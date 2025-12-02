@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_tenant\_configuration Resource - terraform-provider-f5xc"
+page_title: "f5xc_tenant_configuration Resource - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
   Manages a TenantConfiguration resource in F5 Distributed Cloud for tenant configuration configuration.
 ---
 
-# f5xc\_tenant\_configuration (Resource)
+# f5xc_tenant_configuration (Resource)
 
 Manages a TenantConfiguration resource in F5 Distributed Cloud for tenant configuration configuration.
 
@@ -18,7 +18,7 @@ Manages a TenantConfiguration resource in F5 Distributed Cloud for tenant config
 # Manages a TenantConfiguration resource in F5 Distributed Cloud for tenant configuration configuration.
 
 # Basic Tenant Configuration configuration
-resource "f5xc\_tenant\_configuration" "example" {
+resource "f5xc_tenant_configuration" "example" {
   name      = "example-tenant-configuration"
   namespace = "system"
 
@@ -37,8 +37,8 @@ resource "f5xc\_tenant\_configuration" "example" {
     # Configure basic_configuration settings
   }
   # BruteForceDetectionSettings.
-  brute\_force_detection\_settings {
-    # Configure brute\_force_detection\_settings settings
+  brute_force_detection_settings {
+    # Configure brute_force_detection_settings settings
   }
   # PasswordPolicy.
   password_policy {
@@ -68,7 +68,7 @@ resource "f5xc\_tenant\_configuration" "example" {
 
 <a id="basic-configuration"></a>&#x2022; [`basic_configuration`](#basic-configuration) - Optional Block<br>BasicConfiguration<br>See [Basic Configuration](#basic-configuration) below for details.
 
-<a id="brute-force-detection-settings"></a>&#x2022; [`brute\_force_detection\_settings`](#brute-force-detection-settings) - Optional Block<br>BruteForceDetectionSettings<br>See [Brute Force Detection Settings](#brute-force-detection-settings) below for details.
+<a id="brute-force-detection-settings"></a>&#x2022; [`brute_force_detection_settings`](#brute-force-detection-settings) - Optional Block<br>BruteForceDetectionSettings<br>See [Brute Force Detection Settings](#brute-force-detection-settings) below for details.
 
 <a id="password-policy"></a>&#x2022; [`password_policy`](#password-policy) - Optional Block<br>PasswordPolicy<br>See [Password Policy](#password-policy) below for details.
 
@@ -90,9 +90,9 @@ A [`basic_configuration`](#basic-configuration) block supports the following:
 
 #### Brute Force Detection Settings
 
-A [`brute\_force_detection\_settings`](#brute-force-detection-settings) block supports the following:
+A [`brute_force_detection_settings`](#brute-force-detection-settings) block supports the following:
 
-<a id="brute-force-detection-settings-max-login-failures"></a>&#x2022; [`max\_login\_failures`](#brute-force-detection-settings-max-login-failures) - Optional Number<br>Max Login Failures. How many failures before wait is triggered. When login failure count is hit, user will be temporarily locked for a max duration of 15 minutes
+<a id="brute-force-detection-settings-max-login-failures"></a>&#x2022; [`max_login_failures`](#brute-force-detection-settings-max-login-failures) - Optional Number<br>Max Login Failures. How many failures before wait is triggered. When login failure count is hit, user will be temporarily locked for a max duration of 15 minutes
 
 #### Password Policy
 
@@ -106,7 +106,7 @@ A [`password_policy`](#password-policy) block supports the following:
 
 <a id="password-policy-minimum-length"></a>&#x2022; [`minimum_length`](#password-policy-minimum-length) - Optional Number<br>Minimum Length. Minimum length of password
 
-<a id="password-policy-not-recently-used"></a>&#x2022; [`not\_recently\_used`](#password-policy-not-recently-used) - Optional Number<br>Not Recently Used. This policy is used to restrict user from using previously used passwords. Number that's set determines number of last passwords which user cannot use as new password
+<a id="password-policy-not-recently-used"></a>&#x2022; [`not_recently_used`](#password-policy-not-recently-used) - Optional Number<br>Not Recently Used. This policy is used to restrict user from using previously used passwords. Number that's set determines number of last passwords which user cannot use as new password
 
 <a id="password-policy-not-username"></a>&#x2022; [`not_username`](#password-policy-not-username) - Optional Bool<br>Not Username. When set, the password is not allowed to be the same as the username
 
@@ -132,5 +132,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_tenant\_configuration.example system/example
+terraform import f5xc_tenant_configuration.example system/example
 ```

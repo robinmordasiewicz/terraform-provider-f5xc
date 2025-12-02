@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_tenant\_configuration Data Source - terraform-provider-f5xc"
+page_title: "f5xc_tenant_configuration Data Source - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
   Manages a TenantConfiguration resource in F5 Distributed Cloud for tenant configuration configuration.
 ---
 
-# f5xc\_tenant\_configuration (Data Source)
+# f5xc_tenant_configuration (Data Source)
 
 Manages a TenantConfiguration resource in F5 Distributed Cloud for tenant configuration configuration.
 
@@ -18,14 +18,14 @@ Manages a TenantConfiguration resource in F5 Distributed Cloud for tenant config
 # Retrieves information about an existing Tenant Configuration
 
 # Look up an existing Tenant Configuration by name
-data "f5xc\_tenant\_configuration" "example" {
+data "f5xc_tenant_configuration" "example" {
   name      = "example-tenant-configuration"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "tenant\_configuration\_id" {
-#   value = data.f5xc\_tenant\_configuration.example.id
+# output "tenant_configuration_id" {
+#   value = data.f5xc_tenant_configuration.example.id
 # }
 ```
 

@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_virtual\_host Data Source - terraform-provider-f5xc"
+page_title: "f5xc_virtual_host Data Source - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
   Manages virtual host in a given namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc\_virtual\_host (Data Source)
+# f5xc_virtual_host (Data Source)
 
 Manages virtual host in a given namespace. in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages virtual host in a given namespace. in F5 Distributed Cloud.
 # Retrieves information about an existing Virtual Host
 
 # Look up an existing Virtual Host by name
-data "f5xc\_virtual\_host" "example" {
+data "f5xc_virtual_host" "example" {
   name      = "example-virtual-host"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "virtual\_host\_id" {
-#   value = data.f5xc\_virtual\_host.example.id
+# output "virtual_host_id" {
+#   value = data.f5xc_virtual_host.example.id
 # }
 ```
 

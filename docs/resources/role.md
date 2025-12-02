@@ -37,7 +37,7 @@ resource "f5xc_role" "example" {
   # API groups for this role
   api_groups {
     name = "read-http-lb"
-    api\_group\_elements {
+    api_group_elements {
       api_group     = "ves.io.schema.views.http_loadbalancer"
       resource_type = "http_loadbalancer"
       verbs {

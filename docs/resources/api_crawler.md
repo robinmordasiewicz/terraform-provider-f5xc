@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_api\_crawler Resource - terraform-provider-f5xc"
+page_title: "f5xc_api_crawler Resource - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
   Manages a APICrawler resource in F5 Distributed Cloud.
 ---
 
-# f5xc\_api\_crawler (Resource)
+# f5xc_api_crawler (Resource)
 
 Manages a APICrawler resource in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages a APICrawler resource in F5 Distributed Cloud.
 # Manages a APICrawler resource in F5 Distributed Cloud.
 
 # Basic API Crawler configuration
-resource "f5xc\_api\_crawler" "example" {
+resource "f5xc_api_crawler" "example" {
   name      = "example-api-crawler"
   namespace = "staging"
 
@@ -98,13 +98,13 @@ A [`simple_login`](#domains-simple-login) block (within [`domains`](#domains)) s
 
 A [`password`](#domains-simple-login-password) block (within [`domains.simple_login`](#domains-simple-login)) supports the following:
 
-<a id="domains-simple-login-password-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#domains-simple-login-password-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#domains-simple-login-password-blindfold-secret-info) below.
+<a id="domains-simple-login-password-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#domains-simple-login-password-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#domains-simple-login-password-blindfold-secret-info) below.
 
-<a id="domains-simple-login-password-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#domains-simple-login-password-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#domains-simple-login-password-clear-secret-info) below.
+<a id="domains-simple-login-password-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#domains-simple-login-password-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#domains-simple-login-password-clear-secret-info) below.
 
 #### Domains Simple Login Password Blindfold Secret Info
 
-A [`blindfold\_secret\_info`](#domains-simple-login-password-blindfold-secret-info) block (within [`domains.simple_login.password`](#domains-simple-login-password)) supports the following:
+A [`blindfold_secret_info`](#domains-simple-login-password-blindfold-secret-info) block (within [`domains.simple_login.password`](#domains-simple-login-password)) supports the following:
 
 <a id="domains-simple-login-password-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#domains-simple-login-password-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -114,7 +114,7 @@ A [`blindfold\_secret\_info`](#domains-simple-login-password-blindfold-secret-in
 
 #### Domains Simple Login Password Clear Secret Info
 
-A [`clear\_secret\_info`](#domains-simple-login-password-clear-secret-info) block (within [`domains.simple_login.password`](#domains-simple-login-password)) supports the following:
+A [`clear_secret_info`](#domains-simple-login-password-clear-secret-info) block (within [`domains.simple_login.password`](#domains-simple-login-password)) supports the following:
 
 <a id="domains-simple-login-password-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#domains-simple-login-password-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -138,5 +138,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_api\_crawler.example system/example
+terraform import f5xc_api_crawler.example system/example
 ```

@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_service\_policy Data Source - terraform-provider-f5xc"
+page_title: "f5xc_service_policy Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages service_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc\_service\_policy (Data Source)
+# f5xc_service_policy (Data Source)
 
 Manages service_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
@@ -18,25 +18,25 @@ Manages service_policy creates a new object in the storage backend for metadata.
 # Retrieves information about an existing Service Policy
 
 # Look up an existing Service Policy by name
-data "f5xc\_service\_policy" "example" {
+data "f5xc_service_policy" "example" {
   name      = "example-service-policy"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "service\_policy\_id" {
-#   value = data.f5xc\_service\_policy.example.id
+# output "service_policy_id" {
+#   value = data.f5xc_service_policy.example.id
 # }
 
 # Example: Reference service policy in HTTP load balancer
-# resource "f5xc\_http\_loadbalancer" "example" {
+# resource "f5xc_http_loadbalancer" "example" {
 #   name      = "policy-protected-lb"
 #   namespace = "system"
 #
-#   active\_service\_policies {
+#   active_service_policies {
 #     policies {
-#       name      = data.f5xc\_service\_policy.example.name
-#       namespace = data.f5xc\_service\_policy.example.namespace
+#       name      = data.f5xc_service_policy.example.name
+#       namespace = data.f5xc_service_policy.example.namespace
 #     }
 #   }
 # }

@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_customer\_support Data Source - terraform-provider-f5xc"
+page_title: "f5xc_customer_support Data Source - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
   Manages new customer support ticket in our customer support provider system. in F5 Distributed Cloud.
 ---
 
-# f5xc\_customer\_support (Data Source)
+# f5xc_customer_support (Data Source)
 
 Manages new customer support ticket in our customer support provider system. in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages new customer support ticket in our customer support provider system. in 
 # Retrieves information about an existing Customer Support
 
 # Look up an existing Customer Support by name
-data "f5xc\_customer\_support" "example" {
+data "f5xc_customer_support" "example" {
   name      = "example-customer-support"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "customer\_support\_id" {
-#   value = data.f5xc\_customer\_support.example.id
+# output "customer_support_id" {
+#   value = data.f5xc_customer_support.example.id
 # }
 ```
 

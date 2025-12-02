@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_oidc\_provider Resource - terraform-provider-f5xc"
+page_title: "f5xc_oidc_provider Resource - terraform-provider-f5xc"
 subcategory: "Authentication"
 description: |-
   Manages a OIDCProvider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.
 ---
 
-# f5xc\_oidc\_provider (Resource)
+# f5xc_oidc_provider (Resource)
 
 Manages a OIDCProvider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.
 
@@ -18,7 +18,7 @@ Manages a OIDCProvider resource in F5 Distributed Cloud for customcreatespectype
 # Manages a OIDCProvider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.
 
 # Basic OIDC Provider configuration
-resource "f5xc\_oidc\_provider" "example" {
+resource "f5xc_oidc_provider" "example" {
   name      = "example-oidc-provider"
   namespace = "staging"
 
@@ -32,17 +32,17 @@ resource "f5xc\_oidc\_provider" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: azure\_oidc_spec\_type, google\_oidc_spec\_type, oidc...
-  azure\_oidc_spec\_type {
-    # Configure azure\_oidc_spec\_type settings
+  # [OneOf: azure_oidc_spec_type, google_oidc_spec_type, oidc...
+  azure_oidc_spec_type {
+    # Configure azure_oidc_spec_type settings
   }
   # Google OIDC Spec Type. GoogleOIDCSpecType specifies the a...
-  google\_oidc_spec\_type {
-    # Configure google\_oidc_spec\_type settings
+  google_oidc_spec_type {
+    # Configure google_oidc_spec_type settings
   }
   # OpenID Connect v1.0 Spec Type. OIDCV10SpecType specifies ...
-  oidc\_v10_spec\_type {
-    # Configure oidc\_v10_spec\_type settings
+  oidc_v10_spec_type {
+    # Configure oidc_v10_spec_type settings
   }
 }
 ```
@@ -67,10 +67,10 @@ resource "f5xc\_oidc\_provider" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="azure-oidc-spec-type"></a>[`azure\_oidc_spec\_type`](#azure-oidc-spec-type) - Optional Block<br>Azure OIDC Spec Type. AzureOIDCSpecType specifies the attributes required to configure Azure provider<br>See [Azure OIDC Spec Type](#azure-oidc-spec-type) below for details.
-<br><br>&#x2022; <a id="google-oidc-spec-type"></a>[`google\_oidc_spec\_type`](#google-oidc-spec-type) - Optional Block<br>Google OIDC Spec Type. GoogleOIDCSpecType specifies the attributes required to configure google provider<br>See [Google OIDC Spec Type](#google-oidc-spec-type) below for details.
-<br><br>&#x2022; <a id="oidc-v10-spec-type"></a>[`oidc\_v10_spec\_type`](#oidc-v10-spec-type) - Optional Block<br>OpenID Connect v1.0 Spec Type. OIDCV10SpecType specifies the attributes required to configure OIDC provider<br>See [OIDC V10 Spec Type](#oidc-v10-spec-type) below for details.
-<br><br>&#x2022; <a id="okta-oidc-spec-type"></a>[`okta\_oidc_spec\_type`](#okta-oidc-spec-type) - Optional Block<br>Okta OpenID Connect Spec Type. OKTAOIDCSpecType specifies the attributes required to configure okta OIDC provider<br>See [Okta OIDC Spec Type](#okta-oidc-spec-type) below for details.
+&#x2022; <a id="azure-oidc-spec-type"></a>[`azure_oidc_spec_type`](#azure-oidc-spec-type) - Optional Block<br>Azure OIDC Spec Type. AzureOIDCSpecType specifies the attributes required to configure Azure provider<br>See [Azure OIDC Spec Type](#azure-oidc-spec-type) below for details.
+<br><br>&#x2022; <a id="google-oidc-spec-type"></a>[`google_oidc_spec_type`](#google-oidc-spec-type) - Optional Block<br>Google OIDC Spec Type. GoogleOIDCSpecType specifies the attributes required to configure google provider<br>See [Google OIDC Spec Type](#google-oidc-spec-type) below for details.
+<br><br>&#x2022; <a id="oidc-v10-spec-type"></a>[`oidc_v10_spec_type`](#oidc-v10-spec-type) - Optional Block<br>OpenID Connect v1.0 Spec Type. OIDCV10SpecType specifies the attributes required to configure OIDC provider<br>See [OIDC V10 Spec Type](#oidc-v10-spec-type) below for details.
+<br><br>&#x2022; <a id="okta-oidc-spec-type"></a>[`okta_oidc_spec_type`](#okta-oidc-spec-type) - Optional Block<br>Okta OpenID Connect Spec Type. OKTAOIDCSpecType specifies the attributes required to configure okta OIDC provider<br>See [Okta OIDC Spec Type](#okta-oidc-spec-type) below for details.
 
 <a id="provider-type"></a>&#x2022; [`provider_type`](#provider-type) - Optional String  Defaults to `DEFAULT`<br>Possible values are `DEFAULT`, `GOOGLE`, `AZURE`, `OKTA`<br>Provider Type. Types of OIDC providers Default provider. use this for standard OpenIDConnect v1.0 Authenticate with Google OIDC Authenticate with Azure OIDC Authenticate with Okta OIDC
 
@@ -86,7 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 
 #### Azure OIDC Spec Type
 
-An [`azure\_oidc_spec\_type`](#azure-oidc-spec-type) block supports the following:
+An [`azure_oidc_spec_type`](#azure-oidc-spec-type) block supports the following:
 
 <a id="azure-oidc-spec-type-authorization-url"></a>&#x2022; [`authorization_url`](#azure-oidc-spec-type-authorization-url) - Optional String<br>Authorization URL. The authorization URL of your OIDC application
 
@@ -108,11 +108,11 @@ An [`azure\_oidc_spec\_type`](#azure-oidc-spec-type) block supports the followin
 
 <a id="azure-oidc-spec-type-token-url"></a>&#x2022; [`token_url`](#azure-oidc-spec-type-token-url) - Optional String<br>Token URL. The token URL of your OIDC application
 
-<a id="azure-oidc-spec-type-user-info-url"></a>&#x2022; [`user\_info\_url`](#azure-oidc-spec-type-user-info-url) - Optional String<br>User Info URL. The User Info URL specified in your OIDC application
+<a id="azure-oidc-spec-type-user-info-url"></a>&#x2022; [`user_info_url`](#azure-oidc-spec-type-user-info-url) - Optional String<br>User Info URL. The User Info URL specified in your OIDC application
 
 #### Google OIDC Spec Type
 
-A [`google\_oidc_spec\_type`](#google-oidc-spec-type) block supports the following:
+A [`google_oidc_spec_type`](#google-oidc-spec-type) block supports the following:
 
 <a id="google-oidc-spec-type-client-id"></a>&#x2022; [`client_id`](#google-oidc-spec-type-client-id) - Optional String<br>Client ID. Client ID of the OIDC application registered with google provider. REQUIRED field
 
@@ -122,9 +122,9 @@ A [`google\_oidc_spec\_type`](#google-oidc-spec-type) block supports the followi
 
 #### OIDC V10 Spec Type
 
-An [`oidc\_v10_spec\_type`](#oidc-v10-spec-type) block supports the following:
+An [`oidc_v10_spec_type`](#oidc-v10-spec-type) block supports the following:
 
-<a id="oidc-v10-spec-type-allowed-clock-skew"></a>&#x2022; [`allowed\_clock\_skew`](#oidc-v10-spec-type-allowed-clock-skew) - Optional String  Defaults to `zero`<br>Allowed Clock Skew. Clock skew in seconds that is tolerated when validating identity provider tokens
+<a id="oidc-v10-spec-type-allowed-clock-skew"></a>&#x2022; [`allowed_clock_skew`](#oidc-v10-spec-type-allowed-clock-skew) - Optional String  Defaults to `zero`<br>Allowed Clock Skew. Clock skew in seconds that is tolerated when validating identity provider tokens
 
 <a id="oidc-v10-spec-type-authorization-url"></a>&#x2022; [`authorization_url`](#oidc-v10-spec-type-authorization-url) - Optional String<br>Authorization URL. The authorization URL of your OIDC application
 
@@ -136,11 +136,11 @@ An [`oidc\_v10_spec\_type`](#oidc-v10-spec-type) block supports the following:
 
 <a id="oidc-v10-spec-type-default-scopes"></a>&#x2022; [`default_scopes`](#oidc-v10-spec-type-default-scopes) - Optional String<br>Default Scopes. The scopes to be sent when asking for authorization. It can be a space-separated list of scopes. The recommendation is to set the default scopes as 'openid profile email' and is to add additional scopes if needed
 
-<a id="oidc-v10-spec-type-disable-user-info"></a>&#x2022; [`disable\_user\_info`](#oidc-v10-spec-type-disable-user-info) - Optional Bool<br>Disable User Info. Disable fetching of user info information
+<a id="oidc-v10-spec-type-disable-user-info"></a>&#x2022; [`disable_user_info`](#oidc-v10-spec-type-disable-user-info) - Optional Bool<br>Disable User Info. Disable fetching of user info information
 
 <a id="oidc-v10-spec-type-display-name"></a>&#x2022; [`display_name`](#oidc-v10-spec-type-display-name) - Optional String<br>Display Name. Friendly name for identity provider
 
-<a id="oidc-v10-spec-type-forwarded-query-parameters"></a>&#x2022; [`forwarded\_query\_parameters`](#oidc-v10-spec-type-forwarded-query-parameters) - Optional String<br>Forwarded Query Parameters. Non OpenID Connect/OAuth standard query parameters to be forwarded to external IDP from the initial application request to Authorization Endpoint. Multiple parameters can be entered, separated by comma (,)
+<a id="oidc-v10-spec-type-forwarded-query-parameters"></a>&#x2022; [`forwarded_query_parameters`](#oidc-v10-spec-type-forwarded-query-parameters) - Optional String<br>Forwarded Query Parameters. Non OpenID Connect/OAuth standard query parameters to be forwarded to external IDP from the initial application request to Authorization Endpoint. Multiple parameters can be entered, separated by comma (,)
 
 <a id="oidc-v10-spec-type-issuer"></a>&#x2022; [`issuer`](#oidc-v10-spec-type-issuer) - Optional String<br>Issuer. The issuer identifier for the issuer of the response. If not provided, no validation will be performed
 
@@ -148,21 +148,21 @@ An [`oidc\_v10_spec\_type`](#oidc-v10-spec-type) block supports the following:
 
 <a id="oidc-v10-spec-type-logout-url"></a>&#x2022; [`logout_url`](#oidc-v10-spec-type-logout-url) - Optional String<br>Logout URL. Logout URL specified in your OIDC application
 
-<a id="oidc-v10-spec-type-pass-current-locale"></a>&#x2022; [`pass\_current\_locale`](#oidc-v10-spec-type-pass-current-locale) - Optional Bool<br>Pass Current Locale. Pass the current locale to the identity provider
+<a id="oidc-v10-spec-type-pass-current-locale"></a>&#x2022; [`pass_current_locale`](#oidc-v10-spec-type-pass-current-locale) - Optional Bool<br>Pass Current Locale. Pass the current locale to the identity provider
 
-<a id="oidc-v10-spec-type-pass-login-hint"></a>&#x2022; [`pass\_login\_hint`](#oidc-v10-spec-type-pass-login-hint) - Optional Bool<br>Pass Login Hint. Pass login_hint to identity provider
+<a id="oidc-v10-spec-type-pass-login-hint"></a>&#x2022; [`pass_login_hint`](#oidc-v10-spec-type-pass-login-hint) - Optional Bool<br>Pass Login Hint. Pass login_hint to identity provider
 
 <a id="oidc-v10-spec-type-prompt"></a>&#x2022; [`prompt`](#oidc-v10-spec-type-prompt) - Optional String<br>Possible values are `UNSPECIFIED`, `NONE`, `CONSENT`, `LOGIN`, `SELECT_ACCOUNT`<br>Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the End-User to select a user account. This enables an End-User who has multiple accounts at the Authorization Server to select amongst the multiple accounts that they might have current sessions for
 
 <a id="oidc-v10-spec-type-token-url"></a>&#x2022; [`token_url`](#oidc-v10-spec-type-token-url) - Optional String<br>Token URL. The token URL of your OIDC application
 
-<a id="oidc-v10-spec-type-user-info-url"></a>&#x2022; [`user\_info\_url`](#oidc-v10-spec-type-user-info-url) - Optional String<br>User Info URL. The User Info URL specified in your OIDC application
+<a id="oidc-v10-spec-type-user-info-url"></a>&#x2022; [`user_info_url`](#oidc-v10-spec-type-user-info-url) - Optional String<br>User Info URL. The User Info URL specified in your OIDC application
 
 <a id="oidc-v10-spec-type-validate-signatures"></a>&#x2022; [`validate_signatures`](#oidc-v10-spec-type-validate-signatures) - Optional Bool<br>Validate Signatures. Enable/disable signature validation of external IDP signatures
 
 #### Okta OIDC Spec Type
 
-An [`okta\_oidc_spec\_type`](#okta-oidc-spec-type) block supports the following:
+An [`okta_oidc_spec_type`](#okta-oidc-spec-type) block supports the following:
 
 <a id="okta-oidc-spec-type-authorization-url"></a>&#x2022; [`authorization_url`](#okta-oidc-spec-type-authorization-url) - Optional String<br>Authorization URL. The authorization URL of your OIDC application
 
@@ -184,7 +184,7 @@ An [`okta\_oidc_spec\_type`](#okta-oidc-spec-type) block supports the following:
 
 <a id="okta-oidc-spec-type-token-url"></a>&#x2022; [`token_url`](#okta-oidc-spec-type-token-url) - Optional String<br>Token URL. The token URL of your OIDC application
 
-<a id="okta-oidc-spec-type-user-info-url"></a>&#x2022; [`user\_info\_url`](#okta-oidc-spec-type-user-info-url) - Optional String<br>User Info URL. The User Info URL specified in your OIDC application
+<a id="okta-oidc-spec-type-user-info-url"></a>&#x2022; [`user_info_url`](#okta-oidc-spec-type-user-info-url) - Optional String<br>User Info URL. The User Info URL specified in your OIDC application
 
 #### Timeouts
 
@@ -204,5 +204,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_oidc\_provider.example system/example
+terraform import f5xc_oidc_provider.example system/example
 ```

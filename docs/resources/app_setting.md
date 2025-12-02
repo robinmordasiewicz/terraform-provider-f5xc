@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_app\_setting Resource - terraform-provider-f5xc"
+page_title: "f5xc_app_setting Resource - terraform-provider-f5xc"
 subcategory: "Applications"
 description: |-
   Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.
 ---
 
-# f5xc\_app\_setting (Resource)
+# f5xc_app_setting (Resource)
 
 Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages App setting configuration in namespace metadata.namespace in F5 Distribu
 # Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.
 
 # Basic App Setting configuration
-resource "f5xc\_app\_setting" "example" {
+resource "f5xc_app_setting" "example" {
   name      = "example-app-setting"
   namespace = "staging"
 
@@ -33,16 +33,16 @@ resource "f5xc\_app\_setting" "example" {
 
   # Resource-specific configuration
   # Customize AppType For This Namespace. List of settings to...
-  app\_type\_settings {
-    # Configure app\_type\_settings settings
+  app_type_settings {
+    # Configure app_type_settings settings
   }
   # AppType. The AppType of App instance in current Namespace...
-  app\_type\_ref {
-    # Configure app\_type\_ref settings
+  app_type_ref {
+    # Configure app_type_ref settings
   }
   # API Discovery. Settings specifying how API Discovery will...
-  business\_logic_markup\_setting {
-    # Configure business\_logic_markup\_setting settings
+  business_logic_markup_setting {
+    # Configure business_logic_markup_setting settings
   }
 }
 ```
@@ -66,7 +66,7 @@ resource "f5xc\_app\_setting" "example" {
 
 ### Spec Argument Reference
 
-<a id="app-type-settings"></a>&#x2022; [`app\_type\_settings`](#app-type-settings) - Optional Block<br>Customize AppType For This Namespace. List of settings to enable for each AppType, given instance of AppType Exist in this Namespace<br>See [App Type Settings](#app-type-settings) below for details.
+<a id="app-type-settings"></a>&#x2022; [`app_type_settings`](#app-type-settings) - Optional Block<br>Customize AppType For This Namespace. List of settings to enable for each AppType, given instance of AppType Exist in this Namespace<br>See [App Type Settings](#app-type-settings) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -80,19 +80,19 @@ In addition to all arguments above, the following attributes are exported:
 
 #### App Type Settings
 
-An [`app\_type\_settings`](#app-type-settings) block supports the following:
+An [`app_type_settings`](#app-type-settings) block supports the following:
 
-<a id="app-type-settings-app-type-ref"></a>&#x2022; [`app\_type\_ref`](#app-type-settings-app-type-ref) - Optional Block<br>AppType. The AppType of App instance in current Namespace. Associating an AppType reference, will enable analysis on this instance's generated data<br>See [App Type Ref](#app-type-settings-app-type-ref) below.
+<a id="app-type-settings-app-type-ref"></a>&#x2022; [`app_type_ref`](#app-type-settings-app-type-ref) - Optional Block<br>AppType. The AppType of App instance in current Namespace. Associating an AppType reference, will enable analysis on this instance's generated data<br>See [App Type Ref](#app-type-settings-app-type-ref) below.
 
-<a id="app-type-settings-business-logic-markup-setting"></a>&#x2022; [`business\_logic_markup\_setting`](#app-type-settings-business-logic-markup-setting) - Optional Block<br>API Discovery. Settings specifying how API Discovery will be performed<br>See [Business Logic Markup Setting](#app-type-settings-business-logic-markup-setting) below.
+<a id="app-type-settings-business-logic-markup-setting"></a>&#x2022; [`business_logic_markup_setting`](#app-type-settings-business-logic-markup-setting) - Optional Block<br>API Discovery. Settings specifying how API Discovery will be performed<br>See [Business Logic Markup Setting](#app-type-settings-business-logic-markup-setting) below.
 
-<a id="app-type-settings-timeseries-analyses-setting"></a>&#x2022; [`timeseries\_analyses\_setting`](#app-type-settings-timeseries-analyses-setting) - Optional Block<br>DDOS Settings. Configuration for DDOS Detection<br>See [Timeseries Analyses Setting](#app-type-settings-timeseries-analyses-setting) below.
+<a id="app-type-settings-timeseries-analyses-setting"></a>&#x2022; [`timeseries_analyses_setting`](#app-type-settings-timeseries-analyses-setting) - Optional Block<br>DDOS Settings. Configuration for DDOS Detection<br>See [Timeseries Analyses Setting](#app-type-settings-timeseries-analyses-setting) below.
 
-<a id="app-type-settings-user-behavior-analysis-setting"></a>&#x2022; [`user\_behavior_analysis\_setting`](#app-type-settings-user-behavior-analysis-setting) - Optional Block<br>User Behavior Analysis Setting. Configuration for user behavior analysis<br>See [User Behavior Analysis Setting](#app-type-settings-user-behavior-analysis-setting) below.
+<a id="app-type-settings-user-behavior-analysis-setting"></a>&#x2022; [`user_behavior_analysis_setting`](#app-type-settings-user-behavior-analysis-setting) - Optional Block<br>User Behavior Analysis Setting. Configuration for user behavior analysis<br>See [User Behavior Analysis Setting](#app-type-settings-user-behavior-analysis-setting) below.
 
 #### App Type Settings App Type Ref
 
-An [`app\_type\_ref`](#app-type-settings-app-type-ref) block (within [`app\_type\_settings`](#app-type-settings)) supports the following:
+An [`app_type_ref`](#app-type-settings-app-type-ref) block (within [`app_type_settings`](#app-type-settings)) supports the following:
 
 <a id="app-type-settings-app-type-ref-kind"></a>&#x2022; [`kind`](#app-type-settings-app-type-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -106,7 +106,7 @@ An [`app\_type\_ref`](#app-type-settings-app-type-ref) block (within [`app\_type
 
 #### App Type Settings Business Logic Markup Setting
 
-A [`business\_logic_markup\_setting`](#app-type-settings-business-logic-markup-setting) block (within [`app\_type\_settings`](#app-type-settings)) supports the following:
+A [`business_logic_markup_setting`](#app-type-settings-business-logic-markup-setting) block (within [`app_type_settings`](#app-type-settings)) supports the following:
 
 <a id="app-type-settings-business-logic-markup-setting-disable"></a>&#x2022; [`disable`](#app-type-settings-business-logic-markup-setting-disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -114,13 +114,13 @@ A [`business\_logic_markup\_setting`](#app-type-settings-business-logic-markup-s
 
 #### App Type Settings Timeseries Analyses Setting
 
-A [`timeseries\_analyses\_setting`](#app-type-settings-timeseries-analyses-setting) block (within [`app\_type\_settings`](#app-type-settings)) supports the following:
+A [`timeseries_analyses_setting`](#app-type-settings-timeseries-analyses-setting) block (within [`app_type_settings`](#app-type-settings)) supports the following:
 
 <a id="app-type-settings-timeseries-analyses-setting-metric-selectors"></a>&#x2022; [`metric_selectors`](#app-type-settings-timeseries-analyses-setting-metric-selectors) - Optional Block<br>Metric Selectors. Define the metric selection criteria, i.e. the metrics source and the actual metrics that should be included in the detection logic<br>See [Metric Selectors](#app-type-settings-timeseries-analyses-setting-metric-selectors) below.
 
 #### App Type Settings Timeseries Analyses Setting Metric Selectors
 
-A [`metric_selectors`](#app-type-settings-timeseries-analyses-setting-metric-selectors) block (within [`app\_type\_settings.timeseries\_analyses\_setting`](#app-type-settings-timeseries-analyses-setting)) supports the following:
+A [`metric_selectors`](#app-type-settings-timeseries-analyses-setting-metric-selectors) block (within [`app_type_settings.timeseries_analyses_setting`](#app-type-settings-timeseries-analyses-setting)) supports the following:
 
 <a id="app-type-settings-timeseries-analyses-setting-metric-selectors-metric"></a>&#x2022; [`metric`](#app-type-settings-timeseries-analyses-setting-metric-selectors-metric) - Optional List  Defaults to `NO_METRICS`<br>Possible values are `NO_METRICS`, `REQUEST_RATE`, `ERROR_RATE`, `LATENCY`, `THROUGHPUT`<br>Metrics. Choose one or more metrics to be included in the detection logic
 
@@ -128,7 +128,7 @@ A [`metric_selectors`](#app-type-settings-timeseries-analyses-setting-metric-sel
 
 #### App Type Settings User Behavior Analysis Setting
 
-An [`user\_behavior_analysis\_setting`](#app-type-settings-user-behavior-analysis-setting) block (within [`app\_type\_settings`](#app-type-settings)) supports the following:
+An [`user_behavior_analysis_setting`](#app-type-settings-user-behavior-analysis-setting) block (within [`app_type_settings`](#app-type-settings)) supports the following:
 
 <a id="app-type-settings-user-behavior-analysis-setting-disable-detection"></a>&#x2022; [`disable_detection`](#app-type-settings-user-behavior-analysis-setting-disable-detection) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -140,59 +140,59 @@ An [`user\_behavior_analysis\_setting`](#app-type-settings-user-behavior-analysi
 
 #### App Type Settings User Behavior Analysis Setting Enable Detection
 
-An [`enable_detection`](#app-type-settings-user-behavior-analysis-setting-enable-detection) block (within [`app\_type\_settings.user\_behavior_analysis\_setting`](#app-type-settings-user-behavior-analysis-setting)) supports the following:
+An [`enable_detection`](#app-type-settings-user-behavior-analysis-setting-enable-detection) block (within [`app_type_settings.user_behavior_analysis_setting`](#app-type-settings-user-behavior-analysis-setting)) supports the following:
 
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-bola-detection-automatic"></a>&#x2022; [`bola\_detection\_automatic`](#app-type-settings-user-behavior-analysis-setting-enable-detection-bola-detection-automatic) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-bola-detection-automatic"></a>&#x2022; [`bola_detection_automatic`](#app-type-settings-user-behavior-analysis-setting-enable-detection-bola-detection-automatic) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-cooling-off-period"></a>&#x2022; [`cooling\_off\_period`](#app-type-settings-user-behavior-analysis-setting-enable-detection-cooling-off-period) - Optional Number<br>Cooling off period. Malicious user detection assigns a threat level to each user based on their activity. Once a threat level is assigned, the system continues tracking activity from this user and if no further malicious activity is seen, it gradually reduces the threat assesment to lower levels. This field specifies the time period, in minutes, used by the system to decay a user's threat level from a high to medium or medium to low or low to none
+<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-cooling-off-period"></a>&#x2022; [`cooling_off_period`](#app-type-settings-user-behavior-analysis-setting-enable-detection-cooling-off-period) - Optional Number<br>Cooling off period. Malicious user detection assigns a threat level to each user based on their activity. Once a threat level is assigned, the system continues tracking activity from this user and if no further malicious activity is seen, it gradually reduces the threat assesment to lower levels. This field specifies the time period, in minutes, used by the system to decay a user's threat level from a high to medium or medium to low or low to none
 
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-bola-detection"></a>&#x2022; [`exclude\_bola\_detection`](#app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-bola-detection) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-bola-detection"></a>&#x2022; [`exclude_bola_detection`](#app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-bola-detection) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-bot-defense-activity"></a>&#x2022; [`exclude\_bot_defense\_activity`](#app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-bot-defense-activity) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-bot-defense-activity"></a>&#x2022; [`exclude_bot_defense_activity`](#app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-bot-defense-activity) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-failed-login-activity"></a>&#x2022; [`exclude\_failed_login\_activity`](#app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-failed-login-activity) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-failed-login-activity"></a>&#x2022; [`exclude_failed_login_activity`](#app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-failed-login-activity) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-forbidden-activity"></a>&#x2022; [`exclude\_forbidden\_activity`](#app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-forbidden-activity) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-forbidden-activity"></a>&#x2022; [`exclude_forbidden_activity`](#app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-forbidden-activity) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-ip-reputation"></a>&#x2022; [`exclude\_ip\_reputation`](#app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-ip-reputation) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-ip-reputation"></a>&#x2022; [`exclude_ip_reputation`](#app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-ip-reputation) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-non-existent-url-activity"></a>&#x2022; [`exclude\_non_existent_url\_activity`](#app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-non-existent-url-activity) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-non-existent-url-activity"></a>&#x2022; [`exclude_non_existent_url_activity`](#app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-non-existent-url-activity) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-rate-limit"></a>&#x2022; [`exclude\_rate\_limit`](#app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-rate-limit) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-rate-limit"></a>&#x2022; [`exclude_rate_limit`](#app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-rate-limit) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-waf-activity"></a>&#x2022; [`exclude\_waf\_activity`](#app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-waf-activity) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-waf-activity"></a>&#x2022; [`exclude_waf_activity`](#app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-waf-activity) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-bot-defense-activity"></a>&#x2022; [`include\_bot_defense\_activity`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-bot-defense-activity) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-bot-defense-activity"></a>&#x2022; [`include_bot_defense_activity`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-bot-defense-activity) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-failed-login-activity"></a>&#x2022; [`include\_failed_login\_activity`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-failed-login-activity) - Optional Block<br>Failed Login Activity Setting. When enabled, the system monitors persistent failed login attempts from a user. A failed login is detected if a request results in a response code of 401. These settings specify how to use failed login activity to determine suspicious behavior<br>See [Include Failed Login Activity](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-failed-login-activity) below.
+<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-failed-login-activity"></a>&#x2022; [`include_failed_login_activity`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-failed-login-activity) - Optional Block<br>Failed Login Activity Setting. When enabled, the system monitors persistent failed login attempts from a user. A failed login is detected if a request results in a response code of 401. These settings specify how to use failed login activity to determine suspicious behavior<br>See [Include Failed Login Activity](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-failed-login-activity) below.
 
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-forbidden-activity"></a>&#x2022; [`include\_forbidden\_activity`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-forbidden-activity) - Optional Block<br>Forbidden Activity Setting. When L7 policy rules are set up to disallow certain types of requests, the system monitors persistent attempts from a user to send requests which result in policy denies. These settings specify how to use disallowed request activity from a user to determine suspicious behavior<br>See [Include Forbidden Activity](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-forbidden-activity) below.
+<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-forbidden-activity"></a>&#x2022; [`include_forbidden_activity`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-forbidden-activity) - Optional Block<br>Forbidden Activity Setting. When L7 policy rules are set up to disallow certain types of requests, the system monitors persistent attempts from a user to send requests which result in policy denies. These settings specify how to use disallowed request activity from a user to determine suspicious behavior<br>See [Include Forbidden Activity](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-forbidden-activity) below.
 
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-ip-reputation"></a>&#x2022; [`include\_ip\_reputation`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-ip-reputation) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-ip-reputation"></a>&#x2022; [`include_ip_reputation`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-ip-reputation) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-automatic"></a>&#x2022; [`include\_non_existent_url_activity\_automatic`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-automatic) - Optional Block<br>Non-existent URL Automatic Activity Settings<br>See [Include Non Existent URL Activity Automatic](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-automatic) below.
+<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-automatic"></a>&#x2022; [`include_non_existent_url_activity_automatic`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-automatic) - Optional Block<br>Non-existent URL Automatic Activity Settings<br>See [Include Non Existent URL Activity Automatic](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-automatic) below.
 
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-custom"></a>&#x2022; [`include\_non_existent_url_activity\_custom`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-custom) - Optional Block<br>Non-existent URL Custom Activity Setting<br>See [Include Non Existent URL Activity Custom](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-custom) below.
+<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-custom"></a>&#x2022; [`include_non_existent_url_activity_custom`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-custom) - Optional Block<br>Non-existent URL Custom Activity Setting<br>See [Include Non Existent URL Activity Custom](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-custom) below.
 
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-rate-limit"></a>&#x2022; [`include\_rate\_limit`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-rate-limit) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-rate-limit"></a>&#x2022; [`include_rate_limit`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-rate-limit) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-waf-activity"></a>&#x2022; [`include\_waf\_activity`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-waf-activity) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-waf-activity"></a>&#x2022; [`include_waf_activity`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-waf-activity) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### App Type Settings User Behavior Analysis Setting Enable Detection Include Failed Login Activity
 
-An [`include\_failed_login\_activity`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-failed-login-activity) block (within [`app\_type\_settings.user\_behavior_analysis\_setting.enable_detection`](#app-type-settings-user-behavior-analysis-setting-enable-detection)) supports the following:
+An [`include_failed_login_activity`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-failed-login-activity) block (within [`app_type_settings.user_behavior_analysis_setting.enable_detection`](#app-type-settings-user-behavior-analysis-setting-enable-detection)) supports the following:
 
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-failed-login-activity-login-failures-threshold"></a>&#x2022; [`login\_failures\_threshold`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-failed-login-activity-login-failures-threshold) - Optional Number<br>Login Failures Threshold. The number of failed logins beyond which the system will flag this user as malicious
+<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-failed-login-activity-login-failures-threshold"></a>&#x2022; [`login_failures_threshold`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-failed-login-activity-login-failures-threshold) - Optional Number<br>Login Failures Threshold. The number of failed logins beyond which the system will flag this user as malicious
 
 #### App Type Settings User Behavior Analysis Setting Enable Detection Include Forbidden Activity
 
-An [`include\_forbidden\_activity`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-forbidden-activity) block (within [`app\_type\_settings.user\_behavior_analysis\_setting.enable_detection`](#app-type-settings-user-behavior-analysis-setting-enable-detection)) supports the following:
+An [`include_forbidden_activity`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-forbidden-activity) block (within [`app_type_settings.user_behavior_analysis_setting.enable_detection`](#app-type-settings-user-behavior-analysis-setting-enable-detection)) supports the following:
 
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-forbidden-activity-forbidden-requests-threshold"></a>&#x2022; [`forbidden\_requests\_threshold`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-forbidden-activity-forbidden-requests-threshold) - Optional Number<br>Forbidden Requests Threshold. The number of forbidden requests beyond which the system will flag this user as malicious
+<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-forbidden-activity-forbidden-requests-threshold"></a>&#x2022; [`forbidden_requests_threshold`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-forbidden-activity-forbidden-requests-threshold) - Optional Number<br>Forbidden Requests Threshold. The number of forbidden requests beyond which the system will flag this user as malicious
 
 #### App Type Settings User Behavior Analysis Setting Enable Detection Include Non Existent URL Activity Automatic
 
-An [`include\_non_existent_url_activity\_automatic`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-automatic) block (within [`app\_type\_settings.user\_behavior_analysis\_setting.enable_detection`](#app-type-settings-user-behavior-analysis-setting-enable-detection)) supports the following:
+An [`include_non_existent_url_activity_automatic`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-automatic) block (within [`app_type_settings.user_behavior_analysis_setting.enable_detection`](#app-type-settings-user-behavior-analysis-setting-enable-detection)) supports the following:
 
 <a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-automatic-high"></a>&#x2022; [`high`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-automatic-high) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -202,9 +202,9 @@ An [`include\_non_existent_url_activity\_automatic`](#app-type-settings-user-beh
 
 #### App Type Settings User Behavior Analysis Setting Enable Detection Include Non Existent URL Activity Custom
 
-An [`include\_non_existent_url_activity\_custom`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-custom) block (within [`app\_type\_settings.user\_behavior_analysis\_setting.enable_detection`](#app-type-settings-user-behavior-analysis-setting-enable-detection)) supports the following:
+An [`include_non_existent_url_activity_custom`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-custom) block (within [`app_type_settings.user_behavior_analysis_setting.enable_detection`](#app-type-settings-user-behavior-analysis-setting-enable-detection)) supports the following:
 
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-custom-nonexistent-requests-threshold"></a>&#x2022; [`nonexistent\_requests\_threshold`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-custom-nonexistent-requests-threshold) - Optional Number<br>Non-existent URL Custom Threshold (percentage). The percentage of non-existent requests beyond which the system will flag this user as malicious
+<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-custom-nonexistent-requests-threshold"></a>&#x2022; [`nonexistent_requests_threshold`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-custom-nonexistent-requests-threshold) - Optional Number<br>Non-existent URL Custom Threshold (percentage). The percentage of non-existent requests beyond which the system will flag this user as malicious
 
 #### Timeouts
 
@@ -224,5 +224,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_app\_setting.example system/example
+terraform import f5xc_app_setting.example system/example
 ```

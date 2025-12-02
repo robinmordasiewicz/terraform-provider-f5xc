@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_filter\_set Resource - terraform-provider-f5xc"
+page_title: "f5xc_filter_set Resource - terraform-provider-f5xc"
 subcategory: "Applications"
 description: |-
   Manages a FilterSet resource in F5 Distributed Cloud for create configuration.
 ---
 
-# f5xc\_filter\_set (Resource)
+# f5xc_filter_set (Resource)
 
 Manages a FilterSet resource in F5 Distributed Cloud for create configuration.
 
@@ -18,7 +18,7 @@ Manages a FilterSet resource in F5 Distributed Cloud for create configuration.
 # Manages a FilterSet resource in F5 Distributed Cloud for create configuration.
 
 # Basic Filter Set configuration
-resource "f5xc\_filter\_set" "example" {
+resource "f5xc_filter_set" "example" {
   name      = "example-filter-set"
   namespace = "shared"
 
@@ -88,7 +88,7 @@ A [`filter_fields`](#filter-fields) block supports the following:
 
 <a id="filter-fields-field-id"></a>&#x2022; [`field_id`](#filter-fields-field-id) - Optional String<br>Field ID. an identifier for the field that maps to some UI filter component
 
-<a id="filter-fields-filter-expression-field"></a>&#x2022; [`filter\_expression\_field`](#filter-fields-filter-expression-field) - Optional Block<br>Filter Expression Field<br>See [Filter Expression Field](#filter-fields-filter-expression-field) below.
+<a id="filter-fields-filter-expression-field"></a>&#x2022; [`filter_expression_field`](#filter-fields-filter-expression-field) - Optional Block<br>Filter Expression Field<br>See [Filter Expression Field](#filter-fields-filter-expression-field) below.
 
 <a id="filter-fields-string-field"></a>&#x2022; [`string_field`](#filter-fields-string-field) - Optional Block<br>Filter String Field<br>See [String Field](#filter-fields-string-field) below.
 
@@ -110,7 +110,7 @@ An [`absolute`](#filter-fields-date-field-absolute) block (within [`filter_field
 
 #### Filter Fields Filter Expression Field
 
-A [`filter\_expression\_field`](#filter-fields-filter-expression-field) block (within [`filter_fields`](#filter-fields)) supports the following:
+A [`filter_expression_field`](#filter-fields-filter-expression-field) block (within [`filter_fields`](#filter-fields)) supports the following:
 
 <a id="filter-fields-filter-expression-field-expression"></a>&#x2022; [`expression`](#filter-fields-filter-expression-field-expression) - Optional String<br>Expression Value. expression is a kubernetes style label expression for selections, but differs in that it allows special characters in the keys and values
 
@@ -138,5 +138,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_filter\_set.example system/example
+terraform import f5xc_filter_set.example system/example
 ```

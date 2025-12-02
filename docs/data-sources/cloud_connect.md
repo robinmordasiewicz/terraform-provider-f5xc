@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_cloud\_connect Data Source - terraform-provider-f5xc"
+page_title: "f5xc_cloud_connect Data Source - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
   Manages a CloudConnect resource in F5 Distributed Cloud for establishing connectivity to cloud provider networks.
 ---
 
-# f5xc\_cloud\_connect (Data Source)
+# f5xc_cloud_connect (Data Source)
 
 Manages a CloudConnect resource in F5 Distributed Cloud for establishing connectivity to cloud provider networks.
 
@@ -18,14 +18,14 @@ Manages a CloudConnect resource in F5 Distributed Cloud for establishing connect
 # Retrieves information about an existing Cloud Connect
 
 # Look up an existing Cloud Connect by name
-data "f5xc\_cloud\_connect" "example" {
+data "f5xc_cloud_connect" "example" {
   name      = "example-cloud-connect"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "cloud\_connect\_id" {
-#   value = data.f5xc\_cloud\_connect.example.id
+# output "cloud_connect_id" {
+#   value = data.f5xc_cloud_connect.example.id
 # }
 ```
 

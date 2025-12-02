@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_bot_defense_app\_infrastructure Resource - terraform-provider-f5xc"
+page_title: "f5xc_bot_defense_app_infrastructure Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages Bot Defense App Infrastructure in a given namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc\_bot_defense_app\_infrastructure (Resource)
+# f5xc_bot_defense_app_infrastructure (Resource)
 
 Manages Bot Defense App Infrastructure in a given namespace. in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages Bot Defense App Infrastructure in a given namespace. in F5 Distributed C
 # Manages Bot Defense App Infrastructure in a given namespace. in F5 Distributed Cloud.
 
 # Basic Bot Defense App Infrastructure configuration
-resource "f5xc\_bot_defense_app\_infrastructure" "example" {
+resource "f5xc_bot_defense_app_infrastructure" "example" {
   name      = "example-bot-defense-app-infrastructure"
   namespace = "shared"
 
@@ -32,7 +32,7 @@ resource "f5xc\_bot_defense_app\_infrastructure" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: cloud_hosted, data\_center\_hosted] F5 Hosted. Infr...
+  # [OneOf: cloud_hosted, data_center_hosted] F5 Hosted. Infr...
   cloud_hosted {
     # Configure cloud_hosted settings
   }
@@ -68,7 +68,7 @@ resource "f5xc\_bot_defense_app\_infrastructure" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="cloud-hosted"></a>[`cloud_hosted`](#cloud-hosted) - Optional Block<br>F5 Hosted. Infra F5 Hosted<br>See [Cloud Hosted](#cloud-hosted) below for details.
-<br><br>&#x2022; <a id="data-center-hosted"></a>[`data\_center\_hosted`](#data-center-hosted) - Optional Block<br>F5 Hosted. Infra F5 Hosted<br>See [Data Center Hosted](#data-center-hosted) below for details.
+<br><br>&#x2022; <a id="data-center-hosted"></a>[`data_center_hosted`](#data-center-hosted) - Optional Block<br>F5 Hosted. Infra F5 Hosted<br>See [Data Center Hosted](#data-center-hosted) below for details.
 
 <a id="environment-type"></a>&#x2022; [`environment_type`](#environment-type) - Optional String  Defaults to `PRODUCTION`<br>Possible values are `PRODUCTION`, `TESTING`<br>Environment Type. Environment Type Production environment Testing environment
 
@@ -90,7 +90,7 @@ A [`cloud_hosted`](#cloud-hosted) block supports the following:
 
 <a id="cloud-hosted-egress"></a>&#x2022; [`egress`](#cloud-hosted-egress) - Optional Block<br>Egress. Egress<br>See [Egress](#cloud-hosted-egress) below.
 
-<a id="cloud-hosted-infra-host-name"></a>&#x2022; [`infra\_host\_name`](#cloud-hosted-infra-host-name) - Optional String<br>Infra Host Name. Infra Host Name
+<a id="cloud-hosted-infra-host-name"></a>&#x2022; [`infra_host_name`](#cloud-hosted-infra-host-name) - Optional String<br>Infra Host Name. Infra Host Name
 
 <a id="cloud-hosted-ingress"></a>&#x2022; [`ingress`](#cloud-hosted-ingress) - Optional Block<br>Ingress. Ingress<br>See [Ingress](#cloud-hosted-ingress) below.
 
@@ -102,7 +102,7 @@ An [`egress`](#cloud-hosted-egress) block (within [`cloud_hosted`](#cloud-hosted
 
 <a id="cloud-hosted-egress-ip-address"></a>&#x2022; [`ip_address`](#cloud-hosted-egress-ip-address) - Optional String<br>IP Address. Egress IP address
 
-<a id="cloud-hosted-egress-location"></a>&#x2022; [`location`](#cloud-hosted-egress-location) - Optional String  Defaults to `AWS\_AP_NORTHEAST\_1`<br>Possible values are `AWS\_AP_NORTHEAST\_1`, `AWS\_AP_NORTHEAST\_3`, `AWS\_AP_SOUTH\_1`, `AWS\_AP_SOUTH\_2`, `AWS\_AP_SOUTHEAST\_1`, `AWS\_AP_SOUTHEAST\_2`, `AWS\_AP_SOUTHEAST\_3`, `AWS\_EU_CENTRAL\_1`, `AWS\_EU_NORTH\_1`, `AWS\_EU_WEST\_1`, `AWS\_ME_SOUTH\_1`, `AWS\_SA_EAST\_1`, `AWS\_US_EAST\_1`, `AWS\_US_EAST\_2`, `AWS\_US_WEST\_1`, `AWS\_US_WEST\_2`, `GCP\_ASIA_EAST\_1`, `GCP\_ASIA_EAST\_2`, `GCP\_ASIA_NORTHEAST\_1`, `GCP\_ASIA_NORTHEAST\_2`, `GCP\_ASIA_NORTHEAST\_3`, `GCP\_ASIA_SOUTH\_1`, `GCP\_ASIA_SOUTHEAST\_1`, `GCP\_ASIA_SOUTHEAST\_2`, `GCP\_AUSTRALIA_SOUTHEAST\_1`, `GCP\_EUROPE_WEST\_1`, `GCP\_EUROPE_WEST\_2`, `GCP\_EUROPE_WEST\_3`, `GCP\_NORTHAMERICA_NORTHEAST\_1`, `GCP\_NORTHAMERICA_NORTHEAST\_2`, `GCP\_SOUTHAMERICA_EAST\_1`, `GCP\_SOUTHAMERICA_WEST\_1`, `GCP\_US_CENTRAL\_1`, `GCP\_US_EAST\_1`, `GCP\_US_EAST\_4`, `GCP\_US_WEST\_1`, `GCP\_US_WEST\_2`<br>Location. Region location AWS\_AP_NORTHEAST\_1 AWS\_AP_NORTHEAST\_3 AWS\_AP_SOUTH\_1 AWS\_AP_SOUTH\_2 AWS\_AP_SOUTHEAST\_1 AWS\_AP_SOUTHEAST\_2 AWS\_AP_SOUTHEAST\_3 AWS\_EU_CENTRAL\_1 AWS\_EU_NORTH\_1 AWS\_EU_WEST\_1 AWS\_ME_SOUTH\_1 AWS\_SA_EAST\_1 AWS\_US_EAST\_1 AWS\_US_EAST\_2 AWS\_US_WEST\_1 AWS\_US_WEST\_2 GCP\_ASIA_EAST\_1 GCP\_ASIA_EAST\_2 GCP\_ASIA_NORTHEAST\_1 GCP\_ASIA_NORTHEAST\_2 GCP\_ASIA_NORTHEAST\_3 GCP\_ASIA_SOUTH\_1 GCP\_ASIA_SOUTHEAST\_1 GCP\_ASIA_SOUTHEAST\_2 GCP\_AUSTRALIA_SOUTHEAST\_1 GCP\_EUROPE_WEST\_1 GCP\_EUROPE_WEST\_2 GCP\_EUROPE_WEST\_3 GCP\_NORTHAMERICA_NORTHEAST\_1 GCP\_NORTHAMERICA_NORTHEAST\_2 GCP\_SOUTHAMERICA_EAST\_1 GCP\_SOUTHAMERICA_WEST\_1 GCP\_US_CENTRAL\_1 GCP\_US_EAST\_1 GCP\_US_EAST\_4 GCP\_US_WEST\_1 GCP\_US_WEST\_2
+<a id="cloud-hosted-egress-location"></a>&#x2022; [`location`](#cloud-hosted-egress-location) - Optional String  Defaults to `AWS_AP_NORTHEAST_1`<br>Possible values are `AWS_AP_NORTHEAST_1`, `AWS_AP_NORTHEAST_3`, `AWS_AP_SOUTH_1`, `AWS_AP_SOUTH_2`, `AWS_AP_SOUTHEAST_1`, `AWS_AP_SOUTHEAST_2`, `AWS_AP_SOUTHEAST_3`, `AWS_EU_CENTRAL_1`, `AWS_EU_NORTH_1`, `AWS_EU_WEST_1`, `AWS_ME_SOUTH_1`, `AWS_SA_EAST_1`, `AWS_US_EAST_1`, `AWS_US_EAST_2`, `AWS_US_WEST_1`, `AWS_US_WEST_2`, `GCP_ASIA_EAST_1`, `GCP_ASIA_EAST_2`, `GCP_ASIA_NORTHEAST_1`, `GCP_ASIA_NORTHEAST_2`, `GCP_ASIA_NORTHEAST_3`, `GCP_ASIA_SOUTH_1`, `GCP_ASIA_SOUTHEAST_1`, `GCP_ASIA_SOUTHEAST_2`, `GCP_AUSTRALIA_SOUTHEAST_1`, `GCP_EUROPE_WEST_1`, `GCP_EUROPE_WEST_2`, `GCP_EUROPE_WEST_3`, `GCP_NORTHAMERICA_NORTHEAST_1`, `GCP_NORTHAMERICA_NORTHEAST_2`, `GCP_SOUTHAMERICA_EAST_1`, `GCP_SOUTHAMERICA_WEST_1`, `GCP_US_CENTRAL_1`, `GCP_US_EAST_1`, `GCP_US_EAST_4`, `GCP_US_WEST_1`, `GCP_US_WEST_2`<br>Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2 GCP_EUROPE_WEST_3 GCP_NORTHAMERICA_NORTHEAST_1 GCP_NORTHAMERICA_NORTHEAST_2 GCP_SOUTHAMERICA_EAST_1 GCP_SOUTHAMERICA_WEST_1 GCP_US_CENTRAL_1 GCP_US_EAST_1 GCP_US_EAST_4 GCP_US_WEST_1 GCP_US_WEST_2
 
 #### Cloud Hosted Ingress
 
@@ -112,15 +112,15 @@ An [`ingress`](#cloud-hosted-ingress) block (within [`cloud_hosted`](#cloud-host
 
 <a id="cloud-hosted-ingress-ip-address"></a>&#x2022; [`ip_address`](#cloud-hosted-ingress-ip-address) - Optional String<br>Ingress value. Ingress IP Address
 
-<a id="cloud-hosted-ingress-location"></a>&#x2022; [`location`](#cloud-hosted-ingress-location) - Optional String  Defaults to `AWS\_AP_NORTHEAST\_1`<br>Possible values are `AWS\_AP_NORTHEAST\_1`, `AWS\_AP_NORTHEAST\_3`, `AWS\_AP_SOUTH\_1`, `AWS\_AP_SOUTH\_2`, `AWS\_AP_SOUTHEAST\_1`, `AWS\_AP_SOUTHEAST\_2`, `AWS\_AP_SOUTHEAST\_3`, `AWS\_EU_CENTRAL\_1`, `AWS\_EU_NORTH\_1`, `AWS\_EU_WEST\_1`, `AWS\_ME_SOUTH\_1`, `AWS\_SA_EAST\_1`, `AWS\_US_EAST\_1`, `AWS\_US_EAST\_2`, `AWS\_US_WEST\_1`, `AWS\_US_WEST\_2`, `GCP\_ASIA_EAST\_1`, `GCP\_ASIA_EAST\_2`, `GCP\_ASIA_NORTHEAST\_1`, `GCP\_ASIA_NORTHEAST\_2`, `GCP\_ASIA_NORTHEAST\_3`, `GCP\_ASIA_SOUTH\_1`, `GCP\_ASIA_SOUTHEAST\_1`, `GCP\_ASIA_SOUTHEAST\_2`, `GCP\_AUSTRALIA_SOUTHEAST\_1`, `GCP\_EUROPE_WEST\_1`, `GCP\_EUROPE_WEST\_2`, `GCP\_EUROPE_WEST\_3`, `GCP\_NORTHAMERICA_NORTHEAST\_1`, `GCP\_NORTHAMERICA_NORTHEAST\_2`, `GCP\_SOUTHAMERICA_EAST\_1`, `GCP\_SOUTHAMERICA_WEST\_1`, `GCP\_US_CENTRAL\_1`, `GCP\_US_EAST\_1`, `GCP\_US_EAST\_4`, `GCP\_US_WEST\_1`, `GCP\_US_WEST\_2`<br>Location. Region location AWS\_AP_NORTHEAST\_1 AWS\_AP_NORTHEAST\_3 AWS\_AP_SOUTH\_1 AWS\_AP_SOUTH\_2 AWS\_AP_SOUTHEAST\_1 AWS\_AP_SOUTHEAST\_2 AWS\_AP_SOUTHEAST\_3 AWS\_EU_CENTRAL\_1 AWS\_EU_NORTH\_1 AWS\_EU_WEST\_1 AWS\_ME_SOUTH\_1 AWS\_SA_EAST\_1 AWS\_US_EAST\_1 AWS\_US_EAST\_2 AWS\_US_WEST\_1 AWS\_US_WEST\_2 GCP\_ASIA_EAST\_1 GCP\_ASIA_EAST\_2 GCP\_ASIA_NORTHEAST\_1 GCP\_ASIA_NORTHEAST\_2 GCP\_ASIA_NORTHEAST\_3 GCP\_ASIA_SOUTH\_1 GCP\_ASIA_SOUTHEAST\_1 GCP\_ASIA_SOUTHEAST\_2 GCP\_AUSTRALIA_SOUTHEAST\_1 GCP\_EUROPE_WEST\_1 GCP\_EUROPE_WEST\_2 GCP\_EUROPE_WEST\_3 GCP\_NORTHAMERICA_NORTHEAST\_1 GCP\_NORTHAMERICA_NORTHEAST\_2 GCP\_SOUTHAMERICA_EAST\_1 GCP\_SOUTHAMERICA_WEST\_1 GCP\_US_CENTRAL\_1 GCP\_US_EAST\_1 GCP\_US_EAST\_4 GCP\_US_WEST\_1 GCP\_US_WEST\_2
+<a id="cloud-hosted-ingress-location"></a>&#x2022; [`location`](#cloud-hosted-ingress-location) - Optional String  Defaults to `AWS_AP_NORTHEAST_1`<br>Possible values are `AWS_AP_NORTHEAST_1`, `AWS_AP_NORTHEAST_3`, `AWS_AP_SOUTH_1`, `AWS_AP_SOUTH_2`, `AWS_AP_SOUTHEAST_1`, `AWS_AP_SOUTHEAST_2`, `AWS_AP_SOUTHEAST_3`, `AWS_EU_CENTRAL_1`, `AWS_EU_NORTH_1`, `AWS_EU_WEST_1`, `AWS_ME_SOUTH_1`, `AWS_SA_EAST_1`, `AWS_US_EAST_1`, `AWS_US_EAST_2`, `AWS_US_WEST_1`, `AWS_US_WEST_2`, `GCP_ASIA_EAST_1`, `GCP_ASIA_EAST_2`, `GCP_ASIA_NORTHEAST_1`, `GCP_ASIA_NORTHEAST_2`, `GCP_ASIA_NORTHEAST_3`, `GCP_ASIA_SOUTH_1`, `GCP_ASIA_SOUTHEAST_1`, `GCP_ASIA_SOUTHEAST_2`, `GCP_AUSTRALIA_SOUTHEAST_1`, `GCP_EUROPE_WEST_1`, `GCP_EUROPE_WEST_2`, `GCP_EUROPE_WEST_3`, `GCP_NORTHAMERICA_NORTHEAST_1`, `GCP_NORTHAMERICA_NORTHEAST_2`, `GCP_SOUTHAMERICA_EAST_1`, `GCP_SOUTHAMERICA_WEST_1`, `GCP_US_CENTRAL_1`, `GCP_US_EAST_1`, `GCP_US_EAST_4`, `GCP_US_WEST_1`, `GCP_US_WEST_2`<br>Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2 GCP_EUROPE_WEST_3 GCP_NORTHAMERICA_NORTHEAST_1 GCP_NORTHAMERICA_NORTHEAST_2 GCP_SOUTHAMERICA_EAST_1 GCP_SOUTHAMERICA_WEST_1 GCP_US_CENTRAL_1 GCP_US_EAST_1 GCP_US_EAST_4 GCP_US_WEST_1 GCP_US_WEST_2
 
 #### Data Center Hosted
 
-A [`data\_center\_hosted`](#data-center-hosted) block supports the following:
+A [`data_center_hosted`](#data-center-hosted) block supports the following:
 
 <a id="data-center-hosted-egress"></a>&#x2022; [`egress`](#data-center-hosted-egress) - Optional Block<br>Egress. Egress<br>See [Egress](#data-center-hosted-egress) below.
 
-<a id="data-center-hosted-infra-host-name"></a>&#x2022; [`infra\_host\_name`](#data-center-hosted-infra-host-name) - Optional String<br>Infra Host Name. Infra Host Name
+<a id="data-center-hosted-infra-host-name"></a>&#x2022; [`infra_host_name`](#data-center-hosted-infra-host-name) - Optional String<br>Infra Host Name. Infra Host Name
 
 <a id="data-center-hosted-ingress"></a>&#x2022; [`ingress`](#data-center-hosted-ingress) - Optional Block<br>Ingress. Ingress<br>See [Ingress](#data-center-hosted-ingress) below.
 
@@ -128,21 +128,21 @@ A [`data\_center\_hosted`](#data-center-hosted) block supports the following:
 
 #### Data Center Hosted Egress
 
-An [`egress`](#data-center-hosted-egress) block (within [`data\_center\_hosted`](#data-center-hosted)) supports the following:
+An [`egress`](#data-center-hosted-egress) block (within [`data_center_hosted`](#data-center-hosted)) supports the following:
 
 <a id="data-center-hosted-egress-ip-address"></a>&#x2022; [`ip_address`](#data-center-hosted-egress-ip-address) - Optional String<br>IP Address. Egress IP address
 
-<a id="data-center-hosted-egress-location"></a>&#x2022; [`location`](#data-center-hosted-egress-location) - Optional String  Defaults to `AWS\_AP_NORTHEAST\_1`<br>Possible values are `AWS\_AP_NORTHEAST\_1`, `AWS\_AP_NORTHEAST\_3`, `AWS\_AP_SOUTH\_1`, `AWS\_AP_SOUTH\_2`, `AWS\_AP_SOUTHEAST\_1`, `AWS\_AP_SOUTHEAST\_2`, `AWS\_AP_SOUTHEAST\_3`, `AWS\_EU_CENTRAL\_1`, `AWS\_EU_NORTH\_1`, `AWS\_EU_WEST\_1`, `AWS\_ME_SOUTH\_1`, `AWS\_SA_EAST\_1`, `AWS\_US_EAST\_1`, `AWS\_US_EAST\_2`, `AWS\_US_WEST\_1`, `AWS\_US_WEST\_2`, `GCP\_ASIA_EAST\_1`, `GCP\_ASIA_EAST\_2`, `GCP\_ASIA_NORTHEAST\_1`, `GCP\_ASIA_NORTHEAST\_2`, `GCP\_ASIA_NORTHEAST\_3`, `GCP\_ASIA_SOUTH\_1`, `GCP\_ASIA_SOUTHEAST\_1`, `GCP\_ASIA_SOUTHEAST\_2`, `GCP\_AUSTRALIA_SOUTHEAST\_1`, `GCP\_EUROPE_WEST\_1`, `GCP\_EUROPE_WEST\_2`, `GCP\_EUROPE_WEST\_3`, `GCP\_NORTHAMERICA_NORTHEAST\_1`, `GCP\_NORTHAMERICA_NORTHEAST\_2`, `GCP\_SOUTHAMERICA_EAST\_1`, `GCP\_SOUTHAMERICA_WEST\_1`, `GCP\_US_CENTRAL\_1`, `GCP\_US_EAST\_1`, `GCP\_US_EAST\_4`, `GCP\_US_WEST\_1`, `GCP\_US_WEST\_2`<br>Location. Region location AWS\_AP_NORTHEAST\_1 AWS\_AP_NORTHEAST\_3 AWS\_AP_SOUTH\_1 AWS\_AP_SOUTH\_2 AWS\_AP_SOUTHEAST\_1 AWS\_AP_SOUTHEAST\_2 AWS\_AP_SOUTHEAST\_3 AWS\_EU_CENTRAL\_1 AWS\_EU_NORTH\_1 AWS\_EU_WEST\_1 AWS\_ME_SOUTH\_1 AWS\_SA_EAST\_1 AWS\_US_EAST\_1 AWS\_US_EAST\_2 AWS\_US_WEST\_1 AWS\_US_WEST\_2 GCP\_ASIA_EAST\_1 GCP\_ASIA_EAST\_2 GCP\_ASIA_NORTHEAST\_1 GCP\_ASIA_NORTHEAST\_2 GCP\_ASIA_NORTHEAST\_3 GCP\_ASIA_SOUTH\_1 GCP\_ASIA_SOUTHEAST\_1 GCP\_ASIA_SOUTHEAST\_2 GCP\_AUSTRALIA_SOUTHEAST\_1 GCP\_EUROPE_WEST\_1 GCP\_EUROPE_WEST\_2 GCP\_EUROPE_WEST\_3 GCP\_NORTHAMERICA_NORTHEAST\_1 GCP\_NORTHAMERICA_NORTHEAST\_2 GCP\_SOUTHAMERICA_EAST\_1 GCP\_SOUTHAMERICA_WEST\_1 GCP\_US_CENTRAL\_1 GCP\_US_EAST\_1 GCP\_US_EAST\_4 GCP\_US_WEST\_1 GCP\_US_WEST\_2
+<a id="data-center-hosted-egress-location"></a>&#x2022; [`location`](#data-center-hosted-egress-location) - Optional String  Defaults to `AWS_AP_NORTHEAST_1`<br>Possible values are `AWS_AP_NORTHEAST_1`, `AWS_AP_NORTHEAST_3`, `AWS_AP_SOUTH_1`, `AWS_AP_SOUTH_2`, `AWS_AP_SOUTHEAST_1`, `AWS_AP_SOUTHEAST_2`, `AWS_AP_SOUTHEAST_3`, `AWS_EU_CENTRAL_1`, `AWS_EU_NORTH_1`, `AWS_EU_WEST_1`, `AWS_ME_SOUTH_1`, `AWS_SA_EAST_1`, `AWS_US_EAST_1`, `AWS_US_EAST_2`, `AWS_US_WEST_1`, `AWS_US_WEST_2`, `GCP_ASIA_EAST_1`, `GCP_ASIA_EAST_2`, `GCP_ASIA_NORTHEAST_1`, `GCP_ASIA_NORTHEAST_2`, `GCP_ASIA_NORTHEAST_3`, `GCP_ASIA_SOUTH_1`, `GCP_ASIA_SOUTHEAST_1`, `GCP_ASIA_SOUTHEAST_2`, `GCP_AUSTRALIA_SOUTHEAST_1`, `GCP_EUROPE_WEST_1`, `GCP_EUROPE_WEST_2`, `GCP_EUROPE_WEST_3`, `GCP_NORTHAMERICA_NORTHEAST_1`, `GCP_NORTHAMERICA_NORTHEAST_2`, `GCP_SOUTHAMERICA_EAST_1`, `GCP_SOUTHAMERICA_WEST_1`, `GCP_US_CENTRAL_1`, `GCP_US_EAST_1`, `GCP_US_EAST_4`, `GCP_US_WEST_1`, `GCP_US_WEST_2`<br>Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2 GCP_EUROPE_WEST_3 GCP_NORTHAMERICA_NORTHEAST_1 GCP_NORTHAMERICA_NORTHEAST_2 GCP_SOUTHAMERICA_EAST_1 GCP_SOUTHAMERICA_WEST_1 GCP_US_CENTRAL_1 GCP_US_EAST_1 GCP_US_EAST_4 GCP_US_WEST_1 GCP_US_WEST_2
 
 #### Data Center Hosted Ingress
 
-An [`ingress`](#data-center-hosted-ingress) block (within [`data\_center\_hosted`](#data-center-hosted)) supports the following:
+An [`ingress`](#data-center-hosted-ingress) block (within [`data_center_hosted`](#data-center-hosted)) supports the following:
 
 <a id="data-center-hosted-ingress-host-name"></a>&#x2022; [`host_name`](#data-center-hosted-ingress-host-name) - Optional String<br>Ingress value. Ingress Host Name
 
 <a id="data-center-hosted-ingress-ip-address"></a>&#x2022; [`ip_address`](#data-center-hosted-ingress-ip-address) - Optional String<br>Ingress value. Ingress IP Address
 
-<a id="data-center-hosted-ingress-location"></a>&#x2022; [`location`](#data-center-hosted-ingress-location) - Optional String  Defaults to `AWS\_AP_NORTHEAST\_1`<br>Possible values are `AWS\_AP_NORTHEAST\_1`, `AWS\_AP_NORTHEAST\_3`, `AWS\_AP_SOUTH\_1`, `AWS\_AP_SOUTH\_2`, `AWS\_AP_SOUTHEAST\_1`, `AWS\_AP_SOUTHEAST\_2`, `AWS\_AP_SOUTHEAST\_3`, `AWS\_EU_CENTRAL\_1`, `AWS\_EU_NORTH\_1`, `AWS\_EU_WEST\_1`, `AWS\_ME_SOUTH\_1`, `AWS\_SA_EAST\_1`, `AWS\_US_EAST\_1`, `AWS\_US_EAST\_2`, `AWS\_US_WEST\_1`, `AWS\_US_WEST\_2`, `GCP\_ASIA_EAST\_1`, `GCP\_ASIA_EAST\_2`, `GCP\_ASIA_NORTHEAST\_1`, `GCP\_ASIA_NORTHEAST\_2`, `GCP\_ASIA_NORTHEAST\_3`, `GCP\_ASIA_SOUTH\_1`, `GCP\_ASIA_SOUTHEAST\_1`, `GCP\_ASIA_SOUTHEAST\_2`, `GCP\_AUSTRALIA_SOUTHEAST\_1`, `GCP\_EUROPE_WEST\_1`, `GCP\_EUROPE_WEST\_2`, `GCP\_EUROPE_WEST\_3`, `GCP\_NORTHAMERICA_NORTHEAST\_1`, `GCP\_NORTHAMERICA_NORTHEAST\_2`, `GCP\_SOUTHAMERICA_EAST\_1`, `GCP\_SOUTHAMERICA_WEST\_1`, `GCP\_US_CENTRAL\_1`, `GCP\_US_EAST\_1`, `GCP\_US_EAST\_4`, `GCP\_US_WEST\_1`, `GCP\_US_WEST\_2`<br>Location. Region location AWS\_AP_NORTHEAST\_1 AWS\_AP_NORTHEAST\_3 AWS\_AP_SOUTH\_1 AWS\_AP_SOUTH\_2 AWS\_AP_SOUTHEAST\_1 AWS\_AP_SOUTHEAST\_2 AWS\_AP_SOUTHEAST\_3 AWS\_EU_CENTRAL\_1 AWS\_EU_NORTH\_1 AWS\_EU_WEST\_1 AWS\_ME_SOUTH\_1 AWS\_SA_EAST\_1 AWS\_US_EAST\_1 AWS\_US_EAST\_2 AWS\_US_WEST\_1 AWS\_US_WEST\_2 GCP\_ASIA_EAST\_1 GCP\_ASIA_EAST\_2 GCP\_ASIA_NORTHEAST\_1 GCP\_ASIA_NORTHEAST\_2 GCP\_ASIA_NORTHEAST\_3 GCP\_ASIA_SOUTH\_1 GCP\_ASIA_SOUTHEAST\_1 GCP\_ASIA_SOUTHEAST\_2 GCP\_AUSTRALIA_SOUTHEAST\_1 GCP\_EUROPE_WEST\_1 GCP\_EUROPE_WEST\_2 GCP\_EUROPE_WEST\_3 GCP\_NORTHAMERICA_NORTHEAST\_1 GCP\_NORTHAMERICA_NORTHEAST\_2 GCP\_SOUTHAMERICA_EAST\_1 GCP\_SOUTHAMERICA_WEST\_1 GCP\_US_CENTRAL\_1 GCP\_US_EAST\_1 GCP\_US_EAST\_4 GCP\_US_WEST\_1 GCP\_US_WEST\_2
+<a id="data-center-hosted-ingress-location"></a>&#x2022; [`location`](#data-center-hosted-ingress-location) - Optional String  Defaults to `AWS_AP_NORTHEAST_1`<br>Possible values are `AWS_AP_NORTHEAST_1`, `AWS_AP_NORTHEAST_3`, `AWS_AP_SOUTH_1`, `AWS_AP_SOUTH_2`, `AWS_AP_SOUTHEAST_1`, `AWS_AP_SOUTHEAST_2`, `AWS_AP_SOUTHEAST_3`, `AWS_EU_CENTRAL_1`, `AWS_EU_NORTH_1`, `AWS_EU_WEST_1`, `AWS_ME_SOUTH_1`, `AWS_SA_EAST_1`, `AWS_US_EAST_1`, `AWS_US_EAST_2`, `AWS_US_WEST_1`, `AWS_US_WEST_2`, `GCP_ASIA_EAST_1`, `GCP_ASIA_EAST_2`, `GCP_ASIA_NORTHEAST_1`, `GCP_ASIA_NORTHEAST_2`, `GCP_ASIA_NORTHEAST_3`, `GCP_ASIA_SOUTH_1`, `GCP_ASIA_SOUTHEAST_1`, `GCP_ASIA_SOUTHEAST_2`, `GCP_AUSTRALIA_SOUTHEAST_1`, `GCP_EUROPE_WEST_1`, `GCP_EUROPE_WEST_2`, `GCP_EUROPE_WEST_3`, `GCP_NORTHAMERICA_NORTHEAST_1`, `GCP_NORTHAMERICA_NORTHEAST_2`, `GCP_SOUTHAMERICA_EAST_1`, `GCP_SOUTHAMERICA_WEST_1`, `GCP_US_CENTRAL_1`, `GCP_US_EAST_1`, `GCP_US_EAST_4`, `GCP_US_WEST_1`, `GCP_US_WEST_2`<br>Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2 GCP_EUROPE_WEST_3 GCP_NORTHAMERICA_NORTHEAST_1 GCP_NORTHAMERICA_NORTHEAST_2 GCP_SOUTHAMERICA_EAST_1 GCP_SOUTHAMERICA_WEST_1 GCP_US_CENTRAL_1 GCP_US_EAST_1 GCP_US_EAST_4 GCP_US_WEST_1 GCP_US_WEST_2
 
 #### Timeouts
 
@@ -162,5 +162,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_bot_defense_app\_infrastructure.example system/example
+terraform import f5xc_bot_defense_app_infrastructure.example system/example
 ```

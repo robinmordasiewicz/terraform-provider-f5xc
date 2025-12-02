@@ -32,8 +32,8 @@ resource "f5xc_tunnel" "example" {
   }
 
   # Tunnel configuration
-  remote\_ip\_address = "203.0.113.1"
-  local\_ip\_address  = "203.0.113.2"
+  remote_ip_address = "203.0.113.1"
+  local_ip_address  = "203.0.113.2"
 
   # IPsec tunnel
   ipsec {
@@ -124,7 +124,7 @@ An [`ip_address`](#local-ip-ip-address) block (within [`local_ip`](#local-ip)) s
 
 <a id="local-ip-ip-address-ip-address"></a>&#x2022; [`ip_address`](#local-ip-ip-address-ip-address) - Optional Block<br>IP Address. IP Address used to specify an IPv4 or IPv6 address<br>See [IP Address](#local-ip-ip-address-ip-address) below.
 
-<a id="local-ip-ip-address-virtual-network-type"></a>&#x2022; [`virtual\_network\_type`](#local-ip-ip-address-virtual-network-type) - Optional Block<br>Virtual Network Type. Different types of virtual networks understood by the system<br>See [Virtual Network Type](#local-ip-ip-address-virtual-network-type) below.
+<a id="local-ip-ip-address-virtual-network-type"></a>&#x2022; [`virtual_network_type`](#local-ip-ip-address-virtual-network-type) - Optional Block<br>Virtual Network Type. Different types of virtual networks understood by the system<br>See [Virtual Network Type](#local-ip-ip-address-virtual-network-type) below.
 
 #### Local IP IP Address IP Address
 
@@ -148,13 +148,13 @@ An [`ipv6`](#local-ip-ip-address-ip-address-ipv6) block (within [`local_ip.ip_ad
 
 #### Local IP IP Address Virtual Network Type
 
-A [`virtual\_network\_type`](#local-ip-ip-address-virtual-network-type) block (within [`local_ip.ip_address`](#local-ip-ip-address)) supports the following:
+A [`virtual_network_type`](#local-ip-ip-address-virtual-network-type) block (within [`local_ip.ip_address`](#local-ip-ip-address)) supports the following:
 
 <a id="local-ip-ip-address-virtual-network-type-public"></a>&#x2022; [`public`](#local-ip-ip-address-virtual-network-type-public) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="local-ip-ip-address-virtual-network-type-site-local"></a>&#x2022; [`site_local`](#local-ip-ip-address-virtual-network-type-site-local) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="local-ip-ip-address-virtual-network-type-site-local-inside"></a>&#x2022; [`site\_local\_inside`](#local-ip-ip-address-virtual-network-type-site-local-inside) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="local-ip-ip-address-virtual-network-type-site-local-inside"></a>&#x2022; [`site_local_inside`](#local-ip-ip-address-virtual-network-type-site-local-inside) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Params
 
@@ -172,13 +172,13 @@ An [`ipsec`](#params-ipsec) block (within [`params`](#params)) supports the foll
 
 An [`ipsec_psk`](#params-ipsec-ipsec-psk) block (within [`params.ipsec`](#params-ipsec)) supports the following:
 
-<a id="params-ipsec-ipsec-psk-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#params-ipsec-ipsec-psk-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#params-ipsec-ipsec-psk-blindfold-secret-info) below.
+<a id="params-ipsec-ipsec-psk-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#params-ipsec-ipsec-psk-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#params-ipsec-ipsec-psk-blindfold-secret-info) below.
 
-<a id="params-ipsec-ipsec-psk-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#params-ipsec-ipsec-psk-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#params-ipsec-ipsec-psk-clear-secret-info) below.
+<a id="params-ipsec-ipsec-psk-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#params-ipsec-ipsec-psk-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#params-ipsec-ipsec-psk-clear-secret-info) below.
 
 #### Params Ipsec Ipsec Psk Blindfold Secret Info
 
-A [`blindfold\_secret\_info`](#params-ipsec-ipsec-psk-blindfold-secret-info) block (within [`params.ipsec.ipsec_psk`](#params-ipsec-ipsec-psk)) supports the following:
+A [`blindfold_secret_info`](#params-ipsec-ipsec-psk-blindfold-secret-info) block (within [`params.ipsec.ipsec_psk`](#params-ipsec-ipsec-psk)) supports the following:
 
 <a id="params-ipsec-ipsec-psk-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#params-ipsec-ipsec-psk-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -188,7 +188,7 @@ A [`blindfold\_secret\_info`](#params-ipsec-ipsec-psk-blindfold-secret-info) blo
 
 #### Params Ipsec Ipsec Psk Clear Secret Info
 
-A [`clear\_secret\_info`](#params-ipsec-ipsec-psk-clear-secret-info) block (within [`params.ipsec.ipsec_psk`](#params-ipsec-ipsec-psk)) supports the following:
+A [`clear_secret_info`](#params-ipsec-ipsec-psk-clear-secret-info) block (within [`params.ipsec.ipsec_psk`](#params-ipsec-ipsec-psk)) supports the following:
 
 <a id="params-ipsec-ipsec-psk-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#params-ipsec-ipsec-psk-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 

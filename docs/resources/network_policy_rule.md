@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_network_policy\_rule Resource - terraform-provider-f5xc"
+page_title: "f5xc_network_policy_rule Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages network policy rule with configured parameters in specified namespace in F5 Distributed Cloud.
 ---
 
-# f5xc\_network_policy\_rule (Resource)
+# f5xc_network_policy_rule (Resource)
 
 Manages network policy rule with configured parameters in specified namespace in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages network policy rule with configured parameters in specified namespace in
 # Manages network policy rule with configured parameters in specified namespace in F5 Distributed Cloud.
 
 # Basic Network Policy Rule configuration
-resource "f5xc\_network_policy\_rule" "example" {
+resource "f5xc_network_policy_rule" "example" {
   name      = "example-network-policy-rule"
   namespace = "system"
 
@@ -36,11 +36,11 @@ resource "f5xc\_network_policy\_rule" "example" {
   advanced_action {
     # Configure advanced_action settings
   }
-  # [OneOf: ip\_prefix\_set, prefix, prefix_selector] IP Prefix...
-  ip\_prefix\_set {
-    # Configure ip\_prefix\_set settings
+  # [OneOf: ip_prefix_set, prefix, prefix_selector] IP Prefix...
+  ip_prefix_set {
+    # Configure ip_prefix_set settings
   }
-  # Reference. A list of references to ip\_prefix\_set objects.
+  # Reference. A list of references to ip_prefix_set objects.
   ref {
     # Configure ref settings
   }
@@ -71,7 +71,7 @@ resource "f5xc\_network_policy\_rule" "example" {
 <a id="advanced-action"></a>&#x2022; [`advanced_action`](#advanced-action) - Optional Block<br>Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction<br>See [Advanced Action](#advanced-action) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="ip-prefix-set"></a>[`ip\_prefix\_set`](#ip-prefix-set) - Optional Block<br>IP Prefix Set Reference. A list of references to ip\_prefix\_set objects<br>See [IP Prefix Set](#ip-prefix-set) below for details.
+&#x2022; <a id="ip-prefix-set"></a>[`ip_prefix_set`](#ip-prefix-set) - Optional Block<br>IP Prefix Set Reference. A list of references to ip_prefix_set objects<br>See [IP Prefix Set](#ip-prefix-set) below for details.
 <br><br>&#x2022; <a id="prefix"></a>[`prefix`](#prefix) - Optional Block<br>IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Prefix](#prefix) below for details.
 <br><br>&#x2022; <a id="prefix-selector"></a>[`prefix_selector`](#prefix-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Prefix Selector](#prefix-selector) below for details.
 
@@ -99,13 +99,13 @@ An [`advanced_action`](#advanced-action) block supports the following:
 
 #### IP Prefix Set
 
-An [`ip\_prefix\_set`](#ip-prefix-set) block supports the following:
+An [`ip_prefix_set`](#ip-prefix-set) block supports the following:
 
-<a id="ip-prefix-set-ref"></a>&#x2022; [`ref`](#ip-prefix-set-ref) - Optional Block<br>Reference. A list of references to ip\_prefix\_set objects<br>See [Ref](#ip-prefix-set-ref) below.
+<a id="ip-prefix-set-ref"></a>&#x2022; [`ref`](#ip-prefix-set-ref) - Optional Block<br>Reference. A list of references to ip_prefix_set objects<br>See [Ref](#ip-prefix-set-ref) below.
 
 #### IP Prefix Set Ref
 
-A [`ref`](#ip-prefix-set-ref) block (within [`ip\_prefix\_set`](#ip-prefix-set)) supports the following:
+A [`ref`](#ip-prefix-set-ref) block (within [`ip_prefix_set`](#ip-prefix-set)) supports the following:
 
 <a id="ip-prefix-set-ref-kind"></a>&#x2022; [`kind`](#ip-prefix-set-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -153,5 +153,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_network_policy\_rule.example system/example
+terraform import f5xc_network_policy_rule.example system/example
 ```

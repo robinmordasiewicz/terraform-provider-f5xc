@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_usb\_policy Resource - terraform-provider-f5xc"
+page_title: "f5xc_usb_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages a UsbPolicy resource in F5 Distributed Cloud for creates a new usb policy configuration.
 ---
 
-# f5xc\_usb\_policy (Resource)
+# f5xc_usb_policy (Resource)
 
 Manages a UsbPolicy resource in F5 Distributed Cloud for creates a new usb policy configuration.
 
@@ -18,7 +18,7 @@ Manages a UsbPolicy resource in F5 Distributed Cloud for creates a new usb polic
 # Manages a UsbPolicy resource in F5 Distributed Cloud for creates a new usb policy configuration.
 
 # Basic Usb Policy configuration
-resource "f5xc\_usb\_policy" "example" {
+resource "f5xc_usb_policy" "example" {
   name      = "example-usb-policy"
   namespace = "staging"
 
@@ -74,11 +74,11 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`allowed_devices`](#allowed-devices) block supports the following:
 
-<a id="allowed-devices-b-device-class"></a>&#x2022; [`b\_device\_class`](#allowed-devices-b-device-class) - Optional String<br>Class. The class of this device
+<a id="allowed-devices-b-device-class"></a>&#x2022; [`b_device_class`](#allowed-devices-b-device-class) - Optional String<br>Class. The class of this device
 
-<a id="allowed-devices-b-device-protocol"></a>&#x2022; [`b\_device\_protocol`](#allowed-devices-b-device-protocol) - Optional String<br>Protocol. The protocol (within the sub-class) of this device
+<a id="allowed-devices-b-device-protocol"></a>&#x2022; [`b_device_protocol`](#allowed-devices-b-device-protocol) - Optional String<br>Protocol. The protocol (within the sub-class) of this device
 
-<a id="allowed-devices-b-device-sub-class"></a>&#x2022; [`b\_device_sub\_class`](#allowed-devices-b-device-sub-class) - Optional String<br>Subclass. The sub-class (within the class) of this device
+<a id="allowed-devices-b-device-sub-class"></a>&#x2022; [`b_device_sub_class`](#allowed-devices-b-device-sub-class) - Optional String<br>Subclass. The sub-class (within the class) of this device
 
 <a id="allowed-devices-i-serial"></a>&#x2022; [`i_serial`](#allowed-devices-i-serial) - Optional String<br>iSerialNumber. Index of Serial Number String Descriptor
 
@@ -104,5 +104,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_usb\_policy.example system/example
+terraform import f5xc_usb_policy.example system/example
 ```

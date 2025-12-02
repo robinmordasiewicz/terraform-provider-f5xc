@@ -37,12 +37,12 @@ resource "f5xc_cminstance" "example" {
     # Configure api_token settings
   }
   # Blindfold Secret. BlindfoldSecretInfoType specifies infor...
-  blindfold\_secret\_info {
-    # Configure blindfold\_secret\_info settings
+  blindfold_secret_info {
+    # Configure blindfold_secret_info settings
   }
   # In-Clear Secret. ClearSecretInfoType specifies informatio...
-  clear\_secret\_info {
-    # Configure clear\_secret\_info settings
+  clear_secret_info {
+    # Configure clear_secret_info settings
   }
 }
 ```
@@ -90,13 +90,13 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`api_token`](#api-token) block supports the following:
 
-<a id="api-token-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#api-token-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#api-token-blindfold-secret-info) below.
+<a id="api-token-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#api-token-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#api-token-blindfold-secret-info) below.
 
-<a id="api-token-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#api-token-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#api-token-clear-secret-info) below.
+<a id="api-token-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#api-token-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#api-token-clear-secret-info) below.
 
 #### API Token Blindfold Secret Info
 
-A [`blindfold\_secret\_info`](#api-token-blindfold-secret-info) block (within [`api_token`](#api-token)) supports the following:
+A [`blindfold_secret_info`](#api-token-blindfold-secret-info) block (within [`api_token`](#api-token)) supports the following:
 
 <a id="api-token-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#api-token-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -106,7 +106,7 @@ A [`blindfold\_secret\_info`](#api-token-blindfold-secret-info) block (within [`
 
 #### API Token Clear Secret Info
 
-A [`clear\_secret\_info`](#api-token-clear-secret-info) block (within [`api_token`](#api-token)) supports the following:
+A [`clear_secret_info`](#api-token-clear-secret-info) block (within [`api_token`](#api-token)) supports the following:
 
 <a id="api-token-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#api-token-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -122,13 +122,13 @@ An [`ip`](#ip) block supports the following:
 
 A [`password`](#password) block supports the following:
 
-<a id="password-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#password-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#password-blindfold-secret-info) below.
+<a id="password-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#password-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#password-blindfold-secret-info) below.
 
-<a id="password-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#password-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#password-clear-secret-info) below.
+<a id="password-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#password-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#password-clear-secret-info) below.
 
 #### Password Blindfold Secret Info
 
-A [`blindfold\_secret\_info`](#password-blindfold-secret-info) block (within [`password`](#password)) supports the following:
+A [`blindfold_secret_info`](#password-blindfold-secret-info) block (within [`password`](#password)) supports the following:
 
 <a id="password-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#password-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -138,7 +138,7 @@ A [`blindfold\_secret\_info`](#password-blindfold-secret-info) block (within [`p
 
 #### Password Clear Secret Info
 
-A [`clear\_secret\_info`](#password-clear-secret-info) block (within [`password`](#password)) supports the following:
+A [`clear_secret_info`](#password-clear-secret-info) block (within [`password`](#password)) supports the following:
 
 <a id="password-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#password-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 

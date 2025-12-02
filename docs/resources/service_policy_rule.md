@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc\_service_policy\_rule Resource - terraform-provider-f5xc"
+page_title: "f5xc_service_policy_rule Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages service\_policy\_rule creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  Manages service_policy_rule creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc\_service_policy\_rule (Resource)
+# f5xc_service_policy_rule (Resource)
 
-Manages service\_policy\_rule creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+Manages service_policy_rule creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Service Policy Rule API docs](https://docs.cloud.f5.com/docs-v2/api/service-policy-rule) to learn more.
 
@@ -15,10 +15,10 @@ Manages service\_policy\_rule creates a new object in the storage backend for me
 
 ```terraform
 # Service Policy Rule Resource Example
-# Manages service\_policy\_rule creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# Manages service_policy_rule creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Service Policy Rule configuration
-resource "f5xc\_service_policy\_rule" "example" {
+resource "f5xc_service_policy_rule" "example" {
   name      = "example-service-policy-rule"
   namespace = "shared"
 
@@ -36,11 +36,11 @@ resource "f5xc\_service_policy\_rule" "example" {
   any_asn {
     # Configure any_asn settings
   }
-  # [OneOf: any_client, client_name, client\_name\_matcher, cli...
+  # [OneOf: any_client, client_name, client_name_matcher, cli...
   any_client {
     # Configure any_client settings
   }
-  # [OneOf: any_ip, ip_matcher, ip\_prefix\_list] Empty. This c...
+  # [OneOf: any_ip, ip_matcher, ip_prefix_list] Empty. This c...
   any_ip {
     # Configure any_ip settings
   }
@@ -66,26 +66,26 @@ resource "f5xc\_service_policy\_rule" "example" {
 
 ### Spec Argument Reference
 
-<a id="action"></a>&#x2022; [`action`](#action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`<br>Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT\_POLICY\_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY Deny the request. - ALLOW: ALLOW Allow the request to proceed. - NEXT\_POLICY\_SET: NEXT\_POLICY\_SET Terminate evaluation of the current policy set and begin evaluating the next policy set in the chain. Note that the evaluation of any remaining policies in the current policy set is skipped. - NEXT_POLICY: NEXT_POLICY Terminate evaluation of the current policy and begin evaluating the next policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - LAST_POLICY: LAST_POLICY Terminate evaluation of the current policy and begin evaluating the last policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - GOTO_POLICY: GOTO_POLICY Terminate evaluation of the current policy and begin evaluating a specific policy in the policy set. The policy is specified using the goto_policy field in the rule and must be after the current policy in the policy set
+<a id="action"></a>&#x2022; [`action`](#action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`<br>Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY Deny the request. - ALLOW: ALLOW Allow the request to proceed. - NEXT_POLICY_SET: NEXT_POLICY_SET Terminate evaluation of the current policy set and begin evaluating the next policy set in the chain. Note that the evaluation of any remaining policies in the current policy set is skipped. - NEXT_POLICY: NEXT_POLICY Terminate evaluation of the current policy and begin evaluating the next policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - LAST_POLICY: LAST_POLICY Terminate evaluation of the current policy and begin evaluating the last policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - GOTO_POLICY: GOTO_POLICY Terminate evaluation of the current policy and begin evaluating a specific policy in the policy set. The policy is specified using the goto_policy field in the rule and must be after the current policy in the policy set
 
 -> **One of the following:**
 &#x2022; <a id="any-asn"></a>[`any_asn`](#any-asn) - Optional Block<br>Empty. This can be used for messages where no values are needed
 <br><br>&#x2022; <a id="asn-list"></a>[`asn_list`](#asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#asn-list) below for details.
-<br><br>&#x2022; <a id="asn-matcher"></a>[`asn_matcher`](#asn-matcher) - Optional Block<br>ASN Matcher. Match any AS number contained in the list of bgp\_asn\_sets<br>See [Asn Matcher](#asn-matcher) below for details.
+<br><br>&#x2022; <a id="asn-matcher"></a>[`asn_matcher`](#asn-matcher) - Optional Block<br>ASN Matcher. Match any AS number contained in the list of bgp_asn_sets<br>See [Asn Matcher](#asn-matcher) below for details.
 
 -> **One of the following:**
 &#x2022; <a id="any-client"></a>[`any_client`](#any-client) - Optional Block<br>Empty. This can be used for messages where no values are needed
 <br><br>&#x2022; <a id="client-name"></a>[`client_name`](#client-name) - Optional String<br>Client Name. The expected name of the client invoking the request API. The predicate evaluates to true if any of the actual names is the same as the expected client name
-<br><br>&#x2022; <a id="client-name-matcher"></a>[`client\_name\_matcher`](#client-name-matcher) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Client Name Matcher](#client-name-matcher) below for details.
+<br><br>&#x2022; <a id="client-name-matcher"></a>[`client_name_matcher`](#client-name-matcher) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Client Name Matcher](#client-name-matcher) below for details.
 <br><br>&#x2022; <a id="client-selector"></a>[`client_selector`](#client-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Client Selector](#client-selector) below for details.
-<br><br>&#x2022; <a id="ip-threat-category-list"></a>[`ip\_threat_category\_list`](#ip-threat-category-list) - Optional Block<br>IP Threat Category List Type. List of IP threat categories<br>See [IP Threat Category List](#ip-threat-category-list) below for details.
+<br><br>&#x2022; <a id="ip-threat-category-list"></a>[`ip_threat_category_list`](#ip-threat-category-list) - Optional Block<br>IP Threat Category List Type. List of IP threat categories<br>See [IP Threat Category List](#ip-threat-category-list) below for details.
 
 -> **One of the following:**
 &#x2022; <a id="any-ip"></a>[`any_ip`](#any-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="ip-matcher"></a>[`ip_matcher`](#ip-matcher) - Optional Block<br>IP Prefix Matcher. Match any IP prefix contained in the list of ip\_prefix\_sets. The result of the match is inverted if invert_matcher is true<br>See [IP Matcher](#ip-matcher) below for details.
-<br><br>&#x2022; <a id="ip-prefix-list"></a>[`ip\_prefix\_list`](#ip-prefix-list) - Optional Block<br>IP Prefix Match List. List of IP Prefix strings to match against<br>See [IP Prefix List](#ip-prefix-list) below for details.
+<br><br>&#x2022; <a id="ip-matcher"></a>[`ip_matcher`](#ip-matcher) - Optional Block<br>IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true<br>See [IP Matcher](#ip-matcher) below for details.
+<br><br>&#x2022; <a id="ip-prefix-list"></a>[`ip_prefix_list`](#ip-prefix-list) - Optional Block<br>IP Prefix Match List. List of IP Prefix strings to match against<br>See [IP Prefix List](#ip-prefix-list) below for details.
 
-<a id="api-group-matcher"></a>&#x2022; [`api\_group\_matcher`](#api-group-matcher) - Optional Block<br>String Matcher. A matcher specifies a list of values for matching an input string. The match is considered successful if the input value is present in the list. The result of the match is inverted if invert_matcher is true<br>See [API Group Matcher](#api-group-matcher) below for details.
+<a id="api-group-matcher"></a>&#x2022; [`api_group_matcher`](#api-group-matcher) - Optional Block<br>String Matcher. A matcher specifies a list of values for matching an input string. The match is considered successful if the input value is present in the list. The result of the match is inverted if invert_matcher is true<br>See [API Group Matcher](#api-group-matcher) below for details.
 
 <a id="arg-matchers"></a>&#x2022; [`arg_matchers`](#arg-matchers) - Optional Block<br>Argument Matchers. A list of predicates for all POST args that need to be matched. The criteria for matching each arg are described in individual instances of ArgMatcherType. The actual arg values are extracted from the request API as a list of strings for each arg selector name. Note that all specified arg matcher predicates must evaluate to true<br>See [Arg Matchers](#arg-matchers) below for details.
 
@@ -104,8 +104,8 @@ resource "f5xc\_service_policy\_rule" "example" {
 <a id="http-method"></a>&#x2022; [`http_method`](#http-method) - Optional Block<br>HTTP Method Matcher. A HTTP method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. The result of the match based on the method list is inverted if invert_matcher is true<br>See [HTTP Method](#http-method) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="ja4-tls-fingerprint"></a>[`ja4\_tls\_fingerprint`](#ja4-tls-fingerprint) - Optional Block<br>JA4 TLS Fingerprint Matcher. An extended version of JA3 that includes additional fields for more comprehensive fingerprinting of SSL/TLS clients and potentially has a different structure and length<br>See [Ja4 TLS Fingerprint](#ja4-tls-fingerprint) below for details.
-<br><br>&#x2022; <a id="tls-fingerprint-matcher"></a>[`tls\_fingerprint\_matcher`](#tls-fingerprint-matcher) - Optional Block<br>TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values
+&#x2022; <a id="ja4-tls-fingerprint"></a>[`ja4_tls_fingerprint`](#ja4-tls-fingerprint) - Optional Block<br>JA4 TLS Fingerprint Matcher. An extended version of JA3 that includes additional fields for more comprehensive fingerprinting of SSL/TLS clients and potentially has a different structure and length<br>See [Ja4 TLS Fingerprint](#ja4-tls-fingerprint) below for details.
+<br><br>&#x2022; <a id="tls-fingerprint-matcher"></a>[`tls_fingerprint_matcher`](#tls-fingerprint-matcher) - Optional Block<br>TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values
 
 <a id="jwt-claims"></a>&#x2022; [`jwt_claims`](#jwt-claims) - Optional Block<br>JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true<br>See [JWT Claims](#jwt-claims) below for details.
 
@@ -137,7 +137,7 @@ In addition to all arguments above, the following attributes are exported:
 
 #### API Group Matcher
 
-An [`api\_group\_matcher`](#api-group-matcher) block supports the following:
+An [`api_group_matcher`](#api-group-matcher) block supports the following:
 
 <a id="api-group-matcher-invert-matcher"></a>&#x2022; [`invert_matcher`](#api-group-matcher-invert-matcher) - Optional Bool<br>Invert String Matcher. Invert the match result
 
@@ -147,7 +147,7 @@ An [`api\_group\_matcher`](#api-group-matcher) block supports the following:
 
 An [`arg_matchers`](#arg-matchers) block supports the following:
 
-<a id="arg-matchers-check-not-present"></a>&#x2022; [`check\_not\_present`](#arg-matchers-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="arg-matchers-check-not-present"></a>&#x2022; [`check_not_present`](#arg-matchers-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="arg-matchers-check-present"></a>&#x2022; [`check_present`](#arg-matchers-check-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -177,7 +177,7 @@ An [`asn_list`](#asn-list) block supports the following:
 
 An [`asn_matcher`](#asn-matcher) block supports the following:
 
-<a id="asn-matcher-asn-sets"></a>&#x2022; [`asn_sets`](#asn-matcher-asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp\_asn\_set objects<br>See [Asn Sets](#asn-matcher-asn-sets) below.
+<a id="asn-matcher-asn-sets"></a>&#x2022; [`asn_sets`](#asn-matcher-asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#asn-matcher-asn-sets) below.
 
 #### Asn Matcher Asn Sets
 
@@ -207,13 +207,13 @@ A [`body_matcher`](#body-matcher) block supports the following:
 
 A [`bot_action`](#bot-action) block supports the following:
 
-<a id="bot-action-bot-skip-processing"></a>&#x2022; [`bot\_skip\_processing`](#bot-action-bot-skip-processing) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-action-bot-skip-processing"></a>&#x2022; [`bot_skip_processing`](#bot-action-bot-skip-processing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="bot-action-none"></a>&#x2022; [`none`](#bot-action-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Client Name Matcher
 
-A [`client\_name\_matcher`](#client-name-matcher) block supports the following:
+A [`client_name_matcher`](#client-name-matcher) block supports the following:
 
 <a id="client-name-matcher-exact-values"></a>&#x2022; [`exact_values`](#client-name-matcher-exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -229,7 +229,7 @@ A [`client_selector`](#client-selector) block supports the following:
 
 A [`cookie_matchers`](#cookie-matchers) block supports the following:
 
-<a id="cookie-matchers-check-not-present"></a>&#x2022; [`check\_not\_present`](#cookie-matchers-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="cookie-matchers-check-not-present"></a>&#x2022; [`check_not_present`](#cookie-matchers-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="cookie-matchers-check-present"></a>&#x2022; [`check_present`](#cookie-matchers-check-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -261,7 +261,7 @@ A [`domain_matcher`](#domain-matcher) block supports the following:
 
 A [`headers`](#headers) block supports the following:
 
-<a id="headers-check-not-present"></a>&#x2022; [`check\_not\_present`](#headers-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="headers-check-not-present"></a>&#x2022; [`check_not_present`](#headers-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="headers-check-present"></a>&#x2022; [`check_present`](#headers-check-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -295,7 +295,7 @@ An [`ip_matcher`](#ip-matcher) block supports the following:
 
 <a id="ip-matcher-invert-matcher"></a>&#x2022; [`invert_matcher`](#ip-matcher-invert-matcher) - Optional Bool<br>Invert IP Matcher. Invert the match result
 
-<a id="ip-matcher-prefix-sets"></a>&#x2022; [`prefix_sets`](#ip-matcher-prefix-sets) - Optional Block<br>IP Prefix Sets. A list of references to ip\_prefix\_set objects<br>See [Prefix Sets](#ip-matcher-prefix-sets) below.
+<a id="ip-matcher-prefix-sets"></a>&#x2022; [`prefix_sets`](#ip-matcher-prefix-sets) - Optional Block<br>IP Prefix Sets. A list of references to ip_prefix_set objects<br>See [Prefix Sets](#ip-matcher-prefix-sets) below.
 
 #### IP Matcher Prefix Sets
 
@@ -313,7 +313,7 @@ A [`prefix_sets`](#ip-matcher-prefix-sets) block (within [`ip_matcher`](#ip-matc
 
 #### IP Prefix List
 
-An [`ip\_prefix\_list`](#ip-prefix-list) block supports the following:
+An [`ip_prefix_list`](#ip-prefix-list) block supports the following:
 
 <a id="ip-prefix-list-invert-match"></a>&#x2022; [`invert_match`](#ip-prefix-list-invert-match) - Optional Bool<br>Invert Match Result. Invert the match result
 
@@ -321,13 +321,13 @@ An [`ip\_prefix\_list`](#ip-prefix-list) block supports the following:
 
 #### IP Threat Category List
 
-An [`ip\_threat_category\_list`](#ip-threat-category-list) block supports the following:
+An [`ip_threat_category_list`](#ip-threat-category-list) block supports the following:
 
-<a id="ip-threat-category-list-ip-threat-categories"></a>&#x2022; [`ip\_threat\_categories`](#ip-threat-category-list-ip-threat-categories) - Optional List  Defaults to `SPAM_SOURCES`<br>Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL\_OF\_SERVICE`, `NETWORK`<br>List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions
+<a id="ip-threat-category-list-ip-threat-categories"></a>&#x2022; [`ip_threat_categories`](#ip-threat-category-list-ip-threat-categories) - Optional List  Defaults to `SPAM_SOURCES`<br>Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`<br>List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions
 
 #### Ja4 TLS Fingerprint
 
-A [`ja4\_tls\_fingerprint`](#ja4-tls-fingerprint) block supports the following:
+A [`ja4_tls_fingerprint`](#ja4-tls-fingerprint) block supports the following:
 
 <a id="ja4-tls-fingerprint-exact-values"></a>&#x2022; [`exact_values`](#ja4-tls-fingerprint-exact-values) - Optional List<br>Exact Values. A list of exact JA4 TLS fingerprint to match the input JA4 TLS fingerprint against
 
@@ -335,7 +335,7 @@ A [`ja4\_tls\_fingerprint`](#ja4-tls-fingerprint) block supports the following:
 
 A [`jwt_claims`](#jwt-claims) block supports the following:
 
-<a id="jwt-claims-check-not-present"></a>&#x2022; [`check\_not\_present`](#jwt-claims-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="jwt-claims-check-not-present"></a>&#x2022; [`check_not_present`](#jwt-claims-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="jwt-claims-check-present"></a>&#x2022; [`check_present`](#jwt-claims-check-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -397,7 +397,7 @@ A [`port_matcher`](#port-matcher) block supports the following:
 
 A [`query_params`](#query-params) block supports the following:
 
-<a id="query-params-check-not-present"></a>&#x2022; [`check\_not\_present`](#query-params-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="query-params-check-not-present"></a>&#x2022; [`check_not_present`](#query-params-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="query-params-check-present"></a>&#x2022; [`check_present`](#query-params-check-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -421,57 +421,57 @@ An [`item`](#query-params-item) block (within [`query_params`](#query-params)) s
 
 A [`request_constraints`](#request-constraints) block supports the following:
 
-<a id="request-constraints-max-cookie-count-exceeds"></a>&#x2022; [`max\_cookie_count\_exceeds`](#request-constraints-max-cookie-count-exceeds) - Optional Number<br>Match on the Count for all Cookies that exceed this value
+<a id="request-constraints-max-cookie-count-exceeds"></a>&#x2022; [`max_cookie_count_exceeds`](#request-constraints-max-cookie-count-exceeds) - Optional Number<br>Match on the Count for all Cookies that exceed this value
 
-<a id="request-constraints-max-cookie-count-none"></a>&#x2022; [`max\_cookie_count\_none`](#request-constraints-max-cookie-count-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="request-constraints-max-cookie-count-none"></a>&#x2022; [`max_cookie_count_none`](#request-constraints-max-cookie-count-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="request-constraints-max-cookie-key-size-exceeds"></a>&#x2022; [`max\_cookie_key_size\_exceeds`](#request-constraints-max-cookie-key-size-exceeds) - Optional Number<br>Match on the Name Size per Cookie that exceed this value
+<a id="request-constraints-max-cookie-key-size-exceeds"></a>&#x2022; [`max_cookie_key_size_exceeds`](#request-constraints-max-cookie-key-size-exceeds) - Optional Number<br>Match on the Name Size per Cookie that exceed this value
 
-<a id="request-constraints-max-cookie-key-size-none"></a>&#x2022; [`max\_cookie_key_size\_none`](#request-constraints-max-cookie-key-size-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="request-constraints-max-cookie-key-size-none"></a>&#x2022; [`max_cookie_key_size_none`](#request-constraints-max-cookie-key-size-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="request-constraints-max-cookie-value-size-exceeds"></a>&#x2022; [`max\_cookie_value_size\_exceeds`](#request-constraints-max-cookie-value-size-exceeds) - Optional Number<br>Match on the Value Size per Cookie that exceed this value
+<a id="request-constraints-max-cookie-value-size-exceeds"></a>&#x2022; [`max_cookie_value_size_exceeds`](#request-constraints-max-cookie-value-size-exceeds) - Optional Number<br>Match on the Value Size per Cookie that exceed this value
 
-<a id="request-constraints-max-cookie-value-size-none"></a>&#x2022; [`max\_cookie_value_size\_none`](#request-constraints-max-cookie-value-size-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="request-constraints-max-cookie-value-size-none"></a>&#x2022; [`max_cookie_value_size_none`](#request-constraints-max-cookie-value-size-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="request-constraints-max-header-count-exceeds"></a>&#x2022; [`max\_header_count\_exceeds`](#request-constraints-max-header-count-exceeds) - Optional Number<br>Match on the Count for all Headers that exceed this value
+<a id="request-constraints-max-header-count-exceeds"></a>&#x2022; [`max_header_count_exceeds`](#request-constraints-max-header-count-exceeds) - Optional Number<br>Match on the Count for all Headers that exceed this value
 
-<a id="request-constraints-max-header-count-none"></a>&#x2022; [`max\_header_count\_none`](#request-constraints-max-header-count-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="request-constraints-max-header-count-none"></a>&#x2022; [`max_header_count_none`](#request-constraints-max-header-count-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="request-constraints-max-header-key-size-exceeds"></a>&#x2022; [`max\_header_key_size\_exceeds`](#request-constraints-max-header-key-size-exceeds) - Optional Number<br>Match on the Name Size per Header that exceed this value
+<a id="request-constraints-max-header-key-size-exceeds"></a>&#x2022; [`max_header_key_size_exceeds`](#request-constraints-max-header-key-size-exceeds) - Optional Number<br>Match on the Name Size per Header that exceed this value
 
-<a id="request-constraints-max-header-key-size-none"></a>&#x2022; [`max\_header_key_size\_none`](#request-constraints-max-header-key-size-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="request-constraints-max-header-key-size-none"></a>&#x2022; [`max_header_key_size_none`](#request-constraints-max-header-key-size-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="request-constraints-max-header-value-size-exceeds"></a>&#x2022; [`max\_header_value_size\_exceeds`](#request-constraints-max-header-value-size-exceeds) - Optional Number<br>Match on the Value Size per Header that exceed this value
+<a id="request-constraints-max-header-value-size-exceeds"></a>&#x2022; [`max_header_value_size_exceeds`](#request-constraints-max-header-value-size-exceeds) - Optional Number<br>Match on the Value Size per Header that exceed this value
 
-<a id="request-constraints-max-header-value-size-none"></a>&#x2022; [`max\_header_value_size\_none`](#request-constraints-max-header-value-size-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="request-constraints-max-header-value-size-none"></a>&#x2022; [`max_header_value_size_none`](#request-constraints-max-header-value-size-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="request-constraints-max-parameter-count-exceeds"></a>&#x2022; [`max\_parameter_count\_exceeds`](#request-constraints-max-parameter-count-exceeds) - Optional Number<br>Match on the Parameter Count that exceed this value
+<a id="request-constraints-max-parameter-count-exceeds"></a>&#x2022; [`max_parameter_count_exceeds`](#request-constraints-max-parameter-count-exceeds) - Optional Number<br>Match on the Parameter Count that exceed this value
 
-<a id="request-constraints-max-parameter-count-none"></a>&#x2022; [`max\_parameter_count\_none`](#request-constraints-max-parameter-count-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="request-constraints-max-parameter-count-none"></a>&#x2022; [`max_parameter_count_none`](#request-constraints-max-parameter-count-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="request-constraints-max-parameter-name-size-exceeds"></a>&#x2022; [`max\_parameter_name_size\_exceeds`](#request-constraints-max-parameter-name-size-exceeds) - Optional Number<br>Match on the Parameter Name Size that exceed this value
+<a id="request-constraints-max-parameter-name-size-exceeds"></a>&#x2022; [`max_parameter_name_size_exceeds`](#request-constraints-max-parameter-name-size-exceeds) - Optional Number<br>Match on the Parameter Name Size that exceed this value
 
-<a id="request-constraints-max-parameter-name-size-none"></a>&#x2022; [`max\_parameter_name_size\_none`](#request-constraints-max-parameter-name-size-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="request-constraints-max-parameter-name-size-none"></a>&#x2022; [`max_parameter_name_size_none`](#request-constraints-max-parameter-name-size-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="request-constraints-max-parameter-value-size-exceeds"></a>&#x2022; [`max\_parameter_value_size\_exceeds`](#request-constraints-max-parameter-value-size-exceeds) - Optional Number<br>Match on the Parameter Value Size that exceed this value
+<a id="request-constraints-max-parameter-value-size-exceeds"></a>&#x2022; [`max_parameter_value_size_exceeds`](#request-constraints-max-parameter-value-size-exceeds) - Optional Number<br>Match on the Parameter Value Size that exceed this value
 
-<a id="request-constraints-max-parameter-value-size-none"></a>&#x2022; [`max\_parameter_value_size\_none`](#request-constraints-max-parameter-value-size-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="request-constraints-max-parameter-value-size-none"></a>&#x2022; [`max_parameter_value_size_none`](#request-constraints-max-parameter-value-size-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="request-constraints-max-query-size-exceeds"></a>&#x2022; [`max\_query_size\_exceeds`](#request-constraints-max-query-size-exceeds) - Optional Number<br>Match on the URL Query Size that exceed this value
+<a id="request-constraints-max-query-size-exceeds"></a>&#x2022; [`max_query_size_exceeds`](#request-constraints-max-query-size-exceeds) - Optional Number<br>Match on the URL Query Size that exceed this value
 
-<a id="request-constraints-max-query-size-none"></a>&#x2022; [`max\_query_size\_none`](#request-constraints-max-query-size-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="request-constraints-max-query-size-none"></a>&#x2022; [`max_query_size_none`](#request-constraints-max-query-size-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="request-constraints-max-request-line-size-exceeds"></a>&#x2022; [`max\_request_line_size\_exceeds`](#request-constraints-max-request-line-size-exceeds) - Optional Number<br>Match on the Request Line Size that exceed this value
+<a id="request-constraints-max-request-line-size-exceeds"></a>&#x2022; [`max_request_line_size_exceeds`](#request-constraints-max-request-line-size-exceeds) - Optional Number<br>Match on the Request Line Size that exceed this value
 
-<a id="request-constraints-max-request-line-size-none"></a>&#x2022; [`max\_request_line_size\_none`](#request-constraints-max-request-line-size-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="request-constraints-max-request-line-size-none"></a>&#x2022; [`max_request_line_size_none`](#request-constraints-max-request-line-size-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="request-constraints-max-request-size-exceeds"></a>&#x2022; [`max\_request_size\_exceeds`](#request-constraints-max-request-size-exceeds) - Optional Number<br>Match on the Request Size that exceed this value
+<a id="request-constraints-max-request-size-exceeds"></a>&#x2022; [`max_request_size_exceeds`](#request-constraints-max-request-size-exceeds) - Optional Number<br>Match on the Request Size that exceed this value
 
-<a id="request-constraints-max-request-size-none"></a>&#x2022; [`max\_request_size\_none`](#request-constraints-max-request-size-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="request-constraints-max-request-size-none"></a>&#x2022; [`max_request_size_none`](#request-constraints-max-request-size-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="request-constraints-max-url-size-exceeds"></a>&#x2022; [`max\_url_size\_exceeds`](#request-constraints-max-url-size-exceeds) - Optional Number<br>Match on the URL Size that exceed this value
+<a id="request-constraints-max-url-size-exceeds"></a>&#x2022; [`max_url_size_exceeds`](#request-constraints-max-url-size-exceeds) - Optional Number<br>Match on the URL Size that exceed this value
 
-<a id="request-constraints-max-url-size-none"></a>&#x2022; [`max\_url_size\_none`](#request-constraints-max-url-size-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="request-constraints-max-url-size-none"></a>&#x2022; [`max_url_size_none`](#request-constraints-max-url-size-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Segment Policy
 
@@ -533,9 +533,9 @@ A [`timeouts`](#timeouts) block supports the following:
 
 #### TLS Fingerprint Matcher
 
-A [`tls\_fingerprint\_matcher`](#tls-fingerprint-matcher) block supports the following:
+A [`tls_fingerprint_matcher`](#tls-fingerprint-matcher) block supports the following:
 
-<a id="tls-fingerprint-matcher-classes"></a>&#x2022; [`classes`](#tls-fingerprint-matcher-classes) - Optional List  Defaults to `TLS\_FINGERPRINT\_NONE`<br>Possible values are `TLS\_FINGERPRINT\_NONE`, `ANY\_MALICIOUS\_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`<br>TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
+<a id="tls-fingerprint-matcher-classes"></a>&#x2022; [`classes`](#tls-fingerprint-matcher-classes) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`<br>TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
 
 <a id="tls-fingerprint-matcher-exact-values"></a>&#x2022; [`exact_values`](#tls-fingerprint-matcher-exact-values) - Optional List<br>Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against
 
@@ -545,43 +545,43 @@ A [`tls\_fingerprint\_matcher`](#tls-fingerprint-matcher) block supports the fol
 
 A [`waf_action`](#waf-action) block supports the following:
 
-<a id="waf-action-app-firewall-detection-control"></a>&#x2022; [`app\_firewall_detection\_control`](#waf-action-app-firewall-detection-control) - Optional Block<br>App Firewall Detection Control. Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria<br>See [App Firewall Detection Control](#waf-action-app-firewall-detection-control) below.
+<a id="waf-action-app-firewall-detection-control"></a>&#x2022; [`app_firewall_detection_control`](#waf-action-app-firewall-detection-control) - Optional Block<br>App Firewall Detection Control. Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria<br>See [App Firewall Detection Control](#waf-action-app-firewall-detection-control) below.
 
 <a id="waf-action-none"></a>&#x2022; [`none`](#waf-action-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="waf-action-waf-skip-processing"></a>&#x2022; [`waf\_skip\_processing`](#waf-action-waf-skip-processing) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="waf-action-waf-skip-processing"></a>&#x2022; [`waf_skip_processing`](#waf-action-waf-skip-processing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### WAF Action App Firewall Detection Control
 
-An [`app\_firewall_detection\_control`](#waf-action-app-firewall-detection-control) block (within [`waf_action`](#waf-action)) supports the following:
+An [`app_firewall_detection_control`](#waf-action-app-firewall-detection-control) block (within [`waf_action`](#waf-action)) supports the following:
 
-<a id="waf-action-app-firewall-detection-control-exclude-attack-type-contexts"></a>&#x2022; [`exclude\_attack_type\_contexts`](#waf-action-app-firewall-detection-control-exclude-attack-type-contexts) - Optional Block<br>Attack Types. Attack Types to be excluded for the defined match criteria<br>See [Exclude Attack Type Contexts](#waf-action-app-firewall-detection-control-exclude-attack-type-contexts) below.
+<a id="waf-action-app-firewall-detection-control-exclude-attack-type-contexts"></a>&#x2022; [`exclude_attack_type_contexts`](#waf-action-app-firewall-detection-control-exclude-attack-type-contexts) - Optional Block<br>Attack Types. Attack Types to be excluded for the defined match criteria<br>See [Exclude Attack Type Contexts](#waf-action-app-firewall-detection-control-exclude-attack-type-contexts) below.
 
-<a id="waf-action-app-firewall-detection-control-exclude-bot-name-contexts"></a>&#x2022; [`exclude\_bot_name\_contexts`](#waf-action-app-firewall-detection-control-exclude-bot-name-contexts) - Optional Block<br>Bot Names. Bot Names to be excluded for the defined match criteria<br>See [Exclude Bot Name Contexts](#waf-action-app-firewall-detection-control-exclude-bot-name-contexts) below.
+<a id="waf-action-app-firewall-detection-control-exclude-bot-name-contexts"></a>&#x2022; [`exclude_bot_name_contexts`](#waf-action-app-firewall-detection-control-exclude-bot-name-contexts) - Optional Block<br>Bot Names. Bot Names to be excluded for the defined match criteria<br>See [Exclude Bot Name Contexts](#waf-action-app-firewall-detection-control-exclude-bot-name-contexts) below.
 
-<a id="waf-action-app-firewall-detection-control-exclude-signature-contexts"></a>&#x2022; [`exclude\_signature\_contexts`](#waf-action-app-firewall-detection-control-exclude-signature-contexts) - Optional Block<br>Signature IDs. Signature IDs to be excluded for the defined match criteria<br>See [Exclude Signature Contexts](#waf-action-app-firewall-detection-control-exclude-signature-contexts) below.
+<a id="waf-action-app-firewall-detection-control-exclude-signature-contexts"></a>&#x2022; [`exclude_signature_contexts`](#waf-action-app-firewall-detection-control-exclude-signature-contexts) - Optional Block<br>Signature IDs. Signature IDs to be excluded for the defined match criteria<br>See [Exclude Signature Contexts](#waf-action-app-firewall-detection-control-exclude-signature-contexts) below.
 
-<a id="waf-action-app-firewall-detection-control-exclude-violation-contexts"></a>&#x2022; [`exclude\_violation\_contexts`](#waf-action-app-firewall-detection-control-exclude-violation-contexts) - Optional Block<br>Violations. Violations to be excluded for the defined match criteria<br>See [Exclude Violation Contexts](#waf-action-app-firewall-detection-control-exclude-violation-contexts) below.
+<a id="waf-action-app-firewall-detection-control-exclude-violation-contexts"></a>&#x2022; [`exclude_violation_contexts`](#waf-action-app-firewall-detection-control-exclude-violation-contexts) - Optional Block<br>Violations. Violations to be excluded for the defined match criteria<br>See [Exclude Violation Contexts](#waf-action-app-firewall-detection-control-exclude-violation-contexts) below.
 
 #### WAF Action App Firewall Detection Control Exclude Attack Type Contexts
 
-An [`exclude\_attack_type\_contexts`](#waf-action-app-firewall-detection-control-exclude-attack-type-contexts) block (within [`waf_action.app\_firewall_detection\_control`](#waf-action-app-firewall-detection-control)) supports the following:
+An [`exclude_attack_type_contexts`](#waf-action-app-firewall-detection-control-exclude-attack-type-contexts) block (within [`waf_action.app_firewall_detection_control`](#waf-action-app-firewall-detection-control)) supports the following:
 
 <a id="waf-action-app-firewall-detection-control-exclude-attack-type-contexts-context"></a>&#x2022; [`context`](#waf-action-app-firewall-detection-control-exclude-attack-type-contexts-context) - Optional String  Defaults to `CONTEXT_ANY`<br>Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`<br>WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI
 
 <a id="waf-action-app-firewall-detection-control-exclude-attack-type-contexts-context-name"></a>&#x2022; [`context_name`](#waf-action-app-firewall-detection-control-exclude-attack-type-contexts-context-name) - Optional String<br>Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*)
 
-<a id="waf-action-app-firewall-detection-control-exclude-attack-type-contexts-exclude-attack-type"></a>&#x2022; [`exclude\_attack\_type`](#waf-action-app-firewall-detection-control-exclude-attack-type-contexts-exclude-attack-type) - Optional String  Defaults to `ATTACK\_TYPE\_NONE`<br>Possible values are `ATTACK\_TYPE\_NONE`, `ATTACK\_TYPE_NON_BROWSER\_CLIENT`, `ATTACK\_TYPE_OTHER_APPLICATION\_ATTACKS`, `ATTACK\_TYPE_TROJAN_BACKDOOR\_SPYWARE`, `ATTACK\_TYPE_DETECTION\_EVASION`, `ATTACK\_TYPE_VULNERABILITY\_SCAN`, `ATTACK\_TYPE_ABUSE_OF\_FUNCTIONALITY`, `ATTACK\_TYPE_AUTHENTICATION_AUTHORIZATION\_ATTACKS`, `ATTACK\_TYPE_BUFFER\_OVERFLOW`, `ATTACK\_TYPE_PREDICTABLE_RESOURCE\_LOCATION`, `ATTACK\_TYPE_INFORMATION\_LEAKAGE`, `ATTACK\_TYPE_DIRECTORY\_INDEXING`, `ATTACK\_TYPE_PATH\_TRAVERSAL`, `ATTACK\_TYPE_XPATH\_INJECTION`, `ATTACK\_TYPE_LDAP\_INJECTION`, `ATTACK\_TYPE_SERVER_SIDE_CODE\_INJECTION`, `ATTACK\_TYPE_COMMAND\_EXECUTION`, `ATTACK\_TYPE_SQL\_INJECTION`, `ATTACK\_TYPE_CROSS_SITE\_SCRIPTING`, `ATTACK\_TYPE_DENIAL_OF\_SERVICE`, `ATTACK\_TYPE_HTTP_PARSER\_ATTACK`, `ATTACK\_TYPE_SESSION\_HIJACKING`, `ATTACK\_TYPE_HTTP_RESPONSE\_SPLITTING`, `ATTACK\_TYPE_FORCEFUL\_BROWSING`, `ATTACK\_TYPE_REMOTE_FILE\_INCLUDE`, `ATTACK\_TYPE_MALICIOUS_FILE\_UPLOAD`, `ATTACK\_TYPE_GRAPHQL_PARSER\_ATTACK`<br>Attack Types. List of all Attack Types ATTACK\_TYPE\_NONE ATTACK\_TYPE_NON_BROWSER\_CLIENT ATTACK\_TYPE_OTHER_APPLICATION\_ATTACKS ATTACK\_TYPE_TROJAN_BACKDOOR\_SPYWARE ATTACK\_TYPE_DETECTION\_EVASION ATTACK\_TYPE_VULNERABILITY\_SCAN ATTACK\_TYPE_ABUSE_OF\_FUNCTIONALITY ATTACK\_TYPE_AUTHENTICATION_AUTHORIZATION\_ATTACKS ATTACK\_TYPE_BUFFER\_OVERFLOW ATTACK\_TYPE_PREDICTABLE_RESOURCE\_LOCATION ATTACK\_TYPE_INFORMATION\_LEAKAGE ATTACK\_TYPE_DIRECTORY\_INDEXING ATTACK\_TYPE_PATH\_TRAVERSAL ATTACK\_TYPE_XPATH\_INJECTION ATTACK\_TYPE_LDAP\_INJECTION ATTACK\_TYPE_SERVER_SIDE_CODE\_INJECTION ATTACK\_TYPE_COMMAND\_EXECUTION ATTACK\_TYPE_SQL\_INJECTION ATTACK\_TYPE_CROSS_SITE\_SCRIPTING ATTACK\_TYPE_DENIAL_OF\_SERVICE ATTACK\_TYPE_HTTP_PARSER\_ATTACK ATTACK\_TYPE_SESSION\_HIJACKING ATTACK\_TYPE_HTTP_RESPONSE\_SPLITTING ATTACK\_TYPE_FORCEFUL\_BROWSING ATTACK\_TYPE_REMOTE_FILE\_INCLUDE ATTACK\_TYPE_MALICIOUS_FILE\_UPLOAD ATTACK\_TYPE_GRAPHQL_PARSER\_ATTACK
+<a id="waf-action-app-firewall-detection-control-exclude-attack-type-contexts-exclude-attack-type"></a>&#x2022; [`exclude_attack_type`](#waf-action-app-firewall-detection-control-exclude-attack-type-contexts-exclude-attack-type) - Optional String  Defaults to `ATTACK_TYPE_NONE`<br>Possible values are `ATTACK_TYPE_NONE`, `ATTACK_TYPE_NON_BROWSER_CLIENT`, `ATTACK_TYPE_OTHER_APPLICATION_ATTACKS`, `ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE`, `ATTACK_TYPE_DETECTION_EVASION`, `ATTACK_TYPE_VULNERABILITY_SCAN`, `ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY`, `ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS`, `ATTACK_TYPE_BUFFER_OVERFLOW`, `ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION`, `ATTACK_TYPE_INFORMATION_LEAKAGE`, `ATTACK_TYPE_DIRECTORY_INDEXING`, `ATTACK_TYPE_PATH_TRAVERSAL`, `ATTACK_TYPE_XPATH_INJECTION`, `ATTACK_TYPE_LDAP_INJECTION`, `ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION`, `ATTACK_TYPE_COMMAND_EXECUTION`, `ATTACK_TYPE_SQL_INJECTION`, `ATTACK_TYPE_CROSS_SITE_SCRIPTING`, `ATTACK_TYPE_DENIAL_OF_SERVICE`, `ATTACK_TYPE_HTTP_PARSER_ATTACK`, `ATTACK_TYPE_SESSION_HIJACKING`, `ATTACK_TYPE_HTTP_RESPONSE_SPLITTING`, `ATTACK_TYPE_FORCEFUL_BROWSING`, `ATTACK_TYPE_REMOTE_FILE_INCLUDE`, `ATTACK_TYPE_MALICIOUS_FILE_UPLOAD`, `ATTACK_TYPE_GRAPHQL_PARSER_ATTACK`<br>Attack Types. List of all Attack Types ATTACK_TYPE_NONE ATTACK_TYPE_NON_BROWSER_CLIENT ATTACK_TYPE_OTHER_APPLICATION_ATTACKS ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE ATTACK_TYPE_DETECTION_EVASION ATTACK_TYPE_VULNERABILITY_SCAN ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS ATTACK_TYPE_BUFFER_OVERFLOW ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION ATTACK_TYPE_INFORMATION_LEAKAGE ATTACK_TYPE_DIRECTORY_INDEXING ATTACK_TYPE_PATH_TRAVERSAL ATTACK_TYPE_XPATH_INJECTION ATTACK_TYPE_LDAP_INJECTION ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION ATTACK_TYPE_COMMAND_EXECUTION ATTACK_TYPE_SQL_INJECTION ATTACK_TYPE_CROSS_SITE_SCRIPTING ATTACK_TYPE_DENIAL_OF_SERVICE ATTACK_TYPE_HTTP_PARSER_ATTACK ATTACK_TYPE_SESSION_HIJACKING ATTACK_TYPE_HTTP_RESPONSE_SPLITTING ATTACK_TYPE_FORCEFUL_BROWSING ATTACK_TYPE_REMOTE_FILE_INCLUDE ATTACK_TYPE_MALICIOUS_FILE_UPLOAD ATTACK_TYPE_GRAPHQL_PARSER_ATTACK
 
 #### WAF Action App Firewall Detection Control Exclude Bot Name Contexts
 
-An [`exclude\_bot_name\_contexts`](#waf-action-app-firewall-detection-control-exclude-bot-name-contexts) block (within [`waf_action.app\_firewall_detection\_control`](#waf-action-app-firewall-detection-control)) supports the following:
+An [`exclude_bot_name_contexts`](#waf-action-app-firewall-detection-control-exclude-bot-name-contexts) block (within [`waf_action.app_firewall_detection_control`](#waf-action-app-firewall-detection-control)) supports the following:
 
 <a id="waf-action-app-firewall-detection-control-exclude-bot-name-contexts-bot-name"></a>&#x2022; [`bot_name`](#waf-action-app-firewall-detection-control-exclude-bot-name-contexts-bot-name) - Optional String<br>Bot Name
 
 #### WAF Action App Firewall Detection Control Exclude Signature Contexts
 
-An [`exclude\_signature\_contexts`](#waf-action-app-firewall-detection-control-exclude-signature-contexts) block (within [`waf_action.app\_firewall_detection\_control`](#waf-action-app-firewall-detection-control)) supports the following:
+An [`exclude_signature_contexts`](#waf-action-app-firewall-detection-control-exclude-signature-contexts) block (within [`waf_action.app_firewall_detection_control`](#waf-action-app-firewall-detection-control)) supports the following:
 
 <a id="waf-action-app-firewall-detection-control-exclude-signature-contexts-context"></a>&#x2022; [`context`](#waf-action-app-firewall-detection-control-exclude-signature-contexts-context) - Optional String  Defaults to `CONTEXT_ANY`<br>Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`<br>WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI
 
@@ -591,13 +591,13 @@ An [`exclude\_signature\_contexts`](#waf-action-app-firewall-detection-control-e
 
 #### WAF Action App Firewall Detection Control Exclude Violation Contexts
 
-An [`exclude\_violation\_contexts`](#waf-action-app-firewall-detection-control-exclude-violation-contexts) block (within [`waf_action.app\_firewall_detection\_control`](#waf-action-app-firewall-detection-control)) supports the following:
+An [`exclude_violation_contexts`](#waf-action-app-firewall-detection-control-exclude-violation-contexts) block (within [`waf_action.app_firewall_detection_control`](#waf-action-app-firewall-detection-control)) supports the following:
 
 <a id="waf-action-app-firewall-detection-control-exclude-violation-contexts-context"></a>&#x2022; [`context`](#waf-action-app-firewall-detection-control-exclude-violation-contexts-context) - Optional String  Defaults to `CONTEXT_ANY`<br>Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`<br>WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI
 
 <a id="waf-action-app-firewall-detection-control-exclude-violation-contexts-context-name"></a>&#x2022; [`context_name`](#waf-action-app-firewall-detection-control-exclude-violation-contexts-context-name) - Optional String<br>Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*)
 
-<a id="waf-action-app-firewall-detection-control-exclude-violation-contexts-exclude-violation"></a>&#x2022; [`exclude_violation`](#waf-action-app-firewall-detection-control-exclude-violation-contexts-exclude-violation) - Optional String  Defaults to `VIOL_NONE`<br>Possible values are `VIOL_NONE`, `VIOL_FILETYPE`, `VIOL_METHOD`, `VIOL\_MANDATORY\_HEADER`, `VIOL\_HTTP_RESPONSE\_STATUS`, `VIOL\_REQUEST_MAX\_LENGTH`, `VIOL\_FILE\_UPLOAD`, `VIOL\_FILE_UPLOAD_IN\_BODY`, `VIOL\_XML\_MALFORMED`, `VIOL\_JSON\_MALFORMED`, `VIOL\_ASM_COOKIE\_MODIFIED`, `VIOL\_HTTP_PROTOCOL_MULTIPLE_HOST\_HEADERS`, `VIOL\_HTTP_PROTOCOL_BAD_HOST_HEADER\_VALUE`, `VIOL\_HTTP_PROTOCOL_UNPARSABLE_REQUEST\_CONTENT`, `VIOL\_HTTP_PROTOCOL_NULL_IN\_REQUEST`, `VIOL\_HTTP_PROTOCOL_BAD_HTTP\_VERSION`, `VIOL\_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH\_HEADERS`, `VIOL\_EVASION_DIRECTORY\_TRAVERSALS`, `VIOL\_MALFORMED\_REQUEST`, `VIOL\_EVASION_MULTIPLE\_DECODING`, `VIOL\_DATA\_GUARD`, `VIOL\_EVASION_APACHE\_WHITESPACE`, `VIOL\_COOKIE\_MODIFIED`, `VIOL\_EVASION_IIS_UNICODE\_CODEPOINTS`, `VIOL\_EVASION_IIS\_BACKSLASHES`, `VIOL\_EVASION_PERCENT_U\_DECODING`, `VIOL\_EVASION_BARE_BYTE\_DECODING`, `VIOL\_EVASION_BAD\_UNESCAPE`, `VIOL\_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD\_REQUEST`, `VIOL_ENCODING`, `VIOL\_COOKIE\_MALFORMED`, `VIOL\_GRAPHQL\_FORMAT`, `VIOL\_GRAPHQL\_MALFORMED`, `VIOL\_GRAPHQL_INTROSPECTION\_QUERY`<br>App Firewall Violation Type. List of all supported Violation Types VIOL_NONE VIOL_FILETYPE VIOL_METHOD VIOL\_MANDATORY\_HEADER VIOL\_HTTP_RESPONSE\_STATUS VIOL\_REQUEST_MAX\_LENGTH VIOL\_FILE\_UPLOAD VIOL\_FILE_UPLOAD_IN\_BODY VIOL\_XML\_MALFORMED VIOL\_JSON\_MALFORMED VIOL\_ASM_COOKIE\_MODIFIED VIOL\_HTTP_PROTOCOL_MULTIPLE_HOST\_HEADERS VIOL\_HTTP_PROTOCOL_BAD_HOST_HEADER\_VALUE VIOL\_HTTP_PROTOCOL_UNPARSABLE_REQUEST\_CONTENT VIOL\_HTTP_PROTOCOL_NULL_IN\_REQUEST VIOL\_HTTP_PROTOCOL_BAD_HTTP\_VERSION VIOL\_HTTP_PROTOCOL_CRLF_CHARACTERS_BEFORE_REQUEST\_START VIOL\_HTTP_PROTOCOL_NO_HOST_HEADER_IN_HTTP_1_1\_REQUEST VIOL\_HTTP_PROTOCOL_BAD_MULTIPART_PARAMETERS\_PARSING VIOL\_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH\_HEADERS VIOL\_HTTP_PROTOCOL_CONTENT_LENGTH_SHOULD_BE_A_POSITIVE\_NUMBER VIOL\_EVASION_DIRECTORY\_TRAVERSALS VIOL\_MALFORMED\_REQUEST VIOL\_EVASION_MULTIPLE\_DECODING VIOL\_DATA\_GUARD VIOL\_EVASION_APACHE\_WHITESPACE VIOL\_COOKIE\_MODIFIED VIOL\_EVASION_IIS_UNICODE\_CODEPOINTS VIOL\_EVASION_IIS\_BACKSLASHES VIOL\_EVASION_PERCENT_U\_DECODING VIOL\_EVASION_BARE_BYTE\_DECODING VIOL\_EVASION_BAD\_UNESCAPE VIOL\_HTTP_PROTOCOL_BAD_MULTIPART_FORMDATA_REQUEST\_PARSING VIOL\_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD\_REQUEST VIOL\_HTTP_PROTOCOL_HIGH_ASCII_CHARACTERS_IN\_HEADERS VIOL_ENCODING VIOL\_COOKIE\_MALFORMED VIOL\_GRAPHQL\_FORMAT VIOL\_GRAPHQL\_MALFORMED VIOL\_GRAPHQL_INTROSPECTION\_QUERY
+<a id="waf-action-app-firewall-detection-control-exclude-violation-contexts-exclude-violation"></a>&#x2022; [`exclude_violation`](#waf-action-app-firewall-detection-control-exclude-violation-contexts-exclude-violation) - Optional String  Defaults to `VIOL_NONE`<br>Possible values are `VIOL_NONE`, `VIOL_FILETYPE`, `VIOL_METHOD`, `VIOL_MANDATORY_HEADER`, `VIOL_HTTP_RESPONSE_STATUS`, `VIOL_REQUEST_MAX_LENGTH`, `VIOL_FILE_UPLOAD`, `VIOL_FILE_UPLOAD_IN_BODY`, `VIOL_XML_MALFORMED`, `VIOL_JSON_MALFORMED`, `VIOL_ASM_COOKIE_MODIFIED`, `VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS`, `VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE`, `VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT`, `VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST`, `VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION`, `VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS`, `VIOL_EVASION_DIRECTORY_TRAVERSALS`, `VIOL_MALFORMED_REQUEST`, `VIOL_EVASION_MULTIPLE_DECODING`, `VIOL_DATA_GUARD`, `VIOL_EVASION_APACHE_WHITESPACE`, `VIOL_COOKIE_MODIFIED`, `VIOL_EVASION_IIS_UNICODE_CODEPOINTS`, `VIOL_EVASION_IIS_BACKSLASHES`, `VIOL_EVASION_PERCENT_U_DECODING`, `VIOL_EVASION_BARE_BYTE_DECODING`, `VIOL_EVASION_BAD_UNESCAPE`, `VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST`, `VIOL_ENCODING`, `VIOL_COOKIE_MALFORMED`, `VIOL_GRAPHQL_FORMAT`, `VIOL_GRAPHQL_MALFORMED`, `VIOL_GRAPHQL_INTROSPECTION_QUERY`<br>App Firewall Violation Type. List of all supported Violation Types VIOL_NONE VIOL_FILETYPE VIOL_METHOD VIOL_MANDATORY_HEADER VIOL_HTTP_RESPONSE_STATUS VIOL_REQUEST_MAX_LENGTH VIOL_FILE_UPLOAD VIOL_FILE_UPLOAD_IN_BODY VIOL_XML_MALFORMED VIOL_JSON_MALFORMED VIOL_ASM_COOKIE_MODIFIED VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION VIOL_HTTP_PROTOCOL_CRLF_CHARACTERS_BEFORE_REQUEST_START VIOL_HTTP_PROTOCOL_NO_HOST_HEADER_IN_HTTP_1_1_REQUEST VIOL_HTTP_PROTOCOL_BAD_MULTIPART_PARAMETERS_PARSING VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS VIOL_HTTP_PROTOCOL_CONTENT_LENGTH_SHOULD_BE_A_POSITIVE_NUMBER VIOL_EVASION_DIRECTORY_TRAVERSALS VIOL_MALFORMED_REQUEST VIOL_EVASION_MULTIPLE_DECODING VIOL_DATA_GUARD VIOL_EVASION_APACHE_WHITESPACE VIOL_COOKIE_MODIFIED VIOL_EVASION_IIS_UNICODE_CODEPOINTS VIOL_EVASION_IIS_BACKSLASHES VIOL_EVASION_PERCENT_U_DECODING VIOL_EVASION_BARE_BYTE_DECODING VIOL_EVASION_BAD_UNESCAPE VIOL_HTTP_PROTOCOL_BAD_MULTIPART_FORMDATA_REQUEST_PARSING VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST VIOL_HTTP_PROTOCOL_HIGH_ASCII_CHARACTERS_IN_HEADERS VIOL_ENCODING VIOL_COOKIE_MALFORMED VIOL_GRAPHQL_FORMAT VIOL_GRAPHQL_MALFORMED VIOL_GRAPHQL_INTROSPECTION_QUERY
 
 ## Import
 
@@ -605,5 +605,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_service_policy\_rule.example system/example
+terraform import f5xc_service_policy_rule.example system/example
 ```

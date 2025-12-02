@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_geo_location\_set Data Source - terraform-provider-f5xc"
+page_title: "f5xc_geo_location_set Data Source - terraform-provider-f5xc"
 subcategory: "Cloud Resources"
 description: |-
   Manages Geolocation Set in F5 Distributed Cloud.
 ---
 
-# f5xc\_geo_location\_set (Data Source)
+# f5xc_geo_location_set (Data Source)
 
 Manages Geolocation Set in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages Geolocation Set in F5 Distributed Cloud.
 # Retrieves information about an existing Geo Location Set
 
 # Look up an existing Geo Location Set by name
-data "f5xc\_geo_location\_set" "example" {
+data "f5xc_geo_location_set" "example" {
   name      = "example-geo-location-set"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "geo\_location_set\_id" {
-#   value = data.f5xc\_geo_location\_set.example.id
+# output "geo_location_set_id" {
+#   value = data.f5xc_geo_location_set.example.id
 # }
 ```
 

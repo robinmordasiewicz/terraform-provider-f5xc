@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_api\_credential Data Source - terraform-provider-f5xc"
+page_title: "f5xc_api_credential Data Source - terraform-provider-f5xc"
 subcategory: "Authentication"
 description: |-
   Manages request specification. in F5 Distributed Cloud.
 ---
 
-# f5xc\_api\_credential (Data Source)
+# f5xc_api_credential (Data Source)
 
 Manages request specification. in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages request specification. in F5 Distributed Cloud.
 # Retrieves information about an existing API Credential
 
 # Look up an existing API Credential by name
-data "f5xc\_api\_credential" "example" {
+data "f5xc_api_credential" "example" {
   name      = "example-api-credential"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "api\_credential\_id" {
-#   value = data.f5xc\_api\_credential.example.id
+# output "api_credential_id" {
+#   value = data.f5xc_api_credential.example.id
 # }
 ```
 

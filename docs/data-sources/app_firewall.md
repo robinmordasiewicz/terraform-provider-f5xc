@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_app\_firewall Data Source - terraform-provider-f5xc"
+page_title: "f5xc_app_firewall Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages Application Firewall in F5 Distributed Cloud.
 ---
 
-# f5xc\_app\_firewall (Data Source)
+# f5xc_app_firewall (Data Source)
 
 Manages Application Firewall in F5 Distributed Cloud.
 
@@ -18,24 +18,24 @@ Manages Application Firewall in F5 Distributed Cloud.
 # Retrieves information about an existing App Firewall
 
 # Look up an existing App Firewall by name
-data "f5xc\_app\_firewall" "example" {
+data "f5xc_app_firewall" "example" {
   name      = "example-app-firewall"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "app\_firewall\_id" {
-#   value = data.f5xc\_app\_firewall.example.id
+# output "app_firewall_id" {
+#   value = data.f5xc_app_firewall.example.id
 # }
 
 # Example: Reference WAF in HTTP load balancer
-# resource "f5xc\_http\_loadbalancer" "example" {
+# resource "f5xc_http_loadbalancer" "example" {
 #   name      = "protected-lb"
 #   namespace = "system"
 #
 #   app_firewall {
-#     name      = data.f5xc\_app\_firewall.example.name
-#     namespace = data.f5xc\_app\_firewall.example.namespace
+#     name      = data.f5xc_app_firewall.example.name
+#     namespace = data.f5xc_app_firewall.example.namespace
 #   }
 # }
 ```

@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc\_fast_acl\_rule Resource - terraform-provider-f5xc"
+page_title: "f5xc_fast_acl_rule Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages new Fast ACL rule, fast\_acl\_rule has specification to match source IP, source port and action to apply in F5 Distributed Cloud.
+  Manages new Fast ACL rule, fast_acl_rule has specification to match source IP, source port and action to apply in F5 Distributed Cloud.
 ---
 
-# f5xc\_fast_acl\_rule (Resource)
+# f5xc_fast_acl_rule (Resource)
 
-Manages new Fast ACL rule, `fast\_acl\_rule` has specification to match source IP, source port and action to apply in F5 Distributed Cloud.
+Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP, source port and action to apply in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Fast ACL Rule API docs](https://docs.cloud.f5.com/docs-v2/api/fast-acl-rule) to learn more.
 
@@ -15,10 +15,10 @@ Manages new Fast ACL rule, `fast\_acl\_rule` has specification to match source I
 
 ```terraform
 # Fast ACL Rule Resource Example
-# Manages new Fast ACL rule, `fast\_acl\_rule` has specification to match source IP, source port and action to apply in F5 Distributed Cloud.
+# Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP, source port and action to apply in F5 Distributed Cloud.
 
 # Basic Fast ACL Rule configuration
-resource "f5xc\_fast_acl\_rule" "example" {
+resource "f5xc_fast_acl_rule" "example" {
   name      = "example-fast-acl-rule"
   namespace = "system"
 
@@ -69,7 +69,7 @@ resource "f5xc\_fast_acl\_rule" "example" {
 <a id="action"></a>&#x2022; [`action`](#action) - Optional Block<br>Action. FastAclRuleAction specifies possible action to be applied on traffic, possible action include dropping, forwarding or ratelimiting the traffic<br>See [Action](#action) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="ip-prefix-set"></a>[`ip\_prefix\_set`](#ip-prefix-set) - Optional Block<br>IP Prefix Set Reference. A list of references to ip\_prefix\_set objects<br>See [IP Prefix Set](#ip-prefix-set) below for details.
+&#x2022; <a id="ip-prefix-set"></a>[`ip_prefix_set`](#ip-prefix-set) - Optional Block<br>IP Prefix Set Reference. A list of references to ip_prefix_set objects<br>See [IP Prefix Set](#ip-prefix-set) below for details.
 <br><br>&#x2022; <a id="prefix"></a>[`prefix`](#prefix) - Optional Block<br>IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Prefix](#prefix) below for details.
 
 <a id="port"></a>&#x2022; [`port`](#port) - Optional Block<br>Source Ports. L4 port numbers to match<br>See [Port](#port) below for details.
@@ -90,7 +90,7 @@ An [`action`](#action) block supports the following:
 
 <a id="action-policer-action"></a>&#x2022; [`policer_action`](#action-policer-action) - Optional Block<br>Policer Reference. Reference to policer object<br>See [Policer Action](#action-policer-action) below.
 
-<a id="action-protocol-policer-action"></a>&#x2022; [`protocol\_policer\_action`](#action-protocol-policer-action) - Optional Block<br>Protocol Policer Reference. Reference to policer object<br>See [Protocol Policer Action](#action-protocol-policer-action) below.
+<a id="action-protocol-policer-action"></a>&#x2022; [`protocol_policer_action`](#action-protocol-policer-action) - Optional Block<br>Protocol Policer Reference. Reference to policer object<br>See [Protocol Policer Action](#action-protocol-policer-action) below.
 
 <a id="action-simple-action"></a>&#x2022; [`simple_action`](#action-simple-action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`<br>Simple Action. FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic
 
@@ -116,13 +116,13 @@ A [`ref`](#action-policer-action-ref) block (within [`action.policer_action`](#a
 
 #### Action Protocol Policer Action
 
-A [`protocol\_policer\_action`](#action-protocol-policer-action) block (within [`action`](#action)) supports the following:
+A [`protocol_policer_action`](#action-protocol-policer-action) block (within [`action`](#action)) supports the following:
 
 <a id="action-protocol-policer-action-ref"></a>&#x2022; [`ref`](#action-protocol-policer-action-ref) - Optional Block<br>Protocol policer Reference. Reference to protocol policer object<br>See [Ref](#action-protocol-policer-action-ref) below.
 
 #### Action Protocol Policer Action Ref
 
-A [`ref`](#action-protocol-policer-action-ref) block (within [`action.protocol\_policer\_action`](#action-protocol-policer-action)) supports the following:
+A [`ref`](#action-protocol-policer-action-ref) block (within [`action.protocol_policer_action`](#action-protocol-policer-action)) supports the following:
 
 <a id="action-protocol-policer-action-ref-kind"></a>&#x2022; [`kind`](#action-protocol-policer-action-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -136,13 +136,13 @@ A [`ref`](#action-protocol-policer-action-ref) block (within [`action.protocol\_
 
 #### IP Prefix Set
 
-An [`ip\_prefix\_set`](#ip-prefix-set) block supports the following:
+An [`ip_prefix_set`](#ip-prefix-set) block supports the following:
 
-<a id="ip-prefix-set-ref"></a>&#x2022; [`ref`](#ip-prefix-set-ref) - Optional Block<br>Reference. A list of references to ip\_prefix\_set objects<br>See [Ref](#ip-prefix-set-ref) below.
+<a id="ip-prefix-set-ref"></a>&#x2022; [`ref`](#ip-prefix-set-ref) - Optional Block<br>Reference. A list of references to ip_prefix_set objects<br>See [Ref](#ip-prefix-set-ref) below.
 
 #### IP Prefix Set Ref
 
-A [`ref`](#ip-prefix-set-ref) block (within [`ip\_prefix\_set`](#ip-prefix-set)) supports the following:
+A [`ref`](#ip-prefix-set-ref) block (within [`ip_prefix_set`](#ip-prefix-set)) supports the following:
 
 <a id="ip-prefix-set-ref-kind"></a>&#x2022; [`kind`](#ip-prefix-set-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -188,5 +188,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_fast_acl\_rule.example system/example
+terraform import f5xc_fast_acl_rule.example system/example
 ```

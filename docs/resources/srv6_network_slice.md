@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc\_srv6_network\_slice Resource - terraform-provider-f5xc"
+page_title: "f5xc_srv6_network_slice Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages srv6\_network\_slice creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  Manages srv6_network_slice creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc\_srv6_network\_slice (Resource)
+# f5xc_srv6_network_slice (Resource)
 
-Manages srv6\_network\_slice creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+Manages srv6_network_slice creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Srv6 Network Slice API docs](https://docs.cloud.f5.com/docs-v2/api/srv6-network-slice) to learn more.
 
@@ -15,10 +15,10 @@ Manages srv6\_network\_slice creates a new object in the storage backend for met
 
 ```terraform
 # Srv6 Network Slice Resource Example
-# Manages srv6\_network\_slice creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# Manages srv6_network_slice creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Srv6 Network Slice configuration
-resource "f5xc\_srv6_network\_slice" "example" {
+resource "f5xc_srv6_network_slice" "example" {
   name      = "example-srv6-network-slice"
   namespace = "staging"
 
@@ -52,11 +52,11 @@ resource "f5xc\_srv6_network\_slice" "example" {
 
 ### Spec Argument Reference
 
-<a id="connect-to-access-networks"></a>&#x2022; [`connect\_to_access\_networks`](#connect-to-access-networks) - Optional Bool<br>Connect To Access Networks. Connect all SRv6 Virtual Networks in this slice to their corresponding access networks by importing route targets specified in the virtual network
+<a id="connect-to-access-networks"></a>&#x2022; [`connect_to_access_networks`](#connect-to-access-networks) - Optional Bool<br>Connect To Access Networks. Connect all SRv6 Virtual Networks in this slice to their corresponding access networks by importing route targets specified in the virtual network
 
-<a id="connect-to-enterprise-networks"></a>&#x2022; [`connect\_to_enterprise\_networks`](#connect-to-enterprise-networks) - Optional Bool<br>Connect To Enterprise Networks. Connect all SRv6 Virtual Networks in this slice to their corresponding enterprise networks by importing route targets specified in the virtual network
+<a id="connect-to-enterprise-networks"></a>&#x2022; [`connect_to_enterprise_networks`](#connect-to-enterprise-networks) - Optional Bool<br>Connect To Enterprise Networks. Connect all SRv6 Virtual Networks in this slice to their corresponding enterprise networks by importing route targets specified in the virtual network
 
-<a id="connect-to-internet"></a>&#x2022; [`connect\_to\_internet`](#connect-to-internet) - Optional Bool<br>Connect To Internet. Connect all SRv6 Virtual Networks in this slice to the Internet by importing route targets specified in the virtual network
+<a id="connect-to-internet"></a>&#x2022; [`connect_to_internet`](#connect-to-internet) - Optional Bool<br>Connect To Internet. Connect all SRv6 Virtual Networks in this slice to the Internet by importing route targets specified in the virtual network
 
 <a id="sid-prefixes"></a>&#x2022; [`sid_prefixes`](#sid-prefixes) - Optional List<br>IPv6 Prefix for SID Allocation. A SID Locator from the prefix is allocated automatically for each node in each site
 
@@ -88,5 +88,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_srv6_network\_slice.example system/example
+terraform import f5xc_srv6_network_slice.example system/example
 ```

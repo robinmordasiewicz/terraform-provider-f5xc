@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_app\_type Data Source - terraform-provider-f5xc"
+page_title: "f5xc_app_type Data Source - terraform-provider-f5xc"
 subcategory: "Applications"
 description: |-
   Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.
 ---
 
-# f5xc\_app\_type (Data Source)
+# f5xc_app_type (Data Source)
 
 Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages App type will create the configuration in namespace metadata.namespace i
 # Retrieves information about an existing App Type
 
 # Look up an existing App Type by name
-data "f5xc\_app\_type" "example" {
+data "f5xc_app_type" "example" {
   name      = "example-app-type"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "app\_type\_id" {
-#   value = data.f5xc\_app\_type.example.id
+# output "app_type_id" {
+#   value = data.f5xc_app_type.example.id
 # }
 ```
 

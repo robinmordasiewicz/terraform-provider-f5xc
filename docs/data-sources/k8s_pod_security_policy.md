@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc\_k8s_pod_security\_policy Data Source - terraform-provider-f5xc"
+page_title: "f5xc_k8s_pod_security_policy Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages k8s\_pod_security\_policy will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+  Manages k8s_pod_security_policy will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 ---
 
-# f5xc\_k8s_pod_security\_policy (Data Source)
+# f5xc_k8s_pod_security_policy (Data Source)
 
-Manages k8s\_pod_security\_policy will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+Manages k8s_pod_security_policy will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [K8S Pod Security Policy API docs](https://docs.cloud.f5.com/docs-v2/api/k8s-pod-security-policy) to learn more.
 
@@ -18,14 +18,14 @@ Manages k8s\_pod_security\_policy will create the object in the storage backend 
 # Retrieves information about an existing K8s Pod Security Policy
 
 # Look up an existing K8s Pod Security Policy by name
-data "f5xc\_k8s_pod_security\_policy" "example" {
+data "f5xc_k8s_pod_security_policy" "example" {
   name      = "example-k8s-pod-security-policy"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "k8s\_pod_security_policy\_id" {
-#   value = data.f5xc\_k8s_pod_security\_policy.example.id
+# output "k8s_pod_security_policy_id" {
+#   value = data.f5xc_k8s_pod_security_policy.example.id
 # }
 ```
 

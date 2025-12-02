@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_api\_crawler Data Source - terraform-provider-f5xc"
+page_title: "f5xc_api_crawler Data Source - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
   Manages a APICrawler resource in F5 Distributed Cloud.
 ---
 
-# f5xc\_api\_crawler (Data Source)
+# f5xc_api_crawler (Data Source)
 
 Manages a APICrawler resource in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages a APICrawler resource in F5 Distributed Cloud.
 # Retrieves information about an existing API Crawler
 
 # Look up an existing API Crawler by name
-data "f5xc\_api\_crawler" "example" {
+data "f5xc_api_crawler" "example" {
   name      = "example-api-crawler"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "api\_crawler\_id" {
-#   value = data.f5xc\_api\_crawler.example.id
+# output "api_crawler_id" {
+#   value = data.f5xc_api_crawler.example.id
 # }
 ```
 

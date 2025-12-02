@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_bigip\_irule Resource - terraform-provider-f5xc"
+page_title: "f5xc_bigip_irule Resource - terraform-provider-f5xc"
 subcategory: "BIG-IP Integration"
 description: |-
   Manages a BigIPIrule resource in F5 Distributed Cloud for desired state for big-ip irule service configuration.
 ---
 
-# f5xc\_bigip\_irule (Resource)
+# f5xc_bigip_irule (Resource)
 
 Manages a BigIPIrule resource in F5 Distributed Cloud for desired state for big-ip irule service configuration.
 
@@ -18,7 +18,7 @@ Manages a BigIPIrule resource in F5 Distributed Cloud for desired state for big-
 # Manages a BigIPIrule resource in F5 Distributed Cloud for desired state for big-ip irule service configuration.
 
 # Basic Bigip Irule configuration
-resource "f5xc\_bigip\_irule" "example" {
+resource "f5xc_bigip_irule" "example" {
   name      = "example-bigip-irule"
   namespace = "staging"
 
@@ -86,5 +86,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_bigip\_irule.example system/example
+terraform import f5xc_bigip_irule.example system/example
 ```

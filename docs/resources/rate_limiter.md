@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_rate\_limiter Resource - terraform-provider-f5xc"
+page_title: "f5xc_rate_limiter Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages rate_limiter creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc\_rate\_limiter (Resource)
+# f5xc_rate_limiter (Resource)
 
 Manages rate_limiter creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages rate_limiter creates a new object in the storage backend for metadata.na
 # Manages rate_limiter creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Rate Limiter configuration
-resource "f5xc\_rate\_limiter" "example" {
+resource "f5xc_rate_limiter" "example" {
   name      = "example-rate-limiter"
   namespace = "shared"
 
@@ -151,5 +151,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_rate\_limiter.example system/example
+terraform import f5xc_rate_limiter.example system/example
 ```

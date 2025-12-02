@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_infraprotect_firewall\_rule Data Source - terraform-provider-f5xc"
+page_title: "f5xc_infraprotect_firewall_rule Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages DDoS transit Firewall Rule in F5 Distributed Cloud.
 ---
 
-# f5xc\_infraprotect_firewall\_rule (Data Source)
+# f5xc_infraprotect_firewall_rule (Data Source)
 
 Manages DDoS transit Firewall Rule in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages DDoS transit Firewall Rule in F5 Distributed Cloud.
 # Retrieves information about an existing Infraprotect Firewall Rule
 
 # Look up an existing Infraprotect Firewall Rule by name
-data "f5xc\_infraprotect_firewall\_rule" "example" {
+data "f5xc_infraprotect_firewall_rule" "example" {
   name      = "example-infraprotect-firewall-rule"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "infraprotect\_firewall_rule\_id" {
-#   value = data.f5xc\_infraprotect_firewall\_rule.example.id
+# output "infraprotect_firewall_rule_id" {
+#   value = data.f5xc_infraprotect_firewall_rule.example.id
 # }
 ```
 

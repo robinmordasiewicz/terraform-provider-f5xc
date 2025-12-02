@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_infraprotect_internet_prefix\_advertisement Resource - terraform-provider-f5xc"
+page_title: "f5xc_infraprotect_internet_prefix_advertisement Resource - terraform-provider-f5xc"
 subcategory: "Infrastructure Protection"
 description: |-
   Manages DDoS transit Internet Prefix in F5 Distributed Cloud.
 ---
 
-# f5xc\_infraprotect_internet_prefix\_advertisement (Resource)
+# f5xc_infraprotect_internet_prefix_advertisement (Resource)
 
 Manages DDoS transit Internet Prefix in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages DDoS transit Internet Prefix in F5 Distributed Cloud.
 # Manages DDoS transit Internet Prefix in F5 Distributed Cloud.
 
 # Basic Infraprotect Internet Prefix Advertisement configuration
-resource "f5xc\_infraprotect_internet_prefix\_advertisement" "example" {
+resource "f5xc_infraprotect_internet_prefix_advertisement" "example" {
   name      = "example-infraprotect-internet-prefix-advertisement"
   namespace = "staging"
 
@@ -104,5 +104,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_infraprotect_internet_prefix\_advertisement.example system/example
+terraform import f5xc_infraprotect_internet_prefix_advertisement.example system/example
 ```

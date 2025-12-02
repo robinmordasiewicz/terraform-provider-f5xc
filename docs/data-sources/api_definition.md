@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_api\_definition Data Source - terraform-provider-f5xc"
+page_title: "f5xc_api_definition Data Source - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
   Manages a APIDefinition resource in F5 Distributed Cloud for x-required create api definition. configuration.
 ---
 
-# f5xc\_api\_definition (Data Source)
+# f5xc_api_definition (Data Source)
 
 Manages a APIDefinition resource in F5 Distributed Cloud for x-required create api definition. configuration.
 
@@ -18,14 +18,14 @@ Manages a APIDefinition resource in F5 Distributed Cloud for x-required create a
 # Retrieves information about an existing API Definition
 
 # Look up an existing API Definition by name
-data "f5xc\_api\_definition" "example" {
+data "f5xc_api_definition" "example" {
   name      = "example-api-definition"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "api\_definition\_id" {
-#   value = data.f5xc\_api\_definition.example.id
+# output "api_definition_id" {
+#   value = data.f5xc_api_definition.example.id
 # }
 ```
 

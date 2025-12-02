@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_protocol\_inspection Data Source - terraform-provider-f5xc"
+page_title: "f5xc_protocol_inspection Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages Protocol Inspection Specification in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 ---
 
-# f5xc\_protocol\_inspection (Data Source)
+# f5xc_protocol_inspection (Data Source)
 
 Manages Protocol Inspection Specification in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages Protocol Inspection Specification in a given namespace. If one already e
 # Retrieves information about an existing Protocol Inspection
 
 # Look up an existing Protocol Inspection by name
-data "f5xc\_protocol\_inspection" "example" {
+data "f5xc_protocol_inspection" "example" {
   name      = "example-protocol-inspection"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "protocol\_inspection\_id" {
-#   value = data.f5xc\_protocol\_inspection.example.id
+# output "protocol_inspection_id" {
+#   value = data.f5xc_protocol_inspection.example.id
 # }
 ```
 

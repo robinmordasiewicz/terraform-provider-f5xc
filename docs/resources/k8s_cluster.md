@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_k8s\_cluster Resource - terraform-provider-f5xc"
+page_title: "f5xc_k8s_cluster Resource - terraform-provider-f5xc"
 subcategory: "Kubernetes"
 description: |-
   Manages k8s_cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 ---
 
-# f5xc\_k8s\_cluster (Resource)
+# f5xc_k8s_cluster (Resource)
 
 Manages k8s_cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages k8s_cluster will create the object in the storage backend for namespace 
 # Manages k8s_cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
 # Basic K8S Cluster configuration
-resource "f5xc\_k8s\_cluster" "example" {
+resource "f5xc_k8s_cluster" "example" {
   name      = "example-k8s-cluster"
   namespace = "system"
 
@@ -33,26 +33,26 @@ resource "f5xc\_k8s\_cluster" "example" {
 
   # Kubernetes Cluster configuration
   # Use custom local domain
-  use\_custom_cluster_role\_bindings {
-    cluster\_role\_bindings {
+  use_custom_cluster_role_bindings {
+    cluster_role_bindings {
       name      = "admin-binding"
       namespace = "system"
     }
   }
 
-  cluster\_wide_app\_list {
-    cluster\_wide\_apps {
+  cluster_wide_app_list {
+    cluster_wide_apps {
       name      = "nginx-ingress"
       namespace = "system"
     }
   }
 
-  local\_access\_config {
+  local_access_config {
     local_domain = "cluster.local"
     default_port {}
   }
 
-  global\_access\_enable {}
+  global_access_enable {}
 }
 ```
 
@@ -76,46 +76,46 @@ resource "f5xc\_k8s\_cluster" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="cluster-scoped-access-deny"></a>[`cluster\_scoped_access\_deny`](#cluster-scoped-access-deny) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="cluster-scoped-access-permit"></a>[`cluster\_scoped_access\_permit`](#cluster-scoped-access-permit) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="cluster-scoped-access-deny"></a>[`cluster_scoped_access_deny`](#cluster-scoped-access-deny) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="cluster-scoped-access-permit"></a>[`cluster_scoped_access_permit`](#cluster-scoped-access-permit) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; <a id="cluster-wide-app-list"></a>[`cluster\_wide_app\_list`](#cluster-wide-app-list) - Optional Block<br>Cluster Wide Application List. List of cluster wide applications<br>See [Cluster Wide App List](#cluster-wide-app-list) below for details.
-<br><br>&#x2022; <a id="no-cluster-wide-apps"></a>[`no\_cluster_wide\_apps`](#no-cluster-wide-apps) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="cluster-wide-app-list"></a>[`cluster_wide_app_list`](#cluster-wide-app-list) - Optional Block<br>Cluster Wide Application List. List of cluster wide applications<br>See [Cluster Wide App List](#cluster-wide-app-list) below for details.
+<br><br>&#x2022; <a id="no-cluster-wide-apps"></a>[`no_cluster_wide_apps`](#no-cluster-wide-apps) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; <a id="global-access-enable"></a>[`global\_access\_enable`](#global-access-enable) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="no-global-access"></a>[`no\_global\_access`](#no-global-access) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="global-access-enable"></a>[`global_access_enable`](#global-access-enable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="no-global-access"></a>[`no_global_access`](#no-global-access) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; <a id="insecure-registry-list"></a>[`insecure\_registry\_list`](#insecure-registry-list) - Optional Block<br>Docker Insecure Registry List. List of docker insecure registries<br>See [Insecure Registry List](#insecure-registry-list) below for details.
-<br><br>&#x2022; <a id="no-insecure-registries"></a>[`no\_insecure\_registries`](#no-insecure-registries) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="insecure-registry-list"></a>[`insecure_registry_list`](#insecure-registry-list) - Optional Block<br>Docker Insecure Registry List. List of docker insecure registries<br>See [Insecure Registry List](#insecure-registry-list) below for details.
+<br><br>&#x2022; <a id="no-insecure-registries"></a>[`no_insecure_registries`](#no-insecure-registries) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; <a id="local-access-config"></a>[`local\_access\_config`](#local-access-config) - Optional Block<br>Local Access Configuration. Parameters required to enable local access<br>See [Local Access Config](#local-access-config) below for details.
-<br><br>&#x2022; <a id="no-local-access"></a>[`no\_local\_access`](#no-local-access) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="local-access-config"></a>[`local_access_config`](#local-access-config) - Optional Block<br>Local Access Configuration. Parameters required to enable local access<br>See [Local Access Config](#local-access-config) below for details.
+<br><br>&#x2022; <a id="no-local-access"></a>[`no_local_access`](#no-local-access) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="use-custom-cluster-role-bindings"></a>[`use\_custom_cluster_role\_bindings`](#use-custom-cluster-role-bindings) - Optional Block<br>Cluster Role Binding List. List of active cluster role binding list for a K8S cluster<br>See [Use Custom Cluster Role Bindings](#use-custom-cluster-role-bindings) below for details.
-<br><br>&#x2022; <a id="use-default-cluster-role-bindings"></a>[`use\_default_cluster_role\_bindings`](#use-default-cluster-role-bindings) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="use-custom-cluster-role-bindings"></a>[`use_custom_cluster_role_bindings`](#use-custom-cluster-role-bindings) - Optional Block<br>Cluster Role Binding List. List of active cluster role binding list for a K8S cluster<br>See [Use Custom Cluster Role Bindings](#use-custom-cluster-role-bindings) below for details.
+<br><br>&#x2022; <a id="use-default-cluster-role-bindings"></a>[`use_default_cluster_role_bindings`](#use-default-cluster-role-bindings) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; <a id="use-custom-cluster-role-list"></a>[`use\_custom_cluster_role\_list`](#use-custom-cluster-role-list) - Optional Block<br>Cluster Role List. List of active cluster role list for a K8S cluster<br>See [Use Custom Cluster Role List](#use-custom-cluster-role-list) below for details.
-<br><br>&#x2022; <a id="use-default-cluster-roles"></a>[`use\_default_cluster\_roles`](#use-default-cluster-roles) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="use-custom-cluster-role-list"></a>[`use_custom_cluster_role_list`](#use-custom-cluster-role-list) - Optional Block<br>Cluster Role List. List of active cluster role list for a K8S cluster<br>See [Use Custom Cluster Role List](#use-custom-cluster-role-list) below for details.
+<br><br>&#x2022; <a id="use-default-cluster-roles"></a>[`use_default_cluster_roles`](#use-default-cluster-roles) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; <a id="use-custom-pod-security-admission"></a>[`use\_custom_pod_security\_admission`](#use-custom-pod-security-admission) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Use Custom Pod Security Admission](#use-custom-pod-security-admission) below for details.
-<br><br>&#x2022; <a id="use-default-pod-security-admission"></a>[`use\_default_pod_security\_admission`](#use-default-pod-security-admission) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="use-custom-pod-security-admission"></a>[`use_custom_pod_security_admission`](#use-custom-pod-security-admission) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Use Custom Pod Security Admission](#use-custom-pod-security-admission) below for details.
+<br><br>&#x2022; <a id="use-default-pod-security-admission"></a>[`use_default_pod_security_admission`](#use-default-pod-security-admission) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; <a id="use-custom-psp-list"></a>[`use\_custom_psp\_list`](#use-custom-psp-list) - Optional Block<br>Pod Security Policy List. List of active Pod security policies for a K8S cluster<br>See [Use Custom Psp List](#use-custom-psp-list) below for details.
-<br><br>&#x2022; <a id="use-default-psp"></a>[`use\_default\_psp`](#use-default-psp) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="use-custom-psp-list"></a>[`use_custom_psp_list`](#use-custom-psp-list) - Optional Block<br>Pod Security Policy List. List of active Pod security policies for a K8S cluster<br>See [Use Custom Psp List](#use-custom-psp-list) below for details.
+<br><br>&#x2022; <a id="use-default-psp"></a>[`use_default_psp`](#use-default-psp) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; <a id="vk8s-namespace-access-deny"></a>[`vk8s\_namespace_access\_deny`](#vk8s-namespace-access-deny) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="vk8s-namespace-access-permit"></a>[`vk8s\_namespace_access\_permit`](#vk8s-namespace-access-permit) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="vk8s-namespace-access-deny"></a>[`vk8s_namespace_access_deny`](#vk8s-namespace-access-deny) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="vk8s-namespace-access-permit"></a>[`vk8s_namespace_access_permit`](#vk8s-namespace-access-permit) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 ### Attributes Reference
 
@@ -127,13 +127,13 @@ In addition to all arguments above, the following attributes are exported:
 
 #### Cluster Wide App List
 
-A [`cluster\_wide_app\_list`](#cluster-wide-app-list) block supports the following:
+A [`cluster_wide_app_list`](#cluster-wide-app-list) block supports the following:
 
-<a id="cluster-wide-app-list-cluster-wide-apps"></a>&#x2022; [`cluster\_wide\_apps`](#cluster-wide-app-list-cluster-wide-apps) - Optional Block<br>Cluster Wide Application List. List of cluster wide applications<br>See [Cluster Wide Apps](#cluster-wide-app-list-cluster-wide-apps) below.
+<a id="cluster-wide-app-list-cluster-wide-apps"></a>&#x2022; [`cluster_wide_apps`](#cluster-wide-app-list-cluster-wide-apps) - Optional Block<br>Cluster Wide Application List. List of cluster wide applications<br>See [Cluster Wide Apps](#cluster-wide-app-list-cluster-wide-apps) below.
 
 #### Cluster Wide App List Cluster Wide Apps
 
-A [`cluster\_wide\_apps`](#cluster-wide-app-list-cluster-wide-apps) block (within [`cluster\_wide_app\_list`](#cluster-wide-app-list)) supports the following:
+A [`cluster_wide_apps`](#cluster-wide-app-list-cluster-wide-apps) block (within [`cluster_wide_app_list`](#cluster-wide-app-list)) supports the following:
 
 <a id="cluster-wide-app-list-cluster-wide-apps-argo-cd"></a>&#x2022; [`argo_cd`](#cluster-wide-app-list-cluster-wide-apps-argo-cd) - Optional Block<br>Argo CD configuration. description Parameters for Argo Continuous Deployment(CD) application<br>See [Argo Cd](#cluster-wide-app-list-cluster-wide-apps-argo-cd) below.
 
@@ -145,13 +145,13 @@ A [`cluster\_wide\_apps`](#cluster-wide-app-list-cluster-wide-apps) block (withi
 
 #### Cluster Wide App List Cluster Wide Apps Argo Cd
 
-An [`argo_cd`](#cluster-wide-app-list-cluster-wide-apps-argo-cd) block (within [`cluster\_wide_app\_list.cluster\_wide\_apps`](#cluster-wide-app-list-cluster-wide-apps)) supports the following:
+An [`argo_cd`](#cluster-wide-app-list-cluster-wide-apps-argo-cd) block (within [`cluster_wide_app_list.cluster_wide_apps`](#cluster-wide-app-list-cluster-wide-apps)) supports the following:
 
 <a id="cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain"></a>&#x2022; [`local_domain`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain) - Optional Block<br>Local Access Configuration. Parameters required to enable local access<br>See [Local Domain](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain) below.
 
 #### Cluster Wide App List Cluster Wide Apps Argo Cd Local Domain
 
-A [`local_domain`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain) block (within [`cluster\_wide_app\_list.cluster\_wide\_apps.argo_cd`](#cluster-wide-app-list-cluster-wide-apps-argo-cd)) supports the following:
+A [`local_domain`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain) block (within [`cluster_wide_app_list.cluster_wide_apps.argo_cd`](#cluster-wide-app-list-cluster-wide-apps-argo-cd)) supports the following:
 
 <a id="cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-default-port"></a>&#x2022; [`default_port`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-default-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -163,15 +163,15 @@ A [`local_domain`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain
 
 #### Cluster Wide App List Cluster Wide Apps Argo Cd Local Domain Password
 
-A [`password`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password) block (within [`cluster\_wide_app\_list.cluster\_wide\_apps.argo_cd.local_domain`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain)) supports the following:
+A [`password`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password) block (within [`cluster_wide_app_list.cluster_wide_apps.argo_cd.local_domain`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain)) supports the following:
 
-<a id="cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-blindfold-secret-info) below.
+<a id="cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-blindfold-secret-info) below.
 
-<a id="cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-clear-secret-info) below.
+<a id="cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-clear-secret-info) below.
 
 #### Cluster Wide App List Cluster Wide Apps Argo Cd Local Domain Password Blindfold Secret Info
 
-A [`blindfold\_secret\_info`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-blindfold-secret-info) block (within [`cluster\_wide_app\_list.cluster\_wide\_apps.argo_cd.local_domain.password`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password)) supports the following:
+A [`blindfold_secret_info`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-blindfold-secret-info) block (within [`cluster_wide_app_list.cluster_wide_apps.argo_cd.local_domain.password`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password)) supports the following:
 
 <a id="cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -181,7 +181,7 @@ A [`blindfold\_secret\_info`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-l
 
 #### Cluster Wide App List Cluster Wide Apps Argo Cd Local Domain Password Clear Secret Info
 
-A [`clear\_secret\_info`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-clear-secret-info) block (within [`cluster\_wide_app\_list.cluster\_wide\_apps.argo_cd.local_domain.password`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password)) supports the following:
+A [`clear_secret_info`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-clear-secret-info) block (within [`cluster_wide_app_list.cluster_wide_apps.argo_cd.local_domain.password`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password)) supports the following:
 
 <a id="cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -189,13 +189,13 @@ A [`clear\_secret\_info`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local
 
 #### Insecure Registry List
 
-An [`insecure\_registry\_list`](#insecure-registry-list) block supports the following:
+An [`insecure_registry_list`](#insecure-registry-list) block supports the following:
 
 <a id="insecure-registry-list-insecure-registries"></a>&#x2022; [`insecure_registries`](#insecure-registry-list-insecure-registries) - Optional List<br>Docker Insecure Registry List. List of docker insecure registries in format 'example.com:5000'
 
 #### Local Access Config
 
-A [`local\_access\_config`](#local-access-config) block supports the following:
+A [`local_access_config`](#local-access-config) block supports the following:
 
 <a id="local-access-config-default-port"></a>&#x2022; [`default_port`](#local-access-config-default-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -217,13 +217,13 @@ A [`timeouts`](#timeouts) block supports the following:
 
 #### Use Custom Cluster Role Bindings
 
-An [`use\_custom_cluster_role\_bindings`](#use-custom-cluster-role-bindings) block supports the following:
+An [`use_custom_cluster_role_bindings`](#use-custom-cluster-role-bindings) block supports the following:
 
-<a id="use-custom-cluster-role-bindings-cluster-role-bindings"></a>&#x2022; [`cluster\_role\_bindings`](#use-custom-cluster-role-bindings-cluster-role-bindings) - Optional Block<br>Cluster Role Binding List. List of active cluster role binding list for a K8S cluster<br>See [Cluster Role Bindings](#use-custom-cluster-role-bindings-cluster-role-bindings) below.
+<a id="use-custom-cluster-role-bindings-cluster-role-bindings"></a>&#x2022; [`cluster_role_bindings`](#use-custom-cluster-role-bindings-cluster-role-bindings) - Optional Block<br>Cluster Role Binding List. List of active cluster role binding list for a K8S cluster<br>See [Cluster Role Bindings](#use-custom-cluster-role-bindings-cluster-role-bindings) below.
 
 #### Use Custom Cluster Role Bindings Cluster Role Bindings
 
-A [`cluster\_role\_bindings`](#use-custom-cluster-role-bindings-cluster-role-bindings) block (within [`use\_custom_cluster_role\_bindings`](#use-custom-cluster-role-bindings)) supports the following:
+A [`cluster_role_bindings`](#use-custom-cluster-role-bindings-cluster-role-bindings) block (within [`use_custom_cluster_role_bindings`](#use-custom-cluster-role-bindings)) supports the following:
 
 <a id="use-custom-cluster-role-bindings-cluster-role-bindings-name"></a>&#x2022; [`name`](#use-custom-cluster-role-bindings-cluster-role-bindings-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -233,13 +233,13 @@ A [`cluster\_role\_bindings`](#use-custom-cluster-role-bindings-cluster-role-bin
 
 #### Use Custom Cluster Role List
 
-An [`use\_custom_cluster_role\_list`](#use-custom-cluster-role-list) block supports the following:
+An [`use_custom_cluster_role_list`](#use-custom-cluster-role-list) block supports the following:
 
 <a id="use-custom-cluster-role-list-cluster-roles"></a>&#x2022; [`cluster_roles`](#use-custom-cluster-role-list-cluster-roles) - Optional Block<br>Cluster Role List. List of active cluster role list for a K8S cluster<br>See [Cluster Roles](#use-custom-cluster-role-list-cluster-roles) below.
 
 #### Use Custom Cluster Role List Cluster Roles
 
-A [`cluster_roles`](#use-custom-cluster-role-list-cluster-roles) block (within [`use\_custom_cluster_role\_list`](#use-custom-cluster-role-list)) supports the following:
+A [`cluster_roles`](#use-custom-cluster-role-list-cluster-roles) block (within [`use_custom_cluster_role_list`](#use-custom-cluster-role-list)) supports the following:
 
 <a id="use-custom-cluster-role-list-cluster-roles-name"></a>&#x2022; [`name`](#use-custom-cluster-role-list-cluster-roles-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -249,7 +249,7 @@ A [`cluster_roles`](#use-custom-cluster-role-list-cluster-roles) block (within [
 
 #### Use Custom Pod Security Admission
 
-An [`use\_custom_pod_security\_admission`](#use-custom-pod-security-admission) block supports the following:
+An [`use_custom_pod_security_admission`](#use-custom-pod-security-admission) block supports the following:
 
 <a id="use-custom-pod-security-admission-name"></a>&#x2022; [`name`](#use-custom-pod-security-admission-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -259,13 +259,13 @@ An [`use\_custom_pod_security\_admission`](#use-custom-pod-security-admission) b
 
 #### Use Custom Psp List
 
-An [`use\_custom_psp\_list`](#use-custom-psp-list) block supports the following:
+An [`use_custom_psp_list`](#use-custom-psp-list) block supports the following:
 
-<a id="use-custom-psp-list-pod-security-policies"></a>&#x2022; [`pod\_security\_policies`](#use-custom-psp-list-pod-security-policies) - Optional Block<br>Pod Security Policy List. List of active Pod security policies for a K8S cluster<br>See [Pod Security Policies](#use-custom-psp-list-pod-security-policies) below.
+<a id="use-custom-psp-list-pod-security-policies"></a>&#x2022; [`pod_security_policies`](#use-custom-psp-list-pod-security-policies) - Optional Block<br>Pod Security Policy List. List of active Pod security policies for a K8S cluster<br>See [Pod Security Policies](#use-custom-psp-list-pod-security-policies) below.
 
 #### Use Custom Psp List Pod Security Policies
 
-A [`pod\_security\_policies`](#use-custom-psp-list-pod-security-policies) block (within [`use\_custom_psp\_list`](#use-custom-psp-list)) supports the following:
+A [`pod_security_policies`](#use-custom-psp-list-pod-security-policies) block (within [`use_custom_psp_list`](#use-custom-psp-list)) supports the following:
 
 <a id="use-custom-psp-list-pod-security-policies-name"></a>&#x2022; [`name`](#use-custom-psp-list-pod-security-policies-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -279,5 +279,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_k8s\_cluster.example system/example
+terraform import f5xc_k8s_cluster.example system/example
 ```

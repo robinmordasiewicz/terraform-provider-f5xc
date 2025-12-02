@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_api\_discovery Resource - terraform-provider-f5xc"
+page_title: "f5xc_api_discovery Resource - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
   Manages api discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc\_api\_discovery (Resource)
+# f5xc_api_discovery (Resource)
 
 Manages api discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages api discovery creates a new object in the storage backend for metadata.n
 # Manages api discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic API Discovery configuration
-resource "f5xc\_api\_discovery" "example" {
+resource "f5xc_api_discovery" "example" {
   name      = "example-api-discovery"
   namespace = "staging"
 
@@ -33,8 +33,8 @@ resource "f5xc\_api\_discovery" "example" {
 
   # Resource-specific configuration
   # Custom Authentication Types. Select your custom authentic...
-  custom\_auth\_types {
-    # Configure custom\_auth\_types settings
+  custom_auth_types {
+    # Configure custom_auth_types settings
   }
 }
 ```
@@ -58,7 +58,7 @@ resource "f5xc\_api\_discovery" "example" {
 
 ### Spec Argument Reference
 
-<a id="custom-auth-types"></a>&#x2022; [`custom\_auth\_types`](#custom-auth-types) - Optional Block<br>Custom Authentication Types. Select your custom authentication types to be detected in the API discovery<br>See [Custom Auth Types](#custom-auth-types) below for details.
+<a id="custom-auth-types"></a>&#x2022; [`custom_auth_types`](#custom-auth-types) - Optional Block<br>Custom Authentication Types. Select your custom authentication types to be detected in the API discovery<br>See [Custom Auth Types](#custom-auth-types) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -72,7 +72,7 @@ In addition to all arguments above, the following attributes are exported:
 
 #### Custom Auth Types
 
-A [`custom\_auth\_types`](#custom-auth-types) block supports the following:
+A [`custom_auth_types`](#custom-auth-types) block supports the following:
 
 <a id="custom-auth-types-parameter-name"></a>&#x2022; [`parameter_name`](#custom-auth-types-parameter-name) - Optional String<br>Parameter Name. The authentication parameter name
 
@@ -96,5 +96,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_api\_discovery.example system/example
+terraform import f5xc_api_discovery.example system/example
 ```

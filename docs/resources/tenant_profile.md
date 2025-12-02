@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_tenant\_profile Resource - terraform-provider-f5xc"
+page_title: "f5xc_tenant_profile Resource - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
   Manages tenant_profile config instance. Name of the object is the name of the tenant profile to be created. in F5 Distributed Cloud.
 ---
 
-# f5xc\_tenant\_profile (Resource)
+# f5xc_tenant_profile (Resource)
 
 Manages tenant_profile config instance. Name of the object is the name of the tenant profile to be created. in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages tenant_profile config instance. Name of the object is the name of the te
 # Manages tenant_profile config instance. Name of the object is the name of the tenant profile to be created. in F5 Distributed Cloud.
 
 # Basic Tenant Profile configuration
-resource "f5xc\_tenant\_profile" "example" {
+resource "f5xc_tenant_profile" "example" {
   name      = "example-tenant-profile"
   namespace = "system"
 
@@ -68,7 +68,7 @@ resource "f5xc\_tenant\_profile" "example" {
 
 <a id="ct-groups"></a>&#x2022; [`ct_groups`](#ct-groups) - Optional Block<br>Child Tenant Groups. List of user groups to be created on child tenant<br>See [Ct Groups](#ct-groups) below for details.
 
-<a id="enable-support-access"></a>&#x2022; [`enable\_support\_access`](#enable-support-access) - Optional Bool<br>Support Access. Selecting Support Access will allow for F5XC Support teams to access the new Child Tenant for troubleshooting. Unselecting will pause access for XC Support
+<a id="enable-support-access"></a>&#x2022; [`enable_support_access`](#enable-support-access) - Optional Bool<br>Support Access. Selecting Support Access will allow for F5XC Support teams to access the new Child Tenant for troubleshooting. Unselecting will pause access for XC Support
 
 <a id="favicon"></a>&#x2022; [`favicon`](#favicon) - Optional Block<br>File. Contains file data<br>See [Favicon](#favicon) below for details.
 
@@ -152,5 +152,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_tenant\_profile.example system/example
+terraform import f5xc_tenant_profile.example system/example
 ```

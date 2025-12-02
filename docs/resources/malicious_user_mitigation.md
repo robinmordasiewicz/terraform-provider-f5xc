@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc\_malicious_user\_mitigation Resource - terraform-provider-f5xc"
+page_title: "f5xc_malicious_user_mitigation Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages malicious\_user\_mitigation creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  Manages malicious_user_mitigation creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc\_malicious_user\_mitigation (Resource)
+# f5xc_malicious_user_mitigation (Resource)
 
-Manages malicious\_user\_mitigation creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+Manages malicious_user_mitigation creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Malicious User Mitigation API docs](https://docs.cloud.f5.com/docs-v2/api/malicious-user-mitigation) to learn more.
 
@@ -15,10 +15,10 @@ Manages malicious\_user\_mitigation creates a new object in the storage backend 
 
 ```terraform
 # Malicious User Mitigation Resource Example
-# Manages malicious\_user\_mitigation creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# Manages malicious_user_mitigation creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Malicious User Mitigation configuration
-resource "f5xc\_malicious_user\_mitigation" "example" {
+resource "f5xc_malicious_user_mitigation" "example" {
   name      = "example-malicious-user-mitigation"
   namespace = "shared"
 
@@ -128,5 +128,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_malicious_user\_mitigation.example system/example
+terraform import f5xc_malicious_user_mitigation.example system/example
 ```

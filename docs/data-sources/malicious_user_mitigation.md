@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc\_malicious_user\_mitigation Data Source - terraform-provider-f5xc"
+page_title: "f5xc_malicious_user_mitigation Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages malicious\_user\_mitigation creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  Manages malicious_user_mitigation creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc\_malicious_user\_mitigation (Data Source)
+# f5xc_malicious_user_mitigation (Data Source)
 
-Manages malicious\_user\_mitigation creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+Manages malicious_user_mitigation creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Malicious User Mitigation API docs](https://docs.cloud.f5.com/docs-v2/api/malicious-user-mitigation) to learn more.
 
@@ -18,14 +18,14 @@ Manages malicious\_user\_mitigation creates a new object in the storage backend 
 # Retrieves information about an existing Malicious User Mitigation
 
 # Look up an existing Malicious User Mitigation by name
-data "f5xc\_malicious_user\_mitigation" "example" {
+data "f5xc_malicious_user_mitigation" "example" {
   name      = "example-malicious-user-mitigation"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "malicious\_user_mitigation\_id" {
-#   value = data.f5xc\_malicious_user\_mitigation.example.id
+# output "malicious_user_mitigation_id" {
+#   value = data.f5xc_malicious_user_mitigation.example.id
 # }
 ```
 

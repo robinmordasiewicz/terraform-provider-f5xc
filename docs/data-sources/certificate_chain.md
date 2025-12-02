@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_certificate\_chain Data Source - terraform-provider-f5xc"
+page_title: "f5xc_certificate_chain Data Source - terraform-provider-f5xc"
 subcategory: "Certificates"
 description: |-
   Manages a CertificateChain resource in F5 Distributed Cloud for certificate chain configuration for TLS.
 ---
 
-# f5xc\_certificate\_chain (Data Source)
+# f5xc_certificate_chain (Data Source)
 
 Manages a CertificateChain resource in F5 Distributed Cloud for certificate chain configuration for TLS.
 
@@ -18,14 +18,14 @@ Manages a CertificateChain resource in F5 Distributed Cloud for certificate chai
 # Retrieves information about an existing Certificate Chain
 
 # Look up an existing Certificate Chain by name
-data "f5xc\_certificate\_chain" "example" {
+data "f5xc_certificate_chain" "example" {
   name      = "example-certificate-chain"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "certificate\_chain\_id" {
-#   value = data.f5xc\_certificate\_chain.example.id
+# output "certificate_chain_id" {
+#   value = data.f5xc_certificate_chain.example.id
 # }
 ```
 

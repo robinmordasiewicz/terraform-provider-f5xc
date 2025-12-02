@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_nat\_policy Data Source - terraform-provider-f5xc"
+page_title: "f5xc_nat_policy Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages a NATPolicy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
 ---
 
-# f5xc\_nat\_policy (Data Source)
+# f5xc_nat_policy (Data Source)
 
 Manages a NATPolicy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
 
@@ -18,14 +18,14 @@ Manages a NATPolicy resource in F5 Distributed Cloud for nat policy create speci
 # Retrieves information about an existing Nat Policy
 
 # Look up an existing Nat Policy by name
-data "f5xc\_nat\_policy" "example" {
+data "f5xc_nat_policy" "example" {
   name      = "example-nat-policy"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "nat\_policy\_id" {
-#   value = data.f5xc\_nat\_policy.example.id
+# output "nat_policy_id" {
+#   value = data.f5xc_nat_policy.example.id
 # }
 ```
 

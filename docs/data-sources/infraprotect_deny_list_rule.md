@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_infraprotect_deny_list\_rule Data Source - terraform-provider-f5xc"
+page_title: "f5xc_infraprotect_deny_list_rule Data Source - terraform-provider-f5xc"
 subcategory: "Infrastructure Protection"
 description: |-
   Manages DDoS transit Deny List Rule in F5 Distributed Cloud.
 ---
 
-# f5xc\_infraprotect_deny_list\_rule (Data Source)
+# f5xc_infraprotect_deny_list_rule (Data Source)
 
 Manages DDoS transit Deny List Rule in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages DDoS transit Deny List Rule in F5 Distributed Cloud.
 # Retrieves information about an existing Infraprotect Deny List Rule
 
 # Look up an existing Infraprotect Deny List Rule by name
-data "f5xc\_infraprotect_deny_list\_rule" "example" {
+data "f5xc_infraprotect_deny_list_rule" "example" {
   name      = "example-infraprotect-deny-list-rule"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "infraprotect\_deny_list_rule\_id" {
-#   value = data.f5xc\_infraprotect_deny_list\_rule.example.id
+# output "infraprotect_deny_list_rule_id" {
+#   value = data.f5xc_infraprotect_deny_list_rule.example.id
 # }
 ```
 

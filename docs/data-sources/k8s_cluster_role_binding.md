@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc\_k8s_cluster_role\_binding Data Source - terraform-provider-f5xc"
+page_title: "f5xc_k8s_cluster_role_binding Data Source - terraform-provider-f5xc"
 subcategory: "Kubernetes"
 description: |-
-  Manages k8s\_cluster_role\_binding will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+  Manages k8s_cluster_role_binding will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 ---
 
-# f5xc\_k8s_cluster_role\_binding (Data Source)
+# f5xc_k8s_cluster_role_binding (Data Source)
 
-Manages k8s\_cluster_role\_binding will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+Manages k8s_cluster_role_binding will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [K8S Cluster Role Binding API docs](https://docs.cloud.f5.com/docs-v2/api/k8s-cluster-role-binding) to learn more.
 
@@ -18,14 +18,14 @@ Manages k8s\_cluster_role\_binding will create the object in the storage backend
 # Retrieves information about an existing K8s Cluster Role Binding
 
 # Look up an existing K8s Cluster Role Binding by name
-data "f5xc\_k8s_cluster_role\_binding" "example" {
+data "f5xc_k8s_cluster_role_binding" "example" {
   name      = "example-k8s-cluster-role-binding"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "k8s\_cluster_role_binding\_id" {
-#   value = data.f5xc\_k8s_cluster_role\_binding.example.id
+# output "k8s_cluster_role_binding_id" {
+#   value = data.f5xc_k8s_cluster_role_binding.example.id
 # }
 ```
 

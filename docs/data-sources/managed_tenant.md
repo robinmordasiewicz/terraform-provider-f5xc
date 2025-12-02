@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_managed\_tenant Data Source - terraform-provider-f5xc"
+page_title: "f5xc_managed_tenant Data Source - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
   Manages managed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.
 ---
 
-# f5xc\_managed\_tenant (Data Source)
+# f5xc_managed_tenant (Data Source)
 
 Manages managed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages managed_tenant config instance. Name of the object is name of the tenant
 # Retrieves information about an existing Managed Tenant
 
 # Look up an existing Managed Tenant by name
-data "f5xc\_managed\_tenant" "example" {
+data "f5xc_managed_tenant" "example" {
   name      = "example-managed-tenant"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "managed\_tenant\_id" {
-#   value = data.f5xc\_managed\_tenant.example.id
+# output "managed_tenant_id" {
+#   value = data.f5xc_managed_tenant.example.id
 # }
 ```
 

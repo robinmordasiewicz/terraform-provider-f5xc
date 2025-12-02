@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_address\_allocator Resource - terraform-provider-f5xc"
+page_title: "f5xc_address_allocator Resource - terraform-provider-f5xc"
 subcategory: "Cloud Resources"
 description: |-
   Manages Address Allocator will create an address allocator object in 'system' namespace of the user in F5 Distributed Cloud.
 ---
 
-# f5xc\_address\_allocator (Resource)
+# f5xc_address_allocator (Resource)
 
 Manages Address Allocator will create an address allocator object in 'system' namespace of the user in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages Address Allocator will create an address allocator object in 'system' na
 # Manages Address Allocator will create an address allocator object in 'system' namespace of the user in F5 Distributed Cloud.
 
 # Basic Address Allocator configuration
-resource "f5xc\_address\_allocator" "example" {
+resource "f5xc_address_allocator" "example" {
   name      = "example-address-allocator"
   namespace = "staging"
 
@@ -33,8 +33,8 @@ resource "f5xc\_address\_allocator" "example" {
 
   # Resource-specific configuration
   # Address Allocation Scheme. Decides the scheme to be used ...
-  address\_allocation\_scheme {
-    # Configure address\_allocation\_scheme settings
+  address_allocation_scheme {
+    # Configure address_allocation_scheme settings
   }
 }
 ```
@@ -58,11 +58,11 @@ resource "f5xc\_address\_allocator" "example" {
 
 ### Spec Argument Reference
 
-<a id="address-allocation-scheme"></a>&#x2022; [`address\_allocation\_scheme`](#address-allocation-scheme) - Optional Block<br>Address Allocation Scheme. Decides the scheme to be used to allocate addresses from the configured address pool<br>See [Address Allocation Scheme](#address-allocation-scheme) below for details.
+<a id="address-allocation-scheme"></a>&#x2022; [`address_allocation_scheme`](#address-allocation-scheme) - Optional Block<br>Address Allocation Scheme. Decides the scheme to be used to allocate addresses from the configured address pool<br>See [Address Allocation Scheme](#address-allocation-scheme) below for details.
 
 <a id="address-pool"></a>&#x2022; [`address_pool`](#address-pool) - Optional List<br>Address Pool. Address pool from which the allocator carves out subnets or addresses to its clients
 
-<a id="mode"></a>&#x2022; [`mode`](#mode) - Optional String  Defaults to `LOCAL`<br>Possible values are `LOCAL`, `GLOBAL\_PER_SITE\_NODE`<br>Allocator Mode. Mode of the address allocator Address allocator is for VERs within the local cluster or site Allocation is per site and then per node
+<a id="mode"></a>&#x2022; [`mode`](#mode) - Optional String  Defaults to `LOCAL`<br>Possible values are `LOCAL`, `GLOBAL_PER_SITE_NODE`<br>Allocator Mode. Mode of the address allocator Address allocator is for VERs within the local cluster or site Allocation is per site and then per node
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -76,13 +76,13 @@ In addition to all arguments above, the following attributes are exported:
 
 #### Address Allocation Scheme
 
-An [`address\_allocation\_scheme`](#address-allocation-scheme) block supports the following:
+An [`address_allocation_scheme`](#address-allocation-scheme) block supports the following:
 
 <a id="address-allocation-scheme-allocation-unit"></a>&#x2022; [`allocation_unit`](#address-allocation-scheme-allocation-unit) - Optional Number<br>Allocation Unit. Prefix length indicating the size of each allocated subnet. For example, if this is specified as 30, subnets of /30 will be allocated from the given address pool
 
-<a id="address-allocation-scheme-local-interface-address-offset"></a>&#x2022; [`local\_interface_address\_offset`](#address-allocation-scheme-local-interface-address-offset) - Optional Number<br>Local Interface Address Offset. This is used to derive address for the local interface from the allocated subnet. If Local Interface Address Type is set to 'Offset from beginning of Subnet', this offset value is added to the allocated subnet and used as the local interface address. For example, if the allocated subnet is 169.254.0.0/30 and offset is set to 2 with Local Interface Address Type set to 'Offset from beginning of Subnet', local interface address of 169.254.0.2 is used. If Local Interface Address Type is set to 'Offset from end of Subnet', this offset value is subtracted from the end of the allocated subnet and used as the local interface address. For example, if the allocated subnet is 169.254.0.0/30 and offset is set to 1 with Local Interface Address Type set to 'Offset from end of Subnet', local interface address of 169.254.0.2 is used
+<a id="address-allocation-scheme-local-interface-address-offset"></a>&#x2022; [`local_interface_address_offset`](#address-allocation-scheme-local-interface-address-offset) - Optional Number<br>Local Interface Address Offset. This is used to derive address for the local interface from the allocated subnet. If Local Interface Address Type is set to 'Offset from beginning of Subnet', this offset value is added to the allocated subnet and used as the local interface address. For example, if the allocated subnet is 169.254.0.0/30 and offset is set to 2 with Local Interface Address Type set to 'Offset from beginning of Subnet', local interface address of 169.254.0.2 is used. If Local Interface Address Type is set to 'Offset from end of Subnet', this offset value is subtracted from the end of the allocated subnet and used as the local interface address. For example, if the allocated subnet is 169.254.0.0/30 and offset is set to 1 with Local Interface Address Type set to 'Offset from end of Subnet', local interface address of 169.254.0.2 is used
 
-<a id="address-allocation-scheme-local-interface-address-type"></a>&#x2022; [`local\_interface_address\_type`](#address-allocation-scheme-local-interface-address-type) - Optional String  Defaults to `LOCAL\_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET\_BEGIN`<br>Possible values are `LOCAL\_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET\_BEGIN`, `LOCAL\_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET\_END`, `LOCAL\_INTERFACE_ADDRESS_FROM\_PREFIX`<br>Local Interface Address Type. Dictates how local interface address is derived from the allocated subnet Use Nth address of the allocated subnet as the local interface address, N being the Local Interface Address Offset. For example, if the allocated subnet is 169.254.0.0/30, Local Interface Address Offset is set to 2 and Local Interface Address Type is set to 'Offset from beginning of Subnet', local address of 169.254.0.2 is used. Use Nth last address of the allocated subnet as the local interface address, N being the Local Interface Address Offset. For example, if the allocated subnet is 169.254.0.0/30, Local Interface Address Offset is set to 1 and Local Interface Address Type is set to 'Offset from end of Subnet', local address of 169.254.0.2 is used. This case is used for external_connector
+<a id="address-allocation-scheme-local-interface-address-type"></a>&#x2022; [`local_interface_address_type`](#address-allocation-scheme-local-interface-address-type) - Optional String  Defaults to `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_BEGIN`<br>Possible values are `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_BEGIN`, `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_END`, `LOCAL_INTERFACE_ADDRESS_FROM_PREFIX`<br>Local Interface Address Type. Dictates how local interface address is derived from the allocated subnet Use Nth address of the allocated subnet as the local interface address, N being the Local Interface Address Offset. For example, if the allocated subnet is 169.254.0.0/30, Local Interface Address Offset is set to 2 and Local Interface Address Type is set to 'Offset from beginning of Subnet', local address of 169.254.0.2 is used. Use Nth last address of the allocated subnet as the local interface address, N being the Local Interface Address Offset. For example, if the allocated subnet is 169.254.0.0/30, Local Interface Address Offset is set to 1 and Local Interface Address Type is set to 'Offset from end of Subnet', local address of 169.254.0.2 is used. This case is used for external_connector
 
 #### Timeouts
 
@@ -102,5 +102,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_address\_allocator.example system/example
+terraform import f5xc_address_allocator.example system/example
 ```

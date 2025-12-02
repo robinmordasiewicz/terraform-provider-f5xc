@@ -14,6 +14,9 @@ import (
 	"regexp"
 	"sort"
 	"strings"
+
+	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/naming"
+	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/resource"
 )
 
 // metadataFields defines the standard F5 XC metadata fields that should be grouped
@@ -27,214 +30,17 @@ var metadataFields = map[string]bool{
 	"namespace":   true,
 }
 
-// uppercaseAcronyms defines acronyms that should always be uppercase
-// Based on RFC 4949, IEEE standards, and industry style guides (Google, Microsoft, Apple)
-var uppercaseAcronyms = map[string]bool{
-	// Networking protocols
-	"DNS": true, "HTTP": true, "HTTPS": true, "TCP": true, "UDP": true,
-	"TLS": true, "SSL": true, "SSH": true, "FTP": true, "SFTP": true,
-	"SMTP": true, "IMAP": true, "POP": true, "LDAP": true, "DHCP": true,
-	"ARP": true, "ICMP": true, "SNMP": true, "NTP": true, "SIP": true,
-	"RTP": true, "RTSP": true, "QUIC": true, "IP": true, "GRPC": true,
-	// Web/API
-	"API": true, "URL": true, "URI": true, "REST": true, "SOAP": true,
-	"JSON": true, "XML": true, "HTML": true, "CSS": true, "CORS": true,
-	"CDN": true, "WAF": true, "JWT": true, "SAML": true,
-	// Network infrastructure
-	"VPN": true, "NAT": true, "VLAN": true, "BGP": true, "OSPF": true,
-	"QOS": true, "MTU": true, "TTL": true, "ACL": true, "CIDR": true,
-	"VIP": true, "LB": true, "HA": true, "DR": true,
-	// Security
-	"PKI": true, "CA": true, "CSR": true, "CRL": true, "OCSP": true,
-	"PEM": true, "AES": true, "RSA": true, "SHA": true, "MD5": true,
-	"HMAC": true, "MFA": true, "SSO": true, "RBAC": true, "IAM": true,
-	"DDOS": true, "DOS": true, "XSS": true, "CSRF": true, "SQL": true,
-	// Cloud/Infrastructure
-	"AWS": true, "GCP": true, "CPU": true, "RAM": true, "SSD": true,
-	"HDD": true, "GPU": true, "RAID": true, "VM": true, "OS": true,
-	"SLA": true, "RPO": true, "RTO": true,
-	// F5/Volterra specific
-	"RE": true, "CE": true, "SPO": true, "SMG": true,
-}
+// Aliases to shared packages for backward compatibility
+// Acronym maps are now in tools/pkg/naming/acronyms.go
+// Timeout/long-running resources are now in tools/pkg/resource/timeouts.go
 
-// mixedCaseAcronyms defines acronyms with specific mixed-case conventions
-// These should be preserved exactly as specified
-var mixedCaseAcronyms = map[string]string{
-	"mtls":      "mTLS",
-	"oauth":     "OAuth",
-	"graphql":   "GraphQL",
-	"websocket": "WebSocket",
-	"iscsi":     "iSCSI",
-	"ipv4":      "IPv4",
-	"ipv6":      "IPv6",
-	"macos":     "macOS",
-	"ios":       "iOS",
-	"nosql":     "NoSQL",
-}
-
-// longRunningResources lists resources that have longer default timeouts (30 minutes)
-// These match LongRunningResourceTypes in internal/timeouts/timeouts.go
-var longRunningResources = map[string]bool{
-	"aws_vpc_site":       true,
-	"azure_vnet_site":    true,
-	"gcp_vpc_site":       true,
-	"aws_tgw_site":       true,
-	"voltstack_site":     true,
-	"securemesh_site":    true,
-	"securemesh_site_v2": true,
-	"k8s_cluster":        true,
-	"virtual_k8s":        true,
-}
-
-// isLongRunningResource returns true if the resource has longer default timeouts
+// isLongRunningResource wraps resource.IsLongRunning
 func isLongRunningResource(resourceName string) bool {
-	return longRunningResources[resourceName]
+	return resource.IsLongRunning(resourceName)
 }
 
-// subcategoryOverrides provides explicit category assignments for resources
-// that don't match any pattern or need a specific override
-var subcategoryOverrides = map[string]string{
-	// Explicit overrides for resources that don't match patterns well
-	"apm":                 "Monitoring",
-	"crl":                 "Certificates",
-	"bgp":                 "Networking",
-	"proxy":               "Networking",
-	"tunnel":              "Networking",
-	"segment":             "Networking",
-	"subnet":              "Networking",
-	"fleet":               "Sites",
-	"cluster":             "Load Balancing",
-	"endpoint":            "Load Balancing",
-	"route":               "Load Balancing",
-	"healthcheck":         "Load Balancing",
-	"origin_pool":         "Load Balancing",
-	"virtual_host":        "Load Balancing",
-	"discovery":           "Applications",
-	"filter_set":          "Applications",
-	"policer":             "Service Mesh",
-	"quota":               "Organization",
-	"contact":             "Organization",
-	"role":                "Organization",
-	"token":               "Authentication",
-	"registration":        "Sites",
-	"namespace":           "Organization",
-	"data_type":           "Security",
-	"data_group":          "BIG-IP Integration",
-	"irule":               "BIG-IP Integration",
-	"nfv_service":         "Networking",
-	"workload":            "Kubernetes",
-	"workload_flavor":     "Kubernetes",
-	"cminstance":          "Subscriptions",
-	"user_identification": "Security",
-	"virtual_network":     "Networking",
-}
-
-// categoryPatterns defines patterns to auto-categorize resources
-// Order matters: more specific patterns should come first
-var categoryPatterns = []struct {
-	pattern  string
-	category string
-}{
-	// Sites - cloud provider sites and site-related
-	{"_vpc_site", "Sites"},
-	{"_vnet_site", "Sites"},
-	{"_tgw_site", "Sites"},
-	{"securemesh_site", "Sites"},
-	{"voltstack_site", "Sites"},
-	{"virtual_site", "Sites"},
-	{"site_mesh", "Sites"},
-
-	// Load Balancing
-	{"loadbalancer", "Load Balancing"},
-	{"cdn_", "Load Balancing"},
-	{"advertise_policy", "Load Balancing"},
-
-	// Security - firewall, policies, WAF
-	{"firewall", "Security"},
-	{"_policy", "Security"},
-	{"_acl", "Security"},
-	{"rate_limiter", "Security"},
-	{"malicious_user", "Security"},
-	{"bot_defense", "Security"},
-	{"waf_", "Security"},
-	{"protocol_", "Security"},
-	{"sensitive_data", "Security"},
-
-	// Networking
-	{"network_", "Networking"},
-	{"bgp_", "Networking"},
-	{"ip_prefix", "Networking"},
-	{"cloud_link", "Networking"},
-	{"cloud_connect", "Networking"},
-	{"_connector", "Networking"},
-	{"dc_cluster", "Networking"},
-	{"srv6_", "Networking"},
-	{"forwarding_", "Networking"},
-	{"routing", "Networking"},
-	{"nat_", "Networking"},
-
-	// DNS
-	{"dns_", "DNS"},
-
-	// Authentication & Secrets
-	{"credential", "Authentication"},
-	{"authentication", "Authentication"},
-	{"oidc_", "Authentication"},
-	{"secret_", "Authentication"},
-
-	// Certificates
-	{"certificate", "Certificates"},
-	{"trusted_ca", "Certificates"},
-
-	// API Security
-	{"api_", "API Security"},
-	{"app_api", "API Security"},
-
-	// Monitoring & Logging
-	{"log_receiver", "Monitoring"},
-	{"alert_", "Monitoring"},
-	{"report_", "Monitoring"},
-
-	// Organization & Tenants
-	{"tenant", "Organization"},
-	{"_support", "Organization"},
-	{"voltshare", "Organization"},
-	{"allowed_", "Organization"},
-
-	// Kubernetes
-	{"k8s_", "Kubernetes"},
-	{"virtual_k8s", "Kubernetes"},
-	{"container_registry", "Kubernetes"},
-
-	// VPN & IPSec
-	{"ike", "VPN"},
-
-	// Infrastructure Protection (DDoS)
-	{"infraprotect_", "Infrastructure Protection"},
-
-	// Applications
-	{"app_setting", "Applications"},
-	{"app_type", "Applications"},
-
-	// BIG-IP Integration
-	{"bigip_", "BIG-IP Integration"},
-
-	// Cloud Resources
-	{"cloud_elastic", "Cloud Resources"},
-	{"address_allocator", "Cloud Resources"},
-	{"geo_location", "Cloud Resources"},
-
-	// Integrations
-	{"ticket_tracking", "Integrations"},
-	{"code_base", "Integrations"},
-	{"tpm_", "Integrations"},
-
-	// Subscriptions
-	{"subscription", "Subscriptions"},
-
-	// Service Mesh (catch remaining mesh-related)
-	{"usb_policy", "Service Mesh"},
-}
+// Aliases to shared packages for backward compatibility
+// Category patterns and subcategory overrides are now in tools/pkg/resource/categories.go
 
 // resourceAPIPathMap maps resource names to their F5 API documentation paths
 // Built dynamically from OpenAPI spec filenames at startup
@@ -288,30 +94,11 @@ func getResourceAPIDocURL(resourceName string) string {
 }
 
 // getSubcategory returns the subcategory for a resource based on filename
-// Uses a three-tier approach:
-// 1. Check explicit overrides first (for exceptions)
-// 2. Apply pattern matching (for automatic categorization)
-// 3. Fall back to "Other" to ensure ALL resources are categorized
+// Wraps resource.GetCategory for backward compatibility
 func getSubcategory(filename string) string {
 	base := filepath.Base(filename)
 	name := strings.TrimSuffix(base, ".md")
-
-	// 1. Check explicit overrides first
-	if cat, ok := subcategoryOverrides[name]; ok {
-		return cat
-	}
-
-	// 2. Apply pattern matching
-	for _, p := range categoryPatterns {
-		if strings.Contains(name, p.pattern) {
-			return p.category
-		}
-	}
-
-	// 3. Fall back to "Other" - ensures no uncategorized resources in Registry
-	// This prevents the mixed layout issue where uncategorized resources
-	// appear under a generic "Resources" section
-	return "Other"
+	return resource.GetCategory(name)
 }
 
 // Terraform Registry limits
@@ -1004,9 +791,9 @@ func toTitleCaseFromAnchor(anchor string) string {
 		if len(word) > 0 {
 			// Check for acronyms that should be uppercase
 			upper := strings.ToUpper(word)
-			if uppercaseAcronyms[upper] {
+			if naming.IsUppercaseAcronym(upper) {
 				words[i] = upper
-			} else if mixed, ok := mixedCaseAcronyms[strings.ToLower(word)]; ok {
+			} else if mixed := naming.GetMixedCaseAcronym(strings.ToLower(word)); mixed != "" {
 				words[i] = mixed
 			} else {
 				words[i] = strings.ToUpper(word[:1]) + word[1:]
@@ -1989,63 +1776,24 @@ func extractSimpleType(typeInfo string) string {
 	return "String"
 }
 
+// toTitleCase wraps naming.ToTitleCase for backward compatibility
 func toTitleCase(s string) string {
-	// Replace underscores and dots with spaces
-	s = strings.ReplaceAll(s, "_", " ")
-	s = strings.ReplaceAll(s, ".", " ")
-
-	words := strings.Fields(s)
-	for i, word := range words {
-		if len(word) > 0 {
-			// Apply standard title case first
-			words[i] = strings.ToUpper(string(word[0])) + strings.ToLower(word[1:])
-		}
-	}
-	result := strings.Join(words, " ")
-
-	// Apply acronym normalization to fix any acronyms
-	result = normalizeAcronyms(result)
-
-	return result
+	return naming.ToTitleCase(s)
 }
 
-// startsWithVowel checks if a string starts with a vowel (for "A" vs "An" grammar)
+// startsWithVowel wraps naming.StartsWithVowel for backward compatibility
 func startsWithVowel(s string) bool {
-	if len(s) == 0 {
-		return false
-	}
-	firstChar := strings.ToLower(string(s[0]))
-	return firstChar == "a" || firstChar == "e" || firstChar == "i" || firstChar == "o" || firstChar == "u"
+	return naming.StartsWithVowel(s)
 }
 
-// normalizeAcronyms corrects acronym capitalization in text
-// This function is idempotent - running it multiple times produces the same result
+// normalizeAcronyms wraps naming.NormalizeAcronyms for backward compatibility
 func normalizeAcronyms(text string) string {
-	// Build a regex pattern for word boundaries
-	// Process each word in the text
-	wordRegex := regexp.MustCompile(`\b([A-Za-z0-9]+)\b`)
-
-	return wordRegex.ReplaceAllStringFunc(text, func(word string) string {
-		upperWord := strings.ToUpper(word)
-		lowerWord := strings.ToLower(word)
-
-		// Check for mixed-case acronyms first (e.g., mTLS, OAuth)
-		if corrected, ok := mixedCaseAcronyms[lowerWord]; ok {
-			return corrected
-		}
-
-		// Check for uppercase acronyms (e.g., DNS, HTTP, TCP)
-		if uppercaseAcronyms[upperWord] {
-			return upperWord
-		}
-
-		// Return original word unchanged
-		return word
-	})
+	return naming.NormalizeAcronyms(text)
 }
 
+// toAnchorName wraps naming.ToAnchorName for backward compatibility
 func toAnchorName(name string) string {
-	return strings.ToLower(strings.ReplaceAll(name, "_", "-"))
+	return naming.ToAnchorName(name)
 }
 
 // extractOneOfConstraint extracts the [OneOf: field1, field2] constraint from description

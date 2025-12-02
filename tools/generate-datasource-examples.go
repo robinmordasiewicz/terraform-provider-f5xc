@@ -9,28 +9,10 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/naming"
+	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/namespace"
 )
-
-// uppercaseAcronyms defines acronyms that should be fully uppercase
-var uppercaseAcronyms = map[string]bool{
-	"http": true, "https": true, "dns": true, "tcp": true, "udp": true,
-	"tls": true, "ssl": true, "api": true, "url": true, "uri": true,
-	"ip": true, "bgp": true, "jwt": true, "acl": true, "waf": true,
-	"cdn": true, "aws": true, "gcp": true, "vpc": true, "tgw": true,
-	"vnet": true, "ce": true, "re": true, "lb": true, "vip": true,
-	"sni": true, "cors": true, "xss": true, "csrf": true, "oidc": true,
-	"saml": true, "ssh": true, "nfs": true, "ntp": true, "pem": true,
-	"rsa": true, "ecdsa": true, "id": true, "apm": true, "irule": true,
-}
-
-// mixedCaseAcronyms defines acronyms with specific mixed case
-var mixedCaseAcronyms = map[string]string{
-	"mtls": "mTLS", "oauth": "OAuth", "graphql": "GraphQL",
-	"websocket": "WebSocket", "javascript": "JavaScript", "typescript": "TypeScript",
-	"github": "GitHub", "gitlab": "GitLab", "devops": "DevOps",
-	"fastcgi": "FastCGI", "modsecurity": "ModSecurity", "hashicorp": "HashiCorp",
-	"bigip": "BigIP",
-}
 
 func main() {
 	providerDir := "internal/provider"
@@ -66,8 +48,11 @@ func main() {
 func generateDataSourceExample(dataSourceName string) string {
 	var sb strings.Builder
 
-	humanName := toHumanName(dataSourceName)
+	humanName := naming.ToHumanName(dataSourceName)
 	resourceRef := strings.ReplaceAll(dataSourceName, "_", "-")
+
+	// Get the correct namespace for this data source (fixes bug: was hardcoded to "system")
+	_, ns := namespace.ForResource(dataSourceName)
 
 	sb.WriteString(fmt.Sprintf("# %s Data Source Example\n", humanName))
 	sb.WriteString(fmt.Sprintf("# Retrieves information about an existing %s\n\n", humanName))
@@ -76,11 +61,11 @@ func generateDataSourceExample(dataSourceName string) string {
 	sb.WriteString(fmt.Sprintf("# Look up an existing %s by name\n", humanName))
 	sb.WriteString(fmt.Sprintf("data \"f5xc_%s\" \"example\" {\n", dataSourceName))
 	sb.WriteString(fmt.Sprintf("  name      = \"example-%s\"\n", resourceRef))
-	sb.WriteString("  namespace = \"system\"\n")
+	sb.WriteString(fmt.Sprintf("  namespace = %q\n", ns))
 	sb.WriteString("}\n\n")
 
 	// Usage example
-	sb.WriteString(fmt.Sprintf("# Example: Use the data source in another resource\n"))
+	sb.WriteString("# Example: Use the data source in another resource\n")
 	sb.WriteString(fmt.Sprintf("# output \"%s_id\" {\n", dataSourceName))
 	sb.WriteString(fmt.Sprintf("#   value = data.f5xc_%s.example.id\n", dataSourceName))
 	sb.WriteString("# }\n")
@@ -92,12 +77,15 @@ func generateDataSourceExample(dataSourceName string) string {
 }
 
 func addDataSourceSpecificExample(sb *strings.Builder, dataSourceName string) {
+	// Get the correct namespace for referenced resources
+	_, ns := namespace.ForResource(dataSourceName)
+
 	switch dataSourceName {
 	case "http_loadbalancer":
 		sb.WriteString("\n# Example: Reference in another load balancer configuration\n")
 		sb.WriteString("# resource \"f5xc_service_policy\" \"example\" {\n")
 		sb.WriteString("#   name      = \"policy-for-lb\"\n")
-		sb.WriteString("#   namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("#   namespace = %q\n", namespace.ForReference("service_policy")))
 		sb.WriteString("#\n")
 		sb.WriteString("#   # Use the load balancer's domains\n")
 		sb.WriteString("#   # domain = data.f5xc_http_loadbalancer.example.domains[0]\n")
@@ -107,7 +95,7 @@ func addDataSourceSpecificExample(sb *strings.Builder, dataSourceName string) {
 		sb.WriteString("\n# Example: Use origin pool data in HTTP load balancer\n")
 		sb.WriteString("# resource \"f5xc_http_loadbalancer\" \"example\" {\n")
 		sb.WriteString("#   name      = \"example-lb\"\n")
-		sb.WriteString("#   namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("#   namespace = %q\n", namespace.ForReference("http_loadbalancer")))
 		sb.WriteString("#   domains   = [\"app.example.com\"]\n")
 		sb.WriteString("#\n")
 		sb.WriteString("#   default_route_pools {\n")
@@ -130,7 +118,7 @@ func addDataSourceSpecificExample(sb *strings.Builder, dataSourceName string) {
 		sb.WriteString("\n# Example: Reference healthcheck in origin pool\n")
 		sb.WriteString("# resource \"f5xc_origin_pool\" \"example\" {\n")
 		sb.WriteString("#   name      = \"example-pool\"\n")
-		sb.WriteString("#   namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("#   namespace = %q\n", namespace.ForReference("origin_pool")))
 		sb.WriteString("#\n")
 		sb.WriteString("#   healthcheck {\n")
 		sb.WriteString("#     name      = data.f5xc_healthcheck.example.name\n")
@@ -142,7 +130,7 @@ func addDataSourceSpecificExample(sb *strings.Builder, dataSourceName string) {
 		sb.WriteString("\n# Example: Reference WAF in HTTP load balancer\n")
 		sb.WriteString("# resource \"f5xc_http_loadbalancer\" \"example\" {\n")
 		sb.WriteString("#   name      = \"protected-lb\"\n")
-		sb.WriteString("#   namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("#   namespace = %q\n", namespace.ForReference("http_loadbalancer")))
 		sb.WriteString("#\n")
 		sb.WriteString("#   app_firewall {\n")
 		sb.WriteString("#     name      = data.f5xc_app_firewall.example.name\n")
@@ -154,7 +142,7 @@ func addDataSourceSpecificExample(sb *strings.Builder, dataSourceName string) {
 		sb.WriteString("\n# Example: Reference certificate in HTTPS configuration\n")
 		sb.WriteString("# resource \"f5xc_http_loadbalancer\" \"example\" {\n")
 		sb.WriteString("#   name      = \"https-lb\"\n")
-		sb.WriteString("#   namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("#   namespace = %q\n", namespace.ForReference("http_loadbalancer")))
 		sb.WriteString("#\n")
 		sb.WriteString("#   https {\n")
 		sb.WriteString("#     tls_cert_params {\n")
@@ -168,9 +156,9 @@ func addDataSourceSpecificExample(sb *strings.Builder, dataSourceName string) {
 
 	case "aws_vpc_site", "azure_vnet_site", "gcp_vpc_site":
 		sb.WriteString("\n# Example: Reference cloud site for advertising load balancer\n")
-		sb.WriteString(fmt.Sprintf("# resource \"f5xc_http_loadbalancer\" \"example\" {\n"))
+		sb.WriteString("# resource \"f5xc_http_loadbalancer\" \"example\" {\n")
 		sb.WriteString("#   name      = \"site-advertised-lb\"\n")
-		sb.WriteString("#   namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("#   namespace = %q\n", namespace.ForReference("http_loadbalancer")))
 		sb.WriteString("#\n")
 		sb.WriteString("#   advertise_custom {\n")
 		sb.WriteString("#     advertise_where {\n")
@@ -188,7 +176,7 @@ func addDataSourceSpecificExample(sb *strings.Builder, dataSourceName string) {
 		sb.WriteString("\n# Example: Reference virtual site for site selection\n")
 		sb.WriteString("# resource \"f5xc_http_loadbalancer\" \"example\" {\n")
 		sb.WriteString("#   name      = \"vs-advertised-lb\"\n")
-		sb.WriteString("#   namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("#   namespace = %q\n", namespace.ForReference("http_loadbalancer")))
 		sb.WriteString("#\n")
 		sb.WriteString("#   advertise_custom {\n")
 		sb.WriteString("#     advertise_where {\n")
@@ -206,7 +194,7 @@ func addDataSourceSpecificExample(sb *strings.Builder, dataSourceName string) {
 		sb.WriteString("\n# Example: Reference service policy in HTTP load balancer\n")
 		sb.WriteString("# resource \"f5xc_http_loadbalancer\" \"example\" {\n")
 		sb.WriteString("#   name      = \"policy-protected-lb\"\n")
-		sb.WriteString("#   namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("#   namespace = %q\n", namespace.ForReference("http_loadbalancer")))
 		sb.WriteString("#\n")
 		sb.WriteString("#   active_service_policies {\n")
 		sb.WriteString("#     policies {\n")
@@ -220,7 +208,7 @@ func addDataSourceSpecificExample(sb *strings.Builder, dataSourceName string) {
 		sb.WriteString("\n# Example: Reference cloud credentials in site configuration\n")
 		sb.WriteString("# resource \"f5xc_aws_vpc_site\" \"example\" {\n")
 		sb.WriteString("#   name      = \"example-aws-site\"\n")
-		sb.WriteString("#   namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("#   namespace = %q\n", ns))
 		sb.WriteString("#\n")
 		sb.WriteString("#   aws_cred {\n")
 		sb.WriteString("#     name      = data.f5xc_cloud_credentials.example.name\n")
@@ -232,7 +220,7 @@ func addDataSourceSpecificExample(sb *strings.Builder, dataSourceName string) {
 		sb.WriteString("\n# Example: Reference rate limiter in HTTP load balancer\n")
 		sb.WriteString("# resource \"f5xc_http_loadbalancer\" \"example\" {\n")
 		sb.WriteString("#   name      = \"rate-limited-lb\"\n")
-		sb.WriteString("#   namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("#   namespace = %q\n", namespace.ForReference("http_loadbalancer")))
 		sb.WriteString("#\n")
 		sb.WriteString("#   rate_limit {\n")
 		sb.WriteString("#     rate_limiter {\n")
@@ -246,7 +234,7 @@ func addDataSourceSpecificExample(sb *strings.Builder, dataSourceName string) {
 		sb.WriteString("\n# Example: Reference DNS zone in DNS load balancer\n")
 		sb.WriteString("# resource \"f5xc_dns_load_balancer\" \"example\" {\n")
 		sb.WriteString("#   name      = \"example-dns-lb\"\n")
-		sb.WriteString("#   namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("#   namespace = %q\n", ns))
 		sb.WriteString("#\n")
 		sb.WriteString("#   dns_zone {\n")
 		sb.WriteString("#     name      = data.f5xc_dns_zone.example.name\n")
@@ -258,7 +246,7 @@ func addDataSourceSpecificExample(sb *strings.Builder, dataSourceName string) {
 		sb.WriteString("\n# Example: Reference log receiver in site configuration\n")
 		sb.WriteString("# resource \"f5xc_securemesh_site_v2\" \"example\" {\n")
 		sb.WriteString("#   name      = \"example-site\"\n")
-		sb.WriteString("#   namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("#   namespace = %q\n", namespace.ForReference("securemesh_site_v2")))
 		sb.WriteString("#\n")
 		sb.WriteString("#   log_receiver {\n")
 		sb.WriteString("#     name      = data.f5xc_log_receiver.example.name\n")
@@ -270,7 +258,7 @@ func addDataSourceSpecificExample(sb *strings.Builder, dataSourceName string) {
 		sb.WriteString("\n# Example: Reference alert receiver in alert policy\n")
 		sb.WriteString("# resource \"f5xc_alert_policy\" \"example\" {\n")
 		sb.WriteString("#   name      = \"example-policy\"\n")
-		sb.WriteString("#   namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("#   namespace = %q\n", namespace.ForReference("alert_policy")))
 		sb.WriteString("#\n")
 		sb.WriteString("#   receivers {\n")
 		sb.WriteString("#     name      = data.f5xc_alert_receiver.example.name\n")
@@ -278,19 +266,4 @@ func addDataSourceSpecificExample(sb *strings.Builder, dataSourceName string) {
 		sb.WriteString("#   }\n")
 		sb.WriteString("# }\n")
 	}
-}
-
-func toHumanName(name string) string {
-	words := strings.Split(name, "_")
-	for i, word := range words {
-		lower := strings.ToLower(word)
-		if uppercaseAcronyms[lower] {
-			words[i] = strings.ToUpper(word)
-		} else if replacement, ok := mixedCaseAcronyms[lower]; ok {
-			words[i] = replacement
-		} else {
-			words[i] = strings.Title(word)
-		}
-	}
-	return strings.Join(words, " ")
 }

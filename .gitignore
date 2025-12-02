@@ -46,3 +46,17 @@ claudedocs/
 
 # Local temporary files
 tmp/
+
+# Certificates and secrets (never commit real credentials)
+# The .gitkeep placeholders in certs/ directories are allowed
+*.pem
+*.key
+!.gitkeep
+*.p12
+*.pfx
+*.crt
+*.cer
+*.csr
+terraform.tfvars
+*-secret.txt
+*-credentials.json

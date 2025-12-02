@@ -1,0 +1,8 @@
+# Placeholder for certificate files
+# Place your server.crt and server.key files here for the certificate example.
+#
+# Generate self-signed certificates for testing:
+#   openssl req -x509 -newkey rsa:2048 -keyout server.key -out server.crt \
+#     -days 365 -nodes -subj "/CN=example.com"
+#
+# IMPORTANT: Do not commit actual certificate/key files to version control!

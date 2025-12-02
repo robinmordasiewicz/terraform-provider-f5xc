@@ -1,0 +1,116 @@
+# Blindfold Secret Management Guide - Example Configuration
+#
+# INSTRUCTIONS:
+# 1. Copy this file to terraform.tfvars:
+#    cp terraform.tfvars.example terraform.tfvars
+#
+# 2. Edit terraform.tfvars with your values
+#
+# 3. Set F5XC authentication environment variables:
+#    export F5XC_API_URL="https://your-tenant.console.ves.volterra.io/api"
+#    export F5XC_API_TOKEN="your-api-token"
+#
+#    OR for P12 certificate authentication:
+#    export F5XC_API_URL="https://your-tenant.console.ves.volterra.io/api"
+#    export F5XC_API_P12_FILE="/path/to/your-credentials.p12"
+#    export F5XC_P12_PASSWORD="your-p12-password"  # pragma: allowlist secret
+#
+# 4. Run terraform:
+#    terraform init
+#    terraform plan
+#    terraform apply
+#
+# IMPORTANT: Never commit terraform.tfvars with real credentials!
+#            The .gitignore should exclude *.tfvars files.
+
+# -----------------------------------------------------------------------------
+# General Configuration
+# -----------------------------------------------------------------------------
+
+namespace_name   = "blindfold-guide"
+create_namespace = true
+resource_prefix  = "blindfold-example"
+
+labels = {
+  managed_by  = "terraform"
+  guide       = "blindfold"
+  environment = "testing"
+}
+
+# -----------------------------------------------------------------------------
+# Example Toggle Flags
+# -----------------------------------------------------------------------------
+# Enable ONLY the examples you want to test.
+# Each requires its own credentials/files to be provided below.
+
+enable_certificate_example        = false  # Requires certs/server.crt and certs/server.key
+enable_aws_credentials_example    = false  # Requires AWS credentials below
+enable_azure_credentials_example  = false  # Requires Azure credentials below
+enable_gcp_credentials_example    = false  # Requires GCP credentials file path below
+enable_container_registry_example = false  # Requires registry credentials below
+
+# -----------------------------------------------------------------------------
+# Example 1: TLS Certificate
+# -----------------------------------------------------------------------------
+# To test this example:
+# 1. Generate a self-signed certificate:
+#    openssl req -x509 -newkey rsa:2048 -keyout certs/server.key -out certs/server.crt \
+#      -days 365 -nodes -subj "/CN=example.com"
+# 2. Set enable_certificate_example = true above
+#
+# NOTE: The private key file must be under ~190 bytes for RSA-OAEP encryption.
+# For production, consider using smaller keys or key derivation techniques.
+
+# -----------------------------------------------------------------------------
+# Example 2: AWS Credentials
+# -----------------------------------------------------------------------------
+# To test this example:
+# 1. Get your AWS access key and secret from AWS IAM
+# 2. Set enable_aws_credentials_example = true above
+# 3. Fill in the values below
+
+aws_access_key_id     = ""  # e.g., "AKIAIOSFODNN7EXAMPLE"  # pragma: allowlist secret
+aws_secret_access_key = ""  # Your AWS secret access key (will be encrypted)
+
+# -----------------------------------------------------------------------------
+# Example 3: Azure Credentials
+# -----------------------------------------------------------------------------
+# To test this example:
+# 1. Create an Azure service principal:
+#    az ad sp create-for-rbac --name "f5xc-terraform"
+# 2. Set enable_azure_credentials_example = true above
+# 3. Fill in the values below
+
+azure_subscription_id = ""  # e.g., "12345678-1234-1234-1234-123456789012"
+azure_tenant_id       = ""  # e.g., "12345678-1234-1234-1234-123456789012"
+azure_client_id       = ""  # e.g., "12345678-1234-1234-1234-123456789012"
+azure_client_secret   = ""  # Your Azure client secret (will be encrypted)
+
+# -----------------------------------------------------------------------------
+# Example 4: GCP Credentials
+# -----------------------------------------------------------------------------
+# To test this example:
+# 1. Create a GCP service account and download the JSON key:
+#    gcloud iam service-accounts create f5xc-terraform
+#    gcloud iam service-accounts keys create gcp-credentials.json \
+#      --iam-account=f5xc-terraform@PROJECT_ID.iam.gserviceaccount.com
+# 2. Set enable_gcp_credentials_example = true above
+# 3. Set the path to your JSON key file below
+#
+# IMPORTANT: GCP credential files can be large. Ensure the file is under
+# ~190 bytes or the encryption will fail. Consider extracting only the
+# private key portion if the full JSON exceeds this limit.
+
+gcp_credentials_file = ""  # e.g., "/path/to/gcp-credentials.json"
+
+# -----------------------------------------------------------------------------
+# Example 5: Container Registry
+# -----------------------------------------------------------------------------
+# To test this example:
+# 1. Get your container registry credentials
+# 2. Set enable_container_registry_example = true above
+# 3. Fill in the values below
+
+container_registry_server   = "docker.io"  # or "gcr.io", "ghcr.io", etc.
+container_registry_username = ""           # Your registry username
+container_registry_password = ""           # Your registry password/token (will be encrypted)

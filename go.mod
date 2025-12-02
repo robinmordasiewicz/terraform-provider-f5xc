@@ -12,7 +12,6 @@ require (
 	github.com/hashicorp/terraform-plugin-testing v1.13.3
 	golang.org/x/crypto v0.45.0
 	golang.org/x/text v0.31.0
-	software.sslmate.com/src/go-pkcs12 v0.6.0
 )
 
 require (

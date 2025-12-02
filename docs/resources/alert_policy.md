@@ -72,7 +72,7 @@ resource "f5xc_alert_policy" "example" {
 
 ### Spec Argument Reference
 
-<a id="notification-parameters"></a>&#x2022; [`notification_parameters`](#notification-parameters) - Optional Block<br>Notification Parameters. Set of notification parameters to decide how and when the alert notifications should be sent to the receivers<br>See [Notification Parameters](#notification-parameters) below for details.
+<a id="notification-parameters"></a>&#x2022; [`notification_parameters`](#notification-parameters) - Optional Block  Defaults to `null`<br>Notification Parameters. Set of notification parameters to decide how and when the alert notifications should be sent to the receivers<br>See [Notification Parameters](#notification-parameters) below for details.
 
 <a id="receivers"></a>&#x2022; [`receivers`](#receivers) - Optional Block<br>Alert Receivers. list of Alert Receivers where the alerts will be sent<br>See [Receivers](#receivers) below for details.
 

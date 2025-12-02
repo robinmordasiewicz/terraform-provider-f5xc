@@ -14,4 +14,9 @@ resource "f5xc_policer" "example" {
   annotations = {
     "owner" = "platform-team"
   }
+
+  # API-discovered default values (shown for reference)
+  # These values are applied by the API if not specified
+  # policer_mode = "POLICER_MODE_NOT_SHARED"  # API default
+  # policer_type = "POLICER_SINGLE_RATE_TWO_COLOR"  # API default
 }

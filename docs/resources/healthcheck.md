@@ -84,7 +84,7 @@ resource "f5xc_healthcheck" "example" {
 
 <a id="interval"></a>&#x2022; [`interval`](#interval) - Optional Number<br>Interval. Time interval in seconds between two healthcheck requests
 
-<a id="jitter-percent"></a>&#x2022; [`jitter_percent`](#jitter-percent) - Optional Number<br>Jitter Percent. Add a random amount of time as a percent value to the interval between successive healthcheck requests
+<a id="jitter-percent"></a>&#x2022; [`jitter_percent`](#jitter-percent) - Optional Number  Defaults to `0`<br>Jitter Percent. Add a random amount of time as a percent value to the interval between successive healthcheck requests
 
 <a id="timeout"></a>&#x2022; [`timeout`](#timeout) - Optional Number<br>Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure
 
@@ -114,7 +114,7 @@ A [`http_health_check`](#http-health-check) block supports the following:
 
 <a id="http-health-check-request-headers-to-remove"></a>&#x2022; [`request_headers_to_remove`](#http-health-check-request-headers-to-remove) - Optional List<br>Request Headers to Remove. Specifies a list of HTTP headers that should be removed from each request that is sent to the health checked cluster. This is a list of keys of headers
 
-<a id="http-health-check-use-http2"></a>&#x2022; [`use_http2`](#http-health-check-use-http2) - Optional Bool<br>Use HTTP2. If set, health checks will be made using HTTP/2
+<a id="http-health-check-use-http2"></a>&#x2022; [`use_http2`](#http-health-check-use-http2) - Optional Bool  Defaults to `false`<br>Use HTTP2. If set, health checks will be made using HTTP/2
 
 <a id="http-health-check-use-origin-server-name"></a>&#x2022; [`use_origin_server_name`](#http-health-check-use-origin-server-name) - Optional Block<br>Empty. This can be used for messages where no values are needed
 

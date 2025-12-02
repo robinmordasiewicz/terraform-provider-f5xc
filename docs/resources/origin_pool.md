@@ -121,7 +121,7 @@ resource "f5xc_origin_pool" "example" {
 
 ### Spec Argument Reference
 
-<a id="advanced-options"></a>&#x2022; [`advanced_options`](#advanced-options) - Optional Block<br>Origin Pool Advanced Options. Configure Advanced options for origin pool<br>See [Advanced Options](#advanced-options) below for details.
+<a id="advanced-options"></a>&#x2022; [`advanced_options`](#advanced-options) - Optional Block  Defaults to `null`<br>Origin Pool Advanced Options. Configure Advanced options for origin pool<br>See [Advanced Options](#advanced-options) below for details.
 
 -> **One of the following:**
 &#x2022; <a id="automatic-port"></a>[`automatic_port`](#automatic-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -146,7 +146,7 @@ resource "f5xc_origin_pool" "example" {
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block
 
-<a id="upstream-conn-pool-reuse-type"></a>&#x2022; [`upstream_conn_pool_reuse_type`](#upstream-conn-pool-reuse-type) - Optional Block<br>Select upstream connection pool reuse state. Select upstream connection pool reuse state for every downstream connection. This configuration choice is for HTTP(S) LB only
+<a id="upstream-conn-pool-reuse-type"></a>&#x2022; [`upstream_conn_pool_reuse_type`](#upstream-conn-pool-reuse-type) - Optional Block  Defaults to `null`<br>Select upstream connection pool reuse state. Select upstream connection pool reuse state for every downstream connection. This configuration choice is for HTTP(S) LB only
 
 ### Attributes Reference
 

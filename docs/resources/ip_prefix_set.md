@@ -55,7 +55,7 @@ resource "f5xc_ip_prefix_set" "example" {
 
 ### Spec Argument Reference
 
-<a id="ipv4-prefixes"></a>&#x2022; [`ipv4_prefixes`](#ipv4-prefixes) - Optional Block<br>IPv4 Prefixes. list of IPv4 prefixes with description<br>See [IPv4 Prefixes](#ipv4-prefixes) below for details.
+<a id="ipv4-prefixes"></a>&#x2022; [`ipv4_prefixes`](#ipv4-prefixes) - Optional Block  Defaults to `[{"description":"","ipv4_prefix":"10.0.0.0/8"}]`<br>IPv4 Prefixes. list of IPv4 prefixes with description<br>See [IPv4 Prefixes](#ipv4-prefixes) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

@@ -30,7 +30,9 @@ var UppercaseAcronyms = map[string]bool{
 	"SLA": true, "RPO": true, "RTO": true, "VPC": true, "VNET": true,
 	"TGW": true, "IKE": true, "ID": true, "SLI": true, "S2S": true,
 	// F5/Volterra specific
-	"RE": true, "CE": true, "SPO": true, "SMG": true, "ASN": true,
+	// Note: ASN is intentionally NOT included to maintain backward compatibility
+	// with existing code that uses "Asn" in type names (e.g., BGPAsnSet)
+	"RE": true, "CE": true, "SPO": true, "SMG": true,
 	"APM": true, "PII": true, "OIDC": true, "K8S": true,
 }
 

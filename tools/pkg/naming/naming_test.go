@@ -19,7 +19,7 @@ func TestToTitleCase(t *testing.T) {
 		{"mtls_certificate", "mTLS Certificate"},
 		{"oauth_provider", "OAuth Provider"},
 		{"ipv4_address", "IPv4 Address"},
-		{"bgp_asn_set", "BGP ASN Set"},
+		{"bgp_asn_set", "BGP Asn Set"}, // ASN intentionally not uppercased for backward compatibility
 		{"k8s_cluster", "K8S Cluster"},
 	}
 

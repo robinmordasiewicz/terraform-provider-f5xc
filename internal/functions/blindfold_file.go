@@ -120,28 +120,41 @@ func (f *BlindfoldFileFunction) Run(ctx context.Context, req function.RunRequest
 		return
 	}
 
-	// Get API configuration from environment variables
-	apiURL := os.Getenv("F5XC_API_URL")
-	if apiURL == "" {
-		apiURL = "https://console.ves.volterra.io/api"
-	}
-	apiToken := os.Getenv("F5XC_API_TOKEN")
-	if apiToken == "" {
+	// Get API configuration from environment variables using shared auth module
+	authConfig, err := blindfold.GetAuthConfigFromEnv()
+	if err != nil {
 		resp.Error = function.NewFuncError(
-			"F5XC_API_TOKEN environment variable is required for blindfold encryption. " +
-				"Set this variable to your F5 Distributed Cloud API token.",
+			fmt.Sprintf("Authentication configuration error: %s\n\n"+
+				"Configure one of:\n"+
+				"  - F5XC_API_TOKEN for API token authentication\n"+
+				"  - F5XC_API_P12_FILE and F5XC_P12_PASSWORD for P12 certificate authentication",
+				err),
 		)
 		return
 	}
 
-	// Create HTTP client with bearer token authentication
-	httpClient := &http.Client{
-		Timeout: 30 * time.Second,
-		Transport: &bearerTokenTransport{
-			token:     apiToken,
-			transport: http.DefaultTransport,
-		},
+	// Create authenticated HTTP client (supports both token and P12 auth)
+	authResult, err := blindfold.CreateAuthenticatedClient(authConfig)
+	if err != nil {
+		resp.Error = function.NewFuncError(
+			fmt.Sprintf("Failed to create authenticated client: %s", err),
+		)
+		return
 	}
+
+	// For token auth, wrap the client with bearer token transport
+	httpClient := authResult.Client
+	if authResult.Method == blindfold.AuthMethodToken {
+		httpClient = &http.Client{
+			Timeout: 30 * time.Second,
+			Transport: &bearerTokenTransport{
+				token:     authResult.Token,
+				transport: http.DefaultTransport,
+			},
+		}
+	}
+
+	apiURL := authResult.BaseURL
 
 	// Clean and validate the path
 	cleanPath := filepath.Clean(path)

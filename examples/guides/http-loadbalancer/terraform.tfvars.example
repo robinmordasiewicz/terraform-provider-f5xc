@@ -1,0 +1,73 @@
+# F5 Distributed Cloud HTTP Load Balancer Configuration
+# =====================================================
+#
+# QUICK START:
+# 1. Copy this file: cp terraform.tfvars.example terraform.tfvars
+# 2. Edit terraform.tfvars with your values
+# 3. Set environment variables for authentication (see below)
+# 4. Run: terraform init && terraform plan && terraform apply
+#
+# AUTHENTICATION (environment variables - do NOT put credentials in this file):
+#   export F5XC_API_URL="https://your-tenant.console.ves.volterra.io/api"
+#   export F5XC_API_TOKEN="your-api-token"
+
+# -----------------------------------------------------------------------------
+# Namespace Configuration
+# -----------------------------------------------------------------------------
+
+# Name for the namespace where resources will be created
+namespace_name = "demo"
+
+# Set to false to use an existing namespace instead of creating a new one
+create_namespace = true
+
+# -----------------------------------------------------------------------------
+# Application Configuration
+# -----------------------------------------------------------------------------
+
+# Prefix used when naming resources (e.g., demo-app-origin-pool)
+app_name = "demo-app"
+
+# REQUIRED: Your application's domain name
+# Users will access your application at this URL
+# You'll need to create a DNS CNAME record pointing to F5XC after deployment
+domain = "app.example.com"
+
+# -----------------------------------------------------------------------------
+# Origin Server Configuration
+# -----------------------------------------------------------------------------
+
+# REQUIRED: Your backend server that handles requests
+# Can be a DNS name or IP address
+origin_server = "origin.example.com"
+
+# Port on your origin server (default: 443 for HTTPS)
+origin_port = 443
+
+# Path for health checks (your origin must respond with 200 OK)
+health_check_path = "/health"
+
+# -----------------------------------------------------------------------------
+# Security Features (all enabled by default)
+# -----------------------------------------------------------------------------
+
+# Web Application Firewall - blocks common web attacks (SQLi, XSS, etc.)
+enable_waf = true
+
+# Bot Defense - protects against automated attacks and scrapers
+enable_bot_defense = true
+
+# Rate Limiting - prevents abuse by limiting requests per client
+enable_rate_limiting = true
+rate_limit_requests  = 100 # requests per minute
+
+# -----------------------------------------------------------------------------
+# Labels (optional)
+# -----------------------------------------------------------------------------
+
+# Custom labels for organizing and filtering resources
+# labels = {
+#   environment = "production"
+#   team        = "platform"
+#   cost_center = "engineering"
+# }

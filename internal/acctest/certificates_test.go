@@ -126,6 +126,7 @@ func parseCertPEM(t *testing.T, certPEM string) *x509.Certificate {
 	block, _ := pem.Decode([]byte(certPEM))
 	if block == nil {
 		t.Fatal("failed to decode PEM block")
+		return nil // staticcheck: unreachable but satisfies nil check analysis
 	}
 	cert, err := x509.ParseCertificate(block.Bytes)
 	if err != nil {

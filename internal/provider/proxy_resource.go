@@ -418,7 +418,7 @@ type ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesModel struct {
 	CertificateURL       types.String                                                                  `tfsdk:"certificate_url"`
 	DescriptionSpec      types.String                                                                  `tfsdk:"description_spec"`
 	CustomHashAlgorithms *ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling  *ProxyEmptyModel                                                              `tfsdk:"disable_ocsp_stapling"`
+	DisableOCSPStapling  *ProxyEmptyModel                                                              `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey           *ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
 	UseSystemDefaults    *ProxyEmptyModel                                                              `tfsdk:"use_system_defaults"`
 }
@@ -465,10 +465,10 @@ type ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigCustomSecurityModel struct {
 // ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsModel represents use_mtls block
 type ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                   `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                                 `tfsdk:"trusted_ca_url"`
+	TrustedCAURL              types.String                                                 `tfsdk:"trusted_ca_url"`
 	CRL                       *ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsCRLModel         `tfsdk:"crl"`
 	NoCRL                     *ProxyEmptyModel                                             `tfsdk:"no_crl"`
-	TrustedCa                 *ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	TrustedCA                 *ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
 	XfccDisabled              *ProxyEmptyModel                                             `tfsdk:"xfcc_disabled"`
 	XfccOptions               *ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
@@ -480,8 +480,8 @@ type ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsCRLModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsTrustedCaModel represents trusted_ca block
-type ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsTrustedCaModel struct {
+// ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsTrustedCAModel represents trusted_ca block
+type ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -706,12 +706,12 @@ type ProxySiteVirtualSitesAdvertiseWhereVirtualSiteVirtualSiteModel struct {
 
 // ProxyTLSInterceptModel represents tls_intercept block
 type ProxyTLSInterceptModel struct {
-	TrustedCaURL        types.String                             `tfsdk:"trusted_ca_url"`
+	TrustedCAURL        types.String                             `tfsdk:"trusted_ca_url"`
 	CustomCertificate   *ProxyTLSInterceptCustomCertificateModel `tfsdk:"custom_certificate"`
 	EnableForAllDomains *ProxyEmptyModel                         `tfsdk:"enable_for_all_domains"`
 	Policy              *ProxyTLSInterceptPolicyModel            `tfsdk:"policy"`
 	VolterraCertificate *ProxyEmptyModel                         `tfsdk:"volterra_certificate"`
-	VolterraTrustedCa   *ProxyEmptyModel                         `tfsdk:"volterra_trusted_ca"`
+	VolterraTrustedCA   *ProxyEmptyModel                         `tfsdk:"volterra_trusted_ca"`
 }
 
 // ProxyTLSInterceptCustomCertificateModel represents custom_certificate block
@@ -719,7 +719,7 @@ type ProxyTLSInterceptCustomCertificateModel struct {
 	CertificateURL       types.String                                                 `tfsdk:"certificate_url"`
 	DescriptionSpec      types.String                                                 `tfsdk:"description_spec"`
 	CustomHashAlgorithms *ProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling  *ProxyEmptyModel                                             `tfsdk:"disable_ocsp_stapling"`
+	DisableOCSPStapling  *ProxyEmptyModel                                             `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey           *ProxyTLSInterceptCustomCertificatePrivateKeyModel           `tfsdk:"private_key"`
 	UseSystemDefaults    *ProxyEmptyModel                                             `tfsdk:"use_system_defaults"`
 }
@@ -2745,13 +2745,13 @@ func (r *ProxyResource) Create(ctx context.Context, req resource.CreateRequest, 
 			policyNestedMap := make(map[string]interface{})
 			tls_interceptMap["policy"] = policyNestedMap
 		}
-		if !data.TLSIntercept.TrustedCaURL.IsNull() && !data.TLSIntercept.TrustedCaURL.IsUnknown() {
-			tls_interceptMap["trusted_ca_url"] = data.TLSIntercept.TrustedCaURL.ValueString()
+		if !data.TLSIntercept.TrustedCAURL.IsNull() && !data.TLSIntercept.TrustedCAURL.IsUnknown() {
+			tls_interceptMap["trusted_ca_url"] = data.TLSIntercept.TrustedCAURL.ValueString()
 		}
 		if data.TLSIntercept.VolterraCertificate != nil {
 			tls_interceptMap["volterra_certificate"] = map[string]interface{}{}
 		}
-		if data.TLSIntercept.VolterraTrustedCa != nil {
+		if data.TLSIntercept.VolterraTrustedCA != nil {
 			tls_interceptMap["volterra_trusted_ca"] = map[string]interface{}{}
 		}
 		createReq.Spec["tls_intercept"] = tls_interceptMap
@@ -3028,7 +3028,7 @@ func (r *ProxyResource) Create(ctx context.Context, req resource.CreateRequest, 
 				}
 				return nil
 			}(),
-			TrustedCaURL: func() types.String {
+			TrustedCAURL: func() types.String {
 				if v, ok := blockData["trusted_ca_url"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
@@ -3046,11 +3046,11 @@ func (r *ProxyResource) Create(ctx context.Context, req resource.CreateRequest, 
 				}
 				return nil
 			}(),
-			VolterraTrustedCa: func() *ProxyEmptyModel {
+			VolterraTrustedCA: func() *ProxyEmptyModel {
 				if !isImport && data.TLSIntercept != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.TLSIntercept.VolterraTrustedCa
+					return data.TLSIntercept.VolterraTrustedCA
 				}
 				// Import case: read from API
 				if _, ok := blockData["volterra_trusted_ca"].(map[string]interface{}); ok {
@@ -3414,7 +3414,7 @@ func (r *ProxyResource) Read(ctx context.Context, req resource.ReadRequest, resp
 				}
 				return nil
 			}(),
-			TrustedCaURL: func() types.String {
+			TrustedCAURL: func() types.String {
 				if v, ok := blockData["trusted_ca_url"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
@@ -3432,11 +3432,11 @@ func (r *ProxyResource) Read(ctx context.Context, req resource.ReadRequest, resp
 				}
 				return nil
 			}(),
-			VolterraTrustedCa: func() *ProxyEmptyModel {
+			VolterraTrustedCA: func() *ProxyEmptyModel {
 				if !isImport && data.TLSIntercept != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.TLSIntercept.VolterraTrustedCa
+					return data.TLSIntercept.VolterraTrustedCA
 				}
 				// Import case: read from API
 				if _, ok := blockData["volterra_trusted_ca"].(map[string]interface{}); ok {
@@ -3658,13 +3658,13 @@ func (r *ProxyResource) Update(ctx context.Context, req resource.UpdateRequest, 
 			policyNestedMap := make(map[string]interface{})
 			tls_interceptMap["policy"] = policyNestedMap
 		}
-		if !data.TLSIntercept.TrustedCaURL.IsNull() && !data.TLSIntercept.TrustedCaURL.IsUnknown() {
-			tls_interceptMap["trusted_ca_url"] = data.TLSIntercept.TrustedCaURL.ValueString()
+		if !data.TLSIntercept.TrustedCAURL.IsNull() && !data.TLSIntercept.TrustedCAURL.IsUnknown() {
+			tls_interceptMap["trusted_ca_url"] = data.TLSIntercept.TrustedCAURL.ValueString()
 		}
 		if data.TLSIntercept.VolterraCertificate != nil {
 			tls_interceptMap["volterra_certificate"] = map[string]interface{}{}
 		}
-		if data.TLSIntercept.VolterraTrustedCa != nil {
+		if data.TLSIntercept.VolterraTrustedCA != nil {
 			tls_interceptMap["volterra_trusted_ca"] = map[string]interface{}{}
 		}
 		apiResource.Spec["tls_intercept"] = tls_interceptMap
@@ -3959,7 +3959,7 @@ func (r *ProxyResource) Update(ctx context.Context, req resource.UpdateRequest, 
 				}
 				return nil
 			}(),
-			TrustedCaURL: func() types.String {
+			TrustedCAURL: func() types.String {
 				if v, ok := blockData["trusted_ca_url"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
@@ -3977,11 +3977,11 @@ func (r *ProxyResource) Update(ctx context.Context, req resource.UpdateRequest, 
 				}
 				return nil
 			}(),
-			VolterraTrustedCa: func() *ProxyEmptyModel {
+			VolterraTrustedCA: func() *ProxyEmptyModel {
 				if !isImport && data.TLSIntercept != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.TLSIntercept.VolterraTrustedCa
+					return data.TLSIntercept.VolterraTrustedCA
 				}
 				// Import case: read from API
 				if _, ok := blockData["volterra_trusted_ca"].(map[string]interface{}); ok {

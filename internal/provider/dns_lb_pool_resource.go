@@ -27,46 +27,46 @@ import (
 
 // Ensure provider defined types fully satisfy framework interfaces.
 var (
-	_ resource.Resource                   = &DNSLbPoolResource{}
-	_ resource.ResourceWithConfigure      = &DNSLbPoolResource{}
-	_ resource.ResourceWithImportState    = &DNSLbPoolResource{}
-	_ resource.ResourceWithModifyPlan     = &DNSLbPoolResource{}
-	_ resource.ResourceWithUpgradeState   = &DNSLbPoolResource{}
-	_ resource.ResourceWithValidateConfig = &DNSLbPoolResource{}
+	_ resource.Resource                   = &DNSLBPoolResource{}
+	_ resource.ResourceWithConfigure      = &DNSLBPoolResource{}
+	_ resource.ResourceWithImportState    = &DNSLBPoolResource{}
+	_ resource.ResourceWithModifyPlan     = &DNSLBPoolResource{}
+	_ resource.ResourceWithUpgradeState   = &DNSLBPoolResource{}
+	_ resource.ResourceWithValidateConfig = &DNSLBPoolResource{}
 )
 
 // dns_lb_poolSchemaVersion is the schema version for state upgrades
 const dns_lb_poolSchemaVersion int64 = 1
 
-func NewDNSLbPoolResource() resource.Resource {
-	return &DNSLbPoolResource{}
+func NewDNSLBPoolResource() resource.Resource {
+	return &DNSLBPoolResource{}
 }
 
-type DNSLbPoolResource struct {
+type DNSLBPoolResource struct {
 	client *client.Client
 }
 
-// DNSLbPoolEmptyModel represents empty nested blocks
-type DNSLbPoolEmptyModel struct {
+// DNSLBPoolEmptyModel represents empty nested blocks
+type DNSLBPoolEmptyModel struct {
 }
 
-// DNSLbPoolAPoolModel represents a_pool block
-type DNSLbPoolAPoolModel struct {
+// DNSLBPoolAPoolModel represents a_pool block
+type DNSLBPoolAPoolModel struct {
 	MaxAnswers         types.Int64                     `tfsdk:"max_answers"`
-	DisableHealthCheck *DNSLbPoolEmptyModel            `tfsdk:"disable_health_check"`
-	HealthCheck        *DNSLbPoolAPoolHealthCheckModel `tfsdk:"health_check"`
-	Members            []DNSLbPoolAPoolMembersModel    `tfsdk:"members"`
+	DisableHealthCheck *DNSLBPoolEmptyModel            `tfsdk:"disable_health_check"`
+	HealthCheck        *DNSLBPoolAPoolHealthCheckModel `tfsdk:"health_check"`
+	Members            []DNSLBPoolAPoolMembersModel    `tfsdk:"members"`
 }
 
-// DNSLbPoolAPoolHealthCheckModel represents health_check block
-type DNSLbPoolAPoolHealthCheckModel struct {
+// DNSLBPoolAPoolHealthCheckModel represents health_check block
+type DNSLBPoolAPoolHealthCheckModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// DNSLbPoolAPoolMembersModel represents members block
-type DNSLbPoolAPoolMembersModel struct {
+// DNSLBPoolAPoolMembersModel represents members block
+type DNSLBPoolAPoolMembersModel struct {
 	Disable    types.Bool   `tfsdk:"disable"`
 	IPEndpoint types.String `tfsdk:"ip_endpoint"`
 	Name       types.String `tfsdk:"name"`
@@ -74,14 +74,14 @@ type DNSLbPoolAPoolMembersModel struct {
 	Ratio      types.Int64  `tfsdk:"ratio"`
 }
 
-// DNSLbPoolAaaaPoolModel represents aaaa_pool block
-type DNSLbPoolAaaaPoolModel struct {
+// DNSLBPoolAaaaPoolModel represents aaaa_pool block
+type DNSLBPoolAaaaPoolModel struct {
 	MaxAnswers types.Int64                     `tfsdk:"max_answers"`
-	Members    []DNSLbPoolAaaaPoolMembersModel `tfsdk:"members"`
+	Members    []DNSLBPoolAaaaPoolMembersModel `tfsdk:"members"`
 }
 
-// DNSLbPoolAaaaPoolMembersModel represents members block
-type DNSLbPoolAaaaPoolMembersModel struct {
+// DNSLBPoolAaaaPoolMembersModel represents members block
+type DNSLBPoolAaaaPoolMembersModel struct {
 	Disable    types.Bool   `tfsdk:"disable"`
 	IPEndpoint types.String `tfsdk:"ip_endpoint"`
 	Name       types.String `tfsdk:"name"`
@@ -89,41 +89,41 @@ type DNSLbPoolAaaaPoolMembersModel struct {
 	Ratio      types.Int64  `tfsdk:"ratio"`
 }
 
-// DNSLbPoolCnamePoolModel represents cname_pool block
-type DNSLbPoolCnamePoolModel struct {
-	Members []DNSLbPoolCnamePoolMembersModel `tfsdk:"members"`
+// DNSLBPoolCnamePoolModel represents cname_pool block
+type DNSLBPoolCnamePoolModel struct {
+	Members []DNSLBPoolCnamePoolMembersModel `tfsdk:"members"`
 }
 
-// DNSLbPoolCnamePoolMembersModel represents members block
-type DNSLbPoolCnamePoolMembersModel struct {
+// DNSLBPoolCnamePoolMembersModel represents members block
+type DNSLBPoolCnamePoolMembersModel struct {
 	Domain           types.String `tfsdk:"domain"`
 	FinalTranslation types.Bool   `tfsdk:"final_translation"`
 	Name             types.String `tfsdk:"name"`
 	Ratio            types.Int64  `tfsdk:"ratio"`
 }
 
-// DNSLbPoolMxPoolModel represents mx_pool block
-type DNSLbPoolMxPoolModel struct {
+// DNSLBPoolMxPoolModel represents mx_pool block
+type DNSLBPoolMxPoolModel struct {
 	MaxAnswers types.Int64                   `tfsdk:"max_answers"`
-	Members    []DNSLbPoolMxPoolMembersModel `tfsdk:"members"`
+	Members    []DNSLBPoolMxPoolMembersModel `tfsdk:"members"`
 }
 
-// DNSLbPoolMxPoolMembersModel represents members block
-type DNSLbPoolMxPoolMembersModel struct {
+// DNSLBPoolMxPoolMembersModel represents members block
+type DNSLBPoolMxPoolMembersModel struct {
 	Domain   types.String `tfsdk:"domain"`
 	Name     types.String `tfsdk:"name"`
 	Priority types.Int64  `tfsdk:"priority"`
 	Ratio    types.Int64  `tfsdk:"ratio"`
 }
 
-// DNSLbPoolSrvPoolModel represents srv_pool block
-type DNSLbPoolSrvPoolModel struct {
+// DNSLBPoolSrvPoolModel represents srv_pool block
+type DNSLBPoolSrvPoolModel struct {
 	MaxAnswers types.Int64                    `tfsdk:"max_answers"`
-	Members    []DNSLbPoolSrvPoolMembersModel `tfsdk:"members"`
+	Members    []DNSLBPoolSrvPoolMembersModel `tfsdk:"members"`
 }
 
-// DNSLbPoolSrvPoolMembersModel represents members block
-type DNSLbPoolSrvPoolMembersModel struct {
+// DNSLBPoolSrvPoolMembersModel represents members block
+type DNSLBPoolSrvPoolMembersModel struct {
 	FinalTranslation types.Bool   `tfsdk:"final_translation"`
 	Name             types.String `tfsdk:"name"`
 	Port             types.Int64  `tfsdk:"port"`
@@ -133,7 +133,7 @@ type DNSLbPoolSrvPoolMembersModel struct {
 	Weight           types.Int64  `tfsdk:"weight"`
 }
 
-type DNSLbPoolResourceModel struct {
+type DNSLBPoolResourceModel struct {
 	Name              types.String             `tfsdk:"name"`
 	Namespace         types.String             `tfsdk:"namespace"`
 	Annotations       types.Map                `tfsdk:"annotations"`
@@ -142,27 +142,27 @@ type DNSLbPoolResourceModel struct {
 	Labels            types.Map                `tfsdk:"labels"`
 	ID                types.String             `tfsdk:"id"`
 	LoadBalancingMode types.String             `tfsdk:"load_balancing_mode"`
-	Ttl               types.Int64              `tfsdk:"ttl"`
+	TTL               types.Int64              `tfsdk:"ttl"`
 	Timeouts          timeouts.Value           `tfsdk:"timeouts"`
-	APool             *DNSLbPoolAPoolModel     `tfsdk:"a_pool"`
-	AaaaPool          *DNSLbPoolAaaaPoolModel  `tfsdk:"aaaa_pool"`
-	CnamePool         *DNSLbPoolCnamePoolModel `tfsdk:"cname_pool"`
-	MxPool            *DNSLbPoolMxPoolModel    `tfsdk:"mx_pool"`
-	SrvPool           *DNSLbPoolSrvPoolModel   `tfsdk:"srv_pool"`
-	UseRrsetTtl       *DNSLbPoolEmptyModel     `tfsdk:"use_rrset_ttl"`
+	APool             *DNSLBPoolAPoolModel     `tfsdk:"a_pool"`
+	AaaaPool          *DNSLBPoolAaaaPoolModel  `tfsdk:"aaaa_pool"`
+	CnamePool         *DNSLBPoolCnamePoolModel `tfsdk:"cname_pool"`
+	MxPool            *DNSLBPoolMxPoolModel    `tfsdk:"mx_pool"`
+	SrvPool           *DNSLBPoolSrvPoolModel   `tfsdk:"srv_pool"`
+	UseRrsetTTL       *DNSLBPoolEmptyModel     `tfsdk:"use_rrset_ttl"`
 }
 
-func (r *DNSLbPoolResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
+func (r *DNSLBPoolResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
 	resp.TypeName = req.ProviderTypeName + "_dns_lb_pool"
 }
 
-func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
+func (r *DNSLBPoolResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             dns_lb_poolSchemaVersion,
 		MarkdownDescription: "Manages DNS Load Balancer Pool in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the DNSLbPool. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the DNSLBPool. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -172,7 +172,7 @@ func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the DNSLbPool will be created.",
+				MarkdownDescription: "Namespace where the DNSLBPool will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -443,7 +443,7 @@ func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 	}
 }
 
-func (r *DNSLbPoolResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
+func (r *DNSLBPoolResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -459,8 +459,8 @@ func (r *DNSLbPoolResource) Configure(ctx context.Context, req resource.Configur
 }
 
 // ValidateConfig implements resource.ResourceWithValidateConfig
-func (r *DNSLbPoolResource) ValidateConfig(ctx context.Context, req resource.ValidateConfigRequest, resp *resource.ValidateConfigResponse) {
-	var data DNSLbPoolResourceModel
+func (r *DNSLBPoolResource) ValidateConfig(ctx context.Context, req resource.ValidateConfigRequest, resp *resource.ValidateConfigResponse) {
+	var data DNSLBPoolResourceModel
 	resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -468,7 +468,7 @@ func (r *DNSLbPoolResource) ValidateConfig(ctx context.Context, req resource.Val
 }
 
 // ModifyPlan implements resource.ResourceWithModifyPlan
-func (r *DNSLbPoolResource) ModifyPlan(ctx context.Context, req resource.ModifyPlanRequest, resp *resource.ModifyPlanResponse) {
+func (r *DNSLBPoolResource) ModifyPlan(ctx context.Context, req resource.ModifyPlanRequest, resp *resource.ModifyPlanResponse) {
 	if req.Plan.Raw.IsNull() {
 		resp.Diagnostics.AddWarning(
 			"Resource Destruction",
@@ -478,7 +478,7 @@ func (r *DNSLbPoolResource) ModifyPlan(ctx context.Context, req resource.ModifyP
 	}
 
 	if req.State.Raw.IsNull() {
-		var plan DNSLbPoolResourceModel
+		var plan DNSLBPoolResourceModel
 		resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
 		if resp.Diagnostics.HasError() {
 			return
@@ -494,7 +494,7 @@ func (r *DNSLbPoolResource) ModifyPlan(ctx context.Context, req resource.ModifyP
 }
 
 // UpgradeState implements resource.ResourceWithUpgradeState
-func (r *DNSLbPoolResource) UpgradeState(ctx context.Context) map[int64]resource.StateUpgrader {
+func (r *DNSLBPoolResource) UpgradeState(ctx context.Context) map[int64]resource.StateUpgrader {
 	return map[int64]resource.StateUpgrader{
 		0: {
 			PriorSchema: &schema.Schema{
@@ -520,7 +520,7 @@ func (r *DNSLbPoolResource) UpgradeState(ctx context.Context) map[int64]resource
 					return
 				}
 
-				upgradedState := DNSLbPoolResourceModel{
+				upgradedState := DNSLBPoolResourceModel{
 					Name:        priorState.Name,
 					Namespace:   priorState.Namespace,
 					Annotations: priorState.Annotations,
@@ -535,8 +535,8 @@ func (r *DNSLbPoolResource) UpgradeState(ctx context.Context) map[int64]resource
 	}
 }
 
-func (r *DNSLbPoolResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
-	var data DNSLbPoolResourceModel
+func (r *DNSLBPoolResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
+	var data DNSLBPoolResourceModel
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -556,7 +556,7 @@ func (r *DNSLbPoolResource) Create(ctx context.Context, req resource.CreateReque
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	createReq := &client.DNSLbPool{
+	createReq := &client.DNSLBPool{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -750,20 +750,20 @@ func (r *DNSLbPoolResource) Create(ctx context.Context, req resource.CreateReque
 		}
 		createReq.Spec["srv_pool"] = srv_poolMap
 	}
-	if data.UseRrsetTtl != nil {
+	if data.UseRrsetTTL != nil {
 		use_rrset_ttlMap := make(map[string]interface{})
 		createReq.Spec["use_rrset_ttl"] = use_rrset_ttlMap
 	}
 	if !data.LoadBalancingMode.IsNull() && !data.LoadBalancingMode.IsUnknown() {
 		createReq.Spec["load_balancing_mode"] = data.LoadBalancingMode.ValueString()
 	}
-	if !data.Ttl.IsNull() && !data.Ttl.IsUnknown() {
-		createReq.Spec["ttl"] = data.Ttl.ValueInt64()
+	if !data.TTL.IsNull() && !data.TTL.IsUnknown() {
+		createReq.Spec["ttl"] = data.TTL.ValueInt64()
 	}
 
-	apiResource, err := r.client.CreateDNSLbPool(ctx, createReq)
+	apiResource, err := r.client.CreateDNSLBPool(ctx, createReq)
 	if err != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create DNSLbPool: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create DNSLBPool: %s", err))
 		return
 	}
 
@@ -774,8 +774,8 @@ func (r *DNSLbPoolResource) Create(ctx context.Context, req resource.CreateReque
 	isImport := false // Create is never an import
 	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["a_pool"].(map[string]interface{}); ok && (isImport || data.APool != nil) {
-		data.APool = &DNSLbPoolAPoolModel{
-			DisableHealthCheck: func() *DNSLbPoolEmptyModel {
+		data.APool = &DNSLBPoolAPoolModel{
+			DisableHealthCheck: func() *DNSLBPoolEmptyModel {
 				if !isImport && data.APool != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
@@ -783,18 +783,18 @@ func (r *DNSLbPoolResource) Create(ctx context.Context, req resource.CreateReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["disable_health_check"].(map[string]interface{}); ok {
-					return &DNSLbPoolEmptyModel{}
+					return &DNSLBPoolEmptyModel{}
 				}
 				return nil
 			}(),
-			HealthCheck: func() *DNSLbPoolAPoolHealthCheckModel {
+			HealthCheck: func() *DNSLBPoolAPoolHealthCheckModel {
 				if !isImport && data.APool != nil && data.APool.HealthCheck != nil {
 					// Normal Read: preserve existing state value
 					return data.APool.HealthCheck
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["health_check"].(map[string]interface{}); ok {
-					return &DNSLbPoolAPoolHealthCheckModel{
+					return &DNSLBPoolAPoolHealthCheckModel{
 						Name: func() types.String {
 							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
 								return types.StringValue(v)
@@ -823,12 +823,12 @@ func (r *DNSLbPoolResource) Create(ctx context.Context, req resource.CreateReque
 				}
 				return types.Int64Null()
 			}(),
-			Members: func() []DNSLbPoolAPoolMembersModel {
+			Members: func() []DNSLBPoolAPoolMembersModel {
 				if listData, ok := blockData["members"].([]interface{}); ok && len(listData) > 0 {
-					var result []DNSLbPoolAPoolMembersModel
+					var result []DNSLBPoolAPoolMembersModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, DNSLbPoolAPoolMembersModel{
+							result = append(result, DNSLBPoolAPoolMembersModel{
 								Disable: func() types.Bool {
 									if v, ok := itemMap["disable"].(bool); ok {
 										return types.BoolValue(v)
@@ -869,19 +869,19 @@ func (r *DNSLbPoolResource) Create(ctx context.Context, req resource.CreateReque
 		}
 	}
 	if blockData, ok := apiResource.Spec["aaaa_pool"].(map[string]interface{}); ok && (isImport || data.AaaaPool != nil) {
-		data.AaaaPool = &DNSLbPoolAaaaPoolModel{
+		data.AaaaPool = &DNSLBPoolAaaaPoolModel{
 			MaxAnswers: func() types.Int64 {
 				if v, ok := blockData["max_answers"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
-			Members: func() []DNSLbPoolAaaaPoolMembersModel {
+			Members: func() []DNSLBPoolAaaaPoolMembersModel {
 				if listData, ok := blockData["members"].([]interface{}); ok && len(listData) > 0 {
-					var result []DNSLbPoolAaaaPoolMembersModel
+					var result []DNSLBPoolAaaaPoolMembersModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, DNSLbPoolAaaaPoolMembersModel{
+							result = append(result, DNSLBPoolAaaaPoolMembersModel{
 								Disable: func() types.Bool {
 									if v, ok := itemMap["disable"].(bool); ok {
 										return types.BoolValue(v)
@@ -922,13 +922,13 @@ func (r *DNSLbPoolResource) Create(ctx context.Context, req resource.CreateReque
 		}
 	}
 	if blockData, ok := apiResource.Spec["cname_pool"].(map[string]interface{}); ok && (isImport || data.CnamePool != nil) {
-		data.CnamePool = &DNSLbPoolCnamePoolModel{
-			Members: func() []DNSLbPoolCnamePoolMembersModel {
+		data.CnamePool = &DNSLBPoolCnamePoolModel{
+			Members: func() []DNSLBPoolCnamePoolMembersModel {
 				if listData, ok := blockData["members"].([]interface{}); ok && len(listData) > 0 {
-					var result []DNSLbPoolCnamePoolMembersModel
+					var result []DNSLBPoolCnamePoolMembersModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, DNSLbPoolCnamePoolMembersModel{
+							result = append(result, DNSLBPoolCnamePoolMembersModel{
 								Domain: func() types.String {
 									if v, ok := itemMap["domain"].(string); ok && v != "" {
 										return types.StringValue(v)
@@ -963,19 +963,19 @@ func (r *DNSLbPoolResource) Create(ctx context.Context, req resource.CreateReque
 		}
 	}
 	if blockData, ok := apiResource.Spec["mx_pool"].(map[string]interface{}); ok && (isImport || data.MxPool != nil) {
-		data.MxPool = &DNSLbPoolMxPoolModel{
+		data.MxPool = &DNSLBPoolMxPoolModel{
 			MaxAnswers: func() types.Int64 {
 				if v, ok := blockData["max_answers"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
-			Members: func() []DNSLbPoolMxPoolMembersModel {
+			Members: func() []DNSLBPoolMxPoolMembersModel {
 				if listData, ok := blockData["members"].([]interface{}); ok && len(listData) > 0 {
-					var result []DNSLbPoolMxPoolMembersModel
+					var result []DNSLBPoolMxPoolMembersModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, DNSLbPoolMxPoolMembersModel{
+							result = append(result, DNSLBPoolMxPoolMembersModel{
 								Domain: func() types.String {
 									if v, ok := itemMap["domain"].(string); ok && v != "" {
 										return types.StringValue(v)
@@ -1010,19 +1010,19 @@ func (r *DNSLbPoolResource) Create(ctx context.Context, req resource.CreateReque
 		}
 	}
 	if blockData, ok := apiResource.Spec["srv_pool"].(map[string]interface{}); ok && (isImport || data.SrvPool != nil) {
-		data.SrvPool = &DNSLbPoolSrvPoolModel{
+		data.SrvPool = &DNSLBPoolSrvPoolModel{
 			MaxAnswers: func() types.Int64 {
 				if v, ok := blockData["max_answers"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
-			Members: func() []DNSLbPoolSrvPoolMembersModel {
+			Members: func() []DNSLBPoolSrvPoolMembersModel {
 				if listData, ok := blockData["members"].([]interface{}); ok && len(listData) > 0 {
-					var result []DNSLbPoolSrvPoolMembersModel
+					var result []DNSLBPoolSrvPoolMembersModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, DNSLbPoolSrvPoolMembersModel{
+							result = append(result, DNSLBPoolSrvPoolMembersModel{
 								FinalTranslation: func() types.Bool {
 									if v, ok := itemMap["final_translation"].(bool); ok {
 										return types.BoolValue(v)
@@ -1074,9 +1074,9 @@ func (r *DNSLbPoolResource) Create(ctx context.Context, req resource.CreateReque
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["use_rrset_ttl"].(map[string]interface{}); ok && isImport && data.UseRrsetTtl == nil {
+	if _, ok := apiResource.Spec["use_rrset_ttl"].(map[string]interface{}); ok && isImport && data.UseRrsetTTL == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.UseRrsetTtl = &DNSLbPoolEmptyModel{}
+		data.UseRrsetTTL = &DNSLBPoolEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if v, ok := apiResource.Spec["load_balancing_mode"].(string); ok && v != "" {
@@ -1085,9 +1085,9 @@ func (r *DNSLbPoolResource) Create(ctx context.Context, req resource.CreateReque
 		data.LoadBalancingMode = types.StringNull()
 	}
 	if v, ok := apiResource.Spec["ttl"].(float64); ok {
-		data.Ttl = types.Int64Value(int64(v))
+		data.TTL = types.Int64Value(int64(v))
 	} else {
-		data.Ttl = types.Int64Null()
+		data.TTL = types.Int64Null()
 	}
 
 	psd := privatestate.NewPrivateStateData()
@@ -1097,12 +1097,12 @@ func (r *DNSLbPoolResource) Create(ctx context.Context, req resource.CreateReque
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
-	tflog.Trace(ctx, "created DNSLbPool resource")
+	tflog.Trace(ctx, "created DNSLBPool resource")
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *DNSLbPoolResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-	var data DNSLbPoolResourceModel
+func (r *DNSLBPoolResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
+	var data DNSLBPoolResourceModel
 	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -1120,18 +1120,18 @@ func (r *DNSLbPoolResource) Read(ctx context.Context, req resource.ReadRequest, 
 	psd, psDiags := privatestate.LoadFromPrivateState(ctx, &req)
 	resp.Diagnostics.Append(psDiags...)
 
-	apiResource, err := r.client.GetDNSLbPool(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	apiResource, err := r.client.GetDNSLBPool(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// Check if the resource was deleted outside Terraform
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
-			tflog.Warn(ctx, "DNSLbPool not found, removing from state", map[string]interface{}{
+			tflog.Warn(ctx, "DNSLBPool not found, removing from state", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})
 			resp.State.RemoveResource(ctx)
 			return
 		}
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read DNSLbPool: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read DNSLBPool: %s", err))
 		return
 	}
 
@@ -1183,8 +1183,8 @@ func (r *DNSLbPoolResource) Read(ctx context.Context, req resource.ReadRequest, 
 		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["a_pool"].(map[string]interface{}); ok && (isImport || data.APool != nil) {
-		data.APool = &DNSLbPoolAPoolModel{
-			DisableHealthCheck: func() *DNSLbPoolEmptyModel {
+		data.APool = &DNSLBPoolAPoolModel{
+			DisableHealthCheck: func() *DNSLBPoolEmptyModel {
 				if !isImport && data.APool != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
@@ -1192,18 +1192,18 @@ func (r *DNSLbPoolResource) Read(ctx context.Context, req resource.ReadRequest, 
 				}
 				// Import case: read from API
 				if _, ok := blockData["disable_health_check"].(map[string]interface{}); ok {
-					return &DNSLbPoolEmptyModel{}
+					return &DNSLBPoolEmptyModel{}
 				}
 				return nil
 			}(),
-			HealthCheck: func() *DNSLbPoolAPoolHealthCheckModel {
+			HealthCheck: func() *DNSLBPoolAPoolHealthCheckModel {
 				if !isImport && data.APool != nil && data.APool.HealthCheck != nil {
 					// Normal Read: preserve existing state value
 					return data.APool.HealthCheck
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["health_check"].(map[string]interface{}); ok {
-					return &DNSLbPoolAPoolHealthCheckModel{
+					return &DNSLBPoolAPoolHealthCheckModel{
 						Name: func() types.String {
 							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
 								return types.StringValue(v)
@@ -1232,12 +1232,12 @@ func (r *DNSLbPoolResource) Read(ctx context.Context, req resource.ReadRequest, 
 				}
 				return types.Int64Null()
 			}(),
-			Members: func() []DNSLbPoolAPoolMembersModel {
+			Members: func() []DNSLBPoolAPoolMembersModel {
 				if listData, ok := blockData["members"].([]interface{}); ok && len(listData) > 0 {
-					var result []DNSLbPoolAPoolMembersModel
+					var result []DNSLBPoolAPoolMembersModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, DNSLbPoolAPoolMembersModel{
+							result = append(result, DNSLBPoolAPoolMembersModel{
 								Disable: func() types.Bool {
 									if v, ok := itemMap["disable"].(bool); ok {
 										return types.BoolValue(v)
@@ -1278,19 +1278,19 @@ func (r *DNSLbPoolResource) Read(ctx context.Context, req resource.ReadRequest, 
 		}
 	}
 	if blockData, ok := apiResource.Spec["aaaa_pool"].(map[string]interface{}); ok && (isImport || data.AaaaPool != nil) {
-		data.AaaaPool = &DNSLbPoolAaaaPoolModel{
+		data.AaaaPool = &DNSLBPoolAaaaPoolModel{
 			MaxAnswers: func() types.Int64 {
 				if v, ok := blockData["max_answers"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
-			Members: func() []DNSLbPoolAaaaPoolMembersModel {
+			Members: func() []DNSLBPoolAaaaPoolMembersModel {
 				if listData, ok := blockData["members"].([]interface{}); ok && len(listData) > 0 {
-					var result []DNSLbPoolAaaaPoolMembersModel
+					var result []DNSLBPoolAaaaPoolMembersModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, DNSLbPoolAaaaPoolMembersModel{
+							result = append(result, DNSLBPoolAaaaPoolMembersModel{
 								Disable: func() types.Bool {
 									if v, ok := itemMap["disable"].(bool); ok {
 										return types.BoolValue(v)
@@ -1331,13 +1331,13 @@ func (r *DNSLbPoolResource) Read(ctx context.Context, req resource.ReadRequest, 
 		}
 	}
 	if blockData, ok := apiResource.Spec["cname_pool"].(map[string]interface{}); ok && (isImport || data.CnamePool != nil) {
-		data.CnamePool = &DNSLbPoolCnamePoolModel{
-			Members: func() []DNSLbPoolCnamePoolMembersModel {
+		data.CnamePool = &DNSLBPoolCnamePoolModel{
+			Members: func() []DNSLBPoolCnamePoolMembersModel {
 				if listData, ok := blockData["members"].([]interface{}); ok && len(listData) > 0 {
-					var result []DNSLbPoolCnamePoolMembersModel
+					var result []DNSLBPoolCnamePoolMembersModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, DNSLbPoolCnamePoolMembersModel{
+							result = append(result, DNSLBPoolCnamePoolMembersModel{
 								Domain: func() types.String {
 									if v, ok := itemMap["domain"].(string); ok && v != "" {
 										return types.StringValue(v)
@@ -1372,19 +1372,19 @@ func (r *DNSLbPoolResource) Read(ctx context.Context, req resource.ReadRequest, 
 		}
 	}
 	if blockData, ok := apiResource.Spec["mx_pool"].(map[string]interface{}); ok && (isImport || data.MxPool != nil) {
-		data.MxPool = &DNSLbPoolMxPoolModel{
+		data.MxPool = &DNSLBPoolMxPoolModel{
 			MaxAnswers: func() types.Int64 {
 				if v, ok := blockData["max_answers"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
-			Members: func() []DNSLbPoolMxPoolMembersModel {
+			Members: func() []DNSLBPoolMxPoolMembersModel {
 				if listData, ok := blockData["members"].([]interface{}); ok && len(listData) > 0 {
-					var result []DNSLbPoolMxPoolMembersModel
+					var result []DNSLBPoolMxPoolMembersModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, DNSLbPoolMxPoolMembersModel{
+							result = append(result, DNSLBPoolMxPoolMembersModel{
 								Domain: func() types.String {
 									if v, ok := itemMap["domain"].(string); ok && v != "" {
 										return types.StringValue(v)
@@ -1419,19 +1419,19 @@ func (r *DNSLbPoolResource) Read(ctx context.Context, req resource.ReadRequest, 
 		}
 	}
 	if blockData, ok := apiResource.Spec["srv_pool"].(map[string]interface{}); ok && (isImport || data.SrvPool != nil) {
-		data.SrvPool = &DNSLbPoolSrvPoolModel{
+		data.SrvPool = &DNSLBPoolSrvPoolModel{
 			MaxAnswers: func() types.Int64 {
 				if v, ok := blockData["max_answers"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
-			Members: func() []DNSLbPoolSrvPoolMembersModel {
+			Members: func() []DNSLBPoolSrvPoolMembersModel {
 				if listData, ok := blockData["members"].([]interface{}); ok && len(listData) > 0 {
-					var result []DNSLbPoolSrvPoolMembersModel
+					var result []DNSLBPoolSrvPoolMembersModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, DNSLbPoolSrvPoolMembersModel{
+							result = append(result, DNSLBPoolSrvPoolMembersModel{
 								FinalTranslation: func() types.Bool {
 									if v, ok := itemMap["final_translation"].(bool); ok {
 										return types.BoolValue(v)
@@ -1483,9 +1483,9 @@ func (r *DNSLbPoolResource) Read(ctx context.Context, req resource.ReadRequest, 
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["use_rrset_ttl"].(map[string]interface{}); ok && isImport && data.UseRrsetTtl == nil {
+	if _, ok := apiResource.Spec["use_rrset_ttl"].(map[string]interface{}); ok && isImport && data.UseRrsetTTL == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.UseRrsetTtl = &DNSLbPoolEmptyModel{}
+		data.UseRrsetTTL = &DNSLBPoolEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if v, ok := apiResource.Spec["load_balancing_mode"].(string); ok && v != "" {
@@ -1494,9 +1494,9 @@ func (r *DNSLbPoolResource) Read(ctx context.Context, req resource.ReadRequest, 
 		data.LoadBalancingMode = types.StringNull()
 	}
 	if v, ok := apiResource.Spec["ttl"].(float64); ok {
-		data.Ttl = types.Int64Value(int64(v))
+		data.TTL = types.Int64Value(int64(v))
 	} else {
-		data.Ttl = types.Int64Null()
+		data.TTL = types.Int64Null()
 	}
 
 	// Preserve or set the managed marker for future Read operations
@@ -1511,8 +1511,8 @@ func (r *DNSLbPoolResource) Read(ctx context.Context, req resource.ReadRequest, 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *DNSLbPoolResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-	var data DNSLbPoolResourceModel
+func (r *DNSLBPoolResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
+	var data DNSLBPoolResourceModel
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -1527,7 +1527,7 @@ func (r *DNSLbPoolResource) Update(ctx context.Context, req resource.UpdateReque
 	ctx, cancel := context.WithTimeout(ctx, updateTimeout)
 	defer cancel()
 
-	apiResource := &client.DNSLbPool{
+	apiResource := &client.DNSLBPool{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -1721,20 +1721,20 @@ func (r *DNSLbPoolResource) Update(ctx context.Context, req resource.UpdateReque
 		}
 		apiResource.Spec["srv_pool"] = srv_poolMap
 	}
-	if data.UseRrsetTtl != nil {
+	if data.UseRrsetTTL != nil {
 		use_rrset_ttlMap := make(map[string]interface{})
 		apiResource.Spec["use_rrset_ttl"] = use_rrset_ttlMap
 	}
 	if !data.LoadBalancingMode.IsNull() && !data.LoadBalancingMode.IsUnknown() {
 		apiResource.Spec["load_balancing_mode"] = data.LoadBalancingMode.ValueString()
 	}
-	if !data.Ttl.IsNull() && !data.Ttl.IsUnknown() {
-		apiResource.Spec["ttl"] = data.Ttl.ValueInt64()
+	if !data.TTL.IsNull() && !data.TTL.IsUnknown() {
+		apiResource.Spec["ttl"] = data.TTL.ValueInt64()
 	}
 
-	_, err := r.client.UpdateDNSLbPool(ctx, apiResource)
+	_, err := r.client.UpdateDNSLBPool(ctx, apiResource)
 	if err != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update DNSLbPool: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update DNSLBPool: %s", err))
 		return
 	}
 
@@ -1743,9 +1743,9 @@ func (r *DNSLbPoolResource) Update(ctx context.Context, req resource.UpdateReque
 
 	// Fetch the resource to get complete state including computed fields
 	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
-	fetched, fetchErr := r.client.GetDNSLbPool(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	fetched, fetchErr := r.client.GetDNSLBPool(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if fetchErr != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read DNSLbPool after update: %s", fetchErr))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read DNSLBPool after update: %s", fetchErr))
 		return
 	}
 
@@ -1758,10 +1758,10 @@ func (r *DNSLbPoolResource) Update(ctx context.Context, req resource.UpdateReque
 	}
 	// If plan had a value, preserve it
 	if v, ok := fetched.Spec["ttl"].(float64); ok {
-		data.Ttl = types.Int64Value(int64(v))
-	} else if data.Ttl.IsUnknown() {
+		data.TTL = types.Int64Value(int64(v))
+	} else if data.TTL.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
-		data.Ttl = types.Int64Null()
+		data.TTL = types.Int64Null()
 	}
 	// If plan had a value, preserve it
 
@@ -1770,8 +1770,8 @@ func (r *DNSLbPoolResource) Update(ctx context.Context, req resource.UpdateReque
 	isImport := false     // Update is never an import
 	_ = isImport          // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["a_pool"].(map[string]interface{}); ok && (isImport || data.APool != nil) {
-		data.APool = &DNSLbPoolAPoolModel{
-			DisableHealthCheck: func() *DNSLbPoolEmptyModel {
+		data.APool = &DNSLBPoolAPoolModel{
+			DisableHealthCheck: func() *DNSLBPoolEmptyModel {
 				if !isImport && data.APool != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
@@ -1779,18 +1779,18 @@ func (r *DNSLbPoolResource) Update(ctx context.Context, req resource.UpdateReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["disable_health_check"].(map[string]interface{}); ok {
-					return &DNSLbPoolEmptyModel{}
+					return &DNSLBPoolEmptyModel{}
 				}
 				return nil
 			}(),
-			HealthCheck: func() *DNSLbPoolAPoolHealthCheckModel {
+			HealthCheck: func() *DNSLBPoolAPoolHealthCheckModel {
 				if !isImport && data.APool != nil && data.APool.HealthCheck != nil {
 					// Normal Read: preserve existing state value
 					return data.APool.HealthCheck
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["health_check"].(map[string]interface{}); ok {
-					return &DNSLbPoolAPoolHealthCheckModel{
+					return &DNSLBPoolAPoolHealthCheckModel{
 						Name: func() types.String {
 							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
 								return types.StringValue(v)
@@ -1819,12 +1819,12 @@ func (r *DNSLbPoolResource) Update(ctx context.Context, req resource.UpdateReque
 				}
 				return types.Int64Null()
 			}(),
-			Members: func() []DNSLbPoolAPoolMembersModel {
+			Members: func() []DNSLBPoolAPoolMembersModel {
 				if listData, ok := blockData["members"].([]interface{}); ok && len(listData) > 0 {
-					var result []DNSLbPoolAPoolMembersModel
+					var result []DNSLBPoolAPoolMembersModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, DNSLbPoolAPoolMembersModel{
+							result = append(result, DNSLBPoolAPoolMembersModel{
 								Disable: func() types.Bool {
 									if v, ok := itemMap["disable"].(bool); ok {
 										return types.BoolValue(v)
@@ -1865,19 +1865,19 @@ func (r *DNSLbPoolResource) Update(ctx context.Context, req resource.UpdateReque
 		}
 	}
 	if blockData, ok := apiResource.Spec["aaaa_pool"].(map[string]interface{}); ok && (isImport || data.AaaaPool != nil) {
-		data.AaaaPool = &DNSLbPoolAaaaPoolModel{
+		data.AaaaPool = &DNSLBPoolAaaaPoolModel{
 			MaxAnswers: func() types.Int64 {
 				if v, ok := blockData["max_answers"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
-			Members: func() []DNSLbPoolAaaaPoolMembersModel {
+			Members: func() []DNSLBPoolAaaaPoolMembersModel {
 				if listData, ok := blockData["members"].([]interface{}); ok && len(listData) > 0 {
-					var result []DNSLbPoolAaaaPoolMembersModel
+					var result []DNSLBPoolAaaaPoolMembersModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, DNSLbPoolAaaaPoolMembersModel{
+							result = append(result, DNSLBPoolAaaaPoolMembersModel{
 								Disable: func() types.Bool {
 									if v, ok := itemMap["disable"].(bool); ok {
 										return types.BoolValue(v)
@@ -1918,13 +1918,13 @@ func (r *DNSLbPoolResource) Update(ctx context.Context, req resource.UpdateReque
 		}
 	}
 	if blockData, ok := apiResource.Spec["cname_pool"].(map[string]interface{}); ok && (isImport || data.CnamePool != nil) {
-		data.CnamePool = &DNSLbPoolCnamePoolModel{
-			Members: func() []DNSLbPoolCnamePoolMembersModel {
+		data.CnamePool = &DNSLBPoolCnamePoolModel{
+			Members: func() []DNSLBPoolCnamePoolMembersModel {
 				if listData, ok := blockData["members"].([]interface{}); ok && len(listData) > 0 {
-					var result []DNSLbPoolCnamePoolMembersModel
+					var result []DNSLBPoolCnamePoolMembersModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, DNSLbPoolCnamePoolMembersModel{
+							result = append(result, DNSLBPoolCnamePoolMembersModel{
 								Domain: func() types.String {
 									if v, ok := itemMap["domain"].(string); ok && v != "" {
 										return types.StringValue(v)
@@ -1959,19 +1959,19 @@ func (r *DNSLbPoolResource) Update(ctx context.Context, req resource.UpdateReque
 		}
 	}
 	if blockData, ok := apiResource.Spec["mx_pool"].(map[string]interface{}); ok && (isImport || data.MxPool != nil) {
-		data.MxPool = &DNSLbPoolMxPoolModel{
+		data.MxPool = &DNSLBPoolMxPoolModel{
 			MaxAnswers: func() types.Int64 {
 				if v, ok := blockData["max_answers"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
-			Members: func() []DNSLbPoolMxPoolMembersModel {
+			Members: func() []DNSLBPoolMxPoolMembersModel {
 				if listData, ok := blockData["members"].([]interface{}); ok && len(listData) > 0 {
-					var result []DNSLbPoolMxPoolMembersModel
+					var result []DNSLBPoolMxPoolMembersModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, DNSLbPoolMxPoolMembersModel{
+							result = append(result, DNSLBPoolMxPoolMembersModel{
 								Domain: func() types.String {
 									if v, ok := itemMap["domain"].(string); ok && v != "" {
 										return types.StringValue(v)
@@ -2006,19 +2006,19 @@ func (r *DNSLbPoolResource) Update(ctx context.Context, req resource.UpdateReque
 		}
 	}
 	if blockData, ok := apiResource.Spec["srv_pool"].(map[string]interface{}); ok && (isImport || data.SrvPool != nil) {
-		data.SrvPool = &DNSLbPoolSrvPoolModel{
+		data.SrvPool = &DNSLBPoolSrvPoolModel{
 			MaxAnswers: func() types.Int64 {
 				if v, ok := blockData["max_answers"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
-			Members: func() []DNSLbPoolSrvPoolMembersModel {
+			Members: func() []DNSLBPoolSrvPoolMembersModel {
 				if listData, ok := blockData["members"].([]interface{}); ok && len(listData) > 0 {
-					var result []DNSLbPoolSrvPoolMembersModel
+					var result []DNSLBPoolSrvPoolMembersModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, DNSLbPoolSrvPoolMembersModel{
+							result = append(result, DNSLBPoolSrvPoolMembersModel{
 								FinalTranslation: func() types.Bool {
 									if v, ok := itemMap["final_translation"].(bool); ok {
 										return types.BoolValue(v)
@@ -2070,9 +2070,9 @@ func (r *DNSLbPoolResource) Update(ctx context.Context, req resource.UpdateReque
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["use_rrset_ttl"].(map[string]interface{}); ok && isImport && data.UseRrsetTtl == nil {
+	if _, ok := apiResource.Spec["use_rrset_ttl"].(map[string]interface{}); ok && isImport && data.UseRrsetTTL == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.UseRrsetTtl = &DNSLbPoolEmptyModel{}
+		data.UseRrsetTTL = &DNSLBPoolEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if v, ok := apiResource.Spec["load_balancing_mode"].(string); ok && v != "" {
@@ -2081,9 +2081,9 @@ func (r *DNSLbPoolResource) Update(ctx context.Context, req resource.UpdateReque
 		data.LoadBalancingMode = types.StringNull()
 	}
 	if v, ok := apiResource.Spec["ttl"].(float64); ok {
-		data.Ttl = types.Int64Value(int64(v))
+		data.TTL = types.Int64Value(int64(v))
 	} else {
-		data.Ttl = types.Int64Null()
+		data.TTL = types.Int64Null()
 	}
 
 	psd := privatestate.NewPrivateStateData()
@@ -2096,8 +2096,8 @@ func (r *DNSLbPoolResource) Update(ctx context.Context, req resource.UpdateReque
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *DNSLbPoolResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
-	var data DNSLbPoolResourceModel
+func (r *DNSLBPoolResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
+	var data DNSLBPoolResourceModel
 	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -2111,11 +2111,11 @@ func (r *DNSLbPoolResource) Delete(ctx context.Context, req resource.DeleteReque
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-	err := r.client.DeleteDNSLbPool(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	err := r.client.DeleteDNSLBPool(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
-			tflog.Warn(ctx, "DNSLbPool already deleted, removing from state", map[string]interface{}{
+			tflog.Warn(ctx, "DNSLBPool already deleted, removing from state", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})
@@ -2124,18 +2124,18 @@ func (r *DNSLbPoolResource) Delete(ctx context.Context, req resource.DeleteReque
 		// If delete is not implemented (501), warn and remove from state
 		// Some F5 XC resources don't support deletion via API
 		if strings.Contains(err.Error(), "501") {
-			tflog.Warn(ctx, "DNSLbPool delete not supported by API (501), removing from state only", map[string]interface{}{
+			tflog.Warn(ctx, "DNSLBPool delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})
 			return
 		}
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete DNSLbPool: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete DNSLBPool: %s", err))
 		return
 	}
 }
 
-func (r *DNSLbPoolResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
+func (r *DNSLBPoolResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	// Import ID format: namespace/name
 	parts := strings.Split(req.ID, "/")
 	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {

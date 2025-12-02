@@ -1,7 +1,7 @@
-# Infraprotect ASN Resource Example
+# Infraprotect Asn Resource Example
 # Manages DDoS transit ASN in F5 Distributed Cloud.
 
-# Basic Infraprotect ASN configuration
+# Basic Infraprotect Asn configuration
 resource "f5xc_infraprotect_asn" "example" {
   name      = "example-infraprotect-asn"
   namespace = "staging"

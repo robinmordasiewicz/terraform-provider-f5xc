@@ -15,19 +15,19 @@ import (
 )
 
 var (
-	_ datasource.DataSource              = &DNSLbHealthCheckDataSource{}
-	_ datasource.DataSourceWithConfigure = &DNSLbHealthCheckDataSource{}
+	_ datasource.DataSource              = &DNSLBHealthCheckDataSource{}
+	_ datasource.DataSourceWithConfigure = &DNSLBHealthCheckDataSource{}
 )
 
-func NewDNSLbHealthCheckDataSource() datasource.DataSource {
-	return &DNSLbHealthCheckDataSource{}
+func NewDNSLBHealthCheckDataSource() datasource.DataSource {
+	return &DNSLBHealthCheckDataSource{}
 }
 
-type DNSLbHealthCheckDataSource struct {
+type DNSLBHealthCheckDataSource struct {
 	client *client.Client
 }
 
-type DNSLbHealthCheckDataSourceModel struct {
+type DNSLBHealthCheckDataSourceModel struct {
 	ID          types.String `tfsdk:"id"`
 	Name        types.String `tfsdk:"name"`
 	Namespace   types.String `tfsdk:"namespace"`
@@ -36,11 +36,11 @@ type DNSLbHealthCheckDataSourceModel struct {
 	Annotations types.Map    `tfsdk:"annotations"`
 }
 
-func (d *DNSLbHealthCheckDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
+func (d *DNSLBHealthCheckDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	resp.TypeName = req.ProviderTypeName + "_dns_lb_health_check"
 }
 
-func (d *DNSLbHealthCheckDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
+func (d *DNSLBHealthCheckDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		MarkdownDescription: "Manages DNS Load Balancer Health Check in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
@@ -49,15 +49,15 @@ func (d *DNSLbHealthCheckDataSource) Schema(ctx context.Context, req datasource.
 				Computed:            true,
 			},
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the DNSLbHealthCheck.",
+				MarkdownDescription: "Name of the DNSLBHealthCheck.",
 				Required:            true,
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the DNSLbHealthCheck exists.",
+				MarkdownDescription: "Namespace where the DNSLBHealthCheck exists.",
 				Required:            true,
 			},
 			"description": schema.StringAttribute{
-				MarkdownDescription: "Description of the DNSLbHealthCheck.",
+				MarkdownDescription: "Description of the DNSLBHealthCheck.",
 				Computed:            true,
 			},
 			"labels": schema.MapAttribute{
@@ -74,7 +74,7 @@ func (d *DNSLbHealthCheckDataSource) Schema(ctx context.Context, req datasource.
 	}
 }
 
-func (d *DNSLbHealthCheckDataSource) Configure(ctx context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
+func (d *DNSLBHealthCheckDataSource) Configure(ctx context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -86,16 +86,16 @@ func (d *DNSLbHealthCheckDataSource) Configure(ctx context.Context, req datasour
 	d.client = client
 }
 
-func (d *DNSLbHealthCheckDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
-	var data DNSLbHealthCheckDataSourceModel
+func (d *DNSLBHealthCheckDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
+	var data DNSLBHealthCheckDataSourceModel
 	resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	resource, err := d.client.GetDNSLbHealthCheck(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	resource, err := d.client.GetDNSLBHealthCheck(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read DNSLbHealthCheck: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read DNSLBHealthCheck: %s", err))
 		return
 	}
 

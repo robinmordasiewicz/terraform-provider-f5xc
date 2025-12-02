@@ -67,12 +67,12 @@ type LogReceiverSyslogTCPServerModel struct {
 type LogReceiverSyslogTLSServerModel struct {
 	Port                 types.Int64                                `tfsdk:"port"`
 	ServerName           types.String                               `tfsdk:"server_name"`
-	TrustedCaURL         types.String                               `tfsdk:"trusted_ca_url"`
+	TrustedCAURL         types.String                               `tfsdk:"trusted_ca_url"`
 	DefaultHTTPSPort     *LogReceiverEmptyModel                     `tfsdk:"default_https_port"`
 	DefaultSyslogTLSPort *LogReceiverEmptyModel                     `tfsdk:"default_syslog_tls_port"`
 	MtlsDisabled         *LogReceiverEmptyModel                     `tfsdk:"mtls_disabled"`
 	MtlsEnable           *LogReceiverSyslogTLSServerMtlsEnableModel `tfsdk:"mtls_enable"`
-	VolterraCa           *LogReceiverEmptyModel                     `tfsdk:"volterra_ca"`
+	VolterraCA           *LogReceiverEmptyModel                     `tfsdk:"volterra_ca"`
 }
 
 // LogReceiverSyslogTLSServerMtlsEnableModel represents mtls_enable block
@@ -474,8 +474,8 @@ func (r *LogReceiverResource) Create(ctx context.Context, req resource.CreateReq
 			if !data.Syslog.TLSServer.ServerName.IsNull() && !data.Syslog.TLSServer.ServerName.IsUnknown() {
 				tls_serverNestedMap["server_name"] = data.Syslog.TLSServer.ServerName.ValueString()
 			}
-			if !data.Syslog.TLSServer.TrustedCaURL.IsNull() && !data.Syslog.TLSServer.TrustedCaURL.IsUnknown() {
-				tls_serverNestedMap["trusted_ca_url"] = data.Syslog.TLSServer.TrustedCaURL.ValueString()
+			if !data.Syslog.TLSServer.TrustedCAURL.IsNull() && !data.Syslog.TLSServer.TrustedCAURL.IsUnknown() {
+				tls_serverNestedMap["trusted_ca_url"] = data.Syslog.TLSServer.TrustedCAURL.ValueString()
 			}
 			syslogMap["tls_server"] = tls_serverNestedMap
 		}
@@ -561,7 +561,7 @@ func (r *LogReceiverResource) Create(ctx context.Context, req resource.CreateReq
 							}
 							return types.StringNull()
 						}(),
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -747,7 +747,7 @@ func (r *LogReceiverResource) Read(ctx context.Context, req resource.ReadRequest
 							}
 							return types.StringNull()
 						}(),
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -870,8 +870,8 @@ func (r *LogReceiverResource) Update(ctx context.Context, req resource.UpdateReq
 			if !data.Syslog.TLSServer.ServerName.IsNull() && !data.Syslog.TLSServer.ServerName.IsUnknown() {
 				tls_serverNestedMap["server_name"] = data.Syslog.TLSServer.ServerName.ValueString()
 			}
-			if !data.Syslog.TLSServer.TrustedCaURL.IsNull() && !data.Syslog.TLSServer.TrustedCaURL.IsUnknown() {
-				tls_serverNestedMap["trusted_ca_url"] = data.Syslog.TLSServer.TrustedCaURL.ValueString()
+			if !data.Syslog.TLSServer.TrustedCAURL.IsNull() && !data.Syslog.TLSServer.TrustedCAURL.IsUnknown() {
+				tls_serverNestedMap["trusted_ca_url"] = data.Syslog.TLSServer.TrustedCAURL.ValueString()
 			}
 			syslogMap["tls_server"] = tls_serverNestedMap
 		}
@@ -968,7 +968,7 @@ func (r *LogReceiverResource) Update(ctx context.Context, req resource.UpdateReq
 							}
 							return types.StringNull()
 						}(),
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}

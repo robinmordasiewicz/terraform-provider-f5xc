@@ -8,38 +8,38 @@ import (
 	"fmt"
 )
 
-// DNSLbPool represents a F5XC DNSLbPool
-type DNSLbPool struct {
+// DNSLBPool represents a F5XC DNSLBPool
+type DNSLBPool struct {
 	Metadata Metadata               `json:"metadata"`
 	Spec     map[string]interface{} `json:"spec"`
 }
 
-// CreateDNSLbPool creates a new DNSLbPool
-func (c *Client) CreateDNSLbPool(ctx context.Context, resource *DNSLbPool) (*DNSLbPool, error) {
-	var result DNSLbPool
+// CreateDNSLBPool creates a new DNSLBPool
+func (c *Client) CreateDNSLBPool(ctx context.Context, resource *DNSLBPool) (*DNSLBPool, error) {
+	var result DNSLBPool
 	path := fmt.Sprintf("/api/config/dns/namespaces/%s/dns_lb_pools", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
 
-// GetDNSLbPool retrieves a DNSLbPool
-func (c *Client) GetDNSLbPool(ctx context.Context, namespace, name string) (*DNSLbPool, error) {
-	var result DNSLbPool
+// GetDNSLBPool retrieves a DNSLBPool
+func (c *Client) GetDNSLBPool(ctx context.Context, namespace, name string) (*DNSLBPool, error) {
+	var result DNSLBPool
 	path := fmt.Sprintf("/api/config/dns/namespaces/%s/dns_lb_pools/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
 
-// UpdateDNSLbPool updates a DNSLbPool
-func (c *Client) UpdateDNSLbPool(ctx context.Context, resource *DNSLbPool) (*DNSLbPool, error) {
-	var result DNSLbPool
+// UpdateDNSLBPool updates a DNSLBPool
+func (c *Client) UpdateDNSLBPool(ctx context.Context, resource *DNSLBPool) (*DNSLBPool, error) {
+	var result DNSLBPool
 	path := fmt.Sprintf("/api/config/dns/namespaces/%s/dns_lb_pools/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
-// DeleteDNSLbPool deletes a DNSLbPool
-func (c *Client) DeleteDNSLbPool(ctx context.Context, namespace, name string) error {
+// DeleteDNSLBPool deletes a DNSLBPool
+func (c *Client) DeleteDNSLBPool(ctx context.Context, namespace, name string) error {
 	path := fmt.Sprintf("/api/config/dns/namespaces/%s/dns_lb_pools/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

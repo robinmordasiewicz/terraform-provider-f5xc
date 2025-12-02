@@ -166,7 +166,7 @@ type ServicePolicyRuleListRulesSpecModel struct {
 	IPPrefixList          *ServicePolicyRuleListRulesSpecIPPrefixListModel          `tfsdk:"ip_prefix_list"`
 	IPThreatCategoryList  *ServicePolicyRuleListRulesSpecIPThreatCategoryListModel  `tfsdk:"ip_threat_category_list"`
 	Ja4TLSFingerprint     *ServicePolicyRuleListRulesSpecJa4TLSFingerprintModel     `tfsdk:"ja4_tls_fingerprint"`
-	JwtClaims             []ServicePolicyRuleListRulesSpecJwtClaimsModel            `tfsdk:"jwt_claims"`
+	JWTClaims             []ServicePolicyRuleListRulesSpecJWTClaimsModel            `tfsdk:"jwt_claims"`
 	LabelMatcher          *ServicePolicyRuleListRulesSpecLabelMatcherModel          `tfsdk:"label_matcher"`
 	MumAction             *ServicePolicyRuleListRulesSpecMumActionModel             `tfsdk:"mum_action"`
 	Path                  *ServicePolicyRuleListRulesSpecPathModel                  `tfsdk:"path"`
@@ -321,17 +321,17 @@ type ServicePolicyRuleListRulesSpecJa4TLSFingerprintModel struct {
 	ExactValues types.List `tfsdk:"exact_values"`
 }
 
-// ServicePolicyRuleListRulesSpecJwtClaimsModel represents jwt_claims block
-type ServicePolicyRuleListRulesSpecJwtClaimsModel struct {
+// ServicePolicyRuleListRulesSpecJWTClaimsModel represents jwt_claims block
+type ServicePolicyRuleListRulesSpecJWTClaimsModel struct {
 	InvertMatcher   types.Bool                                        `tfsdk:"invert_matcher"`
 	Name            types.String                                      `tfsdk:"name"`
 	CheckNotPresent *ServicePolicyEmptyModel                          `tfsdk:"check_not_present"`
 	CheckPresent    *ServicePolicyEmptyModel                          `tfsdk:"check_present"`
-	Item            *ServicePolicyRuleListRulesSpecJwtClaimsItemModel `tfsdk:"item"`
+	Item            *ServicePolicyRuleListRulesSpecJWTClaimsItemModel `tfsdk:"item"`
 }
 
-// ServicePolicyRuleListRulesSpecJwtClaimsItemModel represents item block
-type ServicePolicyRuleListRulesSpecJwtClaimsItemModel struct {
+// ServicePolicyRuleListRulesSpecJWTClaimsItemModel represents item block
+type ServicePolicyRuleListRulesSpecJWTClaimsItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`

@@ -89,8 +89,8 @@ type EndpointWhereModel struct {
 // EndpointWhereSiteModel represents site block
 type EndpointWhereSiteModel struct {
 	NetworkType        types.String                `tfsdk:"network_type"`
-	DisableInternetVip *EndpointEmptyModel         `tfsdk:"disable_internet_vip"`
-	EnableInternetVip  *EndpointEmptyModel         `tfsdk:"enable_internet_vip"`
+	DisableInternetVIP *EndpointEmptyModel         `tfsdk:"disable_internet_vip"`
+	EnableInternetVIP  *EndpointEmptyModel         `tfsdk:"enable_internet_vip"`
 	Ref                []EndpointWhereSiteRefModel `tfsdk:"ref"`
 }
 
@@ -120,8 +120,8 @@ type EndpointWhereVirtualNetworkRefModel struct {
 // EndpointWhereVirtualSiteModel represents virtual_site block
 type EndpointWhereVirtualSiteModel struct {
 	NetworkType        types.String                       `tfsdk:"network_type"`
-	DisableInternetVip *EndpointEmptyModel                `tfsdk:"disable_internet_vip"`
-	EnableInternetVip  *EndpointEmptyModel                `tfsdk:"enable_internet_vip"`
+	DisableInternetVIP *EndpointEmptyModel                `tfsdk:"disable_internet_vip"`
+	EnableInternetVIP  *EndpointEmptyModel                `tfsdk:"enable_internet_vip"`
 	Ref                []EndpointWhereVirtualSiteRefModel `tfsdk:"ref"`
 }
 

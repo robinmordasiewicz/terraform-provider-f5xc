@@ -77,7 +77,7 @@ type TCPLoadBalancerAdvertiseCustomAdvertiseWhereModel struct {
 	UseDefaultPort     *TCPLoadBalancerEmptyModel                                           `tfsdk:"use_default_port"`
 	VirtualNetwork     *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel     `tfsdk:"virtual_network"`
 	VirtualSite        *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel        `tfsdk:"virtual_site"`
-	VirtualSiteWithVip *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel `tfsdk:"virtual_site_with_vip"`
+	VirtualSiteWithVIP *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel `tfsdk:"virtual_site_with_vip"`
 	Vk8sService        *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel        `tfsdk:"vk8s_service"`
 }
 
@@ -109,10 +109,10 @@ type TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModel struct {
 
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel represents virtual_network block
 type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel struct {
-	SpecificV6Vip  types.String                                                                   `tfsdk:"specific_v6_vip"`
-	SpecificVip    types.String                                                                   `tfsdk:"specific_vip"`
-	DefaultV6Vip   *TCPLoadBalancerEmptyModel                                                     `tfsdk:"default_v6_vip"`
-	DefaultVip     *TCPLoadBalancerEmptyModel                                                     `tfsdk:"default_vip"`
+	SpecificV6VIP  types.String                                                                   `tfsdk:"specific_v6_vip"`
+	SpecificVIP    types.String                                                                   `tfsdk:"specific_vip"`
+	DefaultV6VIP   *TCPLoadBalancerEmptyModel                                                     `tfsdk:"default_v6_vip"`
+	DefaultVIP     *TCPLoadBalancerEmptyModel                                                     `tfsdk:"default_vip"`
 	VirtualNetwork *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModel `tfsdk:"virtual_network"`
 }
 
@@ -136,15 +136,15 @@ type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel str
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel represents virtual_site_with_vip block
-type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel struct {
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel represents virtual_site_with_vip block
+type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel struct {
 	IP          types.String                                                                    `tfsdk:"ip"`
 	Network     types.String                                                                    `tfsdk:"network"`
-	VirtualSite *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipVirtualSiteModel `tfsdk:"virtual_site"`
+	VirtualSite *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteModel `tfsdk:"virtual_site"`
 }
 
-// TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipVirtualSiteModel represents virtual_site block
-type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipVirtualSiteModel struct {
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteModel represents virtual_site block
+type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -244,10 +244,10 @@ type TCPLoadBalancerTLSTCPTLSCertParamsTLSConfigCustomSecurityModel struct {
 // TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsModel represents use_mtls block
 type TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                 `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                               `tfsdk:"trusted_ca_url"`
+	TrustedCAURL              types.String                                               `tfsdk:"trusted_ca_url"`
 	CRL                       *TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsCRLModel         `tfsdk:"crl"`
 	NoCRL                     *TCPLoadBalancerEmptyModel                                 `tfsdk:"no_crl"`
-	TrustedCa                 *TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	TrustedCA                 *TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
 	XfccDisabled              *TCPLoadBalancerEmptyModel                                 `tfsdk:"xfcc_disabled"`
 	XfccOptions               *TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
@@ -259,8 +259,8 @@ type TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsCRLModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsTrustedCaModel represents trusted_ca block
-type TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsTrustedCaModel struct {
+// TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsTrustedCAModel represents trusted_ca block
+type TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -284,7 +284,7 @@ type TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesModel struct {
 	CertificateURL       types.String                                                                `tfsdk:"certificate_url"`
 	DescriptionSpec      types.String                                                                `tfsdk:"description_spec"`
 	CustomHashAlgorithms *TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling  *TCPLoadBalancerEmptyModel                                                  `tfsdk:"disable_ocsp_stapling"`
+	DisableOCSPStapling  *TCPLoadBalancerEmptyModel                                                  `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey           *TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
 	UseSystemDefaults    *TCPLoadBalancerEmptyModel                                                  `tfsdk:"use_system_defaults"`
 }
@@ -331,10 +331,10 @@ type TCPLoadBalancerTLSTCPTLSParametersTLSConfigCustomSecurityModel struct {
 // TCPLoadBalancerTLSTCPTLSParametersUseMtlsModel represents use_mtls block
 type TCPLoadBalancerTLSTCPTLSParametersUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                 `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                               `tfsdk:"trusted_ca_url"`
+	TrustedCAURL              types.String                                               `tfsdk:"trusted_ca_url"`
 	CRL                       *TCPLoadBalancerTLSTCPTLSParametersUseMtlsCRLModel         `tfsdk:"crl"`
 	NoCRL                     *TCPLoadBalancerEmptyModel                                 `tfsdk:"no_crl"`
-	TrustedCa                 *TCPLoadBalancerTLSTCPTLSParametersUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	TrustedCA                 *TCPLoadBalancerTLSTCPTLSParametersUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
 	XfccDisabled              *TCPLoadBalancerEmptyModel                                 `tfsdk:"xfcc_disabled"`
 	XfccOptions               *TCPLoadBalancerTLSTCPTLSParametersUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
@@ -346,8 +346,8 @@ type TCPLoadBalancerTLSTCPTLSParametersUseMtlsCRLModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// TCPLoadBalancerTLSTCPTLSParametersUseMtlsTrustedCaModel represents trusted_ca block
-type TCPLoadBalancerTLSTCPTLSParametersUseMtlsTrustedCaModel struct {
+// TCPLoadBalancerTLSTCPTLSParametersUseMtlsTrustedCAModel represents trusted_ca block
+type TCPLoadBalancerTLSTCPTLSParametersUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -383,10 +383,10 @@ type TCPLoadBalancerTLSTCPAutoCertTLSConfigCustomSecurityModel struct {
 // TCPLoadBalancerTLSTCPAutoCertUseMtlsModel represents use_mtls block
 type TCPLoadBalancerTLSTCPAutoCertUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                            `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                          `tfsdk:"trusted_ca_url"`
+	TrustedCAURL              types.String                                          `tfsdk:"trusted_ca_url"`
 	CRL                       *TCPLoadBalancerTLSTCPAutoCertUseMtlsCRLModel         `tfsdk:"crl"`
 	NoCRL                     *TCPLoadBalancerEmptyModel                            `tfsdk:"no_crl"`
-	TrustedCa                 *TCPLoadBalancerTLSTCPAutoCertUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	TrustedCA                 *TCPLoadBalancerTLSTCPAutoCertUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
 	XfccDisabled              *TCPLoadBalancerEmptyModel                            `tfsdk:"xfcc_disabled"`
 	XfccOptions               *TCPLoadBalancerTLSTCPAutoCertUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
@@ -398,8 +398,8 @@ type TCPLoadBalancerTLSTCPAutoCertUseMtlsCRLModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// TCPLoadBalancerTLSTCPAutoCertUseMtlsTrustedCaModel represents trusted_ca block
-type TCPLoadBalancerTLSTCPAutoCertUseMtlsTrustedCaModel struct {
+// TCPLoadBalancerTLSTCPAutoCertUseMtlsTrustedCAModel represents trusted_ca block
+type TCPLoadBalancerTLSTCPAutoCertUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -427,8 +427,8 @@ type TCPLoadBalancerResourceModel struct {
 	ActiveServicePolicies              *TCPLoadBalancerActiveServicePoliciesModel `tfsdk:"active_service_policies"`
 	AdvertiseCustom                    *TCPLoadBalancerAdvertiseCustomModel       `tfsdk:"advertise_custom"`
 	AdvertiseOnPublic                  *TCPLoadBalancerAdvertiseOnPublicModel     `tfsdk:"advertise_on_public"`
-	AdvertiseOnPublicDefaultVip        *TCPLoadBalancerEmptyModel                 `tfsdk:"advertise_on_public_default_vip"`
-	DefaultLbWithSni                   *TCPLoadBalancerEmptyModel                 `tfsdk:"default_lb_with_sni"`
+	AdvertiseOnPublicDefaultVIP        *TCPLoadBalancerEmptyModel                 `tfsdk:"advertise_on_public_default_vip"`
+	DefaultLBWithSni                   *TCPLoadBalancerEmptyModel                 `tfsdk:"default_lb_with_sni"`
 	DoNotAdvertise                     *TCPLoadBalancerEmptyModel                 `tfsdk:"do_not_advertise"`
 	DoNotRetractCluster                *TCPLoadBalancerEmptyModel                 `tfsdk:"do_not_retract_cluster"`
 	HashPolicyChoiceLeastActive        *TCPLoadBalancerEmptyModel                 `tfsdk:"hash_policy_choice_least_active"`
@@ -1541,17 +1541,17 @@ func (r *TCPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 				}
 				if listItem.VirtualNetwork != nil {
 					virtual_networkDeepMap := make(map[string]interface{})
-					if listItem.VirtualNetwork.DefaultV6Vip != nil {
+					if listItem.VirtualNetwork.DefaultV6VIP != nil {
 						virtual_networkDeepMap["default_v6_vip"] = map[string]interface{}{}
 					}
-					if listItem.VirtualNetwork.DefaultVip != nil {
+					if listItem.VirtualNetwork.DefaultVIP != nil {
 						virtual_networkDeepMap["default_vip"] = map[string]interface{}{}
 					}
-					if !listItem.VirtualNetwork.SpecificV6Vip.IsNull() && !listItem.VirtualNetwork.SpecificV6Vip.IsUnknown() {
-						virtual_networkDeepMap["specific_v6_vip"] = listItem.VirtualNetwork.SpecificV6Vip.ValueString()
+					if !listItem.VirtualNetwork.SpecificV6VIP.IsNull() && !listItem.VirtualNetwork.SpecificV6VIP.IsUnknown() {
+						virtual_networkDeepMap["specific_v6_vip"] = listItem.VirtualNetwork.SpecificV6VIP.ValueString()
 					}
-					if !listItem.VirtualNetwork.SpecificVip.IsNull() && !listItem.VirtualNetwork.SpecificVip.IsUnknown() {
-						virtual_networkDeepMap["specific_vip"] = listItem.VirtualNetwork.SpecificVip.ValueString()
+					if !listItem.VirtualNetwork.SpecificVIP.IsNull() && !listItem.VirtualNetwork.SpecificVIP.IsUnknown() {
+						virtual_networkDeepMap["specific_vip"] = listItem.VirtualNetwork.SpecificVIP.ValueString()
 					}
 					listItemMap["virtual_network"] = virtual_networkDeepMap
 				}
@@ -1562,13 +1562,13 @@ func (r *TCPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 					}
 					listItemMap["virtual_site"] = virtual_siteDeepMap
 				}
-				if listItem.VirtualSiteWithVip != nil {
+				if listItem.VirtualSiteWithVIP != nil {
 					virtual_site_with_vipDeepMap := make(map[string]interface{})
-					if !listItem.VirtualSiteWithVip.IP.IsNull() && !listItem.VirtualSiteWithVip.IP.IsUnknown() {
-						virtual_site_with_vipDeepMap["ip"] = listItem.VirtualSiteWithVip.IP.ValueString()
+					if !listItem.VirtualSiteWithVIP.IP.IsNull() && !listItem.VirtualSiteWithVIP.IP.IsUnknown() {
+						virtual_site_with_vipDeepMap["ip"] = listItem.VirtualSiteWithVIP.IP.ValueString()
 					}
-					if !listItem.VirtualSiteWithVip.Network.IsNull() && !listItem.VirtualSiteWithVip.Network.IsUnknown() {
-						virtual_site_with_vipDeepMap["network"] = listItem.VirtualSiteWithVip.Network.ValueString()
+					if !listItem.VirtualSiteWithVIP.Network.IsNull() && !listItem.VirtualSiteWithVIP.Network.IsUnknown() {
+						virtual_site_with_vipDeepMap["network"] = listItem.VirtualSiteWithVIP.Network.ValueString()
 					}
 					listItemMap["virtual_site_with_vip"] = virtual_site_with_vipDeepMap
 				}
@@ -1599,11 +1599,11 @@ func (r *TCPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		}
 		createReq.Spec["advertise_on_public"] = advertise_on_publicMap
 	}
-	if data.AdvertiseOnPublicDefaultVip != nil {
+	if data.AdvertiseOnPublicDefaultVIP != nil {
 		advertise_on_public_default_vipMap := make(map[string]interface{})
 		createReq.Spec["advertise_on_public_default_vip"] = advertise_on_public_default_vipMap
 	}
-	if data.DefaultLbWithSni != nil {
+	if data.DefaultLBWithSni != nil {
 		default_lb_with_sniMap := make(map[string]interface{})
 		createReq.Spec["default_lb_with_sni"] = default_lb_with_sniMap
 	}
@@ -1731,8 +1731,8 @@ func (r *TCPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			if !data.TLSTCPAutoCert.UseMtls.ClientCertificateOptional.IsNull() && !data.TLSTCPAutoCert.UseMtls.ClientCertificateOptional.IsUnknown() {
 				use_mtlsNestedMap["client_certificate_optional"] = data.TLSTCPAutoCert.UseMtls.ClientCertificateOptional.ValueBool()
 			}
-			if !data.TLSTCPAutoCert.UseMtls.TrustedCaURL.IsNull() && !data.TLSTCPAutoCert.UseMtls.TrustedCaURL.IsUnknown() {
-				use_mtlsNestedMap["trusted_ca_url"] = data.TLSTCPAutoCert.UseMtls.TrustedCaURL.ValueString()
+			if !data.TLSTCPAutoCert.UseMtls.TrustedCAURL.IsNull() && !data.TLSTCPAutoCert.UseMtls.TrustedCAURL.IsUnknown() {
+				use_mtlsNestedMap["trusted_ca_url"] = data.TLSTCPAutoCert.UseMtls.TrustedCAURL.ValueString()
 			}
 			tls_tcp_auto_certMap["use_mtls"] = use_mtlsNestedMap
 		}
@@ -1852,25 +1852,25 @@ func (r *TCPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 								VirtualNetwork: func() *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel {
 									if deepMap, ok := itemMap["virtual_network"].(map[string]interface{}); ok {
 										return &TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel{
-											DefaultV6Vip: func() *TCPLoadBalancerEmptyModel {
+											DefaultV6VIP: func() *TCPLoadBalancerEmptyModel {
 												if _, ok := deepMap["default_v6_vip"].(map[string]interface{}); ok {
 													return &TCPLoadBalancerEmptyModel{}
 												}
 												return nil
 											}(),
-											DefaultVip: func() *TCPLoadBalancerEmptyModel {
+											DefaultVIP: func() *TCPLoadBalancerEmptyModel {
 												if _, ok := deepMap["default_vip"].(map[string]interface{}); ok {
 													return &TCPLoadBalancerEmptyModel{}
 												}
 												return nil
 											}(),
-											SpecificV6Vip: func() types.String {
+											SpecificV6VIP: func() types.String {
 												if v, ok := deepMap["specific_v6_vip"].(string); ok && v != "" {
 													return types.StringValue(v)
 												}
 												return types.StringNull()
 											}(),
-											SpecificVip: func() types.String {
+											SpecificVIP: func() types.String {
 												if v, ok := deepMap["specific_vip"].(string); ok && v != "" {
 													return types.StringValue(v)
 												}
@@ -1893,9 +1893,9 @@ func (r *TCPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 									}
 									return nil
 								}(),
-								VirtualSiteWithVip: func() *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel {
+								VirtualSiteWithVIP: func() *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel {
 									if deepMap, ok := itemMap["virtual_site_with_vip"].(map[string]interface{}); ok {
-										return &TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel{
+										return &TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel{
 											IP: func() types.String {
 												if v, ok := deepMap["ip"].(string); ok && v != "" {
 													return types.StringValue(v)
@@ -1932,14 +1932,14 @@ func (r *TCPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		data.AdvertiseOnPublic = &TCPLoadBalancerAdvertiseOnPublicModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["advertise_on_public_default_vip"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublicDefaultVip == nil {
+	if _, ok := apiResource.Spec["advertise_on_public_default_vip"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublicDefaultVIP == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.AdvertiseOnPublicDefaultVip = &TCPLoadBalancerEmptyModel{}
+		data.AdvertiseOnPublicDefaultVIP = &TCPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["default_lb_with_sni"].(map[string]interface{}); ok && isImport && data.DefaultLbWithSni == nil {
+	if _, ok := apiResource.Spec["default_lb_with_sni"].(map[string]interface{}); ok && isImport && data.DefaultLBWithSni == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DefaultLbWithSni = &TCPLoadBalancerEmptyModel{}
+		data.DefaultLBWithSni = &TCPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["do_not_advertise"].(map[string]interface{}); ok && isImport && data.DoNotAdvertise == nil {
@@ -2314,25 +2314,25 @@ func (r *TCPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 								VirtualNetwork: func() *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel {
 									if deepMap, ok := itemMap["virtual_network"].(map[string]interface{}); ok {
 										return &TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel{
-											DefaultV6Vip: func() *TCPLoadBalancerEmptyModel {
+											DefaultV6VIP: func() *TCPLoadBalancerEmptyModel {
 												if _, ok := deepMap["default_v6_vip"].(map[string]interface{}); ok {
 													return &TCPLoadBalancerEmptyModel{}
 												}
 												return nil
 											}(),
-											DefaultVip: func() *TCPLoadBalancerEmptyModel {
+											DefaultVIP: func() *TCPLoadBalancerEmptyModel {
 												if _, ok := deepMap["default_vip"].(map[string]interface{}); ok {
 													return &TCPLoadBalancerEmptyModel{}
 												}
 												return nil
 											}(),
-											SpecificV6Vip: func() types.String {
+											SpecificV6VIP: func() types.String {
 												if v, ok := deepMap["specific_v6_vip"].(string); ok && v != "" {
 													return types.StringValue(v)
 												}
 												return types.StringNull()
 											}(),
-											SpecificVip: func() types.String {
+											SpecificVIP: func() types.String {
 												if v, ok := deepMap["specific_vip"].(string); ok && v != "" {
 													return types.StringValue(v)
 												}
@@ -2355,9 +2355,9 @@ func (r *TCPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 									}
 									return nil
 								}(),
-								VirtualSiteWithVip: func() *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel {
+								VirtualSiteWithVIP: func() *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel {
 									if deepMap, ok := itemMap["virtual_site_with_vip"].(map[string]interface{}); ok {
-										return &TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel{
+										return &TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel{
 											IP: func() types.String {
 												if v, ok := deepMap["ip"].(string); ok && v != "" {
 													return types.StringValue(v)
@@ -2394,14 +2394,14 @@ func (r *TCPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 		data.AdvertiseOnPublic = &TCPLoadBalancerAdvertiseOnPublicModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["advertise_on_public_default_vip"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublicDefaultVip == nil {
+	if _, ok := apiResource.Spec["advertise_on_public_default_vip"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublicDefaultVIP == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.AdvertiseOnPublicDefaultVip = &TCPLoadBalancerEmptyModel{}
+		data.AdvertiseOnPublicDefaultVIP = &TCPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["default_lb_with_sni"].(map[string]interface{}); ok && isImport && data.DefaultLbWithSni == nil {
+	if _, ok := apiResource.Spec["default_lb_with_sni"].(map[string]interface{}); ok && isImport && data.DefaultLBWithSni == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DefaultLbWithSni = &TCPLoadBalancerEmptyModel{}
+		data.DefaultLBWithSni = &TCPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["do_not_advertise"].(map[string]interface{}); ok && isImport && data.DoNotAdvertise == nil {
@@ -2706,17 +2706,17 @@ func (r *TCPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 				}
 				if listItem.VirtualNetwork != nil {
 					virtual_networkDeepMap := make(map[string]interface{})
-					if listItem.VirtualNetwork.DefaultV6Vip != nil {
+					if listItem.VirtualNetwork.DefaultV6VIP != nil {
 						virtual_networkDeepMap["default_v6_vip"] = map[string]interface{}{}
 					}
-					if listItem.VirtualNetwork.DefaultVip != nil {
+					if listItem.VirtualNetwork.DefaultVIP != nil {
 						virtual_networkDeepMap["default_vip"] = map[string]interface{}{}
 					}
-					if !listItem.VirtualNetwork.SpecificV6Vip.IsNull() && !listItem.VirtualNetwork.SpecificV6Vip.IsUnknown() {
-						virtual_networkDeepMap["specific_v6_vip"] = listItem.VirtualNetwork.SpecificV6Vip.ValueString()
+					if !listItem.VirtualNetwork.SpecificV6VIP.IsNull() && !listItem.VirtualNetwork.SpecificV6VIP.IsUnknown() {
+						virtual_networkDeepMap["specific_v6_vip"] = listItem.VirtualNetwork.SpecificV6VIP.ValueString()
 					}
-					if !listItem.VirtualNetwork.SpecificVip.IsNull() && !listItem.VirtualNetwork.SpecificVip.IsUnknown() {
-						virtual_networkDeepMap["specific_vip"] = listItem.VirtualNetwork.SpecificVip.ValueString()
+					if !listItem.VirtualNetwork.SpecificVIP.IsNull() && !listItem.VirtualNetwork.SpecificVIP.IsUnknown() {
+						virtual_networkDeepMap["specific_vip"] = listItem.VirtualNetwork.SpecificVIP.ValueString()
 					}
 					listItemMap["virtual_network"] = virtual_networkDeepMap
 				}
@@ -2727,13 +2727,13 @@ func (r *TCPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 					}
 					listItemMap["virtual_site"] = virtual_siteDeepMap
 				}
-				if listItem.VirtualSiteWithVip != nil {
+				if listItem.VirtualSiteWithVIP != nil {
 					virtual_site_with_vipDeepMap := make(map[string]interface{})
-					if !listItem.VirtualSiteWithVip.IP.IsNull() && !listItem.VirtualSiteWithVip.IP.IsUnknown() {
-						virtual_site_with_vipDeepMap["ip"] = listItem.VirtualSiteWithVip.IP.ValueString()
+					if !listItem.VirtualSiteWithVIP.IP.IsNull() && !listItem.VirtualSiteWithVIP.IP.IsUnknown() {
+						virtual_site_with_vipDeepMap["ip"] = listItem.VirtualSiteWithVIP.IP.ValueString()
 					}
-					if !listItem.VirtualSiteWithVip.Network.IsNull() && !listItem.VirtualSiteWithVip.Network.IsUnknown() {
-						virtual_site_with_vipDeepMap["network"] = listItem.VirtualSiteWithVip.Network.ValueString()
+					if !listItem.VirtualSiteWithVIP.Network.IsNull() && !listItem.VirtualSiteWithVIP.Network.IsUnknown() {
+						virtual_site_with_vipDeepMap["network"] = listItem.VirtualSiteWithVIP.Network.ValueString()
 					}
 					listItemMap["virtual_site_with_vip"] = virtual_site_with_vipDeepMap
 				}
@@ -2764,11 +2764,11 @@ func (r *TCPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		}
 		apiResource.Spec["advertise_on_public"] = advertise_on_publicMap
 	}
-	if data.AdvertiseOnPublicDefaultVip != nil {
+	if data.AdvertiseOnPublicDefaultVIP != nil {
 		advertise_on_public_default_vipMap := make(map[string]interface{})
 		apiResource.Spec["advertise_on_public_default_vip"] = advertise_on_public_default_vipMap
 	}
-	if data.DefaultLbWithSni != nil {
+	if data.DefaultLBWithSni != nil {
 		default_lb_with_sniMap := make(map[string]interface{})
 		apiResource.Spec["default_lb_with_sni"] = default_lb_with_sniMap
 	}
@@ -2896,8 +2896,8 @@ func (r *TCPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 			if !data.TLSTCPAutoCert.UseMtls.ClientCertificateOptional.IsNull() && !data.TLSTCPAutoCert.UseMtls.ClientCertificateOptional.IsUnknown() {
 				use_mtlsNestedMap["client_certificate_optional"] = data.TLSTCPAutoCert.UseMtls.ClientCertificateOptional.ValueBool()
 			}
-			if !data.TLSTCPAutoCert.UseMtls.TrustedCaURL.IsNull() && !data.TLSTCPAutoCert.UseMtls.TrustedCaURL.IsUnknown() {
-				use_mtlsNestedMap["trusted_ca_url"] = data.TLSTCPAutoCert.UseMtls.TrustedCaURL.ValueString()
+			if !data.TLSTCPAutoCert.UseMtls.TrustedCAURL.IsNull() && !data.TLSTCPAutoCert.UseMtls.TrustedCAURL.IsUnknown() {
+				use_mtlsNestedMap["trusted_ca_url"] = data.TLSTCPAutoCert.UseMtls.TrustedCAURL.ValueString()
 			}
 			tls_tcp_auto_certMap["use_mtls"] = use_mtlsNestedMap
 		}
@@ -3056,25 +3056,25 @@ func (r *TCPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 								VirtualNetwork: func() *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel {
 									if deepMap, ok := itemMap["virtual_network"].(map[string]interface{}); ok {
 										return &TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel{
-											DefaultV6Vip: func() *TCPLoadBalancerEmptyModel {
+											DefaultV6VIP: func() *TCPLoadBalancerEmptyModel {
 												if _, ok := deepMap["default_v6_vip"].(map[string]interface{}); ok {
 													return &TCPLoadBalancerEmptyModel{}
 												}
 												return nil
 											}(),
-											DefaultVip: func() *TCPLoadBalancerEmptyModel {
+											DefaultVIP: func() *TCPLoadBalancerEmptyModel {
 												if _, ok := deepMap["default_vip"].(map[string]interface{}); ok {
 													return &TCPLoadBalancerEmptyModel{}
 												}
 												return nil
 											}(),
-											SpecificV6Vip: func() types.String {
+											SpecificV6VIP: func() types.String {
 												if v, ok := deepMap["specific_v6_vip"].(string); ok && v != "" {
 													return types.StringValue(v)
 												}
 												return types.StringNull()
 											}(),
-											SpecificVip: func() types.String {
+											SpecificVIP: func() types.String {
 												if v, ok := deepMap["specific_vip"].(string); ok && v != "" {
 													return types.StringValue(v)
 												}
@@ -3097,9 +3097,9 @@ func (r *TCPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 									}
 									return nil
 								}(),
-								VirtualSiteWithVip: func() *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel {
+								VirtualSiteWithVIP: func() *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel {
 									if deepMap, ok := itemMap["virtual_site_with_vip"].(map[string]interface{}); ok {
-										return &TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel{
+										return &TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel{
 											IP: func() types.String {
 												if v, ok := deepMap["ip"].(string); ok && v != "" {
 													return types.StringValue(v)
@@ -3136,14 +3136,14 @@ func (r *TCPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		data.AdvertiseOnPublic = &TCPLoadBalancerAdvertiseOnPublicModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["advertise_on_public_default_vip"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublicDefaultVip == nil {
+	if _, ok := apiResource.Spec["advertise_on_public_default_vip"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublicDefaultVIP == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.AdvertiseOnPublicDefaultVip = &TCPLoadBalancerEmptyModel{}
+		data.AdvertiseOnPublicDefaultVIP = &TCPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["default_lb_with_sni"].(map[string]interface{}); ok && isImport && data.DefaultLbWithSni == nil {
+	if _, ok := apiResource.Spec["default_lb_with_sni"].(map[string]interface{}); ok && isImport && data.DefaultLBWithSni == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DefaultLbWithSni = &TCPLoadBalancerEmptyModel{}
+		data.DefaultLBWithSni = &TCPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["do_not_advertise"].(map[string]interface{}); ok && isImport && data.DoNotAdvertise == nil {

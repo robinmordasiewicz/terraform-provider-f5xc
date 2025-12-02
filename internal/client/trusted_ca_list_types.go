@@ -8,38 +8,38 @@ import (
 	"fmt"
 )
 
-// TrustedCaList represents a F5XC TrustedCaList
-type TrustedCaList struct {
+// TrustedCAList represents a F5XC TrustedCAList
+type TrustedCAList struct {
 	Metadata Metadata               `json:"metadata"`
 	Spec     map[string]interface{} `json:"spec"`
 }
 
-// CreateTrustedCaList creates a new TrustedCaList
-func (c *Client) CreateTrustedCaList(ctx context.Context, resource *TrustedCaList) (*TrustedCaList, error) {
-	var result TrustedCaList
+// CreateTrustedCAList creates a new TrustedCAList
+func (c *Client) CreateTrustedCAList(ctx context.Context, resource *TrustedCAList) (*TrustedCAList, error) {
+	var result TrustedCAList
 	path := fmt.Sprintf("/api/config/namespaces/%s/trusted_ca_lists", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
 
-// GetTrustedCaList retrieves a TrustedCaList
-func (c *Client) GetTrustedCaList(ctx context.Context, namespace, name string) (*TrustedCaList, error) {
-	var result TrustedCaList
+// GetTrustedCAList retrieves a TrustedCAList
+func (c *Client) GetTrustedCAList(ctx context.Context, namespace, name string) (*TrustedCAList, error) {
+	var result TrustedCAList
 	path := fmt.Sprintf("/api/config/namespaces/%s/trusted_ca_lists/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
 
-// UpdateTrustedCaList updates a TrustedCaList
-func (c *Client) UpdateTrustedCaList(ctx context.Context, resource *TrustedCaList) (*TrustedCaList, error) {
-	var result TrustedCaList
+// UpdateTrustedCAList updates a TrustedCAList
+func (c *Client) UpdateTrustedCAList(ctx context.Context, resource *TrustedCAList) (*TrustedCAList, error) {
+	var result TrustedCAList
 	path := fmt.Sprintf("/api/config/namespaces/%s/trusted_ca_lists/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
-// DeleteTrustedCaList deletes a TrustedCaList
-func (c *Client) DeleteTrustedCaList(ctx context.Context, namespace, name string) error {
+// DeleteTrustedCAList deletes a TrustedCAList
+func (c *Client) DeleteTrustedCAList(ctx context.Context, namespace, name string) error {
 	path := fmt.Sprintf("/api/config/namespaces/%s/trusted_ca_lists/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

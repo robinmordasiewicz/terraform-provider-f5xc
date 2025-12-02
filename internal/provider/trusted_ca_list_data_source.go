@@ -15,19 +15,19 @@ import (
 )
 
 var (
-	_ datasource.DataSource              = &TrustedCaListDataSource{}
-	_ datasource.DataSourceWithConfigure = &TrustedCaListDataSource{}
+	_ datasource.DataSource              = &TrustedCAListDataSource{}
+	_ datasource.DataSourceWithConfigure = &TrustedCAListDataSource{}
 )
 
-func NewTrustedCaListDataSource() datasource.DataSource {
-	return &TrustedCaListDataSource{}
+func NewTrustedCAListDataSource() datasource.DataSource {
+	return &TrustedCAListDataSource{}
 }
 
-type TrustedCaListDataSource struct {
+type TrustedCAListDataSource struct {
 	client *client.Client
 }
 
-type TrustedCaListDataSourceModel struct {
+type TrustedCAListDataSourceModel struct {
 	ID          types.String `tfsdk:"id"`
 	Name        types.String `tfsdk:"name"`
 	Namespace   types.String `tfsdk:"namespace"`
@@ -36,28 +36,28 @@ type TrustedCaListDataSourceModel struct {
 	Annotations types.Map    `tfsdk:"annotations"`
 }
 
-func (d *TrustedCaListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
+func (d *TrustedCAListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	resp.TypeName = req.ProviderTypeName + "_trusted_ca_list"
 }
 
-func (d *TrustedCaListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
+func (d *TrustedCAListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages a TrustedCaList resource in F5 Distributed Cloud for trusted certificate authority list management.",
+		MarkdownDescription: "Manages a TrustedCAList resource in F5 Distributed Cloud for trusted certificate authority list management.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
 				Computed:            true,
 			},
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the TrustedCaList.",
+				MarkdownDescription: "Name of the TrustedCAList.",
 				Required:            true,
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the TrustedCaList exists.",
+				MarkdownDescription: "Namespace where the TrustedCAList exists.",
 				Required:            true,
 			},
 			"description": schema.StringAttribute{
-				MarkdownDescription: "Description of the TrustedCaList.",
+				MarkdownDescription: "Description of the TrustedCAList.",
 				Computed:            true,
 			},
 			"labels": schema.MapAttribute{
@@ -74,7 +74,7 @@ func (d *TrustedCaListDataSource) Schema(ctx context.Context, req datasource.Sch
 	}
 }
 
-func (d *TrustedCaListDataSource) Configure(ctx context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
+func (d *TrustedCAListDataSource) Configure(ctx context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -86,16 +86,16 @@ func (d *TrustedCaListDataSource) Configure(ctx context.Context, req datasource.
 	d.client = client
 }
 
-func (d *TrustedCaListDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
-	var data TrustedCaListDataSourceModel
+func (d *TrustedCAListDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
+	var data TrustedCAListDataSourceModel
 	resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	resource, err := d.client.GetTrustedCaList(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	resource, err := d.client.GetTrustedCAList(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read TrustedCaList: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read TrustedCAList: %s", err))
 		return
 	}
 

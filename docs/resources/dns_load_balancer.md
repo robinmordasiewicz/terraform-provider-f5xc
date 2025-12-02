@@ -134,9 +134,9 @@ A [`rule_list`](#rule-list) block supports the following:
 
 A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports the following:
 
-<a id="rule-list-rules-asn-list"></a>&#x2022; [`asn_list`](#rule-list-rules-asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [ASN List](#rule-list-rules-asn-list) below.
+<a id="rule-list-rules-asn-list"></a>&#x2022; [`asn_list`](#rule-list-rules-asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#rule-list-rules-asn-list) below.
 
-<a id="rule-list-rules-asn-matcher"></a>&#x2022; [`asn_matcher`](#rule-list-rules-asn-matcher) - Optional Block<br>ASN Matcher. Match any AS number contained in the list of bgp_asn_sets<br>See [ASN Matcher](#rule-list-rules-asn-matcher) below.
+<a id="rule-list-rules-asn-matcher"></a>&#x2022; [`asn_matcher`](#rule-list-rules-asn-matcher) - Optional Block<br>ASN Matcher. Match any AS number contained in the list of bgp_asn_sets<br>See [Asn Matcher](#rule-list-rules-asn-matcher) below.
 
 <a id="rule-list-rules-geo-location-label-selector"></a>&#x2022; [`geo_location_label_selector`](#rule-list-rules-geo-location-label-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Geo Location Label Selector](#rule-list-rules-geo-location-label-selector) below.
 
@@ -150,19 +150,19 @@ A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports 
 
 <a id="rule-list-rules-score"></a>&#x2022; [`score`](#rule-list-rules-score) - Optional Number<br>Score. When multiple load balancing rules match a query, the one with the highest score is chosen
 
-#### Rule List Rules ASN List
+#### Rule List Rules Asn List
 
 An [`asn_list`](#rule-list-rules-asn-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 <a id="rule-list-rules-asn-list-as-numbers"></a>&#x2022; [`as_numbers`](#rule-list-rules-asn-list-as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
-#### Rule List Rules ASN Matcher
+#### Rule List Rules Asn Matcher
 
 An [`asn_matcher`](#rule-list-rules-asn-matcher) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
-<a id="rule-list-rules-asn-matcher-asn-sets"></a>&#x2022; [`asn_sets`](#rule-list-rules-asn-matcher-asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [ASN Sets](#rule-list-rules-asn-matcher-asn-sets) below.
+<a id="rule-list-rules-asn-matcher-asn-sets"></a>&#x2022; [`asn_sets`](#rule-list-rules-asn-matcher-asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#rule-list-rules-asn-matcher-asn-sets) below.
 
-#### Rule List Rules ASN Matcher ASN Sets
+#### Rule List Rules Asn Matcher Asn Sets
 
 An [`asn_sets`](#rule-list-rules-asn-matcher-asn-sets) block (within [`rule_list.rules.asn_matcher`](#rule-list-rules-asn-matcher)) supports the following:
 

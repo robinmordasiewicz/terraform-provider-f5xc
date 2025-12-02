@@ -189,17 +189,17 @@ type ServicePolicyRuleJa4TLSFingerprintModel struct {
 	ExactValues types.List `tfsdk:"exact_values"`
 }
 
-// ServicePolicyRuleJwtClaimsModel represents jwt_claims block
-type ServicePolicyRuleJwtClaimsModel struct {
+// ServicePolicyRuleJWTClaimsModel represents jwt_claims block
+type ServicePolicyRuleJWTClaimsModel struct {
 	InvertMatcher   types.Bool                           `tfsdk:"invert_matcher"`
 	Name            types.String                         `tfsdk:"name"`
 	CheckNotPresent *ServicePolicyRuleEmptyModel         `tfsdk:"check_not_present"`
 	CheckPresent    *ServicePolicyRuleEmptyModel         `tfsdk:"check_present"`
-	Item            *ServicePolicyRuleJwtClaimsItemModel `tfsdk:"item"`
+	Item            *ServicePolicyRuleJWTClaimsItemModel `tfsdk:"item"`
 }
 
-// ServicePolicyRuleJwtClaimsItemModel represents item block
-type ServicePolicyRuleJwtClaimsItemModel struct {
+// ServicePolicyRuleJWTClaimsItemModel represents item block
+type ServicePolicyRuleJWTClaimsItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
@@ -390,7 +390,7 @@ type ServicePolicyRuleResourceModel struct {
 	IPPrefixList          *ServicePolicyRuleIPPrefixListModel          `tfsdk:"ip_prefix_list"`
 	IPThreatCategoryList  *ServicePolicyRuleIPThreatCategoryListModel  `tfsdk:"ip_threat_category_list"`
 	Ja4TLSFingerprint     *ServicePolicyRuleJa4TLSFingerprintModel     `tfsdk:"ja4_tls_fingerprint"`
-	JwtClaims             []ServicePolicyRuleJwtClaimsModel            `tfsdk:"jwt_claims"`
+	JWTClaims             []ServicePolicyRuleJWTClaimsModel            `tfsdk:"jwt_claims"`
 	LabelMatcher          *ServicePolicyRuleLabelMatcherModel          `tfsdk:"label_matcher"`
 	MumAction             *ServicePolicyRuleMumActionModel             `tfsdk:"mum_action"`
 	Path                  *ServicePolicyRulePathModel                  `tfsdk:"path"`
@@ -1783,9 +1783,9 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 		}
 		createReq.Spec["ja4_tls_fingerprint"] = ja4_tls_fingerprintMap
 	}
-	if len(data.JwtClaims) > 0 {
+	if len(data.JWTClaims) > 0 {
 		var jwt_claimsList []map[string]interface{}
-		for _, item := range data.JwtClaims {
+		for _, item := range data.JWTClaims {
 			itemMap := make(map[string]interface{})
 			if item.CheckNotPresent != nil {
 				itemMap["check_not_present"] = map[string]interface{}{}
@@ -2738,19 +2738,19 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 		}
 	}
 	if listData, ok := apiResource.Spec["jwt_claims"].([]interface{}); ok && len(listData) > 0 {
-		var jwt_claimsList []ServicePolicyRuleJwtClaimsModel
+		var jwt_claimsList []ServicePolicyRuleJWTClaimsModel
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
-				jwt_claimsList = append(jwt_claimsList, ServicePolicyRuleJwtClaimsModel{
+				jwt_claimsList = append(jwt_claimsList, ServicePolicyRuleJWTClaimsModel{
 					CheckNotPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.JwtClaims) > listIdx && data.JwtClaims[listIdx].CheckNotPresent != nil {
+						if !isImport && len(data.JWTClaims) > listIdx && data.JWTClaims[listIdx].CheckNotPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
 					}(),
 					CheckPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.JwtClaims) > listIdx && data.JwtClaims[listIdx].CheckPresent != nil {
+						if !isImport && len(data.JWTClaims) > listIdx && data.JWTClaims[listIdx].CheckPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
@@ -2761,9 +2761,9 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 						}
 						return types.BoolNull()
 					}(),
-					Item: func() *ServicePolicyRuleJwtClaimsItemModel {
+					Item: func() *ServicePolicyRuleJWTClaimsItemModel {
 						if nestedMap, ok := itemMap["item"].(map[string]interface{}); ok {
-							return &ServicePolicyRuleJwtClaimsItemModel{
+							return &ServicePolicyRuleJWTClaimsItemModel{
 								ExactValues: func() types.List {
 									if v, ok := nestedMap["exact_values"].([]interface{}); ok && len(v) > 0 {
 										var items []string
@@ -2816,7 +2816,7 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 				})
 			}
 		}
-		data.JwtClaims = jwt_claimsList
+		data.JWTClaims = jwt_claimsList
 	}
 	if blockData, ok := apiResource.Spec["label_matcher"].(map[string]interface{}); ok && (isImport || data.LabelMatcher != nil) {
 		data.LabelMatcher = &ServicePolicyRuleLabelMatcherModel{
@@ -4052,19 +4052,19 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 		}
 	}
 	if listData, ok := apiResource.Spec["jwt_claims"].([]interface{}); ok && len(listData) > 0 {
-		var jwt_claimsList []ServicePolicyRuleJwtClaimsModel
+		var jwt_claimsList []ServicePolicyRuleJWTClaimsModel
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
-				jwt_claimsList = append(jwt_claimsList, ServicePolicyRuleJwtClaimsModel{
+				jwt_claimsList = append(jwt_claimsList, ServicePolicyRuleJWTClaimsModel{
 					CheckNotPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.JwtClaims) > listIdx && data.JwtClaims[listIdx].CheckNotPresent != nil {
+						if !isImport && len(data.JWTClaims) > listIdx && data.JWTClaims[listIdx].CheckNotPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
 					}(),
 					CheckPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.JwtClaims) > listIdx && data.JwtClaims[listIdx].CheckPresent != nil {
+						if !isImport && len(data.JWTClaims) > listIdx && data.JWTClaims[listIdx].CheckPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
@@ -4075,9 +4075,9 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 						}
 						return types.BoolNull()
 					}(),
-					Item: func() *ServicePolicyRuleJwtClaimsItemModel {
+					Item: func() *ServicePolicyRuleJWTClaimsItemModel {
 						if nestedMap, ok := itemMap["item"].(map[string]interface{}); ok {
-							return &ServicePolicyRuleJwtClaimsItemModel{
+							return &ServicePolicyRuleJWTClaimsItemModel{
 								ExactValues: func() types.List {
 									if v, ok := nestedMap["exact_values"].([]interface{}); ok && len(v) > 0 {
 										var items []string
@@ -4130,7 +4130,7 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 				})
 			}
 		}
-		data.JwtClaims = jwt_claimsList
+		data.JWTClaims = jwt_claimsList
 	}
 	if blockData, ok := apiResource.Spec["label_matcher"].(map[string]interface{}); ok && (isImport || data.LabelMatcher != nil) {
 		data.LabelMatcher = &ServicePolicyRuleLabelMatcherModel{
@@ -5070,9 +5070,9 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 		}
 		apiResource.Spec["ja4_tls_fingerprint"] = ja4_tls_fingerprintMap
 	}
-	if len(data.JwtClaims) > 0 {
+	if len(data.JWTClaims) > 0 {
 		var jwt_claimsList []map[string]interface{}
-		for _, item := range data.JwtClaims {
+		for _, item := range data.JWTClaims {
 			itemMap := make(map[string]interface{})
 			if item.CheckNotPresent != nil {
 				itemMap["check_not_present"] = map[string]interface{}{}
@@ -6057,19 +6057,19 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 		}
 	}
 	if listData, ok := apiResource.Spec["jwt_claims"].([]interface{}); ok && len(listData) > 0 {
-		var jwt_claimsList []ServicePolicyRuleJwtClaimsModel
+		var jwt_claimsList []ServicePolicyRuleJWTClaimsModel
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
-				jwt_claimsList = append(jwt_claimsList, ServicePolicyRuleJwtClaimsModel{
+				jwt_claimsList = append(jwt_claimsList, ServicePolicyRuleJWTClaimsModel{
 					CheckNotPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.JwtClaims) > listIdx && data.JwtClaims[listIdx].CheckNotPresent != nil {
+						if !isImport && len(data.JWTClaims) > listIdx && data.JWTClaims[listIdx].CheckNotPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
 					}(),
 					CheckPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.JwtClaims) > listIdx && data.JwtClaims[listIdx].CheckPresent != nil {
+						if !isImport && len(data.JWTClaims) > listIdx && data.JWTClaims[listIdx].CheckPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
@@ -6080,9 +6080,9 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 						}
 						return types.BoolNull()
 					}(),
-					Item: func() *ServicePolicyRuleJwtClaimsItemModel {
+					Item: func() *ServicePolicyRuleJWTClaimsItemModel {
 						if nestedMap, ok := itemMap["item"].(map[string]interface{}); ok {
-							return &ServicePolicyRuleJwtClaimsItemModel{
+							return &ServicePolicyRuleJWTClaimsItemModel{
 								ExactValues: func() types.List {
 									if v, ok := nestedMap["exact_values"].([]interface{}); ok && len(v) > 0 {
 										var items []string
@@ -6135,7 +6135,7 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 				})
 			}
 		}
-		data.JwtClaims = jwt_claimsList
+		data.JWTClaims = jwt_claimsList
 	}
 	if blockData, ok := apiResource.Spec["label_matcher"].(map[string]interface{}); ok && (isImport || data.LabelMatcher != nil) {
 		data.LabelMatcher = &ServicePolicyRuleLabelMatcherModel{

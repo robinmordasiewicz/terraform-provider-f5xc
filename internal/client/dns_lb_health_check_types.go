@@ -8,38 +8,38 @@ import (
 	"fmt"
 )
 
-// DNSLbHealthCheck represents a F5XC DNSLbHealthCheck
-type DNSLbHealthCheck struct {
+// DNSLBHealthCheck represents a F5XC DNSLBHealthCheck
+type DNSLBHealthCheck struct {
 	Metadata Metadata               `json:"metadata"`
 	Spec     map[string]interface{} `json:"spec"`
 }
 
-// CreateDNSLbHealthCheck creates a new DNSLbHealthCheck
-func (c *Client) CreateDNSLbHealthCheck(ctx context.Context, resource *DNSLbHealthCheck) (*DNSLbHealthCheck, error) {
-	var result DNSLbHealthCheck
+// CreateDNSLBHealthCheck creates a new DNSLBHealthCheck
+func (c *Client) CreateDNSLBHealthCheck(ctx context.Context, resource *DNSLBHealthCheck) (*DNSLBHealthCheck, error) {
+	var result DNSLBHealthCheck
 	path := fmt.Sprintf("/api/config/dns/namespaces/%s/dns_lb_health_checks", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
 
-// GetDNSLbHealthCheck retrieves a DNSLbHealthCheck
-func (c *Client) GetDNSLbHealthCheck(ctx context.Context, namespace, name string) (*DNSLbHealthCheck, error) {
-	var result DNSLbHealthCheck
+// GetDNSLBHealthCheck retrieves a DNSLBHealthCheck
+func (c *Client) GetDNSLBHealthCheck(ctx context.Context, namespace, name string) (*DNSLBHealthCheck, error) {
+	var result DNSLBHealthCheck
 	path := fmt.Sprintf("/api/config/dns/namespaces/%s/dns_lb_health_checks/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
 
-// UpdateDNSLbHealthCheck updates a DNSLbHealthCheck
-func (c *Client) UpdateDNSLbHealthCheck(ctx context.Context, resource *DNSLbHealthCheck) (*DNSLbHealthCheck, error) {
-	var result DNSLbHealthCheck
+// UpdateDNSLBHealthCheck updates a DNSLBHealthCheck
+func (c *Client) UpdateDNSLBHealthCheck(ctx context.Context, resource *DNSLBHealthCheck) (*DNSLBHealthCheck, error) {
+	var result DNSLBHealthCheck
 	path := fmt.Sprintf("/api/config/dns/namespaces/%s/dns_lb_health_checks/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
-// DeleteDNSLbHealthCheck deletes a DNSLbHealthCheck
-func (c *Client) DeleteDNSLbHealthCheck(ctx context.Context, namespace, name string) error {
+// DeleteDNSLBHealthCheck deletes a DNSLBHealthCheck
+func (c *Client) DeleteDNSLBHealthCheck(ctx context.Context, namespace, name string) error {
 	path := fmt.Sprintf("/api/config/dns/namespaces/%s/dns_lb_health_checks/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

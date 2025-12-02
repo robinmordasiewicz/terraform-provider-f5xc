@@ -146,24 +146,24 @@ type APITestingDomainsCredentialsLoginEndpointModel struct {
 	Method           types.String                                               `tfsdk:"method"`
 	Path             types.String                                               `tfsdk:"path"`
 	TokenResponseKey types.String                                               `tfsdk:"token_response_key"`
-	JsonPayload      *APITestingDomainsCredentialsLoginEndpointJsonPayloadModel `tfsdk:"json_payload"`
+	JSONPayload      *APITestingDomainsCredentialsLoginEndpointJSONPayloadModel `tfsdk:"json_payload"`
 }
 
-// APITestingDomainsCredentialsLoginEndpointJsonPayloadModel represents json_payload block
-type APITestingDomainsCredentialsLoginEndpointJsonPayloadModel struct {
-	BlindfoldSecretInfo *APITestingDomainsCredentialsLoginEndpointJsonPayloadBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo     *APITestingDomainsCredentialsLoginEndpointJsonPayloadClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+// APITestingDomainsCredentialsLoginEndpointJSONPayloadModel represents json_payload block
+type APITestingDomainsCredentialsLoginEndpointJSONPayloadModel struct {
+	BlindfoldSecretInfo *APITestingDomainsCredentialsLoginEndpointJSONPayloadBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *APITestingDomainsCredentialsLoginEndpointJSONPayloadClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
-// APITestingDomainsCredentialsLoginEndpointJsonPayloadBlindfoldSecretInfoModel represents blindfold_secret_info block
-type APITestingDomainsCredentialsLoginEndpointJsonPayloadBlindfoldSecretInfoModel struct {
+// APITestingDomainsCredentialsLoginEndpointJSONPayloadBlindfoldSecretInfoModel represents blindfold_secret_info block
+type APITestingDomainsCredentialsLoginEndpointJSONPayloadBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
 	Location           types.String `tfsdk:"location"`
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
-// APITestingDomainsCredentialsLoginEndpointJsonPayloadClearSecretInfoModel represents clear_secret_info block
-type APITestingDomainsCredentialsLoginEndpointJsonPayloadClearSecretInfoModel struct {
+// APITestingDomainsCredentialsLoginEndpointJSONPayloadClearSecretInfoModel represents clear_secret_info block
+type APITestingDomainsCredentialsLoginEndpointJSONPayloadClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }

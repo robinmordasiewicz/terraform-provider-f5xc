@@ -34,9 +34,9 @@ data "f5xc_dns_lb_health_check" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the DNSLbHealthCheck
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the DNSLBHealthCheck
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the DNSLbHealthCheck exists
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the DNSLBHealthCheck exists
 
 ### Attributes Reference
 
@@ -44,7 +44,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations applied to this resource
 
-<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Description of the DNSLbHealthCheck
+<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Description of the DNSLBHealthCheck
 
 <a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 

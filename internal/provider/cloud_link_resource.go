@@ -75,9 +75,9 @@ type CloudLinkAWSByocConnectionsModel struct {
 	Region               types.String                              `tfsdk:"region"`
 	UserAssignedName     types.String                              `tfsdk:"user_assigned_name"`
 	VirtualInterfaceType types.String                              `tfsdk:"virtual_interface_type"`
-	Vlan                 types.Int64                               `tfsdk:"vlan"`
+	VLAN                 types.Int64                               `tfsdk:"vlan"`
 	AuthKey              *CloudLinkAWSByocConnectionsAuthKeyModel  `tfsdk:"auth_key"`
-	IPV4                 *CloudLinkAWSByocConnectionsIPV4Model     `tfsdk:"ipv4"`
+	Ipv4                 *CloudLinkAWSByocConnectionsIpv4Model     `tfsdk:"ipv4"`
 	Metadata             *CloudLinkAWSByocConnectionsMetadataModel `tfsdk:"metadata"`
 	SystemGeneratedName  *CloudLinkEmptyModel                      `tfsdk:"system_generated_name"`
 	Tags                 *CloudLinkEmptyModel                      `tfsdk:"tags"`
@@ -102,8 +102,8 @@ type CloudLinkAWSByocConnectionsAuthKeyClearSecretInfoModel struct {
 	URL      types.String `tfsdk:"url"`
 }
 
-// CloudLinkAWSByocConnectionsIPV4Model represents ipv4 block
-type CloudLinkAWSByocConnectionsIPV4Model struct {
+// CloudLinkAWSByocConnectionsIpv4Model represents ipv4 block
+type CloudLinkAWSByocConnectionsIpv4Model struct {
 	AWSRouterPeerAddress types.String `tfsdk:"aws_router_peer_address"`
 	RouterPeerAddress    types.String `tfsdk:"router_peer_address"`
 }

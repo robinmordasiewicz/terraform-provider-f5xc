@@ -142,18 +142,18 @@ type ClusterTLSParametersCertParamsCertificatesModel struct {
 // ClusterTLSParametersCertParamsValidationParamsModel represents validation_params block
 type ClusterTLSParametersCertParamsValidationParamsModel struct {
 	SkipHostnameVerification types.Bool                                                    `tfsdk:"skip_hostname_verification"`
-	TrustedCaURL             types.String                                                  `tfsdk:"trusted_ca_url"`
+	TrustedCAURL             types.String                                                  `tfsdk:"trusted_ca_url"`
 	VerifySubjectAltNames    types.List                                                    `tfsdk:"verify_subject_alt_names"`
-	TrustedCa                *ClusterTLSParametersCertParamsValidationParamsTrustedCaModel `tfsdk:"trusted_ca"`
+	TrustedCA                *ClusterTLSParametersCertParamsValidationParamsTrustedCAModel `tfsdk:"trusted_ca"`
 }
 
-// ClusterTLSParametersCertParamsValidationParamsTrustedCaModel represents trusted_ca block
-type ClusterTLSParametersCertParamsValidationParamsTrustedCaModel struct {
-	TrustedCaList []ClusterTLSParametersCertParamsValidationParamsTrustedCaTrustedCaListModel `tfsdk:"trusted_ca_list"`
+// ClusterTLSParametersCertParamsValidationParamsTrustedCAModel represents trusted_ca block
+type ClusterTLSParametersCertParamsValidationParamsTrustedCAModel struct {
+	TrustedCAList []ClusterTLSParametersCertParamsValidationParamsTrustedCATrustedCAListModel `tfsdk:"trusted_ca_list"`
 }
 
-// ClusterTLSParametersCertParamsValidationParamsTrustedCaTrustedCaListModel represents trusted_ca_list block
-type ClusterTLSParametersCertParamsValidationParamsTrustedCaTrustedCaListModel struct {
+// ClusterTLSParametersCertParamsValidationParamsTrustedCATrustedCAListModel represents trusted_ca_list block
+type ClusterTLSParametersCertParamsValidationParamsTrustedCATrustedCAListModel struct {
 	Kind      types.String `tfsdk:"kind"`
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -175,7 +175,7 @@ type ClusterTLSParametersCommonParamsTLSCertificatesModel struct {
 	CertificateURL       types.String                                                              `tfsdk:"certificate_url"`
 	DescriptionSpec      types.String                                                              `tfsdk:"description_spec"`
 	CustomHashAlgorithms *ClusterTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling  *ClusterEmptyModel                                                        `tfsdk:"disable_ocsp_stapling"`
+	DisableOCSPStapling  *ClusterEmptyModel                                                        `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey           *ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
 	UseSystemDefaults    *ClusterEmptyModel                                                        `tfsdk:"use_system_defaults"`
 }
@@ -207,18 +207,18 @@ type ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoMod
 // ClusterTLSParametersCommonParamsValidationParamsModel represents validation_params block
 type ClusterTLSParametersCommonParamsValidationParamsModel struct {
 	SkipHostnameVerification types.Bool                                                      `tfsdk:"skip_hostname_verification"`
-	TrustedCaURL             types.String                                                    `tfsdk:"trusted_ca_url"`
+	TrustedCAURL             types.String                                                    `tfsdk:"trusted_ca_url"`
 	VerifySubjectAltNames    types.List                                                      `tfsdk:"verify_subject_alt_names"`
-	TrustedCa                *ClusterTLSParametersCommonParamsValidationParamsTrustedCaModel `tfsdk:"trusted_ca"`
+	TrustedCA                *ClusterTLSParametersCommonParamsValidationParamsTrustedCAModel `tfsdk:"trusted_ca"`
 }
 
-// ClusterTLSParametersCommonParamsValidationParamsTrustedCaModel represents trusted_ca block
-type ClusterTLSParametersCommonParamsValidationParamsTrustedCaModel struct {
-	TrustedCaList []ClusterTLSParametersCommonParamsValidationParamsTrustedCaTrustedCaListModel `tfsdk:"trusted_ca_list"`
+// ClusterTLSParametersCommonParamsValidationParamsTrustedCAModel represents trusted_ca block
+type ClusterTLSParametersCommonParamsValidationParamsTrustedCAModel struct {
+	TrustedCAList []ClusterTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModel `tfsdk:"trusted_ca_list"`
 }
 
-// ClusterTLSParametersCommonParamsValidationParamsTrustedCaTrustedCaListModel represents trusted_ca_list block
-type ClusterTLSParametersCommonParamsValidationParamsTrustedCaTrustedCaListModel struct {
+// ClusterTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModel represents trusted_ca_list block
+type ClusterTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModel struct {
 	Kind      types.String `tfsdk:"kind"`
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`

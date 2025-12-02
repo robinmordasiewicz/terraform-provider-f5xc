@@ -65,9 +65,9 @@ type DNSLoadBalancerResponseCacheModel struct {
 
 // DNSLoadBalancerResponseCacheResponseCacheParametersModel represents response_cache_parameters block
 type DNSLoadBalancerResponseCacheResponseCacheParametersModel struct {
-	CacheCidrIPV4 types.Int64 `tfsdk:"cache_cidr_ipv4"`
-	CacheCidrIPV6 types.Int64 `tfsdk:"cache_cidr_ipv6"`
-	CacheTtl      types.Int64 `tfsdk:"cache_ttl"`
+	CacheCIDRIpv4 types.Int64 `tfsdk:"cache_cidr_ipv4"`
+	CacheCIDRIpv6 types.Int64 `tfsdk:"cache_cidr_ipv6"`
+	CacheTTL      types.Int64 `tfsdk:"cache_ttl"`
 }
 
 // DNSLoadBalancerRuleListModel represents rule_list block
@@ -615,14 +615,14 @@ func (r *DNSLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		}
 		if data.ResponseCache.ResponseCacheParameters != nil {
 			response_cache_parametersNestedMap := make(map[string]interface{})
-			if !data.ResponseCache.ResponseCacheParameters.CacheCidrIPV4.IsNull() && !data.ResponseCache.ResponseCacheParameters.CacheCidrIPV4.IsUnknown() {
-				response_cache_parametersNestedMap["cache_cidr_ipv4"] = data.ResponseCache.ResponseCacheParameters.CacheCidrIPV4.ValueInt64()
+			if !data.ResponseCache.ResponseCacheParameters.CacheCIDRIpv4.IsNull() && !data.ResponseCache.ResponseCacheParameters.CacheCIDRIpv4.IsUnknown() {
+				response_cache_parametersNestedMap["cache_cidr_ipv4"] = data.ResponseCache.ResponseCacheParameters.CacheCIDRIpv4.ValueInt64()
 			}
-			if !data.ResponseCache.ResponseCacheParameters.CacheCidrIPV6.IsNull() && !data.ResponseCache.ResponseCacheParameters.CacheCidrIPV6.IsUnknown() {
-				response_cache_parametersNestedMap["cache_cidr_ipv6"] = data.ResponseCache.ResponseCacheParameters.CacheCidrIPV6.ValueInt64()
+			if !data.ResponseCache.ResponseCacheParameters.CacheCIDRIpv6.IsNull() && !data.ResponseCache.ResponseCacheParameters.CacheCIDRIpv6.IsUnknown() {
+				response_cache_parametersNestedMap["cache_cidr_ipv6"] = data.ResponseCache.ResponseCacheParameters.CacheCIDRIpv6.ValueInt64()
 			}
-			if !data.ResponseCache.ResponseCacheParameters.CacheTtl.IsNull() && !data.ResponseCache.ResponseCacheParameters.CacheTtl.IsUnknown() {
-				response_cache_parametersNestedMap["cache_ttl"] = data.ResponseCache.ResponseCacheParameters.CacheTtl.ValueInt64()
+			if !data.ResponseCache.ResponseCacheParameters.CacheTTL.IsNull() && !data.ResponseCache.ResponseCacheParameters.CacheTTL.IsUnknown() {
+				response_cache_parametersNestedMap["cache_ttl"] = data.ResponseCache.ResponseCacheParameters.CacheTTL.ValueInt64()
 			}
 			response_cacheMap["response_cache_parameters"] = response_cache_parametersNestedMap
 		}
@@ -1185,14 +1185,14 @@ func (r *DNSLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		}
 		if data.ResponseCache.ResponseCacheParameters != nil {
 			response_cache_parametersNestedMap := make(map[string]interface{})
-			if !data.ResponseCache.ResponseCacheParameters.CacheCidrIPV4.IsNull() && !data.ResponseCache.ResponseCacheParameters.CacheCidrIPV4.IsUnknown() {
-				response_cache_parametersNestedMap["cache_cidr_ipv4"] = data.ResponseCache.ResponseCacheParameters.CacheCidrIPV4.ValueInt64()
+			if !data.ResponseCache.ResponseCacheParameters.CacheCIDRIpv4.IsNull() && !data.ResponseCache.ResponseCacheParameters.CacheCIDRIpv4.IsUnknown() {
+				response_cache_parametersNestedMap["cache_cidr_ipv4"] = data.ResponseCache.ResponseCacheParameters.CacheCIDRIpv4.ValueInt64()
 			}
-			if !data.ResponseCache.ResponseCacheParameters.CacheCidrIPV6.IsNull() && !data.ResponseCache.ResponseCacheParameters.CacheCidrIPV6.IsUnknown() {
-				response_cache_parametersNestedMap["cache_cidr_ipv6"] = data.ResponseCache.ResponseCacheParameters.CacheCidrIPV6.ValueInt64()
+			if !data.ResponseCache.ResponseCacheParameters.CacheCIDRIpv6.IsNull() && !data.ResponseCache.ResponseCacheParameters.CacheCIDRIpv6.IsUnknown() {
+				response_cache_parametersNestedMap["cache_cidr_ipv6"] = data.ResponseCache.ResponseCacheParameters.CacheCIDRIpv6.ValueInt64()
 			}
-			if !data.ResponseCache.ResponseCacheParameters.CacheTtl.IsNull() && !data.ResponseCache.ResponseCacheParameters.CacheTtl.IsUnknown() {
-				response_cache_parametersNestedMap["cache_ttl"] = data.ResponseCache.ResponseCacheParameters.CacheTtl.ValueInt64()
+			if !data.ResponseCache.ResponseCacheParameters.CacheTTL.IsNull() && !data.ResponseCache.ResponseCacheParameters.CacheTTL.IsUnknown() {
+				response_cache_parametersNestedMap["cache_ttl"] = data.ResponseCache.ResponseCacheParameters.CacheTTL.ValueInt64()
 			}
 			response_cacheMap["response_cache_parameters"] = response_cache_parametersNestedMap
 		}

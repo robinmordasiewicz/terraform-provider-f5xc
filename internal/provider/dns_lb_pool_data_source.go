@@ -15,19 +15,19 @@ import (
 )
 
 var (
-	_ datasource.DataSource              = &DNSLbPoolDataSource{}
-	_ datasource.DataSourceWithConfigure = &DNSLbPoolDataSource{}
+	_ datasource.DataSource              = &DNSLBPoolDataSource{}
+	_ datasource.DataSourceWithConfigure = &DNSLBPoolDataSource{}
 )
 
-func NewDNSLbPoolDataSource() datasource.DataSource {
-	return &DNSLbPoolDataSource{}
+func NewDNSLBPoolDataSource() datasource.DataSource {
+	return &DNSLBPoolDataSource{}
 }
 
-type DNSLbPoolDataSource struct {
+type DNSLBPoolDataSource struct {
 	client *client.Client
 }
 
-type DNSLbPoolDataSourceModel struct {
+type DNSLBPoolDataSourceModel struct {
 	ID          types.String `tfsdk:"id"`
 	Name        types.String `tfsdk:"name"`
 	Namespace   types.String `tfsdk:"namespace"`
@@ -36,11 +36,11 @@ type DNSLbPoolDataSourceModel struct {
 	Annotations types.Map    `tfsdk:"annotations"`
 }
 
-func (d *DNSLbPoolDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
+func (d *DNSLBPoolDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	resp.TypeName = req.ProviderTypeName + "_dns_lb_pool"
 }
 
-func (d *DNSLbPoolDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
+func (d *DNSLBPoolDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		MarkdownDescription: "Manages DNS Load Balancer Pool in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
@@ -49,15 +49,15 @@ func (d *DNSLbPoolDataSource) Schema(ctx context.Context, req datasource.SchemaR
 				Computed:            true,
 			},
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the DNSLbPool.",
+				MarkdownDescription: "Name of the DNSLBPool.",
 				Required:            true,
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the DNSLbPool exists.",
+				MarkdownDescription: "Namespace where the DNSLBPool exists.",
 				Required:            true,
 			},
 			"description": schema.StringAttribute{
-				MarkdownDescription: "Description of the DNSLbPool.",
+				MarkdownDescription: "Description of the DNSLBPool.",
 				Computed:            true,
 			},
 			"labels": schema.MapAttribute{
@@ -74,7 +74,7 @@ func (d *DNSLbPoolDataSource) Schema(ctx context.Context, req datasource.SchemaR
 	}
 }
 
-func (d *DNSLbPoolDataSource) Configure(ctx context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
+func (d *DNSLBPoolDataSource) Configure(ctx context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -86,16 +86,16 @@ func (d *DNSLbPoolDataSource) Configure(ctx context.Context, req datasource.Conf
 	d.client = client
 }
 
-func (d *DNSLbPoolDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
-	var data DNSLbPoolDataSourceModel
+func (d *DNSLBPoolDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
+	var data DNSLBPoolDataSourceModel
 	resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	resource, err := d.client.GetDNSLbPool(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	resource, err := d.client.GetDNSLBPool(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read DNSLbPool: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read DNSLBPool: %s", err))
 		return
 	}
 

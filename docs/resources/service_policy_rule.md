@@ -70,8 +70,8 @@ resource "f5xc_service_policy_rule" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="any-asn"></a>[`any_asn`](#any-asn) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="asn-list"></a>[`asn_list`](#asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [ASN List](#asn-list) below for details.
-<br><br>&#x2022; <a id="asn-matcher"></a>[`asn_matcher`](#asn-matcher) - Optional Block<br>ASN Matcher. Match any AS number contained in the list of bgp_asn_sets<br>See [ASN Matcher](#asn-matcher) below for details.
+<br><br>&#x2022; <a id="asn-list"></a>[`asn_list`](#asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#asn-list) below for details.
+<br><br>&#x2022; <a id="asn-matcher"></a>[`asn_matcher`](#asn-matcher) - Optional Block<br>ASN Matcher. Match any AS number contained in the list of bgp_asn_sets<br>See [Asn Matcher](#asn-matcher) below for details.
 
 -> **One of the following:**
 &#x2022; <a id="any-client"></a>[`any_client`](#any-client) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -167,19 +167,19 @@ An [`item`](#arg-matchers-item) block (within [`arg_matchers`](#arg-matchers)) s
 
 <a id="arg-matchers-item-transformers"></a>&#x2022; [`transformers`](#arg-matchers-item-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
-#### ASN List
+#### Asn List
 
 An [`asn_list`](#asn-list) block supports the following:
 
 <a id="asn-list-as-numbers"></a>&#x2022; [`as_numbers`](#asn-list-as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
-#### ASN Matcher
+#### Asn Matcher
 
 An [`asn_matcher`](#asn-matcher) block supports the following:
 
-<a id="asn-matcher-asn-sets"></a>&#x2022; [`asn_sets`](#asn-matcher-asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [ASN Sets](#asn-matcher-asn-sets) below.
+<a id="asn-matcher-asn-sets"></a>&#x2022; [`asn_sets`](#asn-matcher-asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#asn-matcher-asn-sets) below.
 
-#### ASN Matcher ASN Sets
+#### Asn Matcher Asn Sets
 
 An [`asn_sets`](#asn-matcher-asn-sets) block (within [`asn_matcher`](#asn-matcher)) supports the following:
 

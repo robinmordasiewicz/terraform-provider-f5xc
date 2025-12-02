@@ -2,12 +2,12 @@
 page_title: "f5xc_nat_policy Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages a NatPolicy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
+  Manages a NATPolicy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
 ---
 
 # f5xc_nat_policy (Data Source)
 
-Manages a NatPolicy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
+Manages a NATPolicy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
 
 ~> **Note** Please refer to [NAT Policy API docs](https://docs.cloud.f5.com/docs-v2/api/nat-policy) to learn more.
 
@@ -34,9 +34,9 @@ data "f5xc_nat_policy" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the NatPolicy
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the NATPolicy
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the NatPolicy exists
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the NATPolicy exists
 
 ### Attributes Reference
 
@@ -44,7 +44,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations applied to this resource
 
-<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Description of the NatPolicy
+<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Description of the NATPolicy
 
 <a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 

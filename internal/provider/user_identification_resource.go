@@ -54,7 +54,7 @@ type UserIdentificationRulesModel struct {
 	CookieName             types.String                  `tfsdk:"cookie_name"`
 	HTTPHeaderName         types.String                  `tfsdk:"http_header_name"`
 	IPAndHTTPHeaderName    types.String                  `tfsdk:"ip_and_http_header_name"`
-	JwtClaimName           types.String                  `tfsdk:"jwt_claim_name"`
+	JWTClaimName           types.String                  `tfsdk:"jwt_claim_name"`
 	QueryParamKey          types.String                  `tfsdk:"query_param_key"`
 	ClientAsn              *UserIdentificationEmptyModel `tfsdk:"client_asn"`
 	ClientCity             *UserIdentificationEmptyModel `tfsdk:"client_city"`
@@ -386,8 +386,8 @@ func (r *UserIdentificationResource) Create(ctx context.Context, req resource.Cr
 			if item.Ja4TLSFingerprint != nil {
 				itemMap["ja4_tls_fingerprint"] = map[string]interface{}{}
 			}
-			if !item.JwtClaimName.IsNull() && !item.JwtClaimName.IsUnknown() {
-				itemMap["jwt_claim_name"] = item.JwtClaimName.ValueString()
+			if !item.JWTClaimName.IsNull() && !item.JWTClaimName.IsUnknown() {
+				itemMap["jwt_claim_name"] = item.JWTClaimName.ValueString()
 			}
 			if item.None != nil {
 				itemMap["none"] = map[string]interface{}{}
@@ -487,7 +487,7 @@ func (r *UserIdentificationResource) Create(ctx context.Context, req resource.Cr
 						}
 						return nil
 					}(),
-					JwtClaimName: func() types.String {
+					JWTClaimName: func() types.String {
 						if v, ok := itemMap["jwt_claim_name"].(string); ok && v != "" {
 							return types.StringValue(v)
 						}
@@ -681,7 +681,7 @@ func (r *UserIdentificationResource) Read(ctx context.Context, req resource.Read
 						}
 						return nil
 					}(),
-					JwtClaimName: func() types.String {
+					JWTClaimName: func() types.String {
 						if v, ok := itemMap["jwt_claim_name"].(string); ok && v != "" {
 							return types.StringValue(v)
 						}
@@ -807,8 +807,8 @@ func (r *UserIdentificationResource) Update(ctx context.Context, req resource.Up
 			if item.Ja4TLSFingerprint != nil {
 				itemMap["ja4_tls_fingerprint"] = map[string]interface{}{}
 			}
-			if !item.JwtClaimName.IsNull() && !item.JwtClaimName.IsUnknown() {
-				itemMap["jwt_claim_name"] = item.JwtClaimName.ValueString()
+			if !item.JWTClaimName.IsNull() && !item.JWTClaimName.IsUnknown() {
+				itemMap["jwt_claim_name"] = item.JWTClaimName.ValueString()
 			}
 			if item.None != nil {
 				itemMap["none"] = map[string]interface{}{}
@@ -919,7 +919,7 @@ func (r *UserIdentificationResource) Update(ctx context.Context, req resource.Up
 						}
 						return nil
 					}(),
-					JwtClaimName: func() types.String {
+					JWTClaimName: func() types.String {
 						if v, ok := itemMap["jwt_claim_name"].(string); ok && v != "" {
 							return types.StringValue(v)
 						}

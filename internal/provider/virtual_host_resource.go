@@ -83,52 +83,52 @@ type VirtualHostAuthenticationCookieParamsModel struct {
 	CookieExpiry          types.Int64                                         `tfsdk:"cookie_expiry"`
 	CookieRefreshInterval types.Int64                                         `tfsdk:"cookie_refresh_interval"`
 	SessionExpiry         types.Int64                                         `tfsdk:"session_expiry"`
-	AuthHmac              *VirtualHostAuthenticationCookieParamsAuthHmacModel `tfsdk:"auth_hmac"`
-	KmsKeyHmac            *VirtualHostEmptyModel                              `tfsdk:"kms_key_hmac"`
+	AuthHMAC              *VirtualHostAuthenticationCookieParamsAuthHMACModel `tfsdk:"auth_hmac"`
+	KmsKeyHMAC            *VirtualHostEmptyModel                              `tfsdk:"kms_key_hmac"`
 }
 
-// VirtualHostAuthenticationCookieParamsAuthHmacModel represents auth_hmac block
-type VirtualHostAuthenticationCookieParamsAuthHmacModel struct {
+// VirtualHostAuthenticationCookieParamsAuthHMACModel represents auth_hmac block
+type VirtualHostAuthenticationCookieParamsAuthHMACModel struct {
 	PrimKeyExpiry types.String                                               `tfsdk:"prim_key_expiry"`
 	SecKeyExpiry  types.String                                               `tfsdk:"sec_key_expiry"`
-	PrimKey       *VirtualHostAuthenticationCookieParamsAuthHmacPrimKeyModel `tfsdk:"prim_key"`
-	SecKey        *VirtualHostAuthenticationCookieParamsAuthHmacSecKeyModel  `tfsdk:"sec_key"`
+	PrimKey       *VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyModel `tfsdk:"prim_key"`
+	SecKey        *VirtualHostAuthenticationCookieParamsAuthHMACSecKeyModel  `tfsdk:"sec_key"`
 }
 
-// VirtualHostAuthenticationCookieParamsAuthHmacPrimKeyModel represents prim_key block
-type VirtualHostAuthenticationCookieParamsAuthHmacPrimKeyModel struct {
-	BlindfoldSecretInfo *VirtualHostAuthenticationCookieParamsAuthHmacPrimKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo     *VirtualHostAuthenticationCookieParamsAuthHmacPrimKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+// VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyModel represents prim_key block
+type VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyModel struct {
+	BlindfoldSecretInfo *VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
-// VirtualHostAuthenticationCookieParamsAuthHmacPrimKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
-type VirtualHostAuthenticationCookieParamsAuthHmacPrimKeyBlindfoldSecretInfoModel struct {
+// VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
 	Location           types.String `tfsdk:"location"`
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
-// VirtualHostAuthenticationCookieParamsAuthHmacPrimKeyClearSecretInfoModel represents clear_secret_info block
-type VirtualHostAuthenticationCookieParamsAuthHmacPrimKeyClearSecretInfoModel struct {
+// VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyClearSecretInfoModel represents clear_secret_info block
+type VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
-// VirtualHostAuthenticationCookieParamsAuthHmacSecKeyModel represents sec_key block
-type VirtualHostAuthenticationCookieParamsAuthHmacSecKeyModel struct {
-	BlindfoldSecretInfo *VirtualHostAuthenticationCookieParamsAuthHmacSecKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo     *VirtualHostAuthenticationCookieParamsAuthHmacSecKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+// VirtualHostAuthenticationCookieParamsAuthHMACSecKeyModel represents sec_key block
+type VirtualHostAuthenticationCookieParamsAuthHMACSecKeyModel struct {
+	BlindfoldSecretInfo *VirtualHostAuthenticationCookieParamsAuthHMACSecKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *VirtualHostAuthenticationCookieParamsAuthHMACSecKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
-// VirtualHostAuthenticationCookieParamsAuthHmacSecKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
-type VirtualHostAuthenticationCookieParamsAuthHmacSecKeyBlindfoldSecretInfoModel struct {
+// VirtualHostAuthenticationCookieParamsAuthHMACSecKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type VirtualHostAuthenticationCookieParamsAuthHMACSecKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
 	Location           types.String `tfsdk:"location"`
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
-// VirtualHostAuthenticationCookieParamsAuthHmacSecKeyClearSecretInfoModel represents clear_secret_info block
-type VirtualHostAuthenticationCookieParamsAuthHmacSecKeyClearSecretInfoModel struct {
+// VirtualHostAuthenticationCookieParamsAuthHMACSecKeyClearSecretInfoModel represents clear_secret_info block
+type VirtualHostAuthenticationCookieParamsAuthHMACSecKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
@@ -159,8 +159,8 @@ type VirtualHostCompressionParamsModel struct {
 	RemoveAcceptEncodingHeader types.Bool  `tfsdk:"remove_accept_encoding_header"`
 }
 
-// VirtualHostCorsPolicyModel represents cors_policy block
-type VirtualHostCorsPolicyModel struct {
+// VirtualHostCORSPolicyModel represents cors_policy block
+type VirtualHostCORSPolicyModel struct {
 	AllowCredentials types.Bool   `tfsdk:"allow_credentials"`
 	AllowHeaders     types.String `tfsdk:"allow_headers"`
 	AllowMethods     types.String `tfsdk:"allow_methods"`
@@ -171,15 +171,15 @@ type VirtualHostCorsPolicyModel struct {
 	MaximumAge       types.Int64  `tfsdk:"maximum_age"`
 }
 
-// VirtualHostCsrfPolicyModel represents csrf_policy block
-type VirtualHostCsrfPolicyModel struct {
+// VirtualHostCSRFPolicyModel represents csrf_policy block
+type VirtualHostCSRFPolicyModel struct {
 	AllLoadBalancerDomains *VirtualHostEmptyModel                      `tfsdk:"all_load_balancer_domains"`
-	CustomDomainList       *VirtualHostCsrfPolicyCustomDomainListModel `tfsdk:"custom_domain_list"`
+	CustomDomainList       *VirtualHostCSRFPolicyCustomDomainListModel `tfsdk:"custom_domain_list"`
 	Disabled               *VirtualHostEmptyModel                      `tfsdk:"disabled"`
 }
 
-// VirtualHostCsrfPolicyCustomDomainListModel represents custom_domain_list block
-type VirtualHostCsrfPolicyCustomDomainListModel struct {
+// VirtualHostCSRFPolicyCustomDomainListModel represents custom_domain_list block
+type VirtualHostCSRFPolicyCustomDomainListModel struct {
 	Domains types.List `tfsdk:"domains"`
 }
 
@@ -396,8 +396,8 @@ type VirtualHostSensitiveDataPolicyModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
-// VirtualHostSlowDdosMitigationModel represents slow_ddos_mitigation block
-type VirtualHostSlowDdosMitigationModel struct {
+// VirtualHostSlowDDOSMitigationModel represents slow_ddos_mitigation block
+type VirtualHostSlowDDOSMitigationModel struct {
 	RequestHeadersTimeout types.Int64            `tfsdk:"request_headers_timeout"`
 	RequestTimeout        types.Int64            `tfsdk:"request_timeout"`
 	DisableRequestTimeout *VirtualHostEmptyModel `tfsdk:"disable_request_timeout"`
@@ -428,18 +428,18 @@ type VirtualHostTLSCertParamsCertificatesModel struct {
 // VirtualHostTLSCertParamsValidationParamsModel represents validation_params block
 type VirtualHostTLSCertParamsValidationParamsModel struct {
 	SkipHostnameVerification types.Bool                                              `tfsdk:"skip_hostname_verification"`
-	TrustedCaURL             types.String                                            `tfsdk:"trusted_ca_url"`
+	TrustedCAURL             types.String                                            `tfsdk:"trusted_ca_url"`
 	VerifySubjectAltNames    types.List                                              `tfsdk:"verify_subject_alt_names"`
-	TrustedCa                *VirtualHostTLSCertParamsValidationParamsTrustedCaModel `tfsdk:"trusted_ca"`
+	TrustedCA                *VirtualHostTLSCertParamsValidationParamsTrustedCAModel `tfsdk:"trusted_ca"`
 }
 
-// VirtualHostTLSCertParamsValidationParamsTrustedCaModel represents trusted_ca block
-type VirtualHostTLSCertParamsValidationParamsTrustedCaModel struct {
-	TrustedCaList []VirtualHostTLSCertParamsValidationParamsTrustedCaTrustedCaListModel `tfsdk:"trusted_ca_list"`
+// VirtualHostTLSCertParamsValidationParamsTrustedCAModel represents trusted_ca block
+type VirtualHostTLSCertParamsValidationParamsTrustedCAModel struct {
+	TrustedCAList []VirtualHostTLSCertParamsValidationParamsTrustedCATrustedCAListModel `tfsdk:"trusted_ca_list"`
 }
 
-// VirtualHostTLSCertParamsValidationParamsTrustedCaTrustedCaListModel represents trusted_ca_list block
-type VirtualHostTLSCertParamsValidationParamsTrustedCaTrustedCaListModel struct {
+// VirtualHostTLSCertParamsValidationParamsTrustedCATrustedCAListModel represents trusted_ca_list block
+type VirtualHostTLSCertParamsValidationParamsTrustedCATrustedCAListModel struct {
 	Kind      types.String `tfsdk:"kind"`
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -470,7 +470,7 @@ type VirtualHostTLSParametersCommonParamsTLSCertificatesModel struct {
 	CertificateURL       types.String                                                                  `tfsdk:"certificate_url"`
 	DescriptionSpec      types.String                                                                  `tfsdk:"description_spec"`
 	CustomHashAlgorithms *VirtualHostTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling  *VirtualHostEmptyModel                                                        `tfsdk:"disable_ocsp_stapling"`
+	DisableOCSPStapling  *VirtualHostEmptyModel                                                        `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey           *VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
 	UseSystemDefaults    *VirtualHostEmptyModel                                                        `tfsdk:"use_system_defaults"`
 }
@@ -502,18 +502,18 @@ type VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInf
 // VirtualHostTLSParametersCommonParamsValidationParamsModel represents validation_params block
 type VirtualHostTLSParametersCommonParamsValidationParamsModel struct {
 	SkipHostnameVerification types.Bool                                                          `tfsdk:"skip_hostname_verification"`
-	TrustedCaURL             types.String                                                        `tfsdk:"trusted_ca_url"`
+	TrustedCAURL             types.String                                                        `tfsdk:"trusted_ca_url"`
 	VerifySubjectAltNames    types.List                                                          `tfsdk:"verify_subject_alt_names"`
-	TrustedCa                *VirtualHostTLSParametersCommonParamsValidationParamsTrustedCaModel `tfsdk:"trusted_ca"`
+	TrustedCA                *VirtualHostTLSParametersCommonParamsValidationParamsTrustedCAModel `tfsdk:"trusted_ca"`
 }
 
-// VirtualHostTLSParametersCommonParamsValidationParamsTrustedCaModel represents trusted_ca block
-type VirtualHostTLSParametersCommonParamsValidationParamsTrustedCaModel struct {
-	TrustedCaList []VirtualHostTLSParametersCommonParamsValidationParamsTrustedCaTrustedCaListModel `tfsdk:"trusted_ca_list"`
+// VirtualHostTLSParametersCommonParamsValidationParamsTrustedCAModel represents trusted_ca block
+type VirtualHostTLSParametersCommonParamsValidationParamsTrustedCAModel struct {
+	TrustedCAList []VirtualHostTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModel `tfsdk:"trusted_ca_list"`
 }
 
-// VirtualHostTLSParametersCommonParamsValidationParamsTrustedCaTrustedCaListModel represents trusted_ca_list block
-type VirtualHostTLSParametersCommonParamsValidationParamsTrustedCaTrustedCaListModel struct {
+// VirtualHostTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModel represents trusted_ca_list block
+type VirtualHostTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModel struct {
 	Kind      types.String `tfsdk:"kind"`
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -580,8 +580,8 @@ type VirtualHostResourceModel struct {
 	CaptchaChallenge           *VirtualHostCaptchaChallengeModel            `tfsdk:"captcha_challenge"`
 	CoalescingOptions          *VirtualHostCoalescingOptionsModel           `tfsdk:"coalescing_options"`
 	CompressionParams          *VirtualHostCompressionParamsModel           `tfsdk:"compression_params"`
-	CorsPolicy                 *VirtualHostCorsPolicyModel                  `tfsdk:"cors_policy"`
-	CsrfPolicy                 *VirtualHostCsrfPolicyModel                  `tfsdk:"csrf_policy"`
+	CORSPolicy                 *VirtualHostCORSPolicyModel                  `tfsdk:"cors_policy"`
+	CSRFPolicy                 *VirtualHostCSRFPolicyModel                  `tfsdk:"csrf_policy"`
 	CustomErrors               *VirtualHostEmptyModel                       `tfsdk:"custom_errors"`
 	DefaultHeader              *VirtualHostEmptyModel                       `tfsdk:"default_header"`
 	DefaultLoadBalancer        *VirtualHostEmptyModel                       `tfsdk:"default_loadbalancer"`
@@ -602,7 +602,7 @@ type VirtualHostResourceModel struct {
 	RetryPolicy                *VirtualHostRetryPolicyModel                 `tfsdk:"retry_policy"`
 	Routes                     []VirtualHostRoutesModel                     `tfsdk:"routes"`
 	SensitiveDataPolicy        []VirtualHostSensitiveDataPolicyModel        `tfsdk:"sensitive_data_policy"`
-	SlowDdosMitigation         *VirtualHostSlowDdosMitigationModel          `tfsdk:"slow_ddos_mitigation"`
+	SlowDDOSMitigation         *VirtualHostSlowDDOSMitigationModel          `tfsdk:"slow_ddos_mitigation"`
 	TLSCertParams              *VirtualHostTLSCertParamsModel               `tfsdk:"tls_cert_params"`
 	TLSParameters              *VirtualHostTLSParametersModel               `tfsdk:"tls_parameters"`
 	UserIdentification         []VirtualHostUserIdentificationModel         `tfsdk:"user_identification"`
@@ -2273,52 +2273,52 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 		}
 		createReq.Spec["compression_params"] = compression_paramsMap
 	}
-	if data.CorsPolicy != nil {
+	if data.CORSPolicy != nil {
 		cors_policyMap := make(map[string]interface{})
-		if !data.CorsPolicy.AllowCredentials.IsNull() && !data.CorsPolicy.AllowCredentials.IsUnknown() {
-			cors_policyMap["allow_credentials"] = data.CorsPolicy.AllowCredentials.ValueBool()
+		if !data.CORSPolicy.AllowCredentials.IsNull() && !data.CORSPolicy.AllowCredentials.IsUnknown() {
+			cors_policyMap["allow_credentials"] = data.CORSPolicy.AllowCredentials.ValueBool()
 		}
-		if !data.CorsPolicy.AllowHeaders.IsNull() && !data.CorsPolicy.AllowHeaders.IsUnknown() {
-			cors_policyMap["allow_headers"] = data.CorsPolicy.AllowHeaders.ValueString()
+		if !data.CORSPolicy.AllowHeaders.IsNull() && !data.CORSPolicy.AllowHeaders.IsUnknown() {
+			cors_policyMap["allow_headers"] = data.CORSPolicy.AllowHeaders.ValueString()
 		}
-		if !data.CorsPolicy.AllowMethods.IsNull() && !data.CorsPolicy.AllowMethods.IsUnknown() {
-			cors_policyMap["allow_methods"] = data.CorsPolicy.AllowMethods.ValueString()
+		if !data.CORSPolicy.AllowMethods.IsNull() && !data.CORSPolicy.AllowMethods.IsUnknown() {
+			cors_policyMap["allow_methods"] = data.CORSPolicy.AllowMethods.ValueString()
 		}
-		if !data.CorsPolicy.AllowOrigin.IsNull() && !data.CorsPolicy.AllowOrigin.IsUnknown() {
+		if !data.CORSPolicy.AllowOrigin.IsNull() && !data.CORSPolicy.AllowOrigin.IsUnknown() {
 			var allow_originItems []string
-			diags := data.CorsPolicy.AllowOrigin.ElementsAs(ctx, &allow_originItems, false)
+			diags := data.CORSPolicy.AllowOrigin.ElementsAs(ctx, &allow_originItems, false)
 			if !diags.HasError() {
 				cors_policyMap["allow_origin"] = allow_originItems
 			}
 		}
-		if !data.CorsPolicy.AllowOriginRegex.IsNull() && !data.CorsPolicy.AllowOriginRegex.IsUnknown() {
+		if !data.CORSPolicy.AllowOriginRegex.IsNull() && !data.CORSPolicy.AllowOriginRegex.IsUnknown() {
 			var allow_origin_regexItems []string
-			diags := data.CorsPolicy.AllowOriginRegex.ElementsAs(ctx, &allow_origin_regexItems, false)
+			diags := data.CORSPolicy.AllowOriginRegex.ElementsAs(ctx, &allow_origin_regexItems, false)
 			if !diags.HasError() {
 				cors_policyMap["allow_origin_regex"] = allow_origin_regexItems
 			}
 		}
-		if !data.CorsPolicy.Disabled.IsNull() && !data.CorsPolicy.Disabled.IsUnknown() {
-			cors_policyMap["disabled"] = data.CorsPolicy.Disabled.ValueBool()
+		if !data.CORSPolicy.Disabled.IsNull() && !data.CORSPolicy.Disabled.IsUnknown() {
+			cors_policyMap["disabled"] = data.CORSPolicy.Disabled.ValueBool()
 		}
-		if !data.CorsPolicy.ExposeHeaders.IsNull() && !data.CorsPolicy.ExposeHeaders.IsUnknown() {
-			cors_policyMap["expose_headers"] = data.CorsPolicy.ExposeHeaders.ValueString()
+		if !data.CORSPolicy.ExposeHeaders.IsNull() && !data.CORSPolicy.ExposeHeaders.IsUnknown() {
+			cors_policyMap["expose_headers"] = data.CORSPolicy.ExposeHeaders.ValueString()
 		}
-		if !data.CorsPolicy.MaximumAge.IsNull() && !data.CorsPolicy.MaximumAge.IsUnknown() {
-			cors_policyMap["maximum_age"] = data.CorsPolicy.MaximumAge.ValueInt64()
+		if !data.CORSPolicy.MaximumAge.IsNull() && !data.CORSPolicy.MaximumAge.IsUnknown() {
+			cors_policyMap["maximum_age"] = data.CORSPolicy.MaximumAge.ValueInt64()
 		}
 		createReq.Spec["cors_policy"] = cors_policyMap
 	}
-	if data.CsrfPolicy != nil {
+	if data.CSRFPolicy != nil {
 		csrf_policyMap := make(map[string]interface{})
-		if data.CsrfPolicy.AllLoadBalancerDomains != nil {
+		if data.CSRFPolicy.AllLoadBalancerDomains != nil {
 			csrf_policyMap["all_load_balancer_domains"] = map[string]interface{}{}
 		}
-		if data.CsrfPolicy.CustomDomainList != nil {
+		if data.CSRFPolicy.CustomDomainList != nil {
 			custom_domain_listNestedMap := make(map[string]interface{})
 			csrf_policyMap["custom_domain_list"] = custom_domain_listNestedMap
 		}
-		if data.CsrfPolicy.Disabled != nil {
+		if data.CSRFPolicy.Disabled != nil {
 			csrf_policyMap["disabled"] = map[string]interface{}{}
 		}
 		createReq.Spec["csrf_policy"] = csrf_policyMap
@@ -2793,16 +2793,16 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 		}
 		createReq.Spec["sensitive_data_policy"] = sensitive_data_policyList
 	}
-	if data.SlowDdosMitigation != nil {
+	if data.SlowDDOSMitigation != nil {
 		slow_ddos_mitigationMap := make(map[string]interface{})
-		if data.SlowDdosMitigation.DisableRequestTimeout != nil {
+		if data.SlowDDOSMitigation.DisableRequestTimeout != nil {
 			slow_ddos_mitigationMap["disable_request_timeout"] = map[string]interface{}{}
 		}
-		if !data.SlowDdosMitigation.RequestHeadersTimeout.IsNull() && !data.SlowDdosMitigation.RequestHeadersTimeout.IsUnknown() {
-			slow_ddos_mitigationMap["request_headers_timeout"] = data.SlowDdosMitigation.RequestHeadersTimeout.ValueInt64()
+		if !data.SlowDDOSMitigation.RequestHeadersTimeout.IsNull() && !data.SlowDDOSMitigation.RequestHeadersTimeout.IsUnknown() {
+			slow_ddos_mitigationMap["request_headers_timeout"] = data.SlowDDOSMitigation.RequestHeadersTimeout.ValueInt64()
 		}
-		if !data.SlowDdosMitigation.RequestTimeout.IsNull() && !data.SlowDdosMitigation.RequestTimeout.IsUnknown() {
-			slow_ddos_mitigationMap["request_timeout"] = data.SlowDdosMitigation.RequestTimeout.ValueInt64()
+		if !data.SlowDDOSMitigation.RequestTimeout.IsNull() && !data.SlowDDOSMitigation.RequestTimeout.IsUnknown() {
+			slow_ddos_mitigationMap["request_timeout"] = data.SlowDDOSMitigation.RequestTimeout.ValueInt64()
 		}
 		createReq.Spec["slow_ddos_mitigation"] = slow_ddos_mitigationMap
 	}
@@ -2858,8 +2858,8 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 			if !data.TLSCertParams.ValidationParams.SkipHostnameVerification.IsNull() && !data.TLSCertParams.ValidationParams.SkipHostnameVerification.IsUnknown() {
 				validation_paramsNestedMap["skip_hostname_verification"] = data.TLSCertParams.ValidationParams.SkipHostnameVerification.ValueBool()
 			}
-			if !data.TLSCertParams.ValidationParams.TrustedCaURL.IsNull() && !data.TLSCertParams.ValidationParams.TrustedCaURL.IsUnknown() {
-				validation_paramsNestedMap["trusted_ca_url"] = data.TLSCertParams.ValidationParams.TrustedCaURL.ValueString()
+			if !data.TLSCertParams.ValidationParams.TrustedCAURL.IsNull() && !data.TLSCertParams.ValidationParams.TrustedCAURL.IsUnknown() {
+				validation_paramsNestedMap["trusted_ca_url"] = data.TLSCertParams.ValidationParams.TrustedCAURL.ValueString()
 			}
 			tls_cert_paramsMap["validation_params"] = validation_paramsNestedMap
 		}
@@ -3214,12 +3214,12 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["cors_policy"].(map[string]interface{}); ok && (isImport || data.CorsPolicy != nil) {
-		data.CorsPolicy = &VirtualHostCorsPolicyModel{
+	if blockData, ok := apiResource.Spec["cors_policy"].(map[string]interface{}); ok && (isImport || data.CORSPolicy != nil) {
+		data.CORSPolicy = &VirtualHostCORSPolicyModel{
 			AllowCredentials: func() types.Bool {
-				if !isImport && data.CorsPolicy != nil {
+				if !isImport && data.CORSPolicy != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.CorsPolicy.AllowCredentials
+					return data.CORSPolicy.AllowCredentials
 				}
 				// Import case: read from API
 				if v, ok := blockData["allow_credentials"].(bool); ok {
@@ -3266,9 +3266,9 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 				return types.ListNull(types.StringType)
 			}(),
 			Disabled: func() types.Bool {
-				if !isImport && data.CorsPolicy != nil {
+				if !isImport && data.CORSPolicy != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.CorsPolicy.Disabled
+					return data.CORSPolicy.Disabled
 				}
 				// Import case: read from API
 				if v, ok := blockData["disabled"].(bool); ok {
@@ -3290,9 +3290,9 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["csrf_policy"].(map[string]interface{}); ok && isImport && data.CsrfPolicy == nil {
+	if _, ok := apiResource.Spec["csrf_policy"].(map[string]interface{}); ok && isImport && data.CSRFPolicy == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.CsrfPolicy = &VirtualHostCsrfPolicyModel{}
+		data.CSRFPolicy = &VirtualHostCSRFPolicyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["custom_errors"].(map[string]interface{}); ok && isImport && data.CustomErrors == nil {
@@ -3955,13 +3955,13 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 		}
 		data.SensitiveDataPolicy = sensitive_data_policyList
 	}
-	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDdosMitigation != nil) {
-		data.SlowDdosMitigation = &VirtualHostSlowDdosMitigationModel{
+	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDDOSMitigation != nil) {
+		data.SlowDDOSMitigation = &VirtualHostSlowDDOSMitigationModel{
 			DisableRequestTimeout: func() *VirtualHostEmptyModel {
-				if !isImport && data.SlowDdosMitigation != nil {
+				if !isImport && data.SlowDDOSMitigation != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.SlowDdosMitigation.DisableRequestTimeout
+					return data.SlowDDOSMitigation.DisableRequestTimeout
 				}
 				// Import case: read from API
 				if _, ok := blockData["disable_request_timeout"].(map[string]interface{}); ok {
@@ -4103,7 +4103,7 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 							}
 							return types.BoolNull()
 						}(),
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -4668,12 +4668,12 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["cors_policy"].(map[string]interface{}); ok && (isImport || data.CorsPolicy != nil) {
-		data.CorsPolicy = &VirtualHostCorsPolicyModel{
+	if blockData, ok := apiResource.Spec["cors_policy"].(map[string]interface{}); ok && (isImport || data.CORSPolicy != nil) {
+		data.CORSPolicy = &VirtualHostCORSPolicyModel{
 			AllowCredentials: func() types.Bool {
-				if !isImport && data.CorsPolicy != nil {
+				if !isImport && data.CORSPolicy != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.CorsPolicy.AllowCredentials
+					return data.CORSPolicy.AllowCredentials
 				}
 				// Import case: read from API
 				if v, ok := blockData["allow_credentials"].(bool); ok {
@@ -4720,9 +4720,9 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 				return types.ListNull(types.StringType)
 			}(),
 			Disabled: func() types.Bool {
-				if !isImport && data.CorsPolicy != nil {
+				if !isImport && data.CORSPolicy != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.CorsPolicy.Disabled
+					return data.CORSPolicy.Disabled
 				}
 				// Import case: read from API
 				if v, ok := blockData["disabled"].(bool); ok {
@@ -4744,9 +4744,9 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["csrf_policy"].(map[string]interface{}); ok && isImport && data.CsrfPolicy == nil {
+	if _, ok := apiResource.Spec["csrf_policy"].(map[string]interface{}); ok && isImport && data.CSRFPolicy == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.CsrfPolicy = &VirtualHostCsrfPolicyModel{}
+		data.CSRFPolicy = &VirtualHostCSRFPolicyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["custom_errors"].(map[string]interface{}); ok && isImport && data.CustomErrors == nil {
@@ -5409,13 +5409,13 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 		}
 		data.SensitiveDataPolicy = sensitive_data_policyList
 	}
-	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDdosMitigation != nil) {
-		data.SlowDdosMitigation = &VirtualHostSlowDdosMitigationModel{
+	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDDOSMitigation != nil) {
+		data.SlowDDOSMitigation = &VirtualHostSlowDDOSMitigationModel{
 			DisableRequestTimeout: func() *VirtualHostEmptyModel {
-				if !isImport && data.SlowDdosMitigation != nil {
+				if !isImport && data.SlowDDOSMitigation != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.SlowDdosMitigation.DisableRequestTimeout
+					return data.SlowDDOSMitigation.DisableRequestTimeout
 				}
 				// Import case: read from API
 				if _, ok := blockData["disable_request_timeout"].(map[string]interface{}); ok {
@@ -5557,7 +5557,7 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 							}
 							return types.BoolNull()
 						}(),
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -5976,52 +5976,52 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 		}
 		apiResource.Spec["compression_params"] = compression_paramsMap
 	}
-	if data.CorsPolicy != nil {
+	if data.CORSPolicy != nil {
 		cors_policyMap := make(map[string]interface{})
-		if !data.CorsPolicy.AllowCredentials.IsNull() && !data.CorsPolicy.AllowCredentials.IsUnknown() {
-			cors_policyMap["allow_credentials"] = data.CorsPolicy.AllowCredentials.ValueBool()
+		if !data.CORSPolicy.AllowCredentials.IsNull() && !data.CORSPolicy.AllowCredentials.IsUnknown() {
+			cors_policyMap["allow_credentials"] = data.CORSPolicy.AllowCredentials.ValueBool()
 		}
-		if !data.CorsPolicy.AllowHeaders.IsNull() && !data.CorsPolicy.AllowHeaders.IsUnknown() {
-			cors_policyMap["allow_headers"] = data.CorsPolicy.AllowHeaders.ValueString()
+		if !data.CORSPolicy.AllowHeaders.IsNull() && !data.CORSPolicy.AllowHeaders.IsUnknown() {
+			cors_policyMap["allow_headers"] = data.CORSPolicy.AllowHeaders.ValueString()
 		}
-		if !data.CorsPolicy.AllowMethods.IsNull() && !data.CorsPolicy.AllowMethods.IsUnknown() {
-			cors_policyMap["allow_methods"] = data.CorsPolicy.AllowMethods.ValueString()
+		if !data.CORSPolicy.AllowMethods.IsNull() && !data.CORSPolicy.AllowMethods.IsUnknown() {
+			cors_policyMap["allow_methods"] = data.CORSPolicy.AllowMethods.ValueString()
 		}
-		if !data.CorsPolicy.AllowOrigin.IsNull() && !data.CorsPolicy.AllowOrigin.IsUnknown() {
+		if !data.CORSPolicy.AllowOrigin.IsNull() && !data.CORSPolicy.AllowOrigin.IsUnknown() {
 			var allow_originItems []string
-			diags := data.CorsPolicy.AllowOrigin.ElementsAs(ctx, &allow_originItems, false)
+			diags := data.CORSPolicy.AllowOrigin.ElementsAs(ctx, &allow_originItems, false)
 			if !diags.HasError() {
 				cors_policyMap["allow_origin"] = allow_originItems
 			}
 		}
-		if !data.CorsPolicy.AllowOriginRegex.IsNull() && !data.CorsPolicy.AllowOriginRegex.IsUnknown() {
+		if !data.CORSPolicy.AllowOriginRegex.IsNull() && !data.CORSPolicy.AllowOriginRegex.IsUnknown() {
 			var allow_origin_regexItems []string
-			diags := data.CorsPolicy.AllowOriginRegex.ElementsAs(ctx, &allow_origin_regexItems, false)
+			diags := data.CORSPolicy.AllowOriginRegex.ElementsAs(ctx, &allow_origin_regexItems, false)
 			if !diags.HasError() {
 				cors_policyMap["allow_origin_regex"] = allow_origin_regexItems
 			}
 		}
-		if !data.CorsPolicy.Disabled.IsNull() && !data.CorsPolicy.Disabled.IsUnknown() {
-			cors_policyMap["disabled"] = data.CorsPolicy.Disabled.ValueBool()
+		if !data.CORSPolicy.Disabled.IsNull() && !data.CORSPolicy.Disabled.IsUnknown() {
+			cors_policyMap["disabled"] = data.CORSPolicy.Disabled.ValueBool()
 		}
-		if !data.CorsPolicy.ExposeHeaders.IsNull() && !data.CorsPolicy.ExposeHeaders.IsUnknown() {
-			cors_policyMap["expose_headers"] = data.CorsPolicy.ExposeHeaders.ValueString()
+		if !data.CORSPolicy.ExposeHeaders.IsNull() && !data.CORSPolicy.ExposeHeaders.IsUnknown() {
+			cors_policyMap["expose_headers"] = data.CORSPolicy.ExposeHeaders.ValueString()
 		}
-		if !data.CorsPolicy.MaximumAge.IsNull() && !data.CorsPolicy.MaximumAge.IsUnknown() {
-			cors_policyMap["maximum_age"] = data.CorsPolicy.MaximumAge.ValueInt64()
+		if !data.CORSPolicy.MaximumAge.IsNull() && !data.CORSPolicy.MaximumAge.IsUnknown() {
+			cors_policyMap["maximum_age"] = data.CORSPolicy.MaximumAge.ValueInt64()
 		}
 		apiResource.Spec["cors_policy"] = cors_policyMap
 	}
-	if data.CsrfPolicy != nil {
+	if data.CSRFPolicy != nil {
 		csrf_policyMap := make(map[string]interface{})
-		if data.CsrfPolicy.AllLoadBalancerDomains != nil {
+		if data.CSRFPolicy.AllLoadBalancerDomains != nil {
 			csrf_policyMap["all_load_balancer_domains"] = map[string]interface{}{}
 		}
-		if data.CsrfPolicy.CustomDomainList != nil {
+		if data.CSRFPolicy.CustomDomainList != nil {
 			custom_domain_listNestedMap := make(map[string]interface{})
 			csrf_policyMap["custom_domain_list"] = custom_domain_listNestedMap
 		}
-		if data.CsrfPolicy.Disabled != nil {
+		if data.CSRFPolicy.Disabled != nil {
 			csrf_policyMap["disabled"] = map[string]interface{}{}
 		}
 		apiResource.Spec["csrf_policy"] = csrf_policyMap
@@ -6496,16 +6496,16 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 		}
 		apiResource.Spec["sensitive_data_policy"] = sensitive_data_policyList
 	}
-	if data.SlowDdosMitigation != nil {
+	if data.SlowDDOSMitigation != nil {
 		slow_ddos_mitigationMap := make(map[string]interface{})
-		if data.SlowDdosMitigation.DisableRequestTimeout != nil {
+		if data.SlowDDOSMitigation.DisableRequestTimeout != nil {
 			slow_ddos_mitigationMap["disable_request_timeout"] = map[string]interface{}{}
 		}
-		if !data.SlowDdosMitigation.RequestHeadersTimeout.IsNull() && !data.SlowDdosMitigation.RequestHeadersTimeout.IsUnknown() {
-			slow_ddos_mitigationMap["request_headers_timeout"] = data.SlowDdosMitigation.RequestHeadersTimeout.ValueInt64()
+		if !data.SlowDDOSMitigation.RequestHeadersTimeout.IsNull() && !data.SlowDDOSMitigation.RequestHeadersTimeout.IsUnknown() {
+			slow_ddos_mitigationMap["request_headers_timeout"] = data.SlowDDOSMitigation.RequestHeadersTimeout.ValueInt64()
 		}
-		if !data.SlowDdosMitigation.RequestTimeout.IsNull() && !data.SlowDdosMitigation.RequestTimeout.IsUnknown() {
-			slow_ddos_mitigationMap["request_timeout"] = data.SlowDdosMitigation.RequestTimeout.ValueInt64()
+		if !data.SlowDDOSMitigation.RequestTimeout.IsNull() && !data.SlowDDOSMitigation.RequestTimeout.IsUnknown() {
+			slow_ddos_mitigationMap["request_timeout"] = data.SlowDDOSMitigation.RequestTimeout.ValueInt64()
 		}
 		apiResource.Spec["slow_ddos_mitigation"] = slow_ddos_mitigationMap
 	}
@@ -6561,8 +6561,8 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 			if !data.TLSCertParams.ValidationParams.SkipHostnameVerification.IsNull() && !data.TLSCertParams.ValidationParams.SkipHostnameVerification.IsUnknown() {
 				validation_paramsNestedMap["skip_hostname_verification"] = data.TLSCertParams.ValidationParams.SkipHostnameVerification.ValueBool()
 			}
-			if !data.TLSCertParams.ValidationParams.TrustedCaURL.IsNull() && !data.TLSCertParams.ValidationParams.TrustedCaURL.IsUnknown() {
-				validation_paramsNestedMap["trusted_ca_url"] = data.TLSCertParams.ValidationParams.TrustedCaURL.ValueString()
+			if !data.TLSCertParams.ValidationParams.TrustedCAURL.IsNull() && !data.TLSCertParams.ValidationParams.TrustedCAURL.IsUnknown() {
+				validation_paramsNestedMap["trusted_ca_url"] = data.TLSCertParams.ValidationParams.TrustedCAURL.ValueString()
 			}
 			tls_cert_paramsMap["validation_params"] = validation_paramsNestedMap
 		}
@@ -6991,12 +6991,12 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["cors_policy"].(map[string]interface{}); ok && (isImport || data.CorsPolicy != nil) {
-		data.CorsPolicy = &VirtualHostCorsPolicyModel{
+	if blockData, ok := apiResource.Spec["cors_policy"].(map[string]interface{}); ok && (isImport || data.CORSPolicy != nil) {
+		data.CORSPolicy = &VirtualHostCORSPolicyModel{
 			AllowCredentials: func() types.Bool {
-				if !isImport && data.CorsPolicy != nil {
+				if !isImport && data.CORSPolicy != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.CorsPolicy.AllowCredentials
+					return data.CORSPolicy.AllowCredentials
 				}
 				// Import case: read from API
 				if v, ok := blockData["allow_credentials"].(bool); ok {
@@ -7043,9 +7043,9 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 				return types.ListNull(types.StringType)
 			}(),
 			Disabled: func() types.Bool {
-				if !isImport && data.CorsPolicy != nil {
+				if !isImport && data.CORSPolicy != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.CorsPolicy.Disabled
+					return data.CORSPolicy.Disabled
 				}
 				// Import case: read from API
 				if v, ok := blockData["disabled"].(bool); ok {
@@ -7067,9 +7067,9 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["csrf_policy"].(map[string]interface{}); ok && isImport && data.CsrfPolicy == nil {
+	if _, ok := apiResource.Spec["csrf_policy"].(map[string]interface{}); ok && isImport && data.CSRFPolicy == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.CsrfPolicy = &VirtualHostCsrfPolicyModel{}
+		data.CSRFPolicy = &VirtualHostCSRFPolicyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["custom_errors"].(map[string]interface{}); ok && isImport && data.CustomErrors == nil {
@@ -7732,13 +7732,13 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 		}
 		data.SensitiveDataPolicy = sensitive_data_policyList
 	}
-	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDdosMitigation != nil) {
-		data.SlowDdosMitigation = &VirtualHostSlowDdosMitigationModel{
+	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDDOSMitigation != nil) {
+		data.SlowDDOSMitigation = &VirtualHostSlowDDOSMitigationModel{
 			DisableRequestTimeout: func() *VirtualHostEmptyModel {
-				if !isImport && data.SlowDdosMitigation != nil {
+				if !isImport && data.SlowDDOSMitigation != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.SlowDdosMitigation.DisableRequestTimeout
+					return data.SlowDDOSMitigation.DisableRequestTimeout
 				}
 				// Import case: read from API
 				if _, ok := blockData["disable_request_timeout"].(map[string]interface{}); ok {
@@ -7880,7 +7880,7 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 							}
 							return types.BoolNull()
 						}(),
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}

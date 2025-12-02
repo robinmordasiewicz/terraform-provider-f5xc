@@ -67,13 +67,13 @@ type ProtocolPolicerProtocolPolicerPolicerModel struct {
 // ProtocolPolicerProtocolPolicerProtocolModel represents protocol block
 type ProtocolPolicerProtocolPolicerProtocolModel struct {
 	DNS  *ProtocolPolicerEmptyModel                       `tfsdk:"dns"`
-	Icmp *ProtocolPolicerProtocolPolicerProtocolIcmpModel `tfsdk:"icmp"`
+	ICMP *ProtocolPolicerProtocolPolicerProtocolICMPModel `tfsdk:"icmp"`
 	TCP  *ProtocolPolicerProtocolPolicerProtocolTCPModel  `tfsdk:"tcp"`
 	UDP  *ProtocolPolicerEmptyModel                       `tfsdk:"udp"`
 }
 
-// ProtocolPolicerProtocolPolicerProtocolIcmpModel represents icmp block
-type ProtocolPolicerProtocolPolicerProtocolIcmpModel struct {
+// ProtocolPolicerProtocolPolicerProtocolICMPModel represents icmp block
+type ProtocolPolicerProtocolPolicerProtocolICMPModel struct {
 	Type types.List `tfsdk:"type"`
 }
 
@@ -406,11 +406,11 @@ func (r *ProtocolPolicerResource) Create(ctx context.Context, req resource.Creat
 				if item.Protocol.DNS != nil {
 					protocolNestedMap["dns"] = map[string]interface{}{}
 				}
-				if item.Protocol.Icmp != nil {
+				if item.Protocol.ICMP != nil {
 					icmpDeepMap := make(map[string]interface{})
-					if !item.Protocol.Icmp.Type.IsNull() && !item.Protocol.Icmp.Type.IsUnknown() {
+					if !item.Protocol.ICMP.Type.IsNull() && !item.Protocol.ICMP.Type.IsUnknown() {
 						var TypeItems []string
-						diags := item.Protocol.Icmp.Type.ElementsAs(ctx, &TypeItems, false)
+						diags := item.Protocol.ICMP.Type.ElementsAs(ctx, &TypeItems, false)
 						if !diags.HasError() {
 							icmpDeepMap["type"] = TypeItems
 						}
@@ -781,11 +781,11 @@ func (r *ProtocolPolicerResource) Update(ctx context.Context, req resource.Updat
 				if item.Protocol.DNS != nil {
 					protocolNestedMap["dns"] = map[string]interface{}{}
 				}
-				if item.Protocol.Icmp != nil {
+				if item.Protocol.ICMP != nil {
 					icmpDeepMap := make(map[string]interface{})
-					if !item.Protocol.Icmp.Type.IsNull() && !item.Protocol.Icmp.Type.IsUnknown() {
+					if !item.Protocol.ICMP.Type.IsNull() && !item.Protocol.ICMP.Type.IsUnknown() {
 						var TypeItems []string
-						diags := item.Protocol.Icmp.Type.ElementsAs(ctx, &TypeItems, false)
+						diags := item.Protocol.ICMP.Type.ElementsAs(ctx, &TypeItems, false)
 						if !diags.HasError() {
 							icmpDeepMap["type"] = TypeItems
 						}

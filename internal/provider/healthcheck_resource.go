@@ -83,7 +83,7 @@ type HealthcheckResourceModel struct {
 	Timeouts           timeouts.Value                   `tfsdk:"timeouts"`
 	HTTPHealthCheck    *HealthcheckHTTPHealthCheckModel `tfsdk:"http_health_check"`
 	TCPHealthCheck     *HealthcheckTCPHealthCheckModel  `tfsdk:"tcp_health_check"`
-	UDPIcmpHealthCheck *HealthcheckEmptyModel           `tfsdk:"udp_icmp_health_check"`
+	UDPICMPHealthCheck *HealthcheckEmptyModel           `tfsdk:"udp_icmp_health_check"`
 }
 
 func (r *HealthcheckResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -430,7 +430,7 @@ func (r *HealthcheckResource) Create(ctx context.Context, req resource.CreateReq
 		}
 		createReq.Spec["tcp_health_check"] = tcp_health_checkMap
 	}
-	if data.UDPIcmpHealthCheck != nil {
+	if data.UDPICMPHealthCheck != nil {
 		udp_icmp_health_checkMap := make(map[string]interface{})
 		createReq.Spec["udp_icmp_health_check"] = udp_icmp_health_checkMap
 	}
@@ -555,9 +555,9 @@ func (r *HealthcheckResource) Create(ctx context.Context, req resource.CreateReq
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["udp_icmp_health_check"].(map[string]interface{}); ok && isImport && data.UDPIcmpHealthCheck == nil {
+	if _, ok := apiResource.Spec["udp_icmp_health_check"].(map[string]interface{}); ok && isImport && data.UDPICMPHealthCheck == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.UDPIcmpHealthCheck = &HealthcheckEmptyModel{}
+		data.UDPICMPHealthCheck = &HealthcheckEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if v, ok := apiResource.Spec["healthy_threshold"].(float64); ok {
@@ -771,9 +771,9 @@ func (r *HealthcheckResource) Read(ctx context.Context, req resource.ReadRequest
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["udp_icmp_health_check"].(map[string]interface{}); ok && isImport && data.UDPIcmpHealthCheck == nil {
+	if _, ok := apiResource.Spec["udp_icmp_health_check"].(map[string]interface{}); ok && isImport && data.UDPICMPHealthCheck == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.UDPIcmpHealthCheck = &HealthcheckEmptyModel{}
+		data.UDPICMPHealthCheck = &HealthcheckEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if v, ok := apiResource.Spec["healthy_threshold"].(float64); ok {
@@ -904,7 +904,7 @@ func (r *HealthcheckResource) Update(ctx context.Context, req resource.UpdateReq
 		}
 		apiResource.Spec["tcp_health_check"] = tcp_health_checkMap
 	}
-	if data.UDPIcmpHealthCheck != nil {
+	if data.UDPICMPHealthCheck != nil {
 		udp_icmp_health_checkMap := make(map[string]interface{})
 		apiResource.Spec["udp_icmp_health_check"] = udp_icmp_health_checkMap
 	}
@@ -1075,9 +1075,9 @@ func (r *HealthcheckResource) Update(ctx context.Context, req resource.UpdateReq
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["udp_icmp_health_check"].(map[string]interface{}); ok && isImport && data.UDPIcmpHealthCheck == nil {
+	if _, ok := apiResource.Spec["udp_icmp_health_check"].(map[string]interface{}); ok && isImport && data.UDPICMPHealthCheck == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.UDPIcmpHealthCheck = &HealthcheckEmptyModel{}
+		data.UDPICMPHealthCheck = &HealthcheckEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if v, ok := apiResource.Spec["healthy_threshold"].(float64); ok {

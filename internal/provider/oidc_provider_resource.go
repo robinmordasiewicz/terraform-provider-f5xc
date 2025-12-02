@@ -26,31 +26,31 @@ import (
 
 // Ensure provider defined types fully satisfy framework interfaces.
 var (
-	_ resource.Resource                   = &OidcProviderResource{}
-	_ resource.ResourceWithConfigure      = &OidcProviderResource{}
-	_ resource.ResourceWithImportState    = &OidcProviderResource{}
-	_ resource.ResourceWithModifyPlan     = &OidcProviderResource{}
-	_ resource.ResourceWithUpgradeState   = &OidcProviderResource{}
-	_ resource.ResourceWithValidateConfig = &OidcProviderResource{}
+	_ resource.Resource                   = &OIDCProviderResource{}
+	_ resource.ResourceWithConfigure      = &OIDCProviderResource{}
+	_ resource.ResourceWithImportState    = &OIDCProviderResource{}
+	_ resource.ResourceWithModifyPlan     = &OIDCProviderResource{}
+	_ resource.ResourceWithUpgradeState   = &OIDCProviderResource{}
+	_ resource.ResourceWithValidateConfig = &OIDCProviderResource{}
 )
 
 // oidc_providerSchemaVersion is the schema version for state upgrades
 const oidc_providerSchemaVersion int64 = 1
 
-func NewOidcProviderResource() resource.Resource {
-	return &OidcProviderResource{}
+func NewOIDCProviderResource() resource.Resource {
+	return &OIDCProviderResource{}
 }
 
-type OidcProviderResource struct {
+type OIDCProviderResource struct {
 	client *client.Client
 }
 
-// OidcProviderEmptyModel represents empty nested blocks
-type OidcProviderEmptyModel struct {
+// OIDCProviderEmptyModel represents empty nested blocks
+type OIDCProviderEmptyModel struct {
 }
 
-// OidcProviderAzureOidcSpecTypeModel represents azure_oidc_spec_type block
-type OidcProviderAzureOidcSpecTypeModel struct {
+// OIDCProviderAzureOIDCSpecTypeModel represents azure_oidc_spec_type block
+type OIDCProviderAzureOIDCSpecTypeModel struct {
 	AuthorizationURL  types.String `tfsdk:"authorization_url"`
 	BackchannelLogout types.Bool   `tfsdk:"backchannel_logout"`
 	ClientID          types.String `tfsdk:"client_id"`
@@ -64,15 +64,15 @@ type OidcProviderAzureOidcSpecTypeModel struct {
 	UserInfoURL       types.String `tfsdk:"user_info_url"`
 }
 
-// OidcProviderGoogleOidcSpecTypeModel represents google_oidc_spec_type block
-type OidcProviderGoogleOidcSpecTypeModel struct {
+// OIDCProviderGoogleOIDCSpecTypeModel represents google_oidc_spec_type block
+type OIDCProviderGoogleOIDCSpecTypeModel struct {
 	ClientID     types.String `tfsdk:"client_id"`
 	ClientSecret types.String `tfsdk:"client_secret"`
 	HostedDomain types.String `tfsdk:"hosted_domain"`
 }
 
-// OidcProviderOidcV10SpecTypeModel represents oidc_v10_spec_type block
-type OidcProviderOidcV10SpecTypeModel struct {
+// OIDCProviderOIDCV10SpecTypeModel represents oidc_v10_spec_type block
+type OIDCProviderOIDCV10SpecTypeModel struct {
 	AllowedClockSkew         types.String `tfsdk:"allowed_clock_skew"`
 	AuthorizationURL         types.String `tfsdk:"authorization_url"`
 	BackchannelLogout        types.Bool   `tfsdk:"backchannel_logout"`
@@ -93,8 +93,8 @@ type OidcProviderOidcV10SpecTypeModel struct {
 	ValidateSignatures       types.Bool   `tfsdk:"validate_signatures"`
 }
 
-// OidcProviderOktaOidcSpecTypeModel represents okta_oidc_spec_type block
-type OidcProviderOktaOidcSpecTypeModel struct {
+// OIDCProviderOktaOIDCSpecTypeModel represents okta_oidc_spec_type block
+type OIDCProviderOktaOIDCSpecTypeModel struct {
 	AuthorizationURL  types.String `tfsdk:"authorization_url"`
 	BackchannelLogout types.Bool   `tfsdk:"backchannel_logout"`
 	ClientID          types.String `tfsdk:"client_id"`
@@ -108,7 +108,7 @@ type OidcProviderOktaOidcSpecTypeModel struct {
 	UserInfoURL       types.String `tfsdk:"user_info_url"`
 }
 
-type OidcProviderResourceModel struct {
+type OIDCProviderResourceModel struct {
 	Name               types.String                         `tfsdk:"name"`
 	Namespace          types.String                         `tfsdk:"namespace"`
 	Annotations        types.Map                            `tfsdk:"annotations"`
@@ -118,23 +118,23 @@ type OidcProviderResourceModel struct {
 	ID                 types.String                         `tfsdk:"id"`
 	ProviderType       types.String                         `tfsdk:"provider_type"`
 	Timeouts           timeouts.Value                       `tfsdk:"timeouts"`
-	AzureOidcSpecType  *OidcProviderAzureOidcSpecTypeModel  `tfsdk:"azure_oidc_spec_type"`
-	GoogleOidcSpecType *OidcProviderGoogleOidcSpecTypeModel `tfsdk:"google_oidc_spec_type"`
-	OidcV10SpecType    *OidcProviderOidcV10SpecTypeModel    `tfsdk:"oidc_v10_spec_type"`
-	OktaOidcSpecType   *OidcProviderOktaOidcSpecTypeModel   `tfsdk:"okta_oidc_spec_type"`
+	AzureOIDCSpecType  *OIDCProviderAzureOIDCSpecTypeModel  `tfsdk:"azure_oidc_spec_type"`
+	GoogleOIDCSpecType *OIDCProviderGoogleOIDCSpecTypeModel `tfsdk:"google_oidc_spec_type"`
+	OIDCV10SpecType    *OIDCProviderOIDCV10SpecTypeModel    `tfsdk:"oidc_v10_spec_type"`
+	OktaOIDCSpecType   *OIDCProviderOktaOIDCSpecTypeModel   `tfsdk:"okta_oidc_spec_type"`
 }
 
-func (r *OidcProviderResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
+func (r *OIDCProviderResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
 	resp.TypeName = req.ProviderTypeName + "_oidc_provider"
 }
 
-func (r *OidcProviderResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
+func (r *OIDCProviderResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             oidc_providerSchemaVersion,
-		MarkdownDescription: "Manages a OidcProvider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.",
+		MarkdownDescription: "Manages a OIDCProvider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the OidcProvider. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the OIDCProvider. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -144,7 +144,7 @@ func (r *OidcProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the OidcProvider will be created.",
+				MarkdownDescription: "Namespace where the OIDCProvider will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -390,7 +390,7 @@ func (r *OidcProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 	}
 }
 
-func (r *OidcProviderResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
+func (r *OIDCProviderResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -406,8 +406,8 @@ func (r *OidcProviderResource) Configure(ctx context.Context, req resource.Confi
 }
 
 // ValidateConfig implements resource.ResourceWithValidateConfig
-func (r *OidcProviderResource) ValidateConfig(ctx context.Context, req resource.ValidateConfigRequest, resp *resource.ValidateConfigResponse) {
-	var data OidcProviderResourceModel
+func (r *OIDCProviderResource) ValidateConfig(ctx context.Context, req resource.ValidateConfigRequest, resp *resource.ValidateConfigResponse) {
+	var data OIDCProviderResourceModel
 	resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -415,7 +415,7 @@ func (r *OidcProviderResource) ValidateConfig(ctx context.Context, req resource.
 }
 
 // ModifyPlan implements resource.ResourceWithModifyPlan
-func (r *OidcProviderResource) ModifyPlan(ctx context.Context, req resource.ModifyPlanRequest, resp *resource.ModifyPlanResponse) {
+func (r *OIDCProviderResource) ModifyPlan(ctx context.Context, req resource.ModifyPlanRequest, resp *resource.ModifyPlanResponse) {
 	if req.Plan.Raw.IsNull() {
 		resp.Diagnostics.AddWarning(
 			"Resource Destruction",
@@ -425,7 +425,7 @@ func (r *OidcProviderResource) ModifyPlan(ctx context.Context, req resource.Modi
 	}
 
 	if req.State.Raw.IsNull() {
-		var plan OidcProviderResourceModel
+		var plan OIDCProviderResourceModel
 		resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
 		if resp.Diagnostics.HasError() {
 			return
@@ -441,7 +441,7 @@ func (r *OidcProviderResource) ModifyPlan(ctx context.Context, req resource.Modi
 }
 
 // UpgradeState implements resource.ResourceWithUpgradeState
-func (r *OidcProviderResource) UpgradeState(ctx context.Context) map[int64]resource.StateUpgrader {
+func (r *OIDCProviderResource) UpgradeState(ctx context.Context) map[int64]resource.StateUpgrader {
 	return map[int64]resource.StateUpgrader{
 		0: {
 			PriorSchema: &schema.Schema{
@@ -467,7 +467,7 @@ func (r *OidcProviderResource) UpgradeState(ctx context.Context) map[int64]resou
 					return
 				}
 
-				upgradedState := OidcProviderResourceModel{
+				upgradedState := OIDCProviderResourceModel{
 					Name:        priorState.Name,
 					Namespace:   priorState.Namespace,
 					Annotations: priorState.Annotations,
@@ -482,8 +482,8 @@ func (r *OidcProviderResource) UpgradeState(ctx context.Context) map[int64]resou
 	}
 }
 
-func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
-	var data OidcProviderResourceModel
+func (r *OIDCProviderResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
+	var data OIDCProviderResourceModel
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -503,7 +503,7 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	createReq := &client.OidcProvider{
+	createReq := &client.OIDCProvider{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -534,148 +534,148 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if data.AzureOidcSpecType != nil {
+	if data.AzureOIDCSpecType != nil {
 		azure_oidc_spec_typeMap := make(map[string]interface{})
-		if !data.AzureOidcSpecType.AuthorizationURL.IsNull() && !data.AzureOidcSpecType.AuthorizationURL.IsUnknown() {
-			azure_oidc_spec_typeMap["authorization_url"] = data.AzureOidcSpecType.AuthorizationURL.ValueString()
+		if !data.AzureOIDCSpecType.AuthorizationURL.IsNull() && !data.AzureOIDCSpecType.AuthorizationURL.IsUnknown() {
+			azure_oidc_spec_typeMap["authorization_url"] = data.AzureOIDCSpecType.AuthorizationURL.ValueString()
 		}
-		if !data.AzureOidcSpecType.BackchannelLogout.IsNull() && !data.AzureOidcSpecType.BackchannelLogout.IsUnknown() {
-			azure_oidc_spec_typeMap["backchannel_logout"] = data.AzureOidcSpecType.BackchannelLogout.ValueBool()
+		if !data.AzureOIDCSpecType.BackchannelLogout.IsNull() && !data.AzureOIDCSpecType.BackchannelLogout.IsUnknown() {
+			azure_oidc_spec_typeMap["backchannel_logout"] = data.AzureOIDCSpecType.BackchannelLogout.ValueBool()
 		}
-		if !data.AzureOidcSpecType.ClientID.IsNull() && !data.AzureOidcSpecType.ClientID.IsUnknown() {
-			azure_oidc_spec_typeMap["client_id"] = data.AzureOidcSpecType.ClientID.ValueString()
+		if !data.AzureOIDCSpecType.ClientID.IsNull() && !data.AzureOIDCSpecType.ClientID.IsUnknown() {
+			azure_oidc_spec_typeMap["client_id"] = data.AzureOIDCSpecType.ClientID.ValueString()
 		}
-		if !data.AzureOidcSpecType.ClientSecret.IsNull() && !data.AzureOidcSpecType.ClientSecret.IsUnknown() {
-			azure_oidc_spec_typeMap["client_secret"] = data.AzureOidcSpecType.ClientSecret.ValueString()
+		if !data.AzureOIDCSpecType.ClientSecret.IsNull() && !data.AzureOIDCSpecType.ClientSecret.IsUnknown() {
+			azure_oidc_spec_typeMap["client_secret"] = data.AzureOIDCSpecType.ClientSecret.ValueString()
 		}
-		if !data.AzureOidcSpecType.DefaultScopes.IsNull() && !data.AzureOidcSpecType.DefaultScopes.IsUnknown() {
-			azure_oidc_spec_typeMap["default_scopes"] = data.AzureOidcSpecType.DefaultScopes.ValueString()
+		if !data.AzureOIDCSpecType.DefaultScopes.IsNull() && !data.AzureOIDCSpecType.DefaultScopes.IsUnknown() {
+			azure_oidc_spec_typeMap["default_scopes"] = data.AzureOIDCSpecType.DefaultScopes.ValueString()
 		}
-		if !data.AzureOidcSpecType.Issuer.IsNull() && !data.AzureOidcSpecType.Issuer.IsUnknown() {
-			azure_oidc_spec_typeMap["issuer"] = data.AzureOidcSpecType.Issuer.ValueString()
+		if !data.AzureOIDCSpecType.Issuer.IsNull() && !data.AzureOIDCSpecType.Issuer.IsUnknown() {
+			azure_oidc_spec_typeMap["issuer"] = data.AzureOIDCSpecType.Issuer.ValueString()
 		}
-		if !data.AzureOidcSpecType.JwksURL.IsNull() && !data.AzureOidcSpecType.JwksURL.IsUnknown() {
-			azure_oidc_spec_typeMap["jwks_url"] = data.AzureOidcSpecType.JwksURL.ValueString()
+		if !data.AzureOIDCSpecType.JwksURL.IsNull() && !data.AzureOIDCSpecType.JwksURL.IsUnknown() {
+			azure_oidc_spec_typeMap["jwks_url"] = data.AzureOIDCSpecType.JwksURL.ValueString()
 		}
-		if !data.AzureOidcSpecType.LogoutURL.IsNull() && !data.AzureOidcSpecType.LogoutURL.IsUnknown() {
-			azure_oidc_spec_typeMap["logout_url"] = data.AzureOidcSpecType.LogoutURL.ValueString()
+		if !data.AzureOIDCSpecType.LogoutURL.IsNull() && !data.AzureOIDCSpecType.LogoutURL.IsUnknown() {
+			azure_oidc_spec_typeMap["logout_url"] = data.AzureOIDCSpecType.LogoutURL.ValueString()
 		}
-		if !data.AzureOidcSpecType.Prompt.IsNull() && !data.AzureOidcSpecType.Prompt.IsUnknown() {
-			azure_oidc_spec_typeMap["prompt"] = data.AzureOidcSpecType.Prompt.ValueString()
+		if !data.AzureOIDCSpecType.Prompt.IsNull() && !data.AzureOIDCSpecType.Prompt.IsUnknown() {
+			azure_oidc_spec_typeMap["prompt"] = data.AzureOIDCSpecType.Prompt.ValueString()
 		}
-		if !data.AzureOidcSpecType.TokenURL.IsNull() && !data.AzureOidcSpecType.TokenURL.IsUnknown() {
-			azure_oidc_spec_typeMap["token_url"] = data.AzureOidcSpecType.TokenURL.ValueString()
+		if !data.AzureOIDCSpecType.TokenURL.IsNull() && !data.AzureOIDCSpecType.TokenURL.IsUnknown() {
+			azure_oidc_spec_typeMap["token_url"] = data.AzureOIDCSpecType.TokenURL.ValueString()
 		}
-		if !data.AzureOidcSpecType.UserInfoURL.IsNull() && !data.AzureOidcSpecType.UserInfoURL.IsUnknown() {
-			azure_oidc_spec_typeMap["user_info_url"] = data.AzureOidcSpecType.UserInfoURL.ValueString()
+		if !data.AzureOIDCSpecType.UserInfoURL.IsNull() && !data.AzureOIDCSpecType.UserInfoURL.IsUnknown() {
+			azure_oidc_spec_typeMap["user_info_url"] = data.AzureOIDCSpecType.UserInfoURL.ValueString()
 		}
 		createReq.Spec["azure_oidc_spec_type"] = azure_oidc_spec_typeMap
 	}
-	if data.GoogleOidcSpecType != nil {
+	if data.GoogleOIDCSpecType != nil {
 		google_oidc_spec_typeMap := make(map[string]interface{})
-		if !data.GoogleOidcSpecType.ClientID.IsNull() && !data.GoogleOidcSpecType.ClientID.IsUnknown() {
-			google_oidc_spec_typeMap["client_id"] = data.GoogleOidcSpecType.ClientID.ValueString()
+		if !data.GoogleOIDCSpecType.ClientID.IsNull() && !data.GoogleOIDCSpecType.ClientID.IsUnknown() {
+			google_oidc_spec_typeMap["client_id"] = data.GoogleOIDCSpecType.ClientID.ValueString()
 		}
-		if !data.GoogleOidcSpecType.ClientSecret.IsNull() && !data.GoogleOidcSpecType.ClientSecret.IsUnknown() {
-			google_oidc_spec_typeMap["client_secret"] = data.GoogleOidcSpecType.ClientSecret.ValueString()
+		if !data.GoogleOIDCSpecType.ClientSecret.IsNull() && !data.GoogleOIDCSpecType.ClientSecret.IsUnknown() {
+			google_oidc_spec_typeMap["client_secret"] = data.GoogleOIDCSpecType.ClientSecret.ValueString()
 		}
-		if !data.GoogleOidcSpecType.HostedDomain.IsNull() && !data.GoogleOidcSpecType.HostedDomain.IsUnknown() {
-			google_oidc_spec_typeMap["hosted_domain"] = data.GoogleOidcSpecType.HostedDomain.ValueString()
+		if !data.GoogleOIDCSpecType.HostedDomain.IsNull() && !data.GoogleOIDCSpecType.HostedDomain.IsUnknown() {
+			google_oidc_spec_typeMap["hosted_domain"] = data.GoogleOIDCSpecType.HostedDomain.ValueString()
 		}
 		createReq.Spec["google_oidc_spec_type"] = google_oidc_spec_typeMap
 	}
-	if data.OidcV10SpecType != nil {
+	if data.OIDCV10SpecType != nil {
 		oidc_v10_spec_typeMap := make(map[string]interface{})
-		if !data.OidcV10SpecType.AllowedClockSkew.IsNull() && !data.OidcV10SpecType.AllowedClockSkew.IsUnknown() {
-			oidc_v10_spec_typeMap["allowed_clock_skew"] = data.OidcV10SpecType.AllowedClockSkew.ValueString()
+		if !data.OIDCV10SpecType.AllowedClockSkew.IsNull() && !data.OIDCV10SpecType.AllowedClockSkew.IsUnknown() {
+			oidc_v10_spec_typeMap["allowed_clock_skew"] = data.OIDCV10SpecType.AllowedClockSkew.ValueString()
 		}
-		if !data.OidcV10SpecType.AuthorizationURL.IsNull() && !data.OidcV10SpecType.AuthorizationURL.IsUnknown() {
-			oidc_v10_spec_typeMap["authorization_url"] = data.OidcV10SpecType.AuthorizationURL.ValueString()
+		if !data.OIDCV10SpecType.AuthorizationURL.IsNull() && !data.OIDCV10SpecType.AuthorizationURL.IsUnknown() {
+			oidc_v10_spec_typeMap["authorization_url"] = data.OIDCV10SpecType.AuthorizationURL.ValueString()
 		}
-		if !data.OidcV10SpecType.BackchannelLogout.IsNull() && !data.OidcV10SpecType.BackchannelLogout.IsUnknown() {
-			oidc_v10_spec_typeMap["backchannel_logout"] = data.OidcV10SpecType.BackchannelLogout.ValueBool()
+		if !data.OIDCV10SpecType.BackchannelLogout.IsNull() && !data.OIDCV10SpecType.BackchannelLogout.IsUnknown() {
+			oidc_v10_spec_typeMap["backchannel_logout"] = data.OIDCV10SpecType.BackchannelLogout.ValueBool()
 		}
-		if !data.OidcV10SpecType.ClientID.IsNull() && !data.OidcV10SpecType.ClientID.IsUnknown() {
-			oidc_v10_spec_typeMap["client_id"] = data.OidcV10SpecType.ClientID.ValueString()
+		if !data.OIDCV10SpecType.ClientID.IsNull() && !data.OIDCV10SpecType.ClientID.IsUnknown() {
+			oidc_v10_spec_typeMap["client_id"] = data.OIDCV10SpecType.ClientID.ValueString()
 		}
-		if !data.OidcV10SpecType.ClientSecret.IsNull() && !data.OidcV10SpecType.ClientSecret.IsUnknown() {
-			oidc_v10_spec_typeMap["client_secret"] = data.OidcV10SpecType.ClientSecret.ValueString()
+		if !data.OIDCV10SpecType.ClientSecret.IsNull() && !data.OIDCV10SpecType.ClientSecret.IsUnknown() {
+			oidc_v10_spec_typeMap["client_secret"] = data.OIDCV10SpecType.ClientSecret.ValueString()
 		}
-		if !data.OidcV10SpecType.DefaultScopes.IsNull() && !data.OidcV10SpecType.DefaultScopes.IsUnknown() {
-			oidc_v10_spec_typeMap["default_scopes"] = data.OidcV10SpecType.DefaultScopes.ValueString()
+		if !data.OIDCV10SpecType.DefaultScopes.IsNull() && !data.OIDCV10SpecType.DefaultScopes.IsUnknown() {
+			oidc_v10_spec_typeMap["default_scopes"] = data.OIDCV10SpecType.DefaultScopes.ValueString()
 		}
-		if !data.OidcV10SpecType.DisableUserInfo.IsNull() && !data.OidcV10SpecType.DisableUserInfo.IsUnknown() {
-			oidc_v10_spec_typeMap["disable_user_info"] = data.OidcV10SpecType.DisableUserInfo.ValueBool()
+		if !data.OIDCV10SpecType.DisableUserInfo.IsNull() && !data.OIDCV10SpecType.DisableUserInfo.IsUnknown() {
+			oidc_v10_spec_typeMap["disable_user_info"] = data.OIDCV10SpecType.DisableUserInfo.ValueBool()
 		}
-		if !data.OidcV10SpecType.DisplayName.IsNull() && !data.OidcV10SpecType.DisplayName.IsUnknown() {
-			oidc_v10_spec_typeMap["display_name"] = data.OidcV10SpecType.DisplayName.ValueString()
+		if !data.OIDCV10SpecType.DisplayName.IsNull() && !data.OIDCV10SpecType.DisplayName.IsUnknown() {
+			oidc_v10_spec_typeMap["display_name"] = data.OIDCV10SpecType.DisplayName.ValueString()
 		}
-		if !data.OidcV10SpecType.ForwardedQueryParameters.IsNull() && !data.OidcV10SpecType.ForwardedQueryParameters.IsUnknown() {
-			oidc_v10_spec_typeMap["forwarded_query_parameters"] = data.OidcV10SpecType.ForwardedQueryParameters.ValueString()
+		if !data.OIDCV10SpecType.ForwardedQueryParameters.IsNull() && !data.OIDCV10SpecType.ForwardedQueryParameters.IsUnknown() {
+			oidc_v10_spec_typeMap["forwarded_query_parameters"] = data.OIDCV10SpecType.ForwardedQueryParameters.ValueString()
 		}
-		if !data.OidcV10SpecType.Issuer.IsNull() && !data.OidcV10SpecType.Issuer.IsUnknown() {
-			oidc_v10_spec_typeMap["issuer"] = data.OidcV10SpecType.Issuer.ValueString()
+		if !data.OIDCV10SpecType.Issuer.IsNull() && !data.OIDCV10SpecType.Issuer.IsUnknown() {
+			oidc_v10_spec_typeMap["issuer"] = data.OIDCV10SpecType.Issuer.ValueString()
 		}
-		if !data.OidcV10SpecType.JwksURL.IsNull() && !data.OidcV10SpecType.JwksURL.IsUnknown() {
-			oidc_v10_spec_typeMap["jwks_url"] = data.OidcV10SpecType.JwksURL.ValueString()
+		if !data.OIDCV10SpecType.JwksURL.IsNull() && !data.OIDCV10SpecType.JwksURL.IsUnknown() {
+			oidc_v10_spec_typeMap["jwks_url"] = data.OIDCV10SpecType.JwksURL.ValueString()
 		}
-		if !data.OidcV10SpecType.LogoutURL.IsNull() && !data.OidcV10SpecType.LogoutURL.IsUnknown() {
-			oidc_v10_spec_typeMap["logout_url"] = data.OidcV10SpecType.LogoutURL.ValueString()
+		if !data.OIDCV10SpecType.LogoutURL.IsNull() && !data.OIDCV10SpecType.LogoutURL.IsUnknown() {
+			oidc_v10_spec_typeMap["logout_url"] = data.OIDCV10SpecType.LogoutURL.ValueString()
 		}
-		if !data.OidcV10SpecType.PassCurrentLocale.IsNull() && !data.OidcV10SpecType.PassCurrentLocale.IsUnknown() {
-			oidc_v10_spec_typeMap["pass_current_locale"] = data.OidcV10SpecType.PassCurrentLocale.ValueBool()
+		if !data.OIDCV10SpecType.PassCurrentLocale.IsNull() && !data.OIDCV10SpecType.PassCurrentLocale.IsUnknown() {
+			oidc_v10_spec_typeMap["pass_current_locale"] = data.OIDCV10SpecType.PassCurrentLocale.ValueBool()
 		}
-		if !data.OidcV10SpecType.PassLoginHint.IsNull() && !data.OidcV10SpecType.PassLoginHint.IsUnknown() {
-			oidc_v10_spec_typeMap["pass_login_hint"] = data.OidcV10SpecType.PassLoginHint.ValueBool()
+		if !data.OIDCV10SpecType.PassLoginHint.IsNull() && !data.OIDCV10SpecType.PassLoginHint.IsUnknown() {
+			oidc_v10_spec_typeMap["pass_login_hint"] = data.OIDCV10SpecType.PassLoginHint.ValueBool()
 		}
-		if !data.OidcV10SpecType.Prompt.IsNull() && !data.OidcV10SpecType.Prompt.IsUnknown() {
-			oidc_v10_spec_typeMap["prompt"] = data.OidcV10SpecType.Prompt.ValueString()
+		if !data.OIDCV10SpecType.Prompt.IsNull() && !data.OIDCV10SpecType.Prompt.IsUnknown() {
+			oidc_v10_spec_typeMap["prompt"] = data.OIDCV10SpecType.Prompt.ValueString()
 		}
-		if !data.OidcV10SpecType.TokenURL.IsNull() && !data.OidcV10SpecType.TokenURL.IsUnknown() {
-			oidc_v10_spec_typeMap["token_url"] = data.OidcV10SpecType.TokenURL.ValueString()
+		if !data.OIDCV10SpecType.TokenURL.IsNull() && !data.OIDCV10SpecType.TokenURL.IsUnknown() {
+			oidc_v10_spec_typeMap["token_url"] = data.OIDCV10SpecType.TokenURL.ValueString()
 		}
-		if !data.OidcV10SpecType.UserInfoURL.IsNull() && !data.OidcV10SpecType.UserInfoURL.IsUnknown() {
-			oidc_v10_spec_typeMap["user_info_url"] = data.OidcV10SpecType.UserInfoURL.ValueString()
+		if !data.OIDCV10SpecType.UserInfoURL.IsNull() && !data.OIDCV10SpecType.UserInfoURL.IsUnknown() {
+			oidc_v10_spec_typeMap["user_info_url"] = data.OIDCV10SpecType.UserInfoURL.ValueString()
 		}
-		if !data.OidcV10SpecType.ValidateSignatures.IsNull() && !data.OidcV10SpecType.ValidateSignatures.IsUnknown() {
-			oidc_v10_spec_typeMap["validate_signatures"] = data.OidcV10SpecType.ValidateSignatures.ValueBool()
+		if !data.OIDCV10SpecType.ValidateSignatures.IsNull() && !data.OIDCV10SpecType.ValidateSignatures.IsUnknown() {
+			oidc_v10_spec_typeMap["validate_signatures"] = data.OIDCV10SpecType.ValidateSignatures.ValueBool()
 		}
 		createReq.Spec["oidc_v10_spec_type"] = oidc_v10_spec_typeMap
 	}
-	if data.OktaOidcSpecType != nil {
+	if data.OktaOIDCSpecType != nil {
 		okta_oidc_spec_typeMap := make(map[string]interface{})
-		if !data.OktaOidcSpecType.AuthorizationURL.IsNull() && !data.OktaOidcSpecType.AuthorizationURL.IsUnknown() {
-			okta_oidc_spec_typeMap["authorization_url"] = data.OktaOidcSpecType.AuthorizationURL.ValueString()
+		if !data.OktaOIDCSpecType.AuthorizationURL.IsNull() && !data.OktaOIDCSpecType.AuthorizationURL.IsUnknown() {
+			okta_oidc_spec_typeMap["authorization_url"] = data.OktaOIDCSpecType.AuthorizationURL.ValueString()
 		}
-		if !data.OktaOidcSpecType.BackchannelLogout.IsNull() && !data.OktaOidcSpecType.BackchannelLogout.IsUnknown() {
-			okta_oidc_spec_typeMap["backchannel_logout"] = data.OktaOidcSpecType.BackchannelLogout.ValueBool()
+		if !data.OktaOIDCSpecType.BackchannelLogout.IsNull() && !data.OktaOIDCSpecType.BackchannelLogout.IsUnknown() {
+			okta_oidc_spec_typeMap["backchannel_logout"] = data.OktaOIDCSpecType.BackchannelLogout.ValueBool()
 		}
-		if !data.OktaOidcSpecType.ClientID.IsNull() && !data.OktaOidcSpecType.ClientID.IsUnknown() {
-			okta_oidc_spec_typeMap["client_id"] = data.OktaOidcSpecType.ClientID.ValueString()
+		if !data.OktaOIDCSpecType.ClientID.IsNull() && !data.OktaOIDCSpecType.ClientID.IsUnknown() {
+			okta_oidc_spec_typeMap["client_id"] = data.OktaOIDCSpecType.ClientID.ValueString()
 		}
-		if !data.OktaOidcSpecType.ClientSecret.IsNull() && !data.OktaOidcSpecType.ClientSecret.IsUnknown() {
-			okta_oidc_spec_typeMap["client_secret"] = data.OktaOidcSpecType.ClientSecret.ValueString()
+		if !data.OktaOIDCSpecType.ClientSecret.IsNull() && !data.OktaOIDCSpecType.ClientSecret.IsUnknown() {
+			okta_oidc_spec_typeMap["client_secret"] = data.OktaOIDCSpecType.ClientSecret.ValueString()
 		}
-		if !data.OktaOidcSpecType.DefaultScopes.IsNull() && !data.OktaOidcSpecType.DefaultScopes.IsUnknown() {
-			okta_oidc_spec_typeMap["default_scopes"] = data.OktaOidcSpecType.DefaultScopes.ValueString()
+		if !data.OktaOIDCSpecType.DefaultScopes.IsNull() && !data.OktaOIDCSpecType.DefaultScopes.IsUnknown() {
+			okta_oidc_spec_typeMap["default_scopes"] = data.OktaOIDCSpecType.DefaultScopes.ValueString()
 		}
-		if !data.OktaOidcSpecType.Issuer.IsNull() && !data.OktaOidcSpecType.Issuer.IsUnknown() {
-			okta_oidc_spec_typeMap["issuer"] = data.OktaOidcSpecType.Issuer.ValueString()
+		if !data.OktaOIDCSpecType.Issuer.IsNull() && !data.OktaOIDCSpecType.Issuer.IsUnknown() {
+			okta_oidc_spec_typeMap["issuer"] = data.OktaOIDCSpecType.Issuer.ValueString()
 		}
-		if !data.OktaOidcSpecType.JwksURL.IsNull() && !data.OktaOidcSpecType.JwksURL.IsUnknown() {
-			okta_oidc_spec_typeMap["jwks_url"] = data.OktaOidcSpecType.JwksURL.ValueString()
+		if !data.OktaOIDCSpecType.JwksURL.IsNull() && !data.OktaOIDCSpecType.JwksURL.IsUnknown() {
+			okta_oidc_spec_typeMap["jwks_url"] = data.OktaOIDCSpecType.JwksURL.ValueString()
 		}
-		if !data.OktaOidcSpecType.LogoutURL.IsNull() && !data.OktaOidcSpecType.LogoutURL.IsUnknown() {
-			okta_oidc_spec_typeMap["logout_url"] = data.OktaOidcSpecType.LogoutURL.ValueString()
+		if !data.OktaOIDCSpecType.LogoutURL.IsNull() && !data.OktaOIDCSpecType.LogoutURL.IsUnknown() {
+			okta_oidc_spec_typeMap["logout_url"] = data.OktaOIDCSpecType.LogoutURL.ValueString()
 		}
-		if !data.OktaOidcSpecType.Prompt.IsNull() && !data.OktaOidcSpecType.Prompt.IsUnknown() {
-			okta_oidc_spec_typeMap["prompt"] = data.OktaOidcSpecType.Prompt.ValueString()
+		if !data.OktaOIDCSpecType.Prompt.IsNull() && !data.OktaOIDCSpecType.Prompt.IsUnknown() {
+			okta_oidc_spec_typeMap["prompt"] = data.OktaOIDCSpecType.Prompt.ValueString()
 		}
-		if !data.OktaOidcSpecType.TokenURL.IsNull() && !data.OktaOidcSpecType.TokenURL.IsUnknown() {
-			okta_oidc_spec_typeMap["token_url"] = data.OktaOidcSpecType.TokenURL.ValueString()
+		if !data.OktaOIDCSpecType.TokenURL.IsNull() && !data.OktaOIDCSpecType.TokenURL.IsUnknown() {
+			okta_oidc_spec_typeMap["token_url"] = data.OktaOIDCSpecType.TokenURL.ValueString()
 		}
-		if !data.OktaOidcSpecType.UserInfoURL.IsNull() && !data.OktaOidcSpecType.UserInfoURL.IsUnknown() {
-			okta_oidc_spec_typeMap["user_info_url"] = data.OktaOidcSpecType.UserInfoURL.ValueString()
+		if !data.OktaOIDCSpecType.UserInfoURL.IsNull() && !data.OktaOIDCSpecType.UserInfoURL.IsUnknown() {
+			okta_oidc_spec_typeMap["user_info_url"] = data.OktaOIDCSpecType.UserInfoURL.ValueString()
 		}
 		createReq.Spec["okta_oidc_spec_type"] = okta_oidc_spec_typeMap
 	}
@@ -683,9 +683,9 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 		createReq.Spec["provider_type"] = data.ProviderType.ValueString()
 	}
 
-	apiResource, err := r.client.CreateOidcProvider(ctx, createReq)
+	apiResource, err := r.client.CreateOIDCProvider(ctx, createReq)
 	if err != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create OidcProvider: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create OIDCProvider: %s", err))
 		return
 	}
 
@@ -695,8 +695,8 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
 	_ = isImport      // May be unused if resource has no blocks needing import detection
-	if blockData, ok := apiResource.Spec["azure_oidc_spec_type"].(map[string]interface{}); ok && (isImport || data.AzureOidcSpecType != nil) {
-		data.AzureOidcSpecType = &OidcProviderAzureOidcSpecTypeModel{
+	if blockData, ok := apiResource.Spec["azure_oidc_spec_type"].(map[string]interface{}); ok && (isImport || data.AzureOIDCSpecType != nil) {
+		data.AzureOIDCSpecType = &OIDCProviderAzureOIDCSpecTypeModel{
 			AuthorizationURL: func() types.String {
 				if v, ok := blockData["authorization_url"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -704,9 +704,9 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 				return types.StringNull()
 			}(),
 			BackchannelLogout: func() types.Bool {
-				if !isImport && data.AzureOidcSpecType != nil {
+				if !isImport && data.AzureOIDCSpecType != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.AzureOidcSpecType.BackchannelLogout
+					return data.AzureOIDCSpecType.BackchannelLogout
 				}
 				// Import case: read from API
 				if v, ok := blockData["backchannel_logout"].(bool); ok {
@@ -770,8 +770,8 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["google_oidc_spec_type"].(map[string]interface{}); ok && (isImport || data.GoogleOidcSpecType != nil) {
-		data.GoogleOidcSpecType = &OidcProviderGoogleOidcSpecTypeModel{
+	if blockData, ok := apiResource.Spec["google_oidc_spec_type"].(map[string]interface{}); ok && (isImport || data.GoogleOIDCSpecType != nil) {
+		data.GoogleOIDCSpecType = &OIDCProviderGoogleOIDCSpecTypeModel{
 			ClientID: func() types.String {
 				if v, ok := blockData["client_id"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -792,8 +792,8 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["oidc_v10_spec_type"].(map[string]interface{}); ok && (isImport || data.OidcV10SpecType != nil) {
-		data.OidcV10SpecType = &OidcProviderOidcV10SpecTypeModel{
+	if blockData, ok := apiResource.Spec["oidc_v10_spec_type"].(map[string]interface{}); ok && (isImport || data.OIDCV10SpecType != nil) {
+		data.OIDCV10SpecType = &OIDCProviderOIDCV10SpecTypeModel{
 			AllowedClockSkew: func() types.String {
 				if v, ok := blockData["allowed_clock_skew"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -807,9 +807,9 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 				return types.StringNull()
 			}(),
 			BackchannelLogout: func() types.Bool {
-				if !isImport && data.OidcV10SpecType != nil {
+				if !isImport && data.OIDCV10SpecType != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.OidcV10SpecType.BackchannelLogout
+					return data.OIDCV10SpecType.BackchannelLogout
 				}
 				// Import case: read from API
 				if v, ok := blockData["backchannel_logout"].(bool); ok {
@@ -836,9 +836,9 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 				return types.StringNull()
 			}(),
 			DisableUserInfo: func() types.Bool {
-				if !isImport && data.OidcV10SpecType != nil {
+				if !isImport && data.OIDCV10SpecType != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.OidcV10SpecType.DisableUserInfo
+					return data.OIDCV10SpecType.DisableUserInfo
 				}
 				// Import case: read from API
 				if v, ok := blockData["disable_user_info"].(bool); ok {
@@ -877,9 +877,9 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 				return types.StringNull()
 			}(),
 			PassCurrentLocale: func() types.Bool {
-				if !isImport && data.OidcV10SpecType != nil {
+				if !isImport && data.OIDCV10SpecType != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.OidcV10SpecType.PassCurrentLocale
+					return data.OIDCV10SpecType.PassCurrentLocale
 				}
 				// Import case: read from API
 				if v, ok := blockData["pass_current_locale"].(bool); ok {
@@ -888,9 +888,9 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 				return types.BoolNull()
 			}(),
 			PassLoginHint: func() types.Bool {
-				if !isImport && data.OidcV10SpecType != nil {
+				if !isImport && data.OIDCV10SpecType != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.OidcV10SpecType.PassLoginHint
+					return data.OIDCV10SpecType.PassLoginHint
 				}
 				// Import case: read from API
 				if v, ok := blockData["pass_login_hint"].(bool); ok {
@@ -917,9 +917,9 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 				return types.StringNull()
 			}(),
 			ValidateSignatures: func() types.Bool {
-				if !isImport && data.OidcV10SpecType != nil {
+				if !isImport && data.OIDCV10SpecType != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.OidcV10SpecType.ValidateSignatures
+					return data.OIDCV10SpecType.ValidateSignatures
 				}
 				// Import case: read from API
 				if v, ok := blockData["validate_signatures"].(bool); ok {
@@ -929,8 +929,8 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["okta_oidc_spec_type"].(map[string]interface{}); ok && (isImport || data.OktaOidcSpecType != nil) {
-		data.OktaOidcSpecType = &OidcProviderOktaOidcSpecTypeModel{
+	if blockData, ok := apiResource.Spec["okta_oidc_spec_type"].(map[string]interface{}); ok && (isImport || data.OktaOIDCSpecType != nil) {
+		data.OktaOIDCSpecType = &OIDCProviderOktaOIDCSpecTypeModel{
 			AuthorizationURL: func() types.String {
 				if v, ok := blockData["authorization_url"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -938,9 +938,9 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 				return types.StringNull()
 			}(),
 			BackchannelLogout: func() types.Bool {
-				if !isImport && data.OktaOidcSpecType != nil {
+				if !isImport && data.OktaOIDCSpecType != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.OktaOidcSpecType.BackchannelLogout
+					return data.OktaOIDCSpecType.BackchannelLogout
 				}
 				// Import case: read from API
 				if v, ok := blockData["backchannel_logout"].(bool); ok {
@@ -1017,12 +1017,12 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
-	tflog.Trace(ctx, "created OidcProvider resource")
+	tflog.Trace(ctx, "created OIDCProvider resource")
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *OidcProviderResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-	var data OidcProviderResourceModel
+func (r *OIDCProviderResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
+	var data OIDCProviderResourceModel
 	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -1040,18 +1040,18 @@ func (r *OidcProviderResource) Read(ctx context.Context, req resource.ReadReques
 	psd, psDiags := privatestate.LoadFromPrivateState(ctx, &req)
 	resp.Diagnostics.Append(psDiags...)
 
-	apiResource, err := r.client.GetOidcProvider(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	apiResource, err := r.client.GetOIDCProvider(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// Check if the resource was deleted outside Terraform
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
-			tflog.Warn(ctx, "OidcProvider not found, removing from state", map[string]interface{}{
+			tflog.Warn(ctx, "OIDCProvider not found, removing from state", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})
 			resp.State.RemoveResource(ctx)
 			return
 		}
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read OidcProvider: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read OIDCProvider: %s", err))
 		return
 	}
 
@@ -1102,8 +1102,8 @@ func (r *OidcProviderResource) Read(ctx context.Context, req resource.ReadReques
 		"psd_is_nil": psd == nil,
 		"managed":    psd.Metadata.Custom["managed"],
 	})
-	if blockData, ok := apiResource.Spec["azure_oidc_spec_type"].(map[string]interface{}); ok && (isImport || data.AzureOidcSpecType != nil) {
-		data.AzureOidcSpecType = &OidcProviderAzureOidcSpecTypeModel{
+	if blockData, ok := apiResource.Spec["azure_oidc_spec_type"].(map[string]interface{}); ok && (isImport || data.AzureOIDCSpecType != nil) {
+		data.AzureOIDCSpecType = &OIDCProviderAzureOIDCSpecTypeModel{
 			AuthorizationURL: func() types.String {
 				if v, ok := blockData["authorization_url"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -1111,9 +1111,9 @@ func (r *OidcProviderResource) Read(ctx context.Context, req resource.ReadReques
 				return types.StringNull()
 			}(),
 			BackchannelLogout: func() types.Bool {
-				if !isImport && data.AzureOidcSpecType != nil {
+				if !isImport && data.AzureOIDCSpecType != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.AzureOidcSpecType.BackchannelLogout
+					return data.AzureOIDCSpecType.BackchannelLogout
 				}
 				// Import case: read from API
 				if v, ok := blockData["backchannel_logout"].(bool); ok {
@@ -1177,8 +1177,8 @@ func (r *OidcProviderResource) Read(ctx context.Context, req resource.ReadReques
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["google_oidc_spec_type"].(map[string]interface{}); ok && (isImport || data.GoogleOidcSpecType != nil) {
-		data.GoogleOidcSpecType = &OidcProviderGoogleOidcSpecTypeModel{
+	if blockData, ok := apiResource.Spec["google_oidc_spec_type"].(map[string]interface{}); ok && (isImport || data.GoogleOIDCSpecType != nil) {
+		data.GoogleOIDCSpecType = &OIDCProviderGoogleOIDCSpecTypeModel{
 			ClientID: func() types.String {
 				if v, ok := blockData["client_id"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -1199,8 +1199,8 @@ func (r *OidcProviderResource) Read(ctx context.Context, req resource.ReadReques
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["oidc_v10_spec_type"].(map[string]interface{}); ok && (isImport || data.OidcV10SpecType != nil) {
-		data.OidcV10SpecType = &OidcProviderOidcV10SpecTypeModel{
+	if blockData, ok := apiResource.Spec["oidc_v10_spec_type"].(map[string]interface{}); ok && (isImport || data.OIDCV10SpecType != nil) {
+		data.OIDCV10SpecType = &OIDCProviderOIDCV10SpecTypeModel{
 			AllowedClockSkew: func() types.String {
 				if v, ok := blockData["allowed_clock_skew"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -1214,9 +1214,9 @@ func (r *OidcProviderResource) Read(ctx context.Context, req resource.ReadReques
 				return types.StringNull()
 			}(),
 			BackchannelLogout: func() types.Bool {
-				if !isImport && data.OidcV10SpecType != nil {
+				if !isImport && data.OIDCV10SpecType != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.OidcV10SpecType.BackchannelLogout
+					return data.OIDCV10SpecType.BackchannelLogout
 				}
 				// Import case: read from API
 				if v, ok := blockData["backchannel_logout"].(bool); ok {
@@ -1243,9 +1243,9 @@ func (r *OidcProviderResource) Read(ctx context.Context, req resource.ReadReques
 				return types.StringNull()
 			}(),
 			DisableUserInfo: func() types.Bool {
-				if !isImport && data.OidcV10SpecType != nil {
+				if !isImport && data.OIDCV10SpecType != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.OidcV10SpecType.DisableUserInfo
+					return data.OIDCV10SpecType.DisableUserInfo
 				}
 				// Import case: read from API
 				if v, ok := blockData["disable_user_info"].(bool); ok {
@@ -1284,9 +1284,9 @@ func (r *OidcProviderResource) Read(ctx context.Context, req resource.ReadReques
 				return types.StringNull()
 			}(),
 			PassCurrentLocale: func() types.Bool {
-				if !isImport && data.OidcV10SpecType != nil {
+				if !isImport && data.OIDCV10SpecType != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.OidcV10SpecType.PassCurrentLocale
+					return data.OIDCV10SpecType.PassCurrentLocale
 				}
 				// Import case: read from API
 				if v, ok := blockData["pass_current_locale"].(bool); ok {
@@ -1295,9 +1295,9 @@ func (r *OidcProviderResource) Read(ctx context.Context, req resource.ReadReques
 				return types.BoolNull()
 			}(),
 			PassLoginHint: func() types.Bool {
-				if !isImport && data.OidcV10SpecType != nil {
+				if !isImport && data.OIDCV10SpecType != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.OidcV10SpecType.PassLoginHint
+					return data.OIDCV10SpecType.PassLoginHint
 				}
 				// Import case: read from API
 				if v, ok := blockData["pass_login_hint"].(bool); ok {
@@ -1324,9 +1324,9 @@ func (r *OidcProviderResource) Read(ctx context.Context, req resource.ReadReques
 				return types.StringNull()
 			}(),
 			ValidateSignatures: func() types.Bool {
-				if !isImport && data.OidcV10SpecType != nil {
+				if !isImport && data.OIDCV10SpecType != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.OidcV10SpecType.ValidateSignatures
+					return data.OIDCV10SpecType.ValidateSignatures
 				}
 				// Import case: read from API
 				if v, ok := blockData["validate_signatures"].(bool); ok {
@@ -1336,8 +1336,8 @@ func (r *OidcProviderResource) Read(ctx context.Context, req resource.ReadReques
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["okta_oidc_spec_type"].(map[string]interface{}); ok && (isImport || data.OktaOidcSpecType != nil) {
-		data.OktaOidcSpecType = &OidcProviderOktaOidcSpecTypeModel{
+	if blockData, ok := apiResource.Spec["okta_oidc_spec_type"].(map[string]interface{}); ok && (isImport || data.OktaOIDCSpecType != nil) {
+		data.OktaOIDCSpecType = &OIDCProviderOktaOIDCSpecTypeModel{
 			AuthorizationURL: func() types.String {
 				if v, ok := blockData["authorization_url"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -1345,9 +1345,9 @@ func (r *OidcProviderResource) Read(ctx context.Context, req resource.ReadReques
 				return types.StringNull()
 			}(),
 			BackchannelLogout: func() types.Bool {
-				if !isImport && data.OktaOidcSpecType != nil {
+				if !isImport && data.OktaOIDCSpecType != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.OktaOidcSpecType.BackchannelLogout
+					return data.OktaOIDCSpecType.BackchannelLogout
 				}
 				// Import case: read from API
 				if v, ok := blockData["backchannel_logout"].(bool); ok {
@@ -1429,8 +1429,8 @@ func (r *OidcProviderResource) Read(ctx context.Context, req resource.ReadReques
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *OidcProviderResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-	var data OidcProviderResourceModel
+func (r *OIDCProviderResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
+	var data OIDCProviderResourceModel
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -1445,7 +1445,7 @@ func (r *OidcProviderResource) Update(ctx context.Context, req resource.UpdateRe
 	ctx, cancel := context.WithTimeout(ctx, updateTimeout)
 	defer cancel()
 
-	apiResource := &client.OidcProvider{
+	apiResource := &client.OIDCProvider{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -1476,148 +1476,148 @@ func (r *OidcProviderResource) Update(ctx context.Context, req resource.UpdateRe
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if data.AzureOidcSpecType != nil {
+	if data.AzureOIDCSpecType != nil {
 		azure_oidc_spec_typeMap := make(map[string]interface{})
-		if !data.AzureOidcSpecType.AuthorizationURL.IsNull() && !data.AzureOidcSpecType.AuthorizationURL.IsUnknown() {
-			azure_oidc_spec_typeMap["authorization_url"] = data.AzureOidcSpecType.AuthorizationURL.ValueString()
+		if !data.AzureOIDCSpecType.AuthorizationURL.IsNull() && !data.AzureOIDCSpecType.AuthorizationURL.IsUnknown() {
+			azure_oidc_spec_typeMap["authorization_url"] = data.AzureOIDCSpecType.AuthorizationURL.ValueString()
 		}
-		if !data.AzureOidcSpecType.BackchannelLogout.IsNull() && !data.AzureOidcSpecType.BackchannelLogout.IsUnknown() {
-			azure_oidc_spec_typeMap["backchannel_logout"] = data.AzureOidcSpecType.BackchannelLogout.ValueBool()
+		if !data.AzureOIDCSpecType.BackchannelLogout.IsNull() && !data.AzureOIDCSpecType.BackchannelLogout.IsUnknown() {
+			azure_oidc_spec_typeMap["backchannel_logout"] = data.AzureOIDCSpecType.BackchannelLogout.ValueBool()
 		}
-		if !data.AzureOidcSpecType.ClientID.IsNull() && !data.AzureOidcSpecType.ClientID.IsUnknown() {
-			azure_oidc_spec_typeMap["client_id"] = data.AzureOidcSpecType.ClientID.ValueString()
+		if !data.AzureOIDCSpecType.ClientID.IsNull() && !data.AzureOIDCSpecType.ClientID.IsUnknown() {
+			azure_oidc_spec_typeMap["client_id"] = data.AzureOIDCSpecType.ClientID.ValueString()
 		}
-		if !data.AzureOidcSpecType.ClientSecret.IsNull() && !data.AzureOidcSpecType.ClientSecret.IsUnknown() {
-			azure_oidc_spec_typeMap["client_secret"] = data.AzureOidcSpecType.ClientSecret.ValueString()
+		if !data.AzureOIDCSpecType.ClientSecret.IsNull() && !data.AzureOIDCSpecType.ClientSecret.IsUnknown() {
+			azure_oidc_spec_typeMap["client_secret"] = data.AzureOIDCSpecType.ClientSecret.ValueString()
 		}
-		if !data.AzureOidcSpecType.DefaultScopes.IsNull() && !data.AzureOidcSpecType.DefaultScopes.IsUnknown() {
-			azure_oidc_spec_typeMap["default_scopes"] = data.AzureOidcSpecType.DefaultScopes.ValueString()
+		if !data.AzureOIDCSpecType.DefaultScopes.IsNull() && !data.AzureOIDCSpecType.DefaultScopes.IsUnknown() {
+			azure_oidc_spec_typeMap["default_scopes"] = data.AzureOIDCSpecType.DefaultScopes.ValueString()
 		}
-		if !data.AzureOidcSpecType.Issuer.IsNull() && !data.AzureOidcSpecType.Issuer.IsUnknown() {
-			azure_oidc_spec_typeMap["issuer"] = data.AzureOidcSpecType.Issuer.ValueString()
+		if !data.AzureOIDCSpecType.Issuer.IsNull() && !data.AzureOIDCSpecType.Issuer.IsUnknown() {
+			azure_oidc_spec_typeMap["issuer"] = data.AzureOIDCSpecType.Issuer.ValueString()
 		}
-		if !data.AzureOidcSpecType.JwksURL.IsNull() && !data.AzureOidcSpecType.JwksURL.IsUnknown() {
-			azure_oidc_spec_typeMap["jwks_url"] = data.AzureOidcSpecType.JwksURL.ValueString()
+		if !data.AzureOIDCSpecType.JwksURL.IsNull() && !data.AzureOIDCSpecType.JwksURL.IsUnknown() {
+			azure_oidc_spec_typeMap["jwks_url"] = data.AzureOIDCSpecType.JwksURL.ValueString()
 		}
-		if !data.AzureOidcSpecType.LogoutURL.IsNull() && !data.AzureOidcSpecType.LogoutURL.IsUnknown() {
-			azure_oidc_spec_typeMap["logout_url"] = data.AzureOidcSpecType.LogoutURL.ValueString()
+		if !data.AzureOIDCSpecType.LogoutURL.IsNull() && !data.AzureOIDCSpecType.LogoutURL.IsUnknown() {
+			azure_oidc_spec_typeMap["logout_url"] = data.AzureOIDCSpecType.LogoutURL.ValueString()
 		}
-		if !data.AzureOidcSpecType.Prompt.IsNull() && !data.AzureOidcSpecType.Prompt.IsUnknown() {
-			azure_oidc_spec_typeMap["prompt"] = data.AzureOidcSpecType.Prompt.ValueString()
+		if !data.AzureOIDCSpecType.Prompt.IsNull() && !data.AzureOIDCSpecType.Prompt.IsUnknown() {
+			azure_oidc_spec_typeMap["prompt"] = data.AzureOIDCSpecType.Prompt.ValueString()
 		}
-		if !data.AzureOidcSpecType.TokenURL.IsNull() && !data.AzureOidcSpecType.TokenURL.IsUnknown() {
-			azure_oidc_spec_typeMap["token_url"] = data.AzureOidcSpecType.TokenURL.ValueString()
+		if !data.AzureOIDCSpecType.TokenURL.IsNull() && !data.AzureOIDCSpecType.TokenURL.IsUnknown() {
+			azure_oidc_spec_typeMap["token_url"] = data.AzureOIDCSpecType.TokenURL.ValueString()
 		}
-		if !data.AzureOidcSpecType.UserInfoURL.IsNull() && !data.AzureOidcSpecType.UserInfoURL.IsUnknown() {
-			azure_oidc_spec_typeMap["user_info_url"] = data.AzureOidcSpecType.UserInfoURL.ValueString()
+		if !data.AzureOIDCSpecType.UserInfoURL.IsNull() && !data.AzureOIDCSpecType.UserInfoURL.IsUnknown() {
+			azure_oidc_spec_typeMap["user_info_url"] = data.AzureOIDCSpecType.UserInfoURL.ValueString()
 		}
 		apiResource.Spec["azure_oidc_spec_type"] = azure_oidc_spec_typeMap
 	}
-	if data.GoogleOidcSpecType != nil {
+	if data.GoogleOIDCSpecType != nil {
 		google_oidc_spec_typeMap := make(map[string]interface{})
-		if !data.GoogleOidcSpecType.ClientID.IsNull() && !data.GoogleOidcSpecType.ClientID.IsUnknown() {
-			google_oidc_spec_typeMap["client_id"] = data.GoogleOidcSpecType.ClientID.ValueString()
+		if !data.GoogleOIDCSpecType.ClientID.IsNull() && !data.GoogleOIDCSpecType.ClientID.IsUnknown() {
+			google_oidc_spec_typeMap["client_id"] = data.GoogleOIDCSpecType.ClientID.ValueString()
 		}
-		if !data.GoogleOidcSpecType.ClientSecret.IsNull() && !data.GoogleOidcSpecType.ClientSecret.IsUnknown() {
-			google_oidc_spec_typeMap["client_secret"] = data.GoogleOidcSpecType.ClientSecret.ValueString()
+		if !data.GoogleOIDCSpecType.ClientSecret.IsNull() && !data.GoogleOIDCSpecType.ClientSecret.IsUnknown() {
+			google_oidc_spec_typeMap["client_secret"] = data.GoogleOIDCSpecType.ClientSecret.ValueString()
 		}
-		if !data.GoogleOidcSpecType.HostedDomain.IsNull() && !data.GoogleOidcSpecType.HostedDomain.IsUnknown() {
-			google_oidc_spec_typeMap["hosted_domain"] = data.GoogleOidcSpecType.HostedDomain.ValueString()
+		if !data.GoogleOIDCSpecType.HostedDomain.IsNull() && !data.GoogleOIDCSpecType.HostedDomain.IsUnknown() {
+			google_oidc_spec_typeMap["hosted_domain"] = data.GoogleOIDCSpecType.HostedDomain.ValueString()
 		}
 		apiResource.Spec["google_oidc_spec_type"] = google_oidc_spec_typeMap
 	}
-	if data.OidcV10SpecType != nil {
+	if data.OIDCV10SpecType != nil {
 		oidc_v10_spec_typeMap := make(map[string]interface{})
-		if !data.OidcV10SpecType.AllowedClockSkew.IsNull() && !data.OidcV10SpecType.AllowedClockSkew.IsUnknown() {
-			oidc_v10_spec_typeMap["allowed_clock_skew"] = data.OidcV10SpecType.AllowedClockSkew.ValueString()
+		if !data.OIDCV10SpecType.AllowedClockSkew.IsNull() && !data.OIDCV10SpecType.AllowedClockSkew.IsUnknown() {
+			oidc_v10_spec_typeMap["allowed_clock_skew"] = data.OIDCV10SpecType.AllowedClockSkew.ValueString()
 		}
-		if !data.OidcV10SpecType.AuthorizationURL.IsNull() && !data.OidcV10SpecType.AuthorizationURL.IsUnknown() {
-			oidc_v10_spec_typeMap["authorization_url"] = data.OidcV10SpecType.AuthorizationURL.ValueString()
+		if !data.OIDCV10SpecType.AuthorizationURL.IsNull() && !data.OIDCV10SpecType.AuthorizationURL.IsUnknown() {
+			oidc_v10_spec_typeMap["authorization_url"] = data.OIDCV10SpecType.AuthorizationURL.ValueString()
 		}
-		if !data.OidcV10SpecType.BackchannelLogout.IsNull() && !data.OidcV10SpecType.BackchannelLogout.IsUnknown() {
-			oidc_v10_spec_typeMap["backchannel_logout"] = data.OidcV10SpecType.BackchannelLogout.ValueBool()
+		if !data.OIDCV10SpecType.BackchannelLogout.IsNull() && !data.OIDCV10SpecType.BackchannelLogout.IsUnknown() {
+			oidc_v10_spec_typeMap["backchannel_logout"] = data.OIDCV10SpecType.BackchannelLogout.ValueBool()
 		}
-		if !data.OidcV10SpecType.ClientID.IsNull() && !data.OidcV10SpecType.ClientID.IsUnknown() {
-			oidc_v10_spec_typeMap["client_id"] = data.OidcV10SpecType.ClientID.ValueString()
+		if !data.OIDCV10SpecType.ClientID.IsNull() && !data.OIDCV10SpecType.ClientID.IsUnknown() {
+			oidc_v10_spec_typeMap["client_id"] = data.OIDCV10SpecType.ClientID.ValueString()
 		}
-		if !data.OidcV10SpecType.ClientSecret.IsNull() && !data.OidcV10SpecType.ClientSecret.IsUnknown() {
-			oidc_v10_spec_typeMap["client_secret"] = data.OidcV10SpecType.ClientSecret.ValueString()
+		if !data.OIDCV10SpecType.ClientSecret.IsNull() && !data.OIDCV10SpecType.ClientSecret.IsUnknown() {
+			oidc_v10_spec_typeMap["client_secret"] = data.OIDCV10SpecType.ClientSecret.ValueString()
 		}
-		if !data.OidcV10SpecType.DefaultScopes.IsNull() && !data.OidcV10SpecType.DefaultScopes.IsUnknown() {
-			oidc_v10_spec_typeMap["default_scopes"] = data.OidcV10SpecType.DefaultScopes.ValueString()
+		if !data.OIDCV10SpecType.DefaultScopes.IsNull() && !data.OIDCV10SpecType.DefaultScopes.IsUnknown() {
+			oidc_v10_spec_typeMap["default_scopes"] = data.OIDCV10SpecType.DefaultScopes.ValueString()
 		}
-		if !data.OidcV10SpecType.DisableUserInfo.IsNull() && !data.OidcV10SpecType.DisableUserInfo.IsUnknown() {
-			oidc_v10_spec_typeMap["disable_user_info"] = data.OidcV10SpecType.DisableUserInfo.ValueBool()
+		if !data.OIDCV10SpecType.DisableUserInfo.IsNull() && !data.OIDCV10SpecType.DisableUserInfo.IsUnknown() {
+			oidc_v10_spec_typeMap["disable_user_info"] = data.OIDCV10SpecType.DisableUserInfo.ValueBool()
 		}
-		if !data.OidcV10SpecType.DisplayName.IsNull() && !data.OidcV10SpecType.DisplayName.IsUnknown() {
-			oidc_v10_spec_typeMap["display_name"] = data.OidcV10SpecType.DisplayName.ValueString()
+		if !data.OIDCV10SpecType.DisplayName.IsNull() && !data.OIDCV10SpecType.DisplayName.IsUnknown() {
+			oidc_v10_spec_typeMap["display_name"] = data.OIDCV10SpecType.DisplayName.ValueString()
 		}
-		if !data.OidcV10SpecType.ForwardedQueryParameters.IsNull() && !data.OidcV10SpecType.ForwardedQueryParameters.IsUnknown() {
-			oidc_v10_spec_typeMap["forwarded_query_parameters"] = data.OidcV10SpecType.ForwardedQueryParameters.ValueString()
+		if !data.OIDCV10SpecType.ForwardedQueryParameters.IsNull() && !data.OIDCV10SpecType.ForwardedQueryParameters.IsUnknown() {
+			oidc_v10_spec_typeMap["forwarded_query_parameters"] = data.OIDCV10SpecType.ForwardedQueryParameters.ValueString()
 		}
-		if !data.OidcV10SpecType.Issuer.IsNull() && !data.OidcV10SpecType.Issuer.IsUnknown() {
-			oidc_v10_spec_typeMap["issuer"] = data.OidcV10SpecType.Issuer.ValueString()
+		if !data.OIDCV10SpecType.Issuer.IsNull() && !data.OIDCV10SpecType.Issuer.IsUnknown() {
+			oidc_v10_spec_typeMap["issuer"] = data.OIDCV10SpecType.Issuer.ValueString()
 		}
-		if !data.OidcV10SpecType.JwksURL.IsNull() && !data.OidcV10SpecType.JwksURL.IsUnknown() {
-			oidc_v10_spec_typeMap["jwks_url"] = data.OidcV10SpecType.JwksURL.ValueString()
+		if !data.OIDCV10SpecType.JwksURL.IsNull() && !data.OIDCV10SpecType.JwksURL.IsUnknown() {
+			oidc_v10_spec_typeMap["jwks_url"] = data.OIDCV10SpecType.JwksURL.ValueString()
 		}
-		if !data.OidcV10SpecType.LogoutURL.IsNull() && !data.OidcV10SpecType.LogoutURL.IsUnknown() {
-			oidc_v10_spec_typeMap["logout_url"] = data.OidcV10SpecType.LogoutURL.ValueString()
+		if !data.OIDCV10SpecType.LogoutURL.IsNull() && !data.OIDCV10SpecType.LogoutURL.IsUnknown() {
+			oidc_v10_spec_typeMap["logout_url"] = data.OIDCV10SpecType.LogoutURL.ValueString()
 		}
-		if !data.OidcV10SpecType.PassCurrentLocale.IsNull() && !data.OidcV10SpecType.PassCurrentLocale.IsUnknown() {
-			oidc_v10_spec_typeMap["pass_current_locale"] = data.OidcV10SpecType.PassCurrentLocale.ValueBool()
+		if !data.OIDCV10SpecType.PassCurrentLocale.IsNull() && !data.OIDCV10SpecType.PassCurrentLocale.IsUnknown() {
+			oidc_v10_spec_typeMap["pass_current_locale"] = data.OIDCV10SpecType.PassCurrentLocale.ValueBool()
 		}
-		if !data.OidcV10SpecType.PassLoginHint.IsNull() && !data.OidcV10SpecType.PassLoginHint.IsUnknown() {
-			oidc_v10_spec_typeMap["pass_login_hint"] = data.OidcV10SpecType.PassLoginHint.ValueBool()
+		if !data.OIDCV10SpecType.PassLoginHint.IsNull() && !data.OIDCV10SpecType.PassLoginHint.IsUnknown() {
+			oidc_v10_spec_typeMap["pass_login_hint"] = data.OIDCV10SpecType.PassLoginHint.ValueBool()
 		}
-		if !data.OidcV10SpecType.Prompt.IsNull() && !data.OidcV10SpecType.Prompt.IsUnknown() {
-			oidc_v10_spec_typeMap["prompt"] = data.OidcV10SpecType.Prompt.ValueString()
+		if !data.OIDCV10SpecType.Prompt.IsNull() && !data.OIDCV10SpecType.Prompt.IsUnknown() {
+			oidc_v10_spec_typeMap["prompt"] = data.OIDCV10SpecType.Prompt.ValueString()
 		}
-		if !data.OidcV10SpecType.TokenURL.IsNull() && !data.OidcV10SpecType.TokenURL.IsUnknown() {
-			oidc_v10_spec_typeMap["token_url"] = data.OidcV10SpecType.TokenURL.ValueString()
+		if !data.OIDCV10SpecType.TokenURL.IsNull() && !data.OIDCV10SpecType.TokenURL.IsUnknown() {
+			oidc_v10_spec_typeMap["token_url"] = data.OIDCV10SpecType.TokenURL.ValueString()
 		}
-		if !data.OidcV10SpecType.UserInfoURL.IsNull() && !data.OidcV10SpecType.UserInfoURL.IsUnknown() {
-			oidc_v10_spec_typeMap["user_info_url"] = data.OidcV10SpecType.UserInfoURL.ValueString()
+		if !data.OIDCV10SpecType.UserInfoURL.IsNull() && !data.OIDCV10SpecType.UserInfoURL.IsUnknown() {
+			oidc_v10_spec_typeMap["user_info_url"] = data.OIDCV10SpecType.UserInfoURL.ValueString()
 		}
-		if !data.OidcV10SpecType.ValidateSignatures.IsNull() && !data.OidcV10SpecType.ValidateSignatures.IsUnknown() {
-			oidc_v10_spec_typeMap["validate_signatures"] = data.OidcV10SpecType.ValidateSignatures.ValueBool()
+		if !data.OIDCV10SpecType.ValidateSignatures.IsNull() && !data.OIDCV10SpecType.ValidateSignatures.IsUnknown() {
+			oidc_v10_spec_typeMap["validate_signatures"] = data.OIDCV10SpecType.ValidateSignatures.ValueBool()
 		}
 		apiResource.Spec["oidc_v10_spec_type"] = oidc_v10_spec_typeMap
 	}
-	if data.OktaOidcSpecType != nil {
+	if data.OktaOIDCSpecType != nil {
 		okta_oidc_spec_typeMap := make(map[string]interface{})
-		if !data.OktaOidcSpecType.AuthorizationURL.IsNull() && !data.OktaOidcSpecType.AuthorizationURL.IsUnknown() {
-			okta_oidc_spec_typeMap["authorization_url"] = data.OktaOidcSpecType.AuthorizationURL.ValueString()
+		if !data.OktaOIDCSpecType.AuthorizationURL.IsNull() && !data.OktaOIDCSpecType.AuthorizationURL.IsUnknown() {
+			okta_oidc_spec_typeMap["authorization_url"] = data.OktaOIDCSpecType.AuthorizationURL.ValueString()
 		}
-		if !data.OktaOidcSpecType.BackchannelLogout.IsNull() && !data.OktaOidcSpecType.BackchannelLogout.IsUnknown() {
-			okta_oidc_spec_typeMap["backchannel_logout"] = data.OktaOidcSpecType.BackchannelLogout.ValueBool()
+		if !data.OktaOIDCSpecType.BackchannelLogout.IsNull() && !data.OktaOIDCSpecType.BackchannelLogout.IsUnknown() {
+			okta_oidc_spec_typeMap["backchannel_logout"] = data.OktaOIDCSpecType.BackchannelLogout.ValueBool()
 		}
-		if !data.OktaOidcSpecType.ClientID.IsNull() && !data.OktaOidcSpecType.ClientID.IsUnknown() {
-			okta_oidc_spec_typeMap["client_id"] = data.OktaOidcSpecType.ClientID.ValueString()
+		if !data.OktaOIDCSpecType.ClientID.IsNull() && !data.OktaOIDCSpecType.ClientID.IsUnknown() {
+			okta_oidc_spec_typeMap["client_id"] = data.OktaOIDCSpecType.ClientID.ValueString()
 		}
-		if !data.OktaOidcSpecType.ClientSecret.IsNull() && !data.OktaOidcSpecType.ClientSecret.IsUnknown() {
-			okta_oidc_spec_typeMap["client_secret"] = data.OktaOidcSpecType.ClientSecret.ValueString()
+		if !data.OktaOIDCSpecType.ClientSecret.IsNull() && !data.OktaOIDCSpecType.ClientSecret.IsUnknown() {
+			okta_oidc_spec_typeMap["client_secret"] = data.OktaOIDCSpecType.ClientSecret.ValueString()
 		}
-		if !data.OktaOidcSpecType.DefaultScopes.IsNull() && !data.OktaOidcSpecType.DefaultScopes.IsUnknown() {
-			okta_oidc_spec_typeMap["default_scopes"] = data.OktaOidcSpecType.DefaultScopes.ValueString()
+		if !data.OktaOIDCSpecType.DefaultScopes.IsNull() && !data.OktaOIDCSpecType.DefaultScopes.IsUnknown() {
+			okta_oidc_spec_typeMap["default_scopes"] = data.OktaOIDCSpecType.DefaultScopes.ValueString()
 		}
-		if !data.OktaOidcSpecType.Issuer.IsNull() && !data.OktaOidcSpecType.Issuer.IsUnknown() {
-			okta_oidc_spec_typeMap["issuer"] = data.OktaOidcSpecType.Issuer.ValueString()
+		if !data.OktaOIDCSpecType.Issuer.IsNull() && !data.OktaOIDCSpecType.Issuer.IsUnknown() {
+			okta_oidc_spec_typeMap["issuer"] = data.OktaOIDCSpecType.Issuer.ValueString()
 		}
-		if !data.OktaOidcSpecType.JwksURL.IsNull() && !data.OktaOidcSpecType.JwksURL.IsUnknown() {
-			okta_oidc_spec_typeMap["jwks_url"] = data.OktaOidcSpecType.JwksURL.ValueString()
+		if !data.OktaOIDCSpecType.JwksURL.IsNull() && !data.OktaOIDCSpecType.JwksURL.IsUnknown() {
+			okta_oidc_spec_typeMap["jwks_url"] = data.OktaOIDCSpecType.JwksURL.ValueString()
 		}
-		if !data.OktaOidcSpecType.LogoutURL.IsNull() && !data.OktaOidcSpecType.LogoutURL.IsUnknown() {
-			okta_oidc_spec_typeMap["logout_url"] = data.OktaOidcSpecType.LogoutURL.ValueString()
+		if !data.OktaOIDCSpecType.LogoutURL.IsNull() && !data.OktaOIDCSpecType.LogoutURL.IsUnknown() {
+			okta_oidc_spec_typeMap["logout_url"] = data.OktaOIDCSpecType.LogoutURL.ValueString()
 		}
-		if !data.OktaOidcSpecType.Prompt.IsNull() && !data.OktaOidcSpecType.Prompt.IsUnknown() {
-			okta_oidc_spec_typeMap["prompt"] = data.OktaOidcSpecType.Prompt.ValueString()
+		if !data.OktaOIDCSpecType.Prompt.IsNull() && !data.OktaOIDCSpecType.Prompt.IsUnknown() {
+			okta_oidc_spec_typeMap["prompt"] = data.OktaOIDCSpecType.Prompt.ValueString()
 		}
-		if !data.OktaOidcSpecType.TokenURL.IsNull() && !data.OktaOidcSpecType.TokenURL.IsUnknown() {
-			okta_oidc_spec_typeMap["token_url"] = data.OktaOidcSpecType.TokenURL.ValueString()
+		if !data.OktaOIDCSpecType.TokenURL.IsNull() && !data.OktaOIDCSpecType.TokenURL.IsUnknown() {
+			okta_oidc_spec_typeMap["token_url"] = data.OktaOIDCSpecType.TokenURL.ValueString()
 		}
-		if !data.OktaOidcSpecType.UserInfoURL.IsNull() && !data.OktaOidcSpecType.UserInfoURL.IsUnknown() {
-			okta_oidc_spec_typeMap["user_info_url"] = data.OktaOidcSpecType.UserInfoURL.ValueString()
+		if !data.OktaOIDCSpecType.UserInfoURL.IsNull() && !data.OktaOIDCSpecType.UserInfoURL.IsUnknown() {
+			okta_oidc_spec_typeMap["user_info_url"] = data.OktaOIDCSpecType.UserInfoURL.ValueString()
 		}
 		apiResource.Spec["okta_oidc_spec_type"] = okta_oidc_spec_typeMap
 	}
@@ -1625,9 +1625,9 @@ func (r *OidcProviderResource) Update(ctx context.Context, req resource.UpdateRe
 		apiResource.Spec["provider_type"] = data.ProviderType.ValueString()
 	}
 
-	_, err := r.client.UpdateOidcProvider(ctx, apiResource)
+	_, err := r.client.UpdateOIDCProvider(ctx, apiResource)
 	if err != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update OidcProvider: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update OIDCProvider: %s", err))
 		return
 	}
 
@@ -1636,9 +1636,9 @@ func (r *OidcProviderResource) Update(ctx context.Context, req resource.UpdateRe
 
 	// Fetch the resource to get complete state including computed fields
 	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
-	fetched, fetchErr := r.client.GetOidcProvider(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	fetched, fetchErr := r.client.GetOIDCProvider(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if fetchErr != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read OidcProvider after update: %s", fetchErr))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read OIDCProvider after update: %s", fetchErr))
 		return
 	}
 
@@ -1655,8 +1655,8 @@ func (r *OidcProviderResource) Update(ctx context.Context, req resource.UpdateRe
 	apiResource = fetched // Use GET response which includes all computed fields
 	isImport := false     // Update is never an import
 	_ = isImport          // May be unused if resource has no blocks needing import detection
-	if blockData, ok := apiResource.Spec["azure_oidc_spec_type"].(map[string]interface{}); ok && (isImport || data.AzureOidcSpecType != nil) {
-		data.AzureOidcSpecType = &OidcProviderAzureOidcSpecTypeModel{
+	if blockData, ok := apiResource.Spec["azure_oidc_spec_type"].(map[string]interface{}); ok && (isImport || data.AzureOIDCSpecType != nil) {
+		data.AzureOIDCSpecType = &OIDCProviderAzureOIDCSpecTypeModel{
 			AuthorizationURL: func() types.String {
 				if v, ok := blockData["authorization_url"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -1664,9 +1664,9 @@ func (r *OidcProviderResource) Update(ctx context.Context, req resource.UpdateRe
 				return types.StringNull()
 			}(),
 			BackchannelLogout: func() types.Bool {
-				if !isImport && data.AzureOidcSpecType != nil {
+				if !isImport && data.AzureOIDCSpecType != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.AzureOidcSpecType.BackchannelLogout
+					return data.AzureOIDCSpecType.BackchannelLogout
 				}
 				// Import case: read from API
 				if v, ok := blockData["backchannel_logout"].(bool); ok {
@@ -1730,8 +1730,8 @@ func (r *OidcProviderResource) Update(ctx context.Context, req resource.UpdateRe
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["google_oidc_spec_type"].(map[string]interface{}); ok && (isImport || data.GoogleOidcSpecType != nil) {
-		data.GoogleOidcSpecType = &OidcProviderGoogleOidcSpecTypeModel{
+	if blockData, ok := apiResource.Spec["google_oidc_spec_type"].(map[string]interface{}); ok && (isImport || data.GoogleOIDCSpecType != nil) {
+		data.GoogleOIDCSpecType = &OIDCProviderGoogleOIDCSpecTypeModel{
 			ClientID: func() types.String {
 				if v, ok := blockData["client_id"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -1752,8 +1752,8 @@ func (r *OidcProviderResource) Update(ctx context.Context, req resource.UpdateRe
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["oidc_v10_spec_type"].(map[string]interface{}); ok && (isImport || data.OidcV10SpecType != nil) {
-		data.OidcV10SpecType = &OidcProviderOidcV10SpecTypeModel{
+	if blockData, ok := apiResource.Spec["oidc_v10_spec_type"].(map[string]interface{}); ok && (isImport || data.OIDCV10SpecType != nil) {
+		data.OIDCV10SpecType = &OIDCProviderOIDCV10SpecTypeModel{
 			AllowedClockSkew: func() types.String {
 				if v, ok := blockData["allowed_clock_skew"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -1767,9 +1767,9 @@ func (r *OidcProviderResource) Update(ctx context.Context, req resource.UpdateRe
 				return types.StringNull()
 			}(),
 			BackchannelLogout: func() types.Bool {
-				if !isImport && data.OidcV10SpecType != nil {
+				if !isImport && data.OIDCV10SpecType != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.OidcV10SpecType.BackchannelLogout
+					return data.OIDCV10SpecType.BackchannelLogout
 				}
 				// Import case: read from API
 				if v, ok := blockData["backchannel_logout"].(bool); ok {
@@ -1796,9 +1796,9 @@ func (r *OidcProviderResource) Update(ctx context.Context, req resource.UpdateRe
 				return types.StringNull()
 			}(),
 			DisableUserInfo: func() types.Bool {
-				if !isImport && data.OidcV10SpecType != nil {
+				if !isImport && data.OIDCV10SpecType != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.OidcV10SpecType.DisableUserInfo
+					return data.OIDCV10SpecType.DisableUserInfo
 				}
 				// Import case: read from API
 				if v, ok := blockData["disable_user_info"].(bool); ok {
@@ -1837,9 +1837,9 @@ func (r *OidcProviderResource) Update(ctx context.Context, req resource.UpdateRe
 				return types.StringNull()
 			}(),
 			PassCurrentLocale: func() types.Bool {
-				if !isImport && data.OidcV10SpecType != nil {
+				if !isImport && data.OIDCV10SpecType != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.OidcV10SpecType.PassCurrentLocale
+					return data.OIDCV10SpecType.PassCurrentLocale
 				}
 				// Import case: read from API
 				if v, ok := blockData["pass_current_locale"].(bool); ok {
@@ -1848,9 +1848,9 @@ func (r *OidcProviderResource) Update(ctx context.Context, req resource.UpdateRe
 				return types.BoolNull()
 			}(),
 			PassLoginHint: func() types.Bool {
-				if !isImport && data.OidcV10SpecType != nil {
+				if !isImport && data.OIDCV10SpecType != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.OidcV10SpecType.PassLoginHint
+					return data.OIDCV10SpecType.PassLoginHint
 				}
 				// Import case: read from API
 				if v, ok := blockData["pass_login_hint"].(bool); ok {
@@ -1877,9 +1877,9 @@ func (r *OidcProviderResource) Update(ctx context.Context, req resource.UpdateRe
 				return types.StringNull()
 			}(),
 			ValidateSignatures: func() types.Bool {
-				if !isImport && data.OidcV10SpecType != nil {
+				if !isImport && data.OIDCV10SpecType != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.OidcV10SpecType.ValidateSignatures
+					return data.OIDCV10SpecType.ValidateSignatures
 				}
 				// Import case: read from API
 				if v, ok := blockData["validate_signatures"].(bool); ok {
@@ -1889,8 +1889,8 @@ func (r *OidcProviderResource) Update(ctx context.Context, req resource.UpdateRe
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["okta_oidc_spec_type"].(map[string]interface{}); ok && (isImport || data.OktaOidcSpecType != nil) {
-		data.OktaOidcSpecType = &OidcProviderOktaOidcSpecTypeModel{
+	if blockData, ok := apiResource.Spec["okta_oidc_spec_type"].(map[string]interface{}); ok && (isImport || data.OktaOIDCSpecType != nil) {
+		data.OktaOIDCSpecType = &OIDCProviderOktaOIDCSpecTypeModel{
 			AuthorizationURL: func() types.String {
 				if v, ok := blockData["authorization_url"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -1898,9 +1898,9 @@ func (r *OidcProviderResource) Update(ctx context.Context, req resource.UpdateRe
 				return types.StringNull()
 			}(),
 			BackchannelLogout: func() types.Bool {
-				if !isImport && data.OktaOidcSpecType != nil {
+				if !isImport && data.OktaOIDCSpecType != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.OktaOidcSpecType.BackchannelLogout
+					return data.OktaOIDCSpecType.BackchannelLogout
 				}
 				// Import case: read from API
 				if v, ok := blockData["backchannel_logout"].(bool); ok {
@@ -1980,8 +1980,8 @@ func (r *OidcProviderResource) Update(ctx context.Context, req resource.UpdateRe
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *OidcProviderResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
-	var data OidcProviderResourceModel
+func (r *OIDCProviderResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
+	var data OIDCProviderResourceModel
 	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -1995,11 +1995,11 @@ func (r *OidcProviderResource) Delete(ctx context.Context, req resource.DeleteRe
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-	err := r.client.DeleteOidcProvider(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	err := r.client.DeleteOIDCProvider(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
-			tflog.Warn(ctx, "OidcProvider already deleted, removing from state", map[string]interface{}{
+			tflog.Warn(ctx, "OIDCProvider already deleted, removing from state", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})
@@ -2008,18 +2008,18 @@ func (r *OidcProviderResource) Delete(ctx context.Context, req resource.DeleteRe
 		// If delete is not implemented (501), warn and remove from state
 		// Some F5 XC resources don't support deletion via API
 		if strings.Contains(err.Error(), "501") {
-			tflog.Warn(ctx, "OidcProvider delete not supported by API (501), removing from state only", map[string]interface{}{
+			tflog.Warn(ctx, "OIDCProvider delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})
 			return
 		}
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete OidcProvider: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete OIDCProvider: %s", err))
 		return
 	}
 }
 
-func (r *OidcProviderResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
+func (r *OIDCProviderResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	// Import ID format: namespace/name
 	parts := strings.Split(req.ID, "/")
 	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {

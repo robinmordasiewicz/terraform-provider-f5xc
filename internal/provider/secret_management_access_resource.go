@@ -53,50 +53,50 @@ type SecretManagementAccessEmptyModel struct {
 type SecretManagementAccessAccessInfoModel struct {
 	Scheme         types.String                                        `tfsdk:"scheme"`
 	ServerEndpoint types.String                                        `tfsdk:"server_endpoint"`
-	RestAuthInfo   *SecretManagementAccessAccessInfoRestAuthInfoModel  `tfsdk:"rest_auth_info"`
+	RESTAuthInfo   *SecretManagementAccessAccessInfoRESTAuthInfoModel  `tfsdk:"rest_auth_info"`
 	TLSConfig      *SecretManagementAccessAccessInfoTLSConfigModel     `tfsdk:"tls_config"`
 	VaultAuthInfo  *SecretManagementAccessAccessInfoVaultAuthInfoModel `tfsdk:"vault_auth_info"`
 }
 
-// SecretManagementAccessAccessInfoRestAuthInfoModel represents rest_auth_info block
-type SecretManagementAccessAccessInfoRestAuthInfoModel struct {
-	BasicAuth       *SecretManagementAccessAccessInfoRestAuthInfoBasicAuthModel       `tfsdk:"basic_auth"`
-	HeadersAuth     *SecretManagementAccessAccessInfoRestAuthInfoHeadersAuthModel     `tfsdk:"headers_auth"`
-	QueryParamsAuth *SecretManagementAccessAccessInfoRestAuthInfoQueryParamsAuthModel `tfsdk:"query_params_auth"`
+// SecretManagementAccessAccessInfoRESTAuthInfoModel represents rest_auth_info block
+type SecretManagementAccessAccessInfoRESTAuthInfoModel struct {
+	BasicAuth       *SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthModel       `tfsdk:"basic_auth"`
+	HeadersAuth     *SecretManagementAccessAccessInfoRESTAuthInfoHeadersAuthModel     `tfsdk:"headers_auth"`
+	QueryParamsAuth *SecretManagementAccessAccessInfoRESTAuthInfoQueryParamsAuthModel `tfsdk:"query_params_auth"`
 }
 
-// SecretManagementAccessAccessInfoRestAuthInfoBasicAuthModel represents basic_auth block
-type SecretManagementAccessAccessInfoRestAuthInfoBasicAuthModel struct {
+// SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthModel represents basic_auth block
+type SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthModel struct {
 	Username types.String                                                        `tfsdk:"username"`
-	Password *SecretManagementAccessAccessInfoRestAuthInfoBasicAuthPasswordModel `tfsdk:"password"`
+	Password *SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordModel `tfsdk:"password"`
 }
 
-// SecretManagementAccessAccessInfoRestAuthInfoBasicAuthPasswordModel represents password block
-type SecretManagementAccessAccessInfoRestAuthInfoBasicAuthPasswordModel struct {
-	BlindfoldSecretInfo *SecretManagementAccessAccessInfoRestAuthInfoBasicAuthPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo     *SecretManagementAccessAccessInfoRestAuthInfoBasicAuthPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+// SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordModel represents password block
+type SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordModel struct {
+	BlindfoldSecretInfo *SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
-// SecretManagementAccessAccessInfoRestAuthInfoBasicAuthPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
-type SecretManagementAccessAccessInfoRestAuthInfoBasicAuthPasswordBlindfoldSecretInfoModel struct {
+// SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
+type SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
 	Location           types.String `tfsdk:"location"`
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
-// SecretManagementAccessAccessInfoRestAuthInfoBasicAuthPasswordClearSecretInfoModel represents clear_secret_info block
-type SecretManagementAccessAccessInfoRestAuthInfoBasicAuthPasswordClearSecretInfoModel struct {
+// SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordClearSecretInfoModel represents clear_secret_info block
+type SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
-// SecretManagementAccessAccessInfoRestAuthInfoHeadersAuthModel represents headers_auth block
-type SecretManagementAccessAccessInfoRestAuthInfoHeadersAuthModel struct {
+// SecretManagementAccessAccessInfoRESTAuthInfoHeadersAuthModel represents headers_auth block
+type SecretManagementAccessAccessInfoRESTAuthInfoHeadersAuthModel struct {
 	Headers *SecretManagementAccessEmptyModel `tfsdk:"headers"`
 }
 
-// SecretManagementAccessAccessInfoRestAuthInfoQueryParamsAuthModel represents query_params_auth block
-type SecretManagementAccessAccessInfoRestAuthInfoQueryParamsAuthModel struct {
+// SecretManagementAccessAccessInfoRESTAuthInfoQueryParamsAuthModel represents query_params_auth block
+type SecretManagementAccessAccessInfoRESTAuthInfoQueryParamsAuthModel struct {
 	QueryParams *SecretManagementAccessEmptyModel `tfsdk:"query_params"`
 }
 
@@ -133,18 +133,18 @@ type SecretManagementAccessAccessInfoTLSConfigCertParamsCertificatesModel struct
 // SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsModel represents validation_params block
 type SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsModel struct {
 	SkipHostnameVerification types.Bool                                                                         `tfsdk:"skip_hostname_verification"`
-	TrustedCaURL             types.String                                                                       `tfsdk:"trusted_ca_url"`
+	TrustedCAURL             types.String                                                                       `tfsdk:"trusted_ca_url"`
 	VerifySubjectAltNames    types.List                                                                         `tfsdk:"verify_subject_alt_names"`
-	TrustedCa                *SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsTrustedCaModel `tfsdk:"trusted_ca"`
+	TrustedCA                *SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsTrustedCAModel `tfsdk:"trusted_ca"`
 }
 
-// SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsTrustedCaModel represents trusted_ca block
-type SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsTrustedCaModel struct {
-	TrustedCaList []SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsTrustedCaTrustedCaListModel `tfsdk:"trusted_ca_list"`
+// SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsTrustedCAModel represents trusted_ca block
+type SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsTrustedCAModel struct {
+	TrustedCAList []SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsTrustedCATrustedCAListModel `tfsdk:"trusted_ca_list"`
 }
 
-// SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsTrustedCaTrustedCaListModel represents trusted_ca_list block
-type SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsTrustedCaTrustedCaListModel struct {
+// SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsTrustedCATrustedCAListModel represents trusted_ca_list block
+type SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsTrustedCATrustedCAListModel struct {
 	Kind      types.String `tfsdk:"kind"`
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -166,7 +166,7 @@ type SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesModel s
 	CertificateURL       types.String                                                                                   `tfsdk:"certificate_url"`
 	DescriptionSpec      types.String                                                                                   `tfsdk:"description_spec"`
 	CustomHashAlgorithms *SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling  *SecretManagementAccessEmptyModel                                                              `tfsdk:"disable_ocsp_stapling"`
+	DisableOCSPStapling  *SecretManagementAccessEmptyModel                                                              `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey           *SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
 	UseSystemDefaults    *SecretManagementAccessEmptyModel                                                              `tfsdk:"use_system_defaults"`
 }
@@ -198,18 +198,18 @@ type SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesPrivate
 // SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsModel represents validation_params block
 type SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsModel struct {
 	SkipHostnameVerification types.Bool                                                                           `tfsdk:"skip_hostname_verification"`
-	TrustedCaURL             types.String                                                                         `tfsdk:"trusted_ca_url"`
+	TrustedCAURL             types.String                                                                         `tfsdk:"trusted_ca_url"`
 	VerifySubjectAltNames    types.List                                                                           `tfsdk:"verify_subject_alt_names"`
-	TrustedCa                *SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsTrustedCaModel `tfsdk:"trusted_ca"`
+	TrustedCA                *SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsTrustedCAModel `tfsdk:"trusted_ca"`
 }
 
-// SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsTrustedCaModel represents trusted_ca block
-type SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsTrustedCaModel struct {
-	TrustedCaList []SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsTrustedCaTrustedCaListModel `tfsdk:"trusted_ca_list"`
+// SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsTrustedCAModel represents trusted_ca block
+type SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsTrustedCAModel struct {
+	TrustedCAList []SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsTrustedCATrustedCAListModel `tfsdk:"trusted_ca_list"`
 }
 
-// SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsTrustedCaTrustedCaListModel represents trusted_ca_list block
-type SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsTrustedCaTrustedCaListModel struct {
+// SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsTrustedCATrustedCAListModel represents trusted_ca_list block
+type SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsTrustedCATrustedCAListModel struct {
 	Kind      types.String `tfsdk:"kind"`
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -277,8 +277,8 @@ type SecretManagementAccessWhereModel struct {
 // SecretManagementAccessWhereSiteModel represents site block
 type SecretManagementAccessWhereSiteModel struct {
 	NetworkType        types.String                              `tfsdk:"network_type"`
-	DisableInternetVip *SecretManagementAccessEmptyModel         `tfsdk:"disable_internet_vip"`
-	EnableInternetVip  *SecretManagementAccessEmptyModel         `tfsdk:"enable_internet_vip"`
+	DisableInternetVIP *SecretManagementAccessEmptyModel         `tfsdk:"disable_internet_vip"`
+	EnableInternetVIP  *SecretManagementAccessEmptyModel         `tfsdk:"enable_internet_vip"`
 	Ref                []SecretManagementAccessWhereSiteRefModel `tfsdk:"ref"`
 }
 
@@ -308,8 +308,8 @@ type SecretManagementAccessWhereVirtualNetworkRefModel struct {
 // SecretManagementAccessWhereVirtualSiteModel represents virtual_site block
 type SecretManagementAccessWhereVirtualSiteModel struct {
 	NetworkType        types.String                                     `tfsdk:"network_type"`
-	DisableInternetVip *SecretManagementAccessEmptyModel                `tfsdk:"disable_internet_vip"`
-	EnableInternetVip  *SecretManagementAccessEmptyModel                `tfsdk:"enable_internet_vip"`
+	DisableInternetVIP *SecretManagementAccessEmptyModel                `tfsdk:"disable_internet_vip"`
+	EnableInternetVIP  *SecretManagementAccessEmptyModel                `tfsdk:"enable_internet_vip"`
 	Ref                []SecretManagementAccessWhereVirtualSiteRefModel `tfsdk:"ref"`
 }
 
@@ -1145,7 +1145,7 @@ func (r *SecretManagementAccessResource) Create(ctx context.Context, req resourc
 	// Marshal spec fields from Terraform state to API struct
 	if data.AccessInfo != nil {
 		access_infoMap := make(map[string]interface{})
-		if data.AccessInfo.RestAuthInfo != nil {
+		if data.AccessInfo.RESTAuthInfo != nil {
 			rest_auth_infoNestedMap := make(map[string]interface{})
 			access_infoMap["rest_auth_info"] = rest_auth_infoNestedMap
 		}
@@ -1211,14 +1211,14 @@ func (r *SecretManagementAccessResource) Create(ctx context.Context, req resourc
 	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["access_info"].(map[string]interface{}); ok && (isImport || data.AccessInfo != nil) {
 		data.AccessInfo = &SecretManagementAccessAccessInfoModel{
-			RestAuthInfo: func() *SecretManagementAccessAccessInfoRestAuthInfoModel {
-				if !isImport && data.AccessInfo != nil && data.AccessInfo.RestAuthInfo != nil {
+			RESTAuthInfo: func() *SecretManagementAccessAccessInfoRESTAuthInfoModel {
+				if !isImport && data.AccessInfo != nil && data.AccessInfo.RESTAuthInfo != nil {
 					// Normal Read: preserve existing state value
-					return data.AccessInfo.RestAuthInfo
+					return data.AccessInfo.RESTAuthInfo
 				}
 				// Import case: read from API
 				if _, ok := blockData["rest_auth_info"].(map[string]interface{}); ok {
-					return &SecretManagementAccessAccessInfoRestAuthInfoModel{}
+					return &SecretManagementAccessAccessInfoRESTAuthInfoModel{}
 				}
 				return nil
 			}(),
@@ -1376,14 +1376,14 @@ func (r *SecretManagementAccessResource) Read(ctx context.Context, req resource.
 	})
 	if blockData, ok := apiResource.Spec["access_info"].(map[string]interface{}); ok && (isImport || data.AccessInfo != nil) {
 		data.AccessInfo = &SecretManagementAccessAccessInfoModel{
-			RestAuthInfo: func() *SecretManagementAccessAccessInfoRestAuthInfoModel {
-				if !isImport && data.AccessInfo != nil && data.AccessInfo.RestAuthInfo != nil {
+			RESTAuthInfo: func() *SecretManagementAccessAccessInfoRESTAuthInfoModel {
+				if !isImport && data.AccessInfo != nil && data.AccessInfo.RESTAuthInfo != nil {
 					// Normal Read: preserve existing state value
-					return data.AccessInfo.RestAuthInfo
+					return data.AccessInfo.RESTAuthInfo
 				}
 				// Import case: read from API
 				if _, ok := blockData["rest_auth_info"].(map[string]interface{}); ok {
-					return &SecretManagementAccessAccessInfoRestAuthInfoModel{}
+					return &SecretManagementAccessAccessInfoRESTAuthInfoModel{}
 				}
 				return nil
 			}(),
@@ -1508,7 +1508,7 @@ func (r *SecretManagementAccessResource) Update(ctx context.Context, req resourc
 	// Marshal spec fields from Terraform state to API struct
 	if data.AccessInfo != nil {
 		access_infoMap := make(map[string]interface{})
-		if data.AccessInfo.RestAuthInfo != nil {
+		if data.AccessInfo.RESTAuthInfo != nil {
 			rest_auth_infoNestedMap := make(map[string]interface{})
 			access_infoMap["rest_auth_info"] = rest_auth_infoNestedMap
 		}
@@ -1592,14 +1592,14 @@ func (r *SecretManagementAccessResource) Update(ctx context.Context, req resourc
 	_ = isImport          // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["access_info"].(map[string]interface{}); ok && (isImport || data.AccessInfo != nil) {
 		data.AccessInfo = &SecretManagementAccessAccessInfoModel{
-			RestAuthInfo: func() *SecretManagementAccessAccessInfoRestAuthInfoModel {
-				if !isImport && data.AccessInfo != nil && data.AccessInfo.RestAuthInfo != nil {
+			RESTAuthInfo: func() *SecretManagementAccessAccessInfoRESTAuthInfoModel {
+				if !isImport && data.AccessInfo != nil && data.AccessInfo.RESTAuthInfo != nil {
 					// Normal Read: preserve existing state value
-					return data.AccessInfo.RestAuthInfo
+					return data.AccessInfo.RESTAuthInfo
 				}
 				// Import case: read from API
 				if _, ok := blockData["rest_auth_info"].(map[string]interface{}); ok {
-					return &SecretManagementAccessAccessInfoRestAuthInfoModel{}
+					return &SecretManagementAccessAccessInfoRESTAuthInfoModel{}
 				}
 				return nil
 			}(),

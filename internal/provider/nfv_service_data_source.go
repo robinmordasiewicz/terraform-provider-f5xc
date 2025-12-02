@@ -15,19 +15,19 @@ import (
 )
 
 var (
-	_ datasource.DataSource              = &NFVServiceDataSource{}
-	_ datasource.DataSourceWithConfigure = &NFVServiceDataSource{}
+	_ datasource.DataSource              = &NfvServiceDataSource{}
+	_ datasource.DataSourceWithConfigure = &NfvServiceDataSource{}
 )
 
-func NewNFVServiceDataSource() datasource.DataSource {
-	return &NFVServiceDataSource{}
+func NewNfvServiceDataSource() datasource.DataSource {
+	return &NfvServiceDataSource{}
 }
 
-type NFVServiceDataSource struct {
+type NfvServiceDataSource struct {
 	client *client.Client
 }
 
-type NFVServiceDataSourceModel struct {
+type NfvServiceDataSourceModel struct {
 	ID          types.String `tfsdk:"id"`
 	Name        types.String `tfsdk:"name"`
 	Namespace   types.String `tfsdk:"namespace"`
@@ -36,11 +36,11 @@ type NFVServiceDataSourceModel struct {
 	Annotations types.Map    `tfsdk:"annotations"`
 }
 
-func (d *NFVServiceDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
+func (d *NfvServiceDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	resp.TypeName = req.ProviderTypeName + "_nfv_service"
 }
 
-func (d *NFVServiceDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
+func (d *NfvServiceDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		MarkdownDescription: "Manages new NFV service with configured parameters in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
@@ -49,15 +49,15 @@ func (d *NFVServiceDataSource) Schema(ctx context.Context, req datasource.Schema
 				Computed:            true,
 			},
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the NFVService.",
+				MarkdownDescription: "Name of the NfvService.",
 				Required:            true,
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the NFVService exists.",
+				MarkdownDescription: "Namespace where the NfvService exists.",
 				Required:            true,
 			},
 			"description": schema.StringAttribute{
-				MarkdownDescription: "Description of the NFVService.",
+				MarkdownDescription: "Description of the NfvService.",
 				Computed:            true,
 			},
 			"labels": schema.MapAttribute{
@@ -74,7 +74,7 @@ func (d *NFVServiceDataSource) Schema(ctx context.Context, req datasource.Schema
 	}
 }
 
-func (d *NFVServiceDataSource) Configure(ctx context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
+func (d *NfvServiceDataSource) Configure(ctx context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -86,16 +86,16 @@ func (d *NFVServiceDataSource) Configure(ctx context.Context, req datasource.Con
 	d.client = client
 }
 
-func (d *NFVServiceDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
-	var data NFVServiceDataSourceModel
+func (d *NfvServiceDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
+	var data NfvServiceDataSourceModel
 	resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	resource, err := d.client.GetNFVService(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	resource, err := d.client.GetNfvService(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read NFVService: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read NfvService: %s", err))
 		return
 	}
 

@@ -9,7 +9,7 @@ description: |-
 
 Manages DDoS transit Prefix in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Infraprotect ASN Prefix API docs](https://docs.cloud.f5.com/docs-v2/api/infraprotect-asn-prefix) to learn more.
+~> **Note** Please refer to [Infraprotect Asn Prefix API docs](https://docs.cloud.f5.com/docs-v2/api/infraprotect-asn-prefix) to learn more.
 
 ## Example Usage
 

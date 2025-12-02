@@ -76,7 +76,7 @@ type HTTPLoadBalancerAdvertiseCustomAdvertiseWhereModel struct {
 	UseDefaultPort     *HTTPLoadBalancerEmptyModel                                           `tfsdk:"use_default_port"`
 	VirtualNetwork     *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel     `tfsdk:"virtual_network"`
 	VirtualSite        *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel        `tfsdk:"virtual_site"`
-	VirtualSiteWithVip *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel `tfsdk:"virtual_site_with_vip"`
+	VirtualSiteWithVIP *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel `tfsdk:"virtual_site_with_vip"`
 	Vk8sService        *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel        `tfsdk:"vk8s_service"`
 }
 
@@ -108,10 +108,10 @@ type HTTPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModel struct {
 
 // HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel represents virtual_network block
 type HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel struct {
-	SpecificV6Vip  types.String                                                                    `tfsdk:"specific_v6_vip"`
-	SpecificVip    types.String                                                                    `tfsdk:"specific_vip"`
-	DefaultV6Vip   *HTTPLoadBalancerEmptyModel                                                     `tfsdk:"default_v6_vip"`
-	DefaultVip     *HTTPLoadBalancerEmptyModel                                                     `tfsdk:"default_vip"`
+	SpecificV6VIP  types.String                                                                    `tfsdk:"specific_v6_vip"`
+	SpecificVIP    types.String                                                                    `tfsdk:"specific_vip"`
+	DefaultV6VIP   *HTTPLoadBalancerEmptyModel                                                     `tfsdk:"default_v6_vip"`
+	DefaultVIP     *HTTPLoadBalancerEmptyModel                                                     `tfsdk:"default_vip"`
 	VirtualNetwork *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModel `tfsdk:"virtual_network"`
 }
 
@@ -135,15 +135,15 @@ type HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel st
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel represents virtual_site_with_vip block
-type HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel struct {
+// HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel represents virtual_site_with_vip block
+type HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel struct {
 	IP          types.String                                                                     `tfsdk:"ip"`
 	Network     types.String                                                                     `tfsdk:"network"`
-	VirtualSite *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipVirtualSiteModel `tfsdk:"virtual_site"`
+	VirtualSite *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteModel `tfsdk:"virtual_site"`
 }
 
-// HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipVirtualSiteModel represents virtual_site block
-type HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipVirtualSiteModel struct {
+// HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteModel represents virtual_site block
+type HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -291,7 +291,7 @@ type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesMetadataModel struct {
 type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherModel struct {
 	CookieMatchers []HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherCookieMatchersModel `tfsdk:"cookie_matchers"`
 	Headers        []HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherHeadersModel        `tfsdk:"headers"`
-	JwtClaims      []HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherJwtClaimsModel      `tfsdk:"jwt_claims"`
+	JWTClaims      []HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherJWTClaimsModel      `tfsdk:"jwt_claims"`
 	QueryParams    []HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherQueryParamsModel    `tfsdk:"query_params"`
 }
 
@@ -327,17 +327,17 @@ type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherHeadersItem
 	Transformers types.List `tfsdk:"transformers"`
 }
 
-// HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherJwtClaimsModel represents jwt_claims block
-type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherJwtClaimsModel struct {
+// HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherJWTClaimsModel represents jwt_claims block
+type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherJWTClaimsModel struct {
 	InvertMatcher   types.Bool                                                                          `tfsdk:"invert_matcher"`
 	Name            types.String                                                                        `tfsdk:"name"`
 	CheckNotPresent *HTTPLoadBalancerEmptyModel                                                         `tfsdk:"check_not_present"`
 	CheckPresent    *HTTPLoadBalancerEmptyModel                                                         `tfsdk:"check_present"`
-	Item            *HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherJwtClaimsItemModel `tfsdk:"item"`
+	Item            *HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherJWTClaimsItemModel `tfsdk:"item"`
 }
 
-// HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherJwtClaimsItemModel represents item block
-type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherJwtClaimsItemModel struct {
+// HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherJWTClaimsItemModel represents item block
+type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherJWTClaimsItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
@@ -457,7 +457,7 @@ type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesMetadataModel struct {
 type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherModel struct {
 	CookieMatchers []HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherCookieMatchersModel `tfsdk:"cookie_matchers"`
 	Headers        []HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherHeadersModel        `tfsdk:"headers"`
-	JwtClaims      []HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherJwtClaimsModel      `tfsdk:"jwt_claims"`
+	JWTClaims      []HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherJWTClaimsModel      `tfsdk:"jwt_claims"`
 	QueryParams    []HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherQueryParamsModel    `tfsdk:"query_params"`
 }
 
@@ -493,17 +493,17 @@ type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherHeadersItemMo
 	Transformers types.List `tfsdk:"transformers"`
 }
 
-// HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherJwtClaimsModel represents jwt_claims block
-type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherJwtClaimsModel struct {
+// HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherJWTClaimsModel represents jwt_claims block
+type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherJWTClaimsModel struct {
 	InvertMatcher   types.Bool                                                                        `tfsdk:"invert_matcher"`
 	Name            types.String                                                                      `tfsdk:"name"`
 	CheckNotPresent *HTTPLoadBalancerEmptyModel                                                       `tfsdk:"check_not_present"`
 	CheckPresent    *HTTPLoadBalancerEmptyModel                                                       `tfsdk:"check_present"`
-	Item            *HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherJwtClaimsItemModel `tfsdk:"item"`
+	Item            *HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherJWTClaimsItemModel `tfsdk:"item"`
 }
 
-// HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherJwtClaimsItemModel represents item block
-type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherJwtClaimsItemModel struct {
+// HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherJWTClaimsItemModel represents item block
+type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherJWTClaimsItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
@@ -628,7 +628,7 @@ type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterModel struct {
 	Threshold       types.Int64                                                                  `tfsdk:"threshold"`
 	Unit            types.String                                                                 `tfsdk:"unit"`
 	RefUserID       *HTTPLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterRefUserIDModel `tfsdk:"ref_user_id"`
-	UseHTTPLbUserID *HTTPLoadBalancerEmptyModel                                                  `tfsdk:"use_http_lb_user_id"`
+	UseHTTPLBUserID *HTTPLoadBalancerEmptyModel                                                  `tfsdk:"use_http_lb_user_id"`
 }
 
 // HTTPLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterRefUserIDModel represents ref_user_id block
@@ -649,7 +649,7 @@ type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRefRateLimiterModel struct {
 type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModel struct {
 	CookieMatchers []HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersModel `tfsdk:"cookie_matchers"`
 	Headers        []HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersModel        `tfsdk:"headers"`
-	JwtClaims      []HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJwtClaimsModel      `tfsdk:"jwt_claims"`
+	JWTClaims      []HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJWTClaimsModel      `tfsdk:"jwt_claims"`
 	QueryParams    []HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsModel    `tfsdk:"query_params"`
 }
 
@@ -685,17 +685,17 @@ type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersItemModel 
 	Transformers types.List `tfsdk:"transformers"`
 }
 
-// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJwtClaimsModel represents jwt_claims block
-type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJwtClaimsModel struct {
+// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJWTClaimsModel represents jwt_claims block
+type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJWTClaimsModel struct {
 	InvertMatcher   types.Bool                                                                    `tfsdk:"invert_matcher"`
 	Name            types.String                                                                  `tfsdk:"name"`
 	CheckNotPresent *HTTPLoadBalancerEmptyModel                                                   `tfsdk:"check_not_present"`
 	CheckPresent    *HTTPLoadBalancerEmptyModel                                                   `tfsdk:"check_present"`
-	Item            *HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJwtClaimsItemModel `tfsdk:"item"`
+	Item            *HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJWTClaimsItemModel `tfsdk:"item"`
 }
 
-// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJwtClaimsItemModel represents item block
-type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJwtClaimsItemModel struct {
+// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJWTClaimsItemModel represents item block
+type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJWTClaimsItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
@@ -819,7 +819,7 @@ type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesC
 type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherModel struct {
 	CookieMatchers []HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersModel `tfsdk:"cookie_matchers"`
 	Headers        []HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersModel        `tfsdk:"headers"`
-	JwtClaims      []HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJwtClaimsModel      `tfsdk:"jwt_claims"`
+	JWTClaims      []HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJWTClaimsModel      `tfsdk:"jwt_claims"`
 	QueryParams    []HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsModel    `tfsdk:"query_params"`
 }
 
@@ -855,17 +855,17 @@ type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesR
 	Transformers types.List `tfsdk:"transformers"`
 }
 
-// HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJwtClaimsModel represents jwt_claims block
-type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJwtClaimsModel struct {
+// HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJWTClaimsModel represents jwt_claims block
+type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJWTClaimsModel struct {
 	InvertMatcher   types.Bool                                                                                                  `tfsdk:"invert_matcher"`
 	Name            types.String                                                                                                `tfsdk:"name"`
 	CheckNotPresent *HTTPLoadBalancerEmptyModel                                                                                 `tfsdk:"check_not_present"`
 	CheckPresent    *HTTPLoadBalancerEmptyModel                                                                                 `tfsdk:"check_present"`
-	Item            *HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJwtClaimsItemModel `tfsdk:"item"`
+	Item            *HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJWTClaimsItemModel `tfsdk:"item"`
 }
 
-// HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJwtClaimsItemModel represents item block
-type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJwtClaimsItemModel struct {
+// HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJWTClaimsItemModel represents item block
+type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJWTClaimsItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
@@ -991,7 +991,7 @@ type HTTPLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterModel struct {
 	Threshold       types.Int64                                                                `tfsdk:"threshold"`
 	Unit            types.String                                                               `tfsdk:"unit"`
 	RefUserID       *HTTPLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterRefUserIDModel `tfsdk:"ref_user_id"`
-	UseHTTPLbUserID *HTTPLoadBalancerEmptyModel                                                `tfsdk:"use_http_lb_user_id"`
+	UseHTTPLBUserID *HTTPLoadBalancerEmptyModel                                                `tfsdk:"use_http_lb_user_id"`
 }
 
 // HTTPLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterRefUserIDModel represents ref_user_id block
@@ -1012,7 +1012,7 @@ type HTTPLoadBalancerAPIRateLimitServerURLRulesRefRateLimiterModel struct {
 type HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModel struct {
 	CookieMatchers []HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersModel `tfsdk:"cookie_matchers"`
 	Headers        []HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersModel        `tfsdk:"headers"`
-	JwtClaims      []HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJwtClaimsModel      `tfsdk:"jwt_claims"`
+	JWTClaims      []HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJWTClaimsModel      `tfsdk:"jwt_claims"`
 	QueryParams    []HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsModel    `tfsdk:"query_params"`
 }
 
@@ -1048,17 +1048,17 @@ type HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersItemModel st
 	Transformers types.List `tfsdk:"transformers"`
 }
 
-// HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJwtClaimsModel represents jwt_claims block
-type HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJwtClaimsModel struct {
+// HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJWTClaimsModel represents jwt_claims block
+type HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJWTClaimsModel struct {
 	InvertMatcher   types.Bool                                                                  `tfsdk:"invert_matcher"`
 	Name            types.String                                                                `tfsdk:"name"`
 	CheckNotPresent *HTTPLoadBalancerEmptyModel                                                 `tfsdk:"check_not_present"`
 	CheckPresent    *HTTPLoadBalancerEmptyModel                                                 `tfsdk:"check_present"`
-	Item            *HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJwtClaimsItemModel `tfsdk:"item"`
+	Item            *HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJWTClaimsItemModel `tfsdk:"item"`
 }
 
-// HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJwtClaimsItemModel represents item block
-type HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJwtClaimsItemModel struct {
+// HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJWTClaimsItemModel represents item block
+type HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJWTClaimsItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
@@ -1388,24 +1388,24 @@ type HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointModel struct {
 	Method           types.String                                                               `tfsdk:"method"`
 	Path             types.String                                                               `tfsdk:"path"`
 	TokenResponseKey types.String                                                               `tfsdk:"token_response_key"`
-	JsonPayload      *HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJsonPayloadModel `tfsdk:"json_payload"`
+	JSONPayload      *HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadModel `tfsdk:"json_payload"`
 }
 
-// HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJsonPayloadModel represents json_payload block
-type HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJsonPayloadModel struct {
-	BlindfoldSecretInfo *HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJsonPayloadBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo     *HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJsonPayloadClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+// HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadModel represents json_payload block
+type HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadModel struct {
+	BlindfoldSecretInfo *HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
-// HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJsonPayloadBlindfoldSecretInfoModel represents blindfold_secret_info block
-type HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJsonPayloadBlindfoldSecretInfoModel struct {
+// HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadBlindfoldSecretInfoModel represents blindfold_secret_info block
+type HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
 	Location           types.String `tfsdk:"location"`
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
-// HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJsonPayloadClearSecretInfoModel represents clear_secret_info block
-type HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJsonPayloadClearSecretInfoModel struct {
+// HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadClearSecretInfoModel represents clear_secret_info block
+type HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
@@ -1423,7 +1423,7 @@ type HTTPLoadBalancerBlockedClientsModel struct {
 	AsNumber            types.Int64                                    `tfsdk:"as_number"`
 	ExpirationTimestamp types.String                                   `tfsdk:"expiration_timestamp"`
 	IPPrefix            types.String                                   `tfsdk:"ip_prefix"`
-	IPV6Prefix          types.String                                   `tfsdk:"ipv6_prefix"`
+	Ipv6Prefix          types.String                                   `tfsdk:"ipv6_prefix"`
 	UserIdentifier      types.String                                   `tfsdk:"user_identifier"`
 	BotSkipProcessing   *HTTPLoadBalancerEmptyModel                    `tfsdk:"bot_skip_processing"`
 	HTTPHeader          *HTTPLoadBalancerBlockedClientsHTTPHeaderModel `tfsdk:"http_header"`
@@ -1456,8 +1456,8 @@ type HTTPLoadBalancerBlockedClientsMetadataModel struct {
 type HTTPLoadBalancerBotDefenseModel struct {
 	RegionalEndpoint   types.String                           `tfsdk:"regional_endpoint"`
 	Timeout            types.Int64                            `tfsdk:"timeout"`
-	DisableCorsSupport *HTTPLoadBalancerEmptyModel            `tfsdk:"disable_cors_support"`
-	EnableCorsSupport  *HTTPLoadBalancerEmptyModel            `tfsdk:"enable_cors_support"`
+	DisableCORSSupport *HTTPLoadBalancerEmptyModel            `tfsdk:"disable_cors_support"`
+	EnableCORSSupport  *HTTPLoadBalancerEmptyModel            `tfsdk:"enable_cors_support"`
 	Policy             *HTTPLoadBalancerBotDefensePolicyModel `tfsdk:"policy"`
 }
 
@@ -1648,7 +1648,7 @@ type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAccountManage
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationModel represents authentication block
 type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationModel struct {
 	Login        *HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginModel `tfsdk:"login"`
-	LoginMfa     *HTTPLoadBalancerEmptyModel                                                             `tfsdk:"login_mfa"`
+	LoginMFA     *HTTPLoadBalancerEmptyModel                                                             `tfsdk:"login_mfa"`
 	LoginPartner *HTTPLoadBalancerEmptyModel                                                             `tfsdk:"login_partner"`
 	Logout       *HTTPLoadBalancerEmptyModel                                                             `tfsdk:"logout"`
 	TokenRefresh *HTTPLoadBalancerEmptyModel                                                             `tfsdk:"token_refresh"`
@@ -1975,8 +1975,8 @@ type HTTPLoadBalancerCachingPolicyCustomCacheRuleCDNCacheRulesModel struct {
 
 // HTTPLoadBalancerCachingPolicyDefaultCacheActionModel represents default_cache_action block
 type HTTPLoadBalancerCachingPolicyDefaultCacheActionModel struct {
-	CacheTtlDefault  types.String                `tfsdk:"cache_ttl_default"`
-	CacheTtlOverride types.String                `tfsdk:"cache_ttl_override"`
+	CacheTTLDefault  types.String                `tfsdk:"cache_ttl_default"`
+	CacheTTLOverride types.String                `tfsdk:"cache_ttl_override"`
 	CacheDisabled    *HTTPLoadBalancerEmptyModel `tfsdk:"cache_disabled"`
 }
 
@@ -2098,7 +2098,7 @@ type HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesPathModel struc
 type HTTPLoadBalancerCookieStickinessModel struct {
 	Name           types.String                `tfsdk:"name"`
 	Path           types.String                `tfsdk:"path"`
-	Ttl            types.Int64                 `tfsdk:"ttl"`
+	TTL            types.Int64                 `tfsdk:"ttl"`
 	AddHttponly    *HTTPLoadBalancerEmptyModel `tfsdk:"add_httponly"`
 	AddSecure      *HTTPLoadBalancerEmptyModel `tfsdk:"add_secure"`
 	IgnoreHttponly *HTTPLoadBalancerEmptyModel `tfsdk:"ignore_httponly"`
@@ -2109,8 +2109,8 @@ type HTTPLoadBalancerCookieStickinessModel struct {
 	SamesiteStrict *HTTPLoadBalancerEmptyModel `tfsdk:"samesite_strict"`
 }
 
-// HTTPLoadBalancerCorsPolicyModel represents cors_policy block
-type HTTPLoadBalancerCorsPolicyModel struct {
+// HTTPLoadBalancerCORSPolicyModel represents cors_policy block
+type HTTPLoadBalancerCORSPolicyModel struct {
 	AllowCredentials types.Bool   `tfsdk:"allow_credentials"`
 	AllowHeaders     types.String `tfsdk:"allow_headers"`
 	AllowMethods     types.String `tfsdk:"allow_methods"`
@@ -2121,15 +2121,15 @@ type HTTPLoadBalancerCorsPolicyModel struct {
 	MaximumAge       types.Int64  `tfsdk:"maximum_age"`
 }
 
-// HTTPLoadBalancerCsrfPolicyModel represents csrf_policy block
-type HTTPLoadBalancerCsrfPolicyModel struct {
+// HTTPLoadBalancerCSRFPolicyModel represents csrf_policy block
+type HTTPLoadBalancerCSRFPolicyModel struct {
 	AllLoadBalancerDomains *HTTPLoadBalancerEmptyModel                      `tfsdk:"all_load_balancer_domains"`
-	CustomDomainList       *HTTPLoadBalancerCsrfPolicyCustomDomainListModel `tfsdk:"custom_domain_list"`
+	CustomDomainList       *HTTPLoadBalancerCSRFPolicyCustomDomainListModel `tfsdk:"custom_domain_list"`
 	Disabled               *HTTPLoadBalancerEmptyModel                      `tfsdk:"disabled"`
 }
 
-// HTTPLoadBalancerCsrfPolicyCustomDomainListModel represents custom_domain_list block
-type HTTPLoadBalancerCsrfPolicyCustomDomainListModel struct {
+// HTTPLoadBalancerCSRFPolicyCustomDomainListModel represents custom_domain_list block
+type HTTPLoadBalancerCSRFPolicyCustomDomainListModel struct {
 	Domains types.List `tfsdk:"domains"`
 }
 
@@ -2157,48 +2157,48 @@ type HTTPLoadBalancerDataGuardRulesPathModel struct {
 	Regex  types.String `tfsdk:"regex"`
 }
 
-// HTTPLoadBalancerDdosMitigationRulesModel represents ddos_mitigation_rules block
-type HTTPLoadBalancerDdosMitigationRulesModel struct {
+// HTTPLoadBalancerDDOSMitigationRulesModel represents ddos_mitigation_rules block
+type HTTPLoadBalancerDDOSMitigationRulesModel struct {
 	ExpirationTimestamp types.String                                              `tfsdk:"expiration_timestamp"`
 	Block               *HTTPLoadBalancerEmptyModel                               `tfsdk:"block"`
-	DdosClientSource    *HTTPLoadBalancerDdosMitigationRulesDdosClientSourceModel `tfsdk:"ddos_client_source"`
-	IPPrefixList        *HTTPLoadBalancerDdosMitigationRulesIPPrefixListModel     `tfsdk:"ip_prefix_list"`
-	Metadata            *HTTPLoadBalancerDdosMitigationRulesMetadataModel         `tfsdk:"metadata"`
+	DDOSClientSource    *HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceModel `tfsdk:"ddos_client_source"`
+	IPPrefixList        *HTTPLoadBalancerDDOSMitigationRulesIPPrefixListModel     `tfsdk:"ip_prefix_list"`
+	Metadata            *HTTPLoadBalancerDDOSMitigationRulesMetadataModel         `tfsdk:"metadata"`
 }
 
-// HTTPLoadBalancerDdosMitigationRulesDdosClientSourceModel represents ddos_client_source block
-type HTTPLoadBalancerDdosMitigationRulesDdosClientSourceModel struct {
+// HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceModel represents ddos_client_source block
+type HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceModel struct {
 	CountryList              types.List                                                                        `tfsdk:"country_list"`
-	AsnList                  *HTTPLoadBalancerDdosMitigationRulesDdosClientSourceAsnListModel                  `tfsdk:"asn_list"`
-	Ja4TLSFingerprintMatcher *HTTPLoadBalancerDdosMitigationRulesDdosClientSourceJa4TLSFingerprintMatcherModel `tfsdk:"ja4_tls_fingerprint_matcher"`
-	TLSFingerprintMatcher    *HTTPLoadBalancerDdosMitigationRulesDdosClientSourceTLSFingerprintMatcherModel    `tfsdk:"tls_fingerprint_matcher"`
+	AsnList                  *HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceAsnListModel                  `tfsdk:"asn_list"`
+	Ja4TLSFingerprintMatcher *HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceJa4TLSFingerprintMatcherModel `tfsdk:"ja4_tls_fingerprint_matcher"`
+	TLSFingerprintMatcher    *HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceTLSFingerprintMatcherModel    `tfsdk:"tls_fingerprint_matcher"`
 }
 
-// HTTPLoadBalancerDdosMitigationRulesDdosClientSourceAsnListModel represents asn_list block
-type HTTPLoadBalancerDdosMitigationRulesDdosClientSourceAsnListModel struct {
+// HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceAsnListModel represents asn_list block
+type HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceAsnListModel struct {
 	AsNumbers types.List `tfsdk:"as_numbers"`
 }
 
-// HTTPLoadBalancerDdosMitigationRulesDdosClientSourceJa4TLSFingerprintMatcherModel represents ja4_tls_fingerprint_matcher block
-type HTTPLoadBalancerDdosMitigationRulesDdosClientSourceJa4TLSFingerprintMatcherModel struct {
+// HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceJa4TLSFingerprintMatcherModel represents ja4_tls_fingerprint_matcher block
+type HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceJa4TLSFingerprintMatcherModel struct {
 	ExactValues types.List `tfsdk:"exact_values"`
 }
 
-// HTTPLoadBalancerDdosMitigationRulesDdosClientSourceTLSFingerprintMatcherModel represents tls_fingerprint_matcher block
-type HTTPLoadBalancerDdosMitigationRulesDdosClientSourceTLSFingerprintMatcherModel struct {
+// HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceTLSFingerprintMatcherModel represents tls_fingerprint_matcher block
+type HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceTLSFingerprintMatcherModel struct {
 	Classes        types.List `tfsdk:"classes"`
 	ExactValues    types.List `tfsdk:"exact_values"`
 	ExcludedValues types.List `tfsdk:"excluded_values"`
 }
 
-// HTTPLoadBalancerDdosMitigationRulesIPPrefixListModel represents ip_prefix_list block
-type HTTPLoadBalancerDdosMitigationRulesIPPrefixListModel struct {
+// HTTPLoadBalancerDDOSMitigationRulesIPPrefixListModel represents ip_prefix_list block
+type HTTPLoadBalancerDDOSMitigationRulesIPPrefixListModel struct {
 	InvertMatch types.Bool `tfsdk:"invert_match"`
 	IPPrefixes  types.List `tfsdk:"ip_prefixes"`
 }
 
-// HTTPLoadBalancerDdosMitigationRulesMetadataModel represents metadata block
-type HTTPLoadBalancerDdosMitigationRulesMetadataModel struct {
+// HTTPLoadBalancerDDOSMitigationRulesMetadataModel represents metadata block
+type HTTPLoadBalancerDDOSMitigationRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
 }
@@ -2212,7 +2212,7 @@ type HTTPLoadBalancerDefaultPoolModel struct {
 	AdvancedOptions           *HTTPLoadBalancerDefaultPoolAdvancedOptionsModel           `tfsdk:"advanced_options"`
 	AutomaticPort             *HTTPLoadBalancerEmptyModel                                `tfsdk:"automatic_port"`
 	Healthcheck               []HTTPLoadBalancerDefaultPoolHealthcheckModel              `tfsdk:"healthcheck"`
-	LbPort                    *HTTPLoadBalancerEmptyModel                                `tfsdk:"lb_port"`
+	LBPort                    *HTTPLoadBalancerEmptyModel                                `tfsdk:"lb_port"`
 	NoTLS                     *HTTPLoadBalancerEmptyModel                                `tfsdk:"no_tls"`
 	OriginServers             []HTTPLoadBalancerDefaultPoolOriginServersModel            `tfsdk:"origin_servers"`
 	SameAsEndpointPort        *HTTPLoadBalancerEmptyModel                                `tfsdk:"same_as_endpoint_port"`
@@ -2230,11 +2230,11 @@ type HTTPLoadBalancerDefaultPoolAdvancedOptionsModel struct {
 	CircuitBreaker               *HTTPLoadBalancerDefaultPoolAdvancedOptionsCircuitBreakerModel   `tfsdk:"circuit_breaker"`
 	DefaultCircuitBreaker        *HTTPLoadBalancerEmptyModel                                      `tfsdk:"default_circuit_breaker"`
 	DisableCircuitBreaker        *HTTPLoadBalancerEmptyModel                                      `tfsdk:"disable_circuit_breaker"`
-	DisableLbSourceIPPersistance *HTTPLoadBalancerEmptyModel                                      `tfsdk:"disable_lb_source_ip_persistance"`
+	DisableLBSourceIPPersistance *HTTPLoadBalancerEmptyModel                                      `tfsdk:"disable_lb_source_ip_persistance"`
 	DisableOutlierDetection      *HTTPLoadBalancerEmptyModel                                      `tfsdk:"disable_outlier_detection"`
 	DisableProxyProtocol         *HTTPLoadBalancerEmptyModel                                      `tfsdk:"disable_proxy_protocol"`
 	DisableSubsets               *HTTPLoadBalancerEmptyModel                                      `tfsdk:"disable_subsets"`
-	EnableLbSourceIPPersistance  *HTTPLoadBalancerEmptyModel                                      `tfsdk:"enable_lb_source_ip_persistance"`
+	EnableLBSourceIPPersistance  *HTTPLoadBalancerEmptyModel                                      `tfsdk:"enable_lb_source_ip_persistance"`
 	EnableSubsets                *HTTPLoadBalancerDefaultPoolAdvancedOptionsEnableSubsetsModel    `tfsdk:"enable_subsets"`
 	Http1Config                  *HTTPLoadBalancerDefaultPoolAdvancedOptionsHttp1ConfigModel      `tfsdk:"http1_config"`
 	Http2Options                 *HTTPLoadBalancerDefaultPoolAdvancedOptionsHttp2OptionsModel     `tfsdk:"http2_options"`
@@ -2573,7 +2573,7 @@ type HTTPLoadBalancerDefaultPoolUseTLSModel struct {
 	UseMtls                  *HTTPLoadBalancerDefaultPoolUseTLSUseMtlsModel               `tfsdk:"use_mtls"`
 	UseMtlsObj               *HTTPLoadBalancerDefaultPoolUseTLSUseMtlsObjModel            `tfsdk:"use_mtls_obj"`
 	UseServerVerification    *HTTPLoadBalancerDefaultPoolUseTLSUseServerVerificationModel `tfsdk:"use_server_verification"`
-	VolterraTrustedCa        *HTTPLoadBalancerEmptyModel                                  `tfsdk:"volterra_trusted_ca"`
+	VolterraTrustedCA        *HTTPLoadBalancerEmptyModel                                  `tfsdk:"volterra_trusted_ca"`
 }
 
 // HTTPLoadBalancerDefaultPoolUseTLSTLSConfigModel represents tls_config block
@@ -2601,7 +2601,7 @@ type HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesModel struct {
 	CertificateURL       types.String                                                                      `tfsdk:"certificate_url"`
 	DescriptionSpec      types.String                                                                      `tfsdk:"description_spec"`
 	CustomHashAlgorithms *HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling  *HTTPLoadBalancerEmptyModel                                                       `tfsdk:"disable_ocsp_stapling"`
+	DisableOCSPStapling  *HTTPLoadBalancerEmptyModel                                                       `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey           *HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
 	UseSystemDefaults    *HTTPLoadBalancerEmptyModel                                                       `tfsdk:"use_system_defaults"`
 }
@@ -2639,12 +2639,12 @@ type HTTPLoadBalancerDefaultPoolUseTLSUseMtlsObjModel struct {
 
 // HTTPLoadBalancerDefaultPoolUseTLSUseServerVerificationModel represents use_server_verification block
 type HTTPLoadBalancerDefaultPoolUseTLSUseServerVerificationModel struct {
-	TrustedCaURL types.String                                                          `tfsdk:"trusted_ca_url"`
-	TrustedCa    *HTTPLoadBalancerDefaultPoolUseTLSUseServerVerificationTrustedCaModel `tfsdk:"trusted_ca"`
+	TrustedCAURL types.String                                                          `tfsdk:"trusted_ca_url"`
+	TrustedCA    *HTTPLoadBalancerDefaultPoolUseTLSUseServerVerificationTrustedCAModel `tfsdk:"trusted_ca"`
 }
 
-// HTTPLoadBalancerDefaultPoolUseTLSUseServerVerificationTrustedCaModel represents trusted_ca block
-type HTTPLoadBalancerDefaultPoolUseTLSUseServerVerificationTrustedCaModel struct {
+// HTTPLoadBalancerDefaultPoolUseTLSUseServerVerificationTrustedCAModel represents trusted_ca block
+type HTTPLoadBalancerDefaultPoolUseTLSUseServerVerificationTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -2956,10 +2956,10 @@ type HTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel struct {
 // HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel represents use_mtls block
 type HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                 `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                               `tfsdk:"trusted_ca_url"`
+	TrustedCAURL              types.String                                               `tfsdk:"trusted_ca_url"`
 	CRL                       *HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel         `tfsdk:"crl"`
 	NoCRL                     *HTTPLoadBalancerEmptyModel                                `tfsdk:"no_crl"`
-	TrustedCa                 *HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	TrustedCA                 *HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
 	XfccDisabled              *HTTPLoadBalancerEmptyModel                                `tfsdk:"xfcc_disabled"`
 	XfccOptions               *HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
@@ -2971,8 +2971,8 @@ type HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel represents trusted_ca block
-type HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel struct {
+// HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel represents trusted_ca block
+type HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -2996,7 +2996,7 @@ type HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel struct {
 	CertificateURL       types.String                                                                `tfsdk:"certificate_url"`
 	DescriptionSpec      types.String                                                                `tfsdk:"description_spec"`
 	CustomHashAlgorithms *HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling  *HTTPLoadBalancerEmptyModel                                                 `tfsdk:"disable_ocsp_stapling"`
+	DisableOCSPStapling  *HTTPLoadBalancerEmptyModel                                                 `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey           *HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
 	UseSystemDefaults    *HTTPLoadBalancerEmptyModel                                                 `tfsdk:"use_system_defaults"`
 }
@@ -3043,10 +3043,10 @@ type HTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel struct {
 // HTTPLoadBalancerHTTPSTLSParametersUseMtlsModel represents use_mtls block
 type HTTPLoadBalancerHTTPSTLSParametersUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                 `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                               `tfsdk:"trusted_ca_url"`
+	TrustedCAURL              types.String                                               `tfsdk:"trusted_ca_url"`
 	CRL                       *HTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel         `tfsdk:"crl"`
 	NoCRL                     *HTTPLoadBalancerEmptyModel                                `tfsdk:"no_crl"`
-	TrustedCa                 *HTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	TrustedCA                 *HTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
 	XfccDisabled              *HTTPLoadBalancerEmptyModel                                `tfsdk:"xfcc_disabled"`
 	XfccOptions               *HTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
@@ -3058,8 +3058,8 @@ type HTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// HTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel represents trusted_ca block
-type HTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel struct {
+// HTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel represents trusted_ca block
+type HTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -3136,10 +3136,10 @@ type HTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel struct {
 // HTTPLoadBalancerHTTPSAutoCertUseMtlsModel represents use_mtls block
 type HTTPLoadBalancerHTTPSAutoCertUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                            `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                          `tfsdk:"trusted_ca_url"`
+	TrustedCAURL              types.String                                          `tfsdk:"trusted_ca_url"`
 	CRL                       *HTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel         `tfsdk:"crl"`
 	NoCRL                     *HTTPLoadBalancerEmptyModel                           `tfsdk:"no_crl"`
-	TrustedCa                 *HTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	TrustedCA                 *HTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
 	XfccDisabled              *HTTPLoadBalancerEmptyModel                           `tfsdk:"xfcc_disabled"`
 	XfccOptions               *HTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
@@ -3151,8 +3151,8 @@ type HTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// HTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel represents trusted_ca block
-type HTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel struct {
+// HTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel represents trusted_ca block
+type HTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -3170,118 +3170,118 @@ type HTTPLoadBalancerJsChallengeModel struct {
 	JsScriptDelay types.Int64  `tfsdk:"js_script_delay"`
 }
 
-// HTTPLoadBalancerJwtValidationModel represents jwt_validation block
-type HTTPLoadBalancerJwtValidationModel struct {
-	Action          *HTTPLoadBalancerJwtValidationActionModel          `tfsdk:"action"`
-	JwksConfig      *HTTPLoadBalancerJwtValidationJwksConfigModel      `tfsdk:"jwks_config"`
-	MandatoryClaims *HTTPLoadBalancerJwtValidationMandatoryClaimsModel `tfsdk:"mandatory_claims"`
-	ReservedClaims  *HTTPLoadBalancerJwtValidationReservedClaimsModel  `tfsdk:"reserved_claims"`
-	Target          *HTTPLoadBalancerJwtValidationTargetModel          `tfsdk:"target"`
-	TokenLocation   *HTTPLoadBalancerJwtValidationTokenLocationModel   `tfsdk:"token_location"`
+// HTTPLoadBalancerJWTValidationModel represents jwt_validation block
+type HTTPLoadBalancerJWTValidationModel struct {
+	Action          *HTTPLoadBalancerJWTValidationActionModel          `tfsdk:"action"`
+	JwksConfig      *HTTPLoadBalancerJWTValidationJwksConfigModel      `tfsdk:"jwks_config"`
+	MandatoryClaims *HTTPLoadBalancerJWTValidationMandatoryClaimsModel `tfsdk:"mandatory_claims"`
+	ReservedClaims  *HTTPLoadBalancerJWTValidationReservedClaimsModel  `tfsdk:"reserved_claims"`
+	Target          *HTTPLoadBalancerJWTValidationTargetModel          `tfsdk:"target"`
+	TokenLocation   *HTTPLoadBalancerJWTValidationTokenLocationModel   `tfsdk:"token_location"`
 }
 
-// HTTPLoadBalancerJwtValidationActionModel represents action block
-type HTTPLoadBalancerJwtValidationActionModel struct {
+// HTTPLoadBalancerJWTValidationActionModel represents action block
+type HTTPLoadBalancerJWTValidationActionModel struct {
 	Block  *HTTPLoadBalancerEmptyModel `tfsdk:"block"`
 	Report *HTTPLoadBalancerEmptyModel `tfsdk:"report"`
 }
 
-// HTTPLoadBalancerJwtValidationJwksConfigModel represents jwks_config block
-type HTTPLoadBalancerJwtValidationJwksConfigModel struct {
+// HTTPLoadBalancerJWTValidationJwksConfigModel represents jwks_config block
+type HTTPLoadBalancerJWTValidationJwksConfigModel struct {
 	Cleartext types.String `tfsdk:"cleartext"`
 }
 
-// HTTPLoadBalancerJwtValidationMandatoryClaimsModel represents mandatory_claims block
-type HTTPLoadBalancerJwtValidationMandatoryClaimsModel struct {
+// HTTPLoadBalancerJWTValidationMandatoryClaimsModel represents mandatory_claims block
+type HTTPLoadBalancerJWTValidationMandatoryClaimsModel struct {
 	ClaimNames types.List `tfsdk:"claim_names"`
 }
 
-// HTTPLoadBalancerJwtValidationReservedClaimsModel represents reserved_claims block
-type HTTPLoadBalancerJwtValidationReservedClaimsModel struct {
+// HTTPLoadBalancerJWTValidationReservedClaimsModel represents reserved_claims block
+type HTTPLoadBalancerJWTValidationReservedClaimsModel struct {
 	Issuer                types.String                                              `tfsdk:"issuer"`
-	Audience              *HTTPLoadBalancerJwtValidationReservedClaimsAudienceModel `tfsdk:"audience"`
+	Audience              *HTTPLoadBalancerJWTValidationReservedClaimsAudienceModel `tfsdk:"audience"`
 	AudienceDisable       *HTTPLoadBalancerEmptyModel                               `tfsdk:"audience_disable"`
 	IssuerDisable         *HTTPLoadBalancerEmptyModel                               `tfsdk:"issuer_disable"`
 	ValidatePeriodDisable *HTTPLoadBalancerEmptyModel                               `tfsdk:"validate_period_disable"`
 	ValidatePeriodEnable  *HTTPLoadBalancerEmptyModel                               `tfsdk:"validate_period_enable"`
 }
 
-// HTTPLoadBalancerJwtValidationReservedClaimsAudienceModel represents audience block
-type HTTPLoadBalancerJwtValidationReservedClaimsAudienceModel struct {
+// HTTPLoadBalancerJWTValidationReservedClaimsAudienceModel represents audience block
+type HTTPLoadBalancerJWTValidationReservedClaimsAudienceModel struct {
 	Audiences types.List `tfsdk:"audiences"`
 }
 
-// HTTPLoadBalancerJwtValidationTargetModel represents target block
-type HTTPLoadBalancerJwtValidationTargetModel struct {
+// HTTPLoadBalancerJWTValidationTargetModel represents target block
+type HTTPLoadBalancerJWTValidationTargetModel struct {
 	AllEndpoint *HTTPLoadBalancerEmptyModel                        `tfsdk:"all_endpoint"`
-	APIGroups   *HTTPLoadBalancerJwtValidationTargetAPIGroupsModel `tfsdk:"api_groups"`
-	BasePaths   *HTTPLoadBalancerJwtValidationTargetBasePathsModel `tfsdk:"base_paths"`
+	APIGroups   *HTTPLoadBalancerJWTValidationTargetAPIGroupsModel `tfsdk:"api_groups"`
+	BasePaths   *HTTPLoadBalancerJWTValidationTargetBasePathsModel `tfsdk:"base_paths"`
 }
 
-// HTTPLoadBalancerJwtValidationTargetAPIGroupsModel represents api_groups block
-type HTTPLoadBalancerJwtValidationTargetAPIGroupsModel struct {
+// HTTPLoadBalancerJWTValidationTargetAPIGroupsModel represents api_groups block
+type HTTPLoadBalancerJWTValidationTargetAPIGroupsModel struct {
 	APIGroups types.List `tfsdk:"api_groups"`
 }
 
-// HTTPLoadBalancerJwtValidationTargetBasePathsModel represents base_paths block
-type HTTPLoadBalancerJwtValidationTargetBasePathsModel struct {
+// HTTPLoadBalancerJWTValidationTargetBasePathsModel represents base_paths block
+type HTTPLoadBalancerJWTValidationTargetBasePathsModel struct {
 	BasePaths types.List `tfsdk:"base_paths"`
 }
 
-// HTTPLoadBalancerJwtValidationTokenLocationModel represents token_location block
-type HTTPLoadBalancerJwtValidationTokenLocationModel struct {
+// HTTPLoadBalancerJWTValidationTokenLocationModel represents token_location block
+type HTTPLoadBalancerJWTValidationTokenLocationModel struct {
 	BearerToken *HTTPLoadBalancerEmptyModel `tfsdk:"bearer_token"`
 }
 
-// HTTPLoadBalancerL7DdosActionJsChallengeModel represents l7_ddos_action_js_challenge block
-type HTTPLoadBalancerL7DdosActionJsChallengeModel struct {
+// HTTPLoadBalancerL7DDOSActionJsChallengeModel represents l7_ddos_action_js_challenge block
+type HTTPLoadBalancerL7DDOSActionJsChallengeModel struct {
 	CookieExpiry  types.Int64  `tfsdk:"cookie_expiry"`
 	CustomPage    types.String `tfsdk:"custom_page"`
 	JsScriptDelay types.Int64  `tfsdk:"js_script_delay"`
 }
 
-// HTTPLoadBalancerL7DdosProtectionModel represents l7_ddos_protection block
-type HTTPLoadBalancerL7DdosProtectionModel struct {
+// HTTPLoadBalancerL7DDOSProtectionModel represents l7_ddos_protection block
+type HTTPLoadBalancerL7DDOSProtectionModel struct {
 	RpsThreshold                     types.Int64                                                            `tfsdk:"rps_threshold"`
-	ClientsideActionCaptchaChallenge *HTTPLoadBalancerL7DdosProtectionClientsideActionCaptchaChallengeModel `tfsdk:"clientside_action_captcha_challenge"`
-	ClientsideActionJsChallenge      *HTTPLoadBalancerL7DdosProtectionClientsideActionJsChallengeModel      `tfsdk:"clientside_action_js_challenge"`
+	ClientsideActionCaptchaChallenge *HTTPLoadBalancerL7DDOSProtectionClientsideActionCaptchaChallengeModel `tfsdk:"clientside_action_captcha_challenge"`
+	ClientsideActionJsChallenge      *HTTPLoadBalancerL7DDOSProtectionClientsideActionJsChallengeModel      `tfsdk:"clientside_action_js_challenge"`
 	ClientsideActionNone             *HTTPLoadBalancerEmptyModel                                            `tfsdk:"clientside_action_none"`
-	DdosPolicyCustom                 *HTTPLoadBalancerL7DdosProtectionDdosPolicyCustomModel                 `tfsdk:"ddos_policy_custom"`
-	DdosPolicyNone                   *HTTPLoadBalancerEmptyModel                                            `tfsdk:"ddos_policy_none"`
+	DDOSPolicyCustom                 *HTTPLoadBalancerL7DDOSProtectionDDOSPolicyCustomModel                 `tfsdk:"ddos_policy_custom"`
+	DDOSPolicyNone                   *HTTPLoadBalancerEmptyModel                                            `tfsdk:"ddos_policy_none"`
 	DefaultRpsThreshold              *HTTPLoadBalancerEmptyModel                                            `tfsdk:"default_rps_threshold"`
 	MitigationBlock                  *HTTPLoadBalancerEmptyModel                                            `tfsdk:"mitigation_block"`
-	MitigationCaptchaChallenge       *HTTPLoadBalancerL7DdosProtectionMitigationCaptchaChallengeModel       `tfsdk:"mitigation_captcha_challenge"`
-	MitigationJsChallenge            *HTTPLoadBalancerL7DdosProtectionMitigationJsChallengeModel            `tfsdk:"mitigation_js_challenge"`
+	MitigationCaptchaChallenge       *HTTPLoadBalancerL7DDOSProtectionMitigationCaptchaChallengeModel       `tfsdk:"mitigation_captcha_challenge"`
+	MitigationJsChallenge            *HTTPLoadBalancerL7DDOSProtectionMitigationJsChallengeModel            `tfsdk:"mitigation_js_challenge"`
 }
 
-// HTTPLoadBalancerL7DdosProtectionClientsideActionCaptchaChallengeModel represents clientside_action_captcha_challenge block
-type HTTPLoadBalancerL7DdosProtectionClientsideActionCaptchaChallengeModel struct {
+// HTTPLoadBalancerL7DDOSProtectionClientsideActionCaptchaChallengeModel represents clientside_action_captcha_challenge block
+type HTTPLoadBalancerL7DDOSProtectionClientsideActionCaptchaChallengeModel struct {
 	CookieExpiry types.Int64  `tfsdk:"cookie_expiry"`
 	CustomPage   types.String `tfsdk:"custom_page"`
 }
 
-// HTTPLoadBalancerL7DdosProtectionClientsideActionJsChallengeModel represents clientside_action_js_challenge block
-type HTTPLoadBalancerL7DdosProtectionClientsideActionJsChallengeModel struct {
+// HTTPLoadBalancerL7DDOSProtectionClientsideActionJsChallengeModel represents clientside_action_js_challenge block
+type HTTPLoadBalancerL7DDOSProtectionClientsideActionJsChallengeModel struct {
 	CookieExpiry  types.Int64  `tfsdk:"cookie_expiry"`
 	CustomPage    types.String `tfsdk:"custom_page"`
 	JsScriptDelay types.Int64  `tfsdk:"js_script_delay"`
 }
 
-// HTTPLoadBalancerL7DdosProtectionDdosPolicyCustomModel represents ddos_policy_custom block
-type HTTPLoadBalancerL7DdosProtectionDdosPolicyCustomModel struct {
+// HTTPLoadBalancerL7DDOSProtectionDDOSPolicyCustomModel represents ddos_policy_custom block
+type HTTPLoadBalancerL7DDOSProtectionDDOSPolicyCustomModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// HTTPLoadBalancerL7DdosProtectionMitigationCaptchaChallengeModel represents mitigation_captcha_challenge block
-type HTTPLoadBalancerL7DdosProtectionMitigationCaptchaChallengeModel struct {
+// HTTPLoadBalancerL7DDOSProtectionMitigationCaptchaChallengeModel represents mitigation_captcha_challenge block
+type HTTPLoadBalancerL7DDOSProtectionMitigationCaptchaChallengeModel struct {
 	CookieExpiry types.Int64  `tfsdk:"cookie_expiry"`
 	CustomPage   types.String `tfsdk:"custom_page"`
 }
 
-// HTTPLoadBalancerL7DdosProtectionMitigationJsChallengeModel represents mitigation_js_challenge block
-type HTTPLoadBalancerL7DdosProtectionMitigationJsChallengeModel struct {
+// HTTPLoadBalancerL7DDOSProtectionMitigationJsChallengeModel represents mitigation_js_challenge block
+type HTTPLoadBalancerL7DDOSProtectionMitigationJsChallengeModel struct {
 	CookieExpiry  types.Int64  `tfsdk:"cookie_expiry"`
 	CustomPage    types.String `tfsdk:"custom_page"`
 	JsScriptDelay types.Int64  `tfsdk:"js_script_delay"`
@@ -3502,7 +3502,7 @@ type HTTPLoadBalancerOriginServerSubsetRuleListModel struct {
 // HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesModel represents origin_server_subset_rules block
 type HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesModel struct {
 	CountryCodes              types.List                                                                            `tfsdk:"country_codes"`
-	ReNameList                types.List                                                                            `tfsdk:"re_name_list"`
+	RENameList                types.List                                                                            `tfsdk:"re_name_list"`
 	AnyAsn                    *HTTPLoadBalancerEmptyModel                                                           `tfsdk:"any_asn"`
 	AnyIP                     *HTTPLoadBalancerEmptyModel                                                           `tfsdk:"any_ip"`
 	AsnList                   *HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnListModel        `tfsdk:"asn_list"`
@@ -3901,7 +3901,7 @@ type HTTPLoadBalancerRingHashHashPolicyModel struct {
 type HTTPLoadBalancerRingHashHashPolicyCookieModel struct {
 	Name           types.String                `tfsdk:"name"`
 	Path           types.String                `tfsdk:"path"`
-	Ttl            types.Int64                 `tfsdk:"ttl"`
+	TTL            types.Int64                 `tfsdk:"ttl"`
 	AddHttponly    *HTTPLoadBalancerEmptyModel `tfsdk:"add_httponly"`
 	AddSecure      *HTTPLoadBalancerEmptyModel `tfsdk:"add_secure"`
 	IgnoreHttponly *HTTPLoadBalancerEmptyModel `tfsdk:"ignore_httponly"`
@@ -4043,8 +4043,8 @@ type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsModel struct {
 	BufferPolicy                           *HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBufferPolicyModel                  `tfsdk:"buffer_policy"`
 	CommonBuffering                        *HTTPLoadBalancerEmptyModel                                                         `tfsdk:"common_buffering"`
 	CommonHashPolicy                       *HTTPLoadBalancerEmptyModel                                                         `tfsdk:"common_hash_policy"`
-	CorsPolicy                             *HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCorsPolicyModel                    `tfsdk:"cors_policy"`
-	CsrfPolicy                             *HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCsrfPolicyModel                    `tfsdk:"csrf_policy"`
+	CORSPolicy                             *HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCORSPolicyModel                    `tfsdk:"cors_policy"`
+	CSRFPolicy                             *HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCSRFPolicyModel                    `tfsdk:"csrf_policy"`
 	DefaultRetryPolicy                     *HTTPLoadBalancerEmptyModel                                                         `tfsdk:"default_retry_policy"`
 	DisableMirroring                       *HTTPLoadBalancerEmptyModel                                                         `tfsdk:"disable_mirroring"`
 	DisablePrefixRewrite                   *HTTPLoadBalancerEmptyModel                                                         `tfsdk:"disable_prefix_rewrite"`
@@ -4102,8 +4102,8 @@ type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBufferPolicyModel struct {
 	MaxRequestBytes types.Int64 `tfsdk:"max_request_bytes"`
 }
 
-// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCorsPolicyModel represents cors_policy block
-type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCorsPolicyModel struct {
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCORSPolicyModel represents cors_policy block
+type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCORSPolicyModel struct {
 	AllowCredentials types.Bool   `tfsdk:"allow_credentials"`
 	AllowHeaders     types.String `tfsdk:"allow_headers"`
 	AllowMethods     types.String `tfsdk:"allow_methods"`
@@ -4114,15 +4114,15 @@ type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCorsPolicyModel struct {
 	MaximumAge       types.Int64  `tfsdk:"maximum_age"`
 }
 
-// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCsrfPolicyModel represents csrf_policy block
-type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCsrfPolicyModel struct {
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCSRFPolicyModel represents csrf_policy block
+type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCSRFPolicyModel struct {
 	AllLoadBalancerDomains *HTTPLoadBalancerEmptyModel                                                      `tfsdk:"all_load_balancer_domains"`
-	CustomDomainList       *HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCsrfPolicyCustomDomainListModel `tfsdk:"custom_domain_list"`
+	CustomDomainList       *HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCSRFPolicyCustomDomainListModel `tfsdk:"custom_domain_list"`
 	Disabled               *HTTPLoadBalancerEmptyModel                                                      `tfsdk:"disabled"`
 }
 
-// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCsrfPolicyCustomDomainListModel represents custom_domain_list block
-type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCsrfPolicyCustomDomainListModel struct {
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCSRFPolicyCustomDomainListModel represents custom_domain_list block
+type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCSRFPolicyCustomDomainListModel struct {
 	Domains types.List `tfsdk:"domains"`
 }
 
@@ -4310,7 +4310,7 @@ type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsSpecificHashPolicyHashPolic
 type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsSpecificHashPolicyHashPolicyCookieModel struct {
 	Name           types.String                `tfsdk:"name"`
 	Path           types.String                `tfsdk:"path"`
-	Ttl            types.Int64                 `tfsdk:"ttl"`
+	TTL            types.Int64                 `tfsdk:"ttl"`
 	AddHttponly    *HTTPLoadBalancerEmptyModel `tfsdk:"add_httponly"`
 	AddSecure      *HTTPLoadBalancerEmptyModel `tfsdk:"add_secure"`
 	IgnoreHttponly *HTTPLoadBalancerEmptyModel `tfsdk:"ignore_httponly"`
@@ -4330,7 +4330,7 @@ type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsWAFExclusionPolicyModel str
 
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsWebSocketConfigModel represents web_socket_config block
 type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsWebSocketConfigModel struct {
-	UseWebsocket types.Bool `tfsdk:"use_websocket"`
+	UseWebSocket types.Bool `tfsdk:"use_websocket"`
 }
 
 // HTTPLoadBalancerRoutesSimpleRouteHeadersModel represents headers block
@@ -4422,110 +4422,110 @@ type HTTPLoadBalancerSensitiveDataPolicySensitiveDataPolicyRefModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// HTTPLoadBalancerSingleLbAppModel represents single_lb_app block
-type HTTPLoadBalancerSingleLbAppModel struct {
+// HTTPLoadBalancerSingleLBAppModel represents single_lb_app block
+type HTTPLoadBalancerSingleLBAppModel struct {
 	DisableDiscovery              *HTTPLoadBalancerEmptyModel                      `tfsdk:"disable_discovery"`
 	DisableMaliciousUserDetection *HTTPLoadBalancerEmptyModel                      `tfsdk:"disable_malicious_user_detection"`
-	EnableDiscovery               *HTTPLoadBalancerSingleLbAppEnableDiscoveryModel `tfsdk:"enable_discovery"`
+	EnableDiscovery               *HTTPLoadBalancerSingleLBAppEnableDiscoveryModel `tfsdk:"enable_discovery"`
 	EnableMaliciousUserDetection  *HTTPLoadBalancerEmptyModel                      `tfsdk:"enable_malicious_user_detection"`
 }
 
-// HTTPLoadBalancerSingleLbAppEnableDiscoveryModel represents enable_discovery block
-type HTTPLoadBalancerSingleLbAppEnableDiscoveryModel struct {
-	APICrawler                      *HTTPLoadBalancerSingleLbAppEnableDiscoveryAPICrawlerModel               `tfsdk:"api_crawler"`
-	APIDiscoveryFromCodeScan        *HTTPLoadBalancerSingleLbAppEnableDiscoveryAPIDiscoveryFromCodeScanModel `tfsdk:"api_discovery_from_code_scan"`
-	CustomAPIAuthDiscovery          *HTTPLoadBalancerSingleLbAppEnableDiscoveryCustomAPIAuthDiscoveryModel   `tfsdk:"custom_api_auth_discovery"`
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryModel represents enable_discovery block
+type HTTPLoadBalancerSingleLBAppEnableDiscoveryModel struct {
+	APICrawler                      *HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerModel               `tfsdk:"api_crawler"`
+	APIDiscoveryFromCodeScan        *HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanModel `tfsdk:"api_discovery_from_code_scan"`
+	CustomAPIAuthDiscovery          *HTTPLoadBalancerSingleLBAppEnableDiscoveryCustomAPIAuthDiscoveryModel   `tfsdk:"custom_api_auth_discovery"`
 	DefaultAPIAuthDiscovery         *HTTPLoadBalancerEmptyModel                                              `tfsdk:"default_api_auth_discovery"`
 	DisableLearnFromRedirectTraffic *HTTPLoadBalancerEmptyModel                                              `tfsdk:"disable_learn_from_redirect_traffic"`
-	DiscoveredAPISettings           *HTTPLoadBalancerSingleLbAppEnableDiscoveryDiscoveredAPISettingsModel    `tfsdk:"discovered_api_settings"`
+	DiscoveredAPISettings           *HTTPLoadBalancerSingleLBAppEnableDiscoveryDiscoveredAPISettingsModel    `tfsdk:"discovered_api_settings"`
 	EnableLearnFromRedirectTraffic  *HTTPLoadBalancerEmptyModel                                              `tfsdk:"enable_learn_from_redirect_traffic"`
 }
 
-// HTTPLoadBalancerSingleLbAppEnableDiscoveryAPICrawlerModel represents api_crawler block
-type HTTPLoadBalancerSingleLbAppEnableDiscoveryAPICrawlerModel struct {
-	APICrawlerConfig  *HTTPLoadBalancerSingleLbAppEnableDiscoveryAPICrawlerAPICrawlerConfigModel `tfsdk:"api_crawler_config"`
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerModel represents api_crawler block
+type HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerModel struct {
+	APICrawlerConfig  *HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigModel `tfsdk:"api_crawler_config"`
 	DisableAPICrawler *HTTPLoadBalancerEmptyModel                                                `tfsdk:"disable_api_crawler"`
 }
 
-// HTTPLoadBalancerSingleLbAppEnableDiscoveryAPICrawlerAPICrawlerConfigModel represents api_crawler_config block
-type HTTPLoadBalancerSingleLbAppEnableDiscoveryAPICrawlerAPICrawlerConfigModel struct {
-	Domains []HTTPLoadBalancerSingleLbAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsModel `tfsdk:"domains"`
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigModel represents api_crawler_config block
+type HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigModel struct {
+	Domains []HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsModel `tfsdk:"domains"`
 }
 
-// HTTPLoadBalancerSingleLbAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsModel represents domains block
-type HTTPLoadBalancerSingleLbAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsModel struct {
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsModel represents domains block
+type HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsModel struct {
 	Domain      types.String                                                                                 `tfsdk:"domain"`
-	SimpleLogin *HTTPLoadBalancerSingleLbAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModel `tfsdk:"simple_login"`
+	SimpleLogin *HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModel `tfsdk:"simple_login"`
 }
 
-// HTTPLoadBalancerSingleLbAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModel represents simple_login block
-type HTTPLoadBalancerSingleLbAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModel struct {
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModel represents simple_login block
+type HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModel struct {
 	User     types.String                                                                                         `tfsdk:"user"`
-	Password *HTTPLoadBalancerSingleLbAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModel `tfsdk:"password"`
+	Password *HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModel `tfsdk:"password"`
 }
 
-// HTTPLoadBalancerSingleLbAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModel represents password block
-type HTTPLoadBalancerSingleLbAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModel struct {
-	BlindfoldSecretInfo *HTTPLoadBalancerSingleLbAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo     *HTTPLoadBalancerSingleLbAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModel represents password block
+type HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModel struct {
+	BlindfoldSecretInfo *HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
-// HTTPLoadBalancerSingleLbAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
-type HTTPLoadBalancerSingleLbAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordBlindfoldSecretInfoModel struct {
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
+type HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
 	Location           types.String `tfsdk:"location"`
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
-// HTTPLoadBalancerSingleLbAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordClearSecretInfoModel represents clear_secret_info block
-type HTTPLoadBalancerSingleLbAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordClearSecretInfoModel struct {
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordClearSecretInfoModel represents clear_secret_info block
+type HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
-// HTTPLoadBalancerSingleLbAppEnableDiscoveryAPIDiscoveryFromCodeScanModel represents api_discovery_from_code_scan block
-type HTTPLoadBalancerSingleLbAppEnableDiscoveryAPIDiscoveryFromCodeScanModel struct {
-	CodeBaseIntegrations []HTTPLoadBalancerSingleLbAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsModel `tfsdk:"code_base_integrations"`
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanModel represents api_discovery_from_code_scan block
+type HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanModel struct {
+	CodeBaseIntegrations []HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsModel `tfsdk:"code_base_integrations"`
 }
 
-// HTTPLoadBalancerSingleLbAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsModel represents code_base_integrations block
-type HTTPLoadBalancerSingleLbAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsModel struct {
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsModel represents code_base_integrations block
+type HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsModel struct {
 	AllRepos            *HTTPLoadBalancerEmptyModel                                                                                     `tfsdk:"all_repos"`
-	CodeBaseIntegration *HTTPLoadBalancerSingleLbAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsCodeBaseIntegrationModel `tfsdk:"code_base_integration"`
-	SelectedRepos       *HTTPLoadBalancerSingleLbAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsSelectedReposModel       `tfsdk:"selected_repos"`
+	CodeBaseIntegration *HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsCodeBaseIntegrationModel `tfsdk:"code_base_integration"`
+	SelectedRepos       *HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsSelectedReposModel       `tfsdk:"selected_repos"`
 }
 
-// HTTPLoadBalancerSingleLbAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsCodeBaseIntegrationModel represents code_base_integration block
-type HTTPLoadBalancerSingleLbAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsCodeBaseIntegrationModel struct {
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsCodeBaseIntegrationModel represents code_base_integration block
+type HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsCodeBaseIntegrationModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// HTTPLoadBalancerSingleLbAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsSelectedReposModel represents selected_repos block
-type HTTPLoadBalancerSingleLbAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsSelectedReposModel struct {
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsSelectedReposModel represents selected_repos block
+type HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsSelectedReposModel struct {
 	APICodeRepo types.List `tfsdk:"api_code_repo"`
 }
 
-// HTTPLoadBalancerSingleLbAppEnableDiscoveryCustomAPIAuthDiscoveryModel represents custom_api_auth_discovery block
-type HTTPLoadBalancerSingleLbAppEnableDiscoveryCustomAPIAuthDiscoveryModel struct {
-	APIDiscoveryRef *HTTPLoadBalancerSingleLbAppEnableDiscoveryCustomAPIAuthDiscoveryAPIDiscoveryRefModel `tfsdk:"api_discovery_ref"`
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryCustomAPIAuthDiscoveryModel represents custom_api_auth_discovery block
+type HTTPLoadBalancerSingleLBAppEnableDiscoveryCustomAPIAuthDiscoveryModel struct {
+	APIDiscoveryRef *HTTPLoadBalancerSingleLBAppEnableDiscoveryCustomAPIAuthDiscoveryAPIDiscoveryRefModel `tfsdk:"api_discovery_ref"`
 }
 
-// HTTPLoadBalancerSingleLbAppEnableDiscoveryCustomAPIAuthDiscoveryAPIDiscoveryRefModel represents api_discovery_ref block
-type HTTPLoadBalancerSingleLbAppEnableDiscoveryCustomAPIAuthDiscoveryAPIDiscoveryRefModel struct {
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryCustomAPIAuthDiscoveryAPIDiscoveryRefModel represents api_discovery_ref block
+type HTTPLoadBalancerSingleLBAppEnableDiscoveryCustomAPIAuthDiscoveryAPIDiscoveryRefModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// HTTPLoadBalancerSingleLbAppEnableDiscoveryDiscoveredAPISettingsModel represents discovered_api_settings block
-type HTTPLoadBalancerSingleLbAppEnableDiscoveryDiscoveredAPISettingsModel struct {
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryDiscoveredAPISettingsModel represents discovered_api_settings block
+type HTTPLoadBalancerSingleLBAppEnableDiscoveryDiscoveredAPISettingsModel struct {
 	PurgeDurationForInactiveDiscoveredApis types.Int64 `tfsdk:"purge_duration_for_inactive_discovered_apis"`
 }
 
-// HTTPLoadBalancerSlowDdosMitigationModel represents slow_ddos_mitigation block
-type HTTPLoadBalancerSlowDdosMitigationModel struct {
+// HTTPLoadBalancerSlowDDOSMitigationModel represents slow_ddos_mitigation block
+type HTTPLoadBalancerSlowDDOSMitigationModel struct {
 	RequestHeadersTimeout types.Int64                 `tfsdk:"request_headers_timeout"`
 	RequestTimeout        types.Int64                 `tfsdk:"request_timeout"`
 	DisableRequestTimeout *HTTPLoadBalancerEmptyModel `tfsdk:"disable_request_timeout"`
@@ -4537,7 +4537,7 @@ type HTTPLoadBalancerTrustedClientsModel struct {
 	AsNumber            types.Int64                                    `tfsdk:"as_number"`
 	ExpirationTimestamp types.String                                   `tfsdk:"expiration_timestamp"`
 	IPPrefix            types.String                                   `tfsdk:"ip_prefix"`
-	IPV6Prefix          types.String                                   `tfsdk:"ipv6_prefix"`
+	Ipv6Prefix          types.String                                   `tfsdk:"ipv6_prefix"`
 	UserIdentifier      types.String                                   `tfsdk:"user_identifier"`
 	BotSkipProcessing   *HTTPLoadBalancerEmptyModel                    `tfsdk:"bot_skip_processing"`
 	HTTPHeader          *HTTPLoadBalancerTrustedClientsHTTPHeaderModel `tfsdk:"http_header"`
@@ -4660,7 +4660,7 @@ type HTTPLoadBalancerResourceModel struct {
 	ActiveServicePolicies         *HTTPLoadBalancerActiveServicePoliciesModel        `tfsdk:"active_service_policies"`
 	AdvertiseCustom               *HTTPLoadBalancerAdvertiseCustomModel              `tfsdk:"advertise_custom"`
 	AdvertiseOnPublic             *HTTPLoadBalancerAdvertiseOnPublicModel            `tfsdk:"advertise_on_public"`
-	AdvertiseOnPublicDefaultVip   *HTTPLoadBalancerEmptyModel                        `tfsdk:"advertise_on_public_default_vip"`
+	AdvertiseOnPublicDefaultVIP   *HTTPLoadBalancerEmptyModel                        `tfsdk:"advertise_on_public_default_vip"`
 	APIProtectionRules            *HTTPLoadBalancerAPIProtectionRulesModel           `tfsdk:"api_protection_rules"`
 	APIRateLimit                  *HTTPLoadBalancerAPIRateLimitModel                 `tfsdk:"api_rate_limit"`
 	APISpecification              *HTTPLoadBalancerAPISpecificationModel             `tfsdk:"api_specification"`
@@ -4673,10 +4673,10 @@ type HTTPLoadBalancerResourceModel struct {
 	CaptchaChallenge              *HTTPLoadBalancerCaptchaChallengeModel             `tfsdk:"captcha_challenge"`
 	ClientSideDefense             *HTTPLoadBalancerClientSideDefenseModel            `tfsdk:"client_side_defense"`
 	CookieStickiness              *HTTPLoadBalancerCookieStickinessModel             `tfsdk:"cookie_stickiness"`
-	CorsPolicy                    *HTTPLoadBalancerCorsPolicyModel                   `tfsdk:"cors_policy"`
-	CsrfPolicy                    *HTTPLoadBalancerCsrfPolicyModel                   `tfsdk:"csrf_policy"`
+	CORSPolicy                    *HTTPLoadBalancerCORSPolicyModel                   `tfsdk:"cors_policy"`
+	CSRFPolicy                    *HTTPLoadBalancerCSRFPolicyModel                   `tfsdk:"csrf_policy"`
 	DataGuardRules                []HTTPLoadBalancerDataGuardRulesModel              `tfsdk:"data_guard_rules"`
-	DdosMitigationRules           []HTTPLoadBalancerDdosMitigationRulesModel         `tfsdk:"ddos_mitigation_rules"`
+	DDOSMitigationRules           []HTTPLoadBalancerDDOSMitigationRulesModel         `tfsdk:"ddos_mitigation_rules"`
 	DefaultPool                   *HTTPLoadBalancerDefaultPoolModel                  `tfsdk:"default_pool"`
 	DefaultPoolList               *HTTPLoadBalancerDefaultPoolListModel              `tfsdk:"default_pool_list"`
 	DefaultRoutePools             []HTTPLoadBalancerDefaultRoutePoolsModel           `tfsdk:"default_route_pools"`
@@ -4706,15 +4706,15 @@ type HTTPLoadBalancerResourceModel struct {
 	HTTPS                         *HTTPLoadBalancerHTTPSModel                        `tfsdk:"https"`
 	HTTPSAutoCert                 *HTTPLoadBalancerHTTPSAutoCertModel                `tfsdk:"https_auto_cert"`
 	JsChallenge                   *HTTPLoadBalancerJsChallengeModel                  `tfsdk:"js_challenge"`
-	JwtValidation                 *HTTPLoadBalancerJwtValidationModel                `tfsdk:"jwt_validation"`
-	L7DdosActionBlock             *HTTPLoadBalancerEmptyModel                        `tfsdk:"l7_ddos_action_block"`
-	L7DdosActionDefault           *HTTPLoadBalancerEmptyModel                        `tfsdk:"l7_ddos_action_default"`
-	L7DdosActionJsChallenge       *HTTPLoadBalancerL7DdosActionJsChallengeModel      `tfsdk:"l7_ddos_action_js_challenge"`
-	L7DdosProtection              *HTTPLoadBalancerL7DdosProtectionModel             `tfsdk:"l7_ddos_protection"`
+	JWTValidation                 *HTTPLoadBalancerJWTValidationModel                `tfsdk:"jwt_validation"`
+	L7DDOSActionBlock             *HTTPLoadBalancerEmptyModel                        `tfsdk:"l7_ddos_action_block"`
+	L7DDOSActionDefault           *HTTPLoadBalancerEmptyModel                        `tfsdk:"l7_ddos_action_default"`
+	L7DDOSActionJsChallenge       *HTTPLoadBalancerL7DDOSActionJsChallengeModel      `tfsdk:"l7_ddos_action_js_challenge"`
+	L7DDOSProtection              *HTTPLoadBalancerL7DDOSProtectionModel             `tfsdk:"l7_ddos_protection"`
 	LeastActive                   *HTTPLoadBalancerEmptyModel                        `tfsdk:"least_active"`
 	MalwareProtectionSettings     *HTTPLoadBalancerMalwareProtectionSettingsModel    `tfsdk:"malware_protection_settings"`
 	MoreOption                    *HTTPLoadBalancerMoreOptionModel                   `tfsdk:"more_option"`
-	MultiLbApp                    *HTTPLoadBalancerEmptyModel                        `tfsdk:"multi_lb_app"`
+	MultiLBApp                    *HTTPLoadBalancerEmptyModel                        `tfsdk:"multi_lb_app"`
 	NoChallenge                   *HTTPLoadBalancerEmptyModel                        `tfsdk:"no_challenge"`
 	NoServicePolicies             *HTTPLoadBalancerEmptyModel                        `tfsdk:"no_service_policies"`
 	OriginServerSubsetRuleList    *HTTPLoadBalancerOriginServerSubsetRuleListModel   `tfsdk:"origin_server_subset_rule_list"`
@@ -4728,8 +4728,8 @@ type HTTPLoadBalancerResourceModel struct {
 	SensitiveDataDisclosureRules  *HTTPLoadBalancerSensitiveDataDisclosureRulesModel `tfsdk:"sensitive_data_disclosure_rules"`
 	SensitiveDataPolicy           *HTTPLoadBalancerSensitiveDataPolicyModel          `tfsdk:"sensitive_data_policy"`
 	ServicePoliciesFromNamespace  *HTTPLoadBalancerEmptyModel                        `tfsdk:"service_policies_from_namespace"`
-	SingleLbApp                   *HTTPLoadBalancerSingleLbAppModel                  `tfsdk:"single_lb_app"`
-	SlowDdosMitigation            *HTTPLoadBalancerSlowDdosMitigationModel           `tfsdk:"slow_ddos_mitigation"`
+	SingleLBApp                   *HTTPLoadBalancerSingleLBAppModel                  `tfsdk:"single_lb_app"`
+	SlowDDOSMitigation            *HTTPLoadBalancerSlowDDOSMitigationModel           `tfsdk:"slow_ddos_mitigation"`
 	SourceIPStickiness            *HTTPLoadBalancerEmptyModel                        `tfsdk:"source_ip_stickiness"`
 	SystemDefaultTimeouts         *HTTPLoadBalancerEmptyModel                        `tfsdk:"system_default_timeouts"`
 	TrustedClients                []HTTPLoadBalancerTrustedClientsModel              `tfsdk:"trusted_clients"`
@@ -14951,17 +14951,17 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				}
 				if listItem.VirtualNetwork != nil {
 					virtual_networkDeepMap := make(map[string]interface{})
-					if listItem.VirtualNetwork.DefaultV6Vip != nil {
+					if listItem.VirtualNetwork.DefaultV6VIP != nil {
 						virtual_networkDeepMap["default_v6_vip"] = map[string]interface{}{}
 					}
-					if listItem.VirtualNetwork.DefaultVip != nil {
+					if listItem.VirtualNetwork.DefaultVIP != nil {
 						virtual_networkDeepMap["default_vip"] = map[string]interface{}{}
 					}
-					if !listItem.VirtualNetwork.SpecificV6Vip.IsNull() && !listItem.VirtualNetwork.SpecificV6Vip.IsUnknown() {
-						virtual_networkDeepMap["specific_v6_vip"] = listItem.VirtualNetwork.SpecificV6Vip.ValueString()
+					if !listItem.VirtualNetwork.SpecificV6VIP.IsNull() && !listItem.VirtualNetwork.SpecificV6VIP.IsUnknown() {
+						virtual_networkDeepMap["specific_v6_vip"] = listItem.VirtualNetwork.SpecificV6VIP.ValueString()
 					}
-					if !listItem.VirtualNetwork.SpecificVip.IsNull() && !listItem.VirtualNetwork.SpecificVip.IsUnknown() {
-						virtual_networkDeepMap["specific_vip"] = listItem.VirtualNetwork.SpecificVip.ValueString()
+					if !listItem.VirtualNetwork.SpecificVIP.IsNull() && !listItem.VirtualNetwork.SpecificVIP.IsUnknown() {
+						virtual_networkDeepMap["specific_vip"] = listItem.VirtualNetwork.SpecificVIP.ValueString()
 					}
 					listItemMap["virtual_network"] = virtual_networkDeepMap
 				}
@@ -14972,13 +14972,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 					}
 					listItemMap["virtual_site"] = virtual_siteDeepMap
 				}
-				if listItem.VirtualSiteWithVip != nil {
+				if listItem.VirtualSiteWithVIP != nil {
 					virtual_site_with_vipDeepMap := make(map[string]interface{})
-					if !listItem.VirtualSiteWithVip.IP.IsNull() && !listItem.VirtualSiteWithVip.IP.IsUnknown() {
-						virtual_site_with_vipDeepMap["ip"] = listItem.VirtualSiteWithVip.IP.ValueString()
+					if !listItem.VirtualSiteWithVIP.IP.IsNull() && !listItem.VirtualSiteWithVIP.IP.IsUnknown() {
+						virtual_site_with_vipDeepMap["ip"] = listItem.VirtualSiteWithVIP.IP.ValueString()
 					}
-					if !listItem.VirtualSiteWithVip.Network.IsNull() && !listItem.VirtualSiteWithVip.Network.IsUnknown() {
-						virtual_site_with_vipDeepMap["network"] = listItem.VirtualSiteWithVip.Network.ValueString()
+					if !listItem.VirtualSiteWithVIP.Network.IsNull() && !listItem.VirtualSiteWithVIP.Network.IsUnknown() {
+						virtual_site_with_vipDeepMap["network"] = listItem.VirtualSiteWithVIP.Network.ValueString()
 					}
 					listItemMap["virtual_site_with_vip"] = virtual_site_with_vipDeepMap
 				}
@@ -15009,7 +15009,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		}
 		createReq.Spec["advertise_on_public"] = advertise_on_publicMap
 	}
-	if data.AdvertiseOnPublicDefaultVip != nil {
+	if data.AdvertiseOnPublicDefaultVIP != nil {
 		advertise_on_public_default_vipMap := make(map[string]interface{})
 		createReq.Spec["advertise_on_public_default_vip"] = advertise_on_public_default_vipMap
 	}
@@ -15166,7 +15166,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 					if !listItem.InlineRateLimiter.Unit.IsNull() && !listItem.InlineRateLimiter.Unit.IsUnknown() {
 						inline_rate_limiterDeepMap["unit"] = listItem.InlineRateLimiter.Unit.ValueString()
 					}
-					if listItem.InlineRateLimiter.UseHTTPLbUserID != nil {
+					if listItem.InlineRateLimiter.UseHTTPLBUserID != nil {
 						inline_rate_limiterDeepMap["use_http_lb_user_id"] = map[string]interface{}{}
 					}
 					listItemMap["inline_rate_limiter"] = inline_rate_limiterDeepMap
@@ -15241,7 +15241,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 					if !listItem.InlineRateLimiter.Unit.IsNull() && !listItem.InlineRateLimiter.Unit.IsUnknown() {
 						inline_rate_limiterDeepMap["unit"] = listItem.InlineRateLimiter.Unit.ValueString()
 					}
-					if listItem.InlineRateLimiter.UseHTTPLbUserID != nil {
+					if listItem.InlineRateLimiter.UseHTTPLBUserID != nil {
 						inline_rate_limiterDeepMap["use_http_lb_user_id"] = map[string]interface{}{}
 					}
 					listItemMap["inline_rate_limiter"] = inline_rate_limiterDeepMap
@@ -15386,8 +15386,8 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {
 				itemMap["ip_prefix"] = item.IPPrefix.ValueString()
 			}
-			if !item.IPV6Prefix.IsNull() && !item.IPV6Prefix.IsUnknown() {
-				itemMap["ipv6_prefix"] = item.IPV6Prefix.ValueString()
+			if !item.Ipv6Prefix.IsNull() && !item.Ipv6Prefix.IsUnknown() {
+				itemMap["ipv6_prefix"] = item.Ipv6Prefix.ValueString()
 			}
 			if item.Metadata != nil {
 				metadataNestedMap := make(map[string]interface{})
@@ -15414,10 +15414,10 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 	}
 	if data.BotDefense != nil {
 		bot_defenseMap := make(map[string]interface{})
-		if data.BotDefense.DisableCorsSupport != nil {
+		if data.BotDefense.DisableCORSSupport != nil {
 			bot_defenseMap["disable_cors_support"] = map[string]interface{}{}
 		}
-		if data.BotDefense.EnableCorsSupport != nil {
+		if data.BotDefense.EnableCORSSupport != nil {
 			bot_defenseMap["enable_cors_support"] = map[string]interface{}{}
 		}
 		if data.BotDefense.Policy != nil {
@@ -15504,11 +15504,11 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		}
 		if data.CachingPolicy.DefaultCacheAction != nil {
 			default_cache_actionNestedMap := make(map[string]interface{})
-			if !data.CachingPolicy.DefaultCacheAction.CacheTtlDefault.IsNull() && !data.CachingPolicy.DefaultCacheAction.CacheTtlDefault.IsUnknown() {
-				default_cache_actionNestedMap["cache_ttl_default"] = data.CachingPolicy.DefaultCacheAction.CacheTtlDefault.ValueString()
+			if !data.CachingPolicy.DefaultCacheAction.CacheTTLDefault.IsNull() && !data.CachingPolicy.DefaultCacheAction.CacheTTLDefault.IsUnknown() {
+				default_cache_actionNestedMap["cache_ttl_default"] = data.CachingPolicy.DefaultCacheAction.CacheTTLDefault.ValueString()
 			}
-			if !data.CachingPolicy.DefaultCacheAction.CacheTtlOverride.IsNull() && !data.CachingPolicy.DefaultCacheAction.CacheTtlOverride.IsUnknown() {
-				default_cache_actionNestedMap["cache_ttl_override"] = data.CachingPolicy.DefaultCacheAction.CacheTtlOverride.ValueString()
+			if !data.CachingPolicy.DefaultCacheAction.CacheTTLOverride.IsNull() && !data.CachingPolicy.DefaultCacheAction.CacheTTLOverride.IsUnknown() {
+				default_cache_actionNestedMap["cache_ttl_override"] = data.CachingPolicy.DefaultCacheAction.CacheTTLOverride.ValueString()
 			}
 			caching_policyMap["default_cache_action"] = default_cache_actionNestedMap
 		}
@@ -15564,57 +15564,57 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		if data.CookieStickiness.SamesiteStrict != nil {
 			cookie_stickinessMap["samesite_strict"] = map[string]interface{}{}
 		}
-		if !data.CookieStickiness.Ttl.IsNull() && !data.CookieStickiness.Ttl.IsUnknown() {
-			cookie_stickinessMap["ttl"] = data.CookieStickiness.Ttl.ValueInt64()
+		if !data.CookieStickiness.TTL.IsNull() && !data.CookieStickiness.TTL.IsUnknown() {
+			cookie_stickinessMap["ttl"] = data.CookieStickiness.TTL.ValueInt64()
 		}
 		createReq.Spec["cookie_stickiness"] = cookie_stickinessMap
 	}
-	if data.CorsPolicy != nil {
+	if data.CORSPolicy != nil {
 		cors_policyMap := make(map[string]interface{})
-		if !data.CorsPolicy.AllowCredentials.IsNull() && !data.CorsPolicy.AllowCredentials.IsUnknown() {
-			cors_policyMap["allow_credentials"] = data.CorsPolicy.AllowCredentials.ValueBool()
+		if !data.CORSPolicy.AllowCredentials.IsNull() && !data.CORSPolicy.AllowCredentials.IsUnknown() {
+			cors_policyMap["allow_credentials"] = data.CORSPolicy.AllowCredentials.ValueBool()
 		}
-		if !data.CorsPolicy.AllowHeaders.IsNull() && !data.CorsPolicy.AllowHeaders.IsUnknown() {
-			cors_policyMap["allow_headers"] = data.CorsPolicy.AllowHeaders.ValueString()
+		if !data.CORSPolicy.AllowHeaders.IsNull() && !data.CORSPolicy.AllowHeaders.IsUnknown() {
+			cors_policyMap["allow_headers"] = data.CORSPolicy.AllowHeaders.ValueString()
 		}
-		if !data.CorsPolicy.AllowMethods.IsNull() && !data.CorsPolicy.AllowMethods.IsUnknown() {
-			cors_policyMap["allow_methods"] = data.CorsPolicy.AllowMethods.ValueString()
+		if !data.CORSPolicy.AllowMethods.IsNull() && !data.CORSPolicy.AllowMethods.IsUnknown() {
+			cors_policyMap["allow_methods"] = data.CORSPolicy.AllowMethods.ValueString()
 		}
-		if !data.CorsPolicy.AllowOrigin.IsNull() && !data.CorsPolicy.AllowOrigin.IsUnknown() {
+		if !data.CORSPolicy.AllowOrigin.IsNull() && !data.CORSPolicy.AllowOrigin.IsUnknown() {
 			var allow_originItems []string
-			diags := data.CorsPolicy.AllowOrigin.ElementsAs(ctx, &allow_originItems, false)
+			diags := data.CORSPolicy.AllowOrigin.ElementsAs(ctx, &allow_originItems, false)
 			if !diags.HasError() {
 				cors_policyMap["allow_origin"] = allow_originItems
 			}
 		}
-		if !data.CorsPolicy.AllowOriginRegex.IsNull() && !data.CorsPolicy.AllowOriginRegex.IsUnknown() {
+		if !data.CORSPolicy.AllowOriginRegex.IsNull() && !data.CORSPolicy.AllowOriginRegex.IsUnknown() {
 			var allow_origin_regexItems []string
-			diags := data.CorsPolicy.AllowOriginRegex.ElementsAs(ctx, &allow_origin_regexItems, false)
+			diags := data.CORSPolicy.AllowOriginRegex.ElementsAs(ctx, &allow_origin_regexItems, false)
 			if !diags.HasError() {
 				cors_policyMap["allow_origin_regex"] = allow_origin_regexItems
 			}
 		}
-		if !data.CorsPolicy.Disabled.IsNull() && !data.CorsPolicy.Disabled.IsUnknown() {
-			cors_policyMap["disabled"] = data.CorsPolicy.Disabled.ValueBool()
+		if !data.CORSPolicy.Disabled.IsNull() && !data.CORSPolicy.Disabled.IsUnknown() {
+			cors_policyMap["disabled"] = data.CORSPolicy.Disabled.ValueBool()
 		}
-		if !data.CorsPolicy.ExposeHeaders.IsNull() && !data.CorsPolicy.ExposeHeaders.IsUnknown() {
-			cors_policyMap["expose_headers"] = data.CorsPolicy.ExposeHeaders.ValueString()
+		if !data.CORSPolicy.ExposeHeaders.IsNull() && !data.CORSPolicy.ExposeHeaders.IsUnknown() {
+			cors_policyMap["expose_headers"] = data.CORSPolicy.ExposeHeaders.ValueString()
 		}
-		if !data.CorsPolicy.MaximumAge.IsNull() && !data.CorsPolicy.MaximumAge.IsUnknown() {
-			cors_policyMap["maximum_age"] = data.CorsPolicy.MaximumAge.ValueInt64()
+		if !data.CORSPolicy.MaximumAge.IsNull() && !data.CORSPolicy.MaximumAge.IsUnknown() {
+			cors_policyMap["maximum_age"] = data.CORSPolicy.MaximumAge.ValueInt64()
 		}
 		createReq.Spec["cors_policy"] = cors_policyMap
 	}
-	if data.CsrfPolicy != nil {
+	if data.CSRFPolicy != nil {
 		csrf_policyMap := make(map[string]interface{})
-		if data.CsrfPolicy.AllLoadBalancerDomains != nil {
+		if data.CSRFPolicy.AllLoadBalancerDomains != nil {
 			csrf_policyMap["all_load_balancer_domains"] = map[string]interface{}{}
 		}
-		if data.CsrfPolicy.CustomDomainList != nil {
+		if data.CSRFPolicy.CustomDomainList != nil {
 			custom_domain_listNestedMap := make(map[string]interface{})
 			csrf_policyMap["custom_domain_list"] = custom_domain_listNestedMap
 		}
-		if data.CsrfPolicy.Disabled != nil {
+		if data.CSRFPolicy.Disabled != nil {
 			csrf_policyMap["disabled"] = map[string]interface{}{}
 		}
 		createReq.Spec["csrf_policy"] = csrf_policyMap
@@ -15665,56 +15665,56 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		}
 		createReq.Spec["data_guard_rules"] = data_guard_rulesList
 	}
-	if len(data.DdosMitigationRules) > 0 {
+	if len(data.DDOSMitigationRules) > 0 {
 		var ddos_mitigation_rulesList []map[string]interface{}
-		for _, item := range data.DdosMitigationRules {
+		for _, item := range data.DDOSMitigationRules {
 			itemMap := make(map[string]interface{})
 			if item.Block != nil {
 				itemMap["block"] = map[string]interface{}{}
 			}
-			if item.DdosClientSource != nil {
+			if item.DDOSClientSource != nil {
 				ddos_client_sourceNestedMap := make(map[string]interface{})
-				if item.DdosClientSource.AsnList != nil {
+				if item.DDOSClientSource.AsnList != nil {
 					asn_listDeepMap := make(map[string]interface{})
 					ddos_client_sourceNestedMap["asn_list"] = asn_listDeepMap
 				}
-				if !item.DdosClientSource.CountryList.IsNull() && !item.DdosClientSource.CountryList.IsUnknown() {
+				if !item.DDOSClientSource.CountryList.IsNull() && !item.DDOSClientSource.CountryList.IsUnknown() {
 					var CountryListItems []string
-					diags := item.DdosClientSource.CountryList.ElementsAs(ctx, &CountryListItems, false)
+					diags := item.DDOSClientSource.CountryList.ElementsAs(ctx, &CountryListItems, false)
 					if !diags.HasError() {
 						ddos_client_sourceNestedMap["country_list"] = CountryListItems
 					}
 				}
-				if item.DdosClientSource.Ja4TLSFingerprintMatcher != nil {
+				if item.DDOSClientSource.Ja4TLSFingerprintMatcher != nil {
 					ja4_tls_fingerprint_matcherDeepMap := make(map[string]interface{})
-					if !item.DdosClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsNull() && !item.DdosClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsUnknown() {
+					if !item.DDOSClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsNull() && !item.DDOSClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsUnknown() {
 						var ExactValuesItems []string
-						diags := item.DdosClientSource.Ja4TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						diags := item.DDOSClientSource.Ja4TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
 						if !diags.HasError() {
 							ja4_tls_fingerprint_matcherDeepMap["exact_values"] = ExactValuesItems
 						}
 					}
 					ddos_client_sourceNestedMap["ja4_tls_fingerprint_matcher"] = ja4_tls_fingerprint_matcherDeepMap
 				}
-				if item.DdosClientSource.TLSFingerprintMatcher != nil {
+				if item.DDOSClientSource.TLSFingerprintMatcher != nil {
 					tls_fingerprint_matcherDeepMap := make(map[string]interface{})
-					if !item.DdosClientSource.TLSFingerprintMatcher.Classes.IsNull() && !item.DdosClientSource.TLSFingerprintMatcher.Classes.IsUnknown() {
+					if !item.DDOSClientSource.TLSFingerprintMatcher.Classes.IsNull() && !item.DDOSClientSource.TLSFingerprintMatcher.Classes.IsUnknown() {
 						var ClassesItems []string
-						diags := item.DdosClientSource.TLSFingerprintMatcher.Classes.ElementsAs(ctx, &ClassesItems, false)
+						diags := item.DDOSClientSource.TLSFingerprintMatcher.Classes.ElementsAs(ctx, &ClassesItems, false)
 						if !diags.HasError() {
 							tls_fingerprint_matcherDeepMap["classes"] = ClassesItems
 						}
 					}
-					if !item.DdosClientSource.TLSFingerprintMatcher.ExactValues.IsNull() && !item.DdosClientSource.TLSFingerprintMatcher.ExactValues.IsUnknown() {
+					if !item.DDOSClientSource.TLSFingerprintMatcher.ExactValues.IsNull() && !item.DDOSClientSource.TLSFingerprintMatcher.ExactValues.IsUnknown() {
 						var ExactValuesItems []string
-						diags := item.DdosClientSource.TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						diags := item.DDOSClientSource.TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
 						if !diags.HasError() {
 							tls_fingerprint_matcherDeepMap["exact_values"] = ExactValuesItems
 						}
 					}
-					if !item.DdosClientSource.TLSFingerprintMatcher.ExcludedValues.IsNull() && !item.DdosClientSource.TLSFingerprintMatcher.ExcludedValues.IsUnknown() {
+					if !item.DDOSClientSource.TLSFingerprintMatcher.ExcludedValues.IsNull() && !item.DDOSClientSource.TLSFingerprintMatcher.ExcludedValues.IsUnknown() {
 						var ExcludedValuesItems []string
-						diags := item.DdosClientSource.TLSFingerprintMatcher.ExcludedValues.ElementsAs(ctx, &ExcludedValuesItems, false)
+						diags := item.DDOSClientSource.TLSFingerprintMatcher.ExcludedValues.ElementsAs(ctx, &ExcludedValuesItems, false)
 						if !diags.HasError() {
 							tls_fingerprint_matcherDeepMap["excluded_values"] = ExcludedValuesItems
 						}
@@ -15795,7 +15795,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			default_poolMap["healthcheck"] = healthcheckList
 		}
-		if data.DefaultPool.LbPort != nil {
+		if data.DefaultPool.LBPort != nil {
 			default_poolMap["lb_port"] = map[string]interface{}{}
 		}
 		if !data.DefaultPool.LoadBalancerAlgorithm.IsNull() && !data.DefaultPool.LoadBalancerAlgorithm.IsUnknown() {
@@ -16409,8 +16409,8 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			if !data.HTTPSAutoCert.UseMtls.ClientCertificateOptional.IsNull() && !data.HTTPSAutoCert.UseMtls.ClientCertificateOptional.IsUnknown() {
 				use_mtlsNestedMap["client_certificate_optional"] = data.HTTPSAutoCert.UseMtls.ClientCertificateOptional.ValueBool()
 			}
-			if !data.HTTPSAutoCert.UseMtls.TrustedCaURL.IsNull() && !data.HTTPSAutoCert.UseMtls.TrustedCaURL.IsUnknown() {
-				use_mtlsNestedMap["trusted_ca_url"] = data.HTTPSAutoCert.UseMtls.TrustedCaURL.ValueString()
+			if !data.HTTPSAutoCert.UseMtls.TrustedCAURL.IsNull() && !data.HTTPSAutoCert.UseMtls.TrustedCAURL.IsUnknown() {
+				use_mtlsNestedMap["trusted_ca_url"] = data.HTTPSAutoCert.UseMtls.TrustedCAURL.ValueString()
 			}
 			https_auto_certMap["use_mtls"] = use_mtlsNestedMap
 		}
@@ -16429,136 +16429,136 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		}
 		createReq.Spec["js_challenge"] = js_challengeMap
 	}
-	if data.JwtValidation != nil {
+	if data.JWTValidation != nil {
 		jwt_validationMap := make(map[string]interface{})
-		if data.JwtValidation.Action != nil {
+		if data.JWTValidation.Action != nil {
 			actionNestedMap := make(map[string]interface{})
 			jwt_validationMap["action"] = actionNestedMap
 		}
-		if data.JwtValidation.JwksConfig != nil {
+		if data.JWTValidation.JwksConfig != nil {
 			jwks_configNestedMap := make(map[string]interface{})
-			if !data.JwtValidation.JwksConfig.Cleartext.IsNull() && !data.JwtValidation.JwksConfig.Cleartext.IsUnknown() {
-				jwks_configNestedMap["cleartext"] = data.JwtValidation.JwksConfig.Cleartext.ValueString()
+			if !data.JWTValidation.JwksConfig.Cleartext.IsNull() && !data.JWTValidation.JwksConfig.Cleartext.IsUnknown() {
+				jwks_configNestedMap["cleartext"] = data.JWTValidation.JwksConfig.Cleartext.ValueString()
 			}
 			jwt_validationMap["jwks_config"] = jwks_configNestedMap
 		}
-		if data.JwtValidation.MandatoryClaims != nil {
+		if data.JWTValidation.MandatoryClaims != nil {
 			mandatory_claimsNestedMap := make(map[string]interface{})
 			jwt_validationMap["mandatory_claims"] = mandatory_claimsNestedMap
 		}
-		if data.JwtValidation.ReservedClaims != nil {
+		if data.JWTValidation.ReservedClaims != nil {
 			reserved_claimsNestedMap := make(map[string]interface{})
-			if !data.JwtValidation.ReservedClaims.Issuer.IsNull() && !data.JwtValidation.ReservedClaims.Issuer.IsUnknown() {
-				reserved_claimsNestedMap["issuer"] = data.JwtValidation.ReservedClaims.Issuer.ValueString()
+			if !data.JWTValidation.ReservedClaims.Issuer.IsNull() && !data.JWTValidation.ReservedClaims.Issuer.IsUnknown() {
+				reserved_claimsNestedMap["issuer"] = data.JWTValidation.ReservedClaims.Issuer.ValueString()
 			}
 			jwt_validationMap["reserved_claims"] = reserved_claimsNestedMap
 		}
-		if data.JwtValidation.Target != nil {
+		if data.JWTValidation.Target != nil {
 			targetNestedMap := make(map[string]interface{})
 			jwt_validationMap["target"] = targetNestedMap
 		}
-		if data.JwtValidation.TokenLocation != nil {
+		if data.JWTValidation.TokenLocation != nil {
 			token_locationNestedMap := make(map[string]interface{})
 			jwt_validationMap["token_location"] = token_locationNestedMap
 		}
 		createReq.Spec["jwt_validation"] = jwt_validationMap
 	}
-	if data.L7DdosActionBlock != nil {
+	if data.L7DDOSActionBlock != nil {
 		l7_ddos_action_blockMap := make(map[string]interface{})
 		createReq.Spec["l7_ddos_action_block"] = l7_ddos_action_blockMap
 	}
-	if data.L7DdosActionDefault != nil {
+	if data.L7DDOSActionDefault != nil {
 		l7_ddos_action_defaultMap := make(map[string]interface{})
 		createReq.Spec["l7_ddos_action_default"] = l7_ddos_action_defaultMap
 	}
-	if data.L7DdosActionJsChallenge != nil {
+	if data.L7DDOSActionJsChallenge != nil {
 		l7_ddos_action_js_challengeMap := make(map[string]interface{})
-		if !data.L7DdosActionJsChallenge.CookieExpiry.IsNull() && !data.L7DdosActionJsChallenge.CookieExpiry.IsUnknown() {
-			l7_ddos_action_js_challengeMap["cookie_expiry"] = data.L7DdosActionJsChallenge.CookieExpiry.ValueInt64()
+		if !data.L7DDOSActionJsChallenge.CookieExpiry.IsNull() && !data.L7DDOSActionJsChallenge.CookieExpiry.IsUnknown() {
+			l7_ddos_action_js_challengeMap["cookie_expiry"] = data.L7DDOSActionJsChallenge.CookieExpiry.ValueInt64()
 		}
-		if !data.L7DdosActionJsChallenge.CustomPage.IsNull() && !data.L7DdosActionJsChallenge.CustomPage.IsUnknown() {
-			l7_ddos_action_js_challengeMap["custom_page"] = data.L7DdosActionJsChallenge.CustomPage.ValueString()
+		if !data.L7DDOSActionJsChallenge.CustomPage.IsNull() && !data.L7DDOSActionJsChallenge.CustomPage.IsUnknown() {
+			l7_ddos_action_js_challengeMap["custom_page"] = data.L7DDOSActionJsChallenge.CustomPage.ValueString()
 		}
-		if !data.L7DdosActionJsChallenge.JsScriptDelay.IsNull() && !data.L7DdosActionJsChallenge.JsScriptDelay.IsUnknown() {
-			l7_ddos_action_js_challengeMap["js_script_delay"] = data.L7DdosActionJsChallenge.JsScriptDelay.ValueInt64()
+		if !data.L7DDOSActionJsChallenge.JsScriptDelay.IsNull() && !data.L7DDOSActionJsChallenge.JsScriptDelay.IsUnknown() {
+			l7_ddos_action_js_challengeMap["js_script_delay"] = data.L7DDOSActionJsChallenge.JsScriptDelay.ValueInt64()
 		}
 		createReq.Spec["l7_ddos_action_js_challenge"] = l7_ddos_action_js_challengeMap
 	}
-	if data.L7DdosProtection != nil {
+	if data.L7DDOSProtection != nil {
 		l7_ddos_protectionMap := make(map[string]interface{})
-		if data.L7DdosProtection.ClientsideActionCaptchaChallenge != nil {
+		if data.L7DDOSProtection.ClientsideActionCaptchaChallenge != nil {
 			clientside_action_captcha_challengeNestedMap := make(map[string]interface{})
-			if !data.L7DdosProtection.ClientsideActionCaptchaChallenge.CookieExpiry.IsNull() && !data.L7DdosProtection.ClientsideActionCaptchaChallenge.CookieExpiry.IsUnknown() {
-				clientside_action_captcha_challengeNestedMap["cookie_expiry"] = data.L7DdosProtection.ClientsideActionCaptchaChallenge.CookieExpiry.ValueInt64()
+			if !data.L7DDOSProtection.ClientsideActionCaptchaChallenge.CookieExpiry.IsNull() && !data.L7DDOSProtection.ClientsideActionCaptchaChallenge.CookieExpiry.IsUnknown() {
+				clientside_action_captcha_challengeNestedMap["cookie_expiry"] = data.L7DDOSProtection.ClientsideActionCaptchaChallenge.CookieExpiry.ValueInt64()
 			}
-			if !data.L7DdosProtection.ClientsideActionCaptchaChallenge.CustomPage.IsNull() && !data.L7DdosProtection.ClientsideActionCaptchaChallenge.CustomPage.IsUnknown() {
-				clientside_action_captcha_challengeNestedMap["custom_page"] = data.L7DdosProtection.ClientsideActionCaptchaChallenge.CustomPage.ValueString()
+			if !data.L7DDOSProtection.ClientsideActionCaptchaChallenge.CustomPage.IsNull() && !data.L7DDOSProtection.ClientsideActionCaptchaChallenge.CustomPage.IsUnknown() {
+				clientside_action_captcha_challengeNestedMap["custom_page"] = data.L7DDOSProtection.ClientsideActionCaptchaChallenge.CustomPage.ValueString()
 			}
 			l7_ddos_protectionMap["clientside_action_captcha_challenge"] = clientside_action_captcha_challengeNestedMap
 		}
-		if data.L7DdosProtection.ClientsideActionJsChallenge != nil {
+		if data.L7DDOSProtection.ClientsideActionJsChallenge != nil {
 			clientside_action_js_challengeNestedMap := make(map[string]interface{})
-			if !data.L7DdosProtection.ClientsideActionJsChallenge.CookieExpiry.IsNull() && !data.L7DdosProtection.ClientsideActionJsChallenge.CookieExpiry.IsUnknown() {
-				clientside_action_js_challengeNestedMap["cookie_expiry"] = data.L7DdosProtection.ClientsideActionJsChallenge.CookieExpiry.ValueInt64()
+			if !data.L7DDOSProtection.ClientsideActionJsChallenge.CookieExpiry.IsNull() && !data.L7DDOSProtection.ClientsideActionJsChallenge.CookieExpiry.IsUnknown() {
+				clientside_action_js_challengeNestedMap["cookie_expiry"] = data.L7DDOSProtection.ClientsideActionJsChallenge.CookieExpiry.ValueInt64()
 			}
-			if !data.L7DdosProtection.ClientsideActionJsChallenge.CustomPage.IsNull() && !data.L7DdosProtection.ClientsideActionJsChallenge.CustomPage.IsUnknown() {
-				clientside_action_js_challengeNestedMap["custom_page"] = data.L7DdosProtection.ClientsideActionJsChallenge.CustomPage.ValueString()
+			if !data.L7DDOSProtection.ClientsideActionJsChallenge.CustomPage.IsNull() && !data.L7DDOSProtection.ClientsideActionJsChallenge.CustomPage.IsUnknown() {
+				clientside_action_js_challengeNestedMap["custom_page"] = data.L7DDOSProtection.ClientsideActionJsChallenge.CustomPage.ValueString()
 			}
-			if !data.L7DdosProtection.ClientsideActionJsChallenge.JsScriptDelay.IsNull() && !data.L7DdosProtection.ClientsideActionJsChallenge.JsScriptDelay.IsUnknown() {
-				clientside_action_js_challengeNestedMap["js_script_delay"] = data.L7DdosProtection.ClientsideActionJsChallenge.JsScriptDelay.ValueInt64()
+			if !data.L7DDOSProtection.ClientsideActionJsChallenge.JsScriptDelay.IsNull() && !data.L7DDOSProtection.ClientsideActionJsChallenge.JsScriptDelay.IsUnknown() {
+				clientside_action_js_challengeNestedMap["js_script_delay"] = data.L7DDOSProtection.ClientsideActionJsChallenge.JsScriptDelay.ValueInt64()
 			}
 			l7_ddos_protectionMap["clientside_action_js_challenge"] = clientside_action_js_challengeNestedMap
 		}
-		if data.L7DdosProtection.ClientsideActionNone != nil {
+		if data.L7DDOSProtection.ClientsideActionNone != nil {
 			l7_ddos_protectionMap["clientside_action_none"] = map[string]interface{}{}
 		}
-		if data.L7DdosProtection.DdosPolicyCustom != nil {
+		if data.L7DDOSProtection.DDOSPolicyCustom != nil {
 			ddos_policy_customNestedMap := make(map[string]interface{})
-			if !data.L7DdosProtection.DdosPolicyCustom.Name.IsNull() && !data.L7DdosProtection.DdosPolicyCustom.Name.IsUnknown() {
-				ddos_policy_customNestedMap["name"] = data.L7DdosProtection.DdosPolicyCustom.Name.ValueString()
+			if !data.L7DDOSProtection.DDOSPolicyCustom.Name.IsNull() && !data.L7DDOSProtection.DDOSPolicyCustom.Name.IsUnknown() {
+				ddos_policy_customNestedMap["name"] = data.L7DDOSProtection.DDOSPolicyCustom.Name.ValueString()
 			}
-			if !data.L7DdosProtection.DdosPolicyCustom.Namespace.IsNull() && !data.L7DdosProtection.DdosPolicyCustom.Namespace.IsUnknown() {
-				ddos_policy_customNestedMap["namespace"] = data.L7DdosProtection.DdosPolicyCustom.Namespace.ValueString()
+			if !data.L7DDOSProtection.DDOSPolicyCustom.Namespace.IsNull() && !data.L7DDOSProtection.DDOSPolicyCustom.Namespace.IsUnknown() {
+				ddos_policy_customNestedMap["namespace"] = data.L7DDOSProtection.DDOSPolicyCustom.Namespace.ValueString()
 			}
-			if !data.L7DdosProtection.DdosPolicyCustom.Tenant.IsNull() && !data.L7DdosProtection.DdosPolicyCustom.Tenant.IsUnknown() {
-				ddos_policy_customNestedMap["tenant"] = data.L7DdosProtection.DdosPolicyCustom.Tenant.ValueString()
+			if !data.L7DDOSProtection.DDOSPolicyCustom.Tenant.IsNull() && !data.L7DDOSProtection.DDOSPolicyCustom.Tenant.IsUnknown() {
+				ddos_policy_customNestedMap["tenant"] = data.L7DDOSProtection.DDOSPolicyCustom.Tenant.ValueString()
 			}
 			l7_ddos_protectionMap["ddos_policy_custom"] = ddos_policy_customNestedMap
 		}
-		if data.L7DdosProtection.DdosPolicyNone != nil {
+		if data.L7DDOSProtection.DDOSPolicyNone != nil {
 			l7_ddos_protectionMap["ddos_policy_none"] = map[string]interface{}{}
 		}
-		if data.L7DdosProtection.DefaultRpsThreshold != nil {
+		if data.L7DDOSProtection.DefaultRpsThreshold != nil {
 			l7_ddos_protectionMap["default_rps_threshold"] = map[string]interface{}{}
 		}
-		if data.L7DdosProtection.MitigationBlock != nil {
+		if data.L7DDOSProtection.MitigationBlock != nil {
 			l7_ddos_protectionMap["mitigation_block"] = map[string]interface{}{}
 		}
-		if data.L7DdosProtection.MitigationCaptchaChallenge != nil {
+		if data.L7DDOSProtection.MitigationCaptchaChallenge != nil {
 			mitigation_captcha_challengeNestedMap := make(map[string]interface{})
-			if !data.L7DdosProtection.MitigationCaptchaChallenge.CookieExpiry.IsNull() && !data.L7DdosProtection.MitigationCaptchaChallenge.CookieExpiry.IsUnknown() {
-				mitigation_captcha_challengeNestedMap["cookie_expiry"] = data.L7DdosProtection.MitigationCaptchaChallenge.CookieExpiry.ValueInt64()
+			if !data.L7DDOSProtection.MitigationCaptchaChallenge.CookieExpiry.IsNull() && !data.L7DDOSProtection.MitigationCaptchaChallenge.CookieExpiry.IsUnknown() {
+				mitigation_captcha_challengeNestedMap["cookie_expiry"] = data.L7DDOSProtection.MitigationCaptchaChallenge.CookieExpiry.ValueInt64()
 			}
-			if !data.L7DdosProtection.MitigationCaptchaChallenge.CustomPage.IsNull() && !data.L7DdosProtection.MitigationCaptchaChallenge.CustomPage.IsUnknown() {
-				mitigation_captcha_challengeNestedMap["custom_page"] = data.L7DdosProtection.MitigationCaptchaChallenge.CustomPage.ValueString()
+			if !data.L7DDOSProtection.MitigationCaptchaChallenge.CustomPage.IsNull() && !data.L7DDOSProtection.MitigationCaptchaChallenge.CustomPage.IsUnknown() {
+				mitigation_captcha_challengeNestedMap["custom_page"] = data.L7DDOSProtection.MitigationCaptchaChallenge.CustomPage.ValueString()
 			}
 			l7_ddos_protectionMap["mitigation_captcha_challenge"] = mitigation_captcha_challengeNestedMap
 		}
-		if data.L7DdosProtection.MitigationJsChallenge != nil {
+		if data.L7DDOSProtection.MitigationJsChallenge != nil {
 			mitigation_js_challengeNestedMap := make(map[string]interface{})
-			if !data.L7DdosProtection.MitigationJsChallenge.CookieExpiry.IsNull() && !data.L7DdosProtection.MitigationJsChallenge.CookieExpiry.IsUnknown() {
-				mitigation_js_challengeNestedMap["cookie_expiry"] = data.L7DdosProtection.MitigationJsChallenge.CookieExpiry.ValueInt64()
+			if !data.L7DDOSProtection.MitigationJsChallenge.CookieExpiry.IsNull() && !data.L7DDOSProtection.MitigationJsChallenge.CookieExpiry.IsUnknown() {
+				mitigation_js_challengeNestedMap["cookie_expiry"] = data.L7DDOSProtection.MitigationJsChallenge.CookieExpiry.ValueInt64()
 			}
-			if !data.L7DdosProtection.MitigationJsChallenge.CustomPage.IsNull() && !data.L7DdosProtection.MitigationJsChallenge.CustomPage.IsUnknown() {
-				mitigation_js_challengeNestedMap["custom_page"] = data.L7DdosProtection.MitigationJsChallenge.CustomPage.ValueString()
+			if !data.L7DDOSProtection.MitigationJsChallenge.CustomPage.IsNull() && !data.L7DDOSProtection.MitigationJsChallenge.CustomPage.IsUnknown() {
+				mitigation_js_challengeNestedMap["custom_page"] = data.L7DDOSProtection.MitigationJsChallenge.CustomPage.ValueString()
 			}
-			if !data.L7DdosProtection.MitigationJsChallenge.JsScriptDelay.IsNull() && !data.L7DdosProtection.MitigationJsChallenge.JsScriptDelay.IsUnknown() {
-				mitigation_js_challengeNestedMap["js_script_delay"] = data.L7DdosProtection.MitigationJsChallenge.JsScriptDelay.ValueInt64()
+			if !data.L7DDOSProtection.MitigationJsChallenge.JsScriptDelay.IsNull() && !data.L7DDOSProtection.MitigationJsChallenge.JsScriptDelay.IsUnknown() {
+				mitigation_js_challengeNestedMap["js_script_delay"] = data.L7DDOSProtection.MitigationJsChallenge.JsScriptDelay.ValueInt64()
 			}
 			l7_ddos_protectionMap["mitigation_js_challenge"] = mitigation_js_challengeNestedMap
 		}
-		if !data.L7DdosProtection.RpsThreshold.IsNull() && !data.L7DdosProtection.RpsThreshold.IsUnknown() {
-			l7_ddos_protectionMap["rps_threshold"] = data.L7DdosProtection.RpsThreshold.ValueInt64()
+		if !data.L7DDOSProtection.RpsThreshold.IsNull() && !data.L7DDOSProtection.RpsThreshold.IsUnknown() {
+			l7_ddos_protectionMap["rps_threshold"] = data.L7DDOSProtection.RpsThreshold.ValueInt64()
 		}
 		createReq.Spec["l7_ddos_protection"] = l7_ddos_protectionMap
 	}
@@ -16832,7 +16832,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		}
 		createReq.Spec["more_option"] = more_optionMap
 	}
-	if data.MultiLbApp != nil {
+	if data.MultiLBApp != nil {
 		multi_lb_appMap := make(map[string]interface{})
 		createReq.Spec["multi_lb_app"] = multi_lb_appMap
 	}
@@ -17103,8 +17103,8 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 					if listItem.Cookie.SamesiteStrict != nil {
 						cookieDeepMap["samesite_strict"] = map[string]interface{}{}
 					}
-					if !listItem.Cookie.Ttl.IsNull() && !listItem.Cookie.Ttl.IsUnknown() {
-						cookieDeepMap["ttl"] = listItem.Cookie.Ttl.ValueInt64()
+					if !listItem.Cookie.TTL.IsNull() && !listItem.Cookie.TTL.IsUnknown() {
+						cookieDeepMap["ttl"] = listItem.Cookie.TTL.ValueInt64()
 					}
 					listItemMap["cookie"] = cookieDeepMap
 				}
@@ -17539,33 +17539,33 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		service_policies_from_namespaceMap := make(map[string]interface{})
 		createReq.Spec["service_policies_from_namespace"] = service_policies_from_namespaceMap
 	}
-	if data.SingleLbApp != nil {
+	if data.SingleLBApp != nil {
 		single_lb_appMap := make(map[string]interface{})
-		if data.SingleLbApp.DisableDiscovery != nil {
+		if data.SingleLBApp.DisableDiscovery != nil {
 			single_lb_appMap["disable_discovery"] = map[string]interface{}{}
 		}
-		if data.SingleLbApp.DisableMaliciousUserDetection != nil {
+		if data.SingleLBApp.DisableMaliciousUserDetection != nil {
 			single_lb_appMap["disable_malicious_user_detection"] = map[string]interface{}{}
 		}
-		if data.SingleLbApp.EnableDiscovery != nil {
+		if data.SingleLBApp.EnableDiscovery != nil {
 			enable_discoveryNestedMap := make(map[string]interface{})
 			single_lb_appMap["enable_discovery"] = enable_discoveryNestedMap
 		}
-		if data.SingleLbApp.EnableMaliciousUserDetection != nil {
+		if data.SingleLBApp.EnableMaliciousUserDetection != nil {
 			single_lb_appMap["enable_malicious_user_detection"] = map[string]interface{}{}
 		}
 		createReq.Spec["single_lb_app"] = single_lb_appMap
 	}
-	if data.SlowDdosMitigation != nil {
+	if data.SlowDDOSMitigation != nil {
 		slow_ddos_mitigationMap := make(map[string]interface{})
-		if data.SlowDdosMitigation.DisableRequestTimeout != nil {
+		if data.SlowDDOSMitigation.DisableRequestTimeout != nil {
 			slow_ddos_mitigationMap["disable_request_timeout"] = map[string]interface{}{}
 		}
-		if !data.SlowDdosMitigation.RequestHeadersTimeout.IsNull() && !data.SlowDdosMitigation.RequestHeadersTimeout.IsUnknown() {
-			slow_ddos_mitigationMap["request_headers_timeout"] = data.SlowDdosMitigation.RequestHeadersTimeout.ValueInt64()
+		if !data.SlowDDOSMitigation.RequestHeadersTimeout.IsNull() && !data.SlowDDOSMitigation.RequestHeadersTimeout.IsUnknown() {
+			slow_ddos_mitigationMap["request_headers_timeout"] = data.SlowDDOSMitigation.RequestHeadersTimeout.ValueInt64()
 		}
-		if !data.SlowDdosMitigation.RequestTimeout.IsNull() && !data.SlowDdosMitigation.RequestTimeout.IsUnknown() {
-			slow_ddos_mitigationMap["request_timeout"] = data.SlowDdosMitigation.RequestTimeout.ValueInt64()
+		if !data.SlowDDOSMitigation.RequestTimeout.IsNull() && !data.SlowDDOSMitigation.RequestTimeout.IsUnknown() {
+			slow_ddos_mitigationMap["request_timeout"] = data.SlowDDOSMitigation.RequestTimeout.ValueInt64()
 		}
 		createReq.Spec["slow_ddos_mitigation"] = slow_ddos_mitigationMap
 	}
@@ -17620,8 +17620,8 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {
 				itemMap["ip_prefix"] = item.IPPrefix.ValueString()
 			}
-			if !item.IPV6Prefix.IsNull() && !item.IPV6Prefix.IsUnknown() {
-				itemMap["ipv6_prefix"] = item.IPV6Prefix.ValueString()
+			if !item.Ipv6Prefix.IsNull() && !item.Ipv6Prefix.IsUnknown() {
+				itemMap["ipv6_prefix"] = item.Ipv6Prefix.ValueString()
 			}
 			if item.Metadata != nil {
 				metadataNestedMap := make(map[string]interface{})
@@ -17789,25 +17789,25 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 								VirtualNetwork: func() *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel {
 									if deepMap, ok := itemMap["virtual_network"].(map[string]interface{}); ok {
 										return &HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel{
-											DefaultV6Vip: func() *HTTPLoadBalancerEmptyModel {
+											DefaultV6VIP: func() *HTTPLoadBalancerEmptyModel {
 												if _, ok := deepMap["default_v6_vip"].(map[string]interface{}); ok {
 													return &HTTPLoadBalancerEmptyModel{}
 												}
 												return nil
 											}(),
-											DefaultVip: func() *HTTPLoadBalancerEmptyModel {
+											DefaultVIP: func() *HTTPLoadBalancerEmptyModel {
 												if _, ok := deepMap["default_vip"].(map[string]interface{}); ok {
 													return &HTTPLoadBalancerEmptyModel{}
 												}
 												return nil
 											}(),
-											SpecificV6Vip: func() types.String {
+											SpecificV6VIP: func() types.String {
 												if v, ok := deepMap["specific_v6_vip"].(string); ok && v != "" {
 													return types.StringValue(v)
 												}
 												return types.StringNull()
 											}(),
-											SpecificVip: func() types.String {
+											SpecificVIP: func() types.String {
 												if v, ok := deepMap["specific_vip"].(string); ok && v != "" {
 													return types.StringValue(v)
 												}
@@ -17830,9 +17830,9 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 									}
 									return nil
 								}(),
-								VirtualSiteWithVip: func() *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel {
+								VirtualSiteWithVIP: func() *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel {
 									if deepMap, ok := itemMap["virtual_site_with_vip"].(map[string]interface{}); ok {
-										return &HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel{
+										return &HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel{
 											IP: func() types.String {
 												if v, ok := deepMap["ip"].(string); ok && v != "" {
 													return types.StringValue(v)
@@ -17869,9 +17869,9 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		data.AdvertiseOnPublic = &HTTPLoadBalancerAdvertiseOnPublicModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["advertise_on_public_default_vip"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublicDefaultVip == nil {
+	if _, ok := apiResource.Spec["advertise_on_public_default_vip"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublicDefaultVIP == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.AdvertiseOnPublicDefaultVip = &HTTPLoadBalancerEmptyModel{}
+		data.AdvertiseOnPublicDefaultVIP = &HTTPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["api_protection_rules"].(map[string]interface{}); ok && (isImport || data.APIProtectionRules != nil) {
@@ -18152,7 +18152,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 												}
 												return types.StringNull()
 											}(),
-											UseHTTPLbUserID: func() *HTTPLoadBalancerEmptyModel {
+											UseHTTPLBUserID: func() *HTTPLoadBalancerEmptyModel {
 												if _, ok := deepMap["use_http_lb_user_id"].(map[string]interface{}); ok {
 													return &HTTPLoadBalancerEmptyModel{}
 												}
@@ -18323,7 +18323,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 												}
 												return types.StringNull()
 											}(),
-											UseHTTPLbUserID: func() *HTTPLoadBalancerEmptyModel {
+											UseHTTPLBUserID: func() *HTTPLoadBalancerEmptyModel {
 												if _, ok := deepMap["use_http_lb_user_id"].(map[string]interface{}); ok {
 													return &HTTPLoadBalancerEmptyModel{}
 												}
@@ -18526,7 +18526,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 						}
 						return types.StringNull()
 					}(),
-					IPV6Prefix: func() types.String {
+					Ipv6Prefix: func() types.String {
 						if v, ok := itemMap["ipv6_prefix"].(string); ok && v != "" {
 							return types.StringValue(v)
 						}
@@ -18576,11 +18576,11 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 	}
 	if blockData, ok := apiResource.Spec["bot_defense"].(map[string]interface{}); ok && (isImport || data.BotDefense != nil) {
 		data.BotDefense = &HTTPLoadBalancerBotDefenseModel{
-			DisableCorsSupport: func() *HTTPLoadBalancerEmptyModel {
+			DisableCORSSupport: func() *HTTPLoadBalancerEmptyModel {
 				if !isImport && data.BotDefense != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.BotDefense.DisableCorsSupport
+					return data.BotDefense.DisableCORSSupport
 				}
 				// Import case: read from API
 				if _, ok := blockData["disable_cors_support"].(map[string]interface{}); ok {
@@ -18588,11 +18588,11 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				}
 				return nil
 			}(),
-			EnableCorsSupport: func() *HTTPLoadBalancerEmptyModel {
+			EnableCORSSupport: func() *HTTPLoadBalancerEmptyModel {
 				if !isImport && data.BotDefense != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.BotDefense.EnableCorsSupport
+					return data.BotDefense.EnableCORSSupport
 				}
 				// Import case: read from API
 				if _, ok := blockData["enable_cors_support"].(map[string]interface{}); ok {
@@ -18779,7 +18779,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				}
 				return nil
 			}(),
-			Ttl: func() types.Int64 {
+			TTL: func() types.Int64 {
 				if v, ok := blockData["ttl"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -18787,12 +18787,12 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["cors_policy"].(map[string]interface{}); ok && (isImport || data.CorsPolicy != nil) {
-		data.CorsPolicy = &HTTPLoadBalancerCorsPolicyModel{
+	if blockData, ok := apiResource.Spec["cors_policy"].(map[string]interface{}); ok && (isImport || data.CORSPolicy != nil) {
+		data.CORSPolicy = &HTTPLoadBalancerCORSPolicyModel{
 			AllowCredentials: func() types.Bool {
-				if !isImport && data.CorsPolicy != nil {
+				if !isImport && data.CORSPolicy != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.CorsPolicy.AllowCredentials
+					return data.CORSPolicy.AllowCredentials
 				}
 				// Import case: read from API
 				if v, ok := blockData["allow_credentials"].(bool); ok {
@@ -18839,9 +18839,9 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				return types.ListNull(types.StringType)
 			}(),
 			Disabled: func() types.Bool {
-				if !isImport && data.CorsPolicy != nil {
+				if !isImport && data.CORSPolicy != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.CorsPolicy.Disabled
+					return data.CORSPolicy.Disabled
 				}
 				// Import case: read from API
 				if v, ok := blockData["disabled"].(bool); ok {
@@ -18863,9 +18863,9 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["csrf_policy"].(map[string]interface{}); ok && isImport && data.CsrfPolicy == nil {
+	if _, ok := apiResource.Spec["csrf_policy"].(map[string]interface{}); ok && isImport && data.CSRFPolicy == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.CsrfPolicy = &HTTPLoadBalancerCsrfPolicyModel{}
+		data.CSRFPolicy = &HTTPLoadBalancerCSRFPolicyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["data_guard_rules"].([]interface{}); ok && len(listData) > 0 {
@@ -18954,20 +18954,20 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		data.DataGuardRules = data_guard_rulesList
 	}
 	if listData, ok := apiResource.Spec["ddos_mitigation_rules"].([]interface{}); ok && len(listData) > 0 {
-		var ddos_mitigation_rulesList []HTTPLoadBalancerDdosMitigationRulesModel
+		var ddos_mitigation_rulesList []HTTPLoadBalancerDDOSMitigationRulesModel
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
-				ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, HTTPLoadBalancerDdosMitigationRulesModel{
+				ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, HTTPLoadBalancerDDOSMitigationRulesModel{
 					Block: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.DdosMitigationRules) > listIdx && data.DdosMitigationRules[listIdx].Block != nil {
+						if !isImport && len(data.DDOSMitigationRules) > listIdx && data.DDOSMitigationRules[listIdx].Block != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
-					DdosClientSource: func() *HTTPLoadBalancerDdosMitigationRulesDdosClientSourceModel {
+					DDOSClientSource: func() *HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceModel {
 						if nestedMap, ok := itemMap["ddos_client_source"].(map[string]interface{}); ok {
-							return &HTTPLoadBalancerDdosMitigationRulesDdosClientSourceModel{
+							return &HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceModel{
 								CountryList: func() types.List {
 									if v, ok := nestedMap["country_list"].([]interface{}); ok && len(v) > 0 {
 										var items []string
@@ -18991,9 +18991,9 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 						}
 						return types.StringNull()
 					}(),
-					IPPrefixList: func() *HTTPLoadBalancerDdosMitigationRulesIPPrefixListModel {
+					IPPrefixList: func() *HTTPLoadBalancerDDOSMitigationRulesIPPrefixListModel {
 						if nestedMap, ok := itemMap["ip_prefix_list"].(map[string]interface{}); ok {
-							return &HTTPLoadBalancerDdosMitigationRulesIPPrefixListModel{
+							return &HTTPLoadBalancerDDOSMitigationRulesIPPrefixListModel{
 								InvertMatch: func() types.Bool {
 									if v, ok := nestedMap["invert_match"].(bool); ok {
 										return types.BoolValue(v)
@@ -19017,9 +19017,9 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 						}
 						return nil
 					}(),
-					Metadata: func() *HTTPLoadBalancerDdosMitigationRulesMetadataModel {
+					Metadata: func() *HTTPLoadBalancerDDOSMitigationRulesMetadataModel {
 						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
-							return &HTTPLoadBalancerDdosMitigationRulesMetadataModel{
+							return &HTTPLoadBalancerDDOSMitigationRulesMetadataModel{
 								DescriptionSpec: func() types.String {
 									if v, ok := nestedMap["description"].(string); ok && v != "" {
 										return types.StringValue(v)
@@ -19039,7 +19039,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				})
 			}
 		}
-		data.DdosMitigationRules = ddos_mitigation_rulesList
+		data.DDOSMitigationRules = ddos_mitigation_rulesList
 	}
 	if blockData, ok := apiResource.Spec["default_pool"].(map[string]interface{}); ok && (isImport || data.DefaultPool != nil) {
 		data.DefaultPool = &HTTPLoadBalancerDefaultPoolModel{
@@ -19128,11 +19128,11 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				}
 				return nil
 			}(),
-			LbPort: func() *HTTPLoadBalancerEmptyModel {
+			LBPort: func() *HTTPLoadBalancerEmptyModel {
 				if !isImport && data.DefaultPool != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.DefaultPool.LbPort
+					return data.DefaultPool.LBPort
 				}
 				// Import case: read from API
 				if _, ok := blockData["lb_port"].(map[string]interface{}); ok {
@@ -20252,7 +20252,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 							}
 							return types.BoolNull()
 						}(),
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -20286,23 +20286,23 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["jwt_validation"].(map[string]interface{}); ok && isImport && data.JwtValidation == nil {
+	if _, ok := apiResource.Spec["jwt_validation"].(map[string]interface{}); ok && isImport && data.JWTValidation == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.JwtValidation = &HTTPLoadBalancerJwtValidationModel{}
+		data.JWTValidation = &HTTPLoadBalancerJWTValidationModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["l7_ddos_action_block"].(map[string]interface{}); ok && isImport && data.L7DdosActionBlock == nil {
+	if _, ok := apiResource.Spec["l7_ddos_action_block"].(map[string]interface{}); ok && isImport && data.L7DDOSActionBlock == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.L7DdosActionBlock = &HTTPLoadBalancerEmptyModel{}
+		data.L7DDOSActionBlock = &HTTPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["l7_ddos_action_default"].(map[string]interface{}); ok && isImport && data.L7DdosActionDefault == nil {
+	if _, ok := apiResource.Spec["l7_ddos_action_default"].(map[string]interface{}); ok && isImport && data.L7DDOSActionDefault == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.L7DdosActionDefault = &HTTPLoadBalancerEmptyModel{}
+		data.L7DDOSActionDefault = &HTTPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["l7_ddos_action_js_challenge"].(map[string]interface{}); ok && (isImport || data.L7DdosActionJsChallenge != nil) {
-		data.L7DdosActionJsChallenge = &HTTPLoadBalancerL7DdosActionJsChallengeModel{
+	if blockData, ok := apiResource.Spec["l7_ddos_action_js_challenge"].(map[string]interface{}); ok && (isImport || data.L7DDOSActionJsChallenge != nil) {
+		data.L7DDOSActionJsChallenge = &HTTPLoadBalancerL7DDOSActionJsChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -20323,16 +20323,16 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["l7_ddos_protection"].(map[string]interface{}); ok && (isImport || data.L7DdosProtection != nil) {
-		data.L7DdosProtection = &HTTPLoadBalancerL7DdosProtectionModel{
-			ClientsideActionCaptchaChallenge: func() *HTTPLoadBalancerL7DdosProtectionClientsideActionCaptchaChallengeModel {
-				if !isImport && data.L7DdosProtection != nil && data.L7DdosProtection.ClientsideActionCaptchaChallenge != nil {
+	if blockData, ok := apiResource.Spec["l7_ddos_protection"].(map[string]interface{}); ok && (isImport || data.L7DDOSProtection != nil) {
+		data.L7DDOSProtection = &HTTPLoadBalancerL7DDOSProtectionModel{
+			ClientsideActionCaptchaChallenge: func() *HTTPLoadBalancerL7DDOSProtectionClientsideActionCaptchaChallengeModel {
+				if !isImport && data.L7DDOSProtection != nil && data.L7DDOSProtection.ClientsideActionCaptchaChallenge != nil {
 					// Normal Read: preserve existing state value
-					return data.L7DdosProtection.ClientsideActionCaptchaChallenge
+					return data.L7DDOSProtection.ClientsideActionCaptchaChallenge
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["clientside_action_captcha_challenge"].(map[string]interface{}); ok {
-					return &HTTPLoadBalancerL7DdosProtectionClientsideActionCaptchaChallengeModel{
+					return &HTTPLoadBalancerL7DDOSProtectionClientsideActionCaptchaChallengeModel{
 						CookieExpiry: func() types.Int64 {
 							if v, ok := nestedBlockData["cookie_expiry"].(float64); ok {
 								return types.Int64Value(int64(v))
@@ -20349,14 +20349,14 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				}
 				return nil
 			}(),
-			ClientsideActionJsChallenge: func() *HTTPLoadBalancerL7DdosProtectionClientsideActionJsChallengeModel {
-				if !isImport && data.L7DdosProtection != nil && data.L7DdosProtection.ClientsideActionJsChallenge != nil {
+			ClientsideActionJsChallenge: func() *HTTPLoadBalancerL7DDOSProtectionClientsideActionJsChallengeModel {
+				if !isImport && data.L7DDOSProtection != nil && data.L7DDOSProtection.ClientsideActionJsChallenge != nil {
 					// Normal Read: preserve existing state value
-					return data.L7DdosProtection.ClientsideActionJsChallenge
+					return data.L7DDOSProtection.ClientsideActionJsChallenge
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["clientside_action_js_challenge"].(map[string]interface{}); ok {
-					return &HTTPLoadBalancerL7DdosProtectionClientsideActionJsChallengeModel{
+					return &HTTPLoadBalancerL7DDOSProtectionClientsideActionJsChallengeModel{
 						CookieExpiry: func() types.Int64 {
 							if v, ok := nestedBlockData["cookie_expiry"].(float64); ok {
 								return types.Int64Value(int64(v))
@@ -20380,10 +20380,10 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				return nil
 			}(),
 			ClientsideActionNone: func() *HTTPLoadBalancerEmptyModel {
-				if !isImport && data.L7DdosProtection != nil {
+				if !isImport && data.L7DDOSProtection != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.L7DdosProtection.ClientsideActionNone
+					return data.L7DDOSProtection.ClientsideActionNone
 				}
 				// Import case: read from API
 				if _, ok := blockData["clientside_action_none"].(map[string]interface{}); ok {
@@ -20391,14 +20391,14 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				}
 				return nil
 			}(),
-			DdosPolicyCustom: func() *HTTPLoadBalancerL7DdosProtectionDdosPolicyCustomModel {
-				if !isImport && data.L7DdosProtection != nil && data.L7DdosProtection.DdosPolicyCustom != nil {
+			DDOSPolicyCustom: func() *HTTPLoadBalancerL7DDOSProtectionDDOSPolicyCustomModel {
+				if !isImport && data.L7DDOSProtection != nil && data.L7DDOSProtection.DDOSPolicyCustom != nil {
 					// Normal Read: preserve existing state value
-					return data.L7DdosProtection.DdosPolicyCustom
+					return data.L7DDOSProtection.DDOSPolicyCustom
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["ddos_policy_custom"].(map[string]interface{}); ok {
-					return &HTTPLoadBalancerL7DdosProtectionDdosPolicyCustomModel{
+					return &HTTPLoadBalancerL7DDOSProtectionDDOSPolicyCustomModel{
 						Name: func() types.String {
 							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
 								return types.StringValue(v)
@@ -20421,11 +20421,11 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				}
 				return nil
 			}(),
-			DdosPolicyNone: func() *HTTPLoadBalancerEmptyModel {
-				if !isImport && data.L7DdosProtection != nil {
+			DDOSPolicyNone: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.L7DDOSProtection != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.L7DdosProtection.DdosPolicyNone
+					return data.L7DDOSProtection.DDOSPolicyNone
 				}
 				// Import case: read from API
 				if _, ok := blockData["ddos_policy_none"].(map[string]interface{}); ok {
@@ -20434,10 +20434,10 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				return nil
 			}(),
 			DefaultRpsThreshold: func() *HTTPLoadBalancerEmptyModel {
-				if !isImport && data.L7DdosProtection != nil {
+				if !isImport && data.L7DDOSProtection != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.L7DdosProtection.DefaultRpsThreshold
+					return data.L7DDOSProtection.DefaultRpsThreshold
 				}
 				// Import case: read from API
 				if _, ok := blockData["default_rps_threshold"].(map[string]interface{}); ok {
@@ -20446,10 +20446,10 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				return nil
 			}(),
 			MitigationBlock: func() *HTTPLoadBalancerEmptyModel {
-				if !isImport && data.L7DdosProtection != nil {
+				if !isImport && data.L7DDOSProtection != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.L7DdosProtection.MitigationBlock
+					return data.L7DDOSProtection.MitigationBlock
 				}
 				// Import case: read from API
 				if _, ok := blockData["mitigation_block"].(map[string]interface{}); ok {
@@ -20457,14 +20457,14 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				}
 				return nil
 			}(),
-			MitigationCaptchaChallenge: func() *HTTPLoadBalancerL7DdosProtectionMitigationCaptchaChallengeModel {
-				if !isImport && data.L7DdosProtection != nil && data.L7DdosProtection.MitigationCaptchaChallenge != nil {
+			MitigationCaptchaChallenge: func() *HTTPLoadBalancerL7DDOSProtectionMitigationCaptchaChallengeModel {
+				if !isImport && data.L7DDOSProtection != nil && data.L7DDOSProtection.MitigationCaptchaChallenge != nil {
 					// Normal Read: preserve existing state value
-					return data.L7DdosProtection.MitigationCaptchaChallenge
+					return data.L7DDOSProtection.MitigationCaptchaChallenge
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["mitigation_captcha_challenge"].(map[string]interface{}); ok {
-					return &HTTPLoadBalancerL7DdosProtectionMitigationCaptchaChallengeModel{
+					return &HTTPLoadBalancerL7DDOSProtectionMitigationCaptchaChallengeModel{
 						CookieExpiry: func() types.Int64 {
 							if v, ok := nestedBlockData["cookie_expiry"].(float64); ok {
 								return types.Int64Value(int64(v))
@@ -20481,14 +20481,14 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				}
 				return nil
 			}(),
-			MitigationJsChallenge: func() *HTTPLoadBalancerL7DdosProtectionMitigationJsChallengeModel {
-				if !isImport && data.L7DdosProtection != nil && data.L7DdosProtection.MitigationJsChallenge != nil {
+			MitigationJsChallenge: func() *HTTPLoadBalancerL7DDOSProtectionMitigationJsChallengeModel {
+				if !isImport && data.L7DDOSProtection != nil && data.L7DDOSProtection.MitigationJsChallenge != nil {
 					// Normal Read: preserve existing state value
-					return data.L7DdosProtection.MitigationJsChallenge
+					return data.L7DDOSProtection.MitigationJsChallenge
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["mitigation_js_challenge"].(map[string]interface{}); ok {
-					return &HTTPLoadBalancerL7DdosProtectionMitigationJsChallengeModel{
+					return &HTTPLoadBalancerL7DDOSProtectionMitigationJsChallengeModel{
 						CookieExpiry: func() types.Int64 {
 							if v, ok := nestedBlockData["cookie_expiry"].(float64); ok {
 								return types.Int64Value(int64(v))
@@ -21061,9 +21061,9 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["multi_lb_app"].(map[string]interface{}); ok && isImport && data.MultiLbApp == nil {
+	if _, ok := apiResource.Spec["multi_lb_app"].(map[string]interface{}); ok && isImport && data.MultiLBApp == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.MultiLbApp = &HTTPLoadBalancerEmptyModel{}
+		data.MultiLBApp = &HTTPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["no_challenge"].(map[string]interface{}); ok && isImport && data.NoChallenge == nil {
@@ -21355,7 +21355,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 												}
 												return nil
 											}(),
-											Ttl: func() types.Int64 {
+											TTL: func() types.Int64 {
 												if v, ok := deepMap["ttl"].(float64); ok {
 													return types.Int64Value(int64(v))
 												}
@@ -21529,18 +21529,18 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		data.ServicePoliciesFromNamespace = &HTTPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["single_lb_app"].(map[string]interface{}); ok && isImport && data.SingleLbApp == nil {
+	if _, ok := apiResource.Spec["single_lb_app"].(map[string]interface{}); ok && isImport && data.SingleLBApp == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.SingleLbApp = &HTTPLoadBalancerSingleLbAppModel{}
+		data.SingleLBApp = &HTTPLoadBalancerSingleLBAppModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDdosMitigation != nil) {
-		data.SlowDdosMitigation = &HTTPLoadBalancerSlowDdosMitigationModel{
+	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDDOSMitigation != nil) {
+		data.SlowDDOSMitigation = &HTTPLoadBalancerSlowDDOSMitigationModel{
 			DisableRequestTimeout: func() *HTTPLoadBalancerEmptyModel {
-				if !isImport && data.SlowDdosMitigation != nil {
+				if !isImport && data.SlowDDOSMitigation != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.SlowDdosMitigation.DisableRequestTimeout
+					return data.SlowDDOSMitigation.DisableRequestTimeout
 				}
 				// Import case: read from API
 				if _, ok := blockData["disable_request_timeout"].(map[string]interface{}); ok {
@@ -21621,7 +21621,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 						}
 						return types.StringNull()
 					}(),
-					IPV6Prefix: func() types.String {
+					Ipv6Prefix: func() types.String {
 						if v, ok := itemMap["ipv6_prefix"].(string); ok && v != "" {
 							return types.StringValue(v)
 						}
@@ -21894,25 +21894,25 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 								VirtualNetwork: func() *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel {
 									if deepMap, ok := itemMap["virtual_network"].(map[string]interface{}); ok {
 										return &HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel{
-											DefaultV6Vip: func() *HTTPLoadBalancerEmptyModel {
+											DefaultV6VIP: func() *HTTPLoadBalancerEmptyModel {
 												if _, ok := deepMap["default_v6_vip"].(map[string]interface{}); ok {
 													return &HTTPLoadBalancerEmptyModel{}
 												}
 												return nil
 											}(),
-											DefaultVip: func() *HTTPLoadBalancerEmptyModel {
+											DefaultVIP: func() *HTTPLoadBalancerEmptyModel {
 												if _, ok := deepMap["default_vip"].(map[string]interface{}); ok {
 													return &HTTPLoadBalancerEmptyModel{}
 												}
 												return nil
 											}(),
-											SpecificV6Vip: func() types.String {
+											SpecificV6VIP: func() types.String {
 												if v, ok := deepMap["specific_v6_vip"].(string); ok && v != "" {
 													return types.StringValue(v)
 												}
 												return types.StringNull()
 											}(),
-											SpecificVip: func() types.String {
+											SpecificVIP: func() types.String {
 												if v, ok := deepMap["specific_vip"].(string); ok && v != "" {
 													return types.StringValue(v)
 												}
@@ -21935,9 +21935,9 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 									}
 									return nil
 								}(),
-								VirtualSiteWithVip: func() *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel {
+								VirtualSiteWithVIP: func() *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel {
 									if deepMap, ok := itemMap["virtual_site_with_vip"].(map[string]interface{}); ok {
-										return &HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel{
+										return &HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel{
 											IP: func() types.String {
 												if v, ok := deepMap["ip"].(string); ok && v != "" {
 													return types.StringValue(v)
@@ -21974,9 +21974,9 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 		data.AdvertiseOnPublic = &HTTPLoadBalancerAdvertiseOnPublicModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["advertise_on_public_default_vip"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublicDefaultVip == nil {
+	if _, ok := apiResource.Spec["advertise_on_public_default_vip"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublicDefaultVIP == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.AdvertiseOnPublicDefaultVip = &HTTPLoadBalancerEmptyModel{}
+		data.AdvertiseOnPublicDefaultVIP = &HTTPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["api_protection_rules"].(map[string]interface{}); ok && (isImport || data.APIProtectionRules != nil) {
@@ -22257,7 +22257,7 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 												}
 												return types.StringNull()
 											}(),
-											UseHTTPLbUserID: func() *HTTPLoadBalancerEmptyModel {
+											UseHTTPLBUserID: func() *HTTPLoadBalancerEmptyModel {
 												if _, ok := deepMap["use_http_lb_user_id"].(map[string]interface{}); ok {
 													return &HTTPLoadBalancerEmptyModel{}
 												}
@@ -22428,7 +22428,7 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 												}
 												return types.StringNull()
 											}(),
-											UseHTTPLbUserID: func() *HTTPLoadBalancerEmptyModel {
+											UseHTTPLBUserID: func() *HTTPLoadBalancerEmptyModel {
 												if _, ok := deepMap["use_http_lb_user_id"].(map[string]interface{}); ok {
 													return &HTTPLoadBalancerEmptyModel{}
 												}
@@ -22631,7 +22631,7 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						}
 						return types.StringNull()
 					}(),
-					IPV6Prefix: func() types.String {
+					Ipv6Prefix: func() types.String {
 						if v, ok := itemMap["ipv6_prefix"].(string); ok && v != "" {
 							return types.StringValue(v)
 						}
@@ -22681,11 +22681,11 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 	}
 	if blockData, ok := apiResource.Spec["bot_defense"].(map[string]interface{}); ok && (isImport || data.BotDefense != nil) {
 		data.BotDefense = &HTTPLoadBalancerBotDefenseModel{
-			DisableCorsSupport: func() *HTTPLoadBalancerEmptyModel {
+			DisableCORSSupport: func() *HTTPLoadBalancerEmptyModel {
 				if !isImport && data.BotDefense != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.BotDefense.DisableCorsSupport
+					return data.BotDefense.DisableCORSSupport
 				}
 				// Import case: read from API
 				if _, ok := blockData["disable_cors_support"].(map[string]interface{}); ok {
@@ -22693,11 +22693,11 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				return nil
 			}(),
-			EnableCorsSupport: func() *HTTPLoadBalancerEmptyModel {
+			EnableCORSSupport: func() *HTTPLoadBalancerEmptyModel {
 				if !isImport && data.BotDefense != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.BotDefense.EnableCorsSupport
+					return data.BotDefense.EnableCORSSupport
 				}
 				// Import case: read from API
 				if _, ok := blockData["enable_cors_support"].(map[string]interface{}); ok {
@@ -22884,7 +22884,7 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				return nil
 			}(),
-			Ttl: func() types.Int64 {
+			TTL: func() types.Int64 {
 				if v, ok := blockData["ttl"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -22892,12 +22892,12 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["cors_policy"].(map[string]interface{}); ok && (isImport || data.CorsPolicy != nil) {
-		data.CorsPolicy = &HTTPLoadBalancerCorsPolicyModel{
+	if blockData, ok := apiResource.Spec["cors_policy"].(map[string]interface{}); ok && (isImport || data.CORSPolicy != nil) {
+		data.CORSPolicy = &HTTPLoadBalancerCORSPolicyModel{
 			AllowCredentials: func() types.Bool {
-				if !isImport && data.CorsPolicy != nil {
+				if !isImport && data.CORSPolicy != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.CorsPolicy.AllowCredentials
+					return data.CORSPolicy.AllowCredentials
 				}
 				// Import case: read from API
 				if v, ok := blockData["allow_credentials"].(bool); ok {
@@ -22944,9 +22944,9 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				return types.ListNull(types.StringType)
 			}(),
 			Disabled: func() types.Bool {
-				if !isImport && data.CorsPolicy != nil {
+				if !isImport && data.CORSPolicy != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.CorsPolicy.Disabled
+					return data.CORSPolicy.Disabled
 				}
 				// Import case: read from API
 				if v, ok := blockData["disabled"].(bool); ok {
@@ -22968,9 +22968,9 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["csrf_policy"].(map[string]interface{}); ok && isImport && data.CsrfPolicy == nil {
+	if _, ok := apiResource.Spec["csrf_policy"].(map[string]interface{}); ok && isImport && data.CSRFPolicy == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.CsrfPolicy = &HTTPLoadBalancerCsrfPolicyModel{}
+		data.CSRFPolicy = &HTTPLoadBalancerCSRFPolicyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["data_guard_rules"].([]interface{}); ok && len(listData) > 0 {
@@ -23059,20 +23059,20 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 		data.DataGuardRules = data_guard_rulesList
 	}
 	if listData, ok := apiResource.Spec["ddos_mitigation_rules"].([]interface{}); ok && len(listData) > 0 {
-		var ddos_mitigation_rulesList []HTTPLoadBalancerDdosMitigationRulesModel
+		var ddos_mitigation_rulesList []HTTPLoadBalancerDDOSMitigationRulesModel
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
-				ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, HTTPLoadBalancerDdosMitigationRulesModel{
+				ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, HTTPLoadBalancerDDOSMitigationRulesModel{
 					Block: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.DdosMitigationRules) > listIdx && data.DdosMitigationRules[listIdx].Block != nil {
+						if !isImport && len(data.DDOSMitigationRules) > listIdx && data.DDOSMitigationRules[listIdx].Block != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
-					DdosClientSource: func() *HTTPLoadBalancerDdosMitigationRulesDdosClientSourceModel {
+					DDOSClientSource: func() *HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceModel {
 						if nestedMap, ok := itemMap["ddos_client_source"].(map[string]interface{}); ok {
-							return &HTTPLoadBalancerDdosMitigationRulesDdosClientSourceModel{
+							return &HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceModel{
 								CountryList: func() types.List {
 									if v, ok := nestedMap["country_list"].([]interface{}); ok && len(v) > 0 {
 										var items []string
@@ -23096,9 +23096,9 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						}
 						return types.StringNull()
 					}(),
-					IPPrefixList: func() *HTTPLoadBalancerDdosMitigationRulesIPPrefixListModel {
+					IPPrefixList: func() *HTTPLoadBalancerDDOSMitigationRulesIPPrefixListModel {
 						if nestedMap, ok := itemMap["ip_prefix_list"].(map[string]interface{}); ok {
-							return &HTTPLoadBalancerDdosMitigationRulesIPPrefixListModel{
+							return &HTTPLoadBalancerDDOSMitigationRulesIPPrefixListModel{
 								InvertMatch: func() types.Bool {
 									if v, ok := nestedMap["invert_match"].(bool); ok {
 										return types.BoolValue(v)
@@ -23122,9 +23122,9 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						}
 						return nil
 					}(),
-					Metadata: func() *HTTPLoadBalancerDdosMitigationRulesMetadataModel {
+					Metadata: func() *HTTPLoadBalancerDDOSMitigationRulesMetadataModel {
 						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
-							return &HTTPLoadBalancerDdosMitigationRulesMetadataModel{
+							return &HTTPLoadBalancerDDOSMitigationRulesMetadataModel{
 								DescriptionSpec: func() types.String {
 									if v, ok := nestedMap["description"].(string); ok && v != "" {
 										return types.StringValue(v)
@@ -23144,7 +23144,7 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				})
 			}
 		}
-		data.DdosMitigationRules = ddos_mitigation_rulesList
+		data.DDOSMitigationRules = ddos_mitigation_rulesList
 	}
 	if blockData, ok := apiResource.Spec["default_pool"].(map[string]interface{}); ok && (isImport || data.DefaultPool != nil) {
 		data.DefaultPool = &HTTPLoadBalancerDefaultPoolModel{
@@ -23233,11 +23233,11 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				return nil
 			}(),
-			LbPort: func() *HTTPLoadBalancerEmptyModel {
+			LBPort: func() *HTTPLoadBalancerEmptyModel {
 				if !isImport && data.DefaultPool != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.DefaultPool.LbPort
+					return data.DefaultPool.LBPort
 				}
 				// Import case: read from API
 				if _, ok := blockData["lb_port"].(map[string]interface{}); ok {
@@ -24357,7 +24357,7 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 							}
 							return types.BoolNull()
 						}(),
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -24391,23 +24391,23 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["jwt_validation"].(map[string]interface{}); ok && isImport && data.JwtValidation == nil {
+	if _, ok := apiResource.Spec["jwt_validation"].(map[string]interface{}); ok && isImport && data.JWTValidation == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.JwtValidation = &HTTPLoadBalancerJwtValidationModel{}
+		data.JWTValidation = &HTTPLoadBalancerJWTValidationModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["l7_ddos_action_block"].(map[string]interface{}); ok && isImport && data.L7DdosActionBlock == nil {
+	if _, ok := apiResource.Spec["l7_ddos_action_block"].(map[string]interface{}); ok && isImport && data.L7DDOSActionBlock == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.L7DdosActionBlock = &HTTPLoadBalancerEmptyModel{}
+		data.L7DDOSActionBlock = &HTTPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["l7_ddos_action_default"].(map[string]interface{}); ok && isImport && data.L7DdosActionDefault == nil {
+	if _, ok := apiResource.Spec["l7_ddos_action_default"].(map[string]interface{}); ok && isImport && data.L7DDOSActionDefault == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.L7DdosActionDefault = &HTTPLoadBalancerEmptyModel{}
+		data.L7DDOSActionDefault = &HTTPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["l7_ddos_action_js_challenge"].(map[string]interface{}); ok && (isImport || data.L7DdosActionJsChallenge != nil) {
-		data.L7DdosActionJsChallenge = &HTTPLoadBalancerL7DdosActionJsChallengeModel{
+	if blockData, ok := apiResource.Spec["l7_ddos_action_js_challenge"].(map[string]interface{}); ok && (isImport || data.L7DDOSActionJsChallenge != nil) {
+		data.L7DDOSActionJsChallenge = &HTTPLoadBalancerL7DDOSActionJsChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -24428,16 +24428,16 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["l7_ddos_protection"].(map[string]interface{}); ok && (isImport || data.L7DdosProtection != nil) {
-		data.L7DdosProtection = &HTTPLoadBalancerL7DdosProtectionModel{
-			ClientsideActionCaptchaChallenge: func() *HTTPLoadBalancerL7DdosProtectionClientsideActionCaptchaChallengeModel {
-				if !isImport && data.L7DdosProtection != nil && data.L7DdosProtection.ClientsideActionCaptchaChallenge != nil {
+	if blockData, ok := apiResource.Spec["l7_ddos_protection"].(map[string]interface{}); ok && (isImport || data.L7DDOSProtection != nil) {
+		data.L7DDOSProtection = &HTTPLoadBalancerL7DDOSProtectionModel{
+			ClientsideActionCaptchaChallenge: func() *HTTPLoadBalancerL7DDOSProtectionClientsideActionCaptchaChallengeModel {
+				if !isImport && data.L7DDOSProtection != nil && data.L7DDOSProtection.ClientsideActionCaptchaChallenge != nil {
 					// Normal Read: preserve existing state value
-					return data.L7DdosProtection.ClientsideActionCaptchaChallenge
+					return data.L7DDOSProtection.ClientsideActionCaptchaChallenge
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["clientside_action_captcha_challenge"].(map[string]interface{}); ok {
-					return &HTTPLoadBalancerL7DdosProtectionClientsideActionCaptchaChallengeModel{
+					return &HTTPLoadBalancerL7DDOSProtectionClientsideActionCaptchaChallengeModel{
 						CookieExpiry: func() types.Int64 {
 							if v, ok := nestedBlockData["cookie_expiry"].(float64); ok {
 								return types.Int64Value(int64(v))
@@ -24454,14 +24454,14 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				return nil
 			}(),
-			ClientsideActionJsChallenge: func() *HTTPLoadBalancerL7DdosProtectionClientsideActionJsChallengeModel {
-				if !isImport && data.L7DdosProtection != nil && data.L7DdosProtection.ClientsideActionJsChallenge != nil {
+			ClientsideActionJsChallenge: func() *HTTPLoadBalancerL7DDOSProtectionClientsideActionJsChallengeModel {
+				if !isImport && data.L7DDOSProtection != nil && data.L7DDOSProtection.ClientsideActionJsChallenge != nil {
 					// Normal Read: preserve existing state value
-					return data.L7DdosProtection.ClientsideActionJsChallenge
+					return data.L7DDOSProtection.ClientsideActionJsChallenge
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["clientside_action_js_challenge"].(map[string]interface{}); ok {
-					return &HTTPLoadBalancerL7DdosProtectionClientsideActionJsChallengeModel{
+					return &HTTPLoadBalancerL7DDOSProtectionClientsideActionJsChallengeModel{
 						CookieExpiry: func() types.Int64 {
 							if v, ok := nestedBlockData["cookie_expiry"].(float64); ok {
 								return types.Int64Value(int64(v))
@@ -24485,10 +24485,10 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				return nil
 			}(),
 			ClientsideActionNone: func() *HTTPLoadBalancerEmptyModel {
-				if !isImport && data.L7DdosProtection != nil {
+				if !isImport && data.L7DDOSProtection != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.L7DdosProtection.ClientsideActionNone
+					return data.L7DDOSProtection.ClientsideActionNone
 				}
 				// Import case: read from API
 				if _, ok := blockData["clientside_action_none"].(map[string]interface{}); ok {
@@ -24496,14 +24496,14 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				return nil
 			}(),
-			DdosPolicyCustom: func() *HTTPLoadBalancerL7DdosProtectionDdosPolicyCustomModel {
-				if !isImport && data.L7DdosProtection != nil && data.L7DdosProtection.DdosPolicyCustom != nil {
+			DDOSPolicyCustom: func() *HTTPLoadBalancerL7DDOSProtectionDDOSPolicyCustomModel {
+				if !isImport && data.L7DDOSProtection != nil && data.L7DDOSProtection.DDOSPolicyCustom != nil {
 					// Normal Read: preserve existing state value
-					return data.L7DdosProtection.DdosPolicyCustom
+					return data.L7DDOSProtection.DDOSPolicyCustom
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["ddos_policy_custom"].(map[string]interface{}); ok {
-					return &HTTPLoadBalancerL7DdosProtectionDdosPolicyCustomModel{
+					return &HTTPLoadBalancerL7DDOSProtectionDDOSPolicyCustomModel{
 						Name: func() types.String {
 							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
 								return types.StringValue(v)
@@ -24526,11 +24526,11 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				return nil
 			}(),
-			DdosPolicyNone: func() *HTTPLoadBalancerEmptyModel {
-				if !isImport && data.L7DdosProtection != nil {
+			DDOSPolicyNone: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.L7DDOSProtection != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.L7DdosProtection.DdosPolicyNone
+					return data.L7DDOSProtection.DDOSPolicyNone
 				}
 				// Import case: read from API
 				if _, ok := blockData["ddos_policy_none"].(map[string]interface{}); ok {
@@ -24539,10 +24539,10 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				return nil
 			}(),
 			DefaultRpsThreshold: func() *HTTPLoadBalancerEmptyModel {
-				if !isImport && data.L7DdosProtection != nil {
+				if !isImport && data.L7DDOSProtection != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.L7DdosProtection.DefaultRpsThreshold
+					return data.L7DDOSProtection.DefaultRpsThreshold
 				}
 				// Import case: read from API
 				if _, ok := blockData["default_rps_threshold"].(map[string]interface{}); ok {
@@ -24551,10 +24551,10 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				return nil
 			}(),
 			MitigationBlock: func() *HTTPLoadBalancerEmptyModel {
-				if !isImport && data.L7DdosProtection != nil {
+				if !isImport && data.L7DDOSProtection != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.L7DdosProtection.MitigationBlock
+					return data.L7DDOSProtection.MitigationBlock
 				}
 				// Import case: read from API
 				if _, ok := blockData["mitigation_block"].(map[string]interface{}); ok {
@@ -24562,14 +24562,14 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				return nil
 			}(),
-			MitigationCaptchaChallenge: func() *HTTPLoadBalancerL7DdosProtectionMitigationCaptchaChallengeModel {
-				if !isImport && data.L7DdosProtection != nil && data.L7DdosProtection.MitigationCaptchaChallenge != nil {
+			MitigationCaptchaChallenge: func() *HTTPLoadBalancerL7DDOSProtectionMitigationCaptchaChallengeModel {
+				if !isImport && data.L7DDOSProtection != nil && data.L7DDOSProtection.MitigationCaptchaChallenge != nil {
 					// Normal Read: preserve existing state value
-					return data.L7DdosProtection.MitigationCaptchaChallenge
+					return data.L7DDOSProtection.MitigationCaptchaChallenge
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["mitigation_captcha_challenge"].(map[string]interface{}); ok {
-					return &HTTPLoadBalancerL7DdosProtectionMitigationCaptchaChallengeModel{
+					return &HTTPLoadBalancerL7DDOSProtectionMitigationCaptchaChallengeModel{
 						CookieExpiry: func() types.Int64 {
 							if v, ok := nestedBlockData["cookie_expiry"].(float64); ok {
 								return types.Int64Value(int64(v))
@@ -24586,14 +24586,14 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				return nil
 			}(),
-			MitigationJsChallenge: func() *HTTPLoadBalancerL7DdosProtectionMitigationJsChallengeModel {
-				if !isImport && data.L7DdosProtection != nil && data.L7DdosProtection.MitigationJsChallenge != nil {
+			MitigationJsChallenge: func() *HTTPLoadBalancerL7DDOSProtectionMitigationJsChallengeModel {
+				if !isImport && data.L7DDOSProtection != nil && data.L7DDOSProtection.MitigationJsChallenge != nil {
 					// Normal Read: preserve existing state value
-					return data.L7DdosProtection.MitigationJsChallenge
+					return data.L7DDOSProtection.MitigationJsChallenge
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["mitigation_js_challenge"].(map[string]interface{}); ok {
-					return &HTTPLoadBalancerL7DdosProtectionMitigationJsChallengeModel{
+					return &HTTPLoadBalancerL7DDOSProtectionMitigationJsChallengeModel{
 						CookieExpiry: func() types.Int64 {
 							if v, ok := nestedBlockData["cookie_expiry"].(float64); ok {
 								return types.Int64Value(int64(v))
@@ -25166,9 +25166,9 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["multi_lb_app"].(map[string]interface{}); ok && isImport && data.MultiLbApp == nil {
+	if _, ok := apiResource.Spec["multi_lb_app"].(map[string]interface{}); ok && isImport && data.MultiLBApp == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.MultiLbApp = &HTTPLoadBalancerEmptyModel{}
+		data.MultiLBApp = &HTTPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["no_challenge"].(map[string]interface{}); ok && isImport && data.NoChallenge == nil {
@@ -25460,7 +25460,7 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 												}
 												return nil
 											}(),
-											Ttl: func() types.Int64 {
+											TTL: func() types.Int64 {
 												if v, ok := deepMap["ttl"].(float64); ok {
 													return types.Int64Value(int64(v))
 												}
@@ -25634,18 +25634,18 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 		data.ServicePoliciesFromNamespace = &HTTPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["single_lb_app"].(map[string]interface{}); ok && isImport && data.SingleLbApp == nil {
+	if _, ok := apiResource.Spec["single_lb_app"].(map[string]interface{}); ok && isImport && data.SingleLBApp == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.SingleLbApp = &HTTPLoadBalancerSingleLbAppModel{}
+		data.SingleLBApp = &HTTPLoadBalancerSingleLBAppModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDdosMitigation != nil) {
-		data.SlowDdosMitigation = &HTTPLoadBalancerSlowDdosMitigationModel{
+	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDDOSMitigation != nil) {
+		data.SlowDDOSMitigation = &HTTPLoadBalancerSlowDDOSMitigationModel{
 			DisableRequestTimeout: func() *HTTPLoadBalancerEmptyModel {
-				if !isImport && data.SlowDdosMitigation != nil {
+				if !isImport && data.SlowDDOSMitigation != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.SlowDdosMitigation.DisableRequestTimeout
+					return data.SlowDDOSMitigation.DisableRequestTimeout
 				}
 				// Import case: read from API
 				if _, ok := blockData["disable_request_timeout"].(map[string]interface{}); ok {
@@ -25726,7 +25726,7 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						}
 						return types.StringNull()
 					}(),
-					IPV6Prefix: func() types.String {
+					Ipv6Prefix: func() types.String {
 						if v, ok := itemMap["ipv6_prefix"].(string); ok && v != "" {
 							return types.StringValue(v)
 						}
@@ -25929,17 +25929,17 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 				}
 				if listItem.VirtualNetwork != nil {
 					virtual_networkDeepMap := make(map[string]interface{})
-					if listItem.VirtualNetwork.DefaultV6Vip != nil {
+					if listItem.VirtualNetwork.DefaultV6VIP != nil {
 						virtual_networkDeepMap["default_v6_vip"] = map[string]interface{}{}
 					}
-					if listItem.VirtualNetwork.DefaultVip != nil {
+					if listItem.VirtualNetwork.DefaultVIP != nil {
 						virtual_networkDeepMap["default_vip"] = map[string]interface{}{}
 					}
-					if !listItem.VirtualNetwork.SpecificV6Vip.IsNull() && !listItem.VirtualNetwork.SpecificV6Vip.IsUnknown() {
-						virtual_networkDeepMap["specific_v6_vip"] = listItem.VirtualNetwork.SpecificV6Vip.ValueString()
+					if !listItem.VirtualNetwork.SpecificV6VIP.IsNull() && !listItem.VirtualNetwork.SpecificV6VIP.IsUnknown() {
+						virtual_networkDeepMap["specific_v6_vip"] = listItem.VirtualNetwork.SpecificV6VIP.ValueString()
 					}
-					if !listItem.VirtualNetwork.SpecificVip.IsNull() && !listItem.VirtualNetwork.SpecificVip.IsUnknown() {
-						virtual_networkDeepMap["specific_vip"] = listItem.VirtualNetwork.SpecificVip.ValueString()
+					if !listItem.VirtualNetwork.SpecificVIP.IsNull() && !listItem.VirtualNetwork.SpecificVIP.IsUnknown() {
+						virtual_networkDeepMap["specific_vip"] = listItem.VirtualNetwork.SpecificVIP.ValueString()
 					}
 					listItemMap["virtual_network"] = virtual_networkDeepMap
 				}
@@ -25950,13 +25950,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 					}
 					listItemMap["virtual_site"] = virtual_siteDeepMap
 				}
-				if listItem.VirtualSiteWithVip != nil {
+				if listItem.VirtualSiteWithVIP != nil {
 					virtual_site_with_vipDeepMap := make(map[string]interface{})
-					if !listItem.VirtualSiteWithVip.IP.IsNull() && !listItem.VirtualSiteWithVip.IP.IsUnknown() {
-						virtual_site_with_vipDeepMap["ip"] = listItem.VirtualSiteWithVip.IP.ValueString()
+					if !listItem.VirtualSiteWithVIP.IP.IsNull() && !listItem.VirtualSiteWithVIP.IP.IsUnknown() {
+						virtual_site_with_vipDeepMap["ip"] = listItem.VirtualSiteWithVIP.IP.ValueString()
 					}
-					if !listItem.VirtualSiteWithVip.Network.IsNull() && !listItem.VirtualSiteWithVip.Network.IsUnknown() {
-						virtual_site_with_vipDeepMap["network"] = listItem.VirtualSiteWithVip.Network.ValueString()
+					if !listItem.VirtualSiteWithVIP.Network.IsNull() && !listItem.VirtualSiteWithVIP.Network.IsUnknown() {
+						virtual_site_with_vipDeepMap["network"] = listItem.VirtualSiteWithVIP.Network.ValueString()
 					}
 					listItemMap["virtual_site_with_vip"] = virtual_site_with_vipDeepMap
 				}
@@ -25987,7 +25987,7 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		}
 		apiResource.Spec["advertise_on_public"] = advertise_on_publicMap
 	}
-	if data.AdvertiseOnPublicDefaultVip != nil {
+	if data.AdvertiseOnPublicDefaultVIP != nil {
 		advertise_on_public_default_vipMap := make(map[string]interface{})
 		apiResource.Spec["advertise_on_public_default_vip"] = advertise_on_public_default_vipMap
 	}
@@ -26144,7 +26144,7 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 					if !listItem.InlineRateLimiter.Unit.IsNull() && !listItem.InlineRateLimiter.Unit.IsUnknown() {
 						inline_rate_limiterDeepMap["unit"] = listItem.InlineRateLimiter.Unit.ValueString()
 					}
-					if listItem.InlineRateLimiter.UseHTTPLbUserID != nil {
+					if listItem.InlineRateLimiter.UseHTTPLBUserID != nil {
 						inline_rate_limiterDeepMap["use_http_lb_user_id"] = map[string]interface{}{}
 					}
 					listItemMap["inline_rate_limiter"] = inline_rate_limiterDeepMap
@@ -26219,7 +26219,7 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 					if !listItem.InlineRateLimiter.Unit.IsNull() && !listItem.InlineRateLimiter.Unit.IsUnknown() {
 						inline_rate_limiterDeepMap["unit"] = listItem.InlineRateLimiter.Unit.ValueString()
 					}
-					if listItem.InlineRateLimiter.UseHTTPLbUserID != nil {
+					if listItem.InlineRateLimiter.UseHTTPLBUserID != nil {
 						inline_rate_limiterDeepMap["use_http_lb_user_id"] = map[string]interface{}{}
 					}
 					listItemMap["inline_rate_limiter"] = inline_rate_limiterDeepMap
@@ -26364,8 +26364,8 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {
 				itemMap["ip_prefix"] = item.IPPrefix.ValueString()
 			}
-			if !item.IPV6Prefix.IsNull() && !item.IPV6Prefix.IsUnknown() {
-				itemMap["ipv6_prefix"] = item.IPV6Prefix.ValueString()
+			if !item.Ipv6Prefix.IsNull() && !item.Ipv6Prefix.IsUnknown() {
+				itemMap["ipv6_prefix"] = item.Ipv6Prefix.ValueString()
 			}
 			if item.Metadata != nil {
 				metadataNestedMap := make(map[string]interface{})
@@ -26392,10 +26392,10 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 	}
 	if data.BotDefense != nil {
 		bot_defenseMap := make(map[string]interface{})
-		if data.BotDefense.DisableCorsSupport != nil {
+		if data.BotDefense.DisableCORSSupport != nil {
 			bot_defenseMap["disable_cors_support"] = map[string]interface{}{}
 		}
-		if data.BotDefense.EnableCorsSupport != nil {
+		if data.BotDefense.EnableCORSSupport != nil {
 			bot_defenseMap["enable_cors_support"] = map[string]interface{}{}
 		}
 		if data.BotDefense.Policy != nil {
@@ -26482,11 +26482,11 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		}
 		if data.CachingPolicy.DefaultCacheAction != nil {
 			default_cache_actionNestedMap := make(map[string]interface{})
-			if !data.CachingPolicy.DefaultCacheAction.CacheTtlDefault.IsNull() && !data.CachingPolicy.DefaultCacheAction.CacheTtlDefault.IsUnknown() {
-				default_cache_actionNestedMap["cache_ttl_default"] = data.CachingPolicy.DefaultCacheAction.CacheTtlDefault.ValueString()
+			if !data.CachingPolicy.DefaultCacheAction.CacheTTLDefault.IsNull() && !data.CachingPolicy.DefaultCacheAction.CacheTTLDefault.IsUnknown() {
+				default_cache_actionNestedMap["cache_ttl_default"] = data.CachingPolicy.DefaultCacheAction.CacheTTLDefault.ValueString()
 			}
-			if !data.CachingPolicy.DefaultCacheAction.CacheTtlOverride.IsNull() && !data.CachingPolicy.DefaultCacheAction.CacheTtlOverride.IsUnknown() {
-				default_cache_actionNestedMap["cache_ttl_override"] = data.CachingPolicy.DefaultCacheAction.CacheTtlOverride.ValueString()
+			if !data.CachingPolicy.DefaultCacheAction.CacheTTLOverride.IsNull() && !data.CachingPolicy.DefaultCacheAction.CacheTTLOverride.IsUnknown() {
+				default_cache_actionNestedMap["cache_ttl_override"] = data.CachingPolicy.DefaultCacheAction.CacheTTLOverride.ValueString()
 			}
 			caching_policyMap["default_cache_action"] = default_cache_actionNestedMap
 		}
@@ -26542,57 +26542,57 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		if data.CookieStickiness.SamesiteStrict != nil {
 			cookie_stickinessMap["samesite_strict"] = map[string]interface{}{}
 		}
-		if !data.CookieStickiness.Ttl.IsNull() && !data.CookieStickiness.Ttl.IsUnknown() {
-			cookie_stickinessMap["ttl"] = data.CookieStickiness.Ttl.ValueInt64()
+		if !data.CookieStickiness.TTL.IsNull() && !data.CookieStickiness.TTL.IsUnknown() {
+			cookie_stickinessMap["ttl"] = data.CookieStickiness.TTL.ValueInt64()
 		}
 		apiResource.Spec["cookie_stickiness"] = cookie_stickinessMap
 	}
-	if data.CorsPolicy != nil {
+	if data.CORSPolicy != nil {
 		cors_policyMap := make(map[string]interface{})
-		if !data.CorsPolicy.AllowCredentials.IsNull() && !data.CorsPolicy.AllowCredentials.IsUnknown() {
-			cors_policyMap["allow_credentials"] = data.CorsPolicy.AllowCredentials.ValueBool()
+		if !data.CORSPolicy.AllowCredentials.IsNull() && !data.CORSPolicy.AllowCredentials.IsUnknown() {
+			cors_policyMap["allow_credentials"] = data.CORSPolicy.AllowCredentials.ValueBool()
 		}
-		if !data.CorsPolicy.AllowHeaders.IsNull() && !data.CorsPolicy.AllowHeaders.IsUnknown() {
-			cors_policyMap["allow_headers"] = data.CorsPolicy.AllowHeaders.ValueString()
+		if !data.CORSPolicy.AllowHeaders.IsNull() && !data.CORSPolicy.AllowHeaders.IsUnknown() {
+			cors_policyMap["allow_headers"] = data.CORSPolicy.AllowHeaders.ValueString()
 		}
-		if !data.CorsPolicy.AllowMethods.IsNull() && !data.CorsPolicy.AllowMethods.IsUnknown() {
-			cors_policyMap["allow_methods"] = data.CorsPolicy.AllowMethods.ValueString()
+		if !data.CORSPolicy.AllowMethods.IsNull() && !data.CORSPolicy.AllowMethods.IsUnknown() {
+			cors_policyMap["allow_methods"] = data.CORSPolicy.AllowMethods.ValueString()
 		}
-		if !data.CorsPolicy.AllowOrigin.IsNull() && !data.CorsPolicy.AllowOrigin.IsUnknown() {
+		if !data.CORSPolicy.AllowOrigin.IsNull() && !data.CORSPolicy.AllowOrigin.IsUnknown() {
 			var allow_originItems []string
-			diags := data.CorsPolicy.AllowOrigin.ElementsAs(ctx, &allow_originItems, false)
+			diags := data.CORSPolicy.AllowOrigin.ElementsAs(ctx, &allow_originItems, false)
 			if !diags.HasError() {
 				cors_policyMap["allow_origin"] = allow_originItems
 			}
 		}
-		if !data.CorsPolicy.AllowOriginRegex.IsNull() && !data.CorsPolicy.AllowOriginRegex.IsUnknown() {
+		if !data.CORSPolicy.AllowOriginRegex.IsNull() && !data.CORSPolicy.AllowOriginRegex.IsUnknown() {
 			var allow_origin_regexItems []string
-			diags := data.CorsPolicy.AllowOriginRegex.ElementsAs(ctx, &allow_origin_regexItems, false)
+			diags := data.CORSPolicy.AllowOriginRegex.ElementsAs(ctx, &allow_origin_regexItems, false)
 			if !diags.HasError() {
 				cors_policyMap["allow_origin_regex"] = allow_origin_regexItems
 			}
 		}
-		if !data.CorsPolicy.Disabled.IsNull() && !data.CorsPolicy.Disabled.IsUnknown() {
-			cors_policyMap["disabled"] = data.CorsPolicy.Disabled.ValueBool()
+		if !data.CORSPolicy.Disabled.IsNull() && !data.CORSPolicy.Disabled.IsUnknown() {
+			cors_policyMap["disabled"] = data.CORSPolicy.Disabled.ValueBool()
 		}
-		if !data.CorsPolicy.ExposeHeaders.IsNull() && !data.CorsPolicy.ExposeHeaders.IsUnknown() {
-			cors_policyMap["expose_headers"] = data.CorsPolicy.ExposeHeaders.ValueString()
+		if !data.CORSPolicy.ExposeHeaders.IsNull() && !data.CORSPolicy.ExposeHeaders.IsUnknown() {
+			cors_policyMap["expose_headers"] = data.CORSPolicy.ExposeHeaders.ValueString()
 		}
-		if !data.CorsPolicy.MaximumAge.IsNull() && !data.CorsPolicy.MaximumAge.IsUnknown() {
-			cors_policyMap["maximum_age"] = data.CorsPolicy.MaximumAge.ValueInt64()
+		if !data.CORSPolicy.MaximumAge.IsNull() && !data.CORSPolicy.MaximumAge.IsUnknown() {
+			cors_policyMap["maximum_age"] = data.CORSPolicy.MaximumAge.ValueInt64()
 		}
 		apiResource.Spec["cors_policy"] = cors_policyMap
 	}
-	if data.CsrfPolicy != nil {
+	if data.CSRFPolicy != nil {
 		csrf_policyMap := make(map[string]interface{})
-		if data.CsrfPolicy.AllLoadBalancerDomains != nil {
+		if data.CSRFPolicy.AllLoadBalancerDomains != nil {
 			csrf_policyMap["all_load_balancer_domains"] = map[string]interface{}{}
 		}
-		if data.CsrfPolicy.CustomDomainList != nil {
+		if data.CSRFPolicy.CustomDomainList != nil {
 			custom_domain_listNestedMap := make(map[string]interface{})
 			csrf_policyMap["custom_domain_list"] = custom_domain_listNestedMap
 		}
-		if data.CsrfPolicy.Disabled != nil {
+		if data.CSRFPolicy.Disabled != nil {
 			csrf_policyMap["disabled"] = map[string]interface{}{}
 		}
 		apiResource.Spec["csrf_policy"] = csrf_policyMap
@@ -26643,56 +26643,56 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		}
 		apiResource.Spec["data_guard_rules"] = data_guard_rulesList
 	}
-	if len(data.DdosMitigationRules) > 0 {
+	if len(data.DDOSMitigationRules) > 0 {
 		var ddos_mitigation_rulesList []map[string]interface{}
-		for _, item := range data.DdosMitigationRules {
+		for _, item := range data.DDOSMitigationRules {
 			itemMap := make(map[string]interface{})
 			if item.Block != nil {
 				itemMap["block"] = map[string]interface{}{}
 			}
-			if item.DdosClientSource != nil {
+			if item.DDOSClientSource != nil {
 				ddos_client_sourceNestedMap := make(map[string]interface{})
-				if item.DdosClientSource.AsnList != nil {
+				if item.DDOSClientSource.AsnList != nil {
 					asn_listDeepMap := make(map[string]interface{})
 					ddos_client_sourceNestedMap["asn_list"] = asn_listDeepMap
 				}
-				if !item.DdosClientSource.CountryList.IsNull() && !item.DdosClientSource.CountryList.IsUnknown() {
+				if !item.DDOSClientSource.CountryList.IsNull() && !item.DDOSClientSource.CountryList.IsUnknown() {
 					var CountryListItems []string
-					diags := item.DdosClientSource.CountryList.ElementsAs(ctx, &CountryListItems, false)
+					diags := item.DDOSClientSource.CountryList.ElementsAs(ctx, &CountryListItems, false)
 					if !diags.HasError() {
 						ddos_client_sourceNestedMap["country_list"] = CountryListItems
 					}
 				}
-				if item.DdosClientSource.Ja4TLSFingerprintMatcher != nil {
+				if item.DDOSClientSource.Ja4TLSFingerprintMatcher != nil {
 					ja4_tls_fingerprint_matcherDeepMap := make(map[string]interface{})
-					if !item.DdosClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsNull() && !item.DdosClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsUnknown() {
+					if !item.DDOSClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsNull() && !item.DDOSClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsUnknown() {
 						var ExactValuesItems []string
-						diags := item.DdosClientSource.Ja4TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						diags := item.DDOSClientSource.Ja4TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
 						if !diags.HasError() {
 							ja4_tls_fingerprint_matcherDeepMap["exact_values"] = ExactValuesItems
 						}
 					}
 					ddos_client_sourceNestedMap["ja4_tls_fingerprint_matcher"] = ja4_tls_fingerprint_matcherDeepMap
 				}
-				if item.DdosClientSource.TLSFingerprintMatcher != nil {
+				if item.DDOSClientSource.TLSFingerprintMatcher != nil {
 					tls_fingerprint_matcherDeepMap := make(map[string]interface{})
-					if !item.DdosClientSource.TLSFingerprintMatcher.Classes.IsNull() && !item.DdosClientSource.TLSFingerprintMatcher.Classes.IsUnknown() {
+					if !item.DDOSClientSource.TLSFingerprintMatcher.Classes.IsNull() && !item.DDOSClientSource.TLSFingerprintMatcher.Classes.IsUnknown() {
 						var ClassesItems []string
-						diags := item.DdosClientSource.TLSFingerprintMatcher.Classes.ElementsAs(ctx, &ClassesItems, false)
+						diags := item.DDOSClientSource.TLSFingerprintMatcher.Classes.ElementsAs(ctx, &ClassesItems, false)
 						if !diags.HasError() {
 							tls_fingerprint_matcherDeepMap["classes"] = ClassesItems
 						}
 					}
-					if !item.DdosClientSource.TLSFingerprintMatcher.ExactValues.IsNull() && !item.DdosClientSource.TLSFingerprintMatcher.ExactValues.IsUnknown() {
+					if !item.DDOSClientSource.TLSFingerprintMatcher.ExactValues.IsNull() && !item.DDOSClientSource.TLSFingerprintMatcher.ExactValues.IsUnknown() {
 						var ExactValuesItems []string
-						diags := item.DdosClientSource.TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						diags := item.DDOSClientSource.TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
 						if !diags.HasError() {
 							tls_fingerprint_matcherDeepMap["exact_values"] = ExactValuesItems
 						}
 					}
-					if !item.DdosClientSource.TLSFingerprintMatcher.ExcludedValues.IsNull() && !item.DdosClientSource.TLSFingerprintMatcher.ExcludedValues.IsUnknown() {
+					if !item.DDOSClientSource.TLSFingerprintMatcher.ExcludedValues.IsNull() && !item.DDOSClientSource.TLSFingerprintMatcher.ExcludedValues.IsUnknown() {
 						var ExcludedValuesItems []string
-						diags := item.DdosClientSource.TLSFingerprintMatcher.ExcludedValues.ElementsAs(ctx, &ExcludedValuesItems, false)
+						diags := item.DDOSClientSource.TLSFingerprintMatcher.ExcludedValues.ElementsAs(ctx, &ExcludedValuesItems, false)
 						if !diags.HasError() {
 							tls_fingerprint_matcherDeepMap["excluded_values"] = ExcludedValuesItems
 						}
@@ -26773,7 +26773,7 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}
 			default_poolMap["healthcheck"] = healthcheckList
 		}
-		if data.DefaultPool.LbPort != nil {
+		if data.DefaultPool.LBPort != nil {
 			default_poolMap["lb_port"] = map[string]interface{}{}
 		}
 		if !data.DefaultPool.LoadBalancerAlgorithm.IsNull() && !data.DefaultPool.LoadBalancerAlgorithm.IsUnknown() {
@@ -27387,8 +27387,8 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			if !data.HTTPSAutoCert.UseMtls.ClientCertificateOptional.IsNull() && !data.HTTPSAutoCert.UseMtls.ClientCertificateOptional.IsUnknown() {
 				use_mtlsNestedMap["client_certificate_optional"] = data.HTTPSAutoCert.UseMtls.ClientCertificateOptional.ValueBool()
 			}
-			if !data.HTTPSAutoCert.UseMtls.TrustedCaURL.IsNull() && !data.HTTPSAutoCert.UseMtls.TrustedCaURL.IsUnknown() {
-				use_mtlsNestedMap["trusted_ca_url"] = data.HTTPSAutoCert.UseMtls.TrustedCaURL.ValueString()
+			if !data.HTTPSAutoCert.UseMtls.TrustedCAURL.IsNull() && !data.HTTPSAutoCert.UseMtls.TrustedCAURL.IsUnknown() {
+				use_mtlsNestedMap["trusted_ca_url"] = data.HTTPSAutoCert.UseMtls.TrustedCAURL.ValueString()
 			}
 			https_auto_certMap["use_mtls"] = use_mtlsNestedMap
 		}
@@ -27407,136 +27407,136 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		}
 		apiResource.Spec["js_challenge"] = js_challengeMap
 	}
-	if data.JwtValidation != nil {
+	if data.JWTValidation != nil {
 		jwt_validationMap := make(map[string]interface{})
-		if data.JwtValidation.Action != nil {
+		if data.JWTValidation.Action != nil {
 			actionNestedMap := make(map[string]interface{})
 			jwt_validationMap["action"] = actionNestedMap
 		}
-		if data.JwtValidation.JwksConfig != nil {
+		if data.JWTValidation.JwksConfig != nil {
 			jwks_configNestedMap := make(map[string]interface{})
-			if !data.JwtValidation.JwksConfig.Cleartext.IsNull() && !data.JwtValidation.JwksConfig.Cleartext.IsUnknown() {
-				jwks_configNestedMap["cleartext"] = data.JwtValidation.JwksConfig.Cleartext.ValueString()
+			if !data.JWTValidation.JwksConfig.Cleartext.IsNull() && !data.JWTValidation.JwksConfig.Cleartext.IsUnknown() {
+				jwks_configNestedMap["cleartext"] = data.JWTValidation.JwksConfig.Cleartext.ValueString()
 			}
 			jwt_validationMap["jwks_config"] = jwks_configNestedMap
 		}
-		if data.JwtValidation.MandatoryClaims != nil {
+		if data.JWTValidation.MandatoryClaims != nil {
 			mandatory_claimsNestedMap := make(map[string]interface{})
 			jwt_validationMap["mandatory_claims"] = mandatory_claimsNestedMap
 		}
-		if data.JwtValidation.ReservedClaims != nil {
+		if data.JWTValidation.ReservedClaims != nil {
 			reserved_claimsNestedMap := make(map[string]interface{})
-			if !data.JwtValidation.ReservedClaims.Issuer.IsNull() && !data.JwtValidation.ReservedClaims.Issuer.IsUnknown() {
-				reserved_claimsNestedMap["issuer"] = data.JwtValidation.ReservedClaims.Issuer.ValueString()
+			if !data.JWTValidation.ReservedClaims.Issuer.IsNull() && !data.JWTValidation.ReservedClaims.Issuer.IsUnknown() {
+				reserved_claimsNestedMap["issuer"] = data.JWTValidation.ReservedClaims.Issuer.ValueString()
 			}
 			jwt_validationMap["reserved_claims"] = reserved_claimsNestedMap
 		}
-		if data.JwtValidation.Target != nil {
+		if data.JWTValidation.Target != nil {
 			targetNestedMap := make(map[string]interface{})
 			jwt_validationMap["target"] = targetNestedMap
 		}
-		if data.JwtValidation.TokenLocation != nil {
+		if data.JWTValidation.TokenLocation != nil {
 			token_locationNestedMap := make(map[string]interface{})
 			jwt_validationMap["token_location"] = token_locationNestedMap
 		}
 		apiResource.Spec["jwt_validation"] = jwt_validationMap
 	}
-	if data.L7DdosActionBlock != nil {
+	if data.L7DDOSActionBlock != nil {
 		l7_ddos_action_blockMap := make(map[string]interface{})
 		apiResource.Spec["l7_ddos_action_block"] = l7_ddos_action_blockMap
 	}
-	if data.L7DdosActionDefault != nil {
+	if data.L7DDOSActionDefault != nil {
 		l7_ddos_action_defaultMap := make(map[string]interface{})
 		apiResource.Spec["l7_ddos_action_default"] = l7_ddos_action_defaultMap
 	}
-	if data.L7DdosActionJsChallenge != nil {
+	if data.L7DDOSActionJsChallenge != nil {
 		l7_ddos_action_js_challengeMap := make(map[string]interface{})
-		if !data.L7DdosActionJsChallenge.CookieExpiry.IsNull() && !data.L7DdosActionJsChallenge.CookieExpiry.IsUnknown() {
-			l7_ddos_action_js_challengeMap["cookie_expiry"] = data.L7DdosActionJsChallenge.CookieExpiry.ValueInt64()
+		if !data.L7DDOSActionJsChallenge.CookieExpiry.IsNull() && !data.L7DDOSActionJsChallenge.CookieExpiry.IsUnknown() {
+			l7_ddos_action_js_challengeMap["cookie_expiry"] = data.L7DDOSActionJsChallenge.CookieExpiry.ValueInt64()
 		}
-		if !data.L7DdosActionJsChallenge.CustomPage.IsNull() && !data.L7DdosActionJsChallenge.CustomPage.IsUnknown() {
-			l7_ddos_action_js_challengeMap["custom_page"] = data.L7DdosActionJsChallenge.CustomPage.ValueString()
+		if !data.L7DDOSActionJsChallenge.CustomPage.IsNull() && !data.L7DDOSActionJsChallenge.CustomPage.IsUnknown() {
+			l7_ddos_action_js_challengeMap["custom_page"] = data.L7DDOSActionJsChallenge.CustomPage.ValueString()
 		}
-		if !data.L7DdosActionJsChallenge.JsScriptDelay.IsNull() && !data.L7DdosActionJsChallenge.JsScriptDelay.IsUnknown() {
-			l7_ddos_action_js_challengeMap["js_script_delay"] = data.L7DdosActionJsChallenge.JsScriptDelay.ValueInt64()
+		if !data.L7DDOSActionJsChallenge.JsScriptDelay.IsNull() && !data.L7DDOSActionJsChallenge.JsScriptDelay.IsUnknown() {
+			l7_ddos_action_js_challengeMap["js_script_delay"] = data.L7DDOSActionJsChallenge.JsScriptDelay.ValueInt64()
 		}
 		apiResource.Spec["l7_ddos_action_js_challenge"] = l7_ddos_action_js_challengeMap
 	}
-	if data.L7DdosProtection != nil {
+	if data.L7DDOSProtection != nil {
 		l7_ddos_protectionMap := make(map[string]interface{})
-		if data.L7DdosProtection.ClientsideActionCaptchaChallenge != nil {
+		if data.L7DDOSProtection.ClientsideActionCaptchaChallenge != nil {
 			clientside_action_captcha_challengeNestedMap := make(map[string]interface{})
-			if !data.L7DdosProtection.ClientsideActionCaptchaChallenge.CookieExpiry.IsNull() && !data.L7DdosProtection.ClientsideActionCaptchaChallenge.CookieExpiry.IsUnknown() {
-				clientside_action_captcha_challengeNestedMap["cookie_expiry"] = data.L7DdosProtection.ClientsideActionCaptchaChallenge.CookieExpiry.ValueInt64()
+			if !data.L7DDOSProtection.ClientsideActionCaptchaChallenge.CookieExpiry.IsNull() && !data.L7DDOSProtection.ClientsideActionCaptchaChallenge.CookieExpiry.IsUnknown() {
+				clientside_action_captcha_challengeNestedMap["cookie_expiry"] = data.L7DDOSProtection.ClientsideActionCaptchaChallenge.CookieExpiry.ValueInt64()
 			}
-			if !data.L7DdosProtection.ClientsideActionCaptchaChallenge.CustomPage.IsNull() && !data.L7DdosProtection.ClientsideActionCaptchaChallenge.CustomPage.IsUnknown() {
-				clientside_action_captcha_challengeNestedMap["custom_page"] = data.L7DdosProtection.ClientsideActionCaptchaChallenge.CustomPage.ValueString()
+			if !data.L7DDOSProtection.ClientsideActionCaptchaChallenge.CustomPage.IsNull() && !data.L7DDOSProtection.ClientsideActionCaptchaChallenge.CustomPage.IsUnknown() {
+				clientside_action_captcha_challengeNestedMap["custom_page"] = data.L7DDOSProtection.ClientsideActionCaptchaChallenge.CustomPage.ValueString()
 			}
 			l7_ddos_protectionMap["clientside_action_captcha_challenge"] = clientside_action_captcha_challengeNestedMap
 		}
-		if data.L7DdosProtection.ClientsideActionJsChallenge != nil {
+		if data.L7DDOSProtection.ClientsideActionJsChallenge != nil {
 			clientside_action_js_challengeNestedMap := make(map[string]interface{})
-			if !data.L7DdosProtection.ClientsideActionJsChallenge.CookieExpiry.IsNull() && !data.L7DdosProtection.ClientsideActionJsChallenge.CookieExpiry.IsUnknown() {
-				clientside_action_js_challengeNestedMap["cookie_expiry"] = data.L7DdosProtection.ClientsideActionJsChallenge.CookieExpiry.ValueInt64()
+			if !data.L7DDOSProtection.ClientsideActionJsChallenge.CookieExpiry.IsNull() && !data.L7DDOSProtection.ClientsideActionJsChallenge.CookieExpiry.IsUnknown() {
+				clientside_action_js_challengeNestedMap["cookie_expiry"] = data.L7DDOSProtection.ClientsideActionJsChallenge.CookieExpiry.ValueInt64()
 			}
-			if !data.L7DdosProtection.ClientsideActionJsChallenge.CustomPage.IsNull() && !data.L7DdosProtection.ClientsideActionJsChallenge.CustomPage.IsUnknown() {
-				clientside_action_js_challengeNestedMap["custom_page"] = data.L7DdosProtection.ClientsideActionJsChallenge.CustomPage.ValueString()
+			if !data.L7DDOSProtection.ClientsideActionJsChallenge.CustomPage.IsNull() && !data.L7DDOSProtection.ClientsideActionJsChallenge.CustomPage.IsUnknown() {
+				clientside_action_js_challengeNestedMap["custom_page"] = data.L7DDOSProtection.ClientsideActionJsChallenge.CustomPage.ValueString()
 			}
-			if !data.L7DdosProtection.ClientsideActionJsChallenge.JsScriptDelay.IsNull() && !data.L7DdosProtection.ClientsideActionJsChallenge.JsScriptDelay.IsUnknown() {
-				clientside_action_js_challengeNestedMap["js_script_delay"] = data.L7DdosProtection.ClientsideActionJsChallenge.JsScriptDelay.ValueInt64()
+			if !data.L7DDOSProtection.ClientsideActionJsChallenge.JsScriptDelay.IsNull() && !data.L7DDOSProtection.ClientsideActionJsChallenge.JsScriptDelay.IsUnknown() {
+				clientside_action_js_challengeNestedMap["js_script_delay"] = data.L7DDOSProtection.ClientsideActionJsChallenge.JsScriptDelay.ValueInt64()
 			}
 			l7_ddos_protectionMap["clientside_action_js_challenge"] = clientside_action_js_challengeNestedMap
 		}
-		if data.L7DdosProtection.ClientsideActionNone != nil {
+		if data.L7DDOSProtection.ClientsideActionNone != nil {
 			l7_ddos_protectionMap["clientside_action_none"] = map[string]interface{}{}
 		}
-		if data.L7DdosProtection.DdosPolicyCustom != nil {
+		if data.L7DDOSProtection.DDOSPolicyCustom != nil {
 			ddos_policy_customNestedMap := make(map[string]interface{})
-			if !data.L7DdosProtection.DdosPolicyCustom.Name.IsNull() && !data.L7DdosProtection.DdosPolicyCustom.Name.IsUnknown() {
-				ddos_policy_customNestedMap["name"] = data.L7DdosProtection.DdosPolicyCustom.Name.ValueString()
+			if !data.L7DDOSProtection.DDOSPolicyCustom.Name.IsNull() && !data.L7DDOSProtection.DDOSPolicyCustom.Name.IsUnknown() {
+				ddos_policy_customNestedMap["name"] = data.L7DDOSProtection.DDOSPolicyCustom.Name.ValueString()
 			}
-			if !data.L7DdosProtection.DdosPolicyCustom.Namespace.IsNull() && !data.L7DdosProtection.DdosPolicyCustom.Namespace.IsUnknown() {
-				ddos_policy_customNestedMap["namespace"] = data.L7DdosProtection.DdosPolicyCustom.Namespace.ValueString()
+			if !data.L7DDOSProtection.DDOSPolicyCustom.Namespace.IsNull() && !data.L7DDOSProtection.DDOSPolicyCustom.Namespace.IsUnknown() {
+				ddos_policy_customNestedMap["namespace"] = data.L7DDOSProtection.DDOSPolicyCustom.Namespace.ValueString()
 			}
-			if !data.L7DdosProtection.DdosPolicyCustom.Tenant.IsNull() && !data.L7DdosProtection.DdosPolicyCustom.Tenant.IsUnknown() {
-				ddos_policy_customNestedMap["tenant"] = data.L7DdosProtection.DdosPolicyCustom.Tenant.ValueString()
+			if !data.L7DDOSProtection.DDOSPolicyCustom.Tenant.IsNull() && !data.L7DDOSProtection.DDOSPolicyCustom.Tenant.IsUnknown() {
+				ddos_policy_customNestedMap["tenant"] = data.L7DDOSProtection.DDOSPolicyCustom.Tenant.ValueString()
 			}
 			l7_ddos_protectionMap["ddos_policy_custom"] = ddos_policy_customNestedMap
 		}
-		if data.L7DdosProtection.DdosPolicyNone != nil {
+		if data.L7DDOSProtection.DDOSPolicyNone != nil {
 			l7_ddos_protectionMap["ddos_policy_none"] = map[string]interface{}{}
 		}
-		if data.L7DdosProtection.DefaultRpsThreshold != nil {
+		if data.L7DDOSProtection.DefaultRpsThreshold != nil {
 			l7_ddos_protectionMap["default_rps_threshold"] = map[string]interface{}{}
 		}
-		if data.L7DdosProtection.MitigationBlock != nil {
+		if data.L7DDOSProtection.MitigationBlock != nil {
 			l7_ddos_protectionMap["mitigation_block"] = map[string]interface{}{}
 		}
-		if data.L7DdosProtection.MitigationCaptchaChallenge != nil {
+		if data.L7DDOSProtection.MitigationCaptchaChallenge != nil {
 			mitigation_captcha_challengeNestedMap := make(map[string]interface{})
-			if !data.L7DdosProtection.MitigationCaptchaChallenge.CookieExpiry.IsNull() && !data.L7DdosProtection.MitigationCaptchaChallenge.CookieExpiry.IsUnknown() {
-				mitigation_captcha_challengeNestedMap["cookie_expiry"] = data.L7DdosProtection.MitigationCaptchaChallenge.CookieExpiry.ValueInt64()
+			if !data.L7DDOSProtection.MitigationCaptchaChallenge.CookieExpiry.IsNull() && !data.L7DDOSProtection.MitigationCaptchaChallenge.CookieExpiry.IsUnknown() {
+				mitigation_captcha_challengeNestedMap["cookie_expiry"] = data.L7DDOSProtection.MitigationCaptchaChallenge.CookieExpiry.ValueInt64()
 			}
-			if !data.L7DdosProtection.MitigationCaptchaChallenge.CustomPage.IsNull() && !data.L7DdosProtection.MitigationCaptchaChallenge.CustomPage.IsUnknown() {
-				mitigation_captcha_challengeNestedMap["custom_page"] = data.L7DdosProtection.MitigationCaptchaChallenge.CustomPage.ValueString()
+			if !data.L7DDOSProtection.MitigationCaptchaChallenge.CustomPage.IsNull() && !data.L7DDOSProtection.MitigationCaptchaChallenge.CustomPage.IsUnknown() {
+				mitigation_captcha_challengeNestedMap["custom_page"] = data.L7DDOSProtection.MitigationCaptchaChallenge.CustomPage.ValueString()
 			}
 			l7_ddos_protectionMap["mitigation_captcha_challenge"] = mitigation_captcha_challengeNestedMap
 		}
-		if data.L7DdosProtection.MitigationJsChallenge != nil {
+		if data.L7DDOSProtection.MitigationJsChallenge != nil {
 			mitigation_js_challengeNestedMap := make(map[string]interface{})
-			if !data.L7DdosProtection.MitigationJsChallenge.CookieExpiry.IsNull() && !data.L7DdosProtection.MitigationJsChallenge.CookieExpiry.IsUnknown() {
-				mitigation_js_challengeNestedMap["cookie_expiry"] = data.L7DdosProtection.MitigationJsChallenge.CookieExpiry.ValueInt64()
+			if !data.L7DDOSProtection.MitigationJsChallenge.CookieExpiry.IsNull() && !data.L7DDOSProtection.MitigationJsChallenge.CookieExpiry.IsUnknown() {
+				mitigation_js_challengeNestedMap["cookie_expiry"] = data.L7DDOSProtection.MitigationJsChallenge.CookieExpiry.ValueInt64()
 			}
-			if !data.L7DdosProtection.MitigationJsChallenge.CustomPage.IsNull() && !data.L7DdosProtection.MitigationJsChallenge.CustomPage.IsUnknown() {
-				mitigation_js_challengeNestedMap["custom_page"] = data.L7DdosProtection.MitigationJsChallenge.CustomPage.ValueString()
+			if !data.L7DDOSProtection.MitigationJsChallenge.CustomPage.IsNull() && !data.L7DDOSProtection.MitigationJsChallenge.CustomPage.IsUnknown() {
+				mitigation_js_challengeNestedMap["custom_page"] = data.L7DDOSProtection.MitigationJsChallenge.CustomPage.ValueString()
 			}
-			if !data.L7DdosProtection.MitigationJsChallenge.JsScriptDelay.IsNull() && !data.L7DdosProtection.MitigationJsChallenge.JsScriptDelay.IsUnknown() {
-				mitigation_js_challengeNestedMap["js_script_delay"] = data.L7DdosProtection.MitigationJsChallenge.JsScriptDelay.ValueInt64()
+			if !data.L7DDOSProtection.MitigationJsChallenge.JsScriptDelay.IsNull() && !data.L7DDOSProtection.MitigationJsChallenge.JsScriptDelay.IsUnknown() {
+				mitigation_js_challengeNestedMap["js_script_delay"] = data.L7DDOSProtection.MitigationJsChallenge.JsScriptDelay.ValueInt64()
 			}
 			l7_ddos_protectionMap["mitigation_js_challenge"] = mitigation_js_challengeNestedMap
 		}
-		if !data.L7DdosProtection.RpsThreshold.IsNull() && !data.L7DdosProtection.RpsThreshold.IsUnknown() {
-			l7_ddos_protectionMap["rps_threshold"] = data.L7DdosProtection.RpsThreshold.ValueInt64()
+		if !data.L7DDOSProtection.RpsThreshold.IsNull() && !data.L7DDOSProtection.RpsThreshold.IsUnknown() {
+			l7_ddos_protectionMap["rps_threshold"] = data.L7DDOSProtection.RpsThreshold.ValueInt64()
 		}
 		apiResource.Spec["l7_ddos_protection"] = l7_ddos_protectionMap
 	}
@@ -27810,7 +27810,7 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		}
 		apiResource.Spec["more_option"] = more_optionMap
 	}
-	if data.MultiLbApp != nil {
+	if data.MultiLBApp != nil {
 		multi_lb_appMap := make(map[string]interface{})
 		apiResource.Spec["multi_lb_app"] = multi_lb_appMap
 	}
@@ -28081,8 +28081,8 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 					if listItem.Cookie.SamesiteStrict != nil {
 						cookieDeepMap["samesite_strict"] = map[string]interface{}{}
 					}
-					if !listItem.Cookie.Ttl.IsNull() && !listItem.Cookie.Ttl.IsUnknown() {
-						cookieDeepMap["ttl"] = listItem.Cookie.Ttl.ValueInt64()
+					if !listItem.Cookie.TTL.IsNull() && !listItem.Cookie.TTL.IsUnknown() {
+						cookieDeepMap["ttl"] = listItem.Cookie.TTL.ValueInt64()
 					}
 					listItemMap["cookie"] = cookieDeepMap
 				}
@@ -28517,33 +28517,33 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		service_policies_from_namespaceMap := make(map[string]interface{})
 		apiResource.Spec["service_policies_from_namespace"] = service_policies_from_namespaceMap
 	}
-	if data.SingleLbApp != nil {
+	if data.SingleLBApp != nil {
 		single_lb_appMap := make(map[string]interface{})
-		if data.SingleLbApp.DisableDiscovery != nil {
+		if data.SingleLBApp.DisableDiscovery != nil {
 			single_lb_appMap["disable_discovery"] = map[string]interface{}{}
 		}
-		if data.SingleLbApp.DisableMaliciousUserDetection != nil {
+		if data.SingleLBApp.DisableMaliciousUserDetection != nil {
 			single_lb_appMap["disable_malicious_user_detection"] = map[string]interface{}{}
 		}
-		if data.SingleLbApp.EnableDiscovery != nil {
+		if data.SingleLBApp.EnableDiscovery != nil {
 			enable_discoveryNestedMap := make(map[string]interface{})
 			single_lb_appMap["enable_discovery"] = enable_discoveryNestedMap
 		}
-		if data.SingleLbApp.EnableMaliciousUserDetection != nil {
+		if data.SingleLBApp.EnableMaliciousUserDetection != nil {
 			single_lb_appMap["enable_malicious_user_detection"] = map[string]interface{}{}
 		}
 		apiResource.Spec["single_lb_app"] = single_lb_appMap
 	}
-	if data.SlowDdosMitigation != nil {
+	if data.SlowDDOSMitigation != nil {
 		slow_ddos_mitigationMap := make(map[string]interface{})
-		if data.SlowDdosMitigation.DisableRequestTimeout != nil {
+		if data.SlowDDOSMitigation.DisableRequestTimeout != nil {
 			slow_ddos_mitigationMap["disable_request_timeout"] = map[string]interface{}{}
 		}
-		if !data.SlowDdosMitigation.RequestHeadersTimeout.IsNull() && !data.SlowDdosMitigation.RequestHeadersTimeout.IsUnknown() {
-			slow_ddos_mitigationMap["request_headers_timeout"] = data.SlowDdosMitigation.RequestHeadersTimeout.ValueInt64()
+		if !data.SlowDDOSMitigation.RequestHeadersTimeout.IsNull() && !data.SlowDDOSMitigation.RequestHeadersTimeout.IsUnknown() {
+			slow_ddos_mitigationMap["request_headers_timeout"] = data.SlowDDOSMitigation.RequestHeadersTimeout.ValueInt64()
 		}
-		if !data.SlowDdosMitigation.RequestTimeout.IsNull() && !data.SlowDdosMitigation.RequestTimeout.IsUnknown() {
-			slow_ddos_mitigationMap["request_timeout"] = data.SlowDdosMitigation.RequestTimeout.ValueInt64()
+		if !data.SlowDDOSMitigation.RequestTimeout.IsNull() && !data.SlowDDOSMitigation.RequestTimeout.IsUnknown() {
+			slow_ddos_mitigationMap["request_timeout"] = data.SlowDDOSMitigation.RequestTimeout.ValueInt64()
 		}
 		apiResource.Spec["slow_ddos_mitigation"] = slow_ddos_mitigationMap
 	}
@@ -28598,8 +28598,8 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {
 				itemMap["ip_prefix"] = item.IPPrefix.ValueString()
 			}
-			if !item.IPV6Prefix.IsNull() && !item.IPV6Prefix.IsUnknown() {
-				itemMap["ipv6_prefix"] = item.IPV6Prefix.ValueString()
+			if !item.Ipv6Prefix.IsNull() && !item.Ipv6Prefix.IsUnknown() {
+				itemMap["ipv6_prefix"] = item.Ipv6Prefix.ValueString()
 			}
 			if item.Metadata != nil {
 				metadataNestedMap := make(map[string]interface{})
@@ -28785,25 +28785,25 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 								VirtualNetwork: func() *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel {
 									if deepMap, ok := itemMap["virtual_network"].(map[string]interface{}); ok {
 										return &HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel{
-											DefaultV6Vip: func() *HTTPLoadBalancerEmptyModel {
+											DefaultV6VIP: func() *HTTPLoadBalancerEmptyModel {
 												if _, ok := deepMap["default_v6_vip"].(map[string]interface{}); ok {
 													return &HTTPLoadBalancerEmptyModel{}
 												}
 												return nil
 											}(),
-											DefaultVip: func() *HTTPLoadBalancerEmptyModel {
+											DefaultVIP: func() *HTTPLoadBalancerEmptyModel {
 												if _, ok := deepMap["default_vip"].(map[string]interface{}); ok {
 													return &HTTPLoadBalancerEmptyModel{}
 												}
 												return nil
 											}(),
-											SpecificV6Vip: func() types.String {
+											SpecificV6VIP: func() types.String {
 												if v, ok := deepMap["specific_v6_vip"].(string); ok && v != "" {
 													return types.StringValue(v)
 												}
 												return types.StringNull()
 											}(),
-											SpecificVip: func() types.String {
+											SpecificVIP: func() types.String {
 												if v, ok := deepMap["specific_vip"].(string); ok && v != "" {
 													return types.StringValue(v)
 												}
@@ -28826,9 +28826,9 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 									}
 									return nil
 								}(),
-								VirtualSiteWithVip: func() *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel {
+								VirtualSiteWithVIP: func() *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel {
 									if deepMap, ok := itemMap["virtual_site_with_vip"].(map[string]interface{}); ok {
-										return &HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel{
+										return &HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel{
 											IP: func() types.String {
 												if v, ok := deepMap["ip"].(string); ok && v != "" {
 													return types.StringValue(v)
@@ -28865,9 +28865,9 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		data.AdvertiseOnPublic = &HTTPLoadBalancerAdvertiseOnPublicModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["advertise_on_public_default_vip"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublicDefaultVip == nil {
+	if _, ok := apiResource.Spec["advertise_on_public_default_vip"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublicDefaultVIP == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.AdvertiseOnPublicDefaultVip = &HTTPLoadBalancerEmptyModel{}
+		data.AdvertiseOnPublicDefaultVIP = &HTTPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["api_protection_rules"].(map[string]interface{}); ok && (isImport || data.APIProtectionRules != nil) {
@@ -29148,7 +29148,7 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 												}
 												return types.StringNull()
 											}(),
-											UseHTTPLbUserID: func() *HTTPLoadBalancerEmptyModel {
+											UseHTTPLBUserID: func() *HTTPLoadBalancerEmptyModel {
 												if _, ok := deepMap["use_http_lb_user_id"].(map[string]interface{}); ok {
 													return &HTTPLoadBalancerEmptyModel{}
 												}
@@ -29319,7 +29319,7 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 												}
 												return types.StringNull()
 											}(),
-											UseHTTPLbUserID: func() *HTTPLoadBalancerEmptyModel {
+											UseHTTPLBUserID: func() *HTTPLoadBalancerEmptyModel {
 												if _, ok := deepMap["use_http_lb_user_id"].(map[string]interface{}); ok {
 													return &HTTPLoadBalancerEmptyModel{}
 												}
@@ -29522,7 +29522,7 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 						}
 						return types.StringNull()
 					}(),
-					IPV6Prefix: func() types.String {
+					Ipv6Prefix: func() types.String {
 						if v, ok := itemMap["ipv6_prefix"].(string); ok && v != "" {
 							return types.StringValue(v)
 						}
@@ -29572,11 +29572,11 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 	}
 	if blockData, ok := apiResource.Spec["bot_defense"].(map[string]interface{}); ok && (isImport || data.BotDefense != nil) {
 		data.BotDefense = &HTTPLoadBalancerBotDefenseModel{
-			DisableCorsSupport: func() *HTTPLoadBalancerEmptyModel {
+			DisableCORSSupport: func() *HTTPLoadBalancerEmptyModel {
 				if !isImport && data.BotDefense != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.BotDefense.DisableCorsSupport
+					return data.BotDefense.DisableCORSSupport
 				}
 				// Import case: read from API
 				if _, ok := blockData["disable_cors_support"].(map[string]interface{}); ok {
@@ -29584,11 +29584,11 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 				}
 				return nil
 			}(),
-			EnableCorsSupport: func() *HTTPLoadBalancerEmptyModel {
+			EnableCORSSupport: func() *HTTPLoadBalancerEmptyModel {
 				if !isImport && data.BotDefense != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.BotDefense.EnableCorsSupport
+					return data.BotDefense.EnableCORSSupport
 				}
 				// Import case: read from API
 				if _, ok := blockData["enable_cors_support"].(map[string]interface{}); ok {
@@ -29775,7 +29775,7 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 				}
 				return nil
 			}(),
-			Ttl: func() types.Int64 {
+			TTL: func() types.Int64 {
 				if v, ok := blockData["ttl"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -29783,12 +29783,12 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["cors_policy"].(map[string]interface{}); ok && (isImport || data.CorsPolicy != nil) {
-		data.CorsPolicy = &HTTPLoadBalancerCorsPolicyModel{
+	if blockData, ok := apiResource.Spec["cors_policy"].(map[string]interface{}); ok && (isImport || data.CORSPolicy != nil) {
+		data.CORSPolicy = &HTTPLoadBalancerCORSPolicyModel{
 			AllowCredentials: func() types.Bool {
-				if !isImport && data.CorsPolicy != nil {
+				if !isImport && data.CORSPolicy != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.CorsPolicy.AllowCredentials
+					return data.CORSPolicy.AllowCredentials
 				}
 				// Import case: read from API
 				if v, ok := blockData["allow_credentials"].(bool); ok {
@@ -29835,9 +29835,9 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 				return types.ListNull(types.StringType)
 			}(),
 			Disabled: func() types.Bool {
-				if !isImport && data.CorsPolicy != nil {
+				if !isImport && data.CORSPolicy != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.CorsPolicy.Disabled
+					return data.CORSPolicy.Disabled
 				}
 				// Import case: read from API
 				if v, ok := blockData["disabled"].(bool); ok {
@@ -29859,9 +29859,9 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["csrf_policy"].(map[string]interface{}); ok && isImport && data.CsrfPolicy == nil {
+	if _, ok := apiResource.Spec["csrf_policy"].(map[string]interface{}); ok && isImport && data.CSRFPolicy == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.CsrfPolicy = &HTTPLoadBalancerCsrfPolicyModel{}
+		data.CSRFPolicy = &HTTPLoadBalancerCSRFPolicyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["data_guard_rules"].([]interface{}); ok && len(listData) > 0 {
@@ -29950,20 +29950,20 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		data.DataGuardRules = data_guard_rulesList
 	}
 	if listData, ok := apiResource.Spec["ddos_mitigation_rules"].([]interface{}); ok && len(listData) > 0 {
-		var ddos_mitigation_rulesList []HTTPLoadBalancerDdosMitigationRulesModel
+		var ddos_mitigation_rulesList []HTTPLoadBalancerDDOSMitigationRulesModel
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
-				ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, HTTPLoadBalancerDdosMitigationRulesModel{
+				ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, HTTPLoadBalancerDDOSMitigationRulesModel{
 					Block: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.DdosMitigationRules) > listIdx && data.DdosMitigationRules[listIdx].Block != nil {
+						if !isImport && len(data.DDOSMitigationRules) > listIdx && data.DDOSMitigationRules[listIdx].Block != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
-					DdosClientSource: func() *HTTPLoadBalancerDdosMitigationRulesDdosClientSourceModel {
+					DDOSClientSource: func() *HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceModel {
 						if nestedMap, ok := itemMap["ddos_client_source"].(map[string]interface{}); ok {
-							return &HTTPLoadBalancerDdosMitigationRulesDdosClientSourceModel{
+							return &HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceModel{
 								CountryList: func() types.List {
 									if v, ok := nestedMap["country_list"].([]interface{}); ok && len(v) > 0 {
 										var items []string
@@ -29987,9 +29987,9 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 						}
 						return types.StringNull()
 					}(),
-					IPPrefixList: func() *HTTPLoadBalancerDdosMitigationRulesIPPrefixListModel {
+					IPPrefixList: func() *HTTPLoadBalancerDDOSMitigationRulesIPPrefixListModel {
 						if nestedMap, ok := itemMap["ip_prefix_list"].(map[string]interface{}); ok {
-							return &HTTPLoadBalancerDdosMitigationRulesIPPrefixListModel{
+							return &HTTPLoadBalancerDDOSMitigationRulesIPPrefixListModel{
 								InvertMatch: func() types.Bool {
 									if v, ok := nestedMap["invert_match"].(bool); ok {
 										return types.BoolValue(v)
@@ -30013,9 +30013,9 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 						}
 						return nil
 					}(),
-					Metadata: func() *HTTPLoadBalancerDdosMitigationRulesMetadataModel {
+					Metadata: func() *HTTPLoadBalancerDDOSMitigationRulesMetadataModel {
 						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
-							return &HTTPLoadBalancerDdosMitigationRulesMetadataModel{
+							return &HTTPLoadBalancerDDOSMitigationRulesMetadataModel{
 								DescriptionSpec: func() types.String {
 									if v, ok := nestedMap["description"].(string); ok && v != "" {
 										return types.StringValue(v)
@@ -30035,7 +30035,7 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 				})
 			}
 		}
-		data.DdosMitigationRules = ddos_mitigation_rulesList
+		data.DDOSMitigationRules = ddos_mitigation_rulesList
 	}
 	if blockData, ok := apiResource.Spec["default_pool"].(map[string]interface{}); ok && (isImport || data.DefaultPool != nil) {
 		data.DefaultPool = &HTTPLoadBalancerDefaultPoolModel{
@@ -30124,11 +30124,11 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 				}
 				return nil
 			}(),
-			LbPort: func() *HTTPLoadBalancerEmptyModel {
+			LBPort: func() *HTTPLoadBalancerEmptyModel {
 				if !isImport && data.DefaultPool != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.DefaultPool.LbPort
+					return data.DefaultPool.LBPort
 				}
 				// Import case: read from API
 				if _, ok := blockData["lb_port"].(map[string]interface{}); ok {
@@ -31248,7 +31248,7 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 							}
 							return types.BoolNull()
 						}(),
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -31282,23 +31282,23 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["jwt_validation"].(map[string]interface{}); ok && isImport && data.JwtValidation == nil {
+	if _, ok := apiResource.Spec["jwt_validation"].(map[string]interface{}); ok && isImport && data.JWTValidation == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.JwtValidation = &HTTPLoadBalancerJwtValidationModel{}
+		data.JWTValidation = &HTTPLoadBalancerJWTValidationModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["l7_ddos_action_block"].(map[string]interface{}); ok && isImport && data.L7DdosActionBlock == nil {
+	if _, ok := apiResource.Spec["l7_ddos_action_block"].(map[string]interface{}); ok && isImport && data.L7DDOSActionBlock == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.L7DdosActionBlock = &HTTPLoadBalancerEmptyModel{}
+		data.L7DDOSActionBlock = &HTTPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["l7_ddos_action_default"].(map[string]interface{}); ok && isImport && data.L7DdosActionDefault == nil {
+	if _, ok := apiResource.Spec["l7_ddos_action_default"].(map[string]interface{}); ok && isImport && data.L7DDOSActionDefault == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.L7DdosActionDefault = &HTTPLoadBalancerEmptyModel{}
+		data.L7DDOSActionDefault = &HTTPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["l7_ddos_action_js_challenge"].(map[string]interface{}); ok && (isImport || data.L7DdosActionJsChallenge != nil) {
-		data.L7DdosActionJsChallenge = &HTTPLoadBalancerL7DdosActionJsChallengeModel{
+	if blockData, ok := apiResource.Spec["l7_ddos_action_js_challenge"].(map[string]interface{}); ok && (isImport || data.L7DDOSActionJsChallenge != nil) {
+		data.L7DDOSActionJsChallenge = &HTTPLoadBalancerL7DDOSActionJsChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -31319,16 +31319,16 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["l7_ddos_protection"].(map[string]interface{}); ok && (isImport || data.L7DdosProtection != nil) {
-		data.L7DdosProtection = &HTTPLoadBalancerL7DdosProtectionModel{
-			ClientsideActionCaptchaChallenge: func() *HTTPLoadBalancerL7DdosProtectionClientsideActionCaptchaChallengeModel {
-				if !isImport && data.L7DdosProtection != nil && data.L7DdosProtection.ClientsideActionCaptchaChallenge != nil {
+	if blockData, ok := apiResource.Spec["l7_ddos_protection"].(map[string]interface{}); ok && (isImport || data.L7DDOSProtection != nil) {
+		data.L7DDOSProtection = &HTTPLoadBalancerL7DDOSProtectionModel{
+			ClientsideActionCaptchaChallenge: func() *HTTPLoadBalancerL7DDOSProtectionClientsideActionCaptchaChallengeModel {
+				if !isImport && data.L7DDOSProtection != nil && data.L7DDOSProtection.ClientsideActionCaptchaChallenge != nil {
 					// Normal Read: preserve existing state value
-					return data.L7DdosProtection.ClientsideActionCaptchaChallenge
+					return data.L7DDOSProtection.ClientsideActionCaptchaChallenge
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["clientside_action_captcha_challenge"].(map[string]interface{}); ok {
-					return &HTTPLoadBalancerL7DdosProtectionClientsideActionCaptchaChallengeModel{
+					return &HTTPLoadBalancerL7DDOSProtectionClientsideActionCaptchaChallengeModel{
 						CookieExpiry: func() types.Int64 {
 							if v, ok := nestedBlockData["cookie_expiry"].(float64); ok {
 								return types.Int64Value(int64(v))
@@ -31345,14 +31345,14 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 				}
 				return nil
 			}(),
-			ClientsideActionJsChallenge: func() *HTTPLoadBalancerL7DdosProtectionClientsideActionJsChallengeModel {
-				if !isImport && data.L7DdosProtection != nil && data.L7DdosProtection.ClientsideActionJsChallenge != nil {
+			ClientsideActionJsChallenge: func() *HTTPLoadBalancerL7DDOSProtectionClientsideActionJsChallengeModel {
+				if !isImport && data.L7DDOSProtection != nil && data.L7DDOSProtection.ClientsideActionJsChallenge != nil {
 					// Normal Read: preserve existing state value
-					return data.L7DdosProtection.ClientsideActionJsChallenge
+					return data.L7DDOSProtection.ClientsideActionJsChallenge
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["clientside_action_js_challenge"].(map[string]interface{}); ok {
-					return &HTTPLoadBalancerL7DdosProtectionClientsideActionJsChallengeModel{
+					return &HTTPLoadBalancerL7DDOSProtectionClientsideActionJsChallengeModel{
 						CookieExpiry: func() types.Int64 {
 							if v, ok := nestedBlockData["cookie_expiry"].(float64); ok {
 								return types.Int64Value(int64(v))
@@ -31376,10 +31376,10 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 				return nil
 			}(),
 			ClientsideActionNone: func() *HTTPLoadBalancerEmptyModel {
-				if !isImport && data.L7DdosProtection != nil {
+				if !isImport && data.L7DDOSProtection != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.L7DdosProtection.ClientsideActionNone
+					return data.L7DDOSProtection.ClientsideActionNone
 				}
 				// Import case: read from API
 				if _, ok := blockData["clientside_action_none"].(map[string]interface{}); ok {
@@ -31387,14 +31387,14 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 				}
 				return nil
 			}(),
-			DdosPolicyCustom: func() *HTTPLoadBalancerL7DdosProtectionDdosPolicyCustomModel {
-				if !isImport && data.L7DdosProtection != nil && data.L7DdosProtection.DdosPolicyCustom != nil {
+			DDOSPolicyCustom: func() *HTTPLoadBalancerL7DDOSProtectionDDOSPolicyCustomModel {
+				if !isImport && data.L7DDOSProtection != nil && data.L7DDOSProtection.DDOSPolicyCustom != nil {
 					// Normal Read: preserve existing state value
-					return data.L7DdosProtection.DdosPolicyCustom
+					return data.L7DDOSProtection.DDOSPolicyCustom
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["ddos_policy_custom"].(map[string]interface{}); ok {
-					return &HTTPLoadBalancerL7DdosProtectionDdosPolicyCustomModel{
+					return &HTTPLoadBalancerL7DDOSProtectionDDOSPolicyCustomModel{
 						Name: func() types.String {
 							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
 								return types.StringValue(v)
@@ -31417,11 +31417,11 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 				}
 				return nil
 			}(),
-			DdosPolicyNone: func() *HTTPLoadBalancerEmptyModel {
-				if !isImport && data.L7DdosProtection != nil {
+			DDOSPolicyNone: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.L7DDOSProtection != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.L7DdosProtection.DdosPolicyNone
+					return data.L7DDOSProtection.DDOSPolicyNone
 				}
 				// Import case: read from API
 				if _, ok := blockData["ddos_policy_none"].(map[string]interface{}); ok {
@@ -31430,10 +31430,10 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 				return nil
 			}(),
 			DefaultRpsThreshold: func() *HTTPLoadBalancerEmptyModel {
-				if !isImport && data.L7DdosProtection != nil {
+				if !isImport && data.L7DDOSProtection != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.L7DdosProtection.DefaultRpsThreshold
+					return data.L7DDOSProtection.DefaultRpsThreshold
 				}
 				// Import case: read from API
 				if _, ok := blockData["default_rps_threshold"].(map[string]interface{}); ok {
@@ -31442,10 +31442,10 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 				return nil
 			}(),
 			MitigationBlock: func() *HTTPLoadBalancerEmptyModel {
-				if !isImport && data.L7DdosProtection != nil {
+				if !isImport && data.L7DDOSProtection != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.L7DdosProtection.MitigationBlock
+					return data.L7DDOSProtection.MitigationBlock
 				}
 				// Import case: read from API
 				if _, ok := blockData["mitigation_block"].(map[string]interface{}); ok {
@@ -31453,14 +31453,14 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 				}
 				return nil
 			}(),
-			MitigationCaptchaChallenge: func() *HTTPLoadBalancerL7DdosProtectionMitigationCaptchaChallengeModel {
-				if !isImport && data.L7DdosProtection != nil && data.L7DdosProtection.MitigationCaptchaChallenge != nil {
+			MitigationCaptchaChallenge: func() *HTTPLoadBalancerL7DDOSProtectionMitigationCaptchaChallengeModel {
+				if !isImport && data.L7DDOSProtection != nil && data.L7DDOSProtection.MitigationCaptchaChallenge != nil {
 					// Normal Read: preserve existing state value
-					return data.L7DdosProtection.MitigationCaptchaChallenge
+					return data.L7DDOSProtection.MitigationCaptchaChallenge
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["mitigation_captcha_challenge"].(map[string]interface{}); ok {
-					return &HTTPLoadBalancerL7DdosProtectionMitigationCaptchaChallengeModel{
+					return &HTTPLoadBalancerL7DDOSProtectionMitigationCaptchaChallengeModel{
 						CookieExpiry: func() types.Int64 {
 							if v, ok := nestedBlockData["cookie_expiry"].(float64); ok {
 								return types.Int64Value(int64(v))
@@ -31477,14 +31477,14 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 				}
 				return nil
 			}(),
-			MitigationJsChallenge: func() *HTTPLoadBalancerL7DdosProtectionMitigationJsChallengeModel {
-				if !isImport && data.L7DdosProtection != nil && data.L7DdosProtection.MitigationJsChallenge != nil {
+			MitigationJsChallenge: func() *HTTPLoadBalancerL7DDOSProtectionMitigationJsChallengeModel {
+				if !isImport && data.L7DDOSProtection != nil && data.L7DDOSProtection.MitigationJsChallenge != nil {
 					// Normal Read: preserve existing state value
-					return data.L7DdosProtection.MitigationJsChallenge
+					return data.L7DDOSProtection.MitigationJsChallenge
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["mitigation_js_challenge"].(map[string]interface{}); ok {
-					return &HTTPLoadBalancerL7DdosProtectionMitigationJsChallengeModel{
+					return &HTTPLoadBalancerL7DDOSProtectionMitigationJsChallengeModel{
 						CookieExpiry: func() types.Int64 {
 							if v, ok := nestedBlockData["cookie_expiry"].(float64); ok {
 								return types.Int64Value(int64(v))
@@ -32057,9 +32057,9 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["multi_lb_app"].(map[string]interface{}); ok && isImport && data.MultiLbApp == nil {
+	if _, ok := apiResource.Spec["multi_lb_app"].(map[string]interface{}); ok && isImport && data.MultiLBApp == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.MultiLbApp = &HTTPLoadBalancerEmptyModel{}
+		data.MultiLBApp = &HTTPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["no_challenge"].(map[string]interface{}); ok && isImport && data.NoChallenge == nil {
@@ -32351,7 +32351,7 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 												}
 												return nil
 											}(),
-											Ttl: func() types.Int64 {
+											TTL: func() types.Int64 {
 												if v, ok := deepMap["ttl"].(float64); ok {
 													return types.Int64Value(int64(v))
 												}
@@ -32525,18 +32525,18 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		data.ServicePoliciesFromNamespace = &HTTPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["single_lb_app"].(map[string]interface{}); ok && isImport && data.SingleLbApp == nil {
+	if _, ok := apiResource.Spec["single_lb_app"].(map[string]interface{}); ok && isImport && data.SingleLBApp == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.SingleLbApp = &HTTPLoadBalancerSingleLbAppModel{}
+		data.SingleLBApp = &HTTPLoadBalancerSingleLBAppModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDdosMitigation != nil) {
-		data.SlowDdosMitigation = &HTTPLoadBalancerSlowDdosMitigationModel{
+	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDDOSMitigation != nil) {
+		data.SlowDDOSMitigation = &HTTPLoadBalancerSlowDDOSMitigationModel{
 			DisableRequestTimeout: func() *HTTPLoadBalancerEmptyModel {
-				if !isImport && data.SlowDdosMitigation != nil {
+				if !isImport && data.SlowDDOSMitigation != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.SlowDdosMitigation.DisableRequestTimeout
+					return data.SlowDDOSMitigation.DisableRequestTimeout
 				}
 				// Import case: read from API
 				if _, ok := blockData["disable_request_timeout"].(map[string]interface{}); ok {
@@ -32617,7 +32617,7 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 						}
 						return types.StringNull()
 					}(),
-					IPV6Prefix: func() types.String {
+					Ipv6Prefix: func() types.String {
 						if v, ok := itemMap["ipv6_prefix"].(string); ok && v != "" {
 							return types.StringValue(v)
 						}

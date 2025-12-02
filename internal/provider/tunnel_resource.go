@@ -78,17 +78,17 @@ type TunnelLocalIPIPAddressModel struct {
 
 // TunnelLocalIPIPAddressIPAddressModel represents ip_address block
 type TunnelLocalIPIPAddressIPAddressModel struct {
-	IPV4 *TunnelLocalIPIPAddressIPAddressIPV4Model `tfsdk:"ipv4"`
-	IPV6 *TunnelLocalIPIPAddressIPAddressIPV6Model `tfsdk:"ipv6"`
+	Ipv4 *TunnelLocalIPIPAddressIPAddressIpv4Model `tfsdk:"ipv4"`
+	Ipv6 *TunnelLocalIPIPAddressIPAddressIpv6Model `tfsdk:"ipv6"`
 }
 
-// TunnelLocalIPIPAddressIPAddressIPV4Model represents ipv4 block
-type TunnelLocalIPIPAddressIPAddressIPV4Model struct {
+// TunnelLocalIPIPAddressIPAddressIpv4Model represents ipv4 block
+type TunnelLocalIPIPAddressIPAddressIpv4Model struct {
 	Addr types.String `tfsdk:"addr"`
 }
 
-// TunnelLocalIPIPAddressIPAddressIPV6Model represents ipv6 block
-type TunnelLocalIPIPAddressIPAddressIPV6Model struct {
+// TunnelLocalIPIPAddressIPAddressIpv6Model represents ipv6 block
+type TunnelLocalIPIPAddressIPAddressIpv6Model struct {
 	Addr types.String `tfsdk:"addr"`
 }
 
@@ -141,17 +141,17 @@ type TunnelRemoteIPEndpointsModel struct {
 
 // TunnelRemoteIPIPModel represents ip block
 type TunnelRemoteIPIPModel struct {
-	IPV4 *TunnelRemoteIPIPIPV4Model `tfsdk:"ipv4"`
-	IPV6 *TunnelRemoteIPIPIPV6Model `tfsdk:"ipv6"`
+	Ipv4 *TunnelRemoteIPIPIpv4Model `tfsdk:"ipv4"`
+	Ipv6 *TunnelRemoteIPIPIpv6Model `tfsdk:"ipv6"`
 }
 
-// TunnelRemoteIPIPIPV4Model represents ipv4 block
-type TunnelRemoteIPIPIPV4Model struct {
+// TunnelRemoteIPIPIpv4Model represents ipv4 block
+type TunnelRemoteIPIPIpv4Model struct {
 	Addr types.String `tfsdk:"addr"`
 }
 
-// TunnelRemoteIPIPIPV6Model represents ipv6 block
-type TunnelRemoteIPIPIPV6Model struct {
+// TunnelRemoteIPIPIpv6Model represents ipv6 block
+type TunnelRemoteIPIPIpv6Model struct {
 	Addr types.String `tfsdk:"addr"`
 }
 

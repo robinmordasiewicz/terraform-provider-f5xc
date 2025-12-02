@@ -49,8 +49,8 @@ type ExternalConnectorResource struct {
 type ExternalConnectorEmptyModel struct {
 }
 
-// ExternalConnectorCeSiteReferenceModel represents ce_site_reference block
-type ExternalConnectorCeSiteReferenceModel struct {
+// ExternalConnectorCESiteReferenceModel represents ce_site_reference block
+type ExternalConnectorCESiteReferenceModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -97,24 +97,24 @@ type ExternalConnectorIpsecIKEParametersIKEPhase2ProfileModel struct {
 
 // ExternalConnectorIpsecIKEParametersRmIPAddressModel represents rm_ip_address block
 type ExternalConnectorIpsecIKEParametersRmIPAddressModel struct {
-	IPV4 *ExternalConnectorIpsecIKEParametersRmIPAddressIPV4Model `tfsdk:"ipv4"`
-	IPV6 *ExternalConnectorIpsecIKEParametersRmIPAddressIPV6Model `tfsdk:"ipv6"`
+	Ipv4 *ExternalConnectorIpsecIKEParametersRmIPAddressIpv4Model `tfsdk:"ipv4"`
+	Ipv6 *ExternalConnectorIpsecIKEParametersRmIPAddressIpv6Model `tfsdk:"ipv6"`
 }
 
-// ExternalConnectorIpsecIKEParametersRmIPAddressIPV4Model represents ipv4 block
-type ExternalConnectorIpsecIKEParametersRmIPAddressIPV4Model struct {
+// ExternalConnectorIpsecIKEParametersRmIPAddressIpv4Model represents ipv4 block
+type ExternalConnectorIpsecIKEParametersRmIPAddressIpv4Model struct {
 	Addr types.String `tfsdk:"addr"`
 }
 
-// ExternalConnectorIpsecIKEParametersRmIPAddressIPV6Model represents ipv6 block
-type ExternalConnectorIpsecIKEParametersRmIPAddressIPV6Model struct {
+// ExternalConnectorIpsecIKEParametersRmIPAddressIpv6Model represents ipv6 block
+type ExternalConnectorIpsecIKEParametersRmIPAddressIpv6Model struct {
 	Addr types.String `tfsdk:"addr"`
 }
 
 // ExternalConnectorIpsecIpsecTunnelParametersModel represents ipsec_tunnel_parameters block
 type ExternalConnectorIpsecIpsecTunnelParametersModel struct {
 	Psk                    types.String                                                   `tfsdk:"psk"`
-	TunnelMtu              types.Int64                                                    `tfsdk:"tunnel_mtu"`
+	TunnelMTU              types.Int64                                                    `tfsdk:"tunnel_mtu"`
 	PeerIPAddress          *ExternalConnectorIpsecIpsecTunnelParametersPeerIPAddressModel `tfsdk:"peer_ip_address"`
 	Segment                *ExternalConnectorIpsecIpsecTunnelParametersSegmentModel       `tfsdk:"segment"`
 	SiteLocalInsideNetwork *ExternalConnectorEmptyModel                                   `tfsdk:"site_local_inside_network"`
@@ -158,7 +158,7 @@ type ExternalConnectorResourceModel struct {
 	Labels          types.Map                              `tfsdk:"labels"`
 	ID              types.String                           `tfsdk:"id"`
 	Timeouts        timeouts.Value                         `tfsdk:"timeouts"`
-	CeSiteReference *ExternalConnectorCeSiteReferenceModel `tfsdk:"ce_site_reference"`
+	CESiteReference *ExternalConnectorCESiteReferenceModel `tfsdk:"ce_site_reference"`
 	Ipsec           *ExternalConnectorIpsecModel           `tfsdk:"ipsec"`
 }
 
@@ -580,16 +580,16 @@ func (r *ExternalConnectorResource) Create(ctx context.Context, req resource.Cre
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if data.CeSiteReference != nil {
+	if data.CESiteReference != nil {
 		ce_site_referenceMap := make(map[string]interface{})
-		if !data.CeSiteReference.Name.IsNull() && !data.CeSiteReference.Name.IsUnknown() {
-			ce_site_referenceMap["name"] = data.CeSiteReference.Name.ValueString()
+		if !data.CESiteReference.Name.IsNull() && !data.CESiteReference.Name.IsUnknown() {
+			ce_site_referenceMap["name"] = data.CESiteReference.Name.ValueString()
 		}
-		if !data.CeSiteReference.Namespace.IsNull() && !data.CeSiteReference.Namespace.IsUnknown() {
-			ce_site_referenceMap["namespace"] = data.CeSiteReference.Namespace.ValueString()
+		if !data.CESiteReference.Namespace.IsNull() && !data.CESiteReference.Namespace.IsUnknown() {
+			ce_site_referenceMap["namespace"] = data.CESiteReference.Namespace.ValueString()
 		}
-		if !data.CeSiteReference.Tenant.IsNull() && !data.CeSiteReference.Tenant.IsUnknown() {
-			ce_site_referenceMap["tenant"] = data.CeSiteReference.Tenant.ValueString()
+		if !data.CESiteReference.Tenant.IsNull() && !data.CESiteReference.Tenant.IsUnknown() {
+			ce_site_referenceMap["tenant"] = data.CESiteReference.Tenant.ValueString()
 		}
 		createReq.Spec["ce_site_reference"] = ce_site_referenceMap
 	}
@@ -607,8 +607,8 @@ func (r *ExternalConnectorResource) Create(ctx context.Context, req resource.Cre
 			if !data.Ipsec.IpsecTunnelParameters.Psk.IsNull() && !data.Ipsec.IpsecTunnelParameters.Psk.IsUnknown() {
 				ipsec_tunnel_parametersNestedMap["psk"] = data.Ipsec.IpsecTunnelParameters.Psk.ValueString()
 			}
-			if !data.Ipsec.IpsecTunnelParameters.TunnelMtu.IsNull() && !data.Ipsec.IpsecTunnelParameters.TunnelMtu.IsUnknown() {
-				ipsec_tunnel_parametersNestedMap["tunnel_mtu"] = data.Ipsec.IpsecTunnelParameters.TunnelMtu.ValueInt64()
+			if !data.Ipsec.IpsecTunnelParameters.TunnelMTU.IsNull() && !data.Ipsec.IpsecTunnelParameters.TunnelMTU.IsUnknown() {
+				ipsec_tunnel_parametersNestedMap["tunnel_mtu"] = data.Ipsec.IpsecTunnelParameters.TunnelMTU.ValueInt64()
 			}
 			ipsecMap["ipsec_tunnel_parameters"] = ipsec_tunnel_parametersNestedMap
 		}
@@ -627,8 +627,8 @@ func (r *ExternalConnectorResource) Create(ctx context.Context, req resource.Cre
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
 	_ = isImport      // May be unused if resource has no blocks needing import detection
-	if blockData, ok := apiResource.Spec["ce_site_reference"].(map[string]interface{}); ok && (isImport || data.CeSiteReference != nil) {
-		data.CeSiteReference = &ExternalConnectorCeSiteReferenceModel{
+	if blockData, ok := apiResource.Spec["ce_site_reference"].(map[string]interface{}); ok && (isImport || data.CESiteReference != nil) {
+		data.CESiteReference = &ExternalConnectorCESiteReferenceModel{
 			Name: func() types.String {
 				if v, ok := blockData["name"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -747,8 +747,8 @@ func (r *ExternalConnectorResource) Read(ctx context.Context, req resource.ReadR
 		"psd_is_nil": psd == nil,
 		"managed":    psd.Metadata.Custom["managed"],
 	})
-	if blockData, ok := apiResource.Spec["ce_site_reference"].(map[string]interface{}); ok && (isImport || data.CeSiteReference != nil) {
-		data.CeSiteReference = &ExternalConnectorCeSiteReferenceModel{
+	if blockData, ok := apiResource.Spec["ce_site_reference"].(map[string]interface{}); ok && (isImport || data.CESiteReference != nil) {
+		data.CESiteReference = &ExternalConnectorCESiteReferenceModel{
 			Name: func() types.String {
 				if v, ok := blockData["name"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -834,16 +834,16 @@ func (r *ExternalConnectorResource) Update(ctx context.Context, req resource.Upd
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if data.CeSiteReference != nil {
+	if data.CESiteReference != nil {
 		ce_site_referenceMap := make(map[string]interface{})
-		if !data.CeSiteReference.Name.IsNull() && !data.CeSiteReference.Name.IsUnknown() {
-			ce_site_referenceMap["name"] = data.CeSiteReference.Name.ValueString()
+		if !data.CESiteReference.Name.IsNull() && !data.CESiteReference.Name.IsUnknown() {
+			ce_site_referenceMap["name"] = data.CESiteReference.Name.ValueString()
 		}
-		if !data.CeSiteReference.Namespace.IsNull() && !data.CeSiteReference.Namespace.IsUnknown() {
-			ce_site_referenceMap["namespace"] = data.CeSiteReference.Namespace.ValueString()
+		if !data.CESiteReference.Namespace.IsNull() && !data.CESiteReference.Namespace.IsUnknown() {
+			ce_site_referenceMap["namespace"] = data.CESiteReference.Namespace.ValueString()
 		}
-		if !data.CeSiteReference.Tenant.IsNull() && !data.CeSiteReference.Tenant.IsUnknown() {
-			ce_site_referenceMap["tenant"] = data.CeSiteReference.Tenant.ValueString()
+		if !data.CESiteReference.Tenant.IsNull() && !data.CESiteReference.Tenant.IsUnknown() {
+			ce_site_referenceMap["tenant"] = data.CESiteReference.Tenant.ValueString()
 		}
 		apiResource.Spec["ce_site_reference"] = ce_site_referenceMap
 	}
@@ -861,8 +861,8 @@ func (r *ExternalConnectorResource) Update(ctx context.Context, req resource.Upd
 			if !data.Ipsec.IpsecTunnelParameters.Psk.IsNull() && !data.Ipsec.IpsecTunnelParameters.Psk.IsUnknown() {
 				ipsec_tunnel_parametersNestedMap["psk"] = data.Ipsec.IpsecTunnelParameters.Psk.ValueString()
 			}
-			if !data.Ipsec.IpsecTunnelParameters.TunnelMtu.IsNull() && !data.Ipsec.IpsecTunnelParameters.TunnelMtu.IsUnknown() {
-				ipsec_tunnel_parametersNestedMap["tunnel_mtu"] = data.Ipsec.IpsecTunnelParameters.TunnelMtu.ValueInt64()
+			if !data.Ipsec.IpsecTunnelParameters.TunnelMTU.IsNull() && !data.Ipsec.IpsecTunnelParameters.TunnelMTU.IsUnknown() {
+				ipsec_tunnel_parametersNestedMap["tunnel_mtu"] = data.Ipsec.IpsecTunnelParameters.TunnelMTU.ValueInt64()
 			}
 			ipsecMap["ipsec_tunnel_parameters"] = ipsec_tunnel_parametersNestedMap
 		}
@@ -892,8 +892,8 @@ func (r *ExternalConnectorResource) Update(ctx context.Context, req resource.Upd
 	apiResource = fetched // Use GET response which includes all computed fields
 	isImport := false     // Update is never an import
 	_ = isImport          // May be unused if resource has no blocks needing import detection
-	if blockData, ok := apiResource.Spec["ce_site_reference"].(map[string]interface{}); ok && (isImport || data.CeSiteReference != nil) {
-		data.CeSiteReference = &ExternalConnectorCeSiteReferenceModel{
+	if blockData, ok := apiResource.Spec["ce_site_reference"].(map[string]interface{}); ok && (isImport || data.CESiteReference != nil) {
+		data.CESiteReference = &ExternalConnectorCESiteReferenceModel{
 			Name: func() types.String {
 				if v, ok := blockData["name"].(string); ok && v != "" {
 					return types.StringValue(v)

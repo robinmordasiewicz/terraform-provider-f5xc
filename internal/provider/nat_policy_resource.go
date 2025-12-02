@@ -26,61 +26,61 @@ import (
 
 // Ensure provider defined types fully satisfy framework interfaces.
 var (
-	_ resource.Resource                   = &NatPolicyResource{}
-	_ resource.ResourceWithConfigure      = &NatPolicyResource{}
-	_ resource.ResourceWithImportState    = &NatPolicyResource{}
-	_ resource.ResourceWithModifyPlan     = &NatPolicyResource{}
-	_ resource.ResourceWithUpgradeState   = &NatPolicyResource{}
-	_ resource.ResourceWithValidateConfig = &NatPolicyResource{}
+	_ resource.Resource                   = &NATPolicyResource{}
+	_ resource.ResourceWithConfigure      = &NATPolicyResource{}
+	_ resource.ResourceWithImportState    = &NATPolicyResource{}
+	_ resource.ResourceWithModifyPlan     = &NATPolicyResource{}
+	_ resource.ResourceWithUpgradeState   = &NATPolicyResource{}
+	_ resource.ResourceWithValidateConfig = &NATPolicyResource{}
 )
 
 // nat_policySchemaVersion is the schema version for state upgrades
 const nat_policySchemaVersion int64 = 1
 
-func NewNatPolicyResource() resource.Resource {
-	return &NatPolicyResource{}
+func NewNATPolicyResource() resource.Resource {
+	return &NATPolicyResource{}
 }
 
-type NatPolicyResource struct {
+type NATPolicyResource struct {
 	client *client.Client
 }
 
-// NatPolicyEmptyModel represents empty nested blocks
-type NatPolicyEmptyModel struct {
+// NATPolicyEmptyModel represents empty nested blocks
+type NATPolicyEmptyModel struct {
 }
 
-// NatPolicyRulesModel represents rules block
-type NatPolicyRulesModel struct {
+// NATPolicyRulesModel represents rules block
+type NATPolicyRulesModel struct {
 	Name             types.String                         `tfsdk:"name"`
-	Action           *NatPolicyRulesActionModel           `tfsdk:"action"`
-	CloudConnect     *NatPolicyRulesCloudConnectModel     `tfsdk:"cloud_connect"`
-	Criteria         *NatPolicyRulesCriteriaModel         `tfsdk:"criteria"`
-	Disable          *NatPolicyEmptyModel                 `tfsdk:"disable"`
-	Enable           *NatPolicyEmptyModel                 `tfsdk:"enable"`
-	NetworkInterface *NatPolicyRulesNetworkInterfaceModel `tfsdk:"network_interface"`
-	Segment          *NatPolicyRulesSegmentModel          `tfsdk:"segment"`
-	VirtualNetwork   *NatPolicyRulesVirtualNetworkModel   `tfsdk:"virtual_network"`
+	Action           *NATPolicyRulesActionModel           `tfsdk:"action"`
+	CloudConnect     *NATPolicyRulesCloudConnectModel     `tfsdk:"cloud_connect"`
+	Criteria         *NATPolicyRulesCriteriaModel         `tfsdk:"criteria"`
+	Disable          *NATPolicyEmptyModel                 `tfsdk:"disable"`
+	Enable           *NATPolicyEmptyModel                 `tfsdk:"enable"`
+	NetworkInterface *NATPolicyRulesNetworkInterfaceModel `tfsdk:"network_interface"`
+	Segment          *NATPolicyRulesSegmentModel          `tfsdk:"segment"`
+	VirtualNetwork   *NATPolicyRulesVirtualNetworkModel   `tfsdk:"virtual_network"`
 }
 
-// NatPolicyRulesActionModel represents action block
-type NatPolicyRulesActionModel struct {
-	VirtualCidr types.String                      `tfsdk:"virtual_cidr"`
-	Dynamic     *NatPolicyRulesActionDynamicModel `tfsdk:"dynamic"`
+// NATPolicyRulesActionModel represents action block
+type NATPolicyRulesActionModel struct {
+	VirtualCIDR types.String                      `tfsdk:"virtual_cidr"`
+	Dynamic     *NATPolicyRulesActionDynamicModel `tfsdk:"dynamic"`
 }
 
-// NatPolicyRulesActionDynamicModel represents dynamic block
-type NatPolicyRulesActionDynamicModel struct {
-	ElasticIps *NatPolicyRulesActionDynamicElasticIpsModel `tfsdk:"elastic_ips"`
-	Pools      *NatPolicyRulesActionDynamicPoolsModel      `tfsdk:"pools"`
+// NATPolicyRulesActionDynamicModel represents dynamic block
+type NATPolicyRulesActionDynamicModel struct {
+	ElasticIps *NATPolicyRulesActionDynamicElasticIpsModel `tfsdk:"elastic_ips"`
+	Pools      *NATPolicyRulesActionDynamicPoolsModel      `tfsdk:"pools"`
 }
 
-// NatPolicyRulesActionDynamicElasticIpsModel represents elastic_ips block
-type NatPolicyRulesActionDynamicElasticIpsModel struct {
-	Refs []NatPolicyRulesActionDynamicElasticIpsRefsModel `tfsdk:"refs"`
+// NATPolicyRulesActionDynamicElasticIpsModel represents elastic_ips block
+type NATPolicyRulesActionDynamicElasticIpsModel struct {
+	Refs []NATPolicyRulesActionDynamicElasticIpsRefsModel `tfsdk:"refs"`
 }
 
-// NatPolicyRulesActionDynamicElasticIpsRefsModel represents refs block
-type NatPolicyRulesActionDynamicElasticIpsRefsModel struct {
+// NATPolicyRulesActionDynamicElasticIpsRefsModel represents refs block
+type NATPolicyRulesActionDynamicElasticIpsRefsModel struct {
 	Kind      types.String `tfsdk:"kind"`
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -88,18 +88,18 @@ type NatPolicyRulesActionDynamicElasticIpsRefsModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
-// NatPolicyRulesActionDynamicPoolsModel represents pools block
-type NatPolicyRulesActionDynamicPoolsModel struct {
+// NATPolicyRulesActionDynamicPoolsModel represents pools block
+type NATPolicyRulesActionDynamicPoolsModel struct {
 	Prefixes types.List `tfsdk:"prefixes"`
 }
 
-// NatPolicyRulesCloudConnectModel represents cloud_connect block
-type NatPolicyRulesCloudConnectModel struct {
-	Refs []NatPolicyRulesCloudConnectRefsModel `tfsdk:"refs"`
+// NATPolicyRulesCloudConnectModel represents cloud_connect block
+type NATPolicyRulesCloudConnectModel struct {
+	Refs []NATPolicyRulesCloudConnectRefsModel `tfsdk:"refs"`
 }
 
-// NatPolicyRulesCloudConnectRefsModel represents refs block
-type NatPolicyRulesCloudConnectRefsModel struct {
+// NATPolicyRulesCloudConnectRefsModel represents refs block
+type NATPolicyRulesCloudConnectRefsModel struct {
 	Kind      types.String `tfsdk:"kind"`
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -107,35 +107,35 @@ type NatPolicyRulesCloudConnectRefsModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
-// NatPolicyRulesCriteriaModel represents criteria block
-type NatPolicyRulesCriteriaModel struct {
-	DestinationCidr types.List                                  `tfsdk:"destination_cidr"`
+// NATPolicyRulesCriteriaModel represents criteria block
+type NATPolicyRulesCriteriaModel struct {
+	DestinationCIDR types.List                                  `tfsdk:"destination_cidr"`
 	Protocol        types.String                                `tfsdk:"protocol"`
-	SourceCidr      types.List                                  `tfsdk:"source_cidr"`
-	Any             *NatPolicyEmptyModel                        `tfsdk:"any"`
-	DestinationPort *NatPolicyRulesCriteriaDestinationPortModel `tfsdk:"destination_port"`
-	Icmp            *NatPolicyEmptyModel                        `tfsdk:"icmp"`
-	Segment         *NatPolicyRulesCriteriaSegmentModel         `tfsdk:"segment"`
-	SourcePort      *NatPolicyRulesCriteriaSourcePortModel      `tfsdk:"source_port"`
-	TCP             *NatPolicyRulesCriteriaTCPModel             `tfsdk:"tcp"`
-	UDP             *NatPolicyRulesCriteriaUDPModel             `tfsdk:"udp"`
-	VirtualNetwork  *NatPolicyRulesCriteriaVirtualNetworkModel  `tfsdk:"virtual_network"`
+	SourceCIDR      types.List                                  `tfsdk:"source_cidr"`
+	Any             *NATPolicyEmptyModel                        `tfsdk:"any"`
+	DestinationPort *NATPolicyRulesCriteriaDestinationPortModel `tfsdk:"destination_port"`
+	ICMP            *NATPolicyEmptyModel                        `tfsdk:"icmp"`
+	Segment         *NATPolicyRulesCriteriaSegmentModel         `tfsdk:"segment"`
+	SourcePort      *NATPolicyRulesCriteriaSourcePortModel      `tfsdk:"source_port"`
+	TCP             *NATPolicyRulesCriteriaTCPModel             `tfsdk:"tcp"`
+	UDP             *NATPolicyRulesCriteriaUDPModel             `tfsdk:"udp"`
+	VirtualNetwork  *NATPolicyRulesCriteriaVirtualNetworkModel  `tfsdk:"virtual_network"`
 }
 
-// NatPolicyRulesCriteriaDestinationPortModel represents destination_port block
-type NatPolicyRulesCriteriaDestinationPortModel struct {
+// NATPolicyRulesCriteriaDestinationPortModel represents destination_port block
+type NATPolicyRulesCriteriaDestinationPortModel struct {
 	Port        types.Int64          `tfsdk:"port"`
 	PortRanges  types.String         `tfsdk:"port_ranges"`
-	NoPortMatch *NatPolicyEmptyModel `tfsdk:"no_port_match"`
+	NoPortMatch *NATPolicyEmptyModel `tfsdk:"no_port_match"`
 }
 
-// NatPolicyRulesCriteriaSegmentModel represents segment block
-type NatPolicyRulesCriteriaSegmentModel struct {
-	Refs []NatPolicyRulesCriteriaSegmentRefsModel `tfsdk:"refs"`
+// NATPolicyRulesCriteriaSegmentModel represents segment block
+type NATPolicyRulesCriteriaSegmentModel struct {
+	Refs []NATPolicyRulesCriteriaSegmentRefsModel `tfsdk:"refs"`
 }
 
-// NatPolicyRulesCriteriaSegmentRefsModel represents refs block
-type NatPolicyRulesCriteriaSegmentRefsModel struct {
+// NATPolicyRulesCriteriaSegmentRefsModel represents refs block
+type NATPolicyRulesCriteriaSegmentRefsModel struct {
 	Kind      types.String `tfsdk:"kind"`
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -143,60 +143,60 @@ type NatPolicyRulesCriteriaSegmentRefsModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
-// NatPolicyRulesCriteriaSourcePortModel represents source_port block
-type NatPolicyRulesCriteriaSourcePortModel struct {
+// NATPolicyRulesCriteriaSourcePortModel represents source_port block
+type NATPolicyRulesCriteriaSourcePortModel struct {
 	Port        types.Int64          `tfsdk:"port"`
 	PortRanges  types.String         `tfsdk:"port_ranges"`
-	NoPortMatch *NatPolicyEmptyModel `tfsdk:"no_port_match"`
+	NoPortMatch *NATPolicyEmptyModel `tfsdk:"no_port_match"`
 }
 
-// NatPolicyRulesCriteriaTCPModel represents tcp block
-type NatPolicyRulesCriteriaTCPModel struct {
-	DestinationPort *NatPolicyRulesCriteriaTCPDestinationPortModel `tfsdk:"destination_port"`
-	SourcePort      *NatPolicyRulesCriteriaTCPSourcePortModel      `tfsdk:"source_port"`
+// NATPolicyRulesCriteriaTCPModel represents tcp block
+type NATPolicyRulesCriteriaTCPModel struct {
+	DestinationPort *NATPolicyRulesCriteriaTCPDestinationPortModel `tfsdk:"destination_port"`
+	SourcePort      *NATPolicyRulesCriteriaTCPSourcePortModel      `tfsdk:"source_port"`
 }
 
-// NatPolicyRulesCriteriaTCPDestinationPortModel represents destination_port block
-type NatPolicyRulesCriteriaTCPDestinationPortModel struct {
+// NATPolicyRulesCriteriaTCPDestinationPortModel represents destination_port block
+type NATPolicyRulesCriteriaTCPDestinationPortModel struct {
 	Port        types.Int64          `tfsdk:"port"`
 	PortRanges  types.String         `tfsdk:"port_ranges"`
-	NoPortMatch *NatPolicyEmptyModel `tfsdk:"no_port_match"`
+	NoPortMatch *NATPolicyEmptyModel `tfsdk:"no_port_match"`
 }
 
-// NatPolicyRulesCriteriaTCPSourcePortModel represents source_port block
-type NatPolicyRulesCriteriaTCPSourcePortModel struct {
+// NATPolicyRulesCriteriaTCPSourcePortModel represents source_port block
+type NATPolicyRulesCriteriaTCPSourcePortModel struct {
 	Port        types.Int64          `tfsdk:"port"`
 	PortRanges  types.String         `tfsdk:"port_ranges"`
-	NoPortMatch *NatPolicyEmptyModel `tfsdk:"no_port_match"`
+	NoPortMatch *NATPolicyEmptyModel `tfsdk:"no_port_match"`
 }
 
-// NatPolicyRulesCriteriaUDPModel represents udp block
-type NatPolicyRulesCriteriaUDPModel struct {
-	DestinationPort *NatPolicyRulesCriteriaUDPDestinationPortModel `tfsdk:"destination_port"`
-	SourcePort      *NatPolicyRulesCriteriaUDPSourcePortModel      `tfsdk:"source_port"`
+// NATPolicyRulesCriteriaUDPModel represents udp block
+type NATPolicyRulesCriteriaUDPModel struct {
+	DestinationPort *NATPolicyRulesCriteriaUDPDestinationPortModel `tfsdk:"destination_port"`
+	SourcePort      *NATPolicyRulesCriteriaUDPSourcePortModel      `tfsdk:"source_port"`
 }
 
-// NatPolicyRulesCriteriaUDPDestinationPortModel represents destination_port block
-type NatPolicyRulesCriteriaUDPDestinationPortModel struct {
+// NATPolicyRulesCriteriaUDPDestinationPortModel represents destination_port block
+type NATPolicyRulesCriteriaUDPDestinationPortModel struct {
 	Port        types.Int64          `tfsdk:"port"`
 	PortRanges  types.String         `tfsdk:"port_ranges"`
-	NoPortMatch *NatPolicyEmptyModel `tfsdk:"no_port_match"`
+	NoPortMatch *NATPolicyEmptyModel `tfsdk:"no_port_match"`
 }
 
-// NatPolicyRulesCriteriaUDPSourcePortModel represents source_port block
-type NatPolicyRulesCriteriaUDPSourcePortModel struct {
+// NATPolicyRulesCriteriaUDPSourcePortModel represents source_port block
+type NATPolicyRulesCriteriaUDPSourcePortModel struct {
 	Port        types.Int64          `tfsdk:"port"`
 	PortRanges  types.String         `tfsdk:"port_ranges"`
-	NoPortMatch *NatPolicyEmptyModel `tfsdk:"no_port_match"`
+	NoPortMatch *NATPolicyEmptyModel `tfsdk:"no_port_match"`
 }
 
-// NatPolicyRulesCriteriaVirtualNetworkModel represents virtual_network block
-type NatPolicyRulesCriteriaVirtualNetworkModel struct {
-	Refs []NatPolicyRulesCriteriaVirtualNetworkRefsModel `tfsdk:"refs"`
+// NATPolicyRulesCriteriaVirtualNetworkModel represents virtual_network block
+type NATPolicyRulesCriteriaVirtualNetworkModel struct {
+	Refs []NATPolicyRulesCriteriaVirtualNetworkRefsModel `tfsdk:"refs"`
 }
 
-// NatPolicyRulesCriteriaVirtualNetworkRefsModel represents refs block
-type NatPolicyRulesCriteriaVirtualNetworkRefsModel struct {
+// NATPolicyRulesCriteriaVirtualNetworkRefsModel represents refs block
+type NATPolicyRulesCriteriaVirtualNetworkRefsModel struct {
 	Kind      types.String `tfsdk:"kind"`
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -204,13 +204,13 @@ type NatPolicyRulesCriteriaVirtualNetworkRefsModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
-// NatPolicyRulesNetworkInterfaceModel represents network_interface block
-type NatPolicyRulesNetworkInterfaceModel struct {
-	Refs []NatPolicyRulesNetworkInterfaceRefsModel `tfsdk:"refs"`
+// NATPolicyRulesNetworkInterfaceModel represents network_interface block
+type NATPolicyRulesNetworkInterfaceModel struct {
+	Refs []NATPolicyRulesNetworkInterfaceRefsModel `tfsdk:"refs"`
 }
 
-// NatPolicyRulesNetworkInterfaceRefsModel represents refs block
-type NatPolicyRulesNetworkInterfaceRefsModel struct {
+// NATPolicyRulesNetworkInterfaceRefsModel represents refs block
+type NATPolicyRulesNetworkInterfaceRefsModel struct {
 	Kind      types.String `tfsdk:"kind"`
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -218,13 +218,13 @@ type NatPolicyRulesNetworkInterfaceRefsModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
-// NatPolicyRulesSegmentModel represents segment block
-type NatPolicyRulesSegmentModel struct {
-	Refs []NatPolicyRulesSegmentRefsModel `tfsdk:"refs"`
+// NATPolicyRulesSegmentModel represents segment block
+type NATPolicyRulesSegmentModel struct {
+	Refs []NATPolicyRulesSegmentRefsModel `tfsdk:"refs"`
 }
 
-// NatPolicyRulesSegmentRefsModel represents refs block
-type NatPolicyRulesSegmentRefsModel struct {
+// NATPolicyRulesSegmentRefsModel represents refs block
+type NATPolicyRulesSegmentRefsModel struct {
 	Kind      types.String `tfsdk:"kind"`
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -232,13 +232,13 @@ type NatPolicyRulesSegmentRefsModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
-// NatPolicyRulesVirtualNetworkModel represents virtual_network block
-type NatPolicyRulesVirtualNetworkModel struct {
-	Refs []NatPolicyRulesVirtualNetworkRefsModel `tfsdk:"refs"`
+// NATPolicyRulesVirtualNetworkModel represents virtual_network block
+type NATPolicyRulesVirtualNetworkModel struct {
+	Refs []NATPolicyRulesVirtualNetworkRefsModel `tfsdk:"refs"`
 }
 
-// NatPolicyRulesVirtualNetworkRefsModel represents refs block
-type NatPolicyRulesVirtualNetworkRefsModel struct {
+// NATPolicyRulesVirtualNetworkRefsModel represents refs block
+type NATPolicyRulesVirtualNetworkRefsModel struct {
 	Kind      types.String `tfsdk:"kind"`
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -246,13 +246,13 @@ type NatPolicyRulesVirtualNetworkRefsModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
-// NatPolicySiteModel represents site block
-type NatPolicySiteModel struct {
-	Refs []NatPolicySiteRefsModel `tfsdk:"refs"`
+// NATPolicySiteModel represents site block
+type NATPolicySiteModel struct {
+	Refs []NATPolicySiteRefsModel `tfsdk:"refs"`
 }
 
-// NatPolicySiteRefsModel represents refs block
-type NatPolicySiteRefsModel struct {
+// NATPolicySiteRefsModel represents refs block
+type NATPolicySiteRefsModel struct {
 	Kind      types.String `tfsdk:"kind"`
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -260,7 +260,7 @@ type NatPolicySiteRefsModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
-type NatPolicyResourceModel struct {
+type NATPolicyResourceModel struct {
 	Name        types.String          `tfsdk:"name"`
 	Namespace   types.String          `tfsdk:"namespace"`
 	Annotations types.Map             `tfsdk:"annotations"`
@@ -269,21 +269,21 @@ type NatPolicyResourceModel struct {
 	Labels      types.Map             `tfsdk:"labels"`
 	ID          types.String          `tfsdk:"id"`
 	Timeouts    timeouts.Value        `tfsdk:"timeouts"`
-	Rules       []NatPolicyRulesModel `tfsdk:"rules"`
-	Site        *NatPolicySiteModel   `tfsdk:"site"`
+	Rules       []NATPolicyRulesModel `tfsdk:"rules"`
+	Site        *NATPolicySiteModel   `tfsdk:"site"`
 }
 
-func (r *NatPolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
+func (r *NATPolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
 	resp.TypeName = req.ProviderTypeName + "_nat_policy"
 }
 
-func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
+func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             nat_policySchemaVersion,
-		MarkdownDescription: "Manages a NatPolicy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.",
+		MarkdownDescription: "Manages a NATPolicy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the NatPolicy. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the NATPolicy. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -293,7 +293,7 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the NatPolicy will be created.",
+				MarkdownDescription: "Namespace where the NATPolicy will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -820,7 +820,7 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 	}
 }
 
-func (r *NatPolicyResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
+func (r *NATPolicyResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -836,8 +836,8 @@ func (r *NatPolicyResource) Configure(ctx context.Context, req resource.Configur
 }
 
 // ValidateConfig implements resource.ResourceWithValidateConfig
-func (r *NatPolicyResource) ValidateConfig(ctx context.Context, req resource.ValidateConfigRequest, resp *resource.ValidateConfigResponse) {
-	var data NatPolicyResourceModel
+func (r *NATPolicyResource) ValidateConfig(ctx context.Context, req resource.ValidateConfigRequest, resp *resource.ValidateConfigResponse) {
+	var data NATPolicyResourceModel
 	resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -845,7 +845,7 @@ func (r *NatPolicyResource) ValidateConfig(ctx context.Context, req resource.Val
 }
 
 // ModifyPlan implements resource.ResourceWithModifyPlan
-func (r *NatPolicyResource) ModifyPlan(ctx context.Context, req resource.ModifyPlanRequest, resp *resource.ModifyPlanResponse) {
+func (r *NATPolicyResource) ModifyPlan(ctx context.Context, req resource.ModifyPlanRequest, resp *resource.ModifyPlanResponse) {
 	if req.Plan.Raw.IsNull() {
 		resp.Diagnostics.AddWarning(
 			"Resource Destruction",
@@ -855,7 +855,7 @@ func (r *NatPolicyResource) ModifyPlan(ctx context.Context, req resource.ModifyP
 	}
 
 	if req.State.Raw.IsNull() {
-		var plan NatPolicyResourceModel
+		var plan NATPolicyResourceModel
 		resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
 		if resp.Diagnostics.HasError() {
 			return
@@ -871,7 +871,7 @@ func (r *NatPolicyResource) ModifyPlan(ctx context.Context, req resource.ModifyP
 }
 
 // UpgradeState implements resource.ResourceWithUpgradeState
-func (r *NatPolicyResource) UpgradeState(ctx context.Context) map[int64]resource.StateUpgrader {
+func (r *NATPolicyResource) UpgradeState(ctx context.Context) map[int64]resource.StateUpgrader {
 	return map[int64]resource.StateUpgrader{
 		0: {
 			PriorSchema: &schema.Schema{
@@ -897,7 +897,7 @@ func (r *NatPolicyResource) UpgradeState(ctx context.Context) map[int64]resource
 					return
 				}
 
-				upgradedState := NatPolicyResourceModel{
+				upgradedState := NATPolicyResourceModel{
 					Name:        priorState.Name,
 					Namespace:   priorState.Namespace,
 					Annotations: priorState.Annotations,
@@ -912,8 +912,8 @@ func (r *NatPolicyResource) UpgradeState(ctx context.Context) map[int64]resource
 	}
 }
 
-func (r *NatPolicyResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
-	var data NatPolicyResourceModel
+func (r *NATPolicyResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
+	var data NATPolicyResourceModel
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -933,7 +933,7 @@ func (r *NatPolicyResource) Create(ctx context.Context, req resource.CreateReque
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	createReq := &client.NatPolicy{
+	createReq := &client.NATPolicy{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -974,8 +974,8 @@ func (r *NatPolicyResource) Create(ctx context.Context, req resource.CreateReque
 					dynamicDeepMap := make(map[string]interface{})
 					actionNestedMap["dynamic"] = dynamicDeepMap
 				}
-				if !item.Action.VirtualCidr.IsNull() && !item.Action.VirtualCidr.IsUnknown() {
-					actionNestedMap["virtual_cidr"] = item.Action.VirtualCidr.ValueString()
+				if !item.Action.VirtualCIDR.IsNull() && !item.Action.VirtualCIDR.IsUnknown() {
+					actionNestedMap["virtual_cidr"] = item.Action.VirtualCIDR.ValueString()
 				}
 				itemMap["action"] = actionNestedMap
 			}
@@ -1011,11 +1011,11 @@ func (r *NatPolicyResource) Create(ctx context.Context, req resource.CreateReque
 				if item.Criteria.Any != nil {
 					criteriaNestedMap["any"] = map[string]interface{}{}
 				}
-				if !item.Criteria.DestinationCidr.IsNull() && !item.Criteria.DestinationCidr.IsUnknown() {
-					var DestinationCidrItems []string
-					diags := item.Criteria.DestinationCidr.ElementsAs(ctx, &DestinationCidrItems, false)
+				if !item.Criteria.DestinationCIDR.IsNull() && !item.Criteria.DestinationCIDR.IsUnknown() {
+					var DestinationCIDRItems []string
+					diags := item.Criteria.DestinationCIDR.ElementsAs(ctx, &DestinationCIDRItems, false)
 					if !diags.HasError() {
-						criteriaNestedMap["destination_cidr"] = DestinationCidrItems
+						criteriaNestedMap["destination_cidr"] = DestinationCIDRItems
 					}
 				}
 				if item.Criteria.DestinationPort != nil {
@@ -1031,7 +1031,7 @@ func (r *NatPolicyResource) Create(ctx context.Context, req resource.CreateReque
 					}
 					criteriaNestedMap["destination_port"] = destination_portDeepMap
 				}
-				if item.Criteria.Icmp != nil {
+				if item.Criteria.ICMP != nil {
 					criteriaNestedMap["icmp"] = map[string]interface{}{}
 				}
 				if !item.Criteria.Protocol.IsNull() && !item.Criteria.Protocol.IsUnknown() {
@@ -1041,11 +1041,11 @@ func (r *NatPolicyResource) Create(ctx context.Context, req resource.CreateReque
 					segmentDeepMap := make(map[string]interface{})
 					criteriaNestedMap["segment"] = segmentDeepMap
 				}
-				if !item.Criteria.SourceCidr.IsNull() && !item.Criteria.SourceCidr.IsUnknown() {
-					var SourceCidrItems []string
-					diags := item.Criteria.SourceCidr.ElementsAs(ctx, &SourceCidrItems, false)
+				if !item.Criteria.SourceCIDR.IsNull() && !item.Criteria.SourceCIDR.IsUnknown() {
+					var SourceCIDRItems []string
+					diags := item.Criteria.SourceCIDR.ElementsAs(ctx, &SourceCIDRItems, false)
 					if !diags.HasError() {
-						criteriaNestedMap["source_cidr"] = SourceCidrItems
+						criteriaNestedMap["source_cidr"] = SourceCIDRItems
 					}
 				}
 				if item.Criteria.SourcePort != nil {
@@ -1197,9 +1197,9 @@ func (r *NatPolicyResource) Create(ctx context.Context, req resource.CreateReque
 		createReq.Spec["site"] = siteMap
 	}
 
-	apiResource, err := r.client.CreateNatPolicy(ctx, createReq)
+	apiResource, err := r.client.CreateNATPolicy(ctx, createReq)
 	if err != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create NatPolicy: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create NATPolicy: %s", err))
 		return
 	}
 
@@ -1210,15 +1210,15 @@ func (r *NatPolicyResource) Create(ctx context.Context, req resource.CreateReque
 	isImport := false // Create is never an import
 	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["rules"].([]interface{}); ok && len(listData) > 0 {
-		var rulesList []NatPolicyRulesModel
+		var rulesList []NATPolicyRulesModel
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
-				rulesList = append(rulesList, NatPolicyRulesModel{
-					Action: func() *NatPolicyRulesActionModel {
+				rulesList = append(rulesList, NATPolicyRulesModel{
+					Action: func() *NATPolicyRulesActionModel {
 						if nestedMap, ok := itemMap["action"].(map[string]interface{}); ok {
-							return &NatPolicyRulesActionModel{
-								VirtualCidr: func() types.String {
+							return &NATPolicyRulesActionModel{
+								VirtualCIDR: func() types.String {
 									if v, ok := nestedMap["virtual_cidr"].(string); ok && v != "" {
 										return types.StringValue(v)
 									}
@@ -1228,22 +1228,22 @@ func (r *NatPolicyResource) Create(ctx context.Context, req resource.CreateReque
 						}
 						return nil
 					}(),
-					CloudConnect: func() *NatPolicyRulesCloudConnectModel {
+					CloudConnect: func() *NATPolicyRulesCloudConnectModel {
 						if _, ok := itemMap["cloud_connect"].(map[string]interface{}); ok {
-							return &NatPolicyRulesCloudConnectModel{}
+							return &NATPolicyRulesCloudConnectModel{}
 						}
 						return nil
 					}(),
-					Criteria: func() *NatPolicyRulesCriteriaModel {
+					Criteria: func() *NATPolicyRulesCriteriaModel {
 						if nestedMap, ok := itemMap["criteria"].(map[string]interface{}); ok {
-							return &NatPolicyRulesCriteriaModel{
-								Any: func() *NatPolicyEmptyModel {
+							return &NATPolicyRulesCriteriaModel{
+								Any: func() *NATPolicyEmptyModel {
 									if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Criteria != nil && data.Rules[listIdx].Criteria.Any != nil {
-										return &NatPolicyEmptyModel{}
+										return &NATPolicyEmptyModel{}
 									}
 									return nil
 								}(),
-								DestinationCidr: func() types.List {
+								DestinationCIDR: func() types.List {
 									if v, ok := nestedMap["destination_cidr"].([]interface{}); ok && len(v) > 0 {
 										var items []string
 										for _, item := range v {
@@ -1256,9 +1256,9 @@ func (r *NatPolicyResource) Create(ctx context.Context, req resource.CreateReque
 									}
 									return types.ListNull(types.StringType)
 								}(),
-								Icmp: func() *NatPolicyEmptyModel {
-									if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Criteria != nil && data.Rules[listIdx].Criteria.Icmp != nil {
-										return &NatPolicyEmptyModel{}
+								ICMP: func() *NATPolicyEmptyModel {
+									if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Criteria != nil && data.Rules[listIdx].Criteria.ICMP != nil {
+										return &NATPolicyEmptyModel{}
 									}
 									return nil
 								}(),
@@ -1268,7 +1268,7 @@ func (r *NatPolicyResource) Create(ctx context.Context, req resource.CreateReque
 									}
 									return types.StringNull()
 								}(),
-								SourceCidr: func() types.List {
+								SourceCIDR: func() types.List {
 									if v, ok := nestedMap["source_cidr"].([]interface{}); ok && len(v) > 0 {
 										var items []string
 										for _, item := range v {
@@ -1285,15 +1285,15 @@ func (r *NatPolicyResource) Create(ctx context.Context, req resource.CreateReque
 						}
 						return nil
 					}(),
-					Disable: func() *NatPolicyEmptyModel {
+					Disable: func() *NATPolicyEmptyModel {
 						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Disable != nil {
-							return &NatPolicyEmptyModel{}
+							return &NATPolicyEmptyModel{}
 						}
 						return nil
 					}(),
-					Enable: func() *NatPolicyEmptyModel {
+					Enable: func() *NATPolicyEmptyModel {
 						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Enable != nil {
-							return &NatPolicyEmptyModel{}
+							return &NATPolicyEmptyModel{}
 						}
 						return nil
 					}(),
@@ -1303,21 +1303,21 @@ func (r *NatPolicyResource) Create(ctx context.Context, req resource.CreateReque
 						}
 						return types.StringNull()
 					}(),
-					NetworkInterface: func() *NatPolicyRulesNetworkInterfaceModel {
+					NetworkInterface: func() *NATPolicyRulesNetworkInterfaceModel {
 						if _, ok := itemMap["network_interface"].(map[string]interface{}); ok {
-							return &NatPolicyRulesNetworkInterfaceModel{}
+							return &NATPolicyRulesNetworkInterfaceModel{}
 						}
 						return nil
 					}(),
-					Segment: func() *NatPolicyRulesSegmentModel {
+					Segment: func() *NATPolicyRulesSegmentModel {
 						if _, ok := itemMap["segment"].(map[string]interface{}); ok {
-							return &NatPolicyRulesSegmentModel{}
+							return &NATPolicyRulesSegmentModel{}
 						}
 						return nil
 					}(),
-					VirtualNetwork: func() *NatPolicyRulesVirtualNetworkModel {
+					VirtualNetwork: func() *NATPolicyRulesVirtualNetworkModel {
 						if _, ok := itemMap["virtual_network"].(map[string]interface{}); ok {
-							return &NatPolicyRulesVirtualNetworkModel{}
+							return &NATPolicyRulesVirtualNetworkModel{}
 						}
 						return nil
 					}(),
@@ -1327,13 +1327,13 @@ func (r *NatPolicyResource) Create(ctx context.Context, req resource.CreateReque
 		data.Rules = rulesList
 	}
 	if blockData, ok := apiResource.Spec["site"].(map[string]interface{}); ok && (isImport || data.Site != nil) {
-		data.Site = &NatPolicySiteModel{
-			Refs: func() []NatPolicySiteRefsModel {
+		data.Site = &NATPolicySiteModel{
+			Refs: func() []NATPolicySiteRefsModel {
 				if listData, ok := blockData["refs"].([]interface{}); ok && len(listData) > 0 {
-					var result []NatPolicySiteRefsModel
+					var result []NATPolicySiteRefsModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, NatPolicySiteRefsModel{
+							result = append(result, NATPolicySiteRefsModel{
 								Kind: func() types.String {
 									if v, ok := itemMap["kind"].(string); ok && v != "" {
 										return types.StringValue(v)
@@ -1381,12 +1381,12 @@ func (r *NatPolicyResource) Create(ctx context.Context, req resource.CreateReque
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
-	tflog.Trace(ctx, "created NatPolicy resource")
+	tflog.Trace(ctx, "created NATPolicy resource")
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *NatPolicyResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-	var data NatPolicyResourceModel
+func (r *NATPolicyResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
+	var data NATPolicyResourceModel
 	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -1404,18 +1404,18 @@ func (r *NatPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 	psd, psDiags := privatestate.LoadFromPrivateState(ctx, &req)
 	resp.Diagnostics.Append(psDiags...)
 
-	apiResource, err := r.client.GetNatPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	apiResource, err := r.client.GetNATPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// Check if the resource was deleted outside Terraform
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
-			tflog.Warn(ctx, "NatPolicy not found, removing from state", map[string]interface{}{
+			tflog.Warn(ctx, "NATPolicy not found, removing from state", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})
 			resp.State.RemoveResource(ctx)
 			return
 		}
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read NatPolicy: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read NATPolicy: %s", err))
 		return
 	}
 
@@ -1467,15 +1467,15 @@ func (r *NatPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if listData, ok := apiResource.Spec["rules"].([]interface{}); ok && len(listData) > 0 {
-		var rulesList []NatPolicyRulesModel
+		var rulesList []NATPolicyRulesModel
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
-				rulesList = append(rulesList, NatPolicyRulesModel{
-					Action: func() *NatPolicyRulesActionModel {
+				rulesList = append(rulesList, NATPolicyRulesModel{
+					Action: func() *NATPolicyRulesActionModel {
 						if nestedMap, ok := itemMap["action"].(map[string]interface{}); ok {
-							return &NatPolicyRulesActionModel{
-								VirtualCidr: func() types.String {
+							return &NATPolicyRulesActionModel{
+								VirtualCIDR: func() types.String {
 									if v, ok := nestedMap["virtual_cidr"].(string); ok && v != "" {
 										return types.StringValue(v)
 									}
@@ -1485,22 +1485,22 @@ func (r *NatPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 						}
 						return nil
 					}(),
-					CloudConnect: func() *NatPolicyRulesCloudConnectModel {
+					CloudConnect: func() *NATPolicyRulesCloudConnectModel {
 						if _, ok := itemMap["cloud_connect"].(map[string]interface{}); ok {
-							return &NatPolicyRulesCloudConnectModel{}
+							return &NATPolicyRulesCloudConnectModel{}
 						}
 						return nil
 					}(),
-					Criteria: func() *NatPolicyRulesCriteriaModel {
+					Criteria: func() *NATPolicyRulesCriteriaModel {
 						if nestedMap, ok := itemMap["criteria"].(map[string]interface{}); ok {
-							return &NatPolicyRulesCriteriaModel{
-								Any: func() *NatPolicyEmptyModel {
+							return &NATPolicyRulesCriteriaModel{
+								Any: func() *NATPolicyEmptyModel {
 									if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Criteria != nil && data.Rules[listIdx].Criteria.Any != nil {
-										return &NatPolicyEmptyModel{}
+										return &NATPolicyEmptyModel{}
 									}
 									return nil
 								}(),
-								DestinationCidr: func() types.List {
+								DestinationCIDR: func() types.List {
 									if v, ok := nestedMap["destination_cidr"].([]interface{}); ok && len(v) > 0 {
 										var items []string
 										for _, item := range v {
@@ -1513,9 +1513,9 @@ func (r *NatPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 									}
 									return types.ListNull(types.StringType)
 								}(),
-								Icmp: func() *NatPolicyEmptyModel {
-									if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Criteria != nil && data.Rules[listIdx].Criteria.Icmp != nil {
-										return &NatPolicyEmptyModel{}
+								ICMP: func() *NATPolicyEmptyModel {
+									if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Criteria != nil && data.Rules[listIdx].Criteria.ICMP != nil {
+										return &NATPolicyEmptyModel{}
 									}
 									return nil
 								}(),
@@ -1525,7 +1525,7 @@ func (r *NatPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 									}
 									return types.StringNull()
 								}(),
-								SourceCidr: func() types.List {
+								SourceCIDR: func() types.List {
 									if v, ok := nestedMap["source_cidr"].([]interface{}); ok && len(v) > 0 {
 										var items []string
 										for _, item := range v {
@@ -1542,15 +1542,15 @@ func (r *NatPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 						}
 						return nil
 					}(),
-					Disable: func() *NatPolicyEmptyModel {
+					Disable: func() *NATPolicyEmptyModel {
 						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Disable != nil {
-							return &NatPolicyEmptyModel{}
+							return &NATPolicyEmptyModel{}
 						}
 						return nil
 					}(),
-					Enable: func() *NatPolicyEmptyModel {
+					Enable: func() *NATPolicyEmptyModel {
 						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Enable != nil {
-							return &NatPolicyEmptyModel{}
+							return &NATPolicyEmptyModel{}
 						}
 						return nil
 					}(),
@@ -1560,21 +1560,21 @@ func (r *NatPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 						}
 						return types.StringNull()
 					}(),
-					NetworkInterface: func() *NatPolicyRulesNetworkInterfaceModel {
+					NetworkInterface: func() *NATPolicyRulesNetworkInterfaceModel {
 						if _, ok := itemMap["network_interface"].(map[string]interface{}); ok {
-							return &NatPolicyRulesNetworkInterfaceModel{}
+							return &NATPolicyRulesNetworkInterfaceModel{}
 						}
 						return nil
 					}(),
-					Segment: func() *NatPolicyRulesSegmentModel {
+					Segment: func() *NATPolicyRulesSegmentModel {
 						if _, ok := itemMap["segment"].(map[string]interface{}); ok {
-							return &NatPolicyRulesSegmentModel{}
+							return &NATPolicyRulesSegmentModel{}
 						}
 						return nil
 					}(),
-					VirtualNetwork: func() *NatPolicyRulesVirtualNetworkModel {
+					VirtualNetwork: func() *NATPolicyRulesVirtualNetworkModel {
 						if _, ok := itemMap["virtual_network"].(map[string]interface{}); ok {
-							return &NatPolicyRulesVirtualNetworkModel{}
+							return &NATPolicyRulesVirtualNetworkModel{}
 						}
 						return nil
 					}(),
@@ -1584,13 +1584,13 @@ func (r *NatPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 		data.Rules = rulesList
 	}
 	if blockData, ok := apiResource.Spec["site"].(map[string]interface{}); ok && (isImport || data.Site != nil) {
-		data.Site = &NatPolicySiteModel{
-			Refs: func() []NatPolicySiteRefsModel {
+		data.Site = &NATPolicySiteModel{
+			Refs: func() []NATPolicySiteRefsModel {
 				if listData, ok := blockData["refs"].([]interface{}); ok && len(listData) > 0 {
-					var result []NatPolicySiteRefsModel
+					var result []NATPolicySiteRefsModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, NatPolicySiteRefsModel{
+							result = append(result, NATPolicySiteRefsModel{
 								Kind: func() types.String {
 									if v, ok := itemMap["kind"].(string); ok && v != "" {
 										return types.StringValue(v)
@@ -1643,8 +1643,8 @@ func (r *NatPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *NatPolicyResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-	var data NatPolicyResourceModel
+func (r *NATPolicyResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
+	var data NATPolicyResourceModel
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -1659,7 +1659,7 @@ func (r *NatPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 	ctx, cancel := context.WithTimeout(ctx, updateTimeout)
 	defer cancel()
 
-	apiResource := &client.NatPolicy{
+	apiResource := &client.NATPolicy{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -1700,8 +1700,8 @@ func (r *NatPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 					dynamicDeepMap := make(map[string]interface{})
 					actionNestedMap["dynamic"] = dynamicDeepMap
 				}
-				if !item.Action.VirtualCidr.IsNull() && !item.Action.VirtualCidr.IsUnknown() {
-					actionNestedMap["virtual_cidr"] = item.Action.VirtualCidr.ValueString()
+				if !item.Action.VirtualCIDR.IsNull() && !item.Action.VirtualCIDR.IsUnknown() {
+					actionNestedMap["virtual_cidr"] = item.Action.VirtualCIDR.ValueString()
 				}
 				itemMap["action"] = actionNestedMap
 			}
@@ -1737,11 +1737,11 @@ func (r *NatPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 				if item.Criteria.Any != nil {
 					criteriaNestedMap["any"] = map[string]interface{}{}
 				}
-				if !item.Criteria.DestinationCidr.IsNull() && !item.Criteria.DestinationCidr.IsUnknown() {
-					var DestinationCidrItems []string
-					diags := item.Criteria.DestinationCidr.ElementsAs(ctx, &DestinationCidrItems, false)
+				if !item.Criteria.DestinationCIDR.IsNull() && !item.Criteria.DestinationCIDR.IsUnknown() {
+					var DestinationCIDRItems []string
+					diags := item.Criteria.DestinationCIDR.ElementsAs(ctx, &DestinationCIDRItems, false)
 					if !diags.HasError() {
-						criteriaNestedMap["destination_cidr"] = DestinationCidrItems
+						criteriaNestedMap["destination_cidr"] = DestinationCIDRItems
 					}
 				}
 				if item.Criteria.DestinationPort != nil {
@@ -1757,7 +1757,7 @@ func (r *NatPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 					}
 					criteriaNestedMap["destination_port"] = destination_portDeepMap
 				}
-				if item.Criteria.Icmp != nil {
+				if item.Criteria.ICMP != nil {
 					criteriaNestedMap["icmp"] = map[string]interface{}{}
 				}
 				if !item.Criteria.Protocol.IsNull() && !item.Criteria.Protocol.IsUnknown() {
@@ -1767,11 +1767,11 @@ func (r *NatPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 					segmentDeepMap := make(map[string]interface{})
 					criteriaNestedMap["segment"] = segmentDeepMap
 				}
-				if !item.Criteria.SourceCidr.IsNull() && !item.Criteria.SourceCidr.IsUnknown() {
-					var SourceCidrItems []string
-					diags := item.Criteria.SourceCidr.ElementsAs(ctx, &SourceCidrItems, false)
+				if !item.Criteria.SourceCIDR.IsNull() && !item.Criteria.SourceCIDR.IsUnknown() {
+					var SourceCIDRItems []string
+					diags := item.Criteria.SourceCIDR.ElementsAs(ctx, &SourceCIDRItems, false)
 					if !diags.HasError() {
-						criteriaNestedMap["source_cidr"] = SourceCidrItems
+						criteriaNestedMap["source_cidr"] = SourceCIDRItems
 					}
 				}
 				if item.Criteria.SourcePort != nil {
@@ -1923,9 +1923,9 @@ func (r *NatPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 		apiResource.Spec["site"] = siteMap
 	}
 
-	_, err := r.client.UpdateNatPolicy(ctx, apiResource)
+	_, err := r.client.UpdateNATPolicy(ctx, apiResource)
 	if err != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update NatPolicy: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update NATPolicy: %s", err))
 		return
 	}
 
@@ -1934,9 +1934,9 @@ func (r *NatPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 
 	// Fetch the resource to get complete state including computed fields
 	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
-	fetched, fetchErr := r.client.GetNatPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	fetched, fetchErr := r.client.GetNATPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if fetchErr != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read NatPolicy after update: %s", fetchErr))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read NATPolicy after update: %s", fetchErr))
 		return
 	}
 
@@ -1947,15 +1947,15 @@ func (r *NatPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 	isImport := false     // Update is never an import
 	_ = isImport          // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["rules"].([]interface{}); ok && len(listData) > 0 {
-		var rulesList []NatPolicyRulesModel
+		var rulesList []NATPolicyRulesModel
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
-				rulesList = append(rulesList, NatPolicyRulesModel{
-					Action: func() *NatPolicyRulesActionModel {
+				rulesList = append(rulesList, NATPolicyRulesModel{
+					Action: func() *NATPolicyRulesActionModel {
 						if nestedMap, ok := itemMap["action"].(map[string]interface{}); ok {
-							return &NatPolicyRulesActionModel{
-								VirtualCidr: func() types.String {
+							return &NATPolicyRulesActionModel{
+								VirtualCIDR: func() types.String {
 									if v, ok := nestedMap["virtual_cidr"].(string); ok && v != "" {
 										return types.StringValue(v)
 									}
@@ -1965,22 +1965,22 @@ func (r *NatPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 						}
 						return nil
 					}(),
-					CloudConnect: func() *NatPolicyRulesCloudConnectModel {
+					CloudConnect: func() *NATPolicyRulesCloudConnectModel {
 						if _, ok := itemMap["cloud_connect"].(map[string]interface{}); ok {
-							return &NatPolicyRulesCloudConnectModel{}
+							return &NATPolicyRulesCloudConnectModel{}
 						}
 						return nil
 					}(),
-					Criteria: func() *NatPolicyRulesCriteriaModel {
+					Criteria: func() *NATPolicyRulesCriteriaModel {
 						if nestedMap, ok := itemMap["criteria"].(map[string]interface{}); ok {
-							return &NatPolicyRulesCriteriaModel{
-								Any: func() *NatPolicyEmptyModel {
+							return &NATPolicyRulesCriteriaModel{
+								Any: func() *NATPolicyEmptyModel {
 									if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Criteria != nil && data.Rules[listIdx].Criteria.Any != nil {
-										return &NatPolicyEmptyModel{}
+										return &NATPolicyEmptyModel{}
 									}
 									return nil
 								}(),
-								DestinationCidr: func() types.List {
+								DestinationCIDR: func() types.List {
 									if v, ok := nestedMap["destination_cidr"].([]interface{}); ok && len(v) > 0 {
 										var items []string
 										for _, item := range v {
@@ -1993,9 +1993,9 @@ func (r *NatPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 									}
 									return types.ListNull(types.StringType)
 								}(),
-								Icmp: func() *NatPolicyEmptyModel {
-									if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Criteria != nil && data.Rules[listIdx].Criteria.Icmp != nil {
-										return &NatPolicyEmptyModel{}
+								ICMP: func() *NATPolicyEmptyModel {
+									if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Criteria != nil && data.Rules[listIdx].Criteria.ICMP != nil {
+										return &NATPolicyEmptyModel{}
 									}
 									return nil
 								}(),
@@ -2005,7 +2005,7 @@ func (r *NatPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 									}
 									return types.StringNull()
 								}(),
-								SourceCidr: func() types.List {
+								SourceCIDR: func() types.List {
 									if v, ok := nestedMap["source_cidr"].([]interface{}); ok && len(v) > 0 {
 										var items []string
 										for _, item := range v {
@@ -2022,15 +2022,15 @@ func (r *NatPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 						}
 						return nil
 					}(),
-					Disable: func() *NatPolicyEmptyModel {
+					Disable: func() *NATPolicyEmptyModel {
 						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Disable != nil {
-							return &NatPolicyEmptyModel{}
+							return &NATPolicyEmptyModel{}
 						}
 						return nil
 					}(),
-					Enable: func() *NatPolicyEmptyModel {
+					Enable: func() *NATPolicyEmptyModel {
 						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Enable != nil {
-							return &NatPolicyEmptyModel{}
+							return &NATPolicyEmptyModel{}
 						}
 						return nil
 					}(),
@@ -2040,21 +2040,21 @@ func (r *NatPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 						}
 						return types.StringNull()
 					}(),
-					NetworkInterface: func() *NatPolicyRulesNetworkInterfaceModel {
+					NetworkInterface: func() *NATPolicyRulesNetworkInterfaceModel {
 						if _, ok := itemMap["network_interface"].(map[string]interface{}); ok {
-							return &NatPolicyRulesNetworkInterfaceModel{}
+							return &NATPolicyRulesNetworkInterfaceModel{}
 						}
 						return nil
 					}(),
-					Segment: func() *NatPolicyRulesSegmentModel {
+					Segment: func() *NATPolicyRulesSegmentModel {
 						if _, ok := itemMap["segment"].(map[string]interface{}); ok {
-							return &NatPolicyRulesSegmentModel{}
+							return &NATPolicyRulesSegmentModel{}
 						}
 						return nil
 					}(),
-					VirtualNetwork: func() *NatPolicyRulesVirtualNetworkModel {
+					VirtualNetwork: func() *NATPolicyRulesVirtualNetworkModel {
 						if _, ok := itemMap["virtual_network"].(map[string]interface{}); ok {
-							return &NatPolicyRulesVirtualNetworkModel{}
+							return &NATPolicyRulesVirtualNetworkModel{}
 						}
 						return nil
 					}(),
@@ -2064,13 +2064,13 @@ func (r *NatPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 		data.Rules = rulesList
 	}
 	if blockData, ok := apiResource.Spec["site"].(map[string]interface{}); ok && (isImport || data.Site != nil) {
-		data.Site = &NatPolicySiteModel{
-			Refs: func() []NatPolicySiteRefsModel {
+		data.Site = &NATPolicySiteModel{
+			Refs: func() []NATPolicySiteRefsModel {
 				if listData, ok := blockData["refs"].([]interface{}); ok && len(listData) > 0 {
-					var result []NatPolicySiteRefsModel
+					var result []NATPolicySiteRefsModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, NatPolicySiteRefsModel{
+							result = append(result, NATPolicySiteRefsModel{
 								Kind: func() types.String {
 									if v, ok := itemMap["kind"].(string); ok && v != "" {
 										return types.StringValue(v)
@@ -2121,8 +2121,8 @@ func (r *NatPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *NatPolicyResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
-	var data NatPolicyResourceModel
+func (r *NATPolicyResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
+	var data NATPolicyResourceModel
 	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -2136,11 +2136,11 @@ func (r *NatPolicyResource) Delete(ctx context.Context, req resource.DeleteReque
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-	err := r.client.DeleteNatPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	err := r.client.DeleteNATPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
-			tflog.Warn(ctx, "NatPolicy already deleted, removing from state", map[string]interface{}{
+			tflog.Warn(ctx, "NATPolicy already deleted, removing from state", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})
@@ -2149,18 +2149,18 @@ func (r *NatPolicyResource) Delete(ctx context.Context, req resource.DeleteReque
 		// If delete is not implemented (501), warn and remove from state
 		// Some F5 XC resources don't support deletion via API
 		if strings.Contains(err.Error(), "501") {
-			tflog.Warn(ctx, "NatPolicy delete not supported by API (501), removing from state only", map[string]interface{}{
+			tflog.Warn(ctx, "NATPolicy delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})
 			return
 		}
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete NatPolicy: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete NATPolicy: %s", err))
 		return
 	}
 }
 
-func (r *NatPolicyResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
+func (r *NATPolicyResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	// Import ID format: namespace/name
 	parts := strings.Split(req.ID, "/")
 	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {

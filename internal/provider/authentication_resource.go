@@ -54,85 +54,85 @@ type AuthenticationCookieParamsModel struct {
 	CookieExpiry          types.Int64                              `tfsdk:"cookie_expiry"`
 	CookieRefreshInterval types.Int64                              `tfsdk:"cookie_refresh_interval"`
 	SessionExpiry         types.Int64                              `tfsdk:"session_expiry"`
-	AuthHmac              *AuthenticationCookieParamsAuthHmacModel `tfsdk:"auth_hmac"`
-	KmsKeyHmac            *AuthenticationEmptyModel                `tfsdk:"kms_key_hmac"`
+	AuthHMAC              *AuthenticationCookieParamsAuthHMACModel `tfsdk:"auth_hmac"`
+	KmsKeyHMAC            *AuthenticationEmptyModel                `tfsdk:"kms_key_hmac"`
 }
 
-// AuthenticationCookieParamsAuthHmacModel represents auth_hmac block
-type AuthenticationCookieParamsAuthHmacModel struct {
+// AuthenticationCookieParamsAuthHMACModel represents auth_hmac block
+type AuthenticationCookieParamsAuthHMACModel struct {
 	PrimKeyExpiry types.String                                    `tfsdk:"prim_key_expiry"`
 	SecKeyExpiry  types.String                                    `tfsdk:"sec_key_expiry"`
-	PrimKey       *AuthenticationCookieParamsAuthHmacPrimKeyModel `tfsdk:"prim_key"`
-	SecKey        *AuthenticationCookieParamsAuthHmacSecKeyModel  `tfsdk:"sec_key"`
+	PrimKey       *AuthenticationCookieParamsAuthHMACPrimKeyModel `tfsdk:"prim_key"`
+	SecKey        *AuthenticationCookieParamsAuthHMACSecKeyModel  `tfsdk:"sec_key"`
 }
 
-// AuthenticationCookieParamsAuthHmacPrimKeyModel represents prim_key block
-type AuthenticationCookieParamsAuthHmacPrimKeyModel struct {
-	BlindfoldSecretInfo *AuthenticationCookieParamsAuthHmacPrimKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo     *AuthenticationCookieParamsAuthHmacPrimKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+// AuthenticationCookieParamsAuthHMACPrimKeyModel represents prim_key block
+type AuthenticationCookieParamsAuthHMACPrimKeyModel struct {
+	BlindfoldSecretInfo *AuthenticationCookieParamsAuthHMACPrimKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *AuthenticationCookieParamsAuthHMACPrimKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
-// AuthenticationCookieParamsAuthHmacPrimKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
-type AuthenticationCookieParamsAuthHmacPrimKeyBlindfoldSecretInfoModel struct {
+// AuthenticationCookieParamsAuthHMACPrimKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type AuthenticationCookieParamsAuthHMACPrimKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
 	Location           types.String `tfsdk:"location"`
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
-// AuthenticationCookieParamsAuthHmacPrimKeyClearSecretInfoModel represents clear_secret_info block
-type AuthenticationCookieParamsAuthHmacPrimKeyClearSecretInfoModel struct {
+// AuthenticationCookieParamsAuthHMACPrimKeyClearSecretInfoModel represents clear_secret_info block
+type AuthenticationCookieParamsAuthHMACPrimKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
-// AuthenticationCookieParamsAuthHmacSecKeyModel represents sec_key block
-type AuthenticationCookieParamsAuthHmacSecKeyModel struct {
-	BlindfoldSecretInfo *AuthenticationCookieParamsAuthHmacSecKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo     *AuthenticationCookieParamsAuthHmacSecKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+// AuthenticationCookieParamsAuthHMACSecKeyModel represents sec_key block
+type AuthenticationCookieParamsAuthHMACSecKeyModel struct {
+	BlindfoldSecretInfo *AuthenticationCookieParamsAuthHMACSecKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *AuthenticationCookieParamsAuthHMACSecKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
-// AuthenticationCookieParamsAuthHmacSecKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
-type AuthenticationCookieParamsAuthHmacSecKeyBlindfoldSecretInfoModel struct {
+// AuthenticationCookieParamsAuthHMACSecKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type AuthenticationCookieParamsAuthHMACSecKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
 	Location           types.String `tfsdk:"location"`
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
-// AuthenticationCookieParamsAuthHmacSecKeyClearSecretInfoModel represents clear_secret_info block
-type AuthenticationCookieParamsAuthHmacSecKeyClearSecretInfoModel struct {
+// AuthenticationCookieParamsAuthHMACSecKeyClearSecretInfoModel represents clear_secret_info block
+type AuthenticationCookieParamsAuthHMACSecKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
-// AuthenticationOidcAuthModel represents oidc_auth block
-type AuthenticationOidcAuthModel struct {
-	OidcClientID           types.String                               `tfsdk:"oidc_client_id"`
-	OidcWellKnownConfigURL types.String                               `tfsdk:"oidc_well_known_config_url"`
-	ClientSecret           *AuthenticationOidcAuthClientSecretModel   `tfsdk:"client_secret"`
-	OidcAuthParams         *AuthenticationOidcAuthOidcAuthParamsModel `tfsdk:"oidc_auth_params"`
+// AuthenticationOIDCAuthModel represents oidc_auth block
+type AuthenticationOIDCAuthModel struct {
+	OIDCClientID           types.String                               `tfsdk:"oidc_client_id"`
+	OIDCWellKnownConfigURL types.String                               `tfsdk:"oidc_well_known_config_url"`
+	ClientSecret           *AuthenticationOIDCAuthClientSecretModel   `tfsdk:"client_secret"`
+	OIDCAuthParams         *AuthenticationOIDCAuthOIDCAuthParamsModel `tfsdk:"oidc_auth_params"`
 }
 
-// AuthenticationOidcAuthClientSecretModel represents client_secret block
-type AuthenticationOidcAuthClientSecretModel struct {
-	BlindfoldSecretInfo *AuthenticationOidcAuthClientSecretBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo     *AuthenticationOidcAuthClientSecretClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+// AuthenticationOIDCAuthClientSecretModel represents client_secret block
+type AuthenticationOIDCAuthClientSecretModel struct {
+	BlindfoldSecretInfo *AuthenticationOIDCAuthClientSecretBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *AuthenticationOIDCAuthClientSecretClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
-// AuthenticationOidcAuthClientSecretBlindfoldSecretInfoModel represents blindfold_secret_info block
-type AuthenticationOidcAuthClientSecretBlindfoldSecretInfoModel struct {
+// AuthenticationOIDCAuthClientSecretBlindfoldSecretInfoModel represents blindfold_secret_info block
+type AuthenticationOIDCAuthClientSecretBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
 	Location           types.String `tfsdk:"location"`
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
-// AuthenticationOidcAuthClientSecretClearSecretInfoModel represents clear_secret_info block
-type AuthenticationOidcAuthClientSecretClearSecretInfoModel struct {
+// AuthenticationOIDCAuthClientSecretClearSecretInfoModel represents clear_secret_info block
+type AuthenticationOIDCAuthClientSecretClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
-// AuthenticationOidcAuthOidcAuthParamsModel represents oidc_auth_params block
-type AuthenticationOidcAuthOidcAuthParamsModel struct {
+// AuthenticationOIDCAuthOIDCAuthParamsModel represents oidc_auth_params block
+type AuthenticationOIDCAuthOIDCAuthParamsModel struct {
 	AuthEndpointURL       types.String `tfsdk:"auth_endpoint_url"`
 	EndSessionEndpointURL types.String `tfsdk:"end_session_endpoint_url"`
 	TokenEndpointURL      types.String `tfsdk:"token_endpoint_url"`
@@ -148,7 +148,7 @@ type AuthenticationResourceModel struct {
 	ID           types.String                     `tfsdk:"id"`
 	Timeouts     timeouts.Value                   `tfsdk:"timeouts"`
 	CookieParams *AuthenticationCookieParamsModel `tfsdk:"cookie_params"`
-	OidcAuth     *AuthenticationOidcAuthModel     `tfsdk:"oidc_auth"`
+	OIDCAuth     *AuthenticationOIDCAuthModel     `tfsdk:"oidc_auth"`
 }
 
 func (r *AuthenticationResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -540,13 +540,13 @@ func (r *AuthenticationResource) Create(ctx context.Context, req resource.Create
 	// Marshal spec fields from Terraform state to API struct
 	if data.CookieParams != nil {
 		cookie_paramsMap := make(map[string]interface{})
-		if data.CookieParams.AuthHmac != nil {
+		if data.CookieParams.AuthHMAC != nil {
 			auth_hmacNestedMap := make(map[string]interface{})
-			if !data.CookieParams.AuthHmac.PrimKeyExpiry.IsNull() && !data.CookieParams.AuthHmac.PrimKeyExpiry.IsUnknown() {
-				auth_hmacNestedMap["prim_key_expiry"] = data.CookieParams.AuthHmac.PrimKeyExpiry.ValueString()
+			if !data.CookieParams.AuthHMAC.PrimKeyExpiry.IsNull() && !data.CookieParams.AuthHMAC.PrimKeyExpiry.IsUnknown() {
+				auth_hmacNestedMap["prim_key_expiry"] = data.CookieParams.AuthHMAC.PrimKeyExpiry.ValueString()
 			}
-			if !data.CookieParams.AuthHmac.SecKeyExpiry.IsNull() && !data.CookieParams.AuthHmac.SecKeyExpiry.IsUnknown() {
-				auth_hmacNestedMap["sec_key_expiry"] = data.CookieParams.AuthHmac.SecKeyExpiry.ValueString()
+			if !data.CookieParams.AuthHMAC.SecKeyExpiry.IsNull() && !data.CookieParams.AuthHMAC.SecKeyExpiry.IsUnknown() {
+				auth_hmacNestedMap["sec_key_expiry"] = data.CookieParams.AuthHMAC.SecKeyExpiry.ValueString()
 			}
 			cookie_paramsMap["auth_hmac"] = auth_hmacNestedMap
 		}
@@ -556,7 +556,7 @@ func (r *AuthenticationResource) Create(ctx context.Context, req resource.Create
 		if !data.CookieParams.CookieRefreshInterval.IsNull() && !data.CookieParams.CookieRefreshInterval.IsUnknown() {
 			cookie_paramsMap["cookie_refresh_interval"] = data.CookieParams.CookieRefreshInterval.ValueInt64()
 		}
-		if data.CookieParams.KmsKeyHmac != nil {
+		if data.CookieParams.KmsKeyHMAC != nil {
 			cookie_paramsMap["kms_key_hmac"] = map[string]interface{}{}
 		}
 		if !data.CookieParams.SessionExpiry.IsNull() && !data.CookieParams.SessionExpiry.IsUnknown() {
@@ -564,30 +564,30 @@ func (r *AuthenticationResource) Create(ctx context.Context, req resource.Create
 		}
 		createReq.Spec["cookie_params"] = cookie_paramsMap
 	}
-	if data.OidcAuth != nil {
+	if data.OIDCAuth != nil {
 		oidc_authMap := make(map[string]interface{})
-		if data.OidcAuth.ClientSecret != nil {
+		if data.OIDCAuth.ClientSecret != nil {
 			client_secretNestedMap := make(map[string]interface{})
 			oidc_authMap["client_secret"] = client_secretNestedMap
 		}
-		if data.OidcAuth.OidcAuthParams != nil {
+		if data.OIDCAuth.OIDCAuthParams != nil {
 			oidc_auth_paramsNestedMap := make(map[string]interface{})
-			if !data.OidcAuth.OidcAuthParams.AuthEndpointURL.IsNull() && !data.OidcAuth.OidcAuthParams.AuthEndpointURL.IsUnknown() {
-				oidc_auth_paramsNestedMap["auth_endpoint_url"] = data.OidcAuth.OidcAuthParams.AuthEndpointURL.ValueString()
+			if !data.OIDCAuth.OIDCAuthParams.AuthEndpointURL.IsNull() && !data.OIDCAuth.OIDCAuthParams.AuthEndpointURL.IsUnknown() {
+				oidc_auth_paramsNestedMap["auth_endpoint_url"] = data.OIDCAuth.OIDCAuthParams.AuthEndpointURL.ValueString()
 			}
-			if !data.OidcAuth.OidcAuthParams.EndSessionEndpointURL.IsNull() && !data.OidcAuth.OidcAuthParams.EndSessionEndpointURL.IsUnknown() {
-				oidc_auth_paramsNestedMap["end_session_endpoint_url"] = data.OidcAuth.OidcAuthParams.EndSessionEndpointURL.ValueString()
+			if !data.OIDCAuth.OIDCAuthParams.EndSessionEndpointURL.IsNull() && !data.OIDCAuth.OIDCAuthParams.EndSessionEndpointURL.IsUnknown() {
+				oidc_auth_paramsNestedMap["end_session_endpoint_url"] = data.OIDCAuth.OIDCAuthParams.EndSessionEndpointURL.ValueString()
 			}
-			if !data.OidcAuth.OidcAuthParams.TokenEndpointURL.IsNull() && !data.OidcAuth.OidcAuthParams.TokenEndpointURL.IsUnknown() {
-				oidc_auth_paramsNestedMap["token_endpoint_url"] = data.OidcAuth.OidcAuthParams.TokenEndpointURL.ValueString()
+			if !data.OIDCAuth.OIDCAuthParams.TokenEndpointURL.IsNull() && !data.OIDCAuth.OIDCAuthParams.TokenEndpointURL.IsUnknown() {
+				oidc_auth_paramsNestedMap["token_endpoint_url"] = data.OIDCAuth.OIDCAuthParams.TokenEndpointURL.ValueString()
 			}
 			oidc_authMap["oidc_auth_params"] = oidc_auth_paramsNestedMap
 		}
-		if !data.OidcAuth.OidcClientID.IsNull() && !data.OidcAuth.OidcClientID.IsUnknown() {
-			oidc_authMap["oidc_client_id"] = data.OidcAuth.OidcClientID.ValueString()
+		if !data.OIDCAuth.OIDCClientID.IsNull() && !data.OIDCAuth.OIDCClientID.IsUnknown() {
+			oidc_authMap["oidc_client_id"] = data.OIDCAuth.OIDCClientID.ValueString()
 		}
-		if !data.OidcAuth.OidcWellKnownConfigURL.IsNull() && !data.OidcAuth.OidcWellKnownConfigURL.IsUnknown() {
-			oidc_authMap["oidc_well_known_config_url"] = data.OidcAuth.OidcWellKnownConfigURL.ValueString()
+		if !data.OIDCAuth.OIDCWellKnownConfigURL.IsNull() && !data.OIDCAuth.OIDCWellKnownConfigURL.IsUnknown() {
+			oidc_authMap["oidc_well_known_config_url"] = data.OIDCAuth.OIDCWellKnownConfigURL.ValueString()
 		}
 		createReq.Spec["oidc_auth"] = oidc_authMap
 	}
@@ -606,14 +606,14 @@ func (r *AuthenticationResource) Create(ctx context.Context, req resource.Create
 	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["cookie_params"].(map[string]interface{}); ok && (isImport || data.CookieParams != nil) {
 		data.CookieParams = &AuthenticationCookieParamsModel{
-			AuthHmac: func() *AuthenticationCookieParamsAuthHmacModel {
-				if !isImport && data.CookieParams != nil && data.CookieParams.AuthHmac != nil {
+			AuthHMAC: func() *AuthenticationCookieParamsAuthHMACModel {
+				if !isImport && data.CookieParams != nil && data.CookieParams.AuthHMAC != nil {
 					// Normal Read: preserve existing state value
-					return data.CookieParams.AuthHmac
+					return data.CookieParams.AuthHMAC
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["auth_hmac"].(map[string]interface{}); ok {
-					return &AuthenticationCookieParamsAuthHmacModel{
+					return &AuthenticationCookieParamsAuthHMACModel{
 						PrimKeyExpiry: func() types.String {
 							if v, ok := nestedBlockData["prim_key_expiry"].(string); ok && v != "" {
 								return types.StringValue(v)
@@ -642,11 +642,11 @@ func (r *AuthenticationResource) Create(ctx context.Context, req resource.Create
 				}
 				return types.Int64Null()
 			}(),
-			KmsKeyHmac: func() *AuthenticationEmptyModel {
+			KmsKeyHMAC: func() *AuthenticationEmptyModel {
 				if !isImport && data.CookieParams != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CookieParams.KmsKeyHmac
+					return data.CookieParams.KmsKeyHMAC
 				}
 				// Import case: read from API
 				if _, ok := blockData["kms_key_hmac"].(map[string]interface{}); ok {
@@ -662,27 +662,27 @@ func (r *AuthenticationResource) Create(ctx context.Context, req resource.Create
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["oidc_auth"].(map[string]interface{}); ok && (isImport || data.OidcAuth != nil) {
-		data.OidcAuth = &AuthenticationOidcAuthModel{
-			ClientSecret: func() *AuthenticationOidcAuthClientSecretModel {
-				if !isImport && data.OidcAuth != nil && data.OidcAuth.ClientSecret != nil {
+	if blockData, ok := apiResource.Spec["oidc_auth"].(map[string]interface{}); ok && (isImport || data.OIDCAuth != nil) {
+		data.OIDCAuth = &AuthenticationOIDCAuthModel{
+			ClientSecret: func() *AuthenticationOIDCAuthClientSecretModel {
+				if !isImport && data.OIDCAuth != nil && data.OIDCAuth.ClientSecret != nil {
 					// Normal Read: preserve existing state value
-					return data.OidcAuth.ClientSecret
+					return data.OIDCAuth.ClientSecret
 				}
 				// Import case: read from API
 				if _, ok := blockData["client_secret"].(map[string]interface{}); ok {
-					return &AuthenticationOidcAuthClientSecretModel{}
+					return &AuthenticationOIDCAuthClientSecretModel{}
 				}
 				return nil
 			}(),
-			OidcAuthParams: func() *AuthenticationOidcAuthOidcAuthParamsModel {
-				if !isImport && data.OidcAuth != nil && data.OidcAuth.OidcAuthParams != nil {
+			OIDCAuthParams: func() *AuthenticationOIDCAuthOIDCAuthParamsModel {
+				if !isImport && data.OIDCAuth != nil && data.OIDCAuth.OIDCAuthParams != nil {
 					// Normal Read: preserve existing state value
-					return data.OidcAuth.OidcAuthParams
+					return data.OIDCAuth.OIDCAuthParams
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["oidc_auth_params"].(map[string]interface{}); ok {
-					return &AuthenticationOidcAuthOidcAuthParamsModel{
+					return &AuthenticationOIDCAuthOIDCAuthParamsModel{
 						AuthEndpointURL: func() types.String {
 							if v, ok := nestedBlockData["auth_endpoint_url"].(string); ok && v != "" {
 								return types.StringValue(v)
@@ -705,13 +705,13 @@ func (r *AuthenticationResource) Create(ctx context.Context, req resource.Create
 				}
 				return nil
 			}(),
-			OidcClientID: func() types.String {
+			OIDCClientID: func() types.String {
 				if v, ok := blockData["oidc_client_id"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
 			}(),
-			OidcWellKnownConfigURL: func() types.String {
+			OIDCWellKnownConfigURL: func() types.String {
 				if v, ok := blockData["oidc_well_known_config_url"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
@@ -814,14 +814,14 @@ func (r *AuthenticationResource) Read(ctx context.Context, req resource.ReadRequ
 	})
 	if blockData, ok := apiResource.Spec["cookie_params"].(map[string]interface{}); ok && (isImport || data.CookieParams != nil) {
 		data.CookieParams = &AuthenticationCookieParamsModel{
-			AuthHmac: func() *AuthenticationCookieParamsAuthHmacModel {
-				if !isImport && data.CookieParams != nil && data.CookieParams.AuthHmac != nil {
+			AuthHMAC: func() *AuthenticationCookieParamsAuthHMACModel {
+				if !isImport && data.CookieParams != nil && data.CookieParams.AuthHMAC != nil {
 					// Normal Read: preserve existing state value
-					return data.CookieParams.AuthHmac
+					return data.CookieParams.AuthHMAC
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["auth_hmac"].(map[string]interface{}); ok {
-					return &AuthenticationCookieParamsAuthHmacModel{
+					return &AuthenticationCookieParamsAuthHMACModel{
 						PrimKeyExpiry: func() types.String {
 							if v, ok := nestedBlockData["prim_key_expiry"].(string); ok && v != "" {
 								return types.StringValue(v)
@@ -850,11 +850,11 @@ func (r *AuthenticationResource) Read(ctx context.Context, req resource.ReadRequ
 				}
 				return types.Int64Null()
 			}(),
-			KmsKeyHmac: func() *AuthenticationEmptyModel {
+			KmsKeyHMAC: func() *AuthenticationEmptyModel {
 				if !isImport && data.CookieParams != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CookieParams.KmsKeyHmac
+					return data.CookieParams.KmsKeyHMAC
 				}
 				// Import case: read from API
 				if _, ok := blockData["kms_key_hmac"].(map[string]interface{}); ok {
@@ -870,27 +870,27 @@ func (r *AuthenticationResource) Read(ctx context.Context, req resource.ReadRequ
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["oidc_auth"].(map[string]interface{}); ok && (isImport || data.OidcAuth != nil) {
-		data.OidcAuth = &AuthenticationOidcAuthModel{
-			ClientSecret: func() *AuthenticationOidcAuthClientSecretModel {
-				if !isImport && data.OidcAuth != nil && data.OidcAuth.ClientSecret != nil {
+	if blockData, ok := apiResource.Spec["oidc_auth"].(map[string]interface{}); ok && (isImport || data.OIDCAuth != nil) {
+		data.OIDCAuth = &AuthenticationOIDCAuthModel{
+			ClientSecret: func() *AuthenticationOIDCAuthClientSecretModel {
+				if !isImport && data.OIDCAuth != nil && data.OIDCAuth.ClientSecret != nil {
 					// Normal Read: preserve existing state value
-					return data.OidcAuth.ClientSecret
+					return data.OIDCAuth.ClientSecret
 				}
 				// Import case: read from API
 				if _, ok := blockData["client_secret"].(map[string]interface{}); ok {
-					return &AuthenticationOidcAuthClientSecretModel{}
+					return &AuthenticationOIDCAuthClientSecretModel{}
 				}
 				return nil
 			}(),
-			OidcAuthParams: func() *AuthenticationOidcAuthOidcAuthParamsModel {
-				if !isImport && data.OidcAuth != nil && data.OidcAuth.OidcAuthParams != nil {
+			OIDCAuthParams: func() *AuthenticationOIDCAuthOIDCAuthParamsModel {
+				if !isImport && data.OIDCAuth != nil && data.OIDCAuth.OIDCAuthParams != nil {
 					// Normal Read: preserve existing state value
-					return data.OidcAuth.OidcAuthParams
+					return data.OIDCAuth.OIDCAuthParams
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["oidc_auth_params"].(map[string]interface{}); ok {
-					return &AuthenticationOidcAuthOidcAuthParamsModel{
+					return &AuthenticationOIDCAuthOIDCAuthParamsModel{
 						AuthEndpointURL: func() types.String {
 							if v, ok := nestedBlockData["auth_endpoint_url"].(string); ok && v != "" {
 								return types.StringValue(v)
@@ -913,13 +913,13 @@ func (r *AuthenticationResource) Read(ctx context.Context, req resource.ReadRequ
 				}
 				return nil
 			}(),
-			OidcClientID: func() types.String {
+			OIDCClientID: func() types.String {
 				if v, ok := blockData["oidc_client_id"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
 			}(),
-			OidcWellKnownConfigURL: func() types.String {
+			OIDCWellKnownConfigURL: func() types.String {
 				if v, ok := blockData["oidc_well_known_config_url"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
@@ -989,13 +989,13 @@ func (r *AuthenticationResource) Update(ctx context.Context, req resource.Update
 	// Marshal spec fields from Terraform state to API struct
 	if data.CookieParams != nil {
 		cookie_paramsMap := make(map[string]interface{})
-		if data.CookieParams.AuthHmac != nil {
+		if data.CookieParams.AuthHMAC != nil {
 			auth_hmacNestedMap := make(map[string]interface{})
-			if !data.CookieParams.AuthHmac.PrimKeyExpiry.IsNull() && !data.CookieParams.AuthHmac.PrimKeyExpiry.IsUnknown() {
-				auth_hmacNestedMap["prim_key_expiry"] = data.CookieParams.AuthHmac.PrimKeyExpiry.ValueString()
+			if !data.CookieParams.AuthHMAC.PrimKeyExpiry.IsNull() && !data.CookieParams.AuthHMAC.PrimKeyExpiry.IsUnknown() {
+				auth_hmacNestedMap["prim_key_expiry"] = data.CookieParams.AuthHMAC.PrimKeyExpiry.ValueString()
 			}
-			if !data.CookieParams.AuthHmac.SecKeyExpiry.IsNull() && !data.CookieParams.AuthHmac.SecKeyExpiry.IsUnknown() {
-				auth_hmacNestedMap["sec_key_expiry"] = data.CookieParams.AuthHmac.SecKeyExpiry.ValueString()
+			if !data.CookieParams.AuthHMAC.SecKeyExpiry.IsNull() && !data.CookieParams.AuthHMAC.SecKeyExpiry.IsUnknown() {
+				auth_hmacNestedMap["sec_key_expiry"] = data.CookieParams.AuthHMAC.SecKeyExpiry.ValueString()
 			}
 			cookie_paramsMap["auth_hmac"] = auth_hmacNestedMap
 		}
@@ -1005,7 +1005,7 @@ func (r *AuthenticationResource) Update(ctx context.Context, req resource.Update
 		if !data.CookieParams.CookieRefreshInterval.IsNull() && !data.CookieParams.CookieRefreshInterval.IsUnknown() {
 			cookie_paramsMap["cookie_refresh_interval"] = data.CookieParams.CookieRefreshInterval.ValueInt64()
 		}
-		if data.CookieParams.KmsKeyHmac != nil {
+		if data.CookieParams.KmsKeyHMAC != nil {
 			cookie_paramsMap["kms_key_hmac"] = map[string]interface{}{}
 		}
 		if !data.CookieParams.SessionExpiry.IsNull() && !data.CookieParams.SessionExpiry.IsUnknown() {
@@ -1013,30 +1013,30 @@ func (r *AuthenticationResource) Update(ctx context.Context, req resource.Update
 		}
 		apiResource.Spec["cookie_params"] = cookie_paramsMap
 	}
-	if data.OidcAuth != nil {
+	if data.OIDCAuth != nil {
 		oidc_authMap := make(map[string]interface{})
-		if data.OidcAuth.ClientSecret != nil {
+		if data.OIDCAuth.ClientSecret != nil {
 			client_secretNestedMap := make(map[string]interface{})
 			oidc_authMap["client_secret"] = client_secretNestedMap
 		}
-		if data.OidcAuth.OidcAuthParams != nil {
+		if data.OIDCAuth.OIDCAuthParams != nil {
 			oidc_auth_paramsNestedMap := make(map[string]interface{})
-			if !data.OidcAuth.OidcAuthParams.AuthEndpointURL.IsNull() && !data.OidcAuth.OidcAuthParams.AuthEndpointURL.IsUnknown() {
-				oidc_auth_paramsNestedMap["auth_endpoint_url"] = data.OidcAuth.OidcAuthParams.AuthEndpointURL.ValueString()
+			if !data.OIDCAuth.OIDCAuthParams.AuthEndpointURL.IsNull() && !data.OIDCAuth.OIDCAuthParams.AuthEndpointURL.IsUnknown() {
+				oidc_auth_paramsNestedMap["auth_endpoint_url"] = data.OIDCAuth.OIDCAuthParams.AuthEndpointURL.ValueString()
 			}
-			if !data.OidcAuth.OidcAuthParams.EndSessionEndpointURL.IsNull() && !data.OidcAuth.OidcAuthParams.EndSessionEndpointURL.IsUnknown() {
-				oidc_auth_paramsNestedMap["end_session_endpoint_url"] = data.OidcAuth.OidcAuthParams.EndSessionEndpointURL.ValueString()
+			if !data.OIDCAuth.OIDCAuthParams.EndSessionEndpointURL.IsNull() && !data.OIDCAuth.OIDCAuthParams.EndSessionEndpointURL.IsUnknown() {
+				oidc_auth_paramsNestedMap["end_session_endpoint_url"] = data.OIDCAuth.OIDCAuthParams.EndSessionEndpointURL.ValueString()
 			}
-			if !data.OidcAuth.OidcAuthParams.TokenEndpointURL.IsNull() && !data.OidcAuth.OidcAuthParams.TokenEndpointURL.IsUnknown() {
-				oidc_auth_paramsNestedMap["token_endpoint_url"] = data.OidcAuth.OidcAuthParams.TokenEndpointURL.ValueString()
+			if !data.OIDCAuth.OIDCAuthParams.TokenEndpointURL.IsNull() && !data.OIDCAuth.OIDCAuthParams.TokenEndpointURL.IsUnknown() {
+				oidc_auth_paramsNestedMap["token_endpoint_url"] = data.OIDCAuth.OIDCAuthParams.TokenEndpointURL.ValueString()
 			}
 			oidc_authMap["oidc_auth_params"] = oidc_auth_paramsNestedMap
 		}
-		if !data.OidcAuth.OidcClientID.IsNull() && !data.OidcAuth.OidcClientID.IsUnknown() {
-			oidc_authMap["oidc_client_id"] = data.OidcAuth.OidcClientID.ValueString()
+		if !data.OIDCAuth.OIDCClientID.IsNull() && !data.OIDCAuth.OIDCClientID.IsUnknown() {
+			oidc_authMap["oidc_client_id"] = data.OIDCAuth.OIDCClientID.ValueString()
 		}
-		if !data.OidcAuth.OidcWellKnownConfigURL.IsNull() && !data.OidcAuth.OidcWellKnownConfigURL.IsUnknown() {
-			oidc_authMap["oidc_well_known_config_url"] = data.OidcAuth.OidcWellKnownConfigURL.ValueString()
+		if !data.OIDCAuth.OIDCWellKnownConfigURL.IsNull() && !data.OIDCAuth.OIDCWellKnownConfigURL.IsUnknown() {
+			oidc_authMap["oidc_well_known_config_url"] = data.OIDCAuth.OIDCWellKnownConfigURL.ValueString()
 		}
 		apiResource.Spec["oidc_auth"] = oidc_authMap
 	}
@@ -1066,14 +1066,14 @@ func (r *AuthenticationResource) Update(ctx context.Context, req resource.Update
 	_ = isImport          // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["cookie_params"].(map[string]interface{}); ok && (isImport || data.CookieParams != nil) {
 		data.CookieParams = &AuthenticationCookieParamsModel{
-			AuthHmac: func() *AuthenticationCookieParamsAuthHmacModel {
-				if !isImport && data.CookieParams != nil && data.CookieParams.AuthHmac != nil {
+			AuthHMAC: func() *AuthenticationCookieParamsAuthHMACModel {
+				if !isImport && data.CookieParams != nil && data.CookieParams.AuthHMAC != nil {
 					// Normal Read: preserve existing state value
-					return data.CookieParams.AuthHmac
+					return data.CookieParams.AuthHMAC
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["auth_hmac"].(map[string]interface{}); ok {
-					return &AuthenticationCookieParamsAuthHmacModel{
+					return &AuthenticationCookieParamsAuthHMACModel{
 						PrimKeyExpiry: func() types.String {
 							if v, ok := nestedBlockData["prim_key_expiry"].(string); ok && v != "" {
 								return types.StringValue(v)
@@ -1102,11 +1102,11 @@ func (r *AuthenticationResource) Update(ctx context.Context, req resource.Update
 				}
 				return types.Int64Null()
 			}(),
-			KmsKeyHmac: func() *AuthenticationEmptyModel {
+			KmsKeyHMAC: func() *AuthenticationEmptyModel {
 				if !isImport && data.CookieParams != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CookieParams.KmsKeyHmac
+					return data.CookieParams.KmsKeyHMAC
 				}
 				// Import case: read from API
 				if _, ok := blockData["kms_key_hmac"].(map[string]interface{}); ok {
@@ -1122,27 +1122,27 @@ func (r *AuthenticationResource) Update(ctx context.Context, req resource.Update
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["oidc_auth"].(map[string]interface{}); ok && (isImport || data.OidcAuth != nil) {
-		data.OidcAuth = &AuthenticationOidcAuthModel{
-			ClientSecret: func() *AuthenticationOidcAuthClientSecretModel {
-				if !isImport && data.OidcAuth != nil && data.OidcAuth.ClientSecret != nil {
+	if blockData, ok := apiResource.Spec["oidc_auth"].(map[string]interface{}); ok && (isImport || data.OIDCAuth != nil) {
+		data.OIDCAuth = &AuthenticationOIDCAuthModel{
+			ClientSecret: func() *AuthenticationOIDCAuthClientSecretModel {
+				if !isImport && data.OIDCAuth != nil && data.OIDCAuth.ClientSecret != nil {
 					// Normal Read: preserve existing state value
-					return data.OidcAuth.ClientSecret
+					return data.OIDCAuth.ClientSecret
 				}
 				// Import case: read from API
 				if _, ok := blockData["client_secret"].(map[string]interface{}); ok {
-					return &AuthenticationOidcAuthClientSecretModel{}
+					return &AuthenticationOIDCAuthClientSecretModel{}
 				}
 				return nil
 			}(),
-			OidcAuthParams: func() *AuthenticationOidcAuthOidcAuthParamsModel {
-				if !isImport && data.OidcAuth != nil && data.OidcAuth.OidcAuthParams != nil {
+			OIDCAuthParams: func() *AuthenticationOIDCAuthOIDCAuthParamsModel {
+				if !isImport && data.OIDCAuth != nil && data.OIDCAuth.OIDCAuthParams != nil {
 					// Normal Read: preserve existing state value
-					return data.OidcAuth.OidcAuthParams
+					return data.OIDCAuth.OIDCAuthParams
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["oidc_auth_params"].(map[string]interface{}); ok {
-					return &AuthenticationOidcAuthOidcAuthParamsModel{
+					return &AuthenticationOIDCAuthOIDCAuthParamsModel{
 						AuthEndpointURL: func() types.String {
 							if v, ok := nestedBlockData["auth_endpoint_url"].(string); ok && v != "" {
 								return types.StringValue(v)
@@ -1165,13 +1165,13 @@ func (r *AuthenticationResource) Update(ctx context.Context, req resource.Update
 				}
 				return nil
 			}(),
-			OidcClientID: func() types.String {
+			OIDCClientID: func() types.String {
 				if v, ok := blockData["oidc_client_id"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
 			}(),
-			OidcWellKnownConfigURL: func() types.String {
+			OIDCWellKnownConfigURL: func() types.String {
 				if v, ok := blockData["oidc_well_known_config_url"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}

@@ -2,12 +2,12 @@
 page_title: "f5xc_trusted_ca_list Resource - terraform-provider-f5xc"
 subcategory: "Certificates"
 description: |-
-  Manages a TrustedCaList resource in F5 Distributed Cloud for trusted certificate authority list management.
+  Manages a TrustedCAList resource in F5 Distributed Cloud for trusted certificate authority list management.
 ---
 
 # f5xc_trusted_ca_list (Resource)
 
-Manages a TrustedCaList resource in F5 Distributed Cloud for trusted certificate authority list management.
+Manages a TrustedCAList resource in F5 Distributed Cloud for trusted certificate authority list management.
 
 ~> **Note** Please refer to [Trusted CA List API docs](https://docs.cloud.f5.com/docs-v2/api/trusted-ca-list) to learn more.
 
@@ -15,7 +15,7 @@ Manages a TrustedCaList resource in F5 Distributed Cloud for trusted certificate
 
 ```terraform
 # Trusted CA List Resource Example
-# Manages a TrustedCaList resource in F5 Distributed Cloud for trusted certificate authority list management.
+# Manages a TrustedCAList resource in F5 Distributed Cloud for trusted certificate authority list management.
 
 # Basic Trusted CA List configuration
 resource "f5xc_trusted_ca_list" "example" {
@@ -41,9 +41,9 @@ resource "f5xc_trusted_ca_list" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the TrustedCaList. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the TrustedCAList. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the TrustedCaList will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the TrustedCAList will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

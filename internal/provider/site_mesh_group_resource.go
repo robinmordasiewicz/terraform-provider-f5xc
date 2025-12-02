@@ -93,8 +93,8 @@ type SiteMeshGroupResourceModel struct {
 	Labels            types.Map                       `tfsdk:"labels"`
 	ID                types.String                    `tfsdk:"id"`
 	Timeouts          timeouts.Value                  `tfsdk:"timeouts"`
-	DisableReFallback *SiteMeshGroupEmptyModel        `tfsdk:"disable_re_fallback"`
-	EnableReFallback  *SiteMeshGroupEmptyModel        `tfsdk:"enable_re_fallback"`
+	DisableREFallback *SiteMeshGroupEmptyModel        `tfsdk:"disable_re_fallback"`
+	EnableREFallback  *SiteMeshGroupEmptyModel        `tfsdk:"enable_re_fallback"`
 	FullMesh          *SiteMeshGroupFullMeshModel     `tfsdk:"full_mesh"`
 	HubMesh           *SiteMeshGroupHubMeshModel      `tfsdk:"hub_mesh"`
 	SpokeMesh         *SiteMeshGroupSpokeMeshModel    `tfsdk:"spoke_mesh"`
@@ -401,11 +401,11 @@ func (r *SiteMeshGroupResource) Create(ctx context.Context, req resource.CreateR
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if data.DisableReFallback != nil {
+	if data.DisableREFallback != nil {
 		disable_re_fallbackMap := make(map[string]interface{})
 		createReq.Spec["disable_re_fallback"] = disable_re_fallbackMap
 	}
-	if data.EnableReFallback != nil {
+	if data.EnableREFallback != nil {
 		enable_re_fallbackMap := make(map[string]interface{})
 		createReq.Spec["enable_re_fallback"] = enable_re_fallbackMap
 	}
@@ -488,14 +488,14 @@ func (r *SiteMeshGroupResource) Create(ctx context.Context, req resource.CreateR
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
 	_ = isImport      // May be unused if resource has no blocks needing import detection
-	if _, ok := apiResource.Spec["disable_re_fallback"].(map[string]interface{}); ok && isImport && data.DisableReFallback == nil {
+	if _, ok := apiResource.Spec["disable_re_fallback"].(map[string]interface{}); ok && isImport && data.DisableREFallback == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DisableReFallback = &SiteMeshGroupEmptyModel{}
+		data.DisableREFallback = &SiteMeshGroupEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["enable_re_fallback"].(map[string]interface{}); ok && isImport && data.EnableReFallback == nil {
+	if _, ok := apiResource.Spec["enable_re_fallback"].(map[string]interface{}); ok && isImport && data.EnableREFallback == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.EnableReFallback = &SiteMeshGroupEmptyModel{}
+		data.EnableREFallback = &SiteMeshGroupEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["full_mesh"].(map[string]interface{}); ok && isImport && data.FullMesh == nil {
@@ -647,14 +647,14 @@ func (r *SiteMeshGroupResource) Read(ctx context.Context, req resource.ReadReque
 		"psd_is_nil": psd == nil,
 		"managed":    psd.Metadata.Custom["managed"],
 	})
-	if _, ok := apiResource.Spec["disable_re_fallback"].(map[string]interface{}); ok && isImport && data.DisableReFallback == nil {
+	if _, ok := apiResource.Spec["disable_re_fallback"].(map[string]interface{}); ok && isImport && data.DisableREFallback == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DisableReFallback = &SiteMeshGroupEmptyModel{}
+		data.DisableREFallback = &SiteMeshGroupEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["enable_re_fallback"].(map[string]interface{}); ok && isImport && data.EnableReFallback == nil {
+	if _, ok := apiResource.Spec["enable_re_fallback"].(map[string]interface{}); ok && isImport && data.EnableREFallback == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.EnableReFallback = &SiteMeshGroupEmptyModel{}
+		data.EnableREFallback = &SiteMeshGroupEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["full_mesh"].(map[string]interface{}); ok && isImport && data.FullMesh == nil {
@@ -773,11 +773,11 @@ func (r *SiteMeshGroupResource) Update(ctx context.Context, req resource.UpdateR
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if data.DisableReFallback != nil {
+	if data.DisableREFallback != nil {
 		disable_re_fallbackMap := make(map[string]interface{})
 		apiResource.Spec["disable_re_fallback"] = disable_re_fallbackMap
 	}
-	if data.EnableReFallback != nil {
+	if data.EnableREFallback != nil {
 		enable_re_fallbackMap := make(map[string]interface{})
 		apiResource.Spec["enable_re_fallback"] = enable_re_fallbackMap
 	}
@@ -871,14 +871,14 @@ func (r *SiteMeshGroupResource) Update(ctx context.Context, req resource.UpdateR
 	apiResource = fetched // Use GET response which includes all computed fields
 	isImport := false     // Update is never an import
 	_ = isImport          // May be unused if resource has no blocks needing import detection
-	if _, ok := apiResource.Spec["disable_re_fallback"].(map[string]interface{}); ok && isImport && data.DisableReFallback == nil {
+	if _, ok := apiResource.Spec["disable_re_fallback"].(map[string]interface{}); ok && isImport && data.DisableREFallback == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DisableReFallback = &SiteMeshGroupEmptyModel{}
+		data.DisableREFallback = &SiteMeshGroupEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["enable_re_fallback"].(map[string]interface{}); ok && isImport && data.EnableReFallback == nil {
+	if _, ok := apiResource.Spec["enable_re_fallback"].(map[string]interface{}); ok && isImport && data.EnableREFallback == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.EnableReFallback = &SiteMeshGroupEmptyModel{}
+		data.EnableREFallback = &SiteMeshGroupEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["full_mesh"].(map[string]interface{}); ok && isImport && data.FullMesh == nil {

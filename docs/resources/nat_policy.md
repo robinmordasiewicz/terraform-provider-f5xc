@@ -2,12 +2,12 @@
 page_title: "f5xc_nat_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages a NatPolicy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
+  Manages a NATPolicy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
 ---
 
 # f5xc_nat_policy (Resource)
 
-Manages a NatPolicy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
+Manages a NATPolicy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
 
 ~> **Note** Please refer to [NAT Policy API docs](https://docs.cloud.f5.com/docs-v2/api/nat-policy) to learn more.
 
@@ -15,7 +15,7 @@ Manages a NatPolicy resource in F5 Distributed Cloud for nat policy create speci
 
 ```terraform
 # NAT Policy Resource Example
-# Manages a NatPolicy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
+# Manages a NATPolicy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
 
 # Basic NAT Policy configuration
 resource "f5xc_nat_policy" "example" {
@@ -52,9 +52,9 @@ resource "f5xc_nat_policy" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the NatPolicy. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the NATPolicy. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the NatPolicy will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the NATPolicy will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

@@ -51,11 +51,11 @@ type TicketTrackingSystemEmptyModel struct {
 
 // TicketTrackingSystemJiraConfigModel represents jira_config block
 type TicketTrackingSystemJiraConfigModel struct {
-	AdhocRestAPI *TicketTrackingSystemJiraConfigAdhocRestAPIModel `tfsdk:"adhoc_rest_api"`
+	AdhocRESTAPI *TicketTrackingSystemJiraConfigAdhocRESTAPIModel `tfsdk:"adhoc_rest_api"`
 }
 
-// TicketTrackingSystemJiraConfigAdhocRestAPIModel represents adhoc_rest_api block
-type TicketTrackingSystemJiraConfigAdhocRestAPIModel struct {
+// TicketTrackingSystemJiraConfigAdhocRESTAPIModel represents adhoc_rest_api block
+type TicketTrackingSystemJiraConfigAdhocRESTAPIModel struct {
 	AccountEmail       types.String `tfsdk:"account_email"`
 	APIToken           types.String `tfsdk:"api_token"`
 	OrganizationDomain types.String `tfsdk:"organization_domain"`
@@ -308,16 +308,16 @@ func (r *TicketTrackingSystemResource) Create(ctx context.Context, req resource.
 	// Marshal spec fields from Terraform state to API struct
 	if data.JiraConfig != nil {
 		jira_configMap := make(map[string]interface{})
-		if data.JiraConfig.AdhocRestAPI != nil {
+		if data.JiraConfig.AdhocRESTAPI != nil {
 			adhoc_rest_apiNestedMap := make(map[string]interface{})
-			if !data.JiraConfig.AdhocRestAPI.AccountEmail.IsNull() && !data.JiraConfig.AdhocRestAPI.AccountEmail.IsUnknown() {
-				adhoc_rest_apiNestedMap["account_email"] = data.JiraConfig.AdhocRestAPI.AccountEmail.ValueString()
+			if !data.JiraConfig.AdhocRESTAPI.AccountEmail.IsNull() && !data.JiraConfig.AdhocRESTAPI.AccountEmail.IsUnknown() {
+				adhoc_rest_apiNestedMap["account_email"] = data.JiraConfig.AdhocRESTAPI.AccountEmail.ValueString()
 			}
-			if !data.JiraConfig.AdhocRestAPI.APIToken.IsNull() && !data.JiraConfig.AdhocRestAPI.APIToken.IsUnknown() {
-				adhoc_rest_apiNestedMap["api_token"] = data.JiraConfig.AdhocRestAPI.APIToken.ValueString()
+			if !data.JiraConfig.AdhocRESTAPI.APIToken.IsNull() && !data.JiraConfig.AdhocRESTAPI.APIToken.IsUnknown() {
+				adhoc_rest_apiNestedMap["api_token"] = data.JiraConfig.AdhocRESTAPI.APIToken.ValueString()
 			}
-			if !data.JiraConfig.AdhocRestAPI.OrganizationDomain.IsNull() && !data.JiraConfig.AdhocRestAPI.OrganizationDomain.IsUnknown() {
-				adhoc_rest_apiNestedMap["organization_domain"] = data.JiraConfig.AdhocRestAPI.OrganizationDomain.ValueString()
+			if !data.JiraConfig.AdhocRESTAPI.OrganizationDomain.IsNull() && !data.JiraConfig.AdhocRESTAPI.OrganizationDomain.IsUnknown() {
+				adhoc_rest_apiNestedMap["organization_domain"] = data.JiraConfig.AdhocRESTAPI.OrganizationDomain.ValueString()
 			}
 			jira_configMap["adhoc_rest_api"] = adhoc_rest_apiNestedMap
 		}
@@ -501,16 +501,16 @@ func (r *TicketTrackingSystemResource) Update(ctx context.Context, req resource.
 	// Marshal spec fields from Terraform state to API struct
 	if data.JiraConfig != nil {
 		jira_configMap := make(map[string]interface{})
-		if data.JiraConfig.AdhocRestAPI != nil {
+		if data.JiraConfig.AdhocRESTAPI != nil {
 			adhoc_rest_apiNestedMap := make(map[string]interface{})
-			if !data.JiraConfig.AdhocRestAPI.AccountEmail.IsNull() && !data.JiraConfig.AdhocRestAPI.AccountEmail.IsUnknown() {
-				adhoc_rest_apiNestedMap["account_email"] = data.JiraConfig.AdhocRestAPI.AccountEmail.ValueString()
+			if !data.JiraConfig.AdhocRESTAPI.AccountEmail.IsNull() && !data.JiraConfig.AdhocRESTAPI.AccountEmail.IsUnknown() {
+				adhoc_rest_apiNestedMap["account_email"] = data.JiraConfig.AdhocRESTAPI.AccountEmail.ValueString()
 			}
-			if !data.JiraConfig.AdhocRestAPI.APIToken.IsNull() && !data.JiraConfig.AdhocRestAPI.APIToken.IsUnknown() {
-				adhoc_rest_apiNestedMap["api_token"] = data.JiraConfig.AdhocRestAPI.APIToken.ValueString()
+			if !data.JiraConfig.AdhocRESTAPI.APIToken.IsNull() && !data.JiraConfig.AdhocRESTAPI.APIToken.IsUnknown() {
+				adhoc_rest_apiNestedMap["api_token"] = data.JiraConfig.AdhocRESTAPI.APIToken.ValueString()
 			}
-			if !data.JiraConfig.AdhocRestAPI.OrganizationDomain.IsNull() && !data.JiraConfig.AdhocRestAPI.OrganizationDomain.IsUnknown() {
-				adhoc_rest_apiNestedMap["organization_domain"] = data.JiraConfig.AdhocRestAPI.OrganizationDomain.ValueString()
+			if !data.JiraConfig.AdhocRESTAPI.OrganizationDomain.IsNull() && !data.JiraConfig.AdhocRESTAPI.OrganizationDomain.IsUnknown() {
+				adhoc_rest_apiNestedMap["organization_domain"] = data.JiraConfig.AdhocRESTAPI.OrganizationDomain.ValueString()
 			}
 			jira_configMap["adhoc_rest_api"] = adhoc_rest_apiNestedMap
 		}

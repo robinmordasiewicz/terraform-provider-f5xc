@@ -79,7 +79,7 @@ type EnhancedFirewallPolicyRuleListRulesModel struct {
 	AdvancedAction           *EnhancedFirewallPolicyRuleListRulesAdvancedActionModel           `tfsdk:"advanced_action"`
 	AllDestinations          *EnhancedFirewallPolicyEmptyModel                                 `tfsdk:"all_destinations"`
 	AllSLIVips               *EnhancedFirewallPolicyEmptyModel                                 `tfsdk:"all_sli_vips"`
-	AllSLOVips               *EnhancedFirewallPolicyEmptyModel                                 `tfsdk:"all_slo_vips"`
+	AllSloVips               *EnhancedFirewallPolicyEmptyModel                                 `tfsdk:"all_slo_vips"`
 	AllSources               *EnhancedFirewallPolicyEmptyModel                                 `tfsdk:"all_sources"`
 	AllTCPTraffic            *EnhancedFirewallPolicyEmptyModel                                 `tfsdk:"all_tcp_traffic"`
 	AllTraffic               *EnhancedFirewallPolicyEmptyModel                                 `tfsdk:"all_traffic"`
@@ -146,11 +146,11 @@ type EnhancedFirewallPolicyRuleListRulesDestinationPrefixListModel struct {
 
 // EnhancedFirewallPolicyRuleListRulesInsertServiceModel represents insert_service block
 type EnhancedFirewallPolicyRuleListRulesInsertServiceModel struct {
-	NFVService *EnhancedFirewallPolicyRuleListRulesInsertServiceNFVServiceModel `tfsdk:"nfv_service"`
+	NfvService *EnhancedFirewallPolicyRuleListRulesInsertServiceNfvServiceModel `tfsdk:"nfv_service"`
 }
 
-// EnhancedFirewallPolicyRuleListRulesInsertServiceNFVServiceModel represents nfv_service block
-type EnhancedFirewallPolicyRuleListRulesInsertServiceNFVServiceModel struct {
+// EnhancedFirewallPolicyRuleListRulesInsertServiceNfvServiceModel represents nfv_service block
+type EnhancedFirewallPolicyRuleListRulesInsertServiceNfvServiceModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -812,7 +812,7 @@ func (r *EnhancedFirewallPolicyResource) Create(ctx context.Context, req resourc
 				if listItem.AllSLIVips != nil {
 					listItemMap["all_sli_vips"] = map[string]interface{}{}
 				}
-				if listItem.AllSLOVips != nil {
+				if listItem.AllSloVips != nil {
 					listItemMap["all_slo_vips"] = map[string]interface{}{}
 				}
 				if listItem.AllSources != nil {
@@ -1036,7 +1036,7 @@ func (r *EnhancedFirewallPolicyResource) Create(ctx context.Context, req resourc
 									}
 									return nil
 								}(),
-								AllSLOVips: func() *EnhancedFirewallPolicyEmptyModel {
+								AllSloVips: func() *EnhancedFirewallPolicyEmptyModel {
 									if _, ok := itemMap["all_slo_vips"].(map[string]interface{}); ok {
 										return &EnhancedFirewallPolicyEmptyModel{}
 									}
@@ -1413,7 +1413,7 @@ func (r *EnhancedFirewallPolicyResource) Read(ctx context.Context, req resource.
 									}
 									return nil
 								}(),
-								AllSLOVips: func() *EnhancedFirewallPolicyEmptyModel {
+								AllSloVips: func() *EnhancedFirewallPolicyEmptyModel {
 									if _, ok := itemMap["all_slo_vips"].(map[string]interface{}); ok {
 										return &EnhancedFirewallPolicyEmptyModel{}
 									}
@@ -1717,7 +1717,7 @@ func (r *EnhancedFirewallPolicyResource) Update(ctx context.Context, req resourc
 				if listItem.AllSLIVips != nil {
 					listItemMap["all_sli_vips"] = map[string]interface{}{}
 				}
-				if listItem.AllSLOVips != nil {
+				if listItem.AllSloVips != nil {
 					listItemMap["all_slo_vips"] = map[string]interface{}{}
 				}
 				if listItem.AllSources != nil {
@@ -1952,7 +1952,7 @@ func (r *EnhancedFirewallPolicyResource) Update(ctx context.Context, req resourc
 									}
 									return nil
 								}(),
-								AllSLOVips: func() *EnhancedFirewallPolicyEmptyModel {
+								AllSloVips: func() *EnhancedFirewallPolicyEmptyModel {
 									if _, ok := itemMap["all_slo_vips"].(map[string]interface{}); ok {
 										return &EnhancedFirewallPolicyEmptyModel{}
 									}

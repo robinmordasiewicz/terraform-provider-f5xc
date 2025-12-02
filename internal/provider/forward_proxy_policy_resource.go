@@ -61,7 +61,7 @@ type ForwardProxyPolicyAllowListModel struct {
 
 // ForwardProxyPolicyAllowListDestListModel represents dest_list block
 type ForwardProxyPolicyAllowListDestListModel struct {
-	IPV6Prefixes types.List   `tfsdk:"ipv6_prefixes"`
+	Ipv6Prefixes types.List   `tfsdk:"ipv6_prefixes"`
 	PortRanges   types.String `tfsdk:"port_ranges"`
 	Prefixes     types.List   `tfsdk:"prefixes"`
 }
@@ -96,7 +96,7 @@ type ForwardProxyPolicyDenyListModel struct {
 
 // ForwardProxyPolicyDenyListDestListModel represents dest_list block
 type ForwardProxyPolicyDenyListDestListModel struct {
-	IPV6Prefixes types.List   `tfsdk:"ipv6_prefixes"`
+	Ipv6Prefixes types.List   `tfsdk:"ipv6_prefixes"`
 	PortRanges   types.String `tfsdk:"port_ranges"`
 	Prefixes     types.List   `tfsdk:"prefixes"`
 }

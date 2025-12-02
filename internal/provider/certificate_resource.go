@@ -92,7 +92,7 @@ type CertificateResourceModel struct {
 	Timeouts             timeouts.Value                        `tfsdk:"timeouts"`
 	CertificateChain     *CertificateCertificateChainModel     `tfsdk:"certificate_chain"`
 	CustomHashAlgorithms *CertificateCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling  *CertificateEmptyModel                `tfsdk:"disable_ocsp_stapling"`
+	DisableOCSPStapling  *CertificateEmptyModel                `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey           *CertificatePrivateKeyModel           `tfsdk:"private_key"`
 	UseSystemDefaults    *CertificateEmptyModel                `tfsdk:"use_system_defaults"`
 }
@@ -409,7 +409,7 @@ func (r *CertificateResource) Create(ctx context.Context, req resource.CreateReq
 		}
 		createReq.Spec["custom_hash_algorithms"] = custom_hash_algorithmsMap
 	}
-	if data.DisableOcspStapling != nil {
+	if data.DisableOCSPStapling != nil {
 		disable_ocsp_staplingMap := make(map[string]interface{})
 		createReq.Spec["disable_ocsp_stapling"] = disable_ocsp_staplingMap
 	}
@@ -499,9 +499,9 @@ func (r *CertificateResource) Create(ctx context.Context, req resource.CreateReq
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["disable_ocsp_stapling"].(map[string]interface{}); ok && isImport && data.DisableOcspStapling == nil {
+	if _, ok := apiResource.Spec["disable_ocsp_stapling"].(map[string]interface{}); ok && isImport && data.DisableOCSPStapling == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DisableOcspStapling = &CertificateEmptyModel{}
+		data.DisableOCSPStapling = &CertificateEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["private_key"].(map[string]interface{}); ok && isImport && data.PrivateKey == nil {
@@ -651,9 +651,9 @@ func (r *CertificateResource) Read(ctx context.Context, req resource.ReadRequest
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["disable_ocsp_stapling"].(map[string]interface{}); ok && isImport && data.DisableOcspStapling == nil {
+	if _, ok := apiResource.Spec["disable_ocsp_stapling"].(map[string]interface{}); ok && isImport && data.DisableOCSPStapling == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DisableOcspStapling = &CertificateEmptyModel{}
+		data.DisableOCSPStapling = &CertificateEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["private_key"].(map[string]interface{}); ok && isImport && data.PrivateKey == nil {
@@ -755,7 +755,7 @@ func (r *CertificateResource) Update(ctx context.Context, req resource.UpdateReq
 		}
 		apiResource.Spec["custom_hash_algorithms"] = custom_hash_algorithmsMap
 	}
-	if data.DisableOcspStapling != nil {
+	if data.DisableOCSPStapling != nil {
 		disable_ocsp_staplingMap := make(map[string]interface{})
 		apiResource.Spec["disable_ocsp_stapling"] = disable_ocsp_staplingMap
 	}
@@ -863,9 +863,9 @@ func (r *CertificateResource) Update(ctx context.Context, req resource.UpdateReq
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["disable_ocsp_stapling"].(map[string]interface{}); ok && isImport && data.DisableOcspStapling == nil {
+	if _, ok := apiResource.Spec["disable_ocsp_stapling"].(map[string]interface{}); ok && isImport && data.DisableOCSPStapling == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DisableOcspStapling = &CertificateEmptyModel{}
+		data.DisableOCSPStapling = &CertificateEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["private_key"].(map[string]interface{}); ok && isImport && data.PrivateKey == nil {

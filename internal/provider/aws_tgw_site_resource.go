@@ -62,15 +62,15 @@ type AWSTGWSiteAWSParametersModel struct {
 	AWSCred             *AWSTGWSiteAWSParametersAWSCredModel             `tfsdk:"aws_cred"`
 	AzNodes             []AWSTGWSiteAWSParametersAzNodesModel            `tfsdk:"az_nodes"`
 	CustomSecurityGroup *AWSTGWSiteAWSParametersCustomSecurityGroupModel `tfsdk:"custom_security_group"`
-	DisableInternetVip  *AWSTGWSiteEmptyModel                            `tfsdk:"disable_internet_vip"`
-	EnableInternetVip   *AWSTGWSiteEmptyModel                            `tfsdk:"enable_internet_vip"`
+	DisableInternetVIP  *AWSTGWSiteEmptyModel                            `tfsdk:"disable_internet_vip"`
+	EnableInternetVIP   *AWSTGWSiteEmptyModel                            `tfsdk:"enable_internet_vip"`
 	ExistingTGW         *AWSTGWSiteAWSParametersExistingTGWModel         `tfsdk:"existing_tgw"`
 	F5xcSecurityGroup   *AWSTGWSiteEmptyModel                            `tfsdk:"f5xc_security_group"`
 	NewTGW              *AWSTGWSiteAWSParametersNewTGWModel              `tfsdk:"new_tgw"`
 	NewVPC              *AWSTGWSiteAWSParametersNewVPCModel              `tfsdk:"new_vpc"`
 	NoWorkerNodes       *AWSTGWSiteEmptyModel                            `tfsdk:"no_worker_nodes"`
-	ReservedTGWCidr     *AWSTGWSiteEmptyModel                            `tfsdk:"reserved_tgw_cidr"`
-	TGWCidr             *AWSTGWSiteAWSParametersTGWCidrModel             `tfsdk:"tgw_cidr"`
+	ReservedTGWCIDR     *AWSTGWSiteEmptyModel                            `tfsdk:"reserved_tgw_cidr"`
+	TGWCIDR             *AWSTGWSiteAWSParametersTGWCIDRModel             `tfsdk:"tgw_cidr"`
 }
 
 // AWSTGWSiteAWSParametersAdminPasswordModel represents admin_password block
@@ -116,7 +116,7 @@ type AWSTGWSiteAWSParametersAzNodesInsideSubnetModel struct {
 
 // AWSTGWSiteAWSParametersAzNodesInsideSubnetSubnetParamModel represents subnet_param block
 type AWSTGWSiteAWSParametersAzNodesInsideSubnetSubnetParamModel struct {
-	IPV4 types.String `tfsdk:"ipv4"`
+	Ipv4 types.String `tfsdk:"ipv4"`
 }
 
 // AWSTGWSiteAWSParametersAzNodesOutsideSubnetModel represents outside_subnet block
@@ -127,7 +127,7 @@ type AWSTGWSiteAWSParametersAzNodesOutsideSubnetModel struct {
 
 // AWSTGWSiteAWSParametersAzNodesOutsideSubnetSubnetParamModel represents subnet_param block
 type AWSTGWSiteAWSParametersAzNodesOutsideSubnetSubnetParamModel struct {
-	IPV4 types.String `tfsdk:"ipv4"`
+	Ipv4 types.String `tfsdk:"ipv4"`
 }
 
 // AWSTGWSiteAWSParametersAzNodesWorkloadSubnetModel represents workload_subnet block
@@ -138,7 +138,7 @@ type AWSTGWSiteAWSParametersAzNodesWorkloadSubnetModel struct {
 
 // AWSTGWSiteAWSParametersAzNodesWorkloadSubnetSubnetParamModel represents subnet_param block
 type AWSTGWSiteAWSParametersAzNodesWorkloadSubnetSubnetParamModel struct {
-	IPV4 types.String `tfsdk:"ipv4"`
+	Ipv4 types.String `tfsdk:"ipv4"`
 }
 
 // AWSTGWSiteAWSParametersCustomSecurityGroupModel represents custom_security_group block
@@ -169,13 +169,13 @@ type AWSTGWSiteAWSParametersNewTGWUserAssignedModel struct {
 // AWSTGWSiteAWSParametersNewVPCModel represents new_vpc block
 type AWSTGWSiteAWSParametersNewVPCModel struct {
 	NameTag      types.String          `tfsdk:"name_tag"`
-	PrimaryIPV4  types.String          `tfsdk:"primary_ipv4"`
+	PrimaryIpv4  types.String          `tfsdk:"primary_ipv4"`
 	Autogenerate *AWSTGWSiteEmptyModel `tfsdk:"autogenerate"`
 }
 
-// AWSTGWSiteAWSParametersTGWCidrModel represents tgw_cidr block
-type AWSTGWSiteAWSParametersTGWCidrModel struct {
-	IPV4 types.String `tfsdk:"ipv4"`
+// AWSTGWSiteAWSParametersTGWCIDRModel represents tgw_cidr block
+type AWSTGWSiteAWSParametersTGWCIDRModel struct {
+	Ipv4 types.String `tfsdk:"ipv4"`
 }
 
 // AWSTGWSiteBlockedServicesModel represents blocked_services block
@@ -257,10 +257,10 @@ type AWSTGWSiteOfflineSurvivabilityModeModel struct {
 	NoOfflineSurvivabilityMode     *AWSTGWSiteEmptyModel `tfsdk:"no_offline_survivability_mode"`
 }
 
-// AWSTGWSiteOsModel represents os block
-type AWSTGWSiteOsModel struct {
+// AWSTGWSiteOSModel represents os block
+type AWSTGWSiteOSModel struct {
 	OperatingSystemVersion types.String          `tfsdk:"operating_system_version"`
-	DefaultOsVersion       *AWSTGWSiteEmptyModel `tfsdk:"default_os_version"`
+	DefaultOSVersion       *AWSTGWSiteEmptyModel `tfsdk:"default_os_version"`
 }
 
 // AWSTGWSitePerformanceEnhancementModeModel represents performance_enhancement_mode block
@@ -358,8 +358,8 @@ type AWSTGWSiteTGWSecurityActiveNetworkPoliciesNetworkPoliciesModel struct {
 
 // AWSTGWSiteVnConfigModel represents vn_config block
 type AWSTGWSiteVnConfigModel struct {
-	AllowedVipPort          *AWSTGWSiteVnConfigAllowedVipPortModel          `tfsdk:"allowed_vip_port"`
-	AllowedVipPortSLI       *AWSTGWSiteVnConfigAllowedVipPortSLIModel       `tfsdk:"allowed_vip_port_sli"`
+	AllowedVIPPort          *AWSTGWSiteVnConfigAllowedVIPPortModel          `tfsdk:"allowed_vip_port"`
+	AllowedVIPPortSLI       *AWSTGWSiteVnConfigAllowedVIPPortSLIModel       `tfsdk:"allowed_vip_port_sli"`
 	DcClusterGroupInsideVn  *AWSTGWSiteVnConfigDcClusterGroupInsideVnModel  `tfsdk:"dc_cluster_group_inside_vn"`
 	DcClusterGroupOutsideVn *AWSTGWSiteVnConfigDcClusterGroupOutsideVnModel `tfsdk:"dc_cluster_group_outside_vn"`
 	GlobalNetworkList       *AWSTGWSiteVnConfigGlobalNetworkListModel       `tfsdk:"global_network_list"`
@@ -373,31 +373,31 @@ type AWSTGWSiteVnConfigModel struct {
 	SmConnectionPvtIP       *AWSTGWSiteEmptyModel                           `tfsdk:"sm_connection_pvt_ip"`
 }
 
-// AWSTGWSiteVnConfigAllowedVipPortModel represents allowed_vip_port block
-type AWSTGWSiteVnConfigAllowedVipPortModel struct {
-	CustomPorts           *AWSTGWSiteVnConfigAllowedVipPortCustomPortsModel `tfsdk:"custom_ports"`
-	DisableAllowedVipPort *AWSTGWSiteEmptyModel                             `tfsdk:"disable_allowed_vip_port"`
+// AWSTGWSiteVnConfigAllowedVIPPortModel represents allowed_vip_port block
+type AWSTGWSiteVnConfigAllowedVIPPortModel struct {
+	CustomPorts           *AWSTGWSiteVnConfigAllowedVIPPortCustomPortsModel `tfsdk:"custom_ports"`
+	DisableAllowedVIPPort *AWSTGWSiteEmptyModel                             `tfsdk:"disable_allowed_vip_port"`
 	UseHTTPHTTPSPort      *AWSTGWSiteEmptyModel                             `tfsdk:"use_http_https_port"`
 	UseHTTPPort           *AWSTGWSiteEmptyModel                             `tfsdk:"use_http_port"`
 	UseHTTPSPort          *AWSTGWSiteEmptyModel                             `tfsdk:"use_https_port"`
 }
 
-// AWSTGWSiteVnConfigAllowedVipPortCustomPortsModel represents custom_ports block
-type AWSTGWSiteVnConfigAllowedVipPortCustomPortsModel struct {
+// AWSTGWSiteVnConfigAllowedVIPPortCustomPortsModel represents custom_ports block
+type AWSTGWSiteVnConfigAllowedVIPPortCustomPortsModel struct {
 	PortRanges types.String `tfsdk:"port_ranges"`
 }
 
-// AWSTGWSiteVnConfigAllowedVipPortSLIModel represents allowed_vip_port_sli block
-type AWSTGWSiteVnConfigAllowedVipPortSLIModel struct {
-	CustomPorts           *AWSTGWSiteVnConfigAllowedVipPortSLICustomPortsModel `tfsdk:"custom_ports"`
-	DisableAllowedVipPort *AWSTGWSiteEmptyModel                                `tfsdk:"disable_allowed_vip_port"`
+// AWSTGWSiteVnConfigAllowedVIPPortSLIModel represents allowed_vip_port_sli block
+type AWSTGWSiteVnConfigAllowedVIPPortSLIModel struct {
+	CustomPorts           *AWSTGWSiteVnConfigAllowedVIPPortSLICustomPortsModel `tfsdk:"custom_ports"`
+	DisableAllowedVIPPort *AWSTGWSiteEmptyModel                                `tfsdk:"disable_allowed_vip_port"`
 	UseHTTPHTTPSPort      *AWSTGWSiteEmptyModel                                `tfsdk:"use_http_https_port"`
 	UseHTTPPort           *AWSTGWSiteEmptyModel                                `tfsdk:"use_http_port"`
 	UseHTTPSPort          *AWSTGWSiteEmptyModel                                `tfsdk:"use_https_port"`
 }
 
-// AWSTGWSiteVnConfigAllowedVipPortSLICustomPortsModel represents custom_ports block
-type AWSTGWSiteVnConfigAllowedVipPortSLICustomPortsModel struct {
+// AWSTGWSiteVnConfigAllowedVIPPortSLICustomPortsModel represents custom_ports block
+type AWSTGWSiteVnConfigAllowedVIPPortSLICustomPortsModel struct {
 	PortRanges types.String `tfsdk:"port_ranges"`
 }
 
@@ -422,29 +422,29 @@ type AWSTGWSiteVnConfigGlobalNetworkListModel struct {
 
 // AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsModel represents global_network_connections block
 type AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsModel struct {
-	SLIToGlobalDr *AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel `tfsdk:"sli_to_global_dr"`
-	SLOToGlobalDr *AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel `tfsdk:"slo_to_global_dr"`
+	SLIToGlobalDR *AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel `tfsdk:"sli_to_global_dr"`
+	SloToGlobalDR *AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel `tfsdk:"slo_to_global_dr"`
 }
 
-// AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel represents sli_to_global_dr block
-type AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel struct {
-	GlobalVn *AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel `tfsdk:"global_vn"`
+// AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel represents sli_to_global_dr block
+type AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel struct {
+	GlobalVn *AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel `tfsdk:"global_vn"`
 }
 
-// AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel represents global_vn block
-type AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel struct {
+// AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel represents global_vn block
+type AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel represents slo_to_global_dr block
-type AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel struct {
-	GlobalVn *AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel `tfsdk:"global_vn"`
+// AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel represents slo_to_global_dr block
+type AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel struct {
+	GlobalVn *AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel `tfsdk:"global_vn"`
 }
 
-// AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel represents global_vn block
-type AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel struct {
+// AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel represents global_vn block
+type AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -487,34 +487,34 @@ type AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthop
 
 // AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
 type AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel struct {
-	IPV4 *AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model `tfsdk:"ipv4"`
-	IPV6 *AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model `tfsdk:"ipv6"`
+	Ipv4 *AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model `tfsdk:"ipv4"`
+	Ipv6 *AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model `tfsdk:"ipv6"`
 }
 
-// AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model represents ipv4 block
-type AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model struct {
+// AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model represents ipv4 block
+type AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model struct {
 	Addr types.String `tfsdk:"addr"`
 }
 
-// AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model represents ipv6 block
-type AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model struct {
+// AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model represents ipv6 block
+type AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model struct {
 	Addr types.String `tfsdk:"addr"`
 }
 
 // AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel represents subnets block
 type AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel struct {
-	IPV4 *AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model `tfsdk:"ipv4"`
-	IPV6 *AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model `tfsdk:"ipv6"`
+	Ipv4 *AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model `tfsdk:"ipv4"`
+	Ipv6 *AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model `tfsdk:"ipv6"`
 }
 
-// AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model represents ipv4 block
-type AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model struct {
+// AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model represents ipv4 block
+type AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model struct {
 	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
 
-// AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model represents ipv6 block
-type AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model struct {
+// AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model represents ipv6 block
+type AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model struct {
 	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
@@ -556,34 +556,34 @@ type AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNextho
 
 // AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
 type AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel struct {
-	IPV4 *AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model `tfsdk:"ipv4"`
-	IPV6 *AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model `tfsdk:"ipv6"`
+	Ipv4 *AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model `tfsdk:"ipv4"`
+	Ipv6 *AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model `tfsdk:"ipv6"`
 }
 
-// AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model represents ipv4 block
-type AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model struct {
+// AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model represents ipv4 block
+type AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model struct {
 	Addr types.String `tfsdk:"addr"`
 }
 
-// AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model represents ipv6 block
-type AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model struct {
+// AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model represents ipv6 block
+type AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model struct {
 	Addr types.String `tfsdk:"addr"`
 }
 
 // AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel represents subnets block
 type AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel struct {
-	IPV4 *AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model `tfsdk:"ipv4"`
-	IPV6 *AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model `tfsdk:"ipv6"`
+	Ipv4 *AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model `tfsdk:"ipv4"`
+	Ipv6 *AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model `tfsdk:"ipv6"`
 }
 
-// AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model represents ipv4 block
-type AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model struct {
+// AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model represents ipv4 block
+type AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model struct {
 	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
 
-// AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model represents ipv6 block
-type AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model struct {
+// AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model represents ipv6 block
+type AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model struct {
 	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
@@ -620,7 +620,7 @@ type AWSTGWSiteResourceModel struct {
 	LogReceiver                *AWSTGWSiteLogReceiverModel                `tfsdk:"log_receiver"`
 	LogsStreamingDisabled      *AWSTGWSiteEmptyModel                      `tfsdk:"logs_streaming_disabled"`
 	OfflineSurvivabilityMode   *AWSTGWSiteOfflineSurvivabilityModeModel   `tfsdk:"offline_survivability_mode"`
-	Os                         *AWSTGWSiteOsModel                         `tfsdk:"os"`
+	OS                         *AWSTGWSiteOSModel                         `tfsdk:"os"`
 	PerformanceEnhancementMode *AWSTGWSitePerformanceEnhancementModeModel `tfsdk:"performance_enhancement_mode"`
 	PrivateConnectivity        *AWSTGWSitePrivateConnectivityModel        `tfsdk:"private_connectivity"`
 	Sw                         *AWSTGWSiteSwModel                         `tfsdk:"sw"`
@@ -2018,13 +2018,13 @@ func (r *AWSTGWSiteResource) Create(ctx context.Context, req resource.CreateRequ
 			}
 			aws_parametersMap["custom_security_group"] = custom_security_groupNestedMap
 		}
-		if data.AWSParameters.DisableInternetVip != nil {
+		if data.AWSParameters.DisableInternetVIP != nil {
 			aws_parametersMap["disable_internet_vip"] = map[string]interface{}{}
 		}
 		if !data.AWSParameters.DiskSize.IsNull() && !data.AWSParameters.DiskSize.IsUnknown() {
 			aws_parametersMap["disk_size"] = data.AWSParameters.DiskSize.ValueInt64()
 		}
-		if data.AWSParameters.EnableInternetVip != nil {
+		if data.AWSParameters.EnableInternetVIP != nil {
 			aws_parametersMap["enable_internet_vip"] = map[string]interface{}{}
 		}
 		if data.AWSParameters.ExistingTGW != nil {
@@ -2055,8 +2055,8 @@ func (r *AWSTGWSiteResource) Create(ctx context.Context, req resource.CreateRequ
 			if !data.AWSParameters.NewVPC.NameTag.IsNull() && !data.AWSParameters.NewVPC.NameTag.IsUnknown() {
 				new_vpcNestedMap["name_tag"] = data.AWSParameters.NewVPC.NameTag.ValueString()
 			}
-			if !data.AWSParameters.NewVPC.PrimaryIPV4.IsNull() && !data.AWSParameters.NewVPC.PrimaryIPV4.IsUnknown() {
-				new_vpcNestedMap["primary_ipv4"] = data.AWSParameters.NewVPC.PrimaryIPV4.ValueString()
+			if !data.AWSParameters.NewVPC.PrimaryIpv4.IsNull() && !data.AWSParameters.NewVPC.PrimaryIpv4.IsUnknown() {
+				new_vpcNestedMap["primary_ipv4"] = data.AWSParameters.NewVPC.PrimaryIpv4.ValueString()
 			}
 			aws_parametersMap["new_vpc"] = new_vpcNestedMap
 		}
@@ -2066,16 +2066,16 @@ func (r *AWSTGWSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		if !data.AWSParameters.NodesPerAz.IsNull() && !data.AWSParameters.NodesPerAz.IsUnknown() {
 			aws_parametersMap["nodes_per_az"] = data.AWSParameters.NodesPerAz.ValueInt64()
 		}
-		if data.AWSParameters.ReservedTGWCidr != nil {
+		if data.AWSParameters.ReservedTGWCIDR != nil {
 			aws_parametersMap["reserved_tgw_cidr"] = map[string]interface{}{}
 		}
 		if !data.AWSParameters.SSHKey.IsNull() && !data.AWSParameters.SSHKey.IsUnknown() {
 			aws_parametersMap["ssh_key"] = data.AWSParameters.SSHKey.ValueString()
 		}
-		if data.AWSParameters.TGWCidr != nil {
+		if data.AWSParameters.TGWCIDR != nil {
 			tgw_cidrNestedMap := make(map[string]interface{})
-			if !data.AWSParameters.TGWCidr.IPV4.IsNull() && !data.AWSParameters.TGWCidr.IPV4.IsUnknown() {
-				tgw_cidrNestedMap["ipv4"] = data.AWSParameters.TGWCidr.IPV4.ValueString()
+			if !data.AWSParameters.TGWCIDR.Ipv4.IsNull() && !data.AWSParameters.TGWCIDR.Ipv4.IsUnknown() {
+				tgw_cidrNestedMap["ipv4"] = data.AWSParameters.TGWCIDR.Ipv4.ValueString()
 			}
 			aws_parametersMap["tgw_cidr"] = tgw_cidrNestedMap
 		}
@@ -2204,13 +2204,13 @@ func (r *AWSTGWSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		}
 		createReq.Spec["offline_survivability_mode"] = offline_survivability_modeMap
 	}
-	if data.Os != nil {
+	if data.OS != nil {
 		osMap := make(map[string]interface{})
-		if data.Os.DefaultOsVersion != nil {
+		if data.OS.DefaultOSVersion != nil {
 			osMap["default_os_version"] = map[string]interface{}{}
 		}
-		if !data.Os.OperatingSystemVersion.IsNull() && !data.Os.OperatingSystemVersion.IsUnknown() {
-			osMap["operating_system_version"] = data.Os.OperatingSystemVersion.ValueString()
+		if !data.OS.OperatingSystemVersion.IsNull() && !data.OS.OperatingSystemVersion.IsUnknown() {
+			osMap["operating_system_version"] = data.OS.OperatingSystemVersion.ValueString()
 		}
 		createReq.Spec["os"] = osMap
 	}
@@ -2299,11 +2299,11 @@ func (r *AWSTGWSiteResource) Create(ctx context.Context, req resource.CreateRequ
 	}
 	if data.VnConfig != nil {
 		vn_configMap := make(map[string]interface{})
-		if data.VnConfig.AllowedVipPort != nil {
+		if data.VnConfig.AllowedVIPPort != nil {
 			allowed_vip_portNestedMap := make(map[string]interface{})
 			vn_configMap["allowed_vip_port"] = allowed_vip_portNestedMap
 		}
-		if data.VnConfig.AllowedVipPortSLI != nil {
+		if data.VnConfig.AllowedVIPPortSLI != nil {
 			allowed_vip_port_sliNestedMap := make(map[string]interface{})
 			vn_configMap["allowed_vip_port_sli"] = allowed_vip_port_sliNestedMap
 		}
@@ -2533,11 +2533,11 @@ func (r *AWSTGWSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				return nil
 			}(),
-			DisableInternetVip: func() *AWSTGWSiteEmptyModel {
+			DisableInternetVIP: func() *AWSTGWSiteEmptyModel {
 				if !isImport && data.AWSParameters != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.AWSParameters.DisableInternetVip
+					return data.AWSParameters.DisableInternetVIP
 				}
 				// Import case: read from API
 				if _, ok := blockData["disable_internet_vip"].(map[string]interface{}); ok {
@@ -2551,11 +2551,11 @@ func (r *AWSTGWSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				return types.Int64Null()
 			}(),
-			EnableInternetVip: func() *AWSTGWSiteEmptyModel {
+			EnableInternetVIP: func() *AWSTGWSiteEmptyModel {
 				if !isImport && data.AWSParameters != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.AWSParameters.EnableInternetVip
+					return data.AWSParameters.EnableInternetVIP
 				}
 				// Import case: read from API
 				if _, ok := blockData["enable_internet_vip"].(map[string]interface{}); ok {
@@ -2636,7 +2636,7 @@ func (r *AWSTGWSiteResource) Create(ctx context.Context, req resource.CreateRequ
 							}
 							return types.StringNull()
 						}(),
-						PrimaryIPV4: func() types.String {
+						PrimaryIpv4: func() types.String {
 							if v, ok := nestedBlockData["primary_ipv4"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -2664,11 +2664,11 @@ func (r *AWSTGWSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				return types.Int64Null()
 			}(),
-			ReservedTGWCidr: func() *AWSTGWSiteEmptyModel {
+			ReservedTGWCIDR: func() *AWSTGWSiteEmptyModel {
 				if !isImport && data.AWSParameters != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.AWSParameters.ReservedTGWCidr
+					return data.AWSParameters.ReservedTGWCIDR
 				}
 				// Import case: read from API
 				if _, ok := blockData["reserved_tgw_cidr"].(map[string]interface{}); ok {
@@ -2682,15 +2682,15 @@ func (r *AWSTGWSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				return types.StringNull()
 			}(),
-			TGWCidr: func() *AWSTGWSiteAWSParametersTGWCidrModel {
-				if !isImport && data.AWSParameters != nil && data.AWSParameters.TGWCidr != nil {
+			TGWCIDR: func() *AWSTGWSiteAWSParametersTGWCIDRModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.TGWCIDR != nil {
 					// Normal Read: preserve existing state value
-					return data.AWSParameters.TGWCidr
+					return data.AWSParameters.TGWCIDR
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["tgw_cidr"].(map[string]interface{}); ok {
-					return &AWSTGWSiteAWSParametersTGWCidrModel{
-						IPV4: func() types.String {
+					return &AWSTGWSiteAWSParametersTGWCIDRModel{
+						Ipv4: func() types.String {
 							if v, ok := nestedBlockData["ipv4"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -2884,13 +2884,13 @@ func (r *AWSTGWSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		data.OfflineSurvivabilityMode = &AWSTGWSiteOfflineSurvivabilityModeModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.Os != nil) {
-		data.Os = &AWSTGWSiteOsModel{
-			DefaultOsVersion: func() *AWSTGWSiteEmptyModel {
-				if !isImport && data.Os != nil {
+	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.OS != nil) {
+		data.OS = &AWSTGWSiteOSModel{
+			DefaultOSVersion: func() *AWSTGWSiteEmptyModel {
+				if !isImport && data.OS != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.Os.DefaultOsVersion
+					return data.OS.DefaultOSVersion
 				}
 				// Import case: read from API
 				if _, ok := blockData["default_os_version"].(map[string]interface{}); ok {
@@ -3212,11 +3212,11 @@ func (r *AWSTGWSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				return nil
 			}(),
-			DisableInternetVip: func() *AWSTGWSiteEmptyModel {
+			DisableInternetVIP: func() *AWSTGWSiteEmptyModel {
 				if !isImport && data.AWSParameters != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.AWSParameters.DisableInternetVip
+					return data.AWSParameters.DisableInternetVIP
 				}
 				// Import case: read from API
 				if _, ok := blockData["disable_internet_vip"].(map[string]interface{}); ok {
@@ -3230,11 +3230,11 @@ func (r *AWSTGWSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				return types.Int64Null()
 			}(),
-			EnableInternetVip: func() *AWSTGWSiteEmptyModel {
+			EnableInternetVIP: func() *AWSTGWSiteEmptyModel {
 				if !isImport && data.AWSParameters != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.AWSParameters.EnableInternetVip
+					return data.AWSParameters.EnableInternetVIP
 				}
 				// Import case: read from API
 				if _, ok := blockData["enable_internet_vip"].(map[string]interface{}); ok {
@@ -3315,7 +3315,7 @@ func (r *AWSTGWSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 							}
 							return types.StringNull()
 						}(),
-						PrimaryIPV4: func() types.String {
+						PrimaryIpv4: func() types.String {
 							if v, ok := nestedBlockData["primary_ipv4"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -3343,11 +3343,11 @@ func (r *AWSTGWSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				return types.Int64Null()
 			}(),
-			ReservedTGWCidr: func() *AWSTGWSiteEmptyModel {
+			ReservedTGWCIDR: func() *AWSTGWSiteEmptyModel {
 				if !isImport && data.AWSParameters != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.AWSParameters.ReservedTGWCidr
+					return data.AWSParameters.ReservedTGWCIDR
 				}
 				// Import case: read from API
 				if _, ok := blockData["reserved_tgw_cidr"].(map[string]interface{}); ok {
@@ -3361,15 +3361,15 @@ func (r *AWSTGWSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				return types.StringNull()
 			}(),
-			TGWCidr: func() *AWSTGWSiteAWSParametersTGWCidrModel {
-				if !isImport && data.AWSParameters != nil && data.AWSParameters.TGWCidr != nil {
+			TGWCIDR: func() *AWSTGWSiteAWSParametersTGWCIDRModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.TGWCIDR != nil {
 					// Normal Read: preserve existing state value
-					return data.AWSParameters.TGWCidr
+					return data.AWSParameters.TGWCIDR
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["tgw_cidr"].(map[string]interface{}); ok {
-					return &AWSTGWSiteAWSParametersTGWCidrModel{
-						IPV4: func() types.String {
+					return &AWSTGWSiteAWSParametersTGWCIDRModel{
+						Ipv4: func() types.String {
 							if v, ok := nestedBlockData["ipv4"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -3563,13 +3563,13 @@ func (r *AWSTGWSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 		data.OfflineSurvivabilityMode = &AWSTGWSiteOfflineSurvivabilityModeModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.Os != nil) {
-		data.Os = &AWSTGWSiteOsModel{
-			DefaultOsVersion: func() *AWSTGWSiteEmptyModel {
-				if !isImport && data.Os != nil {
+	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.OS != nil) {
+		data.OS = &AWSTGWSiteOSModel{
+			DefaultOSVersion: func() *AWSTGWSiteEmptyModel {
+				if !isImport && data.OS != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.Os.DefaultOsVersion
+					return data.OS.DefaultOSVersion
 				}
 				// Import case: read from API
 				if _, ok := blockData["default_os_version"].(map[string]interface{}); ok {
@@ -3788,13 +3788,13 @@ func (r *AWSTGWSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 			}
 			aws_parametersMap["custom_security_group"] = custom_security_groupNestedMap
 		}
-		if data.AWSParameters.DisableInternetVip != nil {
+		if data.AWSParameters.DisableInternetVIP != nil {
 			aws_parametersMap["disable_internet_vip"] = map[string]interface{}{}
 		}
 		if !data.AWSParameters.DiskSize.IsNull() && !data.AWSParameters.DiskSize.IsUnknown() {
 			aws_parametersMap["disk_size"] = data.AWSParameters.DiskSize.ValueInt64()
 		}
-		if data.AWSParameters.EnableInternetVip != nil {
+		if data.AWSParameters.EnableInternetVIP != nil {
 			aws_parametersMap["enable_internet_vip"] = map[string]interface{}{}
 		}
 		if data.AWSParameters.ExistingTGW != nil {
@@ -3825,8 +3825,8 @@ func (r *AWSTGWSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 			if !data.AWSParameters.NewVPC.NameTag.IsNull() && !data.AWSParameters.NewVPC.NameTag.IsUnknown() {
 				new_vpcNestedMap["name_tag"] = data.AWSParameters.NewVPC.NameTag.ValueString()
 			}
-			if !data.AWSParameters.NewVPC.PrimaryIPV4.IsNull() && !data.AWSParameters.NewVPC.PrimaryIPV4.IsUnknown() {
-				new_vpcNestedMap["primary_ipv4"] = data.AWSParameters.NewVPC.PrimaryIPV4.ValueString()
+			if !data.AWSParameters.NewVPC.PrimaryIpv4.IsNull() && !data.AWSParameters.NewVPC.PrimaryIpv4.IsUnknown() {
+				new_vpcNestedMap["primary_ipv4"] = data.AWSParameters.NewVPC.PrimaryIpv4.ValueString()
 			}
 			aws_parametersMap["new_vpc"] = new_vpcNestedMap
 		}
@@ -3836,16 +3836,16 @@ func (r *AWSTGWSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 		if !data.AWSParameters.NodesPerAz.IsNull() && !data.AWSParameters.NodesPerAz.IsUnknown() {
 			aws_parametersMap["nodes_per_az"] = data.AWSParameters.NodesPerAz.ValueInt64()
 		}
-		if data.AWSParameters.ReservedTGWCidr != nil {
+		if data.AWSParameters.ReservedTGWCIDR != nil {
 			aws_parametersMap["reserved_tgw_cidr"] = map[string]interface{}{}
 		}
 		if !data.AWSParameters.SSHKey.IsNull() && !data.AWSParameters.SSHKey.IsUnknown() {
 			aws_parametersMap["ssh_key"] = data.AWSParameters.SSHKey.ValueString()
 		}
-		if data.AWSParameters.TGWCidr != nil {
+		if data.AWSParameters.TGWCIDR != nil {
 			tgw_cidrNestedMap := make(map[string]interface{})
-			if !data.AWSParameters.TGWCidr.IPV4.IsNull() && !data.AWSParameters.TGWCidr.IPV4.IsUnknown() {
-				tgw_cidrNestedMap["ipv4"] = data.AWSParameters.TGWCidr.IPV4.ValueString()
+			if !data.AWSParameters.TGWCIDR.Ipv4.IsNull() && !data.AWSParameters.TGWCIDR.Ipv4.IsUnknown() {
+				tgw_cidrNestedMap["ipv4"] = data.AWSParameters.TGWCIDR.Ipv4.ValueString()
 			}
 			aws_parametersMap["tgw_cidr"] = tgw_cidrNestedMap
 		}
@@ -3974,13 +3974,13 @@ func (r *AWSTGWSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 		}
 		apiResource.Spec["offline_survivability_mode"] = offline_survivability_modeMap
 	}
-	if data.Os != nil {
+	if data.OS != nil {
 		osMap := make(map[string]interface{})
-		if data.Os.DefaultOsVersion != nil {
+		if data.OS.DefaultOSVersion != nil {
 			osMap["default_os_version"] = map[string]interface{}{}
 		}
-		if !data.Os.OperatingSystemVersion.IsNull() && !data.Os.OperatingSystemVersion.IsUnknown() {
-			osMap["operating_system_version"] = data.Os.OperatingSystemVersion.ValueString()
+		if !data.OS.OperatingSystemVersion.IsNull() && !data.OS.OperatingSystemVersion.IsUnknown() {
+			osMap["operating_system_version"] = data.OS.OperatingSystemVersion.ValueString()
 		}
 		apiResource.Spec["os"] = osMap
 	}
@@ -4069,11 +4069,11 @@ func (r *AWSTGWSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 	}
 	if data.VnConfig != nil {
 		vn_configMap := make(map[string]interface{})
-		if data.VnConfig.AllowedVipPort != nil {
+		if data.VnConfig.AllowedVIPPort != nil {
 			allowed_vip_portNestedMap := make(map[string]interface{})
 			vn_configMap["allowed_vip_port"] = allowed_vip_portNestedMap
 		}
-		if data.VnConfig.AllowedVipPortSLI != nil {
+		if data.VnConfig.AllowedVIPPortSLI != nil {
 			allowed_vip_port_sliNestedMap := make(map[string]interface{})
 			vn_configMap["allowed_vip_port_sli"] = allowed_vip_port_sliNestedMap
 		}
@@ -4314,11 +4314,11 @@ func (r *AWSTGWSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 				}
 				return nil
 			}(),
-			DisableInternetVip: func() *AWSTGWSiteEmptyModel {
+			DisableInternetVIP: func() *AWSTGWSiteEmptyModel {
 				if !isImport && data.AWSParameters != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.AWSParameters.DisableInternetVip
+					return data.AWSParameters.DisableInternetVIP
 				}
 				// Import case: read from API
 				if _, ok := blockData["disable_internet_vip"].(map[string]interface{}); ok {
@@ -4332,11 +4332,11 @@ func (r *AWSTGWSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 				}
 				return types.Int64Null()
 			}(),
-			EnableInternetVip: func() *AWSTGWSiteEmptyModel {
+			EnableInternetVIP: func() *AWSTGWSiteEmptyModel {
 				if !isImport && data.AWSParameters != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.AWSParameters.EnableInternetVip
+					return data.AWSParameters.EnableInternetVIP
 				}
 				// Import case: read from API
 				if _, ok := blockData["enable_internet_vip"].(map[string]interface{}); ok {
@@ -4417,7 +4417,7 @@ func (r *AWSTGWSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 							}
 							return types.StringNull()
 						}(),
-						PrimaryIPV4: func() types.String {
+						PrimaryIpv4: func() types.String {
 							if v, ok := nestedBlockData["primary_ipv4"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -4445,11 +4445,11 @@ func (r *AWSTGWSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 				}
 				return types.Int64Null()
 			}(),
-			ReservedTGWCidr: func() *AWSTGWSiteEmptyModel {
+			ReservedTGWCIDR: func() *AWSTGWSiteEmptyModel {
 				if !isImport && data.AWSParameters != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.AWSParameters.ReservedTGWCidr
+					return data.AWSParameters.ReservedTGWCIDR
 				}
 				// Import case: read from API
 				if _, ok := blockData["reserved_tgw_cidr"].(map[string]interface{}); ok {
@@ -4463,15 +4463,15 @@ func (r *AWSTGWSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 				}
 				return types.StringNull()
 			}(),
-			TGWCidr: func() *AWSTGWSiteAWSParametersTGWCidrModel {
-				if !isImport && data.AWSParameters != nil && data.AWSParameters.TGWCidr != nil {
+			TGWCIDR: func() *AWSTGWSiteAWSParametersTGWCIDRModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.TGWCIDR != nil {
 					// Normal Read: preserve existing state value
-					return data.AWSParameters.TGWCidr
+					return data.AWSParameters.TGWCIDR
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["tgw_cidr"].(map[string]interface{}); ok {
-					return &AWSTGWSiteAWSParametersTGWCidrModel{
-						IPV4: func() types.String {
+					return &AWSTGWSiteAWSParametersTGWCIDRModel{
+						Ipv4: func() types.String {
 							if v, ok := nestedBlockData["ipv4"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -4665,13 +4665,13 @@ func (r *AWSTGWSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 		data.OfflineSurvivabilityMode = &AWSTGWSiteOfflineSurvivabilityModeModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.Os != nil) {
-		data.Os = &AWSTGWSiteOsModel{
-			DefaultOsVersion: func() *AWSTGWSiteEmptyModel {
-				if !isImport && data.Os != nil {
+	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.OS != nil) {
+		data.OS = &AWSTGWSiteOSModel{
+			DefaultOSVersion: func() *AWSTGWSiteEmptyModel {
+				if !isImport && data.OS != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.Os.DefaultOsVersion
+					return data.OS.DefaultOSVersion
 				}
 				// Import case: read from API
 				if _, ok := blockData["default_os_version"].(map[string]interface{}); ok {

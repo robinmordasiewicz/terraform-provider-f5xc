@@ -72,12 +72,12 @@ type RegistrationInfraHwInfoModel struct {
 	Bios      *RegistrationInfraHwInfoBiosModel     `tfsdk:"bios"`
 	Board     *RegistrationInfraHwInfoBoardModel    `tfsdk:"board"`
 	Chassis   *RegistrationInfraHwInfoChassisModel  `tfsdk:"chassis"`
-	Cpu       *RegistrationInfraHwInfoCpuModel      `tfsdk:"cpu"`
-	Gpu       *RegistrationInfraHwInfoGpuModel      `tfsdk:"gpu"`
+	CPU       *RegistrationInfraHwInfoCPUModel      `tfsdk:"cpu"`
+	GPU       *RegistrationInfraHwInfoGPUModel      `tfsdk:"gpu"`
 	Kernel    *RegistrationInfraHwInfoKernelModel   `tfsdk:"kernel"`
 	Memory    *RegistrationInfraHwInfoMemoryModel   `tfsdk:"memory"`
 	Network   []RegistrationInfraHwInfoNetworkModel `tfsdk:"network"`
-	Os        *RegistrationInfraHwInfoOsModel       `tfsdk:"os"`
+	OS        *RegistrationInfraHwInfoOSModel       `tfsdk:"os"`
 	Product   *RegistrationInfraHwInfoProductModel  `tfsdk:"product"`
 	Storage   []RegistrationInfraHwInfoStorageModel `tfsdk:"storage"`
 	Usb       []RegistrationInfraHwInfoUsbModel     `tfsdk:"usb"`
@@ -108,8 +108,8 @@ type RegistrationInfraHwInfoChassisModel struct {
 	Version  types.String `tfsdk:"version"`
 }
 
-// RegistrationInfraHwInfoCpuModel represents cpu block
-type RegistrationInfraHwInfoCpuModel struct {
+// RegistrationInfraHwInfoCPUModel represents cpu block
+type RegistrationInfraHwInfoCPUModel struct {
 	Cache   types.Int64  `tfsdk:"cache"`
 	Cores   types.Int64  `tfsdk:"cores"`
 	Cpus    types.Int64  `tfsdk:"cpus"`
@@ -119,15 +119,15 @@ type RegistrationInfraHwInfoCpuModel struct {
 	Vendor  types.String `tfsdk:"vendor"`
 }
 
-// RegistrationInfraHwInfoGpuModel represents gpu block
-type RegistrationInfraHwInfoGpuModel struct {
+// RegistrationInfraHwInfoGPUModel represents gpu block
+type RegistrationInfraHwInfoGPUModel struct {
 	CudaVersion   types.String                               `tfsdk:"cuda_version"`
 	DriverVersion types.String                               `tfsdk:"driver_version"`
-	GpuDevice     []RegistrationInfraHwInfoGpuGpuDeviceModel `tfsdk:"gpu_device"`
+	GPUDevice     []RegistrationInfraHwInfoGPUGPUDeviceModel `tfsdk:"gpu_device"`
 }
 
-// RegistrationInfraHwInfoGpuGpuDeviceModel represents gpu_device block
-type RegistrationInfraHwInfoGpuGpuDeviceModel struct {
+// RegistrationInfraHwInfoGPUGPUDeviceModel represents gpu_device block
+type RegistrationInfraHwInfoGPUGPUDeviceModel struct {
 	ID          types.String `tfsdk:"id"`
 	Processes   types.String `tfsdk:"processes"`
 	ProductName types.String `tfsdk:"product_name"`
@@ -159,8 +159,8 @@ type RegistrationInfraHwInfoNetworkModel struct {
 	Speed       types.Int64  `tfsdk:"speed"`
 }
 
-// RegistrationInfraHwInfoOsModel represents os block
-type RegistrationInfraHwInfoOsModel struct {
+// RegistrationInfraHwInfoOSModel represents os block
+type RegistrationInfraHwInfoOSModel struct {
 	Architecture types.String `tfsdk:"architecture"`
 	Name         types.String `tfsdk:"name"`
 	Release      types.String `tfsdk:"release"`
@@ -232,7 +232,7 @@ type RegistrationPassportModel struct {
 	OperatingSystemVersion  types.String            `tfsdk:"operating_system_version"`
 	PrivateNetworkName      types.String            `tfsdk:"private_network_name"`
 	VolterraSoftwareVersion types.String            `tfsdk:"volterra_software_version"`
-	DefaultOsVersion        *RegistrationEmptyModel `tfsdk:"default_os_version"`
+	DefaultOSVersion        *RegistrationEmptyModel `tfsdk:"default_os_version"`
 	DefaultSwVersion        *RegistrationEmptyModel `tfsdk:"default_sw_version"`
 }
 
@@ -1043,7 +1043,7 @@ func (r *RegistrationResource) Create(ctx context.Context, req resource.CreateRe
 		if !data.Passport.ClusterType.IsNull() && !data.Passport.ClusterType.IsUnknown() {
 			passportMap["cluster_type"] = data.Passport.ClusterType.ValueString()
 		}
-		if data.Passport.DefaultOsVersion != nil {
+		if data.Passport.DefaultOSVersion != nil {
 			passportMap["default_os_version"] = map[string]interface{}{}
 		}
 		if data.Passport.DefaultSwVersion != nil {
@@ -1244,11 +1244,11 @@ func (r *RegistrationResource) Create(ctx context.Context, req resource.CreateRe
 				}
 				return types.StringNull()
 			}(),
-			DefaultOsVersion: func() *RegistrationEmptyModel {
+			DefaultOSVersion: func() *RegistrationEmptyModel {
 				if !isImport && data.Passport != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.Passport.DefaultOsVersion
+					return data.Passport.DefaultOSVersion
 				}
 				// Import case: read from API
 				if _, ok := blockData["default_os_version"].(map[string]interface{}); ok {
@@ -1560,11 +1560,11 @@ func (r *RegistrationResource) Read(ctx context.Context, req resource.ReadReques
 				}
 				return types.StringNull()
 			}(),
-			DefaultOsVersion: func() *RegistrationEmptyModel {
+			DefaultOSVersion: func() *RegistrationEmptyModel {
 				if !isImport && data.Passport != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.Passport.DefaultOsVersion
+					return data.Passport.DefaultOSVersion
 				}
 				// Import case: read from API
 				if _, ok := blockData["default_os_version"].(map[string]interface{}); ok {
@@ -1756,7 +1756,7 @@ func (r *RegistrationResource) Update(ctx context.Context, req resource.UpdateRe
 		if !data.Passport.ClusterType.IsNull() && !data.Passport.ClusterType.IsUnknown() {
 			passportMap["cluster_type"] = data.Passport.ClusterType.ValueString()
 		}
-		if data.Passport.DefaultOsVersion != nil {
+		if data.Passport.DefaultOSVersion != nil {
 			passportMap["default_os_version"] = map[string]interface{}{}
 		}
 		if data.Passport.DefaultSwVersion != nil {
@@ -1975,11 +1975,11 @@ func (r *RegistrationResource) Update(ctx context.Context, req resource.UpdateRe
 				}
 				return types.StringNull()
 			}(),
-			DefaultOsVersion: func() *RegistrationEmptyModel {
+			DefaultOSVersion: func() *RegistrationEmptyModel {
 				if !isImport && data.Passport != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.Passport.DefaultOsVersion
+					return data.Passport.DefaultOSVersion
 				}
 				// Import case: read from API
 				if _, ok := blockData["default_os_version"].(map[string]interface{}); ok {

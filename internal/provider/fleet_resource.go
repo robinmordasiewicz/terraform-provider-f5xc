@@ -363,7 +363,7 @@ type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasModel
 	StorageDriverName    types.String                                                                                 `tfsdk:"storage_driver_name"`
 	StoragePrefix        types.String                                                                                 `tfsdk:"storage_prefix"`
 	Svm                  types.String                                                                                 `tfsdk:"svm"`
-	TrustedCaCertificate types.String                                                                                 `tfsdk:"trusted_ca_certificate"`
+	TrustedCACertificate types.String                                                                                 `tfsdk:"trusted_ca_certificate"`
 	Username             types.String                                                                                 `tfsdk:"username"`
 	AutoExportCidrs      *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasAutoExportCidrsModel  `tfsdk:"auto_export_cidrs"`
 	ClientPrivateKey     *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyModel `tfsdk:"client_private_key"`
@@ -425,10 +425,10 @@ type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStora
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageVolumeDefaultsModel represents volume_defaults block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageVolumeDefaultsModel struct {
-	AdaptiveQosPolicy types.String     `tfsdk:"adaptive_qos_policy"`
+	AdaptiveQOSPolicy types.String     `tfsdk:"adaptive_qos_policy"`
 	Encryption        types.Bool       `tfsdk:"encryption"`
 	ExportPolicy      types.String     `tfsdk:"export_policy"`
-	QosPolicy         types.String     `tfsdk:"qos_policy"`
+	QOSPolicy         types.String     `tfsdk:"qos_policy"`
 	SecurityStyle     types.String     `tfsdk:"security_style"`
 	SnapshotDir       types.Bool       `tfsdk:"snapshot_dir"`
 	SnapshotPolicy    types.String     `tfsdk:"snapshot_policy"`
@@ -437,15 +437,15 @@ type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStora
 	SplitOnClone      types.Bool       `tfsdk:"split_on_clone"`
 	TieringPolicy     types.String     `tfsdk:"tiering_policy"`
 	UnixPermissions   types.Int64      `tfsdk:"unix_permissions"`
-	NoQos             *FleetEmptyModel `tfsdk:"no_qos"`
+	NoQOS             *FleetEmptyModel `tfsdk:"no_qos"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasVolumeDefaultsModel represents volume_defaults block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasVolumeDefaultsModel struct {
-	AdaptiveQosPolicy types.String     `tfsdk:"adaptive_qos_policy"`
+	AdaptiveQOSPolicy types.String     `tfsdk:"adaptive_qos_policy"`
 	Encryption        types.Bool       `tfsdk:"encryption"`
 	ExportPolicy      types.String     `tfsdk:"export_policy"`
-	QosPolicy         types.String     `tfsdk:"qos_policy"`
+	QOSPolicy         types.String     `tfsdk:"qos_policy"`
 	SecurityStyle     types.String     `tfsdk:"security_style"`
 	SnapshotDir       types.Bool       `tfsdk:"snapshot_dir"`
 	SnapshotPolicy    types.String     `tfsdk:"snapshot_policy"`
@@ -454,7 +454,7 @@ type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasVolum
 	SplitOnClone      types.Bool       `tfsdk:"split_on_clone"`
 	TieringPolicy     types.String     `tfsdk:"tiering_policy"`
 	UnixPermissions   types.Int64      `tfsdk:"unix_permissions"`
-	NoQos             *FleetEmptyModel `tfsdk:"no_qos"`
+	NoQOS             *FleetEmptyModel `tfsdk:"no_qos"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanModel represents netapp_backend_ontap_san block
@@ -471,7 +471,7 @@ type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanModel
 	StorageDriverName    types.String                                                                                 `tfsdk:"storage_driver_name"`
 	StoragePrefix        types.String                                                                                 `tfsdk:"storage_prefix"`
 	Svm                  types.String                                                                                 `tfsdk:"svm"`
-	TrustedCaCertificate types.String                                                                                 `tfsdk:"trusted_ca_certificate"`
+	TrustedCACertificate types.String                                                                                 `tfsdk:"trusted_ca_certificate"`
 	Username             types.String                                                                                 `tfsdk:"username"`
 	ClientPrivateKey     *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyModel `tfsdk:"client_private_key"`
 	Labels               *FleetEmptyModel                                                                             `tfsdk:"labels"`
@@ -529,10 +529,10 @@ type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStora
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageVolumeDefaultsModel represents volume_defaults block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageVolumeDefaultsModel struct {
-	AdaptiveQosPolicy types.String     `tfsdk:"adaptive_qos_policy"`
+	AdaptiveQOSPolicy types.String     `tfsdk:"adaptive_qos_policy"`
 	Encryption        types.Bool       `tfsdk:"encryption"`
 	ExportPolicy      types.String     `tfsdk:"export_policy"`
-	QosPolicy         types.String     `tfsdk:"qos_policy"`
+	QOSPolicy         types.String     `tfsdk:"qos_policy"`
 	SecurityStyle     types.String     `tfsdk:"security_style"`
 	SnapshotDir       types.Bool       `tfsdk:"snapshot_dir"`
 	SnapshotPolicy    types.String     `tfsdk:"snapshot_policy"`
@@ -541,7 +541,7 @@ type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStora
 	SplitOnClone      types.Bool       `tfsdk:"split_on_clone"`
 	TieringPolicy     types.String     `tfsdk:"tiering_policy"`
 	UnixPermissions   types.Int64      `tfsdk:"unix_permissions"`
-	NoQos             *FleetEmptyModel `tfsdk:"no_qos"`
+	NoQOS             *FleetEmptyModel `tfsdk:"no_qos"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapModel represents use_chap block
@@ -592,10 +592,10 @@ type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseCh
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanVolumeDefaultsModel represents volume_defaults block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanVolumeDefaultsModel struct {
-	AdaptiveQosPolicy types.String     `tfsdk:"adaptive_qos_policy"`
+	AdaptiveQOSPolicy types.String     `tfsdk:"adaptive_qos_policy"`
 	Encryption        types.Bool       `tfsdk:"encryption"`
 	ExportPolicy      types.String     `tfsdk:"export_policy"`
-	QosPolicy         types.String     `tfsdk:"qos_policy"`
+	QOSPolicy         types.String     `tfsdk:"qos_policy"`
 	SecurityStyle     types.String     `tfsdk:"security_style"`
 	SnapshotDir       types.Bool       `tfsdk:"snapshot_dir"`
 	SnapshotPolicy    types.String     `tfsdk:"snapshot_policy"`
@@ -604,7 +604,7 @@ type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanVolum
 	SplitOnClone      types.Bool       `tfsdk:"split_on_clone"`
 	TieringPolicy     types.String     `tfsdk:"tiering_policy"`
 	UnixPermissions   types.Int64      `tfsdk:"unix_permissions"`
-	NoQos             *FleetEmptyModel `tfsdk:"no_qos"`
+	NoQOS             *FleetEmptyModel `tfsdk:"no_qos"`
 }
 
 // FleetStorageDeviceListStorageDevicesPureServiceOrchestratorModel represents pure_service_orchestrator block
@@ -738,34 +738,34 @@ type FleetStorageStaticRoutesStorageRoutesNexthopInterfaceModel struct {
 
 // FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressModel represents nexthop_address block
 type FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressModel struct {
-	IPV4 *FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIPV4Model `tfsdk:"ipv4"`
-	IPV6 *FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIPV6Model `tfsdk:"ipv6"`
+	Ipv4 *FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIpv4Model `tfsdk:"ipv4"`
+	Ipv6 *FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIpv6Model `tfsdk:"ipv6"`
 }
 
-// FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIPV4Model represents ipv4 block
-type FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIPV4Model struct {
+// FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIpv4Model represents ipv4 block
+type FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIpv4Model struct {
 	Addr types.String `tfsdk:"addr"`
 }
 
-// FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIPV6Model represents ipv6 block
-type FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIPV6Model struct {
+// FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIpv6Model represents ipv6 block
+type FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIpv6Model struct {
 	Addr types.String `tfsdk:"addr"`
 }
 
 // FleetStorageStaticRoutesStorageRoutesSubnetsModel represents subnets block
 type FleetStorageStaticRoutesStorageRoutesSubnetsModel struct {
-	IPV4 *FleetStorageStaticRoutesStorageRoutesSubnetsIPV4Model `tfsdk:"ipv4"`
-	IPV6 *FleetStorageStaticRoutesStorageRoutesSubnetsIPV6Model `tfsdk:"ipv6"`
+	Ipv4 *FleetStorageStaticRoutesStorageRoutesSubnetsIpv4Model `tfsdk:"ipv4"`
+	Ipv6 *FleetStorageStaticRoutesStorageRoutesSubnetsIpv6Model `tfsdk:"ipv6"`
 }
 
-// FleetStorageStaticRoutesStorageRoutesSubnetsIPV4Model represents ipv4 block
-type FleetStorageStaticRoutesStorageRoutesSubnetsIPV4Model struct {
+// FleetStorageStaticRoutesStorageRoutesSubnetsIpv4Model represents ipv4 block
+type FleetStorageStaticRoutesStorageRoutesSubnetsIpv4Model struct {
 	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
 
-// FleetStorageStaticRoutesStorageRoutesSubnetsIPV6Model represents ipv6 block
-type FleetStorageStaticRoutesStorageRoutesSubnetsIPV6Model struct {
+// FleetStorageStaticRoutesStorageRoutesSubnetsIpv6Model represents ipv6 block
+type FleetStorageStaticRoutesStorageRoutesSubnetsIpv6Model struct {
 	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
@@ -800,11 +800,11 @@ type FleetResourceModel struct {
 	DefaultStorageClass              *FleetEmptyModel                      `tfsdk:"default_storage_class"`
 	DenyAllUsb                       *FleetEmptyModel                      `tfsdk:"deny_all_usb"`
 	DeviceList                       *FleetDeviceListModel                 `tfsdk:"device_list"`
-	DisableGpu                       *FleetEmptyModel                      `tfsdk:"disable_gpu"`
-	DisableVm                        *FleetEmptyModel                      `tfsdk:"disable_vm"`
-	EnableGpu                        *FleetEmptyModel                      `tfsdk:"enable_gpu"`
+	DisableGPU                       *FleetEmptyModel                      `tfsdk:"disable_gpu"`
+	DisableVM                        *FleetEmptyModel                      `tfsdk:"disable_vm"`
+	EnableGPU                        *FleetEmptyModel                      `tfsdk:"enable_gpu"`
 	EnableVgpu                       *FleetEnableVgpuModel                 `tfsdk:"enable_vgpu"`
-	EnableVm                         *FleetEmptyModel                      `tfsdk:"enable_vm"`
+	EnableVM                         *FleetEmptyModel                      `tfsdk:"enable_vm"`
 	InsideVirtualNetwork             []FleetInsideVirtualNetworkModel      `tfsdk:"inside_virtual_network"`
 	InterfaceList                    *FleetInterfaceListModel              `tfsdk:"interface_list"`
 	KubernetesUpgradeDrain           *FleetKubernetesUpgradeDrainModel     `tfsdk:"kubernetes_upgrade_drain"`
@@ -2946,15 +2946,15 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 		}
 		createReq.Spec["device_list"] = device_listMap
 	}
-	if data.DisableGpu != nil {
+	if data.DisableGPU != nil {
 		disable_gpuMap := make(map[string]interface{})
 		createReq.Spec["disable_gpu"] = disable_gpuMap
 	}
-	if data.DisableVm != nil {
+	if data.DisableVM != nil {
 		disable_vmMap := make(map[string]interface{})
 		createReq.Spec["disable_vm"] = disable_vmMap
 	}
-	if data.EnableGpu != nil {
+	if data.EnableGPU != nil {
 		enable_gpuMap := make(map[string]interface{})
 		createReq.Spec["enable_gpu"] = enable_gpuMap
 	}
@@ -2971,7 +2971,7 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 		}
 		createReq.Spec["enable_vgpu"] = enable_vgpuMap
 	}
-	if data.EnableVm != nil {
+	if data.EnableVM != nil {
 		enable_vmMap := make(map[string]interface{})
 		createReq.Spec["enable_vm"] = enable_vmMap
 	}
@@ -3627,19 +3627,19 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["disable_gpu"].(map[string]interface{}); ok && isImport && data.DisableGpu == nil {
+	if _, ok := apiResource.Spec["disable_gpu"].(map[string]interface{}); ok && isImport && data.DisableGPU == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DisableGpu = &FleetEmptyModel{}
+		data.DisableGPU = &FleetEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["disable_vm"].(map[string]interface{}); ok && isImport && data.DisableVm == nil {
+	if _, ok := apiResource.Spec["disable_vm"].(map[string]interface{}); ok && isImport && data.DisableVM == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DisableVm = &FleetEmptyModel{}
+		data.DisableVM = &FleetEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["enable_gpu"].(map[string]interface{}); ok && isImport && data.EnableGpu == nil {
+	if _, ok := apiResource.Spec["enable_gpu"].(map[string]interface{}); ok && isImport && data.EnableGPU == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.EnableGpu = &FleetEmptyModel{}
+		data.EnableGPU = &FleetEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["enable_vgpu"].(map[string]interface{}); ok && (isImport || data.EnableVgpu != nil) {
@@ -3664,9 +3664,9 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["enable_vm"].(map[string]interface{}); ok && isImport && data.EnableVm == nil {
+	if _, ok := apiResource.Spec["enable_vm"].(map[string]interface{}); ok && isImport && data.EnableVM == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.EnableVm = &FleetEmptyModel{}
+		data.EnableVM = &FleetEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["inside_virtual_network"].([]interface{}); ok && len(listData) > 0 {
@@ -4699,19 +4699,19 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["disable_gpu"].(map[string]interface{}); ok && isImport && data.DisableGpu == nil {
+	if _, ok := apiResource.Spec["disable_gpu"].(map[string]interface{}); ok && isImport && data.DisableGPU == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DisableGpu = &FleetEmptyModel{}
+		data.DisableGPU = &FleetEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["disable_vm"].(map[string]interface{}); ok && isImport && data.DisableVm == nil {
+	if _, ok := apiResource.Spec["disable_vm"].(map[string]interface{}); ok && isImport && data.DisableVM == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DisableVm = &FleetEmptyModel{}
+		data.DisableVM = &FleetEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["enable_gpu"].(map[string]interface{}); ok && isImport && data.EnableGpu == nil {
+	if _, ok := apiResource.Spec["enable_gpu"].(map[string]interface{}); ok && isImport && data.EnableGPU == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.EnableGpu = &FleetEmptyModel{}
+		data.EnableGPU = &FleetEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["enable_vgpu"].(map[string]interface{}); ok && (isImport || data.EnableVgpu != nil) {
@@ -4736,9 +4736,9 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["enable_vm"].(map[string]interface{}); ok && isImport && data.EnableVm == nil {
+	if _, ok := apiResource.Spec["enable_vm"].(map[string]interface{}); ok && isImport && data.EnableVM == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.EnableVm = &FleetEmptyModel{}
+		data.EnableVM = &FleetEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["inside_virtual_network"].([]interface{}); ok && len(listData) > 0 {
@@ -5660,15 +5660,15 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		}
 		apiResource.Spec["device_list"] = device_listMap
 	}
-	if data.DisableGpu != nil {
+	if data.DisableGPU != nil {
 		disable_gpuMap := make(map[string]interface{})
 		apiResource.Spec["disable_gpu"] = disable_gpuMap
 	}
-	if data.DisableVm != nil {
+	if data.DisableVM != nil {
 		disable_vmMap := make(map[string]interface{})
 		apiResource.Spec["disable_vm"] = disable_vmMap
 	}
-	if data.EnableGpu != nil {
+	if data.EnableGPU != nil {
 		enable_gpuMap := make(map[string]interface{})
 		apiResource.Spec["enable_gpu"] = enable_gpuMap
 	}
@@ -5685,7 +5685,7 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		}
 		apiResource.Spec["enable_vgpu"] = enable_vgpuMap
 	}
-	if data.EnableVm != nil {
+	if data.EnableVM != nil {
 		enable_vmMap := make(map[string]interface{})
 		apiResource.Spec["enable_vm"] = enable_vmMap
 	}
@@ -6380,19 +6380,19 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["disable_gpu"].(map[string]interface{}); ok && isImport && data.DisableGpu == nil {
+	if _, ok := apiResource.Spec["disable_gpu"].(map[string]interface{}); ok && isImport && data.DisableGPU == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DisableGpu = &FleetEmptyModel{}
+		data.DisableGPU = &FleetEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["disable_vm"].(map[string]interface{}); ok && isImport && data.DisableVm == nil {
+	if _, ok := apiResource.Spec["disable_vm"].(map[string]interface{}); ok && isImport && data.DisableVM == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DisableVm = &FleetEmptyModel{}
+		data.DisableVM = &FleetEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["enable_gpu"].(map[string]interface{}); ok && isImport && data.EnableGpu == nil {
+	if _, ok := apiResource.Spec["enable_gpu"].(map[string]interface{}); ok && isImport && data.EnableGPU == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.EnableGpu = &FleetEmptyModel{}
+		data.EnableGPU = &FleetEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["enable_vgpu"].(map[string]interface{}); ok && (isImport || data.EnableVgpu != nil) {
@@ -6417,9 +6417,9 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["enable_vm"].(map[string]interface{}); ok && isImport && data.EnableVm == nil {
+	if _, ok := apiResource.Spec["enable_vm"].(map[string]interface{}); ok && isImport && data.EnableVM == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.EnableVm = &FleetEmptyModel{}
+		data.EnableVM = &FleetEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["inside_virtual_network"].([]interface{}); ok && len(listData) > 0 {

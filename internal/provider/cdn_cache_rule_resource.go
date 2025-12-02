@@ -66,14 +66,14 @@ type CDNCacheRuleCacheRulesEligibleForCacheModel struct {
 // CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostRequestURIModel represents scheme_proxy_host_request_uri block
 type CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostRequestURIModel struct {
 	CacheOverride        types.Bool   `tfsdk:"cache_override"`
-	CacheTtl             types.String `tfsdk:"cache_ttl"`
+	CacheTTL             types.String `tfsdk:"cache_ttl"`
 	IgnoreResponseCookie types.Bool   `tfsdk:"ignore_response_cookie"`
 }
 
 // CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostURIModel represents scheme_proxy_host_uri block
 type CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostURIModel struct {
 	CacheOverride        types.Bool   `tfsdk:"cache_override"`
-	CacheTtl             types.String `tfsdk:"cache_ttl"`
+	CacheTTL             types.String `tfsdk:"cache_ttl"`
 	IgnoreResponseCookie types.Bool   `tfsdk:"ignore_response_cookie"`
 }
 

@@ -26,26 +26,26 @@ import (
 
 // Ensure provider defined types fully satisfy framework interfaces.
 var (
-	_ resource.Resource                   = &TrustedCaListResource{}
-	_ resource.ResourceWithConfigure      = &TrustedCaListResource{}
-	_ resource.ResourceWithImportState    = &TrustedCaListResource{}
-	_ resource.ResourceWithModifyPlan     = &TrustedCaListResource{}
-	_ resource.ResourceWithUpgradeState   = &TrustedCaListResource{}
-	_ resource.ResourceWithValidateConfig = &TrustedCaListResource{}
+	_ resource.Resource                   = &TrustedCAListResource{}
+	_ resource.ResourceWithConfigure      = &TrustedCAListResource{}
+	_ resource.ResourceWithImportState    = &TrustedCAListResource{}
+	_ resource.ResourceWithModifyPlan     = &TrustedCAListResource{}
+	_ resource.ResourceWithUpgradeState   = &TrustedCAListResource{}
+	_ resource.ResourceWithValidateConfig = &TrustedCAListResource{}
 )
 
 // trusted_ca_listSchemaVersion is the schema version for state upgrades
 const trusted_ca_listSchemaVersion int64 = 1
 
-func NewTrustedCaListResource() resource.Resource {
-	return &TrustedCaListResource{}
+func NewTrustedCAListResource() resource.Resource {
+	return &TrustedCAListResource{}
 }
 
-type TrustedCaListResource struct {
+type TrustedCAListResource struct {
 	client *client.Client
 }
 
-type TrustedCaListResourceModel struct {
+type TrustedCAListResourceModel struct {
 	Name         types.String   `tfsdk:"name"`
 	Namespace    types.String   `tfsdk:"namespace"`
 	Annotations  types.Map      `tfsdk:"annotations"`
@@ -53,21 +53,21 @@ type TrustedCaListResourceModel struct {
 	Disable      types.Bool     `tfsdk:"disable"`
 	Labels       types.Map      `tfsdk:"labels"`
 	ID           types.String   `tfsdk:"id"`
-	TrustedCaURL types.String   `tfsdk:"trusted_ca_url"`
+	TrustedCAURL types.String   `tfsdk:"trusted_ca_url"`
 	Timeouts     timeouts.Value `tfsdk:"timeouts"`
 }
 
-func (r *TrustedCaListResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
+func (r *TrustedCAListResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
 	resp.TypeName = req.ProviderTypeName + "_trusted_ca_list"
 }
 
-func (r *TrustedCaListResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
+func (r *TrustedCAListResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             trusted_ca_listSchemaVersion,
-		MarkdownDescription: "Manages a TrustedCaList resource in F5 Distributed Cloud for trusted certificate authority list management.",
+		MarkdownDescription: "Manages a TrustedCAList resource in F5 Distributed Cloud for trusted certificate authority list management.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the TrustedCaList. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the TrustedCAList. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -77,7 +77,7 @@ func (r *TrustedCaListResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the TrustedCaList will be created.",
+				MarkdownDescription: "Namespace where the TrustedCAList will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -131,7 +131,7 @@ func (r *TrustedCaListResource) Schema(ctx context.Context, req resource.SchemaR
 	}
 }
 
-func (r *TrustedCaListResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
+func (r *TrustedCAListResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -147,8 +147,8 @@ func (r *TrustedCaListResource) Configure(ctx context.Context, req resource.Conf
 }
 
 // ValidateConfig implements resource.ResourceWithValidateConfig
-func (r *TrustedCaListResource) ValidateConfig(ctx context.Context, req resource.ValidateConfigRequest, resp *resource.ValidateConfigResponse) {
-	var data TrustedCaListResourceModel
+func (r *TrustedCAListResource) ValidateConfig(ctx context.Context, req resource.ValidateConfigRequest, resp *resource.ValidateConfigResponse) {
+	var data TrustedCAListResourceModel
 	resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -156,7 +156,7 @@ func (r *TrustedCaListResource) ValidateConfig(ctx context.Context, req resource
 }
 
 // ModifyPlan implements resource.ResourceWithModifyPlan
-func (r *TrustedCaListResource) ModifyPlan(ctx context.Context, req resource.ModifyPlanRequest, resp *resource.ModifyPlanResponse) {
+func (r *TrustedCAListResource) ModifyPlan(ctx context.Context, req resource.ModifyPlanRequest, resp *resource.ModifyPlanResponse) {
 	if req.Plan.Raw.IsNull() {
 		resp.Diagnostics.AddWarning(
 			"Resource Destruction",
@@ -166,7 +166,7 @@ func (r *TrustedCaListResource) ModifyPlan(ctx context.Context, req resource.Mod
 	}
 
 	if req.State.Raw.IsNull() {
-		var plan TrustedCaListResourceModel
+		var plan TrustedCAListResourceModel
 		resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
 		if resp.Diagnostics.HasError() {
 			return
@@ -182,7 +182,7 @@ func (r *TrustedCaListResource) ModifyPlan(ctx context.Context, req resource.Mod
 }
 
 // UpgradeState implements resource.ResourceWithUpgradeState
-func (r *TrustedCaListResource) UpgradeState(ctx context.Context) map[int64]resource.StateUpgrader {
+func (r *TrustedCAListResource) UpgradeState(ctx context.Context) map[int64]resource.StateUpgrader {
 	return map[int64]resource.StateUpgrader{
 		0: {
 			PriorSchema: &schema.Schema{
@@ -208,7 +208,7 @@ func (r *TrustedCaListResource) UpgradeState(ctx context.Context) map[int64]reso
 					return
 				}
 
-				upgradedState := TrustedCaListResourceModel{
+				upgradedState := TrustedCAListResourceModel{
 					Name:        priorState.Name,
 					Namespace:   priorState.Namespace,
 					Annotations: priorState.Annotations,
@@ -223,8 +223,8 @@ func (r *TrustedCaListResource) UpgradeState(ctx context.Context) map[int64]reso
 	}
 }
 
-func (r *TrustedCaListResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
-	var data TrustedCaListResourceModel
+func (r *TrustedCAListResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
+	var data TrustedCAListResourceModel
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -244,7 +244,7 @@ func (r *TrustedCaListResource) Create(ctx context.Context, req resource.CreateR
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	createReq := &client.TrustedCaList{
+	createReq := &client.TrustedCAList{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -275,13 +275,13 @@ func (r *TrustedCaListResource) Create(ctx context.Context, req resource.CreateR
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if !data.TrustedCaURL.IsNull() && !data.TrustedCaURL.IsUnknown() {
-		createReq.Spec["trusted_ca_url"] = data.TrustedCaURL.ValueString()
+	if !data.TrustedCAURL.IsNull() && !data.TrustedCAURL.IsUnknown() {
+		createReq.Spec["trusted_ca_url"] = data.TrustedCAURL.ValueString()
 	}
 
-	apiResource, err := r.client.CreateTrustedCaList(ctx, createReq)
+	apiResource, err := r.client.CreateTrustedCAList(ctx, createReq)
 	if err != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create TrustedCaList: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create TrustedCAList: %s", err))
 		return
 	}
 
@@ -292,9 +292,9 @@ func (r *TrustedCaListResource) Create(ctx context.Context, req resource.CreateR
 	isImport := false // Create is never an import
 	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if v, ok := apiResource.Spec["trusted_ca_url"].(string); ok && v != "" {
-		data.TrustedCaURL = types.StringValue(v)
+		data.TrustedCAURL = types.StringValue(v)
 	} else {
-		data.TrustedCaURL = types.StringNull()
+		data.TrustedCAURL = types.StringNull()
 	}
 
 	psd := privatestate.NewPrivateStateData()
@@ -304,12 +304,12 @@ func (r *TrustedCaListResource) Create(ctx context.Context, req resource.CreateR
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
-	tflog.Trace(ctx, "created TrustedCaList resource")
+	tflog.Trace(ctx, "created TrustedCAList resource")
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *TrustedCaListResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-	var data TrustedCaListResourceModel
+func (r *TrustedCAListResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
+	var data TrustedCAListResourceModel
 	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -327,18 +327,18 @@ func (r *TrustedCaListResource) Read(ctx context.Context, req resource.ReadReque
 	psd, psDiags := privatestate.LoadFromPrivateState(ctx, &req)
 	resp.Diagnostics.Append(psDiags...)
 
-	apiResource, err := r.client.GetTrustedCaList(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	apiResource, err := r.client.GetTrustedCAList(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// Check if the resource was deleted outside Terraform
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
-			tflog.Warn(ctx, "TrustedCaList not found, removing from state", map[string]interface{}{
+			tflog.Warn(ctx, "TrustedCAList not found, removing from state", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})
 			resp.State.RemoveResource(ctx)
 			return
 		}
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read TrustedCaList: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read TrustedCAList: %s", err))
 		return
 	}
 
@@ -390,9 +390,9 @@ func (r *TrustedCaListResource) Read(ctx context.Context, req resource.ReadReque
 		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if v, ok := apiResource.Spec["trusted_ca_url"].(string); ok && v != "" {
-		data.TrustedCaURL = types.StringValue(v)
+		data.TrustedCAURL = types.StringValue(v)
 	} else {
-		data.TrustedCaURL = types.StringNull()
+		data.TrustedCAURL = types.StringNull()
 	}
 
 	// Preserve or set the managed marker for future Read operations
@@ -407,8 +407,8 @@ func (r *TrustedCaListResource) Read(ctx context.Context, req resource.ReadReque
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *TrustedCaListResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-	var data TrustedCaListResourceModel
+func (r *TrustedCAListResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
+	var data TrustedCAListResourceModel
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -423,7 +423,7 @@ func (r *TrustedCaListResource) Update(ctx context.Context, req resource.UpdateR
 	ctx, cancel := context.WithTimeout(ctx, updateTimeout)
 	defer cancel()
 
-	apiResource := &client.TrustedCaList{
+	apiResource := &client.TrustedCAList{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -454,13 +454,13 @@ func (r *TrustedCaListResource) Update(ctx context.Context, req resource.UpdateR
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if !data.TrustedCaURL.IsNull() && !data.TrustedCaURL.IsUnknown() {
-		apiResource.Spec["trusted_ca_url"] = data.TrustedCaURL.ValueString()
+	if !data.TrustedCAURL.IsNull() && !data.TrustedCAURL.IsUnknown() {
+		apiResource.Spec["trusted_ca_url"] = data.TrustedCAURL.ValueString()
 	}
 
-	_, err := r.client.UpdateTrustedCaList(ctx, apiResource)
+	_, err := r.client.UpdateTrustedCAList(ctx, apiResource)
 	if err != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update TrustedCaList: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update TrustedCAList: %s", err))
 		return
 	}
 
@@ -469,18 +469,18 @@ func (r *TrustedCaListResource) Update(ctx context.Context, req resource.UpdateR
 
 	// Fetch the resource to get complete state including computed fields
 	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
-	fetched, fetchErr := r.client.GetTrustedCaList(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	fetched, fetchErr := r.client.GetTrustedCAList(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if fetchErr != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read TrustedCaList after update: %s", fetchErr))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read TrustedCAList after update: %s", fetchErr))
 		return
 	}
 
 	// Set computed fields from API response
 	if v, ok := fetched.Spec["trusted_ca_url"].(string); ok && v != "" {
-		data.TrustedCaURL = types.StringValue(v)
-	} else if data.TrustedCaURL.IsUnknown() {
+		data.TrustedCAURL = types.StringValue(v)
+	} else if data.TrustedCAURL.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
-		data.TrustedCaURL = types.StringNull()
+		data.TrustedCAURL = types.StringNull()
 	}
 	// If plan had a value, preserve it
 
@@ -489,9 +489,9 @@ func (r *TrustedCaListResource) Update(ctx context.Context, req resource.UpdateR
 	isImport := false     // Update is never an import
 	_ = isImport          // May be unused if resource has no blocks needing import detection
 	if v, ok := apiResource.Spec["trusted_ca_url"].(string); ok && v != "" {
-		data.TrustedCaURL = types.StringValue(v)
+		data.TrustedCAURL = types.StringValue(v)
 	} else {
-		data.TrustedCaURL = types.StringNull()
+		data.TrustedCAURL = types.StringNull()
 	}
 
 	psd := privatestate.NewPrivateStateData()
@@ -504,8 +504,8 @@ func (r *TrustedCaListResource) Update(ctx context.Context, req resource.UpdateR
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *TrustedCaListResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
-	var data TrustedCaListResourceModel
+func (r *TrustedCAListResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
+	var data TrustedCAListResourceModel
 	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -519,11 +519,11 @@ func (r *TrustedCaListResource) Delete(ctx context.Context, req resource.DeleteR
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-	err := r.client.DeleteTrustedCaList(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	err := r.client.DeleteTrustedCAList(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
-			tflog.Warn(ctx, "TrustedCaList already deleted, removing from state", map[string]interface{}{
+			tflog.Warn(ctx, "TrustedCAList already deleted, removing from state", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})
@@ -532,18 +532,18 @@ func (r *TrustedCaListResource) Delete(ctx context.Context, req resource.DeleteR
 		// If delete is not implemented (501), warn and remove from state
 		// Some F5 XC resources don't support deletion via API
 		if strings.Contains(err.Error(), "501") {
-			tflog.Warn(ctx, "TrustedCaList delete not supported by API (501), removing from state only", map[string]interface{}{
+			tflog.Warn(ctx, "TrustedCAList delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})
 			return
 		}
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete TrustedCaList: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete TrustedCAList: %s", err))
 		return
 	}
 }
 
-func (r *TrustedCaListResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
+func (r *TrustedCAListResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	// Import ID format: namespace/name
 	parts := strings.Split(req.ID, "/")
 	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {

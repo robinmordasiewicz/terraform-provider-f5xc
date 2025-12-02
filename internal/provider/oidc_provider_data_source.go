@@ -15,19 +15,19 @@ import (
 )
 
 var (
-	_ datasource.DataSource              = &OidcProviderDataSource{}
-	_ datasource.DataSourceWithConfigure = &OidcProviderDataSource{}
+	_ datasource.DataSource              = &OIDCProviderDataSource{}
+	_ datasource.DataSourceWithConfigure = &OIDCProviderDataSource{}
 )
 
-func NewOidcProviderDataSource() datasource.DataSource {
-	return &OidcProviderDataSource{}
+func NewOIDCProviderDataSource() datasource.DataSource {
+	return &OIDCProviderDataSource{}
 }
 
-type OidcProviderDataSource struct {
+type OIDCProviderDataSource struct {
 	client *client.Client
 }
 
-type OidcProviderDataSourceModel struct {
+type OIDCProviderDataSourceModel struct {
 	ID          types.String `tfsdk:"id"`
 	Name        types.String `tfsdk:"name"`
 	Namespace   types.String `tfsdk:"namespace"`
@@ -36,28 +36,28 @@ type OidcProviderDataSourceModel struct {
 	Annotations types.Map    `tfsdk:"annotations"`
 }
 
-func (d *OidcProviderDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
+func (d *OIDCProviderDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	resp.TypeName = req.ProviderTypeName + "_oidc_provider"
 }
 
-func (d *OidcProviderDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
+func (d *OIDCProviderDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages a OidcProvider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.",
+		MarkdownDescription: "Manages a OIDCProvider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
 				Computed:            true,
 			},
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the OidcProvider.",
+				MarkdownDescription: "Name of the OIDCProvider.",
 				Required:            true,
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the OidcProvider exists.",
+				MarkdownDescription: "Namespace where the OIDCProvider exists.",
 				Required:            true,
 			},
 			"description": schema.StringAttribute{
-				MarkdownDescription: "Description of the OidcProvider.",
+				MarkdownDescription: "Description of the OIDCProvider.",
 				Computed:            true,
 			},
 			"labels": schema.MapAttribute{
@@ -74,7 +74,7 @@ func (d *OidcProviderDataSource) Schema(ctx context.Context, req datasource.Sche
 	}
 }
 
-func (d *OidcProviderDataSource) Configure(ctx context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
+func (d *OIDCProviderDataSource) Configure(ctx context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -86,16 +86,16 @@ func (d *OidcProviderDataSource) Configure(ctx context.Context, req datasource.C
 	d.client = client
 }
 
-func (d *OidcProviderDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
-	var data OidcProviderDataSourceModel
+func (d *OIDCProviderDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
+	var data OIDCProviderDataSourceModel
 	resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	resource, err := d.client.GetOidcProvider(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	resource, err := d.client.GetOIDCProvider(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read OidcProvider: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read OIDCProvider: %s", err))
 		return
 	}
 

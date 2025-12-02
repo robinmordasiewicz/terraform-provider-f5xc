@@ -61,12 +61,12 @@ type NetworkConnectorEnableForwardProxyModel struct {
 
 // NetworkConnectorEnableForwardProxyTLSInterceptModel represents tls_intercept block
 type NetworkConnectorEnableForwardProxyTLSInterceptModel struct {
-	TrustedCaURL        types.String                                                          `tfsdk:"trusted_ca_url"`
+	TrustedCAURL        types.String                                                          `tfsdk:"trusted_ca_url"`
 	CustomCertificate   *NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateModel `tfsdk:"custom_certificate"`
 	EnableForAllDomains *NetworkConnectorEmptyModel                                           `tfsdk:"enable_for_all_domains"`
 	Policy              *NetworkConnectorEnableForwardProxyTLSInterceptPolicyModel            `tfsdk:"policy"`
 	VolterraCertificate *NetworkConnectorEmptyModel                                           `tfsdk:"volterra_certificate"`
-	VolterraTrustedCa   *NetworkConnectorEmptyModel                                           `tfsdk:"volterra_trusted_ca"`
+	VolterraTrustedCA   *NetworkConnectorEmptyModel                                           `tfsdk:"volterra_trusted_ca"`
 }
 
 // NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateModel represents custom_certificate block
@@ -74,7 +74,7 @@ type NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateModel struct
 	CertificateURL       types.String                                                                              `tfsdk:"certificate_url"`
 	DescriptionSpec      types.String                                                                              `tfsdk:"description_spec"`
 	CustomHashAlgorithms *NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling  *NetworkConnectorEmptyModel                                                               `tfsdk:"disable_ocsp_stapling"`
+	DisableOCSPStapling  *NetworkConnectorEmptyModel                                                               `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey           *NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyModel           `tfsdk:"private_key"`
 	UseSystemDefaults    *NetworkConnectorEmptyModel                                                               `tfsdk:"use_system_defaults"`
 }
@@ -122,31 +122,31 @@ type NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesDomain
 	SuffixValue types.String `tfsdk:"suffix_value"`
 }
 
-// NetworkConnectorSLIToGlobalDrModel represents sli_to_global_dr block
-type NetworkConnectorSLIToGlobalDrModel struct {
-	GlobalVn *NetworkConnectorSLIToGlobalDrGlobalVnModel `tfsdk:"global_vn"`
+// NetworkConnectorSLIToGlobalDRModel represents sli_to_global_dr block
+type NetworkConnectorSLIToGlobalDRModel struct {
+	GlobalVn *NetworkConnectorSLIToGlobalDRGlobalVnModel `tfsdk:"global_vn"`
 }
 
-// NetworkConnectorSLIToGlobalDrGlobalVnModel represents global_vn block
-type NetworkConnectorSLIToGlobalDrGlobalVnModel struct {
+// NetworkConnectorSLIToGlobalDRGlobalVnModel represents global_vn block
+type NetworkConnectorSLIToGlobalDRGlobalVnModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// NetworkConnectorSLIToSLOSnatModel represents sli_to_slo_snat block
-type NetworkConnectorSLIToSLOSnatModel struct {
+// NetworkConnectorSLIToSloSnatModel represents sli_to_slo_snat block
+type NetworkConnectorSLIToSloSnatModel struct {
 	DefaultGwSnat *NetworkConnectorEmptyModel `tfsdk:"default_gw_snat"`
 	InterfaceIP   *NetworkConnectorEmptyModel `tfsdk:"interface_ip"`
 }
 
-// NetworkConnectorSLOToGlobalDrModel represents slo_to_global_dr block
-type NetworkConnectorSLOToGlobalDrModel struct {
-	GlobalVn *NetworkConnectorSLOToGlobalDrGlobalVnModel `tfsdk:"global_vn"`
+// NetworkConnectorSloToGlobalDRModel represents slo_to_global_dr block
+type NetworkConnectorSloToGlobalDRModel struct {
+	GlobalVn *NetworkConnectorSloToGlobalDRGlobalVnModel `tfsdk:"global_vn"`
 }
 
-// NetworkConnectorSLOToGlobalDrGlobalVnModel represents global_vn block
-type NetworkConnectorSLOToGlobalDrGlobalVnModel struct {
+// NetworkConnectorSloToGlobalDRGlobalVnModel represents global_vn block
+type NetworkConnectorSloToGlobalDRGlobalVnModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -163,9 +163,9 @@ type NetworkConnectorResourceModel struct {
 	Timeouts            timeouts.Value                           `tfsdk:"timeouts"`
 	DisableForwardProxy *NetworkConnectorEmptyModel              `tfsdk:"disable_forward_proxy"`
 	EnableForwardProxy  *NetworkConnectorEnableForwardProxyModel `tfsdk:"enable_forward_proxy"`
-	SLIToGlobalDr       *NetworkConnectorSLIToGlobalDrModel      `tfsdk:"sli_to_global_dr"`
-	SLIToSLOSnat        *NetworkConnectorSLIToSLOSnatModel       `tfsdk:"sli_to_slo_snat"`
-	SLOToGlobalDr       *NetworkConnectorSLOToGlobalDrModel      `tfsdk:"slo_to_global_dr"`
+	SLIToGlobalDR       *NetworkConnectorSLIToGlobalDRModel      `tfsdk:"sli_to_global_dr"`
+	SLIToSloSnat        *NetworkConnectorSLIToSloSnatModel       `tfsdk:"sli_to_slo_snat"`
+	SloToGlobalDR       *NetworkConnectorSloToGlobalDRModel      `tfsdk:"slo_to_global_dr"`
 }
 
 func (r *NetworkConnectorResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -610,8 +610,8 @@ func (r *NetworkConnectorResource) Create(ctx context.Context, req resource.Crea
 		}
 		if data.EnableForwardProxy.TLSIntercept != nil {
 			tls_interceptNestedMap := make(map[string]interface{})
-			if !data.EnableForwardProxy.TLSIntercept.TrustedCaURL.IsNull() && !data.EnableForwardProxy.TLSIntercept.TrustedCaURL.IsUnknown() {
-				tls_interceptNestedMap["trusted_ca_url"] = data.EnableForwardProxy.TLSIntercept.TrustedCaURL.ValueString()
+			if !data.EnableForwardProxy.TLSIntercept.TrustedCAURL.IsNull() && !data.EnableForwardProxy.TLSIntercept.TrustedCAURL.IsUnknown() {
+				tls_interceptNestedMap["trusted_ca_url"] = data.EnableForwardProxy.TLSIntercept.TrustedCAURL.ValueString()
 			}
 			enable_forward_proxyMap["tls_intercept"] = tls_interceptNestedMap
 		}
@@ -631,45 +631,45 @@ func (r *NetworkConnectorResource) Create(ctx context.Context, req resource.Crea
 		}
 		createReq.Spec["enable_forward_proxy"] = enable_forward_proxyMap
 	}
-	if data.SLIToGlobalDr != nil {
+	if data.SLIToGlobalDR != nil {
 		sli_to_global_drMap := make(map[string]interface{})
-		if data.SLIToGlobalDr.GlobalVn != nil {
+		if data.SLIToGlobalDR.GlobalVn != nil {
 			global_vnNestedMap := make(map[string]interface{})
-			if !data.SLIToGlobalDr.GlobalVn.Name.IsNull() && !data.SLIToGlobalDr.GlobalVn.Name.IsUnknown() {
-				global_vnNestedMap["name"] = data.SLIToGlobalDr.GlobalVn.Name.ValueString()
+			if !data.SLIToGlobalDR.GlobalVn.Name.IsNull() && !data.SLIToGlobalDR.GlobalVn.Name.IsUnknown() {
+				global_vnNestedMap["name"] = data.SLIToGlobalDR.GlobalVn.Name.ValueString()
 			}
-			if !data.SLIToGlobalDr.GlobalVn.Namespace.IsNull() && !data.SLIToGlobalDr.GlobalVn.Namespace.IsUnknown() {
-				global_vnNestedMap["namespace"] = data.SLIToGlobalDr.GlobalVn.Namespace.ValueString()
+			if !data.SLIToGlobalDR.GlobalVn.Namespace.IsNull() && !data.SLIToGlobalDR.GlobalVn.Namespace.IsUnknown() {
+				global_vnNestedMap["namespace"] = data.SLIToGlobalDR.GlobalVn.Namespace.ValueString()
 			}
-			if !data.SLIToGlobalDr.GlobalVn.Tenant.IsNull() && !data.SLIToGlobalDr.GlobalVn.Tenant.IsUnknown() {
-				global_vnNestedMap["tenant"] = data.SLIToGlobalDr.GlobalVn.Tenant.ValueString()
+			if !data.SLIToGlobalDR.GlobalVn.Tenant.IsNull() && !data.SLIToGlobalDR.GlobalVn.Tenant.IsUnknown() {
+				global_vnNestedMap["tenant"] = data.SLIToGlobalDR.GlobalVn.Tenant.ValueString()
 			}
 			sli_to_global_drMap["global_vn"] = global_vnNestedMap
 		}
 		createReq.Spec["sli_to_global_dr"] = sli_to_global_drMap
 	}
-	if data.SLIToSLOSnat != nil {
+	if data.SLIToSloSnat != nil {
 		sli_to_slo_snatMap := make(map[string]interface{})
-		if data.SLIToSLOSnat.DefaultGwSnat != nil {
+		if data.SLIToSloSnat.DefaultGwSnat != nil {
 			sli_to_slo_snatMap["default_gw_snat"] = map[string]interface{}{}
 		}
-		if data.SLIToSLOSnat.InterfaceIP != nil {
+		if data.SLIToSloSnat.InterfaceIP != nil {
 			sli_to_slo_snatMap["interface_ip"] = map[string]interface{}{}
 		}
 		createReq.Spec["sli_to_slo_snat"] = sli_to_slo_snatMap
 	}
-	if data.SLOToGlobalDr != nil {
+	if data.SloToGlobalDR != nil {
 		slo_to_global_drMap := make(map[string]interface{})
-		if data.SLOToGlobalDr.GlobalVn != nil {
+		if data.SloToGlobalDR.GlobalVn != nil {
 			global_vnNestedMap := make(map[string]interface{})
-			if !data.SLOToGlobalDr.GlobalVn.Name.IsNull() && !data.SLOToGlobalDr.GlobalVn.Name.IsUnknown() {
-				global_vnNestedMap["name"] = data.SLOToGlobalDr.GlobalVn.Name.ValueString()
+			if !data.SloToGlobalDR.GlobalVn.Name.IsNull() && !data.SloToGlobalDR.GlobalVn.Name.IsUnknown() {
+				global_vnNestedMap["name"] = data.SloToGlobalDR.GlobalVn.Name.ValueString()
 			}
-			if !data.SLOToGlobalDr.GlobalVn.Namespace.IsNull() && !data.SLOToGlobalDr.GlobalVn.Namespace.IsUnknown() {
-				global_vnNestedMap["namespace"] = data.SLOToGlobalDr.GlobalVn.Namespace.ValueString()
+			if !data.SloToGlobalDR.GlobalVn.Namespace.IsNull() && !data.SloToGlobalDR.GlobalVn.Namespace.IsUnknown() {
+				global_vnNestedMap["namespace"] = data.SloToGlobalDR.GlobalVn.Namespace.ValueString()
 			}
-			if !data.SLOToGlobalDr.GlobalVn.Tenant.IsNull() && !data.SLOToGlobalDr.GlobalVn.Tenant.IsUnknown() {
-				global_vnNestedMap["tenant"] = data.SLOToGlobalDr.GlobalVn.Tenant.ValueString()
+			if !data.SloToGlobalDR.GlobalVn.Tenant.IsNull() && !data.SloToGlobalDR.GlobalVn.Tenant.IsUnknown() {
+				global_vnNestedMap["tenant"] = data.SloToGlobalDR.GlobalVn.Tenant.ValueString()
 			}
 			slo_to_global_drMap["global_vn"] = global_vnNestedMap
 		}
@@ -727,7 +727,7 @@ func (r *NetworkConnectorResource) Create(ctx context.Context, req resource.Crea
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["tls_intercept"].(map[string]interface{}); ok {
 					return &NetworkConnectorEnableForwardProxyTLSInterceptModel{
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -765,19 +765,19 @@ func (r *NetworkConnectorResource) Create(ctx context.Context, req resource.Crea
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["sli_to_global_dr"].(map[string]interface{}); ok && isImport && data.SLIToGlobalDr == nil {
+	if _, ok := apiResource.Spec["sli_to_global_dr"].(map[string]interface{}); ok && isImport && data.SLIToGlobalDR == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.SLIToGlobalDr = &NetworkConnectorSLIToGlobalDrModel{}
+		data.SLIToGlobalDR = &NetworkConnectorSLIToGlobalDRModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["sli_to_slo_snat"].(map[string]interface{}); ok && isImport && data.SLIToSLOSnat == nil {
+	if _, ok := apiResource.Spec["sli_to_slo_snat"].(map[string]interface{}); ok && isImport && data.SLIToSloSnat == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.SLIToSLOSnat = &NetworkConnectorSLIToSLOSnatModel{}
+		data.SLIToSloSnat = &NetworkConnectorSLIToSloSnatModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["slo_to_global_dr"].(map[string]interface{}); ok && isImport && data.SLOToGlobalDr == nil {
+	if _, ok := apiResource.Spec["slo_to_global_dr"].(map[string]interface{}); ok && isImport && data.SloToGlobalDR == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.SLOToGlobalDr = &NetworkConnectorSLOToGlobalDrModel{}
+		data.SloToGlobalDR = &NetworkConnectorSloToGlobalDRModel{}
 	}
 	// Normal Read: preserve existing state value
 
@@ -912,7 +912,7 @@ func (r *NetworkConnectorResource) Read(ctx context.Context, req resource.ReadRe
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["tls_intercept"].(map[string]interface{}); ok {
 					return &NetworkConnectorEnableForwardProxyTLSInterceptModel{
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -950,19 +950,19 @@ func (r *NetworkConnectorResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["sli_to_global_dr"].(map[string]interface{}); ok && isImport && data.SLIToGlobalDr == nil {
+	if _, ok := apiResource.Spec["sli_to_global_dr"].(map[string]interface{}); ok && isImport && data.SLIToGlobalDR == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.SLIToGlobalDr = &NetworkConnectorSLIToGlobalDrModel{}
+		data.SLIToGlobalDR = &NetworkConnectorSLIToGlobalDRModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["sli_to_slo_snat"].(map[string]interface{}); ok && isImport && data.SLIToSLOSnat == nil {
+	if _, ok := apiResource.Spec["sli_to_slo_snat"].(map[string]interface{}); ok && isImport && data.SLIToSloSnat == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.SLIToSLOSnat = &NetworkConnectorSLIToSLOSnatModel{}
+		data.SLIToSloSnat = &NetworkConnectorSLIToSloSnatModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["slo_to_global_dr"].(map[string]interface{}); ok && isImport && data.SLOToGlobalDr == nil {
+	if _, ok := apiResource.Spec["slo_to_global_dr"].(map[string]interface{}); ok && isImport && data.SloToGlobalDR == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.SLOToGlobalDr = &NetworkConnectorSLOToGlobalDrModel{}
+		data.SloToGlobalDR = &NetworkConnectorSloToGlobalDRModel{}
 	}
 	// Normal Read: preserve existing state value
 
@@ -1042,8 +1042,8 @@ func (r *NetworkConnectorResource) Update(ctx context.Context, req resource.Upda
 		}
 		if data.EnableForwardProxy.TLSIntercept != nil {
 			tls_interceptNestedMap := make(map[string]interface{})
-			if !data.EnableForwardProxy.TLSIntercept.TrustedCaURL.IsNull() && !data.EnableForwardProxy.TLSIntercept.TrustedCaURL.IsUnknown() {
-				tls_interceptNestedMap["trusted_ca_url"] = data.EnableForwardProxy.TLSIntercept.TrustedCaURL.ValueString()
+			if !data.EnableForwardProxy.TLSIntercept.TrustedCAURL.IsNull() && !data.EnableForwardProxy.TLSIntercept.TrustedCAURL.IsUnknown() {
+				tls_interceptNestedMap["trusted_ca_url"] = data.EnableForwardProxy.TLSIntercept.TrustedCAURL.ValueString()
 			}
 			enable_forward_proxyMap["tls_intercept"] = tls_interceptNestedMap
 		}
@@ -1063,45 +1063,45 @@ func (r *NetworkConnectorResource) Update(ctx context.Context, req resource.Upda
 		}
 		apiResource.Spec["enable_forward_proxy"] = enable_forward_proxyMap
 	}
-	if data.SLIToGlobalDr != nil {
+	if data.SLIToGlobalDR != nil {
 		sli_to_global_drMap := make(map[string]interface{})
-		if data.SLIToGlobalDr.GlobalVn != nil {
+		if data.SLIToGlobalDR.GlobalVn != nil {
 			global_vnNestedMap := make(map[string]interface{})
-			if !data.SLIToGlobalDr.GlobalVn.Name.IsNull() && !data.SLIToGlobalDr.GlobalVn.Name.IsUnknown() {
-				global_vnNestedMap["name"] = data.SLIToGlobalDr.GlobalVn.Name.ValueString()
+			if !data.SLIToGlobalDR.GlobalVn.Name.IsNull() && !data.SLIToGlobalDR.GlobalVn.Name.IsUnknown() {
+				global_vnNestedMap["name"] = data.SLIToGlobalDR.GlobalVn.Name.ValueString()
 			}
-			if !data.SLIToGlobalDr.GlobalVn.Namespace.IsNull() && !data.SLIToGlobalDr.GlobalVn.Namespace.IsUnknown() {
-				global_vnNestedMap["namespace"] = data.SLIToGlobalDr.GlobalVn.Namespace.ValueString()
+			if !data.SLIToGlobalDR.GlobalVn.Namespace.IsNull() && !data.SLIToGlobalDR.GlobalVn.Namespace.IsUnknown() {
+				global_vnNestedMap["namespace"] = data.SLIToGlobalDR.GlobalVn.Namespace.ValueString()
 			}
-			if !data.SLIToGlobalDr.GlobalVn.Tenant.IsNull() && !data.SLIToGlobalDr.GlobalVn.Tenant.IsUnknown() {
-				global_vnNestedMap["tenant"] = data.SLIToGlobalDr.GlobalVn.Tenant.ValueString()
+			if !data.SLIToGlobalDR.GlobalVn.Tenant.IsNull() && !data.SLIToGlobalDR.GlobalVn.Tenant.IsUnknown() {
+				global_vnNestedMap["tenant"] = data.SLIToGlobalDR.GlobalVn.Tenant.ValueString()
 			}
 			sli_to_global_drMap["global_vn"] = global_vnNestedMap
 		}
 		apiResource.Spec["sli_to_global_dr"] = sli_to_global_drMap
 	}
-	if data.SLIToSLOSnat != nil {
+	if data.SLIToSloSnat != nil {
 		sli_to_slo_snatMap := make(map[string]interface{})
-		if data.SLIToSLOSnat.DefaultGwSnat != nil {
+		if data.SLIToSloSnat.DefaultGwSnat != nil {
 			sli_to_slo_snatMap["default_gw_snat"] = map[string]interface{}{}
 		}
-		if data.SLIToSLOSnat.InterfaceIP != nil {
+		if data.SLIToSloSnat.InterfaceIP != nil {
 			sli_to_slo_snatMap["interface_ip"] = map[string]interface{}{}
 		}
 		apiResource.Spec["sli_to_slo_snat"] = sli_to_slo_snatMap
 	}
-	if data.SLOToGlobalDr != nil {
+	if data.SloToGlobalDR != nil {
 		slo_to_global_drMap := make(map[string]interface{})
-		if data.SLOToGlobalDr.GlobalVn != nil {
+		if data.SloToGlobalDR.GlobalVn != nil {
 			global_vnNestedMap := make(map[string]interface{})
-			if !data.SLOToGlobalDr.GlobalVn.Name.IsNull() && !data.SLOToGlobalDr.GlobalVn.Name.IsUnknown() {
-				global_vnNestedMap["name"] = data.SLOToGlobalDr.GlobalVn.Name.ValueString()
+			if !data.SloToGlobalDR.GlobalVn.Name.IsNull() && !data.SloToGlobalDR.GlobalVn.Name.IsUnknown() {
+				global_vnNestedMap["name"] = data.SloToGlobalDR.GlobalVn.Name.ValueString()
 			}
-			if !data.SLOToGlobalDr.GlobalVn.Namespace.IsNull() && !data.SLOToGlobalDr.GlobalVn.Namespace.IsUnknown() {
-				global_vnNestedMap["namespace"] = data.SLOToGlobalDr.GlobalVn.Namespace.ValueString()
+			if !data.SloToGlobalDR.GlobalVn.Namespace.IsNull() && !data.SloToGlobalDR.GlobalVn.Namespace.IsUnknown() {
+				global_vnNestedMap["namespace"] = data.SloToGlobalDR.GlobalVn.Namespace.ValueString()
 			}
-			if !data.SLOToGlobalDr.GlobalVn.Tenant.IsNull() && !data.SLOToGlobalDr.GlobalVn.Tenant.IsUnknown() {
-				global_vnNestedMap["tenant"] = data.SLOToGlobalDr.GlobalVn.Tenant.ValueString()
+			if !data.SloToGlobalDR.GlobalVn.Tenant.IsNull() && !data.SloToGlobalDR.GlobalVn.Tenant.IsUnknown() {
+				global_vnNestedMap["tenant"] = data.SloToGlobalDR.GlobalVn.Tenant.ValueString()
 			}
 			slo_to_global_drMap["global_vn"] = global_vnNestedMap
 		}
@@ -1170,7 +1170,7 @@ func (r *NetworkConnectorResource) Update(ctx context.Context, req resource.Upda
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["tls_intercept"].(map[string]interface{}); ok {
 					return &NetworkConnectorEnableForwardProxyTLSInterceptModel{
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -1208,19 +1208,19 @@ func (r *NetworkConnectorResource) Update(ctx context.Context, req resource.Upda
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["sli_to_global_dr"].(map[string]interface{}); ok && isImport && data.SLIToGlobalDr == nil {
+	if _, ok := apiResource.Spec["sli_to_global_dr"].(map[string]interface{}); ok && isImport && data.SLIToGlobalDR == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.SLIToGlobalDr = &NetworkConnectorSLIToGlobalDrModel{}
+		data.SLIToGlobalDR = &NetworkConnectorSLIToGlobalDRModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["sli_to_slo_snat"].(map[string]interface{}); ok && isImport && data.SLIToSLOSnat == nil {
+	if _, ok := apiResource.Spec["sli_to_slo_snat"].(map[string]interface{}); ok && isImport && data.SLIToSloSnat == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.SLIToSLOSnat = &NetworkConnectorSLIToSLOSnatModel{}
+		data.SLIToSloSnat = &NetworkConnectorSLIToSloSnatModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["slo_to_global_dr"].(map[string]interface{}); ok && isImport && data.SLOToGlobalDr == nil {
+	if _, ok := apiResource.Spec["slo_to_global_dr"].(map[string]interface{}); ok && isImport && data.SloToGlobalDR == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.SLOToGlobalDr = &NetworkConnectorSLOToGlobalDrModel{}
+		data.SloToGlobalDR = &NetworkConnectorSloToGlobalDRModel{}
 	}
 	// Normal Read: preserve existing state value
 

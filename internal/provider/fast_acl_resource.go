@@ -56,37 +56,37 @@ type FastACLProtocolPolicerModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// FastACLReACLModel represents re_acl block
-type FastACLReACLModel struct {
+// FastACLREACLModel represents re_acl block
+type FastACLREACLModel struct {
 	AllPublicVips     *FastACLEmptyModel                  `tfsdk:"all_public_vips"`
-	DefaultTenantVip  *FastACLEmptyModel                  `tfsdk:"default_tenant_vip"`
-	FastACLRules      []FastACLReACLFastACLRulesModel     `tfsdk:"fast_acl_rules"`
-	SelectedTenantVip *FastACLReACLSelectedTenantVipModel `tfsdk:"selected_tenant_vip"`
+	DefaultTenantVIP  *FastACLEmptyModel                  `tfsdk:"default_tenant_vip"`
+	FastACLRules      []FastACLREACLFastACLRulesModel     `tfsdk:"fast_acl_rules"`
+	SelectedTenantVIP *FastACLREACLSelectedTenantVIPModel `tfsdk:"selected_tenant_vip"`
 }
 
-// FastACLReACLFastACLRulesModel represents fast_acl_rules block
-type FastACLReACLFastACLRulesModel struct {
-	Action      *FastACLReACLFastACLRulesActionModel      `tfsdk:"action"`
-	IPPrefixSet *FastACLReACLFastACLRulesIPPrefixSetModel `tfsdk:"ip_prefix_set"`
-	Metadata    *FastACLReACLFastACLRulesMetadataModel    `tfsdk:"metadata"`
-	Port        []FastACLReACLFastACLRulesPortModel       `tfsdk:"port"`
-	Prefix      *FastACLReACLFastACLRulesPrefixModel      `tfsdk:"prefix"`
+// FastACLREACLFastACLRulesModel represents fast_acl_rules block
+type FastACLREACLFastACLRulesModel struct {
+	Action      *FastACLREACLFastACLRulesActionModel      `tfsdk:"action"`
+	IPPrefixSet *FastACLREACLFastACLRulesIPPrefixSetModel `tfsdk:"ip_prefix_set"`
+	Metadata    *FastACLREACLFastACLRulesMetadataModel    `tfsdk:"metadata"`
+	Port        []FastACLREACLFastACLRulesPortModel       `tfsdk:"port"`
+	Prefix      *FastACLREACLFastACLRulesPrefixModel      `tfsdk:"prefix"`
 }
 
-// FastACLReACLFastACLRulesActionModel represents action block
-type FastACLReACLFastACLRulesActionModel struct {
+// FastACLREACLFastACLRulesActionModel represents action block
+type FastACLREACLFastACLRulesActionModel struct {
 	SimpleAction          types.String                                              `tfsdk:"simple_action"`
-	PolicerAction         *FastACLReACLFastACLRulesActionPolicerActionModel         `tfsdk:"policer_action"`
-	ProtocolPolicerAction *FastACLReACLFastACLRulesActionProtocolPolicerActionModel `tfsdk:"protocol_policer_action"`
+	PolicerAction         *FastACLREACLFastACLRulesActionPolicerActionModel         `tfsdk:"policer_action"`
+	ProtocolPolicerAction *FastACLREACLFastACLRulesActionProtocolPolicerActionModel `tfsdk:"protocol_policer_action"`
 }
 
-// FastACLReACLFastACLRulesActionPolicerActionModel represents policer_action block
-type FastACLReACLFastACLRulesActionPolicerActionModel struct {
-	Ref []FastACLReACLFastACLRulesActionPolicerActionRefModel `tfsdk:"ref"`
+// FastACLREACLFastACLRulesActionPolicerActionModel represents policer_action block
+type FastACLREACLFastACLRulesActionPolicerActionModel struct {
+	Ref []FastACLREACLFastACLRulesActionPolicerActionRefModel `tfsdk:"ref"`
 }
 
-// FastACLReACLFastACLRulesActionPolicerActionRefModel represents ref block
-type FastACLReACLFastACLRulesActionPolicerActionRefModel struct {
+// FastACLREACLFastACLRulesActionPolicerActionRefModel represents ref block
+type FastACLREACLFastACLRulesActionPolicerActionRefModel struct {
 	Kind      types.String `tfsdk:"kind"`
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -94,13 +94,13 @@ type FastACLReACLFastACLRulesActionPolicerActionRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
-// FastACLReACLFastACLRulesActionProtocolPolicerActionModel represents protocol_policer_action block
-type FastACLReACLFastACLRulesActionProtocolPolicerActionModel struct {
-	Ref []FastACLReACLFastACLRulesActionProtocolPolicerActionRefModel `tfsdk:"ref"`
+// FastACLREACLFastACLRulesActionProtocolPolicerActionModel represents protocol_policer_action block
+type FastACLREACLFastACLRulesActionProtocolPolicerActionModel struct {
+	Ref []FastACLREACLFastACLRulesActionProtocolPolicerActionRefModel `tfsdk:"ref"`
 }
 
-// FastACLReACLFastACLRulesActionProtocolPolicerActionRefModel represents ref block
-type FastACLReACLFastACLRulesActionProtocolPolicerActionRefModel struct {
+// FastACLREACLFastACLRulesActionProtocolPolicerActionRefModel represents ref block
+type FastACLREACLFastACLRulesActionProtocolPolicerActionRefModel struct {
 	Kind      types.String `tfsdk:"kind"`
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -108,13 +108,13 @@ type FastACLReACLFastACLRulesActionProtocolPolicerActionRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
-// FastACLReACLFastACLRulesIPPrefixSetModel represents ip_prefix_set block
-type FastACLReACLFastACLRulesIPPrefixSetModel struct {
-	Ref []FastACLReACLFastACLRulesIPPrefixSetRefModel `tfsdk:"ref"`
+// FastACLREACLFastACLRulesIPPrefixSetModel represents ip_prefix_set block
+type FastACLREACLFastACLRulesIPPrefixSetModel struct {
+	Ref []FastACLREACLFastACLRulesIPPrefixSetRefModel `tfsdk:"ref"`
 }
 
-// FastACLReACLFastACLRulesIPPrefixSetRefModel represents ref block
-type FastACLReACLFastACLRulesIPPrefixSetRefModel struct {
+// FastACLREACLFastACLRulesIPPrefixSetRefModel represents ref block
+type FastACLREACLFastACLRulesIPPrefixSetRefModel struct {
 	Kind      types.String `tfsdk:"kind"`
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -122,32 +122,32 @@ type FastACLReACLFastACLRulesIPPrefixSetRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
-// FastACLReACLFastACLRulesMetadataModel represents metadata block
-type FastACLReACLFastACLRulesMetadataModel struct {
+// FastACLREACLFastACLRulesMetadataModel represents metadata block
+type FastACLREACLFastACLRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
 }
 
-// FastACLReACLFastACLRulesPortModel represents port block
-type FastACLReACLFastACLRulesPortModel struct {
+// FastACLREACLFastACLRulesPortModel represents port block
+type FastACLREACLFastACLRulesPortModel struct {
 	UserDefined types.Int64        `tfsdk:"user_defined"`
 	All         *FastACLEmptyModel `tfsdk:"all"`
 	DNS         *FastACLEmptyModel `tfsdk:"dns"`
 }
 
-// FastACLReACLFastACLRulesPrefixModel represents prefix block
-type FastACLReACLFastACLRulesPrefixModel struct {
+// FastACLREACLFastACLRulesPrefixModel represents prefix block
+type FastACLREACLFastACLRulesPrefixModel struct {
 	Prefix types.List `tfsdk:"prefix"`
 }
 
-// FastACLReACLSelectedTenantVipModel represents selected_tenant_vip block
-type FastACLReACLSelectedTenantVipModel struct {
-	DefaultTenantVip types.Bool                                       `tfsdk:"default_tenant_vip"`
-	PublicIPRefs     []FastACLReACLSelectedTenantVipPublicIPRefsModel `tfsdk:"public_ip_refs"`
+// FastACLREACLSelectedTenantVIPModel represents selected_tenant_vip block
+type FastACLREACLSelectedTenantVIPModel struct {
+	DefaultTenantVIP types.Bool                                       `tfsdk:"default_tenant_vip"`
+	PublicIPRefs     []FastACLREACLSelectedTenantVIPPublicIPRefsModel `tfsdk:"public_ip_refs"`
 }
 
-// FastACLReACLSelectedTenantVipPublicIPRefsModel represents public_ip_refs block
-type FastACLReACLSelectedTenantVipPublicIPRefsModel struct {
+// FastACLREACLSelectedTenantVIPPublicIPRefsModel represents public_ip_refs block
+type FastACLREACLSelectedTenantVIPPublicIPRefsModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -160,7 +160,7 @@ type FastACLSiteACLModel struct {
 	InsideNetwork     *FastACLEmptyModel                `tfsdk:"inside_network"`
 	InterfaceServices *FastACLEmptyModel                `tfsdk:"interface_services"`
 	OutsideNetwork    *FastACLEmptyModel                `tfsdk:"outside_network"`
-	VipServices       *FastACLEmptyModel                `tfsdk:"vip_services"`
+	VIPServices       *FastACLEmptyModel                `tfsdk:"vip_services"`
 }
 
 // FastACLSiteACLFastACLRulesModel represents fast_acl_rules block
@@ -249,7 +249,7 @@ type FastACLResourceModel struct {
 	ID              types.String                 `tfsdk:"id"`
 	Timeouts        timeouts.Value               `tfsdk:"timeouts"`
 	ProtocolPolicer *FastACLProtocolPolicerModel `tfsdk:"protocol_policer"`
-	ReACL           *FastACLReACLModel           `tfsdk:"re_acl"`
+	REACL           *FastACLREACLModel           `tfsdk:"re_acl"`
 	SiteACL         *FastACLSiteACLModel         `tfsdk:"site_acl"`
 }
 
@@ -896,17 +896,17 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 		}
 		createReq.Spec["protocol_policer"] = protocol_policerMap
 	}
-	if data.ReACL != nil {
+	if data.REACL != nil {
 		re_aclMap := make(map[string]interface{})
-		if data.ReACL.AllPublicVips != nil {
+		if data.REACL.AllPublicVips != nil {
 			re_aclMap["all_public_vips"] = map[string]interface{}{}
 		}
-		if data.ReACL.DefaultTenantVip != nil {
+		if data.REACL.DefaultTenantVIP != nil {
 			re_aclMap["default_tenant_vip"] = map[string]interface{}{}
 		}
-		if len(data.ReACL.FastACLRules) > 0 {
+		if len(data.REACL.FastACLRules) > 0 {
 			var fast_acl_rulesList []map[string]interface{}
-			for _, listItem := range data.ReACL.FastACLRules {
+			for _, listItem := range data.REACL.FastACLRules {
 				listItemMap := make(map[string]interface{})
 				if listItem.Action != nil {
 					actionDeepMap := make(map[string]interface{})
@@ -937,10 +937,10 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 			}
 			re_aclMap["fast_acl_rules"] = fast_acl_rulesList
 		}
-		if data.ReACL.SelectedTenantVip != nil {
+		if data.REACL.SelectedTenantVIP != nil {
 			selected_tenant_vipNestedMap := make(map[string]interface{})
-			if !data.ReACL.SelectedTenantVip.DefaultTenantVip.IsNull() && !data.ReACL.SelectedTenantVip.DefaultTenantVip.IsUnknown() {
-				selected_tenant_vipNestedMap["default_tenant_vip"] = data.ReACL.SelectedTenantVip.DefaultTenantVip.ValueBool()
+			if !data.REACL.SelectedTenantVIP.DefaultTenantVIP.IsNull() && !data.REACL.SelectedTenantVIP.DefaultTenantVIP.IsUnknown() {
+				selected_tenant_vipNestedMap["default_tenant_vip"] = data.REACL.SelectedTenantVIP.DefaultTenantVIP.ValueBool()
 			}
 			re_aclMap["selected_tenant_vip"] = selected_tenant_vipNestedMap
 		}
@@ -993,7 +993,7 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 		if data.SiteACL.OutsideNetwork != nil {
 			site_aclMap["outside_network"] = map[string]interface{}{}
 		}
-		if data.SiteACL.VipServices != nil {
+		if data.SiteACL.VIPServices != nil {
 			site_aclMap["vip_services"] = map[string]interface{}{}
 		}
 		createReq.Spec["site_acl"] = site_aclMap
@@ -1033,13 +1033,13 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["re_acl"].(map[string]interface{}); ok && (isImport || data.ReACL != nil) {
-		data.ReACL = &FastACLReACLModel{
+	if blockData, ok := apiResource.Spec["re_acl"].(map[string]interface{}); ok && (isImport || data.REACL != nil) {
+		data.REACL = &FastACLREACLModel{
 			AllPublicVips: func() *FastACLEmptyModel {
-				if !isImport && data.ReACL != nil {
+				if !isImport && data.REACL != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.ReACL.AllPublicVips
+					return data.REACL.AllPublicVips
 				}
 				// Import case: read from API
 				if _, ok := blockData["all_public_vips"].(map[string]interface{}); ok {
@@ -1047,11 +1047,11 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 				}
 				return nil
 			}(),
-			DefaultTenantVip: func() *FastACLEmptyModel {
-				if !isImport && data.ReACL != nil {
+			DefaultTenantVIP: func() *FastACLEmptyModel {
+				if !isImport && data.REACL != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.ReACL.DefaultTenantVip
+					return data.REACL.DefaultTenantVIP
 				}
 				// Import case: read from API
 				if _, ok := blockData["default_tenant_vip"].(map[string]interface{}); ok {
@@ -1059,15 +1059,15 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 				}
 				return nil
 			}(),
-			FastACLRules: func() []FastACLReACLFastACLRulesModel {
+			FastACLRules: func() []FastACLREACLFastACLRulesModel {
 				if listData, ok := blockData["fast_acl_rules"].([]interface{}); ok && len(listData) > 0 {
-					var result []FastACLReACLFastACLRulesModel
+					var result []FastACLREACLFastACLRulesModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, FastACLReACLFastACLRulesModel{
-								Action: func() *FastACLReACLFastACLRulesActionModel {
+							result = append(result, FastACLREACLFastACLRulesModel{
+								Action: func() *FastACLREACLFastACLRulesActionModel {
 									if deepMap, ok := itemMap["action"].(map[string]interface{}); ok {
-										return &FastACLReACLFastACLRulesActionModel{
+										return &FastACLREACLFastACLRulesActionModel{
 											SimpleAction: func() types.String {
 												if v, ok := deepMap["simple_action"].(string); ok && v != "" {
 													return types.StringValue(v)
@@ -1078,15 +1078,15 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 									}
 									return nil
 								}(),
-								IPPrefixSet: func() *FastACLReACLFastACLRulesIPPrefixSetModel {
+								IPPrefixSet: func() *FastACLREACLFastACLRulesIPPrefixSetModel {
 									if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
-										return &FastACLReACLFastACLRulesIPPrefixSetModel{}
+										return &FastACLREACLFastACLRulesIPPrefixSetModel{}
 									}
 									return nil
 								}(),
-								Metadata: func() *FastACLReACLFastACLRulesMetadataModel {
+								Metadata: func() *FastACLREACLFastACLRulesMetadataModel {
 									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
-										return &FastACLReACLFastACLRulesMetadataModel{
+										return &FastACLREACLFastACLRulesMetadataModel{
 											DescriptionSpec: func() types.String {
 												if v, ok := deepMap["description"].(string); ok && v != "" {
 													return types.StringValue(v)
@@ -1103,9 +1103,9 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 									}
 									return nil
 								}(),
-								Prefix: func() *FastACLReACLFastACLRulesPrefixModel {
+								Prefix: func() *FastACLREACLFastACLRulesPrefixModel {
 									if _, ok := itemMap["prefix"].(map[string]interface{}); ok {
-										return &FastACLReACLFastACLRulesPrefixModel{}
+										return &FastACLREACLFastACLRulesPrefixModel{}
 									}
 									return nil
 								}(),
@@ -1116,15 +1116,15 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 				}
 				return nil
 			}(),
-			SelectedTenantVip: func() *FastACLReACLSelectedTenantVipModel {
-				if !isImport && data.ReACL != nil && data.ReACL.SelectedTenantVip != nil {
+			SelectedTenantVIP: func() *FastACLREACLSelectedTenantVIPModel {
+				if !isImport && data.REACL != nil && data.REACL.SelectedTenantVIP != nil {
 					// Normal Read: preserve existing state value
-					return data.ReACL.SelectedTenantVip
+					return data.REACL.SelectedTenantVIP
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["selected_tenant_vip"].(map[string]interface{}); ok {
-					return &FastACLReACLSelectedTenantVipModel{
-						DefaultTenantVip: func() types.Bool {
+					return &FastACLREACLSelectedTenantVIPModel{
+						DefaultTenantVIP: func() types.Bool {
 							if v, ok := nestedBlockData["default_tenant_vip"].(bool); ok {
 								return types.BoolValue(v)
 							}
@@ -1243,11 +1243,11 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 				}
 				return nil
 			}(),
-			VipServices: func() *FastACLEmptyModel {
+			VIPServices: func() *FastACLEmptyModel {
 				if !isImport && data.SiteACL != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.SiteACL.VipServices
+					return data.SiteACL.VIPServices
 				}
 				// Import case: read from API
 				if _, ok := blockData["vip_services"].(map[string]interface{}); ok {
@@ -1372,13 +1372,13 @@ func (r *FastACLResource) Read(ctx context.Context, req resource.ReadRequest, re
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["re_acl"].(map[string]interface{}); ok && (isImport || data.ReACL != nil) {
-		data.ReACL = &FastACLReACLModel{
+	if blockData, ok := apiResource.Spec["re_acl"].(map[string]interface{}); ok && (isImport || data.REACL != nil) {
+		data.REACL = &FastACLREACLModel{
 			AllPublicVips: func() *FastACLEmptyModel {
-				if !isImport && data.ReACL != nil {
+				if !isImport && data.REACL != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.ReACL.AllPublicVips
+					return data.REACL.AllPublicVips
 				}
 				// Import case: read from API
 				if _, ok := blockData["all_public_vips"].(map[string]interface{}); ok {
@@ -1386,11 +1386,11 @@ func (r *FastACLResource) Read(ctx context.Context, req resource.ReadRequest, re
 				}
 				return nil
 			}(),
-			DefaultTenantVip: func() *FastACLEmptyModel {
-				if !isImport && data.ReACL != nil {
+			DefaultTenantVIP: func() *FastACLEmptyModel {
+				if !isImport && data.REACL != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.ReACL.DefaultTenantVip
+					return data.REACL.DefaultTenantVIP
 				}
 				// Import case: read from API
 				if _, ok := blockData["default_tenant_vip"].(map[string]interface{}); ok {
@@ -1398,15 +1398,15 @@ func (r *FastACLResource) Read(ctx context.Context, req resource.ReadRequest, re
 				}
 				return nil
 			}(),
-			FastACLRules: func() []FastACLReACLFastACLRulesModel {
+			FastACLRules: func() []FastACLREACLFastACLRulesModel {
 				if listData, ok := blockData["fast_acl_rules"].([]interface{}); ok && len(listData) > 0 {
-					var result []FastACLReACLFastACLRulesModel
+					var result []FastACLREACLFastACLRulesModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, FastACLReACLFastACLRulesModel{
-								Action: func() *FastACLReACLFastACLRulesActionModel {
+							result = append(result, FastACLREACLFastACLRulesModel{
+								Action: func() *FastACLREACLFastACLRulesActionModel {
 									if deepMap, ok := itemMap["action"].(map[string]interface{}); ok {
-										return &FastACLReACLFastACLRulesActionModel{
+										return &FastACLREACLFastACLRulesActionModel{
 											SimpleAction: func() types.String {
 												if v, ok := deepMap["simple_action"].(string); ok && v != "" {
 													return types.StringValue(v)
@@ -1417,15 +1417,15 @@ func (r *FastACLResource) Read(ctx context.Context, req resource.ReadRequest, re
 									}
 									return nil
 								}(),
-								IPPrefixSet: func() *FastACLReACLFastACLRulesIPPrefixSetModel {
+								IPPrefixSet: func() *FastACLREACLFastACLRulesIPPrefixSetModel {
 									if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
-										return &FastACLReACLFastACLRulesIPPrefixSetModel{}
+										return &FastACLREACLFastACLRulesIPPrefixSetModel{}
 									}
 									return nil
 								}(),
-								Metadata: func() *FastACLReACLFastACLRulesMetadataModel {
+								Metadata: func() *FastACLREACLFastACLRulesMetadataModel {
 									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
-										return &FastACLReACLFastACLRulesMetadataModel{
+										return &FastACLREACLFastACLRulesMetadataModel{
 											DescriptionSpec: func() types.String {
 												if v, ok := deepMap["description"].(string); ok && v != "" {
 													return types.StringValue(v)
@@ -1442,9 +1442,9 @@ func (r *FastACLResource) Read(ctx context.Context, req resource.ReadRequest, re
 									}
 									return nil
 								}(),
-								Prefix: func() *FastACLReACLFastACLRulesPrefixModel {
+								Prefix: func() *FastACLREACLFastACLRulesPrefixModel {
 									if _, ok := itemMap["prefix"].(map[string]interface{}); ok {
-										return &FastACLReACLFastACLRulesPrefixModel{}
+										return &FastACLREACLFastACLRulesPrefixModel{}
 									}
 									return nil
 								}(),
@@ -1455,15 +1455,15 @@ func (r *FastACLResource) Read(ctx context.Context, req resource.ReadRequest, re
 				}
 				return nil
 			}(),
-			SelectedTenantVip: func() *FastACLReACLSelectedTenantVipModel {
-				if !isImport && data.ReACL != nil && data.ReACL.SelectedTenantVip != nil {
+			SelectedTenantVIP: func() *FastACLREACLSelectedTenantVIPModel {
+				if !isImport && data.REACL != nil && data.REACL.SelectedTenantVIP != nil {
 					// Normal Read: preserve existing state value
-					return data.ReACL.SelectedTenantVip
+					return data.REACL.SelectedTenantVIP
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["selected_tenant_vip"].(map[string]interface{}); ok {
-					return &FastACLReACLSelectedTenantVipModel{
-						DefaultTenantVip: func() types.Bool {
+					return &FastACLREACLSelectedTenantVIPModel{
+						DefaultTenantVIP: func() types.Bool {
 							if v, ok := nestedBlockData["default_tenant_vip"].(bool); ok {
 								return types.BoolValue(v)
 							}
@@ -1582,11 +1582,11 @@ func (r *FastACLResource) Read(ctx context.Context, req resource.ReadRequest, re
 				}
 				return nil
 			}(),
-			VipServices: func() *FastACLEmptyModel {
+			VIPServices: func() *FastACLEmptyModel {
 				if !isImport && data.SiteACL != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.SiteACL.VipServices
+					return data.SiteACL.VIPServices
 				}
 				// Import case: read from API
 				if _, ok := blockData["vip_services"].(map[string]interface{}); ok {
@@ -1669,17 +1669,17 @@ func (r *FastACLResource) Update(ctx context.Context, req resource.UpdateRequest
 		}
 		apiResource.Spec["protocol_policer"] = protocol_policerMap
 	}
-	if data.ReACL != nil {
+	if data.REACL != nil {
 		re_aclMap := make(map[string]interface{})
-		if data.ReACL.AllPublicVips != nil {
+		if data.REACL.AllPublicVips != nil {
 			re_aclMap["all_public_vips"] = map[string]interface{}{}
 		}
-		if data.ReACL.DefaultTenantVip != nil {
+		if data.REACL.DefaultTenantVIP != nil {
 			re_aclMap["default_tenant_vip"] = map[string]interface{}{}
 		}
-		if len(data.ReACL.FastACLRules) > 0 {
+		if len(data.REACL.FastACLRules) > 0 {
 			var fast_acl_rulesList []map[string]interface{}
-			for _, listItem := range data.ReACL.FastACLRules {
+			for _, listItem := range data.REACL.FastACLRules {
 				listItemMap := make(map[string]interface{})
 				if listItem.Action != nil {
 					actionDeepMap := make(map[string]interface{})
@@ -1710,10 +1710,10 @@ func (r *FastACLResource) Update(ctx context.Context, req resource.UpdateRequest
 			}
 			re_aclMap["fast_acl_rules"] = fast_acl_rulesList
 		}
-		if data.ReACL.SelectedTenantVip != nil {
+		if data.REACL.SelectedTenantVIP != nil {
 			selected_tenant_vipNestedMap := make(map[string]interface{})
-			if !data.ReACL.SelectedTenantVip.DefaultTenantVip.IsNull() && !data.ReACL.SelectedTenantVip.DefaultTenantVip.IsUnknown() {
-				selected_tenant_vipNestedMap["default_tenant_vip"] = data.ReACL.SelectedTenantVip.DefaultTenantVip.ValueBool()
+			if !data.REACL.SelectedTenantVIP.DefaultTenantVIP.IsNull() && !data.REACL.SelectedTenantVIP.DefaultTenantVIP.IsUnknown() {
+				selected_tenant_vipNestedMap["default_tenant_vip"] = data.REACL.SelectedTenantVIP.DefaultTenantVIP.ValueBool()
 			}
 			re_aclMap["selected_tenant_vip"] = selected_tenant_vipNestedMap
 		}
@@ -1766,7 +1766,7 @@ func (r *FastACLResource) Update(ctx context.Context, req resource.UpdateRequest
 		if data.SiteACL.OutsideNetwork != nil {
 			site_aclMap["outside_network"] = map[string]interface{}{}
 		}
-		if data.SiteACL.VipServices != nil {
+		if data.SiteACL.VIPServices != nil {
 			site_aclMap["vip_services"] = map[string]interface{}{}
 		}
 		apiResource.Spec["site_acl"] = site_aclMap
@@ -1817,13 +1817,13 @@ func (r *FastACLResource) Update(ctx context.Context, req resource.UpdateRequest
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["re_acl"].(map[string]interface{}); ok && (isImport || data.ReACL != nil) {
-		data.ReACL = &FastACLReACLModel{
+	if blockData, ok := apiResource.Spec["re_acl"].(map[string]interface{}); ok && (isImport || data.REACL != nil) {
+		data.REACL = &FastACLREACLModel{
 			AllPublicVips: func() *FastACLEmptyModel {
-				if !isImport && data.ReACL != nil {
+				if !isImport && data.REACL != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.ReACL.AllPublicVips
+					return data.REACL.AllPublicVips
 				}
 				// Import case: read from API
 				if _, ok := blockData["all_public_vips"].(map[string]interface{}); ok {
@@ -1831,11 +1831,11 @@ func (r *FastACLResource) Update(ctx context.Context, req resource.UpdateRequest
 				}
 				return nil
 			}(),
-			DefaultTenantVip: func() *FastACLEmptyModel {
-				if !isImport && data.ReACL != nil {
+			DefaultTenantVIP: func() *FastACLEmptyModel {
+				if !isImport && data.REACL != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.ReACL.DefaultTenantVip
+					return data.REACL.DefaultTenantVIP
 				}
 				// Import case: read from API
 				if _, ok := blockData["default_tenant_vip"].(map[string]interface{}); ok {
@@ -1843,15 +1843,15 @@ func (r *FastACLResource) Update(ctx context.Context, req resource.UpdateRequest
 				}
 				return nil
 			}(),
-			FastACLRules: func() []FastACLReACLFastACLRulesModel {
+			FastACLRules: func() []FastACLREACLFastACLRulesModel {
 				if listData, ok := blockData["fast_acl_rules"].([]interface{}); ok && len(listData) > 0 {
-					var result []FastACLReACLFastACLRulesModel
+					var result []FastACLREACLFastACLRulesModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, FastACLReACLFastACLRulesModel{
-								Action: func() *FastACLReACLFastACLRulesActionModel {
+							result = append(result, FastACLREACLFastACLRulesModel{
+								Action: func() *FastACLREACLFastACLRulesActionModel {
 									if deepMap, ok := itemMap["action"].(map[string]interface{}); ok {
-										return &FastACLReACLFastACLRulesActionModel{
+										return &FastACLREACLFastACLRulesActionModel{
 											SimpleAction: func() types.String {
 												if v, ok := deepMap["simple_action"].(string); ok && v != "" {
 													return types.StringValue(v)
@@ -1862,15 +1862,15 @@ func (r *FastACLResource) Update(ctx context.Context, req resource.UpdateRequest
 									}
 									return nil
 								}(),
-								IPPrefixSet: func() *FastACLReACLFastACLRulesIPPrefixSetModel {
+								IPPrefixSet: func() *FastACLREACLFastACLRulesIPPrefixSetModel {
 									if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
-										return &FastACLReACLFastACLRulesIPPrefixSetModel{}
+										return &FastACLREACLFastACLRulesIPPrefixSetModel{}
 									}
 									return nil
 								}(),
-								Metadata: func() *FastACLReACLFastACLRulesMetadataModel {
+								Metadata: func() *FastACLREACLFastACLRulesMetadataModel {
 									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
-										return &FastACLReACLFastACLRulesMetadataModel{
+										return &FastACLREACLFastACLRulesMetadataModel{
 											DescriptionSpec: func() types.String {
 												if v, ok := deepMap["description"].(string); ok && v != "" {
 													return types.StringValue(v)
@@ -1887,9 +1887,9 @@ func (r *FastACLResource) Update(ctx context.Context, req resource.UpdateRequest
 									}
 									return nil
 								}(),
-								Prefix: func() *FastACLReACLFastACLRulesPrefixModel {
+								Prefix: func() *FastACLREACLFastACLRulesPrefixModel {
 									if _, ok := itemMap["prefix"].(map[string]interface{}); ok {
-										return &FastACLReACLFastACLRulesPrefixModel{}
+										return &FastACLREACLFastACLRulesPrefixModel{}
 									}
 									return nil
 								}(),
@@ -1900,15 +1900,15 @@ func (r *FastACLResource) Update(ctx context.Context, req resource.UpdateRequest
 				}
 				return nil
 			}(),
-			SelectedTenantVip: func() *FastACLReACLSelectedTenantVipModel {
-				if !isImport && data.ReACL != nil && data.ReACL.SelectedTenantVip != nil {
+			SelectedTenantVIP: func() *FastACLREACLSelectedTenantVIPModel {
+				if !isImport && data.REACL != nil && data.REACL.SelectedTenantVIP != nil {
 					// Normal Read: preserve existing state value
-					return data.ReACL.SelectedTenantVip
+					return data.REACL.SelectedTenantVIP
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["selected_tenant_vip"].(map[string]interface{}); ok {
-					return &FastACLReACLSelectedTenantVipModel{
-						DefaultTenantVip: func() types.Bool {
+					return &FastACLREACLSelectedTenantVIPModel{
+						DefaultTenantVIP: func() types.Bool {
 							if v, ok := nestedBlockData["default_tenant_vip"].(bool); ok {
 								return types.BoolValue(v)
 							}
@@ -2027,11 +2027,11 @@ func (r *FastACLResource) Update(ctx context.Context, req resource.UpdateRequest
 				}
 				return nil
 			}(),
-			VipServices: func() *FastACLEmptyModel {
+			VIPServices: func() *FastACLEmptyModel {
 				if !isImport && data.SiteACL != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.SiteACL.VipServices
+					return data.SiteACL.VIPServices
 				}
 				// Import case: read from API
 				if _, ok := blockData["vip_services"].(map[string]interface{}); ok {

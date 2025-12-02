@@ -15,19 +15,19 @@ import (
 )
 
 var (
-	_ datasource.DataSource              = &NatPolicyDataSource{}
-	_ datasource.DataSourceWithConfigure = &NatPolicyDataSource{}
+	_ datasource.DataSource              = &NATPolicyDataSource{}
+	_ datasource.DataSourceWithConfigure = &NATPolicyDataSource{}
 )
 
-func NewNatPolicyDataSource() datasource.DataSource {
-	return &NatPolicyDataSource{}
+func NewNATPolicyDataSource() datasource.DataSource {
+	return &NATPolicyDataSource{}
 }
 
-type NatPolicyDataSource struct {
+type NATPolicyDataSource struct {
 	client *client.Client
 }
 
-type NatPolicyDataSourceModel struct {
+type NATPolicyDataSourceModel struct {
 	ID          types.String `tfsdk:"id"`
 	Name        types.String `tfsdk:"name"`
 	Namespace   types.String `tfsdk:"namespace"`
@@ -36,28 +36,28 @@ type NatPolicyDataSourceModel struct {
 	Annotations types.Map    `tfsdk:"annotations"`
 }
 
-func (d *NatPolicyDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
+func (d *NATPolicyDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	resp.TypeName = req.ProviderTypeName + "_nat_policy"
 }
 
-func (d *NatPolicyDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
+func (d *NATPolicyDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages a NatPolicy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.",
+		MarkdownDescription: "Manages a NATPolicy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
 				Computed:            true,
 			},
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the NatPolicy.",
+				MarkdownDescription: "Name of the NATPolicy.",
 				Required:            true,
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the NatPolicy exists.",
+				MarkdownDescription: "Namespace where the NATPolicy exists.",
 				Required:            true,
 			},
 			"description": schema.StringAttribute{
-				MarkdownDescription: "Description of the NatPolicy.",
+				MarkdownDescription: "Description of the NATPolicy.",
 				Computed:            true,
 			},
 			"labels": schema.MapAttribute{
@@ -74,7 +74,7 @@ func (d *NatPolicyDataSource) Schema(ctx context.Context, req datasource.SchemaR
 	}
 }
 
-func (d *NatPolicyDataSource) Configure(ctx context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
+func (d *NATPolicyDataSource) Configure(ctx context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -86,16 +86,16 @@ func (d *NatPolicyDataSource) Configure(ctx context.Context, req datasource.Conf
 	d.client = client
 }
 
-func (d *NatPolicyDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
-	var data NatPolicyDataSourceModel
+func (d *NATPolicyDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
+	var data NATPolicyDataSourceModel
 	resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	resource, err := d.client.GetNatPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	resource, err := d.client.GetNATPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read NatPolicy: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read NATPolicy: %s", err))
 		return
 	}
 

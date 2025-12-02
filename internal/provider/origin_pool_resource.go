@@ -59,11 +59,11 @@ type OriginPoolAdvancedOptionsModel struct {
 	CircuitBreaker               *OriginPoolAdvancedOptionsCircuitBreakerModel   `tfsdk:"circuit_breaker"`
 	DefaultCircuitBreaker        *OriginPoolEmptyModel                           `tfsdk:"default_circuit_breaker"`
 	DisableCircuitBreaker        *OriginPoolEmptyModel                           `tfsdk:"disable_circuit_breaker"`
-	DisableLbSourceIPPersistance *OriginPoolEmptyModel                           `tfsdk:"disable_lb_source_ip_persistance"`
+	DisableLBSourceIPPersistance *OriginPoolEmptyModel                           `tfsdk:"disable_lb_source_ip_persistance"`
 	DisableOutlierDetection      *OriginPoolEmptyModel                           `tfsdk:"disable_outlier_detection"`
 	DisableProxyProtocol         *OriginPoolEmptyModel                           `tfsdk:"disable_proxy_protocol"`
 	DisableSubsets               *OriginPoolEmptyModel                           `tfsdk:"disable_subsets"`
-	EnableLbSourceIPPersistance  *OriginPoolEmptyModel                           `tfsdk:"enable_lb_source_ip_persistance"`
+	EnableLBSourceIPPersistance  *OriginPoolEmptyModel                           `tfsdk:"enable_lb_source_ip_persistance"`
 	EnableSubsets                *OriginPoolAdvancedOptionsEnableSubsetsModel    `tfsdk:"enable_subsets"`
 	Http1Config                  *OriginPoolAdvancedOptionsHttp1ConfigModel      `tfsdk:"http1_config"`
 	Http2Options                 *OriginPoolAdvancedOptionsHttp2OptionsModel     `tfsdk:"http2_options"`
@@ -402,7 +402,7 @@ type OriginPoolUseTLSModel struct {
 	UseMtls                  *OriginPoolUseTLSUseMtlsModel               `tfsdk:"use_mtls"`
 	UseMtlsObj               *OriginPoolUseTLSUseMtlsObjModel            `tfsdk:"use_mtls_obj"`
 	UseServerVerification    *OriginPoolUseTLSUseServerVerificationModel `tfsdk:"use_server_verification"`
-	VolterraTrustedCa        *OriginPoolEmptyModel                       `tfsdk:"volterra_trusted_ca"`
+	VolterraTrustedCA        *OriginPoolEmptyModel                       `tfsdk:"volterra_trusted_ca"`
 }
 
 // OriginPoolUseTLSTLSConfigModel represents tls_config block
@@ -430,7 +430,7 @@ type OriginPoolUseTLSUseMtlsTLSCertificatesModel struct {
 	CertificateURL       types.String                                                     `tfsdk:"certificate_url"`
 	DescriptionSpec      types.String                                                     `tfsdk:"description_spec"`
 	CustomHashAlgorithms *OriginPoolUseTLSUseMtlsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling  *OriginPoolEmptyModel                                            `tfsdk:"disable_ocsp_stapling"`
+	DisableOCSPStapling  *OriginPoolEmptyModel                                            `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey           *OriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
 	UseSystemDefaults    *OriginPoolEmptyModel                                            `tfsdk:"use_system_defaults"`
 }
@@ -468,12 +468,12 @@ type OriginPoolUseTLSUseMtlsObjModel struct {
 
 // OriginPoolUseTLSUseServerVerificationModel represents use_server_verification block
 type OriginPoolUseTLSUseServerVerificationModel struct {
-	TrustedCaURL types.String                                         `tfsdk:"trusted_ca_url"`
-	TrustedCa    *OriginPoolUseTLSUseServerVerificationTrustedCaModel `tfsdk:"trusted_ca"`
+	TrustedCAURL types.String                                         `tfsdk:"trusted_ca_url"`
+	TrustedCA    *OriginPoolUseTLSUseServerVerificationTrustedCAModel `tfsdk:"trusted_ca"`
 }
 
-// OriginPoolUseTLSUseServerVerificationTrustedCaModel represents trusted_ca block
-type OriginPoolUseTLSUseServerVerificationTrustedCaModel struct {
+// OriginPoolUseTLSUseServerVerificationTrustedCAModel represents trusted_ca block
+type OriginPoolUseTLSUseServerVerificationTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -495,7 +495,7 @@ type OriginPoolResourceModel struct {
 	AdvancedOptions           *OriginPoolAdvancedOptionsModel           `tfsdk:"advanced_options"`
 	AutomaticPort             *OriginPoolEmptyModel                     `tfsdk:"automatic_port"`
 	Healthcheck               []OriginPoolHealthcheckModel              `tfsdk:"healthcheck"`
-	LbPort                    *OriginPoolEmptyModel                     `tfsdk:"lb_port"`
+	LBPort                    *OriginPoolEmptyModel                     `tfsdk:"lb_port"`
 	NoTLS                     *OriginPoolEmptyModel                     `tfsdk:"no_tls"`
 	OriginServers             []OriginPoolOriginServersModel            `tfsdk:"origin_servers"`
 	SameAsEndpointPort        *OriginPoolEmptyModel                     `tfsdk:"same_as_endpoint_port"`
@@ -1664,7 +1664,7 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 		if data.AdvancedOptions.DisableCircuitBreaker != nil {
 			advanced_optionsMap["disable_circuit_breaker"] = map[string]interface{}{}
 		}
-		if data.AdvancedOptions.DisableLbSourceIPPersistance != nil {
+		if data.AdvancedOptions.DisableLBSourceIPPersistance != nil {
 			advanced_optionsMap["disable_lb_source_ip_persistance"] = map[string]interface{}{}
 		}
 		if data.AdvancedOptions.DisableOutlierDetection != nil {
@@ -1676,7 +1676,7 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 		if data.AdvancedOptions.DisableSubsets != nil {
 			advanced_optionsMap["disable_subsets"] = map[string]interface{}{}
 		}
-		if data.AdvancedOptions.EnableLbSourceIPPersistance != nil {
+		if data.AdvancedOptions.EnableLBSourceIPPersistance != nil {
 			advanced_optionsMap["enable_lb_source_ip_persistance"] = map[string]interface{}{}
 		}
 		if data.AdvancedOptions.EnableSubsets != nil {
@@ -1751,7 +1751,7 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 		}
 		createReq.Spec["healthcheck"] = healthcheckList
 	}
-	if data.LbPort != nil {
+	if data.LBPort != nil {
 		lb_portMap := make(map[string]interface{})
 		createReq.Spec["lb_port"] = lb_portMap
 	}
@@ -2045,12 +2045,12 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 		}
 		if data.UseTLS.UseServerVerification != nil {
 			use_server_verificationNestedMap := make(map[string]interface{})
-			if !data.UseTLS.UseServerVerification.TrustedCaURL.IsNull() && !data.UseTLS.UseServerVerification.TrustedCaURL.IsUnknown() {
-				use_server_verificationNestedMap["trusted_ca_url"] = data.UseTLS.UseServerVerification.TrustedCaURL.ValueString()
+			if !data.UseTLS.UseServerVerification.TrustedCAURL.IsNull() && !data.UseTLS.UseServerVerification.TrustedCAURL.IsUnknown() {
+				use_server_verificationNestedMap["trusted_ca_url"] = data.UseTLS.UseServerVerification.TrustedCAURL.ValueString()
 			}
 			use_tlsMap["use_server_verification"] = use_server_verificationNestedMap
 		}
-		if data.UseTLS.VolterraTrustedCa != nil {
+		if data.UseTLS.VolterraTrustedCA != nil {
 			use_tlsMap["volterra_trusted_ca"] = map[string]interface{}{}
 		}
 		createReq.Spec["use_tls"] = use_tlsMap
@@ -2166,11 +2166,11 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				return nil
 			}(),
-			DisableLbSourceIPPersistance: func() *OriginPoolEmptyModel {
+			DisableLBSourceIPPersistance: func() *OriginPoolEmptyModel {
 				if !isImport && data.AdvancedOptions != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.AdvancedOptions.DisableLbSourceIPPersistance
+					return data.AdvancedOptions.DisableLBSourceIPPersistance
 				}
 				// Import case: read from API
 				if _, ok := blockData["disable_lb_source_ip_persistance"].(map[string]interface{}); ok {
@@ -2214,11 +2214,11 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				return nil
 			}(),
-			EnableLbSourceIPPersistance: func() *OriginPoolEmptyModel {
+			EnableLBSourceIPPersistance: func() *OriginPoolEmptyModel {
 				if !isImport && data.AdvancedOptions != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.AdvancedOptions.EnableLbSourceIPPersistance
+					return data.AdvancedOptions.EnableLBSourceIPPersistance
 				}
 				// Import case: read from API
 				if _, ok := blockData["enable_lb_source_ip_persistance"].(map[string]interface{}); ok {
@@ -2392,9 +2392,9 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 		}
 		data.Healthcheck = healthcheckList
 	}
-	if _, ok := apiResource.Spec["lb_port"].(map[string]interface{}); ok && isImport && data.LbPort == nil {
+	if _, ok := apiResource.Spec["lb_port"].(map[string]interface{}); ok && isImport && data.LBPort == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.LbPort = &OriginPoolEmptyModel{}
+		data.LBPort = &OriginPoolEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["no_tls"].(map[string]interface{}); ok && isImport && data.NoTLS == nil {
@@ -2770,7 +2770,7 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["use_server_verification"].(map[string]interface{}); ok {
 					return &OriginPoolUseTLSUseServerVerificationModel{
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -2780,11 +2780,11 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				return nil
 			}(),
-			VolterraTrustedCa: func() *OriginPoolEmptyModel {
+			VolterraTrustedCA: func() *OriginPoolEmptyModel {
 				if !isImport && data.UseTLS != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.UseTLS.VolterraTrustedCa
+					return data.UseTLS.VolterraTrustedCA
 				}
 				// Import case: read from API
 				if _, ok := blockData["volterra_trusted_ca"].(map[string]interface{}); ok {
@@ -2993,11 +2993,11 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				return nil
 			}(),
-			DisableLbSourceIPPersistance: func() *OriginPoolEmptyModel {
+			DisableLBSourceIPPersistance: func() *OriginPoolEmptyModel {
 				if !isImport && data.AdvancedOptions != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.AdvancedOptions.DisableLbSourceIPPersistance
+					return data.AdvancedOptions.DisableLBSourceIPPersistance
 				}
 				// Import case: read from API
 				if _, ok := blockData["disable_lb_source_ip_persistance"].(map[string]interface{}); ok {
@@ -3041,11 +3041,11 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				return nil
 			}(),
-			EnableLbSourceIPPersistance: func() *OriginPoolEmptyModel {
+			EnableLBSourceIPPersistance: func() *OriginPoolEmptyModel {
 				if !isImport && data.AdvancedOptions != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.AdvancedOptions.EnableLbSourceIPPersistance
+					return data.AdvancedOptions.EnableLBSourceIPPersistance
 				}
 				// Import case: read from API
 				if _, ok := blockData["enable_lb_source_ip_persistance"].(map[string]interface{}); ok {
@@ -3219,9 +3219,9 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 		}
 		data.Healthcheck = healthcheckList
 	}
-	if _, ok := apiResource.Spec["lb_port"].(map[string]interface{}); ok && isImport && data.LbPort == nil {
+	if _, ok := apiResource.Spec["lb_port"].(map[string]interface{}); ok && isImport && data.LBPort == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.LbPort = &OriginPoolEmptyModel{}
+		data.LBPort = &OriginPoolEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["no_tls"].(map[string]interface{}); ok && isImport && data.NoTLS == nil {
@@ -3597,7 +3597,7 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["use_server_verification"].(map[string]interface{}); ok {
 					return &OriginPoolUseTLSUseServerVerificationModel{
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -3607,11 +3607,11 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				return nil
 			}(),
-			VolterraTrustedCa: func() *OriginPoolEmptyModel {
+			VolterraTrustedCA: func() *OriginPoolEmptyModel {
 				if !isImport && data.UseTLS != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.UseTLS.VolterraTrustedCa
+					return data.UseTLS.VolterraTrustedCA
 				}
 				// Import case: read from API
 				if _, ok := blockData["volterra_trusted_ca"].(map[string]interface{}); ok {
@@ -3734,7 +3734,7 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 		if data.AdvancedOptions.DisableCircuitBreaker != nil {
 			advanced_optionsMap["disable_circuit_breaker"] = map[string]interface{}{}
 		}
-		if data.AdvancedOptions.DisableLbSourceIPPersistance != nil {
+		if data.AdvancedOptions.DisableLBSourceIPPersistance != nil {
 			advanced_optionsMap["disable_lb_source_ip_persistance"] = map[string]interface{}{}
 		}
 		if data.AdvancedOptions.DisableOutlierDetection != nil {
@@ -3746,7 +3746,7 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 		if data.AdvancedOptions.DisableSubsets != nil {
 			advanced_optionsMap["disable_subsets"] = map[string]interface{}{}
 		}
-		if data.AdvancedOptions.EnableLbSourceIPPersistance != nil {
+		if data.AdvancedOptions.EnableLBSourceIPPersistance != nil {
 			advanced_optionsMap["enable_lb_source_ip_persistance"] = map[string]interface{}{}
 		}
 		if data.AdvancedOptions.EnableSubsets != nil {
@@ -3821,7 +3821,7 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 		}
 		apiResource.Spec["healthcheck"] = healthcheckList
 	}
-	if data.LbPort != nil {
+	if data.LBPort != nil {
 		lb_portMap := make(map[string]interface{})
 		apiResource.Spec["lb_port"] = lb_portMap
 	}
@@ -4115,12 +4115,12 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 		}
 		if data.UseTLS.UseServerVerification != nil {
 			use_server_verificationNestedMap := make(map[string]interface{})
-			if !data.UseTLS.UseServerVerification.TrustedCaURL.IsNull() && !data.UseTLS.UseServerVerification.TrustedCaURL.IsUnknown() {
-				use_server_verificationNestedMap["trusted_ca_url"] = data.UseTLS.UseServerVerification.TrustedCaURL.ValueString()
+			if !data.UseTLS.UseServerVerification.TrustedCAURL.IsNull() && !data.UseTLS.UseServerVerification.TrustedCAURL.IsUnknown() {
+				use_server_verificationNestedMap["trusted_ca_url"] = data.UseTLS.UseServerVerification.TrustedCAURL.ValueString()
 			}
 			use_tlsMap["use_server_verification"] = use_server_verificationNestedMap
 		}
-		if data.UseTLS.VolterraTrustedCa != nil {
+		if data.UseTLS.VolterraTrustedCA != nil {
 			use_tlsMap["volterra_trusted_ca"] = map[string]interface{}{}
 		}
 		apiResource.Spec["use_tls"] = use_tlsMap
@@ -4275,11 +4275,11 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 				}
 				return nil
 			}(),
-			DisableLbSourceIPPersistance: func() *OriginPoolEmptyModel {
+			DisableLBSourceIPPersistance: func() *OriginPoolEmptyModel {
 				if !isImport && data.AdvancedOptions != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.AdvancedOptions.DisableLbSourceIPPersistance
+					return data.AdvancedOptions.DisableLBSourceIPPersistance
 				}
 				// Import case: read from API
 				if _, ok := blockData["disable_lb_source_ip_persistance"].(map[string]interface{}); ok {
@@ -4323,11 +4323,11 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 				}
 				return nil
 			}(),
-			EnableLbSourceIPPersistance: func() *OriginPoolEmptyModel {
+			EnableLBSourceIPPersistance: func() *OriginPoolEmptyModel {
 				if !isImport && data.AdvancedOptions != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.AdvancedOptions.EnableLbSourceIPPersistance
+					return data.AdvancedOptions.EnableLBSourceIPPersistance
 				}
 				// Import case: read from API
 				if _, ok := blockData["enable_lb_source_ip_persistance"].(map[string]interface{}); ok {
@@ -4501,9 +4501,9 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 		}
 		data.Healthcheck = healthcheckList
 	}
-	if _, ok := apiResource.Spec["lb_port"].(map[string]interface{}); ok && isImport && data.LbPort == nil {
+	if _, ok := apiResource.Spec["lb_port"].(map[string]interface{}); ok && isImport && data.LBPort == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.LbPort = &OriginPoolEmptyModel{}
+		data.LBPort = &OriginPoolEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["no_tls"].(map[string]interface{}); ok && isImport && data.NoTLS == nil {
@@ -4879,7 +4879,7 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["use_server_verification"].(map[string]interface{}); ok {
 					return &OriginPoolUseTLSUseServerVerificationModel{
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -4889,11 +4889,11 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 				}
 				return nil
 			}(),
-			VolterraTrustedCa: func() *OriginPoolEmptyModel {
+			VolterraTrustedCA: func() *OriginPoolEmptyModel {
 				if !isImport && data.UseTLS != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.UseTLS.VolterraTrustedCa
+					return data.UseTLS.VolterraTrustedCA
 				}
 				// Import case: read from API
 				if _, ok := blockData["volterra_trusted_ca"].(map[string]interface{}); ok {

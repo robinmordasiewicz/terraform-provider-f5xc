@@ -214,55 +214,55 @@ type WorkloadJobContainersReadinessCheckTCPHealthCheckPortModel struct {
 type WorkloadJobDeployOptionsModel struct {
 	AllRes               *WorkloadEmptyModel                                `tfsdk:"all_res"`
 	DefaultVirtualSites  *WorkloadEmptyModel                                `tfsdk:"default_virtual_sites"`
-	DeployCeSites        *WorkloadJobDeployOptionsDeployCeSitesModel        `tfsdk:"deploy_ce_sites"`
-	DeployCeVirtualSites *WorkloadJobDeployOptionsDeployCeVirtualSitesModel `tfsdk:"deploy_ce_virtual_sites"`
-	DeployReSites        *WorkloadJobDeployOptionsDeployReSitesModel        `tfsdk:"deploy_re_sites"`
-	DeployReVirtualSites *WorkloadJobDeployOptionsDeployReVirtualSitesModel `tfsdk:"deploy_re_virtual_sites"`
+	DeployCESites        *WorkloadJobDeployOptionsDeployCESitesModel        `tfsdk:"deploy_ce_sites"`
+	DeployCEVirtualSites *WorkloadJobDeployOptionsDeployCEVirtualSitesModel `tfsdk:"deploy_ce_virtual_sites"`
+	DeployRESites        *WorkloadJobDeployOptionsDeployRESitesModel        `tfsdk:"deploy_re_sites"`
+	DeployREVirtualSites *WorkloadJobDeployOptionsDeployREVirtualSitesModel `tfsdk:"deploy_re_virtual_sites"`
 }
 
-// WorkloadJobDeployOptionsDeployCeSitesModel represents deploy_ce_sites block
-type WorkloadJobDeployOptionsDeployCeSitesModel struct {
-	Site []WorkloadJobDeployOptionsDeployCeSitesSiteModel `tfsdk:"site"`
+// WorkloadJobDeployOptionsDeployCESitesModel represents deploy_ce_sites block
+type WorkloadJobDeployOptionsDeployCESitesModel struct {
+	Site []WorkloadJobDeployOptionsDeployCESitesSiteModel `tfsdk:"site"`
 }
 
-// WorkloadJobDeployOptionsDeployCeSitesSiteModel represents site block
-type WorkloadJobDeployOptionsDeployCeSitesSiteModel struct {
+// WorkloadJobDeployOptionsDeployCESitesSiteModel represents site block
+type WorkloadJobDeployOptionsDeployCESitesSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// WorkloadJobDeployOptionsDeployCeVirtualSitesModel represents deploy_ce_virtual_sites block
-type WorkloadJobDeployOptionsDeployCeVirtualSitesModel struct {
-	VirtualSite []WorkloadJobDeployOptionsDeployCeVirtualSitesVirtualSiteModel `tfsdk:"virtual_site"`
+// WorkloadJobDeployOptionsDeployCEVirtualSitesModel represents deploy_ce_virtual_sites block
+type WorkloadJobDeployOptionsDeployCEVirtualSitesModel struct {
+	VirtualSite []WorkloadJobDeployOptionsDeployCEVirtualSitesVirtualSiteModel `tfsdk:"virtual_site"`
 }
 
-// WorkloadJobDeployOptionsDeployCeVirtualSitesVirtualSiteModel represents virtual_site block
-type WorkloadJobDeployOptionsDeployCeVirtualSitesVirtualSiteModel struct {
+// WorkloadJobDeployOptionsDeployCEVirtualSitesVirtualSiteModel represents virtual_site block
+type WorkloadJobDeployOptionsDeployCEVirtualSitesVirtualSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// WorkloadJobDeployOptionsDeployReSitesModel represents deploy_re_sites block
-type WorkloadJobDeployOptionsDeployReSitesModel struct {
-	Site []WorkloadJobDeployOptionsDeployReSitesSiteModel `tfsdk:"site"`
+// WorkloadJobDeployOptionsDeployRESitesModel represents deploy_re_sites block
+type WorkloadJobDeployOptionsDeployRESitesModel struct {
+	Site []WorkloadJobDeployOptionsDeployRESitesSiteModel `tfsdk:"site"`
 }
 
-// WorkloadJobDeployOptionsDeployReSitesSiteModel represents site block
-type WorkloadJobDeployOptionsDeployReSitesSiteModel struct {
+// WorkloadJobDeployOptionsDeployRESitesSiteModel represents site block
+type WorkloadJobDeployOptionsDeployRESitesSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// WorkloadJobDeployOptionsDeployReVirtualSitesModel represents deploy_re_virtual_sites block
-type WorkloadJobDeployOptionsDeployReVirtualSitesModel struct {
-	VirtualSite []WorkloadJobDeployOptionsDeployReVirtualSitesVirtualSiteModel `tfsdk:"virtual_site"`
+// WorkloadJobDeployOptionsDeployREVirtualSitesModel represents deploy_re_virtual_sites block
+type WorkloadJobDeployOptionsDeployREVirtualSitesModel struct {
+	VirtualSite []WorkloadJobDeployOptionsDeployREVirtualSitesVirtualSiteModel `tfsdk:"virtual_site"`
 }
 
-// WorkloadJobDeployOptionsDeployReVirtualSitesVirtualSiteModel represents virtual_site block
-type WorkloadJobDeployOptionsDeployReVirtualSitesVirtualSiteModel struct {
+// WorkloadJobDeployOptionsDeployREVirtualSitesVirtualSiteModel represents virtual_site block
+type WorkloadJobDeployOptionsDeployREVirtualSitesVirtualSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -513,10 +513,10 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLS
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel represents use_mtls block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                                                                    `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                                                                                  `tfsdk:"trusted_ca_url"`
+	TrustedCAURL              types.String                                                                                                  `tfsdk:"trusted_ca_url"`
 	CRL                       *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel         `tfsdk:"crl"`
 	NoCRL                     *WorkloadEmptyModel                                                                                           `tfsdk:"no_crl"`
-	TrustedCa                 *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	TrustedCA                 *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
 	XfccDisabled              *WorkloadEmptyModel                                                                                           `tfsdk:"xfcc_disabled"`
 	XfccOptions               *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
@@ -528,8 +528,8 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLS
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel represents trusted_ca block
-type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel struct {
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel represents trusted_ca block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -553,7 +553,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLS
 	CertificateURL       types.String                                                                                                                   `tfsdk:"certificate_url"`
 	DescriptionSpec      types.String                                                                                                                   `tfsdk:"description_spec"`
 	CustomHashAlgorithms *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling  *WorkloadEmptyModel                                                                                                            `tfsdk:"disable_ocsp_stapling"`
+	DisableOCSPStapling  *WorkloadEmptyModel                                                                                                            `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey           *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
 	UseSystemDefaults    *WorkloadEmptyModel                                                                                                            `tfsdk:"use_system_defaults"`
 }
@@ -600,10 +600,10 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLS
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel represents use_mtls block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                                                                    `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                                                                                  `tfsdk:"trusted_ca_url"`
+	TrustedCAURL              types.String                                                                                                  `tfsdk:"trusted_ca_url"`
 	CRL                       *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel         `tfsdk:"crl"`
 	NoCRL                     *WorkloadEmptyModel                                                                                           `tfsdk:"no_crl"`
-	TrustedCa                 *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	TrustedCA                 *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
 	XfccDisabled              *WorkloadEmptyModel                                                                                           `tfsdk:"xfcc_disabled"`
 	XfccOptions               *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
@@ -615,8 +615,8 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLS
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel represents trusted_ca block
-type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel struct {
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel represents trusted_ca block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -693,10 +693,10 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAut
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel represents use_mtls block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                                                               `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                                                                             `tfsdk:"trusted_ca_url"`
+	TrustedCAURL              types.String                                                                                             `tfsdk:"trusted_ca_url"`
 	CRL                       *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel         `tfsdk:"crl"`
 	NoCRL                     *WorkloadEmptyModel                                                                                      `tfsdk:"no_crl"`
-	TrustedCa                 *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	TrustedCA                 *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
 	XfccDisabled              *WorkloadEmptyModel                                                                                      `tfsdk:"xfcc_disabled"`
 	XfccOptions               *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
@@ -708,8 +708,8 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAut
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel represents trusted_ca block
-type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel struct {
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel represents trusted_ca block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -1023,10 +1023,10 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel represents use_mtls block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                                                                                `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                                                                                              `tfsdk:"trusted_ca_url"`
+	TrustedCAURL              types.String                                                                                                              `tfsdk:"trusted_ca_url"`
 	CRL                       *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel         `tfsdk:"crl"`
 	NoCRL                     *WorkloadEmptyModel                                                                                                       `tfsdk:"no_crl"`
-	TrustedCa                 *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	TrustedCA                 *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
 	XfccDisabled              *WorkloadEmptyModel                                                                                                       `tfsdk:"xfcc_disabled"`
 	XfccOptions               *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
@@ -1038,8 +1038,8 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel represents trusted_ca block
-type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel struct {
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel represents trusted_ca block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -1063,7 +1063,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	CertificateURL       types.String                                                                                                                               `tfsdk:"certificate_url"`
 	DescriptionSpec      types.String                                                                                                                               `tfsdk:"description_spec"`
 	CustomHashAlgorithms *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling  *WorkloadEmptyModel                                                                                                                        `tfsdk:"disable_ocsp_stapling"`
+	DisableOCSPStapling  *WorkloadEmptyModel                                                                                                                        `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey           *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
 	UseSystemDefaults    *WorkloadEmptyModel                                                                                                                        `tfsdk:"use_system_defaults"`
 }
@@ -1110,10 +1110,10 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel represents use_mtls block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                                                                                `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                                                                                              `tfsdk:"trusted_ca_url"`
+	TrustedCAURL              types.String                                                                                                              `tfsdk:"trusted_ca_url"`
 	CRL                       *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel         `tfsdk:"crl"`
 	NoCRL                     *WorkloadEmptyModel                                                                                                       `tfsdk:"no_crl"`
-	TrustedCa                 *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	TrustedCA                 *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
 	XfccDisabled              *WorkloadEmptyModel                                                                                                       `tfsdk:"xfcc_disabled"`
 	XfccOptions               *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
@@ -1125,8 +1125,8 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel represents trusted_ca block
-type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel struct {
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel represents trusted_ca block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -1203,10 +1203,10 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel represents use_mtls block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                                                                           `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                                                                                         `tfsdk:"trusted_ca_url"`
+	TrustedCAURL              types.String                                                                                                         `tfsdk:"trusted_ca_url"`
 	CRL                       *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel         `tfsdk:"crl"`
 	NoCRL                     *WorkloadEmptyModel                                                                                                  `tfsdk:"no_crl"`
-	TrustedCa                 *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	TrustedCA                 *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
 	XfccDisabled              *WorkloadEmptyModel                                                                                                  `tfsdk:"xfcc_disabled"`
 	XfccOptions               *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
@@ -1218,8 +1218,8 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel represents trusted_ca block
-type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel struct {
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel represents trusted_ca block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -1484,10 +1484,10 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTL
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel represents use_mtls block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                                                                     `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                                                                                   `tfsdk:"trusted_ca_url"`
+	TrustedCAURL              types.String                                                                                                   `tfsdk:"trusted_ca_url"`
 	CRL                       *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel         `tfsdk:"crl"`
 	NoCRL                     *WorkloadEmptyModel                                                                                            `tfsdk:"no_crl"`
-	TrustedCa                 *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	TrustedCA                 *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
 	XfccDisabled              *WorkloadEmptyModel                                                                                            `tfsdk:"xfcc_disabled"`
 	XfccOptions               *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
@@ -1499,8 +1499,8 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTL
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel represents trusted_ca block
-type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel struct {
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel represents trusted_ca block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -1524,7 +1524,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTL
 	CertificateURL       types.String                                                                                                                    `tfsdk:"certificate_url"`
 	DescriptionSpec      types.String                                                                                                                    `tfsdk:"description_spec"`
 	CustomHashAlgorithms *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling  *WorkloadEmptyModel                                                                                                             `tfsdk:"disable_ocsp_stapling"`
+	DisableOCSPStapling  *WorkloadEmptyModel                                                                                                             `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey           *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
 	UseSystemDefaults    *WorkloadEmptyModel                                                                                                             `tfsdk:"use_system_defaults"`
 }
@@ -1571,10 +1571,10 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTL
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel represents use_mtls block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                                                                     `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                                                                                   `tfsdk:"trusted_ca_url"`
+	TrustedCAURL              types.String                                                                                                   `tfsdk:"trusted_ca_url"`
 	CRL                       *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel         `tfsdk:"crl"`
 	NoCRL                     *WorkloadEmptyModel                                                                                            `tfsdk:"no_crl"`
-	TrustedCa                 *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	TrustedCA                 *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
 	XfccDisabled              *WorkloadEmptyModel                                                                                            `tfsdk:"xfcc_disabled"`
 	XfccOptions               *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
@@ -1586,8 +1586,8 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTL
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel represents trusted_ca block
-type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel struct {
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel represents trusted_ca block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -1664,10 +1664,10 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAu
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsModel represents use_mtls block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                                                                `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                                                                              `tfsdk:"trusted_ca_url"`
+	TrustedCAURL              types.String                                                                                              `tfsdk:"trusted_ca_url"`
 	CRL                       *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel         `tfsdk:"crl"`
 	NoCRL                     *WorkloadEmptyModel                                                                                       `tfsdk:"no_crl"`
-	TrustedCa                 *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	TrustedCA                 *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
 	XfccDisabled              *WorkloadEmptyModel                                                                                       `tfsdk:"xfcc_disabled"`
 	XfccOptions               *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
@@ -1679,8 +1679,8 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAu
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel represents trusted_ca block
-type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel struct {
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel represents trusted_ca block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -1989,55 +1989,55 @@ type WorkloadServiceContainersReadinessCheckTCPHealthCheckPortModel struct {
 type WorkloadServiceDeployOptionsModel struct {
 	AllRes               *WorkloadEmptyModel                                    `tfsdk:"all_res"`
 	DefaultVirtualSites  *WorkloadEmptyModel                                    `tfsdk:"default_virtual_sites"`
-	DeployCeSites        *WorkloadServiceDeployOptionsDeployCeSitesModel        `tfsdk:"deploy_ce_sites"`
-	DeployCeVirtualSites *WorkloadServiceDeployOptionsDeployCeVirtualSitesModel `tfsdk:"deploy_ce_virtual_sites"`
-	DeployReSites        *WorkloadServiceDeployOptionsDeployReSitesModel        `tfsdk:"deploy_re_sites"`
-	DeployReVirtualSites *WorkloadServiceDeployOptionsDeployReVirtualSitesModel `tfsdk:"deploy_re_virtual_sites"`
+	DeployCESites        *WorkloadServiceDeployOptionsDeployCESitesModel        `tfsdk:"deploy_ce_sites"`
+	DeployCEVirtualSites *WorkloadServiceDeployOptionsDeployCEVirtualSitesModel `tfsdk:"deploy_ce_virtual_sites"`
+	DeployRESites        *WorkloadServiceDeployOptionsDeployRESitesModel        `tfsdk:"deploy_re_sites"`
+	DeployREVirtualSites *WorkloadServiceDeployOptionsDeployREVirtualSitesModel `tfsdk:"deploy_re_virtual_sites"`
 }
 
-// WorkloadServiceDeployOptionsDeployCeSitesModel represents deploy_ce_sites block
-type WorkloadServiceDeployOptionsDeployCeSitesModel struct {
-	Site []WorkloadServiceDeployOptionsDeployCeSitesSiteModel `tfsdk:"site"`
+// WorkloadServiceDeployOptionsDeployCESitesModel represents deploy_ce_sites block
+type WorkloadServiceDeployOptionsDeployCESitesModel struct {
+	Site []WorkloadServiceDeployOptionsDeployCESitesSiteModel `tfsdk:"site"`
 }
 
-// WorkloadServiceDeployOptionsDeployCeSitesSiteModel represents site block
-type WorkloadServiceDeployOptionsDeployCeSitesSiteModel struct {
+// WorkloadServiceDeployOptionsDeployCESitesSiteModel represents site block
+type WorkloadServiceDeployOptionsDeployCESitesSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// WorkloadServiceDeployOptionsDeployCeVirtualSitesModel represents deploy_ce_virtual_sites block
-type WorkloadServiceDeployOptionsDeployCeVirtualSitesModel struct {
-	VirtualSite []WorkloadServiceDeployOptionsDeployCeVirtualSitesVirtualSiteModel `tfsdk:"virtual_site"`
+// WorkloadServiceDeployOptionsDeployCEVirtualSitesModel represents deploy_ce_virtual_sites block
+type WorkloadServiceDeployOptionsDeployCEVirtualSitesModel struct {
+	VirtualSite []WorkloadServiceDeployOptionsDeployCEVirtualSitesVirtualSiteModel `tfsdk:"virtual_site"`
 }
 
-// WorkloadServiceDeployOptionsDeployCeVirtualSitesVirtualSiteModel represents virtual_site block
-type WorkloadServiceDeployOptionsDeployCeVirtualSitesVirtualSiteModel struct {
+// WorkloadServiceDeployOptionsDeployCEVirtualSitesVirtualSiteModel represents virtual_site block
+type WorkloadServiceDeployOptionsDeployCEVirtualSitesVirtualSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// WorkloadServiceDeployOptionsDeployReSitesModel represents deploy_re_sites block
-type WorkloadServiceDeployOptionsDeployReSitesModel struct {
-	Site []WorkloadServiceDeployOptionsDeployReSitesSiteModel `tfsdk:"site"`
+// WorkloadServiceDeployOptionsDeployRESitesModel represents deploy_re_sites block
+type WorkloadServiceDeployOptionsDeployRESitesModel struct {
+	Site []WorkloadServiceDeployOptionsDeployRESitesSiteModel `tfsdk:"site"`
 }
 
-// WorkloadServiceDeployOptionsDeployReSitesSiteModel represents site block
-type WorkloadServiceDeployOptionsDeployReSitesSiteModel struct {
+// WorkloadServiceDeployOptionsDeployRESitesSiteModel represents site block
+type WorkloadServiceDeployOptionsDeployRESitesSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// WorkloadServiceDeployOptionsDeployReVirtualSitesModel represents deploy_re_virtual_sites block
-type WorkloadServiceDeployOptionsDeployReVirtualSitesModel struct {
-	VirtualSite []WorkloadServiceDeployOptionsDeployReVirtualSitesVirtualSiteModel `tfsdk:"virtual_site"`
+// WorkloadServiceDeployOptionsDeployREVirtualSitesModel represents deploy_re_virtual_sites block
+type WorkloadServiceDeployOptionsDeployREVirtualSitesModel struct {
+	VirtualSite []WorkloadServiceDeployOptionsDeployREVirtualSitesVirtualSiteModel `tfsdk:"virtual_site"`
 }
 
-// WorkloadServiceDeployOptionsDeployReVirtualSitesVirtualSiteModel represents virtual_site block
-type WorkloadServiceDeployOptionsDeployReVirtualSitesVirtualSiteModel struct {
+// WorkloadServiceDeployOptionsDeployREVirtualSitesVirtualSiteModel represents virtual_site block
+type WorkloadServiceDeployOptionsDeployREVirtualSitesVirtualSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -2485,10 +2485,10 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel represents use_mtls block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                                                                            `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                                                                                          `tfsdk:"trusted_ca_url"`
+	TrustedCAURL              types.String                                                                                                          `tfsdk:"trusted_ca_url"`
 	CRL                       *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel         `tfsdk:"crl"`
 	NoCRL                     *WorkloadEmptyModel                                                                                                   `tfsdk:"no_crl"`
-	TrustedCa                 *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	TrustedCA                 *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
 	XfccDisabled              *WorkloadEmptyModel                                                                                                   `tfsdk:"xfcc_disabled"`
 	XfccOptions               *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
@@ -2500,8 +2500,8 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel represents trusted_ca block
-type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel struct {
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel represents trusted_ca block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -2525,7 +2525,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	CertificateURL       types.String                                                                                                                           `tfsdk:"certificate_url"`
 	DescriptionSpec      types.String                                                                                                                           `tfsdk:"description_spec"`
 	CustomHashAlgorithms *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling  *WorkloadEmptyModel                                                                                                                    `tfsdk:"disable_ocsp_stapling"`
+	DisableOCSPStapling  *WorkloadEmptyModel                                                                                                                    `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey           *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
 	UseSystemDefaults    *WorkloadEmptyModel                                                                                                                    `tfsdk:"use_system_defaults"`
 }
@@ -2572,10 +2572,10 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel represents use_mtls block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                                                                            `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                                                                                          `tfsdk:"trusted_ca_url"`
+	TrustedCAURL              types.String                                                                                                          `tfsdk:"trusted_ca_url"`
 	CRL                       *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel         `tfsdk:"crl"`
 	NoCRL                     *WorkloadEmptyModel                                                                                                   `tfsdk:"no_crl"`
-	TrustedCa                 *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	TrustedCA                 *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
 	XfccDisabled              *WorkloadEmptyModel                                                                                                   `tfsdk:"xfcc_disabled"`
 	XfccOptions               *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
@@ -2587,8 +2587,8 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel represents trusted_ca block
-type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel struct {
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel represents trusted_ca block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -2665,10 +2665,10 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel represents use_mtls block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                                                                       `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                                                                                     `tfsdk:"trusted_ca_url"`
+	TrustedCAURL              types.String                                                                                                     `tfsdk:"trusted_ca_url"`
 	CRL                       *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel         `tfsdk:"crl"`
 	NoCRL                     *WorkloadEmptyModel                                                                                              `tfsdk:"no_crl"`
-	TrustedCa                 *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	TrustedCA                 *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
 	XfccDisabled              *WorkloadEmptyModel                                                                                              `tfsdk:"xfcc_disabled"`
 	XfccOptions               *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
@@ -2680,8 +2680,8 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel represents trusted_ca block
-type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel struct {
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel represents trusted_ca block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -2995,10 +2995,10 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel represents use_mtls block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                                                                                        `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                                                                                                      `tfsdk:"trusted_ca_url"`
+	TrustedCAURL              types.String                                                                                                                      `tfsdk:"trusted_ca_url"`
 	CRL                       *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel         `tfsdk:"crl"`
 	NoCRL                     *WorkloadEmptyModel                                                                                                               `tfsdk:"no_crl"`
-	TrustedCa                 *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	TrustedCA                 *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
 	XfccDisabled              *WorkloadEmptyModel                                                                                                               `tfsdk:"xfcc_disabled"`
 	XfccOptions               *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
@@ -3010,8 +3010,8 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel represents trusted_ca block
-type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel struct {
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel represents trusted_ca block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -3035,7 +3035,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	CertificateURL       types.String                                                                                                                                       `tfsdk:"certificate_url"`
 	DescriptionSpec      types.String                                                                                                                                       `tfsdk:"description_spec"`
 	CustomHashAlgorithms *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling  *WorkloadEmptyModel                                                                                                                                `tfsdk:"disable_ocsp_stapling"`
+	DisableOCSPStapling  *WorkloadEmptyModel                                                                                                                                `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey           *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
 	UseSystemDefaults    *WorkloadEmptyModel                                                                                                                                `tfsdk:"use_system_defaults"`
 }
@@ -3082,10 +3082,10 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel represents use_mtls block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                                                                                        `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                                                                                                      `tfsdk:"trusted_ca_url"`
+	TrustedCAURL              types.String                                                                                                                      `tfsdk:"trusted_ca_url"`
 	CRL                       *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel         `tfsdk:"crl"`
 	NoCRL                     *WorkloadEmptyModel                                                                                                               `tfsdk:"no_crl"`
-	TrustedCa                 *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	TrustedCA                 *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
 	XfccDisabled              *WorkloadEmptyModel                                                                                                               `tfsdk:"xfcc_disabled"`
 	XfccOptions               *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
@@ -3097,8 +3097,8 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel represents trusted_ca block
-type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel struct {
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel represents trusted_ca block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -3175,10 +3175,10 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel represents use_mtls block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                                                                                   `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                                                                                                 `tfsdk:"trusted_ca_url"`
+	TrustedCAURL              types.String                                                                                                                 `tfsdk:"trusted_ca_url"`
 	CRL                       *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel         `tfsdk:"crl"`
 	NoCRL                     *WorkloadEmptyModel                                                                                                          `tfsdk:"no_crl"`
-	TrustedCa                 *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	TrustedCA                 *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
 	XfccDisabled              *WorkloadEmptyModel                                                                                                          `tfsdk:"xfcc_disabled"`
 	XfccOptions               *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
@@ -3190,8 +3190,8 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel represents trusted_ca block
-type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel struct {
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel represents trusted_ca block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -3456,10 +3456,10 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel represents use_mtls block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                                                                             `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                                                                                           `tfsdk:"trusted_ca_url"`
+	TrustedCAURL              types.String                                                                                                           `tfsdk:"trusted_ca_url"`
 	CRL                       *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel         `tfsdk:"crl"`
 	NoCRL                     *WorkloadEmptyModel                                                                                                    `tfsdk:"no_crl"`
-	TrustedCa                 *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	TrustedCA                 *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
 	XfccDisabled              *WorkloadEmptyModel                                                                                                    `tfsdk:"xfcc_disabled"`
 	XfccOptions               *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
@@ -3471,8 +3471,8 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel represents trusted_ca block
-type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel struct {
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel represents trusted_ca block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -3496,7 +3496,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	CertificateURL       types.String                                                                                                                            `tfsdk:"certificate_url"`
 	DescriptionSpec      types.String                                                                                                                            `tfsdk:"description_spec"`
 	CustomHashAlgorithms *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling  *WorkloadEmptyModel                                                                                                                     `tfsdk:"disable_ocsp_stapling"`
+	DisableOCSPStapling  *WorkloadEmptyModel                                                                                                                     `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey           *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
 	UseSystemDefaults    *WorkloadEmptyModel                                                                                                                     `tfsdk:"use_system_defaults"`
 }
@@ -3543,10 +3543,10 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel represents use_mtls block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                                                                             `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                                                                                           `tfsdk:"trusted_ca_url"`
+	TrustedCAURL              types.String                                                                                                           `tfsdk:"trusted_ca_url"`
 	CRL                       *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel         `tfsdk:"crl"`
 	NoCRL                     *WorkloadEmptyModel                                                                                                    `tfsdk:"no_crl"`
-	TrustedCa                 *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	TrustedCA                 *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
 	XfccDisabled              *WorkloadEmptyModel                                                                                                    `tfsdk:"xfcc_disabled"`
 	XfccOptions               *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
@@ -3558,8 +3558,8 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel represents trusted_ca block
-type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel struct {
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel represents trusted_ca block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -3636,10 +3636,10 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsModel represents use_mtls block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                                                                        `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                                                                                      `tfsdk:"trusted_ca_url"`
+	TrustedCAURL              types.String                                                                                                      `tfsdk:"trusted_ca_url"`
 	CRL                       *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel         `tfsdk:"crl"`
 	NoCRL                     *WorkloadEmptyModel                                                                                               `tfsdk:"no_crl"`
-	TrustedCa                 *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	TrustedCA                 *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
 	XfccDisabled              *WorkloadEmptyModel                                                                                               `tfsdk:"xfcc_disabled"`
 	XfccOptions               *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
@@ -3651,8 +3651,8 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel represents trusted_ca block
-type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel struct {
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel represents trusted_ca block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -3961,55 +3961,55 @@ type WorkloadStatefulServiceContainersReadinessCheckTCPHealthCheckPortModel stru
 type WorkloadStatefulServiceDeployOptionsModel struct {
 	AllRes               *WorkloadEmptyModel                                            `tfsdk:"all_res"`
 	DefaultVirtualSites  *WorkloadEmptyModel                                            `tfsdk:"default_virtual_sites"`
-	DeployCeSites        *WorkloadStatefulServiceDeployOptionsDeployCeSitesModel        `tfsdk:"deploy_ce_sites"`
-	DeployCeVirtualSites *WorkloadStatefulServiceDeployOptionsDeployCeVirtualSitesModel `tfsdk:"deploy_ce_virtual_sites"`
-	DeployReSites        *WorkloadStatefulServiceDeployOptionsDeployReSitesModel        `tfsdk:"deploy_re_sites"`
-	DeployReVirtualSites *WorkloadStatefulServiceDeployOptionsDeployReVirtualSitesModel `tfsdk:"deploy_re_virtual_sites"`
+	DeployCESites        *WorkloadStatefulServiceDeployOptionsDeployCESitesModel        `tfsdk:"deploy_ce_sites"`
+	DeployCEVirtualSites *WorkloadStatefulServiceDeployOptionsDeployCEVirtualSitesModel `tfsdk:"deploy_ce_virtual_sites"`
+	DeployRESites        *WorkloadStatefulServiceDeployOptionsDeployRESitesModel        `tfsdk:"deploy_re_sites"`
+	DeployREVirtualSites *WorkloadStatefulServiceDeployOptionsDeployREVirtualSitesModel `tfsdk:"deploy_re_virtual_sites"`
 }
 
-// WorkloadStatefulServiceDeployOptionsDeployCeSitesModel represents deploy_ce_sites block
-type WorkloadStatefulServiceDeployOptionsDeployCeSitesModel struct {
-	Site []WorkloadStatefulServiceDeployOptionsDeployCeSitesSiteModel `tfsdk:"site"`
+// WorkloadStatefulServiceDeployOptionsDeployCESitesModel represents deploy_ce_sites block
+type WorkloadStatefulServiceDeployOptionsDeployCESitesModel struct {
+	Site []WorkloadStatefulServiceDeployOptionsDeployCESitesSiteModel `tfsdk:"site"`
 }
 
-// WorkloadStatefulServiceDeployOptionsDeployCeSitesSiteModel represents site block
-type WorkloadStatefulServiceDeployOptionsDeployCeSitesSiteModel struct {
+// WorkloadStatefulServiceDeployOptionsDeployCESitesSiteModel represents site block
+type WorkloadStatefulServiceDeployOptionsDeployCESitesSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// WorkloadStatefulServiceDeployOptionsDeployCeVirtualSitesModel represents deploy_ce_virtual_sites block
-type WorkloadStatefulServiceDeployOptionsDeployCeVirtualSitesModel struct {
-	VirtualSite []WorkloadStatefulServiceDeployOptionsDeployCeVirtualSitesVirtualSiteModel `tfsdk:"virtual_site"`
+// WorkloadStatefulServiceDeployOptionsDeployCEVirtualSitesModel represents deploy_ce_virtual_sites block
+type WorkloadStatefulServiceDeployOptionsDeployCEVirtualSitesModel struct {
+	VirtualSite []WorkloadStatefulServiceDeployOptionsDeployCEVirtualSitesVirtualSiteModel `tfsdk:"virtual_site"`
 }
 
-// WorkloadStatefulServiceDeployOptionsDeployCeVirtualSitesVirtualSiteModel represents virtual_site block
-type WorkloadStatefulServiceDeployOptionsDeployCeVirtualSitesVirtualSiteModel struct {
+// WorkloadStatefulServiceDeployOptionsDeployCEVirtualSitesVirtualSiteModel represents virtual_site block
+type WorkloadStatefulServiceDeployOptionsDeployCEVirtualSitesVirtualSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// WorkloadStatefulServiceDeployOptionsDeployReSitesModel represents deploy_re_sites block
-type WorkloadStatefulServiceDeployOptionsDeployReSitesModel struct {
-	Site []WorkloadStatefulServiceDeployOptionsDeployReSitesSiteModel `tfsdk:"site"`
+// WorkloadStatefulServiceDeployOptionsDeployRESitesModel represents deploy_re_sites block
+type WorkloadStatefulServiceDeployOptionsDeployRESitesModel struct {
+	Site []WorkloadStatefulServiceDeployOptionsDeployRESitesSiteModel `tfsdk:"site"`
 }
 
-// WorkloadStatefulServiceDeployOptionsDeployReSitesSiteModel represents site block
-type WorkloadStatefulServiceDeployOptionsDeployReSitesSiteModel struct {
+// WorkloadStatefulServiceDeployOptionsDeployRESitesSiteModel represents site block
+type WorkloadStatefulServiceDeployOptionsDeployRESitesSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// WorkloadStatefulServiceDeployOptionsDeployReVirtualSitesModel represents deploy_re_virtual_sites block
-type WorkloadStatefulServiceDeployOptionsDeployReVirtualSitesModel struct {
-	VirtualSite []WorkloadStatefulServiceDeployOptionsDeployReVirtualSitesVirtualSiteModel `tfsdk:"virtual_site"`
+// WorkloadStatefulServiceDeployOptionsDeployREVirtualSitesModel represents deploy_re_virtual_sites block
+type WorkloadStatefulServiceDeployOptionsDeployREVirtualSitesModel struct {
+	VirtualSite []WorkloadStatefulServiceDeployOptionsDeployREVirtualSitesVirtualSiteModel `tfsdk:"virtual_site"`
 }
 
-// WorkloadStatefulServiceDeployOptionsDeployReVirtualSitesVirtualSiteModel represents virtual_site block
-type WorkloadStatefulServiceDeployOptionsDeployReVirtualSitesVirtualSiteModel struct {
+// WorkloadStatefulServiceDeployOptionsDeployREVirtualSitesVirtualSiteModel represents virtual_site block
+type WorkloadStatefulServiceDeployOptionsDeployREVirtualSitesVirtualSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`

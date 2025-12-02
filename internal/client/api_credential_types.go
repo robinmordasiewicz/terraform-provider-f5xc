@@ -17,8 +17,7 @@ type APICredential struct {
 // CreateAPICredential creates a new APICredential
 func (c *Client) CreateAPICredential(ctx context.Context, resource *APICredential) (*APICredential, error) {
 	var result APICredential
-	path := "/api/web/namespaces/system/bulk_revoke/api_credentials"
-	_ = resource.Metadata.Namespace // Namespace not required in API path for this resource
+	path := fmt.Sprintf("/api/web/namespaces/%s/activate/api_credentials", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -26,8 +25,7 @@ func (c *Client) CreateAPICredential(ctx context.Context, resource *APICredentia
 // GetAPICredential retrieves a APICredential
 func (c *Client) GetAPICredential(ctx context.Context, namespace, name string) (*APICredential, error) {
 	var result APICredential
-	path := fmt.Sprintf("/api/web/namespaces/system/bulk_revoke/api_credentials/%s", name)
-	_ = namespace // Namespace not required in API path for this resource
+	path := fmt.Sprintf("/api/web/namespaces/%s/activate/api_credentials/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -35,15 +33,13 @@ func (c *Client) GetAPICredential(ctx context.Context, namespace, name string) (
 // UpdateAPICredential updates a APICredential
 func (c *Client) UpdateAPICredential(ctx context.Context, resource *APICredential) (*APICredential, error) {
 	var result APICredential
-	path := fmt.Sprintf("/api/web/namespaces/system/bulk_revoke/api_credentials/%s", resource.Metadata.Name)
-	_ = resource.Metadata.Namespace // Namespace not required in API path for this resource
+	path := fmt.Sprintf("/api/web/namespaces/%s/activate/api_credentials/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteAPICredential deletes a APICredential
 func (c *Client) DeleteAPICredential(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/web/namespaces/system/bulk_revoke/api_credentials/%s", name)
-	_ = namespace // Namespace not required in API path for this resource
+	path := fmt.Sprintf("/api/web/namespaces/%s/activate/api_credentials/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

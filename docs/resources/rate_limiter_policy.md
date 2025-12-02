@@ -108,9 +108,9 @@ A [`spec`](#rules-spec) block (within [`rules`](#rules)) supports the following:
 
 <a id="rules-spec-apply-rate-limiter"></a>&#x2022; [`apply_rate_limiter`](#rules-spec-apply-rate-limiter) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="rules-spec-asn-list"></a>&#x2022; [`asn_list`](#rules-spec-asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [ASN List](#rules-spec-asn-list) below.
+<a id="rules-spec-asn-list"></a>&#x2022; [`asn_list`](#rules-spec-asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#rules-spec-asn-list) below.
 
-<a id="rules-spec-asn-matcher"></a>&#x2022; [`asn_matcher`](#rules-spec-asn-matcher) - Optional Block<br>ASN Matcher. Match any AS number contained in the list of bgp_asn_sets<br>See [ASN Matcher](#rules-spec-asn-matcher) below.
+<a id="rules-spec-asn-matcher"></a>&#x2022; [`asn_matcher`](#rules-spec-asn-matcher) - Optional Block<br>ASN Matcher. Match any AS number contained in the list of bgp_asn_sets<br>See [Asn Matcher](#rules-spec-asn-matcher) below.
 
 <a id="rules-spec-bypass-rate-limiter"></a>&#x2022; [`bypass_rate_limiter`](#rules-spec-bypass-rate-limiter) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -130,19 +130,19 @@ A [`spec`](#rules-spec) block (within [`rules`](#rules)) supports the following:
 
 <a id="rules-spec-path"></a>&#x2022; [`path`](#rules-spec-path) - Optional Block<br>Path Matcher. A path matcher specifies multiple criteria for matching an HTTP path string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of path prefixes, a list of exact path values and a list of regular expressions<br>See [Path](#rules-spec-path) below.
 
-#### Rules Spec ASN List
+#### Rules Spec Asn List
 
 An [`asn_list`](#rules-spec-asn-list) block (within [`rules.spec`](#rules-spec)) supports the following:
 
 <a id="rules-spec-asn-list-as-numbers"></a>&#x2022; [`as_numbers`](#rules-spec-asn-list-as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
-#### Rules Spec ASN Matcher
+#### Rules Spec Asn Matcher
 
 An [`asn_matcher`](#rules-spec-asn-matcher) block (within [`rules.spec`](#rules-spec)) supports the following:
 
-<a id="rules-spec-asn-matcher-asn-sets"></a>&#x2022; [`asn_sets`](#rules-spec-asn-matcher-asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [ASN Sets](#rules-spec-asn-matcher-asn-sets) below.
+<a id="rules-spec-asn-matcher-asn-sets"></a>&#x2022; [`asn_sets`](#rules-spec-asn-matcher-asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#rules-spec-asn-matcher-asn-sets) below.
 
-#### Rules Spec ASN Matcher ASN Sets
+#### Rules Spec Asn Matcher Asn Sets
 
 An [`asn_sets`](#rules-spec-asn-matcher-asn-sets) block (within [`rules.spec.asn_matcher`](#rules-spec-asn-matcher)) supports the following:
 

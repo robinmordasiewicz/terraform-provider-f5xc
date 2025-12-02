@@ -210,14 +210,14 @@ type GlobalLogReceiverDatadogReceiverDatadogAPIKeyClearSecretInfoModel struct {
 
 // GlobalLogReceiverDatadogReceiverUseTLSModel represents use_tls block
 type GlobalLogReceiverDatadogReceiverUseTLSModel struct {
-	TrustedCaURL             types.String                                           `tfsdk:"trusted_ca_url"`
+	TrustedCAURL             types.String                                           `tfsdk:"trusted_ca_url"`
 	DisableVerifyCertificate *GlobalLogReceiverEmptyModel                           `tfsdk:"disable_verify_certificate"`
 	DisableVerifyHostname    *GlobalLogReceiverEmptyModel                           `tfsdk:"disable_verify_hostname"`
 	EnableVerifyCertificate  *GlobalLogReceiverEmptyModel                           `tfsdk:"enable_verify_certificate"`
 	EnableVerifyHostname     *GlobalLogReceiverEmptyModel                           `tfsdk:"enable_verify_hostname"`
 	MtlsDisabled             *GlobalLogReceiverEmptyModel                           `tfsdk:"mtls_disabled"`
 	MtlsEnable               *GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableModel `tfsdk:"mtls_enable"`
-	NoCa                     *GlobalLogReceiverEmptyModel                           `tfsdk:"no_ca"`
+	NoCA                     *GlobalLogReceiverEmptyModel                           `tfsdk:"no_ca"`
 }
 
 // GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableModel represents mtls_enable block
@@ -365,14 +365,14 @@ type GlobalLogReceiverHTTPReceiverCompressionModel struct {
 
 // GlobalLogReceiverHTTPReceiverUseTLSModel represents use_tls block
 type GlobalLogReceiverHTTPReceiverUseTLSModel struct {
-	TrustedCaURL             types.String                                        `tfsdk:"trusted_ca_url"`
+	TrustedCAURL             types.String                                        `tfsdk:"trusted_ca_url"`
 	DisableVerifyCertificate *GlobalLogReceiverEmptyModel                        `tfsdk:"disable_verify_certificate"`
 	DisableVerifyHostname    *GlobalLogReceiverEmptyModel                        `tfsdk:"disable_verify_hostname"`
 	EnableVerifyCertificate  *GlobalLogReceiverEmptyModel                        `tfsdk:"enable_verify_certificate"`
 	EnableVerifyHostname     *GlobalLogReceiverEmptyModel                        `tfsdk:"enable_verify_hostname"`
 	MtlsDisabled             *GlobalLogReceiverEmptyModel                        `tfsdk:"mtls_disabled"`
 	MtlsEnable               *GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableModel `tfsdk:"mtls_enable"`
-	NoCa                     *GlobalLogReceiverEmptyModel                        `tfsdk:"no_ca"`
+	NoCA                     *GlobalLogReceiverEmptyModel                        `tfsdk:"no_ca"`
 }
 
 // GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableModel represents mtls_enable block
@@ -429,14 +429,14 @@ type GlobalLogReceiverKafkaReceiverCompressionModel struct {
 
 // GlobalLogReceiverKafkaReceiverUseTLSModel represents use_tls block
 type GlobalLogReceiverKafkaReceiverUseTLSModel struct {
-	TrustedCaURL             types.String                                         `tfsdk:"trusted_ca_url"`
+	TrustedCAURL             types.String                                         `tfsdk:"trusted_ca_url"`
 	DisableVerifyCertificate *GlobalLogReceiverEmptyModel                         `tfsdk:"disable_verify_certificate"`
 	DisableVerifyHostname    *GlobalLogReceiverEmptyModel                         `tfsdk:"disable_verify_hostname"`
 	EnableVerifyCertificate  *GlobalLogReceiverEmptyModel                         `tfsdk:"enable_verify_certificate"`
 	EnableVerifyHostname     *GlobalLogReceiverEmptyModel                         `tfsdk:"enable_verify_hostname"`
 	MtlsDisabled             *GlobalLogReceiverEmptyModel                         `tfsdk:"mtls_disabled"`
 	MtlsEnable               *GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableModel `tfsdk:"mtls_enable"`
-	NoCa                     *GlobalLogReceiverEmptyModel                         `tfsdk:"no_ca"`
+	NoCA                     *GlobalLogReceiverEmptyModel                         `tfsdk:"no_ca"`
 }
 
 // GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableModel represents mtls_enable block
@@ -523,14 +523,14 @@ type GlobalLogReceiverQradarReceiverCompressionModel struct {
 
 // GlobalLogReceiverQradarReceiverUseTLSModel represents use_tls block
 type GlobalLogReceiverQradarReceiverUseTLSModel struct {
-	TrustedCaURL             types.String                                          `tfsdk:"trusted_ca_url"`
+	TrustedCAURL             types.String                                          `tfsdk:"trusted_ca_url"`
 	DisableVerifyCertificate *GlobalLogReceiverEmptyModel                          `tfsdk:"disable_verify_certificate"`
 	DisableVerifyHostname    *GlobalLogReceiverEmptyModel                          `tfsdk:"disable_verify_hostname"`
 	EnableVerifyCertificate  *GlobalLogReceiverEmptyModel                          `tfsdk:"enable_verify_certificate"`
 	EnableVerifyHostname     *GlobalLogReceiverEmptyModel                          `tfsdk:"enable_verify_hostname"`
 	MtlsDisabled             *GlobalLogReceiverEmptyModel                          `tfsdk:"mtls_disabled"`
 	MtlsEnable               *GlobalLogReceiverQradarReceiverUseTLSMtlsEnableModel `tfsdk:"mtls_enable"`
-	NoCa                     *GlobalLogReceiverEmptyModel                          `tfsdk:"no_ca"`
+	NoCA                     *GlobalLogReceiverEmptyModel                          `tfsdk:"no_ca"`
 }
 
 // GlobalLogReceiverQradarReceiverUseTLSMtlsEnableModel represents mtls_enable block
@@ -647,14 +647,14 @@ type GlobalLogReceiverSplunkReceiverSplunkHecTokenClearSecretInfoModel struct {
 
 // GlobalLogReceiverSplunkReceiverUseTLSModel represents use_tls block
 type GlobalLogReceiverSplunkReceiverUseTLSModel struct {
-	TrustedCaURL             types.String                                          `tfsdk:"trusted_ca_url"`
+	TrustedCAURL             types.String                                          `tfsdk:"trusted_ca_url"`
 	DisableVerifyCertificate *GlobalLogReceiverEmptyModel                          `tfsdk:"disable_verify_certificate"`
 	DisableVerifyHostname    *GlobalLogReceiverEmptyModel                          `tfsdk:"disable_verify_hostname"`
 	EnableVerifyCertificate  *GlobalLogReceiverEmptyModel                          `tfsdk:"enable_verify_certificate"`
 	EnableVerifyHostname     *GlobalLogReceiverEmptyModel                          `tfsdk:"enable_verify_hostname"`
 	MtlsDisabled             *GlobalLogReceiverEmptyModel                          `tfsdk:"mtls_disabled"`
 	MtlsEnable               *GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableModel `tfsdk:"mtls_enable"`
-	NoCa                     *GlobalLogReceiverEmptyModel                          `tfsdk:"no_ca"`
+	NoCA                     *GlobalLogReceiverEmptyModel                          `tfsdk:"no_ca"`
 }
 
 // GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableModel represents mtls_enable block
@@ -2452,8 +2452,8 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 		}
 		if data.DatadogReceiver.UseTLS != nil {
 			use_tlsNestedMap := make(map[string]interface{})
-			if !data.DatadogReceiver.UseTLS.TrustedCaURL.IsNull() && !data.DatadogReceiver.UseTLS.TrustedCaURL.IsUnknown() {
-				use_tlsNestedMap["trusted_ca_url"] = data.DatadogReceiver.UseTLS.TrustedCaURL.ValueString()
+			if !data.DatadogReceiver.UseTLS.TrustedCAURL.IsNull() && !data.DatadogReceiver.UseTLS.TrustedCAURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.DatadogReceiver.UseTLS.TrustedCAURL.ValueString()
 			}
 			datadog_receiverMap["use_tls"] = use_tlsNestedMap
 		}
@@ -2548,8 +2548,8 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 		}
 		if data.HTTPReceiver.UseTLS != nil {
 			use_tlsNestedMap := make(map[string]interface{})
-			if !data.HTTPReceiver.UseTLS.TrustedCaURL.IsNull() && !data.HTTPReceiver.UseTLS.TrustedCaURL.IsUnknown() {
-				use_tlsNestedMap["trusted_ca_url"] = data.HTTPReceiver.UseTLS.TrustedCaURL.ValueString()
+			if !data.HTTPReceiver.UseTLS.TrustedCAURL.IsNull() && !data.HTTPReceiver.UseTLS.TrustedCAURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.HTTPReceiver.UseTLS.TrustedCAURL.ValueString()
 			}
 			http_receiverMap["use_tls"] = use_tlsNestedMap
 		}
@@ -2589,8 +2589,8 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 		}
 		if data.KafkaReceiver.UseTLS != nil {
 			use_tlsNestedMap := make(map[string]interface{})
-			if !data.KafkaReceiver.UseTLS.TrustedCaURL.IsNull() && !data.KafkaReceiver.UseTLS.TrustedCaURL.IsUnknown() {
-				use_tlsNestedMap["trusted_ca_url"] = data.KafkaReceiver.UseTLS.TrustedCaURL.ValueString()
+			if !data.KafkaReceiver.UseTLS.TrustedCAURL.IsNull() && !data.KafkaReceiver.UseTLS.TrustedCAURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.KafkaReceiver.UseTLS.TrustedCAURL.ValueString()
 			}
 			kafka_receiverMap["use_tls"] = use_tlsNestedMap
 		}
@@ -2656,8 +2656,8 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 		}
 		if data.QradarReceiver.UseTLS != nil {
 			use_tlsNestedMap := make(map[string]interface{})
-			if !data.QradarReceiver.UseTLS.TrustedCaURL.IsNull() && !data.QradarReceiver.UseTLS.TrustedCaURL.IsUnknown() {
-				use_tlsNestedMap["trusted_ca_url"] = data.QradarReceiver.UseTLS.TrustedCaURL.ValueString()
+			if !data.QradarReceiver.UseTLS.TrustedCAURL.IsNull() && !data.QradarReceiver.UseTLS.TrustedCAURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.QradarReceiver.UseTLS.TrustedCAURL.ValueString()
 			}
 			qradar_receiverMap["use_tls"] = use_tlsNestedMap
 		}
@@ -2749,8 +2749,8 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 		}
 		if data.SplunkReceiver.UseTLS != nil {
 			use_tlsNestedMap := make(map[string]interface{})
-			if !data.SplunkReceiver.UseTLS.TrustedCaURL.IsNull() && !data.SplunkReceiver.UseTLS.TrustedCaURL.IsUnknown() {
-				use_tlsNestedMap["trusted_ca_url"] = data.SplunkReceiver.UseTLS.TrustedCaURL.ValueString()
+			if !data.SplunkReceiver.UseTLS.TrustedCAURL.IsNull() && !data.SplunkReceiver.UseTLS.TrustedCAURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.SplunkReceiver.UseTLS.TrustedCAURL.ValueString()
 			}
 			splunk_receiverMap["use_tls"] = use_tlsNestedMap
 		}
@@ -3068,7 +3068,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
 					return &GlobalLogReceiverDatadogReceiverUseTLSModel{
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -3294,7 +3294,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
 					return &GlobalLogReceiverHTTPReceiverUseTLSModel{
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -3388,7 +3388,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
 					return &GlobalLogReceiverKafkaReceiverUseTLSModel{
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -3501,7 +3501,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
 					return &GlobalLogReceiverQradarReceiverUseTLSModel{
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -3708,7 +3708,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
 					return &GlobalLogReceiverSplunkReceiverUseTLSModel{
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -4109,7 +4109,7 @@ func (r *GlobalLogReceiverResource) Read(ctx context.Context, req resource.ReadR
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
 					return &GlobalLogReceiverDatadogReceiverUseTLSModel{
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -4335,7 +4335,7 @@ func (r *GlobalLogReceiverResource) Read(ctx context.Context, req resource.ReadR
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
 					return &GlobalLogReceiverHTTPReceiverUseTLSModel{
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -4429,7 +4429,7 @@ func (r *GlobalLogReceiverResource) Read(ctx context.Context, req resource.ReadR
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
 					return &GlobalLogReceiverKafkaReceiverUseTLSModel{
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -4542,7 +4542,7 @@ func (r *GlobalLogReceiverResource) Read(ctx context.Context, req resource.ReadR
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
 					return &GlobalLogReceiverQradarReceiverUseTLSModel{
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -4749,7 +4749,7 @@ func (r *GlobalLogReceiverResource) Read(ctx context.Context, req resource.ReadR
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
 					return &GlobalLogReceiverSplunkReceiverUseTLSModel{
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -4956,8 +4956,8 @@ func (r *GlobalLogReceiverResource) Update(ctx context.Context, req resource.Upd
 		}
 		if data.DatadogReceiver.UseTLS != nil {
 			use_tlsNestedMap := make(map[string]interface{})
-			if !data.DatadogReceiver.UseTLS.TrustedCaURL.IsNull() && !data.DatadogReceiver.UseTLS.TrustedCaURL.IsUnknown() {
-				use_tlsNestedMap["trusted_ca_url"] = data.DatadogReceiver.UseTLS.TrustedCaURL.ValueString()
+			if !data.DatadogReceiver.UseTLS.TrustedCAURL.IsNull() && !data.DatadogReceiver.UseTLS.TrustedCAURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.DatadogReceiver.UseTLS.TrustedCAURL.ValueString()
 			}
 			datadog_receiverMap["use_tls"] = use_tlsNestedMap
 		}
@@ -5052,8 +5052,8 @@ func (r *GlobalLogReceiverResource) Update(ctx context.Context, req resource.Upd
 		}
 		if data.HTTPReceiver.UseTLS != nil {
 			use_tlsNestedMap := make(map[string]interface{})
-			if !data.HTTPReceiver.UseTLS.TrustedCaURL.IsNull() && !data.HTTPReceiver.UseTLS.TrustedCaURL.IsUnknown() {
-				use_tlsNestedMap["trusted_ca_url"] = data.HTTPReceiver.UseTLS.TrustedCaURL.ValueString()
+			if !data.HTTPReceiver.UseTLS.TrustedCAURL.IsNull() && !data.HTTPReceiver.UseTLS.TrustedCAURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.HTTPReceiver.UseTLS.TrustedCAURL.ValueString()
 			}
 			http_receiverMap["use_tls"] = use_tlsNestedMap
 		}
@@ -5093,8 +5093,8 @@ func (r *GlobalLogReceiverResource) Update(ctx context.Context, req resource.Upd
 		}
 		if data.KafkaReceiver.UseTLS != nil {
 			use_tlsNestedMap := make(map[string]interface{})
-			if !data.KafkaReceiver.UseTLS.TrustedCaURL.IsNull() && !data.KafkaReceiver.UseTLS.TrustedCaURL.IsUnknown() {
-				use_tlsNestedMap["trusted_ca_url"] = data.KafkaReceiver.UseTLS.TrustedCaURL.ValueString()
+			if !data.KafkaReceiver.UseTLS.TrustedCAURL.IsNull() && !data.KafkaReceiver.UseTLS.TrustedCAURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.KafkaReceiver.UseTLS.TrustedCAURL.ValueString()
 			}
 			kafka_receiverMap["use_tls"] = use_tlsNestedMap
 		}
@@ -5160,8 +5160,8 @@ func (r *GlobalLogReceiverResource) Update(ctx context.Context, req resource.Upd
 		}
 		if data.QradarReceiver.UseTLS != nil {
 			use_tlsNestedMap := make(map[string]interface{})
-			if !data.QradarReceiver.UseTLS.TrustedCaURL.IsNull() && !data.QradarReceiver.UseTLS.TrustedCaURL.IsUnknown() {
-				use_tlsNestedMap["trusted_ca_url"] = data.QradarReceiver.UseTLS.TrustedCaURL.ValueString()
+			if !data.QradarReceiver.UseTLS.TrustedCAURL.IsNull() && !data.QradarReceiver.UseTLS.TrustedCAURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.QradarReceiver.UseTLS.TrustedCAURL.ValueString()
 			}
 			qradar_receiverMap["use_tls"] = use_tlsNestedMap
 		}
@@ -5253,8 +5253,8 @@ func (r *GlobalLogReceiverResource) Update(ctx context.Context, req resource.Upd
 		}
 		if data.SplunkReceiver.UseTLS != nil {
 			use_tlsNestedMap := make(map[string]interface{})
-			if !data.SplunkReceiver.UseTLS.TrustedCaURL.IsNull() && !data.SplunkReceiver.UseTLS.TrustedCaURL.IsUnknown() {
-				use_tlsNestedMap["trusted_ca_url"] = data.SplunkReceiver.UseTLS.TrustedCaURL.ValueString()
+			if !data.SplunkReceiver.UseTLS.TrustedCAURL.IsNull() && !data.SplunkReceiver.UseTLS.TrustedCAURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.SplunkReceiver.UseTLS.TrustedCAURL.ValueString()
 			}
 			splunk_receiverMap["use_tls"] = use_tlsNestedMap
 		}
@@ -5583,7 +5583,7 @@ func (r *GlobalLogReceiverResource) Update(ctx context.Context, req resource.Upd
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
 					return &GlobalLogReceiverDatadogReceiverUseTLSModel{
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -5809,7 +5809,7 @@ func (r *GlobalLogReceiverResource) Update(ctx context.Context, req resource.Upd
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
 					return &GlobalLogReceiverHTTPReceiverUseTLSModel{
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -5903,7 +5903,7 @@ func (r *GlobalLogReceiverResource) Update(ctx context.Context, req resource.Upd
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
 					return &GlobalLogReceiverKafkaReceiverUseTLSModel{
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -6016,7 +6016,7 @@ func (r *GlobalLogReceiverResource) Update(ctx context.Context, req resource.Upd
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
 					return &GlobalLogReceiverQradarReceiverUseTLSModel{
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -6223,7 +6223,7 @@ func (r *GlobalLogReceiverResource) Update(ctx context.Context, req resource.Upd
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
 					return &GlobalLogReceiverSplunkReceiverUseTLSModel{
-						TrustedCaURL: func() types.String {
+						TrustedCAURL: func() types.String {
 							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}

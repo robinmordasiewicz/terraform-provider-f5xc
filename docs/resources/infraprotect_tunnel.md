@@ -100,7 +100,7 @@ A [`bandwidth`](#bandwidth) block supports the following:
 
 A [`bgp_information`](#bgp-information) block supports the following:
 
-<a id="bgp-information-asn"></a>&#x2022; [`asn`](#bgp-information-asn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [ASN](#bgp-information-asn) below.
+<a id="bgp-information-asn"></a>&#x2022; [`asn`](#bgp-information-asn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Asn](#bgp-information-asn) below.
 
 <a id="bgp-information-holddown-timer-seconds"></a>&#x2022; [`holddown_timer_seconds`](#bgp-information-holddown-timer-seconds) - Optional Number<br>Hold down Timer. BGP hold down timer, in seconds
 
@@ -110,7 +110,7 @@ A [`bgp_information`](#bgp-information) block supports the following:
 
 <a id="bgp-information-use-default-secret"></a>&#x2022; [`use_default_secret`](#bgp-information-use-default-secret) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### BGP Information ASN
+#### BGP Information Asn
 
 An [`asn`](#bgp-information-asn) block (within [`bgp_information`](#bgp-information)) supports the following:
 

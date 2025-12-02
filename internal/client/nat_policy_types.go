@@ -8,38 +8,38 @@ import (
 	"fmt"
 )
 
-// NatPolicy represents a F5XC NatPolicy
-type NatPolicy struct {
+// NATPolicy represents a F5XC NATPolicy
+type NATPolicy struct {
 	Metadata Metadata               `json:"metadata"`
 	Spec     map[string]interface{} `json:"spec"`
 }
 
-// CreateNatPolicy creates a new NatPolicy
-func (c *Client) CreateNatPolicy(ctx context.Context, resource *NatPolicy) (*NatPolicy, error) {
-	var result NatPolicy
+// CreateNATPolicy creates a new NATPolicy
+func (c *Client) CreateNATPolicy(ctx context.Context, resource *NATPolicy) (*NATPolicy, error) {
+	var result NATPolicy
 	path := fmt.Sprintf("/api/config/namespaces/%s/nat_policys", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
 
-// GetNatPolicy retrieves a NatPolicy
-func (c *Client) GetNatPolicy(ctx context.Context, namespace, name string) (*NatPolicy, error) {
-	var result NatPolicy
+// GetNATPolicy retrieves a NATPolicy
+func (c *Client) GetNATPolicy(ctx context.Context, namespace, name string) (*NATPolicy, error) {
+	var result NATPolicy
 	path := fmt.Sprintf("/api/config/namespaces/%s/nat_policys/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
 
-// UpdateNatPolicy updates a NatPolicy
-func (c *Client) UpdateNatPolicy(ctx context.Context, resource *NatPolicy) (*NatPolicy, error) {
-	var result NatPolicy
+// UpdateNATPolicy updates a NATPolicy
+func (c *Client) UpdateNATPolicy(ctx context.Context, resource *NATPolicy) (*NATPolicy, error) {
+	var result NATPolicy
 	path := fmt.Sprintf("/api/config/namespaces/%s/nat_policys/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
-// DeleteNatPolicy deletes a NatPolicy
-func (c *Client) DeleteNatPolicy(ctx context.Context, namespace, name string) error {
+// DeleteNATPolicy deletes a NATPolicy
+func (c *Client) DeleteNATPolicy(ctx context.Context, namespace, name string) error {
 	path := fmt.Sprintf("/api/config/namespaces/%s/nat_policys/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

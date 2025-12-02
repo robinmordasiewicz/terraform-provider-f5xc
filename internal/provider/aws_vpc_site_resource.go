@@ -134,9 +134,9 @@ type AWSVPCSiteDirectConnectEnabledHostedVifsVifListModel struct {
 	SameAsSiteRegion *AWSVPCSiteEmptyModel `tfsdk:"same_as_site_region"`
 }
 
-// AWSVPCSiteEgressNatGwModel represents egress_nat_gw block
-type AWSVPCSiteEgressNatGwModel struct {
-	NatGwID types.String `tfsdk:"nat_gw_id"`
+// AWSVPCSiteEgressNATGwModel represents egress_nat_gw block
+type AWSVPCSiteEgressNATGwModel struct {
+	NATGwID types.String `tfsdk:"nat_gw_id"`
 }
 
 // AWSVPCSiteEgressVirtualPrivateGatewayModel represents egress_virtual_private_gateway block
@@ -150,8 +150,8 @@ type AWSVPCSiteIngressEgressGwModel struct {
 	ActiveEnhancedFirewallPolicies *AWSVPCSiteIngressEgressGwActiveEnhancedFirewallPoliciesModel `tfsdk:"active_enhanced_firewall_policies"`
 	ActiveForwardProxyPolicies     *AWSVPCSiteIngressEgressGwActiveForwardProxyPoliciesModel     `tfsdk:"active_forward_proxy_policies"`
 	ActiveNetworkPolicies          *AWSVPCSiteIngressEgressGwActiveNetworkPoliciesModel          `tfsdk:"active_network_policies"`
-	AllowedVipPort                 *AWSVPCSiteIngressEgressGwAllowedVipPortModel                 `tfsdk:"allowed_vip_port"`
-	AllowedVipPortSLI              *AWSVPCSiteIngressEgressGwAllowedVipPortSLIModel              `tfsdk:"allowed_vip_port_sli"`
+	AllowedVIPPort                 *AWSVPCSiteIngressEgressGwAllowedVIPPortModel                 `tfsdk:"allowed_vip_port"`
+	AllowedVIPPortSLI              *AWSVPCSiteIngressEgressGwAllowedVIPPortSLIModel              `tfsdk:"allowed_vip_port_sli"`
 	AzNodes                        []AWSVPCSiteIngressEgressGwAzNodesModel                       `tfsdk:"az_nodes"`
 	DcClusterGroupInsideVn         *AWSVPCSiteIngressEgressGwDcClusterGroupInsideVnModel         `tfsdk:"dc_cluster_group_inside_vn"`
 	DcClusterGroupOutsideVn        *AWSVPCSiteIngressEgressGwDcClusterGroupOutsideVnModel        `tfsdk:"dc_cluster_group_outside_vn"`
@@ -206,31 +206,31 @@ type AWSVPCSiteIngressEgressGwActiveNetworkPoliciesNetworkPoliciesModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// AWSVPCSiteIngressEgressGwAllowedVipPortModel represents allowed_vip_port block
-type AWSVPCSiteIngressEgressGwAllowedVipPortModel struct {
-	CustomPorts           *AWSVPCSiteIngressEgressGwAllowedVipPortCustomPortsModel `tfsdk:"custom_ports"`
-	DisableAllowedVipPort *AWSVPCSiteEmptyModel                                    `tfsdk:"disable_allowed_vip_port"`
+// AWSVPCSiteIngressEgressGwAllowedVIPPortModel represents allowed_vip_port block
+type AWSVPCSiteIngressEgressGwAllowedVIPPortModel struct {
+	CustomPorts           *AWSVPCSiteIngressEgressGwAllowedVIPPortCustomPortsModel `tfsdk:"custom_ports"`
+	DisableAllowedVIPPort *AWSVPCSiteEmptyModel                                    `tfsdk:"disable_allowed_vip_port"`
 	UseHTTPHTTPSPort      *AWSVPCSiteEmptyModel                                    `tfsdk:"use_http_https_port"`
 	UseHTTPPort           *AWSVPCSiteEmptyModel                                    `tfsdk:"use_http_port"`
 	UseHTTPSPort          *AWSVPCSiteEmptyModel                                    `tfsdk:"use_https_port"`
 }
 
-// AWSVPCSiteIngressEgressGwAllowedVipPortCustomPortsModel represents custom_ports block
-type AWSVPCSiteIngressEgressGwAllowedVipPortCustomPortsModel struct {
+// AWSVPCSiteIngressEgressGwAllowedVIPPortCustomPortsModel represents custom_ports block
+type AWSVPCSiteIngressEgressGwAllowedVIPPortCustomPortsModel struct {
 	PortRanges types.String `tfsdk:"port_ranges"`
 }
 
-// AWSVPCSiteIngressEgressGwAllowedVipPortSLIModel represents allowed_vip_port_sli block
-type AWSVPCSiteIngressEgressGwAllowedVipPortSLIModel struct {
-	CustomPorts           *AWSVPCSiteIngressEgressGwAllowedVipPortSLICustomPortsModel `tfsdk:"custom_ports"`
-	DisableAllowedVipPort *AWSVPCSiteEmptyModel                                       `tfsdk:"disable_allowed_vip_port"`
+// AWSVPCSiteIngressEgressGwAllowedVIPPortSLIModel represents allowed_vip_port_sli block
+type AWSVPCSiteIngressEgressGwAllowedVIPPortSLIModel struct {
+	CustomPorts           *AWSVPCSiteIngressEgressGwAllowedVIPPortSLICustomPortsModel `tfsdk:"custom_ports"`
+	DisableAllowedVIPPort *AWSVPCSiteEmptyModel                                       `tfsdk:"disable_allowed_vip_port"`
 	UseHTTPHTTPSPort      *AWSVPCSiteEmptyModel                                       `tfsdk:"use_http_https_port"`
 	UseHTTPPort           *AWSVPCSiteEmptyModel                                       `tfsdk:"use_http_port"`
 	UseHTTPSPort          *AWSVPCSiteEmptyModel                                       `tfsdk:"use_https_port"`
 }
 
-// AWSVPCSiteIngressEgressGwAllowedVipPortSLICustomPortsModel represents custom_ports block
-type AWSVPCSiteIngressEgressGwAllowedVipPortSLICustomPortsModel struct {
+// AWSVPCSiteIngressEgressGwAllowedVIPPortSLICustomPortsModel represents custom_ports block
+type AWSVPCSiteIngressEgressGwAllowedVIPPortSLICustomPortsModel struct {
 	PortRanges types.String `tfsdk:"port_ranges"`
 }
 
@@ -251,7 +251,7 @@ type AWSVPCSiteIngressEgressGwAzNodesInsideSubnetModel struct {
 
 // AWSVPCSiteIngressEgressGwAzNodesInsideSubnetSubnetParamModel represents subnet_param block
 type AWSVPCSiteIngressEgressGwAzNodesInsideSubnetSubnetParamModel struct {
-	IPV4 types.String `tfsdk:"ipv4"`
+	Ipv4 types.String `tfsdk:"ipv4"`
 }
 
 // AWSVPCSiteIngressEgressGwAzNodesOutsideSubnetModel represents outside_subnet block
@@ -262,7 +262,7 @@ type AWSVPCSiteIngressEgressGwAzNodesOutsideSubnetModel struct {
 
 // AWSVPCSiteIngressEgressGwAzNodesOutsideSubnetSubnetParamModel represents subnet_param block
 type AWSVPCSiteIngressEgressGwAzNodesOutsideSubnetSubnetParamModel struct {
-	IPV4 types.String `tfsdk:"ipv4"`
+	Ipv4 types.String `tfsdk:"ipv4"`
 }
 
 // AWSVPCSiteIngressEgressGwAzNodesWorkloadSubnetModel represents workload_subnet block
@@ -273,7 +273,7 @@ type AWSVPCSiteIngressEgressGwAzNodesWorkloadSubnetModel struct {
 
 // AWSVPCSiteIngressEgressGwAzNodesWorkloadSubnetSubnetParamModel represents subnet_param block
 type AWSVPCSiteIngressEgressGwAzNodesWorkloadSubnetSubnetParamModel struct {
-	IPV4 types.String `tfsdk:"ipv4"`
+	Ipv4 types.String `tfsdk:"ipv4"`
 }
 
 // AWSVPCSiteIngressEgressGwDcClusterGroupInsideVnModel represents dc_cluster_group_inside_vn block
@@ -297,29 +297,29 @@ type AWSVPCSiteIngressEgressGwGlobalNetworkListModel struct {
 
 // AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsModel represents global_network_connections block
 type AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsModel struct {
-	SLIToGlobalDr *AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel `tfsdk:"sli_to_global_dr"`
-	SLOToGlobalDr *AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel `tfsdk:"slo_to_global_dr"`
+	SLIToGlobalDR *AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel `tfsdk:"sli_to_global_dr"`
+	SloToGlobalDR *AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel `tfsdk:"slo_to_global_dr"`
 }
 
-// AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel represents sli_to_global_dr block
-type AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel struct {
-	GlobalVn *AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel `tfsdk:"global_vn"`
+// AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel represents sli_to_global_dr block
+type AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel struct {
+	GlobalVn *AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel `tfsdk:"global_vn"`
 }
 
-// AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel represents global_vn block
-type AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel struct {
+// AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel represents global_vn block
+type AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel represents slo_to_global_dr block
-type AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel struct {
-	GlobalVn *AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel `tfsdk:"global_vn"`
+// AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel represents slo_to_global_dr block
+type AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel struct {
+	GlobalVn *AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel `tfsdk:"global_vn"`
 }
 
-// AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel represents global_vn block
-type AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel struct {
+// AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel represents global_vn block
+type AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -362,34 +362,34 @@ type AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRoute
 
 // AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
 type AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel struct {
-	IPV4 *AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model `tfsdk:"ipv4"`
-	IPV6 *AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model `tfsdk:"ipv6"`
+	Ipv4 *AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model `tfsdk:"ipv4"`
+	Ipv6 *AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model `tfsdk:"ipv6"`
 }
 
-// AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model represents ipv4 block
-type AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model struct {
+// AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model represents ipv4 block
+type AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model struct {
 	Addr types.String `tfsdk:"addr"`
 }
 
-// AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model represents ipv6 block
-type AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model struct {
+// AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model represents ipv6 block
+type AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model struct {
 	Addr types.String `tfsdk:"addr"`
 }
 
 // AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel represents subnets block
 type AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel struct {
-	IPV4 *AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model `tfsdk:"ipv4"`
-	IPV6 *AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model `tfsdk:"ipv6"`
+	Ipv4 *AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model `tfsdk:"ipv4"`
+	Ipv6 *AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model `tfsdk:"ipv6"`
 }
 
-// AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model represents ipv4 block
-type AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model struct {
+// AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model represents ipv4 block
+type AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model struct {
 	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
 
-// AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model represents ipv6 block
-type AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model struct {
+// AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model represents ipv6 block
+type AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model struct {
 	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
@@ -431,34 +431,34 @@ type AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRout
 
 // AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
 type AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel struct {
-	IPV4 *AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model `tfsdk:"ipv4"`
-	IPV6 *AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model `tfsdk:"ipv6"`
+	Ipv4 *AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model `tfsdk:"ipv4"`
+	Ipv6 *AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model `tfsdk:"ipv6"`
 }
 
-// AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model represents ipv4 block
-type AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model struct {
+// AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model represents ipv4 block
+type AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model struct {
 	Addr types.String `tfsdk:"addr"`
 }
 
-// AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model represents ipv6 block
-type AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model struct {
+// AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model represents ipv6 block
+type AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model struct {
 	Addr types.String `tfsdk:"addr"`
 }
 
 // AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel represents subnets block
 type AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel struct {
-	IPV4 *AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model `tfsdk:"ipv4"`
-	IPV6 *AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model `tfsdk:"ipv6"`
+	Ipv4 *AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model `tfsdk:"ipv4"`
+	Ipv6 *AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model `tfsdk:"ipv6"`
 }
 
-// AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model represents ipv4 block
-type AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model struct {
+// AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model represents ipv4 block
+type AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model struct {
 	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
 
-// AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model represents ipv6 block
-type AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model struct {
+// AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model represents ipv6 block
+type AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model struct {
 	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
@@ -478,22 +478,22 @@ type AWSVPCSiteIngressEgressGwPerformanceEnhancementModePerfModeL3EnhancedModel 
 // AWSVPCSiteIngressGwModel represents ingress_gw block
 type AWSVPCSiteIngressGwModel struct {
 	AWSCertifiedHw             types.String                                        `tfsdk:"aws_certified_hw"`
-	AllowedVipPort             *AWSVPCSiteIngressGwAllowedVipPortModel             `tfsdk:"allowed_vip_port"`
+	AllowedVIPPort             *AWSVPCSiteIngressGwAllowedVIPPortModel             `tfsdk:"allowed_vip_port"`
 	AzNodes                    []AWSVPCSiteIngressGwAzNodesModel                   `tfsdk:"az_nodes"`
 	PerformanceEnhancementMode *AWSVPCSiteIngressGwPerformanceEnhancementModeModel `tfsdk:"performance_enhancement_mode"`
 }
 
-// AWSVPCSiteIngressGwAllowedVipPortModel represents allowed_vip_port block
-type AWSVPCSiteIngressGwAllowedVipPortModel struct {
-	CustomPorts           *AWSVPCSiteIngressGwAllowedVipPortCustomPortsModel `tfsdk:"custom_ports"`
-	DisableAllowedVipPort *AWSVPCSiteEmptyModel                              `tfsdk:"disable_allowed_vip_port"`
+// AWSVPCSiteIngressGwAllowedVIPPortModel represents allowed_vip_port block
+type AWSVPCSiteIngressGwAllowedVIPPortModel struct {
+	CustomPorts           *AWSVPCSiteIngressGwAllowedVIPPortCustomPortsModel `tfsdk:"custom_ports"`
+	DisableAllowedVIPPort *AWSVPCSiteEmptyModel                              `tfsdk:"disable_allowed_vip_port"`
 	UseHTTPHTTPSPort      *AWSVPCSiteEmptyModel                              `tfsdk:"use_http_https_port"`
 	UseHTTPPort           *AWSVPCSiteEmptyModel                              `tfsdk:"use_http_port"`
 	UseHTTPSPort          *AWSVPCSiteEmptyModel                              `tfsdk:"use_https_port"`
 }
 
-// AWSVPCSiteIngressGwAllowedVipPortCustomPortsModel represents custom_ports block
-type AWSVPCSiteIngressGwAllowedVipPortCustomPortsModel struct {
+// AWSVPCSiteIngressGwAllowedVIPPortCustomPortsModel represents custom_ports block
+type AWSVPCSiteIngressGwAllowedVIPPortCustomPortsModel struct {
 	PortRanges types.String `tfsdk:"port_ranges"`
 }
 
@@ -511,7 +511,7 @@ type AWSVPCSiteIngressGwAzNodesLocalSubnetModel struct {
 
 // AWSVPCSiteIngressGwAzNodesLocalSubnetSubnetParamModel represents subnet_param block
 type AWSVPCSiteIngressGwAzNodesLocalSubnetSubnetParamModel struct {
-	IPV4 types.String `tfsdk:"ipv4"`
+	Ipv4 types.String `tfsdk:"ipv4"`
 }
 
 // AWSVPCSiteIngressGwPerformanceEnhancementModeModel represents performance_enhancement_mode block
@@ -553,10 +553,10 @@ type AWSVPCSiteOfflineSurvivabilityModeModel struct {
 	NoOfflineSurvivabilityMode     *AWSVPCSiteEmptyModel `tfsdk:"no_offline_survivability_mode"`
 }
 
-// AWSVPCSiteOsModel represents os block
-type AWSVPCSiteOsModel struct {
+// AWSVPCSiteOSModel represents os block
+type AWSVPCSiteOSModel struct {
 	OperatingSystemVersion types.String          `tfsdk:"operating_system_version"`
-	DefaultOsVersion       *AWSVPCSiteEmptyModel `tfsdk:"default_os_version"`
+	DefaultOSVersion       *AWSVPCSiteEmptyModel `tfsdk:"default_os_version"`
 }
 
 // AWSVPCSitePrivateConnectivityModel represents private_connectivity block
@@ -585,7 +585,7 @@ type AWSVPCSiteVoltstackClusterModel struct {
 	ActiveEnhancedFirewallPolicies *AWSVPCSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel `tfsdk:"active_enhanced_firewall_policies"`
 	ActiveForwardProxyPolicies     *AWSVPCSiteVoltstackClusterActiveForwardProxyPoliciesModel     `tfsdk:"active_forward_proxy_policies"`
 	ActiveNetworkPolicies          *AWSVPCSiteVoltstackClusterActiveNetworkPoliciesModel          `tfsdk:"active_network_policies"`
-	AllowedVipPort                 *AWSVPCSiteVoltstackClusterAllowedVipPortModel                 `tfsdk:"allowed_vip_port"`
+	AllowedVIPPort                 *AWSVPCSiteVoltstackClusterAllowedVIPPortModel                 `tfsdk:"allowed_vip_port"`
 	AzNodes                        []AWSVPCSiteVoltstackClusterAzNodesModel                       `tfsdk:"az_nodes"`
 	DcClusterGroup                 *AWSVPCSiteVoltstackClusterDcClusterGroupModel                 `tfsdk:"dc_cluster_group"`
 	DefaultStorage                 *AWSVPCSiteEmptyModel                                          `tfsdk:"default_storage"`
@@ -640,17 +640,17 @@ type AWSVPCSiteVoltstackClusterActiveNetworkPoliciesNetworkPoliciesModel struct 
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// AWSVPCSiteVoltstackClusterAllowedVipPortModel represents allowed_vip_port block
-type AWSVPCSiteVoltstackClusterAllowedVipPortModel struct {
-	CustomPorts           *AWSVPCSiteVoltstackClusterAllowedVipPortCustomPortsModel `tfsdk:"custom_ports"`
-	DisableAllowedVipPort *AWSVPCSiteEmptyModel                                     `tfsdk:"disable_allowed_vip_port"`
+// AWSVPCSiteVoltstackClusterAllowedVIPPortModel represents allowed_vip_port block
+type AWSVPCSiteVoltstackClusterAllowedVIPPortModel struct {
+	CustomPorts           *AWSVPCSiteVoltstackClusterAllowedVIPPortCustomPortsModel `tfsdk:"custom_ports"`
+	DisableAllowedVIPPort *AWSVPCSiteEmptyModel                                     `tfsdk:"disable_allowed_vip_port"`
 	UseHTTPHTTPSPort      *AWSVPCSiteEmptyModel                                     `tfsdk:"use_http_https_port"`
 	UseHTTPPort           *AWSVPCSiteEmptyModel                                     `tfsdk:"use_http_port"`
 	UseHTTPSPort          *AWSVPCSiteEmptyModel                                     `tfsdk:"use_https_port"`
 }
 
-// AWSVPCSiteVoltstackClusterAllowedVipPortCustomPortsModel represents custom_ports block
-type AWSVPCSiteVoltstackClusterAllowedVipPortCustomPortsModel struct {
+// AWSVPCSiteVoltstackClusterAllowedVIPPortCustomPortsModel represents custom_ports block
+type AWSVPCSiteVoltstackClusterAllowedVIPPortCustomPortsModel struct {
 	PortRanges types.String `tfsdk:"port_ranges"`
 }
 
@@ -668,7 +668,7 @@ type AWSVPCSiteVoltstackClusterAzNodesLocalSubnetModel struct {
 
 // AWSVPCSiteVoltstackClusterAzNodesLocalSubnetSubnetParamModel represents subnet_param block
 type AWSVPCSiteVoltstackClusterAzNodesLocalSubnetSubnetParamModel struct {
-	IPV4 types.String `tfsdk:"ipv4"`
+	Ipv4 types.String `tfsdk:"ipv4"`
 }
 
 // AWSVPCSiteVoltstackClusterDcClusterGroupModel represents dc_cluster_group block
@@ -685,29 +685,29 @@ type AWSVPCSiteVoltstackClusterGlobalNetworkListModel struct {
 
 // AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsModel represents global_network_connections block
 type AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsModel struct {
-	SLIToGlobalDr *AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel `tfsdk:"sli_to_global_dr"`
-	SLOToGlobalDr *AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel `tfsdk:"slo_to_global_dr"`
+	SLIToGlobalDR *AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel `tfsdk:"sli_to_global_dr"`
+	SloToGlobalDR *AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel `tfsdk:"slo_to_global_dr"`
 }
 
-// AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel represents sli_to_global_dr block
-type AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel struct {
-	GlobalVn *AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel `tfsdk:"global_vn"`
+// AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel represents sli_to_global_dr block
+type AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel struct {
+	GlobalVn *AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel `tfsdk:"global_vn"`
 }
 
-// AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel represents global_vn block
-type AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel struct {
+// AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel represents global_vn block
+type AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel represents slo_to_global_dr block
-type AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel struct {
-	GlobalVn *AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel `tfsdk:"global_vn"`
+// AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel represents slo_to_global_dr block
+type AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel struct {
+	GlobalVn *AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel `tfsdk:"global_vn"`
 }
 
-// AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel represents global_vn block
-type AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel struct {
+// AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel represents global_vn block
+type AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -757,34 +757,34 @@ type AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRou
 
 // AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
 type AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel struct {
-	IPV4 *AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model `tfsdk:"ipv4"`
-	IPV6 *AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model `tfsdk:"ipv6"`
+	Ipv4 *AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model `tfsdk:"ipv4"`
+	Ipv6 *AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model `tfsdk:"ipv6"`
 }
 
-// AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model represents ipv4 block
-type AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model struct {
+// AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model represents ipv4 block
+type AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model struct {
 	Addr types.String `tfsdk:"addr"`
 }
 
-// AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model represents ipv6 block
-type AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model struct {
+// AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model represents ipv6 block
+type AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model struct {
 	Addr types.String `tfsdk:"addr"`
 }
 
 // AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel represents subnets block
 type AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel struct {
-	IPV4 *AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model `tfsdk:"ipv4"`
-	IPV6 *AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model `tfsdk:"ipv6"`
+	Ipv4 *AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model `tfsdk:"ipv4"`
+	Ipv6 *AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model `tfsdk:"ipv6"`
 }
 
-// AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model represents ipv4 block
-type AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model struct {
+// AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model represents ipv4 block
+type AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model struct {
 	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
 
-// AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model represents ipv6 block
-type AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model struct {
+// AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model represents ipv6 block
+type AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model struct {
 	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
@@ -809,7 +809,7 @@ type AWSVPCSiteVPCModel struct {
 // AWSVPCSiteVPCNewVPCModel represents new_vpc block
 type AWSVPCSiteVPCNewVPCModel struct {
 	NameTag      types.String          `tfsdk:"name_tag"`
-	PrimaryIPV4  types.String          `tfsdk:"primary_ipv4"`
+	PrimaryIpv4  types.String          `tfsdk:"primary_ipv4"`
 	Autogenerate *AWSVPCSiteEmptyModel `tfsdk:"autogenerate"`
 }
 
@@ -839,11 +839,11 @@ type AWSVPCSiteResourceModel struct {
 	DefaultBlockedServices      *AWSVPCSiteEmptyModel                       `tfsdk:"default_blocked_services"`
 	DirectConnectDisabled       *AWSVPCSiteEmptyModel                       `tfsdk:"direct_connect_disabled"`
 	DirectConnectEnabled        *AWSVPCSiteDirectConnectEnabledModel        `tfsdk:"direct_connect_enabled"`
-	DisableInternetVip          *AWSVPCSiteEmptyModel                       `tfsdk:"disable_internet_vip"`
+	DisableInternetVIP          *AWSVPCSiteEmptyModel                       `tfsdk:"disable_internet_vip"`
 	EgressGatewayDefault        *AWSVPCSiteEmptyModel                       `tfsdk:"egress_gateway_default"`
-	EgressNatGw                 *AWSVPCSiteEgressNatGwModel                 `tfsdk:"egress_nat_gw"`
+	EgressNATGw                 *AWSVPCSiteEgressNATGwModel                 `tfsdk:"egress_nat_gw"`
 	EgressVirtualPrivateGateway *AWSVPCSiteEgressVirtualPrivateGatewayModel `tfsdk:"egress_virtual_private_gateway"`
-	EnableInternetVip           *AWSVPCSiteEmptyModel                       `tfsdk:"enable_internet_vip"`
+	EnableInternetVIP           *AWSVPCSiteEmptyModel                       `tfsdk:"enable_internet_vip"`
 	F5OrchestratedRouting       *AWSVPCSiteEmptyModel                       `tfsdk:"f5_orchestrated_routing"`
 	F5xcSecurityGroup           *AWSVPCSiteEmptyModel                       `tfsdk:"f5xc_security_group"`
 	IngressEgressGw             *AWSVPCSiteIngressEgressGwModel             `tfsdk:"ingress_egress_gw"`
@@ -854,7 +854,7 @@ type AWSVPCSiteResourceModel struct {
 	ManualRouting               *AWSVPCSiteEmptyModel                       `tfsdk:"manual_routing"`
 	NoWorkerNodes               *AWSVPCSiteEmptyModel                       `tfsdk:"no_worker_nodes"`
 	OfflineSurvivabilityMode    *AWSVPCSiteOfflineSurvivabilityModeModel    `tfsdk:"offline_survivability_mode"`
-	Os                          *AWSVPCSiteOsModel                          `tfsdk:"os"`
+	OS                          *AWSVPCSiteOSModel                          `tfsdk:"os"`
 	PrivateConnectivity         *AWSVPCSitePrivateConnectivityModel         `tfsdk:"private_connectivity"`
 	Sw                          *AWSVPCSiteSwModel                          `tfsdk:"sw"`
 	Tags                        *AWSVPCSiteEmptyModel                       `tfsdk:"tags"`
@@ -2782,7 +2782,7 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		}
 		createReq.Spec["direct_connect_enabled"] = direct_connect_enabledMap
 	}
-	if data.DisableInternetVip != nil {
+	if data.DisableInternetVIP != nil {
 		disable_internet_vipMap := make(map[string]interface{})
 		createReq.Spec["disable_internet_vip"] = disable_internet_vipMap
 	}
@@ -2790,10 +2790,10 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		egress_gateway_defaultMap := make(map[string]interface{})
 		createReq.Spec["egress_gateway_default"] = egress_gateway_defaultMap
 	}
-	if data.EgressNatGw != nil {
+	if data.EgressNATGw != nil {
 		egress_nat_gwMap := make(map[string]interface{})
-		if !data.EgressNatGw.NatGwID.IsNull() && !data.EgressNatGw.NatGwID.IsUnknown() {
-			egress_nat_gwMap["nat_gw_id"] = data.EgressNatGw.NatGwID.ValueString()
+		if !data.EgressNATGw.NATGwID.IsNull() && !data.EgressNATGw.NATGwID.IsUnknown() {
+			egress_nat_gwMap["nat_gw_id"] = data.EgressNATGw.NATGwID.ValueString()
 		}
 		createReq.Spec["egress_nat_gw"] = egress_nat_gwMap
 	}
@@ -2804,7 +2804,7 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		}
 		createReq.Spec["egress_virtual_private_gateway"] = egress_virtual_private_gatewayMap
 	}
-	if data.EnableInternetVip != nil {
+	if data.EnableInternetVIP != nil {
 		enable_internet_vipMap := make(map[string]interface{})
 		createReq.Spec["enable_internet_vip"] = enable_internet_vipMap
 	}
@@ -2830,11 +2830,11 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 			active_network_policiesNestedMap := make(map[string]interface{})
 			ingress_egress_gwMap["active_network_policies"] = active_network_policiesNestedMap
 		}
-		if data.IngressEgressGw.AllowedVipPort != nil {
+		if data.IngressEgressGw.AllowedVIPPort != nil {
 			allowed_vip_portNestedMap := make(map[string]interface{})
 			ingress_egress_gwMap["allowed_vip_port"] = allowed_vip_portNestedMap
 		}
-		if data.IngressEgressGw.AllowedVipPortSLI != nil {
+		if data.IngressEgressGw.AllowedVIPPortSLI != nil {
 			allowed_vip_port_sliNestedMap := make(map[string]interface{})
 			ingress_egress_gwMap["allowed_vip_port_sli"] = allowed_vip_port_sliNestedMap
 		}
@@ -2949,7 +2949,7 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 	}
 	if data.IngressGw != nil {
 		ingress_gwMap := make(map[string]interface{})
-		if data.IngressGw.AllowedVipPort != nil {
+		if data.IngressGw.AllowedVIPPort != nil {
 			allowed_vip_portNestedMap := make(map[string]interface{})
 			ingress_gwMap["allowed_vip_port"] = allowed_vip_portNestedMap
 		}
@@ -3032,13 +3032,13 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		}
 		createReq.Spec["offline_survivability_mode"] = offline_survivability_modeMap
 	}
-	if data.Os != nil {
+	if data.OS != nil {
 		osMap := make(map[string]interface{})
-		if data.Os.DefaultOsVersion != nil {
+		if data.OS.DefaultOSVersion != nil {
 			osMap["default_os_version"] = map[string]interface{}{}
 		}
-		if !data.Os.OperatingSystemVersion.IsNull() && !data.Os.OperatingSystemVersion.IsUnknown() {
-			osMap["operating_system_version"] = data.Os.OperatingSystemVersion.ValueString()
+		if !data.OS.OperatingSystemVersion.IsNull() && !data.OS.OperatingSystemVersion.IsUnknown() {
+			osMap["operating_system_version"] = data.OS.OperatingSystemVersion.ValueString()
 		}
 		createReq.Spec["os"] = osMap
 	}
@@ -3093,7 +3093,7 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 			active_network_policiesNestedMap := make(map[string]interface{})
 			voltstack_clusterMap["active_network_policies"] = active_network_policiesNestedMap
 		}
-		if data.VoltstackCluster.AllowedVipPort != nil {
+		if data.VoltstackCluster.AllowedVIPPort != nil {
 			allowed_vip_portNestedMap := make(map[string]interface{})
 			voltstack_clusterMap["allowed_vip_port"] = allowed_vip_portNestedMap
 		}
@@ -3195,8 +3195,8 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 			if !data.VPC.NewVPC.NameTag.IsNull() && !data.VPC.NewVPC.NameTag.IsUnknown() {
 				new_vpcNestedMap["name_tag"] = data.VPC.NewVPC.NameTag.ValueString()
 			}
-			if !data.VPC.NewVPC.PrimaryIPV4.IsNull() && !data.VPC.NewVPC.PrimaryIPV4.IsUnknown() {
-				new_vpcNestedMap["primary_ipv4"] = data.VPC.NewVPC.PrimaryIPV4.ValueString()
+			if !data.VPC.NewVPC.PrimaryIpv4.IsNull() && !data.VPC.NewVPC.PrimaryIpv4.IsUnknown() {
+				new_vpcNestedMap["primary_ipv4"] = data.VPC.NewVPC.PrimaryIpv4.ValueString()
 			}
 			vpcMap["new_vpc"] = new_vpcNestedMap
 		}
@@ -3415,9 +3415,9 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["disable_internet_vip"].(map[string]interface{}); ok && isImport && data.DisableInternetVip == nil {
+	if _, ok := apiResource.Spec["disable_internet_vip"].(map[string]interface{}); ok && isImport && data.DisableInternetVIP == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DisableInternetVip = &AWSVPCSiteEmptyModel{}
+		data.DisableInternetVIP = &AWSVPCSiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["egress_gateway_default"].(map[string]interface{}); ok && isImport && data.EgressGatewayDefault == nil {
@@ -3425,9 +3425,9 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		data.EgressGatewayDefault = &AWSVPCSiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["egress_nat_gw"].(map[string]interface{}); ok && (isImport || data.EgressNatGw != nil) {
-		data.EgressNatGw = &AWSVPCSiteEgressNatGwModel{
-			NatGwID: func() types.String {
+	if blockData, ok := apiResource.Spec["egress_nat_gw"].(map[string]interface{}); ok && (isImport || data.EgressNATGw != nil) {
+		data.EgressNATGw = &AWSVPCSiteEgressNATGwModel{
+			NATGwID: func() types.String {
 				if v, ok := blockData["nat_gw_id"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
@@ -3445,9 +3445,9 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["enable_internet_vip"].(map[string]interface{}); ok && isImport && data.EnableInternetVip == nil {
+	if _, ok := apiResource.Spec["enable_internet_vip"].(map[string]interface{}); ok && isImport && data.EnableInternetVIP == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.EnableInternetVip = &AWSVPCSiteEmptyModel{}
+		data.EnableInternetVIP = &AWSVPCSiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["f5_orchestrated_routing"].(map[string]interface{}); ok && isImport && data.F5OrchestratedRouting == nil {
@@ -3495,25 +3495,25 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				return nil
 			}(),
-			AllowedVipPort: func() *AWSVPCSiteIngressEgressGwAllowedVipPortModel {
-				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.AllowedVipPort != nil {
+			AllowedVIPPort: func() *AWSVPCSiteIngressEgressGwAllowedVIPPortModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.AllowedVIPPort != nil {
 					// Normal Read: preserve existing state value
-					return data.IngressEgressGw.AllowedVipPort
+					return data.IngressEgressGw.AllowedVIPPort
 				}
 				// Import case: read from API
 				if _, ok := blockData["allowed_vip_port"].(map[string]interface{}); ok {
-					return &AWSVPCSiteIngressEgressGwAllowedVipPortModel{}
+					return &AWSVPCSiteIngressEgressGwAllowedVIPPortModel{}
 				}
 				return nil
 			}(),
-			AllowedVipPortSLI: func() *AWSVPCSiteIngressEgressGwAllowedVipPortSLIModel {
-				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.AllowedVipPortSLI != nil {
+			AllowedVIPPortSLI: func() *AWSVPCSiteIngressEgressGwAllowedVIPPortSLIModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.AllowedVIPPortSLI != nil {
 					// Normal Read: preserve existing state value
-					return data.IngressEgressGw.AllowedVipPortSLI
+					return data.IngressEgressGw.AllowedVIPPortSLI
 				}
 				// Import case: read from API
 				if _, ok := blockData["allowed_vip_port_sli"].(map[string]interface{}); ok {
-					return &AWSVPCSiteIngressEgressGwAllowedVipPortSLIModel{}
+					return &AWSVPCSiteIngressEgressGwAllowedVIPPortSLIModel{}
 				}
 				return nil
 			}(),
@@ -3803,14 +3803,14 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 	}
 	if blockData, ok := apiResource.Spec["ingress_gw"].(map[string]interface{}); ok && (isImport || data.IngressGw != nil) {
 		data.IngressGw = &AWSVPCSiteIngressGwModel{
-			AllowedVipPort: func() *AWSVPCSiteIngressGwAllowedVipPortModel {
-				if !isImport && data.IngressGw != nil && data.IngressGw.AllowedVipPort != nil {
+			AllowedVIPPort: func() *AWSVPCSiteIngressGwAllowedVIPPortModel {
+				if !isImport && data.IngressGw != nil && data.IngressGw.AllowedVIPPort != nil {
 					// Normal Read: preserve existing state value
-					return data.IngressGw.AllowedVipPort
+					return data.IngressGw.AllowedVIPPort
 				}
 				// Import case: read from API
 				if _, ok := blockData["allowed_vip_port"].(map[string]interface{}); ok {
-					return &AWSVPCSiteIngressGwAllowedVipPortModel{}
+					return &AWSVPCSiteIngressGwAllowedVIPPortModel{}
 				}
 				return nil
 			}(),
@@ -3912,13 +3912,13 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		data.OfflineSurvivabilityMode = &AWSVPCSiteOfflineSurvivabilityModeModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.Os != nil) {
-		data.Os = &AWSVPCSiteOsModel{
-			DefaultOsVersion: func() *AWSVPCSiteEmptyModel {
-				if !isImport && data.Os != nil {
+	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.OS != nil) {
+		data.OS = &AWSVPCSiteOSModel{
+			DefaultOSVersion: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.OS != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.Os.DefaultOsVersion
+					return data.OS.DefaultOSVersion
 				}
 				// Import case: read from API
 				if _, ok := blockData["default_os_version"].(map[string]interface{}); ok {
@@ -4001,14 +4001,14 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				return nil
 			}(),
-			AllowedVipPort: func() *AWSVPCSiteVoltstackClusterAllowedVipPortModel {
-				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.AllowedVipPort != nil {
+			AllowedVIPPort: func() *AWSVPCSiteVoltstackClusterAllowedVIPPortModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.AllowedVIPPort != nil {
 					// Normal Read: preserve existing state value
-					return data.VoltstackCluster.AllowedVipPort
+					return data.VoltstackCluster.AllowedVIPPort
 				}
 				// Import case: read from API
 				if _, ok := blockData["allowed_vip_port"].(map[string]interface{}); ok {
-					return &AWSVPCSiteVoltstackClusterAllowedVipPortModel{}
+					return &AWSVPCSiteVoltstackClusterAllowedVIPPortModel{}
 				}
 				return nil
 			}(),
@@ -4281,7 +4281,7 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 							}
 							return types.StringNull()
 						}(),
-						PrimaryIPV4: func() types.String {
+						PrimaryIpv4: func() types.String {
 							if v, ok := nestedBlockData["primary_ipv4"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -4603,9 +4603,9 @@ func (r *AWSVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["disable_internet_vip"].(map[string]interface{}); ok && isImport && data.DisableInternetVip == nil {
+	if _, ok := apiResource.Spec["disable_internet_vip"].(map[string]interface{}); ok && isImport && data.DisableInternetVIP == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DisableInternetVip = &AWSVPCSiteEmptyModel{}
+		data.DisableInternetVIP = &AWSVPCSiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["egress_gateway_default"].(map[string]interface{}); ok && isImport && data.EgressGatewayDefault == nil {
@@ -4613,9 +4613,9 @@ func (r *AWSVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 		data.EgressGatewayDefault = &AWSVPCSiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["egress_nat_gw"].(map[string]interface{}); ok && (isImport || data.EgressNatGw != nil) {
-		data.EgressNatGw = &AWSVPCSiteEgressNatGwModel{
-			NatGwID: func() types.String {
+	if blockData, ok := apiResource.Spec["egress_nat_gw"].(map[string]interface{}); ok && (isImport || data.EgressNATGw != nil) {
+		data.EgressNATGw = &AWSVPCSiteEgressNATGwModel{
+			NATGwID: func() types.String {
 				if v, ok := blockData["nat_gw_id"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
@@ -4633,9 +4633,9 @@ func (r *AWSVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["enable_internet_vip"].(map[string]interface{}); ok && isImport && data.EnableInternetVip == nil {
+	if _, ok := apiResource.Spec["enable_internet_vip"].(map[string]interface{}); ok && isImport && data.EnableInternetVIP == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.EnableInternetVip = &AWSVPCSiteEmptyModel{}
+		data.EnableInternetVIP = &AWSVPCSiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["f5_orchestrated_routing"].(map[string]interface{}); ok && isImport && data.F5OrchestratedRouting == nil {
@@ -4683,25 +4683,25 @@ func (r *AWSVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				return nil
 			}(),
-			AllowedVipPort: func() *AWSVPCSiteIngressEgressGwAllowedVipPortModel {
-				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.AllowedVipPort != nil {
+			AllowedVIPPort: func() *AWSVPCSiteIngressEgressGwAllowedVIPPortModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.AllowedVIPPort != nil {
 					// Normal Read: preserve existing state value
-					return data.IngressEgressGw.AllowedVipPort
+					return data.IngressEgressGw.AllowedVIPPort
 				}
 				// Import case: read from API
 				if _, ok := blockData["allowed_vip_port"].(map[string]interface{}); ok {
-					return &AWSVPCSiteIngressEgressGwAllowedVipPortModel{}
+					return &AWSVPCSiteIngressEgressGwAllowedVIPPortModel{}
 				}
 				return nil
 			}(),
-			AllowedVipPortSLI: func() *AWSVPCSiteIngressEgressGwAllowedVipPortSLIModel {
-				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.AllowedVipPortSLI != nil {
+			AllowedVIPPortSLI: func() *AWSVPCSiteIngressEgressGwAllowedVIPPortSLIModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.AllowedVIPPortSLI != nil {
 					// Normal Read: preserve existing state value
-					return data.IngressEgressGw.AllowedVipPortSLI
+					return data.IngressEgressGw.AllowedVIPPortSLI
 				}
 				// Import case: read from API
 				if _, ok := blockData["allowed_vip_port_sli"].(map[string]interface{}); ok {
-					return &AWSVPCSiteIngressEgressGwAllowedVipPortSLIModel{}
+					return &AWSVPCSiteIngressEgressGwAllowedVIPPortSLIModel{}
 				}
 				return nil
 			}(),
@@ -4991,14 +4991,14 @@ func (r *AWSVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 	}
 	if blockData, ok := apiResource.Spec["ingress_gw"].(map[string]interface{}); ok && (isImport || data.IngressGw != nil) {
 		data.IngressGw = &AWSVPCSiteIngressGwModel{
-			AllowedVipPort: func() *AWSVPCSiteIngressGwAllowedVipPortModel {
-				if !isImport && data.IngressGw != nil && data.IngressGw.AllowedVipPort != nil {
+			AllowedVIPPort: func() *AWSVPCSiteIngressGwAllowedVIPPortModel {
+				if !isImport && data.IngressGw != nil && data.IngressGw.AllowedVIPPort != nil {
 					// Normal Read: preserve existing state value
-					return data.IngressGw.AllowedVipPort
+					return data.IngressGw.AllowedVIPPort
 				}
 				// Import case: read from API
 				if _, ok := blockData["allowed_vip_port"].(map[string]interface{}); ok {
-					return &AWSVPCSiteIngressGwAllowedVipPortModel{}
+					return &AWSVPCSiteIngressGwAllowedVIPPortModel{}
 				}
 				return nil
 			}(),
@@ -5100,13 +5100,13 @@ func (r *AWSVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 		data.OfflineSurvivabilityMode = &AWSVPCSiteOfflineSurvivabilityModeModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.Os != nil) {
-		data.Os = &AWSVPCSiteOsModel{
-			DefaultOsVersion: func() *AWSVPCSiteEmptyModel {
-				if !isImport && data.Os != nil {
+	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.OS != nil) {
+		data.OS = &AWSVPCSiteOSModel{
+			DefaultOSVersion: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.OS != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.Os.DefaultOsVersion
+					return data.OS.DefaultOSVersion
 				}
 				// Import case: read from API
 				if _, ok := blockData["default_os_version"].(map[string]interface{}); ok {
@@ -5189,14 +5189,14 @@ func (r *AWSVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				return nil
 			}(),
-			AllowedVipPort: func() *AWSVPCSiteVoltstackClusterAllowedVipPortModel {
-				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.AllowedVipPort != nil {
+			AllowedVIPPort: func() *AWSVPCSiteVoltstackClusterAllowedVIPPortModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.AllowedVIPPort != nil {
 					// Normal Read: preserve existing state value
-					return data.VoltstackCluster.AllowedVipPort
+					return data.VoltstackCluster.AllowedVIPPort
 				}
 				// Import case: read from API
 				if _, ok := blockData["allowed_vip_port"].(map[string]interface{}); ok {
-					return &AWSVPCSiteVoltstackClusterAllowedVipPortModel{}
+					return &AWSVPCSiteVoltstackClusterAllowedVIPPortModel{}
 				}
 				return nil
 			}(),
@@ -5469,7 +5469,7 @@ func (r *AWSVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 							}
 							return types.StringNull()
 						}(),
-						PrimaryIPV4: func() types.String {
+						PrimaryIpv4: func() types.String {
 							if v, ok := nestedBlockData["primary_ipv4"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -5705,7 +5705,7 @@ func (r *AWSVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 		}
 		apiResource.Spec["direct_connect_enabled"] = direct_connect_enabledMap
 	}
-	if data.DisableInternetVip != nil {
+	if data.DisableInternetVIP != nil {
 		disable_internet_vipMap := make(map[string]interface{})
 		apiResource.Spec["disable_internet_vip"] = disable_internet_vipMap
 	}
@@ -5713,10 +5713,10 @@ func (r *AWSVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 		egress_gateway_defaultMap := make(map[string]interface{})
 		apiResource.Spec["egress_gateway_default"] = egress_gateway_defaultMap
 	}
-	if data.EgressNatGw != nil {
+	if data.EgressNATGw != nil {
 		egress_nat_gwMap := make(map[string]interface{})
-		if !data.EgressNatGw.NatGwID.IsNull() && !data.EgressNatGw.NatGwID.IsUnknown() {
-			egress_nat_gwMap["nat_gw_id"] = data.EgressNatGw.NatGwID.ValueString()
+		if !data.EgressNATGw.NATGwID.IsNull() && !data.EgressNATGw.NATGwID.IsUnknown() {
+			egress_nat_gwMap["nat_gw_id"] = data.EgressNATGw.NATGwID.ValueString()
 		}
 		apiResource.Spec["egress_nat_gw"] = egress_nat_gwMap
 	}
@@ -5727,7 +5727,7 @@ func (r *AWSVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 		}
 		apiResource.Spec["egress_virtual_private_gateway"] = egress_virtual_private_gatewayMap
 	}
-	if data.EnableInternetVip != nil {
+	if data.EnableInternetVIP != nil {
 		enable_internet_vipMap := make(map[string]interface{})
 		apiResource.Spec["enable_internet_vip"] = enable_internet_vipMap
 	}
@@ -5753,11 +5753,11 @@ func (r *AWSVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 			active_network_policiesNestedMap := make(map[string]interface{})
 			ingress_egress_gwMap["active_network_policies"] = active_network_policiesNestedMap
 		}
-		if data.IngressEgressGw.AllowedVipPort != nil {
+		if data.IngressEgressGw.AllowedVIPPort != nil {
 			allowed_vip_portNestedMap := make(map[string]interface{})
 			ingress_egress_gwMap["allowed_vip_port"] = allowed_vip_portNestedMap
 		}
-		if data.IngressEgressGw.AllowedVipPortSLI != nil {
+		if data.IngressEgressGw.AllowedVIPPortSLI != nil {
 			allowed_vip_port_sliNestedMap := make(map[string]interface{})
 			ingress_egress_gwMap["allowed_vip_port_sli"] = allowed_vip_port_sliNestedMap
 		}
@@ -5872,7 +5872,7 @@ func (r *AWSVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 	}
 	if data.IngressGw != nil {
 		ingress_gwMap := make(map[string]interface{})
-		if data.IngressGw.AllowedVipPort != nil {
+		if data.IngressGw.AllowedVIPPort != nil {
 			allowed_vip_portNestedMap := make(map[string]interface{})
 			ingress_gwMap["allowed_vip_port"] = allowed_vip_portNestedMap
 		}
@@ -5955,13 +5955,13 @@ func (r *AWSVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 		}
 		apiResource.Spec["offline_survivability_mode"] = offline_survivability_modeMap
 	}
-	if data.Os != nil {
+	if data.OS != nil {
 		osMap := make(map[string]interface{})
-		if data.Os.DefaultOsVersion != nil {
+		if data.OS.DefaultOSVersion != nil {
 			osMap["default_os_version"] = map[string]interface{}{}
 		}
-		if !data.Os.OperatingSystemVersion.IsNull() && !data.Os.OperatingSystemVersion.IsUnknown() {
-			osMap["operating_system_version"] = data.Os.OperatingSystemVersion.ValueString()
+		if !data.OS.OperatingSystemVersion.IsNull() && !data.OS.OperatingSystemVersion.IsUnknown() {
+			osMap["operating_system_version"] = data.OS.OperatingSystemVersion.ValueString()
 		}
 		apiResource.Spec["os"] = osMap
 	}
@@ -6016,7 +6016,7 @@ func (r *AWSVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 			active_network_policiesNestedMap := make(map[string]interface{})
 			voltstack_clusterMap["active_network_policies"] = active_network_policiesNestedMap
 		}
-		if data.VoltstackCluster.AllowedVipPort != nil {
+		if data.VoltstackCluster.AllowedVIPPort != nil {
 			allowed_vip_portNestedMap := make(map[string]interface{})
 			voltstack_clusterMap["allowed_vip_port"] = allowed_vip_portNestedMap
 		}
@@ -6118,8 +6118,8 @@ func (r *AWSVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 			if !data.VPC.NewVPC.NameTag.IsNull() && !data.VPC.NewVPC.NameTag.IsUnknown() {
 				new_vpcNestedMap["name_tag"] = data.VPC.NewVPC.NameTag.ValueString()
 			}
-			if !data.VPC.NewVPC.PrimaryIPV4.IsNull() && !data.VPC.NewVPC.PrimaryIPV4.IsUnknown() {
-				new_vpcNestedMap["primary_ipv4"] = data.VPC.NewVPC.PrimaryIPV4.ValueString()
+			if !data.VPC.NewVPC.PrimaryIpv4.IsNull() && !data.VPC.NewVPC.PrimaryIpv4.IsUnknown() {
+				new_vpcNestedMap["primary_ipv4"] = data.VPC.NewVPC.PrimaryIpv4.ValueString()
 			}
 			vpcMap["new_vpc"] = new_vpcNestedMap
 		}
@@ -6398,9 +6398,9 @@ func (r *AWSVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["disable_internet_vip"].(map[string]interface{}); ok && isImport && data.DisableInternetVip == nil {
+	if _, ok := apiResource.Spec["disable_internet_vip"].(map[string]interface{}); ok && isImport && data.DisableInternetVIP == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DisableInternetVip = &AWSVPCSiteEmptyModel{}
+		data.DisableInternetVIP = &AWSVPCSiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["egress_gateway_default"].(map[string]interface{}); ok && isImport && data.EgressGatewayDefault == nil {
@@ -6408,9 +6408,9 @@ func (r *AWSVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 		data.EgressGatewayDefault = &AWSVPCSiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["egress_nat_gw"].(map[string]interface{}); ok && (isImport || data.EgressNatGw != nil) {
-		data.EgressNatGw = &AWSVPCSiteEgressNatGwModel{
-			NatGwID: func() types.String {
+	if blockData, ok := apiResource.Spec["egress_nat_gw"].(map[string]interface{}); ok && (isImport || data.EgressNATGw != nil) {
+		data.EgressNATGw = &AWSVPCSiteEgressNATGwModel{
+			NATGwID: func() types.String {
 				if v, ok := blockData["nat_gw_id"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
@@ -6428,9 +6428,9 @@ func (r *AWSVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["enable_internet_vip"].(map[string]interface{}); ok && isImport && data.EnableInternetVip == nil {
+	if _, ok := apiResource.Spec["enable_internet_vip"].(map[string]interface{}); ok && isImport && data.EnableInternetVIP == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.EnableInternetVip = &AWSVPCSiteEmptyModel{}
+		data.EnableInternetVIP = &AWSVPCSiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["f5_orchestrated_routing"].(map[string]interface{}); ok && isImport && data.F5OrchestratedRouting == nil {
@@ -6478,25 +6478,25 @@ func (r *AWSVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 				}
 				return nil
 			}(),
-			AllowedVipPort: func() *AWSVPCSiteIngressEgressGwAllowedVipPortModel {
-				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.AllowedVipPort != nil {
+			AllowedVIPPort: func() *AWSVPCSiteIngressEgressGwAllowedVIPPortModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.AllowedVIPPort != nil {
 					// Normal Read: preserve existing state value
-					return data.IngressEgressGw.AllowedVipPort
+					return data.IngressEgressGw.AllowedVIPPort
 				}
 				// Import case: read from API
 				if _, ok := blockData["allowed_vip_port"].(map[string]interface{}); ok {
-					return &AWSVPCSiteIngressEgressGwAllowedVipPortModel{}
+					return &AWSVPCSiteIngressEgressGwAllowedVIPPortModel{}
 				}
 				return nil
 			}(),
-			AllowedVipPortSLI: func() *AWSVPCSiteIngressEgressGwAllowedVipPortSLIModel {
-				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.AllowedVipPortSLI != nil {
+			AllowedVIPPortSLI: func() *AWSVPCSiteIngressEgressGwAllowedVIPPortSLIModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.AllowedVIPPortSLI != nil {
 					// Normal Read: preserve existing state value
-					return data.IngressEgressGw.AllowedVipPortSLI
+					return data.IngressEgressGw.AllowedVIPPortSLI
 				}
 				// Import case: read from API
 				if _, ok := blockData["allowed_vip_port_sli"].(map[string]interface{}); ok {
-					return &AWSVPCSiteIngressEgressGwAllowedVipPortSLIModel{}
+					return &AWSVPCSiteIngressEgressGwAllowedVIPPortSLIModel{}
 				}
 				return nil
 			}(),
@@ -6786,14 +6786,14 @@ func (r *AWSVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 	}
 	if blockData, ok := apiResource.Spec["ingress_gw"].(map[string]interface{}); ok && (isImport || data.IngressGw != nil) {
 		data.IngressGw = &AWSVPCSiteIngressGwModel{
-			AllowedVipPort: func() *AWSVPCSiteIngressGwAllowedVipPortModel {
-				if !isImport && data.IngressGw != nil && data.IngressGw.AllowedVipPort != nil {
+			AllowedVIPPort: func() *AWSVPCSiteIngressGwAllowedVIPPortModel {
+				if !isImport && data.IngressGw != nil && data.IngressGw.AllowedVIPPort != nil {
 					// Normal Read: preserve existing state value
-					return data.IngressGw.AllowedVipPort
+					return data.IngressGw.AllowedVIPPort
 				}
 				// Import case: read from API
 				if _, ok := blockData["allowed_vip_port"].(map[string]interface{}); ok {
-					return &AWSVPCSiteIngressGwAllowedVipPortModel{}
+					return &AWSVPCSiteIngressGwAllowedVIPPortModel{}
 				}
 				return nil
 			}(),
@@ -6895,13 +6895,13 @@ func (r *AWSVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 		data.OfflineSurvivabilityMode = &AWSVPCSiteOfflineSurvivabilityModeModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.Os != nil) {
-		data.Os = &AWSVPCSiteOsModel{
-			DefaultOsVersion: func() *AWSVPCSiteEmptyModel {
-				if !isImport && data.Os != nil {
+	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.OS != nil) {
+		data.OS = &AWSVPCSiteOSModel{
+			DefaultOSVersion: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.OS != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.Os.DefaultOsVersion
+					return data.OS.DefaultOSVersion
 				}
 				// Import case: read from API
 				if _, ok := blockData["default_os_version"].(map[string]interface{}); ok {
@@ -6984,14 +6984,14 @@ func (r *AWSVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 				}
 				return nil
 			}(),
-			AllowedVipPort: func() *AWSVPCSiteVoltstackClusterAllowedVipPortModel {
-				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.AllowedVipPort != nil {
+			AllowedVIPPort: func() *AWSVPCSiteVoltstackClusterAllowedVIPPortModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.AllowedVIPPort != nil {
 					// Normal Read: preserve existing state value
-					return data.VoltstackCluster.AllowedVipPort
+					return data.VoltstackCluster.AllowedVIPPort
 				}
 				// Import case: read from API
 				if _, ok := blockData["allowed_vip_port"].(map[string]interface{}); ok {
-					return &AWSVPCSiteVoltstackClusterAllowedVipPortModel{}
+					return &AWSVPCSiteVoltstackClusterAllowedVIPPortModel{}
 				}
 				return nil
 			}(),
@@ -7264,7 +7264,7 @@ func (r *AWSVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 							}
 							return types.StringNull()
 						}(),
-						PrimaryIPV4: func() types.String {
+						PrimaryIpv4: func() types.String {
 							if v, ok := nestedBlockData["primary_ipv4"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}

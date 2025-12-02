@@ -8,38 +8,38 @@ import (
 	"fmt"
 )
 
-// NFVService represents a F5XC NFVService
-type NFVService struct {
+// NfvService represents a F5XC NfvService
+type NfvService struct {
 	Metadata Metadata               `json:"metadata"`
 	Spec     map[string]interface{} `json:"spec"`
 }
 
-// CreateNFVService creates a new NFVService
-func (c *Client) CreateNFVService(ctx context.Context, resource *NFVService) (*NFVService, error) {
-	var result NFVService
+// CreateNfvService creates a new NfvService
+func (c *Client) CreateNfvService(ctx context.Context, resource *NfvService) (*NfvService, error) {
+	var result NfvService
 	path := fmt.Sprintf("/api/config/namespaces/%s/nfv_services", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
 
-// GetNFVService retrieves a NFVService
-func (c *Client) GetNFVService(ctx context.Context, namespace, name string) (*NFVService, error) {
-	var result NFVService
+// GetNfvService retrieves a NfvService
+func (c *Client) GetNfvService(ctx context.Context, namespace, name string) (*NfvService, error) {
+	var result NfvService
 	path := fmt.Sprintf("/api/config/namespaces/%s/nfv_services/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
 
-// UpdateNFVService updates a NFVService
-func (c *Client) UpdateNFVService(ctx context.Context, resource *NFVService) (*NFVService, error) {
-	var result NFVService
+// UpdateNfvService updates a NfvService
+func (c *Client) UpdateNfvService(ctx context.Context, resource *NfvService) (*NfvService, error) {
+	var result NfvService
 	path := fmt.Sprintf("/api/config/namespaces/%s/nfv_services/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
-// DeleteNFVService deletes a NFVService
-func (c *Client) DeleteNFVService(ctx context.Context, namespace, name string) error {
+// DeleteNfvService deletes a NfvService
+func (c *Client) DeleteNfvService(ctx context.Context, namespace, name string) error {
 	path := fmt.Sprintf("/api/config/namespaces/%s/nfv_services/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

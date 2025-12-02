@@ -2,12 +2,12 @@
 page_title: "f5xc_oidc_provider Data Source - terraform-provider-f5xc"
 subcategory: "Authentication"
 description: |-
-  Manages a OidcProvider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.
+  Manages a OIDCProvider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.
 ---
 
 # f5xc_oidc_provider (Data Source)
 
-Manages a OidcProvider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.
+Manages a OIDCProvider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.
 
 ~> **Note** Please refer to [OIDC Provider API docs](https://docs.cloud.f5.com/docs-v2/api/oidc-provider) to learn more.
 
@@ -34,9 +34,9 @@ data "f5xc_oidc_provider" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the OidcProvider
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the OIDCProvider
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the OidcProvider exists
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the OIDCProvider exists
 
 ### Attributes Reference
 
@@ -44,7 +44,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations applied to this resource
 
-<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Description of the OidcProvider
+<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Description of the OIDCProvider
 
 <a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 

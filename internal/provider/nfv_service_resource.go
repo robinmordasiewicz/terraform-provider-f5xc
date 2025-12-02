@@ -26,638 +26,638 @@ import (
 
 // Ensure provider defined types fully satisfy framework interfaces.
 var (
-	_ resource.Resource                   = &NFVServiceResource{}
-	_ resource.ResourceWithConfigure      = &NFVServiceResource{}
-	_ resource.ResourceWithImportState    = &NFVServiceResource{}
-	_ resource.ResourceWithModifyPlan     = &NFVServiceResource{}
-	_ resource.ResourceWithUpgradeState   = &NFVServiceResource{}
-	_ resource.ResourceWithValidateConfig = &NFVServiceResource{}
+	_ resource.Resource                   = &NfvServiceResource{}
+	_ resource.ResourceWithConfigure      = &NfvServiceResource{}
+	_ resource.ResourceWithImportState    = &NfvServiceResource{}
+	_ resource.ResourceWithModifyPlan     = &NfvServiceResource{}
+	_ resource.ResourceWithUpgradeState   = &NfvServiceResource{}
+	_ resource.ResourceWithValidateConfig = &NfvServiceResource{}
 )
 
 // nfv_serviceSchemaVersion is the schema version for state upgrades
 const nfv_serviceSchemaVersion int64 = 1
 
-func NewNFVServiceResource() resource.Resource {
-	return &NFVServiceResource{}
+func NewNfvServiceResource() resource.Resource {
+	return &NfvServiceResource{}
 }
 
-type NFVServiceResource struct {
+type NfvServiceResource struct {
 	client *client.Client
 }
 
-// NFVServiceEmptyModel represents empty nested blocks
-type NFVServiceEmptyModel struct {
+// NfvServiceEmptyModel represents empty nested blocks
+type NfvServiceEmptyModel struct {
 }
 
-// NFVServiceEnabledSSHAccessModel represents enabled_ssh_access block
-type NFVServiceEnabledSSHAccessModel struct {
+// NfvServiceEnabledSSHAccessModel represents enabled_ssh_access block
+type NfvServiceEnabledSSHAccessModel struct {
 	DomainSuffix      types.String                                  `tfsdk:"domain_suffix"`
-	AdvertiseOnSLI    *NFVServiceEmptyModel                         `tfsdk:"advertise_on_sli"`
-	AdvertiseOnSLO    *NFVServiceEmptyModel                         `tfsdk:"advertise_on_slo"`
-	AdvertiseOnSLOSLI *NFVServiceEmptyModel                         `tfsdk:"advertise_on_slo_sli"`
-	NodeSSHPorts      []NFVServiceEnabledSSHAccessNodeSSHPortsModel `tfsdk:"node_ssh_ports"`
+	AdvertiseOnSLI    *NfvServiceEmptyModel                         `tfsdk:"advertise_on_sli"`
+	AdvertiseOnSlo    *NfvServiceEmptyModel                         `tfsdk:"advertise_on_slo"`
+	AdvertiseOnSloSLI *NfvServiceEmptyModel                         `tfsdk:"advertise_on_slo_sli"`
+	NodeSSHPorts      []NfvServiceEnabledSSHAccessNodeSSHPortsModel `tfsdk:"node_ssh_ports"`
 }
 
-// NFVServiceEnabledSSHAccessNodeSSHPortsModel represents node_ssh_ports block
-type NFVServiceEnabledSSHAccessNodeSSHPortsModel struct {
+// NfvServiceEnabledSSHAccessNodeSSHPortsModel represents node_ssh_ports block
+type NfvServiceEnabledSSHAccessNodeSSHPortsModel struct {
 	NodeName types.String `tfsdk:"node_name"`
 	SSHPort  types.Int64  `tfsdk:"ssh_port"`
 }
 
-// NFVServiceF5BigIPAWSServiceModel represents f5_big_ip_aws_service block
-type NFVServiceF5BigIPAWSServiceModel struct {
+// NfvServiceF5BigIPAWSServiceModel represents f5_big_ip_aws_service block
+type NfvServiceF5BigIPAWSServiceModel struct {
 	AdminUsername    types.String                                      `tfsdk:"admin_username"`
 	SSHKey           types.String                                      `tfsdk:"ssh_key"`
-	AdminPassword    *NFVServiceF5BigIPAWSServiceAdminPasswordModel    `tfsdk:"admin_password"`
-	AWSTGWSiteParams *NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsModel `tfsdk:"aws_tgw_site_params"`
-	EndpointService  *NFVServiceF5BigIPAWSServiceEndpointServiceModel  `tfsdk:"endpoint_service"`
-	MarketPlaceImage *NFVServiceF5BigIPAWSServiceMarketPlaceImageModel `tfsdk:"market_place_image"`
-	Nodes            []NFVServiceF5BigIPAWSServiceNodesModel           `tfsdk:"nodes"`
-	Tags             *NFVServiceEmptyModel                             `tfsdk:"tags"`
+	AdminPassword    *NfvServiceF5BigIPAWSServiceAdminPasswordModel    `tfsdk:"admin_password"`
+	AWSTGWSiteParams *NfvServiceF5BigIPAWSServiceAWSTGWSiteParamsModel `tfsdk:"aws_tgw_site_params"`
+	EndpointService  *NfvServiceF5BigIPAWSServiceEndpointServiceModel  `tfsdk:"endpoint_service"`
+	MarketPlaceImage *NfvServiceF5BigIPAWSServiceMarketPlaceImageModel `tfsdk:"market_place_image"`
+	Nodes            []NfvServiceF5BigIPAWSServiceNodesModel           `tfsdk:"nodes"`
+	Tags             *NfvServiceEmptyModel                             `tfsdk:"tags"`
 }
 
-// NFVServiceF5BigIPAWSServiceAdminPasswordModel represents admin_password block
-type NFVServiceF5BigIPAWSServiceAdminPasswordModel struct {
-	BlindfoldSecretInfo *NFVServiceF5BigIPAWSServiceAdminPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo     *NFVServiceF5BigIPAWSServiceAdminPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+// NfvServiceF5BigIPAWSServiceAdminPasswordModel represents admin_password block
+type NfvServiceF5BigIPAWSServiceAdminPasswordModel struct {
+	BlindfoldSecretInfo *NfvServiceF5BigIPAWSServiceAdminPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *NfvServiceF5BigIPAWSServiceAdminPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
-// NFVServiceF5BigIPAWSServiceAdminPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
-type NFVServiceF5BigIPAWSServiceAdminPasswordBlindfoldSecretInfoModel struct {
+// NfvServiceF5BigIPAWSServiceAdminPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
+type NfvServiceF5BigIPAWSServiceAdminPasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
 	Location           types.String `tfsdk:"location"`
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
-// NFVServiceF5BigIPAWSServiceAdminPasswordClearSecretInfoModel represents clear_secret_info block
-type NFVServiceF5BigIPAWSServiceAdminPasswordClearSecretInfoModel struct {
+// NfvServiceF5BigIPAWSServiceAdminPasswordClearSecretInfoModel represents clear_secret_info block
+type NfvServiceF5BigIPAWSServiceAdminPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
-// NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsModel represents aws_tgw_site_params block
-type NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsModel struct {
-	AWSTGWSite *NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsAWSTGWSiteModel `tfsdk:"aws_tgw_site"`
+// NfvServiceF5BigIPAWSServiceAWSTGWSiteParamsModel represents aws_tgw_site_params block
+type NfvServiceF5BigIPAWSServiceAWSTGWSiteParamsModel struct {
+	AWSTGWSite *NfvServiceF5BigIPAWSServiceAWSTGWSiteParamsAWSTGWSiteModel `tfsdk:"aws_tgw_site"`
 }
 
-// NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsAWSTGWSiteModel represents aws_tgw_site block
-type NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsAWSTGWSiteModel struct {
+// NfvServiceF5BigIPAWSServiceAWSTGWSiteParamsAWSTGWSiteModel represents aws_tgw_site block
+type NfvServiceF5BigIPAWSServiceAWSTGWSiteParamsAWSTGWSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// NFVServiceF5BigIPAWSServiceEndpointServiceModel represents endpoint_service block
-type NFVServiceF5BigIPAWSServiceEndpointServiceModel struct {
-	ConfiguredVip            types.String                                                   `tfsdk:"configured_vip"`
-	AdvertiseOnSLOIP         *NFVServiceEmptyModel                                          `tfsdk:"advertise_on_slo_ip"`
-	AdvertiseOnSLOIPExternal *NFVServiceEmptyModel                                          `tfsdk:"advertise_on_slo_ip_external"`
-	AutomaticVip             *NFVServiceEmptyModel                                          `tfsdk:"automatic_vip"`
-	CustomTCPPorts           *NFVServiceF5BigIPAWSServiceEndpointServiceCustomTCPPortsModel `tfsdk:"custom_tcp_ports"`
-	CustomUDPPorts           *NFVServiceF5BigIPAWSServiceEndpointServiceCustomUDPPortsModel `tfsdk:"custom_udp_ports"`
-	DefaultTCPPorts          *NFVServiceEmptyModel                                          `tfsdk:"default_tcp_ports"`
-	DisableAdvertiseOnSLOIP  *NFVServiceEmptyModel                                          `tfsdk:"disable_advertise_on_slo_ip"`
-	HTTPPort                 *NFVServiceEmptyModel                                          `tfsdk:"http_port"`
-	HTTPSPort                *NFVServiceEmptyModel                                          `tfsdk:"https_port"`
-	NoTCPPorts               *NFVServiceEmptyModel                                          `tfsdk:"no_tcp_ports"`
-	NoUDPPorts               *NFVServiceEmptyModel                                          `tfsdk:"no_udp_ports"`
+// NfvServiceF5BigIPAWSServiceEndpointServiceModel represents endpoint_service block
+type NfvServiceF5BigIPAWSServiceEndpointServiceModel struct {
+	ConfiguredVIP            types.String                                                   `tfsdk:"configured_vip"`
+	AdvertiseOnSloIP         *NfvServiceEmptyModel                                          `tfsdk:"advertise_on_slo_ip"`
+	AdvertiseOnSloIPExternal *NfvServiceEmptyModel                                          `tfsdk:"advertise_on_slo_ip_external"`
+	AutomaticVIP             *NfvServiceEmptyModel                                          `tfsdk:"automatic_vip"`
+	CustomTCPPorts           *NfvServiceF5BigIPAWSServiceEndpointServiceCustomTCPPortsModel `tfsdk:"custom_tcp_ports"`
+	CustomUDPPorts           *NfvServiceF5BigIPAWSServiceEndpointServiceCustomUDPPortsModel `tfsdk:"custom_udp_ports"`
+	DefaultTCPPorts          *NfvServiceEmptyModel                                          `tfsdk:"default_tcp_ports"`
+	DisableAdvertiseOnSloIP  *NfvServiceEmptyModel                                          `tfsdk:"disable_advertise_on_slo_ip"`
+	HTTPPort                 *NfvServiceEmptyModel                                          `tfsdk:"http_port"`
+	HTTPSPort                *NfvServiceEmptyModel                                          `tfsdk:"https_port"`
+	NoTCPPorts               *NfvServiceEmptyModel                                          `tfsdk:"no_tcp_ports"`
+	NoUDPPorts               *NfvServiceEmptyModel                                          `tfsdk:"no_udp_ports"`
 }
 
-// NFVServiceF5BigIPAWSServiceEndpointServiceCustomTCPPortsModel represents custom_tcp_ports block
-type NFVServiceF5BigIPAWSServiceEndpointServiceCustomTCPPortsModel struct {
+// NfvServiceF5BigIPAWSServiceEndpointServiceCustomTCPPortsModel represents custom_tcp_ports block
+type NfvServiceF5BigIPAWSServiceEndpointServiceCustomTCPPortsModel struct {
 	Ports types.List `tfsdk:"ports"`
 }
 
-// NFVServiceF5BigIPAWSServiceEndpointServiceCustomUDPPortsModel represents custom_udp_ports block
-type NFVServiceF5BigIPAWSServiceEndpointServiceCustomUDPPortsModel struct {
+// NfvServiceF5BigIPAWSServiceEndpointServiceCustomUDPPortsModel represents custom_udp_ports block
+type NfvServiceF5BigIPAWSServiceEndpointServiceCustomUDPPortsModel struct {
 	Ports types.List `tfsdk:"ports"`
 }
 
-// NFVServiceF5BigIPAWSServiceMarketPlaceImageModel represents market_place_image block
-type NFVServiceF5BigIPAWSServiceMarketPlaceImageModel struct {
-	Awafpayg200mbps *NFVServiceEmptyModel `tfsdk:"awafpay_g200_mbps"`
-	Awafpayg3gbps   *NFVServiceEmptyModel `tfsdk:"awafpay_g3_gbps"`
+// NfvServiceF5BigIPAWSServiceMarketPlaceImageModel represents market_place_image block
+type NfvServiceF5BigIPAWSServiceMarketPlaceImageModel struct {
+	Awafpayg200mbps *NfvServiceEmptyModel `tfsdk:"awafpay_g200_mbps"`
+	Awafpayg3gbps   *NfvServiceEmptyModel `tfsdk:"awafpay_g3_gbps"`
 }
 
-// NFVServiceF5BigIPAWSServiceNodesModel represents nodes block
-type NFVServiceF5BigIPAWSServiceNodesModel struct {
+// NfvServiceF5BigIPAWSServiceNodesModel represents nodes block
+type NfvServiceF5BigIPAWSServiceNodesModel struct {
 	AWSAzName          types.String                                     `tfsdk:"aws_az_name"`
 	NodeName           types.String                                     `tfsdk:"node_name"`
 	TunnelPrefix       types.String                                     `tfsdk:"tunnel_prefix"`
-	AutomaticPrefix    *NFVServiceEmptyModel                            `tfsdk:"automatic_prefix"`
-	MgmtSubnet         *NFVServiceF5BigIPAWSServiceNodesMgmtSubnetModel `tfsdk:"mgmt_subnet"`
-	ReservedMgmtSubnet *NFVServiceEmptyModel                            `tfsdk:"reserved_mgmt_subnet"`
+	AutomaticPrefix    *NfvServiceEmptyModel                            `tfsdk:"automatic_prefix"`
+	MgmtSubnet         *NfvServiceF5BigIPAWSServiceNodesMgmtSubnetModel `tfsdk:"mgmt_subnet"`
+	ReservedMgmtSubnet *NfvServiceEmptyModel                            `tfsdk:"reserved_mgmt_subnet"`
 }
 
-// NFVServiceF5BigIPAWSServiceNodesMgmtSubnetModel represents mgmt_subnet block
-type NFVServiceF5BigIPAWSServiceNodesMgmtSubnetModel struct {
+// NfvServiceF5BigIPAWSServiceNodesMgmtSubnetModel represents mgmt_subnet block
+type NfvServiceF5BigIPAWSServiceNodesMgmtSubnetModel struct {
 	ExistingSubnetID types.String                                                `tfsdk:"existing_subnet_id"`
-	SubnetParam      *NFVServiceF5BigIPAWSServiceNodesMgmtSubnetSubnetParamModel `tfsdk:"subnet_param"`
+	SubnetParam      *NfvServiceF5BigIPAWSServiceNodesMgmtSubnetSubnetParamModel `tfsdk:"subnet_param"`
 }
 
-// NFVServiceF5BigIPAWSServiceNodesMgmtSubnetSubnetParamModel represents subnet_param block
-type NFVServiceF5BigIPAWSServiceNodesMgmtSubnetSubnetParamModel struct {
-	IPV4 types.String `tfsdk:"ipv4"`
+// NfvServiceF5BigIPAWSServiceNodesMgmtSubnetSubnetParamModel represents subnet_param block
+type NfvServiceF5BigIPAWSServiceNodesMgmtSubnetSubnetParamModel struct {
+	Ipv4 types.String `tfsdk:"ipv4"`
 }
 
-// NFVServiceHTTPSManagementModel represents https_management block
-type NFVServiceHTTPSManagementModel struct {
+// NfvServiceHTTPSManagementModel represents https_management block
+type NfvServiceHTTPSManagementModel struct {
 	DomainSuffix                  types.String                                             `tfsdk:"domain_suffix"`
 	HTTPSPort                     types.Int64                                              `tfsdk:"https_port"`
-	AdvertiseOnInternet           *NFVServiceHTTPSManagementAdvertiseOnInternetModel       `tfsdk:"advertise_on_internet"`
-	AdvertiseOnInternetDefaultVip *NFVServiceEmptyModel                                    `tfsdk:"advertise_on_internet_default_vip"`
-	AdvertiseOnSLIVip             *NFVServiceHTTPSManagementAdvertiseOnSLIVipModel         `tfsdk:"advertise_on_sli_vip"`
-	AdvertiseOnSLOInternetVip     *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipModel `tfsdk:"advertise_on_slo_internet_vip"`
-	AdvertiseOnSLOSLI             *NFVServiceHTTPSManagementAdvertiseOnSLOSLIModel         `tfsdk:"advertise_on_slo_sli"`
-	AdvertiseOnSLOVip             *NFVServiceHTTPSManagementAdvertiseOnSLOVipModel         `tfsdk:"advertise_on_slo_vip"`
-	DefaultHTTPSPort              *NFVServiceEmptyModel                                    `tfsdk:"default_https_port"`
+	AdvertiseOnInternet           *NfvServiceHTTPSManagementAdvertiseOnInternetModel       `tfsdk:"advertise_on_internet"`
+	AdvertiseOnInternetDefaultVIP *NfvServiceEmptyModel                                    `tfsdk:"advertise_on_internet_default_vip"`
+	AdvertiseOnSLIVIP             *NfvServiceHTTPSManagementAdvertiseOnSLIVIPModel         `tfsdk:"advertise_on_sli_vip"`
+	AdvertiseOnSloInternetVIP     *NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPModel `tfsdk:"advertise_on_slo_internet_vip"`
+	AdvertiseOnSloSLI             *NfvServiceHTTPSManagementAdvertiseOnSloSLIModel         `tfsdk:"advertise_on_slo_sli"`
+	AdvertiseOnSloVIP             *NfvServiceHTTPSManagementAdvertiseOnSloVIPModel         `tfsdk:"advertise_on_slo_vip"`
+	DefaultHTTPSPort              *NfvServiceEmptyModel                                    `tfsdk:"default_https_port"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnInternetModel represents advertise_on_internet block
-type NFVServiceHTTPSManagementAdvertiseOnInternetModel struct {
-	PublicIP *NFVServiceHTTPSManagementAdvertiseOnInternetPublicIPModel `tfsdk:"public_ip"`
+// NfvServiceHTTPSManagementAdvertiseOnInternetModel represents advertise_on_internet block
+type NfvServiceHTTPSManagementAdvertiseOnInternetModel struct {
+	PublicIP *NfvServiceHTTPSManagementAdvertiseOnInternetPublicIPModel `tfsdk:"public_ip"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnInternetPublicIPModel represents public_ip block
-type NFVServiceHTTPSManagementAdvertiseOnInternetPublicIPModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnInternetPublicIPModel represents public_ip block
+type NfvServiceHTTPSManagementAdvertiseOnInternetPublicIPModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLIVipModel represents advertise_on_sli_vip block
-type NFVServiceHTTPSManagementAdvertiseOnSLIVipModel struct {
-	NoMtls          *NFVServiceEmptyModel                                            `tfsdk:"no_mtls"`
-	TLSCertificates []NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesModel `tfsdk:"tls_certificates"`
-	TLSConfig       *NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSConfigModel        `tfsdk:"tls_config"`
-	UseMtls         *NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsModel          `tfsdk:"use_mtls"`
+// NfvServiceHTTPSManagementAdvertiseOnSLIVIPModel represents advertise_on_sli_vip block
+type NfvServiceHTTPSManagementAdvertiseOnSLIVIPModel struct {
+	NoMtls          *NfvServiceEmptyModel                                            `tfsdk:"no_mtls"`
+	TLSCertificates []NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesModel `tfsdk:"tls_certificates"`
+	TLSConfig       *NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSConfigModel        `tfsdk:"tls_config"`
+	UseMtls         *NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsModel          `tfsdk:"use_mtls"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesModel represents tls_certificates block
-type NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesModel represents tls_certificates block
+type NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesModel struct {
 	CertificateURL       types.String                                                                        `tfsdk:"certificate_url"`
 	DescriptionSpec      types.String                                                                        `tfsdk:"description_spec"`
-	CustomHashAlgorithms *NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling  *NFVServiceEmptyModel                                                               `tfsdk:"disable_ocsp_stapling"`
-	PrivateKey           *NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
-	UseSystemDefaults    *NFVServiceEmptyModel                                                               `tfsdk:"use_system_defaults"`
+	CustomHashAlgorithms *NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOCSPStapling  *NfvServiceEmptyModel                                                               `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey           *NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
+	UseSystemDefaults    *NfvServiceEmptyModel                                                               `tfsdk:"use_system_defaults"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
-type NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesCustomHashAlgorithmsModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyModel represents private_key block
-type NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyModel struct {
-	BlindfoldSecretInfo *NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo     *NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+// NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyModel represents private_key block
+type NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyModel struct {
+	BlindfoldSecretInfo *NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
-type NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
 	Location           types.String `tfsdk:"location"`
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
-type NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyClearSecretInfoModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSConfigModel represents tls_config block
-type NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSConfigModel struct {
-	CustomSecurity  *NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
-	DefaultSecurity *NFVServiceEmptyModel                                                   `tfsdk:"default_security"`
-	LowSecurity     *NFVServiceEmptyModel                                                   `tfsdk:"low_security"`
-	MediumSecurity  *NFVServiceEmptyModel                                                   `tfsdk:"medium_security"`
+// NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSConfigModel represents tls_config block
+type NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSConfigModel struct {
+	CustomSecurity  *NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *NfvServiceEmptyModel                                                   `tfsdk:"default_security"`
+	LowSecurity     *NfvServiceEmptyModel                                                   `tfsdk:"low_security"`
+	MediumSecurity  *NfvServiceEmptyModel                                                   `tfsdk:"medium_security"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSConfigCustomSecurityModel represents custom_security block
-type NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSConfigCustomSecurityModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSConfigCustomSecurityModel represents custom_security block
+type NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsModel represents use_mtls block
-type NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsModel represents use_mtls block
+type NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                         `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                                       `tfsdk:"trusted_ca_url"`
-	CRL                       *NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsCRLModel         `tfsdk:"crl"`
-	NoCRL                     *NFVServiceEmptyModel                                              `tfsdk:"no_crl"`
-	TrustedCa                 *NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
-	XfccDisabled              *NFVServiceEmptyModel                                              `tfsdk:"xfcc_disabled"`
-	XfccOptions               *NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+	TrustedCAURL              types.String                                                       `tfsdk:"trusted_ca_url"`
+	CRL                       *NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsCRLModel         `tfsdk:"crl"`
+	NoCRL                     *NfvServiceEmptyModel                                              `tfsdk:"no_crl"`
+	TrustedCA                 *NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
+	XfccDisabled              *NfvServiceEmptyModel                                              `tfsdk:"xfcc_disabled"`
+	XfccOptions               *NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsCRLModel represents crl block
-type NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsCRLModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsCRLModel represents crl block
+type NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsTrustedCaModel represents trusted_ca block
-type NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsTrustedCaModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsTrustedCAModel represents trusted_ca block
+type NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsXfccOptionsModel represents xfcc_options block
-type NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsXfccOptionsModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsXfccOptionsModel represents xfcc_options block
+type NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipModel represents advertise_on_slo_internet_vip block
-type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipModel struct {
-	NoMtls          *NFVServiceEmptyModel                                                    `tfsdk:"no_mtls"`
-	TLSCertificates []NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesModel `tfsdk:"tls_certificates"`
-	TLSConfig       *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigModel        `tfsdk:"tls_config"`
-	UseMtls         *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsModel          `tfsdk:"use_mtls"`
+// NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPModel represents advertise_on_slo_internet_vip block
+type NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPModel struct {
+	NoMtls          *NfvServiceEmptyModel                                                    `tfsdk:"no_mtls"`
+	TLSCertificates []NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesModel `tfsdk:"tls_certificates"`
+	TLSConfig       *NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigModel        `tfsdk:"tls_config"`
+	UseMtls         *NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsModel          `tfsdk:"use_mtls"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesModel represents tls_certificates block
-type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesModel represents tls_certificates block
+type NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesModel struct {
 	CertificateURL       types.String                                                                                `tfsdk:"certificate_url"`
 	DescriptionSpec      types.String                                                                                `tfsdk:"description_spec"`
-	CustomHashAlgorithms *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling  *NFVServiceEmptyModel                                                                       `tfsdk:"disable_ocsp_stapling"`
-	PrivateKey           *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
-	UseSystemDefaults    *NFVServiceEmptyModel                                                                       `tfsdk:"use_system_defaults"`
+	CustomHashAlgorithms *NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOCSPStapling  *NfvServiceEmptyModel                                                                       `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey           *NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
+	UseSystemDefaults    *NfvServiceEmptyModel                                                                       `tfsdk:"use_system_defaults"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
-type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesCustomHashAlgorithmsModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyModel represents private_key block
-type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyModel struct {
-	BlindfoldSecretInfo *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo     *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+// NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyModel represents private_key block
+type NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyModel struct {
+	BlindfoldSecretInfo *NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
-type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
 	Location           types.String `tfsdk:"location"`
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
-type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyClearSecretInfoModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigModel represents tls_config block
-type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigModel struct {
-	CustomSecurity  *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
-	DefaultSecurity *NFVServiceEmptyModel                                                           `tfsdk:"default_security"`
-	LowSecurity     *NFVServiceEmptyModel                                                           `tfsdk:"low_security"`
-	MediumSecurity  *NFVServiceEmptyModel                                                           `tfsdk:"medium_security"`
+// NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigModel represents tls_config block
+type NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigModel struct {
+	CustomSecurity  *NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *NfvServiceEmptyModel                                                           `tfsdk:"default_security"`
+	LowSecurity     *NfvServiceEmptyModel                                                           `tfsdk:"low_security"`
+	MediumSecurity  *NfvServiceEmptyModel                                                           `tfsdk:"medium_security"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigCustomSecurityModel represents custom_security block
-type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigCustomSecurityModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigCustomSecurityModel represents custom_security block
+type NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsModel represents use_mtls block
-type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsModel represents use_mtls block
+type NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                                 `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                                               `tfsdk:"trusted_ca_url"`
-	CRL                       *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsCRLModel         `tfsdk:"crl"`
-	NoCRL                     *NFVServiceEmptyModel                                                      `tfsdk:"no_crl"`
-	TrustedCa                 *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
-	XfccDisabled              *NFVServiceEmptyModel                                                      `tfsdk:"xfcc_disabled"`
-	XfccOptions               *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+	TrustedCAURL              types.String                                                               `tfsdk:"trusted_ca_url"`
+	CRL                       *NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsCRLModel         `tfsdk:"crl"`
+	NoCRL                     *NfvServiceEmptyModel                                                      `tfsdk:"no_crl"`
+	TrustedCA                 *NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
+	XfccDisabled              *NfvServiceEmptyModel                                                      `tfsdk:"xfcc_disabled"`
+	XfccOptions               *NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsCRLModel represents crl block
-type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsCRLModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsCRLModel represents crl block
+type NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsTrustedCaModel represents trusted_ca block
-type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsTrustedCaModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsTrustedCAModel represents trusted_ca block
+type NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsXfccOptionsModel represents xfcc_options block
-type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsXfccOptionsModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsXfccOptionsModel represents xfcc_options block
+type NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOSLIModel represents advertise_on_slo_sli block
-type NFVServiceHTTPSManagementAdvertiseOnSLOSLIModel struct {
-	NoMtls          *NFVServiceEmptyModel                                            `tfsdk:"no_mtls"`
-	TLSCertificates []NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesModel `tfsdk:"tls_certificates"`
-	TLSConfig       *NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSConfigModel        `tfsdk:"tls_config"`
-	UseMtls         *NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsModel          `tfsdk:"use_mtls"`
+// NfvServiceHTTPSManagementAdvertiseOnSloSLIModel represents advertise_on_slo_sli block
+type NfvServiceHTTPSManagementAdvertiseOnSloSLIModel struct {
+	NoMtls          *NfvServiceEmptyModel                                            `tfsdk:"no_mtls"`
+	TLSCertificates []NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesModel `tfsdk:"tls_certificates"`
+	TLSConfig       *NfvServiceHTTPSManagementAdvertiseOnSloSLITLSConfigModel        `tfsdk:"tls_config"`
+	UseMtls         *NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsModel          `tfsdk:"use_mtls"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesModel represents tls_certificates block
-type NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesModel represents tls_certificates block
+type NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesModel struct {
 	CertificateURL       types.String                                                                        `tfsdk:"certificate_url"`
 	DescriptionSpec      types.String                                                                        `tfsdk:"description_spec"`
-	CustomHashAlgorithms *NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling  *NFVServiceEmptyModel                                                               `tfsdk:"disable_ocsp_stapling"`
-	PrivateKey           *NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
-	UseSystemDefaults    *NFVServiceEmptyModel                                                               `tfsdk:"use_system_defaults"`
+	CustomHashAlgorithms *NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOCSPStapling  *NfvServiceEmptyModel                                                               `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey           *NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
+	UseSystemDefaults    *NfvServiceEmptyModel                                                               `tfsdk:"use_system_defaults"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
-type NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesCustomHashAlgorithmsModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyModel represents private_key block
-type NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyModel struct {
-	BlindfoldSecretInfo *NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo     *NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+// NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyModel represents private_key block
+type NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyModel struct {
+	BlindfoldSecretInfo *NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
-type NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
 	Location           types.String `tfsdk:"location"`
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
-type NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyClearSecretInfoModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSConfigModel represents tls_config block
-type NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSConfigModel struct {
-	CustomSecurity  *NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSConfigCustomSecurityModel `tfsdk:"custom_security"`
-	DefaultSecurity *NFVServiceEmptyModel                                                   `tfsdk:"default_security"`
-	LowSecurity     *NFVServiceEmptyModel                                                   `tfsdk:"low_security"`
-	MediumSecurity  *NFVServiceEmptyModel                                                   `tfsdk:"medium_security"`
+// NfvServiceHTTPSManagementAdvertiseOnSloSLITLSConfigModel represents tls_config block
+type NfvServiceHTTPSManagementAdvertiseOnSloSLITLSConfigModel struct {
+	CustomSecurity  *NfvServiceHTTPSManagementAdvertiseOnSloSLITLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *NfvServiceEmptyModel                                                   `tfsdk:"default_security"`
+	LowSecurity     *NfvServiceEmptyModel                                                   `tfsdk:"low_security"`
+	MediumSecurity  *NfvServiceEmptyModel                                                   `tfsdk:"medium_security"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSConfigCustomSecurityModel represents custom_security block
-type NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSConfigCustomSecurityModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSloSLITLSConfigCustomSecurityModel represents custom_security block
+type NfvServiceHTTPSManagementAdvertiseOnSloSLITLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsModel represents use_mtls block
-type NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsModel represents use_mtls block
+type NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                         `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                                       `tfsdk:"trusted_ca_url"`
-	CRL                       *NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsCRLModel         `tfsdk:"crl"`
-	NoCRL                     *NFVServiceEmptyModel                                              `tfsdk:"no_crl"`
-	TrustedCa                 *NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
-	XfccDisabled              *NFVServiceEmptyModel                                              `tfsdk:"xfcc_disabled"`
-	XfccOptions               *NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+	TrustedCAURL              types.String                                                       `tfsdk:"trusted_ca_url"`
+	CRL                       *NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsCRLModel         `tfsdk:"crl"`
+	NoCRL                     *NfvServiceEmptyModel                                              `tfsdk:"no_crl"`
+	TrustedCA                 *NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
+	XfccDisabled              *NfvServiceEmptyModel                                              `tfsdk:"xfcc_disabled"`
+	XfccOptions               *NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsCRLModel represents crl block
-type NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsCRLModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsCRLModel represents crl block
+type NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsTrustedCaModel represents trusted_ca block
-type NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsTrustedCaModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsTrustedCAModel represents trusted_ca block
+type NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsXfccOptionsModel represents xfcc_options block
-type NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsXfccOptionsModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsXfccOptionsModel represents xfcc_options block
+type NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOVipModel represents advertise_on_slo_vip block
-type NFVServiceHTTPSManagementAdvertiseOnSLOVipModel struct {
-	NoMtls          *NFVServiceEmptyModel                                            `tfsdk:"no_mtls"`
-	TLSCertificates []NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesModel `tfsdk:"tls_certificates"`
-	TLSConfig       *NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSConfigModel        `tfsdk:"tls_config"`
-	UseMtls         *NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsModel          `tfsdk:"use_mtls"`
+// NfvServiceHTTPSManagementAdvertiseOnSloVIPModel represents advertise_on_slo_vip block
+type NfvServiceHTTPSManagementAdvertiseOnSloVIPModel struct {
+	NoMtls          *NfvServiceEmptyModel                                            `tfsdk:"no_mtls"`
+	TLSCertificates []NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesModel `tfsdk:"tls_certificates"`
+	TLSConfig       *NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSConfigModel        `tfsdk:"tls_config"`
+	UseMtls         *NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsModel          `tfsdk:"use_mtls"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesModel represents tls_certificates block
-type NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesModel represents tls_certificates block
+type NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesModel struct {
 	CertificateURL       types.String                                                                        `tfsdk:"certificate_url"`
 	DescriptionSpec      types.String                                                                        `tfsdk:"description_spec"`
-	CustomHashAlgorithms *NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling  *NFVServiceEmptyModel                                                               `tfsdk:"disable_ocsp_stapling"`
-	PrivateKey           *NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
-	UseSystemDefaults    *NFVServiceEmptyModel                                                               `tfsdk:"use_system_defaults"`
+	CustomHashAlgorithms *NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOCSPStapling  *NfvServiceEmptyModel                                                               `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey           *NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
+	UseSystemDefaults    *NfvServiceEmptyModel                                                               `tfsdk:"use_system_defaults"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
-type NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesCustomHashAlgorithmsModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyModel represents private_key block
-type NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyModel struct {
-	BlindfoldSecretInfo *NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo     *NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+// NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyModel represents private_key block
+type NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyModel struct {
+	BlindfoldSecretInfo *NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
-type NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
 	Location           types.String `tfsdk:"location"`
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
-type NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyClearSecretInfoModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSConfigModel represents tls_config block
-type NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSConfigModel struct {
-	CustomSecurity  *NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
-	DefaultSecurity *NFVServiceEmptyModel                                                   `tfsdk:"default_security"`
-	LowSecurity     *NFVServiceEmptyModel                                                   `tfsdk:"low_security"`
-	MediumSecurity  *NFVServiceEmptyModel                                                   `tfsdk:"medium_security"`
+// NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSConfigModel represents tls_config block
+type NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSConfigModel struct {
+	CustomSecurity  *NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *NfvServiceEmptyModel                                                   `tfsdk:"default_security"`
+	LowSecurity     *NfvServiceEmptyModel                                                   `tfsdk:"low_security"`
+	MediumSecurity  *NfvServiceEmptyModel                                                   `tfsdk:"medium_security"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSConfigCustomSecurityModel represents custom_security block
-type NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSConfigCustomSecurityModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSConfigCustomSecurityModel represents custom_security block
+type NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsModel represents use_mtls block
-type NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsModel represents use_mtls block
+type NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                         `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                                       `tfsdk:"trusted_ca_url"`
-	CRL                       *NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsCRLModel         `tfsdk:"crl"`
-	NoCRL                     *NFVServiceEmptyModel                                              `tfsdk:"no_crl"`
-	TrustedCa                 *NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
-	XfccDisabled              *NFVServiceEmptyModel                                              `tfsdk:"xfcc_disabled"`
-	XfccOptions               *NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+	TrustedCAURL              types.String                                                       `tfsdk:"trusted_ca_url"`
+	CRL                       *NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsCRLModel         `tfsdk:"crl"`
+	NoCRL                     *NfvServiceEmptyModel                                              `tfsdk:"no_crl"`
+	TrustedCA                 *NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
+	XfccDisabled              *NfvServiceEmptyModel                                              `tfsdk:"xfcc_disabled"`
+	XfccOptions               *NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsCRLModel represents crl block
-type NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsCRLModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsCRLModel represents crl block
+type NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsTrustedCaModel represents trusted_ca block
-type NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsTrustedCaModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsTrustedCAModel represents trusted_ca block
+type NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsXfccOptionsModel represents xfcc_options block
-type NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsXfccOptionsModel struct {
+// NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsXfccOptionsModel represents xfcc_options block
+type NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
 }
 
-// NFVServicePaloAltoFwServiceModel represents palo_alto_fw_service block
-type NFVServicePaloAltoFwServiceModel struct {
+// NfvServicePaloAltoFwServiceModel represents palo_alto_fw_service block
+type NfvServicePaloAltoFwServiceModel struct {
 	InstanceType    types.String                                    `tfsdk:"instance_type"`
 	SSHKey          types.String                                    `tfsdk:"ssh_key"`
 	Version         types.String                                    `tfsdk:"version"`
-	AutoSetup       *NFVServicePaloAltoFwServiceAutoSetupModel      `tfsdk:"auto_setup"`
-	AWSTGWSite      *NFVServicePaloAltoFwServiceAWSTGWSiteModel     `tfsdk:"aws_tgw_site"`
-	DisablePanaroma *NFVServiceEmptyModel                           `tfsdk:"disable_panaroma"`
-	PanAmiBundle1   *NFVServiceEmptyModel                           `tfsdk:"pan_ami_bundle1"`
-	PanAmiBundle2   *NFVServiceEmptyModel                           `tfsdk:"pan_ami_bundle2"`
-	PanoramaServer  *NFVServicePaloAltoFwServicePanoramaServerModel `tfsdk:"panorama_server"`
-	ServiceNodes    *NFVServicePaloAltoFwServiceServiceNodesModel   `tfsdk:"service_nodes"`
-	Tags            *NFVServiceEmptyModel                           `tfsdk:"tags"`
+	AutoSetup       *NfvServicePaloAltoFwServiceAutoSetupModel      `tfsdk:"auto_setup"`
+	AWSTGWSite      *NfvServicePaloAltoFwServiceAWSTGWSiteModel     `tfsdk:"aws_tgw_site"`
+	DisablePanaroma *NfvServiceEmptyModel                           `tfsdk:"disable_panaroma"`
+	PanAmiBundle1   *NfvServiceEmptyModel                           `tfsdk:"pan_ami_bundle1"`
+	PanAmiBundle2   *NfvServiceEmptyModel                           `tfsdk:"pan_ami_bundle2"`
+	PanoramaServer  *NfvServicePaloAltoFwServicePanoramaServerModel `tfsdk:"panorama_server"`
+	ServiceNodes    *NfvServicePaloAltoFwServiceServiceNodesModel   `tfsdk:"service_nodes"`
+	Tags            *NfvServiceEmptyModel                           `tfsdk:"tags"`
 }
 
-// NFVServicePaloAltoFwServiceAutoSetupModel represents auto_setup block
-type NFVServicePaloAltoFwServiceAutoSetupModel struct {
+// NfvServicePaloAltoFwServiceAutoSetupModel represents auto_setup block
+type NfvServicePaloAltoFwServiceAutoSetupModel struct {
 	AdminUsername types.String                                            `tfsdk:"admin_username"`
-	AdminPassword *NFVServicePaloAltoFwServiceAutoSetupAdminPasswordModel `tfsdk:"admin_password"`
-	ManualSSHKeys *NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysModel `tfsdk:"manual_ssh_keys"`
+	AdminPassword *NfvServicePaloAltoFwServiceAutoSetupAdminPasswordModel `tfsdk:"admin_password"`
+	ManualSSHKeys *NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysModel `tfsdk:"manual_ssh_keys"`
 }
 
-// NFVServicePaloAltoFwServiceAutoSetupAdminPasswordModel represents admin_password block
-type NFVServicePaloAltoFwServiceAutoSetupAdminPasswordModel struct {
-	BlindfoldSecretInfo *NFVServicePaloAltoFwServiceAutoSetupAdminPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo     *NFVServicePaloAltoFwServiceAutoSetupAdminPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+// NfvServicePaloAltoFwServiceAutoSetupAdminPasswordModel represents admin_password block
+type NfvServicePaloAltoFwServiceAutoSetupAdminPasswordModel struct {
+	BlindfoldSecretInfo *NfvServicePaloAltoFwServiceAutoSetupAdminPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *NfvServicePaloAltoFwServiceAutoSetupAdminPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
-// NFVServicePaloAltoFwServiceAutoSetupAdminPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
-type NFVServicePaloAltoFwServiceAutoSetupAdminPasswordBlindfoldSecretInfoModel struct {
+// NfvServicePaloAltoFwServiceAutoSetupAdminPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
+type NfvServicePaloAltoFwServiceAutoSetupAdminPasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
 	Location           types.String `tfsdk:"location"`
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
-// NFVServicePaloAltoFwServiceAutoSetupAdminPasswordClearSecretInfoModel represents clear_secret_info block
-type NFVServicePaloAltoFwServiceAutoSetupAdminPasswordClearSecretInfoModel struct {
+// NfvServicePaloAltoFwServiceAutoSetupAdminPasswordClearSecretInfoModel represents clear_secret_info block
+type NfvServicePaloAltoFwServiceAutoSetupAdminPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
-// NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysModel represents manual_ssh_keys block
-type NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysModel struct {
+// NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysModel represents manual_ssh_keys block
+type NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysModel struct {
 	PublicKey  types.String                                                      `tfsdk:"public_key"`
-	PrivateKey *NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyModel `tfsdk:"private_key"`
+	PrivateKey *NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyModel `tfsdk:"private_key"`
 }
 
-// NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyModel represents private_key block
-type NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyModel struct {
-	BlindfoldSecretInfo *NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo     *NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+// NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyModel represents private_key block
+type NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyModel struct {
+	BlindfoldSecretInfo *NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
-// NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
-type NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyBlindfoldSecretInfoModel struct {
+// NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
 	Location           types.String `tfsdk:"location"`
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
-// NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyClearSecretInfoModel represents clear_secret_info block
-type NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyClearSecretInfoModel struct {
+// NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
-// NFVServicePaloAltoFwServiceAWSTGWSiteModel represents aws_tgw_site block
-type NFVServicePaloAltoFwServiceAWSTGWSiteModel struct {
+// NfvServicePaloAltoFwServiceAWSTGWSiteModel represents aws_tgw_site block
+type NfvServicePaloAltoFwServiceAWSTGWSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// NFVServicePaloAltoFwServicePanoramaServerModel represents panorama_server block
-type NFVServicePaloAltoFwServicePanoramaServerModel struct {
+// NfvServicePaloAltoFwServicePanoramaServerModel represents panorama_server block
+type NfvServicePaloAltoFwServicePanoramaServerModel struct {
 	DeviceGroupName   types.String                                                    `tfsdk:"device_group_name"`
 	Server            types.String                                                    `tfsdk:"server"`
 	TemplateStackName types.String                                                    `tfsdk:"template_stack_name"`
-	AuthorizationKey  *NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyModel `tfsdk:"authorization_key"`
+	AuthorizationKey  *NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyModel `tfsdk:"authorization_key"`
 }
 
-// NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyModel represents authorization_key block
-type NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyModel struct {
-	BlindfoldSecretInfo *NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo     *NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+// NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyModel represents authorization_key block
+type NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyModel struct {
+	BlindfoldSecretInfo *NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
-// NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
-type NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyBlindfoldSecretInfoModel struct {
+// NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
 	Location           types.String `tfsdk:"location"`
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
-// NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyClearSecretInfoModel represents clear_secret_info block
-type NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyClearSecretInfoModel struct {
+// NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyClearSecretInfoModel represents clear_secret_info block
+type NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
-// NFVServicePaloAltoFwServiceServiceNodesModel represents service_nodes block
-type NFVServicePaloAltoFwServiceServiceNodesModel struct {
-	Nodes []NFVServicePaloAltoFwServiceServiceNodesNodesModel `tfsdk:"nodes"`
+// NfvServicePaloAltoFwServiceServiceNodesModel represents service_nodes block
+type NfvServicePaloAltoFwServiceServiceNodesModel struct {
+	Nodes []NfvServicePaloAltoFwServiceServiceNodesNodesModel `tfsdk:"nodes"`
 }
 
-// NFVServicePaloAltoFwServiceServiceNodesNodesModel represents nodes block
-type NFVServicePaloAltoFwServiceServiceNodesNodesModel struct {
+// NfvServicePaloAltoFwServiceServiceNodesNodesModel represents nodes block
+type NfvServicePaloAltoFwServiceServiceNodesNodesModel struct {
 	AWSAzName          types.String                                                 `tfsdk:"aws_az_name"`
 	NodeName           types.String                                                 `tfsdk:"node_name"`
-	MgmtSubnet         *NFVServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetModel `tfsdk:"mgmt_subnet"`
-	ReservedMgmtSubnet *NFVServiceEmptyModel                                        `tfsdk:"reserved_mgmt_subnet"`
+	MgmtSubnet         *NfvServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetModel `tfsdk:"mgmt_subnet"`
+	ReservedMgmtSubnet *NfvServiceEmptyModel                                        `tfsdk:"reserved_mgmt_subnet"`
 }
 
-// NFVServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetModel represents mgmt_subnet block
-type NFVServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetModel struct {
+// NfvServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetModel represents mgmt_subnet block
+type NfvServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetModel struct {
 	ExistingSubnetID types.String                                                            `tfsdk:"existing_subnet_id"`
-	SubnetParam      *NFVServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetSubnetParamModel `tfsdk:"subnet_param"`
+	SubnetParam      *NfvServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetSubnetParamModel `tfsdk:"subnet_param"`
 }
 
-// NFVServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetSubnetParamModel represents subnet_param block
-type NFVServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetSubnetParamModel struct {
-	IPV4 types.String `tfsdk:"ipv4"`
+// NfvServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetSubnetParamModel represents subnet_param block
+type NfvServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetSubnetParamModel struct {
+	Ipv4 types.String `tfsdk:"ipv4"`
 }
 
-type NFVServiceResourceModel struct {
+type NfvServiceResourceModel struct {
 	Name                   types.String                      `tfsdk:"name"`
 	Namespace              types.String                      `tfsdk:"namespace"`
 	Annotations            types.Map                         `tfsdk:"annotations"`
@@ -666,25 +666,25 @@ type NFVServiceResourceModel struct {
 	Labels                 types.Map                         `tfsdk:"labels"`
 	ID                     types.String                      `tfsdk:"id"`
 	Timeouts               timeouts.Value                    `tfsdk:"timeouts"`
-	DisableHTTPSManagement *NFVServiceEmptyModel             `tfsdk:"disable_https_management"`
-	DisableSSHAccess       *NFVServiceEmptyModel             `tfsdk:"disable_ssh_access"`
-	EnabledSSHAccess       *NFVServiceEnabledSSHAccessModel  `tfsdk:"enabled_ssh_access"`
-	F5BigIPAWSService      *NFVServiceF5BigIPAWSServiceModel `tfsdk:"f5_big_ip_aws_service"`
-	HTTPSManagement        *NFVServiceHTTPSManagementModel   `tfsdk:"https_management"`
-	PaloAltoFwService      *NFVServicePaloAltoFwServiceModel `tfsdk:"palo_alto_fw_service"`
+	DisableHTTPSManagement *NfvServiceEmptyModel             `tfsdk:"disable_https_management"`
+	DisableSSHAccess       *NfvServiceEmptyModel             `tfsdk:"disable_ssh_access"`
+	EnabledSSHAccess       *NfvServiceEnabledSSHAccessModel  `tfsdk:"enabled_ssh_access"`
+	F5BigIPAWSService      *NfvServiceF5BigIPAWSServiceModel `tfsdk:"f5_big_ip_aws_service"`
+	HTTPSManagement        *NfvServiceHTTPSManagementModel   `tfsdk:"https_management"`
+	PaloAltoFwService      *NfvServicePaloAltoFwServiceModel `tfsdk:"palo_alto_fw_service"`
 }
 
-func (r *NFVServiceResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
+func (r *NfvServiceResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
 	resp.TypeName = req.ProviderTypeName + "_nfv_service"
 }
 
-func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
+func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             nfv_serviceSchemaVersion,
 		MarkdownDescription: "Manages new NFV service with configured parameters in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the NFVService. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the NfvService. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -694,7 +694,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the NFVService will be created.",
+				MarkdownDescription: "Namespace where the NfvService will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -1977,7 +1977,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 	}
 }
 
-func (r *NFVServiceResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
+func (r *NfvServiceResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -1993,8 +1993,8 @@ func (r *NFVServiceResource) Configure(ctx context.Context, req resource.Configu
 }
 
 // ValidateConfig implements resource.ResourceWithValidateConfig
-func (r *NFVServiceResource) ValidateConfig(ctx context.Context, req resource.ValidateConfigRequest, resp *resource.ValidateConfigResponse) {
-	var data NFVServiceResourceModel
+func (r *NfvServiceResource) ValidateConfig(ctx context.Context, req resource.ValidateConfigRequest, resp *resource.ValidateConfigResponse) {
+	var data NfvServiceResourceModel
 	resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -2002,7 +2002,7 @@ func (r *NFVServiceResource) ValidateConfig(ctx context.Context, req resource.Va
 }
 
 // ModifyPlan implements resource.ResourceWithModifyPlan
-func (r *NFVServiceResource) ModifyPlan(ctx context.Context, req resource.ModifyPlanRequest, resp *resource.ModifyPlanResponse) {
+func (r *NfvServiceResource) ModifyPlan(ctx context.Context, req resource.ModifyPlanRequest, resp *resource.ModifyPlanResponse) {
 	if req.Plan.Raw.IsNull() {
 		resp.Diagnostics.AddWarning(
 			"Resource Destruction",
@@ -2012,7 +2012,7 @@ func (r *NFVServiceResource) ModifyPlan(ctx context.Context, req resource.Modify
 	}
 
 	if req.State.Raw.IsNull() {
-		var plan NFVServiceResourceModel
+		var plan NfvServiceResourceModel
 		resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
 		if resp.Diagnostics.HasError() {
 			return
@@ -2028,7 +2028,7 @@ func (r *NFVServiceResource) ModifyPlan(ctx context.Context, req resource.Modify
 }
 
 // UpgradeState implements resource.ResourceWithUpgradeState
-func (r *NFVServiceResource) UpgradeState(ctx context.Context) map[int64]resource.StateUpgrader {
+func (r *NfvServiceResource) UpgradeState(ctx context.Context) map[int64]resource.StateUpgrader {
 	return map[int64]resource.StateUpgrader{
 		0: {
 			PriorSchema: &schema.Schema{
@@ -2054,7 +2054,7 @@ func (r *NFVServiceResource) UpgradeState(ctx context.Context) map[int64]resourc
 					return
 				}
 
-				upgradedState := NFVServiceResourceModel{
+				upgradedState := NfvServiceResourceModel{
 					Name:        priorState.Name,
 					Namespace:   priorState.Namespace,
 					Annotations: priorState.Annotations,
@@ -2069,8 +2069,8 @@ func (r *NFVServiceResource) UpgradeState(ctx context.Context) map[int64]resourc
 	}
 }
 
-func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
-	var data NFVServiceResourceModel
+func (r *NfvServiceResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
+	var data NfvServiceResourceModel
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -2090,7 +2090,7 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	createReq := &client.NFVService{
+	createReq := &client.NfvService{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -2134,10 +2134,10 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 		if data.EnabledSSHAccess.AdvertiseOnSLI != nil {
 			enabled_ssh_accessMap["advertise_on_sli"] = map[string]interface{}{}
 		}
-		if data.EnabledSSHAccess.AdvertiseOnSLO != nil {
+		if data.EnabledSSHAccess.AdvertiseOnSlo != nil {
 			enabled_ssh_accessMap["advertise_on_slo"] = map[string]interface{}{}
 		}
-		if data.EnabledSSHAccess.AdvertiseOnSLOSLI != nil {
+		if data.EnabledSSHAccess.AdvertiseOnSloSLI != nil {
 			enabled_ssh_accessMap["advertise_on_slo_sli"] = map[string]interface{}{}
 		}
 		if !data.EnabledSSHAccess.DomainSuffix.IsNull() && !data.EnabledSSHAccess.DomainSuffix.IsUnknown() {
@@ -2174,8 +2174,8 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 		}
 		if data.F5BigIPAWSService.EndpointService != nil {
 			endpoint_serviceNestedMap := make(map[string]interface{})
-			if !data.F5BigIPAWSService.EndpointService.ConfiguredVip.IsNull() && !data.F5BigIPAWSService.EndpointService.ConfiguredVip.IsUnknown() {
-				endpoint_serviceNestedMap["configured_vip"] = data.F5BigIPAWSService.EndpointService.ConfiguredVip.ValueString()
+			if !data.F5BigIPAWSService.EndpointService.ConfiguredVIP.IsNull() && !data.F5BigIPAWSService.EndpointService.ConfiguredVIP.IsUnknown() {
+				endpoint_serviceNestedMap["configured_vip"] = data.F5BigIPAWSService.EndpointService.ConfiguredVIP.ValueString()
 			}
 			f5_big_ip_aws_serviceMap["endpoint_service"] = endpoint_serviceNestedMap
 		}
@@ -2227,22 +2227,22 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 			advertise_on_internetNestedMap := make(map[string]interface{})
 			https_managementMap["advertise_on_internet"] = advertise_on_internetNestedMap
 		}
-		if data.HTTPSManagement.AdvertiseOnInternetDefaultVip != nil {
+		if data.HTTPSManagement.AdvertiseOnInternetDefaultVIP != nil {
 			https_managementMap["advertise_on_internet_default_vip"] = map[string]interface{}{}
 		}
-		if data.HTTPSManagement.AdvertiseOnSLIVip != nil {
+		if data.HTTPSManagement.AdvertiseOnSLIVIP != nil {
 			advertise_on_sli_vipNestedMap := make(map[string]interface{})
 			https_managementMap["advertise_on_sli_vip"] = advertise_on_sli_vipNestedMap
 		}
-		if data.HTTPSManagement.AdvertiseOnSLOInternetVip != nil {
+		if data.HTTPSManagement.AdvertiseOnSloInternetVIP != nil {
 			advertise_on_slo_internet_vipNestedMap := make(map[string]interface{})
 			https_managementMap["advertise_on_slo_internet_vip"] = advertise_on_slo_internet_vipNestedMap
 		}
-		if data.HTTPSManagement.AdvertiseOnSLOSLI != nil {
+		if data.HTTPSManagement.AdvertiseOnSloSLI != nil {
 			advertise_on_slo_sliNestedMap := make(map[string]interface{})
 			https_managementMap["advertise_on_slo_sli"] = advertise_on_slo_sliNestedMap
 		}
-		if data.HTTPSManagement.AdvertiseOnSLOVip != nil {
+		if data.HTTPSManagement.AdvertiseOnSloVIP != nil {
 			advertise_on_slo_vipNestedMap := make(map[string]interface{})
 			https_managementMap["advertise_on_slo_vip"] = advertise_on_slo_vipNestedMap
 		}
@@ -2320,9 +2320,9 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 		createReq.Spec["palo_alto_fw_service"] = palo_alto_fw_serviceMap
 	}
 
-	apiResource, err := r.client.CreateNFVService(ctx, createReq)
+	apiResource, err := r.client.CreateNfvService(ctx, createReq)
 	if err != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create NFVService: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create NfvService: %s", err))
 		return
 	}
 
@@ -2334,17 +2334,17 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["disable_https_management"].(map[string]interface{}); ok && isImport && data.DisableHTTPSManagement == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DisableHTTPSManagement = &NFVServiceEmptyModel{}
+		data.DisableHTTPSManagement = &NfvServiceEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["disable_ssh_access"].(map[string]interface{}); ok && isImport && data.DisableSSHAccess == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DisableSSHAccess = &NFVServiceEmptyModel{}
+		data.DisableSSHAccess = &NfvServiceEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["enabled_ssh_access"].(map[string]interface{}); ok && (isImport || data.EnabledSSHAccess != nil) {
-		data.EnabledSSHAccess = &NFVServiceEnabledSSHAccessModel{
-			AdvertiseOnSLI: func() *NFVServiceEmptyModel {
+		data.EnabledSSHAccess = &NfvServiceEnabledSSHAccessModel{
+			AdvertiseOnSLI: func() *NfvServiceEmptyModel {
 				if !isImport && data.EnabledSSHAccess != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
@@ -2352,31 +2352,31 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_sli"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
-			AdvertiseOnSLO: func() *NFVServiceEmptyModel {
+			AdvertiseOnSlo: func() *NfvServiceEmptyModel {
 				if !isImport && data.EnabledSSHAccess != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.EnabledSSHAccess.AdvertiseOnSLO
+					return data.EnabledSSHAccess.AdvertiseOnSlo
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_slo"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
-			AdvertiseOnSLOSLI: func() *NFVServiceEmptyModel {
+			AdvertiseOnSloSLI: func() *NfvServiceEmptyModel {
 				if !isImport && data.EnabledSSHAccess != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.EnabledSSHAccess.AdvertiseOnSLOSLI
+					return data.EnabledSSHAccess.AdvertiseOnSloSLI
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_slo_sli"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
@@ -2386,12 +2386,12 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				return types.StringNull()
 			}(),
-			NodeSSHPorts: func() []NFVServiceEnabledSSHAccessNodeSSHPortsModel {
+			NodeSSHPorts: func() []NfvServiceEnabledSSHAccessNodeSSHPortsModel {
 				if listData, ok := blockData["node_ssh_ports"].([]interface{}); ok && len(listData) > 0 {
-					var result []NFVServiceEnabledSSHAccessNodeSSHPortsModel
+					var result []NfvServiceEnabledSSHAccessNodeSSHPortsModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, NFVServiceEnabledSSHAccessNodeSSHPortsModel{
+							result = append(result, NfvServiceEnabledSSHAccessNodeSSHPortsModel{
 								NodeName: func() types.String {
 									if v, ok := itemMap["node_name"].(string); ok && v != "" {
 										return types.StringValue(v)
@@ -2414,15 +2414,15 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 		}
 	}
 	if blockData, ok := apiResource.Spec["f5_big_ip_aws_service"].(map[string]interface{}); ok && (isImport || data.F5BigIPAWSService != nil) {
-		data.F5BigIPAWSService = &NFVServiceF5BigIPAWSServiceModel{
-			AdminPassword: func() *NFVServiceF5BigIPAWSServiceAdminPasswordModel {
+		data.F5BigIPAWSService = &NfvServiceF5BigIPAWSServiceModel{
+			AdminPassword: func() *NfvServiceF5BigIPAWSServiceAdminPasswordModel {
 				if !isImport && data.F5BigIPAWSService != nil && data.F5BigIPAWSService.AdminPassword != nil {
 					// Normal Read: preserve existing state value
 					return data.F5BigIPAWSService.AdminPassword
 				}
 				// Import case: read from API
 				if _, ok := blockData["admin_password"].(map[string]interface{}); ok {
-					return &NFVServiceF5BigIPAWSServiceAdminPasswordModel{}
+					return &NfvServiceF5BigIPAWSServiceAdminPasswordModel{}
 				}
 				return nil
 			}(),
@@ -2432,26 +2432,26 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				return types.StringNull()
 			}(),
-			AWSTGWSiteParams: func() *NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsModel {
+			AWSTGWSiteParams: func() *NfvServiceF5BigIPAWSServiceAWSTGWSiteParamsModel {
 				if !isImport && data.F5BigIPAWSService != nil && data.F5BigIPAWSService.AWSTGWSiteParams != nil {
 					// Normal Read: preserve existing state value
 					return data.F5BigIPAWSService.AWSTGWSiteParams
 				}
 				// Import case: read from API
 				if _, ok := blockData["aws_tgw_site_params"].(map[string]interface{}); ok {
-					return &NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsModel{}
+					return &NfvServiceF5BigIPAWSServiceAWSTGWSiteParamsModel{}
 				}
 				return nil
 			}(),
-			EndpointService: func() *NFVServiceF5BigIPAWSServiceEndpointServiceModel {
+			EndpointService: func() *NfvServiceF5BigIPAWSServiceEndpointServiceModel {
 				if !isImport && data.F5BigIPAWSService != nil && data.F5BigIPAWSService.EndpointService != nil {
 					// Normal Read: preserve existing state value
 					return data.F5BigIPAWSService.EndpointService
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["endpoint_service"].(map[string]interface{}); ok {
-					return &NFVServiceF5BigIPAWSServiceEndpointServiceModel{
-						ConfiguredVip: func() types.String {
+					return &NfvServiceF5BigIPAWSServiceEndpointServiceModel{
+						ConfiguredVIP: func() types.String {
 							if v, ok := nestedBlockData["configured_vip"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -2461,26 +2461,26 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				return nil
 			}(),
-			MarketPlaceImage: func() *NFVServiceF5BigIPAWSServiceMarketPlaceImageModel {
+			MarketPlaceImage: func() *NfvServiceF5BigIPAWSServiceMarketPlaceImageModel {
 				if !isImport && data.F5BigIPAWSService != nil && data.F5BigIPAWSService.MarketPlaceImage != nil {
 					// Normal Read: preserve existing state value
 					return data.F5BigIPAWSService.MarketPlaceImage
 				}
 				// Import case: read from API
 				if _, ok := blockData["market_place_image"].(map[string]interface{}); ok {
-					return &NFVServiceF5BigIPAWSServiceMarketPlaceImageModel{}
+					return &NfvServiceF5BigIPAWSServiceMarketPlaceImageModel{}
 				}
 				return nil
 			}(),
-			Nodes: func() []NFVServiceF5BigIPAWSServiceNodesModel {
+			Nodes: func() []NfvServiceF5BigIPAWSServiceNodesModel {
 				if listData, ok := blockData["nodes"].([]interface{}); ok && len(listData) > 0 {
-					var result []NFVServiceF5BigIPAWSServiceNodesModel
+					var result []NfvServiceF5BigIPAWSServiceNodesModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, NFVServiceF5BigIPAWSServiceNodesModel{
-								AutomaticPrefix: func() *NFVServiceEmptyModel {
+							result = append(result, NfvServiceF5BigIPAWSServiceNodesModel{
+								AutomaticPrefix: func() *NfvServiceEmptyModel {
 									if _, ok := itemMap["automatic_prefix"].(map[string]interface{}); ok {
-										return &NFVServiceEmptyModel{}
+										return &NfvServiceEmptyModel{}
 									}
 									return nil
 								}(),
@@ -2490,9 +2490,9 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 									}
 									return types.StringNull()
 								}(),
-								MgmtSubnet: func() *NFVServiceF5BigIPAWSServiceNodesMgmtSubnetModel {
+								MgmtSubnet: func() *NfvServiceF5BigIPAWSServiceNodesMgmtSubnetModel {
 									if deepMap, ok := itemMap["mgmt_subnet"].(map[string]interface{}); ok {
-										return &NFVServiceF5BigIPAWSServiceNodesMgmtSubnetModel{
+										return &NfvServiceF5BigIPAWSServiceNodesMgmtSubnetModel{
 											ExistingSubnetID: func() types.String {
 												if v, ok := deepMap["existing_subnet_id"].(string); ok && v != "" {
 													return types.StringValue(v)
@@ -2509,9 +2509,9 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 									}
 									return types.StringNull()
 								}(),
-								ReservedMgmtSubnet: func() *NFVServiceEmptyModel {
+								ReservedMgmtSubnet: func() *NfvServiceEmptyModel {
 									if _, ok := itemMap["reserved_mgmt_subnet"].(map[string]interface{}); ok {
-										return &NFVServiceEmptyModel{}
+										return &NfvServiceEmptyModel{}
 									}
 									return nil
 								}(),
@@ -2534,7 +2534,7 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				return types.StringNull()
 			}(),
-			Tags: func() *NFVServiceEmptyModel {
+			Tags: func() *NfvServiceEmptyModel {
 				if !isImport && data.F5BigIPAWSService != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
@@ -2542,82 +2542,82 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["tags"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
 		}
 	}
 	if blockData, ok := apiResource.Spec["https_management"].(map[string]interface{}); ok && (isImport || data.HTTPSManagement != nil) {
-		data.HTTPSManagement = &NFVServiceHTTPSManagementModel{
-			AdvertiseOnInternet: func() *NFVServiceHTTPSManagementAdvertiseOnInternetModel {
+		data.HTTPSManagement = &NfvServiceHTTPSManagementModel{
+			AdvertiseOnInternet: func() *NfvServiceHTTPSManagementAdvertiseOnInternetModel {
 				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnInternet != nil {
 					// Normal Read: preserve existing state value
 					return data.HTTPSManagement.AdvertiseOnInternet
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_internet"].(map[string]interface{}); ok {
-					return &NFVServiceHTTPSManagementAdvertiseOnInternetModel{}
+					return &NfvServiceHTTPSManagementAdvertiseOnInternetModel{}
 				}
 				return nil
 			}(),
-			AdvertiseOnInternetDefaultVip: func() *NFVServiceEmptyModel {
+			AdvertiseOnInternetDefaultVIP: func() *NfvServiceEmptyModel {
 				if !isImport && data.HTTPSManagement != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.HTTPSManagement.AdvertiseOnInternetDefaultVip
+					return data.HTTPSManagement.AdvertiseOnInternetDefaultVIP
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_internet_default_vip"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
-			AdvertiseOnSLIVip: func() *NFVServiceHTTPSManagementAdvertiseOnSLIVipModel {
-				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLIVip != nil {
+			AdvertiseOnSLIVIP: func() *NfvServiceHTTPSManagementAdvertiseOnSLIVIPModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLIVIP != nil {
 					// Normal Read: preserve existing state value
-					return data.HTTPSManagement.AdvertiseOnSLIVip
+					return data.HTTPSManagement.AdvertiseOnSLIVIP
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_sli_vip"].(map[string]interface{}); ok {
-					return &NFVServiceHTTPSManagementAdvertiseOnSLIVipModel{}
+					return &NfvServiceHTTPSManagementAdvertiseOnSLIVIPModel{}
 				}
 				return nil
 			}(),
-			AdvertiseOnSLOInternetVip: func() *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipModel {
-				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLOInternetVip != nil {
+			AdvertiseOnSloInternetVIP: func() *NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSloInternetVIP != nil {
 					// Normal Read: preserve existing state value
-					return data.HTTPSManagement.AdvertiseOnSLOInternetVip
+					return data.HTTPSManagement.AdvertiseOnSloInternetVIP
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_slo_internet_vip"].(map[string]interface{}); ok {
-					return &NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipModel{}
+					return &NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPModel{}
 				}
 				return nil
 			}(),
-			AdvertiseOnSLOSLI: func() *NFVServiceHTTPSManagementAdvertiseOnSLOSLIModel {
-				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLOSLI != nil {
+			AdvertiseOnSloSLI: func() *NfvServiceHTTPSManagementAdvertiseOnSloSLIModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSloSLI != nil {
 					// Normal Read: preserve existing state value
-					return data.HTTPSManagement.AdvertiseOnSLOSLI
+					return data.HTTPSManagement.AdvertiseOnSloSLI
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_slo_sli"].(map[string]interface{}); ok {
-					return &NFVServiceHTTPSManagementAdvertiseOnSLOSLIModel{}
+					return &NfvServiceHTTPSManagementAdvertiseOnSloSLIModel{}
 				}
 				return nil
 			}(),
-			AdvertiseOnSLOVip: func() *NFVServiceHTTPSManagementAdvertiseOnSLOVipModel {
-				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLOVip != nil {
+			AdvertiseOnSloVIP: func() *NfvServiceHTTPSManagementAdvertiseOnSloVIPModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSloVIP != nil {
 					// Normal Read: preserve existing state value
-					return data.HTTPSManagement.AdvertiseOnSLOVip
+					return data.HTTPSManagement.AdvertiseOnSloVIP
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_slo_vip"].(map[string]interface{}); ok {
-					return &NFVServiceHTTPSManagementAdvertiseOnSLOVipModel{}
+					return &NfvServiceHTTPSManagementAdvertiseOnSloVIPModel{}
 				}
 				return nil
 			}(),
-			DefaultHTTPSPort: func() *NFVServiceEmptyModel {
+			DefaultHTTPSPort: func() *NfvServiceEmptyModel {
 				if !isImport && data.HTTPSManagement != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
@@ -2625,7 +2625,7 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["default_https_port"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
@@ -2644,15 +2644,15 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 		}
 	}
 	if blockData, ok := apiResource.Spec["palo_alto_fw_service"].(map[string]interface{}); ok && (isImport || data.PaloAltoFwService != nil) {
-		data.PaloAltoFwService = &NFVServicePaloAltoFwServiceModel{
-			AutoSetup: func() *NFVServicePaloAltoFwServiceAutoSetupModel {
+		data.PaloAltoFwService = &NfvServicePaloAltoFwServiceModel{
+			AutoSetup: func() *NfvServicePaloAltoFwServiceAutoSetupModel {
 				if !isImport && data.PaloAltoFwService != nil && data.PaloAltoFwService.AutoSetup != nil {
 					// Normal Read: preserve existing state value
 					return data.PaloAltoFwService.AutoSetup
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["auto_setup"].(map[string]interface{}); ok {
-					return &NFVServicePaloAltoFwServiceAutoSetupModel{
+					return &NfvServicePaloAltoFwServiceAutoSetupModel{
 						AdminUsername: func() types.String {
 							if v, ok := nestedBlockData["admin_username"].(string); ok && v != "" {
 								return types.StringValue(v)
@@ -2663,14 +2663,14 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				return nil
 			}(),
-			AWSTGWSite: func() *NFVServicePaloAltoFwServiceAWSTGWSiteModel {
+			AWSTGWSite: func() *NfvServicePaloAltoFwServiceAWSTGWSiteModel {
 				if !isImport && data.PaloAltoFwService != nil && data.PaloAltoFwService.AWSTGWSite != nil {
 					// Normal Read: preserve existing state value
 					return data.PaloAltoFwService.AWSTGWSite
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["aws_tgw_site"].(map[string]interface{}); ok {
-					return &NFVServicePaloAltoFwServiceAWSTGWSiteModel{
+					return &NfvServicePaloAltoFwServiceAWSTGWSiteModel{
 						Name: func() types.String {
 							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
 								return types.StringValue(v)
@@ -2693,7 +2693,7 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				return nil
 			}(),
-			DisablePanaroma: func() *NFVServiceEmptyModel {
+			DisablePanaroma: func() *NfvServiceEmptyModel {
 				if !isImport && data.PaloAltoFwService != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
@@ -2701,7 +2701,7 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["disable_panaroma"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
@@ -2711,7 +2711,7 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				return types.StringNull()
 			}(),
-			PanAmiBundle1: func() *NFVServiceEmptyModel {
+			PanAmiBundle1: func() *NfvServiceEmptyModel {
 				if !isImport && data.PaloAltoFwService != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
@@ -2719,11 +2719,11 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["pan_ami_bundle1"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
-			PanAmiBundle2: func() *NFVServiceEmptyModel {
+			PanAmiBundle2: func() *NfvServiceEmptyModel {
 				if !isImport && data.PaloAltoFwService != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
@@ -2731,18 +2731,18 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["pan_ami_bundle2"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
-			PanoramaServer: func() *NFVServicePaloAltoFwServicePanoramaServerModel {
+			PanoramaServer: func() *NfvServicePaloAltoFwServicePanoramaServerModel {
 				if !isImport && data.PaloAltoFwService != nil && data.PaloAltoFwService.PanoramaServer != nil {
 					// Normal Read: preserve existing state value
 					return data.PaloAltoFwService.PanoramaServer
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["panorama_server"].(map[string]interface{}); ok {
-					return &NFVServicePaloAltoFwServicePanoramaServerModel{
+					return &NfvServicePaloAltoFwServicePanoramaServerModel{
 						DeviceGroupName: func() types.String {
 							if v, ok := nestedBlockData["device_group_name"].(string); ok && v != "" {
 								return types.StringValue(v)
@@ -2765,14 +2765,14 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				return nil
 			}(),
-			ServiceNodes: func() *NFVServicePaloAltoFwServiceServiceNodesModel {
+			ServiceNodes: func() *NfvServicePaloAltoFwServiceServiceNodesModel {
 				if !isImport && data.PaloAltoFwService != nil && data.PaloAltoFwService.ServiceNodes != nil {
 					// Normal Read: preserve existing state value
 					return data.PaloAltoFwService.ServiceNodes
 				}
 				// Import case: read from API
 				if _, ok := blockData["service_nodes"].(map[string]interface{}); ok {
-					return &NFVServicePaloAltoFwServiceServiceNodesModel{}
+					return &NfvServicePaloAltoFwServiceServiceNodesModel{}
 				}
 				return nil
 			}(),
@@ -2782,7 +2782,7 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				return types.StringNull()
 			}(),
-			Tags: func() *NFVServiceEmptyModel {
+			Tags: func() *NfvServiceEmptyModel {
 				if !isImport && data.PaloAltoFwService != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
@@ -2790,7 +2790,7 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["tags"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
@@ -2810,12 +2810,12 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
-	tflog.Trace(ctx, "created NFVService resource")
+	tflog.Trace(ctx, "created NfvService resource")
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-	var data NFVServiceResourceModel
+func (r *NfvServiceResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
+	var data NfvServiceResourceModel
 	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -2833,18 +2833,18 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 	psd, psDiags := privatestate.LoadFromPrivateState(ctx, &req)
 	resp.Diagnostics.Append(psDiags...)
 
-	apiResource, err := r.client.GetNFVService(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	apiResource, err := r.client.GetNfvService(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// Check if the resource was deleted outside Terraform
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
-			tflog.Warn(ctx, "NFVService not found, removing from state", map[string]interface{}{
+			tflog.Warn(ctx, "NfvService not found, removing from state", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})
 			resp.State.RemoveResource(ctx)
 			return
 		}
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read NFVService: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read NfvService: %s", err))
 		return
 	}
 
@@ -2897,17 +2897,17 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 	})
 	if _, ok := apiResource.Spec["disable_https_management"].(map[string]interface{}); ok && isImport && data.DisableHTTPSManagement == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DisableHTTPSManagement = &NFVServiceEmptyModel{}
+		data.DisableHTTPSManagement = &NfvServiceEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["disable_ssh_access"].(map[string]interface{}); ok && isImport && data.DisableSSHAccess == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DisableSSHAccess = &NFVServiceEmptyModel{}
+		data.DisableSSHAccess = &NfvServiceEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["enabled_ssh_access"].(map[string]interface{}); ok && (isImport || data.EnabledSSHAccess != nil) {
-		data.EnabledSSHAccess = &NFVServiceEnabledSSHAccessModel{
-			AdvertiseOnSLI: func() *NFVServiceEmptyModel {
+		data.EnabledSSHAccess = &NfvServiceEnabledSSHAccessModel{
+			AdvertiseOnSLI: func() *NfvServiceEmptyModel {
 				if !isImport && data.EnabledSSHAccess != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
@@ -2915,31 +2915,31 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_sli"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
-			AdvertiseOnSLO: func() *NFVServiceEmptyModel {
+			AdvertiseOnSlo: func() *NfvServiceEmptyModel {
 				if !isImport && data.EnabledSSHAccess != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.EnabledSSHAccess.AdvertiseOnSLO
+					return data.EnabledSSHAccess.AdvertiseOnSlo
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_slo"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
-			AdvertiseOnSLOSLI: func() *NFVServiceEmptyModel {
+			AdvertiseOnSloSLI: func() *NfvServiceEmptyModel {
 				if !isImport && data.EnabledSSHAccess != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.EnabledSSHAccess.AdvertiseOnSLOSLI
+					return data.EnabledSSHAccess.AdvertiseOnSloSLI
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_slo_sli"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
@@ -2949,12 +2949,12 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				return types.StringNull()
 			}(),
-			NodeSSHPorts: func() []NFVServiceEnabledSSHAccessNodeSSHPortsModel {
+			NodeSSHPorts: func() []NfvServiceEnabledSSHAccessNodeSSHPortsModel {
 				if listData, ok := blockData["node_ssh_ports"].([]interface{}); ok && len(listData) > 0 {
-					var result []NFVServiceEnabledSSHAccessNodeSSHPortsModel
+					var result []NfvServiceEnabledSSHAccessNodeSSHPortsModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, NFVServiceEnabledSSHAccessNodeSSHPortsModel{
+							result = append(result, NfvServiceEnabledSSHAccessNodeSSHPortsModel{
 								NodeName: func() types.String {
 									if v, ok := itemMap["node_name"].(string); ok && v != "" {
 										return types.StringValue(v)
@@ -2977,15 +2977,15 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 		}
 	}
 	if blockData, ok := apiResource.Spec["f5_big_ip_aws_service"].(map[string]interface{}); ok && (isImport || data.F5BigIPAWSService != nil) {
-		data.F5BigIPAWSService = &NFVServiceF5BigIPAWSServiceModel{
-			AdminPassword: func() *NFVServiceF5BigIPAWSServiceAdminPasswordModel {
+		data.F5BigIPAWSService = &NfvServiceF5BigIPAWSServiceModel{
+			AdminPassword: func() *NfvServiceF5BigIPAWSServiceAdminPasswordModel {
 				if !isImport && data.F5BigIPAWSService != nil && data.F5BigIPAWSService.AdminPassword != nil {
 					// Normal Read: preserve existing state value
 					return data.F5BigIPAWSService.AdminPassword
 				}
 				// Import case: read from API
 				if _, ok := blockData["admin_password"].(map[string]interface{}); ok {
-					return &NFVServiceF5BigIPAWSServiceAdminPasswordModel{}
+					return &NfvServiceF5BigIPAWSServiceAdminPasswordModel{}
 				}
 				return nil
 			}(),
@@ -2995,26 +2995,26 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				return types.StringNull()
 			}(),
-			AWSTGWSiteParams: func() *NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsModel {
+			AWSTGWSiteParams: func() *NfvServiceF5BigIPAWSServiceAWSTGWSiteParamsModel {
 				if !isImport && data.F5BigIPAWSService != nil && data.F5BigIPAWSService.AWSTGWSiteParams != nil {
 					// Normal Read: preserve existing state value
 					return data.F5BigIPAWSService.AWSTGWSiteParams
 				}
 				// Import case: read from API
 				if _, ok := blockData["aws_tgw_site_params"].(map[string]interface{}); ok {
-					return &NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsModel{}
+					return &NfvServiceF5BigIPAWSServiceAWSTGWSiteParamsModel{}
 				}
 				return nil
 			}(),
-			EndpointService: func() *NFVServiceF5BigIPAWSServiceEndpointServiceModel {
+			EndpointService: func() *NfvServiceF5BigIPAWSServiceEndpointServiceModel {
 				if !isImport && data.F5BigIPAWSService != nil && data.F5BigIPAWSService.EndpointService != nil {
 					// Normal Read: preserve existing state value
 					return data.F5BigIPAWSService.EndpointService
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["endpoint_service"].(map[string]interface{}); ok {
-					return &NFVServiceF5BigIPAWSServiceEndpointServiceModel{
-						ConfiguredVip: func() types.String {
+					return &NfvServiceF5BigIPAWSServiceEndpointServiceModel{
+						ConfiguredVIP: func() types.String {
 							if v, ok := nestedBlockData["configured_vip"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -3024,26 +3024,26 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				return nil
 			}(),
-			MarketPlaceImage: func() *NFVServiceF5BigIPAWSServiceMarketPlaceImageModel {
+			MarketPlaceImage: func() *NfvServiceF5BigIPAWSServiceMarketPlaceImageModel {
 				if !isImport && data.F5BigIPAWSService != nil && data.F5BigIPAWSService.MarketPlaceImage != nil {
 					// Normal Read: preserve existing state value
 					return data.F5BigIPAWSService.MarketPlaceImage
 				}
 				// Import case: read from API
 				if _, ok := blockData["market_place_image"].(map[string]interface{}); ok {
-					return &NFVServiceF5BigIPAWSServiceMarketPlaceImageModel{}
+					return &NfvServiceF5BigIPAWSServiceMarketPlaceImageModel{}
 				}
 				return nil
 			}(),
-			Nodes: func() []NFVServiceF5BigIPAWSServiceNodesModel {
+			Nodes: func() []NfvServiceF5BigIPAWSServiceNodesModel {
 				if listData, ok := blockData["nodes"].([]interface{}); ok && len(listData) > 0 {
-					var result []NFVServiceF5BigIPAWSServiceNodesModel
+					var result []NfvServiceF5BigIPAWSServiceNodesModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, NFVServiceF5BigIPAWSServiceNodesModel{
-								AutomaticPrefix: func() *NFVServiceEmptyModel {
+							result = append(result, NfvServiceF5BigIPAWSServiceNodesModel{
+								AutomaticPrefix: func() *NfvServiceEmptyModel {
 									if _, ok := itemMap["automatic_prefix"].(map[string]interface{}); ok {
-										return &NFVServiceEmptyModel{}
+										return &NfvServiceEmptyModel{}
 									}
 									return nil
 								}(),
@@ -3053,9 +3053,9 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 									}
 									return types.StringNull()
 								}(),
-								MgmtSubnet: func() *NFVServiceF5BigIPAWSServiceNodesMgmtSubnetModel {
+								MgmtSubnet: func() *NfvServiceF5BigIPAWSServiceNodesMgmtSubnetModel {
 									if deepMap, ok := itemMap["mgmt_subnet"].(map[string]interface{}); ok {
-										return &NFVServiceF5BigIPAWSServiceNodesMgmtSubnetModel{
+										return &NfvServiceF5BigIPAWSServiceNodesMgmtSubnetModel{
 											ExistingSubnetID: func() types.String {
 												if v, ok := deepMap["existing_subnet_id"].(string); ok && v != "" {
 													return types.StringValue(v)
@@ -3072,9 +3072,9 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 									}
 									return types.StringNull()
 								}(),
-								ReservedMgmtSubnet: func() *NFVServiceEmptyModel {
+								ReservedMgmtSubnet: func() *NfvServiceEmptyModel {
 									if _, ok := itemMap["reserved_mgmt_subnet"].(map[string]interface{}); ok {
-										return &NFVServiceEmptyModel{}
+										return &NfvServiceEmptyModel{}
 									}
 									return nil
 								}(),
@@ -3097,7 +3097,7 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				return types.StringNull()
 			}(),
-			Tags: func() *NFVServiceEmptyModel {
+			Tags: func() *NfvServiceEmptyModel {
 				if !isImport && data.F5BigIPAWSService != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
@@ -3105,82 +3105,82 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["tags"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
 		}
 	}
 	if blockData, ok := apiResource.Spec["https_management"].(map[string]interface{}); ok && (isImport || data.HTTPSManagement != nil) {
-		data.HTTPSManagement = &NFVServiceHTTPSManagementModel{
-			AdvertiseOnInternet: func() *NFVServiceHTTPSManagementAdvertiseOnInternetModel {
+		data.HTTPSManagement = &NfvServiceHTTPSManagementModel{
+			AdvertiseOnInternet: func() *NfvServiceHTTPSManagementAdvertiseOnInternetModel {
 				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnInternet != nil {
 					// Normal Read: preserve existing state value
 					return data.HTTPSManagement.AdvertiseOnInternet
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_internet"].(map[string]interface{}); ok {
-					return &NFVServiceHTTPSManagementAdvertiseOnInternetModel{}
+					return &NfvServiceHTTPSManagementAdvertiseOnInternetModel{}
 				}
 				return nil
 			}(),
-			AdvertiseOnInternetDefaultVip: func() *NFVServiceEmptyModel {
+			AdvertiseOnInternetDefaultVIP: func() *NfvServiceEmptyModel {
 				if !isImport && data.HTTPSManagement != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.HTTPSManagement.AdvertiseOnInternetDefaultVip
+					return data.HTTPSManagement.AdvertiseOnInternetDefaultVIP
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_internet_default_vip"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
-			AdvertiseOnSLIVip: func() *NFVServiceHTTPSManagementAdvertiseOnSLIVipModel {
-				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLIVip != nil {
+			AdvertiseOnSLIVIP: func() *NfvServiceHTTPSManagementAdvertiseOnSLIVIPModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLIVIP != nil {
 					// Normal Read: preserve existing state value
-					return data.HTTPSManagement.AdvertiseOnSLIVip
+					return data.HTTPSManagement.AdvertiseOnSLIVIP
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_sli_vip"].(map[string]interface{}); ok {
-					return &NFVServiceHTTPSManagementAdvertiseOnSLIVipModel{}
+					return &NfvServiceHTTPSManagementAdvertiseOnSLIVIPModel{}
 				}
 				return nil
 			}(),
-			AdvertiseOnSLOInternetVip: func() *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipModel {
-				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLOInternetVip != nil {
+			AdvertiseOnSloInternetVIP: func() *NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSloInternetVIP != nil {
 					// Normal Read: preserve existing state value
-					return data.HTTPSManagement.AdvertiseOnSLOInternetVip
+					return data.HTTPSManagement.AdvertiseOnSloInternetVIP
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_slo_internet_vip"].(map[string]interface{}); ok {
-					return &NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipModel{}
+					return &NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPModel{}
 				}
 				return nil
 			}(),
-			AdvertiseOnSLOSLI: func() *NFVServiceHTTPSManagementAdvertiseOnSLOSLIModel {
-				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLOSLI != nil {
+			AdvertiseOnSloSLI: func() *NfvServiceHTTPSManagementAdvertiseOnSloSLIModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSloSLI != nil {
 					// Normal Read: preserve existing state value
-					return data.HTTPSManagement.AdvertiseOnSLOSLI
+					return data.HTTPSManagement.AdvertiseOnSloSLI
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_slo_sli"].(map[string]interface{}); ok {
-					return &NFVServiceHTTPSManagementAdvertiseOnSLOSLIModel{}
+					return &NfvServiceHTTPSManagementAdvertiseOnSloSLIModel{}
 				}
 				return nil
 			}(),
-			AdvertiseOnSLOVip: func() *NFVServiceHTTPSManagementAdvertiseOnSLOVipModel {
-				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLOVip != nil {
+			AdvertiseOnSloVIP: func() *NfvServiceHTTPSManagementAdvertiseOnSloVIPModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSloVIP != nil {
 					// Normal Read: preserve existing state value
-					return data.HTTPSManagement.AdvertiseOnSLOVip
+					return data.HTTPSManagement.AdvertiseOnSloVIP
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_slo_vip"].(map[string]interface{}); ok {
-					return &NFVServiceHTTPSManagementAdvertiseOnSLOVipModel{}
+					return &NfvServiceHTTPSManagementAdvertiseOnSloVIPModel{}
 				}
 				return nil
 			}(),
-			DefaultHTTPSPort: func() *NFVServiceEmptyModel {
+			DefaultHTTPSPort: func() *NfvServiceEmptyModel {
 				if !isImport && data.HTTPSManagement != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
@@ -3188,7 +3188,7 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["default_https_port"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
@@ -3207,15 +3207,15 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 		}
 	}
 	if blockData, ok := apiResource.Spec["palo_alto_fw_service"].(map[string]interface{}); ok && (isImport || data.PaloAltoFwService != nil) {
-		data.PaloAltoFwService = &NFVServicePaloAltoFwServiceModel{
-			AutoSetup: func() *NFVServicePaloAltoFwServiceAutoSetupModel {
+		data.PaloAltoFwService = &NfvServicePaloAltoFwServiceModel{
+			AutoSetup: func() *NfvServicePaloAltoFwServiceAutoSetupModel {
 				if !isImport && data.PaloAltoFwService != nil && data.PaloAltoFwService.AutoSetup != nil {
 					// Normal Read: preserve existing state value
 					return data.PaloAltoFwService.AutoSetup
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["auto_setup"].(map[string]interface{}); ok {
-					return &NFVServicePaloAltoFwServiceAutoSetupModel{
+					return &NfvServicePaloAltoFwServiceAutoSetupModel{
 						AdminUsername: func() types.String {
 							if v, ok := nestedBlockData["admin_username"].(string); ok && v != "" {
 								return types.StringValue(v)
@@ -3226,14 +3226,14 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				return nil
 			}(),
-			AWSTGWSite: func() *NFVServicePaloAltoFwServiceAWSTGWSiteModel {
+			AWSTGWSite: func() *NfvServicePaloAltoFwServiceAWSTGWSiteModel {
 				if !isImport && data.PaloAltoFwService != nil && data.PaloAltoFwService.AWSTGWSite != nil {
 					// Normal Read: preserve existing state value
 					return data.PaloAltoFwService.AWSTGWSite
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["aws_tgw_site"].(map[string]interface{}); ok {
-					return &NFVServicePaloAltoFwServiceAWSTGWSiteModel{
+					return &NfvServicePaloAltoFwServiceAWSTGWSiteModel{
 						Name: func() types.String {
 							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
 								return types.StringValue(v)
@@ -3256,7 +3256,7 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				return nil
 			}(),
-			DisablePanaroma: func() *NFVServiceEmptyModel {
+			DisablePanaroma: func() *NfvServiceEmptyModel {
 				if !isImport && data.PaloAltoFwService != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
@@ -3264,7 +3264,7 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["disable_panaroma"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
@@ -3274,7 +3274,7 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				return types.StringNull()
 			}(),
-			PanAmiBundle1: func() *NFVServiceEmptyModel {
+			PanAmiBundle1: func() *NfvServiceEmptyModel {
 				if !isImport && data.PaloAltoFwService != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
@@ -3282,11 +3282,11 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["pan_ami_bundle1"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
-			PanAmiBundle2: func() *NFVServiceEmptyModel {
+			PanAmiBundle2: func() *NfvServiceEmptyModel {
 				if !isImport && data.PaloAltoFwService != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
@@ -3294,18 +3294,18 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["pan_ami_bundle2"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
-			PanoramaServer: func() *NFVServicePaloAltoFwServicePanoramaServerModel {
+			PanoramaServer: func() *NfvServicePaloAltoFwServicePanoramaServerModel {
 				if !isImport && data.PaloAltoFwService != nil && data.PaloAltoFwService.PanoramaServer != nil {
 					// Normal Read: preserve existing state value
 					return data.PaloAltoFwService.PanoramaServer
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["panorama_server"].(map[string]interface{}); ok {
-					return &NFVServicePaloAltoFwServicePanoramaServerModel{
+					return &NfvServicePaloAltoFwServicePanoramaServerModel{
 						DeviceGroupName: func() types.String {
 							if v, ok := nestedBlockData["device_group_name"].(string); ok && v != "" {
 								return types.StringValue(v)
@@ -3328,14 +3328,14 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				return nil
 			}(),
-			ServiceNodes: func() *NFVServicePaloAltoFwServiceServiceNodesModel {
+			ServiceNodes: func() *NfvServicePaloAltoFwServiceServiceNodesModel {
 				if !isImport && data.PaloAltoFwService != nil && data.PaloAltoFwService.ServiceNodes != nil {
 					// Normal Read: preserve existing state value
 					return data.PaloAltoFwService.ServiceNodes
 				}
 				// Import case: read from API
 				if _, ok := blockData["service_nodes"].(map[string]interface{}); ok {
-					return &NFVServicePaloAltoFwServiceServiceNodesModel{}
+					return &NfvServicePaloAltoFwServiceServiceNodesModel{}
 				}
 				return nil
 			}(),
@@ -3345,7 +3345,7 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				return types.StringNull()
 			}(),
-			Tags: func() *NFVServiceEmptyModel {
+			Tags: func() *NfvServiceEmptyModel {
 				if !isImport && data.PaloAltoFwService != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
@@ -3353,7 +3353,7 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["tags"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
@@ -3378,8 +3378,8 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-	var data NFVServiceResourceModel
+func (r *NfvServiceResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
+	var data NfvServiceResourceModel
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -3394,7 +3394,7 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 	ctx, cancel := context.WithTimeout(ctx, updateTimeout)
 	defer cancel()
 
-	apiResource := &client.NFVService{
+	apiResource := &client.NfvService{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -3438,10 +3438,10 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 		if data.EnabledSSHAccess.AdvertiseOnSLI != nil {
 			enabled_ssh_accessMap["advertise_on_sli"] = map[string]interface{}{}
 		}
-		if data.EnabledSSHAccess.AdvertiseOnSLO != nil {
+		if data.EnabledSSHAccess.AdvertiseOnSlo != nil {
 			enabled_ssh_accessMap["advertise_on_slo"] = map[string]interface{}{}
 		}
-		if data.EnabledSSHAccess.AdvertiseOnSLOSLI != nil {
+		if data.EnabledSSHAccess.AdvertiseOnSloSLI != nil {
 			enabled_ssh_accessMap["advertise_on_slo_sli"] = map[string]interface{}{}
 		}
 		if !data.EnabledSSHAccess.DomainSuffix.IsNull() && !data.EnabledSSHAccess.DomainSuffix.IsUnknown() {
@@ -3478,8 +3478,8 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 		}
 		if data.F5BigIPAWSService.EndpointService != nil {
 			endpoint_serviceNestedMap := make(map[string]interface{})
-			if !data.F5BigIPAWSService.EndpointService.ConfiguredVip.IsNull() && !data.F5BigIPAWSService.EndpointService.ConfiguredVip.IsUnknown() {
-				endpoint_serviceNestedMap["configured_vip"] = data.F5BigIPAWSService.EndpointService.ConfiguredVip.ValueString()
+			if !data.F5BigIPAWSService.EndpointService.ConfiguredVIP.IsNull() && !data.F5BigIPAWSService.EndpointService.ConfiguredVIP.IsUnknown() {
+				endpoint_serviceNestedMap["configured_vip"] = data.F5BigIPAWSService.EndpointService.ConfiguredVIP.ValueString()
 			}
 			f5_big_ip_aws_serviceMap["endpoint_service"] = endpoint_serviceNestedMap
 		}
@@ -3531,22 +3531,22 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 			advertise_on_internetNestedMap := make(map[string]interface{})
 			https_managementMap["advertise_on_internet"] = advertise_on_internetNestedMap
 		}
-		if data.HTTPSManagement.AdvertiseOnInternetDefaultVip != nil {
+		if data.HTTPSManagement.AdvertiseOnInternetDefaultVIP != nil {
 			https_managementMap["advertise_on_internet_default_vip"] = map[string]interface{}{}
 		}
-		if data.HTTPSManagement.AdvertiseOnSLIVip != nil {
+		if data.HTTPSManagement.AdvertiseOnSLIVIP != nil {
 			advertise_on_sli_vipNestedMap := make(map[string]interface{})
 			https_managementMap["advertise_on_sli_vip"] = advertise_on_sli_vipNestedMap
 		}
-		if data.HTTPSManagement.AdvertiseOnSLOInternetVip != nil {
+		if data.HTTPSManagement.AdvertiseOnSloInternetVIP != nil {
 			advertise_on_slo_internet_vipNestedMap := make(map[string]interface{})
 			https_managementMap["advertise_on_slo_internet_vip"] = advertise_on_slo_internet_vipNestedMap
 		}
-		if data.HTTPSManagement.AdvertiseOnSLOSLI != nil {
+		if data.HTTPSManagement.AdvertiseOnSloSLI != nil {
 			advertise_on_slo_sliNestedMap := make(map[string]interface{})
 			https_managementMap["advertise_on_slo_sli"] = advertise_on_slo_sliNestedMap
 		}
-		if data.HTTPSManagement.AdvertiseOnSLOVip != nil {
+		if data.HTTPSManagement.AdvertiseOnSloVIP != nil {
 			advertise_on_slo_vipNestedMap := make(map[string]interface{})
 			https_managementMap["advertise_on_slo_vip"] = advertise_on_slo_vipNestedMap
 		}
@@ -3624,9 +3624,9 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 		apiResource.Spec["palo_alto_fw_service"] = palo_alto_fw_serviceMap
 	}
 
-	_, err := r.client.UpdateNFVService(ctx, apiResource)
+	_, err := r.client.UpdateNfvService(ctx, apiResource)
 	if err != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update NFVService: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update NfvService: %s", err))
 		return
 	}
 
@@ -3635,9 +3635,9 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 
 	// Fetch the resource to get complete state including computed fields
 	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
-	fetched, fetchErr := r.client.GetNFVService(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	fetched, fetchErr := r.client.GetNfvService(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if fetchErr != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read NFVService after update: %s", fetchErr))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read NfvService after update: %s", fetchErr))
 		return
 	}
 
@@ -3649,17 +3649,17 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 	_ = isImport          // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["disable_https_management"].(map[string]interface{}); ok && isImport && data.DisableHTTPSManagement == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DisableHTTPSManagement = &NFVServiceEmptyModel{}
+		data.DisableHTTPSManagement = &NfvServiceEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["disable_ssh_access"].(map[string]interface{}); ok && isImport && data.DisableSSHAccess == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DisableSSHAccess = &NFVServiceEmptyModel{}
+		data.DisableSSHAccess = &NfvServiceEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["enabled_ssh_access"].(map[string]interface{}); ok && (isImport || data.EnabledSSHAccess != nil) {
-		data.EnabledSSHAccess = &NFVServiceEnabledSSHAccessModel{
-			AdvertiseOnSLI: func() *NFVServiceEmptyModel {
+		data.EnabledSSHAccess = &NfvServiceEnabledSSHAccessModel{
+			AdvertiseOnSLI: func() *NfvServiceEmptyModel {
 				if !isImport && data.EnabledSSHAccess != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
@@ -3667,31 +3667,31 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_sli"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
-			AdvertiseOnSLO: func() *NFVServiceEmptyModel {
+			AdvertiseOnSlo: func() *NfvServiceEmptyModel {
 				if !isImport && data.EnabledSSHAccess != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.EnabledSSHAccess.AdvertiseOnSLO
+					return data.EnabledSSHAccess.AdvertiseOnSlo
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_slo"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
-			AdvertiseOnSLOSLI: func() *NFVServiceEmptyModel {
+			AdvertiseOnSloSLI: func() *NfvServiceEmptyModel {
 				if !isImport && data.EnabledSSHAccess != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.EnabledSSHAccess.AdvertiseOnSLOSLI
+					return data.EnabledSSHAccess.AdvertiseOnSloSLI
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_slo_sli"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
@@ -3701,12 +3701,12 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 				}
 				return types.StringNull()
 			}(),
-			NodeSSHPorts: func() []NFVServiceEnabledSSHAccessNodeSSHPortsModel {
+			NodeSSHPorts: func() []NfvServiceEnabledSSHAccessNodeSSHPortsModel {
 				if listData, ok := blockData["node_ssh_ports"].([]interface{}); ok && len(listData) > 0 {
-					var result []NFVServiceEnabledSSHAccessNodeSSHPortsModel
+					var result []NfvServiceEnabledSSHAccessNodeSSHPortsModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, NFVServiceEnabledSSHAccessNodeSSHPortsModel{
+							result = append(result, NfvServiceEnabledSSHAccessNodeSSHPortsModel{
 								NodeName: func() types.String {
 									if v, ok := itemMap["node_name"].(string); ok && v != "" {
 										return types.StringValue(v)
@@ -3729,15 +3729,15 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 		}
 	}
 	if blockData, ok := apiResource.Spec["f5_big_ip_aws_service"].(map[string]interface{}); ok && (isImport || data.F5BigIPAWSService != nil) {
-		data.F5BigIPAWSService = &NFVServiceF5BigIPAWSServiceModel{
-			AdminPassword: func() *NFVServiceF5BigIPAWSServiceAdminPasswordModel {
+		data.F5BigIPAWSService = &NfvServiceF5BigIPAWSServiceModel{
+			AdminPassword: func() *NfvServiceF5BigIPAWSServiceAdminPasswordModel {
 				if !isImport && data.F5BigIPAWSService != nil && data.F5BigIPAWSService.AdminPassword != nil {
 					// Normal Read: preserve existing state value
 					return data.F5BigIPAWSService.AdminPassword
 				}
 				// Import case: read from API
 				if _, ok := blockData["admin_password"].(map[string]interface{}); ok {
-					return &NFVServiceF5BigIPAWSServiceAdminPasswordModel{}
+					return &NfvServiceF5BigIPAWSServiceAdminPasswordModel{}
 				}
 				return nil
 			}(),
@@ -3747,26 +3747,26 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 				}
 				return types.StringNull()
 			}(),
-			AWSTGWSiteParams: func() *NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsModel {
+			AWSTGWSiteParams: func() *NfvServiceF5BigIPAWSServiceAWSTGWSiteParamsModel {
 				if !isImport && data.F5BigIPAWSService != nil && data.F5BigIPAWSService.AWSTGWSiteParams != nil {
 					// Normal Read: preserve existing state value
 					return data.F5BigIPAWSService.AWSTGWSiteParams
 				}
 				// Import case: read from API
 				if _, ok := blockData["aws_tgw_site_params"].(map[string]interface{}); ok {
-					return &NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsModel{}
+					return &NfvServiceF5BigIPAWSServiceAWSTGWSiteParamsModel{}
 				}
 				return nil
 			}(),
-			EndpointService: func() *NFVServiceF5BigIPAWSServiceEndpointServiceModel {
+			EndpointService: func() *NfvServiceF5BigIPAWSServiceEndpointServiceModel {
 				if !isImport && data.F5BigIPAWSService != nil && data.F5BigIPAWSService.EndpointService != nil {
 					// Normal Read: preserve existing state value
 					return data.F5BigIPAWSService.EndpointService
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["endpoint_service"].(map[string]interface{}); ok {
-					return &NFVServiceF5BigIPAWSServiceEndpointServiceModel{
-						ConfiguredVip: func() types.String {
+					return &NfvServiceF5BigIPAWSServiceEndpointServiceModel{
+						ConfiguredVIP: func() types.String {
 							if v, ok := nestedBlockData["configured_vip"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
@@ -3776,26 +3776,26 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 				}
 				return nil
 			}(),
-			MarketPlaceImage: func() *NFVServiceF5BigIPAWSServiceMarketPlaceImageModel {
+			MarketPlaceImage: func() *NfvServiceF5BigIPAWSServiceMarketPlaceImageModel {
 				if !isImport && data.F5BigIPAWSService != nil && data.F5BigIPAWSService.MarketPlaceImage != nil {
 					// Normal Read: preserve existing state value
 					return data.F5BigIPAWSService.MarketPlaceImage
 				}
 				// Import case: read from API
 				if _, ok := blockData["market_place_image"].(map[string]interface{}); ok {
-					return &NFVServiceF5BigIPAWSServiceMarketPlaceImageModel{}
+					return &NfvServiceF5BigIPAWSServiceMarketPlaceImageModel{}
 				}
 				return nil
 			}(),
-			Nodes: func() []NFVServiceF5BigIPAWSServiceNodesModel {
+			Nodes: func() []NfvServiceF5BigIPAWSServiceNodesModel {
 				if listData, ok := blockData["nodes"].([]interface{}); ok && len(listData) > 0 {
-					var result []NFVServiceF5BigIPAWSServiceNodesModel
+					var result []NfvServiceF5BigIPAWSServiceNodesModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, NFVServiceF5BigIPAWSServiceNodesModel{
-								AutomaticPrefix: func() *NFVServiceEmptyModel {
+							result = append(result, NfvServiceF5BigIPAWSServiceNodesModel{
+								AutomaticPrefix: func() *NfvServiceEmptyModel {
 									if _, ok := itemMap["automatic_prefix"].(map[string]interface{}); ok {
-										return &NFVServiceEmptyModel{}
+										return &NfvServiceEmptyModel{}
 									}
 									return nil
 								}(),
@@ -3805,9 +3805,9 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 									}
 									return types.StringNull()
 								}(),
-								MgmtSubnet: func() *NFVServiceF5BigIPAWSServiceNodesMgmtSubnetModel {
+								MgmtSubnet: func() *NfvServiceF5BigIPAWSServiceNodesMgmtSubnetModel {
 									if deepMap, ok := itemMap["mgmt_subnet"].(map[string]interface{}); ok {
-										return &NFVServiceF5BigIPAWSServiceNodesMgmtSubnetModel{
+										return &NfvServiceF5BigIPAWSServiceNodesMgmtSubnetModel{
 											ExistingSubnetID: func() types.String {
 												if v, ok := deepMap["existing_subnet_id"].(string); ok && v != "" {
 													return types.StringValue(v)
@@ -3824,9 +3824,9 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 									}
 									return types.StringNull()
 								}(),
-								ReservedMgmtSubnet: func() *NFVServiceEmptyModel {
+								ReservedMgmtSubnet: func() *NfvServiceEmptyModel {
 									if _, ok := itemMap["reserved_mgmt_subnet"].(map[string]interface{}); ok {
-										return &NFVServiceEmptyModel{}
+										return &NfvServiceEmptyModel{}
 									}
 									return nil
 								}(),
@@ -3849,7 +3849,7 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 				}
 				return types.StringNull()
 			}(),
-			Tags: func() *NFVServiceEmptyModel {
+			Tags: func() *NfvServiceEmptyModel {
 				if !isImport && data.F5BigIPAWSService != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
@@ -3857,82 +3857,82 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["tags"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
 		}
 	}
 	if blockData, ok := apiResource.Spec["https_management"].(map[string]interface{}); ok && (isImport || data.HTTPSManagement != nil) {
-		data.HTTPSManagement = &NFVServiceHTTPSManagementModel{
-			AdvertiseOnInternet: func() *NFVServiceHTTPSManagementAdvertiseOnInternetModel {
+		data.HTTPSManagement = &NfvServiceHTTPSManagementModel{
+			AdvertiseOnInternet: func() *NfvServiceHTTPSManagementAdvertiseOnInternetModel {
 				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnInternet != nil {
 					// Normal Read: preserve existing state value
 					return data.HTTPSManagement.AdvertiseOnInternet
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_internet"].(map[string]interface{}); ok {
-					return &NFVServiceHTTPSManagementAdvertiseOnInternetModel{}
+					return &NfvServiceHTTPSManagementAdvertiseOnInternetModel{}
 				}
 				return nil
 			}(),
-			AdvertiseOnInternetDefaultVip: func() *NFVServiceEmptyModel {
+			AdvertiseOnInternetDefaultVIP: func() *NfvServiceEmptyModel {
 				if !isImport && data.HTTPSManagement != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.HTTPSManagement.AdvertiseOnInternetDefaultVip
+					return data.HTTPSManagement.AdvertiseOnInternetDefaultVIP
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_internet_default_vip"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
-			AdvertiseOnSLIVip: func() *NFVServiceHTTPSManagementAdvertiseOnSLIVipModel {
-				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLIVip != nil {
+			AdvertiseOnSLIVIP: func() *NfvServiceHTTPSManagementAdvertiseOnSLIVIPModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLIVIP != nil {
 					// Normal Read: preserve existing state value
-					return data.HTTPSManagement.AdvertiseOnSLIVip
+					return data.HTTPSManagement.AdvertiseOnSLIVIP
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_sli_vip"].(map[string]interface{}); ok {
-					return &NFVServiceHTTPSManagementAdvertiseOnSLIVipModel{}
+					return &NfvServiceHTTPSManagementAdvertiseOnSLIVIPModel{}
 				}
 				return nil
 			}(),
-			AdvertiseOnSLOInternetVip: func() *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipModel {
-				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLOInternetVip != nil {
+			AdvertiseOnSloInternetVIP: func() *NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSloInternetVIP != nil {
 					// Normal Read: preserve existing state value
-					return data.HTTPSManagement.AdvertiseOnSLOInternetVip
+					return data.HTTPSManagement.AdvertiseOnSloInternetVIP
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_slo_internet_vip"].(map[string]interface{}); ok {
-					return &NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipModel{}
+					return &NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPModel{}
 				}
 				return nil
 			}(),
-			AdvertiseOnSLOSLI: func() *NFVServiceHTTPSManagementAdvertiseOnSLOSLIModel {
-				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLOSLI != nil {
+			AdvertiseOnSloSLI: func() *NfvServiceHTTPSManagementAdvertiseOnSloSLIModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSloSLI != nil {
 					// Normal Read: preserve existing state value
-					return data.HTTPSManagement.AdvertiseOnSLOSLI
+					return data.HTTPSManagement.AdvertiseOnSloSLI
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_slo_sli"].(map[string]interface{}); ok {
-					return &NFVServiceHTTPSManagementAdvertiseOnSLOSLIModel{}
+					return &NfvServiceHTTPSManagementAdvertiseOnSloSLIModel{}
 				}
 				return nil
 			}(),
-			AdvertiseOnSLOVip: func() *NFVServiceHTTPSManagementAdvertiseOnSLOVipModel {
-				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLOVip != nil {
+			AdvertiseOnSloVIP: func() *NfvServiceHTTPSManagementAdvertiseOnSloVIPModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSloVIP != nil {
 					// Normal Read: preserve existing state value
-					return data.HTTPSManagement.AdvertiseOnSLOVip
+					return data.HTTPSManagement.AdvertiseOnSloVIP
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_slo_vip"].(map[string]interface{}); ok {
-					return &NFVServiceHTTPSManagementAdvertiseOnSLOVipModel{}
+					return &NfvServiceHTTPSManagementAdvertiseOnSloVIPModel{}
 				}
 				return nil
 			}(),
-			DefaultHTTPSPort: func() *NFVServiceEmptyModel {
+			DefaultHTTPSPort: func() *NfvServiceEmptyModel {
 				if !isImport && data.HTTPSManagement != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
@@ -3940,7 +3940,7 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["default_https_port"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
@@ -3959,15 +3959,15 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 		}
 	}
 	if blockData, ok := apiResource.Spec["palo_alto_fw_service"].(map[string]interface{}); ok && (isImport || data.PaloAltoFwService != nil) {
-		data.PaloAltoFwService = &NFVServicePaloAltoFwServiceModel{
-			AutoSetup: func() *NFVServicePaloAltoFwServiceAutoSetupModel {
+		data.PaloAltoFwService = &NfvServicePaloAltoFwServiceModel{
+			AutoSetup: func() *NfvServicePaloAltoFwServiceAutoSetupModel {
 				if !isImport && data.PaloAltoFwService != nil && data.PaloAltoFwService.AutoSetup != nil {
 					// Normal Read: preserve existing state value
 					return data.PaloAltoFwService.AutoSetup
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["auto_setup"].(map[string]interface{}); ok {
-					return &NFVServicePaloAltoFwServiceAutoSetupModel{
+					return &NfvServicePaloAltoFwServiceAutoSetupModel{
 						AdminUsername: func() types.String {
 							if v, ok := nestedBlockData["admin_username"].(string); ok && v != "" {
 								return types.StringValue(v)
@@ -3978,14 +3978,14 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 				}
 				return nil
 			}(),
-			AWSTGWSite: func() *NFVServicePaloAltoFwServiceAWSTGWSiteModel {
+			AWSTGWSite: func() *NfvServicePaloAltoFwServiceAWSTGWSiteModel {
 				if !isImport && data.PaloAltoFwService != nil && data.PaloAltoFwService.AWSTGWSite != nil {
 					// Normal Read: preserve existing state value
 					return data.PaloAltoFwService.AWSTGWSite
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["aws_tgw_site"].(map[string]interface{}); ok {
-					return &NFVServicePaloAltoFwServiceAWSTGWSiteModel{
+					return &NfvServicePaloAltoFwServiceAWSTGWSiteModel{
 						Name: func() types.String {
 							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
 								return types.StringValue(v)
@@ -4008,7 +4008,7 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 				}
 				return nil
 			}(),
-			DisablePanaroma: func() *NFVServiceEmptyModel {
+			DisablePanaroma: func() *NfvServiceEmptyModel {
 				if !isImport && data.PaloAltoFwService != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
@@ -4016,7 +4016,7 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["disable_panaroma"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
@@ -4026,7 +4026,7 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 				}
 				return types.StringNull()
 			}(),
-			PanAmiBundle1: func() *NFVServiceEmptyModel {
+			PanAmiBundle1: func() *NfvServiceEmptyModel {
 				if !isImport && data.PaloAltoFwService != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
@@ -4034,11 +4034,11 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["pan_ami_bundle1"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
-			PanAmiBundle2: func() *NFVServiceEmptyModel {
+			PanAmiBundle2: func() *NfvServiceEmptyModel {
 				if !isImport && data.PaloAltoFwService != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
@@ -4046,18 +4046,18 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["pan_ami_bundle2"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
-			PanoramaServer: func() *NFVServicePaloAltoFwServicePanoramaServerModel {
+			PanoramaServer: func() *NfvServicePaloAltoFwServicePanoramaServerModel {
 				if !isImport && data.PaloAltoFwService != nil && data.PaloAltoFwService.PanoramaServer != nil {
 					// Normal Read: preserve existing state value
 					return data.PaloAltoFwService.PanoramaServer
 				}
 				// Import case: read from API
 				if nestedBlockData, ok := blockData["panorama_server"].(map[string]interface{}); ok {
-					return &NFVServicePaloAltoFwServicePanoramaServerModel{
+					return &NfvServicePaloAltoFwServicePanoramaServerModel{
 						DeviceGroupName: func() types.String {
 							if v, ok := nestedBlockData["device_group_name"].(string); ok && v != "" {
 								return types.StringValue(v)
@@ -4080,14 +4080,14 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 				}
 				return nil
 			}(),
-			ServiceNodes: func() *NFVServicePaloAltoFwServiceServiceNodesModel {
+			ServiceNodes: func() *NfvServicePaloAltoFwServiceServiceNodesModel {
 				if !isImport && data.PaloAltoFwService != nil && data.PaloAltoFwService.ServiceNodes != nil {
 					// Normal Read: preserve existing state value
 					return data.PaloAltoFwService.ServiceNodes
 				}
 				// Import case: read from API
 				if _, ok := blockData["service_nodes"].(map[string]interface{}); ok {
-					return &NFVServicePaloAltoFwServiceServiceNodesModel{}
+					return &NfvServicePaloAltoFwServiceServiceNodesModel{}
 				}
 				return nil
 			}(),
@@ -4097,7 +4097,7 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 				}
 				return types.StringNull()
 			}(),
-			Tags: func() *NFVServiceEmptyModel {
+			Tags: func() *NfvServiceEmptyModel {
 				if !isImport && data.PaloAltoFwService != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
@@ -4105,7 +4105,7 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["tags"].(map[string]interface{}); ok {
-					return &NFVServiceEmptyModel{}
+					return &NfvServiceEmptyModel{}
 				}
 				return nil
 			}(),
@@ -4128,8 +4128,8 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *NFVServiceResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
-	var data NFVServiceResourceModel
+func (r *NfvServiceResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
+	var data NfvServiceResourceModel
 	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -4143,11 +4143,11 @@ func (r *NFVServiceResource) Delete(ctx context.Context, req resource.DeleteRequ
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-	err := r.client.DeleteNFVService(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	err := r.client.DeleteNfvService(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
-			tflog.Warn(ctx, "NFVService already deleted, removing from state", map[string]interface{}{
+			tflog.Warn(ctx, "NfvService already deleted, removing from state", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})
@@ -4156,18 +4156,18 @@ func (r *NFVServiceResource) Delete(ctx context.Context, req resource.DeleteRequ
 		// If delete is not implemented (501), warn and remove from state
 		// Some F5 XC resources don't support deletion via API
 		if strings.Contains(err.Error(), "501") {
-			tflog.Warn(ctx, "NFVService delete not supported by API (501), removing from state only", map[string]interface{}{
+			tflog.Warn(ctx, "NfvService delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})
 			return
 		}
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete NFVService: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete NfvService: %s", err))
 		return
 	}
 }
 
-func (r *NFVServiceResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
+func (r *NfvServiceResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	// Import ID format: namespace/name
 	parts := strings.Split(req.ID, "/")
 	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {

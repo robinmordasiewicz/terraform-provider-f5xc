@@ -2,12 +2,12 @@
 page_title: "f5xc_trusted_ca_list Data Source - terraform-provider-f5xc"
 subcategory: "Certificates"
 description: |-
-  Manages a TrustedCaList resource in F5 Distributed Cloud for trusted certificate authority list management.
+  Manages a TrustedCAList resource in F5 Distributed Cloud for trusted certificate authority list management.
 ---
 
 # f5xc_trusted_ca_list (Data Source)
 
-Manages a TrustedCaList resource in F5 Distributed Cloud for trusted certificate authority list management.
+Manages a TrustedCAList resource in F5 Distributed Cloud for trusted certificate authority list management.
 
 ~> **Note** Please refer to [Trusted CA List API docs](https://docs.cloud.f5.com/docs-v2/api/trusted-ca-list) to learn more.
 
@@ -34,9 +34,9 @@ data "f5xc_trusted_ca_list" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the TrustedCaList
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the TrustedCAList
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the TrustedCaList exists
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the TrustedCAList exists
 
 ### Attributes Reference
 
@@ -44,7 +44,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations applied to this resource
 
-<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Description of the TrustedCaList
+<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Description of the TrustedCAList
 
 <a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 

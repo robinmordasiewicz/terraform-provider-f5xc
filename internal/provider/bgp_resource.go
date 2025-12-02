@@ -80,9 +80,9 @@ type BGPPeersBfdEnabledModel struct {
 // BGPPeersExternalModel represents external block
 type BGPPeersExternalModel struct {
 	Address             types.String                        `tfsdk:"address"`
-	AddressIPV6         types.String                        `tfsdk:"address_ipv6"`
+	AddressIpv6         types.String                        `tfsdk:"address_ipv6"`
 	Asn                 types.Int64                         `tfsdk:"asn"`
-	Md5AuthKey          types.String                        `tfsdk:"md5_auth_key"`
+	MD5AuthKey          types.String                        `tfsdk:"md5_auth_key"`
 	Port                types.Int64                         `tfsdk:"port"`
 	SubnetBeginOffset   types.Int64                         `tfsdk:"subnet_begin_offset"`
 	SubnetBeginOffsetV6 types.Int64                         `tfsdk:"subnet_begin_offset_v6"`
@@ -169,8 +169,8 @@ type BGPWhereModel struct {
 // BGPWhereSiteModel represents site block
 type BGPWhereSiteModel struct {
 	NetworkType        types.String           `tfsdk:"network_type"`
-	DisableInternetVip *BGPEmptyModel         `tfsdk:"disable_internet_vip"`
-	EnableInternetVip  *BGPEmptyModel         `tfsdk:"enable_internet_vip"`
+	DisableInternetVIP *BGPEmptyModel         `tfsdk:"disable_internet_vip"`
+	EnableInternetVIP  *BGPEmptyModel         `tfsdk:"enable_internet_vip"`
 	Ref                []BGPWhereSiteRefModel `tfsdk:"ref"`
 }
 
@@ -186,8 +186,8 @@ type BGPWhereSiteRefModel struct {
 // BGPWhereVirtualSiteModel represents virtual_site block
 type BGPWhereVirtualSiteModel struct {
 	NetworkType        types.String                  `tfsdk:"network_type"`
-	DisableInternetVip *BGPEmptyModel                `tfsdk:"disable_internet_vip"`
-	EnableInternetVip  *BGPEmptyModel                `tfsdk:"enable_internet_vip"`
+	DisableInternetVIP *BGPEmptyModel                `tfsdk:"disable_internet_vip"`
+	EnableInternetVIP  *BGPEmptyModel                `tfsdk:"enable_internet_vip"`
 	Ref                []BGPWhereVirtualSiteRefModel `tfsdk:"ref"`
 }
 
@@ -830,8 +830,8 @@ func (r *BGPResource) Create(ctx context.Context, req resource.CreateRequest, re
 				if !item.External.Address.IsNull() && !item.External.Address.IsUnknown() {
 					externalNestedMap["address"] = item.External.Address.ValueString()
 				}
-				if !item.External.AddressIPV6.IsNull() && !item.External.AddressIPV6.IsUnknown() {
-					externalNestedMap["address_ipv6"] = item.External.AddressIPV6.ValueString()
+				if !item.External.AddressIpv6.IsNull() && !item.External.AddressIpv6.IsUnknown() {
+					externalNestedMap["address_ipv6"] = item.External.AddressIpv6.ValueString()
 				}
 				if !item.External.Asn.IsNull() && !item.External.Asn.IsUnknown() {
 					externalNestedMap["asn"] = item.External.Asn.ValueInt64()
@@ -884,8 +884,8 @@ func (r *BGPResource) Create(ctx context.Context, req resource.CreateRequest, re
 					interface_listDeepMap := make(map[string]interface{})
 					externalNestedMap["interface_list"] = interface_listDeepMap
 				}
-				if !item.External.Md5AuthKey.IsNull() && !item.External.Md5AuthKey.IsUnknown() {
-					externalNestedMap["md5_auth_key"] = item.External.Md5AuthKey.ValueString()
+				if !item.External.MD5AuthKey.IsNull() && !item.External.MD5AuthKey.IsUnknown() {
+					externalNestedMap["md5_auth_key"] = item.External.MD5AuthKey.ValueString()
 				}
 				if item.External.NoAuthentication != nil {
 					externalNestedMap["no_authentication"] = map[string]interface{}{}
@@ -1074,7 +1074,7 @@ func (r *BGPResource) Create(ctx context.Context, req resource.CreateRequest, re
 									}
 									return types.StringNull()
 								}(),
-								AddressIPV6: func() types.String {
+								AddressIpv6: func() types.String {
 									if v, ok := nestedMap["address_ipv6"].(string); ok && v != "" {
 										return types.StringValue(v)
 									}
@@ -1128,7 +1128,7 @@ func (r *BGPResource) Create(ctx context.Context, req resource.CreateRequest, re
 									}
 									return nil
 								}(),
-								Md5AuthKey: func() types.String {
+								MD5AuthKey: func() types.String {
 									if v, ok := nestedMap["md5_auth_key"].(string); ok && v != "" {
 										return types.StringValue(v)
 									}
@@ -1412,7 +1412,7 @@ func (r *BGPResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 									}
 									return types.StringNull()
 								}(),
-								AddressIPV6: func() types.String {
+								AddressIpv6: func() types.String {
 									if v, ok := nestedMap["address_ipv6"].(string); ok && v != "" {
 										return types.StringValue(v)
 									}
@@ -1466,7 +1466,7 @@ func (r *BGPResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 									}
 									return nil
 								}(),
-								Md5AuthKey: func() types.String {
+								MD5AuthKey: func() types.String {
 									if v, ok := nestedMap["md5_auth_key"].(string); ok && v != "" {
 										return types.StringValue(v)
 									}
@@ -1669,8 +1669,8 @@ func (r *BGPResource) Update(ctx context.Context, req resource.UpdateRequest, re
 				if !item.External.Address.IsNull() && !item.External.Address.IsUnknown() {
 					externalNestedMap["address"] = item.External.Address.ValueString()
 				}
-				if !item.External.AddressIPV6.IsNull() && !item.External.AddressIPV6.IsUnknown() {
-					externalNestedMap["address_ipv6"] = item.External.AddressIPV6.ValueString()
+				if !item.External.AddressIpv6.IsNull() && !item.External.AddressIpv6.IsUnknown() {
+					externalNestedMap["address_ipv6"] = item.External.AddressIpv6.ValueString()
 				}
 				if !item.External.Asn.IsNull() && !item.External.Asn.IsUnknown() {
 					externalNestedMap["asn"] = item.External.Asn.ValueInt64()
@@ -1723,8 +1723,8 @@ func (r *BGPResource) Update(ctx context.Context, req resource.UpdateRequest, re
 					interface_listDeepMap := make(map[string]interface{})
 					externalNestedMap["interface_list"] = interface_listDeepMap
 				}
-				if !item.External.Md5AuthKey.IsNull() && !item.External.Md5AuthKey.IsUnknown() {
-					externalNestedMap["md5_auth_key"] = item.External.Md5AuthKey.ValueString()
+				if !item.External.MD5AuthKey.IsNull() && !item.External.MD5AuthKey.IsUnknown() {
+					externalNestedMap["md5_auth_key"] = item.External.MD5AuthKey.ValueString()
 				}
 				if item.External.NoAuthentication != nil {
 					externalNestedMap["no_authentication"] = map[string]interface{}{}
@@ -1924,7 +1924,7 @@ func (r *BGPResource) Update(ctx context.Context, req resource.UpdateRequest, re
 									}
 									return types.StringNull()
 								}(),
-								AddressIPV6: func() types.String {
+								AddressIpv6: func() types.String {
 									if v, ok := nestedMap["address_ipv6"].(string); ok && v != "" {
 										return types.StringValue(v)
 									}
@@ -1978,7 +1978,7 @@ func (r *BGPResource) Update(ctx context.Context, req resource.UpdateRequest, re
 									}
 									return nil
 								}(),
-								Md5AuthKey: func() types.String {
+								MD5AuthKey: func() types.String {
 									if v, ok := nestedMap["md5_auth_key"].(string); ok && v != "" {
 										return types.StringValue(v)
 									}

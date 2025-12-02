@@ -71,7 +71,7 @@ type DiscoveryDiscoveryConsulAccessInfoConnectionInfoModel struct {
 type DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoModel struct {
 	Certificate  types.String                                                        `tfsdk:"certificate"`
 	ServerName   types.String                                                        `tfsdk:"server_name"`
-	TrustedCaURL types.String                                                        `tfsdk:"trusted_ca_url"`
+	TrustedCAURL types.String                                                        `tfsdk:"trusted_ca_url"`
 	KeyURL       *DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLModel `tfsdk:"key_url"`
 }
 
@@ -151,7 +151,7 @@ type DiscoveryDiscoveryK8SAccessInfoConnectionInfoModel struct {
 type DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoModel struct {
 	Certificate  types.String                                                     `tfsdk:"certificate"`
 	ServerName   types.String                                                     `tfsdk:"server_name"`
-	TrustedCaURL types.String                                                     `tfsdk:"trusted_ca_url"`
+	TrustedCAURL types.String                                                     `tfsdk:"trusted_ca_url"`
 	KeyURL       *DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLModel `tfsdk:"key_url"`
 }
 
@@ -233,8 +233,8 @@ type DiscoveryWhereModel struct {
 // DiscoveryWhereSiteModel represents site block
 type DiscoveryWhereSiteModel struct {
 	NetworkType        types.String                 `tfsdk:"network_type"`
-	DisableInternetVip *DiscoveryEmptyModel         `tfsdk:"disable_internet_vip"`
-	EnableInternetVip  *DiscoveryEmptyModel         `tfsdk:"enable_internet_vip"`
+	DisableInternetVIP *DiscoveryEmptyModel         `tfsdk:"disable_internet_vip"`
+	EnableInternetVIP  *DiscoveryEmptyModel         `tfsdk:"enable_internet_vip"`
 	Ref                []DiscoveryWhereSiteRefModel `tfsdk:"ref"`
 }
 
@@ -264,8 +264,8 @@ type DiscoveryWhereVirtualNetworkRefModel struct {
 // DiscoveryWhereVirtualSiteModel represents virtual_site block
 type DiscoveryWhereVirtualSiteModel struct {
 	NetworkType        types.String                        `tfsdk:"network_type"`
-	DisableInternetVip *DiscoveryEmptyModel                `tfsdk:"disable_internet_vip"`
-	EnableInternetVip  *DiscoveryEmptyModel                `tfsdk:"enable_internet_vip"`
+	DisableInternetVIP *DiscoveryEmptyModel                `tfsdk:"disable_internet_vip"`
+	EnableInternetVIP  *DiscoveryEmptyModel                `tfsdk:"enable_internet_vip"`
 	Ref                []DiscoveryWhereVirtualSiteRefModel `tfsdk:"ref"`
 }
 

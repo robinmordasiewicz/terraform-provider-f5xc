@@ -99,10 +99,10 @@ type VoltstackSiteCustomNetworkConfigModel struct {
 	BGPPeerAddress                 types.String                                                         `tfsdk:"bgp_peer_address"`
 	BGPRouterID                    types.String                                                         `tfsdk:"bgp_router_id"`
 	OutsideNameserver              types.String                                                         `tfsdk:"outside_nameserver"`
-	OutsideVip                     types.String                                                         `tfsdk:"outside_vip"`
+	OutsideVIP                     types.String                                                         `tfsdk:"outside_vip"`
 	SiteToSiteTunnelIP             types.String                                                         `tfsdk:"site_to_site_tunnel_ip"`
 	TunnelDeadTimeout              types.Int64                                                          `tfsdk:"tunnel_dead_timeout"`
-	VipVrrpMode                    types.String                                                         `tfsdk:"vip_vrrp_mode"`
+	VIPVrrpMode                    types.String                                                         `tfsdk:"vip_vrrp_mode"`
 	ActiveEnhancedFirewallPolicies *VoltstackSiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel `tfsdk:"active_enhanced_firewall_policies"`
 	ActiveForwardProxyPolicies     *VoltstackSiteCustomNetworkConfigActiveForwardProxyPoliciesModel     `tfsdk:"active_forward_proxy_policies"`
 	ActiveNetworkPolicies          *VoltstackSiteCustomNetworkConfigActiveNetworkPoliciesModel          `tfsdk:"active_network_policies"`
@@ -116,7 +116,7 @@ type VoltstackSiteCustomNetworkConfigModel struct {
 	NoGlobalNetwork                *VoltstackSiteEmptyModel                                             `tfsdk:"no_global_network"`
 	NoNetworkPolicy                *VoltstackSiteEmptyModel                                             `tfsdk:"no_network_policy"`
 	SLIConfig                      *VoltstackSiteCustomNetworkConfigSLIConfigModel                      `tfsdk:"sli_config"`
-	SLOConfig                      *VoltstackSiteCustomNetworkConfigSLOConfigModel                      `tfsdk:"slo_config"`
+	SloConfig                      *VoltstackSiteCustomNetworkConfigSloConfigModel                      `tfsdk:"slo_config"`
 	SmConnectionPublicIP           *VoltstackSiteEmptyModel                                             `tfsdk:"sm_connection_public_ip"`
 	SmConnectionPvtIP              *VoltstackSiteEmptyModel                                             `tfsdk:"sm_connection_pvt_ip"`
 }
@@ -164,29 +164,29 @@ type VoltstackSiteCustomNetworkConfigGlobalNetworkListModel struct {
 
 // VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsModel represents global_network_connections block
 type VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsModel struct {
-	SLIToGlobalDr *VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel `tfsdk:"sli_to_global_dr"`
-	SLOToGlobalDr *VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel `tfsdk:"slo_to_global_dr"`
+	SLIToGlobalDR *VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel `tfsdk:"sli_to_global_dr"`
+	SloToGlobalDR *VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel `tfsdk:"slo_to_global_dr"`
 }
 
-// VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel represents sli_to_global_dr block
-type VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel struct {
-	GlobalVn *VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel `tfsdk:"global_vn"`
+// VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel represents sli_to_global_dr block
+type VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel struct {
+	GlobalVn *VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel `tfsdk:"global_vn"`
 }
 
-// VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel represents global_vn block
-type VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel struct {
+// VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel represents global_vn block
+type VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel represents slo_to_global_dr block
-type VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel struct {
-	GlobalVn *VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel `tfsdk:"global_vn"`
+// VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel represents slo_to_global_dr block
+type VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel struct {
+	GlobalVn *VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel `tfsdk:"global_vn"`
 }
 
-// VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel represents global_vn block
-type VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel struct {
+// VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel represents global_vn block
+type VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -212,7 +212,7 @@ type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesModel struct {
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesDedicatedInterfaceModel represents dedicated_interface block
 type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesDedicatedInterfaceModel struct {
 	Device          types.String             `tfsdk:"device"`
-	Mtu             types.Int64              `tfsdk:"mtu"`
+	MTU             types.Int64              `tfsdk:"mtu"`
 	Node            types.String             `tfsdk:"node"`
 	Priority        types.Int64              `tfsdk:"priority"`
 	Cluster         *VoltstackSiteEmptyModel `tfsdk:"cluster"`
@@ -225,7 +225,7 @@ type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesDedicatedInterfaceMo
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesDedicatedManagementInterfaceModel represents dedicated_management_interface block
 type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesDedicatedManagementInterfaceModel struct {
 	Device  types.String             `tfsdk:"device"`
-	Mtu     types.Int64              `tfsdk:"mtu"`
+	MTU     types.Int64              `tfsdk:"mtu"`
 	Node    types.String             `tfsdk:"node"`
 	Cluster *VoltstackSiteEmptyModel `tfsdk:"cluster"`
 }
@@ -233,114 +233,114 @@ type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesDedicatedManagementI
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceModel represents ethernet_interface block
 type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceModel struct {
 	Device                 types.String                                                                                    `tfsdk:"device"`
-	Mtu                    types.Int64                                                                                     `tfsdk:"mtu"`
+	MTU                    types.Int64                                                                                     `tfsdk:"mtu"`
 	Node                   types.String                                                                                    `tfsdk:"node"`
 	Priority               types.Int64                                                                                     `tfsdk:"priority"`
-	VlanID                 types.Int64                                                                                     `tfsdk:"vlan_id"`
+	VLANID                 types.Int64                                                                                     `tfsdk:"vlan_id"`
 	Cluster                *VoltstackSiteEmptyModel                                                                        `tfsdk:"cluster"`
-	DhcpClient             *VoltstackSiteEmptyModel                                                                        `tfsdk:"dhcp_client"`
-	DhcpServer             *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDhcpServerModel        `tfsdk:"dhcp_server"`
-	IPV6AutoConfig         *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigModel    `tfsdk:"ipv6_auto_config"`
+	DHCPClient             *VoltstackSiteEmptyModel                                                                        `tfsdk:"dhcp_client"`
+	DHCPServer             *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerModel        `tfsdk:"dhcp_server"`
+	Ipv6AutoConfig         *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigModel    `tfsdk:"ipv6_auto_config"`
 	IsPrimary              *VoltstackSiteEmptyModel                                                                        `tfsdk:"is_primary"`
 	Monitor                *VoltstackSiteEmptyModel                                                                        `tfsdk:"monitor"`
 	MonitorDisabled        *VoltstackSiteEmptyModel                                                                        `tfsdk:"monitor_disabled"`
-	NoIPV6Address          *VoltstackSiteEmptyModel                                                                        `tfsdk:"no_ipv6_address"`
+	NoIpv6Address          *VoltstackSiteEmptyModel                                                                        `tfsdk:"no_ipv6_address"`
 	NotPrimary             *VoltstackSiteEmptyModel                                                                        `tfsdk:"not_primary"`
 	SiteLocalInsideNetwork *VoltstackSiteEmptyModel                                                                        `tfsdk:"site_local_inside_network"`
 	SiteLocalNetwork       *VoltstackSiteEmptyModel                                                                        `tfsdk:"site_local_network"`
 	StaticIP               *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPModel          `tfsdk:"static_ip"`
-	StaticIPV6Address      *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
+	StaticIpv6Address      *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressModel `tfsdk:"static_ipv6_address"`
 	StorageNetwork         *VoltstackSiteEmptyModel                                                                        `tfsdk:"storage_network"`
 	Untagged               *VoltstackSiteEmptyModel                                                                        `tfsdk:"untagged"`
 }
 
-// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDhcpServerModel represents dhcp_server block
-type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDhcpServerModel struct {
+// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerModel represents dhcp_server block
+type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerModel struct {
 	AutomaticFromEnd   *VoltstackSiteEmptyModel                                                                               `tfsdk:"automatic_from_end"`
 	AutomaticFromStart *VoltstackSiteEmptyModel                                                                               `tfsdk:"automatic_from_start"`
-	DhcpNetworks       []VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDhcpServerDhcpNetworksModel  `tfsdk:"dhcp_networks"`
+	DHCPNetworks       []VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerDHCPNetworksModel  `tfsdk:"dhcp_networks"`
 	FixedIPMap         *VoltstackSiteEmptyModel                                                                               `tfsdk:"fixed_ip_map"`
-	InterfaceIPMap     *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDhcpServerInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+	InterfaceIPMap     *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
-// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDhcpServerDhcpNetworksModel represents dhcp_networks block
-type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDhcpServerDhcpNetworksModel struct {
+// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerDHCPNetworksModel represents dhcp_networks block
+type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerDHCPNetworksModel struct {
 	DgwAddress    types.String                                                                                               `tfsdk:"dgw_address"`
 	DNSAddress    types.String                                                                                               `tfsdk:"dns_address"`
 	NetworkPrefix types.String                                                                                               `tfsdk:"network_prefix"`
 	PoolSettings  types.String                                                                                               `tfsdk:"pool_settings"`
 	FirstAddress  *VoltstackSiteEmptyModel                                                                                   `tfsdk:"first_address"`
 	LastAddress   *VoltstackSiteEmptyModel                                                                                   `tfsdk:"last_address"`
-	Pools         []VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDhcpServerDhcpNetworksPoolsModel `tfsdk:"pools"`
+	Pools         []VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerDHCPNetworksPoolsModel `tfsdk:"pools"`
 	SameAsDgw     *VoltstackSiteEmptyModel                                                                                   `tfsdk:"same_as_dgw"`
 }
 
-// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDhcpServerDhcpNetworksPoolsModel represents pools block
-type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDhcpServerDhcpNetworksPoolsModel struct {
+// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerDHCPNetworksPoolsModel represents pools block
+type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerDHCPNetworksPoolsModel struct {
 	EndIP   types.String `tfsdk:"end_ip"`
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
-// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDhcpServerInterfaceIPMapModel represents interface_ip_map block
-type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDhcpServerInterfaceIPMapModel struct {
+// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerInterfaceIPMapModel represents interface_ip_map block
+type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerInterfaceIPMapModel struct {
 	InterfaceIPMap *VoltstackSiteEmptyModel `tfsdk:"interface_ip_map"`
 }
 
-// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigModel represents ipv6_auto_config block
-type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigModel struct {
+// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigModel represents ipv6_auto_config block
+type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigModel struct {
 	Host   *VoltstackSiteEmptyModel                                                                           `tfsdk:"host"`
-	Router *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterModel `tfsdk:"router"`
+	Router *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterModel `tfsdk:"router"`
 }
 
-// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterModel represents router block
-type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterModel struct {
+// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterModel represents router block
+type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterModel struct {
 	NetworkPrefix types.String                                                                                                `tfsdk:"network_prefix"`
-	DNSConfig     *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
-	Stateful      *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
+	DNSConfig     *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
+	Stateful      *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
 }
 
-// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterDNSConfigModel represents dns_config block
-type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterDNSConfigModel struct {
-	ConfiguredList *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
-	LocalDNS       *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
+// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigModel represents dns_config block
+type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigModel struct {
+	ConfiguredList *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
+	LocalDNS       *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
 }
 
-// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
-type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterDNSConfigConfiguredListModel struct {
+// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
+type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigConfiguredListModel struct {
 	DNSList types.List `tfsdk:"dns_list"`
 }
 
-// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
-type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterDNSConfigLocalDNSModel struct {
+// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
+type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigLocalDNSModel struct {
 	ConfiguredAddress types.String             `tfsdk:"configured_address"`
 	FirstAddress      *VoltstackSiteEmptyModel `tfsdk:"first_address"`
 	LastAddress       *VoltstackSiteEmptyModel `tfsdk:"last_address"`
 }
 
-// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterStatefulModel represents stateful block
-type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterStatefulModel struct {
+// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulModel represents stateful block
+type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulModel struct {
 	AutomaticFromEnd   *VoltstackSiteEmptyModel                                                                                                 `tfsdk:"automatic_from_end"`
 	AutomaticFromStart *VoltstackSiteEmptyModel                                                                                                 `tfsdk:"automatic_from_start"`
-	DhcpNetworks       []VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksModel  `tfsdk:"dhcp_networks"`
+	DHCPNetworks       []VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksModel  `tfsdk:"dhcp_networks"`
 	FixedIPMap         *VoltstackSiteEmptyModel                                                                                                 `tfsdk:"fixed_ip_map"`
-	InterfaceIPMap     *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+	InterfaceIPMap     *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
-// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksModel represents dhcp_networks block
-type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksModel struct {
+// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
+type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksModel struct {
 	NetworkPrefix types.String                                                                                                                 `tfsdk:"network_prefix"`
 	PoolSettings  types.String                                                                                                                 `tfsdk:"pool_settings"`
-	Pools         []VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
+	Pools         []VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel `tfsdk:"pools"`
 }
 
-// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel represents pools block
-type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel struct {
+// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel represents pools block
+type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel struct {
 	EndIP   types.String `tfsdk:"end_ip"`
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
-// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterStatefulInterfaceIPMapModel represents interface_ip_map block
-type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterStatefulInterfaceIPMapModel struct {
+// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulInterfaceIPMapModel represents interface_ip_map block
+type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulInterfaceIPMapModel struct {
 	InterfaceIPMap *VoltstackSiteEmptyModel `tfsdk:"interface_ip_map"`
 }
 
@@ -361,26 +361,26 @@ type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceSta
 	IPAddress types.String `tfsdk:"ip_address"`
 }
 
-// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPV6AddressModel represents static_ipv6_address block
-type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPV6AddressModel struct {
-	ClusterStaticIP *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPV6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
-	NodeStaticIP    *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPV6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
+// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressModel represents static_ipv6_address block
+type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressModel struct {
+	ClusterStaticIP *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
+	NodeStaticIP    *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
-// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPV6AddressClusterStaticIPModel represents cluster_static_ip block
-type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPV6AddressClusterStaticIPModel struct {
+// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressClusterStaticIPModel represents cluster_static_ip block
+type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressClusterStaticIPModel struct {
 	InterfaceIPMap *VoltstackSiteEmptyModel `tfsdk:"interface_ip_map"`
 }
 
-// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPV6AddressNodeStaticIPModel represents node_static_ip block
-type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPV6AddressNodeStaticIPModel struct {
+// VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressNodeStaticIPModel represents node_static_ip block
+type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressNodeStaticIPModel struct {
 	DefaultGw types.String `tfsdk:"default_gw"`
 	IPAddress types.String `tfsdk:"ip_address"`
 }
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceModel represents tunnel_interface block
 type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceModel struct {
-	Mtu                    types.Int64                                                                          `tfsdk:"mtu"`
+	MTU                    types.Int64                                                                          `tfsdk:"mtu"`
 	Node                   types.String                                                                         `tfsdk:"node"`
 	Priority               types.Int64                                                                          `tfsdk:"priority"`
 	SiteLocalInsideNetwork *VoltstackSiteEmptyModel                                                             `tfsdk:"site_local_inside_network"`
@@ -489,51 +489,51 @@ type VoltstackSiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInte
 	Uid       types.String `tfsdk:"uid"`
 }
 
-// VoltstackSiteCustomNetworkConfigSLOConfigModel represents slo_config block
-type VoltstackSiteCustomNetworkConfigSLOConfigModel struct {
-	DcClusterGroup   *VoltstackSiteCustomNetworkConfigSLOConfigDcClusterGroupModel `tfsdk:"dc_cluster_group"`
+// VoltstackSiteCustomNetworkConfigSloConfigModel represents slo_config block
+type VoltstackSiteCustomNetworkConfigSloConfigModel struct {
+	DcClusterGroup   *VoltstackSiteCustomNetworkConfigSloConfigDcClusterGroupModel `tfsdk:"dc_cluster_group"`
 	Labels           *VoltstackSiteEmptyModel                                      `tfsdk:"labels"`
 	NoDcClusterGroup *VoltstackSiteEmptyModel                                      `tfsdk:"no_dc_cluster_group"`
 	NoStaticRoutes   *VoltstackSiteEmptyModel                                      `tfsdk:"no_static_routes"`
 	NoStaticV6Routes *VoltstackSiteEmptyModel                                      `tfsdk:"no_static_v6_routes"`
-	StaticRoutes     *VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesModel   `tfsdk:"static_routes"`
-	StaticV6Routes   *VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesModel `tfsdk:"static_v6_routes"`
+	StaticRoutes     *VoltstackSiteCustomNetworkConfigSloConfigStaticRoutesModel   `tfsdk:"static_routes"`
+	StaticV6Routes   *VoltstackSiteCustomNetworkConfigSloConfigStaticV6RoutesModel `tfsdk:"static_v6_routes"`
 }
 
-// VoltstackSiteCustomNetworkConfigSLOConfigDcClusterGroupModel represents dc_cluster_group block
-type VoltstackSiteCustomNetworkConfigSLOConfigDcClusterGroupModel struct {
+// VoltstackSiteCustomNetworkConfigSloConfigDcClusterGroupModel represents dc_cluster_group block
+type VoltstackSiteCustomNetworkConfigSloConfigDcClusterGroupModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesModel represents static_routes block
-type VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesModel struct {
-	StaticRoutes []VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesStaticRoutesModel `tfsdk:"static_routes"`
+// VoltstackSiteCustomNetworkConfigSloConfigStaticRoutesModel represents static_routes block
+type VoltstackSiteCustomNetworkConfigSloConfigStaticRoutesModel struct {
+	StaticRoutes []VoltstackSiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesModel `tfsdk:"static_routes"`
 }
 
-// VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesStaticRoutesModel represents static_routes block
-type VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesStaticRoutesModel struct {
+// VoltstackSiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesModel represents static_routes block
+type VoltstackSiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesModel struct {
 	Attrs          types.List                                                                           `tfsdk:"attrs"`
 	IPAddress      types.String                                                                         `tfsdk:"ip_address"`
 	IPPrefixes     types.List                                                                           `tfsdk:"ip_prefixes"`
 	DefaultGateway *VoltstackSiteEmptyModel                                                             `tfsdk:"default_gateway"`
-	NodeInterface  *VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
+	NodeInterface  *VoltstackSiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
 }
 
-// VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesStaticRoutesNodeInterfaceModel represents node_interface block
-type VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesStaticRoutesNodeInterfaceModel struct {
-	List []VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesStaticRoutesNodeInterfaceListModel `tfsdk:"list"`
+// VoltstackSiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceModel represents node_interface block
+type VoltstackSiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceModel struct {
+	List []VoltstackSiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceListModel `tfsdk:"list"`
 }
 
-// VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesStaticRoutesNodeInterfaceListModel represents list block
-type VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesStaticRoutesNodeInterfaceListModel struct {
+// VoltstackSiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceListModel represents list block
+type VoltstackSiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceListModel struct {
 	Node      types.String                                                                                       `tfsdk:"node"`
-	Interface []VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel `tfsdk:"interface"`
+	Interface []VoltstackSiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel `tfsdk:"interface"`
 }
 
-// VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel represents interface block
-type VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel struct {
+// VoltstackSiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel represents interface block
+type VoltstackSiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel struct {
 	Kind      types.String `tfsdk:"kind"`
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -541,33 +541,33 @@ type VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesStaticRoutesNodeInterf
 	Uid       types.String `tfsdk:"uid"`
 }
 
-// VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesModel represents static_v6_routes block
-type VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesModel struct {
-	StaticRoutes []VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesStaticRoutesModel `tfsdk:"static_routes"`
+// VoltstackSiteCustomNetworkConfigSloConfigStaticV6RoutesModel represents static_v6_routes block
+type VoltstackSiteCustomNetworkConfigSloConfigStaticV6RoutesModel struct {
+	StaticRoutes []VoltstackSiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesModel `tfsdk:"static_routes"`
 }
 
-// VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesStaticRoutesModel represents static_routes block
-type VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesStaticRoutesModel struct {
+// VoltstackSiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesModel represents static_routes block
+type VoltstackSiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesModel struct {
 	Attrs          types.List                                                                             `tfsdk:"attrs"`
 	IPAddress      types.String                                                                           `tfsdk:"ip_address"`
 	IPPrefixes     types.List                                                                             `tfsdk:"ip_prefixes"`
 	DefaultGateway *VoltstackSiteEmptyModel                                                               `tfsdk:"default_gateway"`
-	NodeInterface  *VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
+	NodeInterface  *VoltstackSiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
 }
 
-// VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceModel represents node_interface block
-type VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceModel struct {
-	List []VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel `tfsdk:"list"`
+// VoltstackSiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceModel represents node_interface block
+type VoltstackSiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceModel struct {
+	List []VoltstackSiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel `tfsdk:"list"`
 }
 
-// VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel represents list block
-type VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel struct {
+// VoltstackSiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel represents list block
+type VoltstackSiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel struct {
 	Node      types.String                                                                                         `tfsdk:"node"`
-	Interface []VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel `tfsdk:"interface"`
+	Interface []VoltstackSiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel `tfsdk:"interface"`
 }
 
-// VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel represents interface block
-type VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel struct {
+// VoltstackSiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel represents interface block
+type VoltstackSiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel struct {
 	Kind      types.String `tfsdk:"kind"`
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -765,7 +765,7 @@ type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTriden
 	StorageDriverName    types.String                                                                                                            `tfsdk:"storage_driver_name"`
 	StoragePrefix        types.String                                                                                                            `tfsdk:"storage_prefix"`
 	Svm                  types.String                                                                                                            `tfsdk:"svm"`
-	TrustedCaCertificate types.String                                                                                                            `tfsdk:"trusted_ca_certificate"`
+	TrustedCACertificate types.String                                                                                                            `tfsdk:"trusted_ca_certificate"`
 	Username             types.String                                                                                                            `tfsdk:"username"`
 	AutoExportCidrs      *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasAutoExportCidrsModel  `tfsdk:"auto_export_cidrs"`
 	ClientPrivateKey     *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyModel `tfsdk:"client_private_key"`
@@ -827,10 +827,10 @@ type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTriden
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageVolumeDefaultsModel represents volume_defaults block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageVolumeDefaultsModel struct {
-	AdaptiveQosPolicy types.String             `tfsdk:"adaptive_qos_policy"`
+	AdaptiveQOSPolicy types.String             `tfsdk:"adaptive_qos_policy"`
 	Encryption        types.Bool               `tfsdk:"encryption"`
 	ExportPolicy      types.String             `tfsdk:"export_policy"`
-	QosPolicy         types.String             `tfsdk:"qos_policy"`
+	QOSPolicy         types.String             `tfsdk:"qos_policy"`
 	SecurityStyle     types.String             `tfsdk:"security_style"`
 	SnapshotDir       types.Bool               `tfsdk:"snapshot_dir"`
 	SnapshotPolicy    types.String             `tfsdk:"snapshot_policy"`
@@ -839,15 +839,15 @@ type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTriden
 	SplitOnClone      types.Bool               `tfsdk:"split_on_clone"`
 	TieringPolicy     types.String             `tfsdk:"tiering_policy"`
 	UnixPermissions   types.Int64              `tfsdk:"unix_permissions"`
-	NoQos             *VoltstackSiteEmptyModel `tfsdk:"no_qos"`
+	NoQOS             *VoltstackSiteEmptyModel `tfsdk:"no_qos"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasVolumeDefaultsModel represents volume_defaults block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasVolumeDefaultsModel struct {
-	AdaptiveQosPolicy types.String             `tfsdk:"adaptive_qos_policy"`
+	AdaptiveQOSPolicy types.String             `tfsdk:"adaptive_qos_policy"`
 	Encryption        types.Bool               `tfsdk:"encryption"`
 	ExportPolicy      types.String             `tfsdk:"export_policy"`
-	QosPolicy         types.String             `tfsdk:"qos_policy"`
+	QOSPolicy         types.String             `tfsdk:"qos_policy"`
 	SecurityStyle     types.String             `tfsdk:"security_style"`
 	SnapshotDir       types.Bool               `tfsdk:"snapshot_dir"`
 	SnapshotPolicy    types.String             `tfsdk:"snapshot_policy"`
@@ -856,7 +856,7 @@ type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTriden
 	SplitOnClone      types.Bool               `tfsdk:"split_on_clone"`
 	TieringPolicy     types.String             `tfsdk:"tiering_policy"`
 	UnixPermissions   types.Int64              `tfsdk:"unix_permissions"`
-	NoQos             *VoltstackSiteEmptyModel `tfsdk:"no_qos"`
+	NoQOS             *VoltstackSiteEmptyModel `tfsdk:"no_qos"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanModel represents netapp_backend_ontap_san block
@@ -873,7 +873,7 @@ type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTriden
 	StorageDriverName    types.String                                                                                                            `tfsdk:"storage_driver_name"`
 	StoragePrefix        types.String                                                                                                            `tfsdk:"storage_prefix"`
 	Svm                  types.String                                                                                                            `tfsdk:"svm"`
-	TrustedCaCertificate types.String                                                                                                            `tfsdk:"trusted_ca_certificate"`
+	TrustedCACertificate types.String                                                                                                            `tfsdk:"trusted_ca_certificate"`
 	Username             types.String                                                                                                            `tfsdk:"username"`
 	ClientPrivateKey     *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyModel `tfsdk:"client_private_key"`
 	Labels               *VoltstackSiteEmptyModel                                                                                                `tfsdk:"labels"`
@@ -931,10 +931,10 @@ type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTriden
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageVolumeDefaultsModel represents volume_defaults block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageVolumeDefaultsModel struct {
-	AdaptiveQosPolicy types.String             `tfsdk:"adaptive_qos_policy"`
+	AdaptiveQOSPolicy types.String             `tfsdk:"adaptive_qos_policy"`
 	Encryption        types.Bool               `tfsdk:"encryption"`
 	ExportPolicy      types.String             `tfsdk:"export_policy"`
-	QosPolicy         types.String             `tfsdk:"qos_policy"`
+	QOSPolicy         types.String             `tfsdk:"qos_policy"`
 	SecurityStyle     types.String             `tfsdk:"security_style"`
 	SnapshotDir       types.Bool               `tfsdk:"snapshot_dir"`
 	SnapshotPolicy    types.String             `tfsdk:"snapshot_policy"`
@@ -943,7 +943,7 @@ type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTriden
 	SplitOnClone      types.Bool               `tfsdk:"split_on_clone"`
 	TieringPolicy     types.String             `tfsdk:"tiering_policy"`
 	UnixPermissions   types.Int64              `tfsdk:"unix_permissions"`
-	NoQos             *VoltstackSiteEmptyModel `tfsdk:"no_qos"`
+	NoQOS             *VoltstackSiteEmptyModel `tfsdk:"no_qos"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapModel represents use_chap block
@@ -994,10 +994,10 @@ type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTriden
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanVolumeDefaultsModel represents volume_defaults block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanVolumeDefaultsModel struct {
-	AdaptiveQosPolicy types.String             `tfsdk:"adaptive_qos_policy"`
+	AdaptiveQOSPolicy types.String             `tfsdk:"adaptive_qos_policy"`
 	Encryption        types.Bool               `tfsdk:"encryption"`
 	ExportPolicy      types.String             `tfsdk:"export_policy"`
-	QosPolicy         types.String             `tfsdk:"qos_policy"`
+	QOSPolicy         types.String             `tfsdk:"qos_policy"`
 	SecurityStyle     types.String             `tfsdk:"security_style"`
 	SnapshotDir       types.Bool               `tfsdk:"snapshot_dir"`
 	SnapshotPolicy    types.String             `tfsdk:"snapshot_policy"`
@@ -1006,7 +1006,7 @@ type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTriden
 	SplitOnClone      types.Bool               `tfsdk:"split_on_clone"`
 	TieringPolicy     types.String             `tfsdk:"tiering_policy"`
 	UnixPermissions   types.Int64              `tfsdk:"unix_permissions"`
-	NoQos             *VoltstackSiteEmptyModel `tfsdk:"no_qos"`
+	NoQOS             *VoltstackSiteEmptyModel `tfsdk:"no_qos"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorModel represents pure_service_orchestrator block
@@ -1112,114 +1112,114 @@ type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesModel 
 // VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceModel represents storage_interface block
 type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceModel struct {
 	Device                 types.String                                                                                                 `tfsdk:"device"`
-	Mtu                    types.Int64                                                                                                  `tfsdk:"mtu"`
+	MTU                    types.Int64                                                                                                  `tfsdk:"mtu"`
 	Node                   types.String                                                                                                 `tfsdk:"node"`
 	Priority               types.Int64                                                                                                  `tfsdk:"priority"`
-	VlanID                 types.Int64                                                                                                  `tfsdk:"vlan_id"`
+	VLANID                 types.Int64                                                                                                  `tfsdk:"vlan_id"`
 	Cluster                *VoltstackSiteEmptyModel                                                                                     `tfsdk:"cluster"`
-	DhcpClient             *VoltstackSiteEmptyModel                                                                                     `tfsdk:"dhcp_client"`
-	DhcpServer             *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDhcpServerModel        `tfsdk:"dhcp_server"`
-	IPV6AutoConfig         *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigModel    `tfsdk:"ipv6_auto_config"`
+	DHCPClient             *VoltstackSiteEmptyModel                                                                                     `tfsdk:"dhcp_client"`
+	DHCPServer             *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDHCPServerModel        `tfsdk:"dhcp_server"`
+	Ipv6AutoConfig         *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigModel    `tfsdk:"ipv6_auto_config"`
 	IsPrimary              *VoltstackSiteEmptyModel                                                                                     `tfsdk:"is_primary"`
 	Monitor                *VoltstackSiteEmptyModel                                                                                     `tfsdk:"monitor"`
 	MonitorDisabled        *VoltstackSiteEmptyModel                                                                                     `tfsdk:"monitor_disabled"`
-	NoIPV6Address          *VoltstackSiteEmptyModel                                                                                     `tfsdk:"no_ipv6_address"`
+	NoIpv6Address          *VoltstackSiteEmptyModel                                                                                     `tfsdk:"no_ipv6_address"`
 	NotPrimary             *VoltstackSiteEmptyModel                                                                                     `tfsdk:"not_primary"`
 	SiteLocalInsideNetwork *VoltstackSiteEmptyModel                                                                                     `tfsdk:"site_local_inside_network"`
 	SiteLocalNetwork       *VoltstackSiteEmptyModel                                                                                     `tfsdk:"site_local_network"`
 	StaticIP               *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPModel          `tfsdk:"static_ip"`
-	StaticIPV6Address      *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
+	StaticIpv6Address      *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIpv6AddressModel `tfsdk:"static_ipv6_address"`
 	StorageNetwork         *VoltstackSiteEmptyModel                                                                                     `tfsdk:"storage_network"`
 	Untagged               *VoltstackSiteEmptyModel                                                                                     `tfsdk:"untagged"`
 }
 
-// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDhcpServerModel represents dhcp_server block
-type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDhcpServerModel struct {
+// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDHCPServerModel represents dhcp_server block
+type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDHCPServerModel struct {
 	AutomaticFromEnd   *VoltstackSiteEmptyModel                                                                                            `tfsdk:"automatic_from_end"`
 	AutomaticFromStart *VoltstackSiteEmptyModel                                                                                            `tfsdk:"automatic_from_start"`
-	DhcpNetworks       []VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDhcpServerDhcpNetworksModel  `tfsdk:"dhcp_networks"`
+	DHCPNetworks       []VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDHCPServerDHCPNetworksModel  `tfsdk:"dhcp_networks"`
 	FixedIPMap         *VoltstackSiteEmptyModel                                                                                            `tfsdk:"fixed_ip_map"`
-	InterfaceIPMap     *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDhcpServerInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+	InterfaceIPMap     *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDHCPServerInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
-// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDhcpServerDhcpNetworksModel represents dhcp_networks block
-type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDhcpServerDhcpNetworksModel struct {
+// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDHCPServerDHCPNetworksModel represents dhcp_networks block
+type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDHCPServerDHCPNetworksModel struct {
 	DgwAddress    types.String                                                                                                            `tfsdk:"dgw_address"`
 	DNSAddress    types.String                                                                                                            `tfsdk:"dns_address"`
 	NetworkPrefix types.String                                                                                                            `tfsdk:"network_prefix"`
 	PoolSettings  types.String                                                                                                            `tfsdk:"pool_settings"`
 	FirstAddress  *VoltstackSiteEmptyModel                                                                                                `tfsdk:"first_address"`
 	LastAddress   *VoltstackSiteEmptyModel                                                                                                `tfsdk:"last_address"`
-	Pools         []VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDhcpServerDhcpNetworksPoolsModel `tfsdk:"pools"`
+	Pools         []VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDHCPServerDHCPNetworksPoolsModel `tfsdk:"pools"`
 	SameAsDgw     *VoltstackSiteEmptyModel                                                                                                `tfsdk:"same_as_dgw"`
 }
 
-// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDhcpServerDhcpNetworksPoolsModel represents pools block
-type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDhcpServerDhcpNetworksPoolsModel struct {
+// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDHCPServerDHCPNetworksPoolsModel represents pools block
+type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDHCPServerDHCPNetworksPoolsModel struct {
 	EndIP   types.String `tfsdk:"end_ip"`
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
-// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDhcpServerInterfaceIPMapModel represents interface_ip_map block
-type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDhcpServerInterfaceIPMapModel struct {
+// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDHCPServerInterfaceIPMapModel represents interface_ip_map block
+type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDHCPServerInterfaceIPMapModel struct {
 	InterfaceIPMap *VoltstackSiteEmptyModel `tfsdk:"interface_ip_map"`
 }
 
-// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigModel represents ipv6_auto_config block
-type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigModel struct {
+// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigModel represents ipv6_auto_config block
+type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigModel struct {
 	Host   *VoltstackSiteEmptyModel                                                                                        `tfsdk:"host"`
-	Router *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterModel `tfsdk:"router"`
+	Router *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterModel `tfsdk:"router"`
 }
 
-// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterModel represents router block
-type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterModel struct {
+// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterModel represents router block
+type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterModel struct {
 	NetworkPrefix types.String                                                                                                             `tfsdk:"network_prefix"`
-	DNSConfig     *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
-	Stateful      *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
+	DNSConfig     *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
+	Stateful      *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
 }
 
-// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterDNSConfigModel represents dns_config block
-type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterDNSConfigModel struct {
-	ConfiguredList *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
-	LocalDNS       *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
+// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterDNSConfigModel represents dns_config block
+type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterDNSConfigModel struct {
+	ConfiguredList *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
+	LocalDNS       *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
 }
 
-// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
-type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterDNSConfigConfiguredListModel struct {
+// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
+type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterDNSConfigConfiguredListModel struct {
 	DNSList types.List `tfsdk:"dns_list"`
 }
 
-// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
-type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterDNSConfigLocalDNSModel struct {
+// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
+type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterDNSConfigLocalDNSModel struct {
 	ConfiguredAddress types.String             `tfsdk:"configured_address"`
 	FirstAddress      *VoltstackSiteEmptyModel `tfsdk:"first_address"`
 	LastAddress       *VoltstackSiteEmptyModel `tfsdk:"last_address"`
 }
 
-// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterStatefulModel represents stateful block
-type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterStatefulModel struct {
+// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterStatefulModel represents stateful block
+type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterStatefulModel struct {
 	AutomaticFromEnd   *VoltstackSiteEmptyModel                                                                                                              `tfsdk:"automatic_from_end"`
 	AutomaticFromStart *VoltstackSiteEmptyModel                                                                                                              `tfsdk:"automatic_from_start"`
-	DhcpNetworks       []VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksModel  `tfsdk:"dhcp_networks"`
+	DHCPNetworks       []VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksModel  `tfsdk:"dhcp_networks"`
 	FixedIPMap         *VoltstackSiteEmptyModel                                                                                                              `tfsdk:"fixed_ip_map"`
-	InterfaceIPMap     *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+	InterfaceIPMap     *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
-// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksModel represents dhcp_networks block
-type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksModel struct {
+// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
+type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksModel struct {
 	NetworkPrefix types.String                                                                                                                              `tfsdk:"network_prefix"`
 	PoolSettings  types.String                                                                                                                              `tfsdk:"pool_settings"`
-	Pools         []VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
+	Pools         []VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel `tfsdk:"pools"`
 }
 
-// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel represents pools block
-type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel struct {
+// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel represents pools block
+type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel struct {
 	EndIP   types.String `tfsdk:"end_ip"`
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
-// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterStatefulInterfaceIPMapModel represents interface_ip_map block
-type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterStatefulInterfaceIPMapModel struct {
+// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterStatefulInterfaceIPMapModel represents interface_ip_map block
+type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterStatefulInterfaceIPMapModel struct {
 	InterfaceIPMap *VoltstackSiteEmptyModel `tfsdk:"interface_ip_map"`
 }
 
@@ -1240,19 +1240,19 @@ type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorag
 	IPAddress types.String `tfsdk:"ip_address"`
 }
 
-// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPV6AddressModel represents static_ipv6_address block
-type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPV6AddressModel struct {
-	ClusterStaticIP *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPV6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
-	NodeStaticIP    *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPV6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
+// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIpv6AddressModel represents static_ipv6_address block
+type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIpv6AddressModel struct {
+	ClusterStaticIP *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIpv6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
+	NodeStaticIP    *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIpv6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
-// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPV6AddressClusterStaticIPModel represents cluster_static_ip block
-type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPV6AddressClusterStaticIPModel struct {
+// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIpv6AddressClusterStaticIPModel represents cluster_static_ip block
+type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIpv6AddressClusterStaticIPModel struct {
 	InterfaceIPMap *VoltstackSiteEmptyModel `tfsdk:"interface_ip_map"`
 }
 
-// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPV6AddressNodeStaticIPModel represents node_static_ip block
-type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPV6AddressNodeStaticIPModel struct {
+// VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIpv6AddressNodeStaticIPModel represents node_static_ip block
+type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIpv6AddressNodeStaticIPModel struct {
 	DefaultGw types.String `tfsdk:"default_gw"`
 	IPAddress types.String `tfsdk:"ip_address"`
 }
@@ -1321,9 +1321,9 @@ type VoltstackSiteLocalControlPlaneBGPConfigPeersBfdEnabledModel struct {
 // VoltstackSiteLocalControlPlaneBGPConfigPeersExternalModel represents external block
 type VoltstackSiteLocalControlPlaneBGPConfigPeersExternalModel struct {
 	Address             types.String                                                            `tfsdk:"address"`
-	AddressIPV6         types.String                                                            `tfsdk:"address_ipv6"`
+	AddressIpv6         types.String                                                            `tfsdk:"address_ipv6"`
 	Asn                 types.Int64                                                             `tfsdk:"asn"`
-	Md5AuthKey          types.String                                                            `tfsdk:"md5_auth_key"`
+	MD5AuthKey          types.String                                                            `tfsdk:"md5_auth_key"`
 	Port                types.Int64                                                             `tfsdk:"port"`
 	SubnetBeginOffset   types.Int64                                                             `tfsdk:"subnet_begin_offset"`
 	SubnetBeginOffsetV6 types.Int64                                                             `tfsdk:"subnet_begin_offset_v6"`
@@ -1420,10 +1420,10 @@ type VoltstackSiteOfflineSurvivabilityModeModel struct {
 	NoOfflineSurvivabilityMode     *VoltstackSiteEmptyModel `tfsdk:"no_offline_survivability_mode"`
 }
 
-// VoltstackSiteOsModel represents os block
-type VoltstackSiteOsModel struct {
+// VoltstackSiteOSModel represents os block
+type VoltstackSiteOSModel struct {
 	OperatingSystemVersion types.String             `tfsdk:"operating_system_version"`
-	DefaultOsVersion       *VoltstackSiteEmptyModel `tfsdk:"default_os_version"`
+	DefaultOSVersion       *VoltstackSiteEmptyModel `tfsdk:"default_os_version"`
 }
 
 // VoltstackSiteSriovInterfacesModel represents sriov_interfaces block
@@ -1475,11 +1475,11 @@ type VoltstackSiteResourceModel struct {
 	DefaultSriovInterface    *VoltstackSiteEmptyModel                    `tfsdk:"default_sriov_interface"`
 	DefaultStorageConfig     *VoltstackSiteEmptyModel                    `tfsdk:"default_storage_config"`
 	DenyAllUsb               *VoltstackSiteEmptyModel                    `tfsdk:"deny_all_usb"`
-	DisableGpu               *VoltstackSiteEmptyModel                    `tfsdk:"disable_gpu"`
-	DisableVm                *VoltstackSiteEmptyModel                    `tfsdk:"disable_vm"`
-	EnableGpu                *VoltstackSiteEmptyModel                    `tfsdk:"enable_gpu"`
+	DisableGPU               *VoltstackSiteEmptyModel                    `tfsdk:"disable_gpu"`
+	DisableVM                *VoltstackSiteEmptyModel                    `tfsdk:"disable_vm"`
+	EnableGPU                *VoltstackSiteEmptyModel                    `tfsdk:"enable_gpu"`
 	EnableVgpu               *VoltstackSiteEnableVgpuModel               `tfsdk:"enable_vgpu"`
-	EnableVm                 *VoltstackSiteEmptyModel                    `tfsdk:"enable_vm"`
+	EnableVM                 *VoltstackSiteEmptyModel                    `tfsdk:"enable_vm"`
 	K8SCluster               *VoltstackSiteK8SClusterModel               `tfsdk:"k8s_cluster"`
 	KubernetesUpgradeDrain   *VoltstackSiteKubernetesUpgradeDrainModel   `tfsdk:"kubernetes_upgrade_drain"`
 	LocalControlPlane        *VoltstackSiteLocalControlPlaneModel        `tfsdk:"local_control_plane"`
@@ -1490,7 +1490,7 @@ type VoltstackSiteResourceModel struct {
 	NoK8SCluster             *VoltstackSiteEmptyModel                    `tfsdk:"no_k8s_cluster"`
 	NoLocalControlPlane      *VoltstackSiteEmptyModel                    `tfsdk:"no_local_control_plane"`
 	OfflineSurvivabilityMode *VoltstackSiteOfflineSurvivabilityModeModel `tfsdk:"offline_survivability_mode"`
-	Os                       *VoltstackSiteOsModel                       `tfsdk:"os"`
+	OS                       *VoltstackSiteOSModel                       `tfsdk:"os"`
 	SriovInterfaces          *VoltstackSiteSriovInterfacesModel          `tfsdk:"sriov_interfaces"`
 	Sw                       *VoltstackSiteSwModel                       `tfsdk:"sw"`
 	UsbPolicy                *VoltstackSiteUsbPolicyModel                `tfsdk:"usb_policy"`
@@ -5014,8 +5014,8 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 		if !data.CustomNetworkConfig.OutsideNameserver.IsNull() && !data.CustomNetworkConfig.OutsideNameserver.IsUnknown() {
 			custom_network_configMap["outside_nameserver"] = data.CustomNetworkConfig.OutsideNameserver.ValueString()
 		}
-		if !data.CustomNetworkConfig.OutsideVip.IsNull() && !data.CustomNetworkConfig.OutsideVip.IsUnknown() {
-			custom_network_configMap["outside_vip"] = data.CustomNetworkConfig.OutsideVip.ValueString()
+		if !data.CustomNetworkConfig.OutsideVIP.IsNull() && !data.CustomNetworkConfig.OutsideVIP.IsUnknown() {
+			custom_network_configMap["outside_vip"] = data.CustomNetworkConfig.OutsideVIP.ValueString()
 		}
 		if !data.CustomNetworkConfig.SiteToSiteTunnelIP.IsNull() && !data.CustomNetworkConfig.SiteToSiteTunnelIP.IsUnknown() {
 			custom_network_configMap["site_to_site_tunnel_ip"] = data.CustomNetworkConfig.SiteToSiteTunnelIP.ValueString()
@@ -5024,7 +5024,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 			sli_configNestedMap := make(map[string]interface{})
 			custom_network_configMap["sli_config"] = sli_configNestedMap
 		}
-		if data.CustomNetworkConfig.SLOConfig != nil {
+		if data.CustomNetworkConfig.SloConfig != nil {
 			slo_configNestedMap := make(map[string]interface{})
 			custom_network_configMap["slo_config"] = slo_configNestedMap
 		}
@@ -5037,8 +5037,8 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 		if !data.CustomNetworkConfig.TunnelDeadTimeout.IsNull() && !data.CustomNetworkConfig.TunnelDeadTimeout.IsUnknown() {
 			custom_network_configMap["tunnel_dead_timeout"] = data.CustomNetworkConfig.TunnelDeadTimeout.ValueInt64()
 		}
-		if !data.CustomNetworkConfig.VipVrrpMode.IsNull() && !data.CustomNetworkConfig.VipVrrpMode.IsUnknown() {
-			custom_network_configMap["vip_vrrp_mode"] = data.CustomNetworkConfig.VipVrrpMode.ValueString()
+		if !data.CustomNetworkConfig.VIPVrrpMode.IsNull() && !data.CustomNetworkConfig.VIPVrrpMode.IsUnknown() {
+			custom_network_configMap["vip_vrrp_mode"] = data.CustomNetworkConfig.VIPVrrpMode.ValueString()
 		}
 		createReq.Spec["custom_network_config"] = custom_network_configMap
 	}
@@ -5094,15 +5094,15 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 		deny_all_usbMap := make(map[string]interface{})
 		createReq.Spec["deny_all_usb"] = deny_all_usbMap
 	}
-	if data.DisableGpu != nil {
+	if data.DisableGPU != nil {
 		disable_gpuMap := make(map[string]interface{})
 		createReq.Spec["disable_gpu"] = disable_gpuMap
 	}
-	if data.DisableVm != nil {
+	if data.DisableVM != nil {
 		disable_vmMap := make(map[string]interface{})
 		createReq.Spec["disable_vm"] = disable_vmMap
 	}
-	if data.EnableGpu != nil {
+	if data.EnableGPU != nil {
 		enable_gpuMap := make(map[string]interface{})
 		createReq.Spec["enable_gpu"] = enable_gpuMap
 	}
@@ -5119,7 +5119,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 		}
 		createReq.Spec["enable_vgpu"] = enable_vgpuMap
 	}
-	if data.EnableVm != nil {
+	if data.EnableVM != nil {
 		enable_vmMap := make(map[string]interface{})
 		createReq.Spec["enable_vm"] = enable_vmMap
 	}
@@ -5223,13 +5223,13 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 		}
 		createReq.Spec["offline_survivability_mode"] = offline_survivability_modeMap
 	}
-	if data.Os != nil {
+	if data.OS != nil {
 		osMap := make(map[string]interface{})
-		if data.Os.DefaultOsVersion != nil {
+		if data.OS.DefaultOSVersion != nil {
 			osMap["default_os_version"] = map[string]interface{}{}
 		}
-		if !data.Os.OperatingSystemVersion.IsNull() && !data.Os.OperatingSystemVersion.IsUnknown() {
-			osMap["operating_system_version"] = data.Os.OperatingSystemVersion.ValueString()
+		if !data.OS.OperatingSystemVersion.IsNull() && !data.OS.OperatingSystemVersion.IsUnknown() {
+			osMap["operating_system_version"] = data.OS.OperatingSystemVersion.ValueString()
 		}
 		createReq.Spec["os"] = osMap
 	}
@@ -5594,7 +5594,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				return types.StringNull()
 			}(),
-			OutsideVip: func() types.String {
+			OutsideVIP: func() types.String {
 				if v, ok := blockData["outside_vip"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
@@ -5617,14 +5617,14 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				return nil
 			}(),
-			SLOConfig: func() *VoltstackSiteCustomNetworkConfigSLOConfigModel {
-				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.SLOConfig != nil {
+			SloConfig: func() *VoltstackSiteCustomNetworkConfigSloConfigModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.SloConfig != nil {
 					// Normal Read: preserve existing state value
-					return data.CustomNetworkConfig.SLOConfig
+					return data.CustomNetworkConfig.SloConfig
 				}
 				// Import case: read from API
 				if _, ok := blockData["slo_config"].(map[string]interface{}); ok {
-					return &VoltstackSiteCustomNetworkConfigSLOConfigModel{}
+					return &VoltstackSiteCustomNetworkConfigSloConfigModel{}
 				}
 				return nil
 			}(),
@@ -5658,7 +5658,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				return types.Int64Null()
 			}(),
-			VipVrrpMode: func() types.String {
+			VIPVrrpMode: func() types.String {
 				if v, ok := blockData["vip_vrrp_mode"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
@@ -5696,19 +5696,19 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 		data.DenyAllUsb = &VoltstackSiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["disable_gpu"].(map[string]interface{}); ok && isImport && data.DisableGpu == nil {
+	if _, ok := apiResource.Spec["disable_gpu"].(map[string]interface{}); ok && isImport && data.DisableGPU == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DisableGpu = &VoltstackSiteEmptyModel{}
+		data.DisableGPU = &VoltstackSiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["disable_vm"].(map[string]interface{}); ok && isImport && data.DisableVm == nil {
+	if _, ok := apiResource.Spec["disable_vm"].(map[string]interface{}); ok && isImport && data.DisableVM == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DisableVm = &VoltstackSiteEmptyModel{}
+		data.DisableVM = &VoltstackSiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["enable_gpu"].(map[string]interface{}); ok && isImport && data.EnableGpu == nil {
+	if _, ok := apiResource.Spec["enable_gpu"].(map[string]interface{}); ok && isImport && data.EnableGPU == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.EnableGpu = &VoltstackSiteEmptyModel{}
+		data.EnableGPU = &VoltstackSiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["enable_vgpu"].(map[string]interface{}); ok && (isImport || data.EnableVgpu != nil) {
@@ -5733,9 +5733,9 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["enable_vm"].(map[string]interface{}); ok && isImport && data.EnableVm == nil {
+	if _, ok := apiResource.Spec["enable_vm"].(map[string]interface{}); ok && isImport && data.EnableVM == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.EnableVm = &VoltstackSiteEmptyModel{}
+		data.EnableVM = &VoltstackSiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["k8s_cluster"].(map[string]interface{}); ok && (isImport || data.K8SCluster != nil) {
@@ -5840,13 +5840,13 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 		data.OfflineSurvivabilityMode = &VoltstackSiteOfflineSurvivabilityModeModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.Os != nil) {
-		data.Os = &VoltstackSiteOsModel{
-			DefaultOsVersion: func() *VoltstackSiteEmptyModel {
-				if !isImport && data.Os != nil {
+	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.OS != nil) {
+		data.OS = &VoltstackSiteOSModel{
+			DefaultOSVersion: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.OS != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.Os.DefaultOsVersion
+					return data.OS.DefaultOSVersion
 				}
 				// Import case: read from API
 				if _, ok := blockData["default_os_version"].(map[string]interface{}); ok {
@@ -6350,7 +6350,7 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				return types.StringNull()
 			}(),
-			OutsideVip: func() types.String {
+			OutsideVIP: func() types.String {
 				if v, ok := blockData["outside_vip"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
@@ -6373,14 +6373,14 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				return nil
 			}(),
-			SLOConfig: func() *VoltstackSiteCustomNetworkConfigSLOConfigModel {
-				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.SLOConfig != nil {
+			SloConfig: func() *VoltstackSiteCustomNetworkConfigSloConfigModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.SloConfig != nil {
 					// Normal Read: preserve existing state value
-					return data.CustomNetworkConfig.SLOConfig
+					return data.CustomNetworkConfig.SloConfig
 				}
 				// Import case: read from API
 				if _, ok := blockData["slo_config"].(map[string]interface{}); ok {
-					return &VoltstackSiteCustomNetworkConfigSLOConfigModel{}
+					return &VoltstackSiteCustomNetworkConfigSloConfigModel{}
 				}
 				return nil
 			}(),
@@ -6414,7 +6414,7 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				return types.Int64Null()
 			}(),
-			VipVrrpMode: func() types.String {
+			VIPVrrpMode: func() types.String {
 				if v, ok := blockData["vip_vrrp_mode"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
@@ -6452,19 +6452,19 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 		data.DenyAllUsb = &VoltstackSiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["disable_gpu"].(map[string]interface{}); ok && isImport && data.DisableGpu == nil {
+	if _, ok := apiResource.Spec["disable_gpu"].(map[string]interface{}); ok && isImport && data.DisableGPU == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DisableGpu = &VoltstackSiteEmptyModel{}
+		data.DisableGPU = &VoltstackSiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["disable_vm"].(map[string]interface{}); ok && isImport && data.DisableVm == nil {
+	if _, ok := apiResource.Spec["disable_vm"].(map[string]interface{}); ok && isImport && data.DisableVM == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DisableVm = &VoltstackSiteEmptyModel{}
+		data.DisableVM = &VoltstackSiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["enable_gpu"].(map[string]interface{}); ok && isImport && data.EnableGpu == nil {
+	if _, ok := apiResource.Spec["enable_gpu"].(map[string]interface{}); ok && isImport && data.EnableGPU == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.EnableGpu = &VoltstackSiteEmptyModel{}
+		data.EnableGPU = &VoltstackSiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["enable_vgpu"].(map[string]interface{}); ok && (isImport || data.EnableVgpu != nil) {
@@ -6489,9 +6489,9 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["enable_vm"].(map[string]interface{}); ok && isImport && data.EnableVm == nil {
+	if _, ok := apiResource.Spec["enable_vm"].(map[string]interface{}); ok && isImport && data.EnableVM == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.EnableVm = &VoltstackSiteEmptyModel{}
+		data.EnableVM = &VoltstackSiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["k8s_cluster"].(map[string]interface{}); ok && (isImport || data.K8SCluster != nil) {
@@ -6596,13 +6596,13 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 		data.OfflineSurvivabilityMode = &VoltstackSiteOfflineSurvivabilityModeModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.Os != nil) {
-		data.Os = &VoltstackSiteOsModel{
-			DefaultOsVersion: func() *VoltstackSiteEmptyModel {
-				if !isImport && data.Os != nil {
+	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.OS != nil) {
+		data.OS = &VoltstackSiteOSModel{
+			DefaultOSVersion: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.OS != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.Os.DefaultOsVersion
+					return data.OS.DefaultOSVersion
 				}
 				// Import case: read from API
 				if _, ok := blockData["default_os_version"].(map[string]interface{}); ok {
@@ -6913,8 +6913,8 @@ func (r *VoltstackSiteResource) Update(ctx context.Context, req resource.UpdateR
 		if !data.CustomNetworkConfig.OutsideNameserver.IsNull() && !data.CustomNetworkConfig.OutsideNameserver.IsUnknown() {
 			custom_network_configMap["outside_nameserver"] = data.CustomNetworkConfig.OutsideNameserver.ValueString()
 		}
-		if !data.CustomNetworkConfig.OutsideVip.IsNull() && !data.CustomNetworkConfig.OutsideVip.IsUnknown() {
-			custom_network_configMap["outside_vip"] = data.CustomNetworkConfig.OutsideVip.ValueString()
+		if !data.CustomNetworkConfig.OutsideVIP.IsNull() && !data.CustomNetworkConfig.OutsideVIP.IsUnknown() {
+			custom_network_configMap["outside_vip"] = data.CustomNetworkConfig.OutsideVIP.ValueString()
 		}
 		if !data.CustomNetworkConfig.SiteToSiteTunnelIP.IsNull() && !data.CustomNetworkConfig.SiteToSiteTunnelIP.IsUnknown() {
 			custom_network_configMap["site_to_site_tunnel_ip"] = data.CustomNetworkConfig.SiteToSiteTunnelIP.ValueString()
@@ -6923,7 +6923,7 @@ func (r *VoltstackSiteResource) Update(ctx context.Context, req resource.UpdateR
 			sli_configNestedMap := make(map[string]interface{})
 			custom_network_configMap["sli_config"] = sli_configNestedMap
 		}
-		if data.CustomNetworkConfig.SLOConfig != nil {
+		if data.CustomNetworkConfig.SloConfig != nil {
 			slo_configNestedMap := make(map[string]interface{})
 			custom_network_configMap["slo_config"] = slo_configNestedMap
 		}
@@ -6936,8 +6936,8 @@ func (r *VoltstackSiteResource) Update(ctx context.Context, req resource.UpdateR
 		if !data.CustomNetworkConfig.TunnelDeadTimeout.IsNull() && !data.CustomNetworkConfig.TunnelDeadTimeout.IsUnknown() {
 			custom_network_configMap["tunnel_dead_timeout"] = data.CustomNetworkConfig.TunnelDeadTimeout.ValueInt64()
 		}
-		if !data.CustomNetworkConfig.VipVrrpMode.IsNull() && !data.CustomNetworkConfig.VipVrrpMode.IsUnknown() {
-			custom_network_configMap["vip_vrrp_mode"] = data.CustomNetworkConfig.VipVrrpMode.ValueString()
+		if !data.CustomNetworkConfig.VIPVrrpMode.IsNull() && !data.CustomNetworkConfig.VIPVrrpMode.IsUnknown() {
+			custom_network_configMap["vip_vrrp_mode"] = data.CustomNetworkConfig.VIPVrrpMode.ValueString()
 		}
 		apiResource.Spec["custom_network_config"] = custom_network_configMap
 	}
@@ -6993,15 +6993,15 @@ func (r *VoltstackSiteResource) Update(ctx context.Context, req resource.UpdateR
 		deny_all_usbMap := make(map[string]interface{})
 		apiResource.Spec["deny_all_usb"] = deny_all_usbMap
 	}
-	if data.DisableGpu != nil {
+	if data.DisableGPU != nil {
 		disable_gpuMap := make(map[string]interface{})
 		apiResource.Spec["disable_gpu"] = disable_gpuMap
 	}
-	if data.DisableVm != nil {
+	if data.DisableVM != nil {
 		disable_vmMap := make(map[string]interface{})
 		apiResource.Spec["disable_vm"] = disable_vmMap
 	}
-	if data.EnableGpu != nil {
+	if data.EnableGPU != nil {
 		enable_gpuMap := make(map[string]interface{})
 		apiResource.Spec["enable_gpu"] = enable_gpuMap
 	}
@@ -7018,7 +7018,7 @@ func (r *VoltstackSiteResource) Update(ctx context.Context, req resource.UpdateR
 		}
 		apiResource.Spec["enable_vgpu"] = enable_vgpuMap
 	}
-	if data.EnableVm != nil {
+	if data.EnableVM != nil {
 		enable_vmMap := make(map[string]interface{})
 		apiResource.Spec["enable_vm"] = enable_vmMap
 	}
@@ -7122,13 +7122,13 @@ func (r *VoltstackSiteResource) Update(ctx context.Context, req resource.UpdateR
 		}
 		apiResource.Spec["offline_survivability_mode"] = offline_survivability_modeMap
 	}
-	if data.Os != nil {
+	if data.OS != nil {
 		osMap := make(map[string]interface{})
-		if data.Os.DefaultOsVersion != nil {
+		if data.OS.DefaultOSVersion != nil {
 			osMap["default_os_version"] = map[string]interface{}{}
 		}
-		if !data.Os.OperatingSystemVersion.IsNull() && !data.Os.OperatingSystemVersion.IsUnknown() {
-			osMap["operating_system_version"] = data.Os.OperatingSystemVersion.ValueString()
+		if !data.OS.OperatingSystemVersion.IsNull() && !data.OS.OperatingSystemVersion.IsUnknown() {
+			osMap["operating_system_version"] = data.OS.OperatingSystemVersion.ValueString()
 		}
 		apiResource.Spec["os"] = osMap
 	}
@@ -7518,7 +7518,7 @@ func (r *VoltstackSiteResource) Update(ctx context.Context, req resource.UpdateR
 				}
 				return types.StringNull()
 			}(),
-			OutsideVip: func() types.String {
+			OutsideVIP: func() types.String {
 				if v, ok := blockData["outside_vip"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
@@ -7541,14 +7541,14 @@ func (r *VoltstackSiteResource) Update(ctx context.Context, req resource.UpdateR
 				}
 				return nil
 			}(),
-			SLOConfig: func() *VoltstackSiteCustomNetworkConfigSLOConfigModel {
-				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.SLOConfig != nil {
+			SloConfig: func() *VoltstackSiteCustomNetworkConfigSloConfigModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.SloConfig != nil {
 					// Normal Read: preserve existing state value
-					return data.CustomNetworkConfig.SLOConfig
+					return data.CustomNetworkConfig.SloConfig
 				}
 				// Import case: read from API
 				if _, ok := blockData["slo_config"].(map[string]interface{}); ok {
-					return &VoltstackSiteCustomNetworkConfigSLOConfigModel{}
+					return &VoltstackSiteCustomNetworkConfigSloConfigModel{}
 				}
 				return nil
 			}(),
@@ -7582,7 +7582,7 @@ func (r *VoltstackSiteResource) Update(ctx context.Context, req resource.UpdateR
 				}
 				return types.Int64Null()
 			}(),
-			VipVrrpMode: func() types.String {
+			VIPVrrpMode: func() types.String {
 				if v, ok := blockData["vip_vrrp_mode"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
@@ -7620,19 +7620,19 @@ func (r *VoltstackSiteResource) Update(ctx context.Context, req resource.UpdateR
 		data.DenyAllUsb = &VoltstackSiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["disable_gpu"].(map[string]interface{}); ok && isImport && data.DisableGpu == nil {
+	if _, ok := apiResource.Spec["disable_gpu"].(map[string]interface{}); ok && isImport && data.DisableGPU == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DisableGpu = &VoltstackSiteEmptyModel{}
+		data.DisableGPU = &VoltstackSiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["disable_vm"].(map[string]interface{}); ok && isImport && data.DisableVm == nil {
+	if _, ok := apiResource.Spec["disable_vm"].(map[string]interface{}); ok && isImport && data.DisableVM == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DisableVm = &VoltstackSiteEmptyModel{}
+		data.DisableVM = &VoltstackSiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["enable_gpu"].(map[string]interface{}); ok && isImport && data.EnableGpu == nil {
+	if _, ok := apiResource.Spec["enable_gpu"].(map[string]interface{}); ok && isImport && data.EnableGPU == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.EnableGpu = &VoltstackSiteEmptyModel{}
+		data.EnableGPU = &VoltstackSiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["enable_vgpu"].(map[string]interface{}); ok && (isImport || data.EnableVgpu != nil) {
@@ -7657,9 +7657,9 @@ func (r *VoltstackSiteResource) Update(ctx context.Context, req resource.UpdateR
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["enable_vm"].(map[string]interface{}); ok && isImport && data.EnableVm == nil {
+	if _, ok := apiResource.Spec["enable_vm"].(map[string]interface{}); ok && isImport && data.EnableVM == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.EnableVm = &VoltstackSiteEmptyModel{}
+		data.EnableVM = &VoltstackSiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["k8s_cluster"].(map[string]interface{}); ok && (isImport || data.K8SCluster != nil) {
@@ -7764,13 +7764,13 @@ func (r *VoltstackSiteResource) Update(ctx context.Context, req resource.UpdateR
 		data.OfflineSurvivabilityMode = &VoltstackSiteOfflineSurvivabilityModeModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.Os != nil) {
-		data.Os = &VoltstackSiteOsModel{
-			DefaultOsVersion: func() *VoltstackSiteEmptyModel {
-				if !isImport && data.Os != nil {
+	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.OS != nil) {
+		data.OS = &VoltstackSiteOSModel{
+			DefaultOSVersion: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.OS != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.Os.DefaultOsVersion
+					return data.OS.DefaultOSVersion
 				}
 				// Import case: read from API
 				if _, ok := blockData["default_os_version"].(map[string]interface{}); ok {

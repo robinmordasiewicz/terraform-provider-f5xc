@@ -264,8 +264,8 @@ type RouteRoutesRouteDestinationModel struct {
 	Priority            types.String                                     `tfsdk:"priority"`
 	Timeout             types.Int64                                      `tfsdk:"timeout"`
 	BufferPolicy        *RouteRoutesRouteDestinationBufferPolicyModel    `tfsdk:"buffer_policy"`
-	CorsPolicy          *RouteRoutesRouteDestinationCorsPolicyModel      `tfsdk:"cors_policy"`
-	CsrfPolicy          *RouteRoutesRouteDestinationCsrfPolicyModel      `tfsdk:"csrf_policy"`
+	CORSPolicy          *RouteRoutesRouteDestinationCORSPolicyModel      `tfsdk:"cors_policy"`
+	CSRFPolicy          *RouteRoutesRouteDestinationCSRFPolicyModel      `tfsdk:"csrf_policy"`
 	Destinations        []RouteRoutesRouteDestinationDestinationsModel   `tfsdk:"destinations"`
 	DoNotRetractCluster *RouteEmptyModel                                 `tfsdk:"do_not_retract_cluster"`
 	EndpointSubsets     *RouteEmptyModel                                 `tfsdk:"endpoint_subsets"`
@@ -285,8 +285,8 @@ type RouteRoutesRouteDestinationBufferPolicyModel struct {
 	MaxRequestBytes types.Int64 `tfsdk:"max_request_bytes"`
 }
 
-// RouteRoutesRouteDestinationCorsPolicyModel represents cors_policy block
-type RouteRoutesRouteDestinationCorsPolicyModel struct {
+// RouteRoutesRouteDestinationCORSPolicyModel represents cors_policy block
+type RouteRoutesRouteDestinationCORSPolicyModel struct {
 	AllowCredentials types.Bool   `tfsdk:"allow_credentials"`
 	AllowHeaders     types.String `tfsdk:"allow_headers"`
 	AllowMethods     types.String `tfsdk:"allow_methods"`
@@ -297,15 +297,15 @@ type RouteRoutesRouteDestinationCorsPolicyModel struct {
 	MaximumAge       types.Int64  `tfsdk:"maximum_age"`
 }
 
-// RouteRoutesRouteDestinationCsrfPolicyModel represents csrf_policy block
-type RouteRoutesRouteDestinationCsrfPolicyModel struct {
+// RouteRoutesRouteDestinationCSRFPolicyModel represents csrf_policy block
+type RouteRoutesRouteDestinationCSRFPolicyModel struct {
 	AllLoadBalancerDomains *RouteEmptyModel                                            `tfsdk:"all_load_balancer_domains"`
-	CustomDomainList       *RouteRoutesRouteDestinationCsrfPolicyCustomDomainListModel `tfsdk:"custom_domain_list"`
+	CustomDomainList       *RouteRoutesRouteDestinationCSRFPolicyCustomDomainListModel `tfsdk:"custom_domain_list"`
 	Disabled               *RouteEmptyModel                                            `tfsdk:"disabled"`
 }
 
-// RouteRoutesRouteDestinationCsrfPolicyCustomDomainListModel represents custom_domain_list block
-type RouteRoutesRouteDestinationCsrfPolicyCustomDomainListModel struct {
+// RouteRoutesRouteDestinationCSRFPolicyCustomDomainListModel represents custom_domain_list block
+type RouteRoutesRouteDestinationCSRFPolicyCustomDomainListModel struct {
 	Domains types.List `tfsdk:"domains"`
 }
 
@@ -338,7 +338,7 @@ type RouteRoutesRouteDestinationHashPolicyModel struct {
 type RouteRoutesRouteDestinationHashPolicyCookieModel struct {
 	Name           types.String     `tfsdk:"name"`
 	Path           types.String     `tfsdk:"path"`
-	Ttl            types.Int64      `tfsdk:"ttl"`
+	TTL            types.Int64      `tfsdk:"ttl"`
 	AddHttponly    *RouteEmptyModel `tfsdk:"add_httponly"`
 	AddSecure      *RouteEmptyModel `tfsdk:"add_secure"`
 	IgnoreHttponly *RouteEmptyModel `tfsdk:"ignore_httponly"`
@@ -405,7 +405,7 @@ type RouteRoutesRouteDestinationSpdyConfigModel struct {
 
 // RouteRoutesRouteDestinationWebSocketConfigModel represents web_socket_config block
 type RouteRoutesRouteDestinationWebSocketConfigModel struct {
-	UseWebsocket types.Bool `tfsdk:"use_websocket"`
+	UseWebSocket types.Bool `tfsdk:"use_websocket"`
 }
 
 // RouteRoutesRouteDirectResponseModel represents route_direct_response block
@@ -1763,48 +1763,48 @@ func (r *RouteResource) Create(ctx context.Context, req resource.CreateRequest, 
 					}
 					route_destinationNestedMap["buffer_policy"] = buffer_policyDeepMap
 				}
-				if item.RouteDestination.CorsPolicy != nil {
+				if item.RouteDestination.CORSPolicy != nil {
 					cors_policyDeepMap := make(map[string]interface{})
-					if !item.RouteDestination.CorsPolicy.AllowCredentials.IsNull() && !item.RouteDestination.CorsPolicy.AllowCredentials.IsUnknown() {
-						cors_policyDeepMap["allow_credentials"] = item.RouteDestination.CorsPolicy.AllowCredentials.ValueBool()
+					if !item.RouteDestination.CORSPolicy.AllowCredentials.IsNull() && !item.RouteDestination.CORSPolicy.AllowCredentials.IsUnknown() {
+						cors_policyDeepMap["allow_credentials"] = item.RouteDestination.CORSPolicy.AllowCredentials.ValueBool()
 					}
-					if !item.RouteDestination.CorsPolicy.AllowHeaders.IsNull() && !item.RouteDestination.CorsPolicy.AllowHeaders.IsUnknown() {
-						cors_policyDeepMap["allow_headers"] = item.RouteDestination.CorsPolicy.AllowHeaders.ValueString()
+					if !item.RouteDestination.CORSPolicy.AllowHeaders.IsNull() && !item.RouteDestination.CORSPolicy.AllowHeaders.IsUnknown() {
+						cors_policyDeepMap["allow_headers"] = item.RouteDestination.CORSPolicy.AllowHeaders.ValueString()
 					}
-					if !item.RouteDestination.CorsPolicy.AllowMethods.IsNull() && !item.RouteDestination.CorsPolicy.AllowMethods.IsUnknown() {
-						cors_policyDeepMap["allow_methods"] = item.RouteDestination.CorsPolicy.AllowMethods.ValueString()
+					if !item.RouteDestination.CORSPolicy.AllowMethods.IsNull() && !item.RouteDestination.CORSPolicy.AllowMethods.IsUnknown() {
+						cors_policyDeepMap["allow_methods"] = item.RouteDestination.CORSPolicy.AllowMethods.ValueString()
 					}
-					if !item.RouteDestination.CorsPolicy.AllowOrigin.IsNull() && !item.RouteDestination.CorsPolicy.AllowOrigin.IsUnknown() {
+					if !item.RouteDestination.CORSPolicy.AllowOrigin.IsNull() && !item.RouteDestination.CORSPolicy.AllowOrigin.IsUnknown() {
 						var AllowOriginItems []string
-						diags := item.RouteDestination.CorsPolicy.AllowOrigin.ElementsAs(ctx, &AllowOriginItems, false)
+						diags := item.RouteDestination.CORSPolicy.AllowOrigin.ElementsAs(ctx, &AllowOriginItems, false)
 						if !diags.HasError() {
 							cors_policyDeepMap["allow_origin"] = AllowOriginItems
 						}
 					}
-					if !item.RouteDestination.CorsPolicy.AllowOriginRegex.IsNull() && !item.RouteDestination.CorsPolicy.AllowOriginRegex.IsUnknown() {
+					if !item.RouteDestination.CORSPolicy.AllowOriginRegex.IsNull() && !item.RouteDestination.CORSPolicy.AllowOriginRegex.IsUnknown() {
 						var AllowOriginRegexItems []string
-						diags := item.RouteDestination.CorsPolicy.AllowOriginRegex.ElementsAs(ctx, &AllowOriginRegexItems, false)
+						diags := item.RouteDestination.CORSPolicy.AllowOriginRegex.ElementsAs(ctx, &AllowOriginRegexItems, false)
 						if !diags.HasError() {
 							cors_policyDeepMap["allow_origin_regex"] = AllowOriginRegexItems
 						}
 					}
-					if !item.RouteDestination.CorsPolicy.Disabled.IsNull() && !item.RouteDestination.CorsPolicy.Disabled.IsUnknown() {
-						cors_policyDeepMap["disabled"] = item.RouteDestination.CorsPolicy.Disabled.ValueBool()
+					if !item.RouteDestination.CORSPolicy.Disabled.IsNull() && !item.RouteDestination.CORSPolicy.Disabled.IsUnknown() {
+						cors_policyDeepMap["disabled"] = item.RouteDestination.CORSPolicy.Disabled.ValueBool()
 					}
-					if !item.RouteDestination.CorsPolicy.ExposeHeaders.IsNull() && !item.RouteDestination.CorsPolicy.ExposeHeaders.IsUnknown() {
-						cors_policyDeepMap["expose_headers"] = item.RouteDestination.CorsPolicy.ExposeHeaders.ValueString()
+					if !item.RouteDestination.CORSPolicy.ExposeHeaders.IsNull() && !item.RouteDestination.CORSPolicy.ExposeHeaders.IsUnknown() {
+						cors_policyDeepMap["expose_headers"] = item.RouteDestination.CORSPolicy.ExposeHeaders.ValueString()
 					}
-					if !item.RouteDestination.CorsPolicy.MaximumAge.IsNull() && !item.RouteDestination.CorsPolicy.MaximumAge.IsUnknown() {
-						cors_policyDeepMap["maximum_age"] = item.RouteDestination.CorsPolicy.MaximumAge.ValueInt64()
+					if !item.RouteDestination.CORSPolicy.MaximumAge.IsNull() && !item.RouteDestination.CORSPolicy.MaximumAge.IsUnknown() {
+						cors_policyDeepMap["maximum_age"] = item.RouteDestination.CORSPolicy.MaximumAge.ValueInt64()
 					}
 					route_destinationNestedMap["cors_policy"] = cors_policyDeepMap
 				}
-				if item.RouteDestination.CsrfPolicy != nil {
+				if item.RouteDestination.CSRFPolicy != nil {
 					csrf_policyDeepMap := make(map[string]interface{})
-					if item.RouteDestination.CsrfPolicy.AllLoadBalancerDomains != nil {
+					if item.RouteDestination.CSRFPolicy.AllLoadBalancerDomains != nil {
 						csrf_policyDeepMap["all_load_balancer_domains"] = map[string]interface{}{}
 					}
-					if item.RouteDestination.CsrfPolicy.Disabled != nil {
+					if item.RouteDestination.CSRFPolicy.Disabled != nil {
 						csrf_policyDeepMap["disabled"] = map[string]interface{}{}
 					}
 					route_destinationNestedMap["csrf_policy"] = csrf_policyDeepMap
@@ -1917,8 +1917,8 @@ func (r *RouteResource) Create(ctx context.Context, req resource.CreateRequest, 
 				}
 				if item.RouteDestination.WebSocketConfig != nil {
 					web_socket_configDeepMap := make(map[string]interface{})
-					if !item.RouteDestination.WebSocketConfig.UseWebsocket.IsNull() && !item.RouteDestination.WebSocketConfig.UseWebsocket.IsUnknown() {
-						web_socket_configDeepMap["use_websocket"] = item.RouteDestination.WebSocketConfig.UseWebsocket.ValueBool()
+					if !item.RouteDestination.WebSocketConfig.UseWebSocket.IsNull() && !item.RouteDestination.WebSocketConfig.UseWebSocket.IsUnknown() {
+						web_socket_configDeepMap["use_websocket"] = item.RouteDestination.WebSocketConfig.UseWebSocket.ValueBool()
 					}
 					route_destinationNestedMap["web_socket_config"] = web_socket_configDeepMap
 				}
@@ -3197,48 +3197,48 @@ func (r *RouteResource) Update(ctx context.Context, req resource.UpdateRequest, 
 					}
 					route_destinationNestedMap["buffer_policy"] = buffer_policyDeepMap
 				}
-				if item.RouteDestination.CorsPolicy != nil {
+				if item.RouteDestination.CORSPolicy != nil {
 					cors_policyDeepMap := make(map[string]interface{})
-					if !item.RouteDestination.CorsPolicy.AllowCredentials.IsNull() && !item.RouteDestination.CorsPolicy.AllowCredentials.IsUnknown() {
-						cors_policyDeepMap["allow_credentials"] = item.RouteDestination.CorsPolicy.AllowCredentials.ValueBool()
+					if !item.RouteDestination.CORSPolicy.AllowCredentials.IsNull() && !item.RouteDestination.CORSPolicy.AllowCredentials.IsUnknown() {
+						cors_policyDeepMap["allow_credentials"] = item.RouteDestination.CORSPolicy.AllowCredentials.ValueBool()
 					}
-					if !item.RouteDestination.CorsPolicy.AllowHeaders.IsNull() && !item.RouteDestination.CorsPolicy.AllowHeaders.IsUnknown() {
-						cors_policyDeepMap["allow_headers"] = item.RouteDestination.CorsPolicy.AllowHeaders.ValueString()
+					if !item.RouteDestination.CORSPolicy.AllowHeaders.IsNull() && !item.RouteDestination.CORSPolicy.AllowHeaders.IsUnknown() {
+						cors_policyDeepMap["allow_headers"] = item.RouteDestination.CORSPolicy.AllowHeaders.ValueString()
 					}
-					if !item.RouteDestination.CorsPolicy.AllowMethods.IsNull() && !item.RouteDestination.CorsPolicy.AllowMethods.IsUnknown() {
-						cors_policyDeepMap["allow_methods"] = item.RouteDestination.CorsPolicy.AllowMethods.ValueString()
+					if !item.RouteDestination.CORSPolicy.AllowMethods.IsNull() && !item.RouteDestination.CORSPolicy.AllowMethods.IsUnknown() {
+						cors_policyDeepMap["allow_methods"] = item.RouteDestination.CORSPolicy.AllowMethods.ValueString()
 					}
-					if !item.RouteDestination.CorsPolicy.AllowOrigin.IsNull() && !item.RouteDestination.CorsPolicy.AllowOrigin.IsUnknown() {
+					if !item.RouteDestination.CORSPolicy.AllowOrigin.IsNull() && !item.RouteDestination.CORSPolicy.AllowOrigin.IsUnknown() {
 						var AllowOriginItems []string
-						diags := item.RouteDestination.CorsPolicy.AllowOrigin.ElementsAs(ctx, &AllowOriginItems, false)
+						diags := item.RouteDestination.CORSPolicy.AllowOrigin.ElementsAs(ctx, &AllowOriginItems, false)
 						if !diags.HasError() {
 							cors_policyDeepMap["allow_origin"] = AllowOriginItems
 						}
 					}
-					if !item.RouteDestination.CorsPolicy.AllowOriginRegex.IsNull() && !item.RouteDestination.CorsPolicy.AllowOriginRegex.IsUnknown() {
+					if !item.RouteDestination.CORSPolicy.AllowOriginRegex.IsNull() && !item.RouteDestination.CORSPolicy.AllowOriginRegex.IsUnknown() {
 						var AllowOriginRegexItems []string
-						diags := item.RouteDestination.CorsPolicy.AllowOriginRegex.ElementsAs(ctx, &AllowOriginRegexItems, false)
+						diags := item.RouteDestination.CORSPolicy.AllowOriginRegex.ElementsAs(ctx, &AllowOriginRegexItems, false)
 						if !diags.HasError() {
 							cors_policyDeepMap["allow_origin_regex"] = AllowOriginRegexItems
 						}
 					}
-					if !item.RouteDestination.CorsPolicy.Disabled.IsNull() && !item.RouteDestination.CorsPolicy.Disabled.IsUnknown() {
-						cors_policyDeepMap["disabled"] = item.RouteDestination.CorsPolicy.Disabled.ValueBool()
+					if !item.RouteDestination.CORSPolicy.Disabled.IsNull() && !item.RouteDestination.CORSPolicy.Disabled.IsUnknown() {
+						cors_policyDeepMap["disabled"] = item.RouteDestination.CORSPolicy.Disabled.ValueBool()
 					}
-					if !item.RouteDestination.CorsPolicy.ExposeHeaders.IsNull() && !item.RouteDestination.CorsPolicy.ExposeHeaders.IsUnknown() {
-						cors_policyDeepMap["expose_headers"] = item.RouteDestination.CorsPolicy.ExposeHeaders.ValueString()
+					if !item.RouteDestination.CORSPolicy.ExposeHeaders.IsNull() && !item.RouteDestination.CORSPolicy.ExposeHeaders.IsUnknown() {
+						cors_policyDeepMap["expose_headers"] = item.RouteDestination.CORSPolicy.ExposeHeaders.ValueString()
 					}
-					if !item.RouteDestination.CorsPolicy.MaximumAge.IsNull() && !item.RouteDestination.CorsPolicy.MaximumAge.IsUnknown() {
-						cors_policyDeepMap["maximum_age"] = item.RouteDestination.CorsPolicy.MaximumAge.ValueInt64()
+					if !item.RouteDestination.CORSPolicy.MaximumAge.IsNull() && !item.RouteDestination.CORSPolicy.MaximumAge.IsUnknown() {
+						cors_policyDeepMap["maximum_age"] = item.RouteDestination.CORSPolicy.MaximumAge.ValueInt64()
 					}
 					route_destinationNestedMap["cors_policy"] = cors_policyDeepMap
 				}
-				if item.RouteDestination.CsrfPolicy != nil {
+				if item.RouteDestination.CSRFPolicy != nil {
 					csrf_policyDeepMap := make(map[string]interface{})
-					if item.RouteDestination.CsrfPolicy.AllLoadBalancerDomains != nil {
+					if item.RouteDestination.CSRFPolicy.AllLoadBalancerDomains != nil {
 						csrf_policyDeepMap["all_load_balancer_domains"] = map[string]interface{}{}
 					}
-					if item.RouteDestination.CsrfPolicy.Disabled != nil {
+					if item.RouteDestination.CSRFPolicy.Disabled != nil {
 						csrf_policyDeepMap["disabled"] = map[string]interface{}{}
 					}
 					route_destinationNestedMap["csrf_policy"] = csrf_policyDeepMap
@@ -3351,8 +3351,8 @@ func (r *RouteResource) Update(ctx context.Context, req resource.UpdateRequest, 
 				}
 				if item.RouteDestination.WebSocketConfig != nil {
 					web_socket_configDeepMap := make(map[string]interface{})
-					if !item.RouteDestination.WebSocketConfig.UseWebsocket.IsNull() && !item.RouteDestination.WebSocketConfig.UseWebsocket.IsUnknown() {
-						web_socket_configDeepMap["use_websocket"] = item.RouteDestination.WebSocketConfig.UseWebsocket.ValueBool()
+					if !item.RouteDestination.WebSocketConfig.UseWebSocket.IsNull() && !item.RouteDestination.WebSocketConfig.UseWebSocket.IsUnknown() {
+						web_socket_configDeepMap["use_websocket"] = item.RouteDestination.WebSocketConfig.UseWebSocket.ValueBool()
 					}
 					route_destinationNestedMap["web_socket_config"] = web_socket_configDeepMap
 				}

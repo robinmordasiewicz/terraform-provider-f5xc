@@ -63,10 +63,10 @@ type SubnetConnectToLayer2Layer2IntfRefModel struct {
 
 // SubnetSiteSubnetParamsModel represents site_subnet_params block
 type SubnetSiteSubnetParamsModel struct {
-	Dhcp                   *SubnetEmptyModel                                  `tfsdk:"dhcp"`
+	DHCP                   *SubnetEmptyModel                                  `tfsdk:"dhcp"`
 	Site                   *SubnetSiteSubnetParamsSiteModel                   `tfsdk:"site"`
 	StaticIP               *SubnetEmptyModel                                  `tfsdk:"static_ip"`
-	SubnetDhcpServerParams *SubnetSiteSubnetParamsSubnetDhcpServerParamsModel `tfsdk:"subnet_dhcp_server_params"`
+	SubnetDHCPServerParams *SubnetSiteSubnetParamsSubnetDHCPServerParamsModel `tfsdk:"subnet_dhcp_server_params"`
 }
 
 // SubnetSiteSubnetParamsSiteModel represents site block
@@ -76,13 +76,13 @@ type SubnetSiteSubnetParamsSiteModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// SubnetSiteSubnetParamsSubnetDhcpServerParamsModel represents subnet_dhcp_server_params block
-type SubnetSiteSubnetParamsSubnetDhcpServerParamsModel struct {
-	DhcpNetworks []SubnetSiteSubnetParamsSubnetDhcpServerParamsDhcpNetworksModel `tfsdk:"dhcp_networks"`
+// SubnetSiteSubnetParamsSubnetDHCPServerParamsModel represents subnet_dhcp_server_params block
+type SubnetSiteSubnetParamsSubnetDHCPServerParamsModel struct {
+	DHCPNetworks []SubnetSiteSubnetParamsSubnetDHCPServerParamsDHCPNetworksModel `tfsdk:"dhcp_networks"`
 }
 
-// SubnetSiteSubnetParamsSubnetDhcpServerParamsDhcpNetworksModel represents dhcp_networks block
-type SubnetSiteSubnetParamsSubnetDhcpServerParamsDhcpNetworksModel struct {
+// SubnetSiteSubnetParamsSubnetDHCPServerParamsDHCPNetworksModel represents dhcp_networks block
+type SubnetSiteSubnetParamsSubnetDHCPServerParamsDHCPNetworksModel struct {
 	NetworkPrefix types.String `tfsdk:"network_prefix"`
 }
 
@@ -96,7 +96,7 @@ type SubnetResourceModel struct {
 	ID               types.String                  `tfsdk:"id"`
 	Timeouts         timeouts.Value                `tfsdk:"timeouts"`
 	ConnectToLayer2  *SubnetConnectToLayer2Model   `tfsdk:"connect_to_layer2"`
-	ConnectToSLO     *SubnetEmptyModel             `tfsdk:"connect_to_slo"`
+	ConnectToSlo     *SubnetEmptyModel             `tfsdk:"connect_to_slo"`
 	IsolatedNw       *SubnetEmptyModel             `tfsdk:"isolated_nw"`
 	SiteSubnetParams []SubnetSiteSubnetParamsModel `tfsdk:"site_subnet_params"`
 }
@@ -407,7 +407,7 @@ func (r *SubnetResource) Create(ctx context.Context, req resource.CreateRequest,
 		}
 		createReq.Spec["connect_to_layer2"] = connect_to_layer2Map
 	}
-	if data.ConnectToSLO != nil {
+	if data.ConnectToSlo != nil {
 		connect_to_sloMap := make(map[string]interface{})
 		createReq.Spec["connect_to_slo"] = connect_to_sloMap
 	}
@@ -419,7 +419,7 @@ func (r *SubnetResource) Create(ctx context.Context, req resource.CreateRequest,
 		var site_subnet_paramsList []map[string]interface{}
 		for _, item := range data.SiteSubnetParams {
 			itemMap := make(map[string]interface{})
-			if item.Dhcp != nil {
+			if item.DHCP != nil {
 				itemMap["dhcp"] = map[string]interface{}{}
 			}
 			if item.Site != nil {
@@ -438,11 +438,11 @@ func (r *SubnetResource) Create(ctx context.Context, req resource.CreateRequest,
 			if item.StaticIP != nil {
 				itemMap["static_ip"] = map[string]interface{}{}
 			}
-			if item.SubnetDhcpServerParams != nil {
+			if item.SubnetDHCPServerParams != nil {
 				subnet_dhcp_server_paramsNestedMap := make(map[string]interface{})
-				if len(item.SubnetDhcpServerParams.DhcpNetworks) > 0 {
+				if len(item.SubnetDHCPServerParams.DHCPNetworks) > 0 {
 					var dhcp_networksDeepList []map[string]interface{}
-					for _, deepListItem := range item.SubnetDhcpServerParams.DhcpNetworks {
+					for _, deepListItem := range item.SubnetDHCPServerParams.DHCPNetworks {
 						deepListItemMap := make(map[string]interface{})
 						if !deepListItem.NetworkPrefix.IsNull() && !deepListItem.NetworkPrefix.IsUnknown() {
 							deepListItemMap["network_prefix"] = deepListItem.NetworkPrefix.ValueString()
@@ -475,9 +475,9 @@ func (r *SubnetResource) Create(ctx context.Context, req resource.CreateRequest,
 		data.ConnectToLayer2 = &SubnetConnectToLayer2Model{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["connect_to_slo"].(map[string]interface{}); ok && isImport && data.ConnectToSLO == nil {
+	if _, ok := apiResource.Spec["connect_to_slo"].(map[string]interface{}); ok && isImport && data.ConnectToSlo == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.ConnectToSLO = &SubnetEmptyModel{}
+		data.ConnectToSlo = &SubnetEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["isolated_nw"].(map[string]interface{}); ok && isImport && data.IsolatedNw == nil {
@@ -491,8 +491,8 @@ func (r *SubnetResource) Create(ctx context.Context, req resource.CreateRequest,
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				site_subnet_paramsList = append(site_subnet_paramsList, SubnetSiteSubnetParamsModel{
-					Dhcp: func() *SubnetEmptyModel {
-						if !isImport && len(data.SiteSubnetParams) > listIdx && data.SiteSubnetParams[listIdx].Dhcp != nil {
+					DHCP: func() *SubnetEmptyModel {
+						if !isImport && len(data.SiteSubnetParams) > listIdx && data.SiteSubnetParams[listIdx].DHCP != nil {
 							return &SubnetEmptyModel{}
 						}
 						return nil
@@ -528,9 +528,9 @@ func (r *SubnetResource) Create(ctx context.Context, req resource.CreateRequest,
 						}
 						return nil
 					}(),
-					SubnetDhcpServerParams: func() *SubnetSiteSubnetParamsSubnetDhcpServerParamsModel {
+					SubnetDHCPServerParams: func() *SubnetSiteSubnetParamsSubnetDHCPServerParamsModel {
 						if _, ok := itemMap["subnet_dhcp_server_params"].(map[string]interface{}); ok {
-							return &SubnetSiteSubnetParamsSubnetDhcpServerParamsModel{}
+							return &SubnetSiteSubnetParamsSubnetDHCPServerParamsModel{}
 						}
 						return nil
 					}(),
@@ -637,9 +637,9 @@ func (r *SubnetResource) Read(ctx context.Context, req resource.ReadRequest, res
 		data.ConnectToLayer2 = &SubnetConnectToLayer2Model{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["connect_to_slo"].(map[string]interface{}); ok && isImport && data.ConnectToSLO == nil {
+	if _, ok := apiResource.Spec["connect_to_slo"].(map[string]interface{}); ok && isImport && data.ConnectToSlo == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.ConnectToSLO = &SubnetEmptyModel{}
+		data.ConnectToSlo = &SubnetEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["isolated_nw"].(map[string]interface{}); ok && isImport && data.IsolatedNw == nil {
@@ -653,8 +653,8 @@ func (r *SubnetResource) Read(ctx context.Context, req resource.ReadRequest, res
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				site_subnet_paramsList = append(site_subnet_paramsList, SubnetSiteSubnetParamsModel{
-					Dhcp: func() *SubnetEmptyModel {
-						if !isImport && len(data.SiteSubnetParams) > listIdx && data.SiteSubnetParams[listIdx].Dhcp != nil {
+					DHCP: func() *SubnetEmptyModel {
+						if !isImport && len(data.SiteSubnetParams) > listIdx && data.SiteSubnetParams[listIdx].DHCP != nil {
 							return &SubnetEmptyModel{}
 						}
 						return nil
@@ -690,9 +690,9 @@ func (r *SubnetResource) Read(ctx context.Context, req resource.ReadRequest, res
 						}
 						return nil
 					}(),
-					SubnetDhcpServerParams: func() *SubnetSiteSubnetParamsSubnetDhcpServerParamsModel {
+					SubnetDHCPServerParams: func() *SubnetSiteSubnetParamsSubnetDHCPServerParamsModel {
 						if _, ok := itemMap["subnet_dhcp_server_params"].(map[string]interface{}); ok {
-							return &SubnetSiteSubnetParamsSubnetDhcpServerParamsModel{}
+							return &SubnetSiteSubnetParamsSubnetDHCPServerParamsModel{}
 						}
 						return nil
 					}(),
@@ -778,7 +778,7 @@ func (r *SubnetResource) Update(ctx context.Context, req resource.UpdateRequest,
 		}
 		apiResource.Spec["connect_to_layer2"] = connect_to_layer2Map
 	}
-	if data.ConnectToSLO != nil {
+	if data.ConnectToSlo != nil {
 		connect_to_sloMap := make(map[string]interface{})
 		apiResource.Spec["connect_to_slo"] = connect_to_sloMap
 	}
@@ -790,7 +790,7 @@ func (r *SubnetResource) Update(ctx context.Context, req resource.UpdateRequest,
 		var site_subnet_paramsList []map[string]interface{}
 		for _, item := range data.SiteSubnetParams {
 			itemMap := make(map[string]interface{})
-			if item.Dhcp != nil {
+			if item.DHCP != nil {
 				itemMap["dhcp"] = map[string]interface{}{}
 			}
 			if item.Site != nil {
@@ -809,11 +809,11 @@ func (r *SubnetResource) Update(ctx context.Context, req resource.UpdateRequest,
 			if item.StaticIP != nil {
 				itemMap["static_ip"] = map[string]interface{}{}
 			}
-			if item.SubnetDhcpServerParams != nil {
+			if item.SubnetDHCPServerParams != nil {
 				subnet_dhcp_server_paramsNestedMap := make(map[string]interface{})
-				if len(item.SubnetDhcpServerParams.DhcpNetworks) > 0 {
+				if len(item.SubnetDHCPServerParams.DHCPNetworks) > 0 {
 					var dhcp_networksDeepList []map[string]interface{}
-					for _, deepListItem := range item.SubnetDhcpServerParams.DhcpNetworks {
+					for _, deepListItem := range item.SubnetDHCPServerParams.DHCPNetworks {
 						deepListItemMap := make(map[string]interface{})
 						if !deepListItem.NetworkPrefix.IsNull() && !deepListItem.NetworkPrefix.IsUnknown() {
 							deepListItemMap["network_prefix"] = deepListItem.NetworkPrefix.ValueString()
@@ -857,9 +857,9 @@ func (r *SubnetResource) Update(ctx context.Context, req resource.UpdateRequest,
 		data.ConnectToLayer2 = &SubnetConnectToLayer2Model{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["connect_to_slo"].(map[string]interface{}); ok && isImport && data.ConnectToSLO == nil {
+	if _, ok := apiResource.Spec["connect_to_slo"].(map[string]interface{}); ok && isImport && data.ConnectToSlo == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.ConnectToSLO = &SubnetEmptyModel{}
+		data.ConnectToSlo = &SubnetEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["isolated_nw"].(map[string]interface{}); ok && isImport && data.IsolatedNw == nil {
@@ -873,8 +873,8 @@ func (r *SubnetResource) Update(ctx context.Context, req resource.UpdateRequest,
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				site_subnet_paramsList = append(site_subnet_paramsList, SubnetSiteSubnetParamsModel{
-					Dhcp: func() *SubnetEmptyModel {
-						if !isImport && len(data.SiteSubnetParams) > listIdx && data.SiteSubnetParams[listIdx].Dhcp != nil {
+					DHCP: func() *SubnetEmptyModel {
+						if !isImport && len(data.SiteSubnetParams) > listIdx && data.SiteSubnetParams[listIdx].DHCP != nil {
 							return &SubnetEmptyModel{}
 						}
 						return nil
@@ -910,9 +910,9 @@ func (r *SubnetResource) Update(ctx context.Context, req resource.UpdateRequest,
 						}
 						return nil
 					}(),
-					SubnetDhcpServerParams: func() *SubnetSiteSubnetParamsSubnetDhcpServerParamsModel {
+					SubnetDHCPServerParams: func() *SubnetSiteSubnetParamsSubnetDHCPServerParamsModel {
 						if _, ok := itemMap["subnet_dhcp_server_params"].(map[string]interface{}); ok {
-							return &SubnetSiteSubnetParamsSubnetDhcpServerParamsModel{}
+							return &SubnetSiteSubnetParamsSubnetDHCPServerParamsModel{}
 						}
 						return nil
 					}(),

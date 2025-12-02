@@ -65,7 +65,7 @@ type UDPLoadBalancerAdvertiseCustomAdvertiseWhereModel struct {
 	UseDefaultPort     *UDPLoadBalancerEmptyModel                                           `tfsdk:"use_default_port"`
 	VirtualNetwork     *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel     `tfsdk:"virtual_network"`
 	VirtualSite        *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel        `tfsdk:"virtual_site"`
-	VirtualSiteWithVip *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel `tfsdk:"virtual_site_with_vip"`
+	VirtualSiteWithVIP *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel `tfsdk:"virtual_site_with_vip"`
 	Vk8sService        *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel        `tfsdk:"vk8s_service"`
 }
 
@@ -97,10 +97,10 @@ type UDPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModel struct {
 
 // UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel represents virtual_network block
 type UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel struct {
-	SpecificV6Vip  types.String                                                                   `tfsdk:"specific_v6_vip"`
-	SpecificVip    types.String                                                                   `tfsdk:"specific_vip"`
-	DefaultV6Vip   *UDPLoadBalancerEmptyModel                                                     `tfsdk:"default_v6_vip"`
-	DefaultVip     *UDPLoadBalancerEmptyModel                                                     `tfsdk:"default_vip"`
+	SpecificV6VIP  types.String                                                                   `tfsdk:"specific_v6_vip"`
+	SpecificVIP    types.String                                                                   `tfsdk:"specific_vip"`
+	DefaultV6VIP   *UDPLoadBalancerEmptyModel                                                     `tfsdk:"default_v6_vip"`
+	DefaultVIP     *UDPLoadBalancerEmptyModel                                                     `tfsdk:"default_vip"`
 	VirtualNetwork *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModel `tfsdk:"virtual_network"`
 }
 
@@ -124,15 +124,15 @@ type UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel str
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel represents virtual_site_with_vip block
-type UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel struct {
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel represents virtual_site_with_vip block
+type UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel struct {
 	IP          types.String                                                                    `tfsdk:"ip"`
 	Network     types.String                                                                    `tfsdk:"network"`
-	VirtualSite *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipVirtualSiteModel `tfsdk:"virtual_site"`
+	VirtualSite *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteModel `tfsdk:"virtual_site"`
 }
 
-// UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipVirtualSiteModel represents virtual_site block
-type UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipVirtualSiteModel struct {
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteModel represents virtual_site block
+type UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -210,7 +210,7 @@ type UDPLoadBalancerResourceModel struct {
 	Timeouts                           timeouts.Value                           `tfsdk:"timeouts"`
 	AdvertiseCustom                    *UDPLoadBalancerAdvertiseCustomModel     `tfsdk:"advertise_custom"`
 	AdvertiseOnPublic                  *UDPLoadBalancerAdvertiseOnPublicModel   `tfsdk:"advertise_on_public"`
-	AdvertiseOnPublicDefaultVip        *UDPLoadBalancerEmptyModel               `tfsdk:"advertise_on_public_default_vip"`
+	AdvertiseOnPublicDefaultVIP        *UDPLoadBalancerEmptyModel               `tfsdk:"advertise_on_public_default_vip"`
 	DoNotAdvertise                     *UDPLoadBalancerEmptyModel               `tfsdk:"do_not_advertise"`
 	HashPolicyChoiceRandom             *UDPLoadBalancerEmptyModel               `tfsdk:"hash_policy_choice_random"`
 	HashPolicyChoiceRoundRobin         *UDPLoadBalancerEmptyModel               `tfsdk:"hash_policy_choice_round_robin"`
@@ -829,17 +829,17 @@ func (r *UDPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 				}
 				if listItem.VirtualNetwork != nil {
 					virtual_networkDeepMap := make(map[string]interface{})
-					if listItem.VirtualNetwork.DefaultV6Vip != nil {
+					if listItem.VirtualNetwork.DefaultV6VIP != nil {
 						virtual_networkDeepMap["default_v6_vip"] = map[string]interface{}{}
 					}
-					if listItem.VirtualNetwork.DefaultVip != nil {
+					if listItem.VirtualNetwork.DefaultVIP != nil {
 						virtual_networkDeepMap["default_vip"] = map[string]interface{}{}
 					}
-					if !listItem.VirtualNetwork.SpecificV6Vip.IsNull() && !listItem.VirtualNetwork.SpecificV6Vip.IsUnknown() {
-						virtual_networkDeepMap["specific_v6_vip"] = listItem.VirtualNetwork.SpecificV6Vip.ValueString()
+					if !listItem.VirtualNetwork.SpecificV6VIP.IsNull() && !listItem.VirtualNetwork.SpecificV6VIP.IsUnknown() {
+						virtual_networkDeepMap["specific_v6_vip"] = listItem.VirtualNetwork.SpecificV6VIP.ValueString()
 					}
-					if !listItem.VirtualNetwork.SpecificVip.IsNull() && !listItem.VirtualNetwork.SpecificVip.IsUnknown() {
-						virtual_networkDeepMap["specific_vip"] = listItem.VirtualNetwork.SpecificVip.ValueString()
+					if !listItem.VirtualNetwork.SpecificVIP.IsNull() && !listItem.VirtualNetwork.SpecificVIP.IsUnknown() {
+						virtual_networkDeepMap["specific_vip"] = listItem.VirtualNetwork.SpecificVIP.ValueString()
 					}
 					listItemMap["virtual_network"] = virtual_networkDeepMap
 				}
@@ -850,13 +850,13 @@ func (r *UDPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 					}
 					listItemMap["virtual_site"] = virtual_siteDeepMap
 				}
-				if listItem.VirtualSiteWithVip != nil {
+				if listItem.VirtualSiteWithVIP != nil {
 					virtual_site_with_vipDeepMap := make(map[string]interface{})
-					if !listItem.VirtualSiteWithVip.IP.IsNull() && !listItem.VirtualSiteWithVip.IP.IsUnknown() {
-						virtual_site_with_vipDeepMap["ip"] = listItem.VirtualSiteWithVip.IP.ValueString()
+					if !listItem.VirtualSiteWithVIP.IP.IsNull() && !listItem.VirtualSiteWithVIP.IP.IsUnknown() {
+						virtual_site_with_vipDeepMap["ip"] = listItem.VirtualSiteWithVIP.IP.ValueString()
 					}
-					if !listItem.VirtualSiteWithVip.Network.IsNull() && !listItem.VirtualSiteWithVip.Network.IsUnknown() {
-						virtual_site_with_vipDeepMap["network"] = listItem.VirtualSiteWithVip.Network.ValueString()
+					if !listItem.VirtualSiteWithVIP.Network.IsNull() && !listItem.VirtualSiteWithVIP.Network.IsUnknown() {
+						virtual_site_with_vipDeepMap["network"] = listItem.VirtualSiteWithVIP.Network.ValueString()
 					}
 					listItemMap["virtual_site_with_vip"] = virtual_site_with_vipDeepMap
 				}
@@ -887,7 +887,7 @@ func (r *UDPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		}
 		createReq.Spec["advertise_on_public"] = advertise_on_publicMap
 	}
-	if data.AdvertiseOnPublicDefaultVip != nil {
+	if data.AdvertiseOnPublicDefaultVIP != nil {
 		advertise_on_public_default_vipMap := make(map[string]interface{})
 		createReq.Spec["advertise_on_public_default_vip"] = advertise_on_public_default_vipMap
 	}
@@ -1043,25 +1043,25 @@ func (r *UDPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 								VirtualNetwork: func() *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel {
 									if deepMap, ok := itemMap["virtual_network"].(map[string]interface{}); ok {
 										return &UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel{
-											DefaultV6Vip: func() *UDPLoadBalancerEmptyModel {
+											DefaultV6VIP: func() *UDPLoadBalancerEmptyModel {
 												if _, ok := deepMap["default_v6_vip"].(map[string]interface{}); ok {
 													return &UDPLoadBalancerEmptyModel{}
 												}
 												return nil
 											}(),
-											DefaultVip: func() *UDPLoadBalancerEmptyModel {
+											DefaultVIP: func() *UDPLoadBalancerEmptyModel {
 												if _, ok := deepMap["default_vip"].(map[string]interface{}); ok {
 													return &UDPLoadBalancerEmptyModel{}
 												}
 												return nil
 											}(),
-											SpecificV6Vip: func() types.String {
+											SpecificV6VIP: func() types.String {
 												if v, ok := deepMap["specific_v6_vip"].(string); ok && v != "" {
 													return types.StringValue(v)
 												}
 												return types.StringNull()
 											}(),
-											SpecificVip: func() types.String {
+											SpecificVIP: func() types.String {
 												if v, ok := deepMap["specific_vip"].(string); ok && v != "" {
 													return types.StringValue(v)
 												}
@@ -1084,9 +1084,9 @@ func (r *UDPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 									}
 									return nil
 								}(),
-								VirtualSiteWithVip: func() *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel {
+								VirtualSiteWithVIP: func() *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel {
 									if deepMap, ok := itemMap["virtual_site_with_vip"].(map[string]interface{}); ok {
-										return &UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel{
+										return &UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel{
 											IP: func() types.String {
 												if v, ok := deepMap["ip"].(string); ok && v != "" {
 													return types.StringValue(v)
@@ -1123,9 +1123,9 @@ func (r *UDPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		data.AdvertiseOnPublic = &UDPLoadBalancerAdvertiseOnPublicModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["advertise_on_public_default_vip"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublicDefaultVip == nil {
+	if _, ok := apiResource.Spec["advertise_on_public_default_vip"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublicDefaultVIP == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.AdvertiseOnPublicDefaultVip = &UDPLoadBalancerEmptyModel{}
+		data.AdvertiseOnPublicDefaultVIP = &UDPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["do_not_advertise"].(map[string]interface{}); ok && isImport && data.DoNotAdvertise == nil {
@@ -1431,25 +1431,25 @@ func (r *UDPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 								VirtualNetwork: func() *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel {
 									if deepMap, ok := itemMap["virtual_network"].(map[string]interface{}); ok {
 										return &UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel{
-											DefaultV6Vip: func() *UDPLoadBalancerEmptyModel {
+											DefaultV6VIP: func() *UDPLoadBalancerEmptyModel {
 												if _, ok := deepMap["default_v6_vip"].(map[string]interface{}); ok {
 													return &UDPLoadBalancerEmptyModel{}
 												}
 												return nil
 											}(),
-											DefaultVip: func() *UDPLoadBalancerEmptyModel {
+											DefaultVIP: func() *UDPLoadBalancerEmptyModel {
 												if _, ok := deepMap["default_vip"].(map[string]interface{}); ok {
 													return &UDPLoadBalancerEmptyModel{}
 												}
 												return nil
 											}(),
-											SpecificV6Vip: func() types.String {
+											SpecificV6VIP: func() types.String {
 												if v, ok := deepMap["specific_v6_vip"].(string); ok && v != "" {
 													return types.StringValue(v)
 												}
 												return types.StringNull()
 											}(),
-											SpecificVip: func() types.String {
+											SpecificVIP: func() types.String {
 												if v, ok := deepMap["specific_vip"].(string); ok && v != "" {
 													return types.StringValue(v)
 												}
@@ -1472,9 +1472,9 @@ func (r *UDPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 									}
 									return nil
 								}(),
-								VirtualSiteWithVip: func() *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel {
+								VirtualSiteWithVIP: func() *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel {
 									if deepMap, ok := itemMap["virtual_site_with_vip"].(map[string]interface{}); ok {
-										return &UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel{
+										return &UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel{
 											IP: func() types.String {
 												if v, ok := deepMap["ip"].(string); ok && v != "" {
 													return types.StringValue(v)
@@ -1511,9 +1511,9 @@ func (r *UDPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 		data.AdvertiseOnPublic = &UDPLoadBalancerAdvertiseOnPublicModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["advertise_on_public_default_vip"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublicDefaultVip == nil {
+	if _, ok := apiResource.Spec["advertise_on_public_default_vip"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublicDefaultVIP == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.AdvertiseOnPublicDefaultVip = &UDPLoadBalancerEmptyModel{}
+		data.AdvertiseOnPublicDefaultVIP = &UDPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["do_not_advertise"].(map[string]interface{}); ok && isImport && data.DoNotAdvertise == nil {
@@ -1763,17 +1763,17 @@ func (r *UDPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 				}
 				if listItem.VirtualNetwork != nil {
 					virtual_networkDeepMap := make(map[string]interface{})
-					if listItem.VirtualNetwork.DefaultV6Vip != nil {
+					if listItem.VirtualNetwork.DefaultV6VIP != nil {
 						virtual_networkDeepMap["default_v6_vip"] = map[string]interface{}{}
 					}
-					if listItem.VirtualNetwork.DefaultVip != nil {
+					if listItem.VirtualNetwork.DefaultVIP != nil {
 						virtual_networkDeepMap["default_vip"] = map[string]interface{}{}
 					}
-					if !listItem.VirtualNetwork.SpecificV6Vip.IsNull() && !listItem.VirtualNetwork.SpecificV6Vip.IsUnknown() {
-						virtual_networkDeepMap["specific_v6_vip"] = listItem.VirtualNetwork.SpecificV6Vip.ValueString()
+					if !listItem.VirtualNetwork.SpecificV6VIP.IsNull() && !listItem.VirtualNetwork.SpecificV6VIP.IsUnknown() {
+						virtual_networkDeepMap["specific_v6_vip"] = listItem.VirtualNetwork.SpecificV6VIP.ValueString()
 					}
-					if !listItem.VirtualNetwork.SpecificVip.IsNull() && !listItem.VirtualNetwork.SpecificVip.IsUnknown() {
-						virtual_networkDeepMap["specific_vip"] = listItem.VirtualNetwork.SpecificVip.ValueString()
+					if !listItem.VirtualNetwork.SpecificVIP.IsNull() && !listItem.VirtualNetwork.SpecificVIP.IsUnknown() {
+						virtual_networkDeepMap["specific_vip"] = listItem.VirtualNetwork.SpecificVIP.ValueString()
 					}
 					listItemMap["virtual_network"] = virtual_networkDeepMap
 				}
@@ -1784,13 +1784,13 @@ func (r *UDPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 					}
 					listItemMap["virtual_site"] = virtual_siteDeepMap
 				}
-				if listItem.VirtualSiteWithVip != nil {
+				if listItem.VirtualSiteWithVIP != nil {
 					virtual_site_with_vipDeepMap := make(map[string]interface{})
-					if !listItem.VirtualSiteWithVip.IP.IsNull() && !listItem.VirtualSiteWithVip.IP.IsUnknown() {
-						virtual_site_with_vipDeepMap["ip"] = listItem.VirtualSiteWithVip.IP.ValueString()
+					if !listItem.VirtualSiteWithVIP.IP.IsNull() && !listItem.VirtualSiteWithVIP.IP.IsUnknown() {
+						virtual_site_with_vipDeepMap["ip"] = listItem.VirtualSiteWithVIP.IP.ValueString()
 					}
-					if !listItem.VirtualSiteWithVip.Network.IsNull() && !listItem.VirtualSiteWithVip.Network.IsUnknown() {
-						virtual_site_with_vipDeepMap["network"] = listItem.VirtualSiteWithVip.Network.ValueString()
+					if !listItem.VirtualSiteWithVIP.Network.IsNull() && !listItem.VirtualSiteWithVIP.Network.IsUnknown() {
+						virtual_site_with_vipDeepMap["network"] = listItem.VirtualSiteWithVIP.Network.ValueString()
 					}
 					listItemMap["virtual_site_with_vip"] = virtual_site_with_vipDeepMap
 				}
@@ -1821,7 +1821,7 @@ func (r *UDPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		}
 		apiResource.Spec["advertise_on_public"] = advertise_on_publicMap
 	}
-	if data.AdvertiseOnPublicDefaultVip != nil {
+	if data.AdvertiseOnPublicDefaultVIP != nil {
 		advertise_on_public_default_vipMap := make(map[string]interface{})
 		apiResource.Spec["advertise_on_public_default_vip"] = advertise_on_public_default_vipMap
 	}
@@ -2023,25 +2023,25 @@ func (r *UDPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 								VirtualNetwork: func() *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel {
 									if deepMap, ok := itemMap["virtual_network"].(map[string]interface{}); ok {
 										return &UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel{
-											DefaultV6Vip: func() *UDPLoadBalancerEmptyModel {
+											DefaultV6VIP: func() *UDPLoadBalancerEmptyModel {
 												if _, ok := deepMap["default_v6_vip"].(map[string]interface{}); ok {
 													return &UDPLoadBalancerEmptyModel{}
 												}
 												return nil
 											}(),
-											DefaultVip: func() *UDPLoadBalancerEmptyModel {
+											DefaultVIP: func() *UDPLoadBalancerEmptyModel {
 												if _, ok := deepMap["default_vip"].(map[string]interface{}); ok {
 													return &UDPLoadBalancerEmptyModel{}
 												}
 												return nil
 											}(),
-											SpecificV6Vip: func() types.String {
+											SpecificV6VIP: func() types.String {
 												if v, ok := deepMap["specific_v6_vip"].(string); ok && v != "" {
 													return types.StringValue(v)
 												}
 												return types.StringNull()
 											}(),
-											SpecificVip: func() types.String {
+											SpecificVIP: func() types.String {
 												if v, ok := deepMap["specific_vip"].(string); ok && v != "" {
 													return types.StringValue(v)
 												}
@@ -2064,9 +2064,9 @@ func (r *UDPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 									}
 									return nil
 								}(),
-								VirtualSiteWithVip: func() *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel {
+								VirtualSiteWithVIP: func() *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel {
 									if deepMap, ok := itemMap["virtual_site_with_vip"].(map[string]interface{}); ok {
-										return &UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel{
+										return &UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel{
 											IP: func() types.String {
 												if v, ok := deepMap["ip"].(string); ok && v != "" {
 													return types.StringValue(v)
@@ -2103,9 +2103,9 @@ func (r *UDPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		data.AdvertiseOnPublic = &UDPLoadBalancerAdvertiseOnPublicModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["advertise_on_public_default_vip"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublicDefaultVip == nil {
+	if _, ok := apiResource.Spec["advertise_on_public_default_vip"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublicDefaultVIP == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.AdvertiseOnPublicDefaultVip = &UDPLoadBalancerEmptyModel{}
+		data.AdvertiseOnPublicDefaultVIP = &UDPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["do_not_advertise"].(map[string]interface{}); ok && isImport && data.DoNotAdvertise == nil {

@@ -96,32 +96,32 @@ type InfraprotectTunnelFirewallRuleGroupModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// InfraprotectTunnelGreIPV4Model represents gre_ipv4 block
-type InfraprotectTunnelGreIPV4Model struct {
-	CustomerEndpointIPV4     types.String                  `tfsdk:"customer_endpoint_ipv4"`
+// InfraprotectTunnelGreIpv4Model represents gre_ipv4 block
+type InfraprotectTunnelGreIpv4Model struct {
+	CustomerEndpointIpv4     types.String                  `tfsdk:"customer_endpoint_ipv4"`
 	FragmentationDisabled    *InfraprotectTunnelEmptyModel `tfsdk:"fragmentation_disabled"`
 	FragmentationEnabled     *InfraprotectTunnelEmptyModel `tfsdk:"fragmentation_enabled"`
-	IPV6InterconnectDisabled *InfraprotectTunnelEmptyModel `tfsdk:"ipv6_interconnect_disabled"`
-	IPV6InterconnectEnabled  *InfraprotectTunnelEmptyModel `tfsdk:"ipv6_interconnect_enabled"`
+	Ipv6InterconnectDisabled *InfraprotectTunnelEmptyModel `tfsdk:"ipv6_interconnect_disabled"`
+	Ipv6InterconnectEnabled  *InfraprotectTunnelEmptyModel `tfsdk:"ipv6_interconnect_enabled"`
 	KeepaliveDisabled        *InfraprotectTunnelEmptyModel `tfsdk:"keepalive_disabled"`
 	KeepaliveEnabled         *InfraprotectTunnelEmptyModel `tfsdk:"keepalive_enabled"`
 }
 
-// InfraprotectTunnelGreIPV6Model represents gre_ipv6 block
-type InfraprotectTunnelGreIPV6Model struct {
-	CustomerEndpointIPV6     types.String                  `tfsdk:"customer_endpoint_ipv6"`
-	IPV4InterconnectDisabled *InfraprotectTunnelEmptyModel `tfsdk:"ipv4_interconnect_disabled"`
-	IPV4InterconnectEnabled  *InfraprotectTunnelEmptyModel `tfsdk:"ipv4_interconnect_enabled"`
+// InfraprotectTunnelGreIpv6Model represents gre_ipv6 block
+type InfraprotectTunnelGreIpv6Model struct {
+	CustomerEndpointIpv6     types.String                  `tfsdk:"customer_endpoint_ipv6"`
+	Ipv4InterconnectDisabled *InfraprotectTunnelEmptyModel `tfsdk:"ipv4_interconnect_disabled"`
+	Ipv4InterconnectEnabled  *InfraprotectTunnelEmptyModel `tfsdk:"ipv4_interconnect_enabled"`
 }
 
 // InfraprotectTunnelIPInIPModel represents ip_in_ip block
 type InfraprotectTunnelIPInIPModel struct {
-	CustomerEndpointIPV4 types.String `tfsdk:"customer_endpoint_ipv4"`
+	CustomerEndpointIpv4 types.String `tfsdk:"customer_endpoint_ipv4"`
 }
 
-// InfraprotectTunnelIPV6ToIPV6Model represents ipv6_to_ipv6 block
-type InfraprotectTunnelIPV6ToIPV6Model struct {
-	CustomerEndpointIPV6 types.String `tfsdk:"customer_endpoint_ipv6"`
+// InfraprotectTunnelIpv6ToIpv6Model represents ipv6_to_ipv6 block
+type InfraprotectTunnelIpv6ToIpv6Model struct {
+	CustomerEndpointIpv6 types.String `tfsdk:"customer_endpoint_ipv6"`
 }
 
 // InfraprotectTunnelTunnelLocationModel represents tunnel_location block
@@ -143,10 +143,10 @@ type InfraprotectTunnelResourceModel struct {
 	Bandwidth         *InfraprotectTunnelBandwidthModel         `tfsdk:"bandwidth"`
 	BGPInformation    *InfraprotectTunnelBGPInformationModel    `tfsdk:"bgp_information"`
 	FirewallRuleGroup *InfraprotectTunnelFirewallRuleGroupModel `tfsdk:"firewall_rule_group"`
-	GreIPV4           *InfraprotectTunnelGreIPV4Model           `tfsdk:"gre_ipv4"`
-	GreIPV6           *InfraprotectTunnelGreIPV6Model           `tfsdk:"gre_ipv6"`
+	GreIpv4           *InfraprotectTunnelGreIpv4Model           `tfsdk:"gre_ipv4"`
+	GreIpv6           *InfraprotectTunnelGreIpv6Model           `tfsdk:"gre_ipv6"`
 	IPInIP            *InfraprotectTunnelIPInIPModel            `tfsdk:"ip_in_ip"`
-	IPV6ToIPV6        *InfraprotectTunnelIPV6ToIPV6Model        `tfsdk:"ipv6_to_ipv6"`
+	Ipv6ToIpv6        *InfraprotectTunnelIpv6ToIpv6Model        `tfsdk:"ipv6_to_ipv6"`
 	TunnelLocation    *InfraprotectTunnelTunnelLocationModel    `tfsdk:"tunnel_location"`
 }
 
@@ -589,55 +589,55 @@ func (r *InfraprotectTunnelResource) Create(ctx context.Context, req resource.Cr
 		}
 		createReq.Spec["firewall_rule_group"] = firewall_rule_groupMap
 	}
-	if data.GreIPV4 != nil {
+	if data.GreIpv4 != nil {
 		gre_ipv4Map := make(map[string]interface{})
-		if !data.GreIPV4.CustomerEndpointIPV4.IsNull() && !data.GreIPV4.CustomerEndpointIPV4.IsUnknown() {
-			gre_ipv4Map["customer_endpoint_ipv4"] = data.GreIPV4.CustomerEndpointIPV4.ValueString()
+		if !data.GreIpv4.CustomerEndpointIpv4.IsNull() && !data.GreIpv4.CustomerEndpointIpv4.IsUnknown() {
+			gre_ipv4Map["customer_endpoint_ipv4"] = data.GreIpv4.CustomerEndpointIpv4.ValueString()
 		}
-		if data.GreIPV4.FragmentationDisabled != nil {
+		if data.GreIpv4.FragmentationDisabled != nil {
 			gre_ipv4Map["fragmentation_disabled"] = map[string]interface{}{}
 		}
-		if data.GreIPV4.FragmentationEnabled != nil {
+		if data.GreIpv4.FragmentationEnabled != nil {
 			gre_ipv4Map["fragmentation_enabled"] = map[string]interface{}{}
 		}
-		if data.GreIPV4.IPV6InterconnectDisabled != nil {
+		if data.GreIpv4.Ipv6InterconnectDisabled != nil {
 			gre_ipv4Map["ipv6_interconnect_disabled"] = map[string]interface{}{}
 		}
-		if data.GreIPV4.IPV6InterconnectEnabled != nil {
+		if data.GreIpv4.Ipv6InterconnectEnabled != nil {
 			gre_ipv4Map["ipv6_interconnect_enabled"] = map[string]interface{}{}
 		}
-		if data.GreIPV4.KeepaliveDisabled != nil {
+		if data.GreIpv4.KeepaliveDisabled != nil {
 			gre_ipv4Map["keepalive_disabled"] = map[string]interface{}{}
 		}
-		if data.GreIPV4.KeepaliveEnabled != nil {
+		if data.GreIpv4.KeepaliveEnabled != nil {
 			gre_ipv4Map["keepalive_enabled"] = map[string]interface{}{}
 		}
 		createReq.Spec["gre_ipv4"] = gre_ipv4Map
 	}
-	if data.GreIPV6 != nil {
+	if data.GreIpv6 != nil {
 		gre_ipv6Map := make(map[string]interface{})
-		if !data.GreIPV6.CustomerEndpointIPV6.IsNull() && !data.GreIPV6.CustomerEndpointIPV6.IsUnknown() {
-			gre_ipv6Map["customer_endpoint_ipv6"] = data.GreIPV6.CustomerEndpointIPV6.ValueString()
+		if !data.GreIpv6.CustomerEndpointIpv6.IsNull() && !data.GreIpv6.CustomerEndpointIpv6.IsUnknown() {
+			gre_ipv6Map["customer_endpoint_ipv6"] = data.GreIpv6.CustomerEndpointIpv6.ValueString()
 		}
-		if data.GreIPV6.IPV4InterconnectDisabled != nil {
+		if data.GreIpv6.Ipv4InterconnectDisabled != nil {
 			gre_ipv6Map["ipv4_interconnect_disabled"] = map[string]interface{}{}
 		}
-		if data.GreIPV6.IPV4InterconnectEnabled != nil {
+		if data.GreIpv6.Ipv4InterconnectEnabled != nil {
 			gre_ipv6Map["ipv4_interconnect_enabled"] = map[string]interface{}{}
 		}
 		createReq.Spec["gre_ipv6"] = gre_ipv6Map
 	}
 	if data.IPInIP != nil {
 		ip_in_ipMap := make(map[string]interface{})
-		if !data.IPInIP.CustomerEndpointIPV4.IsNull() && !data.IPInIP.CustomerEndpointIPV4.IsUnknown() {
-			ip_in_ipMap["customer_endpoint_ipv4"] = data.IPInIP.CustomerEndpointIPV4.ValueString()
+		if !data.IPInIP.CustomerEndpointIpv4.IsNull() && !data.IPInIP.CustomerEndpointIpv4.IsUnknown() {
+			ip_in_ipMap["customer_endpoint_ipv4"] = data.IPInIP.CustomerEndpointIpv4.ValueString()
 		}
 		createReq.Spec["ip_in_ip"] = ip_in_ipMap
 	}
-	if data.IPV6ToIPV6 != nil {
+	if data.Ipv6ToIpv6 != nil {
 		ipv6_to_ipv6Map := make(map[string]interface{})
-		if !data.IPV6ToIPV6.CustomerEndpointIPV6.IsNull() && !data.IPV6ToIPV6.CustomerEndpointIPV6.IsUnknown() {
-			ipv6_to_ipv6Map["customer_endpoint_ipv6"] = data.IPV6ToIPV6.CustomerEndpointIPV6.ValueString()
+		if !data.Ipv6ToIpv6.CustomerEndpointIpv6.IsNull() && !data.Ipv6ToIpv6.CustomerEndpointIpv6.IsUnknown() {
+			ipv6_to_ipv6Map["customer_endpoint_ipv6"] = data.Ipv6ToIpv6.CustomerEndpointIpv6.ValueString()
 		}
 		createReq.Spec["ipv6_to_ipv6"] = ipv6_to_ipv6Map
 	}
@@ -774,19 +774,19 @@ func (r *InfraprotectTunnelResource) Create(ctx context.Context, req resource.Cr
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["gre_ipv4"].(map[string]interface{}); ok && (isImport || data.GreIPV4 != nil) {
-		data.GreIPV4 = &InfraprotectTunnelGreIPV4Model{
-			CustomerEndpointIPV4: func() types.String {
+	if blockData, ok := apiResource.Spec["gre_ipv4"].(map[string]interface{}); ok && (isImport || data.GreIpv4 != nil) {
+		data.GreIpv4 = &InfraprotectTunnelGreIpv4Model{
+			CustomerEndpointIpv4: func() types.String {
 				if v, ok := blockData["customer_endpoint_ipv4"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
 			}(),
 			FragmentationDisabled: func() *InfraprotectTunnelEmptyModel {
-				if !isImport && data.GreIPV4 != nil {
+				if !isImport && data.GreIpv4 != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.GreIPV4.FragmentationDisabled
+					return data.GreIpv4.FragmentationDisabled
 				}
 				// Import case: read from API
 				if _, ok := blockData["fragmentation_disabled"].(map[string]interface{}); ok {
@@ -795,10 +795,10 @@ func (r *InfraprotectTunnelResource) Create(ctx context.Context, req resource.Cr
 				return nil
 			}(),
 			FragmentationEnabled: func() *InfraprotectTunnelEmptyModel {
-				if !isImport && data.GreIPV4 != nil {
+				if !isImport && data.GreIpv4 != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.GreIPV4.FragmentationEnabled
+					return data.GreIpv4.FragmentationEnabled
 				}
 				// Import case: read from API
 				if _, ok := blockData["fragmentation_enabled"].(map[string]interface{}); ok {
@@ -806,11 +806,11 @@ func (r *InfraprotectTunnelResource) Create(ctx context.Context, req resource.Cr
 				}
 				return nil
 			}(),
-			IPV6InterconnectDisabled: func() *InfraprotectTunnelEmptyModel {
-				if !isImport && data.GreIPV4 != nil {
+			Ipv6InterconnectDisabled: func() *InfraprotectTunnelEmptyModel {
+				if !isImport && data.GreIpv4 != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.GreIPV4.IPV6InterconnectDisabled
+					return data.GreIpv4.Ipv6InterconnectDisabled
 				}
 				// Import case: read from API
 				if _, ok := blockData["ipv6_interconnect_disabled"].(map[string]interface{}); ok {
@@ -818,11 +818,11 @@ func (r *InfraprotectTunnelResource) Create(ctx context.Context, req resource.Cr
 				}
 				return nil
 			}(),
-			IPV6InterconnectEnabled: func() *InfraprotectTunnelEmptyModel {
-				if !isImport && data.GreIPV4 != nil {
+			Ipv6InterconnectEnabled: func() *InfraprotectTunnelEmptyModel {
+				if !isImport && data.GreIpv4 != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.GreIPV4.IPV6InterconnectEnabled
+					return data.GreIpv4.Ipv6InterconnectEnabled
 				}
 				// Import case: read from API
 				if _, ok := blockData["ipv6_interconnect_enabled"].(map[string]interface{}); ok {
@@ -831,10 +831,10 @@ func (r *InfraprotectTunnelResource) Create(ctx context.Context, req resource.Cr
 				return nil
 			}(),
 			KeepaliveDisabled: func() *InfraprotectTunnelEmptyModel {
-				if !isImport && data.GreIPV4 != nil {
+				if !isImport && data.GreIpv4 != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.GreIPV4.KeepaliveDisabled
+					return data.GreIpv4.KeepaliveDisabled
 				}
 				// Import case: read from API
 				if _, ok := blockData["keepalive_disabled"].(map[string]interface{}); ok {
@@ -843,10 +843,10 @@ func (r *InfraprotectTunnelResource) Create(ctx context.Context, req resource.Cr
 				return nil
 			}(),
 			KeepaliveEnabled: func() *InfraprotectTunnelEmptyModel {
-				if !isImport && data.GreIPV4 != nil {
+				if !isImport && data.GreIpv4 != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.GreIPV4.KeepaliveEnabled
+					return data.GreIpv4.KeepaliveEnabled
 				}
 				// Import case: read from API
 				if _, ok := blockData["keepalive_enabled"].(map[string]interface{}); ok {
@@ -856,19 +856,19 @@ func (r *InfraprotectTunnelResource) Create(ctx context.Context, req resource.Cr
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["gre_ipv6"].(map[string]interface{}); ok && (isImport || data.GreIPV6 != nil) {
-		data.GreIPV6 = &InfraprotectTunnelGreIPV6Model{
-			CustomerEndpointIPV6: func() types.String {
+	if blockData, ok := apiResource.Spec["gre_ipv6"].(map[string]interface{}); ok && (isImport || data.GreIpv6 != nil) {
+		data.GreIpv6 = &InfraprotectTunnelGreIpv6Model{
+			CustomerEndpointIpv6: func() types.String {
 				if v, ok := blockData["customer_endpoint_ipv6"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
 			}(),
-			IPV4InterconnectDisabled: func() *InfraprotectTunnelEmptyModel {
-				if !isImport && data.GreIPV6 != nil {
+			Ipv4InterconnectDisabled: func() *InfraprotectTunnelEmptyModel {
+				if !isImport && data.GreIpv6 != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.GreIPV6.IPV4InterconnectDisabled
+					return data.GreIpv6.Ipv4InterconnectDisabled
 				}
 				// Import case: read from API
 				if _, ok := blockData["ipv4_interconnect_disabled"].(map[string]interface{}); ok {
@@ -876,11 +876,11 @@ func (r *InfraprotectTunnelResource) Create(ctx context.Context, req resource.Cr
 				}
 				return nil
 			}(),
-			IPV4InterconnectEnabled: func() *InfraprotectTunnelEmptyModel {
-				if !isImport && data.GreIPV6 != nil {
+			Ipv4InterconnectEnabled: func() *InfraprotectTunnelEmptyModel {
+				if !isImport && data.GreIpv6 != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.GreIPV6.IPV4InterconnectEnabled
+					return data.GreIpv6.Ipv4InterconnectEnabled
 				}
 				// Import case: read from API
 				if _, ok := blockData["ipv4_interconnect_enabled"].(map[string]interface{}); ok {
@@ -892,7 +892,7 @@ func (r *InfraprotectTunnelResource) Create(ctx context.Context, req resource.Cr
 	}
 	if blockData, ok := apiResource.Spec["ip_in_ip"].(map[string]interface{}); ok && (isImport || data.IPInIP != nil) {
 		data.IPInIP = &InfraprotectTunnelIPInIPModel{
-			CustomerEndpointIPV4: func() types.String {
+			CustomerEndpointIpv4: func() types.String {
 				if v, ok := blockData["customer_endpoint_ipv4"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
@@ -900,9 +900,9 @@ func (r *InfraprotectTunnelResource) Create(ctx context.Context, req resource.Cr
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["ipv6_to_ipv6"].(map[string]interface{}); ok && (isImport || data.IPV6ToIPV6 != nil) {
-		data.IPV6ToIPV6 = &InfraprotectTunnelIPV6ToIPV6Model{
-			CustomerEndpointIPV6: func() types.String {
+	if blockData, ok := apiResource.Spec["ipv6_to_ipv6"].(map[string]interface{}); ok && (isImport || data.Ipv6ToIpv6 != nil) {
+		data.Ipv6ToIpv6 = &InfraprotectTunnelIpv6ToIpv6Model{
+			CustomerEndpointIpv6: func() types.String {
 				if v, ok := blockData["customer_endpoint_ipv6"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
@@ -1144,19 +1144,19 @@ func (r *InfraprotectTunnelResource) Read(ctx context.Context, req resource.Read
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["gre_ipv4"].(map[string]interface{}); ok && (isImport || data.GreIPV4 != nil) {
-		data.GreIPV4 = &InfraprotectTunnelGreIPV4Model{
-			CustomerEndpointIPV4: func() types.String {
+	if blockData, ok := apiResource.Spec["gre_ipv4"].(map[string]interface{}); ok && (isImport || data.GreIpv4 != nil) {
+		data.GreIpv4 = &InfraprotectTunnelGreIpv4Model{
+			CustomerEndpointIpv4: func() types.String {
 				if v, ok := blockData["customer_endpoint_ipv4"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
 			}(),
 			FragmentationDisabled: func() *InfraprotectTunnelEmptyModel {
-				if !isImport && data.GreIPV4 != nil {
+				if !isImport && data.GreIpv4 != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.GreIPV4.FragmentationDisabled
+					return data.GreIpv4.FragmentationDisabled
 				}
 				// Import case: read from API
 				if _, ok := blockData["fragmentation_disabled"].(map[string]interface{}); ok {
@@ -1165,10 +1165,10 @@ func (r *InfraprotectTunnelResource) Read(ctx context.Context, req resource.Read
 				return nil
 			}(),
 			FragmentationEnabled: func() *InfraprotectTunnelEmptyModel {
-				if !isImport && data.GreIPV4 != nil {
+				if !isImport && data.GreIpv4 != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.GreIPV4.FragmentationEnabled
+					return data.GreIpv4.FragmentationEnabled
 				}
 				// Import case: read from API
 				if _, ok := blockData["fragmentation_enabled"].(map[string]interface{}); ok {
@@ -1176,11 +1176,11 @@ func (r *InfraprotectTunnelResource) Read(ctx context.Context, req resource.Read
 				}
 				return nil
 			}(),
-			IPV6InterconnectDisabled: func() *InfraprotectTunnelEmptyModel {
-				if !isImport && data.GreIPV4 != nil {
+			Ipv6InterconnectDisabled: func() *InfraprotectTunnelEmptyModel {
+				if !isImport && data.GreIpv4 != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.GreIPV4.IPV6InterconnectDisabled
+					return data.GreIpv4.Ipv6InterconnectDisabled
 				}
 				// Import case: read from API
 				if _, ok := blockData["ipv6_interconnect_disabled"].(map[string]interface{}); ok {
@@ -1188,11 +1188,11 @@ func (r *InfraprotectTunnelResource) Read(ctx context.Context, req resource.Read
 				}
 				return nil
 			}(),
-			IPV6InterconnectEnabled: func() *InfraprotectTunnelEmptyModel {
-				if !isImport && data.GreIPV4 != nil {
+			Ipv6InterconnectEnabled: func() *InfraprotectTunnelEmptyModel {
+				if !isImport && data.GreIpv4 != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.GreIPV4.IPV6InterconnectEnabled
+					return data.GreIpv4.Ipv6InterconnectEnabled
 				}
 				// Import case: read from API
 				if _, ok := blockData["ipv6_interconnect_enabled"].(map[string]interface{}); ok {
@@ -1201,10 +1201,10 @@ func (r *InfraprotectTunnelResource) Read(ctx context.Context, req resource.Read
 				return nil
 			}(),
 			KeepaliveDisabled: func() *InfraprotectTunnelEmptyModel {
-				if !isImport && data.GreIPV4 != nil {
+				if !isImport && data.GreIpv4 != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.GreIPV4.KeepaliveDisabled
+					return data.GreIpv4.KeepaliveDisabled
 				}
 				// Import case: read from API
 				if _, ok := blockData["keepalive_disabled"].(map[string]interface{}); ok {
@@ -1213,10 +1213,10 @@ func (r *InfraprotectTunnelResource) Read(ctx context.Context, req resource.Read
 				return nil
 			}(),
 			KeepaliveEnabled: func() *InfraprotectTunnelEmptyModel {
-				if !isImport && data.GreIPV4 != nil {
+				if !isImport && data.GreIpv4 != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.GreIPV4.KeepaliveEnabled
+					return data.GreIpv4.KeepaliveEnabled
 				}
 				// Import case: read from API
 				if _, ok := blockData["keepalive_enabled"].(map[string]interface{}); ok {
@@ -1226,19 +1226,19 @@ func (r *InfraprotectTunnelResource) Read(ctx context.Context, req resource.Read
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["gre_ipv6"].(map[string]interface{}); ok && (isImport || data.GreIPV6 != nil) {
-		data.GreIPV6 = &InfraprotectTunnelGreIPV6Model{
-			CustomerEndpointIPV6: func() types.String {
+	if blockData, ok := apiResource.Spec["gre_ipv6"].(map[string]interface{}); ok && (isImport || data.GreIpv6 != nil) {
+		data.GreIpv6 = &InfraprotectTunnelGreIpv6Model{
+			CustomerEndpointIpv6: func() types.String {
 				if v, ok := blockData["customer_endpoint_ipv6"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
 			}(),
-			IPV4InterconnectDisabled: func() *InfraprotectTunnelEmptyModel {
-				if !isImport && data.GreIPV6 != nil {
+			Ipv4InterconnectDisabled: func() *InfraprotectTunnelEmptyModel {
+				if !isImport && data.GreIpv6 != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.GreIPV6.IPV4InterconnectDisabled
+					return data.GreIpv6.Ipv4InterconnectDisabled
 				}
 				// Import case: read from API
 				if _, ok := blockData["ipv4_interconnect_disabled"].(map[string]interface{}); ok {
@@ -1246,11 +1246,11 @@ func (r *InfraprotectTunnelResource) Read(ctx context.Context, req resource.Read
 				}
 				return nil
 			}(),
-			IPV4InterconnectEnabled: func() *InfraprotectTunnelEmptyModel {
-				if !isImport && data.GreIPV6 != nil {
+			Ipv4InterconnectEnabled: func() *InfraprotectTunnelEmptyModel {
+				if !isImport && data.GreIpv6 != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.GreIPV6.IPV4InterconnectEnabled
+					return data.GreIpv6.Ipv4InterconnectEnabled
 				}
 				// Import case: read from API
 				if _, ok := blockData["ipv4_interconnect_enabled"].(map[string]interface{}); ok {
@@ -1262,7 +1262,7 @@ func (r *InfraprotectTunnelResource) Read(ctx context.Context, req resource.Read
 	}
 	if blockData, ok := apiResource.Spec["ip_in_ip"].(map[string]interface{}); ok && (isImport || data.IPInIP != nil) {
 		data.IPInIP = &InfraprotectTunnelIPInIPModel{
-			CustomerEndpointIPV4: func() types.String {
+			CustomerEndpointIpv4: func() types.String {
 				if v, ok := blockData["customer_endpoint_ipv4"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
@@ -1270,9 +1270,9 @@ func (r *InfraprotectTunnelResource) Read(ctx context.Context, req resource.Read
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["ipv6_to_ipv6"].(map[string]interface{}); ok && (isImport || data.IPV6ToIPV6 != nil) {
-		data.IPV6ToIPV6 = &InfraprotectTunnelIPV6ToIPV6Model{
-			CustomerEndpointIPV6: func() types.String {
+	if blockData, ok := apiResource.Spec["ipv6_to_ipv6"].(map[string]interface{}); ok && (isImport || data.Ipv6ToIpv6 != nil) {
+		data.Ipv6ToIpv6 = &InfraprotectTunnelIpv6ToIpv6Model{
+			CustomerEndpointIpv6: func() types.String {
 				if v, ok := blockData["customer_endpoint_ipv6"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
@@ -1424,55 +1424,55 @@ func (r *InfraprotectTunnelResource) Update(ctx context.Context, req resource.Up
 		}
 		apiResource.Spec["firewall_rule_group"] = firewall_rule_groupMap
 	}
-	if data.GreIPV4 != nil {
+	if data.GreIpv4 != nil {
 		gre_ipv4Map := make(map[string]interface{})
-		if !data.GreIPV4.CustomerEndpointIPV4.IsNull() && !data.GreIPV4.CustomerEndpointIPV4.IsUnknown() {
-			gre_ipv4Map["customer_endpoint_ipv4"] = data.GreIPV4.CustomerEndpointIPV4.ValueString()
+		if !data.GreIpv4.CustomerEndpointIpv4.IsNull() && !data.GreIpv4.CustomerEndpointIpv4.IsUnknown() {
+			gre_ipv4Map["customer_endpoint_ipv4"] = data.GreIpv4.CustomerEndpointIpv4.ValueString()
 		}
-		if data.GreIPV4.FragmentationDisabled != nil {
+		if data.GreIpv4.FragmentationDisabled != nil {
 			gre_ipv4Map["fragmentation_disabled"] = map[string]interface{}{}
 		}
-		if data.GreIPV4.FragmentationEnabled != nil {
+		if data.GreIpv4.FragmentationEnabled != nil {
 			gre_ipv4Map["fragmentation_enabled"] = map[string]interface{}{}
 		}
-		if data.GreIPV4.IPV6InterconnectDisabled != nil {
+		if data.GreIpv4.Ipv6InterconnectDisabled != nil {
 			gre_ipv4Map["ipv6_interconnect_disabled"] = map[string]interface{}{}
 		}
-		if data.GreIPV4.IPV6InterconnectEnabled != nil {
+		if data.GreIpv4.Ipv6InterconnectEnabled != nil {
 			gre_ipv4Map["ipv6_interconnect_enabled"] = map[string]interface{}{}
 		}
-		if data.GreIPV4.KeepaliveDisabled != nil {
+		if data.GreIpv4.KeepaliveDisabled != nil {
 			gre_ipv4Map["keepalive_disabled"] = map[string]interface{}{}
 		}
-		if data.GreIPV4.KeepaliveEnabled != nil {
+		if data.GreIpv4.KeepaliveEnabled != nil {
 			gre_ipv4Map["keepalive_enabled"] = map[string]interface{}{}
 		}
 		apiResource.Spec["gre_ipv4"] = gre_ipv4Map
 	}
-	if data.GreIPV6 != nil {
+	if data.GreIpv6 != nil {
 		gre_ipv6Map := make(map[string]interface{})
-		if !data.GreIPV6.CustomerEndpointIPV6.IsNull() && !data.GreIPV6.CustomerEndpointIPV6.IsUnknown() {
-			gre_ipv6Map["customer_endpoint_ipv6"] = data.GreIPV6.CustomerEndpointIPV6.ValueString()
+		if !data.GreIpv6.CustomerEndpointIpv6.IsNull() && !data.GreIpv6.CustomerEndpointIpv6.IsUnknown() {
+			gre_ipv6Map["customer_endpoint_ipv6"] = data.GreIpv6.CustomerEndpointIpv6.ValueString()
 		}
-		if data.GreIPV6.IPV4InterconnectDisabled != nil {
+		if data.GreIpv6.Ipv4InterconnectDisabled != nil {
 			gre_ipv6Map["ipv4_interconnect_disabled"] = map[string]interface{}{}
 		}
-		if data.GreIPV6.IPV4InterconnectEnabled != nil {
+		if data.GreIpv6.Ipv4InterconnectEnabled != nil {
 			gre_ipv6Map["ipv4_interconnect_enabled"] = map[string]interface{}{}
 		}
 		apiResource.Spec["gre_ipv6"] = gre_ipv6Map
 	}
 	if data.IPInIP != nil {
 		ip_in_ipMap := make(map[string]interface{})
-		if !data.IPInIP.CustomerEndpointIPV4.IsNull() && !data.IPInIP.CustomerEndpointIPV4.IsUnknown() {
-			ip_in_ipMap["customer_endpoint_ipv4"] = data.IPInIP.CustomerEndpointIPV4.ValueString()
+		if !data.IPInIP.CustomerEndpointIpv4.IsNull() && !data.IPInIP.CustomerEndpointIpv4.IsUnknown() {
+			ip_in_ipMap["customer_endpoint_ipv4"] = data.IPInIP.CustomerEndpointIpv4.ValueString()
 		}
 		apiResource.Spec["ip_in_ip"] = ip_in_ipMap
 	}
-	if data.IPV6ToIPV6 != nil {
+	if data.Ipv6ToIpv6 != nil {
 		ipv6_to_ipv6Map := make(map[string]interface{})
-		if !data.IPV6ToIPV6.CustomerEndpointIPV6.IsNull() && !data.IPV6ToIPV6.CustomerEndpointIPV6.IsUnknown() {
-			ipv6_to_ipv6Map["customer_endpoint_ipv6"] = data.IPV6ToIPV6.CustomerEndpointIPV6.ValueString()
+		if !data.Ipv6ToIpv6.CustomerEndpointIpv6.IsNull() && !data.Ipv6ToIpv6.CustomerEndpointIpv6.IsUnknown() {
+			ipv6_to_ipv6Map["customer_endpoint_ipv6"] = data.Ipv6ToIpv6.CustomerEndpointIpv6.ValueString()
 		}
 		apiResource.Spec["ipv6_to_ipv6"] = ipv6_to_ipv6Map
 	}
@@ -1620,19 +1620,19 @@ func (r *InfraprotectTunnelResource) Update(ctx context.Context, req resource.Up
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["gre_ipv4"].(map[string]interface{}); ok && (isImport || data.GreIPV4 != nil) {
-		data.GreIPV4 = &InfraprotectTunnelGreIPV4Model{
-			CustomerEndpointIPV4: func() types.String {
+	if blockData, ok := apiResource.Spec["gre_ipv4"].(map[string]interface{}); ok && (isImport || data.GreIpv4 != nil) {
+		data.GreIpv4 = &InfraprotectTunnelGreIpv4Model{
+			CustomerEndpointIpv4: func() types.String {
 				if v, ok := blockData["customer_endpoint_ipv4"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
 			}(),
 			FragmentationDisabled: func() *InfraprotectTunnelEmptyModel {
-				if !isImport && data.GreIPV4 != nil {
+				if !isImport && data.GreIpv4 != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.GreIPV4.FragmentationDisabled
+					return data.GreIpv4.FragmentationDisabled
 				}
 				// Import case: read from API
 				if _, ok := blockData["fragmentation_disabled"].(map[string]interface{}); ok {
@@ -1641,10 +1641,10 @@ func (r *InfraprotectTunnelResource) Update(ctx context.Context, req resource.Up
 				return nil
 			}(),
 			FragmentationEnabled: func() *InfraprotectTunnelEmptyModel {
-				if !isImport && data.GreIPV4 != nil {
+				if !isImport && data.GreIpv4 != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.GreIPV4.FragmentationEnabled
+					return data.GreIpv4.FragmentationEnabled
 				}
 				// Import case: read from API
 				if _, ok := blockData["fragmentation_enabled"].(map[string]interface{}); ok {
@@ -1652,11 +1652,11 @@ func (r *InfraprotectTunnelResource) Update(ctx context.Context, req resource.Up
 				}
 				return nil
 			}(),
-			IPV6InterconnectDisabled: func() *InfraprotectTunnelEmptyModel {
-				if !isImport && data.GreIPV4 != nil {
+			Ipv6InterconnectDisabled: func() *InfraprotectTunnelEmptyModel {
+				if !isImport && data.GreIpv4 != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.GreIPV4.IPV6InterconnectDisabled
+					return data.GreIpv4.Ipv6InterconnectDisabled
 				}
 				// Import case: read from API
 				if _, ok := blockData["ipv6_interconnect_disabled"].(map[string]interface{}); ok {
@@ -1664,11 +1664,11 @@ func (r *InfraprotectTunnelResource) Update(ctx context.Context, req resource.Up
 				}
 				return nil
 			}(),
-			IPV6InterconnectEnabled: func() *InfraprotectTunnelEmptyModel {
-				if !isImport && data.GreIPV4 != nil {
+			Ipv6InterconnectEnabled: func() *InfraprotectTunnelEmptyModel {
+				if !isImport && data.GreIpv4 != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.GreIPV4.IPV6InterconnectEnabled
+					return data.GreIpv4.Ipv6InterconnectEnabled
 				}
 				// Import case: read from API
 				if _, ok := blockData["ipv6_interconnect_enabled"].(map[string]interface{}); ok {
@@ -1677,10 +1677,10 @@ func (r *InfraprotectTunnelResource) Update(ctx context.Context, req resource.Up
 				return nil
 			}(),
 			KeepaliveDisabled: func() *InfraprotectTunnelEmptyModel {
-				if !isImport && data.GreIPV4 != nil {
+				if !isImport && data.GreIpv4 != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.GreIPV4.KeepaliveDisabled
+					return data.GreIpv4.KeepaliveDisabled
 				}
 				// Import case: read from API
 				if _, ok := blockData["keepalive_disabled"].(map[string]interface{}); ok {
@@ -1689,10 +1689,10 @@ func (r *InfraprotectTunnelResource) Update(ctx context.Context, req resource.Up
 				return nil
 			}(),
 			KeepaliveEnabled: func() *InfraprotectTunnelEmptyModel {
-				if !isImport && data.GreIPV4 != nil {
+				if !isImport && data.GreIpv4 != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.GreIPV4.KeepaliveEnabled
+					return data.GreIpv4.KeepaliveEnabled
 				}
 				// Import case: read from API
 				if _, ok := blockData["keepalive_enabled"].(map[string]interface{}); ok {
@@ -1702,19 +1702,19 @@ func (r *InfraprotectTunnelResource) Update(ctx context.Context, req resource.Up
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["gre_ipv6"].(map[string]interface{}); ok && (isImport || data.GreIPV6 != nil) {
-		data.GreIPV6 = &InfraprotectTunnelGreIPV6Model{
-			CustomerEndpointIPV6: func() types.String {
+	if blockData, ok := apiResource.Spec["gre_ipv6"].(map[string]interface{}); ok && (isImport || data.GreIpv6 != nil) {
+		data.GreIpv6 = &InfraprotectTunnelGreIpv6Model{
+			CustomerEndpointIpv6: func() types.String {
 				if v, ok := blockData["customer_endpoint_ipv6"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
 			}(),
-			IPV4InterconnectDisabled: func() *InfraprotectTunnelEmptyModel {
-				if !isImport && data.GreIPV6 != nil {
+			Ipv4InterconnectDisabled: func() *InfraprotectTunnelEmptyModel {
+				if !isImport && data.GreIpv6 != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.GreIPV6.IPV4InterconnectDisabled
+					return data.GreIpv6.Ipv4InterconnectDisabled
 				}
 				// Import case: read from API
 				if _, ok := blockData["ipv4_interconnect_disabled"].(map[string]interface{}); ok {
@@ -1722,11 +1722,11 @@ func (r *InfraprotectTunnelResource) Update(ctx context.Context, req resource.Up
 				}
 				return nil
 			}(),
-			IPV4InterconnectEnabled: func() *InfraprotectTunnelEmptyModel {
-				if !isImport && data.GreIPV6 != nil {
+			Ipv4InterconnectEnabled: func() *InfraprotectTunnelEmptyModel {
+				if !isImport && data.GreIpv6 != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.GreIPV6.IPV4InterconnectEnabled
+					return data.GreIpv6.Ipv4InterconnectEnabled
 				}
 				// Import case: read from API
 				if _, ok := blockData["ipv4_interconnect_enabled"].(map[string]interface{}); ok {
@@ -1738,7 +1738,7 @@ func (r *InfraprotectTunnelResource) Update(ctx context.Context, req resource.Up
 	}
 	if blockData, ok := apiResource.Spec["ip_in_ip"].(map[string]interface{}); ok && (isImport || data.IPInIP != nil) {
 		data.IPInIP = &InfraprotectTunnelIPInIPModel{
-			CustomerEndpointIPV4: func() types.String {
+			CustomerEndpointIpv4: func() types.String {
 				if v, ok := blockData["customer_endpoint_ipv4"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
@@ -1746,9 +1746,9 @@ func (r *InfraprotectTunnelResource) Update(ctx context.Context, req resource.Up
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["ipv6_to_ipv6"].(map[string]interface{}); ok && (isImport || data.IPV6ToIPV6 != nil) {
-		data.IPV6ToIPV6 = &InfraprotectTunnelIPV6ToIPV6Model{
-			CustomerEndpointIPV6: func() types.String {
+	if blockData, ok := apiResource.Spec["ipv6_to_ipv6"].(map[string]interface{}); ok && (isImport || data.Ipv6ToIpv6 != nil) {
+		data.Ipv6ToIpv6 = &InfraprotectTunnelIpv6ToIpv6Model{
+			CustomerEndpointIpv6: func() types.String {
 				if v, ok := blockData["customer_endpoint_ipv6"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}

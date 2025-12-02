@@ -222,21 +222,21 @@ type AlertReceiverWebhookHTTPConfigUseTLSModel struct {
 	Sni                   types.String                                                    `tfsdk:"sni"`
 	DisableSni            *AlertReceiverEmptyModel                                        `tfsdk:"disable_sni"`
 	UseServerVerification *AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationModel `tfsdk:"use_server_verification"`
-	VolterraTrustedCa     *AlertReceiverEmptyModel                                        `tfsdk:"volterra_trusted_ca"`
+	VolterraTrustedCA     *AlertReceiverEmptyModel                                        `tfsdk:"volterra_trusted_ca"`
 }
 
 // AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationModel represents use_server_verification block
 type AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationModel struct {
-	CaCertObj *AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCaCertObjModel `tfsdk:"ca_cert_obj"`
+	CACertObj *AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCACertObjModel `tfsdk:"ca_cert_obj"`
 }
 
-// AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCaCertObjModel represents ca_cert_obj block
-type AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCaCertObjModel struct {
-	TrustedCa []AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCaCertObjTrustedCaModel `tfsdk:"trusted_ca"`
+// AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCACertObjModel represents ca_cert_obj block
+type AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCACertObjModel struct {
+	TrustedCA []AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCACertObjTrustedCAModel `tfsdk:"trusted_ca"`
 }
 
-// AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCaCertObjTrustedCaModel represents trusted_ca block
-type AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCaCertObjTrustedCaModel struct {
+// AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCACertObjTrustedCAModel represents trusted_ca block
+type AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCACertObjTrustedCAModel struct {
 	Kind      types.String `tfsdk:"kind"`
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`

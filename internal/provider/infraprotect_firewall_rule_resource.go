@@ -49,8 +49,8 @@ type InfraprotectFirewallRuleResource struct {
 type InfraprotectFirewallRuleEmptyModel struct {
 }
 
-// InfraprotectFirewallRuleProtocolIcmpModel represents protocol_icmp block
-type InfraprotectFirewallRuleProtocolIcmpModel struct {
+// InfraprotectFirewallRuleProtocolICMPModel represents protocol_icmp block
+type InfraprotectFirewallRuleProtocolICMPModel struct {
 	EchoReply        types.Bool `tfsdk:"echo_reply"`
 	EchoRequest      types.Bool `tfsdk:"echo_request"`
 	ParameterProblem types.Bool `tfsdk:"parameter_problem"`
@@ -113,16 +113,16 @@ type InfraprotectFirewallRuleResourceModel struct {
 	ProtocolAll             *InfraprotectFirewallRuleEmptyModel         `tfsdk:"protocol_all"`
 	ProtocolEsp             *InfraprotectFirewallRuleEmptyModel         `tfsdk:"protocol_esp"`
 	ProtocolGre             *InfraprotectFirewallRuleEmptyModel         `tfsdk:"protocol_gre"`
-	ProtocolIcmp            *InfraprotectFirewallRuleProtocolIcmpModel  `tfsdk:"protocol_icmp"`
+	ProtocolICMP            *InfraprotectFirewallRuleProtocolICMPModel  `tfsdk:"protocol_icmp"`
 	ProtocolIcmp6           *InfraprotectFirewallRuleProtocolIcmp6Model `tfsdk:"protocol_icmp6"`
-	ProtocolIPV6            *InfraprotectFirewallRuleEmptyModel         `tfsdk:"protocol_ipv6"`
+	ProtocolIpv6            *InfraprotectFirewallRuleEmptyModel         `tfsdk:"protocol_ipv6"`
 	ProtocolTCP             *InfraprotectFirewallRuleProtocolTCPModel   `tfsdk:"protocol_tcp"`
 	ProtocolUDP             *InfraprotectFirewallRuleProtocolUDPModel   `tfsdk:"protocol_udp"`
 	SourcePrefixAll         *InfraprotectFirewallRuleEmptyModel         `tfsdk:"source_prefix_all"`
 	StateOff                *InfraprotectFirewallRuleEmptyModel         `tfsdk:"state_off"`
 	StateOn                 *InfraprotectFirewallRuleEmptyModel         `tfsdk:"state_on"`
-	VersionIPV4             *InfraprotectFirewallRuleEmptyModel         `tfsdk:"version_ipv4"`
-	VersionIPV6             *InfraprotectFirewallRuleEmptyModel         `tfsdk:"version_ipv6"`
+	VersionIpv4             *InfraprotectFirewallRuleEmptyModel         `tfsdk:"version_ipv4"`
+	VersionIpv6             *InfraprotectFirewallRuleEmptyModel         `tfsdk:"version_ipv6"`
 }
 
 func (r *InfraprotectFirewallRuleResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -564,28 +564,28 @@ func (r *InfraprotectFirewallRuleResource) Create(ctx context.Context, req resou
 		protocol_greMap := make(map[string]interface{})
 		createReq.Spec["protocol_gre"] = protocol_greMap
 	}
-	if data.ProtocolIcmp != nil {
+	if data.ProtocolICMP != nil {
 		protocol_icmpMap := make(map[string]interface{})
-		if !data.ProtocolIcmp.EchoReply.IsNull() && !data.ProtocolIcmp.EchoReply.IsUnknown() {
-			protocol_icmpMap["echo_reply"] = data.ProtocolIcmp.EchoReply.ValueBool()
+		if !data.ProtocolICMP.EchoReply.IsNull() && !data.ProtocolICMP.EchoReply.IsUnknown() {
+			protocol_icmpMap["echo_reply"] = data.ProtocolICMP.EchoReply.ValueBool()
 		}
-		if !data.ProtocolIcmp.EchoRequest.IsNull() && !data.ProtocolIcmp.EchoRequest.IsUnknown() {
-			protocol_icmpMap["echo_request"] = data.ProtocolIcmp.EchoRequest.ValueBool()
+		if !data.ProtocolICMP.EchoRequest.IsNull() && !data.ProtocolICMP.EchoRequest.IsUnknown() {
+			protocol_icmpMap["echo_request"] = data.ProtocolICMP.EchoRequest.ValueBool()
 		}
-		if !data.ProtocolIcmp.ParameterProblem.IsNull() && !data.ProtocolIcmp.ParameterProblem.IsUnknown() {
-			protocol_icmpMap["parameter_problem"] = data.ProtocolIcmp.ParameterProblem.ValueBool()
+		if !data.ProtocolICMP.ParameterProblem.IsNull() && !data.ProtocolICMP.ParameterProblem.IsUnknown() {
+			protocol_icmpMap["parameter_problem"] = data.ProtocolICMP.ParameterProblem.ValueBool()
 		}
-		if !data.ProtocolIcmp.Redirect.IsNull() && !data.ProtocolIcmp.Redirect.IsUnknown() {
-			protocol_icmpMap["redirect"] = data.ProtocolIcmp.Redirect.ValueBool()
+		if !data.ProtocolICMP.Redirect.IsNull() && !data.ProtocolICMP.Redirect.IsUnknown() {
+			protocol_icmpMap["redirect"] = data.ProtocolICMP.Redirect.ValueBool()
 		}
-		if !data.ProtocolIcmp.SourceQuench.IsNull() && !data.ProtocolIcmp.SourceQuench.IsUnknown() {
-			protocol_icmpMap["source_quench"] = data.ProtocolIcmp.SourceQuench.ValueBool()
+		if !data.ProtocolICMP.SourceQuench.IsNull() && !data.ProtocolICMP.SourceQuench.IsUnknown() {
+			protocol_icmpMap["source_quench"] = data.ProtocolICMP.SourceQuench.ValueBool()
 		}
-		if !data.ProtocolIcmp.TimeExceeded.IsNull() && !data.ProtocolIcmp.TimeExceeded.IsUnknown() {
-			protocol_icmpMap["time_exceeded"] = data.ProtocolIcmp.TimeExceeded.ValueBool()
+		if !data.ProtocolICMP.TimeExceeded.IsNull() && !data.ProtocolICMP.TimeExceeded.IsUnknown() {
+			protocol_icmpMap["time_exceeded"] = data.ProtocolICMP.TimeExceeded.ValueBool()
 		}
-		if !data.ProtocolIcmp.Unreachable.IsNull() && !data.ProtocolIcmp.Unreachable.IsUnknown() {
-			protocol_icmpMap["unreachable"] = data.ProtocolIcmp.Unreachable.ValueBool()
+		if !data.ProtocolICMP.Unreachable.IsNull() && !data.ProtocolICMP.Unreachable.IsUnknown() {
+			protocol_icmpMap["unreachable"] = data.ProtocolICMP.Unreachable.ValueBool()
 		}
 		createReq.Spec["protocol_icmp"] = protocol_icmpMap
 	}
@@ -626,7 +626,7 @@ func (r *InfraprotectFirewallRuleResource) Create(ctx context.Context, req resou
 		}
 		createReq.Spec["protocol_icmp6"] = protocol_icmp6Map
 	}
-	if data.ProtocolIPV6 != nil {
+	if data.ProtocolIpv6 != nil {
 		protocol_ipv6Map := make(map[string]interface{})
 		createReq.Spec["protocol_ipv6"] = protocol_ipv6Map
 	}
@@ -680,11 +680,11 @@ func (r *InfraprotectFirewallRuleResource) Create(ctx context.Context, req resou
 		state_onMap := make(map[string]interface{})
 		createReq.Spec["state_on"] = state_onMap
 	}
-	if data.VersionIPV4 != nil {
+	if data.VersionIpv4 != nil {
 		version_ipv4Map := make(map[string]interface{})
 		createReq.Spec["version_ipv4"] = version_ipv4Map
 	}
-	if data.VersionIPV6 != nil {
+	if data.VersionIpv6 != nil {
 		version_ipv6Map := make(map[string]interface{})
 		createReq.Spec["version_ipv6"] = version_ipv6Map
 	}
@@ -752,12 +752,12 @@ func (r *InfraprotectFirewallRuleResource) Create(ctx context.Context, req resou
 		data.ProtocolGre = &InfraprotectFirewallRuleEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["protocol_icmp"].(map[string]interface{}); ok && (isImport || data.ProtocolIcmp != nil) {
-		data.ProtocolIcmp = &InfraprotectFirewallRuleProtocolIcmpModel{
+	if blockData, ok := apiResource.Spec["protocol_icmp"].(map[string]interface{}); ok && (isImport || data.ProtocolICMP != nil) {
+		data.ProtocolICMP = &InfraprotectFirewallRuleProtocolICMPModel{
 			EchoReply: func() types.Bool {
-				if !isImport && data.ProtocolIcmp != nil {
+				if !isImport && data.ProtocolICMP != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.ProtocolIcmp.EchoReply
+					return data.ProtocolICMP.EchoReply
 				}
 				// Import case: read from API
 				if v, ok := blockData["echo_reply"].(bool); ok {
@@ -766,9 +766,9 @@ func (r *InfraprotectFirewallRuleResource) Create(ctx context.Context, req resou
 				return types.BoolNull()
 			}(),
 			EchoRequest: func() types.Bool {
-				if !isImport && data.ProtocolIcmp != nil {
+				if !isImport && data.ProtocolICMP != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.ProtocolIcmp.EchoRequest
+					return data.ProtocolICMP.EchoRequest
 				}
 				// Import case: read from API
 				if v, ok := blockData["echo_request"].(bool); ok {
@@ -777,9 +777,9 @@ func (r *InfraprotectFirewallRuleResource) Create(ctx context.Context, req resou
 				return types.BoolNull()
 			}(),
 			ParameterProblem: func() types.Bool {
-				if !isImport && data.ProtocolIcmp != nil {
+				if !isImport && data.ProtocolICMP != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.ProtocolIcmp.ParameterProblem
+					return data.ProtocolICMP.ParameterProblem
 				}
 				// Import case: read from API
 				if v, ok := blockData["parameter_problem"].(bool); ok {
@@ -788,9 +788,9 @@ func (r *InfraprotectFirewallRuleResource) Create(ctx context.Context, req resou
 				return types.BoolNull()
 			}(),
 			Redirect: func() types.Bool {
-				if !isImport && data.ProtocolIcmp != nil {
+				if !isImport && data.ProtocolICMP != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.ProtocolIcmp.Redirect
+					return data.ProtocolICMP.Redirect
 				}
 				// Import case: read from API
 				if v, ok := blockData["redirect"].(bool); ok {
@@ -799,9 +799,9 @@ func (r *InfraprotectFirewallRuleResource) Create(ctx context.Context, req resou
 				return types.BoolNull()
 			}(),
 			SourceQuench: func() types.Bool {
-				if !isImport && data.ProtocolIcmp != nil {
+				if !isImport && data.ProtocolICMP != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.ProtocolIcmp.SourceQuench
+					return data.ProtocolICMP.SourceQuench
 				}
 				// Import case: read from API
 				if v, ok := blockData["source_quench"].(bool); ok {
@@ -810,9 +810,9 @@ func (r *InfraprotectFirewallRuleResource) Create(ctx context.Context, req resou
 				return types.BoolNull()
 			}(),
 			TimeExceeded: func() types.Bool {
-				if !isImport && data.ProtocolIcmp != nil {
+				if !isImport && data.ProtocolICMP != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.ProtocolIcmp.TimeExceeded
+					return data.ProtocolICMP.TimeExceeded
 				}
 				// Import case: read from API
 				if v, ok := blockData["time_exceeded"].(bool); ok {
@@ -821,9 +821,9 @@ func (r *InfraprotectFirewallRuleResource) Create(ctx context.Context, req resou
 				return types.BoolNull()
 			}(),
 			Unreachable: func() types.Bool {
-				if !isImport && data.ProtocolIcmp != nil {
+				if !isImport && data.ProtocolICMP != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.ProtocolIcmp.Unreachable
+					return data.ProtocolICMP.Unreachable
 				}
 				// Import case: read from API
 				if v, ok := blockData["unreachable"].(bool); ok {
@@ -958,9 +958,9 @@ func (r *InfraprotectFirewallRuleResource) Create(ctx context.Context, req resou
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["protocol_ipv6"].(map[string]interface{}); ok && isImport && data.ProtocolIPV6 == nil {
+	if _, ok := apiResource.Spec["protocol_ipv6"].(map[string]interface{}); ok && isImport && data.ProtocolIpv6 == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.ProtocolIPV6 = &InfraprotectFirewallRuleEmptyModel{}
+		data.ProtocolIpv6 = &InfraprotectFirewallRuleEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["protocol_tcp"].(map[string]interface{}); ok && (isImport || data.ProtocolTCP != nil) {
@@ -1070,14 +1070,14 @@ func (r *InfraprotectFirewallRuleResource) Create(ctx context.Context, req resou
 		data.StateOn = &InfraprotectFirewallRuleEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["version_ipv4"].(map[string]interface{}); ok && isImport && data.VersionIPV4 == nil {
+	if _, ok := apiResource.Spec["version_ipv4"].(map[string]interface{}); ok && isImport && data.VersionIpv4 == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.VersionIPV4 = &InfraprotectFirewallRuleEmptyModel{}
+		data.VersionIpv4 = &InfraprotectFirewallRuleEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["version_ipv6"].(map[string]interface{}); ok && isImport && data.VersionIPV6 == nil {
+	if _, ok := apiResource.Spec["version_ipv6"].(map[string]interface{}); ok && isImport && data.VersionIpv6 == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.VersionIPV6 = &InfraprotectFirewallRuleEmptyModel{}
+		data.VersionIpv6 = &InfraprotectFirewallRuleEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if v, ok := apiResource.Spec["destination_prefix_single"].(string); ok && v != "" {
@@ -1228,12 +1228,12 @@ func (r *InfraprotectFirewallRuleResource) Read(ctx context.Context, req resourc
 		data.ProtocolGre = &InfraprotectFirewallRuleEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["protocol_icmp"].(map[string]interface{}); ok && (isImport || data.ProtocolIcmp != nil) {
-		data.ProtocolIcmp = &InfraprotectFirewallRuleProtocolIcmpModel{
+	if blockData, ok := apiResource.Spec["protocol_icmp"].(map[string]interface{}); ok && (isImport || data.ProtocolICMP != nil) {
+		data.ProtocolICMP = &InfraprotectFirewallRuleProtocolICMPModel{
 			EchoReply: func() types.Bool {
-				if !isImport && data.ProtocolIcmp != nil {
+				if !isImport && data.ProtocolICMP != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.ProtocolIcmp.EchoReply
+					return data.ProtocolICMP.EchoReply
 				}
 				// Import case: read from API
 				if v, ok := blockData["echo_reply"].(bool); ok {
@@ -1242,9 +1242,9 @@ func (r *InfraprotectFirewallRuleResource) Read(ctx context.Context, req resourc
 				return types.BoolNull()
 			}(),
 			EchoRequest: func() types.Bool {
-				if !isImport && data.ProtocolIcmp != nil {
+				if !isImport && data.ProtocolICMP != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.ProtocolIcmp.EchoRequest
+					return data.ProtocolICMP.EchoRequest
 				}
 				// Import case: read from API
 				if v, ok := blockData["echo_request"].(bool); ok {
@@ -1253,9 +1253,9 @@ func (r *InfraprotectFirewallRuleResource) Read(ctx context.Context, req resourc
 				return types.BoolNull()
 			}(),
 			ParameterProblem: func() types.Bool {
-				if !isImport && data.ProtocolIcmp != nil {
+				if !isImport && data.ProtocolICMP != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.ProtocolIcmp.ParameterProblem
+					return data.ProtocolICMP.ParameterProblem
 				}
 				// Import case: read from API
 				if v, ok := blockData["parameter_problem"].(bool); ok {
@@ -1264,9 +1264,9 @@ func (r *InfraprotectFirewallRuleResource) Read(ctx context.Context, req resourc
 				return types.BoolNull()
 			}(),
 			Redirect: func() types.Bool {
-				if !isImport && data.ProtocolIcmp != nil {
+				if !isImport && data.ProtocolICMP != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.ProtocolIcmp.Redirect
+					return data.ProtocolICMP.Redirect
 				}
 				// Import case: read from API
 				if v, ok := blockData["redirect"].(bool); ok {
@@ -1275,9 +1275,9 @@ func (r *InfraprotectFirewallRuleResource) Read(ctx context.Context, req resourc
 				return types.BoolNull()
 			}(),
 			SourceQuench: func() types.Bool {
-				if !isImport && data.ProtocolIcmp != nil {
+				if !isImport && data.ProtocolICMP != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.ProtocolIcmp.SourceQuench
+					return data.ProtocolICMP.SourceQuench
 				}
 				// Import case: read from API
 				if v, ok := blockData["source_quench"].(bool); ok {
@@ -1286,9 +1286,9 @@ func (r *InfraprotectFirewallRuleResource) Read(ctx context.Context, req resourc
 				return types.BoolNull()
 			}(),
 			TimeExceeded: func() types.Bool {
-				if !isImport && data.ProtocolIcmp != nil {
+				if !isImport && data.ProtocolICMP != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.ProtocolIcmp.TimeExceeded
+					return data.ProtocolICMP.TimeExceeded
 				}
 				// Import case: read from API
 				if v, ok := blockData["time_exceeded"].(bool); ok {
@@ -1297,9 +1297,9 @@ func (r *InfraprotectFirewallRuleResource) Read(ctx context.Context, req resourc
 				return types.BoolNull()
 			}(),
 			Unreachable: func() types.Bool {
-				if !isImport && data.ProtocolIcmp != nil {
+				if !isImport && data.ProtocolICMP != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.ProtocolIcmp.Unreachable
+					return data.ProtocolICMP.Unreachable
 				}
 				// Import case: read from API
 				if v, ok := blockData["unreachable"].(bool); ok {
@@ -1434,9 +1434,9 @@ func (r *InfraprotectFirewallRuleResource) Read(ctx context.Context, req resourc
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["protocol_ipv6"].(map[string]interface{}); ok && isImport && data.ProtocolIPV6 == nil {
+	if _, ok := apiResource.Spec["protocol_ipv6"].(map[string]interface{}); ok && isImport && data.ProtocolIpv6 == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.ProtocolIPV6 = &InfraprotectFirewallRuleEmptyModel{}
+		data.ProtocolIpv6 = &InfraprotectFirewallRuleEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["protocol_tcp"].(map[string]interface{}); ok && (isImport || data.ProtocolTCP != nil) {
@@ -1546,14 +1546,14 @@ func (r *InfraprotectFirewallRuleResource) Read(ctx context.Context, req resourc
 		data.StateOn = &InfraprotectFirewallRuleEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["version_ipv4"].(map[string]interface{}); ok && isImport && data.VersionIPV4 == nil {
+	if _, ok := apiResource.Spec["version_ipv4"].(map[string]interface{}); ok && isImport && data.VersionIpv4 == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.VersionIPV4 = &InfraprotectFirewallRuleEmptyModel{}
+		data.VersionIpv4 = &InfraprotectFirewallRuleEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["version_ipv6"].(map[string]interface{}); ok && isImport && data.VersionIPV6 == nil {
+	if _, ok := apiResource.Spec["version_ipv6"].(map[string]interface{}); ok && isImport && data.VersionIpv6 == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.VersionIPV6 = &InfraprotectFirewallRuleEmptyModel{}
+		data.VersionIpv6 = &InfraprotectFirewallRuleEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if v, ok := apiResource.Spec["destination_prefix_single"].(string); ok && v != "" {
@@ -1662,28 +1662,28 @@ func (r *InfraprotectFirewallRuleResource) Update(ctx context.Context, req resou
 		protocol_greMap := make(map[string]interface{})
 		apiResource.Spec["protocol_gre"] = protocol_greMap
 	}
-	if data.ProtocolIcmp != nil {
+	if data.ProtocolICMP != nil {
 		protocol_icmpMap := make(map[string]interface{})
-		if !data.ProtocolIcmp.EchoReply.IsNull() && !data.ProtocolIcmp.EchoReply.IsUnknown() {
-			protocol_icmpMap["echo_reply"] = data.ProtocolIcmp.EchoReply.ValueBool()
+		if !data.ProtocolICMP.EchoReply.IsNull() && !data.ProtocolICMP.EchoReply.IsUnknown() {
+			protocol_icmpMap["echo_reply"] = data.ProtocolICMP.EchoReply.ValueBool()
 		}
-		if !data.ProtocolIcmp.EchoRequest.IsNull() && !data.ProtocolIcmp.EchoRequest.IsUnknown() {
-			protocol_icmpMap["echo_request"] = data.ProtocolIcmp.EchoRequest.ValueBool()
+		if !data.ProtocolICMP.EchoRequest.IsNull() && !data.ProtocolICMP.EchoRequest.IsUnknown() {
+			protocol_icmpMap["echo_request"] = data.ProtocolICMP.EchoRequest.ValueBool()
 		}
-		if !data.ProtocolIcmp.ParameterProblem.IsNull() && !data.ProtocolIcmp.ParameterProblem.IsUnknown() {
-			protocol_icmpMap["parameter_problem"] = data.ProtocolIcmp.ParameterProblem.ValueBool()
+		if !data.ProtocolICMP.ParameterProblem.IsNull() && !data.ProtocolICMP.ParameterProblem.IsUnknown() {
+			protocol_icmpMap["parameter_problem"] = data.ProtocolICMP.ParameterProblem.ValueBool()
 		}
-		if !data.ProtocolIcmp.Redirect.IsNull() && !data.ProtocolIcmp.Redirect.IsUnknown() {
-			protocol_icmpMap["redirect"] = data.ProtocolIcmp.Redirect.ValueBool()
+		if !data.ProtocolICMP.Redirect.IsNull() && !data.ProtocolICMP.Redirect.IsUnknown() {
+			protocol_icmpMap["redirect"] = data.ProtocolICMP.Redirect.ValueBool()
 		}
-		if !data.ProtocolIcmp.SourceQuench.IsNull() && !data.ProtocolIcmp.SourceQuench.IsUnknown() {
-			protocol_icmpMap["source_quench"] = data.ProtocolIcmp.SourceQuench.ValueBool()
+		if !data.ProtocolICMP.SourceQuench.IsNull() && !data.ProtocolICMP.SourceQuench.IsUnknown() {
+			protocol_icmpMap["source_quench"] = data.ProtocolICMP.SourceQuench.ValueBool()
 		}
-		if !data.ProtocolIcmp.TimeExceeded.IsNull() && !data.ProtocolIcmp.TimeExceeded.IsUnknown() {
-			protocol_icmpMap["time_exceeded"] = data.ProtocolIcmp.TimeExceeded.ValueBool()
+		if !data.ProtocolICMP.TimeExceeded.IsNull() && !data.ProtocolICMP.TimeExceeded.IsUnknown() {
+			protocol_icmpMap["time_exceeded"] = data.ProtocolICMP.TimeExceeded.ValueBool()
 		}
-		if !data.ProtocolIcmp.Unreachable.IsNull() && !data.ProtocolIcmp.Unreachable.IsUnknown() {
-			protocol_icmpMap["unreachable"] = data.ProtocolIcmp.Unreachable.ValueBool()
+		if !data.ProtocolICMP.Unreachable.IsNull() && !data.ProtocolICMP.Unreachable.IsUnknown() {
+			protocol_icmpMap["unreachable"] = data.ProtocolICMP.Unreachable.ValueBool()
 		}
 		apiResource.Spec["protocol_icmp"] = protocol_icmpMap
 	}
@@ -1724,7 +1724,7 @@ func (r *InfraprotectFirewallRuleResource) Update(ctx context.Context, req resou
 		}
 		apiResource.Spec["protocol_icmp6"] = protocol_icmp6Map
 	}
-	if data.ProtocolIPV6 != nil {
+	if data.ProtocolIpv6 != nil {
 		protocol_ipv6Map := make(map[string]interface{})
 		apiResource.Spec["protocol_ipv6"] = protocol_ipv6Map
 	}
@@ -1778,11 +1778,11 @@ func (r *InfraprotectFirewallRuleResource) Update(ctx context.Context, req resou
 		state_onMap := make(map[string]interface{})
 		apiResource.Spec["state_on"] = state_onMap
 	}
-	if data.VersionIPV4 != nil {
+	if data.VersionIpv4 != nil {
 		version_ipv4Map := make(map[string]interface{})
 		apiResource.Spec["version_ipv4"] = version_ipv4Map
 	}
-	if data.VersionIPV6 != nil {
+	if data.VersionIpv6 != nil {
 		version_ipv6Map := make(map[string]interface{})
 		apiResource.Spec["version_ipv6"] = version_ipv6Map
 	}
@@ -1875,12 +1875,12 @@ func (r *InfraprotectFirewallRuleResource) Update(ctx context.Context, req resou
 		data.ProtocolGre = &InfraprotectFirewallRuleEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["protocol_icmp"].(map[string]interface{}); ok && (isImport || data.ProtocolIcmp != nil) {
-		data.ProtocolIcmp = &InfraprotectFirewallRuleProtocolIcmpModel{
+	if blockData, ok := apiResource.Spec["protocol_icmp"].(map[string]interface{}); ok && (isImport || data.ProtocolICMP != nil) {
+		data.ProtocolICMP = &InfraprotectFirewallRuleProtocolICMPModel{
 			EchoReply: func() types.Bool {
-				if !isImport && data.ProtocolIcmp != nil {
+				if !isImport && data.ProtocolICMP != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.ProtocolIcmp.EchoReply
+					return data.ProtocolICMP.EchoReply
 				}
 				// Import case: read from API
 				if v, ok := blockData["echo_reply"].(bool); ok {
@@ -1889,9 +1889,9 @@ func (r *InfraprotectFirewallRuleResource) Update(ctx context.Context, req resou
 				return types.BoolNull()
 			}(),
 			EchoRequest: func() types.Bool {
-				if !isImport && data.ProtocolIcmp != nil {
+				if !isImport && data.ProtocolICMP != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.ProtocolIcmp.EchoRequest
+					return data.ProtocolICMP.EchoRequest
 				}
 				// Import case: read from API
 				if v, ok := blockData["echo_request"].(bool); ok {
@@ -1900,9 +1900,9 @@ func (r *InfraprotectFirewallRuleResource) Update(ctx context.Context, req resou
 				return types.BoolNull()
 			}(),
 			ParameterProblem: func() types.Bool {
-				if !isImport && data.ProtocolIcmp != nil {
+				if !isImport && data.ProtocolICMP != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.ProtocolIcmp.ParameterProblem
+					return data.ProtocolICMP.ParameterProblem
 				}
 				// Import case: read from API
 				if v, ok := blockData["parameter_problem"].(bool); ok {
@@ -1911,9 +1911,9 @@ func (r *InfraprotectFirewallRuleResource) Update(ctx context.Context, req resou
 				return types.BoolNull()
 			}(),
 			Redirect: func() types.Bool {
-				if !isImport && data.ProtocolIcmp != nil {
+				if !isImport && data.ProtocolICMP != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.ProtocolIcmp.Redirect
+					return data.ProtocolICMP.Redirect
 				}
 				// Import case: read from API
 				if v, ok := blockData["redirect"].(bool); ok {
@@ -1922,9 +1922,9 @@ func (r *InfraprotectFirewallRuleResource) Update(ctx context.Context, req resou
 				return types.BoolNull()
 			}(),
 			SourceQuench: func() types.Bool {
-				if !isImport && data.ProtocolIcmp != nil {
+				if !isImport && data.ProtocolICMP != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.ProtocolIcmp.SourceQuench
+					return data.ProtocolICMP.SourceQuench
 				}
 				// Import case: read from API
 				if v, ok := blockData["source_quench"].(bool); ok {
@@ -1933,9 +1933,9 @@ func (r *InfraprotectFirewallRuleResource) Update(ctx context.Context, req resou
 				return types.BoolNull()
 			}(),
 			TimeExceeded: func() types.Bool {
-				if !isImport && data.ProtocolIcmp != nil {
+				if !isImport && data.ProtocolICMP != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.ProtocolIcmp.TimeExceeded
+					return data.ProtocolICMP.TimeExceeded
 				}
 				// Import case: read from API
 				if v, ok := blockData["time_exceeded"].(bool); ok {
@@ -1944,9 +1944,9 @@ func (r *InfraprotectFirewallRuleResource) Update(ctx context.Context, req resou
 				return types.BoolNull()
 			}(),
 			Unreachable: func() types.Bool {
-				if !isImport && data.ProtocolIcmp != nil {
+				if !isImport && data.ProtocolICMP != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.ProtocolIcmp.Unreachable
+					return data.ProtocolICMP.Unreachable
 				}
 				// Import case: read from API
 				if v, ok := blockData["unreachable"].(bool); ok {
@@ -2081,9 +2081,9 @@ func (r *InfraprotectFirewallRuleResource) Update(ctx context.Context, req resou
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["protocol_ipv6"].(map[string]interface{}); ok && isImport && data.ProtocolIPV6 == nil {
+	if _, ok := apiResource.Spec["protocol_ipv6"].(map[string]interface{}); ok && isImport && data.ProtocolIpv6 == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.ProtocolIPV6 = &InfraprotectFirewallRuleEmptyModel{}
+		data.ProtocolIpv6 = &InfraprotectFirewallRuleEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["protocol_tcp"].(map[string]interface{}); ok && (isImport || data.ProtocolTCP != nil) {
@@ -2193,14 +2193,14 @@ func (r *InfraprotectFirewallRuleResource) Update(ctx context.Context, req resou
 		data.StateOn = &InfraprotectFirewallRuleEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["version_ipv4"].(map[string]interface{}); ok && isImport && data.VersionIPV4 == nil {
+	if _, ok := apiResource.Spec["version_ipv4"].(map[string]interface{}); ok && isImport && data.VersionIpv4 == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.VersionIPV4 = &InfraprotectFirewallRuleEmptyModel{}
+		data.VersionIpv4 = &InfraprotectFirewallRuleEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["version_ipv6"].(map[string]interface{}); ok && isImport && data.VersionIPV6 == nil {
+	if _, ok := apiResource.Spec["version_ipv6"].(map[string]interface{}); ok && isImport && data.VersionIpv6 == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.VersionIPV6 = &InfraprotectFirewallRuleEmptyModel{}
+		data.VersionIpv6 = &InfraprotectFirewallRuleEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if v, ok := apiResource.Spec["destination_prefix_single"].(string); ok && v != "" {

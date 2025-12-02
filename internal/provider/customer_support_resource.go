@@ -56,7 +56,7 @@ type CustomerSupportCommentsModel struct {
 	AuthorEmail     types.String                                  `tfsdk:"author_email"`
 	AuthorName      types.String                                  `tfsdk:"author_name"`
 	CreatedAt       types.String                                  `tfsdk:"created_at"`
-	Html            types.String                                  `tfsdk:"html"`
+	HTML            types.String                                  `tfsdk:"html"`
 	PlainText       types.String                                  `tfsdk:"plain_text"`
 	AttachmentsInfo []CustomerSupportCommentsAttachmentsInfoModel `tfsdk:"attachments_info"`
 }
@@ -529,8 +529,8 @@ func (r *CustomerSupportResource) Create(ctx context.Context, req resource.Creat
 			if !item.CreatedAt.IsNull() && !item.CreatedAt.IsUnknown() {
 				itemMap["created_at"] = item.CreatedAt.ValueString()
 			}
-			if !item.Html.IsNull() && !item.Html.IsUnknown() {
-				itemMap["html"] = item.Html.ValueString()
+			if !item.HTML.IsNull() && !item.HTML.IsUnknown() {
+				itemMap["html"] = item.HTML.ValueString()
 			}
 			if !item.PlainText.IsNull() && !item.PlainText.IsUnknown() {
 				itemMap["plain_text"] = item.PlainText.ValueString()
@@ -685,7 +685,7 @@ func (r *CustomerSupportResource) Create(ctx context.Context, req resource.Creat
 						}
 						return types.StringNull()
 					}(),
-					Html: func() types.String {
+					HTML: func() types.String {
 						if v, ok := itemMap["html"].(string); ok && v != "" {
 							return types.StringValue(v)
 						}
@@ -976,7 +976,7 @@ func (r *CustomerSupportResource) Read(ctx context.Context, req resource.ReadReq
 						}
 						return types.StringNull()
 					}(),
-					Html: func() types.String {
+					HTML: func() types.String {
 						if v, ok := itemMap["html"].(string); ok && v != "" {
 							return types.StringValue(v)
 						}
@@ -1193,8 +1193,8 @@ func (r *CustomerSupportResource) Update(ctx context.Context, req resource.Updat
 			if !item.CreatedAt.IsNull() && !item.CreatedAt.IsUnknown() {
 				itemMap["created_at"] = item.CreatedAt.ValueString()
 			}
-			if !item.Html.IsNull() && !item.Html.IsUnknown() {
-				itemMap["html"] = item.Html.ValueString()
+			if !item.HTML.IsNull() && !item.HTML.IsUnknown() {
+				itemMap["html"] = item.HTML.ValueString()
 			}
 			if !item.PlainText.IsNull() && !item.PlainText.IsUnknown() {
 				itemMap["plain_text"] = item.PlainText.ValueString()
@@ -1444,7 +1444,7 @@ func (r *CustomerSupportResource) Update(ctx context.Context, req resource.Updat
 						}
 						return types.StringNull()
 					}(),
-					Html: func() types.String {
+					HTML: func() types.String {
 						if v, ok := itemMap["html"].(string); ok && v != "" {
 							return types.StringValue(v)
 						}

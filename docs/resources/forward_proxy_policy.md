@@ -236,9 +236,9 @@ A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports 
 
 <a id="rule-list-rules-all-sources"></a>&#x2022; [`all_sources`](#rule-list-rules-all-sources) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="rule-list-rules-dst-asn-list"></a>&#x2022; [`dst_asn_list`](#rule-list-rules-dst-asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Dst ASN List](#rule-list-rules-dst-asn-list) below.
+<a id="rule-list-rules-dst-asn-list"></a>&#x2022; [`dst_asn_list`](#rule-list-rules-dst-asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Dst Asn List](#rule-list-rules-dst-asn-list) below.
 
-<a id="rule-list-rules-dst-asn-set"></a>&#x2022; [`dst_asn_set`](#rule-list-rules-dst-asn-set) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dst ASN Set](#rule-list-rules-dst-asn-set) below.
+<a id="rule-list-rules-dst-asn-set"></a>&#x2022; [`dst_asn_set`](#rule-list-rules-dst-asn-set) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dst Asn Set](#rule-list-rules-dst-asn-set) below.
 
 <a id="rule-list-rules-dst-ip-prefix-set"></a>&#x2022; [`dst_ip_prefix_set`](#rule-list-rules-dst-ip-prefix-set) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dst IP Prefix Set](#rule-list-rules-dst-ip-prefix-set) below.
 
@@ -264,13 +264,13 @@ A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports 
 
 <a id="rule-list-rules-url-category-list"></a>&#x2022; [`url_category_list`](#rule-list-rules-url-category-list) - Optional Block<br>URL Category List Type. List of URL categories<br>See [URL Category List](#rule-list-rules-url-category-list) below.
 
-#### Rule List Rules Dst ASN List
+#### Rule List Rules Dst Asn List
 
 A [`dst_asn_list`](#rule-list-rules-dst-asn-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 <a id="rule-list-rules-dst-asn-list-as-numbers"></a>&#x2022; [`as_numbers`](#rule-list-rules-dst-asn-list-as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
-#### Rule List Rules Dst ASN Set
+#### Rule List Rules Dst Asn Set
 
 A [`dst_asn_set`](#rule-list-rules-dst-asn-set) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 

@@ -164,7 +164,7 @@ type CDNLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterModel struct {
 	Threshold       types.Int64                                                                 `tfsdk:"threshold"`
 	Unit            types.String                                                                `tfsdk:"unit"`
 	RefUserID       *CDNLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterRefUserIDModel `tfsdk:"ref_user_id"`
-	UseHTTPLbUserID *CDNLoadBalancerEmptyModel                                                  `tfsdk:"use_http_lb_user_id"`
+	UseHTTPLBUserID *CDNLoadBalancerEmptyModel                                                  `tfsdk:"use_http_lb_user_id"`
 }
 
 // CDNLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterRefUserIDModel represents ref_user_id block
@@ -185,7 +185,7 @@ type CDNLoadBalancerAPIRateLimitAPIEndpointRulesRefRateLimiterModel struct {
 type CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModel struct {
 	CookieMatchers []CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersModel `tfsdk:"cookie_matchers"`
 	Headers        []CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersModel        `tfsdk:"headers"`
-	JwtClaims      []CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJwtClaimsModel      `tfsdk:"jwt_claims"`
+	JWTClaims      []CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJWTClaimsModel      `tfsdk:"jwt_claims"`
 	QueryParams    []CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsModel    `tfsdk:"query_params"`
 }
 
@@ -221,17 +221,17 @@ type CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersItemModel s
 	Transformers types.List `tfsdk:"transformers"`
 }
 
-// CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJwtClaimsModel represents jwt_claims block
-type CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJwtClaimsModel struct {
+// CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJWTClaimsModel represents jwt_claims block
+type CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJWTClaimsModel struct {
 	InvertMatcher   types.Bool                                                                   `tfsdk:"invert_matcher"`
 	Name            types.String                                                                 `tfsdk:"name"`
 	CheckNotPresent *CDNLoadBalancerEmptyModel                                                   `tfsdk:"check_not_present"`
 	CheckPresent    *CDNLoadBalancerEmptyModel                                                   `tfsdk:"check_present"`
-	Item            *CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJwtClaimsItemModel `tfsdk:"item"`
+	Item            *CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJWTClaimsItemModel `tfsdk:"item"`
 }
 
-// CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJwtClaimsItemModel represents item block
-type CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJwtClaimsItemModel struct {
+// CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJWTClaimsItemModel represents item block
+type CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJWTClaimsItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
@@ -355,7 +355,7 @@ type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesCl
 type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherModel struct {
 	CookieMatchers []CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersModel `tfsdk:"cookie_matchers"`
 	Headers        []CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersModel        `tfsdk:"headers"`
-	JwtClaims      []CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJwtClaimsModel      `tfsdk:"jwt_claims"`
+	JWTClaims      []CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJWTClaimsModel      `tfsdk:"jwt_claims"`
 	QueryParams    []CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsModel    `tfsdk:"query_params"`
 }
 
@@ -391,17 +391,17 @@ type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRe
 	Transformers types.List `tfsdk:"transformers"`
 }
 
-// CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJwtClaimsModel represents jwt_claims block
-type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJwtClaimsModel struct {
+// CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJWTClaimsModel represents jwt_claims block
+type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJWTClaimsModel struct {
 	InvertMatcher   types.Bool                                                                                                 `tfsdk:"invert_matcher"`
 	Name            types.String                                                                                               `tfsdk:"name"`
 	CheckNotPresent *CDNLoadBalancerEmptyModel                                                                                 `tfsdk:"check_not_present"`
 	CheckPresent    *CDNLoadBalancerEmptyModel                                                                                 `tfsdk:"check_present"`
-	Item            *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJwtClaimsItemModel `tfsdk:"item"`
+	Item            *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJWTClaimsItemModel `tfsdk:"item"`
 }
 
-// CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJwtClaimsItemModel represents item block
-type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJwtClaimsItemModel struct {
+// CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJWTClaimsItemModel represents item block
+type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJWTClaimsItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
@@ -527,7 +527,7 @@ type CDNLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterModel struct {
 	Threshold       types.Int64                                                               `tfsdk:"threshold"`
 	Unit            types.String                                                              `tfsdk:"unit"`
 	RefUserID       *CDNLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterRefUserIDModel `tfsdk:"ref_user_id"`
-	UseHTTPLbUserID *CDNLoadBalancerEmptyModel                                                `tfsdk:"use_http_lb_user_id"`
+	UseHTTPLBUserID *CDNLoadBalancerEmptyModel                                                `tfsdk:"use_http_lb_user_id"`
 }
 
 // CDNLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterRefUserIDModel represents ref_user_id block
@@ -548,7 +548,7 @@ type CDNLoadBalancerAPIRateLimitServerURLRulesRefRateLimiterModel struct {
 type CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModel struct {
 	CookieMatchers []CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersModel `tfsdk:"cookie_matchers"`
 	Headers        []CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersModel        `tfsdk:"headers"`
-	JwtClaims      []CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJwtClaimsModel      `tfsdk:"jwt_claims"`
+	JWTClaims      []CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJWTClaimsModel      `tfsdk:"jwt_claims"`
 	QueryParams    []CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsModel    `tfsdk:"query_params"`
 }
 
@@ -584,17 +584,17 @@ type CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersItemModel str
 	Transformers types.List `tfsdk:"transformers"`
 }
 
-// CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJwtClaimsModel represents jwt_claims block
-type CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJwtClaimsModel struct {
+// CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJWTClaimsModel represents jwt_claims block
+type CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJWTClaimsModel struct {
 	InvertMatcher   types.Bool                                                                 `tfsdk:"invert_matcher"`
 	Name            types.String                                                               `tfsdk:"name"`
 	CheckNotPresent *CDNLoadBalancerEmptyModel                                                 `tfsdk:"check_not_present"`
 	CheckPresent    *CDNLoadBalancerEmptyModel                                                 `tfsdk:"check_present"`
-	Item            *CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJwtClaimsItemModel `tfsdk:"item"`
+	Item            *CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJWTClaimsItemModel `tfsdk:"item"`
 }
 
-// CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJwtClaimsItemModel represents item block
-type CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJwtClaimsItemModel struct {
+// CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJWTClaimsItemModel represents item block
+type CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJWTClaimsItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
@@ -831,7 +831,7 @@ type CDNLoadBalancerBlockedClientsModel struct {
 	AsNumber            types.Int64                                   `tfsdk:"as_number"`
 	ExpirationTimestamp types.String                                  `tfsdk:"expiration_timestamp"`
 	IPPrefix            types.String                                  `tfsdk:"ip_prefix"`
-	IPV6Prefix          types.String                                  `tfsdk:"ipv6_prefix"`
+	Ipv6Prefix          types.String                                  `tfsdk:"ipv6_prefix"`
 	UserIdentifier      types.String                                  `tfsdk:"user_identifier"`
 	BotSkipProcessing   *CDNLoadBalancerEmptyModel                    `tfsdk:"bot_skip_processing"`
 	HTTPHeader          *CDNLoadBalancerBlockedClientsHTTPHeaderModel `tfsdk:"http_header"`
@@ -864,8 +864,8 @@ type CDNLoadBalancerBlockedClientsMetadataModel struct {
 type CDNLoadBalancerBotDefenseModel struct {
 	RegionalEndpoint   types.String                          `tfsdk:"regional_endpoint"`
 	Timeout            types.Int64                           `tfsdk:"timeout"`
-	DisableCorsSupport *CDNLoadBalancerEmptyModel            `tfsdk:"disable_cors_support"`
-	EnableCorsSupport  *CDNLoadBalancerEmptyModel            `tfsdk:"enable_cors_support"`
+	DisableCORSSupport *CDNLoadBalancerEmptyModel            `tfsdk:"disable_cors_support"`
+	EnableCORSSupport  *CDNLoadBalancerEmptyModel            `tfsdk:"enable_cors_support"`
 	Policy             *CDNLoadBalancerBotDefensePolicyModel `tfsdk:"policy"`
 }
 
@@ -1056,7 +1056,7 @@ type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAccountManagem
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationModel represents authentication block
 type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationModel struct {
 	Login        *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginModel `tfsdk:"login"`
-	LoginMfa     *CDNLoadBalancerEmptyModel                                                             `tfsdk:"login_mfa"`
+	LoginMFA     *CDNLoadBalancerEmptyModel                                                             `tfsdk:"login_mfa"`
 	LoginPartner *CDNLoadBalancerEmptyModel                                                             `tfsdk:"login_partner"`
 	Logout       *CDNLoadBalancerEmptyModel                                                             `tfsdk:"logout"`
 	TokenRefresh *CDNLoadBalancerEmptyModel                                                             `tfsdk:"token_refresh"`
@@ -1324,8 +1324,8 @@ type CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesPathModel struct
 	Regex  types.String `tfsdk:"regex"`
 }
 
-// CDNLoadBalancerCorsPolicyModel represents cors_policy block
-type CDNLoadBalancerCorsPolicyModel struct {
+// CDNLoadBalancerCORSPolicyModel represents cors_policy block
+type CDNLoadBalancerCORSPolicyModel struct {
 	AllowCredentials types.Bool   `tfsdk:"allow_credentials"`
 	AllowHeaders     types.String `tfsdk:"allow_headers"`
 	AllowMethods     types.String `tfsdk:"allow_methods"`
@@ -1336,15 +1336,15 @@ type CDNLoadBalancerCorsPolicyModel struct {
 	MaximumAge       types.Int64  `tfsdk:"maximum_age"`
 }
 
-// CDNLoadBalancerCsrfPolicyModel represents csrf_policy block
-type CDNLoadBalancerCsrfPolicyModel struct {
+// CDNLoadBalancerCSRFPolicyModel represents csrf_policy block
+type CDNLoadBalancerCSRFPolicyModel struct {
 	AllLoadBalancerDomains *CDNLoadBalancerEmptyModel                      `tfsdk:"all_load_balancer_domains"`
-	CustomDomainList       *CDNLoadBalancerCsrfPolicyCustomDomainListModel `tfsdk:"custom_domain_list"`
+	CustomDomainList       *CDNLoadBalancerCSRFPolicyCustomDomainListModel `tfsdk:"custom_domain_list"`
 	Disabled               *CDNLoadBalancerEmptyModel                      `tfsdk:"disabled"`
 }
 
-// CDNLoadBalancerCsrfPolicyCustomDomainListModel represents custom_domain_list block
-type CDNLoadBalancerCsrfPolicyCustomDomainListModel struct {
+// CDNLoadBalancerCSRFPolicyCustomDomainListModel represents custom_domain_list block
+type CDNLoadBalancerCSRFPolicyCustomDomainListModel struct {
 	Domains types.List `tfsdk:"domains"`
 }
 
@@ -1384,56 +1384,56 @@ type CDNLoadBalancerDataGuardRulesPathModel struct {
 	Regex  types.String `tfsdk:"regex"`
 }
 
-// CDNLoadBalancerDdosMitigationRulesModel represents ddos_mitigation_rules block
-type CDNLoadBalancerDdosMitigationRulesModel struct {
+// CDNLoadBalancerDDOSMitigationRulesModel represents ddos_mitigation_rules block
+type CDNLoadBalancerDDOSMitigationRulesModel struct {
 	ExpirationTimestamp types.String                                             `tfsdk:"expiration_timestamp"`
 	Block               *CDNLoadBalancerEmptyModel                               `tfsdk:"block"`
-	DdosClientSource    *CDNLoadBalancerDdosMitigationRulesDdosClientSourceModel `tfsdk:"ddos_client_source"`
-	IPPrefixList        *CDNLoadBalancerDdosMitigationRulesIPPrefixListModel     `tfsdk:"ip_prefix_list"`
-	Metadata            *CDNLoadBalancerDdosMitigationRulesMetadataModel         `tfsdk:"metadata"`
+	DDOSClientSource    *CDNLoadBalancerDDOSMitigationRulesDDOSClientSourceModel `tfsdk:"ddos_client_source"`
+	IPPrefixList        *CDNLoadBalancerDDOSMitigationRulesIPPrefixListModel     `tfsdk:"ip_prefix_list"`
+	Metadata            *CDNLoadBalancerDDOSMitigationRulesMetadataModel         `tfsdk:"metadata"`
 }
 
-// CDNLoadBalancerDdosMitigationRulesDdosClientSourceModel represents ddos_client_source block
-type CDNLoadBalancerDdosMitigationRulesDdosClientSourceModel struct {
+// CDNLoadBalancerDDOSMitigationRulesDDOSClientSourceModel represents ddos_client_source block
+type CDNLoadBalancerDDOSMitigationRulesDDOSClientSourceModel struct {
 	CountryList              types.List                                                                       `tfsdk:"country_list"`
-	AsnList                  *CDNLoadBalancerDdosMitigationRulesDdosClientSourceAsnListModel                  `tfsdk:"asn_list"`
-	Ja4TLSFingerprintMatcher *CDNLoadBalancerDdosMitigationRulesDdosClientSourceJa4TLSFingerprintMatcherModel `tfsdk:"ja4_tls_fingerprint_matcher"`
-	TLSFingerprintMatcher    *CDNLoadBalancerDdosMitigationRulesDdosClientSourceTLSFingerprintMatcherModel    `tfsdk:"tls_fingerprint_matcher"`
+	AsnList                  *CDNLoadBalancerDDOSMitigationRulesDDOSClientSourceAsnListModel                  `tfsdk:"asn_list"`
+	Ja4TLSFingerprintMatcher *CDNLoadBalancerDDOSMitigationRulesDDOSClientSourceJa4TLSFingerprintMatcherModel `tfsdk:"ja4_tls_fingerprint_matcher"`
+	TLSFingerprintMatcher    *CDNLoadBalancerDDOSMitigationRulesDDOSClientSourceTLSFingerprintMatcherModel    `tfsdk:"tls_fingerprint_matcher"`
 }
 
-// CDNLoadBalancerDdosMitigationRulesDdosClientSourceAsnListModel represents asn_list block
-type CDNLoadBalancerDdosMitigationRulesDdosClientSourceAsnListModel struct {
+// CDNLoadBalancerDDOSMitigationRulesDDOSClientSourceAsnListModel represents asn_list block
+type CDNLoadBalancerDDOSMitigationRulesDDOSClientSourceAsnListModel struct {
 	AsNumbers types.List `tfsdk:"as_numbers"`
 }
 
-// CDNLoadBalancerDdosMitigationRulesDdosClientSourceJa4TLSFingerprintMatcherModel represents ja4_tls_fingerprint_matcher block
-type CDNLoadBalancerDdosMitigationRulesDdosClientSourceJa4TLSFingerprintMatcherModel struct {
+// CDNLoadBalancerDDOSMitigationRulesDDOSClientSourceJa4TLSFingerprintMatcherModel represents ja4_tls_fingerprint_matcher block
+type CDNLoadBalancerDDOSMitigationRulesDDOSClientSourceJa4TLSFingerprintMatcherModel struct {
 	ExactValues types.List `tfsdk:"exact_values"`
 }
 
-// CDNLoadBalancerDdosMitigationRulesDdosClientSourceTLSFingerprintMatcherModel represents tls_fingerprint_matcher block
-type CDNLoadBalancerDdosMitigationRulesDdosClientSourceTLSFingerprintMatcherModel struct {
+// CDNLoadBalancerDDOSMitigationRulesDDOSClientSourceTLSFingerprintMatcherModel represents tls_fingerprint_matcher block
+type CDNLoadBalancerDDOSMitigationRulesDDOSClientSourceTLSFingerprintMatcherModel struct {
 	Classes        types.List `tfsdk:"classes"`
 	ExactValues    types.List `tfsdk:"exact_values"`
 	ExcludedValues types.List `tfsdk:"excluded_values"`
 }
 
-// CDNLoadBalancerDdosMitigationRulesIPPrefixListModel represents ip_prefix_list block
-type CDNLoadBalancerDdosMitigationRulesIPPrefixListModel struct {
+// CDNLoadBalancerDDOSMitigationRulesIPPrefixListModel represents ip_prefix_list block
+type CDNLoadBalancerDDOSMitigationRulesIPPrefixListModel struct {
 	InvertMatch types.Bool `tfsdk:"invert_match"`
 	IPPrefixes  types.List `tfsdk:"ip_prefixes"`
 }
 
-// CDNLoadBalancerDdosMitigationRulesMetadataModel represents metadata block
-type CDNLoadBalancerDdosMitigationRulesMetadataModel struct {
+// CDNLoadBalancerDDOSMitigationRulesMetadataModel represents metadata block
+type CDNLoadBalancerDDOSMitigationRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
 }
 
 // CDNLoadBalancerDefaultCacheActionModel represents default_cache_action block
 type CDNLoadBalancerDefaultCacheActionModel struct {
-	CacheTtlDefault  types.String               `tfsdk:"cache_ttl_default"`
-	CacheTtlOverride types.String               `tfsdk:"cache_ttl_override"`
+	CacheTTLDefault  types.String               `tfsdk:"cache_ttl_default"`
+	CacheTTLOverride types.String               `tfsdk:"cache_ttl_override"`
 	CacheDisabled    *CDNLoadBalancerEmptyModel `tfsdk:"cache_disabled"`
 }
 
@@ -1646,10 +1646,10 @@ type CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsTLSConfigCustomSecurityModel
 // CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsModel represents use_mtls block
 type CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                              `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                                            `tfsdk:"trusted_ca_url"`
+	TrustedCAURL              types.String                                                            `tfsdk:"trusted_ca_url"`
 	CRL                       *CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsCRLModel         `tfsdk:"crl"`
 	NoCRL                     *CDNLoadBalancerEmptyModel                                              `tfsdk:"no_crl"`
-	TrustedCa                 *CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	TrustedCA                 *CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
 	XfccDisabled              *CDNLoadBalancerEmptyModel                                              `tfsdk:"xfcc_disabled"`
 	XfccOptions               *CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
@@ -1661,8 +1661,8 @@ type CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsCRLModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsTrustedCaModel represents trusted_ca block
-type CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsTrustedCaModel struct {
+// CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsTrustedCAModel represents trusted_ca block
+type CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -1686,7 +1686,7 @@ type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesModel struc
 	CertificateURL       types.String                                                                               `tfsdk:"certificate_url"`
 	DescriptionSpec      types.String                                                                               `tfsdk:"description_spec"`
 	CustomHashAlgorithms *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling  *CDNLoadBalancerEmptyModel                                                                 `tfsdk:"disable_ocsp_stapling"`
+	DisableOCSPStapling  *CDNLoadBalancerEmptyModel                                                                 `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey           *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
 	UseSystemDefaults    *CDNLoadBalancerEmptyModel                                                                 `tfsdk:"use_system_defaults"`
 }
@@ -1733,10 +1733,10 @@ type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSConfigCustomSecurityMod
 // CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsModel represents use_mtls block
 type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsModel struct {
 	ClientCertificateOptional types.Bool                                                                `tfsdk:"client_certificate_optional"`
-	TrustedCaURL              types.String                                                              `tfsdk:"trusted_ca_url"`
+	TrustedCAURL              types.String                                                              `tfsdk:"trusted_ca_url"`
 	CRL                       *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsCRLModel         `tfsdk:"crl"`
 	NoCRL                     *CDNLoadBalancerEmptyModel                                                `tfsdk:"no_crl"`
-	TrustedCa                 *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	TrustedCA                 *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsTrustedCAModel   `tfsdk:"trusted_ca"`
 	XfccDisabled              *CDNLoadBalancerEmptyModel                                                `tfsdk:"xfcc_disabled"`
 	XfccOptions               *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
@@ -1748,8 +1748,8 @@ type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsCRLModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsTrustedCaModel represents trusted_ca block
-type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsTrustedCaModel struct {
+// CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsTrustedCAModel represents trusted_ca block
+type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -1780,71 +1780,71 @@ type CDNLoadBalancerJsChallengeModel struct {
 	JsScriptDelay types.Int64  `tfsdk:"js_script_delay"`
 }
 
-// CDNLoadBalancerJwtValidationModel represents jwt_validation block
-type CDNLoadBalancerJwtValidationModel struct {
-	Action          *CDNLoadBalancerJwtValidationActionModel          `tfsdk:"action"`
-	JwksConfig      *CDNLoadBalancerJwtValidationJwksConfigModel      `tfsdk:"jwks_config"`
-	MandatoryClaims *CDNLoadBalancerJwtValidationMandatoryClaimsModel `tfsdk:"mandatory_claims"`
-	ReservedClaims  *CDNLoadBalancerJwtValidationReservedClaimsModel  `tfsdk:"reserved_claims"`
-	Target          *CDNLoadBalancerJwtValidationTargetModel          `tfsdk:"target"`
-	TokenLocation   *CDNLoadBalancerJwtValidationTokenLocationModel   `tfsdk:"token_location"`
+// CDNLoadBalancerJWTValidationModel represents jwt_validation block
+type CDNLoadBalancerJWTValidationModel struct {
+	Action          *CDNLoadBalancerJWTValidationActionModel          `tfsdk:"action"`
+	JwksConfig      *CDNLoadBalancerJWTValidationJwksConfigModel      `tfsdk:"jwks_config"`
+	MandatoryClaims *CDNLoadBalancerJWTValidationMandatoryClaimsModel `tfsdk:"mandatory_claims"`
+	ReservedClaims  *CDNLoadBalancerJWTValidationReservedClaimsModel  `tfsdk:"reserved_claims"`
+	Target          *CDNLoadBalancerJWTValidationTargetModel          `tfsdk:"target"`
+	TokenLocation   *CDNLoadBalancerJWTValidationTokenLocationModel   `tfsdk:"token_location"`
 }
 
-// CDNLoadBalancerJwtValidationActionModel represents action block
-type CDNLoadBalancerJwtValidationActionModel struct {
+// CDNLoadBalancerJWTValidationActionModel represents action block
+type CDNLoadBalancerJWTValidationActionModel struct {
 	Block  *CDNLoadBalancerEmptyModel `tfsdk:"block"`
 	Report *CDNLoadBalancerEmptyModel `tfsdk:"report"`
 }
 
-// CDNLoadBalancerJwtValidationJwksConfigModel represents jwks_config block
-type CDNLoadBalancerJwtValidationJwksConfigModel struct {
+// CDNLoadBalancerJWTValidationJwksConfigModel represents jwks_config block
+type CDNLoadBalancerJWTValidationJwksConfigModel struct {
 	Cleartext types.String `tfsdk:"cleartext"`
 }
 
-// CDNLoadBalancerJwtValidationMandatoryClaimsModel represents mandatory_claims block
-type CDNLoadBalancerJwtValidationMandatoryClaimsModel struct {
+// CDNLoadBalancerJWTValidationMandatoryClaimsModel represents mandatory_claims block
+type CDNLoadBalancerJWTValidationMandatoryClaimsModel struct {
 	ClaimNames types.List `tfsdk:"claim_names"`
 }
 
-// CDNLoadBalancerJwtValidationReservedClaimsModel represents reserved_claims block
-type CDNLoadBalancerJwtValidationReservedClaimsModel struct {
+// CDNLoadBalancerJWTValidationReservedClaimsModel represents reserved_claims block
+type CDNLoadBalancerJWTValidationReservedClaimsModel struct {
 	Issuer                types.String                                             `tfsdk:"issuer"`
-	Audience              *CDNLoadBalancerJwtValidationReservedClaimsAudienceModel `tfsdk:"audience"`
+	Audience              *CDNLoadBalancerJWTValidationReservedClaimsAudienceModel `tfsdk:"audience"`
 	AudienceDisable       *CDNLoadBalancerEmptyModel                               `tfsdk:"audience_disable"`
 	IssuerDisable         *CDNLoadBalancerEmptyModel                               `tfsdk:"issuer_disable"`
 	ValidatePeriodDisable *CDNLoadBalancerEmptyModel                               `tfsdk:"validate_period_disable"`
 	ValidatePeriodEnable  *CDNLoadBalancerEmptyModel                               `tfsdk:"validate_period_enable"`
 }
 
-// CDNLoadBalancerJwtValidationReservedClaimsAudienceModel represents audience block
-type CDNLoadBalancerJwtValidationReservedClaimsAudienceModel struct {
+// CDNLoadBalancerJWTValidationReservedClaimsAudienceModel represents audience block
+type CDNLoadBalancerJWTValidationReservedClaimsAudienceModel struct {
 	Audiences types.List `tfsdk:"audiences"`
 }
 
-// CDNLoadBalancerJwtValidationTargetModel represents target block
-type CDNLoadBalancerJwtValidationTargetModel struct {
+// CDNLoadBalancerJWTValidationTargetModel represents target block
+type CDNLoadBalancerJWTValidationTargetModel struct {
 	AllEndpoint *CDNLoadBalancerEmptyModel                        `tfsdk:"all_endpoint"`
-	APIGroups   *CDNLoadBalancerJwtValidationTargetAPIGroupsModel `tfsdk:"api_groups"`
-	BasePaths   *CDNLoadBalancerJwtValidationTargetBasePathsModel `tfsdk:"base_paths"`
+	APIGroups   *CDNLoadBalancerJWTValidationTargetAPIGroupsModel `tfsdk:"api_groups"`
+	BasePaths   *CDNLoadBalancerJWTValidationTargetBasePathsModel `tfsdk:"base_paths"`
 }
 
-// CDNLoadBalancerJwtValidationTargetAPIGroupsModel represents api_groups block
-type CDNLoadBalancerJwtValidationTargetAPIGroupsModel struct {
+// CDNLoadBalancerJWTValidationTargetAPIGroupsModel represents api_groups block
+type CDNLoadBalancerJWTValidationTargetAPIGroupsModel struct {
 	APIGroups types.List `tfsdk:"api_groups"`
 }
 
-// CDNLoadBalancerJwtValidationTargetBasePathsModel represents base_paths block
-type CDNLoadBalancerJwtValidationTargetBasePathsModel struct {
+// CDNLoadBalancerJWTValidationTargetBasePathsModel represents base_paths block
+type CDNLoadBalancerJWTValidationTargetBasePathsModel struct {
 	BasePaths types.List `tfsdk:"base_paths"`
 }
 
-// CDNLoadBalancerJwtValidationTokenLocationModel represents token_location block
-type CDNLoadBalancerJwtValidationTokenLocationModel struct {
+// CDNLoadBalancerJWTValidationTokenLocationModel represents token_location block
+type CDNLoadBalancerJWTValidationTokenLocationModel struct {
 	BearerToken *CDNLoadBalancerEmptyModel `tfsdk:"bearer_token"`
 }
 
-// CDNLoadBalancerL7DdosActionJsChallengeModel represents l7_ddos_action_js_challenge block
-type CDNLoadBalancerL7DdosActionJsChallengeModel struct {
+// CDNLoadBalancerL7DDOSActionJsChallengeModel represents l7_ddos_action_js_challenge block
+type CDNLoadBalancerL7DDOSActionJsChallengeModel struct {
 	CookieExpiry  types.Int64  `tfsdk:"cookie_expiry"`
 	CustomPage    types.String `tfsdk:"custom_page"`
 	JsScriptDelay types.Int64  `tfsdk:"js_script_delay"`
@@ -1863,7 +1863,7 @@ type CDNLoadBalancerOriginPoolModel struct {
 // CDNLoadBalancerOriginPoolMoreOriginOptionsModel represents more_origin_options block
 type CDNLoadBalancerOriginPoolMoreOriginOptionsModel struct {
 	EnableByteRangeRequest types.Bool `tfsdk:"enable_byte_range_request"`
-	WebsocketProxy         types.Bool `tfsdk:"websocket_proxy"`
+	WebSocketProxy         types.Bool `tfsdk:"websocket_proxy"`
 }
 
 // CDNLoadBalancerOriginPoolOriginServersModel represents origin_servers block
@@ -1904,7 +1904,7 @@ type CDNLoadBalancerOriginPoolUseTLSModel struct {
 	UseMtls                  *CDNLoadBalancerOriginPoolUseTLSUseMtlsModel               `tfsdk:"use_mtls"`
 	UseMtlsObj               *CDNLoadBalancerOriginPoolUseTLSUseMtlsObjModel            `tfsdk:"use_mtls_obj"`
 	UseServerVerification    *CDNLoadBalancerOriginPoolUseTLSUseServerVerificationModel `tfsdk:"use_server_verification"`
-	VolterraTrustedCa        *CDNLoadBalancerEmptyModel                                 `tfsdk:"volterra_trusted_ca"`
+	VolterraTrustedCA        *CDNLoadBalancerEmptyModel                                 `tfsdk:"volterra_trusted_ca"`
 }
 
 // CDNLoadBalancerOriginPoolUseTLSTLSConfigModel represents tls_config block
@@ -1932,7 +1932,7 @@ type CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesModel struct {
 	CertificateURL       types.String                                                                    `tfsdk:"certificate_url"`
 	DescriptionSpec      types.String                                                                    `tfsdk:"description_spec"`
 	CustomHashAlgorithms *CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling  *CDNLoadBalancerEmptyModel                                                      `tfsdk:"disable_ocsp_stapling"`
+	DisableOCSPStapling  *CDNLoadBalancerEmptyModel                                                      `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey           *CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
 	UseSystemDefaults    *CDNLoadBalancerEmptyModel                                                      `tfsdk:"use_system_defaults"`
 }
@@ -1970,12 +1970,12 @@ type CDNLoadBalancerOriginPoolUseTLSUseMtlsObjModel struct {
 
 // CDNLoadBalancerOriginPoolUseTLSUseServerVerificationModel represents use_server_verification block
 type CDNLoadBalancerOriginPoolUseTLSUseServerVerificationModel struct {
-	TrustedCaURL types.String                                                        `tfsdk:"trusted_ca_url"`
-	TrustedCa    *CDNLoadBalancerOriginPoolUseTLSUseServerVerificationTrustedCaModel `tfsdk:"trusted_ca"`
+	TrustedCAURL types.String                                                        `tfsdk:"trusted_ca_url"`
+	TrustedCA    *CDNLoadBalancerOriginPoolUseTLSUseServerVerificationTrustedCAModel `tfsdk:"trusted_ca"`
 }
 
-// CDNLoadBalancerOriginPoolUseTLSUseServerVerificationTrustedCaModel represents trusted_ca block
-type CDNLoadBalancerOriginPoolUseTLSUseServerVerificationTrustedCaModel struct {
+// CDNLoadBalancerOriginPoolUseTLSUseServerVerificationTrustedCAModel represents trusted_ca block
+type CDNLoadBalancerOriginPoolUseTLSUseServerVerificationTrustedCAModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
@@ -2396,8 +2396,8 @@ type CDNLoadBalancerSensitiveDataPolicySensitiveDataPolicyRefModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// CDNLoadBalancerSlowDdosMitigationModel represents slow_ddos_mitigation block
-type CDNLoadBalancerSlowDdosMitigationModel struct {
+// CDNLoadBalancerSlowDDOSMitigationModel represents slow_ddos_mitigation block
+type CDNLoadBalancerSlowDDOSMitigationModel struct {
 	RequestHeadersTimeout types.Int64                `tfsdk:"request_headers_timeout"`
 	RequestTimeout        types.Int64                `tfsdk:"request_timeout"`
 	DisableRequestTimeout *CDNLoadBalancerEmptyModel `tfsdk:"disable_request_timeout"`
@@ -2409,7 +2409,7 @@ type CDNLoadBalancerTrustedClientsModel struct {
 	AsNumber            types.Int64                                   `tfsdk:"as_number"`
 	ExpirationTimestamp types.String                                  `tfsdk:"expiration_timestamp"`
 	IPPrefix            types.String                                  `tfsdk:"ip_prefix"`
-	IPV6Prefix          types.String                                  `tfsdk:"ipv6_prefix"`
+	Ipv6Prefix          types.String                                  `tfsdk:"ipv6_prefix"`
 	UserIdentifier      types.String                                  `tfsdk:"user_identifier"`
 	BotSkipProcessing   *CDNLoadBalancerEmptyModel                    `tfsdk:"bot_skip_processing"`
 	HTTPHeader          *CDNLoadBalancerTrustedClientsHTTPHeaderModel `tfsdk:"http_header"`
@@ -2536,11 +2536,11 @@ type CDNLoadBalancerResourceModel struct {
 	BotDefense                    *CDNLoadBalancerBotDefenseModel              `tfsdk:"bot_defense"`
 	CaptchaChallenge              *CDNLoadBalancerCaptchaChallengeModel        `tfsdk:"captcha_challenge"`
 	ClientSideDefense             *CDNLoadBalancerClientSideDefenseModel       `tfsdk:"client_side_defense"`
-	CorsPolicy                    *CDNLoadBalancerCorsPolicyModel              `tfsdk:"cors_policy"`
-	CsrfPolicy                    *CDNLoadBalancerCsrfPolicyModel              `tfsdk:"csrf_policy"`
+	CORSPolicy                    *CDNLoadBalancerCORSPolicyModel              `tfsdk:"cors_policy"`
+	CSRFPolicy                    *CDNLoadBalancerCSRFPolicyModel              `tfsdk:"csrf_policy"`
 	CustomCacheRule               *CDNLoadBalancerCustomCacheRuleModel         `tfsdk:"custom_cache_rule"`
 	DataGuardRules                []CDNLoadBalancerDataGuardRulesModel         `tfsdk:"data_guard_rules"`
-	DdosMitigationRules           []CDNLoadBalancerDdosMitigationRulesModel    `tfsdk:"ddos_mitigation_rules"`
+	DDOSMitigationRules           []CDNLoadBalancerDDOSMitigationRulesModel    `tfsdk:"ddos_mitigation_rules"`
 	DefaultCacheAction            *CDNLoadBalancerDefaultCacheActionModel      `tfsdk:"default_cache_action"`
 	DefaultSensitiveDataPolicy    *CDNLoadBalancerEmptyModel                   `tfsdk:"default_sensitive_data_policy"`
 	DisableAPIDefinition          *CDNLoadBalancerEmptyModel                   `tfsdk:"disable_api_definition"`
@@ -2561,10 +2561,10 @@ type CDNLoadBalancerResourceModel struct {
 	HTTPS                         *CDNLoadBalancerHTTPSModel                   `tfsdk:"https"`
 	HTTPSAutoCert                 *CDNLoadBalancerHTTPSAutoCertModel           `tfsdk:"https_auto_cert"`
 	JsChallenge                   *CDNLoadBalancerJsChallengeModel             `tfsdk:"js_challenge"`
-	JwtValidation                 *CDNLoadBalancerJwtValidationModel           `tfsdk:"jwt_validation"`
-	L7DdosActionBlock             *CDNLoadBalancerEmptyModel                   `tfsdk:"l7_ddos_action_block"`
-	L7DdosActionDefault           *CDNLoadBalancerEmptyModel                   `tfsdk:"l7_ddos_action_default"`
-	L7DdosActionJsChallenge       *CDNLoadBalancerL7DdosActionJsChallengeModel `tfsdk:"l7_ddos_action_js_challenge"`
+	JWTValidation                 *CDNLoadBalancerJWTValidationModel           `tfsdk:"jwt_validation"`
+	L7DDOSActionBlock             *CDNLoadBalancerEmptyModel                   `tfsdk:"l7_ddos_action_block"`
+	L7DDOSActionDefault           *CDNLoadBalancerEmptyModel                   `tfsdk:"l7_ddos_action_default"`
+	L7DDOSActionJsChallenge       *CDNLoadBalancerL7DDOSActionJsChallengeModel `tfsdk:"l7_ddos_action_js_challenge"`
 	NoChallenge                   *CDNLoadBalancerEmptyModel                   `tfsdk:"no_challenge"`
 	NoServicePolicies             *CDNLoadBalancerEmptyModel                   `tfsdk:"no_service_policies"`
 	OriginPool                    *CDNLoadBalancerOriginPoolModel              `tfsdk:"origin_pool"`
@@ -2574,7 +2574,7 @@ type CDNLoadBalancerResourceModel struct {
 	RateLimit                     *CDNLoadBalancerRateLimitModel               `tfsdk:"rate_limit"`
 	SensitiveDataPolicy           *CDNLoadBalancerSensitiveDataPolicyModel     `tfsdk:"sensitive_data_policy"`
 	ServicePoliciesFromNamespace  *CDNLoadBalancerEmptyModel                   `tfsdk:"service_policies_from_namespace"`
-	SlowDdosMitigation            *CDNLoadBalancerSlowDdosMitigationModel      `tfsdk:"slow_ddos_mitigation"`
+	SlowDDOSMitigation            *CDNLoadBalancerSlowDDOSMitigationModel      `tfsdk:"slow_ddos_mitigation"`
 	SystemDefaultTimeouts         *CDNLoadBalancerEmptyModel                   `tfsdk:"system_default_timeouts"`
 	TrustedClients                []CDNLoadBalancerTrustedClientsModel         `tfsdk:"trusted_clients"`
 	UserIDClientIP                *CDNLoadBalancerEmptyModel                   `tfsdk:"user_id_client_ip"`
@@ -8154,7 +8154,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 					if !listItem.InlineRateLimiter.Unit.IsNull() && !listItem.InlineRateLimiter.Unit.IsUnknown() {
 						inline_rate_limiterDeepMap["unit"] = listItem.InlineRateLimiter.Unit.ValueString()
 					}
-					if listItem.InlineRateLimiter.UseHTTPLbUserID != nil {
+					if listItem.InlineRateLimiter.UseHTTPLBUserID != nil {
 						inline_rate_limiterDeepMap["use_http_lb_user_id"] = map[string]interface{}{}
 					}
 					listItemMap["inline_rate_limiter"] = inline_rate_limiterDeepMap
@@ -8229,7 +8229,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 					if !listItem.InlineRateLimiter.Unit.IsNull() && !listItem.InlineRateLimiter.Unit.IsUnknown() {
 						inline_rate_limiterDeepMap["unit"] = listItem.InlineRateLimiter.Unit.ValueString()
 					}
-					if listItem.InlineRateLimiter.UseHTTPLbUserID != nil {
+					if listItem.InlineRateLimiter.UseHTTPLBUserID != nil {
 						inline_rate_limiterDeepMap["use_http_lb_user_id"] = map[string]interface{}{}
 					}
 					listItemMap["inline_rate_limiter"] = inline_rate_limiterDeepMap
@@ -8344,8 +8344,8 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {
 				itemMap["ip_prefix"] = item.IPPrefix.ValueString()
 			}
-			if !item.IPV6Prefix.IsNull() && !item.IPV6Prefix.IsUnknown() {
-				itemMap["ipv6_prefix"] = item.IPV6Prefix.ValueString()
+			if !item.Ipv6Prefix.IsNull() && !item.Ipv6Prefix.IsUnknown() {
+				itemMap["ipv6_prefix"] = item.Ipv6Prefix.ValueString()
 			}
 			if item.Metadata != nil {
 				metadataNestedMap := make(map[string]interface{})
@@ -8372,10 +8372,10 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 	}
 	if data.BotDefense != nil {
 		bot_defenseMap := make(map[string]interface{})
-		if data.BotDefense.DisableCorsSupport != nil {
+		if data.BotDefense.DisableCORSSupport != nil {
 			bot_defenseMap["disable_cors_support"] = map[string]interface{}{}
 		}
-		if data.BotDefense.EnableCorsSupport != nil {
+		if data.BotDefense.EnableCORSSupport != nil {
 			bot_defenseMap["enable_cors_support"] = map[string]interface{}{}
 		}
 		if data.BotDefense.Policy != nil {
@@ -8414,52 +8414,52 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		}
 		createReq.Spec["client_side_defense"] = client_side_defenseMap
 	}
-	if data.CorsPolicy != nil {
+	if data.CORSPolicy != nil {
 		cors_policyMap := make(map[string]interface{})
-		if !data.CorsPolicy.AllowCredentials.IsNull() && !data.CorsPolicy.AllowCredentials.IsUnknown() {
-			cors_policyMap["allow_credentials"] = data.CorsPolicy.AllowCredentials.ValueBool()
+		if !data.CORSPolicy.AllowCredentials.IsNull() && !data.CORSPolicy.AllowCredentials.IsUnknown() {
+			cors_policyMap["allow_credentials"] = data.CORSPolicy.AllowCredentials.ValueBool()
 		}
-		if !data.CorsPolicy.AllowHeaders.IsNull() && !data.CorsPolicy.AllowHeaders.IsUnknown() {
-			cors_policyMap["allow_headers"] = data.CorsPolicy.AllowHeaders.ValueString()
+		if !data.CORSPolicy.AllowHeaders.IsNull() && !data.CORSPolicy.AllowHeaders.IsUnknown() {
+			cors_policyMap["allow_headers"] = data.CORSPolicy.AllowHeaders.ValueString()
 		}
-		if !data.CorsPolicy.AllowMethods.IsNull() && !data.CorsPolicy.AllowMethods.IsUnknown() {
-			cors_policyMap["allow_methods"] = data.CorsPolicy.AllowMethods.ValueString()
+		if !data.CORSPolicy.AllowMethods.IsNull() && !data.CORSPolicy.AllowMethods.IsUnknown() {
+			cors_policyMap["allow_methods"] = data.CORSPolicy.AllowMethods.ValueString()
 		}
-		if !data.CorsPolicy.AllowOrigin.IsNull() && !data.CorsPolicy.AllowOrigin.IsUnknown() {
+		if !data.CORSPolicy.AllowOrigin.IsNull() && !data.CORSPolicy.AllowOrigin.IsUnknown() {
 			var allow_originItems []string
-			diags := data.CorsPolicy.AllowOrigin.ElementsAs(ctx, &allow_originItems, false)
+			diags := data.CORSPolicy.AllowOrigin.ElementsAs(ctx, &allow_originItems, false)
 			if !diags.HasError() {
 				cors_policyMap["allow_origin"] = allow_originItems
 			}
 		}
-		if !data.CorsPolicy.AllowOriginRegex.IsNull() && !data.CorsPolicy.AllowOriginRegex.IsUnknown() {
+		if !data.CORSPolicy.AllowOriginRegex.IsNull() && !data.CORSPolicy.AllowOriginRegex.IsUnknown() {
 			var allow_origin_regexItems []string
-			diags := data.CorsPolicy.AllowOriginRegex.ElementsAs(ctx, &allow_origin_regexItems, false)
+			diags := data.CORSPolicy.AllowOriginRegex.ElementsAs(ctx, &allow_origin_regexItems, false)
 			if !diags.HasError() {
 				cors_policyMap["allow_origin_regex"] = allow_origin_regexItems
 			}
 		}
-		if !data.CorsPolicy.Disabled.IsNull() && !data.CorsPolicy.Disabled.IsUnknown() {
-			cors_policyMap["disabled"] = data.CorsPolicy.Disabled.ValueBool()
+		if !data.CORSPolicy.Disabled.IsNull() && !data.CORSPolicy.Disabled.IsUnknown() {
+			cors_policyMap["disabled"] = data.CORSPolicy.Disabled.ValueBool()
 		}
-		if !data.CorsPolicy.ExposeHeaders.IsNull() && !data.CorsPolicy.ExposeHeaders.IsUnknown() {
-			cors_policyMap["expose_headers"] = data.CorsPolicy.ExposeHeaders.ValueString()
+		if !data.CORSPolicy.ExposeHeaders.IsNull() && !data.CORSPolicy.ExposeHeaders.IsUnknown() {
+			cors_policyMap["expose_headers"] = data.CORSPolicy.ExposeHeaders.ValueString()
 		}
-		if !data.CorsPolicy.MaximumAge.IsNull() && !data.CorsPolicy.MaximumAge.IsUnknown() {
-			cors_policyMap["maximum_age"] = data.CorsPolicy.MaximumAge.ValueInt64()
+		if !data.CORSPolicy.MaximumAge.IsNull() && !data.CORSPolicy.MaximumAge.IsUnknown() {
+			cors_policyMap["maximum_age"] = data.CORSPolicy.MaximumAge.ValueInt64()
 		}
 		createReq.Spec["cors_policy"] = cors_policyMap
 	}
-	if data.CsrfPolicy != nil {
+	if data.CSRFPolicy != nil {
 		csrf_policyMap := make(map[string]interface{})
-		if data.CsrfPolicy.AllLoadBalancerDomains != nil {
+		if data.CSRFPolicy.AllLoadBalancerDomains != nil {
 			csrf_policyMap["all_load_balancer_domains"] = map[string]interface{}{}
 		}
-		if data.CsrfPolicy.CustomDomainList != nil {
+		if data.CSRFPolicy.CustomDomainList != nil {
 			custom_domain_listNestedMap := make(map[string]interface{})
 			csrf_policyMap["custom_domain_list"] = custom_domain_listNestedMap
 		}
-		if data.CsrfPolicy.Disabled != nil {
+		if data.CSRFPolicy.Disabled != nil {
 			csrf_policyMap["disabled"] = map[string]interface{}{}
 		}
 		createReq.Spec["csrf_policy"] = csrf_policyMap
@@ -8531,56 +8531,56 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		}
 		createReq.Spec["data_guard_rules"] = data_guard_rulesList
 	}
-	if len(data.DdosMitigationRules) > 0 {
+	if len(data.DDOSMitigationRules) > 0 {
 		var ddos_mitigation_rulesList []map[string]interface{}
-		for _, item := range data.DdosMitigationRules {
+		for _, item := range data.DDOSMitigationRules {
 			itemMap := make(map[string]interface{})
 			if item.Block != nil {
 				itemMap["block"] = map[string]interface{}{}
 			}
-			if item.DdosClientSource != nil {
+			if item.DDOSClientSource != nil {
 				ddos_client_sourceNestedMap := make(map[string]interface{})
-				if item.DdosClientSource.AsnList != nil {
+				if item.DDOSClientSource.AsnList != nil {
 					asn_listDeepMap := make(map[string]interface{})
 					ddos_client_sourceNestedMap["asn_list"] = asn_listDeepMap
 				}
-				if !item.DdosClientSource.CountryList.IsNull() && !item.DdosClientSource.CountryList.IsUnknown() {
+				if !item.DDOSClientSource.CountryList.IsNull() && !item.DDOSClientSource.CountryList.IsUnknown() {
 					var CountryListItems []string
-					diags := item.DdosClientSource.CountryList.ElementsAs(ctx, &CountryListItems, false)
+					diags := item.DDOSClientSource.CountryList.ElementsAs(ctx, &CountryListItems, false)
 					if !diags.HasError() {
 						ddos_client_sourceNestedMap["country_list"] = CountryListItems
 					}
 				}
-				if item.DdosClientSource.Ja4TLSFingerprintMatcher != nil {
+				if item.DDOSClientSource.Ja4TLSFingerprintMatcher != nil {
 					ja4_tls_fingerprint_matcherDeepMap := make(map[string]interface{})
-					if !item.DdosClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsNull() && !item.DdosClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsUnknown() {
+					if !item.DDOSClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsNull() && !item.DDOSClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsUnknown() {
 						var ExactValuesItems []string
-						diags := item.DdosClientSource.Ja4TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						diags := item.DDOSClientSource.Ja4TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
 						if !diags.HasError() {
 							ja4_tls_fingerprint_matcherDeepMap["exact_values"] = ExactValuesItems
 						}
 					}
 					ddos_client_sourceNestedMap["ja4_tls_fingerprint_matcher"] = ja4_tls_fingerprint_matcherDeepMap
 				}
-				if item.DdosClientSource.TLSFingerprintMatcher != nil {
+				if item.DDOSClientSource.TLSFingerprintMatcher != nil {
 					tls_fingerprint_matcherDeepMap := make(map[string]interface{})
-					if !item.DdosClientSource.TLSFingerprintMatcher.Classes.IsNull() && !item.DdosClientSource.TLSFingerprintMatcher.Classes.IsUnknown() {
+					if !item.DDOSClientSource.TLSFingerprintMatcher.Classes.IsNull() && !item.DDOSClientSource.TLSFingerprintMatcher.Classes.IsUnknown() {
 						var ClassesItems []string
-						diags := item.DdosClientSource.TLSFingerprintMatcher.Classes.ElementsAs(ctx, &ClassesItems, false)
+						diags := item.DDOSClientSource.TLSFingerprintMatcher.Classes.ElementsAs(ctx, &ClassesItems, false)
 						if !diags.HasError() {
 							tls_fingerprint_matcherDeepMap["classes"] = ClassesItems
 						}
 					}
-					if !item.DdosClientSource.TLSFingerprintMatcher.ExactValues.IsNull() && !item.DdosClientSource.TLSFingerprintMatcher.ExactValues.IsUnknown() {
+					if !item.DDOSClientSource.TLSFingerprintMatcher.ExactValues.IsNull() && !item.DDOSClientSource.TLSFingerprintMatcher.ExactValues.IsUnknown() {
 						var ExactValuesItems []string
-						diags := item.DdosClientSource.TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						diags := item.DDOSClientSource.TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
 						if !diags.HasError() {
 							tls_fingerprint_matcherDeepMap["exact_values"] = ExactValuesItems
 						}
 					}
-					if !item.DdosClientSource.TLSFingerprintMatcher.ExcludedValues.IsNull() && !item.DdosClientSource.TLSFingerprintMatcher.ExcludedValues.IsUnknown() {
+					if !item.DDOSClientSource.TLSFingerprintMatcher.ExcludedValues.IsNull() && !item.DDOSClientSource.TLSFingerprintMatcher.ExcludedValues.IsUnknown() {
 						var ExcludedValuesItems []string
-						diags := item.DdosClientSource.TLSFingerprintMatcher.ExcludedValues.ElementsAs(ctx, &ExcludedValuesItems, false)
+						diags := item.DDOSClientSource.TLSFingerprintMatcher.ExcludedValues.ElementsAs(ctx, &ExcludedValuesItems, false)
 						if !diags.HasError() {
 							tls_fingerprint_matcherDeepMap["excluded_values"] = ExcludedValuesItems
 						}
@@ -8625,11 +8625,11 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		if data.DefaultCacheAction.CacheDisabled != nil {
 			default_cache_actionMap["cache_disabled"] = map[string]interface{}{}
 		}
-		if !data.DefaultCacheAction.CacheTtlDefault.IsNull() && !data.DefaultCacheAction.CacheTtlDefault.IsUnknown() {
-			default_cache_actionMap["cache_ttl_default"] = data.DefaultCacheAction.CacheTtlDefault.ValueString()
+		if !data.DefaultCacheAction.CacheTTLDefault.IsNull() && !data.DefaultCacheAction.CacheTTLDefault.IsUnknown() {
+			default_cache_actionMap["cache_ttl_default"] = data.DefaultCacheAction.CacheTTLDefault.ValueString()
 		}
-		if !data.DefaultCacheAction.CacheTtlOverride.IsNull() && !data.DefaultCacheAction.CacheTtlOverride.IsUnknown() {
-			default_cache_actionMap["cache_ttl_override"] = data.DefaultCacheAction.CacheTtlOverride.ValueString()
+		if !data.DefaultCacheAction.CacheTTLOverride.IsNull() && !data.DefaultCacheAction.CacheTTLOverride.IsUnknown() {
+			default_cache_actionMap["cache_ttl_override"] = data.DefaultCacheAction.CacheTTLOverride.ValueString()
 		}
 		createReq.Spec["default_cache_action"] = default_cache_actionMap
 	}
@@ -8885,58 +8885,58 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		}
 		createReq.Spec["js_challenge"] = js_challengeMap
 	}
-	if data.JwtValidation != nil {
+	if data.JWTValidation != nil {
 		jwt_validationMap := make(map[string]interface{})
-		if data.JwtValidation.Action != nil {
+		if data.JWTValidation.Action != nil {
 			actionNestedMap := make(map[string]interface{})
 			jwt_validationMap["action"] = actionNestedMap
 		}
-		if data.JwtValidation.JwksConfig != nil {
+		if data.JWTValidation.JwksConfig != nil {
 			jwks_configNestedMap := make(map[string]interface{})
-			if !data.JwtValidation.JwksConfig.Cleartext.IsNull() && !data.JwtValidation.JwksConfig.Cleartext.IsUnknown() {
-				jwks_configNestedMap["cleartext"] = data.JwtValidation.JwksConfig.Cleartext.ValueString()
+			if !data.JWTValidation.JwksConfig.Cleartext.IsNull() && !data.JWTValidation.JwksConfig.Cleartext.IsUnknown() {
+				jwks_configNestedMap["cleartext"] = data.JWTValidation.JwksConfig.Cleartext.ValueString()
 			}
 			jwt_validationMap["jwks_config"] = jwks_configNestedMap
 		}
-		if data.JwtValidation.MandatoryClaims != nil {
+		if data.JWTValidation.MandatoryClaims != nil {
 			mandatory_claimsNestedMap := make(map[string]interface{})
 			jwt_validationMap["mandatory_claims"] = mandatory_claimsNestedMap
 		}
-		if data.JwtValidation.ReservedClaims != nil {
+		if data.JWTValidation.ReservedClaims != nil {
 			reserved_claimsNestedMap := make(map[string]interface{})
-			if !data.JwtValidation.ReservedClaims.Issuer.IsNull() && !data.JwtValidation.ReservedClaims.Issuer.IsUnknown() {
-				reserved_claimsNestedMap["issuer"] = data.JwtValidation.ReservedClaims.Issuer.ValueString()
+			if !data.JWTValidation.ReservedClaims.Issuer.IsNull() && !data.JWTValidation.ReservedClaims.Issuer.IsUnknown() {
+				reserved_claimsNestedMap["issuer"] = data.JWTValidation.ReservedClaims.Issuer.ValueString()
 			}
 			jwt_validationMap["reserved_claims"] = reserved_claimsNestedMap
 		}
-		if data.JwtValidation.Target != nil {
+		if data.JWTValidation.Target != nil {
 			targetNestedMap := make(map[string]interface{})
 			jwt_validationMap["target"] = targetNestedMap
 		}
-		if data.JwtValidation.TokenLocation != nil {
+		if data.JWTValidation.TokenLocation != nil {
 			token_locationNestedMap := make(map[string]interface{})
 			jwt_validationMap["token_location"] = token_locationNestedMap
 		}
 		createReq.Spec["jwt_validation"] = jwt_validationMap
 	}
-	if data.L7DdosActionBlock != nil {
+	if data.L7DDOSActionBlock != nil {
 		l7_ddos_action_blockMap := make(map[string]interface{})
 		createReq.Spec["l7_ddos_action_block"] = l7_ddos_action_blockMap
 	}
-	if data.L7DdosActionDefault != nil {
+	if data.L7DDOSActionDefault != nil {
 		l7_ddos_action_defaultMap := make(map[string]interface{})
 		createReq.Spec["l7_ddos_action_default"] = l7_ddos_action_defaultMap
 	}
-	if data.L7DdosActionJsChallenge != nil {
+	if data.L7DDOSActionJsChallenge != nil {
 		l7_ddos_action_js_challengeMap := make(map[string]interface{})
-		if !data.L7DdosActionJsChallenge.CookieExpiry.IsNull() && !data.L7DdosActionJsChallenge.CookieExpiry.IsUnknown() {
-			l7_ddos_action_js_challengeMap["cookie_expiry"] = data.L7DdosActionJsChallenge.CookieExpiry.ValueInt64()
+		if !data.L7DDOSActionJsChallenge.CookieExpiry.IsNull() && !data.L7DDOSActionJsChallenge.CookieExpiry.IsUnknown() {
+			l7_ddos_action_js_challengeMap["cookie_expiry"] = data.L7DDOSActionJsChallenge.CookieExpiry.ValueInt64()
 		}
-		if !data.L7DdosActionJsChallenge.CustomPage.IsNull() && !data.L7DdosActionJsChallenge.CustomPage.IsUnknown() {
-			l7_ddos_action_js_challengeMap["custom_page"] = data.L7DdosActionJsChallenge.CustomPage.ValueString()
+		if !data.L7DDOSActionJsChallenge.CustomPage.IsNull() && !data.L7DDOSActionJsChallenge.CustomPage.IsUnknown() {
+			l7_ddos_action_js_challengeMap["custom_page"] = data.L7DDOSActionJsChallenge.CustomPage.ValueString()
 		}
-		if !data.L7DdosActionJsChallenge.JsScriptDelay.IsNull() && !data.L7DdosActionJsChallenge.JsScriptDelay.IsUnknown() {
-			l7_ddos_action_js_challengeMap["js_script_delay"] = data.L7DdosActionJsChallenge.JsScriptDelay.ValueInt64()
+		if !data.L7DDOSActionJsChallenge.JsScriptDelay.IsNull() && !data.L7DDOSActionJsChallenge.JsScriptDelay.IsUnknown() {
+			l7_ddos_action_js_challengeMap["js_script_delay"] = data.L7DDOSActionJsChallenge.JsScriptDelay.ValueInt64()
 		}
 		createReq.Spec["l7_ddos_action_js_challenge"] = l7_ddos_action_js_challengeMap
 	}
@@ -8955,8 +8955,8 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			if !data.OriginPool.MoreOriginOptions.EnableByteRangeRequest.IsNull() && !data.OriginPool.MoreOriginOptions.EnableByteRangeRequest.IsUnknown() {
 				more_origin_optionsNestedMap["enable_byte_range_request"] = data.OriginPool.MoreOriginOptions.EnableByteRangeRequest.ValueBool()
 			}
-			if !data.OriginPool.MoreOriginOptions.WebsocketProxy.IsNull() && !data.OriginPool.MoreOriginOptions.WebsocketProxy.IsUnknown() {
-				more_origin_optionsNestedMap["websocket_proxy"] = data.OriginPool.MoreOriginOptions.WebsocketProxy.ValueBool()
+			if !data.OriginPool.MoreOriginOptions.WebSocketProxy.IsNull() && !data.OriginPool.MoreOriginOptions.WebSocketProxy.IsUnknown() {
+				more_origin_optionsNestedMap["websocket_proxy"] = data.OriginPool.MoreOriginOptions.WebSocketProxy.ValueBool()
 			}
 			origin_poolMap["more_origin_options"] = more_origin_optionsNestedMap
 		}
@@ -9209,16 +9209,16 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		service_policies_from_namespaceMap := make(map[string]interface{})
 		createReq.Spec["service_policies_from_namespace"] = service_policies_from_namespaceMap
 	}
-	if data.SlowDdosMitigation != nil {
+	if data.SlowDDOSMitigation != nil {
 		slow_ddos_mitigationMap := make(map[string]interface{})
-		if data.SlowDdosMitigation.DisableRequestTimeout != nil {
+		if data.SlowDDOSMitigation.DisableRequestTimeout != nil {
 			slow_ddos_mitigationMap["disable_request_timeout"] = map[string]interface{}{}
 		}
-		if !data.SlowDdosMitigation.RequestHeadersTimeout.IsNull() && !data.SlowDdosMitigation.RequestHeadersTimeout.IsUnknown() {
-			slow_ddos_mitigationMap["request_headers_timeout"] = data.SlowDdosMitigation.RequestHeadersTimeout.ValueInt64()
+		if !data.SlowDDOSMitigation.RequestHeadersTimeout.IsNull() && !data.SlowDDOSMitigation.RequestHeadersTimeout.IsUnknown() {
+			slow_ddos_mitigationMap["request_headers_timeout"] = data.SlowDDOSMitigation.RequestHeadersTimeout.ValueInt64()
 		}
-		if !data.SlowDdosMitigation.RequestTimeout.IsNull() && !data.SlowDdosMitigation.RequestTimeout.IsUnknown() {
-			slow_ddos_mitigationMap["request_timeout"] = data.SlowDdosMitigation.RequestTimeout.ValueInt64()
+		if !data.SlowDDOSMitigation.RequestTimeout.IsNull() && !data.SlowDDOSMitigation.RequestTimeout.IsUnknown() {
+			slow_ddos_mitigationMap["request_timeout"] = data.SlowDDOSMitigation.RequestTimeout.ValueInt64()
 		}
 		createReq.Spec["slow_ddos_mitigation"] = slow_ddos_mitigationMap
 	}
@@ -9269,8 +9269,8 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {
 				itemMap["ip_prefix"] = item.IPPrefix.ValueString()
 			}
-			if !item.IPV6Prefix.IsNull() && !item.IPV6Prefix.IsUnknown() {
-				itemMap["ipv6_prefix"] = item.IPV6Prefix.ValueString()
+			if !item.Ipv6Prefix.IsNull() && !item.Ipv6Prefix.IsUnknown() {
+				itemMap["ipv6_prefix"] = item.Ipv6Prefix.ValueString()
 			}
 			if item.Metadata != nil {
 				metadataNestedMap := make(map[string]interface{})
@@ -9448,7 +9448,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 												}
 												return types.StringNull()
 											}(),
-											UseHTTPLbUserID: func() *CDNLoadBalancerEmptyModel {
+											UseHTTPLBUserID: func() *CDNLoadBalancerEmptyModel {
 												if _, ok := deepMap["use_http_lb_user_id"].(map[string]interface{}); ok {
 													return &CDNLoadBalancerEmptyModel{}
 												}
@@ -9619,7 +9619,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 												}
 												return types.StringNull()
 											}(),
-											UseHTTPLbUserID: func() *CDNLoadBalancerEmptyModel {
+											UseHTTPLBUserID: func() *CDNLoadBalancerEmptyModel {
 												if _, ok := deepMap["use_http_lb_user_id"].(map[string]interface{}); ok {
 													return &CDNLoadBalancerEmptyModel{}
 												}
@@ -9751,7 +9751,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 						}
 						return types.StringNull()
 					}(),
-					IPV6Prefix: func() types.String {
+					Ipv6Prefix: func() types.String {
 						if v, ok := itemMap["ipv6_prefix"].(string); ok && v != "" {
 							return types.StringValue(v)
 						}
@@ -9801,11 +9801,11 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 	}
 	if blockData, ok := apiResource.Spec["bot_defense"].(map[string]interface{}); ok && (isImport || data.BotDefense != nil) {
 		data.BotDefense = &CDNLoadBalancerBotDefenseModel{
-			DisableCorsSupport: func() *CDNLoadBalancerEmptyModel {
+			DisableCORSSupport: func() *CDNLoadBalancerEmptyModel {
 				if !isImport && data.BotDefense != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.BotDefense.DisableCorsSupport
+					return data.BotDefense.DisableCORSSupport
 				}
 				// Import case: read from API
 				if _, ok := blockData["disable_cors_support"].(map[string]interface{}); ok {
@@ -9813,11 +9813,11 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 				}
 				return nil
 			}(),
-			EnableCorsSupport: func() *CDNLoadBalancerEmptyModel {
+			EnableCORSSupport: func() *CDNLoadBalancerEmptyModel {
 				if !isImport && data.BotDefense != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.BotDefense.EnableCorsSupport
+					return data.BotDefense.EnableCORSSupport
 				}
 				// Import case: read from API
 				if _, ok := blockData["enable_cors_support"].(map[string]interface{}); ok {
@@ -9884,12 +9884,12 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		data.ClientSideDefense = &CDNLoadBalancerClientSideDefenseModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["cors_policy"].(map[string]interface{}); ok && (isImport || data.CorsPolicy != nil) {
-		data.CorsPolicy = &CDNLoadBalancerCorsPolicyModel{
+	if blockData, ok := apiResource.Spec["cors_policy"].(map[string]interface{}); ok && (isImport || data.CORSPolicy != nil) {
+		data.CORSPolicy = &CDNLoadBalancerCORSPolicyModel{
 			AllowCredentials: func() types.Bool {
-				if !isImport && data.CorsPolicy != nil {
+				if !isImport && data.CORSPolicy != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.CorsPolicy.AllowCredentials
+					return data.CORSPolicy.AllowCredentials
 				}
 				// Import case: read from API
 				if v, ok := blockData["allow_credentials"].(bool); ok {
@@ -9936,9 +9936,9 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 				return types.ListNull(types.StringType)
 			}(),
 			Disabled: func() types.Bool {
-				if !isImport && data.CorsPolicy != nil {
+				if !isImport && data.CORSPolicy != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.CorsPolicy.Disabled
+					return data.CORSPolicy.Disabled
 				}
 				// Import case: read from API
 				if v, ok := blockData["disabled"].(bool); ok {
@@ -9960,9 +9960,9 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["csrf_policy"].(map[string]interface{}); ok && isImport && data.CsrfPolicy == nil {
+	if _, ok := apiResource.Spec["csrf_policy"].(map[string]interface{}); ok && isImport && data.CSRFPolicy == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.CsrfPolicy = &CDNLoadBalancerCsrfPolicyModel{}
+		data.CSRFPolicy = &CDNLoadBalancerCSRFPolicyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["custom_cache_rule"].(map[string]interface{}); ok && (isImport || data.CustomCacheRule != nil) {
@@ -10086,20 +10086,20 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		data.DataGuardRules = data_guard_rulesList
 	}
 	if listData, ok := apiResource.Spec["ddos_mitigation_rules"].([]interface{}); ok && len(listData) > 0 {
-		var ddos_mitigation_rulesList []CDNLoadBalancerDdosMitigationRulesModel
+		var ddos_mitigation_rulesList []CDNLoadBalancerDDOSMitigationRulesModel
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
-				ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, CDNLoadBalancerDdosMitigationRulesModel{
+				ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, CDNLoadBalancerDDOSMitigationRulesModel{
 					Block: func() *CDNLoadBalancerEmptyModel {
-						if !isImport && len(data.DdosMitigationRules) > listIdx && data.DdosMitigationRules[listIdx].Block != nil {
+						if !isImport && len(data.DDOSMitigationRules) > listIdx && data.DDOSMitigationRules[listIdx].Block != nil {
 							return &CDNLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
-					DdosClientSource: func() *CDNLoadBalancerDdosMitigationRulesDdosClientSourceModel {
+					DDOSClientSource: func() *CDNLoadBalancerDDOSMitigationRulesDDOSClientSourceModel {
 						if nestedMap, ok := itemMap["ddos_client_source"].(map[string]interface{}); ok {
-							return &CDNLoadBalancerDdosMitigationRulesDdosClientSourceModel{
+							return &CDNLoadBalancerDDOSMitigationRulesDDOSClientSourceModel{
 								CountryList: func() types.List {
 									if v, ok := nestedMap["country_list"].([]interface{}); ok && len(v) > 0 {
 										var items []string
@@ -10123,9 +10123,9 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 						}
 						return types.StringNull()
 					}(),
-					IPPrefixList: func() *CDNLoadBalancerDdosMitigationRulesIPPrefixListModel {
+					IPPrefixList: func() *CDNLoadBalancerDDOSMitigationRulesIPPrefixListModel {
 						if nestedMap, ok := itemMap["ip_prefix_list"].(map[string]interface{}); ok {
-							return &CDNLoadBalancerDdosMitigationRulesIPPrefixListModel{
+							return &CDNLoadBalancerDDOSMitigationRulesIPPrefixListModel{
 								InvertMatch: func() types.Bool {
 									if v, ok := nestedMap["invert_match"].(bool); ok {
 										return types.BoolValue(v)
@@ -10149,9 +10149,9 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 						}
 						return nil
 					}(),
-					Metadata: func() *CDNLoadBalancerDdosMitigationRulesMetadataModel {
+					Metadata: func() *CDNLoadBalancerDDOSMitigationRulesMetadataModel {
 						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
-							return &CDNLoadBalancerDdosMitigationRulesMetadataModel{
+							return &CDNLoadBalancerDDOSMitigationRulesMetadataModel{
 								DescriptionSpec: func() types.String {
 									if v, ok := nestedMap["description"].(string); ok && v != "" {
 										return types.StringValue(v)
@@ -10171,7 +10171,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 				})
 			}
 		}
-		data.DdosMitigationRules = ddos_mitigation_rulesList
+		data.DDOSMitigationRules = ddos_mitigation_rulesList
 	}
 	if blockData, ok := apiResource.Spec["default_cache_action"].(map[string]interface{}); ok && (isImport || data.DefaultCacheAction != nil) {
 		data.DefaultCacheAction = &CDNLoadBalancerDefaultCacheActionModel{
@@ -10187,13 +10187,13 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 				}
 				return nil
 			}(),
-			CacheTtlDefault: func() types.String {
+			CacheTTLDefault: func() types.String {
 				if v, ok := blockData["cache_ttl_default"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
 			}(),
-			CacheTtlOverride: func() types.String {
+			CacheTTLOverride: func() types.String {
 				if v, ok := blockData["cache_ttl_override"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
@@ -10524,23 +10524,23 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["jwt_validation"].(map[string]interface{}); ok && isImport && data.JwtValidation == nil {
+	if _, ok := apiResource.Spec["jwt_validation"].(map[string]interface{}); ok && isImport && data.JWTValidation == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.JwtValidation = &CDNLoadBalancerJwtValidationModel{}
+		data.JWTValidation = &CDNLoadBalancerJWTValidationModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["l7_ddos_action_block"].(map[string]interface{}); ok && isImport && data.L7DdosActionBlock == nil {
+	if _, ok := apiResource.Spec["l7_ddos_action_block"].(map[string]interface{}); ok && isImport && data.L7DDOSActionBlock == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.L7DdosActionBlock = &CDNLoadBalancerEmptyModel{}
+		data.L7DDOSActionBlock = &CDNLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["l7_ddos_action_default"].(map[string]interface{}); ok && isImport && data.L7DdosActionDefault == nil {
+	if _, ok := apiResource.Spec["l7_ddos_action_default"].(map[string]interface{}); ok && isImport && data.L7DDOSActionDefault == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.L7DdosActionDefault = &CDNLoadBalancerEmptyModel{}
+		data.L7DDOSActionDefault = &CDNLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["l7_ddos_action_js_challenge"].(map[string]interface{}); ok && (isImport || data.L7DdosActionJsChallenge != nil) {
-		data.L7DdosActionJsChallenge = &CDNLoadBalancerL7DdosActionJsChallengeModel{
+	if blockData, ok := apiResource.Spec["l7_ddos_action_js_challenge"].(map[string]interface{}); ok && (isImport || data.L7DDOSActionJsChallenge != nil) {
+		data.L7DDOSActionJsChallenge = &CDNLoadBalancerL7DDOSActionJsChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -10587,7 +10587,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 							}
 							return types.BoolNull()
 						}(),
-						WebsocketProxy: func() types.Bool {
+						WebSocketProxy: func() types.Bool {
 							if v, ok := nestedBlockData["websocket_proxy"].(bool); ok {
 								return types.BoolValue(v)
 							}
@@ -10889,13 +10889,13 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		data.ServicePoliciesFromNamespace = &CDNLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDdosMitigation != nil) {
-		data.SlowDdosMitigation = &CDNLoadBalancerSlowDdosMitigationModel{
+	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDDOSMitigation != nil) {
+		data.SlowDDOSMitigation = &CDNLoadBalancerSlowDDOSMitigationModel{
 			DisableRequestTimeout: func() *CDNLoadBalancerEmptyModel {
-				if !isImport && data.SlowDdosMitigation != nil {
+				if !isImport && data.SlowDDOSMitigation != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.SlowDdosMitigation.DisableRequestTimeout
+					return data.SlowDDOSMitigation.DisableRequestTimeout
 				}
 				// Import case: read from API
 				if _, ok := blockData["disable_request_timeout"].(map[string]interface{}); ok {
@@ -10971,7 +10971,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 						}
 						return types.StringNull()
 					}(),
-					IPV6Prefix: func() types.String {
+					Ipv6Prefix: func() types.String {
 						if v, ok := itemMap["ipv6_prefix"].(string); ok && v != "" {
 							return types.StringValue(v)
 						}
@@ -11246,7 +11246,7 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 												}
 												return types.StringNull()
 											}(),
-											UseHTTPLbUserID: func() *CDNLoadBalancerEmptyModel {
+											UseHTTPLBUserID: func() *CDNLoadBalancerEmptyModel {
 												if _, ok := deepMap["use_http_lb_user_id"].(map[string]interface{}); ok {
 													return &CDNLoadBalancerEmptyModel{}
 												}
@@ -11417,7 +11417,7 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 												}
 												return types.StringNull()
 											}(),
-											UseHTTPLbUserID: func() *CDNLoadBalancerEmptyModel {
+											UseHTTPLBUserID: func() *CDNLoadBalancerEmptyModel {
 												if _, ok := deepMap["use_http_lb_user_id"].(map[string]interface{}); ok {
 													return &CDNLoadBalancerEmptyModel{}
 												}
@@ -11549,7 +11549,7 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 						}
 						return types.StringNull()
 					}(),
-					IPV6Prefix: func() types.String {
+					Ipv6Prefix: func() types.String {
 						if v, ok := itemMap["ipv6_prefix"].(string); ok && v != "" {
 							return types.StringValue(v)
 						}
@@ -11599,11 +11599,11 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 	}
 	if blockData, ok := apiResource.Spec["bot_defense"].(map[string]interface{}); ok && (isImport || data.BotDefense != nil) {
 		data.BotDefense = &CDNLoadBalancerBotDefenseModel{
-			DisableCorsSupport: func() *CDNLoadBalancerEmptyModel {
+			DisableCORSSupport: func() *CDNLoadBalancerEmptyModel {
 				if !isImport && data.BotDefense != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.BotDefense.DisableCorsSupport
+					return data.BotDefense.DisableCORSSupport
 				}
 				// Import case: read from API
 				if _, ok := blockData["disable_cors_support"].(map[string]interface{}); ok {
@@ -11611,11 +11611,11 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 				}
 				return nil
 			}(),
-			EnableCorsSupport: func() *CDNLoadBalancerEmptyModel {
+			EnableCORSSupport: func() *CDNLoadBalancerEmptyModel {
 				if !isImport && data.BotDefense != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.BotDefense.EnableCorsSupport
+					return data.BotDefense.EnableCORSSupport
 				}
 				// Import case: read from API
 				if _, ok := blockData["enable_cors_support"].(map[string]interface{}); ok {
@@ -11682,12 +11682,12 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 		data.ClientSideDefense = &CDNLoadBalancerClientSideDefenseModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["cors_policy"].(map[string]interface{}); ok && (isImport || data.CorsPolicy != nil) {
-		data.CorsPolicy = &CDNLoadBalancerCorsPolicyModel{
+	if blockData, ok := apiResource.Spec["cors_policy"].(map[string]interface{}); ok && (isImport || data.CORSPolicy != nil) {
+		data.CORSPolicy = &CDNLoadBalancerCORSPolicyModel{
 			AllowCredentials: func() types.Bool {
-				if !isImport && data.CorsPolicy != nil {
+				if !isImport && data.CORSPolicy != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.CorsPolicy.AllowCredentials
+					return data.CORSPolicy.AllowCredentials
 				}
 				// Import case: read from API
 				if v, ok := blockData["allow_credentials"].(bool); ok {
@@ -11734,9 +11734,9 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 				return types.ListNull(types.StringType)
 			}(),
 			Disabled: func() types.Bool {
-				if !isImport && data.CorsPolicy != nil {
+				if !isImport && data.CORSPolicy != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.CorsPolicy.Disabled
+					return data.CORSPolicy.Disabled
 				}
 				// Import case: read from API
 				if v, ok := blockData["disabled"].(bool); ok {
@@ -11758,9 +11758,9 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["csrf_policy"].(map[string]interface{}); ok && isImport && data.CsrfPolicy == nil {
+	if _, ok := apiResource.Spec["csrf_policy"].(map[string]interface{}); ok && isImport && data.CSRFPolicy == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.CsrfPolicy = &CDNLoadBalancerCsrfPolicyModel{}
+		data.CSRFPolicy = &CDNLoadBalancerCSRFPolicyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["custom_cache_rule"].(map[string]interface{}); ok && (isImport || data.CustomCacheRule != nil) {
@@ -11884,20 +11884,20 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 		data.DataGuardRules = data_guard_rulesList
 	}
 	if listData, ok := apiResource.Spec["ddos_mitigation_rules"].([]interface{}); ok && len(listData) > 0 {
-		var ddos_mitigation_rulesList []CDNLoadBalancerDdosMitigationRulesModel
+		var ddos_mitigation_rulesList []CDNLoadBalancerDDOSMitigationRulesModel
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
-				ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, CDNLoadBalancerDdosMitigationRulesModel{
+				ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, CDNLoadBalancerDDOSMitigationRulesModel{
 					Block: func() *CDNLoadBalancerEmptyModel {
-						if !isImport && len(data.DdosMitigationRules) > listIdx && data.DdosMitigationRules[listIdx].Block != nil {
+						if !isImport && len(data.DDOSMitigationRules) > listIdx && data.DDOSMitigationRules[listIdx].Block != nil {
 							return &CDNLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
-					DdosClientSource: func() *CDNLoadBalancerDdosMitigationRulesDdosClientSourceModel {
+					DDOSClientSource: func() *CDNLoadBalancerDDOSMitigationRulesDDOSClientSourceModel {
 						if nestedMap, ok := itemMap["ddos_client_source"].(map[string]interface{}); ok {
-							return &CDNLoadBalancerDdosMitigationRulesDdosClientSourceModel{
+							return &CDNLoadBalancerDDOSMitigationRulesDDOSClientSourceModel{
 								CountryList: func() types.List {
 									if v, ok := nestedMap["country_list"].([]interface{}); ok && len(v) > 0 {
 										var items []string
@@ -11921,9 +11921,9 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 						}
 						return types.StringNull()
 					}(),
-					IPPrefixList: func() *CDNLoadBalancerDdosMitigationRulesIPPrefixListModel {
+					IPPrefixList: func() *CDNLoadBalancerDDOSMitigationRulesIPPrefixListModel {
 						if nestedMap, ok := itemMap["ip_prefix_list"].(map[string]interface{}); ok {
-							return &CDNLoadBalancerDdosMitigationRulesIPPrefixListModel{
+							return &CDNLoadBalancerDDOSMitigationRulesIPPrefixListModel{
 								InvertMatch: func() types.Bool {
 									if v, ok := nestedMap["invert_match"].(bool); ok {
 										return types.BoolValue(v)
@@ -11947,9 +11947,9 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 						}
 						return nil
 					}(),
-					Metadata: func() *CDNLoadBalancerDdosMitigationRulesMetadataModel {
+					Metadata: func() *CDNLoadBalancerDDOSMitigationRulesMetadataModel {
 						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
-							return &CDNLoadBalancerDdosMitigationRulesMetadataModel{
+							return &CDNLoadBalancerDDOSMitigationRulesMetadataModel{
 								DescriptionSpec: func() types.String {
 									if v, ok := nestedMap["description"].(string); ok && v != "" {
 										return types.StringValue(v)
@@ -11969,7 +11969,7 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 				})
 			}
 		}
-		data.DdosMitigationRules = ddos_mitigation_rulesList
+		data.DDOSMitigationRules = ddos_mitigation_rulesList
 	}
 	if blockData, ok := apiResource.Spec["default_cache_action"].(map[string]interface{}); ok && (isImport || data.DefaultCacheAction != nil) {
 		data.DefaultCacheAction = &CDNLoadBalancerDefaultCacheActionModel{
@@ -11985,13 +11985,13 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 				}
 				return nil
 			}(),
-			CacheTtlDefault: func() types.String {
+			CacheTTLDefault: func() types.String {
 				if v, ok := blockData["cache_ttl_default"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
 			}(),
-			CacheTtlOverride: func() types.String {
+			CacheTTLOverride: func() types.String {
 				if v, ok := blockData["cache_ttl_override"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
@@ -12322,23 +12322,23 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["jwt_validation"].(map[string]interface{}); ok && isImport && data.JwtValidation == nil {
+	if _, ok := apiResource.Spec["jwt_validation"].(map[string]interface{}); ok && isImport && data.JWTValidation == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.JwtValidation = &CDNLoadBalancerJwtValidationModel{}
+		data.JWTValidation = &CDNLoadBalancerJWTValidationModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["l7_ddos_action_block"].(map[string]interface{}); ok && isImport && data.L7DdosActionBlock == nil {
+	if _, ok := apiResource.Spec["l7_ddos_action_block"].(map[string]interface{}); ok && isImport && data.L7DDOSActionBlock == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.L7DdosActionBlock = &CDNLoadBalancerEmptyModel{}
+		data.L7DDOSActionBlock = &CDNLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["l7_ddos_action_default"].(map[string]interface{}); ok && isImport && data.L7DdosActionDefault == nil {
+	if _, ok := apiResource.Spec["l7_ddos_action_default"].(map[string]interface{}); ok && isImport && data.L7DDOSActionDefault == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.L7DdosActionDefault = &CDNLoadBalancerEmptyModel{}
+		data.L7DDOSActionDefault = &CDNLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["l7_ddos_action_js_challenge"].(map[string]interface{}); ok && (isImport || data.L7DdosActionJsChallenge != nil) {
-		data.L7DdosActionJsChallenge = &CDNLoadBalancerL7DdosActionJsChallengeModel{
+	if blockData, ok := apiResource.Spec["l7_ddos_action_js_challenge"].(map[string]interface{}); ok && (isImport || data.L7DDOSActionJsChallenge != nil) {
+		data.L7DDOSActionJsChallenge = &CDNLoadBalancerL7DDOSActionJsChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -12385,7 +12385,7 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 							}
 							return types.BoolNull()
 						}(),
-						WebsocketProxy: func() types.Bool {
+						WebSocketProxy: func() types.Bool {
 							if v, ok := nestedBlockData["websocket_proxy"].(bool); ok {
 								return types.BoolValue(v)
 							}
@@ -12687,13 +12687,13 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 		data.ServicePoliciesFromNamespace = &CDNLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDdosMitigation != nil) {
-		data.SlowDdosMitigation = &CDNLoadBalancerSlowDdosMitigationModel{
+	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDDOSMitigation != nil) {
+		data.SlowDDOSMitigation = &CDNLoadBalancerSlowDDOSMitigationModel{
 			DisableRequestTimeout: func() *CDNLoadBalancerEmptyModel {
-				if !isImport && data.SlowDdosMitigation != nil {
+				if !isImport && data.SlowDDOSMitigation != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.SlowDdosMitigation.DisableRequestTimeout
+					return data.SlowDDOSMitigation.DisableRequestTimeout
 				}
 				// Import case: read from API
 				if _, ok := blockData["disable_request_timeout"].(map[string]interface{}); ok {
@@ -12769,7 +12769,7 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 						}
 						return types.StringNull()
 					}(),
-					IPV6Prefix: func() types.String {
+					Ipv6Prefix: func() types.String {
 						if v, ok := itemMap["ipv6_prefix"].(string); ok && v != "" {
 							return types.StringValue(v)
 						}
@@ -12967,7 +12967,7 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 					if !listItem.InlineRateLimiter.Unit.IsNull() && !listItem.InlineRateLimiter.Unit.IsUnknown() {
 						inline_rate_limiterDeepMap["unit"] = listItem.InlineRateLimiter.Unit.ValueString()
 					}
-					if listItem.InlineRateLimiter.UseHTTPLbUserID != nil {
+					if listItem.InlineRateLimiter.UseHTTPLBUserID != nil {
 						inline_rate_limiterDeepMap["use_http_lb_user_id"] = map[string]interface{}{}
 					}
 					listItemMap["inline_rate_limiter"] = inline_rate_limiterDeepMap
@@ -13042,7 +13042,7 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 					if !listItem.InlineRateLimiter.Unit.IsNull() && !listItem.InlineRateLimiter.Unit.IsUnknown() {
 						inline_rate_limiterDeepMap["unit"] = listItem.InlineRateLimiter.Unit.ValueString()
 					}
-					if listItem.InlineRateLimiter.UseHTTPLbUserID != nil {
+					if listItem.InlineRateLimiter.UseHTTPLBUserID != nil {
 						inline_rate_limiterDeepMap["use_http_lb_user_id"] = map[string]interface{}{}
 					}
 					listItemMap["inline_rate_limiter"] = inline_rate_limiterDeepMap
@@ -13157,8 +13157,8 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 			if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {
 				itemMap["ip_prefix"] = item.IPPrefix.ValueString()
 			}
-			if !item.IPV6Prefix.IsNull() && !item.IPV6Prefix.IsUnknown() {
-				itemMap["ipv6_prefix"] = item.IPV6Prefix.ValueString()
+			if !item.Ipv6Prefix.IsNull() && !item.Ipv6Prefix.IsUnknown() {
+				itemMap["ipv6_prefix"] = item.Ipv6Prefix.ValueString()
 			}
 			if item.Metadata != nil {
 				metadataNestedMap := make(map[string]interface{})
@@ -13185,10 +13185,10 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 	}
 	if data.BotDefense != nil {
 		bot_defenseMap := make(map[string]interface{})
-		if data.BotDefense.DisableCorsSupport != nil {
+		if data.BotDefense.DisableCORSSupport != nil {
 			bot_defenseMap["disable_cors_support"] = map[string]interface{}{}
 		}
-		if data.BotDefense.EnableCorsSupport != nil {
+		if data.BotDefense.EnableCORSSupport != nil {
 			bot_defenseMap["enable_cors_support"] = map[string]interface{}{}
 		}
 		if data.BotDefense.Policy != nil {
@@ -13227,52 +13227,52 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		}
 		apiResource.Spec["client_side_defense"] = client_side_defenseMap
 	}
-	if data.CorsPolicy != nil {
+	if data.CORSPolicy != nil {
 		cors_policyMap := make(map[string]interface{})
-		if !data.CorsPolicy.AllowCredentials.IsNull() && !data.CorsPolicy.AllowCredentials.IsUnknown() {
-			cors_policyMap["allow_credentials"] = data.CorsPolicy.AllowCredentials.ValueBool()
+		if !data.CORSPolicy.AllowCredentials.IsNull() && !data.CORSPolicy.AllowCredentials.IsUnknown() {
+			cors_policyMap["allow_credentials"] = data.CORSPolicy.AllowCredentials.ValueBool()
 		}
-		if !data.CorsPolicy.AllowHeaders.IsNull() && !data.CorsPolicy.AllowHeaders.IsUnknown() {
-			cors_policyMap["allow_headers"] = data.CorsPolicy.AllowHeaders.ValueString()
+		if !data.CORSPolicy.AllowHeaders.IsNull() && !data.CORSPolicy.AllowHeaders.IsUnknown() {
+			cors_policyMap["allow_headers"] = data.CORSPolicy.AllowHeaders.ValueString()
 		}
-		if !data.CorsPolicy.AllowMethods.IsNull() && !data.CorsPolicy.AllowMethods.IsUnknown() {
-			cors_policyMap["allow_methods"] = data.CorsPolicy.AllowMethods.ValueString()
+		if !data.CORSPolicy.AllowMethods.IsNull() && !data.CORSPolicy.AllowMethods.IsUnknown() {
+			cors_policyMap["allow_methods"] = data.CORSPolicy.AllowMethods.ValueString()
 		}
-		if !data.CorsPolicy.AllowOrigin.IsNull() && !data.CorsPolicy.AllowOrigin.IsUnknown() {
+		if !data.CORSPolicy.AllowOrigin.IsNull() && !data.CORSPolicy.AllowOrigin.IsUnknown() {
 			var allow_originItems []string
-			diags := data.CorsPolicy.AllowOrigin.ElementsAs(ctx, &allow_originItems, false)
+			diags := data.CORSPolicy.AllowOrigin.ElementsAs(ctx, &allow_originItems, false)
 			if !diags.HasError() {
 				cors_policyMap["allow_origin"] = allow_originItems
 			}
 		}
-		if !data.CorsPolicy.AllowOriginRegex.IsNull() && !data.CorsPolicy.AllowOriginRegex.IsUnknown() {
+		if !data.CORSPolicy.AllowOriginRegex.IsNull() && !data.CORSPolicy.AllowOriginRegex.IsUnknown() {
 			var allow_origin_regexItems []string
-			diags := data.CorsPolicy.AllowOriginRegex.ElementsAs(ctx, &allow_origin_regexItems, false)
+			diags := data.CORSPolicy.AllowOriginRegex.ElementsAs(ctx, &allow_origin_regexItems, false)
 			if !diags.HasError() {
 				cors_policyMap["allow_origin_regex"] = allow_origin_regexItems
 			}
 		}
-		if !data.CorsPolicy.Disabled.IsNull() && !data.CorsPolicy.Disabled.IsUnknown() {
-			cors_policyMap["disabled"] = data.CorsPolicy.Disabled.ValueBool()
+		if !data.CORSPolicy.Disabled.IsNull() && !data.CORSPolicy.Disabled.IsUnknown() {
+			cors_policyMap["disabled"] = data.CORSPolicy.Disabled.ValueBool()
 		}
-		if !data.CorsPolicy.ExposeHeaders.IsNull() && !data.CorsPolicy.ExposeHeaders.IsUnknown() {
-			cors_policyMap["expose_headers"] = data.CorsPolicy.ExposeHeaders.ValueString()
+		if !data.CORSPolicy.ExposeHeaders.IsNull() && !data.CORSPolicy.ExposeHeaders.IsUnknown() {
+			cors_policyMap["expose_headers"] = data.CORSPolicy.ExposeHeaders.ValueString()
 		}
-		if !data.CorsPolicy.MaximumAge.IsNull() && !data.CorsPolicy.MaximumAge.IsUnknown() {
-			cors_policyMap["maximum_age"] = data.CorsPolicy.MaximumAge.ValueInt64()
+		if !data.CORSPolicy.MaximumAge.IsNull() && !data.CORSPolicy.MaximumAge.IsUnknown() {
+			cors_policyMap["maximum_age"] = data.CORSPolicy.MaximumAge.ValueInt64()
 		}
 		apiResource.Spec["cors_policy"] = cors_policyMap
 	}
-	if data.CsrfPolicy != nil {
+	if data.CSRFPolicy != nil {
 		csrf_policyMap := make(map[string]interface{})
-		if data.CsrfPolicy.AllLoadBalancerDomains != nil {
+		if data.CSRFPolicy.AllLoadBalancerDomains != nil {
 			csrf_policyMap["all_load_balancer_domains"] = map[string]interface{}{}
 		}
-		if data.CsrfPolicy.CustomDomainList != nil {
+		if data.CSRFPolicy.CustomDomainList != nil {
 			custom_domain_listNestedMap := make(map[string]interface{})
 			csrf_policyMap["custom_domain_list"] = custom_domain_listNestedMap
 		}
-		if data.CsrfPolicy.Disabled != nil {
+		if data.CSRFPolicy.Disabled != nil {
 			csrf_policyMap["disabled"] = map[string]interface{}{}
 		}
 		apiResource.Spec["csrf_policy"] = csrf_policyMap
@@ -13344,56 +13344,56 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		}
 		apiResource.Spec["data_guard_rules"] = data_guard_rulesList
 	}
-	if len(data.DdosMitigationRules) > 0 {
+	if len(data.DDOSMitigationRules) > 0 {
 		var ddos_mitigation_rulesList []map[string]interface{}
-		for _, item := range data.DdosMitigationRules {
+		for _, item := range data.DDOSMitigationRules {
 			itemMap := make(map[string]interface{})
 			if item.Block != nil {
 				itemMap["block"] = map[string]interface{}{}
 			}
-			if item.DdosClientSource != nil {
+			if item.DDOSClientSource != nil {
 				ddos_client_sourceNestedMap := make(map[string]interface{})
-				if item.DdosClientSource.AsnList != nil {
+				if item.DDOSClientSource.AsnList != nil {
 					asn_listDeepMap := make(map[string]interface{})
 					ddos_client_sourceNestedMap["asn_list"] = asn_listDeepMap
 				}
-				if !item.DdosClientSource.CountryList.IsNull() && !item.DdosClientSource.CountryList.IsUnknown() {
+				if !item.DDOSClientSource.CountryList.IsNull() && !item.DDOSClientSource.CountryList.IsUnknown() {
 					var CountryListItems []string
-					diags := item.DdosClientSource.CountryList.ElementsAs(ctx, &CountryListItems, false)
+					diags := item.DDOSClientSource.CountryList.ElementsAs(ctx, &CountryListItems, false)
 					if !diags.HasError() {
 						ddos_client_sourceNestedMap["country_list"] = CountryListItems
 					}
 				}
-				if item.DdosClientSource.Ja4TLSFingerprintMatcher != nil {
+				if item.DDOSClientSource.Ja4TLSFingerprintMatcher != nil {
 					ja4_tls_fingerprint_matcherDeepMap := make(map[string]interface{})
-					if !item.DdosClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsNull() && !item.DdosClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsUnknown() {
+					if !item.DDOSClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsNull() && !item.DDOSClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsUnknown() {
 						var ExactValuesItems []string
-						diags := item.DdosClientSource.Ja4TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						diags := item.DDOSClientSource.Ja4TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
 						if !diags.HasError() {
 							ja4_tls_fingerprint_matcherDeepMap["exact_values"] = ExactValuesItems
 						}
 					}
 					ddos_client_sourceNestedMap["ja4_tls_fingerprint_matcher"] = ja4_tls_fingerprint_matcherDeepMap
 				}
-				if item.DdosClientSource.TLSFingerprintMatcher != nil {
+				if item.DDOSClientSource.TLSFingerprintMatcher != nil {
 					tls_fingerprint_matcherDeepMap := make(map[string]interface{})
-					if !item.DdosClientSource.TLSFingerprintMatcher.Classes.IsNull() && !item.DdosClientSource.TLSFingerprintMatcher.Classes.IsUnknown() {
+					if !item.DDOSClientSource.TLSFingerprintMatcher.Classes.IsNull() && !item.DDOSClientSource.TLSFingerprintMatcher.Classes.IsUnknown() {
 						var ClassesItems []string
-						diags := item.DdosClientSource.TLSFingerprintMatcher.Classes.ElementsAs(ctx, &ClassesItems, false)
+						diags := item.DDOSClientSource.TLSFingerprintMatcher.Classes.ElementsAs(ctx, &ClassesItems, false)
 						if !diags.HasError() {
 							tls_fingerprint_matcherDeepMap["classes"] = ClassesItems
 						}
 					}
-					if !item.DdosClientSource.TLSFingerprintMatcher.ExactValues.IsNull() && !item.DdosClientSource.TLSFingerprintMatcher.ExactValues.IsUnknown() {
+					if !item.DDOSClientSource.TLSFingerprintMatcher.ExactValues.IsNull() && !item.DDOSClientSource.TLSFingerprintMatcher.ExactValues.IsUnknown() {
 						var ExactValuesItems []string
-						diags := item.DdosClientSource.TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						diags := item.DDOSClientSource.TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
 						if !diags.HasError() {
 							tls_fingerprint_matcherDeepMap["exact_values"] = ExactValuesItems
 						}
 					}
-					if !item.DdosClientSource.TLSFingerprintMatcher.ExcludedValues.IsNull() && !item.DdosClientSource.TLSFingerprintMatcher.ExcludedValues.IsUnknown() {
+					if !item.DDOSClientSource.TLSFingerprintMatcher.ExcludedValues.IsNull() && !item.DDOSClientSource.TLSFingerprintMatcher.ExcludedValues.IsUnknown() {
 						var ExcludedValuesItems []string
-						diags := item.DdosClientSource.TLSFingerprintMatcher.ExcludedValues.ElementsAs(ctx, &ExcludedValuesItems, false)
+						diags := item.DDOSClientSource.TLSFingerprintMatcher.ExcludedValues.ElementsAs(ctx, &ExcludedValuesItems, false)
 						if !diags.HasError() {
 							tls_fingerprint_matcherDeepMap["excluded_values"] = ExcludedValuesItems
 						}
@@ -13438,11 +13438,11 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		if data.DefaultCacheAction.CacheDisabled != nil {
 			default_cache_actionMap["cache_disabled"] = map[string]interface{}{}
 		}
-		if !data.DefaultCacheAction.CacheTtlDefault.IsNull() && !data.DefaultCacheAction.CacheTtlDefault.IsUnknown() {
-			default_cache_actionMap["cache_ttl_default"] = data.DefaultCacheAction.CacheTtlDefault.ValueString()
+		if !data.DefaultCacheAction.CacheTTLDefault.IsNull() && !data.DefaultCacheAction.CacheTTLDefault.IsUnknown() {
+			default_cache_actionMap["cache_ttl_default"] = data.DefaultCacheAction.CacheTTLDefault.ValueString()
 		}
-		if !data.DefaultCacheAction.CacheTtlOverride.IsNull() && !data.DefaultCacheAction.CacheTtlOverride.IsUnknown() {
-			default_cache_actionMap["cache_ttl_override"] = data.DefaultCacheAction.CacheTtlOverride.ValueString()
+		if !data.DefaultCacheAction.CacheTTLOverride.IsNull() && !data.DefaultCacheAction.CacheTTLOverride.IsUnknown() {
+			default_cache_actionMap["cache_ttl_override"] = data.DefaultCacheAction.CacheTTLOverride.ValueString()
 		}
 		apiResource.Spec["default_cache_action"] = default_cache_actionMap
 	}
@@ -13698,58 +13698,58 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		}
 		apiResource.Spec["js_challenge"] = js_challengeMap
 	}
-	if data.JwtValidation != nil {
+	if data.JWTValidation != nil {
 		jwt_validationMap := make(map[string]interface{})
-		if data.JwtValidation.Action != nil {
+		if data.JWTValidation.Action != nil {
 			actionNestedMap := make(map[string]interface{})
 			jwt_validationMap["action"] = actionNestedMap
 		}
-		if data.JwtValidation.JwksConfig != nil {
+		if data.JWTValidation.JwksConfig != nil {
 			jwks_configNestedMap := make(map[string]interface{})
-			if !data.JwtValidation.JwksConfig.Cleartext.IsNull() && !data.JwtValidation.JwksConfig.Cleartext.IsUnknown() {
-				jwks_configNestedMap["cleartext"] = data.JwtValidation.JwksConfig.Cleartext.ValueString()
+			if !data.JWTValidation.JwksConfig.Cleartext.IsNull() && !data.JWTValidation.JwksConfig.Cleartext.IsUnknown() {
+				jwks_configNestedMap["cleartext"] = data.JWTValidation.JwksConfig.Cleartext.ValueString()
 			}
 			jwt_validationMap["jwks_config"] = jwks_configNestedMap
 		}
-		if data.JwtValidation.MandatoryClaims != nil {
+		if data.JWTValidation.MandatoryClaims != nil {
 			mandatory_claimsNestedMap := make(map[string]interface{})
 			jwt_validationMap["mandatory_claims"] = mandatory_claimsNestedMap
 		}
-		if data.JwtValidation.ReservedClaims != nil {
+		if data.JWTValidation.ReservedClaims != nil {
 			reserved_claimsNestedMap := make(map[string]interface{})
-			if !data.JwtValidation.ReservedClaims.Issuer.IsNull() && !data.JwtValidation.ReservedClaims.Issuer.IsUnknown() {
-				reserved_claimsNestedMap["issuer"] = data.JwtValidation.ReservedClaims.Issuer.ValueString()
+			if !data.JWTValidation.ReservedClaims.Issuer.IsNull() && !data.JWTValidation.ReservedClaims.Issuer.IsUnknown() {
+				reserved_claimsNestedMap["issuer"] = data.JWTValidation.ReservedClaims.Issuer.ValueString()
 			}
 			jwt_validationMap["reserved_claims"] = reserved_claimsNestedMap
 		}
-		if data.JwtValidation.Target != nil {
+		if data.JWTValidation.Target != nil {
 			targetNestedMap := make(map[string]interface{})
 			jwt_validationMap["target"] = targetNestedMap
 		}
-		if data.JwtValidation.TokenLocation != nil {
+		if data.JWTValidation.TokenLocation != nil {
 			token_locationNestedMap := make(map[string]interface{})
 			jwt_validationMap["token_location"] = token_locationNestedMap
 		}
 		apiResource.Spec["jwt_validation"] = jwt_validationMap
 	}
-	if data.L7DdosActionBlock != nil {
+	if data.L7DDOSActionBlock != nil {
 		l7_ddos_action_blockMap := make(map[string]interface{})
 		apiResource.Spec["l7_ddos_action_block"] = l7_ddos_action_blockMap
 	}
-	if data.L7DdosActionDefault != nil {
+	if data.L7DDOSActionDefault != nil {
 		l7_ddos_action_defaultMap := make(map[string]interface{})
 		apiResource.Spec["l7_ddos_action_default"] = l7_ddos_action_defaultMap
 	}
-	if data.L7DdosActionJsChallenge != nil {
+	if data.L7DDOSActionJsChallenge != nil {
 		l7_ddos_action_js_challengeMap := make(map[string]interface{})
-		if !data.L7DdosActionJsChallenge.CookieExpiry.IsNull() && !data.L7DdosActionJsChallenge.CookieExpiry.IsUnknown() {
-			l7_ddos_action_js_challengeMap["cookie_expiry"] = data.L7DdosActionJsChallenge.CookieExpiry.ValueInt64()
+		if !data.L7DDOSActionJsChallenge.CookieExpiry.IsNull() && !data.L7DDOSActionJsChallenge.CookieExpiry.IsUnknown() {
+			l7_ddos_action_js_challengeMap["cookie_expiry"] = data.L7DDOSActionJsChallenge.CookieExpiry.ValueInt64()
 		}
-		if !data.L7DdosActionJsChallenge.CustomPage.IsNull() && !data.L7DdosActionJsChallenge.CustomPage.IsUnknown() {
-			l7_ddos_action_js_challengeMap["custom_page"] = data.L7DdosActionJsChallenge.CustomPage.ValueString()
+		if !data.L7DDOSActionJsChallenge.CustomPage.IsNull() && !data.L7DDOSActionJsChallenge.CustomPage.IsUnknown() {
+			l7_ddos_action_js_challengeMap["custom_page"] = data.L7DDOSActionJsChallenge.CustomPage.ValueString()
 		}
-		if !data.L7DdosActionJsChallenge.JsScriptDelay.IsNull() && !data.L7DdosActionJsChallenge.JsScriptDelay.IsUnknown() {
-			l7_ddos_action_js_challengeMap["js_script_delay"] = data.L7DdosActionJsChallenge.JsScriptDelay.ValueInt64()
+		if !data.L7DDOSActionJsChallenge.JsScriptDelay.IsNull() && !data.L7DDOSActionJsChallenge.JsScriptDelay.IsUnknown() {
+			l7_ddos_action_js_challengeMap["js_script_delay"] = data.L7DDOSActionJsChallenge.JsScriptDelay.ValueInt64()
 		}
 		apiResource.Spec["l7_ddos_action_js_challenge"] = l7_ddos_action_js_challengeMap
 	}
@@ -13768,8 +13768,8 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 			if !data.OriginPool.MoreOriginOptions.EnableByteRangeRequest.IsNull() && !data.OriginPool.MoreOriginOptions.EnableByteRangeRequest.IsUnknown() {
 				more_origin_optionsNestedMap["enable_byte_range_request"] = data.OriginPool.MoreOriginOptions.EnableByteRangeRequest.ValueBool()
 			}
-			if !data.OriginPool.MoreOriginOptions.WebsocketProxy.IsNull() && !data.OriginPool.MoreOriginOptions.WebsocketProxy.IsUnknown() {
-				more_origin_optionsNestedMap["websocket_proxy"] = data.OriginPool.MoreOriginOptions.WebsocketProxy.ValueBool()
+			if !data.OriginPool.MoreOriginOptions.WebSocketProxy.IsNull() && !data.OriginPool.MoreOriginOptions.WebSocketProxy.IsUnknown() {
+				more_origin_optionsNestedMap["websocket_proxy"] = data.OriginPool.MoreOriginOptions.WebSocketProxy.ValueBool()
 			}
 			origin_poolMap["more_origin_options"] = more_origin_optionsNestedMap
 		}
@@ -14022,16 +14022,16 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		service_policies_from_namespaceMap := make(map[string]interface{})
 		apiResource.Spec["service_policies_from_namespace"] = service_policies_from_namespaceMap
 	}
-	if data.SlowDdosMitigation != nil {
+	if data.SlowDDOSMitigation != nil {
 		slow_ddos_mitigationMap := make(map[string]interface{})
-		if data.SlowDdosMitigation.DisableRequestTimeout != nil {
+		if data.SlowDDOSMitigation.DisableRequestTimeout != nil {
 			slow_ddos_mitigationMap["disable_request_timeout"] = map[string]interface{}{}
 		}
-		if !data.SlowDdosMitigation.RequestHeadersTimeout.IsNull() && !data.SlowDdosMitigation.RequestHeadersTimeout.IsUnknown() {
-			slow_ddos_mitigationMap["request_headers_timeout"] = data.SlowDdosMitigation.RequestHeadersTimeout.ValueInt64()
+		if !data.SlowDDOSMitigation.RequestHeadersTimeout.IsNull() && !data.SlowDDOSMitigation.RequestHeadersTimeout.IsUnknown() {
+			slow_ddos_mitigationMap["request_headers_timeout"] = data.SlowDDOSMitigation.RequestHeadersTimeout.ValueInt64()
 		}
-		if !data.SlowDdosMitigation.RequestTimeout.IsNull() && !data.SlowDdosMitigation.RequestTimeout.IsUnknown() {
-			slow_ddos_mitigationMap["request_timeout"] = data.SlowDdosMitigation.RequestTimeout.ValueInt64()
+		if !data.SlowDDOSMitigation.RequestTimeout.IsNull() && !data.SlowDDOSMitigation.RequestTimeout.IsUnknown() {
+			slow_ddos_mitigationMap["request_timeout"] = data.SlowDDOSMitigation.RequestTimeout.ValueInt64()
 		}
 		apiResource.Spec["slow_ddos_mitigation"] = slow_ddos_mitigationMap
 	}
@@ -14082,8 +14082,8 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 			if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {
 				itemMap["ip_prefix"] = item.IPPrefix.ValueString()
 			}
-			if !item.IPV6Prefix.IsNull() && !item.IPV6Prefix.IsUnknown() {
-				itemMap["ipv6_prefix"] = item.IPV6Prefix.ValueString()
+			if !item.Ipv6Prefix.IsNull() && !item.Ipv6Prefix.IsUnknown() {
+				itemMap["ipv6_prefix"] = item.Ipv6Prefix.ValueString()
 			}
 			if item.Metadata != nil {
 				metadataNestedMap := make(map[string]interface{})
@@ -14272,7 +14272,7 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 												}
 												return types.StringNull()
 											}(),
-											UseHTTPLbUserID: func() *CDNLoadBalancerEmptyModel {
+											UseHTTPLBUserID: func() *CDNLoadBalancerEmptyModel {
 												if _, ok := deepMap["use_http_lb_user_id"].(map[string]interface{}); ok {
 													return &CDNLoadBalancerEmptyModel{}
 												}
@@ -14443,7 +14443,7 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 												}
 												return types.StringNull()
 											}(),
-											UseHTTPLbUserID: func() *CDNLoadBalancerEmptyModel {
+											UseHTTPLBUserID: func() *CDNLoadBalancerEmptyModel {
 												if _, ok := deepMap["use_http_lb_user_id"].(map[string]interface{}); ok {
 													return &CDNLoadBalancerEmptyModel{}
 												}
@@ -14575,7 +14575,7 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 						}
 						return types.StringNull()
 					}(),
-					IPV6Prefix: func() types.String {
+					Ipv6Prefix: func() types.String {
 						if v, ok := itemMap["ipv6_prefix"].(string); ok && v != "" {
 							return types.StringValue(v)
 						}
@@ -14625,11 +14625,11 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 	}
 	if blockData, ok := apiResource.Spec["bot_defense"].(map[string]interface{}); ok && (isImport || data.BotDefense != nil) {
 		data.BotDefense = &CDNLoadBalancerBotDefenseModel{
-			DisableCorsSupport: func() *CDNLoadBalancerEmptyModel {
+			DisableCORSSupport: func() *CDNLoadBalancerEmptyModel {
 				if !isImport && data.BotDefense != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.BotDefense.DisableCorsSupport
+					return data.BotDefense.DisableCORSSupport
 				}
 				// Import case: read from API
 				if _, ok := blockData["disable_cors_support"].(map[string]interface{}); ok {
@@ -14637,11 +14637,11 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 				}
 				return nil
 			}(),
-			EnableCorsSupport: func() *CDNLoadBalancerEmptyModel {
+			EnableCORSSupport: func() *CDNLoadBalancerEmptyModel {
 				if !isImport && data.BotDefense != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.BotDefense.EnableCorsSupport
+					return data.BotDefense.EnableCORSSupport
 				}
 				// Import case: read from API
 				if _, ok := blockData["enable_cors_support"].(map[string]interface{}); ok {
@@ -14708,12 +14708,12 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		data.ClientSideDefense = &CDNLoadBalancerClientSideDefenseModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["cors_policy"].(map[string]interface{}); ok && (isImport || data.CorsPolicy != nil) {
-		data.CorsPolicy = &CDNLoadBalancerCorsPolicyModel{
+	if blockData, ok := apiResource.Spec["cors_policy"].(map[string]interface{}); ok && (isImport || data.CORSPolicy != nil) {
+		data.CORSPolicy = &CDNLoadBalancerCORSPolicyModel{
 			AllowCredentials: func() types.Bool {
-				if !isImport && data.CorsPolicy != nil {
+				if !isImport && data.CORSPolicy != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.CorsPolicy.AllowCredentials
+					return data.CORSPolicy.AllowCredentials
 				}
 				// Import case: read from API
 				if v, ok := blockData["allow_credentials"].(bool); ok {
@@ -14760,9 +14760,9 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 				return types.ListNull(types.StringType)
 			}(),
 			Disabled: func() types.Bool {
-				if !isImport && data.CorsPolicy != nil {
+				if !isImport && data.CORSPolicy != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
-					return data.CorsPolicy.Disabled
+					return data.CORSPolicy.Disabled
 				}
 				// Import case: read from API
 				if v, ok := blockData["disabled"].(bool); ok {
@@ -14784,9 +14784,9 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["csrf_policy"].(map[string]interface{}); ok && isImport && data.CsrfPolicy == nil {
+	if _, ok := apiResource.Spec["csrf_policy"].(map[string]interface{}); ok && isImport && data.CSRFPolicy == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.CsrfPolicy = &CDNLoadBalancerCsrfPolicyModel{}
+		data.CSRFPolicy = &CDNLoadBalancerCSRFPolicyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["custom_cache_rule"].(map[string]interface{}); ok && (isImport || data.CustomCacheRule != nil) {
@@ -14910,20 +14910,20 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		data.DataGuardRules = data_guard_rulesList
 	}
 	if listData, ok := apiResource.Spec["ddos_mitigation_rules"].([]interface{}); ok && len(listData) > 0 {
-		var ddos_mitigation_rulesList []CDNLoadBalancerDdosMitigationRulesModel
+		var ddos_mitigation_rulesList []CDNLoadBalancerDDOSMitigationRulesModel
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
-				ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, CDNLoadBalancerDdosMitigationRulesModel{
+				ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, CDNLoadBalancerDDOSMitigationRulesModel{
 					Block: func() *CDNLoadBalancerEmptyModel {
-						if !isImport && len(data.DdosMitigationRules) > listIdx && data.DdosMitigationRules[listIdx].Block != nil {
+						if !isImport && len(data.DDOSMitigationRules) > listIdx && data.DDOSMitigationRules[listIdx].Block != nil {
 							return &CDNLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
-					DdosClientSource: func() *CDNLoadBalancerDdosMitigationRulesDdosClientSourceModel {
+					DDOSClientSource: func() *CDNLoadBalancerDDOSMitigationRulesDDOSClientSourceModel {
 						if nestedMap, ok := itemMap["ddos_client_source"].(map[string]interface{}); ok {
-							return &CDNLoadBalancerDdosMitigationRulesDdosClientSourceModel{
+							return &CDNLoadBalancerDDOSMitigationRulesDDOSClientSourceModel{
 								CountryList: func() types.List {
 									if v, ok := nestedMap["country_list"].([]interface{}); ok && len(v) > 0 {
 										var items []string
@@ -14947,9 +14947,9 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 						}
 						return types.StringNull()
 					}(),
-					IPPrefixList: func() *CDNLoadBalancerDdosMitigationRulesIPPrefixListModel {
+					IPPrefixList: func() *CDNLoadBalancerDDOSMitigationRulesIPPrefixListModel {
 						if nestedMap, ok := itemMap["ip_prefix_list"].(map[string]interface{}); ok {
-							return &CDNLoadBalancerDdosMitigationRulesIPPrefixListModel{
+							return &CDNLoadBalancerDDOSMitigationRulesIPPrefixListModel{
 								InvertMatch: func() types.Bool {
 									if v, ok := nestedMap["invert_match"].(bool); ok {
 										return types.BoolValue(v)
@@ -14973,9 +14973,9 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 						}
 						return nil
 					}(),
-					Metadata: func() *CDNLoadBalancerDdosMitigationRulesMetadataModel {
+					Metadata: func() *CDNLoadBalancerDDOSMitigationRulesMetadataModel {
 						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
-							return &CDNLoadBalancerDdosMitigationRulesMetadataModel{
+							return &CDNLoadBalancerDDOSMitigationRulesMetadataModel{
 								DescriptionSpec: func() types.String {
 									if v, ok := nestedMap["description"].(string); ok && v != "" {
 										return types.StringValue(v)
@@ -14995,7 +14995,7 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 				})
 			}
 		}
-		data.DdosMitigationRules = ddos_mitigation_rulesList
+		data.DDOSMitigationRules = ddos_mitigation_rulesList
 	}
 	if blockData, ok := apiResource.Spec["default_cache_action"].(map[string]interface{}); ok && (isImport || data.DefaultCacheAction != nil) {
 		data.DefaultCacheAction = &CDNLoadBalancerDefaultCacheActionModel{
@@ -15011,13 +15011,13 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 				}
 				return nil
 			}(),
-			CacheTtlDefault: func() types.String {
+			CacheTTLDefault: func() types.String {
 				if v, ok := blockData["cache_ttl_default"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
 			}(),
-			CacheTtlOverride: func() types.String {
+			CacheTTLOverride: func() types.String {
 				if v, ok := blockData["cache_ttl_override"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
@@ -15348,23 +15348,23 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["jwt_validation"].(map[string]interface{}); ok && isImport && data.JwtValidation == nil {
+	if _, ok := apiResource.Spec["jwt_validation"].(map[string]interface{}); ok && isImport && data.JWTValidation == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.JwtValidation = &CDNLoadBalancerJwtValidationModel{}
+		data.JWTValidation = &CDNLoadBalancerJWTValidationModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["l7_ddos_action_block"].(map[string]interface{}); ok && isImport && data.L7DdosActionBlock == nil {
+	if _, ok := apiResource.Spec["l7_ddos_action_block"].(map[string]interface{}); ok && isImport && data.L7DDOSActionBlock == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.L7DdosActionBlock = &CDNLoadBalancerEmptyModel{}
+		data.L7DDOSActionBlock = &CDNLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["l7_ddos_action_default"].(map[string]interface{}); ok && isImport && data.L7DdosActionDefault == nil {
+	if _, ok := apiResource.Spec["l7_ddos_action_default"].(map[string]interface{}); ok && isImport && data.L7DDOSActionDefault == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.L7DdosActionDefault = &CDNLoadBalancerEmptyModel{}
+		data.L7DDOSActionDefault = &CDNLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["l7_ddos_action_js_challenge"].(map[string]interface{}); ok && (isImport || data.L7DdosActionJsChallenge != nil) {
-		data.L7DdosActionJsChallenge = &CDNLoadBalancerL7DdosActionJsChallengeModel{
+	if blockData, ok := apiResource.Spec["l7_ddos_action_js_challenge"].(map[string]interface{}); ok && (isImport || data.L7DDOSActionJsChallenge != nil) {
+		data.L7DDOSActionJsChallenge = &CDNLoadBalancerL7DDOSActionJsChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -15411,7 +15411,7 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 							}
 							return types.BoolNull()
 						}(),
-						WebsocketProxy: func() types.Bool {
+						WebSocketProxy: func() types.Bool {
 							if v, ok := nestedBlockData["websocket_proxy"].(bool); ok {
 								return types.BoolValue(v)
 							}
@@ -15713,13 +15713,13 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		data.ServicePoliciesFromNamespace = &CDNLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDdosMitigation != nil) {
-		data.SlowDdosMitigation = &CDNLoadBalancerSlowDdosMitigationModel{
+	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDDOSMitigation != nil) {
+		data.SlowDDOSMitigation = &CDNLoadBalancerSlowDDOSMitigationModel{
 			DisableRequestTimeout: func() *CDNLoadBalancerEmptyModel {
-				if !isImport && data.SlowDdosMitigation != nil {
+				if !isImport && data.SlowDDOSMitigation != nil {
 					// Normal Read: preserve existing state value (even if nil)
 					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.SlowDdosMitigation.DisableRequestTimeout
+					return data.SlowDDOSMitigation.DisableRequestTimeout
 				}
 				// Import case: read from API
 				if _, ok := blockData["disable_request_timeout"].(map[string]interface{}); ok {
@@ -15795,7 +15795,7 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 						}
 						return types.StringNull()
 					}(),
-					IPV6Prefix: func() types.String {
+					Ipv6Prefix: func() types.String {
 						if v, ok := itemMap["ipv6_prefix"].(string); ok && v != "" {
 							return types.StringValue(v)
 						}

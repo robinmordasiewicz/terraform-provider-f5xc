@@ -83,7 +83,7 @@ type AdvertisePolicyTLSParametersCommonParamsTLSCertificatesModel struct {
 	CertificateURL       types.String                                                                      `tfsdk:"certificate_url"`
 	DescriptionSpec      types.String                                                                      `tfsdk:"description_spec"`
 	CustomHashAlgorithms *AdvertisePolicyTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling  *AdvertisePolicyEmptyModel                                                        `tfsdk:"disable_ocsp_stapling"`
+	DisableOCSPStapling  *AdvertisePolicyEmptyModel                                                        `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey           *AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
 	UseSystemDefaults    *AdvertisePolicyEmptyModel                                                        `tfsdk:"use_system_defaults"`
 }
@@ -115,18 +115,18 @@ type AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecre
 // AdvertisePolicyTLSParametersCommonParamsValidationParamsModel represents validation_params block
 type AdvertisePolicyTLSParametersCommonParamsValidationParamsModel struct {
 	SkipHostnameVerification types.Bool                                                              `tfsdk:"skip_hostname_verification"`
-	TrustedCaURL             types.String                                                            `tfsdk:"trusted_ca_url"`
+	TrustedCAURL             types.String                                                            `tfsdk:"trusted_ca_url"`
 	VerifySubjectAltNames    types.List                                                              `tfsdk:"verify_subject_alt_names"`
-	TrustedCa                *AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCaModel `tfsdk:"trusted_ca"`
+	TrustedCA                *AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCAModel `tfsdk:"trusted_ca"`
 }
 
-// AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCaModel represents trusted_ca block
-type AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCaModel struct {
-	TrustedCaList []AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCaTrustedCaListModel `tfsdk:"trusted_ca_list"`
+// AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCAModel represents trusted_ca block
+type AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCAModel struct {
+	TrustedCAList []AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModel `tfsdk:"trusted_ca_list"`
 }
 
-// AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCaTrustedCaListModel represents trusted_ca_list block
-type AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCaTrustedCaListModel struct {
+// AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModel represents trusted_ca_list block
+type AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModel struct {
 	Kind      types.String `tfsdk:"kind"`
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -144,8 +144,8 @@ type AdvertisePolicyWhereModel struct {
 // AdvertisePolicyWhereSiteModel represents site block
 type AdvertisePolicyWhereSiteModel struct {
 	NetworkType        types.String                       `tfsdk:"network_type"`
-	DisableInternetVip *AdvertisePolicyEmptyModel         `tfsdk:"disable_internet_vip"`
-	EnableInternetVip  *AdvertisePolicyEmptyModel         `tfsdk:"enable_internet_vip"`
+	DisableInternetVIP *AdvertisePolicyEmptyModel         `tfsdk:"disable_internet_vip"`
+	EnableInternetVIP  *AdvertisePolicyEmptyModel         `tfsdk:"enable_internet_vip"`
 	Ref                []AdvertisePolicyWhereSiteRefModel `tfsdk:"ref"`
 }
 
@@ -175,8 +175,8 @@ type AdvertisePolicyWhereVirtualNetworkRefModel struct {
 // AdvertisePolicyWhereVirtualSiteModel represents virtual_site block
 type AdvertisePolicyWhereVirtualSiteModel struct {
 	NetworkType        types.String                              `tfsdk:"network_type"`
-	DisableInternetVip *AdvertisePolicyEmptyModel                `tfsdk:"disable_internet_vip"`
-	EnableInternetVip  *AdvertisePolicyEmptyModel                `tfsdk:"enable_internet_vip"`
+	DisableInternetVIP *AdvertisePolicyEmptyModel                `tfsdk:"disable_internet_vip"`
+	EnableInternetVIP  *AdvertisePolicyEmptyModel                `tfsdk:"enable_internet_vip"`
 	Ref                []AdvertisePolicyWhereVirtualSiteRefModel `tfsdk:"ref"`
 }
 

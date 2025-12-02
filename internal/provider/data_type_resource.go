@@ -120,7 +120,7 @@ type DataTypeResourceModel struct {
 	Disable         types.Bool           `tfsdk:"disable"`
 	Labels          types.Map            `tfsdk:"labels"`
 	ID              types.String         `tfsdk:"id"`
-	IsPii           types.Bool           `tfsdk:"is_pii"`
+	IsPII           types.Bool           `tfsdk:"is_pii"`
 	IsSensitiveData types.Bool           `tfsdk:"is_sensitive_data"`
 	Timeouts        timeouts.Value       `tfsdk:"timeouts"`
 	Rules           []DataTypeRulesModel `tfsdk:"rules"`
@@ -552,8 +552,8 @@ func (r *DataTypeResource) Create(ctx context.Context, req resource.CreateReques
 		}
 		createReq.Spec["rules"] = rulesList
 	}
-	if !data.IsPii.IsNull() && !data.IsPii.IsUnknown() {
-		createReq.Spec["is_pii"] = data.IsPii.ValueBool()
+	if !data.IsPII.IsNull() && !data.IsPII.IsUnknown() {
+		createReq.Spec["is_pii"] = data.IsPII.ValueBool()
 	}
 	if !data.IsSensitiveData.IsNull() && !data.IsSensitiveData.IsUnknown() {
 		createReq.Spec["is_sensitive_data"] = data.IsSensitiveData.ValueBool()
@@ -642,14 +642,14 @@ func (r *DataTypeResource) Create(ctx context.Context, req resource.CreateReques
 		data.Rules = rulesList
 	}
 	// Top-level Optional bool: preserve prior state to avoid API default drift
-	if !isImport && !data.IsPii.IsNull() && !data.IsPii.IsUnknown() {
+	if !isImport && !data.IsPII.IsNull() && !data.IsPII.IsUnknown() {
 		// Normal Read: preserve existing state value (do nothing)
 	} else {
 		// Import case, null state, or unknown (after Create): read from API
 		if v, ok := apiResource.Spec["is_pii"].(bool); ok {
-			data.IsPii = types.BoolValue(v)
+			data.IsPII = types.BoolValue(v)
 		} else {
-			data.IsPii = types.BoolNull()
+			data.IsPII = types.BoolNull()
 		}
 	}
 	// Top-level Optional bool: preserve prior state to avoid API default drift
@@ -827,14 +827,14 @@ func (r *DataTypeResource) Read(ctx context.Context, req resource.ReadRequest, r
 		data.Rules = rulesList
 	}
 	// Top-level Optional bool: preserve prior state to avoid API default drift
-	if !isImport && !data.IsPii.IsNull() && !data.IsPii.IsUnknown() {
+	if !isImport && !data.IsPII.IsNull() && !data.IsPII.IsUnknown() {
 		// Normal Read: preserve existing state value (do nothing)
 	} else {
 		// Import case, null state, or unknown (after Create): read from API
 		if v, ok := apiResource.Spec["is_pii"].(bool); ok {
-			data.IsPii = types.BoolValue(v)
+			data.IsPII = types.BoolValue(v)
 		} else {
-			data.IsPii = types.BoolNull()
+			data.IsPII = types.BoolNull()
 		}
 	}
 	// Top-level Optional bool: preserve prior state to avoid API default drift
@@ -989,8 +989,8 @@ func (r *DataTypeResource) Update(ctx context.Context, req resource.UpdateReques
 		}
 		apiResource.Spec["rules"] = rulesList
 	}
-	if !data.IsPii.IsNull() && !data.IsPii.IsUnknown() {
-		apiResource.Spec["is_pii"] = data.IsPii.ValueBool()
+	if !data.IsPII.IsNull() && !data.IsPII.IsUnknown() {
+		apiResource.Spec["is_pii"] = data.IsPII.ValueBool()
 	}
 	if !data.IsSensitiveData.IsNull() && !data.IsSensitiveData.IsUnknown() {
 		apiResource.Spec["is_sensitive_data"] = data.IsSensitiveData.ValueBool()
@@ -1015,10 +1015,10 @@ func (r *DataTypeResource) Update(ctx context.Context, req resource.UpdateReques
 
 	// Set computed fields from API response
 	if v, ok := fetched.Spec["is_pii"].(bool); ok {
-		data.IsPii = types.BoolValue(v)
-	} else if data.IsPii.IsUnknown() {
+		data.IsPII = types.BoolValue(v)
+	} else if data.IsPII.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
-		data.IsPii = types.BoolNull()
+		data.IsPII = types.BoolNull()
 	}
 	// If plan had a value, preserve it
 	if v, ok := fetched.Spec["is_sensitive_data"].(bool); ok {
@@ -1104,14 +1104,14 @@ func (r *DataTypeResource) Update(ctx context.Context, req resource.UpdateReques
 		data.Rules = rulesList
 	}
 	// Top-level Optional bool: preserve prior state to avoid API default drift
-	if !isImport && !data.IsPii.IsNull() && !data.IsPii.IsUnknown() {
+	if !isImport && !data.IsPII.IsNull() && !data.IsPII.IsUnknown() {
 		// Normal Read: preserve existing state value (do nothing)
 	} else {
 		// Import case, null state, or unknown (after Create): read from API
 		if v, ok := apiResource.Spec["is_pii"].(bool); ok {
-			data.IsPii = types.BoolValue(v)
+			data.IsPII = types.BoolValue(v)
 		} else {
-			data.IsPii = types.BoolNull()
+			data.IsPII = types.BoolNull()
 		}
 	}
 	// Top-level Optional bool: preserve prior state to avoid API default drift

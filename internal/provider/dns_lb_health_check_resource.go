@@ -26,70 +26,70 @@ import (
 
 // Ensure provider defined types fully satisfy framework interfaces.
 var (
-	_ resource.Resource                   = &DNSLbHealthCheckResource{}
-	_ resource.ResourceWithConfigure      = &DNSLbHealthCheckResource{}
-	_ resource.ResourceWithImportState    = &DNSLbHealthCheckResource{}
-	_ resource.ResourceWithModifyPlan     = &DNSLbHealthCheckResource{}
-	_ resource.ResourceWithUpgradeState   = &DNSLbHealthCheckResource{}
-	_ resource.ResourceWithValidateConfig = &DNSLbHealthCheckResource{}
+	_ resource.Resource                   = &DNSLBHealthCheckResource{}
+	_ resource.ResourceWithConfigure      = &DNSLBHealthCheckResource{}
+	_ resource.ResourceWithImportState    = &DNSLBHealthCheckResource{}
+	_ resource.ResourceWithModifyPlan     = &DNSLBHealthCheckResource{}
+	_ resource.ResourceWithUpgradeState   = &DNSLBHealthCheckResource{}
+	_ resource.ResourceWithValidateConfig = &DNSLBHealthCheckResource{}
 )
 
 // dns_lb_health_checkSchemaVersion is the schema version for state upgrades
 const dns_lb_health_checkSchemaVersion int64 = 1
 
-func NewDNSLbHealthCheckResource() resource.Resource {
-	return &DNSLbHealthCheckResource{}
+func NewDNSLBHealthCheckResource() resource.Resource {
+	return &DNSLBHealthCheckResource{}
 }
 
-type DNSLbHealthCheckResource struct {
+type DNSLBHealthCheckResource struct {
 	client *client.Client
 }
 
-// DNSLbHealthCheckEmptyModel represents empty nested blocks
-type DNSLbHealthCheckEmptyModel struct {
+// DNSLBHealthCheckEmptyModel represents empty nested blocks
+type DNSLBHealthCheckEmptyModel struct {
 }
 
-// DNSLbHealthCheckHTTPHealthCheckModel represents http_health_check block
-type DNSLbHealthCheckHTTPHealthCheckModel struct {
+// DNSLBHealthCheckHTTPHealthCheckModel represents http_health_check block
+type DNSLBHealthCheckHTTPHealthCheckModel struct {
 	HealthCheckPort          types.Int64  `tfsdk:"health_check_port"`
 	HealthCheckSecondaryPort types.Int64  `tfsdk:"health_check_secondary_port"`
 	Receive                  types.String `tfsdk:"receive"`
 	Send                     types.String `tfsdk:"send"`
 }
 
-// DNSLbHealthCheckHTTPSHealthCheckModel represents https_health_check block
-type DNSLbHealthCheckHTTPSHealthCheckModel struct {
+// DNSLBHealthCheckHTTPSHealthCheckModel represents https_health_check block
+type DNSLBHealthCheckHTTPSHealthCheckModel struct {
 	HealthCheckPort          types.Int64  `tfsdk:"health_check_port"`
 	HealthCheckSecondaryPort types.Int64  `tfsdk:"health_check_secondary_port"`
 	Receive                  types.String `tfsdk:"receive"`
 	Send                     types.String `tfsdk:"send"`
 }
 
-// DNSLbHealthCheckTCPHealthCheckModel represents tcp_health_check block
-type DNSLbHealthCheckTCPHealthCheckModel struct {
+// DNSLBHealthCheckTCPHealthCheckModel represents tcp_health_check block
+type DNSLBHealthCheckTCPHealthCheckModel struct {
 	HealthCheckPort          types.Int64  `tfsdk:"health_check_port"`
 	HealthCheckSecondaryPort types.Int64  `tfsdk:"health_check_secondary_port"`
 	Receive                  types.String `tfsdk:"receive"`
 	Send                     types.String `tfsdk:"send"`
 }
 
-// DNSLbHealthCheckTCPHexHealthCheckModel represents tcp_hex_health_check block
-type DNSLbHealthCheckTCPHexHealthCheckModel struct {
+// DNSLBHealthCheckTCPHexHealthCheckModel represents tcp_hex_health_check block
+type DNSLBHealthCheckTCPHexHealthCheckModel struct {
 	HealthCheckPort          types.Int64  `tfsdk:"health_check_port"`
 	HealthCheckSecondaryPort types.Int64  `tfsdk:"health_check_secondary_port"`
 	Receive                  types.String `tfsdk:"receive"`
 	Send                     types.String `tfsdk:"send"`
 }
 
-// DNSLbHealthCheckUDPHealthCheckModel represents udp_health_check block
-type DNSLbHealthCheckUDPHealthCheckModel struct {
+// DNSLBHealthCheckUDPHealthCheckModel represents udp_health_check block
+type DNSLBHealthCheckUDPHealthCheckModel struct {
 	HealthCheckPort          types.Int64  `tfsdk:"health_check_port"`
 	HealthCheckSecondaryPort types.Int64  `tfsdk:"health_check_secondary_port"`
 	Receive                  types.String `tfsdk:"receive"`
 	Send                     types.String `tfsdk:"send"`
 }
 
-type DNSLbHealthCheckResourceModel struct {
+type DNSLBHealthCheckResourceModel struct {
 	Name              types.String                            `tfsdk:"name"`
 	Namespace         types.String                            `tfsdk:"namespace"`
 	Annotations       types.Map                               `tfsdk:"annotations"`
@@ -98,25 +98,25 @@ type DNSLbHealthCheckResourceModel struct {
 	Labels            types.Map                               `tfsdk:"labels"`
 	ID                types.String                            `tfsdk:"id"`
 	Timeouts          timeouts.Value                          `tfsdk:"timeouts"`
-	HTTPHealthCheck   *DNSLbHealthCheckHTTPHealthCheckModel   `tfsdk:"http_health_check"`
-	HTTPSHealthCheck  *DNSLbHealthCheckHTTPSHealthCheckModel  `tfsdk:"https_health_check"`
-	IcmpHealthCheck   *DNSLbHealthCheckEmptyModel             `tfsdk:"icmp_health_check"`
-	TCPHealthCheck    *DNSLbHealthCheckTCPHealthCheckModel    `tfsdk:"tcp_health_check"`
-	TCPHexHealthCheck *DNSLbHealthCheckTCPHexHealthCheckModel `tfsdk:"tcp_hex_health_check"`
-	UDPHealthCheck    *DNSLbHealthCheckUDPHealthCheckModel    `tfsdk:"udp_health_check"`
+	HTTPHealthCheck   *DNSLBHealthCheckHTTPHealthCheckModel   `tfsdk:"http_health_check"`
+	HTTPSHealthCheck  *DNSLBHealthCheckHTTPSHealthCheckModel  `tfsdk:"https_health_check"`
+	ICMPHealthCheck   *DNSLBHealthCheckEmptyModel             `tfsdk:"icmp_health_check"`
+	TCPHealthCheck    *DNSLBHealthCheckTCPHealthCheckModel    `tfsdk:"tcp_health_check"`
+	TCPHexHealthCheck *DNSLBHealthCheckTCPHexHealthCheckModel `tfsdk:"tcp_hex_health_check"`
+	UDPHealthCheck    *DNSLBHealthCheckUDPHealthCheckModel    `tfsdk:"udp_health_check"`
 }
 
-func (r *DNSLbHealthCheckResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
+func (r *DNSLBHealthCheckResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
 	resp.TypeName = req.ProviderTypeName + "_dns_lb_health_check"
 }
 
-func (r *DNSLbHealthCheckResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
+func (r *DNSLBHealthCheckResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             dns_lb_health_checkSchemaVersion,
 		MarkdownDescription: "Manages DNS Load Balancer Health Check in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the DNSLbHealthCheck. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the DNSLBHealthCheck. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -126,7 +126,7 @@ func (r *DNSLbHealthCheckResource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the DNSLbHealthCheck will be created.",
+				MarkdownDescription: "Namespace where the DNSLBHealthCheck will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -280,7 +280,7 @@ func (r *DNSLbHealthCheckResource) Schema(ctx context.Context, req resource.Sche
 	}
 }
 
-func (r *DNSLbHealthCheckResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
+func (r *DNSLBHealthCheckResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -296,8 +296,8 @@ func (r *DNSLbHealthCheckResource) Configure(ctx context.Context, req resource.C
 }
 
 // ValidateConfig implements resource.ResourceWithValidateConfig
-func (r *DNSLbHealthCheckResource) ValidateConfig(ctx context.Context, req resource.ValidateConfigRequest, resp *resource.ValidateConfigResponse) {
-	var data DNSLbHealthCheckResourceModel
+func (r *DNSLBHealthCheckResource) ValidateConfig(ctx context.Context, req resource.ValidateConfigRequest, resp *resource.ValidateConfigResponse) {
+	var data DNSLBHealthCheckResourceModel
 	resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -305,7 +305,7 @@ func (r *DNSLbHealthCheckResource) ValidateConfig(ctx context.Context, req resou
 }
 
 // ModifyPlan implements resource.ResourceWithModifyPlan
-func (r *DNSLbHealthCheckResource) ModifyPlan(ctx context.Context, req resource.ModifyPlanRequest, resp *resource.ModifyPlanResponse) {
+func (r *DNSLBHealthCheckResource) ModifyPlan(ctx context.Context, req resource.ModifyPlanRequest, resp *resource.ModifyPlanResponse) {
 	if req.Plan.Raw.IsNull() {
 		resp.Diagnostics.AddWarning(
 			"Resource Destruction",
@@ -315,7 +315,7 @@ func (r *DNSLbHealthCheckResource) ModifyPlan(ctx context.Context, req resource.
 	}
 
 	if req.State.Raw.IsNull() {
-		var plan DNSLbHealthCheckResourceModel
+		var plan DNSLBHealthCheckResourceModel
 		resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
 		if resp.Diagnostics.HasError() {
 			return
@@ -331,7 +331,7 @@ func (r *DNSLbHealthCheckResource) ModifyPlan(ctx context.Context, req resource.
 }
 
 // UpgradeState implements resource.ResourceWithUpgradeState
-func (r *DNSLbHealthCheckResource) UpgradeState(ctx context.Context) map[int64]resource.StateUpgrader {
+func (r *DNSLBHealthCheckResource) UpgradeState(ctx context.Context) map[int64]resource.StateUpgrader {
 	return map[int64]resource.StateUpgrader{
 		0: {
 			PriorSchema: &schema.Schema{
@@ -357,7 +357,7 @@ func (r *DNSLbHealthCheckResource) UpgradeState(ctx context.Context) map[int64]r
 					return
 				}
 
-				upgradedState := DNSLbHealthCheckResourceModel{
+				upgradedState := DNSLBHealthCheckResourceModel{
 					Name:        priorState.Name,
 					Namespace:   priorState.Namespace,
 					Annotations: priorState.Annotations,
@@ -372,8 +372,8 @@ func (r *DNSLbHealthCheckResource) UpgradeState(ctx context.Context) map[int64]r
 	}
 }
 
-func (r *DNSLbHealthCheckResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
-	var data DNSLbHealthCheckResourceModel
+func (r *DNSLBHealthCheckResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
+	var data DNSLBHealthCheckResourceModel
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -393,7 +393,7 @@ func (r *DNSLbHealthCheckResource) Create(ctx context.Context, req resource.Crea
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	createReq := &client.DNSLbHealthCheck{
+	createReq := &client.DNSLBHealthCheck{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -456,7 +456,7 @@ func (r *DNSLbHealthCheckResource) Create(ctx context.Context, req resource.Crea
 		}
 		createReq.Spec["https_health_check"] = https_health_checkMap
 	}
-	if data.IcmpHealthCheck != nil {
+	if data.ICMPHealthCheck != nil {
 		icmp_health_checkMap := make(map[string]interface{})
 		createReq.Spec["icmp_health_check"] = icmp_health_checkMap
 	}
@@ -509,9 +509,9 @@ func (r *DNSLbHealthCheckResource) Create(ctx context.Context, req resource.Crea
 		createReq.Spec["udp_health_check"] = udp_health_checkMap
 	}
 
-	apiResource, err := r.client.CreateDNSLbHealthCheck(ctx, createReq)
+	apiResource, err := r.client.CreateDNSLBHealthCheck(ctx, createReq)
 	if err != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create DNSLbHealthCheck: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create DNSLBHealthCheck: %s", err))
 		return
 	}
 
@@ -522,7 +522,7 @@ func (r *DNSLbHealthCheckResource) Create(ctx context.Context, req resource.Crea
 	isImport := false // Create is never an import
 	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["http_health_check"].(map[string]interface{}); ok && (isImport || data.HTTPHealthCheck != nil) {
-		data.HTTPHealthCheck = &DNSLbHealthCheckHTTPHealthCheckModel{
+		data.HTTPHealthCheck = &DNSLBHealthCheckHTTPHealthCheckModel{
 			HealthCheckPort: func() types.Int64 {
 				if v, ok := blockData["health_check_port"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -550,7 +550,7 @@ func (r *DNSLbHealthCheckResource) Create(ctx context.Context, req resource.Crea
 		}
 	}
 	if blockData, ok := apiResource.Spec["https_health_check"].(map[string]interface{}); ok && (isImport || data.HTTPSHealthCheck != nil) {
-		data.HTTPSHealthCheck = &DNSLbHealthCheckHTTPSHealthCheckModel{
+		data.HTTPSHealthCheck = &DNSLBHealthCheckHTTPSHealthCheckModel{
 			HealthCheckPort: func() types.Int64 {
 				if v, ok := blockData["health_check_port"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -577,13 +577,13 @@ func (r *DNSLbHealthCheckResource) Create(ctx context.Context, req resource.Crea
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["icmp_health_check"].(map[string]interface{}); ok && isImport && data.IcmpHealthCheck == nil {
+	if _, ok := apiResource.Spec["icmp_health_check"].(map[string]interface{}); ok && isImport && data.ICMPHealthCheck == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.IcmpHealthCheck = &DNSLbHealthCheckEmptyModel{}
+		data.ICMPHealthCheck = &DNSLBHealthCheckEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["tcp_health_check"].(map[string]interface{}); ok && (isImport || data.TCPHealthCheck != nil) {
-		data.TCPHealthCheck = &DNSLbHealthCheckTCPHealthCheckModel{
+		data.TCPHealthCheck = &DNSLBHealthCheckTCPHealthCheckModel{
 			HealthCheckPort: func() types.Int64 {
 				if v, ok := blockData["health_check_port"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -611,7 +611,7 @@ func (r *DNSLbHealthCheckResource) Create(ctx context.Context, req resource.Crea
 		}
 	}
 	if blockData, ok := apiResource.Spec["tcp_hex_health_check"].(map[string]interface{}); ok && (isImport || data.TCPHexHealthCheck != nil) {
-		data.TCPHexHealthCheck = &DNSLbHealthCheckTCPHexHealthCheckModel{
+		data.TCPHexHealthCheck = &DNSLBHealthCheckTCPHexHealthCheckModel{
 			HealthCheckPort: func() types.Int64 {
 				if v, ok := blockData["health_check_port"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -639,7 +639,7 @@ func (r *DNSLbHealthCheckResource) Create(ctx context.Context, req resource.Crea
 		}
 	}
 	if blockData, ok := apiResource.Spec["udp_health_check"].(map[string]interface{}); ok && (isImport || data.UDPHealthCheck != nil) {
-		data.UDPHealthCheck = &DNSLbHealthCheckUDPHealthCheckModel{
+		data.UDPHealthCheck = &DNSLBHealthCheckUDPHealthCheckModel{
 			HealthCheckPort: func() types.Int64 {
 				if v, ok := blockData["health_check_port"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -674,12 +674,12 @@ func (r *DNSLbHealthCheckResource) Create(ctx context.Context, req resource.Crea
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
-	tflog.Trace(ctx, "created DNSLbHealthCheck resource")
+	tflog.Trace(ctx, "created DNSLBHealthCheck resource")
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *DNSLbHealthCheckResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-	var data DNSLbHealthCheckResourceModel
+func (r *DNSLBHealthCheckResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
+	var data DNSLBHealthCheckResourceModel
 	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -697,18 +697,18 @@ func (r *DNSLbHealthCheckResource) Read(ctx context.Context, req resource.ReadRe
 	psd, psDiags := privatestate.LoadFromPrivateState(ctx, &req)
 	resp.Diagnostics.Append(psDiags...)
 
-	apiResource, err := r.client.GetDNSLbHealthCheck(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	apiResource, err := r.client.GetDNSLBHealthCheck(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// Check if the resource was deleted outside Terraform
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
-			tflog.Warn(ctx, "DNSLbHealthCheck not found, removing from state", map[string]interface{}{
+			tflog.Warn(ctx, "DNSLBHealthCheck not found, removing from state", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})
 			resp.State.RemoveResource(ctx)
 			return
 		}
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read DNSLbHealthCheck: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read DNSLBHealthCheck: %s", err))
 		return
 	}
 
@@ -760,7 +760,7 @@ func (r *DNSLbHealthCheckResource) Read(ctx context.Context, req resource.ReadRe
 		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["http_health_check"].(map[string]interface{}); ok && (isImport || data.HTTPHealthCheck != nil) {
-		data.HTTPHealthCheck = &DNSLbHealthCheckHTTPHealthCheckModel{
+		data.HTTPHealthCheck = &DNSLBHealthCheckHTTPHealthCheckModel{
 			HealthCheckPort: func() types.Int64 {
 				if v, ok := blockData["health_check_port"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -788,7 +788,7 @@ func (r *DNSLbHealthCheckResource) Read(ctx context.Context, req resource.ReadRe
 		}
 	}
 	if blockData, ok := apiResource.Spec["https_health_check"].(map[string]interface{}); ok && (isImport || data.HTTPSHealthCheck != nil) {
-		data.HTTPSHealthCheck = &DNSLbHealthCheckHTTPSHealthCheckModel{
+		data.HTTPSHealthCheck = &DNSLBHealthCheckHTTPSHealthCheckModel{
 			HealthCheckPort: func() types.Int64 {
 				if v, ok := blockData["health_check_port"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -815,13 +815,13 @@ func (r *DNSLbHealthCheckResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["icmp_health_check"].(map[string]interface{}); ok && isImport && data.IcmpHealthCheck == nil {
+	if _, ok := apiResource.Spec["icmp_health_check"].(map[string]interface{}); ok && isImport && data.ICMPHealthCheck == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.IcmpHealthCheck = &DNSLbHealthCheckEmptyModel{}
+		data.ICMPHealthCheck = &DNSLBHealthCheckEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["tcp_health_check"].(map[string]interface{}); ok && (isImport || data.TCPHealthCheck != nil) {
-		data.TCPHealthCheck = &DNSLbHealthCheckTCPHealthCheckModel{
+		data.TCPHealthCheck = &DNSLBHealthCheckTCPHealthCheckModel{
 			HealthCheckPort: func() types.Int64 {
 				if v, ok := blockData["health_check_port"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -849,7 +849,7 @@ func (r *DNSLbHealthCheckResource) Read(ctx context.Context, req resource.ReadRe
 		}
 	}
 	if blockData, ok := apiResource.Spec["tcp_hex_health_check"].(map[string]interface{}); ok && (isImport || data.TCPHexHealthCheck != nil) {
-		data.TCPHexHealthCheck = &DNSLbHealthCheckTCPHexHealthCheckModel{
+		data.TCPHexHealthCheck = &DNSLBHealthCheckTCPHexHealthCheckModel{
 			HealthCheckPort: func() types.Int64 {
 				if v, ok := blockData["health_check_port"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -877,7 +877,7 @@ func (r *DNSLbHealthCheckResource) Read(ctx context.Context, req resource.ReadRe
 		}
 	}
 	if blockData, ok := apiResource.Spec["udp_health_check"].(map[string]interface{}); ok && (isImport || data.UDPHealthCheck != nil) {
-		data.UDPHealthCheck = &DNSLbHealthCheckUDPHealthCheckModel{
+		data.UDPHealthCheck = &DNSLBHealthCheckUDPHealthCheckModel{
 			HealthCheckPort: func() types.Int64 {
 				if v, ok := blockData["health_check_port"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -917,8 +917,8 @@ func (r *DNSLbHealthCheckResource) Read(ctx context.Context, req resource.ReadRe
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *DNSLbHealthCheckResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-	var data DNSLbHealthCheckResourceModel
+func (r *DNSLBHealthCheckResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
+	var data DNSLBHealthCheckResourceModel
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -933,7 +933,7 @@ func (r *DNSLbHealthCheckResource) Update(ctx context.Context, req resource.Upda
 	ctx, cancel := context.WithTimeout(ctx, updateTimeout)
 	defer cancel()
 
-	apiResource := &client.DNSLbHealthCheck{
+	apiResource := &client.DNSLBHealthCheck{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -996,7 +996,7 @@ func (r *DNSLbHealthCheckResource) Update(ctx context.Context, req resource.Upda
 		}
 		apiResource.Spec["https_health_check"] = https_health_checkMap
 	}
-	if data.IcmpHealthCheck != nil {
+	if data.ICMPHealthCheck != nil {
 		icmp_health_checkMap := make(map[string]interface{})
 		apiResource.Spec["icmp_health_check"] = icmp_health_checkMap
 	}
@@ -1049,9 +1049,9 @@ func (r *DNSLbHealthCheckResource) Update(ctx context.Context, req resource.Upda
 		apiResource.Spec["udp_health_check"] = udp_health_checkMap
 	}
 
-	_, err := r.client.UpdateDNSLbHealthCheck(ctx, apiResource)
+	_, err := r.client.UpdateDNSLBHealthCheck(ctx, apiResource)
 	if err != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update DNSLbHealthCheck: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update DNSLBHealthCheck: %s", err))
 		return
 	}
 
@@ -1060,9 +1060,9 @@ func (r *DNSLbHealthCheckResource) Update(ctx context.Context, req resource.Upda
 
 	// Fetch the resource to get complete state including computed fields
 	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
-	fetched, fetchErr := r.client.GetDNSLbHealthCheck(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	fetched, fetchErr := r.client.GetDNSLBHealthCheck(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if fetchErr != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read DNSLbHealthCheck after update: %s", fetchErr))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read DNSLBHealthCheck after update: %s", fetchErr))
 		return
 	}
 
@@ -1073,7 +1073,7 @@ func (r *DNSLbHealthCheckResource) Update(ctx context.Context, req resource.Upda
 	isImport := false     // Update is never an import
 	_ = isImport          // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["http_health_check"].(map[string]interface{}); ok && (isImport || data.HTTPHealthCheck != nil) {
-		data.HTTPHealthCheck = &DNSLbHealthCheckHTTPHealthCheckModel{
+		data.HTTPHealthCheck = &DNSLBHealthCheckHTTPHealthCheckModel{
 			HealthCheckPort: func() types.Int64 {
 				if v, ok := blockData["health_check_port"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -1101,7 +1101,7 @@ func (r *DNSLbHealthCheckResource) Update(ctx context.Context, req resource.Upda
 		}
 	}
 	if blockData, ok := apiResource.Spec["https_health_check"].(map[string]interface{}); ok && (isImport || data.HTTPSHealthCheck != nil) {
-		data.HTTPSHealthCheck = &DNSLbHealthCheckHTTPSHealthCheckModel{
+		data.HTTPSHealthCheck = &DNSLBHealthCheckHTTPSHealthCheckModel{
 			HealthCheckPort: func() types.Int64 {
 				if v, ok := blockData["health_check_port"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -1128,13 +1128,13 @@ func (r *DNSLbHealthCheckResource) Update(ctx context.Context, req resource.Upda
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["icmp_health_check"].(map[string]interface{}); ok && isImport && data.IcmpHealthCheck == nil {
+	if _, ok := apiResource.Spec["icmp_health_check"].(map[string]interface{}); ok && isImport && data.ICMPHealthCheck == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.IcmpHealthCheck = &DNSLbHealthCheckEmptyModel{}
+		data.ICMPHealthCheck = &DNSLBHealthCheckEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["tcp_health_check"].(map[string]interface{}); ok && (isImport || data.TCPHealthCheck != nil) {
-		data.TCPHealthCheck = &DNSLbHealthCheckTCPHealthCheckModel{
+		data.TCPHealthCheck = &DNSLBHealthCheckTCPHealthCheckModel{
 			HealthCheckPort: func() types.Int64 {
 				if v, ok := blockData["health_check_port"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -1162,7 +1162,7 @@ func (r *DNSLbHealthCheckResource) Update(ctx context.Context, req resource.Upda
 		}
 	}
 	if blockData, ok := apiResource.Spec["tcp_hex_health_check"].(map[string]interface{}); ok && (isImport || data.TCPHexHealthCheck != nil) {
-		data.TCPHexHealthCheck = &DNSLbHealthCheckTCPHexHealthCheckModel{
+		data.TCPHexHealthCheck = &DNSLBHealthCheckTCPHexHealthCheckModel{
 			HealthCheckPort: func() types.Int64 {
 				if v, ok := blockData["health_check_port"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -1190,7 +1190,7 @@ func (r *DNSLbHealthCheckResource) Update(ctx context.Context, req resource.Upda
 		}
 	}
 	if blockData, ok := apiResource.Spec["udp_health_check"].(map[string]interface{}); ok && (isImport || data.UDPHealthCheck != nil) {
-		data.UDPHealthCheck = &DNSLbHealthCheckUDPHealthCheckModel{
+		data.UDPHealthCheck = &DNSLBHealthCheckUDPHealthCheckModel{
 			HealthCheckPort: func() types.Int64 {
 				if v, ok := blockData["health_check_port"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -1228,8 +1228,8 @@ func (r *DNSLbHealthCheckResource) Update(ctx context.Context, req resource.Upda
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *DNSLbHealthCheckResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
-	var data DNSLbHealthCheckResourceModel
+func (r *DNSLBHealthCheckResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
+	var data DNSLBHealthCheckResourceModel
 	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -1243,11 +1243,11 @@ func (r *DNSLbHealthCheckResource) Delete(ctx context.Context, req resource.Dele
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-	err := r.client.DeleteDNSLbHealthCheck(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	err := r.client.DeleteDNSLBHealthCheck(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
-			tflog.Warn(ctx, "DNSLbHealthCheck already deleted, removing from state", map[string]interface{}{
+			tflog.Warn(ctx, "DNSLBHealthCheck already deleted, removing from state", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})
@@ -1256,18 +1256,18 @@ func (r *DNSLbHealthCheckResource) Delete(ctx context.Context, req resource.Dele
 		// If delete is not implemented (501), warn and remove from state
 		// Some F5 XC resources don't support deletion via API
 		if strings.Contains(err.Error(), "501") {
-			tflog.Warn(ctx, "DNSLbHealthCheck delete not supported by API (501), removing from state only", map[string]interface{}{
+			tflog.Warn(ctx, "DNSLBHealthCheck delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})
 			return
 		}
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete DNSLbHealthCheck: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete DNSLBHealthCheck: %s", err))
 		return
 	}
 }
 
-func (r *DNSLbHealthCheckResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
+func (r *DNSLBHealthCheckResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	// Import ID format: namespace/name
 	parts := strings.Split(req.ID, "/")
 	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {

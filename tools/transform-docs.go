@@ -1675,14 +1675,13 @@ func escapeEmphasisMarkersInContent(content string) string {
 	bracketUnderscore := regexp.MustCompile(`\[_\]`)
 	content = bracketUnderscore.ReplaceAllString(content, "[\\_]")
 
-	// Pattern 6: Underscore emphasis like _text_ that's not in backticks
-	// MD049 requires consistent emphasis style (asterisks preferred)
-	// Match _word_ patterns that look like emphasis but aren't code
-	// Escape underscores to prevent them being interpreted as emphasis
-	underscoreEmphasis := regexp.MustCompile(`([^` + "`" + `\\])_([a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9])_([^` + "`" + `])`)
-	content = underscoreEmphasis.ReplaceAllString(content, "$1\\_$2\\_$3")
+	// NOTE: Pattern 6 (underscore emphasis escaping) was removed in issue #351
+	// The regex was too broad and incorrectly escaped snake_case identifiers
+	// like "http_loadbalancer" → "http\_loadbalancer", breaking code examples
+	// on the Terraform Registry. The Registry's markdown renderer handles
+	// underscores correctly without escaping.
 
-	// Pattern 7: Email addresses - wrap in backticks for MD034 compliance
+	// Pattern 6: Email addresses - wrap in backticks for MD034 compliance
 	// Match email patterns like user@domain.com that are not already in backticks
 	// The negative lookbehind/ahead for backticks prevents double-wrapping
 	emailRegex := regexp.MustCompile(`([^` + "`" + `])([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})([^` + "`" + `])`)

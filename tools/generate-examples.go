@@ -14,28 +14,10 @@ import (
 	"regexp"
 	"sort"
 	"strings"
+
+	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/naming"
+	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/namespace"
 )
-
-// uppercaseAcronyms defines acronyms that should be fully uppercase
-var uppercaseAcronyms = map[string]bool{
-	"http": true, "https": true, "dns": true, "tcp": true, "udp": true,
-	"tls": true, "ssl": true, "api": true, "url": true, "uri": true,
-	"ip": true, "bgp": true, "jwt": true, "acl": true, "waf": true,
-	"cdn": true, "aws": true, "gcp": true, "vpc": true, "tgw": true,
-	"vnet": true, "ce": true, "re": true, "lb": true, "vip": true,
-	"sni": true, "cors": true, "xss": true, "csrf": true, "oidc": true,
-	"saml": true, "ssh": true, "nfs": true, "ntp": true, "pem": true,
-	"rsa": true, "ecdsa": true, "id": true, "apm": true, "irule": true,
-}
-
-// mixedCaseAcronyms defines acronyms with specific mixed case
-var mixedCaseAcronyms = map[string]string{
-	"mtls": "mTLS", "oauth": "OAuth", "graphql": "GraphQL",
-	"websocket": "WebSocket", "javascript": "JavaScript", "typescript": "TypeScript",
-	"github": "GitHub", "gitlab": "GitLab", "devops": "DevOps",
-	"fastcgi": "FastCGI", "modsecurity": "ModSecurity", "hashicorp": "HashiCorp",
-	"bigip": "BigIP",
-}
 
 type SchemaInfo struct {
 	ResourceName string
@@ -70,82 +52,14 @@ type OneOfGroup struct {
 	Description string   // Description of the group
 }
 
-// NamespaceType represents the type of namespace a resource should use
-type NamespaceType int
-
-const (
-	NamespaceSystem      NamespaceType = iota // Infrastructure, sites, networks
-	NamespaceShared                           // Cross-app policies, security
-	NamespaceApplication                      // Application workloads (staging/production)
-)
-
-// getNamespaceForResource returns the appropriate namespace based on F5XC best practices:
-// - system: Infrastructure objects (sites, networks, fleet, cluster, cloud credentials)
-// - shared: Cross-app security policies (app_firewall, certificates, rate_limiters)
-// - application: App-specific workloads (load balancers, origin pools, healthchecks)
-func getNamespaceForResource(resourceName string) (NamespaceType, string) {
-	// System namespace: Infrastructure-level objects
-	systemResources := map[string]bool{
-		// Site resources
-		"aws_vpc_site": true, "azure_vnet_site": true, "gcp_vpc_site": true,
-		"securemesh_site": true, "securemesh_site_v2": true, "voltstack_site": true,
-		"aws_tgw_site": true,
-		// Network infrastructure
-		"virtual_network": true, "network_interface": true, "network_connector": true,
-		"subnet": true, "tunnel": true, "network_firewall": true,
-		// Fleet and cluster management
-		"fleet": true, "cluster": true, "dc_cluster_group": true, "site_mesh_group": true,
-		// Cloud infrastructure
-		"cloud_credentials": true, "cloud_connect": true, "cloud_link": true, "cloud_elastic_ip": true,
-		// BGP and routing
-		"bgp": true, "bgp_asn_set": true, "bgp_routing_policy": true, "route": true,
-		// Core system resources
-		"namespace": true, "virtual_site": true, "global_log_receiver": true,
-		"tenant_configuration": true, "tenant_profile": true, "role": true,
-		"k8s_cluster": true, "k8s_cluster_role": true, "k8s_cluster_role_binding": true,
-	}
-
-	// Shared namespace: Cross-team/application reusable resources
-	sharedResources := map[string]bool{
-		// Security policies
-		"app_firewall": true, "waf_exclusion_policy": true,
-		"service_policy": true, "service_policy_rule": true,
-		"sensitive_data_policy": true, "secret_policy": true, "secret_policy_rule": true,
-		// Certificates and trust
-		"certificate": true, "certificate_chain": true, "trusted_ca_list": true, "crl": true,
-		// Rate limiting
-		"rate_limiter": true, "rate_limiter_policy": true,
-		// User identification and mitigation
-		"user_identification": true, "malicious_user_mitigation": true,
-		// Bot defense
-		"bot_defense_app_infrastructure": true,
-		// API definitions (shared across apps)
-		"api_definition": true, "data_type": true,
-		// Network policy sets
-		"ip_prefix_set": true, "geo_location_set": true,
-		// Protocol inspection
-		"protocol_inspection": true, "protocol_policer": true,
-		// Forward proxy
-		"forward_proxy_policy": true,
-		// Alert configuration
-		"alert_policy": true, "alert_receiver": true,
-	}
-
-	if systemResources[resourceName] {
-		return NamespaceSystem, "system"
-	}
-	if sharedResources[resourceName] {
-		return NamespaceShared, "shared"
-	}
-	// Default to application namespace for workload resources
-	return NamespaceApplication, "staging"
+// getNamespaceForResource wraps namespace.ForResource for backward compatibility
+func getNamespaceForResource(resourceName string) (namespace.Type, string) {
+	return namespace.ForResource(resourceName)
 }
 
-// getNamespaceForReference returns the appropriate namespace for a resource reference
-// based on what type of resource is being referenced
+// getNamespaceForReference wraps namespace.ForReference for backward compatibility
 func getNamespaceForReference(referencedResourceType string) string {
-	_, ns := getNamespaceForResource(referencedResourceType)
-	return ns
+	return namespace.ForReference(referencedResourceType)
 }
 
 func main() {
@@ -1567,19 +1481,9 @@ func truncateDescription(desc string, maxLen int) string {
 	return desc[:maxLen-3] + "..."
 }
 
+// toHumanName wraps naming.ToHumanName for backward compatibility
 func toHumanName(resourceName string) string {
-	words := strings.Split(resourceName, "_")
-	for i, word := range words {
-		lower := strings.ToLower(word)
-		if uppercaseAcronyms[lower] {
-			words[i] = strings.ToUpper(word)
-		} else if replacement, ok := mixedCaseAcronyms[lower]; ok {
-			words[i] = replacement
-		} else {
-			words[i] = strings.Title(word)
-		}
-	}
-	return strings.Join(words, " ")
+	return naming.ToHumanName(resourceName)
 }
 
 func contains(slice []string, item string) bool {

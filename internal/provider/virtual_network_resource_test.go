@@ -134,6 +134,7 @@ func TestAccVirtualNetworkResource_allAttributes(t *testing.T) {
 				ImportState:             true,
 				ImportStateVerify:       true,
 				ImportStateVerifyIgnore: []string{"timeouts", "disable"},
+				ImportStateIdFunc:       testAccVirtualNetworkImportStateIdFunc(resourceName),
 			},
 		},
 	})

@@ -3673,7 +3673,7 @@ func (r *ProxyResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		apiResource.Spec["connection_timeout"] = data.ConnectionTimeout.ValueInt64()
 	}
 
-	updated, err := r.client.UpdateProxy(ctx, apiResource)
+	_, err := r.client.UpdateProxy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Proxy: %s", err))
 		return
@@ -3682,8 +3682,16 @@ func (r *ProxyResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetProxy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Proxy after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["connection_timeout"].(float64); ok {
+	if v, ok := fetched.Spec["connection_timeout"].(float64); ok {
 		data.ConnectionTimeout = types.Int64Value(int64(v))
 	} else if data.ConnectionTimeout.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -3691,16 +3699,307 @@ func (r *ProxyResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetProxy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["active_forward_proxy_policies"].(map[string]interface{}); ok && (isImport || data.ActiveForwardProxyPolicies != nil) {
+		data.ActiveForwardProxyPolicies = &ProxyActiveForwardProxyPoliciesModel{
+			ForwardProxyPolicies: func() []ProxyActiveForwardProxyPoliciesForwardProxyPoliciesModel {
+				if listData, ok := blockData["forward_proxy_policies"].([]interface{}); ok && len(listData) > 0 {
+					var result []ProxyActiveForwardProxyPoliciesForwardProxyPoliciesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, ProxyActiveForwardProxyPoliciesForwardProxyPoliciesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
 		}
 	}
+	if _, ok := apiResource.Spec["do_not_advertise"].(map[string]interface{}); ok && isImport && data.DoNotAdvertise == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DoNotAdvertise = &ProxyEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["dynamic_proxy"].(map[string]interface{}); ok && (isImport || data.DynamicProxy != nil) {
+		data.DynamicProxy = &ProxyDynamicProxyModel{
+			DisableDNSMasquerade: func() *ProxyEmptyModel {
+				if !isImport && data.DynamicProxy != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DynamicProxy.DisableDNSMasquerade
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_dns_masquerade"].(map[string]interface{}); ok {
+					return &ProxyEmptyModel{}
+				}
+				return nil
+			}(),
+			Domains: func() types.List {
+				if v, ok := blockData["domains"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			EnableDNSMasquerade: func() *ProxyEmptyModel {
+				if !isImport && data.DynamicProxy != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DynamicProxy.EnableDNSMasquerade
+				}
+				// Import case: read from API
+				if _, ok := blockData["enable_dns_masquerade"].(map[string]interface{}); ok {
+					return &ProxyEmptyModel{}
+				}
+				return nil
+			}(),
+			HTTPProxy: func() *ProxyDynamicProxyHTTPProxyModel {
+				if !isImport && data.DynamicProxy != nil && data.DynamicProxy.HTTPProxy != nil {
+					// Normal Read: preserve existing state value
+					return data.DynamicProxy.HTTPProxy
+				}
+				// Import case: read from API
+				if _, ok := blockData["http_proxy"].(map[string]interface{}); ok {
+					return &ProxyDynamicProxyHTTPProxyModel{}
+				}
+				return nil
+			}(),
+			HTTPSProxy: func() *ProxyDynamicProxyHTTPSProxyModel {
+				if !isImport && data.DynamicProxy != nil && data.DynamicProxy.HTTPSProxy != nil {
+					// Normal Read: preserve existing state value
+					return data.DynamicProxy.HTTPSProxy
+				}
+				// Import case: read from API
+				if _, ok := blockData["https_proxy"].(map[string]interface{}); ok {
+					return &ProxyDynamicProxyHTTPSProxyModel{}
+				}
+				return nil
+			}(),
+			SniProxy: func() *ProxyDynamicProxySniProxyModel {
+				if !isImport && data.DynamicProxy != nil && data.DynamicProxy.SniProxy != nil {
+					// Normal Read: preserve existing state value
+					return data.DynamicProxy.SniProxy
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["sni_proxy"].(map[string]interface{}); ok {
+					return &ProxyDynamicProxySniProxyModel{
+						IdleTimeout: func() types.Int64 {
+							if v, ok := nestedBlockData["idle_timeout"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["http_proxy"].(map[string]interface{}); ok && isImport && data.HTTPProxy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.HTTPProxy = &ProxyHTTPProxyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_forward_proxy_policy"].(map[string]interface{}); ok && isImport && data.NoForwardProxyPolicy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoForwardProxyPolicy = &ProxyEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_interception"].(map[string]interface{}); ok && isImport && data.NoInterception == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoInterception = &ProxyEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["site_local_inside_network"].(map[string]interface{}); ok && isImport && data.SiteLocalInsideNetwork == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SiteLocalInsideNetwork = &ProxyEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["site_local_network"].(map[string]interface{}); ok && isImport && data.SiteLocalNetwork == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SiteLocalNetwork = &ProxyEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["site_virtual_sites"].(map[string]interface{}); ok && (isImport || data.SiteVirtualSites != nil) {
+		data.SiteVirtualSites = &ProxySiteVirtualSitesModel{
+			AdvertiseWhere: func() []ProxySiteVirtualSitesAdvertiseWhereModel {
+				if listData, ok := blockData["advertise_where"].([]interface{}); ok && len(listData) > 0 {
+					var result []ProxySiteVirtualSitesAdvertiseWhereModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, ProxySiteVirtualSitesAdvertiseWhereModel{
+								Port: func() types.Int64 {
+									if v, ok := itemMap["port"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								Site: func() *ProxySiteVirtualSitesAdvertiseWhereSiteModel {
+									if deepMap, ok := itemMap["site"].(map[string]interface{}); ok {
+										return &ProxySiteVirtualSitesAdvertiseWhereSiteModel{
+											IP: func() types.String {
+												if v, ok := deepMap["ip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Network: func() types.String {
+												if v, ok := deepMap["network"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								UseDefaultPort: func() *ProxyEmptyModel {
+									if _, ok := itemMap["use_default_port"].(map[string]interface{}); ok {
+										return &ProxyEmptyModel{}
+									}
+									return nil
+								}(),
+								VirtualSite: func() *ProxySiteVirtualSitesAdvertiseWhereVirtualSiteModel {
+									if deepMap, ok := itemMap["virtual_site"].(map[string]interface{}); ok {
+										return &ProxySiteVirtualSitesAdvertiseWhereVirtualSiteModel{
+											Network: func() types.String {
+												if v, ok := deepMap["network"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["tls_intercept"].(map[string]interface{}); ok && (isImport || data.TLSIntercept != nil) {
+		data.TLSIntercept = &ProxyTLSInterceptModel{
+			CustomCertificate: func() *ProxyTLSInterceptCustomCertificateModel {
+				if !isImport && data.TLSIntercept != nil && data.TLSIntercept.CustomCertificate != nil {
+					// Normal Read: preserve existing state value
+					return data.TLSIntercept.CustomCertificate
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["custom_certificate"].(map[string]interface{}); ok {
+					return &ProxyTLSInterceptCustomCertificateModel{
+						CertificateURL: func() types.String {
+							if v, ok := nestedBlockData["certificate_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						DescriptionSpec: func() types.String {
+							if v, ok := nestedBlockData["description"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			EnableForAllDomains: func() *ProxyEmptyModel {
+				if !isImport && data.TLSIntercept != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSIntercept.EnableForAllDomains
+				}
+				// Import case: read from API
+				if _, ok := blockData["enable_for_all_domains"].(map[string]interface{}); ok {
+					return &ProxyEmptyModel{}
+				}
+				return nil
+			}(),
+			Policy: func() *ProxyTLSInterceptPolicyModel {
+				if !isImport && data.TLSIntercept != nil && data.TLSIntercept.Policy != nil {
+					// Normal Read: preserve existing state value
+					return data.TLSIntercept.Policy
+				}
+				// Import case: read from API
+				if _, ok := blockData["policy"].(map[string]interface{}); ok {
+					return &ProxyTLSInterceptPolicyModel{}
+				}
+				return nil
+			}(),
+			TrustedCaURL: func() types.String {
+				if v, ok := blockData["trusted_ca_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			VolterraCertificate: func() *ProxyEmptyModel {
+				if !isImport && data.TLSIntercept != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSIntercept.VolterraCertificate
+				}
+				// Import case: read from API
+				if _, ok := blockData["volterra_certificate"].(map[string]interface{}); ok {
+					return &ProxyEmptyModel{}
+				}
+				return nil
+			}(),
+			VolterraTrustedCa: func() *ProxyEmptyModel {
+				if !isImport && data.TLSIntercept != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSIntercept.VolterraTrustedCa
+				}
+				// Import case: read from API
+				if _, ok := blockData["volterra_trusted_ca"].(map[string]interface{}); ok {
+					return &ProxyEmptyModel{}
+				}
+				return nil
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["connection_timeout"].(float64); ok {
+		data.ConnectionTimeout = types.Int64Value(int64(v))
+	} else {
+		data.ConnectionTimeout = types.Int64Null()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

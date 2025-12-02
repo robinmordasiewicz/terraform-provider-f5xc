@@ -503,7 +503,7 @@ func (r *QuotaResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		apiResource.Spec["resource_limits"] = resource_limitsMap
 	}
 
-	updated, err := r.client.UpdateQuota(ctx, apiResource)
+	_, err := r.client.UpdateQuota(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Quota: %s", err))
 		return
@@ -512,18 +512,39 @@ func (r *QuotaResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetQuota(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Quota after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetQuota(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
-		}
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["api_limits"].(map[string]interface{}); ok && isImport && data.APILimits == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.APILimits = &QuotaEmptyModel{}
 	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["object_limits"].(map[string]interface{}); ok && isImport && data.ObjectLimits == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ObjectLimits = &QuotaEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["resource_limits"].(map[string]interface{}); ok && isImport && data.ResourceLimits == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ResourceLimits = &QuotaEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

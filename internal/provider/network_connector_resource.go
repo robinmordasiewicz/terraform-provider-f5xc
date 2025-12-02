@@ -1108,7 +1108,7 @@ func (r *NetworkConnectorResource) Update(ctx context.Context, req resource.Upda
 		apiResource.Spec["slo_to_global_dr"] = slo_to_global_drMap
 	}
 
-	updated, err := r.client.UpdateNetworkConnector(ctx, apiResource)
+	_, err := r.client.UpdateNetworkConnector(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update NetworkConnector: %s", err))
 		return
@@ -1117,18 +1117,116 @@ func (r *NetworkConnectorResource) Update(ctx context.Context, req resource.Upda
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetNetworkConnector(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read NetworkConnector after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetNetworkConnector(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["disable_forward_proxy"].(map[string]interface{}); ok && isImport && data.DisableForwardProxy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableForwardProxy = &NetworkConnectorEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["enable_forward_proxy"].(map[string]interface{}); ok && (isImport || data.EnableForwardProxy != nil) {
+		data.EnableForwardProxy = &NetworkConnectorEnableForwardProxyModel{
+			ConnectionTimeout: func() types.Int64 {
+				if v, ok := blockData["connection_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			MaxConnectAttempts: func() types.Int64 {
+				if v, ok := blockData["max_connect_attempts"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			NoInterception: func() *NetworkConnectorEmptyModel {
+				if !isImport && data.EnableForwardProxy != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.EnableForwardProxy.NoInterception
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_interception"].(map[string]interface{}); ok {
+					return &NetworkConnectorEmptyModel{}
+				}
+				return nil
+			}(),
+			TLSIntercept: func() *NetworkConnectorEnableForwardProxyTLSInterceptModel {
+				if !isImport && data.EnableForwardProxy != nil && data.EnableForwardProxy.TLSIntercept != nil {
+					// Normal Read: preserve existing state value
+					return data.EnableForwardProxy.TLSIntercept
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["tls_intercept"].(map[string]interface{}); ok {
+					return &NetworkConnectorEnableForwardProxyTLSInterceptModel{
+						TrustedCaURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			WhiteListedPorts: func() types.List {
+				if v, ok := blockData["white_listed_ports"].([]interface{}); ok && len(v) > 0 {
+					var items []int64
+					for _, item := range v {
+						if n, ok := item.(float64); ok {
+							items = append(items, int64(n))
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.Int64Type, items)
+					return listVal
+				}
+				return types.ListNull(types.Int64Type)
+			}(),
+			WhiteListedPrefixes: func() types.List {
+				if v, ok := blockData["white_listed_prefixes"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
 		}
 	}
+	if _, ok := apiResource.Spec["sli_to_global_dr"].(map[string]interface{}); ok && isImport && data.SLIToGlobalDr == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SLIToGlobalDr = &NetworkConnectorSLIToGlobalDrModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["sli_to_slo_snat"].(map[string]interface{}); ok && isImport && data.SLIToSLOSnat == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SLIToSLOSnat = &NetworkConnectorSLIToSLOSnatModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["slo_to_global_dr"].(map[string]interface{}); ok && isImport && data.SLOToGlobalDr == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SLOToGlobalDr = &NetworkConnectorSLOToGlobalDrModel{}
+	}
+	// Normal Read: preserve existing state value
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

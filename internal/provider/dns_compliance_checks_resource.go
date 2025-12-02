@@ -583,7 +583,7 @@ func (r *DNSComplianceChecksResource) Update(ctx context.Context, req resource.U
 		}
 	}
 
-	updated, err := r.client.UpdateDNSComplianceChecks(ctx, apiResource)
+	_, err := r.client.UpdateDNSComplianceChecks(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update DNSComplianceChecks: %s", err))
 		return
@@ -592,18 +592,69 @@ func (r *DNSComplianceChecksResource) Update(ctx context.Context, req resource.U
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetDNSComplianceChecks(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read DNSComplianceChecks after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetDNSComplianceChecks(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if v, ok := apiResource.Spec["disallowed_query_type_list"].([]interface{}); ok && len(v) > 0 {
+		var disallowed_query_type_listList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				disallowed_query_type_listList = append(disallowed_query_type_listList, s)
+			}
 		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, disallowed_query_type_listList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.DisallowedQueryTypeList = listVal
+		}
+	} else {
+		data.DisallowedQueryTypeList = types.ListNull(types.StringType)
 	}
+	if v, ok := apiResource.Spec["disallowed_resource_record_type_list"].([]interface{}); ok && len(v) > 0 {
+		var disallowed_resource_record_type_listList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				disallowed_resource_record_type_listList = append(disallowed_resource_record_type_listList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, disallowed_resource_record_type_listList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.DisallowedResourceRecordTypeList = listVal
+		}
+	} else {
+		data.DisallowedResourceRecordTypeList = types.ListNull(types.StringType)
+	}
+	if v, ok := apiResource.Spec["domain_denylist"].([]interface{}); ok && len(v) > 0 {
+		var domain_denylistList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				domain_denylistList = append(domain_denylistList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, domain_denylistList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.DomainDenylist = listVal
+		}
+	} else {
+		data.DomainDenylist = types.ListNull(types.StringType)
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

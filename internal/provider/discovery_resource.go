@@ -1303,7 +1303,7 @@ func (r *DiscoveryResource) Update(ctx context.Context, req resource.UpdateReque
 		apiResource.Spec["cluster_id"] = data.ClusterID.ValueString()
 	}
 
-	updated, err := r.client.UpdateDiscovery(ctx, apiResource)
+	_, err := r.client.UpdateDiscovery(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Discovery: %s", err))
 		return
@@ -1312,8 +1312,16 @@ func (r *DiscoveryResource) Update(ctx context.Context, req resource.UpdateReque
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetDiscovery(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Discovery after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["cluster_id"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["cluster_id"].(string); ok && v != "" {
 		data.ClusterID = types.StringValue(v)
 	} else if data.ClusterID.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -1321,16 +1329,39 @@ func (r *DiscoveryResource) Update(ctx context.Context, req resource.UpdateReque
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetDiscovery(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
-		}
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["discovery_consul"].(map[string]interface{}); ok && isImport && data.DiscoveryConsul == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DiscoveryConsul = &DiscoveryDiscoveryConsulModel{}
 	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["discovery_k8s"].(map[string]interface{}); ok && isImport && data.DiscoveryK8S == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DiscoveryK8S = &DiscoveryDiscoveryK8SModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_cluster_id"].(map[string]interface{}); ok && isImport && data.NoClusterID == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoClusterID = &DiscoveryEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["where"].(map[string]interface{}); ok && isImport && data.Where == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Where = &DiscoveryWhereModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["cluster_id"].(string); ok && v != "" {
+		data.ClusterID = types.StringValue(v)
+	} else {
+		data.ClusterID = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

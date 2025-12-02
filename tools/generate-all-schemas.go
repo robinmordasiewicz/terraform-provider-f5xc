@@ -2066,8 +2066,14 @@ func renderCreateComputedFieldsCode(attrs []TerraformAttribute, indent string) s
 }
 
 // renderUpdateComputedFieldsCode generates code for Update method (uses "updated" variable)
+// Deprecated: Use renderFetchedComputedFieldsCode instead since Update now uses GET after PUT
 func renderUpdateComputedFieldsCode(attrs []TerraformAttribute, indent string) string {
 	return renderComputedFieldsCode(attrs, indent, "updated")
+}
+
+// renderFetchedComputedFieldsCode generates code for Update method after GET (uses "fetched" variable)
+func renderFetchedComputedFieldsCode(attrs []TerraformAttribute, indent string) string {
+	return renderComputedFieldsCode(attrs, indent, "fetched")
 }
 
 // renderSpecUnmarshalCode generates Go code to unmarshal spec fields from API response to Terraform state
@@ -2836,9 +2842,10 @@ func generateResourceFile(resource *ResourceTemplate) error {
 		"renderSpecMarshalCode":          renderSpecMarshalCode,
 		"renderSpecMarshalCodeForCreate": renderSpecMarshalCodeForCreate,
 		"renderSpecUnmarshalCode":        renderSpecUnmarshalCode,
-		"renderCreateComputedFieldsCode": renderCreateComputedFieldsCode,
-		"renderUpdateComputedFieldsCode": renderUpdateComputedFieldsCode,
-		"filterSpecFields":               filterSpecFields,
+		"renderCreateComputedFieldsCode":  renderCreateComputedFieldsCode,
+		"renderUpdateComputedFieldsCode":  renderUpdateComputedFieldsCode,
+		"renderFetchedComputedFieldsCode": renderFetchedComputedFieldsCode,
+		"filterSpecFields":                filterSpecFields,
 	}
 
 	tmpl, err := template.New("resource").Funcs(funcMap).Parse(resourceTemplate)
@@ -3972,7 +3979,7 @@ func (r *{{.TitleCase}}Resource) Update(ctx context.Context, req resource.Update
 	// Marshal spec fields from Terraform state to API struct
 {{renderSpecMarshalCode .Attributes "\t"}}
 
-	updated, err := r.client.Update{{.TitleCase}}(ctx, apiResource)
+	_, err := r.client.Update{{.TitleCase}}(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update {{.TitleCase}}: %s", err))
 		return
@@ -3981,17 +3988,25 @@ func (r *{{.TitleCase}}Resource) Update(ctx context.Context, req resource.Update
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
-{{renderUpdateComputedFieldsCode .Attributes "\t"}}
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.Get{{.TitleCase}}(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
-		}
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.Get{{.TitleCase}}(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read {{.TitleCase}} after update: %s", fetchErr))
+		return
 	}
+
+{{renderFetchedComputedFieldsCode .Attributes "\t"}}
+
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false // Update is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+{{renderSpecUnmarshalCode .Attributes "\t" .TitleCase}}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

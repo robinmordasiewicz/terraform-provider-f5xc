@@ -690,7 +690,7 @@ func (r *SensitiveDataPolicyResource) Update(ctx context.Context, req resource.U
 		}
 	}
 
-	updated, err := r.client.UpdateSensitiveDataPolicy(ctx, apiResource)
+	_, err := r.client.UpdateSensitiveDataPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update SensitiveDataPolicy: %s", err))
 		return
@@ -699,18 +699,90 @@ func (r *SensitiveDataPolicyResource) Update(ctx context.Context, req resource.U
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetSensitiveDataPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read SensitiveDataPolicy after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetSensitiveDataPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if v, ok := apiResource.Spec["compliances"].([]interface{}); ok && len(v) > 0 {
+		var compliancesList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				compliancesList = append(compliancesList, s)
+			}
 		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, compliancesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Compliances = listVal
+		}
+	} else {
+		data.Compliances = types.ListNull(types.StringType)
 	}
+	if listData, ok := apiResource.Spec["custom_data_types"].([]interface{}); ok && len(listData) > 0 {
+		var custom_data_typesList []SensitiveDataPolicyCustomDataTypesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				custom_data_typesList = append(custom_data_typesList, SensitiveDataPolicyCustomDataTypesModel{
+					CustomDataTypeRef: func() *SensitiveDataPolicyCustomDataTypesCustomDataTypeRefModel {
+						if nestedMap, ok := itemMap["custom_data_type_ref"].(map[string]interface{}); ok {
+							return &SensitiveDataPolicyCustomDataTypesCustomDataTypeRefModel{
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := nestedMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := nestedMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.CustomDataTypes = custom_data_typesList
+	}
+	if v, ok := apiResource.Spec["disabled_predefined_data_types"].([]interface{}); ok && len(v) > 0 {
+		var disabled_predefined_data_typesList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				disabled_predefined_data_typesList = append(disabled_predefined_data_typesList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, disabled_predefined_data_typesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.DisabledPredefinedDataTypes = listVal
+		}
+	} else {
+		data.DisabledPredefinedDataTypes = types.ListNull(types.StringType)
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

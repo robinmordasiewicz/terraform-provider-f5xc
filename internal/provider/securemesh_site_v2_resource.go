@@ -8096,7 +8096,7 @@ func (r *SecuremeshSiteV2Resource) Update(ctx context.Context, req resource.Upda
 		apiResource.Spec["tunnel_type"] = data.TunnelType.ValueString()
 	}
 
-	updated, err := r.client.UpdateSecuremeshSiteV2(ctx, apiResource)
+	_, err := r.client.UpdateSecuremeshSiteV2(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update SecuremeshSiteV2: %s", err))
 		return
@@ -8105,15 +8105,23 @@ func (r *SecuremeshSiteV2Resource) Update(ctx context.Context, req resource.Upda
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetSecuremeshSiteV2(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read SecuremeshSiteV2 after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["tunnel_dead_timeout"].(float64); ok {
+	if v, ok := fetched.Spec["tunnel_dead_timeout"].(float64); ok {
 		data.TunnelDeadTimeout = types.Int64Value(int64(v))
 	} else if data.TunnelDeadTimeout.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.TunnelDeadTimeout = types.Int64Null()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["tunnel_type"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["tunnel_type"].(string); ok && v != "" {
 		data.TunnelType = types.StringValue(v)
 	} else if data.TunnelType.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -8121,16 +8129,456 @@ func (r *SecuremeshSiteV2Resource) Update(ctx context.Context, req resource.Upda
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetSecuremeshSiteV2(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["active_enhanced_firewall_policies"].(map[string]interface{}); ok && (isImport || data.ActiveEnhancedFirewallPolicies != nil) {
+		data.ActiveEnhancedFirewallPolicies = &SecuremeshSiteV2ActiveEnhancedFirewallPoliciesModel{
+			EnhancedFirewallPolicies: func() []SecuremeshSiteV2ActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel {
+				if listData, ok := blockData["enhanced_firewall_policies"].([]interface{}); ok && len(listData) > 0 {
+					var result []SecuremeshSiteV2ActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, SecuremeshSiteV2ActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["active_forward_proxy_policies"].(map[string]interface{}); ok && (isImport || data.ActiveForwardProxyPolicies != nil) {
+		data.ActiveForwardProxyPolicies = &SecuremeshSiteV2ActiveForwardProxyPoliciesModel{
+			ForwardProxyPolicies: func() []SecuremeshSiteV2ActiveForwardProxyPoliciesForwardProxyPoliciesModel {
+				if listData, ok := blockData["forward_proxy_policies"].([]interface{}); ok && len(listData) > 0 {
+					var result []SecuremeshSiteV2ActiveForwardProxyPoliciesForwardProxyPoliciesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, SecuremeshSiteV2ActiveForwardProxyPoliciesForwardProxyPoliciesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["admin_user_credentials"].(map[string]interface{}); ok && (isImport || data.AdminUserCredentials != nil) {
+		data.AdminUserCredentials = &SecuremeshSiteV2AdminUserCredentialsModel{
+			AdminPassword: func() *SecuremeshSiteV2AdminUserCredentialsAdminPasswordModel {
+				if !isImport && data.AdminUserCredentials != nil && data.AdminUserCredentials.AdminPassword != nil {
+					// Normal Read: preserve existing state value
+					return data.AdminUserCredentials.AdminPassword
+				}
+				// Import case: read from API
+				if _, ok := blockData["admin_password"].(map[string]interface{}); ok {
+					return &SecuremeshSiteV2AdminUserCredentialsAdminPasswordModel{}
+				}
+				return nil
+			}(),
+			SSHKey: func() types.String {
+				if v, ok := blockData["ssh_key"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["aws"].(map[string]interface{}); ok && isImport && data.AWS == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AWS = &SecuremeshSiteV2AWSModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["azure"].(map[string]interface{}); ok && isImport && data.Azure == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Azure = &SecuremeshSiteV2AzureModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["baremetal"].(map[string]interface{}); ok && isImport && data.Baremetal == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Baremetal = &SecuremeshSiteV2BaremetalModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["block_all_services"].(map[string]interface{}); ok && isImport && data.BlockAllServices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BlockAllServices = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["blocked_services"].(map[string]interface{}); ok && (isImport || data.BlockedServices != nil) {
+		data.BlockedServices = &SecuremeshSiteV2BlockedServicesModel{
+			BlockedSevice: func() []SecuremeshSiteV2BlockedServicesBlockedSeviceModel {
+				if listData, ok := blockData["blocked_sevice"].([]interface{}); ok && len(listData) > 0 {
+					var result []SecuremeshSiteV2BlockedServicesBlockedSeviceModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, SecuremeshSiteV2BlockedServicesBlockedSeviceModel{
+								DNS: func() *SecuremeshSiteV2EmptyModel {
+									if _, ok := itemMap["dns"].(map[string]interface{}); ok {
+										return &SecuremeshSiteV2EmptyModel{}
+									}
+									return nil
+								}(),
+								NetworkType: func() types.String {
+									if v, ok := itemMap["network_type"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SSH: func() *SecuremeshSiteV2EmptyModel {
+									if _, ok := itemMap["ssh"].(map[string]interface{}); ok {
+										return &SecuremeshSiteV2EmptyModel{}
+									}
+									return nil
+								}(),
+								WebUserInterface: func() *SecuremeshSiteV2EmptyModel {
+									if _, ok := itemMap["web_user_interface"].(map[string]interface{}); ok {
+										return &SecuremeshSiteV2EmptyModel{}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["custom_proxy"].(map[string]interface{}); ok && (isImport || data.CustomProxy != nil) {
+		data.CustomProxy = &SecuremeshSiteV2CustomProxyModel{
+			DisableReTunnel: func() *SecuremeshSiteV2EmptyModel {
+				if !isImport && data.CustomProxy != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomProxy.DisableReTunnel
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_re_tunnel"].(map[string]interface{}); ok {
+					return &SecuremeshSiteV2EmptyModel{}
+				}
+				return nil
+			}(),
+			EnableReTunnel: func() *SecuremeshSiteV2EmptyModel {
+				if !isImport && data.CustomProxy != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomProxy.EnableReTunnel
+				}
+				// Import case: read from API
+				if _, ok := blockData["enable_re_tunnel"].(map[string]interface{}); ok {
+					return &SecuremeshSiteV2EmptyModel{}
+				}
+				return nil
+			}(),
+			Password: func() *SecuremeshSiteV2CustomProxyPasswordModel {
+				if !isImport && data.CustomProxy != nil && data.CustomProxy.Password != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomProxy.Password
+				}
+				// Import case: read from API
+				if _, ok := blockData["password"].(map[string]interface{}); ok {
+					return &SecuremeshSiteV2CustomProxyPasswordModel{}
+				}
+				return nil
+			}(),
+			ProxyIPAddress: func() types.String {
+				if v, ok := blockData["proxy_ip_address"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ProxyPort: func() types.Int64 {
+				if v, ok := blockData["proxy_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Username: func() types.String {
+				if v, ok := blockData["username"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["custom_proxy_bypass"].(map[string]interface{}); ok && (isImport || data.CustomProxyBypass != nil) {
+		data.CustomProxyBypass = &SecuremeshSiteV2CustomProxyBypassModel{
+			ProxyBypass: func() types.List {
+				if v, ok := blockData["proxy_bypass"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["dc_cluster_group_sli"].(map[string]interface{}); ok && (isImport || data.DcClusterGroupSLI != nil) {
+		data.DcClusterGroupSLI = &SecuremeshSiteV2DcClusterGroupSLIModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["dc_cluster_group_slo"].(map[string]interface{}); ok && (isImport || data.DcClusterGroupSLO != nil) {
+		data.DcClusterGroupSLO = &SecuremeshSiteV2DcClusterGroupSLOModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["disable_ha"].(map[string]interface{}); ok && isImport && data.DisableHA == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableHA = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_url_categorization"].(map[string]interface{}); ok && isImport && data.DisableURLCategorization == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableURLCategorization = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["dns_ntp_config"].(map[string]interface{}); ok && isImport && data.DNSNTPConfig == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DNSNTPConfig = &SecuremeshSiteV2DNSNTPConfigModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["enable_ha"].(map[string]interface{}); ok && isImport && data.EnableHA == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableHA = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["enable_url_categorization"].(map[string]interface{}); ok && isImport && data.EnableURLCategorization == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableURLCategorization = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["equinix"].(map[string]interface{}); ok && isImport && data.Equinix == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Equinix = &SecuremeshSiteV2EquinixModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["f5_proxy"].(map[string]interface{}); ok && isImport && data.F5Proxy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.F5Proxy = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["gcp"].(map[string]interface{}); ok && isImport && data.GCP == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.GCP = &SecuremeshSiteV2GCPModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["kvm"].(map[string]interface{}); ok && isImport && data.KVM == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.KVM = &SecuremeshSiteV2KVMModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["load_balancing"].(map[string]interface{}); ok && (isImport || data.LoadBalancing != nil) {
+		data.LoadBalancing = &SecuremeshSiteV2LoadBalancingModel{
+			VipVrrpMode: func() types.String {
+				if v, ok := blockData["vip_vrrp_mode"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["local_vrf"].(map[string]interface{}); ok && isImport && data.LocalVrf == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LocalVrf = &SecuremeshSiteV2LocalVrfModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["log_receiver"].(map[string]interface{}); ok && (isImport || data.LogReceiver != nil) {
+		data.LogReceiver = &SecuremeshSiteV2LogReceiverModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["logs_streaming_disabled"].(map[string]interface{}); ok && isImport && data.LogsStreamingDisabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LogsStreamingDisabled = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_forward_proxy"].(map[string]interface{}); ok && isImport && data.NoForwardProxy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoForwardProxy = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_network_policy"].(map[string]interface{}); ok && isImport && data.NoNetworkPolicy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoNetworkPolicy = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_proxy_bypass"].(map[string]interface{}); ok && isImport && data.NoProxyBypass == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoProxyBypass = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_s2s_connectivity_sli"].(map[string]interface{}); ok && isImport && data.NoS2SConnectivitySLI == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoS2SConnectivitySLI = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_s2s_connectivity_slo"].(map[string]interface{}); ok && isImport && data.NoS2SConnectivitySLO == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoS2SConnectivitySLO = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["nutanix"].(map[string]interface{}); ok && isImport && data.Nutanix == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Nutanix = &SecuremeshSiteV2NutanixModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["oci"].(map[string]interface{}); ok && isImport && data.OCI == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.OCI = &SecuremeshSiteV2OCIModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["offline_survivability_mode"].(map[string]interface{}); ok && isImport && data.OfflineSurvivabilityMode == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.OfflineSurvivabilityMode = &SecuremeshSiteV2OfflineSurvivabilityModeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["openstack"].(map[string]interface{}); ok && isImport && data.Openstack == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Openstack = &SecuremeshSiteV2OpenstackModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["performance_enhancement_mode"].(map[string]interface{}); ok && isImport && data.PerformanceEnhancementMode == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PerformanceEnhancementMode = &SecuremeshSiteV2PerformanceEnhancementModeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["re_select"].(map[string]interface{}); ok && isImport && data.ReSelect == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ReSelect = &SecuremeshSiteV2ReSelectModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["site_mesh_group_on_slo"].(map[string]interface{}); ok && isImport && data.SiteMeshGroupOnSLO == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SiteMeshGroupOnSLO = &SecuremeshSiteV2SiteMeshGroupOnSLOModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["software_settings"].(map[string]interface{}); ok && isImport && data.SoftwareSettings == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SoftwareSettings = &SecuremeshSiteV2SoftwareSettingsModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["upgrade_settings"].(map[string]interface{}); ok && isImport && data.UpgradeSettings == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UpgradeSettings = &SecuremeshSiteV2UpgradeSettingsModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["vmware"].(map[string]interface{}); ok && isImport && data.Vmware == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Vmware = &SecuremeshSiteV2VmwareModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["tunnel_dead_timeout"].(float64); ok {
+		data.TunnelDeadTimeout = types.Int64Value(int64(v))
+	} else {
+		data.TunnelDeadTimeout = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["tunnel_type"].(string); ok && v != "" {
+		data.TunnelType = types.StringValue(v)
+	} else {
+		data.TunnelType = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

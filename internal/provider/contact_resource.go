@@ -683,7 +683,7 @@ func (r *ContactResource) Update(ctx context.Context, req resource.UpdateRequest
 		apiResource.Spec["zip_code"] = data.ZipCode.ValueString()
 	}
 
-	updated, err := r.client.UpdateContact(ctx, apiResource)
+	_, err := r.client.UpdateContact(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Contact: %s", err))
 		return
@@ -692,71 +692,79 @@ func (r *ContactResource) Update(ctx context.Context, req resource.UpdateRequest
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetContact(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Contact after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["address1"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["address1"].(string); ok && v != "" {
 		data.Address1 = types.StringValue(v)
 	} else if data.Address1.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.Address1 = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["address2"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["address2"].(string); ok && v != "" {
 		data.Address2 = types.StringValue(v)
 	} else if data.Address2.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.Address2 = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["city"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["city"].(string); ok && v != "" {
 		data.City = types.StringValue(v)
 	} else if data.City.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.City = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["contact_type"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["contact_type"].(string); ok && v != "" {
 		data.ContactType = types.StringValue(v)
 	} else if data.ContactType.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.ContactType = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["country"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["country"].(string); ok && v != "" {
 		data.Country = types.StringValue(v)
 	} else if data.Country.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.Country = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["county"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["county"].(string); ok && v != "" {
 		data.County = types.StringValue(v)
 	} else if data.County.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.County = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["phone_number"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["phone_number"].(string); ok && v != "" {
 		data.PhoneNumber = types.StringValue(v)
 	} else if data.PhoneNumber.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.PhoneNumber = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["state"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["state"].(string); ok && v != "" {
 		data.State = types.StringValue(v)
 	} else if data.State.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.State = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["state_code"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["state_code"].(string); ok && v != "" {
 		data.StateCode = types.StringValue(v)
 	} else if data.StateCode.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.StateCode = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["zip_code"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["zip_code"].(string); ok && v != "" {
 		data.ZipCode = types.StringValue(v)
 	} else if data.ZipCode.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -764,16 +772,64 @@ func (r *ContactResource) Update(ctx context.Context, req resource.UpdateRequest
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetContact(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
-		}
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if v, ok := apiResource.Spec["address1"].(string); ok && v != "" {
+		data.Address1 = types.StringValue(v)
+	} else {
+		data.Address1 = types.StringNull()
 	}
+	if v, ok := apiResource.Spec["address2"].(string); ok && v != "" {
+		data.Address2 = types.StringValue(v)
+	} else {
+		data.Address2 = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["city"].(string); ok && v != "" {
+		data.City = types.StringValue(v)
+	} else {
+		data.City = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["contact_type"].(string); ok && v != "" {
+		data.ContactType = types.StringValue(v)
+	} else {
+		data.ContactType = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["country"].(string); ok && v != "" {
+		data.Country = types.StringValue(v)
+	} else {
+		data.Country = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["county"].(string); ok && v != "" {
+		data.County = types.StringValue(v)
+	} else {
+		data.County = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["phone_number"].(string); ok && v != "" {
+		data.PhoneNumber = types.StringValue(v)
+	} else {
+		data.PhoneNumber = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["state"].(string); ok && v != "" {
+		data.State = types.StringValue(v)
+	} else {
+		data.State = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["state_code"].(string); ok && v != "" {
+		data.StateCode = types.StringValue(v)
+	} else {
+		data.StateCode = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["zip_code"].(string); ok && v != "" {
+		data.ZipCode = types.StringValue(v)
+	} else {
+		data.ZipCode = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

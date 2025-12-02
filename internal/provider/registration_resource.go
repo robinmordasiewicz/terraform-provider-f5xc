@@ -1783,7 +1783,7 @@ func (r *RegistrationResource) Update(ctx context.Context, req resource.UpdateRe
 		apiResource.Spec["token"] = data.Token.ValueString()
 	}
 
-	updated, err := r.client.UpdateRegistration(ctx, apiResource)
+	_, err := r.client.UpdateRegistration(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Registration: %s", err))
 		return
@@ -1792,8 +1792,16 @@ func (r *RegistrationResource) Update(ctx context.Context, req resource.UpdateRe
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetRegistration(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Registration after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["token"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["token"].(string); ok && v != "" {
 		data.Token = types.StringValue(v)
 	} else if data.Token.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -1801,16 +1809,237 @@ func (r *RegistrationResource) Update(ctx context.Context, req resource.UpdateRe
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetRegistration(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["infra"].(map[string]interface{}); ok && (isImport || data.Infra != nil) {
+		data.Infra = &RegistrationInfraModel{
+			AvailabilityZone: func() types.String {
+				if v, ok := blockData["availability_zone"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			CertifiedHw: func() types.String {
+				if v, ok := blockData["certified_hw"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Domain: func() types.String {
+				if v, ok := blockData["domain"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Hostname: func() types.String {
+				if v, ok := blockData["hostname"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			HwInfo: func() *RegistrationInfraHwInfoModel {
+				if !isImport && data.Infra != nil && data.Infra.HwInfo != nil {
+					// Normal Read: preserve existing state value
+					return data.Infra.HwInfo
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["hw_info"].(map[string]interface{}); ok {
+					return &RegistrationInfraHwInfoModel{
+						NumaNodes: func() types.Int64 {
+							if v, ok := nestedBlockData["numa_nodes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			InstanceID: func() types.String {
+				if v, ok := blockData["instance_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Interfaces: func() *RegistrationEmptyModel {
+				if !isImport && data.Infra != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Infra.Interfaces
+				}
+				// Import case: read from API
+				if _, ok := blockData["interfaces"].(map[string]interface{}); ok {
+					return &RegistrationEmptyModel{}
+				}
+				return nil
+			}(),
+			InternetProxy: func() *RegistrationInfraInternetProxyModel {
+				if !isImport && data.Infra != nil && data.Infra.InternetProxy != nil {
+					// Normal Read: preserve existing state value
+					return data.Infra.InternetProxy
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["internet_proxy"].(map[string]interface{}); ok {
+					return &RegistrationInfraInternetProxyModel{
+						HTTPProxy: func() types.String {
+							if v, ok := nestedBlockData["http_proxy"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						HTTPSProxy: func() types.String {
+							if v, ok := nestedBlockData["https_proxy"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						NoProxy: func() types.String {
+							if v, ok := nestedBlockData["no_proxy"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						ProxyCacertURL: func() types.String {
+							if v, ok := nestedBlockData["proxy_cacert_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			MachineID: func() types.String {
+				if v, ok := blockData["machine_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Provider: func() types.String {
+				if v, ok := blockData["provider"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			SwInfo: func() *RegistrationInfraSwInfoModel {
+				if !isImport && data.Infra != nil && data.Infra.SwInfo != nil {
+					// Normal Read: preserve existing state value
+					return data.Infra.SwInfo
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["sw_info"].(map[string]interface{}); ok {
+					return &RegistrationInfraSwInfoModel{
+						SwVersion: func() types.String {
+							if v, ok := nestedBlockData["sw_version"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Timestamp: func() types.String {
+				if v, ok := blockData["timestamp"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Zone: func() types.String {
+				if v, ok := blockData["zone"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["passport"].(map[string]interface{}); ok && (isImport || data.Passport != nil) {
+		data.Passport = &RegistrationPassportModel{
+			ClusterName: func() types.String {
+				if v, ok := blockData["cluster_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ClusterSize: func() types.Int64 {
+				if v, ok := blockData["cluster_size"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			ClusterType: func() types.String {
+				if v, ok := blockData["cluster_type"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			DefaultOsVersion: func() *RegistrationEmptyModel {
+				if !isImport && data.Passport != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Passport.DefaultOsVersion
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_os_version"].(map[string]interface{}); ok {
+					return &RegistrationEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultSwVersion: func() *RegistrationEmptyModel {
+				if !isImport && data.Passport != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Passport.DefaultSwVersion
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_sw_version"].(map[string]interface{}); ok {
+					return &RegistrationEmptyModel{}
+				}
+				return nil
+			}(),
+			Latitude: func() types.Int64 {
+				if v, ok := blockData["latitude"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Longitude: func() types.Int64 {
+				if v, ok := blockData["longitude"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			OperatingSystemVersion: func() types.String {
+				if v, ok := blockData["operating_system_version"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			PrivateNetworkName: func() types.String {
+				if v, ok := blockData["private_network_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			VolterraSoftwareVersion: func() types.String {
+				if v, ok := blockData["volterra_software_version"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["token"].(string); ok && v != "" {
+		data.Token = types.StringValue(v)
+	} else {
+		data.Token = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

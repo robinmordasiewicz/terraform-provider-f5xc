@@ -784,7 +784,7 @@ func (r *SecretPolicyResource) Update(ctx context.Context, req resource.UpdateRe
 		apiResource.Spec["decrypt_cache_timeout"] = data.DecryptCacheTimeout.ValueString()
 	}
 
-	updated, err := r.client.UpdateSecretPolicy(ctx, apiResource)
+	_, err := r.client.UpdateSecretPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update SecretPolicy: %s", err))
 		return
@@ -793,15 +793,23 @@ func (r *SecretPolicyResource) Update(ctx context.Context, req resource.UpdateRe
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetSecretPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read SecretPolicy after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["allow_f5xc"].(bool); ok {
+	if v, ok := fetched.Spec["allow_f5xc"].(bool); ok {
 		data.AllowF5xc = types.BoolValue(v)
 	} else if data.AllowF5xc.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.AllowF5xc = types.BoolNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["decrypt_cache_timeout"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["decrypt_cache_timeout"].(string); ok && v != "" {
 		data.DecryptCacheTimeout = types.StringValue(v)
 	} else if data.DecryptCacheTimeout.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -809,16 +817,85 @@ func (r *SecretPolicyResource) Update(ctx context.Context, req resource.UpdateRe
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetSecretPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["rule_list"].(map[string]interface{}); ok && (isImport || data.RuleList != nil) {
+		data.RuleList = &SecretPolicyRuleListModel{
+			Rules: func() []SecretPolicyRuleListRulesModel {
+				if listData, ok := blockData["rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []SecretPolicyRuleListRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, SecretPolicyRuleListRulesModel{
+								Metadata: func() *SecretPolicyRuleListRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &SecretPolicyRuleListRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Spec: func() *SecretPolicyRuleListRulesSpecModel {
+									if deepMap, ok := itemMap["spec"].(map[string]interface{}); ok {
+										return &SecretPolicyRuleListRulesSpecModel{
+											Action: func() types.String {
+												if v, ok := deepMap["action"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											ClientName: func() types.String {
+												if v, ok := deepMap["client_name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
 		}
 	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.AllowF5xc.IsNull() && !data.AllowF5xc.IsUnknown() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case, null state, or unknown (after Create): read from API
+		if v, ok := apiResource.Spec["allow_f5xc"].(bool); ok {
+			data.AllowF5xc = types.BoolValue(v)
+		} else {
+			data.AllowF5xc = types.BoolNull()
+		}
+	}
+	if v, ok := apiResource.Spec["decrypt_cache_timeout"].(string); ok && v != "" {
+		data.DecryptCacheTimeout = types.StringValue(v)
+	} else {
+		data.DecryptCacheTimeout = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

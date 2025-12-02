@@ -114,12 +114,12 @@ func TestAccDNSZoneResource_allAttributes(t *testing.T) {
 					resource.TestCheckResourceAttr(resourceName, "labels.managed_by", "terraform-acceptance-test"),
 					resource.TestCheckResourceAttr(resourceName, "annotations.purpose", "acceptance-testing"),
 					resource.TestCheckResourceAttr(resourceName, "annotations.owner", "ci-cd"),
-					// Verify default_rr_set_group with A record
-					resource.TestCheckResourceAttr(resourceName, "default_rr_set_group.#", "1"),
-					resource.TestCheckResourceAttr(resourceName, "default_rr_set_group.0.a_record.name", "@"),
-					resource.TestCheckResourceAttr(resourceName, "default_rr_set_group.0.a_record.values.#", "1"),
-					resource.TestCheckResourceAttr(resourceName, "default_rr_set_group.0.a_record.values.0", "192.0.2.1"),
-					resource.TestCheckResourceAttr(resourceName, "default_rr_set_group.0.ttl", "300"),
+					// Verify primary.default_rr_set_group with A record
+					resource.TestCheckResourceAttr(resourceName, "primary.0.default_rr_set_group.#", "1"),
+					resource.TestCheckResourceAttr(resourceName, "primary.0.default_rr_set_group.0.a_record.name", "@"),
+					resource.TestCheckResourceAttr(resourceName, "primary.0.default_rr_set_group.0.a_record.values.#", "1"),
+					resource.TestCheckResourceAttr(resourceName, "primary.0.default_rr_set_group.0.a_record.values.0", "192.0.2.1"),
+					resource.TestCheckResourceAttr(resourceName, "primary.0.default_rr_set_group.0.ttl", "300"),
 				),
 			},
 			// Import verification for all attributes
@@ -553,12 +553,13 @@ resource "f5xc_dns_zone" "test" {
   name      = %[1]q
   namespace = "system"
 
-  # SOA parameters are required - use default
-  default_soa_parameters {}
+  # Primary zone configuration with SOA parameters and DNSSEC mode
+  primary {
+    default_soa_parameters {}
 
-  # DNSSEC mode with disable
-  dnssec_mode {
-    disable {}
+    dnssec_mode {
+      disable {}
+    }
   }
 }
 `, name))
@@ -583,20 +584,23 @@ resource "f5xc_dns_zone" "test" {
     owner   = "ci-cd"
   }
 
-  # SOA parameters
-  default_soa_parameters {}
+  # Primary zone configuration
+  primary {
+    # SOA parameters
+    default_soa_parameters {}
 
-  # DNSSEC mode
-  dnssec_mode {
-    disable {}
-  }
+    # DNSSEC mode
+    dnssec_mode {
+      disable {}
+    }
 
-  # DNS records
-  default_rr_set_group {
-    ttl = 300
-    a_record {
-      name   = "@"
-      values = ["192.0.2.1"]
+    # DNS records
+    default_rr_set_group {
+      ttl = 300
+      a_record {
+        name   = "@"
+        values = ["192.0.2.1"]
+      }
     }
   }
 }
@@ -616,12 +620,13 @@ resource "f5xc_dns_zone" "test" {
     managed_by  = %[3]q
   }
 
-  # SOA parameters
-  default_soa_parameters {}
+  # Primary zone configuration
+  primary {
+    default_soa_parameters {}
 
-  # DNSSEC mode
-  dnssec_mode {
-    disable {}
+    dnssec_mode {
+      disable {}
+    }
   }
 }
 `, name, environment, managedBy))
@@ -636,12 +641,13 @@ resource "f5xc_dns_zone" "test" {
   namespace   = "system"
   description = %[2]q
 
-  # SOA parameters
-  default_soa_parameters {}
+  # Primary zone configuration
+  primary {
+    default_soa_parameters {}
 
-  # DNSSEC mode
-  dnssec_mode {
-    disable {}
+    dnssec_mode {
+      disable {}
+    }
   }
 }
 `, name, description))
@@ -660,12 +666,13 @@ resource "f5xc_dns_zone" "test" {
     key2 = %[3]q
   }
 
-  # SOA parameters
-  default_soa_parameters {}
+  # Primary zone configuration
+  primary {
+    default_soa_parameters {}
 
-  # DNSSEC mode
-  dnssec_mode {
-    disable {}
+    dnssec_mode {
+      disable {}
+    }
   }
 }
 `, name, value1, value2))

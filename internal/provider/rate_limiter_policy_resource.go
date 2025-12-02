@@ -1586,7 +1586,7 @@ func (r *RateLimiterPolicyResource) Update(ctx context.Context, req resource.Upd
 		apiResource.Spec["server_name"] = data.ServerName.ValueString()
 	}
 
-	updated, err := r.client.UpdateRateLimiterPolicy(ctx, apiResource)
+	_, err := r.client.UpdateRateLimiterPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update RateLimiterPolicy: %s", err))
 		return
@@ -1595,8 +1595,16 @@ func (r *RateLimiterPolicyResource) Update(ctx context.Context, req resource.Upd
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetRateLimiterPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read RateLimiterPolicy after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["server_name"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["server_name"].(string); ok && v != "" {
 		data.ServerName = types.StringValue(v)
 	} else if data.ServerName.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -1604,16 +1612,138 @@ func (r *RateLimiterPolicyResource) Update(ctx context.Context, req resource.Upd
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetRateLimiterPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["any_server"].(map[string]interface{}); ok && isImport && data.AnyServer == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AnyServer = &RateLimiterPolicyEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["rules"].([]interface{}); ok && len(listData) > 0 {
+		var rulesList []RateLimiterPolicyRulesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				rulesList = append(rulesList, RateLimiterPolicyRulesModel{
+					Metadata: func() *RateLimiterPolicyRulesMetadataModel {
+						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+							return &RateLimiterPolicyRulesMetadataModel{
+								DescriptionSpec: func() types.String {
+									if v, ok := nestedMap["description"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Spec: func() *RateLimiterPolicyRulesSpecModel {
+						if _, ok := itemMap["spec"].(map[string]interface{}); ok {
+							return &RateLimiterPolicyRulesSpecModel{
+								AnyAsn: func() *RateLimiterPolicyEmptyModel {
+									if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Spec != nil && data.Rules[listIdx].Spec.AnyAsn != nil {
+										return &RateLimiterPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								AnyCountry: func() *RateLimiterPolicyEmptyModel {
+									if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Spec != nil && data.Rules[listIdx].Spec.AnyCountry != nil {
+										return &RateLimiterPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								AnyIP: func() *RateLimiterPolicyEmptyModel {
+									if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Spec != nil && data.Rules[listIdx].Spec.AnyIP != nil {
+										return &RateLimiterPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								ApplyRateLimiter: func() *RateLimiterPolicyEmptyModel {
+									if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Spec != nil && data.Rules[listIdx].Spec.ApplyRateLimiter != nil {
+										return &RateLimiterPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								BypassRateLimiter: func() *RateLimiterPolicyEmptyModel {
+									if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Spec != nil && data.Rules[listIdx].Spec.BypassRateLimiter != nil {
+										return &RateLimiterPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.Rules = rulesList
+	}
+	if blockData, ok := apiResource.Spec["server_name_matcher"].(map[string]interface{}); ok && (isImport || data.ServerNameMatcher != nil) {
+		data.ServerNameMatcher = &RateLimiterPolicyServerNameMatcherModel{
+			ExactValues: func() types.List {
+				if v, ok := blockData["exact_values"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			RegexValues: func() types.List {
+				if v, ok := blockData["regex_values"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["server_selector"].(map[string]interface{}); ok && (isImport || data.ServerSelector != nil) {
+		data.ServerSelector = &RateLimiterPolicyServerSelectorModel{
+			Expressions: func() types.List {
+				if v, ok := blockData["expressions"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["server_name"].(string); ok && v != "" {
+		data.ServerName = types.StringValue(v)
+	} else {
+		data.ServerName = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

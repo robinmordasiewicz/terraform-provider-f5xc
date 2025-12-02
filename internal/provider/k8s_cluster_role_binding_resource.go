@@ -709,7 +709,7 @@ func (r *K8SClusterRoleBindingResource) Update(ctx context.Context, req resource
 		apiResource.Spec["subjects"] = subjectsList
 	}
 
-	updated, err := r.client.UpdateK8SClusterRoleBinding(ctx, apiResource)
+	_, err := r.client.UpdateK8SClusterRoleBinding(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update K8SClusterRoleBinding: %s", err))
 		return
@@ -718,18 +718,88 @@ func (r *K8SClusterRoleBindingResource) Update(ctx context.Context, req resource
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetK8SClusterRoleBinding(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read K8SClusterRoleBinding after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetK8SClusterRoleBinding(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["k8s_cluster_role"].(map[string]interface{}); ok && (isImport || data.K8SClusterRole != nil) {
+		data.K8SClusterRole = &K8SClusterRoleBindingK8SClusterRoleModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
 		}
 	}
+	if listData, ok := apiResource.Spec["subjects"].([]interface{}); ok && len(listData) > 0 {
+		var subjectsList []K8SClusterRoleBindingSubjectsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				subjectsList = append(subjectsList, K8SClusterRoleBindingSubjectsModel{
+					Group: func() types.String {
+						if v, ok := itemMap["group"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					ServiceAccount: func() *K8SClusterRoleBindingSubjectsServiceAccountModel {
+						if nestedMap, ok := itemMap["service_account"].(map[string]interface{}); ok {
+							return &K8SClusterRoleBindingSubjectsServiceAccountModel{
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := nestedMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					User: func() types.String {
+						if v, ok := itemMap["user"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.Subjects = subjectsList
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

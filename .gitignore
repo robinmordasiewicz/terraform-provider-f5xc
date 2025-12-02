@@ -43,3 +43,6 @@ bin/
 # Claude Code working files
 claudedocs/
 .serena/
+
+# Local temporary files
+tmp/

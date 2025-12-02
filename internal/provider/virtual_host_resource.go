@@ -6670,7 +6670,7 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 		apiResource.Spec["server_name"] = data.ServerName.ValueString()
 	}
 
-	updated, err := r.client.UpdateVirtualHost(ctx, apiResource)
+	_, err := r.client.UpdateVirtualHost(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update VirtualHost: %s", err))
 		return
@@ -6679,64 +6679,72 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetVirtualHost(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read VirtualHost after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["add_location"].(bool); ok {
+	if v, ok := fetched.Spec["add_location"].(bool); ok {
 		data.AddLocation = types.BoolValue(v)
 	} else if data.AddLocation.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.AddLocation = types.BoolNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["append_server_name"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["append_server_name"].(string); ok && v != "" {
 		data.AppendServerName = types.StringValue(v)
 	} else if data.AppendServerName.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.AppendServerName = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["connection_idle_timeout"].(float64); ok {
+	if v, ok := fetched.Spec["connection_idle_timeout"].(float64); ok {
 		data.ConnectionIdleTimeout = types.Int64Value(int64(v))
 	} else if data.ConnectionIdleTimeout.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.ConnectionIdleTimeout = types.Int64Null()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["disable_default_error_pages"].(bool); ok {
+	if v, ok := fetched.Spec["disable_default_error_pages"].(bool); ok {
 		data.DisableDefaultErrorPages = types.BoolValue(v)
 	} else if data.DisableDefaultErrorPages.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.DisableDefaultErrorPages = types.BoolNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["disable_dns_resolve"].(bool); ok {
+	if v, ok := fetched.Spec["disable_dns_resolve"].(bool); ok {
 		data.DisableDNSResolve = types.BoolValue(v)
 	} else if data.DisableDNSResolve.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.DisableDNSResolve = types.BoolNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["idle_timeout"].(float64); ok {
+	if v, ok := fetched.Spec["idle_timeout"].(float64); ok {
 		data.IdleTimeout = types.Int64Value(int64(v))
 	} else if data.IdleTimeout.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.IdleTimeout = types.Int64Null()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["max_request_header_size"].(float64); ok {
+	if v, ok := fetched.Spec["max_request_header_size"].(float64); ok {
 		data.MaxRequestHeaderSize = types.Int64Value(int64(v))
 	} else if data.MaxRequestHeaderSize.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.MaxRequestHeaderSize = types.Int64Null()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["proxy"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["proxy"].(string); ok && v != "" {
 		data.Proxy = types.StringValue(v)
 	} else if data.Proxy.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.Proxy = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["server_name"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["server_name"].(string); ok && v != "" {
 		data.ServerName = types.StringValue(v)
 	} else if data.ServerName.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -6744,16 +6752,1375 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetVirtualHost(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["advertise_policies"].([]interface{}); ok && len(listData) > 0 {
+		var advertise_policiesList []VirtualHostAdvertisePoliciesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				advertise_policiesList = append(advertise_policiesList, VirtualHostAdvertisePoliciesModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.AdvertisePolicies = advertise_policiesList
+	}
+	if blockData, ok := apiResource.Spec["authentication"].(map[string]interface{}); ok && (isImport || data.Authentication != nil) {
+		data.Authentication = &VirtualHostAuthenticationModel{
+			AuthConfig: func() []VirtualHostAuthenticationAuthConfigModel {
+				if listData, ok := blockData["auth_config"].([]interface{}); ok && len(listData) > 0 {
+					var result []VirtualHostAuthenticationAuthConfigModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, VirtualHostAuthenticationAuthConfigModel{
+								Kind: func() types.String {
+									if v, ok := itemMap["kind"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Uid: func() types.String {
+									if v, ok := itemMap["uid"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			CookieParams: func() *VirtualHostAuthenticationCookieParamsModel {
+				if !isImport && data.Authentication != nil && data.Authentication.CookieParams != nil {
+					// Normal Read: preserve existing state value
+					return data.Authentication.CookieParams
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["cookie_params"].(map[string]interface{}); ok {
+					return &VirtualHostAuthenticationCookieParamsModel{
+						CookieExpiry: func() types.Int64 {
+							if v, ok := nestedBlockData["cookie_expiry"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						CookieRefreshInterval: func() types.Int64 {
+							if v, ok := nestedBlockData["cookie_refresh_interval"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						SessionExpiry: func() types.Int64 {
+							if v, ok := nestedBlockData["session_expiry"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			RedirectDynamic: func() *VirtualHostEmptyModel {
+				if !isImport && data.Authentication != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Authentication.RedirectDynamic
+				}
+				// Import case: read from API
+				if _, ok := blockData["redirect_dynamic"].(map[string]interface{}); ok {
+					return &VirtualHostEmptyModel{}
+				}
+				return nil
+			}(),
+			RedirectURL: func() types.String {
+				if v, ok := blockData["redirect_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			UseAuthObjectConfig: func() *VirtualHostEmptyModel {
+				if !isImport && data.Authentication != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Authentication.UseAuthObjectConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["use_auth_object_config"].(map[string]interface{}); ok {
+					return &VirtualHostEmptyModel{}
+				}
+				return nil
+			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["buffer_policy"].(map[string]interface{}); ok && (isImport || data.BufferPolicy != nil) {
+		data.BufferPolicy = &VirtualHostBufferPolicyModel{
+			Disabled: func() types.Bool {
+				if !isImport && data.BufferPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.BufferPolicy.Disabled
+				}
+				// Import case: read from API
+				if v, ok := blockData["disabled"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			MaxRequestBytes: func() types.Int64 {
+				if v, ok := blockData["max_request_bytes"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["captcha_challenge"].(map[string]interface{}); ok && (isImport || data.CaptchaChallenge != nil) {
+		data.CaptchaChallenge = &VirtualHostCaptchaChallengeModel{
+			CookieExpiry: func() types.Int64 {
+				if v, ok := blockData["cookie_expiry"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			CustomPage: func() types.String {
+				if v, ok := blockData["custom_page"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["coalescing_options"].(map[string]interface{}); ok && isImport && data.CoalescingOptions == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.CoalescingOptions = &VirtualHostCoalescingOptionsModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["compression_params"].(map[string]interface{}); ok && (isImport || data.CompressionParams != nil) {
+		data.CompressionParams = &VirtualHostCompressionParamsModel{
+			ContentLength: func() types.Int64 {
+				if v, ok := blockData["content_length"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			ContentType: func() types.List {
+				if v, ok := blockData["content_type"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			DisableOnEtagHeader: func() types.Bool {
+				if !isImport && data.CompressionParams != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CompressionParams.DisableOnEtagHeader
+				}
+				// Import case: read from API
+				if v, ok := blockData["disable_on_etag_header"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			RemoveAcceptEncodingHeader: func() types.Bool {
+				if !isImport && data.CompressionParams != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CompressionParams.RemoveAcceptEncodingHeader
+				}
+				// Import case: read from API
+				if v, ok := blockData["remove_accept_encoding_header"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["cors_policy"].(map[string]interface{}); ok && (isImport || data.CorsPolicy != nil) {
+		data.CorsPolicy = &VirtualHostCorsPolicyModel{
+			AllowCredentials: func() types.Bool {
+				if !isImport && data.CorsPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CorsPolicy.AllowCredentials
+				}
+				// Import case: read from API
+				if v, ok := blockData["allow_credentials"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			AllowHeaders: func() types.String {
+				if v, ok := blockData["allow_headers"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			AllowMethods: func() types.String {
+				if v, ok := blockData["allow_methods"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			AllowOrigin: func() types.List {
+				if v, ok := blockData["allow_origin"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			AllowOriginRegex: func() types.List {
+				if v, ok := blockData["allow_origin_regex"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			Disabled: func() types.Bool {
+				if !isImport && data.CorsPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CorsPolicy.Disabled
+				}
+				// Import case: read from API
+				if v, ok := blockData["disabled"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			ExposeHeaders: func() types.String {
+				if v, ok := blockData["expose_headers"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			MaximumAge: func() types.Int64 {
+				if v, ok := blockData["maximum_age"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["csrf_policy"].(map[string]interface{}); ok && isImport && data.CsrfPolicy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.CsrfPolicy = &VirtualHostCsrfPolicyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["custom_errors"].(map[string]interface{}); ok && isImport && data.CustomErrors == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.CustomErrors = &VirtualHostEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["default_header"].(map[string]interface{}); ok && isImport && data.DefaultHeader == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultHeader = &VirtualHostEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["default_loadbalancer"].(map[string]interface{}); ok && isImport && data.DefaultLoadBalancer == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultLoadBalancer = &VirtualHostEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_path_normalize"].(map[string]interface{}); ok && isImport && data.DisablePathNormalize == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisablePathNormalize = &VirtualHostEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["domains"].([]interface{}); ok && len(v) > 0 {
+		var domainsList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				domainsList = append(domainsList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, domainsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Domains = listVal
+		}
+	} else {
+		data.Domains = types.ListNull(types.StringType)
+	}
+	if blockData, ok := apiResource.Spec["dynamic_reverse_proxy"].(map[string]interface{}); ok && (isImport || data.DynamicReverseProxy != nil) {
+		data.DynamicReverseProxy = &VirtualHostDynamicReverseProxyModel{
+			ConnectionTimeout: func() types.Int64 {
+				if v, ok := blockData["connection_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			ResolutionNetwork: func() []VirtualHostDynamicReverseProxyResolutionNetworkModel {
+				if listData, ok := blockData["resolution_network"].([]interface{}); ok && len(listData) > 0 {
+					var result []VirtualHostDynamicReverseProxyResolutionNetworkModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, VirtualHostDynamicReverseProxyResolutionNetworkModel{
+								Kind: func() types.String {
+									if v, ok := itemMap["kind"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Uid: func() types.String {
+									if v, ok := itemMap["uid"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			ResolutionNetworkType: func() types.String {
+				if v, ok := blockData["resolution_network_type"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ResolveEndpointDynamically: func() types.Bool {
+				if !isImport && data.DynamicReverseProxy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.DynamicReverseProxy.ResolveEndpointDynamically
+				}
+				// Import case: read from API
+				if v, ok := blockData["resolve_endpoint_dynamically"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["enable_path_normalize"].(map[string]interface{}); ok && isImport && data.EnablePathNormalize == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnablePathNormalize = &VirtualHostEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["http_protocol_options"].(map[string]interface{}); ok && isImport && data.HTTPProtocolOptions == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.HTTPProtocolOptions = &VirtualHostHTTPProtocolOptionsModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["js_challenge"].(map[string]interface{}); ok && (isImport || data.JsChallenge != nil) {
+		data.JsChallenge = &VirtualHostJsChallengeModel{
+			CookieExpiry: func() types.Int64 {
+				if v, ok := blockData["cookie_expiry"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			CustomPage: func() types.String {
+				if v, ok := blockData["custom_page"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			JsScriptDelay: func() types.Int64 {
+				if v, ok := blockData["js_script_delay"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["no_authentication"].(map[string]interface{}); ok && isImport && data.NoAuthentication == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoAuthentication = &VirtualHostEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_challenge"].(map[string]interface{}); ok && isImport && data.NoChallenge == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoChallenge = &VirtualHostEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["non_default_loadbalancer"].(map[string]interface{}); ok && isImport && data.NonDefaultLoadBalancer == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NonDefaultLoadBalancer = &VirtualHostEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["pass_through"].(map[string]interface{}); ok && isImport && data.PassThrough == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PassThrough = &VirtualHostEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["rate_limiter_allowed_prefixes"].([]interface{}); ok && len(listData) > 0 {
+		var rate_limiter_allowed_prefixesList []VirtualHostRateLimiterAllowedPrefixesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				rate_limiter_allowed_prefixesList = append(rate_limiter_allowed_prefixesList, VirtualHostRateLimiterAllowedPrefixesModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.RateLimiterAllowedPrefixes = rate_limiter_allowed_prefixesList
+	}
+	if listData, ok := apiResource.Spec["request_cookies_to_add"].([]interface{}); ok && len(listData) > 0 {
+		var request_cookies_to_addList []VirtualHostRequestCookiesToAddModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				request_cookies_to_addList = append(request_cookies_to_addList, VirtualHostRequestCookiesToAddModel{
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Overwrite: func() types.Bool {
+						if v, ok := itemMap["overwrite"].(bool); ok {
+							return types.BoolValue(v)
+						}
+						return types.BoolNull()
+					}(),
+					SecretValue: func() *VirtualHostRequestCookiesToAddSecretValueModel {
+						if _, ok := itemMap["secret_value"].(map[string]interface{}); ok {
+							return &VirtualHostRequestCookiesToAddSecretValueModel{}
+						}
+						return nil
+					}(),
+					Value: func() types.String {
+						if v, ok := itemMap["value"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.RequestCookiesToAdd = request_cookies_to_addList
+	}
+	if v, ok := apiResource.Spec["request_cookies_to_remove"].([]interface{}); ok && len(v) > 0 {
+		var request_cookies_to_removeList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				request_cookies_to_removeList = append(request_cookies_to_removeList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, request_cookies_to_removeList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.RequestCookiesToRemove = listVal
+		}
+	} else {
+		data.RequestCookiesToRemove = types.ListNull(types.StringType)
+	}
+	if listData, ok := apiResource.Spec["request_headers_to_add"].([]interface{}); ok && len(listData) > 0 {
+		var request_headers_to_addList []VirtualHostRequestHeadersToAddModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				request_headers_to_addList = append(request_headers_to_addList, VirtualHostRequestHeadersToAddModel{
+					Append: func() types.Bool {
+						if v, ok := itemMap["append"].(bool); ok {
+							return types.BoolValue(v)
+						}
+						return types.BoolNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					SecretValue: func() *VirtualHostRequestHeadersToAddSecretValueModel {
+						if _, ok := itemMap["secret_value"].(map[string]interface{}); ok {
+							return &VirtualHostRequestHeadersToAddSecretValueModel{}
+						}
+						return nil
+					}(),
+					Value: func() types.String {
+						if v, ok := itemMap["value"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.RequestHeadersToAdd = request_headers_to_addList
+	}
+	if v, ok := apiResource.Spec["request_headers_to_remove"].([]interface{}); ok && len(v) > 0 {
+		var request_headers_to_removeList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				request_headers_to_removeList = append(request_headers_to_removeList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, request_headers_to_removeList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.RequestHeadersToRemove = listVal
+		}
+	} else {
+		data.RequestHeadersToRemove = types.ListNull(types.StringType)
+	}
+	if listData, ok := apiResource.Spec["response_cookies_to_add"].([]interface{}); ok && len(listData) > 0 {
+		var response_cookies_to_addList []VirtualHostResponseCookiesToAddModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				response_cookies_to_addList = append(response_cookies_to_addList, VirtualHostResponseCookiesToAddModel{
+					AddDomain: func() types.String {
+						if v, ok := itemMap["add_domain"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					AddExpiry: func() types.String {
+						if v, ok := itemMap["add_expiry"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					AddHttponly: func() *VirtualHostEmptyModel {
+						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].AddHttponly != nil {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					AddPartitioned: func() *VirtualHostEmptyModel {
+						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].AddPartitioned != nil {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					AddPath: func() types.String {
+						if v, ok := itemMap["add_path"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					AddSecure: func() *VirtualHostEmptyModel {
+						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].AddSecure != nil {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnoreDomain: func() *VirtualHostEmptyModel {
+						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreDomain != nil {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnoreExpiry: func() *VirtualHostEmptyModel {
+						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreExpiry != nil {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnoreHttponly: func() *VirtualHostEmptyModel {
+						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreHttponly != nil {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnoreMaxAge: func() *VirtualHostEmptyModel {
+						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreMaxAge != nil {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnorePartitioned: func() *VirtualHostEmptyModel {
+						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnorePartitioned != nil {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnorePath: func() *VirtualHostEmptyModel {
+						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnorePath != nil {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnoreSamesite: func() *VirtualHostEmptyModel {
+						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreSamesite != nil {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnoreSecure: func() *VirtualHostEmptyModel {
+						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreSecure != nil {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnoreValue: func() *VirtualHostEmptyModel {
+						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreValue != nil {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					MaxAgeValue: func() types.Int64 {
+						if v, ok := itemMap["max_age_value"].(float64); ok && v != 0 {
+							return types.Int64Value(int64(v))
+						}
+						return types.Int64Null()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Overwrite: func() types.Bool {
+						if v, ok := itemMap["overwrite"].(bool); ok {
+							return types.BoolValue(v)
+						}
+						return types.BoolNull()
+					}(),
+					SamesiteLax: func() *VirtualHostEmptyModel {
+						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].SamesiteLax != nil {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					SamesiteNone: func() *VirtualHostEmptyModel {
+						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].SamesiteNone != nil {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					SamesiteStrict: func() *VirtualHostEmptyModel {
+						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].SamesiteStrict != nil {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					SecretValue: func() *VirtualHostResponseCookiesToAddSecretValueModel {
+						if _, ok := itemMap["secret_value"].(map[string]interface{}); ok {
+							return &VirtualHostResponseCookiesToAddSecretValueModel{}
+						}
+						return nil
+					}(),
+					Value: func() types.String {
+						if v, ok := itemMap["value"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.ResponseCookiesToAdd = response_cookies_to_addList
+	}
+	if v, ok := apiResource.Spec["response_cookies_to_remove"].([]interface{}); ok && len(v) > 0 {
+		var response_cookies_to_removeList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				response_cookies_to_removeList = append(response_cookies_to_removeList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, response_cookies_to_removeList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.ResponseCookiesToRemove = listVal
+		}
+	} else {
+		data.ResponseCookiesToRemove = types.ListNull(types.StringType)
+	}
+	if listData, ok := apiResource.Spec["response_headers_to_add"].([]interface{}); ok && len(listData) > 0 {
+		var response_headers_to_addList []VirtualHostResponseHeadersToAddModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				response_headers_to_addList = append(response_headers_to_addList, VirtualHostResponseHeadersToAddModel{
+					Append: func() types.Bool {
+						if v, ok := itemMap["append"].(bool); ok {
+							return types.BoolValue(v)
+						}
+						return types.BoolNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					SecretValue: func() *VirtualHostResponseHeadersToAddSecretValueModel {
+						if _, ok := itemMap["secret_value"].(map[string]interface{}); ok {
+							return &VirtualHostResponseHeadersToAddSecretValueModel{}
+						}
+						return nil
+					}(),
+					Value: func() types.String {
+						if v, ok := itemMap["value"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.ResponseHeadersToAdd = response_headers_to_addList
+	}
+	if v, ok := apiResource.Spec["response_headers_to_remove"].([]interface{}); ok && len(v) > 0 {
+		var response_headers_to_removeList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				response_headers_to_removeList = append(response_headers_to_removeList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, response_headers_to_removeList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.ResponseHeadersToRemove = listVal
+		}
+	} else {
+		data.ResponseHeadersToRemove = types.ListNull(types.StringType)
+	}
+	if blockData, ok := apiResource.Spec["retry_policy"].(map[string]interface{}); ok && (isImport || data.RetryPolicy != nil) {
+		data.RetryPolicy = &VirtualHostRetryPolicyModel{
+			BackOff: func() *VirtualHostRetryPolicyBackOffModel {
+				if !isImport && data.RetryPolicy != nil && data.RetryPolicy.BackOff != nil {
+					// Normal Read: preserve existing state value
+					return data.RetryPolicy.BackOff
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["back_off"].(map[string]interface{}); ok {
+					return &VirtualHostRetryPolicyBackOffModel{
+						BaseInterval: func() types.Int64 {
+							if v, ok := nestedBlockData["base_interval"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxInterval: func() types.Int64 {
+							if v, ok := nestedBlockData["max_interval"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			NumRetries: func() types.Int64 {
+				if v, ok := blockData["num_retries"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			PerTryTimeout: func() types.Int64 {
+				if v, ok := blockData["per_try_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			RetriableStatusCodes: func() types.List {
+				if v, ok := blockData["retriable_status_codes"].([]interface{}); ok && len(v) > 0 {
+					var items []int64
+					for _, item := range v {
+						if n, ok := item.(float64); ok {
+							items = append(items, int64(n))
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.Int64Type, items)
+					return listVal
+				}
+				return types.ListNull(types.Int64Type)
+			}(),
+			RetryCondition: func() types.List {
+				if v, ok := blockData["retry_condition"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if listData, ok := apiResource.Spec["routes"].([]interface{}); ok && len(listData) > 0 {
+		var routesList []VirtualHostRoutesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				routesList = append(routesList, VirtualHostRoutesModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.Routes = routesList
+	}
+	if listData, ok := apiResource.Spec["sensitive_data_policy"].([]interface{}); ok && len(listData) > 0 {
+		var sensitive_data_policyList []VirtualHostSensitiveDataPolicyModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				sensitive_data_policyList = append(sensitive_data_policyList, VirtualHostSensitiveDataPolicyModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.SensitiveDataPolicy = sensitive_data_policyList
+	}
+	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDdosMitigation != nil) {
+		data.SlowDdosMitigation = &VirtualHostSlowDdosMitigationModel{
+			DisableRequestTimeout: func() *VirtualHostEmptyModel {
+				if !isImport && data.SlowDdosMitigation != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SlowDdosMitigation.DisableRequestTimeout
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_request_timeout"].(map[string]interface{}); ok {
+					return &VirtualHostEmptyModel{}
+				}
+				return nil
+			}(),
+			RequestHeadersTimeout: func() types.Int64 {
+				if v, ok := blockData["request_headers_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			RequestTimeout: func() types.Int64 {
+				if v, ok := blockData["request_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["tls_cert_params"].(map[string]interface{}); ok && (isImport || data.TLSCertParams != nil) {
+		data.TLSCertParams = &VirtualHostTLSCertParamsModel{
+			Certificates: func() []VirtualHostTLSCertParamsCertificatesModel {
+				if listData, ok := blockData["certificates"].([]interface{}); ok && len(listData) > 0 {
+					var result []VirtualHostTLSCertParamsCertificatesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, VirtualHostTLSCertParamsCertificatesModel{
+								Kind: func() types.String {
+									if v, ok := itemMap["kind"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Uid: func() types.String {
+									if v, ok := itemMap["uid"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			CipherSuites: func() types.List {
+				if v, ok := blockData["cipher_suites"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			ClientCertificateOptional: func() *VirtualHostEmptyModel {
+				if !isImport && data.TLSCertParams != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSCertParams.ClientCertificateOptional
+				}
+				// Import case: read from API
+				if _, ok := blockData["client_certificate_optional"].(map[string]interface{}); ok {
+					return &VirtualHostEmptyModel{}
+				}
+				return nil
+			}(),
+			ClientCertificateRequired: func() *VirtualHostEmptyModel {
+				if !isImport && data.TLSCertParams != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSCertParams.ClientCertificateRequired
+				}
+				// Import case: read from API
+				if _, ok := blockData["client_certificate_required"].(map[string]interface{}); ok {
+					return &VirtualHostEmptyModel{}
+				}
+				return nil
+			}(),
+			MaximumProtocolVersion: func() types.String {
+				if v, ok := blockData["maximum_protocol_version"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			MinimumProtocolVersion: func() types.String {
+				if v, ok := blockData["minimum_protocol_version"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			NoClientCertificate: func() *VirtualHostEmptyModel {
+				if !isImport && data.TLSCertParams != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSCertParams.NoClientCertificate
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_client_certificate"].(map[string]interface{}); ok {
+					return &VirtualHostEmptyModel{}
+				}
+				return nil
+			}(),
+			ValidationParams: func() *VirtualHostTLSCertParamsValidationParamsModel {
+				if !isImport && data.TLSCertParams != nil && data.TLSCertParams.ValidationParams != nil {
+					// Normal Read: preserve existing state value
+					return data.TLSCertParams.ValidationParams
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["validation_params"].(map[string]interface{}); ok {
+					return &VirtualHostTLSCertParamsValidationParamsModel{
+						SkipHostnameVerification: func() types.Bool {
+							if v, ok := nestedBlockData["skip_hostname_verification"].(bool); ok {
+								return types.BoolValue(v)
+							}
+							return types.BoolNull()
+						}(),
+						TrustedCaURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						VerifySubjectAltNames: func() types.List {
+							if v, ok := nestedBlockData["verify_subject_alt_names"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+					}
+				}
+				return nil
+			}(),
+			XfccHeaderElements: func() types.List {
+				if v, ok := blockData["xfcc_header_elements"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["tls_parameters"].(map[string]interface{}); ok && (isImport || data.TLSParameters != nil) {
+		data.TLSParameters = &VirtualHostTLSParametersModel{
+			ClientCertificateOptional: func() *VirtualHostEmptyModel {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSParameters.ClientCertificateOptional
+				}
+				// Import case: read from API
+				if _, ok := blockData["client_certificate_optional"].(map[string]interface{}); ok {
+					return &VirtualHostEmptyModel{}
+				}
+				return nil
+			}(),
+			ClientCertificateRequired: func() *VirtualHostEmptyModel {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSParameters.ClientCertificateRequired
+				}
+				// Import case: read from API
+				if _, ok := blockData["client_certificate_required"].(map[string]interface{}); ok {
+					return &VirtualHostEmptyModel{}
+				}
+				return nil
+			}(),
+			CommonParams: func() *VirtualHostTLSParametersCommonParamsModel {
+				if !isImport && data.TLSParameters != nil && data.TLSParameters.CommonParams != nil {
+					// Normal Read: preserve existing state value
+					return data.TLSParameters.CommonParams
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["common_params"].(map[string]interface{}); ok {
+					return &VirtualHostTLSParametersCommonParamsModel{
+						CipherSuites: func() types.List {
+							if v, ok := nestedBlockData["cipher_suites"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+						MaximumProtocolVersion: func() types.String {
+							if v, ok := nestedBlockData["maximum_protocol_version"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						MinimumProtocolVersion: func() types.String {
+							if v, ok := nestedBlockData["minimum_protocol_version"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			NoClientCertificate: func() *VirtualHostEmptyModel {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSParameters.NoClientCertificate
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_client_certificate"].(map[string]interface{}); ok {
+					return &VirtualHostEmptyModel{}
+				}
+				return nil
+			}(),
+			XfccHeaderElements: func() types.List {
+				if v, ok := blockData["xfcc_header_elements"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if listData, ok := apiResource.Spec["user_identification"].([]interface{}); ok && len(listData) > 0 {
+		var user_identificationList []VirtualHostUserIdentificationModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				user_identificationList = append(user_identificationList, VirtualHostUserIdentificationModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.UserIdentification = user_identificationList
+	}
+	if _, ok := apiResource.Spec["waf_type"].(map[string]interface{}); ok && isImport && data.WAFType == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.WAFType = &VirtualHostWAFTypeModel{}
+	}
+	// Normal Read: preserve existing state value
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.AddLocation.IsNull() && !data.AddLocation.IsUnknown() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case, null state, or unknown (after Create): read from API
+		if v, ok := apiResource.Spec["add_location"].(bool); ok {
+			data.AddLocation = types.BoolValue(v)
+		} else {
+			data.AddLocation = types.BoolNull()
+		}
+	}
+	if v, ok := apiResource.Spec["append_server_name"].(string); ok && v != "" {
+		data.AppendServerName = types.StringValue(v)
+	} else {
+		data.AppendServerName = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["connection_idle_timeout"].(float64); ok {
+		data.ConnectionIdleTimeout = types.Int64Value(int64(v))
+	} else {
+		data.ConnectionIdleTimeout = types.Int64Null()
+	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.DisableDefaultErrorPages.IsNull() && !data.DisableDefaultErrorPages.IsUnknown() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case, null state, or unknown (after Create): read from API
+		if v, ok := apiResource.Spec["disable_default_error_pages"].(bool); ok {
+			data.DisableDefaultErrorPages = types.BoolValue(v)
+		} else {
+			data.DisableDefaultErrorPages = types.BoolNull()
+		}
+	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.DisableDNSResolve.IsNull() && !data.DisableDNSResolve.IsUnknown() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case, null state, or unknown (after Create): read from API
+		if v, ok := apiResource.Spec["disable_dns_resolve"].(bool); ok {
+			data.DisableDNSResolve = types.BoolValue(v)
+		} else {
+			data.DisableDNSResolve = types.BoolNull()
+		}
+	}
+	if v, ok := apiResource.Spec["idle_timeout"].(float64); ok {
+		data.IdleTimeout = types.Int64Value(int64(v))
+	} else {
+		data.IdleTimeout = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["max_request_header_size"].(float64); ok {
+		data.MaxRequestHeaderSize = types.Int64Value(int64(v))
+	} else {
+		data.MaxRequestHeaderSize = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["proxy"].(string); ok && v != "" {
+		data.Proxy = types.StringValue(v)
+	} else {
+		data.Proxy = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["server_name"].(string); ok && v != "" {
+		data.ServerName = types.StringValue(v)
+	} else {
+		data.ServerName = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

@@ -597,7 +597,7 @@ func (r *InfraprotectDenyListRuleResource) Update(ctx context.Context, req resou
 		apiResource.Spec["prefix"] = data.Prefix.ValueString()
 	}
 
-	updated, err := r.client.UpdateInfraprotectDenyListRule(ctx, apiResource)
+	_, err := r.client.UpdateInfraprotectDenyListRule(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update InfraprotectDenyListRule: %s", err))
 		return
@@ -606,15 +606,23 @@ func (r *InfraprotectDenyListRuleResource) Update(ctx context.Context, req resou
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetInfraprotectDenyListRule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read InfraprotectDenyListRule after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["expiration_timestamp"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["expiration_timestamp"].(string); ok && v != "" {
 		data.ExpirationTimestamp = types.StringValue(v)
 	} else if data.ExpirationTimestamp.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.ExpirationTimestamp = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["prefix"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["prefix"].(string); ok && v != "" {
 		data.Prefix = types.StringValue(v)
 	} else if data.Prefix.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -622,16 +630,49 @@ func (r *InfraprotectDenyListRuleResource) Update(ctx context.Context, req resou
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetInfraprotectDenyListRule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
-		}
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["expiration_never"].(map[string]interface{}); ok && isImport && data.ExpirationNever == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ExpirationNever = &InfraprotectDenyListRuleEmptyModel{}
 	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["one_day"].(map[string]interface{}); ok && isImport && data.OneDay == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.OneDay = &InfraprotectDenyListRuleEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["one_hour"].(map[string]interface{}); ok && isImport && data.OneHour == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.OneHour = &InfraprotectDenyListRuleEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["one_month"].(map[string]interface{}); ok && isImport && data.OneMonth == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.OneMonth = &InfraprotectDenyListRuleEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["one_year"].(map[string]interface{}); ok && isImport && data.OneYear == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.OneYear = &InfraprotectDenyListRuleEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["expiration_timestamp"].(string); ok && v != "" {
+		data.ExpirationTimestamp = types.StringValue(v)
+	} else {
+		data.ExpirationTimestamp = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["prefix"].(string); ok && v != "" {
+		data.Prefix = types.StringValue(v)
+	} else {
+		data.Prefix = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

@@ -4138,7 +4138,7 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 		apiResource.Spec["port"] = data.Port.ValueInt64()
 	}
 
-	updated, err := r.client.UpdateOriginPool(ctx, apiResource)
+	_, err := r.client.UpdateOriginPool(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update OriginPool: %s", err))
 		return
@@ -4147,29 +4147,37 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetOriginPool(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read OriginPool after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["endpoint_selection"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["endpoint_selection"].(string); ok && v != "" {
 		data.EndpointSelection = types.StringValue(v)
 	} else if data.EndpointSelection.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.EndpointSelection = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["health_check_port"].(float64); ok {
+	if v, ok := fetched.Spec["health_check_port"].(float64); ok {
 		data.HealthCheckPort = types.Int64Value(int64(v))
 	} else if data.HealthCheckPort.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.HealthCheckPort = types.Int64Null()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["loadbalancer_algorithm"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["loadbalancer_algorithm"].(string); ok && v != "" {
 		data.LoadBalancerAlgorithm = types.StringValue(v)
 	} else if data.LoadBalancerAlgorithm.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.LoadBalancerAlgorithm = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["port"].(float64); ok {
+	if v, ok := fetched.Spec["port"].(float64); ok {
 		data.Port = types.Int64Value(int64(v))
 	} else if data.Port.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -4177,16 +4185,748 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetOriginPool(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["advanced_options"].(map[string]interface{}); ok && (isImport || data.AdvancedOptions != nil) {
+		data.AdvancedOptions = &OriginPoolAdvancedOptionsModel{
+			AutoHTTPConfig: func() *OriginPoolEmptyModel {
+				if !isImport && data.AdvancedOptions != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AdvancedOptions.AutoHTTPConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["auto_http_config"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			CircuitBreaker: func() *OriginPoolAdvancedOptionsCircuitBreakerModel {
+				if !isImport && data.AdvancedOptions != nil && data.AdvancedOptions.CircuitBreaker != nil {
+					// Normal Read: preserve existing state value
+					return data.AdvancedOptions.CircuitBreaker
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["circuit_breaker"].(map[string]interface{}); ok {
+					return &OriginPoolAdvancedOptionsCircuitBreakerModel{
+						ConnectionLimit: func() types.Int64 {
+							if v, ok := nestedBlockData["connection_limit"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxRequests: func() types.Int64 {
+							if v, ok := nestedBlockData["max_requests"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						PendingRequests: func() types.Int64 {
+							if v, ok := nestedBlockData["pending_requests"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						Priority: func() types.String {
+							if v, ok := nestedBlockData["priority"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Retries: func() types.Int64 {
+							if v, ok := nestedBlockData["retries"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			ConnectionTimeout: func() types.Int64 {
+				if v, ok := blockData["connection_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			DefaultCircuitBreaker: func() *OriginPoolEmptyModel {
+				if !isImport && data.AdvancedOptions != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AdvancedOptions.DefaultCircuitBreaker
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_circuit_breaker"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			DisableCircuitBreaker: func() *OriginPoolEmptyModel {
+				if !isImport && data.AdvancedOptions != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AdvancedOptions.DisableCircuitBreaker
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_circuit_breaker"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			DisableLbSourceIPPersistance: func() *OriginPoolEmptyModel {
+				if !isImport && data.AdvancedOptions != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AdvancedOptions.DisableLbSourceIPPersistance
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_lb_source_ip_persistance"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			DisableOutlierDetection: func() *OriginPoolEmptyModel {
+				if !isImport && data.AdvancedOptions != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AdvancedOptions.DisableOutlierDetection
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_outlier_detection"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			DisableProxyProtocol: func() *OriginPoolEmptyModel {
+				if !isImport && data.AdvancedOptions != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AdvancedOptions.DisableProxyProtocol
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_proxy_protocol"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			DisableSubsets: func() *OriginPoolEmptyModel {
+				if !isImport && data.AdvancedOptions != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AdvancedOptions.DisableSubsets
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_subsets"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			EnableLbSourceIPPersistance: func() *OriginPoolEmptyModel {
+				if !isImport && data.AdvancedOptions != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AdvancedOptions.EnableLbSourceIPPersistance
+				}
+				// Import case: read from API
+				if _, ok := blockData["enable_lb_source_ip_persistance"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			EnableSubsets: func() *OriginPoolAdvancedOptionsEnableSubsetsModel {
+				if !isImport && data.AdvancedOptions != nil && data.AdvancedOptions.EnableSubsets != nil {
+					// Normal Read: preserve existing state value
+					return data.AdvancedOptions.EnableSubsets
+				}
+				// Import case: read from API
+				if _, ok := blockData["enable_subsets"].(map[string]interface{}); ok {
+					return &OriginPoolAdvancedOptionsEnableSubsetsModel{}
+				}
+				return nil
+			}(),
+			Http1Config: func() *OriginPoolAdvancedOptionsHttp1ConfigModel {
+				if !isImport && data.AdvancedOptions != nil && data.AdvancedOptions.Http1Config != nil {
+					// Normal Read: preserve existing state value
+					return data.AdvancedOptions.Http1Config
+				}
+				// Import case: read from API
+				if _, ok := blockData["http1_config"].(map[string]interface{}); ok {
+					return &OriginPoolAdvancedOptionsHttp1ConfigModel{}
+				}
+				return nil
+			}(),
+			Http2Options: func() *OriginPoolAdvancedOptionsHttp2OptionsModel {
+				if !isImport && data.AdvancedOptions != nil && data.AdvancedOptions.Http2Options != nil {
+					// Normal Read: preserve existing state value
+					return data.AdvancedOptions.Http2Options
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["http2_options"].(map[string]interface{}); ok {
+					return &OriginPoolAdvancedOptionsHttp2OptionsModel{
+						Enabled: func() types.Bool {
+							if v, ok := nestedBlockData["enabled"].(bool); ok {
+								return types.BoolValue(v)
+							}
+							return types.BoolNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			HTTPIdleTimeout: func() types.Int64 {
+				if v, ok := blockData["http_idle_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			NoPanicThreshold: func() *OriginPoolEmptyModel {
+				if !isImport && data.AdvancedOptions != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AdvancedOptions.NoPanicThreshold
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_panic_threshold"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			OutlierDetection: func() *OriginPoolAdvancedOptionsOutlierDetectionModel {
+				if !isImport && data.AdvancedOptions != nil && data.AdvancedOptions.OutlierDetection != nil {
+					// Normal Read: preserve existing state value
+					return data.AdvancedOptions.OutlierDetection
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["outlier_detection"].(map[string]interface{}); ok {
+					return &OriginPoolAdvancedOptionsOutlierDetectionModel{
+						BaseEjectionTime: func() types.Int64 {
+							if v, ok := nestedBlockData["base_ejection_time"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						Consecutive5xx: func() types.Int64 {
+							if v, ok := nestedBlockData["consecutive_5xx"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						ConsecutiveGatewayFailure: func() types.Int64 {
+							if v, ok := nestedBlockData["consecutive_gateway_failure"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						Interval: func() types.Int64 {
+							if v, ok := nestedBlockData["interval"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEjectionPercent: func() types.Int64 {
+							if v, ok := nestedBlockData["max_ejection_percent"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			PanicThreshold: func() types.Int64 {
+				if v, ok := blockData["panic_threshold"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			ProxyProtocolV1: func() *OriginPoolEmptyModel {
+				if !isImport && data.AdvancedOptions != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AdvancedOptions.ProxyProtocolV1
+				}
+				// Import case: read from API
+				if _, ok := blockData["proxy_protocol_v1"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			ProxyProtocolV2: func() *OriginPoolEmptyModel {
+				if !isImport && data.AdvancedOptions != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AdvancedOptions.ProxyProtocolV2
+				}
+				// Import case: read from API
+				if _, ok := blockData["proxy_protocol_v2"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
 		}
 	}
+	if _, ok := apiResource.Spec["automatic_port"].(map[string]interface{}); ok && isImport && data.AutomaticPort == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AutomaticPort = &OriginPoolEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["healthcheck"].([]interface{}); ok && len(listData) > 0 {
+		var healthcheckList []OriginPoolHealthcheckModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				healthcheckList = append(healthcheckList, OriginPoolHealthcheckModel{
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.Healthcheck = healthcheckList
+	}
+	if _, ok := apiResource.Spec["lb_port"].(map[string]interface{}); ok && isImport && data.LbPort == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LbPort = &OriginPoolEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_tls"].(map[string]interface{}); ok && isImport && data.NoTLS == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoTLS = &OriginPoolEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["origin_servers"].([]interface{}); ok && len(listData) > 0 {
+		var origin_serversList []OriginPoolOriginServersModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				origin_serversList = append(origin_serversList, OriginPoolOriginServersModel{
+					CbipService: func() *OriginPoolOriginServersCbipServiceModel {
+						if nestedMap, ok := itemMap["cbip_service"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersCbipServiceModel{
+								ServiceName: func() types.String {
+									if v, ok := nestedMap["service_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					ConsulService: func() *OriginPoolOriginServersConsulServiceModel {
+						if nestedMap, ok := itemMap["consul_service"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersConsulServiceModel{
+								InsideNetwork: func() *OriginPoolEmptyModel {
+									if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].ConsulService != nil && data.OriginServers[listIdx].ConsulService.InsideNetwork != nil {
+										return &OriginPoolEmptyModel{}
+									}
+									return nil
+								}(),
+								OutsideNetwork: func() *OriginPoolEmptyModel {
+									if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].ConsulService != nil && data.OriginServers[listIdx].ConsulService.OutsideNetwork != nil {
+										return &OriginPoolEmptyModel{}
+									}
+									return nil
+								}(),
+								ServiceName: func() types.String {
+									if v, ok := nestedMap["service_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					CustomEndpointObject: func() *OriginPoolOriginServersCustomEndpointObjectModel {
+						if _, ok := itemMap["custom_endpoint_object"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersCustomEndpointObjectModel{}
+						}
+						return nil
+					}(),
+					K8SService: func() *OriginPoolOriginServersK8SServiceModel {
+						if nestedMap, ok := itemMap["k8s_service"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersK8SServiceModel{
+								InsideNetwork: func() *OriginPoolEmptyModel {
+									if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].K8SService != nil && data.OriginServers[listIdx].K8SService.InsideNetwork != nil {
+										return &OriginPoolEmptyModel{}
+									}
+									return nil
+								}(),
+								OutsideNetwork: func() *OriginPoolEmptyModel {
+									if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].K8SService != nil && data.OriginServers[listIdx].K8SService.OutsideNetwork != nil {
+										return &OriginPoolEmptyModel{}
+									}
+									return nil
+								}(),
+								Protocol: func() types.String {
+									if v, ok := nestedMap["protocol"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ServiceName: func() types.String {
+									if v, ok := nestedMap["service_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Vk8sNetworks: func() *OriginPoolEmptyModel {
+									if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].K8SService != nil && data.OriginServers[listIdx].K8SService.Vk8sNetworks != nil {
+										return &OriginPoolEmptyModel{}
+									}
+									return nil
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Labels: func() *OriginPoolEmptyModel {
+						if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].Labels != nil {
+							return &OriginPoolEmptyModel{}
+						}
+						return nil
+					}(),
+					PrivateIP: func() *OriginPoolOriginServersPrivateIPModel {
+						if nestedMap, ok := itemMap["private_ip"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersPrivateIPModel{
+								InsideNetwork: func() *OriginPoolEmptyModel {
+									if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].PrivateIP != nil && data.OriginServers[listIdx].PrivateIP.InsideNetwork != nil {
+										return &OriginPoolEmptyModel{}
+									}
+									return nil
+								}(),
+								IP: func() types.String {
+									if v, ok := nestedMap["ip"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								OutsideNetwork: func() *OriginPoolEmptyModel {
+									if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].PrivateIP != nil && data.OriginServers[listIdx].PrivateIP.OutsideNetwork != nil {
+										return &OriginPoolEmptyModel{}
+									}
+									return nil
+								}(),
+							}
+						}
+						return nil
+					}(),
+					PrivateName: func() *OriginPoolOriginServersPrivateNameModel {
+						if nestedMap, ok := itemMap["private_name"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersPrivateNameModel{
+								DNSName: func() types.String {
+									if v, ok := nestedMap["dns_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								InsideNetwork: func() *OriginPoolEmptyModel {
+									if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].PrivateName != nil && data.OriginServers[listIdx].PrivateName.InsideNetwork != nil {
+										return &OriginPoolEmptyModel{}
+									}
+									return nil
+								}(),
+								OutsideNetwork: func() *OriginPoolEmptyModel {
+									if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].PrivateName != nil && data.OriginServers[listIdx].PrivateName.OutsideNetwork != nil {
+										return &OriginPoolEmptyModel{}
+									}
+									return nil
+								}(),
+								RefreshInterval: func() types.Int64 {
+									if v, ok := nestedMap["refresh_interval"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					PublicIP: func() *OriginPoolOriginServersPublicIPModel {
+						if nestedMap, ok := itemMap["public_ip"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersPublicIPModel{
+								IP: func() types.String {
+									if v, ok := nestedMap["ip"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					PublicName: func() *OriginPoolOriginServersPublicNameModel {
+						if nestedMap, ok := itemMap["public_name"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersPublicNameModel{
+								DNSName: func() types.String {
+									if v, ok := nestedMap["dns_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								RefreshInterval: func() types.Int64 {
+									if v, ok := nestedMap["refresh_interval"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					VnPrivateIP: func() *OriginPoolOriginServersVnPrivateIPModel {
+						if nestedMap, ok := itemMap["vn_private_ip"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersVnPrivateIPModel{
+								IP: func() types.String {
+									if v, ok := nestedMap["ip"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					VnPrivateName: func() *OriginPoolOriginServersVnPrivateNameModel {
+						if nestedMap, ok := itemMap["vn_private_name"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersVnPrivateNameModel{
+								DNSName: func() types.String {
+									if v, ok := nestedMap["dns_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.OriginServers = origin_serversList
+	}
+	if _, ok := apiResource.Spec["same_as_endpoint_port"].(map[string]interface{}); ok && isImport && data.SameAsEndpointPort == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SameAsEndpointPort = &OriginPoolEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["upstream_conn_pool_reuse_type"].(map[string]interface{}); ok && isImport && data.UpstreamConnPoolReuseType == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UpstreamConnPoolReuseType = &OriginPoolUpstreamConnPoolReuseTypeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["use_tls"].(map[string]interface{}); ok && (isImport || data.UseTLS != nil) {
+		data.UseTLS = &OriginPoolUseTLSModel{
+			DefaultSessionKeyCaching: func() *OriginPoolEmptyModel {
+				if !isImport && data.UseTLS != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.UseTLS.DefaultSessionKeyCaching
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_session_key_caching"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			DisableSessionKeyCaching: func() *OriginPoolEmptyModel {
+				if !isImport && data.UseTLS != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.UseTLS.DisableSessionKeyCaching
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_session_key_caching"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			DisableSni: func() *OriginPoolEmptyModel {
+				if !isImport && data.UseTLS != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.UseTLS.DisableSni
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_sni"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			MaxSessionKeys: func() types.Int64 {
+				if v, ok := blockData["max_session_keys"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			NoMtls: func() *OriginPoolEmptyModel {
+				if !isImport && data.UseTLS != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.UseTLS.NoMtls
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_mtls"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			SkipServerVerification: func() *OriginPoolEmptyModel {
+				if !isImport && data.UseTLS != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.UseTLS.SkipServerVerification
+				}
+				// Import case: read from API
+				if _, ok := blockData["skip_server_verification"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			Sni: func() types.String {
+				if v, ok := blockData["sni"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			TLSConfig: func() *OriginPoolUseTLSTLSConfigModel {
+				if !isImport && data.UseTLS != nil && data.UseTLS.TLSConfig != nil {
+					// Normal Read: preserve existing state value
+					return data.UseTLS.TLSConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["tls_config"].(map[string]interface{}); ok {
+					return &OriginPoolUseTLSTLSConfigModel{}
+				}
+				return nil
+			}(),
+			UseHostHeaderAsSni: func() *OriginPoolEmptyModel {
+				if !isImport && data.UseTLS != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.UseTLS.UseHostHeaderAsSni
+				}
+				// Import case: read from API
+				if _, ok := blockData["use_host_header_as_sni"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			UseMtls: func() *OriginPoolUseTLSUseMtlsModel {
+				if !isImport && data.UseTLS != nil && data.UseTLS.UseMtls != nil {
+					// Normal Read: preserve existing state value
+					return data.UseTLS.UseMtls
+				}
+				// Import case: read from API
+				if _, ok := blockData["use_mtls"].(map[string]interface{}); ok {
+					return &OriginPoolUseTLSUseMtlsModel{}
+				}
+				return nil
+			}(),
+			UseMtlsObj: func() *OriginPoolUseTLSUseMtlsObjModel {
+				if !isImport && data.UseTLS != nil && data.UseTLS.UseMtlsObj != nil {
+					// Normal Read: preserve existing state value
+					return data.UseTLS.UseMtlsObj
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_mtls_obj"].(map[string]interface{}); ok {
+					return &OriginPoolUseTLSUseMtlsObjModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			UseServerVerification: func() *OriginPoolUseTLSUseServerVerificationModel {
+				if !isImport && data.UseTLS != nil && data.UseTLS.UseServerVerification != nil {
+					// Normal Read: preserve existing state value
+					return data.UseTLS.UseServerVerification
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_server_verification"].(map[string]interface{}); ok {
+					return &OriginPoolUseTLSUseServerVerificationModel{
+						TrustedCaURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			VolterraTrustedCa: func() *OriginPoolEmptyModel {
+				if !isImport && data.UseTLS != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.UseTLS.VolterraTrustedCa
+				}
+				// Import case: read from API
+				if _, ok := blockData["volterra_trusted_ca"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["endpoint_selection"].(string); ok && v != "" {
+		data.EndpointSelection = types.StringValue(v)
+	} else {
+		data.EndpointSelection = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["health_check_port"].(float64); ok {
+		data.HealthCheckPort = types.Int64Value(int64(v))
+	} else {
+		data.HealthCheckPort = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["loadbalancer_algorithm"].(string); ok && v != "" {
+		data.LoadBalancerAlgorithm = types.StringValue(v)
+	} else {
+		data.LoadBalancerAlgorithm = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["port"].(float64); ok {
+		data.Port = types.Int64Value(int64(v))
+	} else {
+		data.Port = types.Int64Null()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

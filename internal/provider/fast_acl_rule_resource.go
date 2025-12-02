@@ -1040,7 +1040,7 @@ func (r *FastACLRuleResource) Update(ctx context.Context, req resource.UpdateReq
 		apiResource.Spec["prefix"] = prefixMap
 	}
 
-	updated, err := r.client.UpdateFastACLRule(ctx, apiResource)
+	_, err := r.client.UpdateFastACLRule(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update FastACLRule: %s", err))
 		return
@@ -1049,18 +1049,149 @@ func (r *FastACLRuleResource) Update(ctx context.Context, req resource.UpdateReq
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetFastACLRule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read FastACLRule after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetFastACLRule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["action"].(map[string]interface{}); ok && (isImport || data.Action != nil) {
+		data.Action = &FastACLRuleActionModel{
+			PolicerAction: func() *FastACLRuleActionPolicerActionModel {
+				if !isImport && data.Action != nil && data.Action.PolicerAction != nil {
+					// Normal Read: preserve existing state value
+					return data.Action.PolicerAction
+				}
+				// Import case: read from API
+				if _, ok := blockData["policer_action"].(map[string]interface{}); ok {
+					return &FastACLRuleActionPolicerActionModel{}
+				}
+				return nil
+			}(),
+			ProtocolPolicerAction: func() *FastACLRuleActionProtocolPolicerActionModel {
+				if !isImport && data.Action != nil && data.Action.ProtocolPolicerAction != nil {
+					// Normal Read: preserve existing state value
+					return data.Action.ProtocolPolicerAction
+				}
+				// Import case: read from API
+				if _, ok := blockData["protocol_policer_action"].(map[string]interface{}); ok {
+					return &FastACLRuleActionProtocolPolicerActionModel{}
+				}
+				return nil
+			}(),
+			SimpleAction: func() types.String {
+				if v, ok := blockData["simple_action"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["ip_prefix_set"].(map[string]interface{}); ok && (isImport || data.IPPrefixSet != nil) {
+		data.IPPrefixSet = &FastACLRuleIPPrefixSetModel{
+			Ref: func() []FastACLRuleIPPrefixSetRefModel {
+				if listData, ok := blockData["ref"].([]interface{}); ok && len(listData) > 0 {
+					var result []FastACLRuleIPPrefixSetRefModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, FastACLRuleIPPrefixSetRefModel{
+								Kind: func() types.String {
+									if v, ok := itemMap["kind"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Uid: func() types.String {
+									if v, ok := itemMap["uid"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if listData, ok := apiResource.Spec["port"].([]interface{}); ok && len(listData) > 0 {
+		var portList []FastACLRulePortModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				portList = append(portList, FastACLRulePortModel{
+					All: func() *FastACLRuleEmptyModel {
+						if !isImport && len(data.Port) > listIdx && data.Port[listIdx].All != nil {
+							return &FastACLRuleEmptyModel{}
+						}
+						return nil
+					}(),
+					DNS: func() *FastACLRuleEmptyModel {
+						if !isImport && len(data.Port) > listIdx && data.Port[listIdx].DNS != nil {
+							return &FastACLRuleEmptyModel{}
+						}
+						return nil
+					}(),
+					UserDefined: func() types.Int64 {
+						if v, ok := itemMap["user_defined"].(float64); ok && v != 0 {
+							return types.Int64Value(int64(v))
+						}
+						return types.Int64Null()
+					}(),
+				})
+			}
+		}
+		data.Port = portList
+	}
+	if blockData, ok := apiResource.Spec["prefix"].(map[string]interface{}); ok && (isImport || data.Prefix != nil) {
+		data.Prefix = &FastACLRulePrefixModel{
+			Prefix: func() types.List {
+				if v, ok := blockData["prefix"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

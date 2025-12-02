@@ -134,7 +134,7 @@ func TestAccVirtualHostResource_allAttributes(t *testing.T) {
 				ResourceName:            resourceName,
 				ImportState:             true,
 				ImportStateVerify:       true,
-				ImportStateVerifyIgnore: []string{"timeouts", "disable"},
+				ImportStateVerifyIgnore: []string{"timeouts", "disable", "waf_type"},
 				ImportStateIdFunc:       testAccVirtualHostResourceImportStateIdFunc(resourceName),
 			},
 		},
@@ -755,6 +755,7 @@ resource "f5xc_virtual_host" "test" {
   }
 
   domains = ["test.example.com", "*.example.com"]
+  proxy   = "SMA_PROXY"
 
   add_location                = true
   disable_default_error_pages = true

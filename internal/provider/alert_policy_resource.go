@@ -1580,7 +1580,7 @@ func (r *AlertPolicyResource) Update(ctx context.Context, req resource.UpdateReq
 		apiResource.Spec["routes"] = routesList
 	}
 
-	updated, err := r.client.UpdateAlertPolicy(ctx, apiResource)
+	_, err := r.client.UpdateAlertPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update AlertPolicy: %s", err))
 		return
@@ -1589,18 +1589,285 @@ func (r *AlertPolicyResource) Update(ctx context.Context, req resource.UpdateReq
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetAlertPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read AlertPolicy after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetAlertPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["notification_parameters"].(map[string]interface{}); ok && (isImport || data.NotificationParameters != nil) {
+		data.NotificationParameters = &AlertPolicyNotificationParametersModel{
+			Custom: func() *AlertPolicyNotificationParametersCustomModel {
+				if !isImport && data.NotificationParameters != nil && data.NotificationParameters.Custom != nil {
+					// Normal Read: preserve existing state value
+					return data.NotificationParameters.Custom
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["custom"].(map[string]interface{}); ok {
+					return &AlertPolicyNotificationParametersCustomModel{
+						Labels: func() types.List {
+							if v, ok := nestedBlockData["labels"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Default: func() *AlertPolicyEmptyModel {
+				if !isImport && data.NotificationParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.NotificationParameters.Default
+				}
+				// Import case: read from API
+				if _, ok := blockData["default"].(map[string]interface{}); ok {
+					return &AlertPolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			GroupInterval: func() types.String {
+				if v, ok := blockData["group_interval"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			GroupWait: func() types.String {
+				if v, ok := blockData["group_wait"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Individual: func() *AlertPolicyEmptyModel {
+				if !isImport && data.NotificationParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.NotificationParameters.Individual
+				}
+				// Import case: read from API
+				if _, ok := blockData["individual"].(map[string]interface{}); ok {
+					return &AlertPolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			RepeatInterval: func() types.String {
+				if v, ok := blockData["repeat_interval"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			VesIoGroup: func() *AlertPolicyEmptyModel {
+				if !isImport && data.NotificationParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.NotificationParameters.VesIoGroup
+				}
+				// Import case: read from API
+				if _, ok := blockData["ves_io_group"].(map[string]interface{}); ok {
+					return &AlertPolicyEmptyModel{}
+				}
+				return nil
+			}(),
 		}
 	}
+	if listData, ok := apiResource.Spec["receivers"].([]interface{}); ok && len(listData) > 0 {
+		var receiversList []AlertPolicyReceiversModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				receiversList = append(receiversList, AlertPolicyReceiversModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.Receivers = receiversList
+	}
+	if listData, ok := apiResource.Spec["routes"].([]interface{}); ok && len(listData) > 0 {
+		var routesList []AlertPolicyRoutesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				routesList = append(routesList, AlertPolicyRoutesModel{
+					Alertname: func() types.String {
+						if v, ok := itemMap["alertname"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					AlertnameRegex: func() types.String {
+						if v, ok := itemMap["alertname_regex"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Any: func() *AlertPolicyEmptyModel {
+						if !isImport && len(data.Routes) > listIdx && data.Routes[listIdx].Any != nil {
+							return &AlertPolicyEmptyModel{}
+						}
+						return nil
+					}(),
+					Custom: func() *AlertPolicyRoutesCustomModel {
+						if _, ok := itemMap["custom"].(map[string]interface{}); ok {
+							return &AlertPolicyRoutesCustomModel{
+								Alertlabel: func() *AlertPolicyEmptyModel {
+									if !isImport && len(data.Routes) > listIdx && data.Routes[listIdx].Custom != nil && data.Routes[listIdx].Custom.Alertlabel != nil {
+										return &AlertPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+							}
+						}
+						return nil
+					}(),
+					DontSend: func() *AlertPolicyEmptyModel {
+						if !isImport && len(data.Routes) > listIdx && data.Routes[listIdx].DontSend != nil {
+							return &AlertPolicyEmptyModel{}
+						}
+						return nil
+					}(),
+					Group: func() *AlertPolicyRoutesGroupModel {
+						if nestedMap, ok := itemMap["group"].(map[string]interface{}); ok {
+							return &AlertPolicyRoutesGroupModel{
+								Groups: func() types.List {
+									if v, ok := nestedMap["groups"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
+							}
+						}
+						return nil
+					}(),
+					NotificationParameters: func() *AlertPolicyRoutesNotificationParametersModel {
+						if nestedMap, ok := itemMap["notification_parameters"].(map[string]interface{}); ok {
+							return &AlertPolicyRoutesNotificationParametersModel{
+								Default: func() *AlertPolicyEmptyModel {
+									if !isImport && len(data.Routes) > listIdx && data.Routes[listIdx].NotificationParameters != nil && data.Routes[listIdx].NotificationParameters.Default != nil {
+										return &AlertPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								GroupInterval: func() types.String {
+									if v, ok := nestedMap["group_interval"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								GroupWait: func() types.String {
+									if v, ok := nestedMap["group_wait"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Individual: func() *AlertPolicyEmptyModel {
+									if !isImport && len(data.Routes) > listIdx && data.Routes[listIdx].NotificationParameters != nil && data.Routes[listIdx].NotificationParameters.Individual != nil {
+										return &AlertPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								RepeatInterval: func() types.String {
+									if v, ok := nestedMap["repeat_interval"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								VesIoGroup: func() *AlertPolicyEmptyModel {
+									if !isImport && len(data.Routes) > listIdx && data.Routes[listIdx].NotificationParameters != nil && data.Routes[listIdx].NotificationParameters.VesIoGroup != nil {
+										return &AlertPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Send: func() *AlertPolicyEmptyModel {
+						if !isImport && len(data.Routes) > listIdx && data.Routes[listIdx].Send != nil {
+							return &AlertPolicyEmptyModel{}
+						}
+						return nil
+					}(),
+					Severity: func() *AlertPolicyRoutesSeverityModel {
+						if nestedMap, ok := itemMap["severity"].(map[string]interface{}); ok {
+							return &AlertPolicyRoutesSeverityModel{
+								Severities: func() types.List {
+									if v, ok := nestedMap["severities"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.Routes = routesList
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

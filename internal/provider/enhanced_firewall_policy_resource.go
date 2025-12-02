@@ -1818,7 +1818,7 @@ func (r *EnhancedFirewallPolicyResource) Update(ctx context.Context, req resourc
 		apiResource.Spec["rule_list"] = rule_listMap
 	}
 
-	updated, err := r.client.UpdateEnhancedFirewallPolicy(ctx, apiResource)
+	_, err := r.client.UpdateEnhancedFirewallPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update EnhancedFirewallPolicy: %s", err))
 		return
@@ -1827,18 +1827,308 @@ func (r *EnhancedFirewallPolicyResource) Update(ctx context.Context, req resourc
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetEnhancedFirewallPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read EnhancedFirewallPolicy after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetEnhancedFirewallPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["allow_all"].(map[string]interface{}); ok && isImport && data.AllowAll == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AllowAll = &EnhancedFirewallPolicyEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["allowed_destinations"].(map[string]interface{}); ok && (isImport || data.AllowedDestinations != nil) {
+		data.AllowedDestinations = &EnhancedFirewallPolicyAllowedDestinationsModel{
+			Prefix: func() types.List {
+				if v, ok := blockData["prefix"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["allowed_sources"].(map[string]interface{}); ok && (isImport || data.AllowedSources != nil) {
+		data.AllowedSources = &EnhancedFirewallPolicyAllowedSourcesModel{
+			Prefix: func() types.List {
+				if v, ok := blockData["prefix"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["denied_destinations"].(map[string]interface{}); ok && (isImport || data.DeniedDestinations != nil) {
+		data.DeniedDestinations = &EnhancedFirewallPolicyDeniedDestinationsModel{
+			Prefix: func() types.List {
+				if v, ok := blockData["prefix"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["denied_sources"].(map[string]interface{}); ok && (isImport || data.DeniedSources != nil) {
+		data.DeniedSources = &EnhancedFirewallPolicyDeniedSourcesModel{
+			Prefix: func() types.List {
+				if v, ok := blockData["prefix"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["deny_all"].(map[string]interface{}); ok && isImport && data.DenyAll == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DenyAll = &EnhancedFirewallPolicyEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["rule_list"].(map[string]interface{}); ok && (isImport || data.RuleList != nil) {
+		data.RuleList = &EnhancedFirewallPolicyRuleListModel{
+			Rules: func() []EnhancedFirewallPolicyRuleListRulesModel {
+				if listData, ok := blockData["rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []EnhancedFirewallPolicyRuleListRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, EnhancedFirewallPolicyRuleListRulesModel{
+								AdvancedAction: func() *EnhancedFirewallPolicyRuleListRulesAdvancedActionModel {
+									if deepMap, ok := itemMap["advanced_action"].(map[string]interface{}); ok {
+										return &EnhancedFirewallPolicyRuleListRulesAdvancedActionModel{
+											Action: func() types.String {
+												if v, ok := deepMap["action"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								AllDestinations: func() *EnhancedFirewallPolicyEmptyModel {
+									if _, ok := itemMap["all_destinations"].(map[string]interface{}); ok {
+										return &EnhancedFirewallPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								AllSLIVips: func() *EnhancedFirewallPolicyEmptyModel {
+									if _, ok := itemMap["all_sli_vips"].(map[string]interface{}); ok {
+										return &EnhancedFirewallPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								AllSLOVips: func() *EnhancedFirewallPolicyEmptyModel {
+									if _, ok := itemMap["all_slo_vips"].(map[string]interface{}); ok {
+										return &EnhancedFirewallPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								AllSources: func() *EnhancedFirewallPolicyEmptyModel {
+									if _, ok := itemMap["all_sources"].(map[string]interface{}); ok {
+										return &EnhancedFirewallPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								AllTCPTraffic: func() *EnhancedFirewallPolicyEmptyModel {
+									if _, ok := itemMap["all_tcp_traffic"].(map[string]interface{}); ok {
+										return &EnhancedFirewallPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								AllTraffic: func() *EnhancedFirewallPolicyEmptyModel {
+									if _, ok := itemMap["all_traffic"].(map[string]interface{}); ok {
+										return &EnhancedFirewallPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								AllUDPTraffic: func() *EnhancedFirewallPolicyEmptyModel {
+									if _, ok := itemMap["all_udp_traffic"].(map[string]interface{}); ok {
+										return &EnhancedFirewallPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								Allow: func() *EnhancedFirewallPolicyEmptyModel {
+									if _, ok := itemMap["allow"].(map[string]interface{}); ok {
+										return &EnhancedFirewallPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								Applications: func() *EnhancedFirewallPolicyRuleListRulesApplicationsModel {
+									if _, ok := itemMap["applications"].(map[string]interface{}); ok {
+										return &EnhancedFirewallPolicyRuleListRulesApplicationsModel{}
+									}
+									return nil
+								}(),
+								Deny: func() *EnhancedFirewallPolicyEmptyModel {
+									if _, ok := itemMap["deny"].(map[string]interface{}); ok {
+										return &EnhancedFirewallPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								DestinationAWSVPCIds: func() *EnhancedFirewallPolicyRuleListRulesDestinationAWSVPCIdsModel {
+									if _, ok := itemMap["destination_aws_vpc_ids"].(map[string]interface{}); ok {
+										return &EnhancedFirewallPolicyRuleListRulesDestinationAWSVPCIdsModel{}
+									}
+									return nil
+								}(),
+								DestinationIPPrefixSet: func() *EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetModel {
+									if _, ok := itemMap["destination_ip_prefix_set"].(map[string]interface{}); ok {
+										return &EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetModel{}
+									}
+									return nil
+								}(),
+								DestinationLabelSelector: func() *EnhancedFirewallPolicyRuleListRulesDestinationLabelSelectorModel {
+									if _, ok := itemMap["destination_label_selector"].(map[string]interface{}); ok {
+										return &EnhancedFirewallPolicyRuleListRulesDestinationLabelSelectorModel{}
+									}
+									return nil
+								}(),
+								DestinationPrefixList: func() *EnhancedFirewallPolicyRuleListRulesDestinationPrefixListModel {
+									if _, ok := itemMap["destination_prefix_list"].(map[string]interface{}); ok {
+										return &EnhancedFirewallPolicyRuleListRulesDestinationPrefixListModel{}
+									}
+									return nil
+								}(),
+								InsertService: func() *EnhancedFirewallPolicyRuleListRulesInsertServiceModel {
+									if _, ok := itemMap["insert_service"].(map[string]interface{}); ok {
+										return &EnhancedFirewallPolicyRuleListRulesInsertServiceModel{}
+									}
+									return nil
+								}(),
+								InsideDestinations: func() *EnhancedFirewallPolicyEmptyModel {
+									if _, ok := itemMap["inside_destinations"].(map[string]interface{}); ok {
+										return &EnhancedFirewallPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								InsideSources: func() *EnhancedFirewallPolicyEmptyModel {
+									if _, ok := itemMap["inside_sources"].(map[string]interface{}); ok {
+										return &EnhancedFirewallPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								LabelMatcher: func() *EnhancedFirewallPolicyRuleListRulesLabelMatcherModel {
+									if _, ok := itemMap["label_matcher"].(map[string]interface{}); ok {
+										return &EnhancedFirewallPolicyRuleListRulesLabelMatcherModel{}
+									}
+									return nil
+								}(),
+								Metadata: func() *EnhancedFirewallPolicyRuleListRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &EnhancedFirewallPolicyRuleListRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								OutsideDestinations: func() *EnhancedFirewallPolicyEmptyModel {
+									if _, ok := itemMap["outside_destinations"].(map[string]interface{}); ok {
+										return &EnhancedFirewallPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								OutsideSources: func() *EnhancedFirewallPolicyEmptyModel {
+									if _, ok := itemMap["outside_sources"].(map[string]interface{}); ok {
+										return &EnhancedFirewallPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								ProtocolPortRange: func() *EnhancedFirewallPolicyRuleListRulesProtocolPortRangeModel {
+									if deepMap, ok := itemMap["protocol_port_range"].(map[string]interface{}); ok {
+										return &EnhancedFirewallPolicyRuleListRulesProtocolPortRangeModel{
+											Protocol: func() types.String {
+												if v, ok := deepMap["protocol"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								SourceAWSVPCIds: func() *EnhancedFirewallPolicyRuleListRulesSourceAWSVPCIdsModel {
+									if _, ok := itemMap["source_aws_vpc_ids"].(map[string]interface{}); ok {
+										return &EnhancedFirewallPolicyRuleListRulesSourceAWSVPCIdsModel{}
+									}
+									return nil
+								}(),
+								SourceIPPrefixSet: func() *EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetModel {
+									if _, ok := itemMap["source_ip_prefix_set"].(map[string]interface{}); ok {
+										return &EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetModel{}
+									}
+									return nil
+								}(),
+								SourceLabelSelector: func() *EnhancedFirewallPolicyRuleListRulesSourceLabelSelectorModel {
+									if _, ok := itemMap["source_label_selector"].(map[string]interface{}); ok {
+										return &EnhancedFirewallPolicyRuleListRulesSourceLabelSelectorModel{}
+									}
+									return nil
+								}(),
+								SourcePrefixList: func() *EnhancedFirewallPolicyRuleListRulesSourcePrefixListModel {
+									if _, ok := itemMap["source_prefix_list"].(map[string]interface{}); ok {
+										return &EnhancedFirewallPolicyRuleListRulesSourcePrefixListModel{}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

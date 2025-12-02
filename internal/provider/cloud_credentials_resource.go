@@ -1278,7 +1278,7 @@ func (r *CloudCredentialsResource) Update(ctx context.Context, req resource.Upda
 		apiResource.Spec["gcp_cred_file"] = gcp_cred_fileMap
 	}
 
-	updated, err := r.client.UpdateCloudCredentials(ctx, apiResource)
+	_, err := r.client.UpdateCloudCredentials(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update CloudCredentials: %s", err))
 		return
@@ -1287,18 +1287,186 @@ func (r *CloudCredentialsResource) Update(ctx context.Context, req resource.Upda
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetCloudCredentials(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read CloudCredentials after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetCloudCredentials(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["aws_assume_role"].(map[string]interface{}); ok && (isImport || data.AWSAssumeRole != nil) {
+		data.AWSAssumeRole = &CloudCredentialsAWSAssumeRoleModel{
+			CustomExternalID: func() types.String {
+				if v, ok := blockData["custom_external_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			DurationSeconds: func() types.Int64 {
+				if v, ok := blockData["duration_seconds"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			ExternalIDIsOptional: func() *CloudCredentialsEmptyModel {
+				if !isImport && data.AWSAssumeRole != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSAssumeRole.ExternalIDIsOptional
+				}
+				// Import case: read from API
+				if _, ok := blockData["external_id_is_optional"].(map[string]interface{}); ok {
+					return &CloudCredentialsEmptyModel{}
+				}
+				return nil
+			}(),
+			ExternalIDIsTenantID: func() *CloudCredentialsEmptyModel {
+				if !isImport && data.AWSAssumeRole != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSAssumeRole.ExternalIDIsTenantID
+				}
+				// Import case: read from API
+				if _, ok := blockData["external_id_is_tenant_id"].(map[string]interface{}); ok {
+					return &CloudCredentialsEmptyModel{}
+				}
+				return nil
+			}(),
+			RoleArn: func() types.String {
+				if v, ok := blockData["role_arn"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			SessionName: func() types.String {
+				if v, ok := blockData["session_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			SessionTags: func() *CloudCredentialsEmptyModel {
+				if !isImport && data.AWSAssumeRole != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSAssumeRole.SessionTags
+				}
+				// Import case: read from API
+				if _, ok := blockData["session_tags"].(map[string]interface{}); ok {
+					return &CloudCredentialsEmptyModel{}
+				}
+				return nil
+			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["aws_secret_key"].(map[string]interface{}); ok && (isImport || data.AWSSecretKey != nil) {
+		data.AWSSecretKey = &CloudCredentialsAWSSecretKeyModel{
+			AccessKey: func() types.String {
+				if v, ok := blockData["access_key"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			SecretKey: func() *CloudCredentialsAWSSecretKeySecretKeyModel {
+				if !isImport && data.AWSSecretKey != nil && data.AWSSecretKey.SecretKey != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSSecretKey.SecretKey
+				}
+				// Import case: read from API
+				if _, ok := blockData["secret_key"].(map[string]interface{}); ok {
+					return &CloudCredentialsAWSSecretKeySecretKeyModel{}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["azure_client_secret"].(map[string]interface{}); ok && (isImport || data.AzureClientSecret != nil) {
+		data.AzureClientSecret = &CloudCredentialsAzureClientSecretModel{
+			ClientID: func() types.String {
+				if v, ok := blockData["client_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ClientSecret: func() *CloudCredentialsAzureClientSecretClientSecretModel {
+				if !isImport && data.AzureClientSecret != nil && data.AzureClientSecret.ClientSecret != nil {
+					// Normal Read: preserve existing state value
+					return data.AzureClientSecret.ClientSecret
+				}
+				// Import case: read from API
+				if _, ok := blockData["client_secret"].(map[string]interface{}); ok {
+					return &CloudCredentialsAzureClientSecretClientSecretModel{}
+				}
+				return nil
+			}(),
+			SubscriptionID: func() types.String {
+				if v, ok := blockData["subscription_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			TenantID: func() types.String {
+				if v, ok := blockData["tenant_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["azure_pfx_certificate"].(map[string]interface{}); ok && (isImport || data.AzurePfxCertificate != nil) {
+		data.AzurePfxCertificate = &CloudCredentialsAzurePfxCertificateModel{
+			CertificateURL: func() types.String {
+				if v, ok := blockData["certificate_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ClientID: func() types.String {
+				if v, ok := blockData["client_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Password: func() *CloudCredentialsAzurePfxCertificatePasswordModel {
+				if !isImport && data.AzurePfxCertificate != nil && data.AzurePfxCertificate.Password != nil {
+					// Normal Read: preserve existing state value
+					return data.AzurePfxCertificate.Password
+				}
+				// Import case: read from API
+				if _, ok := blockData["password"].(map[string]interface{}); ok {
+					return &CloudCredentialsAzurePfxCertificatePasswordModel{}
+				}
+				return nil
+			}(),
+			SubscriptionID: func() types.String {
+				if v, ok := blockData["subscription_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			TenantID: func() types.String {
+				if v, ok := blockData["tenant_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["gcp_cred_file"].(map[string]interface{}); ok && isImport && data.GCPCredFile == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.GCPCredFile = &CloudCredentialsGCPCredFileModel{}
+	}
+	// Normal Read: preserve existing state value
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

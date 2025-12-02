@@ -1001,7 +1001,7 @@ func (r *NetworkPolicyRuleResource) Update(ctx context.Context, req resource.Upd
 		apiResource.Spec["protocol"] = data.Protocol.ValueString()
 	}
 
-	updated, err := r.client.UpdateNetworkPolicyRule(ctx, apiResource)
+	_, err := r.client.UpdateNetworkPolicyRule(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update NetworkPolicyRule: %s", err))
 		return
@@ -1010,15 +1010,23 @@ func (r *NetworkPolicyRuleResource) Update(ctx context.Context, req resource.Upd
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetNetworkPolicyRule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read NetworkPolicyRule after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["action"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["action"].(string); ok && v != "" {
 		data.Action = types.StringValue(v)
 	} else if data.Action.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.Action = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["protocol"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["protocol"].(string); ok && v != "" {
 		data.Protocol = types.StringValue(v)
 	} else if data.Protocol.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -1026,16 +1034,147 @@ func (r *NetworkPolicyRuleResource) Update(ctx context.Context, req resource.Upd
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetNetworkPolicyRule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["advanced_action"].(map[string]interface{}); ok && (isImport || data.AdvancedAction != nil) {
+		data.AdvancedAction = &NetworkPolicyRuleAdvancedActionModel{
+			Action: func() types.String {
+				if v, ok := blockData["action"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["ip_prefix_set"].(map[string]interface{}); ok && (isImport || data.IPPrefixSet != nil) {
+		data.IPPrefixSet = &NetworkPolicyRuleIPPrefixSetModel{
+			Ref: func() []NetworkPolicyRuleIPPrefixSetRefModel {
+				if listData, ok := blockData["ref"].([]interface{}); ok && len(listData) > 0 {
+					var result []NetworkPolicyRuleIPPrefixSetRefModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, NetworkPolicyRuleIPPrefixSetRefModel{
+								Kind: func() types.String {
+									if v, ok := itemMap["kind"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Uid: func() types.String {
+									if v, ok := itemMap["uid"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["label_matcher"].(map[string]interface{}); ok && (isImport || data.LabelMatcher != nil) {
+		data.LabelMatcher = &NetworkPolicyRuleLabelMatcherModel{
+			Keys: func() types.List {
+				if v, ok := blockData["keys"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["ports"].([]interface{}); ok && len(v) > 0 {
+		var portsList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				portsList = append(portsList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, portsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Ports = listVal
+		}
+	} else {
+		data.Ports = types.ListNull(types.StringType)
+	}
+	if blockData, ok := apiResource.Spec["prefix"].(map[string]interface{}); ok && (isImport || data.Prefix != nil) {
+		data.Prefix = &NetworkPolicyRulePrefixModel{
+			Prefix: func() types.List {
+				if v, ok := blockData["prefix"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["prefix_selector"].(map[string]interface{}); ok && (isImport || data.PrefixSelector != nil) {
+		data.PrefixSelector = &NetworkPolicyRulePrefixSelectorModel{
+			Expressions: func() types.List {
+				if v, ok := blockData["expressions"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["action"].(string); ok && v != "" {
+		data.Action = types.StringValue(v)
+	} else {
+		data.Action = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["protocol"].(string); ok && v != "" {
+		data.Protocol = types.StringValue(v)
+	} else {
+		data.Protocol = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

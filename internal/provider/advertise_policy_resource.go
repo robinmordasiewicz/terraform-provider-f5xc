@@ -1471,7 +1471,7 @@ func (r *AdvertisePolicyResource) Update(ctx context.Context, req resource.Updat
 		apiResource.Spec["skip_xff_append"] = data.SkipXffAppend.ValueBool()
 	}
 
-	updated, err := r.client.UpdateAdvertisePolicy(ctx, apiResource)
+	_, err := r.client.UpdateAdvertisePolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update AdvertisePolicy: %s", err))
 		return
@@ -1480,36 +1480,44 @@ func (r *AdvertisePolicyResource) Update(ctx context.Context, req resource.Updat
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetAdvertisePolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read AdvertisePolicy after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["address"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["address"].(string); ok && v != "" {
 		data.Address = types.StringValue(v)
 	} else if data.Address.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.Address = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["port"].(float64); ok {
+	if v, ok := fetched.Spec["port"].(float64); ok {
 		data.Port = types.Int64Value(int64(v))
 	} else if data.Port.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.Port = types.Int64Null()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["port_ranges"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["port_ranges"].(string); ok && v != "" {
 		data.PortRanges = types.StringValue(v)
 	} else if data.PortRanges.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.PortRanges = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["protocol"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["protocol"].(string); ok && v != "" {
 		data.Protocol = types.StringValue(v)
 	} else if data.Protocol.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.Protocol = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["skip_xff_append"].(bool); ok {
+	if v, ok := fetched.Spec["skip_xff_append"].(bool); ok {
 		data.SkipXffAppend = types.BoolValue(v)
 	} else if data.SkipXffAppend.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -1517,16 +1525,181 @@ func (r *AdvertisePolicyResource) Update(ctx context.Context, req resource.Updat
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetAdvertisePolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["public_ip"].([]interface{}); ok && len(listData) > 0 {
+		var public_ipList []AdvertisePolicyPublicIPModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				public_ipList = append(public_ipList, AdvertisePolicyPublicIPModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.PublicIP = public_ipList
+	}
+	if blockData, ok := apiResource.Spec["tls_parameters"].(map[string]interface{}); ok && (isImport || data.TLSParameters != nil) {
+		data.TLSParameters = &AdvertisePolicyTLSParametersModel{
+			ClientCertificateOptional: func() *AdvertisePolicyEmptyModel {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSParameters.ClientCertificateOptional
+				}
+				// Import case: read from API
+				if _, ok := blockData["client_certificate_optional"].(map[string]interface{}); ok {
+					return &AdvertisePolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			ClientCertificateRequired: func() *AdvertisePolicyEmptyModel {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSParameters.ClientCertificateRequired
+				}
+				// Import case: read from API
+				if _, ok := blockData["client_certificate_required"].(map[string]interface{}); ok {
+					return &AdvertisePolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			CommonParams: func() *AdvertisePolicyTLSParametersCommonParamsModel {
+				if !isImport && data.TLSParameters != nil && data.TLSParameters.CommonParams != nil {
+					// Normal Read: preserve existing state value
+					return data.TLSParameters.CommonParams
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["common_params"].(map[string]interface{}); ok {
+					return &AdvertisePolicyTLSParametersCommonParamsModel{
+						CipherSuites: func() types.List {
+							if v, ok := nestedBlockData["cipher_suites"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+						MaximumProtocolVersion: func() types.String {
+							if v, ok := nestedBlockData["maximum_protocol_version"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						MinimumProtocolVersion: func() types.String {
+							if v, ok := nestedBlockData["minimum_protocol_version"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			NoClientCertificate: func() *AdvertisePolicyEmptyModel {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSParameters.NoClientCertificate
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_client_certificate"].(map[string]interface{}); ok {
+					return &AdvertisePolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			XfccHeaderElements: func() types.List {
+				if v, ok := blockData["xfcc_header_elements"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
 		}
 	}
+	if _, ok := apiResource.Spec["where"].(map[string]interface{}); ok && isImport && data.Where == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Where = &AdvertisePolicyWhereModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["address"].(string); ok && v != "" {
+		data.Address = types.StringValue(v)
+	} else {
+		data.Address = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["port"].(float64); ok {
+		data.Port = types.Int64Value(int64(v))
+	} else {
+		data.Port = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["port_ranges"].(string); ok && v != "" {
+		data.PortRanges = types.StringValue(v)
+	} else {
+		data.PortRanges = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["protocol"].(string); ok && v != "" {
+		data.Protocol = types.StringValue(v)
+	} else {
+		data.Protocol = types.StringNull()
+	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.SkipXffAppend.IsNull() && !data.SkipXffAppend.IsUnknown() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case, null state, or unknown (after Create): read from API
+		if v, ok := apiResource.Spec["skip_xff_append"].(bool); ok {
+			data.SkipXffAppend = types.BoolValue(v)
+		} else {
+			data.SkipXffAppend = types.BoolNull()
+		}
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

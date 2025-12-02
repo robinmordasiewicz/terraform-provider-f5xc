@@ -1911,7 +1911,7 @@ func (r *UDPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		apiResource.Spec["port_ranges"] = data.PortRanges.ValueString()
 	}
 
-	updated, err := r.client.UpdateUDPLoadBalancer(ctx, apiResource)
+	_, err := r.client.UpdateUDPLoadBalancer(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update UDPLoadBalancer: %s", err))
 		return
@@ -1920,36 +1920,44 @@ func (r *UDPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetUDPLoadBalancer(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read UDPLoadBalancer after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["dns_volterra_managed"].(bool); ok {
+	if v, ok := fetched.Spec["dns_volterra_managed"].(bool); ok {
 		data.DNSVolterraManaged = types.BoolValue(v)
 	} else if data.DNSVolterraManaged.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.DNSVolterraManaged = types.BoolNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["enable_per_packet_load_balancing"].(bool); ok {
+	if v, ok := fetched.Spec["enable_per_packet_load_balancing"].(bool); ok {
 		data.EnablePerPacketLoadBalancing = types.BoolValue(v)
 	} else if data.EnablePerPacketLoadBalancing.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.EnablePerPacketLoadBalancing = types.BoolNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["idle_timeout"].(float64); ok {
+	if v, ok := fetched.Spec["idle_timeout"].(float64); ok {
 		data.IdleTimeout = types.Int64Value(int64(v))
 	} else if data.IdleTimeout.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.IdleTimeout = types.Int64Null()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["listen_port"].(float64); ok {
+	if v, ok := fetched.Spec["listen_port"].(float64); ok {
 		data.ListenPort = types.Int64Value(int64(v))
 	} else if data.ListenPort.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.ListenPort = types.Int64Null()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["port_ranges"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["port_ranges"].(string); ok && v != "" {
 		data.PortRanges = types.StringValue(v)
 	} else if data.PortRanges.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -1957,16 +1965,309 @@ func (r *UDPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetUDPLoadBalancer(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["advertise_custom"].(map[string]interface{}); ok && (isImport || data.AdvertiseCustom != nil) {
+		data.AdvertiseCustom = &UDPLoadBalancerAdvertiseCustomModel{
+			AdvertiseWhere: func() []UDPLoadBalancerAdvertiseCustomAdvertiseWhereModel {
+				if listData, ok := blockData["advertise_where"].([]interface{}); ok && len(listData) > 0 {
+					var result []UDPLoadBalancerAdvertiseCustomAdvertiseWhereModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, UDPLoadBalancerAdvertiseCustomAdvertiseWhereModel{
+								AdvertiseOnPublic: func() *UDPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel {
+									if _, ok := itemMap["advertise_on_public"].(map[string]interface{}); ok {
+										return &UDPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel{}
+									}
+									return nil
+								}(),
+								Port: func() types.Int64 {
+									if v, ok := itemMap["port"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								PortRanges: func() types.String {
+									if v, ok := itemMap["port_ranges"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Site: func() *UDPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel {
+									if deepMap, ok := itemMap["site"].(map[string]interface{}); ok {
+										return &UDPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel{
+											IP: func() types.String {
+												if v, ok := deepMap["ip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Network: func() types.String {
+												if v, ok := deepMap["network"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								UseDefaultPort: func() *UDPLoadBalancerEmptyModel {
+									if _, ok := itemMap["use_default_port"].(map[string]interface{}); ok {
+										return &UDPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								VirtualNetwork: func() *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel {
+									if deepMap, ok := itemMap["virtual_network"].(map[string]interface{}); ok {
+										return &UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel{
+											DefaultV6Vip: func() *UDPLoadBalancerEmptyModel {
+												if _, ok := deepMap["default_v6_vip"].(map[string]interface{}); ok {
+													return &UDPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											DefaultVip: func() *UDPLoadBalancerEmptyModel {
+												if _, ok := deepMap["default_vip"].(map[string]interface{}); ok {
+													return &UDPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											SpecificV6Vip: func() types.String {
+												if v, ok := deepMap["specific_v6_vip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											SpecificVip: func() types.String {
+												if v, ok := deepMap["specific_vip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								VirtualSite: func() *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel {
+									if deepMap, ok := itemMap["virtual_site"].(map[string]interface{}); ok {
+										return &UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel{
+											Network: func() types.String {
+												if v, ok := deepMap["network"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								VirtualSiteWithVip: func() *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel {
+									if deepMap, ok := itemMap["virtual_site_with_vip"].(map[string]interface{}); ok {
+										return &UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel{
+											IP: func() types.String {
+												if v, ok := deepMap["ip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Network: func() types.String {
+												if v, ok := deepMap["network"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Vk8sService: func() *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel {
+									if _, ok := itemMap["vk8s_service"].(map[string]interface{}); ok {
+										return &UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel{}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
 		}
 	}
+	if _, ok := apiResource.Spec["advertise_on_public"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublic == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AdvertiseOnPublic = &UDPLoadBalancerAdvertiseOnPublicModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["advertise_on_public_default_vip"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublicDefaultVip == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AdvertiseOnPublicDefaultVip = &UDPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["do_not_advertise"].(map[string]interface{}); ok && isImport && data.DoNotAdvertise == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DoNotAdvertise = &UDPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["domains"].([]interface{}); ok && len(v) > 0 {
+		var domainsList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				domainsList = append(domainsList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, domainsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Domains = listVal
+		}
+	} else {
+		data.Domains = types.ListNull(types.StringType)
+	}
+	if _, ok := apiResource.Spec["hash_policy_choice_random"].(map[string]interface{}); ok && isImport && data.HashPolicyChoiceRandom == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.HashPolicyChoiceRandom = &UDPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["hash_policy_choice_round_robin"].(map[string]interface{}); ok && isImport && data.HashPolicyChoiceRoundRobin == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.HashPolicyChoiceRoundRobin = &UDPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["hash_policy_choice_source_ip_stickiness"].(map[string]interface{}); ok && isImport && data.HashPolicyChoiceSourceIPStickiness == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.HashPolicyChoiceSourceIPStickiness = &UDPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["origin_pools_weights"].([]interface{}); ok && len(listData) > 0 {
+		var origin_pools_weightsList []UDPLoadBalancerOriginPoolsWeightsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				origin_pools_weightsList = append(origin_pools_weightsList, UDPLoadBalancerOriginPoolsWeightsModel{
+					Cluster: func() *UDPLoadBalancerOriginPoolsWeightsClusterModel {
+						if nestedMap, ok := itemMap["cluster"].(map[string]interface{}); ok {
+							return &UDPLoadBalancerOriginPoolsWeightsClusterModel{
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := nestedMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := nestedMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					EndpointSubsets: func() *UDPLoadBalancerEmptyModel {
+						if !isImport && len(data.OriginPoolsWeights) > listIdx && data.OriginPoolsWeights[listIdx].EndpointSubsets != nil {
+							return &UDPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					Pool: func() *UDPLoadBalancerOriginPoolsWeightsPoolModel {
+						if nestedMap, ok := itemMap["pool"].(map[string]interface{}); ok {
+							return &UDPLoadBalancerOriginPoolsWeightsPoolModel{
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := nestedMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := nestedMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Priority: func() types.Int64 {
+						if v, ok := itemMap["priority"].(float64); ok && v != 0 {
+							return types.Int64Value(int64(v))
+						}
+						return types.Int64Null()
+					}(),
+					Weight: func() types.Int64 {
+						if v, ok := itemMap["weight"].(float64); ok && v != 0 {
+							return types.Int64Value(int64(v))
+						}
+						return types.Int64Null()
+					}(),
+				})
+			}
+		}
+		data.OriginPoolsWeights = origin_pools_weightsList
+	}
+	if _, ok := apiResource.Spec["udp"].(map[string]interface{}); ok && isImport && data.UDP == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UDP = &UDPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.DNSVolterraManaged.IsNull() && !data.DNSVolterraManaged.IsUnknown() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case, null state, or unknown (after Create): read from API
+		if v, ok := apiResource.Spec["dns_volterra_managed"].(bool); ok {
+			data.DNSVolterraManaged = types.BoolValue(v)
+		} else {
+			data.DNSVolterraManaged = types.BoolNull()
+		}
+	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.EnablePerPacketLoadBalancing.IsNull() && !data.EnablePerPacketLoadBalancing.IsUnknown() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case, null state, or unknown (after Create): read from API
+		if v, ok := apiResource.Spec["enable_per_packet_load_balancing"].(bool); ok {
+			data.EnablePerPacketLoadBalancing = types.BoolValue(v)
+		} else {
+			data.EnablePerPacketLoadBalancing = types.BoolNull()
+		}
+	}
+	if v, ok := apiResource.Spec["idle_timeout"].(float64); ok {
+		data.IdleTimeout = types.Int64Value(int64(v))
+	} else {
+		data.IdleTimeout = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["listen_port"].(float64); ok {
+		data.ListenPort = types.Int64Value(int64(v))
+	} else {
+		data.ListenPort = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["port_ranges"].(string); ok && v != "" {
+		data.PortRanges = types.StringValue(v)
+	} else {
+		data.PortRanges = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

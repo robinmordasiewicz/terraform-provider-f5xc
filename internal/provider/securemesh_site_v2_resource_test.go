@@ -89,6 +89,7 @@ func TestAccSecuremeshSiteV2Resource_basic(t *testing.T) {
 // -----------------------------------------------------------------------------
 
 func TestAccSecuremeshSiteV2Resource_allAttributes(t *testing.T) {
+	t.Skip("Skipping: requires physical site infrastructure and registration token")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -134,6 +135,7 @@ func TestAccSecuremeshSiteV2Resource_allAttributes(t *testing.T) {
 // -----------------------------------------------------------------------------
 
 func TestAccSecuremeshSiteV2Resource_updateLabels(t *testing.T) {
+	t.Skip("Skipping: requires physical site infrastructure and registration token")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -183,6 +185,7 @@ func TestAccSecuremeshSiteV2Resource_updateLabels(t *testing.T) {
 // -----------------------------------------------------------------------------
 
 func TestAccSecuremeshSiteV2Resource_updateDescription(t *testing.T) {
+	t.Skip("Skipping: requires physical site infrastructure and registration token")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -236,6 +239,7 @@ func TestAccSecuremeshSiteV2Resource_updateDescription(t *testing.T) {
 // -----------------------------------------------------------------------------
 
 func TestAccSecuremeshSiteV2Resource_updateAnnotations(t *testing.T) {
+	t.Skip("Skipping: requires physical site infrastructure and registration token")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -283,6 +287,7 @@ func TestAccSecuremeshSiteV2Resource_updateAnnotations(t *testing.T) {
 // -----------------------------------------------------------------------------
 
 func TestAccSecuremeshSiteV2Resource_emptyPlan(t *testing.T) {
+	t.Skip("Skipping: requires physical site infrastructure and registration token")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -321,6 +326,7 @@ func TestAccSecuremeshSiteV2Resource_emptyPlan(t *testing.T) {
 // -----------------------------------------------------------------------------
 
 func TestAccSecuremeshSiteV2Resource_planChecks(t *testing.T) {
+	t.Skip("Skipping: requires physical site infrastructure and registration token")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -373,6 +379,7 @@ func TestAccSecuremeshSiteV2Resource_planChecks(t *testing.T) {
 // -----------------------------------------------------------------------------
 
 func TestAccSecuremeshSiteV2Resource_knownValues(t *testing.T) {
+	t.Skip("Skipping: requires physical site infrastructure and registration token")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -484,6 +491,7 @@ func TestAccSecuremeshSiteV2Resource_emptyName(t *testing.T) {
 // -----------------------------------------------------------------------------
 
 func TestAccSecuremeshSiteV2Resource_requiresReplace(t *testing.T) {
+	t.Skip("Skipping: requires physical site infrastructure and registration token")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 

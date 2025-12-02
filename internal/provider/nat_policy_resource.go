@@ -1923,7 +1923,7 @@ func (r *NatPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 		apiResource.Spec["site"] = siteMap
 	}
 
-	updated, err := r.client.UpdateNatPolicy(ctx, apiResource)
+	_, err := r.client.UpdateNatPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update NatPolicy: %s", err))
 		return
@@ -1932,18 +1932,188 @@ func (r *NatPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetNatPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read NatPolicy after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetNatPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["rules"].([]interface{}); ok && len(listData) > 0 {
+		var rulesList []NatPolicyRulesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				rulesList = append(rulesList, NatPolicyRulesModel{
+					Action: func() *NatPolicyRulesActionModel {
+						if nestedMap, ok := itemMap["action"].(map[string]interface{}); ok {
+							return &NatPolicyRulesActionModel{
+								VirtualCidr: func() types.String {
+									if v, ok := nestedMap["virtual_cidr"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					CloudConnect: func() *NatPolicyRulesCloudConnectModel {
+						if _, ok := itemMap["cloud_connect"].(map[string]interface{}); ok {
+							return &NatPolicyRulesCloudConnectModel{}
+						}
+						return nil
+					}(),
+					Criteria: func() *NatPolicyRulesCriteriaModel {
+						if nestedMap, ok := itemMap["criteria"].(map[string]interface{}); ok {
+							return &NatPolicyRulesCriteriaModel{
+								Any: func() *NatPolicyEmptyModel {
+									if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Criteria != nil && data.Rules[listIdx].Criteria.Any != nil {
+										return &NatPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								DestinationCidr: func() types.List {
+									if v, ok := nestedMap["destination_cidr"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
+								Icmp: func() *NatPolicyEmptyModel {
+									if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Criteria != nil && data.Rules[listIdx].Criteria.Icmp != nil {
+										return &NatPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								Protocol: func() types.String {
+									if v, ok := nestedMap["protocol"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SourceCidr: func() types.List {
+									if v, ok := nestedMap["source_cidr"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Disable: func() *NatPolicyEmptyModel {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Disable != nil {
+							return &NatPolicyEmptyModel{}
+						}
+						return nil
+					}(),
+					Enable: func() *NatPolicyEmptyModel {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Enable != nil {
+							return &NatPolicyEmptyModel{}
+						}
+						return nil
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					NetworkInterface: func() *NatPolicyRulesNetworkInterfaceModel {
+						if _, ok := itemMap["network_interface"].(map[string]interface{}); ok {
+							return &NatPolicyRulesNetworkInterfaceModel{}
+						}
+						return nil
+					}(),
+					Segment: func() *NatPolicyRulesSegmentModel {
+						if _, ok := itemMap["segment"].(map[string]interface{}); ok {
+							return &NatPolicyRulesSegmentModel{}
+						}
+						return nil
+					}(),
+					VirtualNetwork: func() *NatPolicyRulesVirtualNetworkModel {
+						if _, ok := itemMap["virtual_network"].(map[string]interface{}); ok {
+							return &NatPolicyRulesVirtualNetworkModel{}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.Rules = rulesList
+	}
+	if blockData, ok := apiResource.Spec["site"].(map[string]interface{}); ok && (isImport || data.Site != nil) {
+		data.Site = &NatPolicySiteModel{
+			Refs: func() []NatPolicySiteRefsModel {
+				if listData, ok := blockData["refs"].([]interface{}); ok && len(listData) > 0 {
+					var result []NatPolicySiteRefsModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, NatPolicySiteRefsModel{
+								Kind: func() types.String {
+									if v, ok := itemMap["kind"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Uid: func() types.String {
+									if v, ok := itemMap["uid"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
 		}
 	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

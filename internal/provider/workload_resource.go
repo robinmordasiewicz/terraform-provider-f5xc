@@ -15728,7 +15728,7 @@ func (r *WorkloadResource) Update(ctx context.Context, req resource.UpdateReques
 		apiResource.Spec["stateful_service"] = stateful_serviceMap
 	}
 
-	updated, err := r.client.UpdateWorkload(ctx, apiResource)
+	_, err := r.client.UpdateWorkload(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Workload: %s", err))
 		return
@@ -15737,18 +15737,976 @@ func (r *WorkloadResource) Update(ctx context.Context, req resource.UpdateReques
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetWorkload(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Workload after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetWorkload(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["job"].(map[string]interface{}); ok && (isImport || data.Job != nil) {
+		data.Job = &WorkloadJobModel{
+			Configuration: func() *WorkloadJobConfigurationModel {
+				if !isImport && data.Job != nil && data.Job.Configuration != nil {
+					// Normal Read: preserve existing state value
+					return data.Job.Configuration
+				}
+				// Import case: read from API
+				if _, ok := blockData["configuration"].(map[string]interface{}); ok {
+					return &WorkloadJobConfigurationModel{}
+				}
+				return nil
+			}(),
+			Containers: func() []WorkloadJobContainersModel {
+				if listData, ok := blockData["containers"].([]interface{}); ok && len(listData) > 0 {
+					var result []WorkloadJobContainersModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, WorkloadJobContainersModel{
+								CustomFlavor: func() *WorkloadJobContainersCustomFlavorModel {
+									if deepMap, ok := itemMap["custom_flavor"].(map[string]interface{}); ok {
+										return &WorkloadJobContainersCustomFlavorModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Namespace: func() types.String {
+												if v, ok := deepMap["namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Tenant: func() types.String {
+												if v, ok := deepMap["tenant"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								DefaultFlavor: func() *WorkloadEmptyModel {
+									if _, ok := itemMap["default_flavor"].(map[string]interface{}); ok {
+										return &WorkloadEmptyModel{}
+									}
+									return nil
+								}(),
+								Flavor: func() types.String {
+									if v, ok := itemMap["flavor"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Image: func() *WorkloadJobContainersImageModel {
+									if deepMap, ok := itemMap["image"].(map[string]interface{}); ok {
+										return &WorkloadJobContainersImageModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Public: func() *WorkloadEmptyModel {
+												if _, ok := deepMap["public"].(map[string]interface{}); ok {
+													return &WorkloadEmptyModel{}
+												}
+												return nil
+											}(),
+											PullPolicy: func() types.String {
+												if v, ok := deepMap["pull_policy"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								InitContainer: func() types.Bool {
+									if v, ok := itemMap["init_container"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								LivenessCheck: func() *WorkloadJobContainersLivenessCheckModel {
+									if deepMap, ok := itemMap["liveness_check"].(map[string]interface{}); ok {
+										return &WorkloadJobContainersLivenessCheckModel{
+											HealthyThreshold: func() types.Int64 {
+												if v, ok := deepMap["healthy_threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											InitialDelay: func() types.Int64 {
+												if v, ok := deepMap["initial_delay"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Interval: func() types.Int64 {
+												if v, ok := deepMap["interval"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Timeout: func() types.Int64 {
+												if v, ok := deepMap["timeout"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											UnhealthyThreshold: func() types.Int64 {
+												if v, ok := deepMap["unhealthy_threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ReadinessCheck: func() *WorkloadJobContainersReadinessCheckModel {
+									if deepMap, ok := itemMap["readiness_check"].(map[string]interface{}); ok {
+										return &WorkloadJobContainersReadinessCheckModel{
+											HealthyThreshold: func() types.Int64 {
+												if v, ok := deepMap["healthy_threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											InitialDelay: func() types.Int64 {
+												if v, ok := deepMap["initial_delay"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Interval: func() types.Int64 {
+												if v, ok := deepMap["interval"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Timeout: func() types.Int64 {
+												if v, ok := deepMap["timeout"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											UnhealthyThreshold: func() types.Int64 {
+												if v, ok := deepMap["unhealthy_threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			DeployOptions: func() *WorkloadJobDeployOptionsModel {
+				if !isImport && data.Job != nil && data.Job.DeployOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.Job.DeployOptions
+				}
+				// Import case: read from API
+				if _, ok := blockData["deploy_options"].(map[string]interface{}); ok {
+					return &WorkloadJobDeployOptionsModel{}
+				}
+				return nil
+			}(),
+			NumReplicas: func() types.Int64 {
+				if v, ok := blockData["num_replicas"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Volumes: func() []WorkloadJobVolumesModel {
+				if listData, ok := blockData["volumes"].([]interface{}); ok && len(listData) > 0 {
+					var result []WorkloadJobVolumesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, WorkloadJobVolumesModel{
+								EmptyDir: func() *WorkloadJobVolumesEmptyDirModel {
+									if deepMap, ok := itemMap["empty_dir"].(map[string]interface{}); ok {
+										return &WorkloadJobVolumesEmptyDirModel{
+											SizeLimit: func() types.Int64 {
+												if v, ok := deepMap["size_limit"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								HostPath: func() *WorkloadJobVolumesHostPathModel {
+									if deepMap, ok := itemMap["host_path"].(map[string]interface{}); ok {
+										return &WorkloadJobVolumesHostPathModel{
+											Path: func() types.String {
+												if v, ok := deepMap["path"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								PersistentVolume: func() *WorkloadJobVolumesPersistentVolumeModel {
+									if _, ok := itemMap["persistent_volume"].(map[string]interface{}); ok {
+										return &WorkloadJobVolumesPersistentVolumeModel{}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["service"].(map[string]interface{}); ok && (isImport || data.Service != nil) {
+		data.Service = &WorkloadServiceModel{
+			AdvertiseOptions: func() *WorkloadServiceAdvertiseOptionsModel {
+				if !isImport && data.Service != nil && data.Service.AdvertiseOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.Service.AdvertiseOptions
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_options"].(map[string]interface{}); ok {
+					return &WorkloadServiceAdvertiseOptionsModel{}
+				}
+				return nil
+			}(),
+			Configuration: func() *WorkloadServiceConfigurationModel {
+				if !isImport && data.Service != nil && data.Service.Configuration != nil {
+					// Normal Read: preserve existing state value
+					return data.Service.Configuration
+				}
+				// Import case: read from API
+				if _, ok := blockData["configuration"].(map[string]interface{}); ok {
+					return &WorkloadServiceConfigurationModel{}
+				}
+				return nil
+			}(),
+			Containers: func() []WorkloadServiceContainersModel {
+				if listData, ok := blockData["containers"].([]interface{}); ok && len(listData) > 0 {
+					var result []WorkloadServiceContainersModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, WorkloadServiceContainersModel{
+								CustomFlavor: func() *WorkloadServiceContainersCustomFlavorModel {
+									if deepMap, ok := itemMap["custom_flavor"].(map[string]interface{}); ok {
+										return &WorkloadServiceContainersCustomFlavorModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Namespace: func() types.String {
+												if v, ok := deepMap["namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Tenant: func() types.String {
+												if v, ok := deepMap["tenant"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								DefaultFlavor: func() *WorkloadEmptyModel {
+									if _, ok := itemMap["default_flavor"].(map[string]interface{}); ok {
+										return &WorkloadEmptyModel{}
+									}
+									return nil
+								}(),
+								Flavor: func() types.String {
+									if v, ok := itemMap["flavor"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Image: func() *WorkloadServiceContainersImageModel {
+									if deepMap, ok := itemMap["image"].(map[string]interface{}); ok {
+										return &WorkloadServiceContainersImageModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Public: func() *WorkloadEmptyModel {
+												if _, ok := deepMap["public"].(map[string]interface{}); ok {
+													return &WorkloadEmptyModel{}
+												}
+												return nil
+											}(),
+											PullPolicy: func() types.String {
+												if v, ok := deepMap["pull_policy"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								InitContainer: func() types.Bool {
+									if v, ok := itemMap["init_container"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								LivenessCheck: func() *WorkloadServiceContainersLivenessCheckModel {
+									if deepMap, ok := itemMap["liveness_check"].(map[string]interface{}); ok {
+										return &WorkloadServiceContainersLivenessCheckModel{
+											HealthyThreshold: func() types.Int64 {
+												if v, ok := deepMap["healthy_threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											InitialDelay: func() types.Int64 {
+												if v, ok := deepMap["initial_delay"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Interval: func() types.Int64 {
+												if v, ok := deepMap["interval"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Timeout: func() types.Int64 {
+												if v, ok := deepMap["timeout"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											UnhealthyThreshold: func() types.Int64 {
+												if v, ok := deepMap["unhealthy_threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ReadinessCheck: func() *WorkloadServiceContainersReadinessCheckModel {
+									if deepMap, ok := itemMap["readiness_check"].(map[string]interface{}); ok {
+										return &WorkloadServiceContainersReadinessCheckModel{
+											HealthyThreshold: func() types.Int64 {
+												if v, ok := deepMap["healthy_threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											InitialDelay: func() types.Int64 {
+												if v, ok := deepMap["initial_delay"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Interval: func() types.Int64 {
+												if v, ok := deepMap["interval"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Timeout: func() types.Int64 {
+												if v, ok := deepMap["timeout"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											UnhealthyThreshold: func() types.Int64 {
+												if v, ok := deepMap["unhealthy_threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			DeployOptions: func() *WorkloadServiceDeployOptionsModel {
+				if !isImport && data.Service != nil && data.Service.DeployOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.Service.DeployOptions
+				}
+				// Import case: read from API
+				if _, ok := blockData["deploy_options"].(map[string]interface{}); ok {
+					return &WorkloadServiceDeployOptionsModel{}
+				}
+				return nil
+			}(),
+			NumReplicas: func() types.Int64 {
+				if v, ok := blockData["num_replicas"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			ScaleToZero: func() *WorkloadEmptyModel {
+				if !isImport && data.Service != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Service.ScaleToZero
+				}
+				// Import case: read from API
+				if _, ok := blockData["scale_to_zero"].(map[string]interface{}); ok {
+					return &WorkloadEmptyModel{}
+				}
+				return nil
+			}(),
+			Volumes: func() []WorkloadServiceVolumesModel {
+				if listData, ok := blockData["volumes"].([]interface{}); ok && len(listData) > 0 {
+					var result []WorkloadServiceVolumesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, WorkloadServiceVolumesModel{
+								EmptyDir: func() *WorkloadServiceVolumesEmptyDirModel {
+									if deepMap, ok := itemMap["empty_dir"].(map[string]interface{}); ok {
+										return &WorkloadServiceVolumesEmptyDirModel{
+											SizeLimit: func() types.Int64 {
+												if v, ok := deepMap["size_limit"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								HostPath: func() *WorkloadServiceVolumesHostPathModel {
+									if deepMap, ok := itemMap["host_path"].(map[string]interface{}); ok {
+										return &WorkloadServiceVolumesHostPathModel{
+											Path: func() types.String {
+												if v, ok := deepMap["path"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								PersistentVolume: func() *WorkloadServiceVolumesPersistentVolumeModel {
+									if _, ok := itemMap["persistent_volume"].(map[string]interface{}); ok {
+										return &WorkloadServiceVolumesPersistentVolumeModel{}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["simple_service"].(map[string]interface{}); ok && (isImport || data.SimpleService != nil) {
+		data.SimpleService = &WorkloadSimpleServiceModel{
+			Configuration: func() *WorkloadSimpleServiceConfigurationModel {
+				if !isImport && data.SimpleService != nil && data.SimpleService.Configuration != nil {
+					// Normal Read: preserve existing state value
+					return data.SimpleService.Configuration
+				}
+				// Import case: read from API
+				if _, ok := blockData["configuration"].(map[string]interface{}); ok {
+					return &WorkloadSimpleServiceConfigurationModel{}
+				}
+				return nil
+			}(),
+			Container: func() *WorkloadSimpleServiceContainerModel {
+				if !isImport && data.SimpleService != nil && data.SimpleService.Container != nil {
+					// Normal Read: preserve existing state value
+					return data.SimpleService.Container
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["container"].(map[string]interface{}); ok {
+					return &WorkloadSimpleServiceContainerModel{
+						Args: func() types.List {
+							if v, ok := nestedBlockData["args"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+						Command: func() types.List {
+							if v, ok := nestedBlockData["command"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+						Flavor: func() types.String {
+							if v, ok := nestedBlockData["flavor"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						InitContainer: func() types.Bool {
+							if v, ok := nestedBlockData["init_container"].(bool); ok {
+								return types.BoolValue(v)
+							}
+							return types.BoolNull()
+						}(),
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Disabled: func() *WorkloadEmptyModel {
+				if !isImport && data.SimpleService != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SimpleService.Disabled
+				}
+				// Import case: read from API
+				if _, ok := blockData["disabled"].(map[string]interface{}); ok {
+					return &WorkloadEmptyModel{}
+				}
+				return nil
+			}(),
+			DoNotAdvertise: func() *WorkloadEmptyModel {
+				if !isImport && data.SimpleService != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SimpleService.DoNotAdvertise
+				}
+				// Import case: read from API
+				if _, ok := blockData["do_not_advertise"].(map[string]interface{}); ok {
+					return &WorkloadEmptyModel{}
+				}
+				return nil
+			}(),
+			Enabled: func() *WorkloadSimpleServiceEnabledModel {
+				if !isImport && data.SimpleService != nil && data.SimpleService.Enabled != nil {
+					// Normal Read: preserve existing state value
+					return data.SimpleService.Enabled
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["enabled"].(map[string]interface{}); ok {
+					return &WorkloadSimpleServiceEnabledModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			ScaleToZero: func() types.Bool {
+				if !isImport && data.SimpleService != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.SimpleService.ScaleToZero
+				}
+				// Import case: read from API
+				if v, ok := blockData["scale_to_zero"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			SimpleAdvertise: func() *WorkloadSimpleServiceSimpleAdvertiseModel {
+				if !isImport && data.SimpleService != nil && data.SimpleService.SimpleAdvertise != nil {
+					// Normal Read: preserve existing state value
+					return data.SimpleService.SimpleAdvertise
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["simple_advertise"].(map[string]interface{}); ok {
+					return &WorkloadSimpleServiceSimpleAdvertiseModel{
+						Domains: func() types.List {
+							if v, ok := nestedBlockData["domains"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+						ServicePort: func() types.Int64 {
+							if v, ok := nestedBlockData["service_port"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["stateful_service"].(map[string]interface{}); ok && (isImport || data.StatefulService != nil) {
+		data.StatefulService = &WorkloadStatefulServiceModel{
+			AdvertiseOptions: func() *WorkloadStatefulServiceAdvertiseOptionsModel {
+				if !isImport && data.StatefulService != nil && data.StatefulService.AdvertiseOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.StatefulService.AdvertiseOptions
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_options"].(map[string]interface{}); ok {
+					return &WorkloadStatefulServiceAdvertiseOptionsModel{}
+				}
+				return nil
+			}(),
+			Configuration: func() *WorkloadStatefulServiceConfigurationModel {
+				if !isImport && data.StatefulService != nil && data.StatefulService.Configuration != nil {
+					// Normal Read: preserve existing state value
+					return data.StatefulService.Configuration
+				}
+				// Import case: read from API
+				if _, ok := blockData["configuration"].(map[string]interface{}); ok {
+					return &WorkloadStatefulServiceConfigurationModel{}
+				}
+				return nil
+			}(),
+			Containers: func() []WorkloadStatefulServiceContainersModel {
+				if listData, ok := blockData["containers"].([]interface{}); ok && len(listData) > 0 {
+					var result []WorkloadStatefulServiceContainersModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, WorkloadStatefulServiceContainersModel{
+								CustomFlavor: func() *WorkloadStatefulServiceContainersCustomFlavorModel {
+									if deepMap, ok := itemMap["custom_flavor"].(map[string]interface{}); ok {
+										return &WorkloadStatefulServiceContainersCustomFlavorModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Namespace: func() types.String {
+												if v, ok := deepMap["namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Tenant: func() types.String {
+												if v, ok := deepMap["tenant"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								DefaultFlavor: func() *WorkloadEmptyModel {
+									if _, ok := itemMap["default_flavor"].(map[string]interface{}); ok {
+										return &WorkloadEmptyModel{}
+									}
+									return nil
+								}(),
+								Flavor: func() types.String {
+									if v, ok := itemMap["flavor"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Image: func() *WorkloadStatefulServiceContainersImageModel {
+									if deepMap, ok := itemMap["image"].(map[string]interface{}); ok {
+										return &WorkloadStatefulServiceContainersImageModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Public: func() *WorkloadEmptyModel {
+												if _, ok := deepMap["public"].(map[string]interface{}); ok {
+													return &WorkloadEmptyModel{}
+												}
+												return nil
+											}(),
+											PullPolicy: func() types.String {
+												if v, ok := deepMap["pull_policy"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								InitContainer: func() types.Bool {
+									if v, ok := itemMap["init_container"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								LivenessCheck: func() *WorkloadStatefulServiceContainersLivenessCheckModel {
+									if deepMap, ok := itemMap["liveness_check"].(map[string]interface{}); ok {
+										return &WorkloadStatefulServiceContainersLivenessCheckModel{
+											HealthyThreshold: func() types.Int64 {
+												if v, ok := deepMap["healthy_threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											InitialDelay: func() types.Int64 {
+												if v, ok := deepMap["initial_delay"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Interval: func() types.Int64 {
+												if v, ok := deepMap["interval"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Timeout: func() types.Int64 {
+												if v, ok := deepMap["timeout"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											UnhealthyThreshold: func() types.Int64 {
+												if v, ok := deepMap["unhealthy_threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ReadinessCheck: func() *WorkloadStatefulServiceContainersReadinessCheckModel {
+									if deepMap, ok := itemMap["readiness_check"].(map[string]interface{}); ok {
+										return &WorkloadStatefulServiceContainersReadinessCheckModel{
+											HealthyThreshold: func() types.Int64 {
+												if v, ok := deepMap["healthy_threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											InitialDelay: func() types.Int64 {
+												if v, ok := deepMap["initial_delay"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Interval: func() types.Int64 {
+												if v, ok := deepMap["interval"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Timeout: func() types.Int64 {
+												if v, ok := deepMap["timeout"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											UnhealthyThreshold: func() types.Int64 {
+												if v, ok := deepMap["unhealthy_threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			DeployOptions: func() *WorkloadStatefulServiceDeployOptionsModel {
+				if !isImport && data.StatefulService != nil && data.StatefulService.DeployOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.StatefulService.DeployOptions
+				}
+				// Import case: read from API
+				if _, ok := blockData["deploy_options"].(map[string]interface{}); ok {
+					return &WorkloadStatefulServiceDeployOptionsModel{}
+				}
+				return nil
+			}(),
+			NumReplicas: func() types.Int64 {
+				if v, ok := blockData["num_replicas"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			PersistentVolumes: func() []WorkloadStatefulServicePersistentVolumesModel {
+				if listData, ok := blockData["persistent_volumes"].([]interface{}); ok && len(listData) > 0 {
+					var result []WorkloadStatefulServicePersistentVolumesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, WorkloadStatefulServicePersistentVolumesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								PersistentVolume: func() *WorkloadStatefulServicePersistentVolumesPersistentVolumeModel {
+									if _, ok := itemMap["persistent_volume"].(map[string]interface{}); ok {
+										return &WorkloadStatefulServicePersistentVolumesPersistentVolumeModel{}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			ScaleToZero: func() *WorkloadEmptyModel {
+				if !isImport && data.StatefulService != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.StatefulService.ScaleToZero
+				}
+				// Import case: read from API
+				if _, ok := blockData["scale_to_zero"].(map[string]interface{}); ok {
+					return &WorkloadEmptyModel{}
+				}
+				return nil
+			}(),
+			Volumes: func() []WorkloadStatefulServiceVolumesModel {
+				if listData, ok := blockData["volumes"].([]interface{}); ok && len(listData) > 0 {
+					var result []WorkloadStatefulServiceVolumesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, WorkloadStatefulServiceVolumesModel{
+								EmptyDir: func() *WorkloadStatefulServiceVolumesEmptyDirModel {
+									if deepMap, ok := itemMap["empty_dir"].(map[string]interface{}); ok {
+										return &WorkloadStatefulServiceVolumesEmptyDirModel{
+											SizeLimit: func() types.Int64 {
+												if v, ok := deepMap["size_limit"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								HostPath: func() *WorkloadStatefulServiceVolumesHostPathModel {
+									if deepMap, ok := itemMap["host_path"].(map[string]interface{}); ok {
+										return &WorkloadStatefulServiceVolumesHostPathModel{
+											Path: func() types.String {
+												if v, ok := deepMap["path"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

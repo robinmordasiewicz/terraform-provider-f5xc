@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_certificate\_chain Resource - terraform-provider-f5xc"
+page_title: "f5xc_certificate_chain Resource - terraform-provider-f5xc"
 subcategory: "Certificates"
 description: |-
   Manages a CertificateChain resource in F5 Distributed Cloud for certificate chain configuration for TLS.
 ---
 
-# f5xc\_certificate\_chain (Resource)
+# f5xc_certificate_chain (Resource)
 
 Manages a CertificateChain resource in F5 Distributed Cloud for certificate chain configuration for TLS.
 
@@ -18,7 +18,7 @@ Manages a CertificateChain resource in F5 Distributed Cloud for certificate chai
 # Manages a CertificateChain resource in F5 Distributed Cloud for certificate chain configuration for TLS.
 
 # Basic Certificate Chain configuration
-resource "f5xc\_certificate\_chain" "example" {
+resource "f5xc_certificate_chain" "example" {
   name      = "example-certificate-chain"
   namespace = "shared"
 
@@ -82,5 +82,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_certificate\_chain.example system/example
+terraform import f5xc_certificate_chain.example system/example
 ```

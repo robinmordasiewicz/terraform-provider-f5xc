@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_dns_load\_balancer Resource - terraform-provider-f5xc"
+page_title: "f5xc_dns_load_balancer Resource - terraform-provider-f5xc"
 subcategory: "DNS"
 description: |-
   Manages DNS Load Balancer in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 ---
 
-# f5xc\_dns_load\_balancer (Resource)
+# f5xc_dns_load_balancer (Resource)
 
 Manages DNS Load Balancer in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages DNS Load Balancer in a given namespace. If one already exist it will giv
 # Manages DNS Load Balancer in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
 # Basic DNS Load Balancer configuration
-resource "f5xc\_dns_load\_balancer" "example" {
+resource "f5xc_dns_load_balancer" "example" {
   name      = "example-dns-load-balancer"
   namespace = "staging"
 
@@ -43,7 +43,7 @@ resource "f5xc\_dns_load\_balancer" "example" {
   # Rule-based load balancing
   rule_list {
     rules {
-      geo\_location\_set {
+      geo_location_set {
         name      = "us-geo"
         namespace = "shared"
       }
@@ -108,19 +108,19 @@ A [`fallback_pool`](#fallback-pool) block supports the following:
 
 A [`response_cache`](#response-cache) block supports the following:
 
-<a id="response-cache-default-response-cache-parameters"></a>&#x2022; [`default\_response_cache\_parameters`](#response-cache-default-response-cache-parameters) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="response-cache-default-response-cache-parameters"></a>&#x2022; [`default_response_cache_parameters`](#response-cache-default-response-cache-parameters) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="response-cache-disable"></a>&#x2022; [`disable`](#response-cache-disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="response-cache-response-cache-parameters"></a>&#x2022; [`response\_cache\_parameters`](#response-cache-response-cache-parameters) - Optional Block<br>Response Cache Parameters<br>See [Response Cache Parameters](#response-cache-response-cache-parameters) below.
+<a id="response-cache-response-cache-parameters"></a>&#x2022; [`response_cache_parameters`](#response-cache-response-cache-parameters) - Optional Block<br>Response Cache Parameters<br>See [Response Cache Parameters](#response-cache-response-cache-parameters) below.
 
 #### Response Cache Response Cache Parameters
 
-A [`response\_cache\_parameters`](#response-cache-response-cache-parameters) block (within [`response_cache`](#response-cache)) supports the following:
+A [`response_cache_parameters`](#response-cache-response-cache-parameters) block (within [`response_cache`](#response-cache)) supports the following:
 
-<a id="response-cache-response-cache-parameters-cache-cidr-ipv4"></a>&#x2022; [`cache\_cidr\_ipv4`](#response-cache-response-cache-parameters-cache-cidr-ipv4) - Optional Number<br>Length of IPv4 CIDR masks. Length of CIDR masks used to group IPv4 clients
+<a id="response-cache-response-cache-parameters-cache-cidr-ipv4"></a>&#x2022; [`cache_cidr_ipv4`](#response-cache-response-cache-parameters-cache-cidr-ipv4) - Optional Number<br>Length of IPv4 CIDR masks. Length of CIDR masks used to group IPv4 clients
 
-<a id="response-cache-response-cache-parameters-cache-cidr-ipv6"></a>&#x2022; [`cache\_cidr\_ipv6`](#response-cache-response-cache-parameters-cache-cidr-ipv6) - Optional Number<br>Length of IPv6 CIDR masks. Length of CIDR masks used to group IPv6 clients
+<a id="response-cache-response-cache-parameters-cache-cidr-ipv6"></a>&#x2022; [`cache_cidr_ipv6`](#response-cache-response-cache-parameters-cache-cidr-ipv6) - Optional Number<br>Length of IPv6 CIDR masks. Length of CIDR masks used to group IPv6 clients
 
 <a id="response-cache-response-cache-parameters-cache-ttl"></a>&#x2022; [`cache_ttl`](#response-cache-response-cache-parameters-cache-ttl) - Optional Number<br>TTL. TTL for response cache
 
@@ -136,15 +136,15 @@ A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports 
 
 <a id="rule-list-rules-asn-list"></a>&#x2022; [`asn_list`](#rule-list-rules-asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#rule-list-rules-asn-list) below.
 
-<a id="rule-list-rules-asn-matcher"></a>&#x2022; [`asn_matcher`](#rule-list-rules-asn-matcher) - Optional Block<br>ASN Matcher. Match any AS number contained in the list of bgp\_asn\_sets<br>See [Asn Matcher](#rule-list-rules-asn-matcher) below.
+<a id="rule-list-rules-asn-matcher"></a>&#x2022; [`asn_matcher`](#rule-list-rules-asn-matcher) - Optional Block<br>ASN Matcher. Match any AS number contained in the list of bgp_asn_sets<br>See [Asn Matcher](#rule-list-rules-asn-matcher) below.
 
-<a id="rule-list-rules-geo-location-label-selector"></a>&#x2022; [`geo\_location_label\_selector`](#rule-list-rules-geo-location-label-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Geo Location Label Selector](#rule-list-rules-geo-location-label-selector) below.
+<a id="rule-list-rules-geo-location-label-selector"></a>&#x2022; [`geo_location_label_selector`](#rule-list-rules-geo-location-label-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Geo Location Label Selector](#rule-list-rules-geo-location-label-selector) below.
 
-<a id="rule-list-rules-geo-location-set"></a>&#x2022; [`geo\_location\_set`](#rule-list-rules-geo-location-set) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Geo Location Set](#rule-list-rules-geo-location-set) below.
+<a id="rule-list-rules-geo-location-set"></a>&#x2022; [`geo_location_set`](#rule-list-rules-geo-location-set) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Geo Location Set](#rule-list-rules-geo-location-set) below.
 
-<a id="rule-list-rules-ip-prefix-list"></a>&#x2022; [`ip\_prefix\_list`](#rule-list-rules-ip-prefix-list) - Optional Block<br>IP Prefix Match List. List of IP Prefix strings to match against<br>See [IP Prefix List](#rule-list-rules-ip-prefix-list) below.
+<a id="rule-list-rules-ip-prefix-list"></a>&#x2022; [`ip_prefix_list`](#rule-list-rules-ip-prefix-list) - Optional Block<br>IP Prefix Match List. List of IP Prefix strings to match against<br>See [IP Prefix List](#rule-list-rules-ip-prefix-list) below.
 
-<a id="rule-list-rules-ip-prefix-set"></a>&#x2022; [`ip\_prefix\_set`](#rule-list-rules-ip-prefix-set) - Optional Block<br>IP Prefix Matcher. Match any IP prefix contained in the list of ip\_prefix\_sets. The result of the match is inverted if invert_matcher is true<br>See [IP Prefix Set](#rule-list-rules-ip-prefix-set) below.
+<a id="rule-list-rules-ip-prefix-set"></a>&#x2022; [`ip_prefix_set`](#rule-list-rules-ip-prefix-set) - Optional Block<br>IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true<br>See [IP Prefix Set](#rule-list-rules-ip-prefix-set) below.
 
 <a id="rule-list-rules-pool"></a>&#x2022; [`pool`](#rule-list-rules-pool) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Pool](#rule-list-rules-pool) below.
 
@@ -160,7 +160,7 @@ An [`asn_list`](#rule-list-rules-asn-list) block (within [`rule_list.rules`](#ru
 
 An [`asn_matcher`](#rule-list-rules-asn-matcher) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
-<a id="rule-list-rules-asn-matcher-asn-sets"></a>&#x2022; [`asn_sets`](#rule-list-rules-asn-matcher-asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp\_asn\_set objects<br>See [Asn Sets](#rule-list-rules-asn-matcher-asn-sets) below.
+<a id="rule-list-rules-asn-matcher-asn-sets"></a>&#x2022; [`asn_sets`](#rule-list-rules-asn-matcher-asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#rule-list-rules-asn-matcher-asn-sets) below.
 
 #### Rule List Rules Asn Matcher Asn Sets
 
@@ -178,13 +178,13 @@ An [`asn_sets`](#rule-list-rules-asn-matcher-asn-sets) block (within [`rule_list
 
 #### Rule List Rules Geo Location Label Selector
 
-A [`geo\_location_label\_selector`](#rule-list-rules-geo-location-label-selector) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
+A [`geo_location_label_selector`](#rule-list-rules-geo-location-label-selector) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 <a id="rule-list-rules-geo-location-label-selector-expressions"></a>&#x2022; [`expressions`](#rule-list-rules-geo-location-label-selector-expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
 #### Rule List Rules Geo Location Set
 
-A [`geo\_location\_set`](#rule-list-rules-geo-location-set) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
+A [`geo_location_set`](#rule-list-rules-geo-location-set) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 <a id="rule-list-rules-geo-location-set-name"></a>&#x2022; [`name`](#rule-list-rules-geo-location-set-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -194,7 +194,7 @@ A [`geo\_location\_set`](#rule-list-rules-geo-location-set) block (within [`rule
 
 #### Rule List Rules IP Prefix List
 
-An [`ip\_prefix\_list`](#rule-list-rules-ip-prefix-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
+An [`ip_prefix_list`](#rule-list-rules-ip-prefix-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 <a id="rule-list-rules-ip-prefix-list-invert-match"></a>&#x2022; [`invert_match`](#rule-list-rules-ip-prefix-list-invert-match) - Optional Bool<br>Invert Match Result. Invert the match result
 
@@ -202,15 +202,15 @@ An [`ip\_prefix\_list`](#rule-list-rules-ip-prefix-list) block (within [`rule_li
 
 #### Rule List Rules IP Prefix Set
 
-An [`ip\_prefix\_set`](#rule-list-rules-ip-prefix-set) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
+An [`ip_prefix_set`](#rule-list-rules-ip-prefix-set) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 <a id="rule-list-rules-ip-prefix-set-invert-matcher"></a>&#x2022; [`invert_matcher`](#rule-list-rules-ip-prefix-set-invert-matcher) - Optional Bool<br>Invert IP Matcher. Invert the match result
 
-<a id="rule-list-rules-ip-prefix-set-prefix-sets"></a>&#x2022; [`prefix_sets`](#rule-list-rules-ip-prefix-set-prefix-sets) - Optional Block<br>IP Prefix Sets. A list of references to ip\_prefix\_set objects<br>See [Prefix Sets](#rule-list-rules-ip-prefix-set-prefix-sets) below.
+<a id="rule-list-rules-ip-prefix-set-prefix-sets"></a>&#x2022; [`prefix_sets`](#rule-list-rules-ip-prefix-set-prefix-sets) - Optional Block<br>IP Prefix Sets. A list of references to ip_prefix_set objects<br>See [Prefix Sets](#rule-list-rules-ip-prefix-set-prefix-sets) below.
 
 #### Rule List Rules IP Prefix Set Prefix Sets
 
-A [`prefix_sets`](#rule-list-rules-ip-prefix-set-prefix-sets) block (within [`rule_list.rules.ip\_prefix\_set`](#rule-list-rules-ip-prefix-set)) supports the following:
+A [`prefix_sets`](#rule-list-rules-ip-prefix-set-prefix-sets) block (within [`rule_list.rules.ip_prefix_set`](#rule-list-rules-ip-prefix-set)) supports the following:
 
 <a id="rule-list-rules-ip-prefix-set-prefix-sets-kind"></a>&#x2022; [`kind`](#rule-list-rules-ip-prefix-set-prefix-sets-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -250,5 +250,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_dns_load\_balancer.example system/example
+terraform import f5xc_dns_load_balancer.example system/example
 ```

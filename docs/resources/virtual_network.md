@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_virtual\_network Resource - terraform-provider-f5xc"
+page_title: "f5xc_virtual_network Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
   Manages virtual network in given namespace in F5 Distributed Cloud.
 ---
 
-# f5xc\_virtual\_network (Resource)
+# f5xc_virtual_network (Resource)
 
 Manages virtual network in given namespace in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages virtual network in given namespace in F5 Distributed Cloud.
 # Manages virtual network in given namespace in F5 Distributed Cloud.
 
 # Basic Virtual Network configuration
-resource "f5xc\_virtual\_network" "example" {
+resource "f5xc_virtual_network" "example" {
   name      = "example-virtual-network"
   namespace = "system"
 
@@ -31,9 +31,9 @@ resource "f5xc\_virtual\_network" "example" {
     "owner" = "platform-team"
   }
 
-  // One of the arguments from this list "global_network legacy_type site\_local_inside\_network site\_local\_network srv6_network" must be set
+  // One of the arguments from this list "global_network legacy_type site_local_inside_network site_local_network srv6_network" must be set
 
-  site\_local\_network {}
+  site_local_network {}
 
   // Static routes configuration (optional)
   static_routes {
@@ -43,7 +43,7 @@ resource "f5xc\_virtual\_network" "example" {
 
     default_gateway {}
 
-    attrs = ["ROUTE\_ATTR_INSTALL\_FORWARDING"]
+    attrs = ["ROUTE_ATTR_INSTALL_FORWARDING"]
   }
 }
 ```
@@ -69,9 +69,9 @@ resource "f5xc\_virtual\_network" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="global-network"></a>[`global_network`](#global-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="legacy-type"></a>[`legacy_type`](#legacy-type) - Optional String  Defaults to `VIRTUAL\_NETWORK_SITE\_LOCAL`<br>Possible values are `VIRTUAL\_NETWORK_SITE\_LOCAL`, `VIRTUAL\_NETWORK_SITE_LOCAL\_INSIDE`, `VIRTUAL\_NETWORK_PER\_SITE`, `VIRTUAL\_NETWORK\_PUBLIC`, `VIRTUAL\_NETWORK\_GLOBAL`, `VIRTUAL\_NETWORK_SITE\_SERVICE`, `VIRTUAL\_NETWORK_VER\_INTERNAL`, `VIRTUAL\_NETWORK_SITE_LOCAL_INSIDE\_OUTSIDE`, `VIRTUAL\_NETWORK_IP\_AUTO`, `VIRTUAL\_NETWORK_VOLTADN_PRIVATE\_NETWORK`, `VIRTUAL\_NETWORK_SRV6\_NETWORK`, `VIRTUAL\_NETWORK_IP\_FABRIC`, `VIRTUAL\_NETWORK\_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL\_NETWORK_SITE\_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL\_NETWORK_SITE_LOCAL\_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL\_NETWORK\_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL\_NETWORK_SITE_LOCAL_INSIDE\_OUTSIDE represents both VIRTUAL\_NETWORK_SITE\_LOCAL and VIRTUAL\_NETWORK_SITE_LOCAL\_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL\_NETWORK_IP\_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
-<br><br>&#x2022; <a id="site-local-inside-network"></a>[`site\_local_inside\_network`](#site-local-inside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="site-local-network"></a>[`site\_local\_network`](#site-local-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="legacy-type"></a>[`legacy_type`](#legacy-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
+<br><br>&#x2022; <a id="site-local-inside-network"></a>[`site_local_inside_network`](#site-local-inside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="site-local-network"></a>[`site_local_network`](#site-local-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="static-routes"></a>&#x2022; [`static_routes`](#static-routes) - Optional Block<br>Static Routes. List of static routes on the virtual network<br>See [Static Routes](#static-routes) below for details.
 
@@ -89,7 +89,7 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`static_routes`](#static-routes) block supports the following:
 
-<a id="static-routes-attrs"></a>&#x2022; [`attrs`](#static-routes-attrs) - Optional List  Defaults to `ROUTE\_ATTR_NO\_OP`<br>Possible values are `ROUTE\_ATTR_NO\_OP`, `ROUTE\_ATTR\_ADVERTISE`, `ROUTE\_ATTR_INSTALL\_HOST`, `ROUTE\_ATTR_INSTALL\_FORWARDING`, `ROUTE\_ATTR_MERGE\_ONLY`<br>Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
+<a id="static-routes-attrs"></a>&#x2022; [`attrs`](#static-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
 <a id="static-routes-default-gateway"></a>&#x2022; [`default_gateway`](#static-routes-default-gateway) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -145,5 +145,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_virtual\_network.example system/example
+terraform import f5xc_virtual_network.example system/example
 ```

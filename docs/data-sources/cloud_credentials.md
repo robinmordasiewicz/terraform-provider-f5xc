@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_cloud\_credentials Data Source - terraform-provider-f5xc"
+page_title: "f5xc_cloud_credentials Data Source - terraform-provider-f5xc"
 subcategory: "Authentication"
 description: |-
   Manages a CloudCredentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.
 ---
 
-# f5xc\_cloud\_credentials (Data Source)
+# f5xc_cloud_credentials (Data Source)
 
 Manages a CloudCredentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.
 
@@ -18,24 +18,24 @@ Manages a CloudCredentials resource in F5 Distributed Cloud for cloud provider c
 # Retrieves information about an existing Cloud Credentials
 
 # Look up an existing Cloud Credentials by name
-data "f5xc\_cloud\_credentials" "example" {
+data "f5xc_cloud_credentials" "example" {
   name      = "example-cloud-credentials"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "cloud\_credentials\_id" {
-#   value = data.f5xc\_cloud\_credentials.example.id
+# output "cloud_credentials_id" {
+#   value = data.f5xc_cloud_credentials.example.id
 # }
 
 # Example: Reference cloud credentials in site configuration
-# resource "f5xc\_aws_vpc\_site" "example" {
+# resource "f5xc_aws_vpc_site" "example" {
 #   name      = "example-aws-site"
 #   namespace = "system"
 #
 #   aws_cred {
-#     name      = data.f5xc\_cloud\_credentials.example.name
-#     namespace = data.f5xc\_cloud\_credentials.example.namespace
+#     name      = data.f5xc_cloud_credentials.example.name
+#     namespace = data.f5xc_cloud_credentials.example.namespace
 #   }
 # }
 ```

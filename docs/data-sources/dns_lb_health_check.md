@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_dns_lb_health\_check Data Source - terraform-provider-f5xc"
+page_title: "f5xc_dns_lb_health_check Data Source - terraform-provider-f5xc"
 subcategory: "DNS"
 description: |-
   Manages DNS Load Balancer Health Check in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 ---
 
-# f5xc\_dns_lb_health\_check (Data Source)
+# f5xc_dns_lb_health_check (Data Source)
 
 Manages DNS Load Balancer Health Check in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages DNS Load Balancer Health Check in a given namespace. If one already exis
 # Retrieves information about an existing DNS LB Health Check
 
 # Look up an existing DNS LB Health Check by name
-data "f5xc\_dns_lb_health\_check" "example" {
+data "f5xc_dns_lb_health_check" "example" {
   name      = "example-dns-lb-health-check"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "dns\_lb_health_check\_id" {
-#   value = data.f5xc\_dns_lb_health\_check.example.id
+# output "dns_lb_health_check_id" {
+#   value = data.f5xc_dns_lb_health_check.example.id
 # }
 ```
 

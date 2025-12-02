@@ -31,18 +31,18 @@ resource "f5xc_healthcheck" "example" {
     "owner" = "platform-team"
   }
 
-  // One of the arguments from this list "http\_health\_check tcp\_health\_check udp\_icmp_health\_check" must be set
+  // One of the arguments from this list "http_health_check tcp_health_check udp_icmp_health_check" must be set
 
-  http\_health\_check {
-    // One of the arguments from this list "host_header use\_origin_server\_name" must be set
+  http_health_check {
+    // One of the arguments from this list "host_header use_origin_server_name" must be set
 
-    use\_origin_server\_name {}
+    use_origin_server_name {}
 
     path                  = "/health"
     use_http2             = false
-    expected\_status\_codes = ["200"]
+    expected_status_codes = ["200"]
 
-    // One of the arguments from this list "headers request\_headers_to\_remove" must be set
+    // One of the arguments from this list "headers request_headers_to_remove" must be set
 
     headers = {
       "x-health-check" = "true"
@@ -78,9 +78,9 @@ resource "f5xc_healthcheck" "example" {
 <a id="healthy-threshold"></a>&#x2022; [`healthy_threshold`](#healthy-threshold) - Optional Number<br>Healthy Threshold. Number of successful responses before declaring healthy. In other words, this is the number of healthy health checks required before a host is marked healthy. Note that during startup, only a single successful health check is required to mark a host healthy
 
 -> **One of the following:**
-&#x2022; <a id="http-health-check"></a>[`http\_health\_check`](#http-health-check) - Optional Block<br>HTTP Health Check. Healthy if 'get' method on URL 'HTTP(s)://`<host>`/`<path>`' with optional '`<header>`' returns success. 'host' is not used for DNS resolution. It is used as HTTP Header in the request<br>See [HTTP Health Check](#http-health-check) below for details.
-<br><br>&#x2022; <a id="tcp-health-check"></a>[`tcp\_health\_check`](#tcp-health-check) - Optional Block<br>TCP Health Check. Healthy if TCP connection is successful and response payload matches `<expected_response>`<br>See [TCP Health Check](#tcp-health-check) below for details.
-<br><br>&#x2022; <a id="udp-icmp-health-check"></a>[`udp\_icmp_health\_check`](#udp-icmp-health-check) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="http-health-check"></a>[`http_health_check`](#http-health-check) - Optional Block<br>HTTP Health Check. Healthy if 'get' method on URL 'HTTP(s)://`<host>`/`<path>`' with optional '`<header>`' returns success. 'host' is not used for DNS resolution. It is used as HTTP Header in the request<br>See [HTTP Health Check](#http-health-check) below for details.
+<br><br>&#x2022; <a id="tcp-health-check"></a>[`tcp_health_check`](#tcp-health-check) - Optional Block<br>TCP Health Check. Healthy if TCP connection is successful and response payload matches `<expected_response>`<br>See [TCP Health Check](#tcp-health-check) below for details.
+<br><br>&#x2022; <a id="udp-icmp-health-check"></a>[`udp_icmp_health_check`](#udp-icmp-health-check) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="interval"></a>&#x2022; [`interval`](#interval) - Optional Number<br>Interval. Time interval in seconds between two healthcheck requests
 
@@ -102,9 +102,9 @@ In addition to all arguments above, the following attributes are exported:
 
 #### HTTP Health Check
 
-A [`http\_health\_check`](#http-health-check) block supports the following:
+A [`http_health_check`](#http-health-check) block supports the following:
 
-<a id="http-health-check-expected-status-codes"></a>&#x2022; [`expected\_status\_codes`](#http-health-check-expected-status-codes) - Optional List<br>Expected Status Codes. Specifies a list of HTTP response status codes considered healthy. To treat default HTTP expected status code 200 as healthy, user has to configure it explicitly. This is a list of strings, each of which is single HTTP status code or a range with start and end values separated by '-'
+<a id="http-health-check-expected-status-codes"></a>&#x2022; [`expected_status_codes`](#http-health-check-expected-status-codes) - Optional List<br>Expected Status Codes. Specifies a list of HTTP response status codes considered healthy. To treat default HTTP expected status code 200 as healthy, user has to configure it explicitly. This is a list of strings, each of which is single HTTP status code or a range with start and end values separated by '-'
 
 <a id="http-health-check-headers"></a>&#x2022; [`headers`](#http-health-check-headers) - Optional Block<br>Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked cluster. This is a list of key-value pairs
 
@@ -112,15 +112,15 @@ A [`http\_health\_check`](#http-health-check) block supports the following:
 
 <a id="http-health-check-path"></a>&#x2022; [`path`](#http-health-check-path) - Optional String<br>Path. Specifies the HTTP path that will be requested during health checking
 
-<a id="http-health-check-request-headers-to-remove"></a>&#x2022; [`request\_headers_to\_remove`](#http-health-check-request-headers-to-remove) - Optional List<br>Request Headers to Remove. Specifies a list of HTTP headers that should be removed from each request that is sent to the health checked cluster. This is a list of keys of headers
+<a id="http-health-check-request-headers-to-remove"></a>&#x2022; [`request_headers_to_remove`](#http-health-check-request-headers-to-remove) - Optional List<br>Request Headers to Remove. Specifies a list of HTTP headers that should be removed from each request that is sent to the health checked cluster. This is a list of keys of headers
 
 <a id="http-health-check-use-http2"></a>&#x2022; [`use_http2`](#http-health-check-use-http2) - Optional Bool  Defaults to `false`<br>Use HTTP2. If set, health checks will be made using HTTP/2
 
-<a id="http-health-check-use-origin-server-name"></a>&#x2022; [`use\_origin_server\_name`](#http-health-check-use-origin-server-name) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-health-check-use-origin-server-name"></a>&#x2022; [`use_origin_server_name`](#http-health-check-use-origin-server-name) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### TCP Health Check
 
-A [`tcp\_health\_check`](#tcp-health-check) block supports the following:
+A [`tcp_health_check`](#tcp-health-check) block supports the following:
 
 <a id="tcp-health-check-expected-response"></a>&#x2022; [`expected_response`](#tcp-health-check-expected-response) - Optional String<br>Expected Response. raw bytes expected in the request. Describes the encoding of the payload bytes in the payload. Hex encoded payload
 

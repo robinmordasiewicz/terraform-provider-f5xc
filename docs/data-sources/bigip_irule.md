@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_bigip\_irule Data Source - terraform-provider-f5xc"
+page_title: "f5xc_bigip_irule Data Source - terraform-provider-f5xc"
 subcategory: "BIG-IP Integration"
 description: |-
   Manages a BigIPIrule resource in F5 Distributed Cloud for desired state for big-ip irule service configuration.
 ---
 
-# f5xc\_bigip\_irule (Data Source)
+# f5xc_bigip_irule (Data Source)
 
 Manages a BigIPIrule resource in F5 Distributed Cloud for desired state for big-ip irule service configuration.
 
@@ -18,14 +18,14 @@ Manages a BigIPIrule resource in F5 Distributed Cloud for desired state for big-
 # Retrieves information about an existing BigIP IRULE
 
 # Look up an existing BigIP IRULE by name
-data "f5xc\_bigip\_irule" "example" {
+data "f5xc_bigip_irule" "example" {
   name      = "example-bigip-irule"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "bigip\_irule\_id" {
-#   value = data.f5xc\_bigip\_irule.example.id
+# output "bigip_irule_id" {
+#   value = data.f5xc_bigip_irule.example.id
 # }
 ```
 

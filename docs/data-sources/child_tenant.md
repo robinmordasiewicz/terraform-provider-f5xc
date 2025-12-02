@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_child\_tenant Data Source - terraform-provider-f5xc"
+page_title: "f5xc_child_tenant Data Source - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
   Manages child_tenant config instance. Name of the object is the name of the child tenant to be created. in F5 Distributed Cloud.
 ---
 
-# f5xc\_child\_tenant (Data Source)
+# f5xc_child_tenant (Data Source)
 
 Manages child_tenant config instance. Name of the object is the name of the child tenant to be created. in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages child_tenant config instance. Name of the object is the name of the chil
 # Retrieves information about an existing Child Tenant
 
 # Look up an existing Child Tenant by name
-data "f5xc\_child\_tenant" "example" {
+data "f5xc_child_tenant" "example" {
   name      = "example-child-tenant"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "child\_tenant\_id" {
-#   value = data.f5xc\_child\_tenant.example.id
+# output "child_tenant_id" {
+#   value = data.f5xc_child_tenant.example.id
 # }
 ```
 

@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_network\_policy Data Source - terraform-provider-f5xc"
+page_title: "f5xc_network_policy Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages new network policy with configured parameters in specified namespace in F5 Distributed Cloud.
 ---
 
-# f5xc\_network\_policy (Data Source)
+# f5xc_network_policy (Data Source)
 
 Manages new network policy with configured parameters in specified namespace in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages new network policy with configured parameters in specified namespace in 
 # Retrieves information about an existing Network Policy
 
 # Look up an existing Network Policy by name
-data "f5xc\_network\_policy" "example" {
+data "f5xc_network_policy" "example" {
   name      = "example-network-policy"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "network\_policy\_id" {
-#   value = data.f5xc\_network\_policy.example.id
+# output "network_policy_id" {
+#   value = data.f5xc_network_policy.example.id
 # }
 ```
 

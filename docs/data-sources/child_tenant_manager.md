@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc\_child_tenant\_manager Data Source - terraform-provider-f5xc"
+page_title: "f5xc_child_tenant_manager Data Source - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
-  Manages child\_tenant\_manager config instance. Name of the object is the name of the child tenant manager to be created. in F5 Distributed Cloud.
+  Manages child_tenant_manager config instance. Name of the object is the name of the child tenant manager to be created. in F5 Distributed Cloud.
 ---
 
-# f5xc\_child_tenant\_manager (Data Source)
+# f5xc_child_tenant_manager (Data Source)
 
-Manages child\_tenant\_manager config instance. Name of the object is the name of the child tenant manager to be created. in F5 Distributed Cloud.
+Manages child_tenant_manager config instance. Name of the object is the name of the child tenant manager to be created. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Child Tenant Manager API docs](https://docs.cloud.f5.com/docs-v2/api/tenant-management-child-tenant-manager) to learn more.
 
@@ -18,14 +18,14 @@ Manages child\_tenant\_manager config instance. Name of the object is the name o
 # Retrieves information about an existing Child Tenant Manager
 
 # Look up an existing Child Tenant Manager by name
-data "f5xc\_child_tenant\_manager" "example" {
+data "f5xc_child_tenant_manager" "example" {
   name      = "example-child-tenant-manager"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "child\_tenant_manager\_id" {
-#   value = data.f5xc\_child_tenant\_manager.example.id
+# output "child_tenant_manager_id" {
+#   value = data.f5xc_child_tenant_manager.example.id
 # }
 ```
 

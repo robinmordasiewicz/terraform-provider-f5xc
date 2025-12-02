@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_filter\_set Data Source - terraform-provider-f5xc"
+page_title: "f5xc_filter_set Data Source - terraform-provider-f5xc"
 subcategory: "Applications"
 description: |-
   Manages a FilterSet resource in F5 Distributed Cloud for create configuration.
 ---
 
-# f5xc\_filter\_set (Data Source)
+# f5xc_filter_set (Data Source)
 
 Manages a FilterSet resource in F5 Distributed Cloud for create configuration.
 
@@ -18,14 +18,14 @@ Manages a FilterSet resource in F5 Distributed Cloud for create configuration.
 # Retrieves information about an existing Filter Set
 
 # Look up an existing Filter Set by name
-data "f5xc\_filter\_set" "example" {
+data "f5xc_filter_set" "example" {
   name      = "example-filter-set"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "filter\_set\_id" {
-#   value = data.f5xc\_filter\_set.example.id
+# output "filter_set_id" {
+#   value = data.f5xc_filter_set.example.id
 # }
 ```
 

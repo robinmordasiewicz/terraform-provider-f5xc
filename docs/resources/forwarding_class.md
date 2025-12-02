@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_forwarding\_class Resource - terraform-provider-f5xc"
+page_title: "f5xc_forwarding_class Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
   Manages a ForwardingClass resource in F5 Distributed Cloud for forwarding class is created by users in system namespace configuration.
 ---
 
-# f5xc\_forwarding\_class (Resource)
+# f5xc_forwarding_class (Resource)
 
 Manages a ForwardingClass resource in F5 Distributed Cloud for forwarding class is created by users in system namespace configuration.
 
@@ -18,7 +18,7 @@ Manages a ForwardingClass resource in F5 Distributed Cloud for forwarding class 
 # Manages a ForwardingClass resource in F5 Distributed Cloud for forwarding class is created by users in system namespace configuration.
 
 # Basic Forwarding Class configuration
-resource "f5xc\_forwarding\_class" "example" {
+resource "f5xc_forwarding_class" "example" {
   name      = "example-forwarding-class"
   namespace = "shared"
 
@@ -36,9 +36,9 @@ resource "f5xc\_forwarding\_class" "example" {
   dscp {
     # Configure dscp settings
   }
-  # [OneOf: dscp\_based\_queue, queue\_id_to\_use] Empty. This ca...
-  dscp\_based\_queue {
-    # Configure dscp\_based\_queue settings
+  # [OneOf: dscp_based_queue, queue_id_to_use] Empty. This ca...
+  dscp_based_queue {
+    # Configure dscp_based_queue settings
   }
   # Empty. This can be used for messages where no values are ...
   no_marking {
@@ -72,10 +72,10 @@ resource "f5xc\_forwarding\_class" "example" {
 <br><br>&#x2022; <a id="tos-value"></a>[`tos_value`](#tos-value) - Optional Number<br>TOS value. Decimal value of raw 8 bit TOS. In above example DSCP 10 = Precedence Class 1 and drop precedence low
 
 -> **One of the following:**
-&#x2022; <a id="dscp-based-queue"></a>[`dscp\_based\_queue`](#dscp-based-queue) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="queue-id-to-use"></a>[`queue\_id_to\_use`](#queue-id-to-use) - Optional String  Defaults to `DSCP\_BEST\_EFFORT`<br>Possible values are `DSCP\_BEST\_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP\_EXPRESS\_FORWARDING`, `DSCP\_CONTROL\_L3`, `DSCP\_CONTROL\_L2`<br>Precedence Level Values. DSCP Precedence Level Values Best Effort service will get any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended
+&#x2022; <a id="dscp-based-queue"></a>[`dscp_based_queue`](#dscp-based-queue) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="queue-id-to-use"></a>[`queue_id_to_use`](#queue-id-to-use) - Optional String  Defaults to `DSCP_BEST_EFFORT`<br>Possible values are `DSCP_BEST_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP_EXPRESS_FORWARDING`, `DSCP_CONTROL_L3`, `DSCP_CONTROL_L2`<br>Precedence Level Values. DSCP Precedence Level Values Best Effort service will get any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended
 
-<a id="interface-group"></a>&#x2022; [`interface_group`](#interface-group) - Optional String  Defaults to `ANY\_AVAILABLE\_INTERFACE`<br>Possible values are `ANY\_AVAILABLE\_INTERFACE`, `INTERFACE_GROUP1`, `INTERFACE_GROUP2`, `INTERFACE_GROUP3`<br>Interface Group. Interface group, group membership by adding group label to interface Choose any of the available interfaces Choose all interfaces with label group1 Choose all interfaces with label group2 Choose all interfaces with label group3
+<a id="interface-group"></a>&#x2022; [`interface_group`](#interface-group) - Optional String  Defaults to `ANY_AVAILABLE_INTERFACE`<br>Possible values are `ANY_AVAILABLE_INTERFACE`, `INTERFACE_GROUP1`, `INTERFACE_GROUP2`, `INTERFACE_GROUP3`<br>Interface Group. Interface group, group membership by adding group label to interface Choose any of the available interfaces Choose all interfaces with label group1 Choose all interfaces with label group2 Choose all interfaces with label group3
 
 -> **One of the following:**
 &#x2022; <a id="no-policer"></a>[`no_policer`](#no-policer) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -95,9 +95,9 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`dscp`](#dscp) block supports the following:
 
-<a id="dscp-drop-precedence"></a>&#x2022; [`drop_precedence`](#dscp-drop-precedence) - Optional String  Defaults to `DSCP\_AF\_FAKE`<br>Possible values are `DSCP\_AF\_LOW`, `DSCP\_AF\_MEDIUM`, `DSCP\_AF\_HIGH`, `DSCP\_AF\_POLICER`<br>DSCP AF Drop Precedence. DSCP Assured forwarding drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP drop precedence value is taken from output of policer
+<a id="dscp-drop-precedence"></a>&#x2022; [`drop_precedence`](#dscp-drop-precedence) - Optional String  Defaults to `DSCP_AF_FAKE`<br>Possible values are `DSCP_AF_LOW`, `DSCP_AF_MEDIUM`, `DSCP_AF_HIGH`, `DSCP_AF_POLICER`<br>DSCP AF Drop Precedence. DSCP Assured forwarding drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP drop precedence value is taken from output of policer
 
-<a id="dscp-dscp-class"></a>&#x2022; [`dscp_class`](#dscp-dscp-class) - Optional String  Defaults to `DSCP\_BEST\_EFFORT`<br>Possible values are `DSCP\_BEST\_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP\_EXPRESS\_FORWARDING`, `DSCP\_CONTROL\_L3`, `DSCP\_CONTROL\_L2`<br>Precedence Level Values. DSCP Precedence Level Values Best Effort service will get any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended
+<a id="dscp-dscp-class"></a>&#x2022; [`dscp_class`](#dscp-dscp-class) - Optional String  Defaults to `DSCP_BEST_EFFORT`<br>Possible values are `DSCP_BEST_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP_EXPRESS_FORWARDING`, `DSCP_CONTROL_L3`, `DSCP_CONTROL_L2`<br>Precedence Level Values. DSCP Precedence Level Values Best Effort service will get any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended
 
 #### Policer
 
@@ -127,5 +127,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_forwarding\_class.example system/example
+terraform import f5xc_forwarding_class.example system/example
 ```

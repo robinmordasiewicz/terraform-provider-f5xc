@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc\_service_policy\_rule Data Source - terraform-provider-f5xc"
+page_title: "f5xc_service_policy_rule Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages service\_policy\_rule creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  Manages service_policy_rule creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc\_service_policy\_rule (Data Source)
+# f5xc_service_policy_rule (Data Source)
 
-Manages service\_policy\_rule creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+Manages service_policy_rule creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Service Policy Rule API docs](https://docs.cloud.f5.com/docs-v2/api/service-policy-rule) to learn more.
 
@@ -18,14 +18,14 @@ Manages service\_policy\_rule creates a new object in the storage backend for me
 # Retrieves information about an existing Service Policy Rule
 
 # Look up an existing Service Policy Rule by name
-data "f5xc\_service_policy\_rule" "example" {
+data "f5xc_service_policy_rule" "example" {
   name      = "example-service-policy-rule"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "service\_policy_rule\_id" {
-#   value = data.f5xc\_service_policy\_rule.example.id
+# output "service_policy_rule_id" {
+#   value = data.f5xc_service_policy_rule.example.id
 # }
 ```
 

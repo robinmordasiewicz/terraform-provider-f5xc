@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_api\_credential Resource - terraform-provider-f5xc"
+page_title: "f5xc_api_credential Resource - terraform-provider-f5xc"
 subcategory: "Authentication"
 description: |-
   Manages request specification. in F5 Distributed Cloud.
 ---
 
-# f5xc\_api\_credential (Resource)
+# f5xc_api_credential (Resource)
 
 Manages request specification. in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages request specification. in F5 Distributed Cloud.
 # Manages request specification. in F5 Distributed Cloud.
 
 # Basic API Credential configuration
-resource "f5xc\_api\_credential" "example" {
+resource "f5xc_api_credential" "example" {
   name      = "example-api-credential"
   namespace = "system"
 
@@ -32,7 +32,7 @@ resource "f5xc\_api\_credential" "example" {
   }
 
   # API Credential configuration
-  api\_credential\_type = "API_CERTIFICATE"
+  api_credential_type = "API_CERTIFICATE"
 
   # Expiration settings
   expiration_timestamp = "2025-12-31T23:59:59Z"
@@ -49,8 +49,6 @@ resource "f5xc\_api\_credential" "example" {
 
 <a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the APICredential. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the APICredential will be created
-
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
 <a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
@@ -59,17 +57,19 @@ resource "f5xc\_api\_credential" "example" {
 
 <a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace for the APICredential. For this resource type, namespace should be empty or omitted
+
 ### Spec Argument Reference
 
 <a id="password"></a>&#x2022; [`password`](#password) - Optional String<br>Password. Password is used for generating an API certificate P12 bundle user can use to protect access to it. this password will not be saved/persisted anywhere in the system. Applicable for credential type API_CERTIFICATE Users have to use this password when they use the certificate, e.g. in curl or while adding to key chain
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-<a id="type"></a>&#x2022; [`type`](#type) - Optional String  Defaults to `API_CERTIFICATE`<br>Possible values are `API_CERTIFICATE`, `KUBE_CONFIG`, `API_TOKEN`, `SERVICE\_API\_TOKEN`, `SERVICE\_API\_CERTIFICATE`, `SERVICE\_KUBE\_CONFIG`, `SITE\_GLOBAL_KUBE\_CONFIG`, `SCIM\_API\_TOKEN`, `SERVICE\_SITE_GLOBAL_KUBE\_CONFIG`<br>Credential Type. Types of API credential given when requesting credentials from volterra F5XC user certificate to access F5XC public API using mTLS using self credential (my credential) Kubernetes config file to access Virtual Kubernetes API in Volterra using self credential (my credential) API token to access F5XC public API using self credential (my credential) API token for service credentials using service user credential (service credential) API certificate for service credentials using service user credential (service credential) Service Credential kubeconfig using service user credential (service credential) Kubeconfig for accessing Site via Global Controller using self credential (my credential) Token for the SCIM public APIs used to sync users and groups with the F5XC platform. External identity provider's SCIM client can use this token as Bearer token with Authorization header Service Credential Kubeconfig for accessing Site via Global Controller using service user credential (service credential)
+<a id="type"></a>&#x2022; [`type`](#type) - Optional String  Defaults to `API_CERTIFICATE`<br>Possible values are `API_CERTIFICATE`, `KUBE_CONFIG`, `API_TOKEN`, `SERVICE_API_TOKEN`, `SERVICE_API_CERTIFICATE`, `SERVICE_KUBE_CONFIG`, `SITE_GLOBAL_KUBE_CONFIG`, `SCIM_API_TOKEN`, `SERVICE_SITE_GLOBAL_KUBE_CONFIG`<br>Credential Type. Types of API credential given when requesting credentials from volterra F5XC user certificate to access F5XC public API using mTLS using self credential (my credential) Kubernetes config file to access Virtual Kubernetes API in Volterra using self credential (my credential) API token to access F5XC public API using self credential (my credential) API token for service credentials using service user credential (service credential) API certificate for service credentials using service user credential (service credential) Service Credential kubeconfig using service user credential (service credential) Kubeconfig for accessing Site via Global Controller using self credential (my credential) Token for the SCIM public APIs used to sync users and groups with the F5XC platform. External identity provider's SCIM client can use this token as Bearer token with Authorization header Service Credential Kubeconfig for accessing Site via Global Controller using service user credential (service credential)
 
-<a id="virtual-k8s-name"></a>&#x2022; [`virtual\_k8s\_name`](#virtual-k8s-name) - Optional String<br>vK8s Cluster. Name of virtual K8S cluster. Applicable for KUBE_CONFIG
+<a id="virtual-k8s-name"></a>&#x2022; [`virtual_k8s_name`](#virtual-k8s-name) - Optional String<br>vK8s Cluster. Name of virtual K8S cluster. Applicable for KUBE_CONFIG
 
-<a id="virtual-k8s-namespace"></a>&#x2022; [`virtual\_k8s\_namespace`](#virtual-k8s-namespace) - Optional String<br>vK8s Namespace. Namespace of virtual K8S cluster. Applicable for KUBE_CONFIG
+<a id="virtual-k8s-namespace"></a>&#x2022; [`virtual_k8s_namespace`](#virtual-k8s-namespace) - Optional String<br>vK8s Namespace. Namespace of virtual K8S cluster. Applicable for KUBE_CONFIG
 
 ### Attributes Reference
 
@@ -97,5 +97,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_api\_credential.example system/example
+terraform import f5xc_api_credential.example system/example
 ```

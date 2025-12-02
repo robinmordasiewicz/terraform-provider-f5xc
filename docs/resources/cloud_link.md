@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_cloud\_link Resource - terraform-provider-f5xc"
+page_title: "f5xc_cloud_link Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
   Manages new CloudLink with configured parameters in F5 Distributed Cloud.
 ---
 
-# f5xc\_cloud\_link (Resource)
+# f5xc_cloud_link (Resource)
 
 Manages new CloudLink with configured parameters in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages new CloudLink with configured parameters in F5 Distributed Cloud.
 # Manages new CloudLink with configured parameters in F5 Distributed Cloud.
 
 # Basic Cloud Link configuration
-resource "f5xc\_cloud\_link" "example" {
+resource "f5xc_cloud_link" "example" {
   name      = "example-cloud-link"
   namespace = "system"
 
@@ -126,13 +126,13 @@ A [`connections`](#aws-byoc-connections) block (within [`aws.byoc`](#aws-byoc)) 
 
 <a id="aws-byoc-connections-region"></a>&#x2022; [`region`](#aws-byoc-connections-region) - Optional String<br>Region. Region where the connection is setup
 
-<a id="aws-byoc-connections-system-generated-name"></a>&#x2022; [`system\_generated\_name`](#aws-byoc-connections-system-generated-name) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="aws-byoc-connections-system-generated-name"></a>&#x2022; [`system_generated_name`](#aws-byoc-connections-system-generated-name) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="aws-byoc-connections-tags"></a>&#x2022; [`tags`](#aws-byoc-connections-tags) - Optional Block<br>AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. Specified tags will be added to Virtual interface along with any F5XC specific tags
 
-<a id="aws-byoc-connections-user-assigned-name"></a>&#x2022; [`user\_assigned\_name`](#aws-byoc-connections-user-assigned-name) - Optional String<br>User Assigned. User is managing the AWS resource name
+<a id="aws-byoc-connections-user-assigned-name"></a>&#x2022; [`user_assigned_name`](#aws-byoc-connections-user-assigned-name) - Optional String<br>User Assigned. User is managing the AWS resource name
 
-<a id="aws-byoc-connections-virtual-interface-type"></a>&#x2022; [`virtual\_interface\_type`](#aws-byoc-connections-virtual-interface-type) - Optional String  Defaults to `PRIVATE`<br>Virtual Interface Type. Defines the type of virtual interface that needs to be configured on AWS - PRIVATE: Private A private virtual interface should be used to access an Amazon VPC using private IP addresses. - TRANSIT: Transit A transit virtual interface is a VLAN that transports traffic from a Direct Connect gateway to one or more transit gateways. The only possible value is `PRIVATE`
+<a id="aws-byoc-connections-virtual-interface-type"></a>&#x2022; [`virtual_interface_type`](#aws-byoc-connections-virtual-interface-type) - Optional String  Defaults to `PRIVATE`<br>Virtual Interface Type. Defines the type of virtual interface that needs to be configured on AWS - PRIVATE: Private A private virtual interface should be used to access an Amazon VPC using private IP addresses. - TRANSIT: Transit A transit virtual interface is a VLAN that transports traffic from a Direct Connect gateway to one or more transit gateways. The only possible value is `PRIVATE`
 
 <a id="aws-byoc-connections-vlan"></a>&#x2022; [`vlan`](#aws-byoc-connections-vlan) - Optional Number<br>Virtual Local Area Network (VLAN). Virtual Local Area Network number for the new virtual interface to be configured on the AWS. This tag is required for any traffic traversing the AWS Direct Connect connection
 
@@ -140,13 +140,13 @@ A [`connections`](#aws-byoc-connections) block (within [`aws.byoc`](#aws-byoc)) 
 
 An [`auth_key`](#aws-byoc-connections-auth-key) block (within [`aws.byoc.connections`](#aws-byoc-connections)) supports the following:
 
-<a id="aws-byoc-connections-auth-key-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#aws-byoc-connections-auth-key-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#aws-byoc-connections-auth-key-blindfold-secret-info) below.
+<a id="aws-byoc-connections-auth-key-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#aws-byoc-connections-auth-key-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#aws-byoc-connections-auth-key-blindfold-secret-info) below.
 
-<a id="aws-byoc-connections-auth-key-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#aws-byoc-connections-auth-key-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#aws-byoc-connections-auth-key-clear-secret-info) below.
+<a id="aws-byoc-connections-auth-key-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#aws-byoc-connections-auth-key-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#aws-byoc-connections-auth-key-clear-secret-info) below.
 
 #### AWS Byoc Connections Auth Key Blindfold Secret Info
 
-A [`blindfold\_secret\_info`](#aws-byoc-connections-auth-key-blindfold-secret-info) block (within [`aws.byoc.connections.auth_key`](#aws-byoc-connections-auth-key)) supports the following:
+A [`blindfold_secret_info`](#aws-byoc-connections-auth-key-blindfold-secret-info) block (within [`aws.byoc.connections.auth_key`](#aws-byoc-connections-auth-key)) supports the following:
 
 <a id="aws-byoc-connections-auth-key-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#aws-byoc-connections-auth-key-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -156,7 +156,7 @@ A [`blindfold\_secret\_info`](#aws-byoc-connections-auth-key-blindfold-secret-in
 
 #### AWS Byoc Connections Auth Key Clear Secret Info
 
-A [`clear\_secret\_info`](#aws-byoc-connections-auth-key-clear-secret-info) block (within [`aws.byoc.connections.auth_key`](#aws-byoc-connections-auth-key)) supports the following:
+A [`clear_secret_info`](#aws-byoc-connections-auth-key-clear-secret-info) block (within [`aws.byoc.connections.auth_key`](#aws-byoc-connections-auth-key)) supports the following:
 
 <a id="aws-byoc-connections-auth-key-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#aws-byoc-connections-auth-key-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -166,9 +166,9 @@ A [`clear\_secret\_info`](#aws-byoc-connections-auth-key-clear-secret-info) bloc
 
 An [`ipv4`](#aws-byoc-connections-ipv4) block (within [`aws.byoc.connections`](#aws-byoc-connections)) supports the following:
 
-<a id="aws-byoc-connections-ipv4-aws-router-peer-address"></a>&#x2022; [`aws\_router_peer\_address`](#aws-byoc-connections-ipv4-aws-router-peer-address) - Optional String<br>AWS Router IP/Prefix. The BGP peer IP configured on the AWS endpoint
+<a id="aws-byoc-connections-ipv4-aws-router-peer-address"></a>&#x2022; [`aws_router_peer_address`](#aws-byoc-connections-ipv4-aws-router-peer-address) - Optional String<br>AWS Router IP/Prefix. The BGP peer IP configured on the AWS endpoint
 
-<a id="aws-byoc-connections-ipv4-router-peer-address"></a>&#x2022; [`router\_peer\_address`](#aws-byoc-connections-ipv4-router-peer-address) - Optional String<br>Customer Router IP/Prefix. The BGP peer IP configured on your (customer) endpoint
+<a id="aws-byoc-connections-ipv4-router-peer-address"></a>&#x2022; [`router_peer_address`](#aws-byoc-connections-ipv4-router-peer-address) - Optional String<br>Customer Router IP/Prefix. The BGP peer IP configured on your (customer) endpoint
 
 #### AWS Byoc Connections Metadata
 
@@ -182,7 +182,7 @@ A [`metadata`](#aws-byoc-connections-metadata) block (within [`aws.byoc.connecti
 
 An [`enabled`](#enabled) block supports the following:
 
-<a id="enabled-cloudlink-network-name"></a>&#x2022; [`cloudlink\_network\_name`](#enabled-cloudlink-network-name) - Optional String<br>Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support
+<a id="enabled-cloudlink-network-name"></a>&#x2022; [`cloudlink_network_name`](#enabled-cloudlink-network-name) - Optional String<br>Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support
 
 #### GCP
 
@@ -202,7 +202,7 @@ A [`byoc`](#gcp-byoc) block (within [`gcp`](#gcp)) supports the following:
 
 A [`connections`](#gcp-byoc-connections) block (within [`gcp.byoc`](#gcp-byoc)) supports the following:
 
-<a id="gcp-byoc-connections-interconnect-attachment-name"></a>&#x2022; [`interconnect\_attachment\_name`](#gcp-byoc-connections-interconnect-attachment-name) - Optional String<br>Interconnect Attachment Name. Name of already-existing GCP Cloud Interconnect Attachment
+<a id="gcp-byoc-connections-interconnect-attachment-name"></a>&#x2022; [`interconnect_attachment_name`](#gcp-byoc-connections-interconnect-attachment-name) - Optional String<br>Interconnect Attachment Name. Name of already-existing GCP Cloud Interconnect Attachment
 
 <a id="gcp-byoc-connections-metadata"></a>&#x2022; [`metadata`](#gcp-byoc-connections-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#gcp-byoc-connections-metadata) below.
 
@@ -210,7 +210,7 @@ A [`connections`](#gcp-byoc-connections) block (within [`gcp.byoc`](#gcp-byoc)) 
 
 <a id="gcp-byoc-connections-region"></a>&#x2022; [`region`](#gcp-byoc-connections-region) - Optional String<br>Region. GCP Region in which the GCP Cloud Interconnect attachment is configured
 
-<a id="gcp-byoc-connections-same-as-credential"></a>&#x2022; [`same\_as\_credential`](#gcp-byoc-connections-same-as-credential) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="gcp-byoc-connections-same-as-credential"></a>&#x2022; [`same_as_credential`](#gcp-byoc-connections-same-as-credential) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### GCP Byoc Connections Metadata
 
@@ -248,5 +248,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_cloud\_link.example system/example
+terraform import f5xc_cloud_link.example system/example
 ```

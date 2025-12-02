@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_network_policy\_view Data Source - terraform-provider-f5xc"
+page_title: "f5xc_network_policy_view Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages a NetworkPolicyView resource in F5 Distributed Cloud for network policy view configuration.
 ---
 
-# f5xc\_network_policy\_view (Data Source)
+# f5xc_network_policy_view (Data Source)
 
 Manages a NetworkPolicyView resource in F5 Distributed Cloud for network policy view configuration.
 
@@ -18,14 +18,14 @@ Manages a NetworkPolicyView resource in F5 Distributed Cloud for network policy 
 # Retrieves information about an existing Network Policy View
 
 # Look up an existing Network Policy View by name
-data "f5xc\_network_policy\_view" "example" {
+data "f5xc_network_policy_view" "example" {
   name      = "example-network-policy-view"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "network\_policy_view\_id" {
-#   value = data.f5xc\_network_policy\_view.example.id
+# output "network_policy_view_id" {
+#   value = data.f5xc_network_policy_view.example.id
 # }
 ```
 

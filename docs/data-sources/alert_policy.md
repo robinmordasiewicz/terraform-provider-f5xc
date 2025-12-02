@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_alert\_policy Data Source - terraform-provider-f5xc"
+page_title: "f5xc_alert_policy Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages a AlertPolicy resource in F5 Distributed Cloud for alerting rules and notification policies.
 ---
 
-# f5xc\_alert\_policy (Data Source)
+# f5xc_alert_policy (Data Source)
 
 Manages a AlertPolicy resource in F5 Distributed Cloud for alerting rules and notification policies.
 
@@ -18,14 +18,14 @@ Manages a AlertPolicy resource in F5 Distributed Cloud for alerting rules and no
 # Retrieves information about an existing Alert Policy
 
 # Look up an existing Alert Policy by name
-data "f5xc\_alert\_policy" "example" {
+data "f5xc_alert_policy" "example" {
   name      = "example-alert-policy"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "alert\_policy\_id" {
-#   value = data.f5xc\_alert\_policy.example.id
+# output "alert_policy_id" {
+#   value = data.f5xc_alert_policy.example.id
 # }
 ```
 

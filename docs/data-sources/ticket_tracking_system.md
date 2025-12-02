@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_ticket_tracking\_system Data Source - terraform-provider-f5xc"
+page_title: "f5xc_ticket_tracking_system Data Source - terraform-provider-f5xc"
 subcategory: "Integrations"
 description: |-
   Manages Ticket Tracking System in F5 Distributed Cloud.
 ---
 
-# f5xc\_ticket_tracking\_system (Data Source)
+# f5xc_ticket_tracking_system (Data Source)
 
 Manages Ticket Tracking System in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages Ticket Tracking System in F5 Distributed Cloud.
 # Retrieves information about an existing Ticket Tracking System
 
 # Look up an existing Ticket Tracking System by name
-data "f5xc\_ticket_tracking\_system" "example" {
+data "f5xc_ticket_tracking_system" "example" {
   name      = "example-ticket-tracking-system"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "ticket\_tracking_system\_id" {
-#   value = data.f5xc\_ticket_tracking\_system.example.id
+# output "ticket_tracking_system_id" {
+#   value = data.f5xc_ticket_tracking_system.example.id
 # }
 ```
 

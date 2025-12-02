@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_network\_firewall Resource - terraform-provider-f5xc"
+page_title: "f5xc_network_firewall Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages a NetworkFirewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.
 ---
 
-# f5xc\_network\_firewall (Resource)
+# f5xc_network_firewall (Resource)
 
 Manages a NetworkFirewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.
 
@@ -18,7 +18,7 @@ Manages a NetworkFirewall resource in F5 Distributed Cloud for network firewall 
 # Manages a NetworkFirewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.
 
 # Basic Network Firewall configuration
-resource "f5xc\_network\_firewall" "example" {
+resource "f5xc_network_firewall" "example" {
   name      = "example-network-firewall"
   namespace = "system"
 
@@ -32,17 +32,17 @@ resource "f5xc\_network\_firewall" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: active\_enhanced_firewall\_policies, active_network...
-  active\_enhanced_firewall\_policies {
-    # Configure active\_enhanced_firewall\_policies settings
+  # [OneOf: active_enhanced_firewall_policies, active_network...
+  active_enhanced_firewall_policies {
+    # Configure active_enhanced_firewall_policies settings
   }
   # Enhanced Firewall Policy. Ordered List of Enhanced Firewa...
-  enhanced\_firewall\_policies {
-    # Configure enhanced\_firewall\_policies settings
+  enhanced_firewall_policies {
+    # Configure enhanced_firewall_policies settings
   }
-  # [OneOf: active\_fast\_acls, disable\_fast\_acl] Active Fast A...
-  active\_fast\_acls {
-    # Configure active\_fast\_acls settings
+  # [OneOf: active_fast_acls, disable_fast_acl] Active Fast A...
+  active_fast_acls {
+    # Configure active_fast_acls settings
   }
 }
 ```
@@ -67,17 +67,17 @@ resource "f5xc\_network\_firewall" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="active-enhanced-firewall-policies"></a>[`active\_enhanced_firewall\_policies`](#active-enhanced-firewall-policies) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#active-enhanced-firewall-policies) below for details.
-<br><br>&#x2022; <a id="active-network-policies"></a>[`active\_network\_policies`](#active-network-policies) - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#active-network-policies) below for details.
-<br><br>&#x2022; <a id="disable-network-policy"></a>[`disable\_network\_policy`](#disable-network-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="active-enhanced-firewall-policies"></a>[`active_enhanced_firewall_policies`](#active-enhanced-firewall-policies) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#active-enhanced-firewall-policies) below for details.
+<br><br>&#x2022; <a id="active-network-policies"></a>[`active_network_policies`](#active-network-policies) - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#active-network-policies) below for details.
+<br><br>&#x2022; <a id="disable-network-policy"></a>[`disable_network_policy`](#disable-network-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; <a id="active-fast-acls"></a>[`active\_fast\_acls`](#active-fast-acls) - Optional Block<br>Active Fast ACL(s). List of Fast ACL(s)<br>See [Active Fast Acls](#active-fast-acls) below for details.
-<br><br>&#x2022; <a id="disable-fast-acl"></a>[`disable\_fast\_acl`](#disable-fast-acl) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="active-fast-acls"></a>[`active_fast_acls`](#active-fast-acls) - Optional Block<br>Active Fast ACL(s). List of Fast ACL(s)<br>See [Active Fast Acls](#active-fast-acls) below for details.
+<br><br>&#x2022; <a id="disable-fast-acl"></a>[`disable_fast_acl`](#disable-fast-acl) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; <a id="active-forward-proxy-policies"></a>[`active\_forward_proxy\_policies`](#active-forward-proxy-policies) - Optional Block<br>Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
-<br><br>&#x2022; <a id="disable-forward-proxy-policy"></a>[`disable\_forward_proxy\_policy`](#disable-forward-proxy-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="active-forward-proxy-policies"></a>[`active_forward_proxy_policies`](#active-forward-proxy-policies) - Optional Block<br>Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
+<br><br>&#x2022; <a id="disable-forward-proxy-policy"></a>[`disable_forward_proxy_policy`](#disable-forward-proxy-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -91,13 +91,13 @@ In addition to all arguments above, the following attributes are exported:
 
 #### Active Enhanced Firewall Policies
 
-An [`active\_enhanced_firewall\_policies`](#active-enhanced-firewall-policies) block supports the following:
+An [`active_enhanced_firewall_policies`](#active-enhanced-firewall-policies) block supports the following:
 
-<a id="active-enhanced-firewall-policies-enhanced-firewall-policies"></a>&#x2022; [`enhanced\_firewall\_policies`](#active-enhanced-firewall-policies-enhanced-firewall-policies) - Optional Block<br>Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#active-enhanced-firewall-policies-enhanced-firewall-policies) below.
+<a id="active-enhanced-firewall-policies-enhanced-firewall-policies"></a>&#x2022; [`enhanced_firewall_policies`](#active-enhanced-firewall-policies-enhanced-firewall-policies) - Optional Block<br>Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#active-enhanced-firewall-policies-enhanced-firewall-policies) below.
 
 #### Active Enhanced Firewall Policies Enhanced Firewall Policies
 
-An [`enhanced\_firewall\_policies`](#active-enhanced-firewall-policies-enhanced-firewall-policies) block (within [`active\_enhanced_firewall\_policies`](#active-enhanced-firewall-policies)) supports the following:
+An [`enhanced_firewall_policies`](#active-enhanced-firewall-policies-enhanced-firewall-policies) block (within [`active_enhanced_firewall_policies`](#active-enhanced-firewall-policies)) supports the following:
 
 <a id="active-enhanced-firewall-policies-enhanced-firewall-policies-name"></a>&#x2022; [`name`](#active-enhanced-firewall-policies-enhanced-firewall-policies-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -107,13 +107,13 @@ An [`enhanced\_firewall\_policies`](#active-enhanced-firewall-policies-enhanced-
 
 #### Active Fast Acls
 
-An [`active\_fast\_acls`](#active-fast-acls) block supports the following:
+An [`active_fast_acls`](#active-fast-acls) block supports the following:
 
 <a id="active-fast-acls-fast-acls"></a>&#x2022; [`fast_acls`](#active-fast-acls-fast-acls) - Optional Block<br>Fast ACL(s). Ordered List of Fast ACL(s) active for this network firewall<br>See [Fast Acls](#active-fast-acls-fast-acls) below.
 
 #### Active Fast Acls Fast Acls
 
-A [`fast_acls`](#active-fast-acls-fast-acls) block (within [`active\_fast\_acls`](#active-fast-acls)) supports the following:
+A [`fast_acls`](#active-fast-acls-fast-acls) block (within [`active_fast_acls`](#active-fast-acls)) supports the following:
 
 <a id="active-fast-acls-fast-acls-name"></a>&#x2022; [`name`](#active-fast-acls-fast-acls-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -123,13 +123,13 @@ A [`fast_acls`](#active-fast-acls-fast-acls) block (within [`active\_fast\_acls`
 
 #### Active Forward Proxy Policies
 
-An [`active\_forward_proxy\_policies`](#active-forward-proxy-policies) block supports the following:
+An [`active_forward_proxy_policies`](#active-forward-proxy-policies) block supports the following:
 
-<a id="active-forward-proxy-policies-forward-proxy-policies"></a>&#x2022; [`forward\_proxy\_policies`](#active-forward-proxy-policies-forward-proxy-policies) - Optional Block<br>Forward Proxy Policies. Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#active-forward-proxy-policies-forward-proxy-policies) below.
+<a id="active-forward-proxy-policies-forward-proxy-policies"></a>&#x2022; [`forward_proxy_policies`](#active-forward-proxy-policies-forward-proxy-policies) - Optional Block<br>Forward Proxy Policies. Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#active-forward-proxy-policies-forward-proxy-policies) below.
 
 #### Active Forward Proxy Policies Forward Proxy Policies
 
-A [`forward\_proxy\_policies`](#active-forward-proxy-policies-forward-proxy-policies) block (within [`active\_forward_proxy\_policies`](#active-forward-proxy-policies)) supports the following:
+A [`forward_proxy_policies`](#active-forward-proxy-policies-forward-proxy-policies) block (within [`active_forward_proxy_policies`](#active-forward-proxy-policies)) supports the following:
 
 <a id="active-forward-proxy-policies-forward-proxy-policies-name"></a>&#x2022; [`name`](#active-forward-proxy-policies-forward-proxy-policies-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -139,13 +139,13 @@ A [`forward\_proxy\_policies`](#active-forward-proxy-policies-forward-proxy-poli
 
 #### Active Network Policies
 
-An [`active\_network\_policies`](#active-network-policies) block supports the following:
+An [`active_network_policies`](#active-network-policies) block supports the following:
 
 <a id="active-network-policies-network-policies"></a>&#x2022; [`network_policies`](#active-network-policies-network-policies) - Optional Block<br>Firewall Policy. Ordered List of Firewall Policies active for this network firewall<br>See [Network Policies](#active-network-policies-network-policies) below.
 
 #### Active Network Policies Network Policies
 
-A [`network_policies`](#active-network-policies-network-policies) block (within [`active\_network\_policies`](#active-network-policies)) supports the following:
+A [`network_policies`](#active-network-policies-network-policies) block (within [`active_network_policies`](#active-network-policies)) supports the following:
 
 <a id="active-network-policies-network-policies-name"></a>&#x2022; [`name`](#active-network-policies-network-policies-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -171,5 +171,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_network\_firewall.example system/example
+terraform import f5xc_network_firewall.example system/example
 ```

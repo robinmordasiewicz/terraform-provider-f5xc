@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_geo_location\_set Resource - terraform-provider-f5xc"
+page_title: "f5xc_geo_location_set Resource - terraform-provider-f5xc"
 subcategory: "Cloud Resources"
 description: |-
   Manages Geolocation Set in F5 Distributed Cloud.
 ---
 
-# f5xc\_geo_location\_set (Resource)
+# f5xc_geo_location_set (Resource)
 
 Manages Geolocation Set in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages Geolocation Set in F5 Distributed Cloud.
 # Manages Geolocation Set in F5 Distributed Cloud.
 
 # Basic Geo Location Set configuration
-resource "f5xc\_geo_location\_set" "example" {
+resource "f5xc_geo_location_set" "example" {
   name      = "example-geo-location-set"
   namespace = "shared"
 
@@ -56,7 +56,7 @@ resource "f5xc\_geo_location\_set" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="custom-geo-location-selector"></a>[`custom\_geo_location\_selector`](#custom-geo-location-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Custom Geo Location Selector](#custom-geo-location-selector) below for details.
+&#x2022; <a id="custom-geo-location-selector"></a>[`custom_geo_location_selector`](#custom-geo-location-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Custom Geo Location Selector](#custom-geo-location-selector) below for details.
 <br><br>&#x2022; <a id="global"></a>[`global`](#global) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
@@ -71,7 +71,7 @@ In addition to all arguments above, the following attributes are exported:
 
 #### Custom Geo Location Selector
 
-A [`custom\_geo_location\_selector`](#custom-geo-location-selector) block supports the following:
+A [`custom_geo_location_selector`](#custom-geo-location-selector) block supports the following:
 
 <a id="custom-geo-location-selector-expressions"></a>&#x2022; [`expressions`](#custom-geo-location-selector-expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
@@ -93,5 +93,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_geo_location\_set.example system/example
+terraform import f5xc_geo_location_set.example system/example
 ```

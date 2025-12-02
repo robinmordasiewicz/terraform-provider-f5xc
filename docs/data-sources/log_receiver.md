@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_log\_receiver Data Source - terraform-provider-f5xc"
+page_title: "f5xc_log_receiver Data Source - terraform-provider-f5xc"
 subcategory: "Monitoring"
 description: |-
   Manages a LogReceiver resource in F5 Distributed Cloud for log collection and forwarding configuration.
 ---
 
-# f5xc\_log\_receiver (Data Source)
+# f5xc_log_receiver (Data Source)
 
 Manages a LogReceiver resource in F5 Distributed Cloud for log collection and forwarding configuration.
 
@@ -18,24 +18,24 @@ Manages a LogReceiver resource in F5 Distributed Cloud for log collection and fo
 # Retrieves information about an existing Log Receiver
 
 # Look up an existing Log Receiver by name
-data "f5xc\_log\_receiver" "example" {
+data "f5xc_log_receiver" "example" {
   name      = "example-log-receiver"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "log\_receiver\_id" {
-#   value = data.f5xc\_log\_receiver.example.id
+# output "log_receiver_id" {
+#   value = data.f5xc_log_receiver.example.id
 # }
 
 # Example: Reference log receiver in site configuration
-# resource "f5xc\_securemesh_site\_v2" "example" {
+# resource "f5xc_securemesh_site_v2" "example" {
 #   name      = "example-site"
 #   namespace = "system"
 #
 #   log_receiver {
-#     name      = data.f5xc\_log\_receiver.example.name
-#     namespace = data.f5xc\_log\_receiver.example.namespace
+#     name      = data.f5xc_log_receiver.example.name
+#     namespace = data.f5xc_log_receiver.example.namespace
 #   }
 # }
 ```

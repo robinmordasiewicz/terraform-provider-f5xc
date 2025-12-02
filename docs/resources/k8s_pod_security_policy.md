@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc\_k8s_pod_security\_policy Resource - terraform-provider-f5xc"
+page_title: "f5xc_k8s_pod_security_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages k8s\_pod_security\_policy will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+  Manages k8s_pod_security_policy will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 ---
 
-# f5xc\_k8s_pod_security\_policy (Resource)
+# f5xc_k8s_pod_security_policy (Resource)
 
-Manages k8s\_pod_security\_policy will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+Manages k8s_pod_security_policy will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [K8S Pod Security Policy API docs](https://docs.cloud.f5.com/docs-v2/api/k8s-pod-security-policy) to learn more.
 
@@ -15,10 +15,10 @@ Manages k8s\_pod_security\_policy will create the object in the storage backend 
 
 ```terraform
 # K8S Pod Security Policy Resource Example
-# Manages k8s\_pod_security\_policy will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+# Manages k8s_pod_security_policy will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
 # Basic K8S Pod Security Policy configuration
-resource "f5xc\_k8s_pod_security\_policy" "example" {
+resource "f5xc_k8s_pod_security_policy" "example" {
   name      = "example-k8s-pod-security-policy"
   namespace = "staging"
 
@@ -41,8 +41,8 @@ resource "f5xc\_k8s_pod_security\_policy" "example" {
     # Configure allowed_capabilities settings
   }
   # Allowed Host Paths. Restrict list of host paths, default ...
-  allowed\_host\_paths {
-    # Configure allowed\_host\_paths settings
+  allowed_host_paths {
+    # Configure allowed_host_paths settings
   }
 }
 ```
@@ -84,21 +84,21 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`psp_spec`](#psp-spec) block supports the following:
 
-<a id="psp-spec-allow-privilege-escalation"></a>&#x2022; [`allow\_privilege\_escalation`](#psp-spec-allow-privilege-escalation) - Optional Bool<br>Allow Privilege Escalation. Pod can request to privilege escalation
+<a id="psp-spec-allow-privilege-escalation"></a>&#x2022; [`allow_privilege_escalation`](#psp-spec-allow-privilege-escalation) - Optional Bool<br>Allow Privilege Escalation. Pod can request to privilege escalation
 
 <a id="psp-spec-allowed-capabilities"></a>&#x2022; [`allowed_capabilities`](#psp-spec-allowed-capabilities) - Optional Block<br>Capability List. List of capabilities that docker container has<br>See [Allowed Capabilities](#psp-spec-allowed-capabilities) below.
 
-<a id="psp-spec-allowed-csi-drivers"></a>&#x2022; [`allowed\_csi\_drivers`](#psp-spec-allowed-csi-drivers) - Optional List<br>Allowed CSI drivers. Restrict the available CSI drivers for POD, default all drivers are available
+<a id="psp-spec-allowed-csi-drivers"></a>&#x2022; [`allowed_csi_drivers`](#psp-spec-allowed-csi-drivers) - Optional List<br>Allowed CSI drivers. Restrict the available CSI drivers for POD, default all drivers are available
 
-<a id="psp-spec-allowed-flex-volumes"></a>&#x2022; [`allowed\_flex\_volumes`](#psp-spec-allowed-flex-volumes) - Optional List<br>Allowed Flex Volumes. Restrict list of Flex volumes, default all volumes are allowed
+<a id="psp-spec-allowed-flex-volumes"></a>&#x2022; [`allowed_flex_volumes`](#psp-spec-allowed-flex-volumes) - Optional List<br>Allowed Flex Volumes. Restrict list of Flex volumes, default all volumes are allowed
 
-<a id="psp-spec-allowed-host-paths"></a>&#x2022; [`allowed\_host\_paths`](#psp-spec-allowed-host-paths) - Optional Block<br>Allowed Host Paths. Restrict list of host paths, default all host paths are allowed<br>See [Allowed Host Paths](#psp-spec-allowed-host-paths) below.
+<a id="psp-spec-allowed-host-paths"></a>&#x2022; [`allowed_host_paths`](#psp-spec-allowed-host-paths) - Optional Block<br>Allowed Host Paths. Restrict list of host paths, default all host paths are allowed<br>See [Allowed Host Paths](#psp-spec-allowed-host-paths) below.
 
-<a id="psp-spec-allowed-proc-mounts"></a>&#x2022; [`allowed\_proc\_mounts`](#psp-spec-allowed-proc-mounts) - Optional List<br>Allowed Proc Mounts. allowed list of proc mounts, empty list allows default proc mounts
+<a id="psp-spec-allowed-proc-mounts"></a>&#x2022; [`allowed_proc_mounts`](#psp-spec-allowed-proc-mounts) - Optional List<br>Allowed Proc Mounts. allowed list of proc mounts, empty list allows default proc mounts
 
-<a id="psp-spec-allowed-unsafe-sysctls"></a>&#x2022; [`allowed\_unsafe\_sysctls`](#psp-spec-allowed-unsafe-sysctls) - Optional List<br>Allowed Unsafe Sysctls. allowed list of unsafe sysctls, empty list allows none. supports prefix reg-ex
+<a id="psp-spec-allowed-unsafe-sysctls"></a>&#x2022; [`allowed_unsafe_sysctls`](#psp-spec-allowed-unsafe-sysctls) - Optional List<br>Allowed Unsafe Sysctls. allowed list of unsafe sysctls, empty list allows none. supports prefix reg-ex
 
-<a id="psp-spec-default-allow-privilege-escalation"></a>&#x2022; [`default\_allow_privilege\_escalation`](#psp-spec-default-allow-privilege-escalation) - Optional Bool<br>Default Allow Privilege Escalation. Pod has permission for privilege escalation by default
+<a id="psp-spec-default-allow-privilege-escalation"></a>&#x2022; [`default_allow_privilege_escalation`](#psp-spec-default-allow-privilege-escalation) - Optional Bool<br>Default Allow Privilege Escalation. Pod has permission for privilege escalation by default
 
 <a id="psp-spec-default-capabilities"></a>&#x2022; [`default_capabilities`](#psp-spec-default-capabilities) - Optional Block<br>Capability List. List of capabilities that docker container has<br>See [Default Capabilities](#psp-spec-default-capabilities) below.
 
@@ -106,7 +106,7 @@ A [`psp_spec`](#psp-spec) block supports the following:
 
 <a id="psp-spec-forbidden-sysctls"></a>&#x2022; [`forbidden_sysctls`](#psp-spec-forbidden-sysctls) - Optional List<br>Forbidden Sysctls. Forbidden list of sysctls, empty list forbids none. supports prefix reg-ex
 
-<a id="psp-spec-fs-group-strategy-options"></a>&#x2022; [`fs\_group_strategy\_options`](#psp-spec-fs-group-strategy-options) - Optional Block<br>ID(User,Group,FSGroup) Strategy. ID ranges and rules<br>See [Fs Group Strategy Options](#psp-spec-fs-group-strategy-options) below.
+<a id="psp-spec-fs-group-strategy-options"></a>&#x2022; [`fs_group_strategy_options`](#psp-spec-fs-group-strategy-options) - Optional Block<br>ID(User,Group,FSGroup) Strategy. ID ranges and rules<br>See [Fs Group Strategy Options](#psp-spec-fs-group-strategy-options) below.
 
 <a id="psp-spec-host-ipc"></a>&#x2022; [`host_ipc`](#psp-spec-host-ipc) - Optional Bool<br>Host IPC. Host IPC determines if the policy allows the use of host IPC in the pod spec
 
@@ -114,33 +114,33 @@ A [`psp_spec`](#psp-spec) block supports the following:
 
 <a id="psp-spec-host-pid"></a>&#x2022; [`host_pid`](#psp-spec-host-pid) - Optional Bool<br>Host PID. Host PID determines if the policy allows the use of host PID in the pod spec
 
-<a id="psp-spec-host-port-ranges"></a>&#x2022; [`host\_port\_ranges`](#psp-spec-host-port-ranges) - Optional String<br>Host Ports Ranges. Host port ranges determines which ports ranges are allowed to be exposed
+<a id="psp-spec-host-port-ranges"></a>&#x2022; [`host_port_ranges`](#psp-spec-host-port-ranges) - Optional String<br>Host Ports Ranges. Host port ranges determines which ports ranges are allowed to be exposed
 
-<a id="psp-spec-no-allowed-capabilities"></a>&#x2022; [`no\_allowed\_capabilities`](#psp-spec-no-allowed-capabilities) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="psp-spec-no-allowed-capabilities"></a>&#x2022; [`no_allowed_capabilities`](#psp-spec-no-allowed-capabilities) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="psp-spec-no-default-capabilities"></a>&#x2022; [`no\_default\_capabilities`](#psp-spec-no-default-capabilities) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="psp-spec-no-default-capabilities"></a>&#x2022; [`no_default_capabilities`](#psp-spec-no-default-capabilities) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="psp-spec-no-drop-capabilities"></a>&#x2022; [`no\_drop\_capabilities`](#psp-spec-no-drop-capabilities) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="psp-spec-no-drop-capabilities"></a>&#x2022; [`no_drop_capabilities`](#psp-spec-no-drop-capabilities) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="psp-spec-no-fs-groups"></a>&#x2022; [`no\_fs\_groups`](#psp-spec-no-fs-groups) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="psp-spec-no-fs-groups"></a>&#x2022; [`no_fs_groups`](#psp-spec-no-fs-groups) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="psp-spec-no-run-as-group"></a>&#x2022; [`no\_run_as\_group`](#psp-spec-no-run-as-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="psp-spec-no-run-as-group"></a>&#x2022; [`no_run_as_group`](#psp-spec-no-run-as-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="psp-spec-no-run-as-user"></a>&#x2022; [`no\_run_as\_user`](#psp-spec-no-run-as-user) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="psp-spec-no-run-as-user"></a>&#x2022; [`no_run_as_user`](#psp-spec-no-run-as-user) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="psp-spec-no-runtime-class"></a>&#x2022; [`no\_runtime\_class`](#psp-spec-no-runtime-class) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="psp-spec-no-runtime-class"></a>&#x2022; [`no_runtime_class`](#psp-spec-no-runtime-class) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="psp-spec-no-se-linux-options"></a>&#x2022; [`no\_se_linux\_options`](#psp-spec-no-se-linux-options) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="psp-spec-no-se-linux-options"></a>&#x2022; [`no_se_linux_options`](#psp-spec-no-se-linux-options) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="psp-spec-no-supplemental-groups"></a>&#x2022; [`no\_supplemental\_groups`](#psp-spec-no-supplemental-groups) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="psp-spec-no-supplemental-groups"></a>&#x2022; [`no_supplemental_groups`](#psp-spec-no-supplemental-groups) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="psp-spec-privileged"></a>&#x2022; [`privileged`](#psp-spec-privileged) - Optional Bool<br>Privileged. Privileged determines if a pod can request to be run as privileged
 
-<a id="psp-spec-read-only-root-filesystem"></a>&#x2022; [`read\_only_root\_filesystem`](#psp-spec-read-only-root-filesystem) - Optional Bool<br>Read Only Root Filesystem. Containers can only run with read only root filesystem
+<a id="psp-spec-read-only-root-filesystem"></a>&#x2022; [`read_only_root_filesystem`](#psp-spec-read-only-root-filesystem) - Optional Bool<br>Read Only Root Filesystem. Containers can only run with read only root filesystem
 
-<a id="psp-spec-run-as-group"></a>&#x2022; [`run\_as\_group`](#psp-spec-run-as-group) - Optional Block<br>ID(User,Group,FSGroup) Strategy. ID ranges and rules<br>See [Run As Group](#psp-spec-run-as-group) below.
+<a id="psp-spec-run-as-group"></a>&#x2022; [`run_as_group`](#psp-spec-run-as-group) - Optional Block<br>ID(User,Group,FSGroup) Strategy. ID ranges and rules<br>See [Run As Group](#psp-spec-run-as-group) below.
 
-<a id="psp-spec-run-as-user"></a>&#x2022; [`run\_as\_user`](#psp-spec-run-as-user) - Optional Block<br>ID(User,Group,FSGroup) Strategy. ID ranges and rules<br>See [Run As User](#psp-spec-run-as-user) below.
+<a id="psp-spec-run-as-user"></a>&#x2022; [`run_as_user`](#psp-spec-run-as-user) - Optional Block<br>ID(User,Group,FSGroup) Strategy. ID ranges and rules<br>See [Run As User](#psp-spec-run-as-user) below.
 
 <a id="psp-spec-supplemental-groups"></a>&#x2022; [`supplemental_groups`](#psp-spec-supplemental-groups) - Optional Block<br>ID(User,Group,FSGroup) Strategy. ID ranges and rules<br>See [Supplemental Groups](#psp-spec-supplemental-groups) below.
 
@@ -154,7 +154,7 @@ An [`allowed_capabilities`](#psp-spec-allowed-capabilities) block (within [`psp_
 
 #### Psp Spec Allowed Host Paths
 
-An [`allowed\_host\_paths`](#psp-spec-allowed-host-paths) block (within [`psp_spec`](#psp-spec)) supports the following:
+An [`allowed_host_paths`](#psp-spec-allowed-host-paths) block (within [`psp_spec`](#psp-spec)) supports the following:
 
 <a id="psp-spec-allowed-host-paths-path-prefix"></a>&#x2022; [`path_prefix`](#psp-spec-allowed-host-paths-path-prefix) - Optional String<br>Host Path Prefix. Host path prefix is the path prefix that the host volume must match. It does not support \*
 
@@ -174,7 +174,7 @@ A [`drop_capabilities`](#psp-spec-drop-capabilities) block (within [`psp_spec`](
 
 #### Psp Spec Fs Group Strategy Options
 
-A [`fs\_group_strategy\_options`](#psp-spec-fs-group-strategy-options) block (within [`psp_spec`](#psp-spec)) supports the following:
+A [`fs_group_strategy_options`](#psp-spec-fs-group-strategy-options) block (within [`psp_spec`](#psp-spec)) supports the following:
 
 <a id="psp-spec-fs-group-strategy-options-id-ranges"></a>&#x2022; [`id_ranges`](#psp-spec-fs-group-strategy-options-id-ranges) - Optional Block<br>ID Ranges. List of range of ID(s)<br>See [ID Ranges](#psp-spec-fs-group-strategy-options-id-ranges) below.
 
@@ -182,7 +182,7 @@ A [`fs\_group_strategy\_options`](#psp-spec-fs-group-strategy-options) block (wi
 
 #### Psp Spec Fs Group Strategy Options ID Ranges
 
-An [`id_ranges`](#psp-spec-fs-group-strategy-options-id-ranges) block (within [`psp_spec.fs\_group_strategy\_options`](#psp-spec-fs-group-strategy-options)) supports the following:
+An [`id_ranges`](#psp-spec-fs-group-strategy-options-id-ranges) block (within [`psp_spec.fs_group_strategy_options`](#psp-spec-fs-group-strategy-options)) supports the following:
 
 <a id="psp-spec-fs-group-strategy-options-id-ranges-max-id"></a>&#x2022; [`max_id`](#psp-spec-fs-group-strategy-options-id-ranges-max-id) - Optional Number<br>Ending ID. Ending(maximum) ID for for ID range
 
@@ -190,7 +190,7 @@ An [`id_ranges`](#psp-spec-fs-group-strategy-options-id-ranges) block (within [`
 
 #### Psp Spec Run As Group
 
-A [`run\_as\_group`](#psp-spec-run-as-group) block (within [`psp_spec`](#psp-spec)) supports the following:
+A [`run_as_group`](#psp-spec-run-as-group) block (within [`psp_spec`](#psp-spec)) supports the following:
 
 <a id="psp-spec-run-as-group-id-ranges"></a>&#x2022; [`id_ranges`](#psp-spec-run-as-group-id-ranges) - Optional Block<br>ID Ranges. List of range of ID(s)<br>See [ID Ranges](#psp-spec-run-as-group-id-ranges) below.
 
@@ -198,7 +198,7 @@ A [`run\_as\_group`](#psp-spec-run-as-group) block (within [`psp_spec`](#psp-spe
 
 #### Psp Spec Run As Group ID Ranges
 
-An [`id_ranges`](#psp-spec-run-as-group-id-ranges) block (within [`psp_spec.run\_as\_group`](#psp-spec-run-as-group)) supports the following:
+An [`id_ranges`](#psp-spec-run-as-group-id-ranges) block (within [`psp_spec.run_as_group`](#psp-spec-run-as-group)) supports the following:
 
 <a id="psp-spec-run-as-group-id-ranges-max-id"></a>&#x2022; [`max_id`](#psp-spec-run-as-group-id-ranges-max-id) - Optional Number<br>Ending ID. Ending(maximum) ID for for ID range
 
@@ -206,7 +206,7 @@ An [`id_ranges`](#psp-spec-run-as-group-id-ranges) block (within [`psp_spec.run\
 
 #### Psp Spec Run As User
 
-A [`run\_as\_user`](#psp-spec-run-as-user) block (within [`psp_spec`](#psp-spec)) supports the following:
+A [`run_as_user`](#psp-spec-run-as-user) block (within [`psp_spec`](#psp-spec)) supports the following:
 
 <a id="psp-spec-run-as-user-id-ranges"></a>&#x2022; [`id_ranges`](#psp-spec-run-as-user-id-ranges) - Optional Block<br>ID Ranges. List of range of ID(s)<br>See [ID Ranges](#psp-spec-run-as-user-id-ranges) below.
 
@@ -214,7 +214,7 @@ A [`run\_as\_user`](#psp-spec-run-as-user) block (within [`psp_spec`](#psp-spec)
 
 #### Psp Spec Run As User ID Ranges
 
-An [`id_ranges`](#psp-spec-run-as-user-id-ranges) block (within [`psp_spec.run\_as\_user`](#psp-spec-run-as-user)) supports the following:
+An [`id_ranges`](#psp-spec-run-as-user-id-ranges) block (within [`psp_spec.run_as_user`](#psp-spec-run-as-user)) supports the following:
 
 <a id="psp-spec-run-as-user-id-ranges-max-id"></a>&#x2022; [`max_id`](#psp-spec-run-as-user-id-ranges-max-id) - Optional Number<br>Ending ID. Ending(maximum) ID for for ID range
 
@@ -254,5 +254,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_k8s_pod_security\_policy.example system/example
+terraform import f5xc_k8s_pod_security_policy.example system/example
 ```

@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc\_ip_prefix\_set Data Source - terraform-provider-f5xc"
+page_title: "f5xc_ip_prefix_set Data Source - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages ip\_prefix\_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  Manages ip_prefix_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc\_ip_prefix\_set (Data Source)
+# f5xc_ip_prefix_set (Data Source)
 
-Manages ip\_prefix\_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+Manages ip_prefix_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [IP Prefix Set API docs](https://docs.cloud.f5.com/docs-v2/api/ip-prefix-set) to learn more.
 
@@ -18,14 +18,14 @@ Manages ip\_prefix\_set creates a new object in the storage backend for metadata
 # Retrieves information about an existing IP Prefix Set
 
 # Look up an existing IP Prefix Set by name
-data "f5xc\_ip_prefix\_set" "example" {
+data "f5xc_ip_prefix_set" "example" {
   name      = "example-ip-prefix-set"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "ip\_prefix_set\_id" {
-#   value = data.f5xc\_ip_prefix\_set.example.id
+# output "ip_prefix_set_id" {
+#   value = data.f5xc_ip_prefix_set.example.id
 # }
 ```
 

@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc\_app_api\_group Data Source - terraform-provider-f5xc"
+page_title: "f5xc_app_api_group Data Source - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
-  Manages app\_api\_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  Manages app_api_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc\_app_api\_group (Data Source)
+# f5xc_app_api_group (Data Source)
 
-Manages app\_api\_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+Manages app_api_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [App API Group API docs](https://docs.cloud.f5.com/docs-v2/api/views-app-api-group) to learn more.
 
@@ -18,14 +18,14 @@ Manages app\_api\_group creates a new object in the storage backend for metadata
 # Retrieves information about an existing App API Group
 
 # Look up an existing App API Group by name
-data "f5xc\_app_api\_group" "example" {
+data "f5xc_app_api_group" "example" {
   name      = "example-app-api-group"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "app\_api_group\_id" {
-#   value = data.f5xc\_app_api\_group.example.id
+# output "app_api_group_id" {
+#   value = data.f5xc_app_api_group.example.id
 # }
 ```
 

@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_app\_setting Data Source - terraform-provider-f5xc"
+page_title: "f5xc_app_setting Data Source - terraform-provider-f5xc"
 subcategory: "Applications"
 description: |-
   Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.
 ---
 
-# f5xc\_app\_setting (Data Source)
+# f5xc_app_setting (Data Source)
 
 Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages App setting configuration in namespace metadata.namespace in F5 Distribu
 # Retrieves information about an existing App Setting
 
 # Look up an existing App Setting by name
-data "f5xc\_app\_setting" "example" {
+data "f5xc_app_setting" "example" {
   name      = "example-app-setting"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "app\_setting\_id" {
-#   value = data.f5xc\_app\_setting.example.id
+# output "app_setting_id" {
+#   value = data.f5xc_app_setting.example.id
 # }
 ```
 

@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc\_secret_management\_access Resource - terraform-provider-f5xc"
+page_title: "f5xc_secret_management_access Resource - terraform-provider-f5xc"
 subcategory: "Authentication"
 description: |-
-  Manages secret\_management\_access creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
+  Manages secret_management_access creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc\_secret_management\_access (Resource)
+# f5xc_secret_management_access (Resource)
 
-Manages secret\_management\_access creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
+Manages secret_management_access creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Secret Management Access API docs](https://docs.cloud.f5.com/docs-v2/api/secret-management-access) to learn more.
 
@@ -15,10 +15,10 @@ Manages secret\_management\_access creates a new object in storage backend for m
 
 ```terraform
 # Secret Management Access Resource Example
-# Manages secret\_management\_access creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
+# Manages secret_management_access creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Secret Management Access configuration
-resource "f5xc\_secret_management\_access" "example" {
+resource "f5xc_secret_management_access" "example" {
   name      = "example-secret-management-access"
   namespace = "staging"
 
@@ -37,8 +37,8 @@ resource "f5xc\_secret_management\_access" "example" {
     # Configure access_info settings
   }
   # Rest Authentication Parameters. Authentication parameters...
-  rest\_auth\_info {
-    # Configure rest\_auth\_info settings
+  rest_auth_info {
+    # Configure rest_auth_info settings
   }
   # BasicAuth Authentication Parameters. AuthnTypeBasicAuth i...
   basic_auth {
@@ -86,7 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`access_info`](#access-info) block supports the following:
 
-<a id="access-info-rest-auth-info"></a>&#x2022; [`rest\_auth\_info`](#access-info-rest-auth-info) - Optional Block<br>REST Authentication Parameters. Authentication parameters for REST based hosts<br>See [REST Auth Info](#access-info-rest-auth-info) below.
+<a id="access-info-rest-auth-info"></a>&#x2022; [`rest_auth_info`](#access-info-rest-auth-info) - Optional Block<br>REST Authentication Parameters. Authentication parameters for REST based hosts<br>See [REST Auth Info](#access-info-rest-auth-info) below.
 
 <a id="access-info-scheme"></a>&#x2022; [`scheme`](#access-info-scheme) - Optional String  Defaults to `HTTP`<br>Possible values are `HTTP`, `HTTPS`<br>URL Scheme. SchemeType is used to indicate URL scheme HTTP:// scheme HTTPS:// scheme
 
@@ -94,21 +94,21 @@ An [`access_info`](#access-info) block supports the following:
 
 <a id="access-info-tls-config"></a>&#x2022; [`tls_config`](#access-info-tls-config) - Optional Block<br>Upstream TLS Parameters. TLS configuration for upstream connections<br>See [TLS Config](#access-info-tls-config) below.
 
-<a id="access-info-vault-auth-info"></a>&#x2022; [`vault\_auth\_info`](#access-info-vault-auth-info) - Optional Block<br>Vault Authentication Parameters. Authentication parameters for Hashicorp Vault hosts<br>See [Vault Auth Info](#access-info-vault-auth-info) below.
+<a id="access-info-vault-auth-info"></a>&#x2022; [`vault_auth_info`](#access-info-vault-auth-info) - Optional Block<br>Vault Authentication Parameters. Authentication parameters for Hashicorp Vault hosts<br>See [Vault Auth Info](#access-info-vault-auth-info) below.
 
 #### Access Info REST Auth Info
 
-A [`rest\_auth\_info`](#access-info-rest-auth-info) block (within [`access_info`](#access-info)) supports the following:
+A [`rest_auth_info`](#access-info-rest-auth-info) block (within [`access_info`](#access-info)) supports the following:
 
 <a id="access-info-rest-auth-info-basic-auth"></a>&#x2022; [`basic_auth`](#access-info-rest-auth-info-basic-auth) - Optional Block<br>BasicAuth Authentication Parameters. AuthnTypeBasicAuth is used for using basic_auth mode of HTTP authentication<br>See [Basic Auth](#access-info-rest-auth-info-basic-auth) below.
 
 <a id="access-info-rest-auth-info-headers-auth"></a>&#x2022; [`headers_auth`](#access-info-rest-auth-info-headers-auth) - Optional Block<br>Authentication Headers. AuthnTypeHeaders is used for setting headers for authentication<br>See [Headers Auth](#access-info-rest-auth-info-headers-auth) below.
 
-<a id="access-info-rest-auth-info-query-params-auth"></a>&#x2022; [`query\_params\_auth`](#access-info-rest-auth-info-query-params-auth) - Optional Block<br>Authentication QueryParams. AuthnTypeQueryParams is used for setting query_params for authentication<br>See [Query Params Auth](#access-info-rest-auth-info-query-params-auth) below.
+<a id="access-info-rest-auth-info-query-params-auth"></a>&#x2022; [`query_params_auth`](#access-info-rest-auth-info-query-params-auth) - Optional Block<br>Authentication QueryParams. AuthnTypeQueryParams is used for setting query_params for authentication<br>See [Query Params Auth](#access-info-rest-auth-info-query-params-auth) below.
 
 #### Access Info REST Auth Info Basic Auth
 
-A [`basic_auth`](#access-info-rest-auth-info-basic-auth) block (within [`access_info.rest\_auth\_info`](#access-info-rest-auth-info)) supports the following:
+A [`basic_auth`](#access-info-rest-auth-info-basic-auth) block (within [`access_info.rest_auth_info`](#access-info-rest-auth-info)) supports the following:
 
 <a id="access-info-rest-auth-info-basic-auth-password"></a>&#x2022; [`password`](#access-info-rest-auth-info-basic-auth-password) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#access-info-rest-auth-info-basic-auth-password) below.
 
@@ -116,15 +116,15 @@ A [`basic_auth`](#access-info-rest-auth-info-basic-auth) block (within [`access_
 
 #### Access Info REST Auth Info Basic Auth Password
 
-A [`password`](#access-info-rest-auth-info-basic-auth-password) block (within [`access_info.rest\_auth\_info.basic_auth`](#access-info-rest-auth-info-basic-auth)) supports the following:
+A [`password`](#access-info-rest-auth-info-basic-auth-password) block (within [`access_info.rest_auth_info.basic_auth`](#access-info-rest-auth-info-basic-auth)) supports the following:
 
-<a id="access-info-rest-auth-info-basic-auth-password-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#access-info-rest-auth-info-basic-auth-password-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#access-info-rest-auth-info-basic-auth-password-blindfold-secret-info) below.
+<a id="access-info-rest-auth-info-basic-auth-password-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#access-info-rest-auth-info-basic-auth-password-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#access-info-rest-auth-info-basic-auth-password-blindfold-secret-info) below.
 
-<a id="access-info-rest-auth-info-basic-auth-password-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#access-info-rest-auth-info-basic-auth-password-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#access-info-rest-auth-info-basic-auth-password-clear-secret-info) below.
+<a id="access-info-rest-auth-info-basic-auth-password-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#access-info-rest-auth-info-basic-auth-password-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#access-info-rest-auth-info-basic-auth-password-clear-secret-info) below.
 
 #### Access Info REST Auth Info Basic Auth Password Blindfold Secret Info
 
-A [`blindfold\_secret\_info`](#access-info-rest-auth-info-basic-auth-password-blindfold-secret-info) block (within [`access_info.rest\_auth\_info.basic_auth.password`](#access-info-rest-auth-info-basic-auth-password)) supports the following:
+A [`blindfold_secret_info`](#access-info-rest-auth-info-basic-auth-password-blindfold-secret-info) block (within [`access_info.rest_auth_info.basic_auth.password`](#access-info-rest-auth-info-basic-auth-password)) supports the following:
 
 <a id="access-info-rest-auth-info-basic-auth-password-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#access-info-rest-auth-info-basic-auth-password-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -134,7 +134,7 @@ A [`blindfold\_secret\_info`](#access-info-rest-auth-info-basic-auth-password-bl
 
 #### Access Info REST Auth Info Basic Auth Password Clear Secret Info
 
-A [`clear\_secret\_info`](#access-info-rest-auth-info-basic-auth-password-clear-secret-info) block (within [`access_info.rest\_auth\_info.basic_auth.password`](#access-info-rest-auth-info-basic-auth-password)) supports the following:
+A [`clear_secret_info`](#access-info-rest-auth-info-basic-auth-password-clear-secret-info) block (within [`access_info.rest_auth_info.basic_auth.password`](#access-info-rest-auth-info-basic-auth-password)) supports the following:
 
 <a id="access-info-rest-auth-info-basic-auth-password-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#access-info-rest-auth-info-basic-auth-password-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -142,13 +142,13 @@ A [`clear\_secret\_info`](#access-info-rest-auth-info-basic-auth-password-clear-
 
 #### Access Info REST Auth Info Headers Auth
 
-A [`headers_auth`](#access-info-rest-auth-info-headers-auth) block (within [`access_info.rest\_auth\_info`](#access-info-rest-auth-info)) supports the following:
+A [`headers_auth`](#access-info-rest-auth-info-headers-auth) block (within [`access_info.rest_auth_info`](#access-info-rest-auth-info)) supports the following:
 
 <a id="access-info-rest-auth-info-headers-auth-headers"></a>&#x2022; [`headers`](#access-info-rest-auth-info-headers-auth-headers) - Optional Block<br>Headers. The set of authentication headers to pass in HTTP request
 
 #### Access Info REST Auth Info Query Params Auth
 
-A [`query\_params\_auth`](#access-info-rest-auth-info-query-params-auth) block (within [`access_info.rest\_auth\_info`](#access-info-rest-auth-info)) supports the following:
+A [`query_params_auth`](#access-info-rest-auth-info-query-params-auth) block (within [`access_info.rest_auth_info`](#access-info-rest-auth-info)) supports the following:
 
 <a id="access-info-rest-auth-info-query-params-auth-query-params"></a>&#x2022; [`query_params`](#access-info-rest-auth-info-query-params-auth-query-params) - Optional Block<br>Query Parameters. The set of authentication parameters to be passed as query parameters
 
@@ -160,17 +160,17 @@ A [`tls_config`](#access-info-tls-config) block (within [`access_info`](#access-
 
 <a id="access-info-tls-config-common-params"></a>&#x2022; [`common_params`](#access-info-tls-config-common-params) - Optional Block<br>TLS Parameters. Information of different aspects for TLS authentication related to ciphers, certificates and trust store<br>See [Common Params](#access-info-tls-config-common-params) below.
 
-<a id="access-info-tls-config-default-session-key-caching"></a>&#x2022; [`default\_session_key\_caching`](#access-info-tls-config-default-session-key-caching) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="access-info-tls-config-default-session-key-caching"></a>&#x2022; [`default_session_key_caching`](#access-info-tls-config-default-session-key-caching) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="access-info-tls-config-disable-session-key-caching"></a>&#x2022; [`disable\_session_key\_caching`](#access-info-tls-config-disable-session-key-caching) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="access-info-tls-config-disable-session-key-caching"></a>&#x2022; [`disable_session_key_caching`](#access-info-tls-config-disable-session-key-caching) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="access-info-tls-config-disable-sni"></a>&#x2022; [`disable_sni`](#access-info-tls-config-disable-sni) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="access-info-tls-config-max-session-keys"></a>&#x2022; [`max\_session\_keys`](#access-info-tls-config-max-session-keys) - Optional Number<br>Max Session Keys Cached. x-example:'25' Number of session keys that are cached
+<a id="access-info-tls-config-max-session-keys"></a>&#x2022; [`max_session_keys`](#access-info-tls-config-max-session-keys) - Optional Number<br>Max Session Keys Cached. x-example:'25' Number of session keys that are cached
 
 <a id="access-info-tls-config-sni"></a>&#x2022; [`sni`](#access-info-tls-config-sni) - Optional String<br>SNI Value. SNI value to be used
 
-<a id="access-info-tls-config-use-host-header-as-sni"></a>&#x2022; [`use\_host_header_as\_sni`](#access-info-tls-config-use-host-header-as-sni) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="access-info-tls-config-use-host-header-as-sni"></a>&#x2022; [`use_host_header_as_sni`](#access-info-tls-config-use-host-header-as-sni) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Access Info TLS Config Cert Params
 
@@ -178,11 +178,11 @@ A [`cert_params`](#access-info-tls-config-cert-params) block (within [`access_in
 
 <a id="access-info-tls-config-cert-params-certificates"></a>&#x2022; [`certificates`](#access-info-tls-config-cert-params-certificates) - Optional Block<br>Client Certificate. Client TLS Certificate required for mTLS authentication<br>See [Certificates](#access-info-tls-config-cert-params-certificates) below.
 
-<a id="access-info-tls-config-cert-params-cipher-suites"></a>&#x2022; [`cipher_suites`](#access-info-tls-config-cert-params-cipher-suites) - Optional List<br>Cipher Suites. The following list specifies the supported cipher suite TLS\_AES_128_GCM\_SHA256 TLS\_AES_256_GCM\_SHA384 TLS\_CHACHA20_POLY1305\_SHA256 TLS\_ECDHE_ECDSA_WITH_AES_128_GCM\_SHA256 TLS\_ECDHE_ECDSA_WITH_AES_256_GCM\_SHA384 TLS\_ECDHE_ECDSA_WITH_CHACHA20_POLY1305\_SHA256 TLS\_ECDHE_RSA_WITH_AES_128_GCM\_SHA256 TLS\_ECDHE_RSA_WITH_AES_256_GCM\_SHA384 TLS\_ECDHE_RSA_WITH_CHACHA20_POLY1305\_SHA256 TLS\_ECDHE_ECDSA_WITH_AES_128_CBC\_SHA TLS\_ECDHE_ECDSA_WITH_AES_256_CBC\_SHA TLS\_ECDHE_RSA_WITH_AES_128_CBC\_SHA TLS\_ECDHE_RSA_WITH_AES_256_CBC\_SHA TLS\_RSA_WITH_AES_128_CBC\_SHA TLS\_RSA_WITH_AES_128_GCM\_SHA256 TLS\_RSA_WITH_AES_256_CBC\_SHA TLS\_RSA_WITH_AES_256_GCM\_SHA384 If not specified, the default list: TLS\_ECDHE_ECDSA_WITH_AES_128_GCM\_SHA256 TLS\_ECDHE_ECDSA_WITH_CHACHA20_POLY1305\_SHA256 TLS\_ECDHE_RSA_WITH_AES_128_GCM\_SHA256 TLS\_ECDHE_RSA_WITH_CHACHA20_POLY1305\_SHA256 TLS\_ECDHE_ECDSA_WITH_AES_256_GCM\_SHA384 TLS\_ECDHE_RSA_WITH_AES_256_GCM\_SHA384 will be used
+<a id="access-info-tls-config-cert-params-cipher-suites"></a>&#x2022; [`cipher_suites`](#access-info-tls-config-cert-params-cipher-suites) - Optional List<br>Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_128_CBC_SHA TLS_RSA_WITH_AES_128_GCM_SHA256 TLS_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_256_GCM_SHA384 If not specified, the default list: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 will be used
 
-<a id="access-info-tls-config-cert-params-maximum-protocol-version"></a>&#x2022; [`maximum\_protocol\_version`](#access-info-tls-config-cert-params-maximum-protocol-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="access-info-tls-config-cert-params-maximum-protocol-version"></a>&#x2022; [`maximum_protocol_version`](#access-info-tls-config-cert-params-maximum-protocol-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
-<a id="access-info-tls-config-cert-params-minimum-protocol-version"></a>&#x2022; [`minimum\_protocol\_version`](#access-info-tls-config-cert-params-minimum-protocol-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="access-info-tls-config-cert-params-minimum-protocol-version"></a>&#x2022; [`minimum_protocol_version`](#access-info-tls-config-cert-params-minimum-protocol-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
 <a id="access-info-tls-config-cert-params-validation-params"></a>&#x2022; [`validation_params`](#access-info-tls-config-cert-params-validation-params) - Optional Block<br>TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification<br>See [Validation Params](#access-info-tls-config-cert-params-validation-params) below.
 
@@ -204,23 +204,23 @@ A [`certificates`](#access-info-tls-config-cert-params-certificates) block (with
 
 A [`validation_params`](#access-info-tls-config-cert-params-validation-params) block (within [`access_info.tls_config.cert_params`](#access-info-tls-config-cert-params)) supports the following:
 
-<a id="access-info-tls-config-cert-params-validation-params-skip-hostname-verification"></a>&#x2022; [`skip\_hostname\_verification`](#access-info-tls-config-cert-params-validation-params-skip-hostname-verification) - Optional Bool<br>Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname
+<a id="access-info-tls-config-cert-params-validation-params-skip-hostname-verification"></a>&#x2022; [`skip_hostname_verification`](#access-info-tls-config-cert-params-validation-params-skip-hostname-verification) - Optional Bool<br>Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname
 
 <a id="access-info-tls-config-cert-params-validation-params-trusted-ca"></a>&#x2022; [`trusted_ca`](#access-info-tls-config-cert-params-validation-params-trusted-ca) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA](#access-info-tls-config-cert-params-validation-params-trusted-ca) below.
 
-<a id="access-info-tls-config-cert-params-validation-params-trusted-ca-url"></a>&#x2022; [`trusted\_ca\_url`](#access-info-tls-config-cert-params-validation-params-trusted-ca-url) - Optional String<br>Inline Root CA Certificate (legacy). Inline Root CA Certificate
+<a id="access-info-tls-config-cert-params-validation-params-trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#access-info-tls-config-cert-params-validation-params-trusted-ca-url) - Optional String<br>Inline Root CA Certificate (legacy). Inline Root CA Certificate
 
-<a id="access-info-tls-config-cert-params-validation-params-verify-subject-alt-names"></a>&#x2022; [`verify\_subject_alt\_names`](#access-info-tls-config-cert-params-validation-params-verify-subject-alt-names) - Optional List<br>List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip\_hostname\_verification is false and verify\_subject_alt\_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate
+<a id="access-info-tls-config-cert-params-validation-params-verify-subject-alt-names"></a>&#x2022; [`verify_subject_alt_names`](#access-info-tls-config-cert-params-validation-params-verify-subject-alt-names) - Optional List<br>List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate
 
 #### Access Info TLS Config Cert Params Validation Params Trusted CA
 
 A [`trusted_ca`](#access-info-tls-config-cert-params-validation-params-trusted-ca) block (within [`access_info.tls_config.cert_params.validation_params`](#access-info-tls-config-cert-params-validation-params)) supports the following:
 
-<a id="access-info-tls-config-cert-params-validation-params-trusted-ca-trusted-ca-list"></a>&#x2022; [`trusted\_ca\_list`](#access-info-tls-config-cert-params-validation-params-trusted-ca-trusted-ca-list) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA List](#access-info-tls-config-cert-params-validation-params-trusted-ca-trusted-ca-list) below.
+<a id="access-info-tls-config-cert-params-validation-params-trusted-ca-trusted-ca-list"></a>&#x2022; [`trusted_ca_list`](#access-info-tls-config-cert-params-validation-params-trusted-ca-trusted-ca-list) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA List](#access-info-tls-config-cert-params-validation-params-trusted-ca-trusted-ca-list) below.
 
 #### Access Info TLS Config Cert Params Validation Params Trusted CA Trusted CA List
 
-A [`trusted\_ca\_list`](#access-info-tls-config-cert-params-validation-params-trusted-ca-trusted-ca-list) block (within [`access_info.tls_config.cert_params.validation_params.trusted_ca`](#access-info-tls-config-cert-params-validation-params-trusted-ca)) supports the following:
+A [`trusted_ca_list`](#access-info-tls-config-cert-params-validation-params-trusted-ca-trusted-ca-list) block (within [`access_info.tls_config.cert_params.validation_params.trusted_ca`](#access-info-tls-config-cert-params-validation-params-trusted-ca)) supports the following:
 
 <a id="access-info-tls-config-cert-params-validation-params-trusted-ca-trusted-ca-list-kind"></a>&#x2022; [`kind`](#access-info-tls-config-cert-params-validation-params-trusted-ca-trusted-ca-list-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -236,11 +236,11 @@ A [`trusted\_ca\_list`](#access-info-tls-config-cert-params-validation-params-tr
 
 A [`common_params`](#access-info-tls-config-common-params) block (within [`access_info.tls_config`](#access-info-tls-config)) supports the following:
 
-<a id="access-info-tls-config-common-params-cipher-suites"></a>&#x2022; [`cipher_suites`](#access-info-tls-config-common-params-cipher-suites) - Optional List<br>Cipher Suites. The following list specifies the supported cipher suite TLS\_AES_128_GCM\_SHA256 TLS\_AES_256_GCM\_SHA384 TLS\_CHACHA20_POLY1305\_SHA256 TLS\_ECDHE_ECDSA_WITH_AES_128_GCM\_SHA256 TLS\_ECDHE_ECDSA_WITH_AES_256_GCM\_SHA384 TLS\_ECDHE_ECDSA_WITH_CHACHA20_POLY1305\_SHA256 TLS\_ECDHE_RSA_WITH_AES_128_GCM\_SHA256 TLS\_ECDHE_RSA_WITH_AES_256_GCM\_SHA384 TLS\_ECDHE_RSA_WITH_CHACHA20_POLY1305\_SHA256 TLS\_ECDHE_ECDSA_WITH_AES_128_CBC\_SHA TLS\_ECDHE_ECDSA_WITH_AES_256_CBC\_SHA TLS\_ECDHE_RSA_WITH_AES_128_CBC\_SHA TLS\_ECDHE_RSA_WITH_AES_256_CBC\_SHA TLS\_RSA_WITH_AES_128_CBC\_SHA TLS\_RSA_WITH_AES_128_GCM\_SHA256 TLS\_RSA_WITH_AES_256_CBC\_SHA TLS\_RSA_WITH_AES_256_GCM\_SHA384 If not specified, the default list: TLS\_ECDHE_ECDSA_WITH_AES_128_GCM\_SHA256 TLS\_ECDHE_ECDSA_WITH_CHACHA20_POLY1305\_SHA256 TLS\_ECDHE_RSA_WITH_AES_128_GCM\_SHA256 TLS\_ECDHE_RSA_WITH_CHACHA20_POLY1305\_SHA256 TLS\_ECDHE_ECDSA_WITH_AES_256_GCM\_SHA384 TLS\_ECDHE_RSA_WITH_AES_256_GCM\_SHA384 will be used
+<a id="access-info-tls-config-common-params-cipher-suites"></a>&#x2022; [`cipher_suites`](#access-info-tls-config-common-params-cipher-suites) - Optional List<br>Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_128_CBC_SHA TLS_RSA_WITH_AES_128_GCM_SHA256 TLS_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_256_GCM_SHA384 If not specified, the default list: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 will be used
 
-<a id="access-info-tls-config-common-params-maximum-protocol-version"></a>&#x2022; [`maximum\_protocol\_version`](#access-info-tls-config-common-params-maximum-protocol-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="access-info-tls-config-common-params-maximum-protocol-version"></a>&#x2022; [`maximum_protocol_version`](#access-info-tls-config-common-params-maximum-protocol-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
-<a id="access-info-tls-config-common-params-minimum-protocol-version"></a>&#x2022; [`minimum\_protocol\_version`](#access-info-tls-config-common-params-minimum-protocol-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="access-info-tls-config-common-params-minimum-protocol-version"></a>&#x2022; [`minimum_protocol_version`](#access-info-tls-config-common-params-minimum-protocol-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
 <a id="access-info-tls-config-common-params-tls-certificates"></a>&#x2022; [`tls_certificates`](#access-info-tls-config-common-params-tls-certificates) - Optional Block<br>TLS Certificates. Set of TLS certificates<br>See [TLS Certificates](#access-info-tls-config-common-params-tls-certificates) below.
 
@@ -252,33 +252,33 @@ A [`tls_certificates`](#access-info-tls-config-common-params-tls-certificates) b
 
 <a id="access-info-tls-config-common-params-tls-certificates-certificate-url"></a>&#x2022; [`certificate_url`](#access-info-tls-config-common-params-tls-certificates-certificate-url) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
 
-<a id="access-info-tls-config-common-params-tls-certificates-custom-hash-algorithms"></a>&#x2022; [`custom\_hash\_algorithms`](#access-info-tls-config-common-params-tls-certificates-custom-hash-algorithms) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#access-info-tls-config-common-params-tls-certificates-custom-hash-algorithms) below.
+<a id="access-info-tls-config-common-params-tls-certificates-custom-hash-algorithms"></a>&#x2022; [`custom_hash_algorithms`](#access-info-tls-config-common-params-tls-certificates-custom-hash-algorithms) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#access-info-tls-config-common-params-tls-certificates-custom-hash-algorithms) below.
 
 <a id="access-info-tls-config-common-params-tls-certificates-description-spec"></a>&#x2022; [`description_spec`](#access-info-tls-config-common-params-tls-certificates-description-spec) - Optional String<br>Description. Description for the certificate
 
-<a id="access-info-tls-config-common-params-tls-certificates-disable-ocsp-stapling"></a>&#x2022; [`disable\_ocsp\_stapling`](#access-info-tls-config-common-params-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="access-info-tls-config-common-params-tls-certificates-disable-ocsp-stapling"></a>&#x2022; [`disable_ocsp_stapling`](#access-info-tls-config-common-params-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="access-info-tls-config-common-params-tls-certificates-private-key"></a>&#x2022; [`private_key`](#access-info-tls-config-common-params-tls-certificates-private-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#access-info-tls-config-common-params-tls-certificates-private-key) below.
 
-<a id="access-info-tls-config-common-params-tls-certificates-use-system-defaults"></a>&#x2022; [`use\_system\_defaults`](#access-info-tls-config-common-params-tls-certificates-use-system-defaults) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="access-info-tls-config-common-params-tls-certificates-use-system-defaults"></a>&#x2022; [`use_system_defaults`](#access-info-tls-config-common-params-tls-certificates-use-system-defaults) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Access Info TLS Config Common Params TLS Certificates Custom Hash Algorithms
 
-A [`custom\_hash\_algorithms`](#access-info-tls-config-common-params-tls-certificates-custom-hash-algorithms) block (within [`access_info.tls_config.common_params.tls_certificates`](#access-info-tls-config-common-params-tls-certificates)) supports the following:
+A [`custom_hash_algorithms`](#access-info-tls-config-common-params-tls-certificates-custom-hash-algorithms) block (within [`access_info.tls_config.common_params.tls_certificates`](#access-info-tls-config-common-params-tls-certificates)) supports the following:
 
-<a id="access-info-tls-config-common-params-tls-certificates-custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#access-info-tls-config-common-params-tls-certificates-custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID\_HASH\_ALGORITHM`<br>Possible values are `INVALID\_HASH\_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="access-info-tls-config-common-params-tls-certificates-custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#access-info-tls-config-common-params-tls-certificates-custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
 #### Access Info TLS Config Common Params TLS Certificates Private Key
 
 A [`private_key`](#access-info-tls-config-common-params-tls-certificates-private-key) block (within [`access_info.tls_config.common_params.tls_certificates`](#access-info-tls-config-common-params-tls-certificates)) supports the following:
 
-<a id="access-info-tls-config-common-params-tls-certificates-private-key-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#access-info-tls-config-common-params-tls-certificates-private-key-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#access-info-tls-config-common-params-tls-certificates-private-key-blindfold-secret-info) below.
+<a id="access-info-tls-config-common-params-tls-certificates-private-key-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#access-info-tls-config-common-params-tls-certificates-private-key-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#access-info-tls-config-common-params-tls-certificates-private-key-blindfold-secret-info) below.
 
-<a id="access-info-tls-config-common-params-tls-certificates-private-key-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#access-info-tls-config-common-params-tls-certificates-private-key-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#access-info-tls-config-common-params-tls-certificates-private-key-clear-secret-info) below.
+<a id="access-info-tls-config-common-params-tls-certificates-private-key-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#access-info-tls-config-common-params-tls-certificates-private-key-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#access-info-tls-config-common-params-tls-certificates-private-key-clear-secret-info) below.
 
 #### Access Info TLS Config Common Params TLS Certificates Private Key Blindfold Secret Info
 
-A [`blindfold\_secret\_info`](#access-info-tls-config-common-params-tls-certificates-private-key-blindfold-secret-info) block (within [`access_info.tls_config.common_params.tls_certificates.private_key`](#access-info-tls-config-common-params-tls-certificates-private-key)) supports the following:
+A [`blindfold_secret_info`](#access-info-tls-config-common-params-tls-certificates-private-key-blindfold-secret-info) block (within [`access_info.tls_config.common_params.tls_certificates.private_key`](#access-info-tls-config-common-params-tls-certificates-private-key)) supports the following:
 
 <a id="access-info-tls-config-common-params-tls-certificates-private-key-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#access-info-tls-config-common-params-tls-certificates-private-key-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -288,7 +288,7 @@ A [`blindfold\_secret\_info`](#access-info-tls-config-common-params-tls-certific
 
 #### Access Info TLS Config Common Params TLS Certificates Private Key Clear Secret Info
 
-A [`clear\_secret\_info`](#access-info-tls-config-common-params-tls-certificates-private-key-clear-secret-info) block (within [`access_info.tls_config.common_params.tls_certificates.private_key`](#access-info-tls-config-common-params-tls-certificates-private-key)) supports the following:
+A [`clear_secret_info`](#access-info-tls-config-common-params-tls-certificates-private-key-clear-secret-info) block (within [`access_info.tls_config.common_params.tls_certificates.private_key`](#access-info-tls-config-common-params-tls-certificates-private-key)) supports the following:
 
 <a id="access-info-tls-config-common-params-tls-certificates-private-key-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#access-info-tls-config-common-params-tls-certificates-private-key-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -298,23 +298,23 @@ A [`clear\_secret\_info`](#access-info-tls-config-common-params-tls-certificates
 
 A [`validation_params`](#access-info-tls-config-common-params-validation-params) block (within [`access_info.tls_config.common_params`](#access-info-tls-config-common-params)) supports the following:
 
-<a id="access-info-tls-config-common-params-validation-params-skip-hostname-verification"></a>&#x2022; [`skip\_hostname\_verification`](#access-info-tls-config-common-params-validation-params-skip-hostname-verification) - Optional Bool<br>Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname
+<a id="access-info-tls-config-common-params-validation-params-skip-hostname-verification"></a>&#x2022; [`skip_hostname_verification`](#access-info-tls-config-common-params-validation-params-skip-hostname-verification) - Optional Bool<br>Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname
 
 <a id="access-info-tls-config-common-params-validation-params-trusted-ca"></a>&#x2022; [`trusted_ca`](#access-info-tls-config-common-params-validation-params-trusted-ca) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA](#access-info-tls-config-common-params-validation-params-trusted-ca) below.
 
-<a id="access-info-tls-config-common-params-validation-params-trusted-ca-url"></a>&#x2022; [`trusted\_ca\_url`](#access-info-tls-config-common-params-validation-params-trusted-ca-url) - Optional String<br>Inline Root CA Certificate (legacy). Inline Root CA Certificate
+<a id="access-info-tls-config-common-params-validation-params-trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#access-info-tls-config-common-params-validation-params-trusted-ca-url) - Optional String<br>Inline Root CA Certificate (legacy). Inline Root CA Certificate
 
-<a id="access-info-tls-config-common-params-validation-params-verify-subject-alt-names"></a>&#x2022; [`verify\_subject_alt\_names`](#access-info-tls-config-common-params-validation-params-verify-subject-alt-names) - Optional List<br>List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip\_hostname\_verification is false and verify\_subject_alt\_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate
+<a id="access-info-tls-config-common-params-validation-params-verify-subject-alt-names"></a>&#x2022; [`verify_subject_alt_names`](#access-info-tls-config-common-params-validation-params-verify-subject-alt-names) - Optional List<br>List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate
 
 #### Access Info TLS Config Common Params Validation Params Trusted CA
 
 A [`trusted_ca`](#access-info-tls-config-common-params-validation-params-trusted-ca) block (within [`access_info.tls_config.common_params.validation_params`](#access-info-tls-config-common-params-validation-params)) supports the following:
 
-<a id="access-info-tls-config-common-params-validation-params-trusted-ca-trusted-ca-list"></a>&#x2022; [`trusted\_ca\_list`](#access-info-tls-config-common-params-validation-params-trusted-ca-trusted-ca-list) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA List](#access-info-tls-config-common-params-validation-params-trusted-ca-trusted-ca-list) below.
+<a id="access-info-tls-config-common-params-validation-params-trusted-ca-trusted-ca-list"></a>&#x2022; [`trusted_ca_list`](#access-info-tls-config-common-params-validation-params-trusted-ca-trusted-ca-list) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA List](#access-info-tls-config-common-params-validation-params-trusted-ca-trusted-ca-list) below.
 
 #### Access Info TLS Config Common Params Validation Params Trusted CA Trusted CA List
 
-A [`trusted\_ca\_list`](#access-info-tls-config-common-params-validation-params-trusted-ca-trusted-ca-list) block (within [`access_info.tls_config.common_params.validation_params.trusted_ca`](#access-info-tls-config-common-params-validation-params-trusted-ca)) supports the following:
+A [`trusted_ca_list`](#access-info-tls-config-common-params-validation-params-trusted-ca-trusted-ca-list) block (within [`access_info.tls_config.common_params.validation_params.trusted_ca`](#access-info-tls-config-common-params-validation-params-trusted-ca)) supports the following:
 
 <a id="access-info-tls-config-common-params-validation-params-trusted-ca-trusted-ca-list-kind"></a>&#x2022; [`kind`](#access-info-tls-config-common-params-validation-params-trusted-ca-trusted-ca-list-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -328,15 +328,15 @@ A [`trusted\_ca\_list`](#access-info-tls-config-common-params-validation-params-
 
 #### Access Info Vault Auth Info
 
-A [`vault\_auth\_info`](#access-info-vault-auth-info) block (within [`access_info`](#access-info)) supports the following:
+A [`vault_auth_info`](#access-info-vault-auth-info) block (within [`access_info`](#access-info)) supports the following:
 
-<a id="access-info-vault-auth-info-app-role-auth"></a>&#x2022; [`app\_role\_auth`](#access-info-vault-auth-info-app-role-auth) - Optional Block<br>Vault AppRole Authentication Parameters. AppRoleAuthInfoType contains parameters for AppRole authentication in Hashicorp Vault<br>See [App Role Auth](#access-info-vault-auth-info-app-role-auth) below.
+<a id="access-info-vault-auth-info-app-role-auth"></a>&#x2022; [`app_role_auth`](#access-info-vault-auth-info-app-role-auth) - Optional Block<br>Vault AppRole Authentication Parameters. AppRoleAuthInfoType contains parameters for AppRole authentication in Hashicorp Vault<br>See [App Role Auth](#access-info-vault-auth-info-app-role-auth) below.
 
 <a id="access-info-vault-auth-info-token"></a>&#x2022; [`token`](#access-info-vault-auth-info-token) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Token](#access-info-vault-auth-info-token) below.
 
 #### Access Info Vault Auth Info App Role Auth
 
-An [`app\_role\_auth`](#access-info-vault-auth-info-app-role-auth) block (within [`access_info.vault\_auth\_info`](#access-info-vault-auth-info)) supports the following:
+An [`app_role_auth`](#access-info-vault-auth-info-app-role-auth) block (within [`access_info.vault_auth_info`](#access-info-vault-auth-info)) supports the following:
 
 <a id="access-info-vault-auth-info-app-role-auth-role-id"></a>&#x2022; [`role_id`](#access-info-vault-auth-info-app-role-auth-role-id) - Optional String<br>Role ID. role-ID to be used for authentication
 
@@ -344,15 +344,15 @@ An [`app\_role\_auth`](#access-info-vault-auth-info-app-role-auth) block (within
 
 #### Access Info Vault Auth Info App Role Auth Secret ID
 
-A [`secret_id`](#access-info-vault-auth-info-app-role-auth-secret-id) block (within [`access_info.vault\_auth\_info.app\_role\_auth`](#access-info-vault-auth-info-app-role-auth)) supports the following:
+A [`secret_id`](#access-info-vault-auth-info-app-role-auth-secret-id) block (within [`access_info.vault_auth_info.app_role_auth`](#access-info-vault-auth-info-app-role-auth)) supports the following:
 
-<a id="access-info-vault-auth-info-app-role-auth-secret-id-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#access-info-vault-auth-info-app-role-auth-secret-id-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#access-info-vault-auth-info-app-role-auth-secret-id-blindfold-secret-info) below.
+<a id="access-info-vault-auth-info-app-role-auth-secret-id-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#access-info-vault-auth-info-app-role-auth-secret-id-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#access-info-vault-auth-info-app-role-auth-secret-id-blindfold-secret-info) below.
 
-<a id="access-info-vault-auth-info-app-role-auth-secret-id-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#access-info-vault-auth-info-app-role-auth-secret-id-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#access-info-vault-auth-info-app-role-auth-secret-id-clear-secret-info) below.
+<a id="access-info-vault-auth-info-app-role-auth-secret-id-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#access-info-vault-auth-info-app-role-auth-secret-id-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#access-info-vault-auth-info-app-role-auth-secret-id-clear-secret-info) below.
 
 #### Access Info Vault Auth Info App Role Auth Secret ID Blindfold Secret Info
 
-A [`blindfold\_secret\_info`](#access-info-vault-auth-info-app-role-auth-secret-id-blindfold-secret-info) block (within [`access_info.vault\_auth\_info.app\_role\_auth.secret_id`](#access-info-vault-auth-info-app-role-auth-secret-id)) supports the following:
+A [`blindfold_secret_info`](#access-info-vault-auth-info-app-role-auth-secret-id-blindfold-secret-info) block (within [`access_info.vault_auth_info.app_role_auth.secret_id`](#access-info-vault-auth-info-app-role-auth-secret-id)) supports the following:
 
 <a id="access-info-vault-auth-info-app-role-auth-secret-id-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#access-info-vault-auth-info-app-role-auth-secret-id-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -362,7 +362,7 @@ A [`blindfold\_secret\_info`](#access-info-vault-auth-info-app-role-auth-secret-
 
 #### Access Info Vault Auth Info App Role Auth Secret ID Clear Secret Info
 
-A [`clear\_secret\_info`](#access-info-vault-auth-info-app-role-auth-secret-id-clear-secret-info) block (within [`access_info.vault\_auth\_info.app\_role\_auth.secret_id`](#access-info-vault-auth-info-app-role-auth-secret-id)) supports the following:
+A [`clear_secret_info`](#access-info-vault-auth-info-app-role-auth-secret-id-clear-secret-info) block (within [`access_info.vault_auth_info.app_role_auth.secret_id`](#access-info-vault-auth-info-app-role-auth-secret-id)) supports the following:
 
 <a id="access-info-vault-auth-info-app-role-auth-secret-id-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#access-info-vault-auth-info-app-role-auth-secret-id-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -370,15 +370,15 @@ A [`clear\_secret\_info`](#access-info-vault-auth-info-app-role-auth-secret-id-c
 
 #### Access Info Vault Auth Info Token
 
-A [`token`](#access-info-vault-auth-info-token) block (within [`access_info.vault\_auth\_info`](#access-info-vault-auth-info)) supports the following:
+A [`token`](#access-info-vault-auth-info-token) block (within [`access_info.vault_auth_info`](#access-info-vault-auth-info)) supports the following:
 
-<a id="access-info-vault-auth-info-token-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#access-info-vault-auth-info-token-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#access-info-vault-auth-info-token-blindfold-secret-info) below.
+<a id="access-info-vault-auth-info-token-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#access-info-vault-auth-info-token-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#access-info-vault-auth-info-token-blindfold-secret-info) below.
 
-<a id="access-info-vault-auth-info-token-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#access-info-vault-auth-info-token-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#access-info-vault-auth-info-token-clear-secret-info) below.
+<a id="access-info-vault-auth-info-token-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#access-info-vault-auth-info-token-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#access-info-vault-auth-info-token-clear-secret-info) below.
 
 #### Access Info Vault Auth Info Token Blindfold Secret Info
 
-A [`blindfold\_secret\_info`](#access-info-vault-auth-info-token-blindfold-secret-info) block (within [`access_info.vault\_auth\_info.token`](#access-info-vault-auth-info-token)) supports the following:
+A [`blindfold_secret_info`](#access-info-vault-auth-info-token-blindfold-secret-info) block (within [`access_info.vault_auth_info.token`](#access-info-vault-auth-info-token)) supports the following:
 
 <a id="access-info-vault-auth-info-token-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#access-info-vault-auth-info-token-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -388,7 +388,7 @@ A [`blindfold\_secret\_info`](#access-info-vault-auth-info-token-blindfold-secre
 
 #### Access Info Vault Auth Info Token Clear Secret Info
 
-A [`clear\_secret\_info`](#access-info-vault-auth-info-token-clear-secret-info) block (within [`access_info.vault\_auth\_info.token`](#access-info-vault-auth-info-token)) supports the following:
+A [`clear_secret_info`](#access-info-vault-auth-info-token-clear-secret-info) block (within [`access_info.vault_auth_info.token`](#access-info-vault-auth-info-token)) supports the following:
 
 <a id="access-info-vault-auth-info-token-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#access-info-vault-auth-info-token-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -420,11 +420,11 @@ A [`where`](#where) block supports the following:
 
 A [`site`](#where-site) block (within [`where`](#where)) supports the following:
 
-<a id="where-site-disable-internet-vip"></a>&#x2022; [`disable\_internet\_vip`](#where-site-disable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="where-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-site-disable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="where-site-enable-internet-vip"></a>&#x2022; [`enable\_internet\_vip`](#where-site-enable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="where-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-site-enable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="where-site-network-type"></a>&#x2022; [`network_type`](#where-site-network-type) - Optional String  Defaults to `VIRTUAL\_NETWORK_SITE\_LOCAL`<br>Possible values are `VIRTUAL\_NETWORK_SITE\_LOCAL`, `VIRTUAL\_NETWORK_SITE_LOCAL\_INSIDE`, `VIRTUAL\_NETWORK_PER\_SITE`, `VIRTUAL\_NETWORK\_PUBLIC`, `VIRTUAL\_NETWORK\_GLOBAL`, `VIRTUAL\_NETWORK_SITE\_SERVICE`, `VIRTUAL\_NETWORK_VER\_INTERNAL`, `VIRTUAL\_NETWORK_SITE_LOCAL_INSIDE\_OUTSIDE`, `VIRTUAL\_NETWORK_IP\_AUTO`, `VIRTUAL\_NETWORK_VOLTADN_PRIVATE\_NETWORK`, `VIRTUAL\_NETWORK_SRV6\_NETWORK`, `VIRTUAL\_NETWORK_IP\_FABRIC`, `VIRTUAL\_NETWORK\_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL\_NETWORK_SITE\_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL\_NETWORK_SITE_LOCAL\_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL\_NETWORK\_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL\_NETWORK_SITE_LOCAL_INSIDE\_OUTSIDE represents both VIRTUAL\_NETWORK_SITE\_LOCAL and VIRTUAL\_NETWORK_SITE_LOCAL\_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL\_NETWORK_IP\_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
+<a id="where-site-network-type"></a>&#x2022; [`network_type`](#where-site-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
 <a id="where-site-ref"></a>&#x2022; [`ref`](#where-site-ref) - Optional Block<br>Reference. A site direct reference<br>See [Ref](#where-site-ref) below.
 
@@ -466,11 +466,11 @@ A [`ref`](#where-virtual-network-ref) block (within [`where.virtual_network`](#w
 
 A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) supports the following:
 
-<a id="where-virtual-site-disable-internet-vip"></a>&#x2022; [`disable\_internet\_vip`](#where-virtual-site-disable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="where-virtual-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-virtual-site-disable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="where-virtual-site-enable-internet-vip"></a>&#x2022; [`enable\_internet\_vip`](#where-virtual-site-enable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="where-virtual-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-virtual-site-enable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="where-virtual-site-network-type"></a>&#x2022; [`network_type`](#where-virtual-site-network-type) - Optional String  Defaults to `VIRTUAL\_NETWORK_SITE\_LOCAL`<br>Possible values are `VIRTUAL\_NETWORK_SITE\_LOCAL`, `VIRTUAL\_NETWORK_SITE_LOCAL\_INSIDE`, `VIRTUAL\_NETWORK_PER\_SITE`, `VIRTUAL\_NETWORK\_PUBLIC`, `VIRTUAL\_NETWORK\_GLOBAL`, `VIRTUAL\_NETWORK_SITE\_SERVICE`, `VIRTUAL\_NETWORK_VER\_INTERNAL`, `VIRTUAL\_NETWORK_SITE_LOCAL_INSIDE\_OUTSIDE`, `VIRTUAL\_NETWORK_IP\_AUTO`, `VIRTUAL\_NETWORK_VOLTADN_PRIVATE\_NETWORK`, `VIRTUAL\_NETWORK_SRV6\_NETWORK`, `VIRTUAL\_NETWORK_IP\_FABRIC`, `VIRTUAL\_NETWORK\_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL\_NETWORK_SITE\_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL\_NETWORK_SITE_LOCAL\_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL\_NETWORK\_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL\_NETWORK_SITE_LOCAL_INSIDE\_OUTSIDE represents both VIRTUAL\_NETWORK_SITE\_LOCAL and VIRTUAL\_NETWORK_SITE_LOCAL\_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL\_NETWORK_IP\_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
+<a id="where-virtual-site-network-type"></a>&#x2022; [`network_type`](#where-virtual-site-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
 <a id="where-virtual-site-ref"></a>&#x2022; [`ref`](#where-virtual-site-ref) - Optional Block<br>Reference. A virtual_site direct reference<br>See [Ref](#where-virtual-site-ref) below.
 
@@ -494,5 +494,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_secret_management\_access.example system/example
+terraform import f5xc_secret_management_access.example system/example
 ```

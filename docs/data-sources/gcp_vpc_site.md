@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_gcp_vpc\_site Data Source - terraform-provider-f5xc"
+page_title: "f5xc_gcp_vpc_site Data Source - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
   Manages a GCPVPCSite resource in F5 Distributed Cloud for deploying F5 sites within Google Cloud VPC environments.
 ---
 
-# f5xc\_gcp_vpc\_site (Data Source)
+# f5xc_gcp_vpc_site (Data Source)
 
 Manages a GCPVPCSite resource in F5 Distributed Cloud for deploying F5 sites within Google Cloud VPC environments.
 
@@ -18,18 +18,18 @@ Manages a GCPVPCSite resource in F5 Distributed Cloud for deploying F5 sites wit
 # Retrieves information about an existing GCP VPC Site
 
 # Look up an existing GCP VPC Site by name
-data "f5xc\_gcp_vpc\_site" "example" {
+data "f5xc_gcp_vpc_site" "example" {
   name      = "example-gcp-vpc-site"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "gcp\_vpc_site\_id" {
-#   value = data.f5xc\_gcp_vpc\_site.example.id
+# output "gcp_vpc_site_id" {
+#   value = data.f5xc_gcp_vpc_site.example.id
 # }
 
 # Example: Reference cloud site for advertising load balancer
-# resource "f5xc\_http\_loadbalancer" "example" {
+# resource "f5xc_http_loadbalancer" "example" {
 #   name      = "site-advertised-lb"
 #   namespace = "system"
 #
@@ -37,8 +37,8 @@ data "f5xc\_gcp_vpc\_site" "example" {
 #     advertise_where {
 #       site {
 #         site {
-#           name      = data.f5xc\_gcp_vpc\_site.example.name
-#           namespace = data.f5xc\_gcp_vpc\_site.example.namespace
+#           name      = data.f5xc_gcp_vpc_site.example.name
+#           namespace = data.f5xc_gcp_vpc_site.example.namespace
 #         }
 #       }
 #     }

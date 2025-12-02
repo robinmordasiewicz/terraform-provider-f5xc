@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_trusted_ca\_list Resource - terraform-provider-f5xc"
+page_title: "f5xc_trusted_ca_list Resource - terraform-provider-f5xc"
 subcategory: "Certificates"
 description: |-
   Manages a TrustedCAList resource in F5 Distributed Cloud for trusted certificate authority list management.
 ---
 
-# f5xc\_trusted_ca\_list (Resource)
+# f5xc_trusted_ca_list (Resource)
 
 Manages a TrustedCAList resource in F5 Distributed Cloud for trusted certificate authority list management.
 
@@ -18,7 +18,7 @@ Manages a TrustedCAList resource in F5 Distributed Cloud for trusted certificate
 # Manages a TrustedCAList resource in F5 Distributed Cloud for trusted certificate authority list management.
 
 # Basic Trusted CA List configuration
-resource "f5xc\_trusted_ca\_list" "example" {
+resource "f5xc_trusted_ca_list" "example" {
   name      = "example-trusted-ca-list"
   namespace = "shared"
 
@@ -32,7 +32,7 @@ resource "f5xc\_trusted_ca\_list" "example" {
   }
 
   # Trusted CA List configuration
-  trusted\_ca\_url = "string:///LS0tLS1CRUdJTi..."
+  trusted_ca_url = "string:///LS0tLS1CRUdJTi..."
 }
 ```
 
@@ -57,7 +57,7 @@ resource "f5xc\_trusted_ca\_list" "example" {
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-<a id="trusted-ca-url"></a>&#x2022; [`trusted\_ca\_url`](#trusted-ca-url) - Optional String<br>Root CA Certificate. Trusted CA certificates for validating certificates
+<a id="trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#trusted-ca-url) - Optional String<br>Root CA Certificate. Trusted CA certificates for validating certificates
 
 ### Attributes Reference
 
@@ -85,5 +85,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_trusted_ca\_list.example system/example
+terraform import f5xc_trusted_ca_list.example system/example
 ```

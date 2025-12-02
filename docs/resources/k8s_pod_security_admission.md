@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc\_k8s_pod_security\_admission Resource - terraform-provider-f5xc"
+page_title: "f5xc_k8s_pod_security_admission Resource - terraform-provider-f5xc"
 subcategory: "Kubernetes"
 description: |-
-  Manages k8s\_pod_security\_admission will create the object in the storage backend in F5 Distributed Cloud.
+  Manages k8s_pod_security_admission will create the object in the storage backend in F5 Distributed Cloud.
 ---
 
-# f5xc\_k8s_pod_security\_admission (Resource)
+# f5xc_k8s_pod_security_admission (Resource)
 
-Manages k8s\_pod_security\_admission will create the object in the storage backend in F5 Distributed Cloud.
+Manages k8s_pod_security_admission will create the object in the storage backend in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [K8S Pod Security Admission API docs](https://docs.cloud.f5.com/docs-v2/api/k8s-pod-security-admission) to learn more.
 
@@ -15,10 +15,10 @@ Manages k8s\_pod_security\_admission will create the object in the storage backe
 
 ```terraform
 # K8S Pod Security Admission Resource Example
-# Manages k8s\_pod_security\_admission will create the object in the storage backend in F5 Distributed Cloud.
+# Manages k8s_pod_security_admission will create the object in the storage backend in F5 Distributed Cloud.
 
 # Basic K8S Pod Security Admission configuration
-resource "f5xc\_k8s_pod_security\_admission" "example" {
+resource "f5xc_k8s_pod_security_admission" "example" {
   name      = "example-k8s-pod-security-admission"
   namespace = "staging"
 
@@ -33,8 +33,8 @@ resource "f5xc\_k8s_pod_security\_admission" "example" {
 
   # Resource-specific configuration
   # K8s Pod Security Admission.
-  pod\_security_admission\_specs {
-    # Configure pod\_security_admission\_specs settings
+  pod_security_admission_specs {
+    # Configure pod_security_admission_specs settings
   }
   # Empty. This can be used for messages where no values are ...
   audit {
@@ -66,7 +66,7 @@ resource "f5xc\_k8s_pod_security\_admission" "example" {
 
 ### Spec Argument Reference
 
-<a id="pod-security-admission-specs"></a>&#x2022; [`pod\_security_admission\_specs`](#pod-security-admission-specs) - Optional Block<br>K8S Pod Security Admission<br>See [Pod Security Admission Specs](#pod-security-admission-specs) below for details.
+<a id="pod-security-admission-specs"></a>&#x2022; [`pod_security_admission_specs`](#pod-security-admission-specs) - Optional Block<br>K8S Pod Security Admission<br>See [Pod Security Admission Specs](#pod-security-admission-specs) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -80,7 +80,7 @@ In addition to all arguments above, the following attributes are exported:
 
 #### Pod Security Admission Specs
 
-A [`pod\_security_admission\_specs`](#pod-security-admission-specs) block supports the following:
+A [`pod_security_admission_specs`](#pod-security-admission-specs) block supports the following:
 
 <a id="pod-security-admission-specs-audit"></a>&#x2022; [`audit`](#pod-security-admission-specs-audit) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -112,5 +112,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_k8s_pod_security\_admission.example system/example
+terraform import f5xc_k8s_pod_security_admission.example system/example
 ```

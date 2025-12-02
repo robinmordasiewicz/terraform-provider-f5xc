@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc\_voltshare_admin\_policy Data Source - terraform-provider-f5xc"
+page_title: "f5xc_voltshare_admin_policy Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages voltshare\_admin\_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  Manages voltshare_admin_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc\_voltshare_admin\_policy (Data Source)
+# f5xc_voltshare_admin_policy (Data Source)
 
-Manages voltshare\_admin\_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+Manages voltshare_admin_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Voltshare Admin Policy API docs](https://docs.cloud.f5.com/docs-v2/api/voltshare-admin-policy) to learn more.
 
@@ -18,14 +18,14 @@ Manages voltshare\_admin\_policy creates a new object in the storage backend for
 # Retrieves information about an existing Voltshare Admin Policy
 
 # Look up an existing Voltshare Admin Policy by name
-data "f5xc\_voltshare_admin\_policy" "example" {
+data "f5xc_voltshare_admin_policy" "example" {
   name      = "example-voltshare-admin-policy"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "voltshare\_admin_policy\_id" {
-#   value = data.f5xc\_voltshare_admin\_policy.example.id
+# output "voltshare_admin_policy_id" {
+#   value = data.f5xc_voltshare_admin_policy.example.id
 # }
 ```
 

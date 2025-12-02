@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_azure_vnet\_site Resource - terraform-provider-f5xc"
+page_title: "f5xc_azure_vnet_site Resource - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
   Manages a AzureVNETSite resource in F5 Distributed Cloud for deploying F5 sites within Azure Virtual Network environments.
 ---
 
-# f5xc\_azure_vnet\_site (Resource)
+# f5xc_azure_vnet_site (Resource)
 
 Manages a AzureVNETSite resource in F5 Distributed Cloud for deploying F5 sites within Azure Virtual Network environments.
 
@@ -18,7 +18,7 @@ Manages a AzureVNETSite resource in F5 Distributed Cloud for deploying F5 sites 
 # Manages a AzureVNETSite resource in F5 Distributed Cloud for deploying F5 sites within Azure Virtual Network environments.
 
 # Basic Azure VNET Site configuration
-resource "f5xc\_azure_vnet\_site" "example" {
+resource "f5xc_azure_vnet_site" "example" {
   name      = "example-azure-vnet-site"
   namespace = "system"
 
@@ -52,11 +52,11 @@ resource "f5xc\_azure_vnet\_site" "example" {
   }
 
   # Machine type
-  machine_type = "Standard\_D3\_v2"
+  machine_type = "Standard_D3_v2"
 
   # Ingress/Egress gateway
-  ingress\_egress\_gw {
-    azure\_certified\_hw = "azure-byol-multi-nic-voltmesh"
+  ingress_egress_gw {
+    azure_certified_hw = "azure-byol-multi-nic-voltmesh"
     az_nodes {
       azure_az = "1"
       inside_subnet {
@@ -73,7 +73,7 @@ resource "f5xc\_azure_vnet\_site" "example" {
   }
 
   # No worker nodes by default
-  no\_worker\_nodes {}
+  no_worker_nodes {}
 }
 ```
 
@@ -107,9 +107,9 @@ resource "f5xc\_azure_vnet\_site" "example" {
 <a id="azure-cred"></a>&#x2022; [`azure_cred`](#azure-cred) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Azure Cred](#azure-cred) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="block-all-services"></a>[`block\_all\_services`](#block-all-services) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="block-all-services"></a>[`block_all_services`](#block-all-services) - Optional Block<br>Empty. This can be used for messages where no values are needed
 <br><br>&#x2022; <a id="blocked-services"></a>[`blocked_services`](#blocked-services) - Optional Block<br>Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site<br>See [Blocked Services](#blocked-services) below for details.
-<br><br>&#x2022; <a id="default-blocked-services"></a>[`default\_blocked\_services`](#default-blocked-services) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="default-blocked-services"></a>[`default_blocked_services`](#default-blocked-services) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="coordinates"></a>&#x2022; [`coordinates`](#coordinates) - Optional Block<br>Site Coordinates. Coordinates of the site which provides the site physical location<br>See [Coordinates](#coordinates) below for details.
 
@@ -118,27 +118,27 @@ resource "f5xc\_azure_vnet\_site" "example" {
 <a id="disk-size"></a>&#x2022; [`disk_size`](#disk-size) - Optional Number<br>Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB
 
 -> **One of the following:**
-&#x2022; <a id="ingress-egress-gw"></a>[`ingress\_egress\_gw`](#ingress-egress-gw) - Optional Block<br>Azure Ingress/Egress Gateway on Recommended Region. Two interface Azure ingress/egress site<br>See [Ingress Egress Gw](#ingress-egress-gw) below for details.
-<br><br>&#x2022; <a id="ingress-egress-gw-ar"></a>[`ingress\_egress_gw\_ar`](#ingress-egress-gw-ar) - Optional Block<br>Azure Ingress/Egress Gateway on Alternate Region. Two interface Azure ingress/egress site on Alternate Region with no support for zones
+&#x2022; <a id="ingress-egress-gw"></a>[`ingress_egress_gw`](#ingress-egress-gw) - Optional Block<br>Azure Ingress/Egress Gateway on Recommended Region. Two interface Azure ingress/egress site<br>See [Ingress Egress Gw](#ingress-egress-gw) below for details.
+<br><br>&#x2022; <a id="ingress-egress-gw-ar"></a>[`ingress_egress_gw_ar`](#ingress-egress-gw-ar) - Optional Block<br>Azure Ingress/Egress Gateway on Alternate Region. Two interface Azure ingress/egress site on Alternate Region with no support for zones
 <br><br>&#x2022; <a id="ingress-gw"></a>[`ingress_gw`](#ingress-gw) - Optional Block<br>Azure Ingress Gateway on Recommended Region. Single interface Azure ingress site on on Recommended Region
-<br><br>&#x2022; <a id="ingress-gw-ar"></a>[`ingress\_gw\_ar`](#ingress-gw-ar) - Optional Block<br>Azure Ingress Gateway on Alternate Region. Single interface Azure ingress site
+<br><br>&#x2022; <a id="ingress-gw-ar"></a>[`ingress_gw_ar`](#ingress-gw-ar) - Optional Block<br>Azure Ingress Gateway on Alternate Region. Single interface Azure ingress site
 <br><br>&#x2022; <a id="voltstack-cluster"></a>[`voltstack_cluster`](#voltstack-cluster) - Optional Block<br>Azure App Stack Cluster on Recommended Region. App Stack Cluster of single interface Azure nodes
-<br><br>&#x2022; <a id="voltstack-cluster-ar"></a>[`voltstack\_cluster\_ar`](#voltstack-cluster-ar) - Optional Block<br>Azure App Stack Cluster on Alternate Region. App Stack Cluster of single interface Azure nodes
+<br><br>&#x2022; <a id="voltstack-cluster-ar"></a>[`voltstack_cluster_ar`](#voltstack-cluster-ar) - Optional Block<br>Azure App Stack Cluster on Alternate Region. App Stack Cluster of single interface Azure nodes
 
-<a id="kubernetes-upgrade-drain"></a>&#x2022; [`kubernetes\_upgrade\_drain`](#kubernetes-upgrade-drain) - Optional Block<br>Node by Node Upgrade. Specify how worker nodes within a site will be upgraded
+<a id="kubernetes-upgrade-drain"></a>&#x2022; [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain) - Optional Block<br>Node by Node Upgrade. Specify how worker nodes within a site will be upgraded
 
 -> **One of the following:**
 &#x2022; <a id="log-receiver"></a>[`log_receiver`](#log-receiver) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
-<br><br>&#x2022; <a id="logs-streaming-disabled"></a>[`logs\_streaming\_disabled`](#logs-streaming-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="logs-streaming-disabled"></a>[`logs_streaming_disabled`](#logs-streaming-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="machine-type"></a>&#x2022; [`machine_type`](#machine-type) - Optional String<br>Azure Machine Type for Node. Select Instance size based on performance needed. The default setting for Accelerated Networking is enabled, thus make sure you select a Virtual Machine that supports accelerated networking or disable the setting under, Select Ingress Gateway or Ingress/Egress Gateway > advanced options
 
 -> **One of the following:**
-&#x2022; <a id="no-worker-nodes"></a>[`no\_worker\_nodes`](#no-worker-nodes) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="nodes-per-az"></a>[`nodes\_per\_az`](#nodes-per-az) - Optional Number<br>Desired Worker Nodes Per AZ. Desired Worker Nodes Per AZ. Max limit is up to 21
+&#x2022; <a id="no-worker-nodes"></a>[`no_worker_nodes`](#no-worker-nodes) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="nodes-per-az"></a>[`nodes_per_az`](#nodes-per-az) - Optional Number<br>Desired Worker Nodes Per AZ. Desired Worker Nodes Per AZ. Max limit is up to 21
 <br><br>&#x2022; <a id="total-nodes"></a>[`total_nodes`](#total-nodes) - Optional Number<br>Total Number of Worker Nodes for a Site. Total number of worker nodes to be deployed across all AZ's used in the Site
 
-<a id="offline-survivability-mode"></a>&#x2022; [`offline\_survivability\_mode`](#offline-survivability-mode) - Optional Block<br>Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen
+<a id="offline-survivability-mode"></a>&#x2022; [`offline_survivability_mode`](#offline-survivability-mode) - Optional Block<br>Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen
 
 <a id="os"></a>&#x2022; [`os`](#os) - Optional Block<br>Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions
 
@@ -166,13 +166,13 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`admin_password`](#admin-password) block supports the following:
 
-<a id="admin-password-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#admin-password-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#admin-password-blindfold-secret-info) below.
+<a id="admin-password-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#admin-password-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#admin-password-blindfold-secret-info) below.
 
-<a id="admin-password-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#admin-password-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#admin-password-clear-secret-info) below.
+<a id="admin-password-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#admin-password-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#admin-password-clear-secret-info) below.
 
 #### Admin Password Blindfold Secret Info
 
-A [`blindfold\_secret\_info`](#admin-password-blindfold-secret-info) block (within [`admin_password`](#admin-password)) supports the following:
+A [`blindfold_secret_info`](#admin-password-blindfold-secret-info) block (within [`admin_password`](#admin-password)) supports the following:
 
 <a id="admin-password-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#admin-password-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -182,7 +182,7 @@ A [`blindfold\_secret\_info`](#admin-password-blindfold-secret-info) block (with
 
 #### Admin Password Clear Secret Info
 
-A [`clear\_secret\_info`](#admin-password-clear-secret-info) block (within [`admin_password`](#admin-password)) supports the following:
+A [`clear_secret_info`](#admin-password-clear-secret-info) block (within [`admin_password`](#admin-password)) supports the following:
 
 <a id="admin-password-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#admin-password-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -210,11 +210,11 @@ A [`blocked_sevice`](#blocked-services-blocked-sevice) block (within [`blocked_s
 
 <a id="blocked-services-blocked-sevice-dns"></a>&#x2022; [`dns`](#blocked-services-blocked-sevice-dns) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="blocked-services-blocked-sevice-network-type"></a>&#x2022; [`network_type`](#blocked-services-blocked-sevice-network-type) - Optional String  Defaults to `VIRTUAL\_NETWORK_SITE\_LOCAL`<br>Possible values are `VIRTUAL\_NETWORK_SITE\_LOCAL`, `VIRTUAL\_NETWORK_SITE_LOCAL\_INSIDE`, `VIRTUAL\_NETWORK_PER\_SITE`, `VIRTUAL\_NETWORK\_PUBLIC`, `VIRTUAL\_NETWORK\_GLOBAL`, `VIRTUAL\_NETWORK_SITE\_SERVICE`, `VIRTUAL\_NETWORK_VER\_INTERNAL`, `VIRTUAL\_NETWORK_SITE_LOCAL_INSIDE\_OUTSIDE`, `VIRTUAL\_NETWORK_IP\_AUTO`, `VIRTUAL\_NETWORK_VOLTADN_PRIVATE\_NETWORK`, `VIRTUAL\_NETWORK_SRV6\_NETWORK`, `VIRTUAL\_NETWORK_IP\_FABRIC`, `VIRTUAL\_NETWORK\_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL\_NETWORK_SITE\_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL\_NETWORK_SITE_LOCAL\_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL\_NETWORK\_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL\_NETWORK_SITE_LOCAL_INSIDE\_OUTSIDE represents both VIRTUAL\_NETWORK_SITE\_LOCAL and VIRTUAL\_NETWORK_SITE_LOCAL\_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL\_NETWORK_IP\_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
+<a id="blocked-services-blocked-sevice-network-type"></a>&#x2022; [`network_type`](#blocked-services-blocked-sevice-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
 <a id="blocked-services-blocked-sevice-ssh"></a>&#x2022; [`ssh`](#blocked-services-blocked-sevice-ssh) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="blocked-services-blocked-sevice-web-user-interface"></a>&#x2022; [`web\_user\_interface`](#blocked-services-blocked-sevice-web-user-interface) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="blocked-services-blocked-sevice-web-user-interface"></a>&#x2022; [`web_user_interface`](#blocked-services-blocked-sevice-web-user-interface) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Coordinates
 
@@ -234,57 +234,57 @@ A [`custom_dns`](#custom-dns) block supports the following:
 
 #### Ingress Egress Gw
 
-An [`ingress\_egress\_gw`](#ingress-egress-gw) block supports the following:
+An [`ingress_egress_gw`](#ingress-egress-gw) block supports the following:
 
 <a id="ingress-egress-gw-accelerated-networking"></a>&#x2022; [`accelerated_networking`](#ingress-egress-gw-accelerated-networking) - Optional Block<br>Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen<br>See [Accelerated Networking](#ingress-egress-gw-accelerated-networking) below.
 
-<a id="ingress-egress-gw-active-enhanced-firewall-policies"></a>&#x2022; [`active\_enhanced_firewall\_policies`](#ingress-egress-gw-active-enhanced-firewall-policies) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#ingress-egress-gw-active-enhanced-firewall-policies) below.
+<a id="ingress-egress-gw-active-enhanced-firewall-policies"></a>&#x2022; [`active_enhanced_firewall_policies`](#ingress-egress-gw-active-enhanced-firewall-policies) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#ingress-egress-gw-active-enhanced-firewall-policies) below.
 
-<a id="ingress-egress-gw-active-forward-proxy-policies"></a>&#x2022; [`active\_forward_proxy\_policies`](#ingress-egress-gw-active-forward-proxy-policies) - Optional Block<br>Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#ingress-egress-gw-active-forward-proxy-policies) below.
+<a id="ingress-egress-gw-active-forward-proxy-policies"></a>&#x2022; [`active_forward_proxy_policies`](#ingress-egress-gw-active-forward-proxy-policies) - Optional Block<br>Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#ingress-egress-gw-active-forward-proxy-policies) below.
 
-<a id="ingress-egress-gw-active-network-policies"></a>&#x2022; [`active\_network\_policies`](#ingress-egress-gw-active-network-policies) - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#ingress-egress-gw-active-network-policies) below.
+<a id="ingress-egress-gw-active-network-policies"></a>&#x2022; [`active_network_policies`](#ingress-egress-gw-active-network-policies) - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#ingress-egress-gw-active-network-policies) below.
 
 <a id="ingress-egress-gw-az-nodes"></a>&#x2022; [`az_nodes`](#ingress-egress-gw-az-nodes) - Optional Block<br>Ingress/Egress Gateway (two Interface) Nodes in AZ. Only Single AZ or Three AZ(s) nodes are supported currently<br>See [Az Nodes](#ingress-egress-gw-az-nodes) below.
 
-<a id="ingress-egress-gw-azure-certified-hw"></a>&#x2022; [`azure\_certified\_hw`](#ingress-egress-gw-azure-certified-hw) - Optional String<br>Azure Certified Hardware. Name for Azure certified hardware
+<a id="ingress-egress-gw-azure-certified-hw"></a>&#x2022; [`azure_certified_hw`](#ingress-egress-gw-azure-certified-hw) - Optional String<br>Azure Certified Hardware. Name for Azure certified hardware
 
-<a id="ingress-egress-gw-dc-cluster-group-inside-vn"></a>&#x2022; [`dc\_cluster_group_inside\_vn`](#ingress-egress-gw-dc-cluster-group-inside-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group Inside Vn](#ingress-egress-gw-dc-cluster-group-inside-vn) below.
+<a id="ingress-egress-gw-dc-cluster-group-inside-vn"></a>&#x2022; [`dc_cluster_group_inside_vn`](#ingress-egress-gw-dc-cluster-group-inside-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group Inside Vn](#ingress-egress-gw-dc-cluster-group-inside-vn) below.
 
-<a id="ingress-egress-gw-dc-cluster-group-outside-vn"></a>&#x2022; [`dc\_cluster_group_outside\_vn`](#ingress-egress-gw-dc-cluster-group-outside-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group Outside Vn](#ingress-egress-gw-dc-cluster-group-outside-vn) below.
+<a id="ingress-egress-gw-dc-cluster-group-outside-vn"></a>&#x2022; [`dc_cluster_group_outside_vn`](#ingress-egress-gw-dc-cluster-group-outside-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group Outside Vn](#ingress-egress-gw-dc-cluster-group-outside-vn) below.
 
-<a id="ingress-egress-gw-forward-proxy-allow-all"></a>&#x2022; [`forward\_proxy_allow\_all`](#ingress-egress-gw-forward-proxy-allow-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-forward-proxy-allow-all"></a>&#x2022; [`forward_proxy_allow_all`](#ingress-egress-gw-forward-proxy-allow-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ingress-egress-gw-global-network-list"></a>&#x2022; [`global\_network\_list`](#ingress-egress-gw-global-network-list) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#ingress-egress-gw-global-network-list) below.
+<a id="ingress-egress-gw-global-network-list"></a>&#x2022; [`global_network_list`](#ingress-egress-gw-global-network-list) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#ingress-egress-gw-global-network-list) below.
 
 <a id="ingress-egress-gw-hub"></a>&#x2022; [`hub`](#ingress-egress-gw-hub) - Optional Block<br>Hub VNET type. Hub VNET type<br>See [Hub](#ingress-egress-gw-hub) below.
 
-<a id="ingress-egress-gw-inside-static-routes"></a>&#x2022; [`inside\_static\_routes`](#ingress-egress-gw-inside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Inside Static Routes](#ingress-egress-gw-inside-static-routes) below.
+<a id="ingress-egress-gw-inside-static-routes"></a>&#x2022; [`inside_static_routes`](#ingress-egress-gw-inside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Inside Static Routes](#ingress-egress-gw-inside-static-routes) below.
 
-<a id="ingress-egress-gw-no-dc-cluster-group"></a>&#x2022; [`no\_dc_cluster\_group`](#ingress-egress-gw-no-dc-cluster-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#ingress-egress-gw-no-dc-cluster-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ingress-egress-gw-no-forward-proxy"></a>&#x2022; [`no\_forward\_proxy`](#ingress-egress-gw-no-forward-proxy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#ingress-egress-gw-no-forward-proxy) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ingress-egress-gw-no-global-network"></a>&#x2022; [`no\_global\_network`](#ingress-egress-gw-no-global-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-no-global-network"></a>&#x2022; [`no_global_network`](#ingress-egress-gw-no-global-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ingress-egress-gw-no-inside-static-routes"></a>&#x2022; [`no\_inside_static\_routes`](#ingress-egress-gw-no-inside-static-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-no-inside-static-routes"></a>&#x2022; [`no_inside_static_routes`](#ingress-egress-gw-no-inside-static-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ingress-egress-gw-no-network-policy"></a>&#x2022; [`no\_network\_policy`](#ingress-egress-gw-no-network-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-no-network-policy"></a>&#x2022; [`no_network_policy`](#ingress-egress-gw-no-network-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ingress-egress-gw-no-outside-static-routes"></a>&#x2022; [`no\_outside_static\_routes`](#ingress-egress-gw-no-outside-static-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-no-outside-static-routes"></a>&#x2022; [`no_outside_static_routes`](#ingress-egress-gw-no-outside-static-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="ingress-egress-gw-not-hub"></a>&#x2022; [`not_hub`](#ingress-egress-gw-not-hub) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ingress-egress-gw-outside-static-routes"></a>&#x2022; [`outside\_static\_routes`](#ingress-egress-gw-outside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Outside Static Routes](#ingress-egress-gw-outside-static-routes) below.
+<a id="ingress-egress-gw-outside-static-routes"></a>&#x2022; [`outside_static_routes`](#ingress-egress-gw-outside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Outside Static Routes](#ingress-egress-gw-outside-static-routes) below.
 
-<a id="ingress-egress-gw-performance-enhancement-mode"></a>&#x2022; [`performance\_enhancement\_mode`](#ingress-egress-gw-performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#ingress-egress-gw-performance-enhancement-mode) below.
+<a id="ingress-egress-gw-performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#ingress-egress-gw-performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#ingress-egress-gw-performance-enhancement-mode) below.
 
-<a id="ingress-egress-gw-sm-connection-public-ip"></a>&#x2022; [`sm\_connection_public\_ip`](#ingress-egress-gw-sm-connection-public-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-sm-connection-public-ip"></a>&#x2022; [`sm_connection_public_ip`](#ingress-egress-gw-sm-connection-public-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ingress-egress-gw-sm-connection-pvt-ip"></a>&#x2022; [`sm\_connection_pvt\_ip`](#ingress-egress-gw-sm-connection-pvt-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-sm-connection-pvt-ip"></a>&#x2022; [`sm_connection_pvt_ip`](#ingress-egress-gw-sm-connection-pvt-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Ingress Egress Gw Accelerated Networking
 
-An [`accelerated_networking`](#ingress-egress-gw-accelerated-networking) block (within [`ingress\_egress\_gw`](#ingress-egress-gw)) supports the following:
+An [`accelerated_networking`](#ingress-egress-gw-accelerated-networking) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
 
 <a id="ingress-egress-gw-accelerated-networking-disable"></a>&#x2022; [`disable`](#ingress-egress-gw-accelerated-networking-disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -292,13 +292,13 @@ An [`accelerated_networking`](#ingress-egress-gw-accelerated-networking) block (
 
 #### Ingress Egress Gw Active Enhanced Firewall Policies
 
-An [`active\_enhanced_firewall\_policies`](#ingress-egress-gw-active-enhanced-firewall-policies) block (within [`ingress\_egress\_gw`](#ingress-egress-gw)) supports the following:
+An [`active_enhanced_firewall_policies`](#ingress-egress-gw-active-enhanced-firewall-policies) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
 
-<a id="ingress-egress-gw-active-enhanced-firewall-policies-enhanced-firewall-policies"></a>&#x2022; [`enhanced\_firewall\_policies`](#ingress-egress-gw-active-enhanced-firewall-policies-enhanced-firewall-policies) - Optional Block<br>Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#ingress-egress-gw-active-enhanced-firewall-policies-enhanced-firewall-policies) below.
+<a id="ingress-egress-gw-active-enhanced-firewall-policies-enhanced-firewall-policies"></a>&#x2022; [`enhanced_firewall_policies`](#ingress-egress-gw-active-enhanced-firewall-policies-enhanced-firewall-policies) - Optional Block<br>Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#ingress-egress-gw-active-enhanced-firewall-policies-enhanced-firewall-policies) below.
 
 #### Ingress Egress Gw Active Enhanced Firewall Policies Enhanced Firewall Policies
 
-An [`enhanced\_firewall\_policies`](#ingress-egress-gw-active-enhanced-firewall-policies-enhanced-firewall-policies) block (within [`ingress\_egress\_gw.active\_enhanced_firewall\_policies`](#ingress-egress-gw-active-enhanced-firewall-policies)) supports the following:
+An [`enhanced_firewall_policies`](#ingress-egress-gw-active-enhanced-firewall-policies-enhanced-firewall-policies) block (within [`ingress_egress_gw.active_enhanced_firewall_policies`](#ingress-egress-gw-active-enhanced-firewall-policies)) supports the following:
 
 <a id="ingress-egress-gw-active-enhanced-firewall-policies-enhanced-firewall-policies-name"></a>&#x2022; [`name`](#ingress-egress-gw-active-enhanced-firewall-policies-enhanced-firewall-policies-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -308,13 +308,13 @@ An [`enhanced\_firewall\_policies`](#ingress-egress-gw-active-enhanced-firewall-
 
 #### Ingress Egress Gw Active Forward Proxy Policies
 
-An [`active\_forward_proxy\_policies`](#ingress-egress-gw-active-forward-proxy-policies) block (within [`ingress\_egress\_gw`](#ingress-egress-gw)) supports the following:
+An [`active_forward_proxy_policies`](#ingress-egress-gw-active-forward-proxy-policies) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
 
-<a id="ingress-egress-gw-active-forward-proxy-policies-forward-proxy-policies"></a>&#x2022; [`forward\_proxy\_policies`](#ingress-egress-gw-active-forward-proxy-policies-forward-proxy-policies) - Optional Block<br>Forward Proxy Policies. Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#ingress-egress-gw-active-forward-proxy-policies-forward-proxy-policies) below.
+<a id="ingress-egress-gw-active-forward-proxy-policies-forward-proxy-policies"></a>&#x2022; [`forward_proxy_policies`](#ingress-egress-gw-active-forward-proxy-policies-forward-proxy-policies) - Optional Block<br>Forward Proxy Policies. Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#ingress-egress-gw-active-forward-proxy-policies-forward-proxy-policies) below.
 
 #### Ingress Egress Gw Active Forward Proxy Policies Forward Proxy Policies
 
-A [`forward\_proxy\_policies`](#ingress-egress-gw-active-forward-proxy-policies-forward-proxy-policies) block (within [`ingress\_egress\_gw.active\_forward_proxy\_policies`](#ingress-egress-gw-active-forward-proxy-policies)) supports the following:
+A [`forward_proxy_policies`](#ingress-egress-gw-active-forward-proxy-policies-forward-proxy-policies) block (within [`ingress_egress_gw.active_forward_proxy_policies`](#ingress-egress-gw-active-forward-proxy-policies)) supports the following:
 
 <a id="ingress-egress-gw-active-forward-proxy-policies-forward-proxy-policies-name"></a>&#x2022; [`name`](#ingress-egress-gw-active-forward-proxy-policies-forward-proxy-policies-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -324,13 +324,13 @@ A [`forward\_proxy\_policies`](#ingress-egress-gw-active-forward-proxy-policies-
 
 #### Ingress Egress Gw Active Network Policies
 
-An [`active\_network\_policies`](#ingress-egress-gw-active-network-policies) block (within [`ingress\_egress\_gw`](#ingress-egress-gw)) supports the following:
+An [`active_network_policies`](#ingress-egress-gw-active-network-policies) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
 
 <a id="ingress-egress-gw-active-network-policies-network-policies"></a>&#x2022; [`network_policies`](#ingress-egress-gw-active-network-policies-network-policies) - Optional Block<br>Firewall Policy. Ordered List of Firewall Policies active for this network firewall<br>See [Network Policies](#ingress-egress-gw-active-network-policies-network-policies) below.
 
 #### Ingress Egress Gw Active Network Policies Network Policies
 
-A [`network_policies`](#ingress-egress-gw-active-network-policies-network-policies) block (within [`ingress\_egress\_gw.active\_network\_policies`](#ingress-egress-gw-active-network-policies)) supports the following:
+A [`network_policies`](#ingress-egress-gw-active-network-policies-network-policies) block (within [`ingress_egress_gw.active_network_policies`](#ingress-egress-gw-active-network-policies)) supports the following:
 
 <a id="ingress-egress-gw-active-network-policies-network-policies-name"></a>&#x2022; [`name`](#ingress-egress-gw-active-network-policies-network-policies-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -340,7 +340,7 @@ A [`network_policies`](#ingress-egress-gw-active-network-policies-network-polici
 
 #### Ingress Egress Gw Az Nodes
 
-An [`az_nodes`](#ingress-egress-gw-az-nodes) block (within [`ingress\_egress\_gw`](#ingress-egress-gw)) supports the following:
+An [`az_nodes`](#ingress-egress-gw-az-nodes) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
 
 <a id="ingress-egress-gw-az-nodes-azure-az"></a>&#x2022; [`azure_az`](#ingress-egress-gw-az-nodes-azure-az) - Optional String<br>Azure Availability Zone. A zone depicting a grouping of datacenters within an Azure region. Expecting numeric input
 
@@ -350,7 +350,7 @@ An [`az_nodes`](#ingress-egress-gw-az-nodes) block (within [`ingress\_egress\_gw
 
 #### Ingress Egress Gw Az Nodes Inside Subnet
 
-An [`inside_subnet`](#ingress-egress-gw-az-nodes-inside-subnet) block (within [`ingress\_egress\_gw.az_nodes`](#ingress-egress-gw-az-nodes)) supports the following:
+An [`inside_subnet`](#ingress-egress-gw-az-nodes-inside-subnet) block (within [`ingress_egress_gw.az_nodes`](#ingress-egress-gw-az-nodes)) supports the following:
 
 <a id="ingress-egress-gw-az-nodes-inside-subnet-subnet"></a>&#x2022; [`subnet`](#ingress-egress-gw-az-nodes-inside-subnet-subnet) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Subnet](#ingress-egress-gw-az-nodes-inside-subnet-subnet) below.
 
@@ -358,23 +358,23 @@ An [`inside_subnet`](#ingress-egress-gw-az-nodes-inside-subnet) block (within [`
 
 #### Ingress Egress Gw Az Nodes Inside Subnet Subnet
 
-A [`subnet`](#ingress-egress-gw-az-nodes-inside-subnet-subnet) block (within [`ingress\_egress\_gw.az_nodes.inside_subnet`](#ingress-egress-gw-az-nodes-inside-subnet)) supports the following:
+A [`subnet`](#ingress-egress-gw-az-nodes-inside-subnet-subnet) block (within [`ingress_egress_gw.az_nodes.inside_subnet`](#ingress-egress-gw-az-nodes-inside-subnet)) supports the following:
 
 <a id="ingress-egress-gw-az-nodes-inside-subnet-subnet-subnet-name"></a>&#x2022; [`subnet_name`](#ingress-egress-gw-az-nodes-inside-subnet-subnet-subnet-name) - Optional String<br>Subnet Name. Name of existing subnet
 
-<a id="ingress-egress-gw-az-nodes-inside-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet\_resource\_grp`](#ingress-egress-gw-az-nodes-inside-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
+<a id="ingress-egress-gw-az-nodes-inside-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet_resource_grp`](#ingress-egress-gw-az-nodes-inside-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
 
-<a id="ingress-egress-gw-az-nodes-inside-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet\_resource\_group`](#ingress-egress-gw-az-nodes-inside-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-az-nodes-inside-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-egress-gw-az-nodes-inside-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Ingress Egress Gw Az Nodes Inside Subnet Subnet Param
 
-A [`subnet_param`](#ingress-egress-gw-az-nodes-inside-subnet-subnet-param) block (within [`ingress\_egress\_gw.az_nodes.inside_subnet`](#ingress-egress-gw-az-nodes-inside-subnet)) supports the following:
+A [`subnet_param`](#ingress-egress-gw-az-nodes-inside-subnet-subnet-param) block (within [`ingress_egress_gw.az_nodes.inside_subnet`](#ingress-egress-gw-az-nodes-inside-subnet)) supports the following:
 
 <a id="ingress-egress-gw-az-nodes-inside-subnet-subnet-param-ipv4"></a>&#x2022; [`ipv4`](#ingress-egress-gw-az-nodes-inside-subnet-subnet-param-ipv4) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
 
 #### Ingress Egress Gw Az Nodes Outside Subnet
 
-An [`outside_subnet`](#ingress-egress-gw-az-nodes-outside-subnet) block (within [`ingress\_egress\_gw.az_nodes`](#ingress-egress-gw-az-nodes)) supports the following:
+An [`outside_subnet`](#ingress-egress-gw-az-nodes-outside-subnet) block (within [`ingress_egress_gw.az_nodes`](#ingress-egress-gw-az-nodes)) supports the following:
 
 <a id="ingress-egress-gw-az-nodes-outside-subnet-subnet"></a>&#x2022; [`subnet`](#ingress-egress-gw-az-nodes-outside-subnet-subnet) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Subnet](#ingress-egress-gw-az-nodes-outside-subnet-subnet) below.
 
@@ -382,23 +382,23 @@ An [`outside_subnet`](#ingress-egress-gw-az-nodes-outside-subnet) block (within 
 
 #### Ingress Egress Gw Az Nodes Outside Subnet Subnet
 
-A [`subnet`](#ingress-egress-gw-az-nodes-outside-subnet-subnet) block (within [`ingress\_egress\_gw.az_nodes.outside_subnet`](#ingress-egress-gw-az-nodes-outside-subnet)) supports the following:
+A [`subnet`](#ingress-egress-gw-az-nodes-outside-subnet-subnet) block (within [`ingress_egress_gw.az_nodes.outside_subnet`](#ingress-egress-gw-az-nodes-outside-subnet)) supports the following:
 
 <a id="ingress-egress-gw-az-nodes-outside-subnet-subnet-subnet-name"></a>&#x2022; [`subnet_name`](#ingress-egress-gw-az-nodes-outside-subnet-subnet-subnet-name) - Optional String<br>Subnet Name. Name of existing subnet
 
-<a id="ingress-egress-gw-az-nodes-outside-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet\_resource\_grp`](#ingress-egress-gw-az-nodes-outside-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
+<a id="ingress-egress-gw-az-nodes-outside-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet_resource_grp`](#ingress-egress-gw-az-nodes-outside-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
 
-<a id="ingress-egress-gw-az-nodes-outside-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet\_resource\_group`](#ingress-egress-gw-az-nodes-outside-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-az-nodes-outside-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-egress-gw-az-nodes-outside-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Ingress Egress Gw Az Nodes Outside Subnet Subnet Param
 
-A [`subnet_param`](#ingress-egress-gw-az-nodes-outside-subnet-subnet-param) block (within [`ingress\_egress\_gw.az_nodes.outside_subnet`](#ingress-egress-gw-az-nodes-outside-subnet)) supports the following:
+A [`subnet_param`](#ingress-egress-gw-az-nodes-outside-subnet-subnet-param) block (within [`ingress_egress_gw.az_nodes.outside_subnet`](#ingress-egress-gw-az-nodes-outside-subnet)) supports the following:
 
 <a id="ingress-egress-gw-az-nodes-outside-subnet-subnet-param-ipv4"></a>&#x2022; [`ipv4`](#ingress-egress-gw-az-nodes-outside-subnet-subnet-param-ipv4) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
 
 #### Ingress Egress Gw Dc Cluster Group Inside Vn
 
-A [`dc\_cluster_group_inside\_vn`](#ingress-egress-gw-dc-cluster-group-inside-vn) block (within [`ingress\_egress\_gw`](#ingress-egress-gw)) supports the following:
+A [`dc_cluster_group_inside_vn`](#ingress-egress-gw-dc-cluster-group-inside-vn) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
 
 <a id="ingress-egress-gw-dc-cluster-group-inside-vn-name"></a>&#x2022; [`name`](#ingress-egress-gw-dc-cluster-group-inside-vn-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -408,7 +408,7 @@ A [`dc\_cluster_group_inside\_vn`](#ingress-egress-gw-dc-cluster-group-inside-vn
 
 #### Ingress Egress Gw Dc Cluster Group Outside Vn
 
-A [`dc\_cluster_group_outside\_vn`](#ingress-egress-gw-dc-cluster-group-outside-vn) block (within [`ingress\_egress\_gw`](#ingress-egress-gw)) supports the following:
+A [`dc_cluster_group_outside_vn`](#ingress-egress-gw-dc-cluster-group-outside-vn) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
 
 <a id="ingress-egress-gw-dc-cluster-group-outside-vn-name"></a>&#x2022; [`name`](#ingress-egress-gw-dc-cluster-group-outside-vn-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -418,27 +418,27 @@ A [`dc\_cluster_group_outside\_vn`](#ingress-egress-gw-dc-cluster-group-outside-
 
 #### Ingress Egress Gw Global Network List
 
-A [`global\_network\_list`](#ingress-egress-gw-global-network-list) block (within [`ingress\_egress\_gw`](#ingress-egress-gw)) supports the following:
+A [`global_network_list`](#ingress-egress-gw-global-network-list) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
 
-<a id="ingress-egress-gw-global-network-list-global-network-connections"></a>&#x2022; [`global\_network\_connections`](#ingress-egress-gw-global-network-list-global-network-connections) - Optional Block<br>Global Network Connections. Global network connections<br>See [Global Network Connections](#ingress-egress-gw-global-network-list-global-network-connections) below.
+<a id="ingress-egress-gw-global-network-list-global-network-connections"></a>&#x2022; [`global_network_connections`](#ingress-egress-gw-global-network-list-global-network-connections) - Optional Block<br>Global Network Connections. Global network connections<br>See [Global Network Connections](#ingress-egress-gw-global-network-list-global-network-connections) below.
 
 #### Ingress Egress Gw Global Network List Global Network Connections
 
-A [`global\_network\_connections`](#ingress-egress-gw-global-network-list-global-network-connections) block (within [`ingress\_egress\_gw.global\_network\_list`](#ingress-egress-gw-global-network-list)) supports the following:
+A [`global_network_connections`](#ingress-egress-gw-global-network-list-global-network-connections) block (within [`ingress_egress_gw.global_network_list`](#ingress-egress-gw-global-network-list)) supports the following:
 
-<a id="ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr"></a>&#x2022; [`sli\_to_global\_dr`](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr) below.
+<a id="ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr"></a>&#x2022; [`sli_to_global_dr`](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr) below.
 
-<a id="ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr"></a>&#x2022; [`slo\_to_global\_dr`](#ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr) below.
+<a id="ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr"></a>&#x2022; [`slo_to_global_dr`](#ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr) below.
 
 #### Ingress Egress Gw Global Network List Global Network Connections SLI To Global DR
 
-A [`sli\_to_global\_dr`](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr) block (within [`ingress\_egress\_gw.global\_network\_list.global\_network\_connections`](#ingress-egress-gw-global-network-list-global-network-connections)) supports the following:
+A [`sli_to_global_dr`](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr) block (within [`ingress_egress_gw.global_network_list.global_network_connections`](#ingress-egress-gw-global-network-list-global-network-connections)) supports the following:
 
 <a id="ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr-global-vn"></a>&#x2022; [`global_vn`](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr-global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr-global-vn) below.
 
 #### Ingress Egress Gw Global Network List Global Network Connections SLI To Global DR Global Vn
 
-A [`global_vn`](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr-global-vn) block (within [`ingress\_egress\_gw.global\_network\_list.global\_network\_connections.sli\_to_global\_dr`](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr)) supports the following:
+A [`global_vn`](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr-global-vn) block (within [`ingress_egress_gw.global_network_list.global_network_connections.sli_to_global_dr`](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr)) supports the following:
 
 <a id="ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr-global-vn-name"></a>&#x2022; [`name`](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr-global-vn-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -448,13 +448,13 @@ A [`global_vn`](#ingress-egress-gw-global-network-list-global-network-connection
 
 #### Ingress Egress Gw Global Network List Global Network Connections Slo To Global DR
 
-A [`slo\_to_global\_dr`](#ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr) block (within [`ingress\_egress\_gw.global\_network\_list.global\_network\_connections`](#ingress-egress-gw-global-network-list-global-network-connections)) supports the following:
+A [`slo_to_global_dr`](#ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr) block (within [`ingress_egress_gw.global_network_list.global_network_connections`](#ingress-egress-gw-global-network-list-global-network-connections)) supports the following:
 
 <a id="ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr-global-vn"></a>&#x2022; [`global_vn`](#ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr-global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr-global-vn) below.
 
 #### Ingress Egress Gw Global Network List Global Network Connections Slo To Global DR Global Vn
 
-A [`global_vn`](#ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr-global-vn) block (within [`ingress\_egress\_gw.global\_network\_list.global\_network\_connections.slo\_to_global\_dr`](#ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr)) supports the following:
+A [`global_vn`](#ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr-global-vn) block (within [`ingress_egress_gw.global_network_list.global_network_connections.slo_to_global_dr`](#ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr)) supports the following:
 
 <a id="ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr-global-vn-name"></a>&#x2022; [`name`](#ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr-global-vn-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -464,19 +464,19 @@ A [`global_vn`](#ingress-egress-gw-global-network-list-global-network-connection
 
 #### Ingress Egress Gw Hub
 
-A [`hub`](#ingress-egress-gw-hub) block (within [`ingress\_egress\_gw`](#ingress-egress-gw)) supports the following:
+A [`hub`](#ingress-egress-gw-hub) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
 
-<a id="ingress-egress-gw-hub-express-route-disabled"></a>&#x2022; [`express\_route\_disabled`](#ingress-egress-gw-hub-express-route-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-hub-express-route-disabled"></a>&#x2022; [`express_route_disabled`](#ingress-egress-gw-hub-express-route-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ingress-egress-gw-hub-express-route-enabled"></a>&#x2022; [`express\_route\_enabled`](#ingress-egress-gw-hub-express-route-enabled) - Optional Block<br>Express Route Configuration. Express Route Configuration<br>See [Express Route Enabled](#ingress-egress-gw-hub-express-route-enabled) below.
+<a id="ingress-egress-gw-hub-express-route-enabled"></a>&#x2022; [`express_route_enabled`](#ingress-egress-gw-hub-express-route-enabled) - Optional Block<br>Express Route Configuration. Express Route Configuration<br>See [Express Route Enabled](#ingress-egress-gw-hub-express-route-enabled) below.
 
 <a id="ingress-egress-gw-hub-spoke-vnets"></a>&#x2022; [`spoke_vnets`](#ingress-egress-gw-hub-spoke-vnets) - Optional Block<br>Spoke VNET Peering (Legacy). Spoke VNET Peering<br>See [Spoke Vnets](#ingress-egress-gw-hub-spoke-vnets) below.
 
 #### Ingress Egress Gw Hub Express Route Enabled
 
-An [`express\_route\_enabled`](#ingress-egress-gw-hub-express-route-enabled) block (within [`ingress\_egress\_gw.hub`](#ingress-egress-gw-hub)) supports the following:
+An [`express_route_enabled`](#ingress-egress-gw-hub-express-route-enabled) block (within [`ingress_egress_gw.hub`](#ingress-egress-gw-hub)) supports the following:
 
-<a id="ingress-egress-gw-hub-express-route-enabled-advertise-to-route-server"></a>&#x2022; [`advertise\_to_route\_server`](#ingress-egress-gw-hub-express-route-enabled-advertise-to-route-server) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-hub-express-route-enabled-advertise-to-route-server"></a>&#x2022; [`advertise_to_route_server`](#ingress-egress-gw-hub-express-route-enabled-advertise-to-route-server) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="ingress-egress-gw-hub-express-route-enabled-auto-asn"></a>&#x2022; [`auto_asn`](#ingress-egress-gw-hub-express-route-enabled-auto-asn) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -484,27 +484,27 @@ An [`express\_route\_enabled`](#ingress-egress-gw-hub-express-route-enabled) blo
 
 <a id="ingress-egress-gw-hub-express-route-enabled-custom-asn"></a>&#x2022; [`custom_asn`](#ingress-egress-gw-hub-express-route-enabled-custom-asn) - Optional Number<br>Custom ASN. Set custom ASN for F5XC Site
 
-<a id="ingress-egress-gw-hub-express-route-enabled-do-not-advertise-to-route-server"></a>&#x2022; [`do\_not_advertise_to_route\_server`](#ingress-egress-gw-hub-express-route-enabled-do-not-advertise-to-route-server) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-hub-express-route-enabled-do-not-advertise-to-route-server"></a>&#x2022; [`do_not_advertise_to_route_server`](#ingress-egress-gw-hub-express-route-enabled-do-not-advertise-to-route-server) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="ingress-egress-gw-hub-express-route-enabled-gateway-subnet"></a>&#x2022; [`gateway_subnet`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Gateway Subnet](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet) below.
 
-<a id="ingress-egress-gw-hub-express-route-enabled-route-server-subnet"></a>&#x2022; [`route\_server\_subnet`](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Route Server Subnet](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet) below.
+<a id="ingress-egress-gw-hub-express-route-enabled-route-server-subnet"></a>&#x2022; [`route_server_subnet`](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Route Server Subnet](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet) below.
 
-<a id="ingress-egress-gw-hub-express-route-enabled-site-registration-over-express-route"></a>&#x2022; [`site\_registration_over_express\_route`](#ingress-egress-gw-hub-express-route-enabled-site-registration-over-express-route) - Optional Block<br>CloudLink ADN Network Config<br>See [Site Registration Over Express Route](#ingress-egress-gw-hub-express-route-enabled-site-registration-over-express-route) below.
+<a id="ingress-egress-gw-hub-express-route-enabled-site-registration-over-express-route"></a>&#x2022; [`site_registration_over_express_route`](#ingress-egress-gw-hub-express-route-enabled-site-registration-over-express-route) - Optional Block<br>CloudLink ADN Network Config<br>See [Site Registration Over Express Route](#ingress-egress-gw-hub-express-route-enabled-site-registration-over-express-route) below.
 
-<a id="ingress-egress-gw-hub-express-route-enabled-site-registration-over-internet"></a>&#x2022; [`site\_registration_over\_internet`](#ingress-egress-gw-hub-express-route-enabled-site-registration-over-internet) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-hub-express-route-enabled-site-registration-over-internet"></a>&#x2022; [`site_registration_over_internet`](#ingress-egress-gw-hub-express-route-enabled-site-registration-over-internet) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="ingress-egress-gw-hub-express-route-enabled-sku-ergw1az"></a>&#x2022; [`sku_ergw1az`](#ingress-egress-gw-hub-express-route-enabled-sku-ergw1az) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="ingress-egress-gw-hub-express-route-enabled-sku-ergw2az"></a>&#x2022; [`sku_ergw2az`](#ingress-egress-gw-hub-express-route-enabled-sku-ergw2az) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ingress-egress-gw-hub-express-route-enabled-sku-high-perf"></a>&#x2022; [`sku\_high\_perf`](#ingress-egress-gw-hub-express-route-enabled-sku-high-perf) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-hub-express-route-enabled-sku-high-perf"></a>&#x2022; [`sku_high_perf`](#ingress-egress-gw-hub-express-route-enabled-sku-high-perf) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="ingress-egress-gw-hub-express-route-enabled-sku-standard"></a>&#x2022; [`sku_standard`](#ingress-egress-gw-hub-express-route-enabled-sku-standard) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Ingress Egress Gw Hub Express Route Enabled Connections
 
-A [`connections`](#ingress-egress-gw-hub-express-route-enabled-connections) block (within [`ingress\_egress\_gw.hub.express\_route\_enabled`](#ingress-egress-gw-hub-express-route-enabled)) supports the following:
+A [`connections`](#ingress-egress-gw-hub-express-route-enabled-connections) block (within [`ingress_egress_gw.hub.express_route_enabled`](#ingress-egress-gw-hub-express-route-enabled)) supports the following:
 
 <a id="ingress-egress-gw-hub-express-route-enabled-connections-circuit-id"></a>&#x2022; [`circuit_id`](#ingress-egress-gw-hub-express-route-enabled-connections-circuit-id) - Optional String<br>Circuit in same subscription. ExpressRoute Circuit is in same subscription as the site
 
@@ -516,7 +516,7 @@ A [`connections`](#ingress-egress-gw-hub-express-route-enabled-connections) bloc
 
 #### Ingress Egress Gw Hub Express Route Enabled Connections Metadata
 
-A [`metadata`](#ingress-egress-gw-hub-express-route-enabled-connections-metadata) block (within [`ingress\_egress\_gw.hub.express\_route\_enabled.connections`](#ingress-egress-gw-hub-express-route-enabled-connections)) supports the following:
+A [`metadata`](#ingress-egress-gw-hub-express-route-enabled-connections-metadata) block (within [`ingress_egress_gw.hub.express_route_enabled.connections`](#ingress-egress-gw-hub-express-route-enabled-connections)) supports the following:
 
 <a id="ingress-egress-gw-hub-express-route-enabled-connections-metadata-description-spec"></a>&#x2022; [`description_spec`](#ingress-egress-gw-hub-express-route-enabled-connections-metadata-description-spec) - Optional String<br>Description. Human readable description
 
@@ -524,7 +524,7 @@ A [`metadata`](#ingress-egress-gw-hub-express-route-enabled-connections-metadata
 
 #### Ingress Egress Gw Hub Express Route Enabled Connections Other Subscription
 
-An [`other_subscription`](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription) block (within [`ingress\_egress\_gw.hub.express\_route\_enabled.connections`](#ingress-egress-gw-hub-express-route-enabled-connections)) supports the following:
+An [`other_subscription`](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription) block (within [`ingress_egress_gw.hub.express_route_enabled.connections`](#ingress-egress-gw-hub-express-route-enabled-connections)) supports the following:
 
 <a id="ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key"></a>&#x2022; [`authorized_key`](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Authorized Key](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key) below.
 
@@ -532,15 +532,15 @@ An [`other_subscription`](#ingress-egress-gw-hub-express-route-enabled-connectio
 
 #### Ingress Egress Gw Hub Express Route Enabled Connections Other Subscription Authorized Key
 
-An [`authorized_key`](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key) block (within [`ingress\_egress\_gw.hub.express\_route\_enabled.connections.other_subscription`](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription)) supports the following:
+An [`authorized_key`](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key) block (within [`ingress_egress_gw.hub.express_route_enabled.connections.other_subscription`](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription)) supports the following:
 
-<a id="ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key-blindfold-secret-info) below.
+<a id="ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key-blindfold-secret-info) below.
 
-<a id="ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key-clear-secret-info) below.
+<a id="ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key-clear-secret-info) below.
 
 #### Ingress Egress Gw Hub Express Route Enabled Connections Other Subscription Authorized Key Blindfold Secret Info
 
-A [`blindfold\_secret\_info`](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key-blindfold-secret-info) block (within [`ingress\_egress\_gw.hub.express\_route\_enabled.connections.other_subscription.authorized_key`](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key)) supports the following:
+A [`blindfold_secret_info`](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key-blindfold-secret-info) block (within [`ingress_egress_gw.hub.express_route_enabled.connections.other_subscription.authorized_key`](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key)) supports the following:
 
 <a id="ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -550,7 +550,7 @@ A [`blindfold\_secret\_info`](#ingress-egress-gw-hub-express-route-enabled-conne
 
 #### Ingress Egress Gw Hub Express Route Enabled Connections Other Subscription Authorized Key Clear Secret Info
 
-A [`clear\_secret\_info`](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key-clear-secret-info) block (within [`ingress\_egress\_gw.hub.express\_route\_enabled.connections.other_subscription.authorized_key`](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key)) supports the following:
+A [`clear_secret_info`](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key-clear-secret-info) block (within [`ingress_egress_gw.hub.express_route_enabled.connections.other_subscription.authorized_key`](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key)) supports the following:
 
 <a id="ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -558,7 +558,7 @@ A [`clear\_secret\_info`](#ingress-egress-gw-hub-express-route-enabled-connectio
 
 #### Ingress Egress Gw Hub Express Route Enabled Gateway Subnet
 
-A [`gateway_subnet`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet) block (within [`ingress\_egress\_gw.hub.express\_route\_enabled`](#ingress-egress-gw-hub-express-route-enabled)) supports the following:
+A [`gateway_subnet`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet) block (within [`ingress_egress_gw.hub.express_route_enabled`](#ingress-egress-gw-hub-express-route-enabled)) supports the following:
 
 <a id="ingress-egress-gw-hub-express-route-enabled-gateway-subnet-auto"></a>&#x2022; [`auto`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet-auto) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -568,21 +568,21 @@ A [`gateway_subnet`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet
 
 #### Ingress Egress Gw Hub Express Route Enabled Gateway Subnet Subnet
 
-A [`subnet`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet) block (within [`ingress\_egress\_gw.hub.express\_route\_enabled.gateway_subnet`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet)) supports the following:
+A [`subnet`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet) block (within [`ingress_egress_gw.hub.express_route_enabled.gateway_subnet`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet)) supports the following:
 
-<a id="ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet\_resource\_grp`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
+<a id="ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet_resource_grp`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
 
-<a id="ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet\_resource\_group`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Ingress Egress Gw Hub Express Route Enabled Gateway Subnet Subnet Param
 
-A [`subnet_param`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet-param) block (within [`ingress\_egress\_gw.hub.express\_route\_enabled.gateway_subnet`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet)) supports the following:
+A [`subnet_param`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet-param) block (within [`ingress_egress_gw.hub.express_route_enabled.gateway_subnet`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet)) supports the following:
 
 <a id="ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet-param-ipv4"></a>&#x2022; [`ipv4`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet-param-ipv4) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
 
 #### Ingress Egress Gw Hub Express Route Enabled Route Server Subnet
 
-A [`route\_server\_subnet`](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet) block (within [`ingress\_egress\_gw.hub.express\_route\_enabled`](#ingress-egress-gw-hub-express-route-enabled)) supports the following:
+A [`route_server_subnet`](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet) block (within [`ingress_egress_gw.hub.express_route_enabled`](#ingress-egress-gw-hub-express-route-enabled)) supports the following:
 
 <a id="ingress-egress-gw-hub-express-route-enabled-route-server-subnet-auto"></a>&#x2022; [`auto`](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet-auto) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -592,27 +592,27 @@ A [`route\_server\_subnet`](#ingress-egress-gw-hub-express-route-enabled-route-s
 
 #### Ingress Egress Gw Hub Express Route Enabled Route Server Subnet Subnet
 
-A [`subnet`](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet-subnet) block (within [`ingress\_egress\_gw.hub.express\_route\_enabled.route\_server\_subnet`](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet)) supports the following:
+A [`subnet`](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet-subnet) block (within [`ingress_egress_gw.hub.express_route_enabled.route_server_subnet`](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet)) supports the following:
 
-<a id="ingress-egress-gw-hub-express-route-enabled-route-server-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet\_resource\_grp`](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
+<a id="ingress-egress-gw-hub-express-route-enabled-route-server-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet_resource_grp`](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
 
-<a id="ingress-egress-gw-hub-express-route-enabled-route-server-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet\_resource\_group`](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-hub-express-route-enabled-route-server-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Ingress Egress Gw Hub Express Route Enabled Route Server Subnet Subnet Param
 
-A [`subnet_param`](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet-subnet-param) block (within [`ingress\_egress\_gw.hub.express\_route\_enabled.route\_server\_subnet`](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet)) supports the following:
+A [`subnet_param`](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet-subnet-param) block (within [`ingress_egress_gw.hub.express_route_enabled.route_server_subnet`](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet)) supports the following:
 
 <a id="ingress-egress-gw-hub-express-route-enabled-route-server-subnet-subnet-param-ipv4"></a>&#x2022; [`ipv4`](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet-subnet-param-ipv4) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
 
 #### Ingress Egress Gw Hub Express Route Enabled Site Registration Over Express Route
 
-A [`site\_registration_over_express\_route`](#ingress-egress-gw-hub-express-route-enabled-site-registration-over-express-route) block (within [`ingress\_egress\_gw.hub.express\_route\_enabled`](#ingress-egress-gw-hub-express-route-enabled)) supports the following:
+A [`site_registration_over_express_route`](#ingress-egress-gw-hub-express-route-enabled-site-registration-over-express-route) block (within [`ingress_egress_gw.hub.express_route_enabled`](#ingress-egress-gw-hub-express-route-enabled)) supports the following:
 
-<a id="ingress-egress-gw-hub-express-route-enabled-site-registration-over-express-route-cloudlink-network-name"></a>&#x2022; [`cloudlink\_network\_name`](#ingress-egress-gw-hub-express-route-enabled-site-registration-over-express-route-cloudlink-network-name) - Optional String<br>Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support
+<a id="ingress-egress-gw-hub-express-route-enabled-site-registration-over-express-route-cloudlink-network-name"></a>&#x2022; [`cloudlink_network_name`](#ingress-egress-gw-hub-express-route-enabled-site-registration-over-express-route-cloudlink-network-name) - Optional String<br>Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support
 
 #### Ingress Egress Gw Hub Spoke Vnets
 
-A [`spoke_vnets`](#ingress-egress-gw-hub-spoke-vnets) block (within [`ingress\_egress\_gw.hub`](#ingress-egress-gw-hub)) supports the following:
+A [`spoke_vnets`](#ingress-egress-gw-hub-spoke-vnets) block (within [`ingress_egress_gw.hub`](#ingress-egress-gw-hub)) supports the following:
 
 <a id="ingress-egress-gw-hub-spoke-vnets-auto"></a>&#x2022; [`auto`](#ingress-egress-gw-hub-spoke-vnets-auto) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -624,9 +624,9 @@ A [`spoke_vnets`](#ingress-egress-gw-hub-spoke-vnets) block (within [`ingress\_e
 
 #### Ingress Egress Gw Hub Spoke Vnets VNET
 
-A [`vnet`](#ingress-egress-gw-hub-spoke-vnets-vnet) block (within [`ingress\_egress\_gw.hub.spoke_vnets`](#ingress-egress-gw-hub-spoke-vnets)) supports the following:
+A [`vnet`](#ingress-egress-gw-hub-spoke-vnets-vnet) block (within [`ingress_egress_gw.hub.spoke_vnets`](#ingress-egress-gw-hub-spoke-vnets)) supports the following:
 
-<a id="ingress-egress-gw-hub-spoke-vnets-vnet-f5-orchestrated-routing"></a>&#x2022; [`f5\_orchestrated\_routing`](#ingress-egress-gw-hub-spoke-vnets-vnet-f5-orchestrated-routing) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-hub-spoke-vnets-vnet-f5-orchestrated-routing"></a>&#x2022; [`f5_orchestrated_routing`](#ingress-egress-gw-hub-spoke-vnets-vnet-f5-orchestrated-routing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="ingress-egress-gw-hub-spoke-vnets-vnet-manual-routing"></a>&#x2022; [`manual_routing`](#ingress-egress-gw-hub-spoke-vnets-vnet-manual-routing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -636,23 +636,23 @@ A [`vnet`](#ingress-egress-gw-hub-spoke-vnets-vnet) block (within [`ingress\_egr
 
 #### Ingress Egress Gw Inside Static Routes
 
-An [`inside\_static\_routes`](#ingress-egress-gw-inside-static-routes) block (within [`ingress\_egress\_gw`](#ingress-egress-gw)) supports the following:
+An [`inside_static_routes`](#ingress-egress-gw-inside-static-routes) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
 
-<a id="ingress-egress-gw-inside-static-routes-static-route-list"></a>&#x2022; [`static\_route\_list`](#ingress-egress-gw-inside-static-routes-static-route-list) - Optional Block<br>List of Static Routes. List of Static routes<br>See [Static Route List](#ingress-egress-gw-inside-static-routes-static-route-list) below.
+<a id="ingress-egress-gw-inside-static-routes-static-route-list"></a>&#x2022; [`static_route_list`](#ingress-egress-gw-inside-static-routes-static-route-list) - Optional Block<br>List of Static Routes. List of Static routes<br>See [Static Route List](#ingress-egress-gw-inside-static-routes-static-route-list) below.
 
 #### Ingress Egress Gw Inside Static Routes Static Route List
 
-A [`static\_route\_list`](#ingress-egress-gw-inside-static-routes-static-route-list) block (within [`ingress\_egress\_gw.inside\_static\_routes`](#ingress-egress-gw-inside-static-routes)) supports the following:
+A [`static_route_list`](#ingress-egress-gw-inside-static-routes-static-route-list) block (within [`ingress_egress_gw.inside_static_routes`](#ingress-egress-gw-inside-static-routes)) supports the following:
 
-<a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route"></a>&#x2022; [`custom\_static\_route`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route) - Optional Block<br>Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them<br>See [Custom Static Route](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route) below.
+<a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route"></a>&#x2022; [`custom_static_route`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route) - Optional Block<br>Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them<br>See [Custom Static Route](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route) below.
 
-<a id="ingress-egress-gw-inside-static-routes-static-route-list-simple-static-route"></a>&#x2022; [`simple\_static\_route`](#ingress-egress-gw-inside-static-routes-static-route-list-simple-static-route) - Optional String<br>Simple Static Route. Use simple static route for prefix pointing to single interface in the network
+<a id="ingress-egress-gw-inside-static-routes-static-route-list-simple-static-route"></a>&#x2022; [`simple_static_route`](#ingress-egress-gw-inside-static-routes-static-route-list-simple-static-route) - Optional String<br>Simple Static Route. Use simple static route for prefix pointing to single interface in the network
 
 #### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route
 
-A [`custom\_static\_route`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route) block (within [`ingress\_egress\_gw.inside\_static\_routes.static\_route\_list`](#ingress-egress-gw-inside-static-routes-static-route-list)) supports the following:
+A [`custom_static_route`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route) block (within [`ingress_egress_gw.inside_static_routes.static_route_list`](#ingress-egress-gw-inside-static-routes-static-route-list)) supports the following:
 
-<a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-attrs"></a>&#x2022; [`attrs`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-attrs) - Optional List  Defaults to `ROUTE\_ATTR_NO\_OP`<br>Possible values are `ROUTE\_ATTR_NO\_OP`, `ROUTE\_ATTR\_ADVERTISE`, `ROUTE\_ATTR_INSTALL\_HOST`, `ROUTE\_ATTR_INSTALL\_FORWARDING`, `ROUTE\_ATTR_MERGE\_ONLY`<br>Attributes. List of route attributes associated with the static route
+<a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-attrs"></a>&#x2022; [`attrs`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of route attributes associated with the static route
 
 <a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-labels"></a>&#x2022; [`labels`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-labels) - Optional Block<br>Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy
 
@@ -662,17 +662,17 @@ A [`custom\_static\_route`](#ingress-egress-gw-inside-static-routes-static-route
 
 #### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Nexthop
 
-A [`nexthop`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop) block (within [`ingress\_egress\_gw.inside\_static\_routes.static\_route\_list.custom\_static\_route`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route)) supports the following:
+A [`nexthop`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop) block (within [`ingress_egress_gw.inside_static_routes.static_route_list.custom_static_route`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route)) supports the following:
 
 <a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-interface"></a>&#x2022; [`interface`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-interface) - Optional Block<br>Network Interface. Nexthop is network interface when type is 'Network-Interface'<br>See [Interface](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-interface) below.
 
 <a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address"></a>&#x2022; [`nexthop_address`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) - Optional Block<br>IP Address. IP Address used to specify an IPv4 or IPv6 address<br>See [Nexthop Address](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) below.
 
-<a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-type"></a>&#x2022; [`type`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-type) - Optional String  Defaults to `NEXT\_HOP_DEFAULT\_GATEWAY`<br>Possible values are `NEXT\_HOP_DEFAULT\_GATEWAY`, `NEXT\_HOP_USE\_CONFIGURED`, `NEXT\_HOP_NETWORK\_INTERFACE`<br>Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network
+<a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-type"></a>&#x2022; [`type`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-type) - Optional String  Defaults to `NEXT_HOP_DEFAULT_GATEWAY`<br>Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`<br>Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network
 
 #### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Nexthop Interface
 
-An [`interface`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-interface) block (within [`ingress\_egress\_gw.inside\_static\_routes.static\_route\_list.custom\_static\_route.nexthop`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop)) supports the following:
+An [`interface`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-interface) block (within [`ingress_egress_gw.inside_static_routes.static_route_list.custom_static_route.nexthop`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop)) supports the following:
 
 <a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-interface-kind"></a>&#x2022; [`kind`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-interface-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -686,7 +686,7 @@ An [`interface`](#ingress-egress-gw-inside-static-routes-static-route-list-custo
 
 #### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address
 
-A [`nexthop_address`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) block (within [`ingress\_egress\_gw.inside\_static\_routes.static\_route\_list.custom\_static\_route.nexthop`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop)) supports the following:
+A [`nexthop_address`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) block (within [`ingress_egress_gw.inside_static_routes.static_route_list.custom_static_route.nexthop`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop)) supports the following:
 
 <a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4"></a>&#x2022; [`ipv4`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) below.
 
@@ -694,19 +694,19 @@ A [`nexthop_address`](#ingress-egress-gw-inside-static-routes-static-route-list-
 
 #### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4
 
-An [`ipv4`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) block (within [`ingress\_egress\_gw.inside\_static\_routes.static\_route\_list.custom\_static\_route.nexthop.nexthop_address`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address)) supports the following:
+An [`ipv4`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) block (within [`ingress_egress_gw.inside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address)) supports the following:
 
 <a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4-addr"></a>&#x2022; [`addr`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4-addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
 #### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6
 
-An [`ipv6`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6) block (within [`ingress\_egress\_gw.inside\_static\_routes.static\_route\_list.custom\_static\_route.nexthop.nexthop_address`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address)) supports the following:
+An [`ipv6`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6) block (within [`ingress_egress_gw.inside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address)) supports the following:
 
 <a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6-addr"></a>&#x2022; [`addr`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6-addr) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
 
 #### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Subnets
 
-A [`subnets`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-subnets) block (within [`ingress\_egress\_gw.inside\_static\_routes.static\_route\_list.custom\_static\_route`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route)) supports the following:
+A [`subnets`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-subnets) block (within [`ingress_egress_gw.inside_static_routes.static_route_list.custom_static_route`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route)) supports the following:
 
 <a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-subnets-ipv4"></a>&#x2022; [`ipv4`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-subnets-ipv4) - Optional Block<br>IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32<br>See [IPv4](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-subnets-ipv4) below.
 
@@ -714,7 +714,7 @@ A [`subnets`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-s
 
 #### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Subnets IPv4
 
-An [`ipv4`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-subnets-ipv4) block (within [`ingress\_egress\_gw.inside\_static\_routes.static\_route\_list.custom\_static\_route.subnets`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-subnets)) supports the following:
+An [`ipv4`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-subnets-ipv4) block (within [`ingress_egress_gw.inside_static_routes.static_route_list.custom_static_route.subnets`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-subnets)) supports the following:
 
 <a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-subnets-ipv4-plen"></a>&#x2022; [`plen`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-subnets-ipv4-plen) - Optional Number<br>Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32
 
@@ -722,7 +722,7 @@ An [`ipv4`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-sta
 
 #### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Subnets IPv6
 
-An [`ipv6`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-subnets-ipv6) block (within [`ingress\_egress\_gw.inside\_static\_routes.static\_route\_list.custom\_static\_route.subnets`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-subnets)) supports the following:
+An [`ipv6`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-subnets-ipv6) block (within [`ingress_egress_gw.inside_static_routes.static_route_list.custom_static_route.subnets`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-subnets)) supports the following:
 
 <a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-subnets-ipv6-plen"></a>&#x2022; [`plen`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-subnets-ipv6-plen) - Optional Number<br>Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128
 
@@ -730,23 +730,23 @@ An [`ipv6`](#ingress-egress-gw-inside-static-routes-static-route-list-custom-sta
 
 #### Ingress Egress Gw Outside Static Routes
 
-An [`outside\_static\_routes`](#ingress-egress-gw-outside-static-routes) block (within [`ingress\_egress\_gw`](#ingress-egress-gw)) supports the following:
+An [`outside_static_routes`](#ingress-egress-gw-outside-static-routes) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
 
-<a id="ingress-egress-gw-outside-static-routes-static-route-list"></a>&#x2022; [`static\_route\_list`](#ingress-egress-gw-outside-static-routes-static-route-list) - Optional Block<br>List of Static Routes. List of Static routes<br>See [Static Route List](#ingress-egress-gw-outside-static-routes-static-route-list) below.
+<a id="ingress-egress-gw-outside-static-routes-static-route-list"></a>&#x2022; [`static_route_list`](#ingress-egress-gw-outside-static-routes-static-route-list) - Optional Block<br>List of Static Routes. List of Static routes<br>See [Static Route List](#ingress-egress-gw-outside-static-routes-static-route-list) below.
 
 #### Ingress Egress Gw Outside Static Routes Static Route List
 
-A [`static\_route\_list`](#ingress-egress-gw-outside-static-routes-static-route-list) block (within [`ingress\_egress\_gw.outside\_static\_routes`](#ingress-egress-gw-outside-static-routes)) supports the following:
+A [`static_route_list`](#ingress-egress-gw-outside-static-routes-static-route-list) block (within [`ingress_egress_gw.outside_static_routes`](#ingress-egress-gw-outside-static-routes)) supports the following:
 
-<a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route"></a>&#x2022; [`custom\_static\_route`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route) - Optional Block<br>Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them<br>See [Custom Static Route](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route) below.
+<a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route"></a>&#x2022; [`custom_static_route`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route) - Optional Block<br>Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them<br>See [Custom Static Route](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route) below.
 
-<a id="ingress-egress-gw-outside-static-routes-static-route-list-simple-static-route"></a>&#x2022; [`simple\_static\_route`](#ingress-egress-gw-outside-static-routes-static-route-list-simple-static-route) - Optional String<br>Simple Static Route. Use simple static route for prefix pointing to single interface in the network
+<a id="ingress-egress-gw-outside-static-routes-static-route-list-simple-static-route"></a>&#x2022; [`simple_static_route`](#ingress-egress-gw-outside-static-routes-static-route-list-simple-static-route) - Optional String<br>Simple Static Route. Use simple static route for prefix pointing to single interface in the network
 
 #### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route
 
-A [`custom\_static\_route`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route) block (within [`ingress\_egress\_gw.outside\_static\_routes.static\_route\_list`](#ingress-egress-gw-outside-static-routes-static-route-list)) supports the following:
+A [`custom_static_route`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route) block (within [`ingress_egress_gw.outside_static_routes.static_route_list`](#ingress-egress-gw-outside-static-routes-static-route-list)) supports the following:
 
-<a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-attrs"></a>&#x2022; [`attrs`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-attrs) - Optional List  Defaults to `ROUTE\_ATTR_NO\_OP`<br>Possible values are `ROUTE\_ATTR_NO\_OP`, `ROUTE\_ATTR\_ADVERTISE`, `ROUTE\_ATTR_INSTALL\_HOST`, `ROUTE\_ATTR_INSTALL\_FORWARDING`, `ROUTE\_ATTR_MERGE\_ONLY`<br>Attributes. List of route attributes associated with the static route
+<a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-attrs"></a>&#x2022; [`attrs`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of route attributes associated with the static route
 
 <a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-labels"></a>&#x2022; [`labels`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-labels) - Optional Block<br>Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy
 
@@ -756,17 +756,17 @@ A [`custom\_static\_route`](#ingress-egress-gw-outside-static-routes-static-rout
 
 #### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Nexthop
 
-A [`nexthop`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop) block (within [`ingress\_egress\_gw.outside\_static\_routes.static\_route\_list.custom\_static\_route`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route)) supports the following:
+A [`nexthop`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop) block (within [`ingress_egress_gw.outside_static_routes.static_route_list.custom_static_route`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route)) supports the following:
 
 <a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-interface"></a>&#x2022; [`interface`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-interface) - Optional Block<br>Network Interface. Nexthop is network interface when type is 'Network-Interface'<br>See [Interface](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-interface) below.
 
 <a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address"></a>&#x2022; [`nexthop_address`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) - Optional Block<br>IP Address. IP Address used to specify an IPv4 or IPv6 address<br>See [Nexthop Address](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) below.
 
-<a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-type"></a>&#x2022; [`type`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-type) - Optional String  Defaults to `NEXT\_HOP_DEFAULT\_GATEWAY`<br>Possible values are `NEXT\_HOP_DEFAULT\_GATEWAY`, `NEXT\_HOP_USE\_CONFIGURED`, `NEXT\_HOP_NETWORK\_INTERFACE`<br>Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network
+<a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-type"></a>&#x2022; [`type`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-type) - Optional String  Defaults to `NEXT_HOP_DEFAULT_GATEWAY`<br>Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`<br>Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network
 
 #### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Nexthop Interface
 
-An [`interface`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-interface) block (within [`ingress\_egress\_gw.outside\_static\_routes.static\_route\_list.custom\_static\_route.nexthop`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop)) supports the following:
+An [`interface`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-interface) block (within [`ingress_egress_gw.outside_static_routes.static_route_list.custom_static_route.nexthop`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop)) supports the following:
 
 <a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-interface-kind"></a>&#x2022; [`kind`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-interface-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -780,7 +780,7 @@ An [`interface`](#ingress-egress-gw-outside-static-routes-static-route-list-cust
 
 #### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address
 
-A [`nexthop_address`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) block (within [`ingress\_egress\_gw.outside\_static\_routes.static\_route\_list.custom\_static\_route.nexthop`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop)) supports the following:
+A [`nexthop_address`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) block (within [`ingress_egress_gw.outside_static_routes.static_route_list.custom_static_route.nexthop`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop)) supports the following:
 
 <a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4"></a>&#x2022; [`ipv4`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) below.
 
@@ -788,19 +788,19 @@ A [`nexthop_address`](#ingress-egress-gw-outside-static-routes-static-route-list
 
 #### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4
 
-An [`ipv4`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) block (within [`ingress\_egress\_gw.outside\_static\_routes.static\_route\_list.custom\_static\_route.nexthop.nexthop_address`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address)) supports the following:
+An [`ipv4`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) block (within [`ingress_egress_gw.outside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address)) supports the following:
 
 <a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4-addr"></a>&#x2022; [`addr`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4-addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
 #### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6
 
-An [`ipv6`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6) block (within [`ingress\_egress\_gw.outside\_static\_routes.static\_route\_list.custom\_static\_route.nexthop.nexthop_address`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address)) supports the following:
+An [`ipv6`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6) block (within [`ingress_egress_gw.outside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address)) supports the following:
 
 <a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6-addr"></a>&#x2022; [`addr`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6-addr) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
 
 #### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Subnets
 
-A [`subnets`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-subnets) block (within [`ingress\_egress\_gw.outside\_static\_routes.static\_route\_list.custom\_static\_route`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route)) supports the following:
+A [`subnets`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-subnets) block (within [`ingress_egress_gw.outside_static_routes.static_route_list.custom_static_route`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route)) supports the following:
 
 <a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4"></a>&#x2022; [`ipv4`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4) - Optional Block<br>IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32<br>See [IPv4](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4) below.
 
@@ -808,7 +808,7 @@ A [`subnets`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-
 
 #### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Subnets IPv4
 
-An [`ipv4`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4) block (within [`ingress\_egress\_gw.outside\_static\_routes.static\_route\_list.custom\_static\_route.subnets`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-subnets)) supports the following:
+An [`ipv4`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4) block (within [`ingress_egress_gw.outside_static_routes.static_route_list.custom_static_route.subnets`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-subnets)) supports the following:
 
 <a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4-plen"></a>&#x2022; [`plen`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4-plen) - Optional Number<br>Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32
 
@@ -816,7 +816,7 @@ An [`ipv4`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-st
 
 #### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Subnets IPv6
 
-An [`ipv6`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6) block (within [`ingress\_egress\_gw.outside\_static\_routes.static\_route\_list.custom\_static\_route.subnets`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-subnets)) supports the following:
+An [`ipv6`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6) block (within [`ingress_egress_gw.outside_static_routes.static_route_list.custom_static_route.subnets`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-subnets)) supports the following:
 
 <a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6-plen"></a>&#x2022; [`plen`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6-plen) - Optional Number<br>Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128
 
@@ -824,15 +824,15 @@ An [`ipv6`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-st
 
 #### Ingress Egress Gw Performance Enhancement Mode
 
-A [`performance\_enhancement\_mode`](#ingress-egress-gw-performance-enhancement-mode) block (within [`ingress\_egress\_gw`](#ingress-egress-gw)) supports the following:
+A [`performance_enhancement_mode`](#ingress-egress-gw-performance-enhancement-mode) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
 
-<a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced"></a>&#x2022; [`perf\_mode_l3\_enhanced`](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) below.
+<a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced"></a>&#x2022; [`perf_mode_l3_enhanced`](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
-<a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l7-enhanced"></a>&#x2022; [`perf\_mode_l7\_enhanced`](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l7-enhanced) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l7-enhanced"></a>&#x2022; [`perf_mode_l7_enhanced`](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l7-enhanced) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Ingress Egress Gw Performance Enhancement Mode Perf Mode L3 Enhanced
 
-A [`perf\_mode_l3\_enhanced`](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) block (within [`ingress\_egress\_gw.performance\_enhancement\_mode`](#ingress-egress-gw-performance-enhancement-mode)) supports the following:
+A [`perf_mode_l3_enhanced`](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) block (within [`ingress_egress_gw.performance_enhancement_mode`](#ingress-egress-gw-performance-enhancement-mode)) supports the following:
 
 <a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>&#x2022; [`jumbo`](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -840,57 +840,57 @@ A [`perf\_mode_l3\_enhanced`](#ingress-egress-gw-performance-enhancement-mode-pe
 
 #### Ingress Egress Gw Ar
 
-An [`ingress\_egress_gw\_ar`](#ingress-egress-gw-ar) block supports the following:
+An [`ingress_egress_gw_ar`](#ingress-egress-gw-ar) block supports the following:
 
 <a id="ingress-egress-gw-ar-accelerated-networking"></a>&#x2022; [`accelerated_networking`](#ingress-egress-gw-ar-accelerated-networking) - Optional Block<br>Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen<br>See [Accelerated Networking](#ingress-egress-gw-ar-accelerated-networking) below.
 
-<a id="ingress-egress-gw-ar-active-enhanced-firewall-policies"></a>&#x2022; [`active\_enhanced_firewall\_policies`](#ingress-egress-gw-ar-active-enhanced-firewall-policies) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#ingress-egress-gw-ar-active-enhanced-firewall-policies) below.
+<a id="ingress-egress-gw-ar-active-enhanced-firewall-policies"></a>&#x2022; [`active_enhanced_firewall_policies`](#ingress-egress-gw-ar-active-enhanced-firewall-policies) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#ingress-egress-gw-ar-active-enhanced-firewall-policies) below.
 
-<a id="ingress-egress-gw-ar-active-forward-proxy-policies"></a>&#x2022; [`active\_forward_proxy\_policies`](#ingress-egress-gw-ar-active-forward-proxy-policies) - Optional Block<br>Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#ingress-egress-gw-ar-active-forward-proxy-policies) below.
+<a id="ingress-egress-gw-ar-active-forward-proxy-policies"></a>&#x2022; [`active_forward_proxy_policies`](#ingress-egress-gw-ar-active-forward-proxy-policies) - Optional Block<br>Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#ingress-egress-gw-ar-active-forward-proxy-policies) below.
 
-<a id="ingress-egress-gw-ar-active-network-policies"></a>&#x2022; [`active\_network\_policies`](#ingress-egress-gw-ar-active-network-policies) - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#ingress-egress-gw-ar-active-network-policies) below.
+<a id="ingress-egress-gw-ar-active-network-policies"></a>&#x2022; [`active_network_policies`](#ingress-egress-gw-ar-active-network-policies) - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#ingress-egress-gw-ar-active-network-policies) below.
 
-<a id="ingress-egress-gw-ar-azure-certified-hw"></a>&#x2022; [`azure\_certified\_hw`](#ingress-egress-gw-ar-azure-certified-hw) - Optional String<br>Azure Certified Hardware. Name for Azure certified hardware
+<a id="ingress-egress-gw-ar-azure-certified-hw"></a>&#x2022; [`azure_certified_hw`](#ingress-egress-gw-ar-azure-certified-hw) - Optional String<br>Azure Certified Hardware. Name for Azure certified hardware
 
-<a id="ingress-egress-gw-ar-dc-cluster-group-inside-vn"></a>&#x2022; [`dc\_cluster_group_inside\_vn`](#ingress-egress-gw-ar-dc-cluster-group-inside-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group Inside Vn](#ingress-egress-gw-ar-dc-cluster-group-inside-vn) below.
+<a id="ingress-egress-gw-ar-dc-cluster-group-inside-vn"></a>&#x2022; [`dc_cluster_group_inside_vn`](#ingress-egress-gw-ar-dc-cluster-group-inside-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group Inside Vn](#ingress-egress-gw-ar-dc-cluster-group-inside-vn) below.
 
-<a id="ingress-egress-gw-ar-dc-cluster-group-outside-vn"></a>&#x2022; [`dc\_cluster_group_outside\_vn`](#ingress-egress-gw-ar-dc-cluster-group-outside-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group Outside Vn](#ingress-egress-gw-ar-dc-cluster-group-outside-vn) below.
+<a id="ingress-egress-gw-ar-dc-cluster-group-outside-vn"></a>&#x2022; [`dc_cluster_group_outside_vn`](#ingress-egress-gw-ar-dc-cluster-group-outside-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group Outside Vn](#ingress-egress-gw-ar-dc-cluster-group-outside-vn) below.
 
-<a id="ingress-egress-gw-ar-forward-proxy-allow-all"></a>&#x2022; [`forward\_proxy_allow\_all`](#ingress-egress-gw-ar-forward-proxy-allow-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-forward-proxy-allow-all"></a>&#x2022; [`forward_proxy_allow_all`](#ingress-egress-gw-ar-forward-proxy-allow-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ingress-egress-gw-ar-global-network-list"></a>&#x2022; [`global\_network\_list`](#ingress-egress-gw-ar-global-network-list) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#ingress-egress-gw-ar-global-network-list) below.
+<a id="ingress-egress-gw-ar-global-network-list"></a>&#x2022; [`global_network_list`](#ingress-egress-gw-ar-global-network-list) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#ingress-egress-gw-ar-global-network-list) below.
 
 <a id="ingress-egress-gw-ar-hub"></a>&#x2022; [`hub`](#ingress-egress-gw-ar-hub) - Optional Block<br>Hub VNET type. Hub VNET type<br>See [Hub](#ingress-egress-gw-ar-hub) below.
 
-<a id="ingress-egress-gw-ar-inside-static-routes"></a>&#x2022; [`inside\_static\_routes`](#ingress-egress-gw-ar-inside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Inside Static Routes](#ingress-egress-gw-ar-inside-static-routes) below.
+<a id="ingress-egress-gw-ar-inside-static-routes"></a>&#x2022; [`inside_static_routes`](#ingress-egress-gw-ar-inside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Inside Static Routes](#ingress-egress-gw-ar-inside-static-routes) below.
 
-<a id="ingress-egress-gw-ar-no-dc-cluster-group"></a>&#x2022; [`no\_dc_cluster\_group`](#ingress-egress-gw-ar-no-dc-cluster-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#ingress-egress-gw-ar-no-dc-cluster-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ingress-egress-gw-ar-no-forward-proxy"></a>&#x2022; [`no\_forward\_proxy`](#ingress-egress-gw-ar-no-forward-proxy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#ingress-egress-gw-ar-no-forward-proxy) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ingress-egress-gw-ar-no-global-network"></a>&#x2022; [`no\_global\_network`](#ingress-egress-gw-ar-no-global-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-no-global-network"></a>&#x2022; [`no_global_network`](#ingress-egress-gw-ar-no-global-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ingress-egress-gw-ar-no-inside-static-routes"></a>&#x2022; [`no\_inside_static\_routes`](#ingress-egress-gw-ar-no-inside-static-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-no-inside-static-routes"></a>&#x2022; [`no_inside_static_routes`](#ingress-egress-gw-ar-no-inside-static-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ingress-egress-gw-ar-no-network-policy"></a>&#x2022; [`no\_network\_policy`](#ingress-egress-gw-ar-no-network-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-no-network-policy"></a>&#x2022; [`no_network_policy`](#ingress-egress-gw-ar-no-network-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ingress-egress-gw-ar-no-outside-static-routes"></a>&#x2022; [`no\_outside_static\_routes`](#ingress-egress-gw-ar-no-outside-static-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-no-outside-static-routes"></a>&#x2022; [`no_outside_static_routes`](#ingress-egress-gw-ar-no-outside-static-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="ingress-egress-gw-ar-node"></a>&#x2022; [`node`](#ingress-egress-gw-ar-node) - Optional Block<br>Two Interface Node. Parameters for creating two interface Node in one AZ<br>See [Node](#ingress-egress-gw-ar-node) below.
 
 <a id="ingress-egress-gw-ar-not-hub"></a>&#x2022; [`not_hub`](#ingress-egress-gw-ar-not-hub) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ingress-egress-gw-ar-outside-static-routes"></a>&#x2022; [`outside\_static\_routes`](#ingress-egress-gw-ar-outside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Outside Static Routes](#ingress-egress-gw-ar-outside-static-routes) below.
+<a id="ingress-egress-gw-ar-outside-static-routes"></a>&#x2022; [`outside_static_routes`](#ingress-egress-gw-ar-outside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Outside Static Routes](#ingress-egress-gw-ar-outside-static-routes) below.
 
-<a id="ingress-egress-gw-ar-performance-enhancement-mode"></a>&#x2022; [`performance\_enhancement\_mode`](#ingress-egress-gw-ar-performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#ingress-egress-gw-ar-performance-enhancement-mode) below.
+<a id="ingress-egress-gw-ar-performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#ingress-egress-gw-ar-performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#ingress-egress-gw-ar-performance-enhancement-mode) below.
 
-<a id="ingress-egress-gw-ar-sm-connection-public-ip"></a>&#x2022; [`sm\_connection_public\_ip`](#ingress-egress-gw-ar-sm-connection-public-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-sm-connection-public-ip"></a>&#x2022; [`sm_connection_public_ip`](#ingress-egress-gw-ar-sm-connection-public-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ingress-egress-gw-ar-sm-connection-pvt-ip"></a>&#x2022; [`sm\_connection_pvt\_ip`](#ingress-egress-gw-ar-sm-connection-pvt-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-sm-connection-pvt-ip"></a>&#x2022; [`sm_connection_pvt_ip`](#ingress-egress-gw-ar-sm-connection-pvt-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Ingress Egress Gw Ar Accelerated Networking
 
-An [`accelerated_networking`](#ingress-egress-gw-ar-accelerated-networking) block (within [`ingress\_egress_gw\_ar`](#ingress-egress-gw-ar)) supports the following:
+An [`accelerated_networking`](#ingress-egress-gw-ar-accelerated-networking) block (within [`ingress_egress_gw_ar`](#ingress-egress-gw-ar)) supports the following:
 
 <a id="ingress-egress-gw-ar-accelerated-networking-disable"></a>&#x2022; [`disable`](#ingress-egress-gw-ar-accelerated-networking-disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -898,13 +898,13 @@ An [`accelerated_networking`](#ingress-egress-gw-ar-accelerated-networking) bloc
 
 #### Ingress Egress Gw Ar Active Enhanced Firewall Policies
 
-An [`active\_enhanced_firewall\_policies`](#ingress-egress-gw-ar-active-enhanced-firewall-policies) block (within [`ingress\_egress_gw\_ar`](#ingress-egress-gw-ar)) supports the following:
+An [`active_enhanced_firewall_policies`](#ingress-egress-gw-ar-active-enhanced-firewall-policies) block (within [`ingress_egress_gw_ar`](#ingress-egress-gw-ar)) supports the following:
 
-<a id="ingress-egress-gw-ar-active-enhanced-firewall-policies-enhanced-firewall-policies"></a>&#x2022; [`enhanced\_firewall\_policies`](#ingress-egress-gw-ar-active-enhanced-firewall-policies-enhanced-firewall-policies) - Optional Block<br>Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#ingress-egress-gw-ar-active-enhanced-firewall-policies-enhanced-firewall-policies) below.
+<a id="ingress-egress-gw-ar-active-enhanced-firewall-policies-enhanced-firewall-policies"></a>&#x2022; [`enhanced_firewall_policies`](#ingress-egress-gw-ar-active-enhanced-firewall-policies-enhanced-firewall-policies) - Optional Block<br>Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#ingress-egress-gw-ar-active-enhanced-firewall-policies-enhanced-firewall-policies) below.
 
 #### Ingress Egress Gw Ar Active Enhanced Firewall Policies Enhanced Firewall Policies
 
-An [`enhanced\_firewall\_policies`](#ingress-egress-gw-ar-active-enhanced-firewall-policies-enhanced-firewall-policies) block (within [`ingress\_egress_gw\_ar.active\_enhanced_firewall\_policies`](#ingress-egress-gw-ar-active-enhanced-firewall-policies)) supports the following:
+An [`enhanced_firewall_policies`](#ingress-egress-gw-ar-active-enhanced-firewall-policies-enhanced-firewall-policies) block (within [`ingress_egress_gw_ar.active_enhanced_firewall_policies`](#ingress-egress-gw-ar-active-enhanced-firewall-policies)) supports the following:
 
 <a id="ingress-egress-gw-ar-active-enhanced-firewall-policies-enhanced-firewall-policies-name"></a>&#x2022; [`name`](#ingress-egress-gw-ar-active-enhanced-firewall-policies-enhanced-firewall-policies-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -914,13 +914,13 @@ An [`enhanced\_firewall\_policies`](#ingress-egress-gw-ar-active-enhanced-firewa
 
 #### Ingress Egress Gw Ar Active Forward Proxy Policies
 
-An [`active\_forward_proxy\_policies`](#ingress-egress-gw-ar-active-forward-proxy-policies) block (within [`ingress\_egress_gw\_ar`](#ingress-egress-gw-ar)) supports the following:
+An [`active_forward_proxy_policies`](#ingress-egress-gw-ar-active-forward-proxy-policies) block (within [`ingress_egress_gw_ar`](#ingress-egress-gw-ar)) supports the following:
 
-<a id="ingress-egress-gw-ar-active-forward-proxy-policies-forward-proxy-policies"></a>&#x2022; [`forward\_proxy\_policies`](#ingress-egress-gw-ar-active-forward-proxy-policies-forward-proxy-policies) - Optional Block<br>Forward Proxy Policies. Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#ingress-egress-gw-ar-active-forward-proxy-policies-forward-proxy-policies) below.
+<a id="ingress-egress-gw-ar-active-forward-proxy-policies-forward-proxy-policies"></a>&#x2022; [`forward_proxy_policies`](#ingress-egress-gw-ar-active-forward-proxy-policies-forward-proxy-policies) - Optional Block<br>Forward Proxy Policies. Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#ingress-egress-gw-ar-active-forward-proxy-policies-forward-proxy-policies) below.
 
 #### Ingress Egress Gw Ar Active Forward Proxy Policies Forward Proxy Policies
 
-A [`forward\_proxy\_policies`](#ingress-egress-gw-ar-active-forward-proxy-policies-forward-proxy-policies) block (within [`ingress\_egress_gw\_ar.active\_forward_proxy\_policies`](#ingress-egress-gw-ar-active-forward-proxy-policies)) supports the following:
+A [`forward_proxy_policies`](#ingress-egress-gw-ar-active-forward-proxy-policies-forward-proxy-policies) block (within [`ingress_egress_gw_ar.active_forward_proxy_policies`](#ingress-egress-gw-ar-active-forward-proxy-policies)) supports the following:
 
 <a id="ingress-egress-gw-ar-active-forward-proxy-policies-forward-proxy-policies-name"></a>&#x2022; [`name`](#ingress-egress-gw-ar-active-forward-proxy-policies-forward-proxy-policies-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -930,13 +930,13 @@ A [`forward\_proxy\_policies`](#ingress-egress-gw-ar-active-forward-proxy-polici
 
 #### Ingress Egress Gw Ar Active Network Policies
 
-An [`active\_network\_policies`](#ingress-egress-gw-ar-active-network-policies) block (within [`ingress\_egress_gw\_ar`](#ingress-egress-gw-ar)) supports the following:
+An [`active_network_policies`](#ingress-egress-gw-ar-active-network-policies) block (within [`ingress_egress_gw_ar`](#ingress-egress-gw-ar)) supports the following:
 
 <a id="ingress-egress-gw-ar-active-network-policies-network-policies"></a>&#x2022; [`network_policies`](#ingress-egress-gw-ar-active-network-policies-network-policies) - Optional Block<br>Firewall Policy. Ordered List of Firewall Policies active for this network firewall<br>See [Network Policies](#ingress-egress-gw-ar-active-network-policies-network-policies) below.
 
 #### Ingress Egress Gw Ar Active Network Policies Network Policies
 
-A [`network_policies`](#ingress-egress-gw-ar-active-network-policies-network-policies) block (within [`ingress\_egress_gw\_ar.active\_network\_policies`](#ingress-egress-gw-ar-active-network-policies)) supports the following:
+A [`network_policies`](#ingress-egress-gw-ar-active-network-policies-network-policies) block (within [`ingress_egress_gw_ar.active_network_policies`](#ingress-egress-gw-ar-active-network-policies)) supports the following:
 
 <a id="ingress-egress-gw-ar-active-network-policies-network-policies-name"></a>&#x2022; [`name`](#ingress-egress-gw-ar-active-network-policies-network-policies-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -946,7 +946,7 @@ A [`network_policies`](#ingress-egress-gw-ar-active-network-policies-network-pol
 
 #### Ingress Egress Gw Ar Dc Cluster Group Inside Vn
 
-A [`dc\_cluster_group_inside\_vn`](#ingress-egress-gw-ar-dc-cluster-group-inside-vn) block (within [`ingress\_egress_gw\_ar`](#ingress-egress-gw-ar)) supports the following:
+A [`dc_cluster_group_inside_vn`](#ingress-egress-gw-ar-dc-cluster-group-inside-vn) block (within [`ingress_egress_gw_ar`](#ingress-egress-gw-ar)) supports the following:
 
 <a id="ingress-egress-gw-ar-dc-cluster-group-inside-vn-name"></a>&#x2022; [`name`](#ingress-egress-gw-ar-dc-cluster-group-inside-vn-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -956,7 +956,7 @@ A [`dc\_cluster_group_inside\_vn`](#ingress-egress-gw-ar-dc-cluster-group-inside
 
 #### Ingress Egress Gw Ar Dc Cluster Group Outside Vn
 
-A [`dc\_cluster_group_outside\_vn`](#ingress-egress-gw-ar-dc-cluster-group-outside-vn) block (within [`ingress\_egress_gw\_ar`](#ingress-egress-gw-ar)) supports the following:
+A [`dc_cluster_group_outside_vn`](#ingress-egress-gw-ar-dc-cluster-group-outside-vn) block (within [`ingress_egress_gw_ar`](#ingress-egress-gw-ar)) supports the following:
 
 <a id="ingress-egress-gw-ar-dc-cluster-group-outside-vn-name"></a>&#x2022; [`name`](#ingress-egress-gw-ar-dc-cluster-group-outside-vn-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -966,27 +966,27 @@ A [`dc\_cluster_group_outside\_vn`](#ingress-egress-gw-ar-dc-cluster-group-outsi
 
 #### Ingress Egress Gw Ar Global Network List
 
-A [`global\_network\_list`](#ingress-egress-gw-ar-global-network-list) block (within [`ingress\_egress_gw\_ar`](#ingress-egress-gw-ar)) supports the following:
+A [`global_network_list`](#ingress-egress-gw-ar-global-network-list) block (within [`ingress_egress_gw_ar`](#ingress-egress-gw-ar)) supports the following:
 
-<a id="ingress-egress-gw-ar-global-network-list-global-network-connections"></a>&#x2022; [`global\_network\_connections`](#ingress-egress-gw-ar-global-network-list-global-network-connections) - Optional Block<br>Global Network Connections. Global network connections<br>See [Global Network Connections](#ingress-egress-gw-ar-global-network-list-global-network-connections) below.
+<a id="ingress-egress-gw-ar-global-network-list-global-network-connections"></a>&#x2022; [`global_network_connections`](#ingress-egress-gw-ar-global-network-list-global-network-connections) - Optional Block<br>Global Network Connections. Global network connections<br>See [Global Network Connections](#ingress-egress-gw-ar-global-network-list-global-network-connections) below.
 
 #### Ingress Egress Gw Ar Global Network List Global Network Connections
 
-A [`global\_network\_connections`](#ingress-egress-gw-ar-global-network-list-global-network-connections) block (within [`ingress\_egress_gw\_ar.global\_network\_list`](#ingress-egress-gw-ar-global-network-list)) supports the following:
+A [`global_network_connections`](#ingress-egress-gw-ar-global-network-list-global-network-connections) block (within [`ingress_egress_gw_ar.global_network_list`](#ingress-egress-gw-ar-global-network-list)) supports the following:
 
-<a id="ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr"></a>&#x2022; [`sli\_to_global\_dr`](#ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr) below.
+<a id="ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr"></a>&#x2022; [`sli_to_global_dr`](#ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr) below.
 
-<a id="ingress-egress-gw-ar-global-network-list-global-network-connections-slo-to-global-dr"></a>&#x2022; [`slo\_to_global\_dr`](#ingress-egress-gw-ar-global-network-list-global-network-connections-slo-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#ingress-egress-gw-ar-global-network-list-global-network-connections-slo-to-global-dr) below.
+<a id="ingress-egress-gw-ar-global-network-list-global-network-connections-slo-to-global-dr"></a>&#x2022; [`slo_to_global_dr`](#ingress-egress-gw-ar-global-network-list-global-network-connections-slo-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#ingress-egress-gw-ar-global-network-list-global-network-connections-slo-to-global-dr) below.
 
 #### Ingress Egress Gw Ar Global Network List Global Network Connections SLI To Global DR
 
-A [`sli\_to_global\_dr`](#ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr) block (within [`ingress\_egress_gw\_ar.global\_network\_list.global\_network\_connections`](#ingress-egress-gw-ar-global-network-list-global-network-connections)) supports the following:
+A [`sli_to_global_dr`](#ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr) block (within [`ingress_egress_gw_ar.global_network_list.global_network_connections`](#ingress-egress-gw-ar-global-network-list-global-network-connections)) supports the following:
 
 <a id="ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr-global-vn"></a>&#x2022; [`global_vn`](#ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr-global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr-global-vn) below.
 
 #### Ingress Egress Gw Ar Global Network List Global Network Connections SLI To Global DR Global Vn
 
-A [`global_vn`](#ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr-global-vn) block (within [`ingress\_egress_gw\_ar.global\_network\_list.global\_network\_connections.sli\_to_global\_dr`](#ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr)) supports the following:
+A [`global_vn`](#ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr-global-vn) block (within [`ingress_egress_gw_ar.global_network_list.global_network_connections.sli_to_global_dr`](#ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr)) supports the following:
 
 <a id="ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr-global-vn-name"></a>&#x2022; [`name`](#ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr-global-vn-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -996,13 +996,13 @@ A [`global_vn`](#ingress-egress-gw-ar-global-network-list-global-network-connect
 
 #### Ingress Egress Gw Ar Global Network List Global Network Connections Slo To Global DR
 
-A [`slo\_to_global\_dr`](#ingress-egress-gw-ar-global-network-list-global-network-connections-slo-to-global-dr) block (within [`ingress\_egress_gw\_ar.global\_network\_list.global\_network\_connections`](#ingress-egress-gw-ar-global-network-list-global-network-connections)) supports the following:
+A [`slo_to_global_dr`](#ingress-egress-gw-ar-global-network-list-global-network-connections-slo-to-global-dr) block (within [`ingress_egress_gw_ar.global_network_list.global_network_connections`](#ingress-egress-gw-ar-global-network-list-global-network-connections)) supports the following:
 
 <a id="ingress-egress-gw-ar-global-network-list-global-network-connections-slo-to-global-dr-global-vn"></a>&#x2022; [`global_vn`](#ingress-egress-gw-ar-global-network-list-global-network-connections-slo-to-global-dr-global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#ingress-egress-gw-ar-global-network-list-global-network-connections-slo-to-global-dr-global-vn) below.
 
 #### Ingress Egress Gw Ar Global Network List Global Network Connections Slo To Global DR Global Vn
 
-A [`global_vn`](#ingress-egress-gw-ar-global-network-list-global-network-connections-slo-to-global-dr-global-vn) block (within [`ingress\_egress_gw\_ar.global\_network\_list.global\_network\_connections.slo\_to_global\_dr`](#ingress-egress-gw-ar-global-network-list-global-network-connections-slo-to-global-dr)) supports the following:
+A [`global_vn`](#ingress-egress-gw-ar-global-network-list-global-network-connections-slo-to-global-dr-global-vn) block (within [`ingress_egress_gw_ar.global_network_list.global_network_connections.slo_to_global_dr`](#ingress-egress-gw-ar-global-network-list-global-network-connections-slo-to-global-dr)) supports the following:
 
 <a id="ingress-egress-gw-ar-global-network-list-global-network-connections-slo-to-global-dr-global-vn-name"></a>&#x2022; [`name`](#ingress-egress-gw-ar-global-network-list-global-network-connections-slo-to-global-dr-global-vn-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1012,19 +1012,19 @@ A [`global_vn`](#ingress-egress-gw-ar-global-network-list-global-network-connect
 
 #### Ingress Egress Gw Ar Hub
 
-A [`hub`](#ingress-egress-gw-ar-hub) block (within [`ingress\_egress_gw\_ar`](#ingress-egress-gw-ar)) supports the following:
+A [`hub`](#ingress-egress-gw-ar-hub) block (within [`ingress_egress_gw_ar`](#ingress-egress-gw-ar)) supports the following:
 
-<a id="ingress-egress-gw-ar-hub-express-route-disabled"></a>&#x2022; [`express\_route\_disabled`](#ingress-egress-gw-ar-hub-express-route-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-hub-express-route-disabled"></a>&#x2022; [`express_route_disabled`](#ingress-egress-gw-ar-hub-express-route-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ingress-egress-gw-ar-hub-express-route-enabled"></a>&#x2022; [`express\_route\_enabled`](#ingress-egress-gw-ar-hub-express-route-enabled) - Optional Block<br>Express Route Configuration. Express Route Configuration<br>See [Express Route Enabled](#ingress-egress-gw-ar-hub-express-route-enabled) below.
+<a id="ingress-egress-gw-ar-hub-express-route-enabled"></a>&#x2022; [`express_route_enabled`](#ingress-egress-gw-ar-hub-express-route-enabled) - Optional Block<br>Express Route Configuration. Express Route Configuration<br>See [Express Route Enabled](#ingress-egress-gw-ar-hub-express-route-enabled) below.
 
 <a id="ingress-egress-gw-ar-hub-spoke-vnets"></a>&#x2022; [`spoke_vnets`](#ingress-egress-gw-ar-hub-spoke-vnets) - Optional Block<br>Spoke VNET Peering (Legacy). Spoke VNET Peering<br>See [Spoke Vnets](#ingress-egress-gw-ar-hub-spoke-vnets) below.
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled
 
-An [`express\_route\_enabled`](#ingress-egress-gw-ar-hub-express-route-enabled) block (within [`ingress\_egress_gw\_ar.hub`](#ingress-egress-gw-ar-hub)) supports the following:
+An [`express_route_enabled`](#ingress-egress-gw-ar-hub-express-route-enabled) block (within [`ingress_egress_gw_ar.hub`](#ingress-egress-gw-ar-hub)) supports the following:
 
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-advertise-to-route-server"></a>&#x2022; [`advertise\_to_route\_server`](#ingress-egress-gw-ar-hub-express-route-enabled-advertise-to-route-server) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-advertise-to-route-server"></a>&#x2022; [`advertise_to_route_server`](#ingress-egress-gw-ar-hub-express-route-enabled-advertise-to-route-server) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="ingress-egress-gw-ar-hub-express-route-enabled-auto-asn"></a>&#x2022; [`auto_asn`](#ingress-egress-gw-ar-hub-express-route-enabled-auto-asn) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1032,27 +1032,27 @@ An [`express\_route\_enabled`](#ingress-egress-gw-ar-hub-express-route-enabled) 
 
 <a id="ingress-egress-gw-ar-hub-express-route-enabled-custom-asn"></a>&#x2022; [`custom_asn`](#ingress-egress-gw-ar-hub-express-route-enabled-custom-asn) - Optional Number<br>Custom ASN. Set custom ASN for F5XC Site
 
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-do-not-advertise-to-route-server"></a>&#x2022; [`do\_not_advertise_to_route\_server`](#ingress-egress-gw-ar-hub-express-route-enabled-do-not-advertise-to-route-server) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-do-not-advertise-to-route-server"></a>&#x2022; [`do_not_advertise_to_route_server`](#ingress-egress-gw-ar-hub-express-route-enabled-do-not-advertise-to-route-server) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet"></a>&#x2022; [`gateway_subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Gateway Subnet](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet) below.
 
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet"></a>&#x2022; [`route\_server\_subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Route Server Subnet](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet) below.
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet"></a>&#x2022; [`route_server_subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Route Server Subnet](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet) below.
 
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-express-route"></a>&#x2022; [`site\_registration_over_express\_route`](#ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-express-route) - Optional Block<br>CloudLink ADN Network Config<br>See [Site Registration Over Express Route](#ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-express-route) below.
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-express-route"></a>&#x2022; [`site_registration_over_express_route`](#ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-express-route) - Optional Block<br>CloudLink ADN Network Config<br>See [Site Registration Over Express Route](#ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-express-route) below.
 
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-internet"></a>&#x2022; [`site\_registration_over\_internet`](#ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-internet) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-internet"></a>&#x2022; [`site_registration_over_internet`](#ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-internet) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="ingress-egress-gw-ar-hub-express-route-enabled-sku-ergw1az"></a>&#x2022; [`sku_ergw1az`](#ingress-egress-gw-ar-hub-express-route-enabled-sku-ergw1az) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="ingress-egress-gw-ar-hub-express-route-enabled-sku-ergw2az"></a>&#x2022; [`sku_ergw2az`](#ingress-egress-gw-ar-hub-express-route-enabled-sku-ergw2az) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-sku-high-perf"></a>&#x2022; [`sku\_high\_perf`](#ingress-egress-gw-ar-hub-express-route-enabled-sku-high-perf) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-sku-high-perf"></a>&#x2022; [`sku_high_perf`](#ingress-egress-gw-ar-hub-express-route-enabled-sku-high-perf) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="ingress-egress-gw-ar-hub-express-route-enabled-sku-standard"></a>&#x2022; [`sku_standard`](#ingress-egress-gw-ar-hub-express-route-enabled-sku-standard) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Connections
 
-A [`connections`](#ingress-egress-gw-ar-hub-express-route-enabled-connections) block (within [`ingress\_egress_gw\_ar.hub.express\_route\_enabled`](#ingress-egress-gw-ar-hub-express-route-enabled)) supports the following:
+A [`connections`](#ingress-egress-gw-ar-hub-express-route-enabled-connections) block (within [`ingress_egress_gw_ar.hub.express_route_enabled`](#ingress-egress-gw-ar-hub-express-route-enabled)) supports the following:
 
 <a id="ingress-egress-gw-ar-hub-express-route-enabled-connections-circuit-id"></a>&#x2022; [`circuit_id`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-circuit-id) - Optional String<br>Circuit in same subscription. ExpressRoute Circuit is in same subscription as the site
 
@@ -1064,7 +1064,7 @@ A [`connections`](#ingress-egress-gw-ar-hub-express-route-enabled-connections) b
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Connections Metadata
 
-A [`metadata`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-metadata) block (within [`ingress\_egress_gw\_ar.hub.express\_route\_enabled.connections`](#ingress-egress-gw-ar-hub-express-route-enabled-connections)) supports the following:
+A [`metadata`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-metadata) block (within [`ingress_egress_gw_ar.hub.express_route_enabled.connections`](#ingress-egress-gw-ar-hub-express-route-enabled-connections)) supports the following:
 
 <a id="ingress-egress-gw-ar-hub-express-route-enabled-connections-metadata-description-spec"></a>&#x2022; [`description_spec`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-metadata-description-spec) - Optional String<br>Description. Human readable description
 
@@ -1072,7 +1072,7 @@ A [`metadata`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-metad
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Connections Other Subscription
 
-An [`other_subscription`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription) block (within [`ingress\_egress_gw\_ar.hub.express\_route\_enabled.connections`](#ingress-egress-gw-ar-hub-express-route-enabled-connections)) supports the following:
+An [`other_subscription`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription) block (within [`ingress_egress_gw_ar.hub.express_route_enabled.connections`](#ingress-egress-gw-ar-hub-express-route-enabled-connections)) supports the following:
 
 <a id="ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key"></a>&#x2022; [`authorized_key`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Authorized Key](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key) below.
 
@@ -1080,15 +1080,15 @@ An [`other_subscription`](#ingress-egress-gw-ar-hub-express-route-enabled-connec
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Connections Other Subscription Authorized Key
 
-An [`authorized_key`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key) block (within [`ingress\_egress_gw\_ar.hub.express\_route\_enabled.connections.other_subscription`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription)) supports the following:
+An [`authorized_key`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key) block (within [`ingress_egress_gw_ar.hub.express_route_enabled.connections.other_subscription`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription)) supports the following:
 
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key-blindfold-secret-info) below.
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key-blindfold-secret-info) below.
 
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key-clear-secret-info) below.
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key-clear-secret-info) below.
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Connections Other Subscription Authorized Key Blindfold Secret Info
 
-A [`blindfold\_secret\_info`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key-blindfold-secret-info) block (within [`ingress\_egress_gw\_ar.hub.express\_route\_enabled.connections.other_subscription.authorized_key`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key)) supports the following:
+A [`blindfold_secret_info`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key-blindfold-secret-info) block (within [`ingress_egress_gw_ar.hub.express_route_enabled.connections.other_subscription.authorized_key`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key)) supports the following:
 
 <a id="ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -1098,7 +1098,7 @@ A [`blindfold\_secret\_info`](#ingress-egress-gw-ar-hub-express-route-enabled-co
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Connections Other Subscription Authorized Key Clear Secret Info
 
-A [`clear\_secret\_info`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key-clear-secret-info) block (within [`ingress\_egress_gw\_ar.hub.express\_route\_enabled.connections.other_subscription.authorized_key`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key)) supports the following:
+A [`clear_secret_info`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key-clear-secret-info) block (within [`ingress_egress_gw_ar.hub.express_route_enabled.connections.other_subscription.authorized_key`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key)) supports the following:
 
 <a id="ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -1106,7 +1106,7 @@ A [`clear\_secret\_info`](#ingress-egress-gw-ar-hub-express-route-enabled-connec
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Gateway Subnet
 
-A [`gateway_subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet) block (within [`ingress\_egress_gw\_ar.hub.express\_route\_enabled`](#ingress-egress-gw-ar-hub-express-route-enabled)) supports the following:
+A [`gateway_subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet) block (within [`ingress_egress_gw_ar.hub.express_route_enabled`](#ingress-egress-gw-ar-hub-express-route-enabled)) supports the following:
 
 <a id="ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-auto"></a>&#x2022; [`auto`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-auto) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1116,21 +1116,21 @@ A [`gateway_subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-sub
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Gateway Subnet Subnet
 
-A [`subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subnet) block (within [`ingress\_egress_gw\_ar.hub.express\_route\_enabled.gateway_subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet)) supports the following:
+A [`subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subnet) block (within [`ingress_egress_gw_ar.hub.express_route_enabled.gateway_subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet)) supports the following:
 
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet\_resource\_grp`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet_resource_grp`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
 
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet\_resource\_group`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Gateway Subnet Subnet Param
 
-A [`subnet_param`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subnet-param) block (within [`ingress\_egress_gw\_ar.hub.express\_route\_enabled.gateway_subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet)) supports the following:
+A [`subnet_param`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subnet-param) block (within [`ingress_egress_gw_ar.hub.express_route_enabled.gateway_subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet)) supports the following:
 
 <a id="ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subnet-param-ipv4"></a>&#x2022; [`ipv4`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subnet-param-ipv4) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Route Server Subnet
 
-A [`route\_server\_subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet) block (within [`ingress\_egress_gw\_ar.hub.express\_route\_enabled`](#ingress-egress-gw-ar-hub-express-route-enabled)) supports the following:
+A [`route_server_subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet) block (within [`ingress_egress_gw_ar.hub.express_route_enabled`](#ingress-egress-gw-ar-hub-express-route-enabled)) supports the following:
 
 <a id="ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-auto"></a>&#x2022; [`auto`](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-auto) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1140,27 +1140,27 @@ A [`route\_server\_subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-rout
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Route Server Subnet Subnet
 
-A [`subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-subnet) block (within [`ingress\_egress_gw\_ar.hub.express\_route\_enabled.route\_server\_subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet)) supports the following:
+A [`subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-subnet) block (within [`ingress_egress_gw_ar.hub.express_route_enabled.route_server_subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet)) supports the following:
 
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet\_resource\_grp`](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet_resource_grp`](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
 
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet\_resource\_group`](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Route Server Subnet Subnet Param
 
-A [`subnet_param`](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-subnet-param) block (within [`ingress\_egress_gw\_ar.hub.express\_route\_enabled.route\_server\_subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet)) supports the following:
+A [`subnet_param`](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-subnet-param) block (within [`ingress_egress_gw_ar.hub.express_route_enabled.route_server_subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet)) supports the following:
 
 <a id="ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-subnet-param-ipv4"></a>&#x2022; [`ipv4`](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-subnet-param-ipv4) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Site Registration Over Express Route
 
-A [`site\_registration_over_express\_route`](#ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-express-route) block (within [`ingress\_egress_gw\_ar.hub.express\_route\_enabled`](#ingress-egress-gw-ar-hub-express-route-enabled)) supports the following:
+A [`site_registration_over_express_route`](#ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-express-route) block (within [`ingress_egress_gw_ar.hub.express_route_enabled`](#ingress-egress-gw-ar-hub-express-route-enabled)) supports the following:
 
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-express-route-cloudlink-network-name"></a>&#x2022; [`cloudlink\_network\_name`](#ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-express-route-cloudlink-network-name) - Optional String<br>Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-express-route-cloudlink-network-name"></a>&#x2022; [`cloudlink_network_name`](#ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-express-route-cloudlink-network-name) - Optional String<br>Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support
 
 #### Ingress Egress Gw Ar Hub Spoke Vnets
 
-A [`spoke_vnets`](#ingress-egress-gw-ar-hub-spoke-vnets) block (within [`ingress\_egress_gw\_ar.hub`](#ingress-egress-gw-ar-hub)) supports the following:
+A [`spoke_vnets`](#ingress-egress-gw-ar-hub-spoke-vnets) block (within [`ingress_egress_gw_ar.hub`](#ingress-egress-gw-ar-hub)) supports the following:
 
 <a id="ingress-egress-gw-ar-hub-spoke-vnets-auto"></a>&#x2022; [`auto`](#ingress-egress-gw-ar-hub-spoke-vnets-auto) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1172,9 +1172,9 @@ A [`spoke_vnets`](#ingress-egress-gw-ar-hub-spoke-vnets) block (within [`ingress
 
 #### Ingress Egress Gw Ar Hub Spoke Vnets VNET
 
-A [`vnet`](#ingress-egress-gw-ar-hub-spoke-vnets-vnet) block (within [`ingress\_egress_gw\_ar.hub.spoke_vnets`](#ingress-egress-gw-ar-hub-spoke-vnets)) supports the following:
+A [`vnet`](#ingress-egress-gw-ar-hub-spoke-vnets-vnet) block (within [`ingress_egress_gw_ar.hub.spoke_vnets`](#ingress-egress-gw-ar-hub-spoke-vnets)) supports the following:
 
-<a id="ingress-egress-gw-ar-hub-spoke-vnets-vnet-f5-orchestrated-routing"></a>&#x2022; [`f5\_orchestrated\_routing`](#ingress-egress-gw-ar-hub-spoke-vnets-vnet-f5-orchestrated-routing) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-hub-spoke-vnets-vnet-f5-orchestrated-routing"></a>&#x2022; [`f5_orchestrated_routing`](#ingress-egress-gw-ar-hub-spoke-vnets-vnet-f5-orchestrated-routing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="ingress-egress-gw-ar-hub-spoke-vnets-vnet-manual-routing"></a>&#x2022; [`manual_routing`](#ingress-egress-gw-ar-hub-spoke-vnets-vnet-manual-routing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1184,23 +1184,23 @@ A [`vnet`](#ingress-egress-gw-ar-hub-spoke-vnets-vnet) block (within [`ingress\_
 
 #### Ingress Egress Gw Ar Inside Static Routes
 
-An [`inside\_static\_routes`](#ingress-egress-gw-ar-inside-static-routes) block (within [`ingress\_egress_gw\_ar`](#ingress-egress-gw-ar)) supports the following:
+An [`inside_static_routes`](#ingress-egress-gw-ar-inside-static-routes) block (within [`ingress_egress_gw_ar`](#ingress-egress-gw-ar)) supports the following:
 
-<a id="ingress-egress-gw-ar-inside-static-routes-static-route-list"></a>&#x2022; [`static\_route\_list`](#ingress-egress-gw-ar-inside-static-routes-static-route-list) - Optional Block<br>List of Static Routes. List of Static routes<br>See [Static Route List](#ingress-egress-gw-ar-inside-static-routes-static-route-list) below.
+<a id="ingress-egress-gw-ar-inside-static-routes-static-route-list"></a>&#x2022; [`static_route_list`](#ingress-egress-gw-ar-inside-static-routes-static-route-list) - Optional Block<br>List of Static Routes. List of Static routes<br>See [Static Route List](#ingress-egress-gw-ar-inside-static-routes-static-route-list) below.
 
 #### Ingress Egress Gw Ar Inside Static Routes Static Route List
 
-A [`static\_route\_list`](#ingress-egress-gw-ar-inside-static-routes-static-route-list) block (within [`ingress\_egress_gw\_ar.inside\_static\_routes`](#ingress-egress-gw-ar-inside-static-routes)) supports the following:
+A [`static_route_list`](#ingress-egress-gw-ar-inside-static-routes-static-route-list) block (within [`ingress_egress_gw_ar.inside_static_routes`](#ingress-egress-gw-ar-inside-static-routes)) supports the following:
 
-<a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route"></a>&#x2022; [`custom\_static\_route`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route) - Optional Block<br>Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them<br>See [Custom Static Route](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route) below.
+<a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route"></a>&#x2022; [`custom_static_route`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route) - Optional Block<br>Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them<br>See [Custom Static Route](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route) below.
 
-<a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-simple-static-route"></a>&#x2022; [`simple\_static\_route`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-simple-static-route) - Optional String<br>Simple Static Route. Use simple static route for prefix pointing to single interface in the network
+<a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-simple-static-route"></a>&#x2022; [`simple_static_route`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-simple-static-route) - Optional String<br>Simple Static Route. Use simple static route for prefix pointing to single interface in the network
 
 #### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route
 
-A [`custom\_static\_route`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route) block (within [`ingress\_egress_gw\_ar.inside\_static\_routes.static\_route\_list`](#ingress-egress-gw-ar-inside-static-routes-static-route-list)) supports the following:
+A [`custom_static_route`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route) block (within [`ingress_egress_gw_ar.inside_static_routes.static_route_list`](#ingress-egress-gw-ar-inside-static-routes-static-route-list)) supports the following:
 
-<a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-attrs"></a>&#x2022; [`attrs`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-attrs) - Optional List  Defaults to `ROUTE\_ATTR_NO\_OP`<br>Possible values are `ROUTE\_ATTR_NO\_OP`, `ROUTE\_ATTR\_ADVERTISE`, `ROUTE\_ATTR_INSTALL\_HOST`, `ROUTE\_ATTR_INSTALL\_FORWARDING`, `ROUTE\_ATTR_MERGE\_ONLY`<br>Attributes. List of route attributes associated with the static route
+<a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-attrs"></a>&#x2022; [`attrs`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of route attributes associated with the static route
 
 <a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-labels"></a>&#x2022; [`labels`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-labels) - Optional Block<br>Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy
 
@@ -1210,17 +1210,17 @@ A [`custom\_static\_route`](#ingress-egress-gw-ar-inside-static-routes-static-ro
 
 #### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Nexthop
 
-A [`nexthop`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop) block (within [`ingress\_egress_gw\_ar.inside\_static\_routes.static\_route\_list.custom\_static\_route`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route)) supports the following:
+A [`nexthop`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop) block (within [`ingress_egress_gw_ar.inside_static_routes.static_route_list.custom_static_route`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route)) supports the following:
 
 <a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-interface"></a>&#x2022; [`interface`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-interface) - Optional Block<br>Network Interface. Nexthop is network interface when type is 'Network-Interface'<br>See [Interface](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-interface) below.
 
 <a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address"></a>&#x2022; [`nexthop_address`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) - Optional Block<br>IP Address. IP Address used to specify an IPv4 or IPv6 address<br>See [Nexthop Address](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) below.
 
-<a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-type"></a>&#x2022; [`type`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-type) - Optional String  Defaults to `NEXT\_HOP_DEFAULT\_GATEWAY`<br>Possible values are `NEXT\_HOP_DEFAULT\_GATEWAY`, `NEXT\_HOP_USE\_CONFIGURED`, `NEXT\_HOP_NETWORK\_INTERFACE`<br>Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network
+<a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-type"></a>&#x2022; [`type`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-type) - Optional String  Defaults to `NEXT_HOP_DEFAULT_GATEWAY`<br>Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`<br>Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network
 
 #### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Nexthop Interface
 
-An [`interface`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-interface) block (within [`ingress\_egress_gw\_ar.inside\_static\_routes.static\_route\_list.custom\_static\_route.nexthop`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop)) supports the following:
+An [`interface`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-interface) block (within [`ingress_egress_gw_ar.inside_static_routes.static_route_list.custom_static_route.nexthop`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop)) supports the following:
 
 <a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-interface-kind"></a>&#x2022; [`kind`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-interface-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -1234,7 +1234,7 @@ An [`interface`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-cu
 
 #### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address
 
-A [`nexthop_address`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) block (within [`ingress\_egress_gw\_ar.inside\_static\_routes.static\_route\_list.custom\_static\_route.nexthop`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop)) supports the following:
+A [`nexthop_address`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) block (within [`ingress_egress_gw_ar.inside_static_routes.static_route_list.custom_static_route.nexthop`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop)) supports the following:
 
 <a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4"></a>&#x2022; [`ipv4`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) below.
 
@@ -1242,19 +1242,19 @@ A [`nexthop_address`](#ingress-egress-gw-ar-inside-static-routes-static-route-li
 
 #### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4
 
-An [`ipv4`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) block (within [`ingress\_egress_gw\_ar.inside\_static\_routes.static\_route\_list.custom\_static\_route.nexthop.nexthop_address`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address)) supports the following:
+An [`ipv4`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) block (within [`ingress_egress_gw_ar.inside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address)) supports the following:
 
 <a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4-addr"></a>&#x2022; [`addr`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4-addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
 #### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6
 
-An [`ipv6`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6) block (within [`ingress\_egress_gw\_ar.inside\_static\_routes.static\_route\_list.custom\_static\_route.nexthop.nexthop_address`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address)) supports the following:
+An [`ipv6`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6) block (within [`ingress_egress_gw_ar.inside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address)) supports the following:
 
 <a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6-addr"></a>&#x2022; [`addr`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6-addr) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
 
 #### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Subnets
 
-A [`subnets`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-subnets) block (within [`ingress\_egress_gw\_ar.inside\_static\_routes.static\_route\_list.custom\_static\_route`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route)) supports the following:
+A [`subnets`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-subnets) block (within [`ingress_egress_gw_ar.inside_static_routes.static_route_list.custom_static_route`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route)) supports the following:
 
 <a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-subnets-ipv4"></a>&#x2022; [`ipv4`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-subnets-ipv4) - Optional Block<br>IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32<br>See [IPv4](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-subnets-ipv4) below.
 
@@ -1262,7 +1262,7 @@ A [`subnets`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custo
 
 #### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Subnets IPv4
 
-An [`ipv4`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-subnets-ipv4) block (within [`ingress\_egress_gw\_ar.inside\_static\_routes.static\_route\_list.custom\_static\_route.subnets`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-subnets)) supports the following:
+An [`ipv4`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-subnets-ipv4) block (within [`ingress_egress_gw_ar.inside_static_routes.static_route_list.custom_static_route.subnets`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-subnets)) supports the following:
 
 <a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-subnets-ipv4-plen"></a>&#x2022; [`plen`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-subnets-ipv4-plen) - Optional Number<br>Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32
 
@@ -1270,7 +1270,7 @@ An [`ipv4`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-
 
 #### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Subnets IPv6
 
-An [`ipv6`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-subnets-ipv6) block (within [`ingress\_egress_gw\_ar.inside\_static\_routes.static\_route\_list.custom\_static\_route.subnets`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-subnets)) supports the following:
+An [`ipv6`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-subnets-ipv6) block (within [`ingress_egress_gw_ar.inside_static_routes.static_route_list.custom_static_route.subnets`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-subnets)) supports the following:
 
 <a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-subnets-ipv6-plen"></a>&#x2022; [`plen`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-subnets-ipv6-plen) - Optional Number<br>Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128
 
@@ -1278,7 +1278,7 @@ An [`ipv6`](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-
 
 #### Ingress Egress Gw Ar Node
 
-A [`node`](#ingress-egress-gw-ar-node) block (within [`ingress\_egress_gw\_ar`](#ingress-egress-gw-ar)) supports the following:
+A [`node`](#ingress-egress-gw-ar-node) block (within [`ingress_egress_gw_ar`](#ingress-egress-gw-ar)) supports the following:
 
 <a id="ingress-egress-gw-ar-node-fault-domain"></a>&#x2022; [`fault_domain`](#ingress-egress-gw-ar-node-fault-domain) - Optional Number<br>Number of fault domains. Namuber of fault domains to be used while creating the availability set
 
@@ -1292,7 +1292,7 @@ A [`node`](#ingress-egress-gw-ar-node) block (within [`ingress\_egress_gw\_ar`](
 
 #### Ingress Egress Gw Ar Node Inside Subnet
 
-An [`inside_subnet`](#ingress-egress-gw-ar-node-inside-subnet) block (within [`ingress\_egress_gw\_ar.node`](#ingress-egress-gw-ar-node)) supports the following:
+An [`inside_subnet`](#ingress-egress-gw-ar-node-inside-subnet) block (within [`ingress_egress_gw_ar.node`](#ingress-egress-gw-ar-node)) supports the following:
 
 <a id="ingress-egress-gw-ar-node-inside-subnet-subnet"></a>&#x2022; [`subnet`](#ingress-egress-gw-ar-node-inside-subnet-subnet) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Subnet](#ingress-egress-gw-ar-node-inside-subnet-subnet) below.
 
@@ -1300,23 +1300,23 @@ An [`inside_subnet`](#ingress-egress-gw-ar-node-inside-subnet) block (within [`i
 
 #### Ingress Egress Gw Ar Node Inside Subnet Subnet
 
-A [`subnet`](#ingress-egress-gw-ar-node-inside-subnet-subnet) block (within [`ingress\_egress_gw\_ar.node.inside_subnet`](#ingress-egress-gw-ar-node-inside-subnet)) supports the following:
+A [`subnet`](#ingress-egress-gw-ar-node-inside-subnet-subnet) block (within [`ingress_egress_gw_ar.node.inside_subnet`](#ingress-egress-gw-ar-node-inside-subnet)) supports the following:
 
 <a id="ingress-egress-gw-ar-node-inside-subnet-subnet-subnet-name"></a>&#x2022; [`subnet_name`](#ingress-egress-gw-ar-node-inside-subnet-subnet-subnet-name) - Optional String<br>Subnet Name. Name of existing subnet
 
-<a id="ingress-egress-gw-ar-node-inside-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet\_resource\_grp`](#ingress-egress-gw-ar-node-inside-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
+<a id="ingress-egress-gw-ar-node-inside-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet_resource_grp`](#ingress-egress-gw-ar-node-inside-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
 
-<a id="ingress-egress-gw-ar-node-inside-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet\_resource\_group`](#ingress-egress-gw-ar-node-inside-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-node-inside-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-egress-gw-ar-node-inside-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Ingress Egress Gw Ar Node Inside Subnet Subnet Param
 
-A [`subnet_param`](#ingress-egress-gw-ar-node-inside-subnet-subnet-param) block (within [`ingress\_egress_gw\_ar.node.inside_subnet`](#ingress-egress-gw-ar-node-inside-subnet)) supports the following:
+A [`subnet_param`](#ingress-egress-gw-ar-node-inside-subnet-subnet-param) block (within [`ingress_egress_gw_ar.node.inside_subnet`](#ingress-egress-gw-ar-node-inside-subnet)) supports the following:
 
 <a id="ingress-egress-gw-ar-node-inside-subnet-subnet-param-ipv4"></a>&#x2022; [`ipv4`](#ingress-egress-gw-ar-node-inside-subnet-subnet-param-ipv4) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
 
 #### Ingress Egress Gw Ar Node Outside Subnet
 
-An [`outside_subnet`](#ingress-egress-gw-ar-node-outside-subnet) block (within [`ingress\_egress_gw\_ar.node`](#ingress-egress-gw-ar-node)) supports the following:
+An [`outside_subnet`](#ingress-egress-gw-ar-node-outside-subnet) block (within [`ingress_egress_gw_ar.node`](#ingress-egress-gw-ar-node)) supports the following:
 
 <a id="ingress-egress-gw-ar-node-outside-subnet-subnet"></a>&#x2022; [`subnet`](#ingress-egress-gw-ar-node-outside-subnet-subnet) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Subnet](#ingress-egress-gw-ar-node-outside-subnet-subnet) below.
 
@@ -1324,39 +1324,39 @@ An [`outside_subnet`](#ingress-egress-gw-ar-node-outside-subnet) block (within [
 
 #### Ingress Egress Gw Ar Node Outside Subnet Subnet
 
-A [`subnet`](#ingress-egress-gw-ar-node-outside-subnet-subnet) block (within [`ingress\_egress_gw\_ar.node.outside_subnet`](#ingress-egress-gw-ar-node-outside-subnet)) supports the following:
+A [`subnet`](#ingress-egress-gw-ar-node-outside-subnet-subnet) block (within [`ingress_egress_gw_ar.node.outside_subnet`](#ingress-egress-gw-ar-node-outside-subnet)) supports the following:
 
 <a id="ingress-egress-gw-ar-node-outside-subnet-subnet-subnet-name"></a>&#x2022; [`subnet_name`](#ingress-egress-gw-ar-node-outside-subnet-subnet-subnet-name) - Optional String<br>Subnet Name. Name of existing subnet
 
-<a id="ingress-egress-gw-ar-node-outside-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet\_resource\_grp`](#ingress-egress-gw-ar-node-outside-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
+<a id="ingress-egress-gw-ar-node-outside-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet_resource_grp`](#ingress-egress-gw-ar-node-outside-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
 
-<a id="ingress-egress-gw-ar-node-outside-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet\_resource\_group`](#ingress-egress-gw-ar-node-outside-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-node-outside-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-egress-gw-ar-node-outside-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Ingress Egress Gw Ar Node Outside Subnet Subnet Param
 
-A [`subnet_param`](#ingress-egress-gw-ar-node-outside-subnet-subnet-param) block (within [`ingress\_egress_gw\_ar.node.outside_subnet`](#ingress-egress-gw-ar-node-outside-subnet)) supports the following:
+A [`subnet_param`](#ingress-egress-gw-ar-node-outside-subnet-subnet-param) block (within [`ingress_egress_gw_ar.node.outside_subnet`](#ingress-egress-gw-ar-node-outside-subnet)) supports the following:
 
 <a id="ingress-egress-gw-ar-node-outside-subnet-subnet-param-ipv4"></a>&#x2022; [`ipv4`](#ingress-egress-gw-ar-node-outside-subnet-subnet-param-ipv4) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
 
 #### Ingress Egress Gw Ar Outside Static Routes
 
-An [`outside\_static\_routes`](#ingress-egress-gw-ar-outside-static-routes) block (within [`ingress\_egress_gw\_ar`](#ingress-egress-gw-ar)) supports the following:
+An [`outside_static_routes`](#ingress-egress-gw-ar-outside-static-routes) block (within [`ingress_egress_gw_ar`](#ingress-egress-gw-ar)) supports the following:
 
-<a id="ingress-egress-gw-ar-outside-static-routes-static-route-list"></a>&#x2022; [`static\_route\_list`](#ingress-egress-gw-ar-outside-static-routes-static-route-list) - Optional Block<br>List of Static Routes. List of Static routes<br>See [Static Route List](#ingress-egress-gw-ar-outside-static-routes-static-route-list) below.
+<a id="ingress-egress-gw-ar-outside-static-routes-static-route-list"></a>&#x2022; [`static_route_list`](#ingress-egress-gw-ar-outside-static-routes-static-route-list) - Optional Block<br>List of Static Routes. List of Static routes<br>See [Static Route List](#ingress-egress-gw-ar-outside-static-routes-static-route-list) below.
 
 #### Ingress Egress Gw Ar Outside Static Routes Static Route List
 
-A [`static\_route\_list`](#ingress-egress-gw-ar-outside-static-routes-static-route-list) block (within [`ingress\_egress_gw\_ar.outside\_static\_routes`](#ingress-egress-gw-ar-outside-static-routes)) supports the following:
+A [`static_route_list`](#ingress-egress-gw-ar-outside-static-routes-static-route-list) block (within [`ingress_egress_gw_ar.outside_static_routes`](#ingress-egress-gw-ar-outside-static-routes)) supports the following:
 
-<a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route"></a>&#x2022; [`custom\_static\_route`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route) - Optional Block<br>Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them<br>See [Custom Static Route](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route) below.
+<a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route"></a>&#x2022; [`custom_static_route`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route) - Optional Block<br>Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them<br>See [Custom Static Route](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route) below.
 
-<a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-simple-static-route"></a>&#x2022; [`simple\_static\_route`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-simple-static-route) - Optional String<br>Simple Static Route. Use simple static route for prefix pointing to single interface in the network
+<a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-simple-static-route"></a>&#x2022; [`simple_static_route`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-simple-static-route) - Optional String<br>Simple Static Route. Use simple static route for prefix pointing to single interface in the network
 
 #### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route
 
-A [`custom\_static\_route`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route) block (within [`ingress\_egress_gw\_ar.outside\_static\_routes.static\_route\_list`](#ingress-egress-gw-ar-outside-static-routes-static-route-list)) supports the following:
+A [`custom_static_route`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route) block (within [`ingress_egress_gw_ar.outside_static_routes.static_route_list`](#ingress-egress-gw-ar-outside-static-routes-static-route-list)) supports the following:
 
-<a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-attrs"></a>&#x2022; [`attrs`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-attrs) - Optional List  Defaults to `ROUTE\_ATTR_NO\_OP`<br>Possible values are `ROUTE\_ATTR_NO\_OP`, `ROUTE\_ATTR\_ADVERTISE`, `ROUTE\_ATTR_INSTALL\_HOST`, `ROUTE\_ATTR_INSTALL\_FORWARDING`, `ROUTE\_ATTR_MERGE\_ONLY`<br>Attributes. List of route attributes associated with the static route
+<a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-attrs"></a>&#x2022; [`attrs`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of route attributes associated with the static route
 
 <a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-labels"></a>&#x2022; [`labels`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-labels) - Optional Block<br>Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy
 
@@ -1366,17 +1366,17 @@ A [`custom\_static\_route`](#ingress-egress-gw-ar-outside-static-routes-static-r
 
 #### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Nexthop
 
-A [`nexthop`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop) block (within [`ingress\_egress_gw\_ar.outside\_static\_routes.static\_route\_list.custom\_static\_route`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route)) supports the following:
+A [`nexthop`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop) block (within [`ingress_egress_gw_ar.outside_static_routes.static_route_list.custom_static_route`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route)) supports the following:
 
 <a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-interface"></a>&#x2022; [`interface`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-interface) - Optional Block<br>Network Interface. Nexthop is network interface when type is 'Network-Interface'<br>See [Interface](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-interface) below.
 
 <a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address"></a>&#x2022; [`nexthop_address`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) - Optional Block<br>IP Address. IP Address used to specify an IPv4 or IPv6 address<br>See [Nexthop Address](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) below.
 
-<a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-type"></a>&#x2022; [`type`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-type) - Optional String  Defaults to `NEXT\_HOP_DEFAULT\_GATEWAY`<br>Possible values are `NEXT\_HOP_DEFAULT\_GATEWAY`, `NEXT\_HOP_USE\_CONFIGURED`, `NEXT\_HOP_NETWORK\_INTERFACE`<br>Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network
+<a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-type"></a>&#x2022; [`type`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-type) - Optional String  Defaults to `NEXT_HOP_DEFAULT_GATEWAY`<br>Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`<br>Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network
 
 #### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Nexthop Interface
 
-An [`interface`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-interface) block (within [`ingress\_egress_gw\_ar.outside\_static\_routes.static\_route\_list.custom\_static\_route.nexthop`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop)) supports the following:
+An [`interface`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-interface) block (within [`ingress_egress_gw_ar.outside_static_routes.static_route_list.custom_static_route.nexthop`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop)) supports the following:
 
 <a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-interface-kind"></a>&#x2022; [`kind`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-interface-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -1390,7 +1390,7 @@ An [`interface`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-c
 
 #### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address
 
-A [`nexthop_address`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) block (within [`ingress\_egress_gw\_ar.outside\_static\_routes.static\_route\_list.custom\_static\_route.nexthop`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop)) supports the following:
+A [`nexthop_address`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) block (within [`ingress_egress_gw_ar.outside_static_routes.static_route_list.custom_static_route.nexthop`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop)) supports the following:
 
 <a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4"></a>&#x2022; [`ipv4`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) below.
 
@@ -1398,19 +1398,19 @@ A [`nexthop_address`](#ingress-egress-gw-ar-outside-static-routes-static-route-l
 
 #### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4
 
-An [`ipv4`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) block (within [`ingress\_egress_gw\_ar.outside\_static\_routes.static\_route\_list.custom\_static\_route.nexthop.nexthop_address`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address)) supports the following:
+An [`ipv4`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) block (within [`ingress_egress_gw_ar.outside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address)) supports the following:
 
 <a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4-addr"></a>&#x2022; [`addr`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4-addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
 #### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6
 
-An [`ipv6`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6) block (within [`ingress\_egress_gw\_ar.outside\_static\_routes.static\_route\_list.custom\_static\_route.nexthop.nexthop_address`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address)) supports the following:
+An [`ipv6`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6) block (within [`ingress_egress_gw_ar.outside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address)) supports the following:
 
 <a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6-addr"></a>&#x2022; [`addr`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6-addr) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
 
 #### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Subnets
 
-A [`subnets`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-subnets) block (within [`ingress\_egress_gw\_ar.outside\_static\_routes.static\_route\_list.custom\_static\_route`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route)) supports the following:
+A [`subnets`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-subnets) block (within [`ingress_egress_gw_ar.outside_static_routes.static_route_list.custom_static_route`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route)) supports the following:
 
 <a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4"></a>&#x2022; [`ipv4`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4) - Optional Block<br>IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32<br>See [IPv4](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4) below.
 
@@ -1418,7 +1418,7 @@ A [`subnets`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-cust
 
 #### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Subnets IPv4
 
-An [`ipv4`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4) block (within [`ingress\_egress_gw\_ar.outside\_static\_routes.static\_route\_list.custom\_static\_route.subnets`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-subnets)) supports the following:
+An [`ipv4`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4) block (within [`ingress_egress_gw_ar.outside_static_routes.static_route_list.custom_static_route.subnets`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-subnets)) supports the following:
 
 <a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4-plen"></a>&#x2022; [`plen`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4-plen) - Optional Number<br>Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32
 
@@ -1426,7 +1426,7 @@ An [`ipv4`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom
 
 #### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Subnets IPv6
 
-An [`ipv6`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6) block (within [`ingress\_egress_gw\_ar.outside\_static\_routes.static\_route\_list.custom\_static\_route.subnets`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-subnets)) supports the following:
+An [`ipv6`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6) block (within [`ingress_egress_gw_ar.outside_static_routes.static_route_list.custom_static_route.subnets`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-subnets)) supports the following:
 
 <a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6-plen"></a>&#x2022; [`plen`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6-plen) - Optional Number<br>Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128
 
@@ -1434,15 +1434,15 @@ An [`ipv6`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom
 
 #### Ingress Egress Gw Ar Performance Enhancement Mode
 
-A [`performance\_enhancement\_mode`](#ingress-egress-gw-ar-performance-enhancement-mode) block (within [`ingress\_egress_gw\_ar`](#ingress-egress-gw-ar)) supports the following:
+A [`performance_enhancement_mode`](#ingress-egress-gw-ar-performance-enhancement-mode) block (within [`ingress_egress_gw_ar`](#ingress-egress-gw-ar)) supports the following:
 
-<a id="ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced"></a>&#x2022; [`perf\_mode_l3\_enhanced`](#ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced) below.
+<a id="ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced"></a>&#x2022; [`perf_mode_l3_enhanced`](#ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
-<a id="ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l7-enhanced"></a>&#x2022; [`perf\_mode_l7\_enhanced`](#ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l7-enhanced) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l7-enhanced"></a>&#x2022; [`perf_mode_l7_enhanced`](#ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l7-enhanced) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Ingress Egress Gw Ar Performance Enhancement Mode Perf Mode L3 Enhanced
 
-A [`perf\_mode_l3\_enhanced`](#ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced) block (within [`ingress\_egress_gw\_ar.performance\_enhancement\_mode`](#ingress-egress-gw-ar-performance-enhancement-mode)) supports the following:
+A [`perf_mode_l3_enhanced`](#ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced) block (within [`ingress_egress_gw_ar.performance_enhancement_mode`](#ingress-egress-gw-ar-performance-enhancement-mode)) supports the following:
 
 <a id="ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>&#x2022; [`jumbo`](#ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1456,9 +1456,9 @@ An [`ingress_gw`](#ingress-gw) block supports the following:
 
 <a id="ingress-gw-az-nodes"></a>&#x2022; [`az_nodes`](#ingress-gw-az-nodes) - Optional Block<br>Ingress Gateway (One Interface) Nodes in AZ. Only Single AZ or Three AZ(s) nodes are supported currently<br>See [Az Nodes](#ingress-gw-az-nodes) below.
 
-<a id="ingress-gw-azure-certified-hw"></a>&#x2022; [`azure\_certified\_hw`](#ingress-gw-azure-certified-hw) - Optional String<br>Azure Certified Hardware. Name for Azure certified hardware
+<a id="ingress-gw-azure-certified-hw"></a>&#x2022; [`azure_certified_hw`](#ingress-gw-azure-certified-hw) - Optional String<br>Azure Certified Hardware. Name for Azure certified hardware
 
-<a id="ingress-gw-performance-enhancement-mode"></a>&#x2022; [`performance\_enhancement\_mode`](#ingress-gw-performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#ingress-gw-performance-enhancement-mode) below.
+<a id="ingress-gw-performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#ingress-gw-performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#ingress-gw-performance-enhancement-mode) below.
 
 #### Ingress Gw Accelerated Networking
 
@@ -1490,9 +1490,9 @@ A [`subnet`](#ingress-gw-az-nodes-local-subnet-subnet) block (within [`ingress_g
 
 <a id="ingress-gw-az-nodes-local-subnet-subnet-subnet-name"></a>&#x2022; [`subnet_name`](#ingress-gw-az-nodes-local-subnet-subnet-subnet-name) - Optional String<br>Subnet Name. Name of existing subnet
 
-<a id="ingress-gw-az-nodes-local-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet\_resource\_grp`](#ingress-gw-az-nodes-local-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
+<a id="ingress-gw-az-nodes-local-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet_resource_grp`](#ingress-gw-az-nodes-local-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
 
-<a id="ingress-gw-az-nodes-local-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet\_resource\_group`](#ingress-gw-az-nodes-local-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-gw-az-nodes-local-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-gw-az-nodes-local-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Ingress Gw Az Nodes Local Subnet Subnet Param
 
@@ -1502,15 +1502,15 @@ A [`subnet_param`](#ingress-gw-az-nodes-local-subnet-subnet-param) block (within
 
 #### Ingress Gw Performance Enhancement Mode
 
-A [`performance\_enhancement\_mode`](#ingress-gw-performance-enhancement-mode) block (within [`ingress_gw`](#ingress-gw)) supports the following:
+A [`performance_enhancement_mode`](#ingress-gw-performance-enhancement-mode) block (within [`ingress_gw`](#ingress-gw)) supports the following:
 
-<a id="ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced"></a>&#x2022; [`perf\_mode_l3\_enhanced`](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) below.
+<a id="ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced"></a>&#x2022; [`perf_mode_l3_enhanced`](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
-<a id="ingress-gw-performance-enhancement-mode-perf-mode-l7-enhanced"></a>&#x2022; [`perf\_mode_l7\_enhanced`](#ingress-gw-performance-enhancement-mode-perf-mode-l7-enhanced) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-gw-performance-enhancement-mode-perf-mode-l7-enhanced"></a>&#x2022; [`perf_mode_l7_enhanced`](#ingress-gw-performance-enhancement-mode-perf-mode-l7-enhanced) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Ingress Gw Performance Enhancement Mode Perf Mode L3 Enhanced
 
-A [`perf\_mode_l3\_enhanced`](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) block (within [`ingress_gw.performance\_enhancement\_mode`](#ingress-gw-performance-enhancement-mode)) supports the following:
+A [`perf_mode_l3_enhanced`](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) block (within [`ingress_gw.performance_enhancement_mode`](#ingress-gw-performance-enhancement-mode)) supports the following:
 
 <a id="ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>&#x2022; [`jumbo`](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1518,19 +1518,19 @@ A [`perf\_mode_l3\_enhanced`](#ingress-gw-performance-enhancement-mode-perf-mode
 
 #### Ingress Gw Ar
 
-An [`ingress\_gw\_ar`](#ingress-gw-ar) block supports the following:
+An [`ingress_gw_ar`](#ingress-gw-ar) block supports the following:
 
 <a id="ingress-gw-ar-accelerated-networking"></a>&#x2022; [`accelerated_networking`](#ingress-gw-ar-accelerated-networking) - Optional Block<br>Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen<br>See [Accelerated Networking](#ingress-gw-ar-accelerated-networking) below.
 
-<a id="ingress-gw-ar-azure-certified-hw"></a>&#x2022; [`azure\_certified\_hw`](#ingress-gw-ar-azure-certified-hw) - Optional String<br>Azure Certified Hardware. Name for Azure certified hardware
+<a id="ingress-gw-ar-azure-certified-hw"></a>&#x2022; [`azure_certified_hw`](#ingress-gw-ar-azure-certified-hw) - Optional String<br>Azure Certified Hardware. Name for Azure certified hardware
 
 <a id="ingress-gw-ar-node"></a>&#x2022; [`node`](#ingress-gw-ar-node) - Optional Block<br>Single Interface Node for Alternate Region. Parameters for creating Single interface Node for Alternate Region<br>See [Node](#ingress-gw-ar-node) below.
 
-<a id="ingress-gw-ar-performance-enhancement-mode"></a>&#x2022; [`performance\_enhancement\_mode`](#ingress-gw-ar-performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#ingress-gw-ar-performance-enhancement-mode) below.
+<a id="ingress-gw-ar-performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#ingress-gw-ar-performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#ingress-gw-ar-performance-enhancement-mode) below.
 
 #### Ingress Gw Ar Accelerated Networking
 
-An [`accelerated_networking`](#ingress-gw-ar-accelerated-networking) block (within [`ingress\_gw\_ar`](#ingress-gw-ar)) supports the following:
+An [`accelerated_networking`](#ingress-gw-ar-accelerated-networking) block (within [`ingress_gw_ar`](#ingress-gw-ar)) supports the following:
 
 <a id="ingress-gw-ar-accelerated-networking-disable"></a>&#x2022; [`disable`](#ingress-gw-ar-accelerated-networking-disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1538,7 +1538,7 @@ An [`accelerated_networking`](#ingress-gw-ar-accelerated-networking) block (with
 
 #### Ingress Gw Ar Node
 
-A [`node`](#ingress-gw-ar-node) block (within [`ingress\_gw\_ar`](#ingress-gw-ar)) supports the following:
+A [`node`](#ingress-gw-ar-node) block (within [`ingress_gw_ar`](#ingress-gw-ar)) supports the following:
 
 <a id="ingress-gw-ar-node-fault-domain"></a>&#x2022; [`fault_domain`](#ingress-gw-ar-node-fault-domain) - Optional Number<br>Number of fault domains. Namuber of fault domains to be used while creating the availability set
 
@@ -1550,7 +1550,7 @@ A [`node`](#ingress-gw-ar-node) block (within [`ingress\_gw\_ar`](#ingress-gw-ar
 
 #### Ingress Gw Ar Node Local Subnet
 
-A [`local_subnet`](#ingress-gw-ar-node-local-subnet) block (within [`ingress\_gw\_ar.node`](#ingress-gw-ar-node)) supports the following:
+A [`local_subnet`](#ingress-gw-ar-node-local-subnet) block (within [`ingress_gw_ar.node`](#ingress-gw-ar-node)) supports the following:
 
 <a id="ingress-gw-ar-node-local-subnet-subnet"></a>&#x2022; [`subnet`](#ingress-gw-ar-node-local-subnet-subnet) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Subnet](#ingress-gw-ar-node-local-subnet-subnet) below.
 
@@ -1558,31 +1558,31 @@ A [`local_subnet`](#ingress-gw-ar-node-local-subnet) block (within [`ingress\_gw
 
 #### Ingress Gw Ar Node Local Subnet Subnet
 
-A [`subnet`](#ingress-gw-ar-node-local-subnet-subnet) block (within [`ingress\_gw\_ar.node.local_subnet`](#ingress-gw-ar-node-local-subnet)) supports the following:
+A [`subnet`](#ingress-gw-ar-node-local-subnet-subnet) block (within [`ingress_gw_ar.node.local_subnet`](#ingress-gw-ar-node-local-subnet)) supports the following:
 
 <a id="ingress-gw-ar-node-local-subnet-subnet-subnet-name"></a>&#x2022; [`subnet_name`](#ingress-gw-ar-node-local-subnet-subnet-subnet-name) - Optional String<br>Subnet Name. Name of existing subnet
 
-<a id="ingress-gw-ar-node-local-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet\_resource\_grp`](#ingress-gw-ar-node-local-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
+<a id="ingress-gw-ar-node-local-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet_resource_grp`](#ingress-gw-ar-node-local-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
 
-<a id="ingress-gw-ar-node-local-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet\_resource\_group`](#ingress-gw-ar-node-local-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-gw-ar-node-local-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-gw-ar-node-local-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Ingress Gw Ar Node Local Subnet Subnet Param
 
-A [`subnet_param`](#ingress-gw-ar-node-local-subnet-subnet-param) block (within [`ingress\_gw\_ar.node.local_subnet`](#ingress-gw-ar-node-local-subnet)) supports the following:
+A [`subnet_param`](#ingress-gw-ar-node-local-subnet-subnet-param) block (within [`ingress_gw_ar.node.local_subnet`](#ingress-gw-ar-node-local-subnet)) supports the following:
 
 <a id="ingress-gw-ar-node-local-subnet-subnet-param-ipv4"></a>&#x2022; [`ipv4`](#ingress-gw-ar-node-local-subnet-subnet-param-ipv4) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
 
 #### Ingress Gw Ar Performance Enhancement Mode
 
-A [`performance\_enhancement\_mode`](#ingress-gw-ar-performance-enhancement-mode) block (within [`ingress\_gw\_ar`](#ingress-gw-ar)) supports the following:
+A [`performance_enhancement_mode`](#ingress-gw-ar-performance-enhancement-mode) block (within [`ingress_gw_ar`](#ingress-gw-ar)) supports the following:
 
-<a id="ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced"></a>&#x2022; [`perf\_mode_l3\_enhanced`](#ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced) below.
+<a id="ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced"></a>&#x2022; [`perf_mode_l3_enhanced`](#ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
-<a id="ingress-gw-ar-performance-enhancement-mode-perf-mode-l7-enhanced"></a>&#x2022; [`perf\_mode_l7\_enhanced`](#ingress-gw-ar-performance-enhancement-mode-perf-mode-l7-enhanced) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-gw-ar-performance-enhancement-mode-perf-mode-l7-enhanced"></a>&#x2022; [`perf_mode_l7_enhanced`](#ingress-gw-ar-performance-enhancement-mode-perf-mode-l7-enhanced) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Ingress Gw Ar Performance Enhancement Mode Perf Mode L3 Enhanced
 
-A [`perf\_mode_l3\_enhanced`](#ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced) block (within [`ingress\_gw\_ar.performance\_enhancement\_mode`](#ingress-gw-ar-performance-enhancement-mode)) supports the following:
+A [`perf_mode_l3_enhanced`](#ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced) block (within [`ingress_gw_ar.performance_enhancement_mode`](#ingress-gw-ar-performance-enhancement-mode)) supports the following:
 
 <a id="ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>&#x2022; [`jumbo`](#ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1590,23 +1590,23 @@ A [`perf\_mode_l3\_enhanced`](#ingress-gw-ar-performance-enhancement-mode-perf-m
 
 #### Kubernetes Upgrade Drain
 
-A [`kubernetes\_upgrade\_drain`](#kubernetes-upgrade-drain) block supports the following:
+A [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain) block supports the following:
 
-<a id="kubernetes-upgrade-drain-disable-upgrade-drain"></a>&#x2022; [`disable\_upgrade\_drain`](#kubernetes-upgrade-drain-disable-upgrade-drain) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kubernetes-upgrade-drain-disable-upgrade-drain"></a>&#x2022; [`disable_upgrade_drain`](#kubernetes-upgrade-drain-disable-upgrade-drain) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="kubernetes-upgrade-drain-enable-upgrade-drain"></a>&#x2022; [`enable\_upgrade\_drain`](#kubernetes-upgrade-drain-enable-upgrade-drain) - Optional Block<br>Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site<br>See [Enable Upgrade Drain](#kubernetes-upgrade-drain-enable-upgrade-drain) below.
+<a id="kubernetes-upgrade-drain-enable-upgrade-drain"></a>&#x2022; [`enable_upgrade_drain`](#kubernetes-upgrade-drain-enable-upgrade-drain) - Optional Block<br>Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site<br>See [Enable Upgrade Drain](#kubernetes-upgrade-drain-enable-upgrade-drain) below.
 
 #### Kubernetes Upgrade Drain Enable Upgrade Drain
 
-An [`enable\_upgrade\_drain`](#kubernetes-upgrade-drain-enable-upgrade-drain) block (within [`kubernetes\_upgrade\_drain`](#kubernetes-upgrade-drain)) supports the following:
+An [`enable_upgrade_drain`](#kubernetes-upgrade-drain-enable-upgrade-drain) block (within [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain)) supports the following:
 
-<a id="kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode"></a>&#x2022; [`disable\_vega_upgrade\_mode`](#kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode"></a>&#x2022; [`disable_vega_upgrade_mode`](#kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="kubernetes-upgrade-drain-enable-upgrade-drain-drain-max-unavailable-node-count"></a>&#x2022; [`drain\_max_unavailable_node\_count`](#kubernetes-upgrade-drain-enable-upgrade-drain-drain-max-unavailable-node-count) - Optional Number<br>Node Batch Size Count
+<a id="kubernetes-upgrade-drain-enable-upgrade-drain-drain-max-unavailable-node-count"></a>&#x2022; [`drain_max_unavailable_node_count`](#kubernetes-upgrade-drain-enable-upgrade-drain-drain-max-unavailable-node-count) - Optional Number<br>Node Batch Size Count
 
-<a id="kubernetes-upgrade-drain-enable-upgrade-drain-drain-node-timeout"></a>&#x2022; [`drain\_node\_timeout`](#kubernetes-upgrade-drain-enable-upgrade-drain-drain-node-timeout) - Optional Number<br>Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value)
+<a id="kubernetes-upgrade-drain-enable-upgrade-drain-drain-node-timeout"></a>&#x2022; [`drain_node_timeout`](#kubernetes-upgrade-drain-enable-upgrade-drain-drain-node-timeout) - Optional Number<br>Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value)
 
-<a id="kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode"></a>&#x2022; [`enable\_vega_upgrade\_mode`](#kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode"></a>&#x2022; [`enable_vega_upgrade_mode`](#kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Log Receiver
 
@@ -1620,27 +1620,27 @@ A [`log_receiver`](#log-receiver) block supports the following:
 
 #### Offline Survivability Mode
 
-An [`offline\_survivability\_mode`](#offline-survivability-mode) block supports the following:
+An [`offline_survivability_mode`](#offline-survivability-mode) block supports the following:
 
-<a id="offline-survivability-mode-enable-offline-survivability-mode"></a>&#x2022; [`enable\_offline_survivability\_mode`](#offline-survivability-mode-enable-offline-survivability-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="offline-survivability-mode-enable-offline-survivability-mode"></a>&#x2022; [`enable_offline_survivability_mode`](#offline-survivability-mode-enable-offline-survivability-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="offline-survivability-mode-no-offline-survivability-mode"></a>&#x2022; [`no\_offline_survivability\_mode`](#offline-survivability-mode-no-offline-survivability-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="offline-survivability-mode-no-offline-survivability-mode"></a>&#x2022; [`no_offline_survivability_mode`](#offline-survivability-mode-no-offline-survivability-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### OS
 
 An [`os`](#os) block supports the following:
 
-<a id="os-default-os-version"></a>&#x2022; [`default\_os\_version`](#os-default-os-version) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="os-default-os-version"></a>&#x2022; [`default_os_version`](#os-default-os-version) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="os-operating-system-version"></a>&#x2022; [`operating\_system\_version`](#os-operating-system-version) - Optional String<br>Operating System Version. Specify a OS version to be used e.g. 9.2024.6
+<a id="os-operating-system-version"></a>&#x2022; [`operating_system_version`](#os-operating-system-version) - Optional String<br>Operating System Version. Specify a OS version to be used e.g. 9.2024.6
 
 #### Sw
 
 A [`sw`](#sw) block supports the following:
 
-<a id="sw-default-sw-version"></a>&#x2022; [`default\_sw\_version`](#sw-default-sw-version) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="sw-default-sw-version"></a>&#x2022; [`default_sw_version`](#sw-default-sw-version) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="sw-volterra-software-version"></a>&#x2022; [`volterra\_software\_version`](#sw-volterra-software-version) - Optional String<br>F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002
+<a id="sw-volterra-software-version"></a>&#x2022; [`volterra_software_version`](#sw-volterra-software-version) - Optional String<br>F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002
 
 #### Timeouts
 
@@ -1666,7 +1666,7 @@ A [`vnet`](#vnet) block supports the following:
 
 An [`existing_vnet`](#vnet-existing-vnet) block (within [`vnet`](#vnet)) supports the following:
 
-<a id="vnet-existing-vnet-f5-orchestrated-routing"></a>&#x2022; [`f5\_orchestrated\_routing`](#vnet-existing-vnet-f5-orchestrated-routing) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="vnet-existing-vnet-f5-orchestrated-routing"></a>&#x2022; [`f5_orchestrated_routing`](#vnet-existing-vnet-f5-orchestrated-routing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="vnet-existing-vnet-manual-routing"></a>&#x2022; [`manual_routing`](#vnet-existing-vnet-manual-routing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1690,45 +1690,45 @@ A [`voltstack_cluster`](#voltstack-cluster) block supports the following:
 
 <a id="voltstack-cluster-accelerated-networking"></a>&#x2022; [`accelerated_networking`](#voltstack-cluster-accelerated-networking) - Optional Block<br>Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen<br>See [Accelerated Networking](#voltstack-cluster-accelerated-networking) below.
 
-<a id="voltstack-cluster-active-enhanced-firewall-policies"></a>&#x2022; [`active\_enhanced_firewall\_policies`](#voltstack-cluster-active-enhanced-firewall-policies) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#voltstack-cluster-active-enhanced-firewall-policies) below.
+<a id="voltstack-cluster-active-enhanced-firewall-policies"></a>&#x2022; [`active_enhanced_firewall_policies`](#voltstack-cluster-active-enhanced-firewall-policies) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#voltstack-cluster-active-enhanced-firewall-policies) below.
 
-<a id="voltstack-cluster-active-forward-proxy-policies"></a>&#x2022; [`active\_forward_proxy\_policies`](#voltstack-cluster-active-forward-proxy-policies) - Optional Block<br>Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#voltstack-cluster-active-forward-proxy-policies) below.
+<a id="voltstack-cluster-active-forward-proxy-policies"></a>&#x2022; [`active_forward_proxy_policies`](#voltstack-cluster-active-forward-proxy-policies) - Optional Block<br>Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#voltstack-cluster-active-forward-proxy-policies) below.
 
-<a id="voltstack-cluster-active-network-policies"></a>&#x2022; [`active\_network\_policies`](#voltstack-cluster-active-network-policies) - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#voltstack-cluster-active-network-policies) below.
+<a id="voltstack-cluster-active-network-policies"></a>&#x2022; [`active_network_policies`](#voltstack-cluster-active-network-policies) - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#voltstack-cluster-active-network-policies) below.
 
 <a id="voltstack-cluster-az-nodes"></a>&#x2022; [`az_nodes`](#voltstack-cluster-az-nodes) - Optional Block<br>App Stack Cluster (One Interface) Nodes in AZ. Only Single AZ or Three AZ(s) nodes are supported currently<br>See [Az Nodes](#voltstack-cluster-az-nodes) below.
 
-<a id="voltstack-cluster-azure-certified-hw"></a>&#x2022; [`azure\_certified\_hw`](#voltstack-cluster-azure-certified-hw) - Optional String<br>Azure Certified Hardware. Name for Azure certified hardware
+<a id="voltstack-cluster-azure-certified-hw"></a>&#x2022; [`azure_certified_hw`](#voltstack-cluster-azure-certified-hw) - Optional String<br>Azure Certified Hardware. Name for Azure certified hardware
 
-<a id="voltstack-cluster-dc-cluster-group"></a>&#x2022; [`dc\_cluster\_group`](#voltstack-cluster-dc-cluster-group) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group](#voltstack-cluster-dc-cluster-group) below.
+<a id="voltstack-cluster-dc-cluster-group"></a>&#x2022; [`dc_cluster_group`](#voltstack-cluster-dc-cluster-group) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group](#voltstack-cluster-dc-cluster-group) below.
 
 <a id="voltstack-cluster-default-storage"></a>&#x2022; [`default_storage`](#voltstack-cluster-default-storage) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="voltstack-cluster-forward-proxy-allow-all"></a>&#x2022; [`forward\_proxy_allow\_all`](#voltstack-cluster-forward-proxy-allow-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-forward-proxy-allow-all"></a>&#x2022; [`forward_proxy_allow_all`](#voltstack-cluster-forward-proxy-allow-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="voltstack-cluster-global-network-list"></a>&#x2022; [`global\_network\_list`](#voltstack-cluster-global-network-list) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#voltstack-cluster-global-network-list) below.
+<a id="voltstack-cluster-global-network-list"></a>&#x2022; [`global_network_list`](#voltstack-cluster-global-network-list) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#voltstack-cluster-global-network-list) below.
 
 <a id="voltstack-cluster-k8s-cluster"></a>&#x2022; [`k8s_cluster`](#voltstack-cluster-k8s-cluster) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [K8S Cluster](#voltstack-cluster-k8s-cluster) below.
 
-<a id="voltstack-cluster-no-dc-cluster-group"></a>&#x2022; [`no\_dc_cluster\_group`](#voltstack-cluster-no-dc-cluster-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#voltstack-cluster-no-dc-cluster-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="voltstack-cluster-no-forward-proxy"></a>&#x2022; [`no\_forward\_proxy`](#voltstack-cluster-no-forward-proxy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#voltstack-cluster-no-forward-proxy) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="voltstack-cluster-no-global-network"></a>&#x2022; [`no\_global\_network`](#voltstack-cluster-no-global-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-no-global-network"></a>&#x2022; [`no_global_network`](#voltstack-cluster-no-global-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="voltstack-cluster-no-k8s-cluster"></a>&#x2022; [`no\_k8s\_cluster`](#voltstack-cluster-no-k8s-cluster) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-no-k8s-cluster"></a>&#x2022; [`no_k8s_cluster`](#voltstack-cluster-no-k8s-cluster) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="voltstack-cluster-no-network-policy"></a>&#x2022; [`no\_network\_policy`](#voltstack-cluster-no-network-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-no-network-policy"></a>&#x2022; [`no_network_policy`](#voltstack-cluster-no-network-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="voltstack-cluster-no-outside-static-routes"></a>&#x2022; [`no\_outside_static\_routes`](#voltstack-cluster-no-outside-static-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-no-outside-static-routes"></a>&#x2022; [`no_outside_static_routes`](#voltstack-cluster-no-outside-static-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="voltstack-cluster-outside-static-routes"></a>&#x2022; [`outside\_static\_routes`](#voltstack-cluster-outside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Outside Static Routes](#voltstack-cluster-outside-static-routes) below.
+<a id="voltstack-cluster-outside-static-routes"></a>&#x2022; [`outside_static_routes`](#voltstack-cluster-outside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Outside Static Routes](#voltstack-cluster-outside-static-routes) below.
 
-<a id="voltstack-cluster-sm-connection-public-ip"></a>&#x2022; [`sm\_connection_public\_ip`](#voltstack-cluster-sm-connection-public-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-sm-connection-public-ip"></a>&#x2022; [`sm_connection_public_ip`](#voltstack-cluster-sm-connection-public-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="voltstack-cluster-sm-connection-pvt-ip"></a>&#x2022; [`sm\_connection_pvt\_ip`](#voltstack-cluster-sm-connection-pvt-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-sm-connection-pvt-ip"></a>&#x2022; [`sm_connection_pvt_ip`](#voltstack-cluster-sm-connection-pvt-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="voltstack-cluster-storage-class-list"></a>&#x2022; [`storage\_class\_list`](#voltstack-cluster-storage-class-list) - Optional Block<br>Custom Storage Class List. Add additional custom storage classes in kubernetes for this site<br>See [Storage Class List](#voltstack-cluster-storage-class-list) below.
+<a id="voltstack-cluster-storage-class-list"></a>&#x2022; [`storage_class_list`](#voltstack-cluster-storage-class-list) - Optional Block<br>Custom Storage Class List. Add additional custom storage classes in kubernetes for this site<br>See [Storage Class List](#voltstack-cluster-storage-class-list) below.
 
 #### Voltstack Cluster Accelerated Networking
 
@@ -1740,13 +1740,13 @@ An [`accelerated_networking`](#voltstack-cluster-accelerated-networking) block (
 
 #### Voltstack Cluster Active Enhanced Firewall Policies
 
-An [`active\_enhanced_firewall\_policies`](#voltstack-cluster-active-enhanced-firewall-policies) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
+An [`active_enhanced_firewall_policies`](#voltstack-cluster-active-enhanced-firewall-policies) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
 
-<a id="voltstack-cluster-active-enhanced-firewall-policies-enhanced-firewall-policies"></a>&#x2022; [`enhanced\_firewall\_policies`](#voltstack-cluster-active-enhanced-firewall-policies-enhanced-firewall-policies) - Optional Block<br>Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#voltstack-cluster-active-enhanced-firewall-policies-enhanced-firewall-policies) below.
+<a id="voltstack-cluster-active-enhanced-firewall-policies-enhanced-firewall-policies"></a>&#x2022; [`enhanced_firewall_policies`](#voltstack-cluster-active-enhanced-firewall-policies-enhanced-firewall-policies) - Optional Block<br>Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#voltstack-cluster-active-enhanced-firewall-policies-enhanced-firewall-policies) below.
 
 #### Voltstack Cluster Active Enhanced Firewall Policies Enhanced Firewall Policies
 
-An [`enhanced\_firewall\_policies`](#voltstack-cluster-active-enhanced-firewall-policies-enhanced-firewall-policies) block (within [`voltstack_cluster.active\_enhanced_firewall\_policies`](#voltstack-cluster-active-enhanced-firewall-policies)) supports the following:
+An [`enhanced_firewall_policies`](#voltstack-cluster-active-enhanced-firewall-policies-enhanced-firewall-policies) block (within [`voltstack_cluster.active_enhanced_firewall_policies`](#voltstack-cluster-active-enhanced-firewall-policies)) supports the following:
 
 <a id="voltstack-cluster-active-enhanced-firewall-policies-enhanced-firewall-policies-name"></a>&#x2022; [`name`](#voltstack-cluster-active-enhanced-firewall-policies-enhanced-firewall-policies-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1756,13 +1756,13 @@ An [`enhanced\_firewall\_policies`](#voltstack-cluster-active-enhanced-firewall-
 
 #### Voltstack Cluster Active Forward Proxy Policies
 
-An [`active\_forward_proxy\_policies`](#voltstack-cluster-active-forward-proxy-policies) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
+An [`active_forward_proxy_policies`](#voltstack-cluster-active-forward-proxy-policies) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
 
-<a id="voltstack-cluster-active-forward-proxy-policies-forward-proxy-policies"></a>&#x2022; [`forward\_proxy\_policies`](#voltstack-cluster-active-forward-proxy-policies-forward-proxy-policies) - Optional Block<br>Forward Proxy Policies. Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#voltstack-cluster-active-forward-proxy-policies-forward-proxy-policies) below.
+<a id="voltstack-cluster-active-forward-proxy-policies-forward-proxy-policies"></a>&#x2022; [`forward_proxy_policies`](#voltstack-cluster-active-forward-proxy-policies-forward-proxy-policies) - Optional Block<br>Forward Proxy Policies. Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#voltstack-cluster-active-forward-proxy-policies-forward-proxy-policies) below.
 
 #### Voltstack Cluster Active Forward Proxy Policies Forward Proxy Policies
 
-A [`forward\_proxy\_policies`](#voltstack-cluster-active-forward-proxy-policies-forward-proxy-policies) block (within [`voltstack_cluster.active\_forward_proxy\_policies`](#voltstack-cluster-active-forward-proxy-policies)) supports the following:
+A [`forward_proxy_policies`](#voltstack-cluster-active-forward-proxy-policies-forward-proxy-policies) block (within [`voltstack_cluster.active_forward_proxy_policies`](#voltstack-cluster-active-forward-proxy-policies)) supports the following:
 
 <a id="voltstack-cluster-active-forward-proxy-policies-forward-proxy-policies-name"></a>&#x2022; [`name`](#voltstack-cluster-active-forward-proxy-policies-forward-proxy-policies-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1772,13 +1772,13 @@ A [`forward\_proxy\_policies`](#voltstack-cluster-active-forward-proxy-policies-
 
 #### Voltstack Cluster Active Network Policies
 
-An [`active\_network\_policies`](#voltstack-cluster-active-network-policies) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
+An [`active_network_policies`](#voltstack-cluster-active-network-policies) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
 
 <a id="voltstack-cluster-active-network-policies-network-policies"></a>&#x2022; [`network_policies`](#voltstack-cluster-active-network-policies-network-policies) - Optional Block<br>Firewall Policy. Ordered List of Firewall Policies active for this network firewall<br>See [Network Policies](#voltstack-cluster-active-network-policies-network-policies) below.
 
 #### Voltstack Cluster Active Network Policies Network Policies
 
-A [`network_policies`](#voltstack-cluster-active-network-policies-network-policies) block (within [`voltstack_cluster.active\_network\_policies`](#voltstack-cluster-active-network-policies)) supports the following:
+A [`network_policies`](#voltstack-cluster-active-network-policies-network-policies) block (within [`voltstack_cluster.active_network_policies`](#voltstack-cluster-active-network-policies)) supports the following:
 
 <a id="voltstack-cluster-active-network-policies-network-policies-name"></a>&#x2022; [`name`](#voltstack-cluster-active-network-policies-network-policies-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1808,9 +1808,9 @@ A [`subnet`](#voltstack-cluster-az-nodes-local-subnet-subnet) block (within [`vo
 
 <a id="voltstack-cluster-az-nodes-local-subnet-subnet-subnet-name"></a>&#x2022; [`subnet_name`](#voltstack-cluster-az-nodes-local-subnet-subnet-subnet-name) - Optional String<br>Subnet Name. Name of existing subnet
 
-<a id="voltstack-cluster-az-nodes-local-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet\_resource\_grp`](#voltstack-cluster-az-nodes-local-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
+<a id="voltstack-cluster-az-nodes-local-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet_resource_grp`](#voltstack-cluster-az-nodes-local-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
 
-<a id="voltstack-cluster-az-nodes-local-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet\_resource\_group`](#voltstack-cluster-az-nodes-local-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-az-nodes-local-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#voltstack-cluster-az-nodes-local-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Voltstack Cluster Az Nodes Local Subnet Subnet Param
 
@@ -1820,7 +1820,7 @@ A [`subnet_param`](#voltstack-cluster-az-nodes-local-subnet-subnet-param) block 
 
 #### Voltstack Cluster Dc Cluster Group
 
-A [`dc\_cluster\_group`](#voltstack-cluster-dc-cluster-group) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
+A [`dc_cluster_group`](#voltstack-cluster-dc-cluster-group) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
 
 <a id="voltstack-cluster-dc-cluster-group-name"></a>&#x2022; [`name`](#voltstack-cluster-dc-cluster-group-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1830,27 +1830,27 @@ A [`dc\_cluster\_group`](#voltstack-cluster-dc-cluster-group) block (within [`vo
 
 #### Voltstack Cluster Global Network List
 
-A [`global\_network\_list`](#voltstack-cluster-global-network-list) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
+A [`global_network_list`](#voltstack-cluster-global-network-list) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
 
-<a id="voltstack-cluster-global-network-list-global-network-connections"></a>&#x2022; [`global\_network\_connections`](#voltstack-cluster-global-network-list-global-network-connections) - Optional Block<br>Global Network Connections. Global network connections<br>See [Global Network Connections](#voltstack-cluster-global-network-list-global-network-connections) below.
+<a id="voltstack-cluster-global-network-list-global-network-connections"></a>&#x2022; [`global_network_connections`](#voltstack-cluster-global-network-list-global-network-connections) - Optional Block<br>Global Network Connections. Global network connections<br>See [Global Network Connections](#voltstack-cluster-global-network-list-global-network-connections) below.
 
 #### Voltstack Cluster Global Network List Global Network Connections
 
-A [`global\_network\_connections`](#voltstack-cluster-global-network-list-global-network-connections) block (within [`voltstack_cluster.global\_network\_list`](#voltstack-cluster-global-network-list)) supports the following:
+A [`global_network_connections`](#voltstack-cluster-global-network-list-global-network-connections) block (within [`voltstack_cluster.global_network_list`](#voltstack-cluster-global-network-list)) supports the following:
 
-<a id="voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr"></a>&#x2022; [`sli\_to_global\_dr`](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr) below.
+<a id="voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr"></a>&#x2022; [`sli_to_global_dr`](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr) below.
 
-<a id="voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr"></a>&#x2022; [`slo\_to_global\_dr`](#voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr) below.
+<a id="voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr"></a>&#x2022; [`slo_to_global_dr`](#voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr) below.
 
 #### Voltstack Cluster Global Network List Global Network Connections SLI To Global DR
 
-A [`sli\_to_global\_dr`](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr) block (within [`voltstack_cluster.global\_network\_list.global\_network\_connections`](#voltstack-cluster-global-network-list-global-network-connections)) supports the following:
+A [`sli_to_global_dr`](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr) block (within [`voltstack_cluster.global_network_list.global_network_connections`](#voltstack-cluster-global-network-list-global-network-connections)) supports the following:
 
 <a id="voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr-global-vn"></a>&#x2022; [`global_vn`](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr-global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr-global-vn) below.
 
 #### Voltstack Cluster Global Network List Global Network Connections SLI To Global DR Global Vn
 
-A [`global_vn`](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr-global-vn) block (within [`voltstack_cluster.global\_network\_list.global\_network\_connections.sli\_to_global\_dr`](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr)) supports the following:
+A [`global_vn`](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr-global-vn) block (within [`voltstack_cluster.global_network_list.global_network_connections.sli_to_global_dr`](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr)) supports the following:
 
 <a id="voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr-global-vn-name"></a>&#x2022; [`name`](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr-global-vn-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1860,13 +1860,13 @@ A [`global_vn`](#voltstack-cluster-global-network-list-global-network-connection
 
 #### Voltstack Cluster Global Network List Global Network Connections Slo To Global DR
 
-A [`slo\_to_global\_dr`](#voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr) block (within [`voltstack_cluster.global\_network\_list.global\_network\_connections`](#voltstack-cluster-global-network-list-global-network-connections)) supports the following:
+A [`slo_to_global_dr`](#voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr) block (within [`voltstack_cluster.global_network_list.global_network_connections`](#voltstack-cluster-global-network-list-global-network-connections)) supports the following:
 
 <a id="voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr-global-vn"></a>&#x2022; [`global_vn`](#voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr-global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr-global-vn) below.
 
 #### Voltstack Cluster Global Network List Global Network Connections Slo To Global DR Global Vn
 
-A [`global_vn`](#voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr-global-vn) block (within [`voltstack_cluster.global\_network\_list.global\_network\_connections.slo\_to_global\_dr`](#voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr)) supports the following:
+A [`global_vn`](#voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr-global-vn) block (within [`voltstack_cluster.global_network_list.global_network_connections.slo_to_global_dr`](#voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr)) supports the following:
 
 <a id="voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr-global-vn-name"></a>&#x2022; [`name`](#voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr-global-vn-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1886,23 +1886,23 @@ A [`k8s_cluster`](#voltstack-cluster-k8s-cluster) block (within [`voltstack_clus
 
 #### Voltstack Cluster Outside Static Routes
 
-An [`outside\_static\_routes`](#voltstack-cluster-outside-static-routes) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
+An [`outside_static_routes`](#voltstack-cluster-outside-static-routes) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
 
-<a id="voltstack-cluster-outside-static-routes-static-route-list"></a>&#x2022; [`static\_route\_list`](#voltstack-cluster-outside-static-routes-static-route-list) - Optional Block<br>List of Static Routes. List of Static routes<br>See [Static Route List](#voltstack-cluster-outside-static-routes-static-route-list) below.
+<a id="voltstack-cluster-outside-static-routes-static-route-list"></a>&#x2022; [`static_route_list`](#voltstack-cluster-outside-static-routes-static-route-list) - Optional Block<br>List of Static Routes. List of Static routes<br>See [Static Route List](#voltstack-cluster-outside-static-routes-static-route-list) below.
 
 #### Voltstack Cluster Outside Static Routes Static Route List
 
-A [`static\_route\_list`](#voltstack-cluster-outside-static-routes-static-route-list) block (within [`voltstack_cluster.outside\_static\_routes`](#voltstack-cluster-outside-static-routes)) supports the following:
+A [`static_route_list`](#voltstack-cluster-outside-static-routes-static-route-list) block (within [`voltstack_cluster.outside_static_routes`](#voltstack-cluster-outside-static-routes)) supports the following:
 
-<a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route"></a>&#x2022; [`custom\_static\_route`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route) - Optional Block<br>Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them<br>See [Custom Static Route](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route) below.
+<a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route"></a>&#x2022; [`custom_static_route`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route) - Optional Block<br>Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them<br>See [Custom Static Route](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route) below.
 
-<a id="voltstack-cluster-outside-static-routes-static-route-list-simple-static-route"></a>&#x2022; [`simple\_static\_route`](#voltstack-cluster-outside-static-routes-static-route-list-simple-static-route) - Optional String<br>Simple Static Route. Use simple static route for prefix pointing to single interface in the network
+<a id="voltstack-cluster-outside-static-routes-static-route-list-simple-static-route"></a>&#x2022; [`simple_static_route`](#voltstack-cluster-outside-static-routes-static-route-list-simple-static-route) - Optional String<br>Simple Static Route. Use simple static route for prefix pointing to single interface in the network
 
 #### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route
 
-A [`custom\_static\_route`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route) block (within [`voltstack_cluster.outside\_static\_routes.static\_route\_list`](#voltstack-cluster-outside-static-routes-static-route-list)) supports the following:
+A [`custom_static_route`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route) block (within [`voltstack_cluster.outside_static_routes.static_route_list`](#voltstack-cluster-outside-static-routes-static-route-list)) supports the following:
 
-<a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-attrs"></a>&#x2022; [`attrs`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-attrs) - Optional List  Defaults to `ROUTE\_ATTR_NO\_OP`<br>Possible values are `ROUTE\_ATTR_NO\_OP`, `ROUTE\_ATTR\_ADVERTISE`, `ROUTE\_ATTR_INSTALL\_HOST`, `ROUTE\_ATTR_INSTALL\_FORWARDING`, `ROUTE\_ATTR_MERGE\_ONLY`<br>Attributes. List of route attributes associated with the static route
+<a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-attrs"></a>&#x2022; [`attrs`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of route attributes associated with the static route
 
 <a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-labels"></a>&#x2022; [`labels`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-labels) - Optional Block<br>Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy
 
@@ -1912,17 +1912,17 @@ A [`custom\_static\_route`](#voltstack-cluster-outside-static-routes-static-rout
 
 #### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Nexthop
 
-A [`nexthop`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop) block (within [`voltstack_cluster.outside\_static\_routes.static\_route\_list.custom\_static\_route`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route)) supports the following:
+A [`nexthop`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop) block (within [`voltstack_cluster.outside_static_routes.static_route_list.custom_static_route`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route)) supports the following:
 
 <a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-interface"></a>&#x2022; [`interface`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-interface) - Optional Block<br>Network Interface. Nexthop is network interface when type is 'Network-Interface'<br>See [Interface](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-interface) below.
 
 <a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address"></a>&#x2022; [`nexthop_address`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) - Optional Block<br>IP Address. IP Address used to specify an IPv4 or IPv6 address<br>See [Nexthop Address](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) below.
 
-<a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-type"></a>&#x2022; [`type`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-type) - Optional String  Defaults to `NEXT\_HOP_DEFAULT\_GATEWAY`<br>Possible values are `NEXT\_HOP_DEFAULT\_GATEWAY`, `NEXT\_HOP_USE\_CONFIGURED`, `NEXT\_HOP_NETWORK\_INTERFACE`<br>Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network
+<a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-type"></a>&#x2022; [`type`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-type) - Optional String  Defaults to `NEXT_HOP_DEFAULT_GATEWAY`<br>Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`<br>Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network
 
 #### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Nexthop Interface
 
-An [`interface`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-interface) block (within [`voltstack_cluster.outside\_static\_routes.static\_route\_list.custom\_static\_route.nexthop`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop)) supports the following:
+An [`interface`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-interface) block (within [`voltstack_cluster.outside_static_routes.static_route_list.custom_static_route.nexthop`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop)) supports the following:
 
 <a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-interface-kind"></a>&#x2022; [`kind`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-interface-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -1936,7 +1936,7 @@ An [`interface`](#voltstack-cluster-outside-static-routes-static-route-list-cust
 
 #### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address
 
-A [`nexthop_address`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) block (within [`voltstack_cluster.outside\_static\_routes.static\_route\_list.custom\_static\_route.nexthop`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop)) supports the following:
+A [`nexthop_address`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) block (within [`voltstack_cluster.outside_static_routes.static_route_list.custom_static_route.nexthop`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop)) supports the following:
 
 <a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4"></a>&#x2022; [`ipv4`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) below.
 
@@ -1944,19 +1944,19 @@ A [`nexthop_address`](#voltstack-cluster-outside-static-routes-static-route-list
 
 #### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4
 
-An [`ipv4`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) block (within [`voltstack_cluster.outside\_static\_routes.static\_route\_list.custom\_static\_route.nexthop.nexthop_address`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address)) supports the following:
+An [`ipv4`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) block (within [`voltstack_cluster.outside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address)) supports the following:
 
 <a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4-addr"></a>&#x2022; [`addr`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4-addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
 #### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6
 
-An [`ipv6`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6) block (within [`voltstack_cluster.outside\_static\_routes.static\_route\_list.custom\_static\_route.nexthop.nexthop_address`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address)) supports the following:
+An [`ipv6`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6) block (within [`voltstack_cluster.outside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address)) supports the following:
 
 <a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6-addr"></a>&#x2022; [`addr`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6-addr) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
 
 #### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Subnets
 
-A [`subnets`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-subnets) block (within [`voltstack_cluster.outside\_static\_routes.static\_route\_list.custom\_static\_route`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route)) supports the following:
+A [`subnets`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-subnets) block (within [`voltstack_cluster.outside_static_routes.static_route_list.custom_static_route`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route)) supports the following:
 
 <a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4"></a>&#x2022; [`ipv4`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4) - Optional Block<br>IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32<br>See [IPv4](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4) below.
 
@@ -1964,7 +1964,7 @@ A [`subnets`](#voltstack-cluster-outside-static-routes-static-route-list-custom-
 
 #### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Subnets IPv4
 
-An [`ipv4`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4) block (within [`voltstack_cluster.outside\_static\_routes.static\_route\_list.custom\_static\_route.subnets`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-subnets)) supports the following:
+An [`ipv4`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4) block (within [`voltstack_cluster.outside_static_routes.static_route_list.custom_static_route.subnets`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-subnets)) supports the following:
 
 <a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4-plen"></a>&#x2022; [`plen`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4-plen) - Optional Number<br>Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32
 
@@ -1972,7 +1972,7 @@ An [`ipv4`](#voltstack-cluster-outside-static-routes-static-route-list-custom-st
 
 #### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Subnets IPv6
 
-An [`ipv6`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6) block (within [`voltstack_cluster.outside\_static\_routes.static\_route\_list.custom\_static\_route.subnets`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-subnets)) supports the following:
+An [`ipv6`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6) block (within [`voltstack_cluster.outside_static_routes.static_route_list.custom_static_route.subnets`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-subnets)) supports the following:
 
 <a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6-plen"></a>&#x2022; [`plen`](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6-plen) - Optional Number<br>Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128
 
@@ -1980,67 +1980,67 @@ An [`ipv6`](#voltstack-cluster-outside-static-routes-static-route-list-custom-st
 
 #### Voltstack Cluster Storage Class List
 
-A [`storage\_class\_list`](#voltstack-cluster-storage-class-list) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
+A [`storage_class_list`](#voltstack-cluster-storage-class-list) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
 
 <a id="voltstack-cluster-storage-class-list-storage-classes"></a>&#x2022; [`storage_classes`](#voltstack-cluster-storage-class-list-storage-classes) - Optional Block<br>List of Storage Classes. List of custom storage classes<br>See [Storage Classes](#voltstack-cluster-storage-class-list-storage-classes) below.
 
 #### Voltstack Cluster Storage Class List Storage Classes
 
-A [`storage_classes`](#voltstack-cluster-storage-class-list-storage-classes) block (within [`voltstack_cluster.storage\_class\_list`](#voltstack-cluster-storage-class-list)) supports the following:
+A [`storage_classes`](#voltstack-cluster-storage-class-list-storage-classes) block (within [`voltstack_cluster.storage_class_list`](#voltstack-cluster-storage-class-list)) supports the following:
 
-<a id="voltstack-cluster-storage-class-list-storage-classes-default-storage-class"></a>&#x2022; [`default\_storage\_class`](#voltstack-cluster-storage-class-list-storage-classes-default-storage-class) - Optional Bool<br>Default Storage Class. Make this storage class default storage class for the K8S cluster
+<a id="voltstack-cluster-storage-class-list-storage-classes-default-storage-class"></a>&#x2022; [`default_storage_class`](#voltstack-cluster-storage-class-list-storage-classes-default-storage-class) - Optional Bool<br>Default Storage Class. Make this storage class default storage class for the K8S cluster
 
-<a id="voltstack-cluster-storage-class-list-storage-classes-storage-class-name"></a>&#x2022; [`storage\_class\_name`](#voltstack-cluster-storage-class-list-storage-classes-storage-class-name) - Optional String<br>Storage Class Name. Name of the storage class as it will appear in K8S
+<a id="voltstack-cluster-storage-class-list-storage-classes-storage-class-name"></a>&#x2022; [`storage_class_name`](#voltstack-cluster-storage-class-list-storage-classes-storage-class-name) - Optional String<br>Storage Class Name. Name of the storage class as it will appear in K8S
 
 #### Voltstack Cluster Ar
 
-A [`voltstack\_cluster\_ar`](#voltstack-cluster-ar) block supports the following:
+A [`voltstack_cluster_ar`](#voltstack-cluster-ar) block supports the following:
 
 <a id="voltstack-cluster-ar-accelerated-networking"></a>&#x2022; [`accelerated_networking`](#voltstack-cluster-ar-accelerated-networking) - Optional Block<br>Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen<br>See [Accelerated Networking](#voltstack-cluster-ar-accelerated-networking) below.
 
-<a id="voltstack-cluster-ar-active-enhanced-firewall-policies"></a>&#x2022; [`active\_enhanced_firewall\_policies`](#voltstack-cluster-ar-active-enhanced-firewall-policies) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#voltstack-cluster-ar-active-enhanced-firewall-policies) below.
+<a id="voltstack-cluster-ar-active-enhanced-firewall-policies"></a>&#x2022; [`active_enhanced_firewall_policies`](#voltstack-cluster-ar-active-enhanced-firewall-policies) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#voltstack-cluster-ar-active-enhanced-firewall-policies) below.
 
-<a id="voltstack-cluster-ar-active-forward-proxy-policies"></a>&#x2022; [`active\_forward_proxy\_policies`](#voltstack-cluster-ar-active-forward-proxy-policies) - Optional Block<br>Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#voltstack-cluster-ar-active-forward-proxy-policies) below.
+<a id="voltstack-cluster-ar-active-forward-proxy-policies"></a>&#x2022; [`active_forward_proxy_policies`](#voltstack-cluster-ar-active-forward-proxy-policies) - Optional Block<br>Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#voltstack-cluster-ar-active-forward-proxy-policies) below.
 
-<a id="voltstack-cluster-ar-active-network-policies"></a>&#x2022; [`active\_network\_policies`](#voltstack-cluster-ar-active-network-policies) - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#voltstack-cluster-ar-active-network-policies) below.
+<a id="voltstack-cluster-ar-active-network-policies"></a>&#x2022; [`active_network_policies`](#voltstack-cluster-ar-active-network-policies) - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#voltstack-cluster-ar-active-network-policies) below.
 
-<a id="voltstack-cluster-ar-azure-certified-hw"></a>&#x2022; [`azure\_certified\_hw`](#voltstack-cluster-ar-azure-certified-hw) - Optional String<br>Azure Certified Hardware. Name for Azure certified hardware
+<a id="voltstack-cluster-ar-azure-certified-hw"></a>&#x2022; [`azure_certified_hw`](#voltstack-cluster-ar-azure-certified-hw) - Optional String<br>Azure Certified Hardware. Name for Azure certified hardware
 
-<a id="voltstack-cluster-ar-dc-cluster-group"></a>&#x2022; [`dc\_cluster\_group`](#voltstack-cluster-ar-dc-cluster-group) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group](#voltstack-cluster-ar-dc-cluster-group) below.
+<a id="voltstack-cluster-ar-dc-cluster-group"></a>&#x2022; [`dc_cluster_group`](#voltstack-cluster-ar-dc-cluster-group) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group](#voltstack-cluster-ar-dc-cluster-group) below.
 
 <a id="voltstack-cluster-ar-default-storage"></a>&#x2022; [`default_storage`](#voltstack-cluster-ar-default-storage) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="voltstack-cluster-ar-forward-proxy-allow-all"></a>&#x2022; [`forward\_proxy_allow\_all`](#voltstack-cluster-ar-forward-proxy-allow-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-ar-forward-proxy-allow-all"></a>&#x2022; [`forward_proxy_allow_all`](#voltstack-cluster-ar-forward-proxy-allow-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="voltstack-cluster-ar-global-network-list"></a>&#x2022; [`global\_network\_list`](#voltstack-cluster-ar-global-network-list) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#voltstack-cluster-ar-global-network-list) below.
+<a id="voltstack-cluster-ar-global-network-list"></a>&#x2022; [`global_network_list`](#voltstack-cluster-ar-global-network-list) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#voltstack-cluster-ar-global-network-list) below.
 
 <a id="voltstack-cluster-ar-k8s-cluster"></a>&#x2022; [`k8s_cluster`](#voltstack-cluster-ar-k8s-cluster) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [K8S Cluster](#voltstack-cluster-ar-k8s-cluster) below.
 
-<a id="voltstack-cluster-ar-no-dc-cluster-group"></a>&#x2022; [`no\_dc_cluster\_group`](#voltstack-cluster-ar-no-dc-cluster-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-ar-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#voltstack-cluster-ar-no-dc-cluster-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="voltstack-cluster-ar-no-forward-proxy"></a>&#x2022; [`no\_forward\_proxy`](#voltstack-cluster-ar-no-forward-proxy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-ar-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#voltstack-cluster-ar-no-forward-proxy) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="voltstack-cluster-ar-no-global-network"></a>&#x2022; [`no\_global\_network`](#voltstack-cluster-ar-no-global-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-ar-no-global-network"></a>&#x2022; [`no_global_network`](#voltstack-cluster-ar-no-global-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="voltstack-cluster-ar-no-k8s-cluster"></a>&#x2022; [`no\_k8s\_cluster`](#voltstack-cluster-ar-no-k8s-cluster) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-ar-no-k8s-cluster"></a>&#x2022; [`no_k8s_cluster`](#voltstack-cluster-ar-no-k8s-cluster) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="voltstack-cluster-ar-no-network-policy"></a>&#x2022; [`no\_network\_policy`](#voltstack-cluster-ar-no-network-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-ar-no-network-policy"></a>&#x2022; [`no_network_policy`](#voltstack-cluster-ar-no-network-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="voltstack-cluster-ar-no-outside-static-routes"></a>&#x2022; [`no\_outside_static\_routes`](#voltstack-cluster-ar-no-outside-static-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-ar-no-outside-static-routes"></a>&#x2022; [`no_outside_static_routes`](#voltstack-cluster-ar-no-outside-static-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="voltstack-cluster-ar-node"></a>&#x2022; [`node`](#voltstack-cluster-ar-node) - Optional Block<br>Single Interface Node for Alternate Region. Parameters for creating Single interface Node for Alternate Region<br>See [Node](#voltstack-cluster-ar-node) below.
 
-<a id="voltstack-cluster-ar-outside-static-routes"></a>&#x2022; [`outside\_static\_routes`](#voltstack-cluster-ar-outside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Outside Static Routes](#voltstack-cluster-ar-outside-static-routes) below.
+<a id="voltstack-cluster-ar-outside-static-routes"></a>&#x2022; [`outside_static_routes`](#voltstack-cluster-ar-outside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Outside Static Routes](#voltstack-cluster-ar-outside-static-routes) below.
 
-<a id="voltstack-cluster-ar-sm-connection-public-ip"></a>&#x2022; [`sm\_connection_public\_ip`](#voltstack-cluster-ar-sm-connection-public-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-ar-sm-connection-public-ip"></a>&#x2022; [`sm_connection_public_ip`](#voltstack-cluster-ar-sm-connection-public-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="voltstack-cluster-ar-sm-connection-pvt-ip"></a>&#x2022; [`sm\_connection_pvt\_ip`](#voltstack-cluster-ar-sm-connection-pvt-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-ar-sm-connection-pvt-ip"></a>&#x2022; [`sm_connection_pvt_ip`](#voltstack-cluster-ar-sm-connection-pvt-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="voltstack-cluster-ar-storage-class-list"></a>&#x2022; [`storage\_class\_list`](#voltstack-cluster-ar-storage-class-list) - Optional Block<br>Custom Storage Class List. Add additional custom storage classes in kubernetes for this site<br>See [Storage Class List](#voltstack-cluster-ar-storage-class-list) below.
+<a id="voltstack-cluster-ar-storage-class-list"></a>&#x2022; [`storage_class_list`](#voltstack-cluster-ar-storage-class-list) - Optional Block<br>Custom Storage Class List. Add additional custom storage classes in kubernetes for this site<br>See [Storage Class List](#voltstack-cluster-ar-storage-class-list) below.
 
 #### Voltstack Cluster Ar Accelerated Networking
 
-An [`accelerated_networking`](#voltstack-cluster-ar-accelerated-networking) block (within [`voltstack\_cluster\_ar`](#voltstack-cluster-ar)) supports the following:
+An [`accelerated_networking`](#voltstack-cluster-ar-accelerated-networking) block (within [`voltstack_cluster_ar`](#voltstack-cluster-ar)) supports the following:
 
 <a id="voltstack-cluster-ar-accelerated-networking-disable"></a>&#x2022; [`disable`](#voltstack-cluster-ar-accelerated-networking-disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2048,13 +2048,13 @@ An [`accelerated_networking`](#voltstack-cluster-ar-accelerated-networking) bloc
 
 #### Voltstack Cluster Ar Active Enhanced Firewall Policies
 
-An [`active\_enhanced_firewall\_policies`](#voltstack-cluster-ar-active-enhanced-firewall-policies) block (within [`voltstack\_cluster\_ar`](#voltstack-cluster-ar)) supports the following:
+An [`active_enhanced_firewall_policies`](#voltstack-cluster-ar-active-enhanced-firewall-policies) block (within [`voltstack_cluster_ar`](#voltstack-cluster-ar)) supports the following:
 
-<a id="voltstack-cluster-ar-active-enhanced-firewall-policies-enhanced-firewall-policies"></a>&#x2022; [`enhanced\_firewall\_policies`](#voltstack-cluster-ar-active-enhanced-firewall-policies-enhanced-firewall-policies) - Optional Block<br>Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#voltstack-cluster-ar-active-enhanced-firewall-policies-enhanced-firewall-policies) below.
+<a id="voltstack-cluster-ar-active-enhanced-firewall-policies-enhanced-firewall-policies"></a>&#x2022; [`enhanced_firewall_policies`](#voltstack-cluster-ar-active-enhanced-firewall-policies-enhanced-firewall-policies) - Optional Block<br>Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#voltstack-cluster-ar-active-enhanced-firewall-policies-enhanced-firewall-policies) below.
 
 #### Voltstack Cluster Ar Active Enhanced Firewall Policies Enhanced Firewall Policies
 
-An [`enhanced\_firewall\_policies`](#voltstack-cluster-ar-active-enhanced-firewall-policies-enhanced-firewall-policies) block (within [`voltstack\_cluster\_ar.active\_enhanced_firewall\_policies`](#voltstack-cluster-ar-active-enhanced-firewall-policies)) supports the following:
+An [`enhanced_firewall_policies`](#voltstack-cluster-ar-active-enhanced-firewall-policies-enhanced-firewall-policies) block (within [`voltstack_cluster_ar.active_enhanced_firewall_policies`](#voltstack-cluster-ar-active-enhanced-firewall-policies)) supports the following:
 
 <a id="voltstack-cluster-ar-active-enhanced-firewall-policies-enhanced-firewall-policies-name"></a>&#x2022; [`name`](#voltstack-cluster-ar-active-enhanced-firewall-policies-enhanced-firewall-policies-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -2064,13 +2064,13 @@ An [`enhanced\_firewall\_policies`](#voltstack-cluster-ar-active-enhanced-firewa
 
 #### Voltstack Cluster Ar Active Forward Proxy Policies
 
-An [`active\_forward_proxy\_policies`](#voltstack-cluster-ar-active-forward-proxy-policies) block (within [`voltstack\_cluster\_ar`](#voltstack-cluster-ar)) supports the following:
+An [`active_forward_proxy_policies`](#voltstack-cluster-ar-active-forward-proxy-policies) block (within [`voltstack_cluster_ar`](#voltstack-cluster-ar)) supports the following:
 
-<a id="voltstack-cluster-ar-active-forward-proxy-policies-forward-proxy-policies"></a>&#x2022; [`forward\_proxy\_policies`](#voltstack-cluster-ar-active-forward-proxy-policies-forward-proxy-policies) - Optional Block<br>Forward Proxy Policies. Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#voltstack-cluster-ar-active-forward-proxy-policies-forward-proxy-policies) below.
+<a id="voltstack-cluster-ar-active-forward-proxy-policies-forward-proxy-policies"></a>&#x2022; [`forward_proxy_policies`](#voltstack-cluster-ar-active-forward-proxy-policies-forward-proxy-policies) - Optional Block<br>Forward Proxy Policies. Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#voltstack-cluster-ar-active-forward-proxy-policies-forward-proxy-policies) below.
 
 #### Voltstack Cluster Ar Active Forward Proxy Policies Forward Proxy Policies
 
-A [`forward\_proxy\_policies`](#voltstack-cluster-ar-active-forward-proxy-policies-forward-proxy-policies) block (within [`voltstack\_cluster\_ar.active\_forward_proxy\_policies`](#voltstack-cluster-ar-active-forward-proxy-policies)) supports the following:
+A [`forward_proxy_policies`](#voltstack-cluster-ar-active-forward-proxy-policies-forward-proxy-policies) block (within [`voltstack_cluster_ar.active_forward_proxy_policies`](#voltstack-cluster-ar-active-forward-proxy-policies)) supports the following:
 
 <a id="voltstack-cluster-ar-active-forward-proxy-policies-forward-proxy-policies-name"></a>&#x2022; [`name`](#voltstack-cluster-ar-active-forward-proxy-policies-forward-proxy-policies-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -2080,13 +2080,13 @@ A [`forward\_proxy\_policies`](#voltstack-cluster-ar-active-forward-proxy-polici
 
 #### Voltstack Cluster Ar Active Network Policies
 
-An [`active\_network\_policies`](#voltstack-cluster-ar-active-network-policies) block (within [`voltstack\_cluster\_ar`](#voltstack-cluster-ar)) supports the following:
+An [`active_network_policies`](#voltstack-cluster-ar-active-network-policies) block (within [`voltstack_cluster_ar`](#voltstack-cluster-ar)) supports the following:
 
 <a id="voltstack-cluster-ar-active-network-policies-network-policies"></a>&#x2022; [`network_policies`](#voltstack-cluster-ar-active-network-policies-network-policies) - Optional Block<br>Firewall Policy. Ordered List of Firewall Policies active for this network firewall<br>See [Network Policies](#voltstack-cluster-ar-active-network-policies-network-policies) below.
 
 #### Voltstack Cluster Ar Active Network Policies Network Policies
 
-A [`network_policies`](#voltstack-cluster-ar-active-network-policies-network-policies) block (within [`voltstack\_cluster\_ar.active\_network\_policies`](#voltstack-cluster-ar-active-network-policies)) supports the following:
+A [`network_policies`](#voltstack-cluster-ar-active-network-policies-network-policies) block (within [`voltstack_cluster_ar.active_network_policies`](#voltstack-cluster-ar-active-network-policies)) supports the following:
 
 <a id="voltstack-cluster-ar-active-network-policies-network-policies-name"></a>&#x2022; [`name`](#voltstack-cluster-ar-active-network-policies-network-policies-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -2096,7 +2096,7 @@ A [`network_policies`](#voltstack-cluster-ar-active-network-policies-network-pol
 
 #### Voltstack Cluster Ar Dc Cluster Group
 
-A [`dc\_cluster\_group`](#voltstack-cluster-ar-dc-cluster-group) block (within [`voltstack\_cluster\_ar`](#voltstack-cluster-ar)) supports the following:
+A [`dc_cluster_group`](#voltstack-cluster-ar-dc-cluster-group) block (within [`voltstack_cluster_ar`](#voltstack-cluster-ar)) supports the following:
 
 <a id="voltstack-cluster-ar-dc-cluster-group-name"></a>&#x2022; [`name`](#voltstack-cluster-ar-dc-cluster-group-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -2106,27 +2106,27 @@ A [`dc\_cluster\_group`](#voltstack-cluster-ar-dc-cluster-group) block (within [
 
 #### Voltstack Cluster Ar Global Network List
 
-A [`global\_network\_list`](#voltstack-cluster-ar-global-network-list) block (within [`voltstack\_cluster\_ar`](#voltstack-cluster-ar)) supports the following:
+A [`global_network_list`](#voltstack-cluster-ar-global-network-list) block (within [`voltstack_cluster_ar`](#voltstack-cluster-ar)) supports the following:
 
-<a id="voltstack-cluster-ar-global-network-list-global-network-connections"></a>&#x2022; [`global\_network\_connections`](#voltstack-cluster-ar-global-network-list-global-network-connections) - Optional Block<br>Global Network Connections. Global network connections<br>See [Global Network Connections](#voltstack-cluster-ar-global-network-list-global-network-connections) below.
+<a id="voltstack-cluster-ar-global-network-list-global-network-connections"></a>&#x2022; [`global_network_connections`](#voltstack-cluster-ar-global-network-list-global-network-connections) - Optional Block<br>Global Network Connections. Global network connections<br>See [Global Network Connections](#voltstack-cluster-ar-global-network-list-global-network-connections) below.
 
 #### Voltstack Cluster Ar Global Network List Global Network Connections
 
-A [`global\_network\_connections`](#voltstack-cluster-ar-global-network-list-global-network-connections) block (within [`voltstack\_cluster\_ar.global\_network\_list`](#voltstack-cluster-ar-global-network-list)) supports the following:
+A [`global_network_connections`](#voltstack-cluster-ar-global-network-list-global-network-connections) block (within [`voltstack_cluster_ar.global_network_list`](#voltstack-cluster-ar-global-network-list)) supports the following:
 
-<a id="voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr"></a>&#x2022; [`sli\_to_global\_dr`](#voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr) below.
+<a id="voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr"></a>&#x2022; [`sli_to_global_dr`](#voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr) below.
 
-<a id="voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr"></a>&#x2022; [`slo\_to_global\_dr`](#voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr) below.
+<a id="voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr"></a>&#x2022; [`slo_to_global_dr`](#voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr) below.
 
 #### Voltstack Cluster Ar Global Network List Global Network Connections SLI To Global DR
 
-A [`sli\_to_global\_dr`](#voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr) block (within [`voltstack\_cluster\_ar.global\_network\_list.global\_network\_connections`](#voltstack-cluster-ar-global-network-list-global-network-connections)) supports the following:
+A [`sli_to_global_dr`](#voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr) block (within [`voltstack_cluster_ar.global_network_list.global_network_connections`](#voltstack-cluster-ar-global-network-list-global-network-connections)) supports the following:
 
 <a id="voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr-global-vn"></a>&#x2022; [`global_vn`](#voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr-global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr-global-vn) below.
 
 #### Voltstack Cluster Ar Global Network List Global Network Connections SLI To Global DR Global Vn
 
-A [`global_vn`](#voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr-global-vn) block (within [`voltstack\_cluster\_ar.global\_network\_list.global\_network\_connections.sli\_to_global\_dr`](#voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr)) supports the following:
+A [`global_vn`](#voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr-global-vn) block (within [`voltstack_cluster_ar.global_network_list.global_network_connections.sli_to_global_dr`](#voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr)) supports the following:
 
 <a id="voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr-global-vn-name"></a>&#x2022; [`name`](#voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr-global-vn-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -2136,13 +2136,13 @@ A [`global_vn`](#voltstack-cluster-ar-global-network-list-global-network-connect
 
 #### Voltstack Cluster Ar Global Network List Global Network Connections Slo To Global DR
 
-A [`slo\_to_global\_dr`](#voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr) block (within [`voltstack\_cluster\_ar.global\_network\_list.global\_network\_connections`](#voltstack-cluster-ar-global-network-list-global-network-connections)) supports the following:
+A [`slo_to_global_dr`](#voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr) block (within [`voltstack_cluster_ar.global_network_list.global_network_connections`](#voltstack-cluster-ar-global-network-list-global-network-connections)) supports the following:
 
 <a id="voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr-global-vn"></a>&#x2022; [`global_vn`](#voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr-global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr-global-vn) below.
 
 #### Voltstack Cluster Ar Global Network List Global Network Connections Slo To Global DR Global Vn
 
-A [`global_vn`](#voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr-global-vn) block (within [`voltstack\_cluster\_ar.global\_network\_list.global\_network\_connections.slo\_to_global\_dr`](#voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr)) supports the following:
+A [`global_vn`](#voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr-global-vn) block (within [`voltstack_cluster_ar.global_network_list.global_network_connections.slo_to_global_dr`](#voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr)) supports the following:
 
 <a id="voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr-global-vn-name"></a>&#x2022; [`name`](#voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr-global-vn-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -2152,7 +2152,7 @@ A [`global_vn`](#voltstack-cluster-ar-global-network-list-global-network-connect
 
 #### Voltstack Cluster Ar K8S Cluster
 
-A [`k8s_cluster`](#voltstack-cluster-ar-k8s-cluster) block (within [`voltstack\_cluster\_ar`](#voltstack-cluster-ar)) supports the following:
+A [`k8s_cluster`](#voltstack-cluster-ar-k8s-cluster) block (within [`voltstack_cluster_ar`](#voltstack-cluster-ar)) supports the following:
 
 <a id="voltstack-cluster-ar-k8s-cluster-name"></a>&#x2022; [`name`](#voltstack-cluster-ar-k8s-cluster-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -2162,7 +2162,7 @@ A [`k8s_cluster`](#voltstack-cluster-ar-k8s-cluster) block (within [`voltstack\_
 
 #### Voltstack Cluster Ar Node
 
-A [`node`](#voltstack-cluster-ar-node) block (within [`voltstack\_cluster\_ar`](#voltstack-cluster-ar)) supports the following:
+A [`node`](#voltstack-cluster-ar-node) block (within [`voltstack_cluster_ar`](#voltstack-cluster-ar)) supports the following:
 
 <a id="voltstack-cluster-ar-node-fault-domain"></a>&#x2022; [`fault_domain`](#voltstack-cluster-ar-node-fault-domain) - Optional Number<br>Number of fault domains. Namuber of fault domains to be used while creating the availability set
 
@@ -2174,7 +2174,7 @@ A [`node`](#voltstack-cluster-ar-node) block (within [`voltstack\_cluster\_ar`](
 
 #### Voltstack Cluster Ar Node Local Subnet
 
-A [`local_subnet`](#voltstack-cluster-ar-node-local-subnet) block (within [`voltstack\_cluster\_ar.node`](#voltstack-cluster-ar-node)) supports the following:
+A [`local_subnet`](#voltstack-cluster-ar-node-local-subnet) block (within [`voltstack_cluster_ar.node`](#voltstack-cluster-ar-node)) supports the following:
 
 <a id="voltstack-cluster-ar-node-local-subnet-subnet"></a>&#x2022; [`subnet`](#voltstack-cluster-ar-node-local-subnet-subnet) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Subnet](#voltstack-cluster-ar-node-local-subnet-subnet) below.
 
@@ -2182,39 +2182,39 @@ A [`local_subnet`](#voltstack-cluster-ar-node-local-subnet) block (within [`volt
 
 #### Voltstack Cluster Ar Node Local Subnet Subnet
 
-A [`subnet`](#voltstack-cluster-ar-node-local-subnet-subnet) block (within [`voltstack\_cluster\_ar.node.local_subnet`](#voltstack-cluster-ar-node-local-subnet)) supports the following:
+A [`subnet`](#voltstack-cluster-ar-node-local-subnet-subnet) block (within [`voltstack_cluster_ar.node.local_subnet`](#voltstack-cluster-ar-node-local-subnet)) supports the following:
 
 <a id="voltstack-cluster-ar-node-local-subnet-subnet-subnet-name"></a>&#x2022; [`subnet_name`](#voltstack-cluster-ar-node-local-subnet-subnet-subnet-name) - Optional String<br>Subnet Name. Name of existing subnet
 
-<a id="voltstack-cluster-ar-node-local-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet\_resource\_grp`](#voltstack-cluster-ar-node-local-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
+<a id="voltstack-cluster-ar-node-local-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet_resource_grp`](#voltstack-cluster-ar-node-local-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
 
-<a id="voltstack-cluster-ar-node-local-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet\_resource\_group`](#voltstack-cluster-ar-node-local-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-ar-node-local-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#voltstack-cluster-ar-node-local-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Voltstack Cluster Ar Node Local Subnet Subnet Param
 
-A [`subnet_param`](#voltstack-cluster-ar-node-local-subnet-subnet-param) block (within [`voltstack\_cluster\_ar.node.local_subnet`](#voltstack-cluster-ar-node-local-subnet)) supports the following:
+A [`subnet_param`](#voltstack-cluster-ar-node-local-subnet-subnet-param) block (within [`voltstack_cluster_ar.node.local_subnet`](#voltstack-cluster-ar-node-local-subnet)) supports the following:
 
 <a id="voltstack-cluster-ar-node-local-subnet-subnet-param-ipv4"></a>&#x2022; [`ipv4`](#voltstack-cluster-ar-node-local-subnet-subnet-param-ipv4) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
 
 #### Voltstack Cluster Ar Outside Static Routes
 
-An [`outside\_static\_routes`](#voltstack-cluster-ar-outside-static-routes) block (within [`voltstack\_cluster\_ar`](#voltstack-cluster-ar)) supports the following:
+An [`outside_static_routes`](#voltstack-cluster-ar-outside-static-routes) block (within [`voltstack_cluster_ar`](#voltstack-cluster-ar)) supports the following:
 
-<a id="voltstack-cluster-ar-outside-static-routes-static-route-list"></a>&#x2022; [`static\_route\_list`](#voltstack-cluster-ar-outside-static-routes-static-route-list) - Optional Block<br>List of Static Routes. List of Static routes<br>See [Static Route List](#voltstack-cluster-ar-outside-static-routes-static-route-list) below.
+<a id="voltstack-cluster-ar-outside-static-routes-static-route-list"></a>&#x2022; [`static_route_list`](#voltstack-cluster-ar-outside-static-routes-static-route-list) - Optional Block<br>List of Static Routes. List of Static routes<br>See [Static Route List](#voltstack-cluster-ar-outside-static-routes-static-route-list) below.
 
 #### Voltstack Cluster Ar Outside Static Routes Static Route List
 
-A [`static\_route\_list`](#voltstack-cluster-ar-outside-static-routes-static-route-list) block (within [`voltstack\_cluster\_ar.outside\_static\_routes`](#voltstack-cluster-ar-outside-static-routes)) supports the following:
+A [`static_route_list`](#voltstack-cluster-ar-outside-static-routes-static-route-list) block (within [`voltstack_cluster_ar.outside_static_routes`](#voltstack-cluster-ar-outside-static-routes)) supports the following:
 
-<a id="voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route"></a>&#x2022; [`custom\_static\_route`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route) - Optional Block<br>Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them<br>See [Custom Static Route](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route) below.
+<a id="voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route"></a>&#x2022; [`custom_static_route`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route) - Optional Block<br>Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them<br>See [Custom Static Route](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route) below.
 
-<a id="voltstack-cluster-ar-outside-static-routes-static-route-list-simple-static-route"></a>&#x2022; [`simple\_static\_route`](#voltstack-cluster-ar-outside-static-routes-static-route-list-simple-static-route) - Optional String<br>Simple Static Route. Use simple static route for prefix pointing to single interface in the network
+<a id="voltstack-cluster-ar-outside-static-routes-static-route-list-simple-static-route"></a>&#x2022; [`simple_static_route`](#voltstack-cluster-ar-outside-static-routes-static-route-list-simple-static-route) - Optional String<br>Simple Static Route. Use simple static route for prefix pointing to single interface in the network
 
 #### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route
 
-A [`custom\_static\_route`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route) block (within [`voltstack\_cluster\_ar.outside\_static\_routes.static\_route\_list`](#voltstack-cluster-ar-outside-static-routes-static-route-list)) supports the following:
+A [`custom_static_route`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route) block (within [`voltstack_cluster_ar.outside_static_routes.static_route_list`](#voltstack-cluster-ar-outside-static-routes-static-route-list)) supports the following:
 
-<a id="voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-attrs"></a>&#x2022; [`attrs`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-attrs) - Optional List  Defaults to `ROUTE\_ATTR_NO\_OP`<br>Possible values are `ROUTE\_ATTR_NO\_OP`, `ROUTE\_ATTR\_ADVERTISE`, `ROUTE\_ATTR_INSTALL\_HOST`, `ROUTE\_ATTR_INSTALL\_FORWARDING`, `ROUTE\_ATTR_MERGE\_ONLY`<br>Attributes. List of route attributes associated with the static route
+<a id="voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-attrs"></a>&#x2022; [`attrs`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of route attributes associated with the static route
 
 <a id="voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-labels"></a>&#x2022; [`labels`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-labels) - Optional Block<br>Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy
 
@@ -2224,17 +2224,17 @@ A [`custom\_static\_route`](#voltstack-cluster-ar-outside-static-routes-static-r
 
 #### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Nexthop
 
-A [`nexthop`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop) block (within [`voltstack\_cluster\_ar.outside\_static\_routes.static\_route\_list.custom\_static\_route`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route)) supports the following:
+A [`nexthop`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop) block (within [`voltstack_cluster_ar.outside_static_routes.static_route_list.custom_static_route`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route)) supports the following:
 
 <a id="voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-interface"></a>&#x2022; [`interface`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-interface) - Optional Block<br>Network Interface. Nexthop is network interface when type is 'Network-Interface'<br>See [Interface](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-interface) below.
 
 <a id="voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address"></a>&#x2022; [`nexthop_address`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) - Optional Block<br>IP Address. IP Address used to specify an IPv4 or IPv6 address<br>See [Nexthop Address](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) below.
 
-<a id="voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-type"></a>&#x2022; [`type`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-type) - Optional String  Defaults to `NEXT\_HOP_DEFAULT\_GATEWAY`<br>Possible values are `NEXT\_HOP_DEFAULT\_GATEWAY`, `NEXT\_HOP_USE\_CONFIGURED`, `NEXT\_HOP_NETWORK\_INTERFACE`<br>Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network
+<a id="voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-type"></a>&#x2022; [`type`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-type) - Optional String  Defaults to `NEXT_HOP_DEFAULT_GATEWAY`<br>Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`<br>Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network
 
 #### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Nexthop Interface
 
-An [`interface`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-interface) block (within [`voltstack\_cluster\_ar.outside\_static\_routes.static\_route\_list.custom\_static\_route.nexthop`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop)) supports the following:
+An [`interface`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-interface) block (within [`voltstack_cluster_ar.outside_static_routes.static_route_list.custom_static_route.nexthop`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop)) supports the following:
 
 <a id="voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-interface-kind"></a>&#x2022; [`kind`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-interface-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -2248,7 +2248,7 @@ An [`interface`](#voltstack-cluster-ar-outside-static-routes-static-route-list-c
 
 #### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address
 
-A [`nexthop_address`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) block (within [`voltstack\_cluster\_ar.outside\_static\_routes.static\_route\_list.custom\_static\_route.nexthop`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop)) supports the following:
+A [`nexthop_address`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) block (within [`voltstack_cluster_ar.outside_static_routes.static_route_list.custom_static_route.nexthop`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop)) supports the following:
 
 <a id="voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4"></a>&#x2022; [`ipv4`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) below.
 
@@ -2256,19 +2256,19 @@ A [`nexthop_address`](#voltstack-cluster-ar-outside-static-routes-static-route-l
 
 #### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4
 
-An [`ipv4`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) block (within [`voltstack\_cluster\_ar.outside\_static\_routes.static\_route\_list.custom\_static\_route.nexthop.nexthop_address`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address)) supports the following:
+An [`ipv4`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) block (within [`voltstack_cluster_ar.outside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address)) supports the following:
 
 <a id="voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4-addr"></a>&#x2022; [`addr`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4-addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
 #### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6
 
-An [`ipv6`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6) block (within [`voltstack\_cluster\_ar.outside\_static\_routes.static\_route\_list.custom\_static\_route.nexthop.nexthop_address`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address)) supports the following:
+An [`ipv6`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6) block (within [`voltstack_cluster_ar.outside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address)) supports the following:
 
 <a id="voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6-addr"></a>&#x2022; [`addr`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6-addr) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
 
 #### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Subnets
 
-A [`subnets`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-subnets) block (within [`voltstack\_cluster\_ar.outside\_static\_routes.static\_route\_list.custom\_static\_route`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route)) supports the following:
+A [`subnets`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-subnets) block (within [`voltstack_cluster_ar.outside_static_routes.static_route_list.custom_static_route`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route)) supports the following:
 
 <a id="voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4"></a>&#x2022; [`ipv4`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4) - Optional Block<br>IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32<br>See [IPv4](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4) below.
 
@@ -2276,7 +2276,7 @@ A [`subnets`](#voltstack-cluster-ar-outside-static-routes-static-route-list-cust
 
 #### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Subnets IPv4
 
-An [`ipv4`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4) block (within [`voltstack\_cluster\_ar.outside\_static\_routes.static\_route\_list.custom\_static\_route.subnets`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-subnets)) supports the following:
+An [`ipv4`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4) block (within [`voltstack_cluster_ar.outside_static_routes.static_route_list.custom_static_route.subnets`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-subnets)) supports the following:
 
 <a id="voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4-plen"></a>&#x2022; [`plen`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4-plen) - Optional Number<br>Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32
 
@@ -2284,7 +2284,7 @@ An [`ipv4`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom
 
 #### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Subnets IPv6
 
-An [`ipv6`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6) block (within [`voltstack\_cluster\_ar.outside\_static\_routes.static\_route\_list.custom\_static\_route.subnets`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-subnets)) supports the following:
+An [`ipv6`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6) block (within [`voltstack_cluster_ar.outside_static_routes.static_route_list.custom_static_route.subnets`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-subnets)) supports the following:
 
 <a id="voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6-plen"></a>&#x2022; [`plen`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6-plen) - Optional Number<br>Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128
 
@@ -2292,17 +2292,17 @@ An [`ipv6`](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom
 
 #### Voltstack Cluster Ar Storage Class List
 
-A [`storage\_class\_list`](#voltstack-cluster-ar-storage-class-list) block (within [`voltstack\_cluster\_ar`](#voltstack-cluster-ar)) supports the following:
+A [`storage_class_list`](#voltstack-cluster-ar-storage-class-list) block (within [`voltstack_cluster_ar`](#voltstack-cluster-ar)) supports the following:
 
 <a id="voltstack-cluster-ar-storage-class-list-storage-classes"></a>&#x2022; [`storage_classes`](#voltstack-cluster-ar-storage-class-list-storage-classes) - Optional Block<br>List of Storage Classes. List of custom storage classes<br>See [Storage Classes](#voltstack-cluster-ar-storage-class-list-storage-classes) below.
 
 #### Voltstack Cluster Ar Storage Class List Storage Classes
 
-A [`storage_classes`](#voltstack-cluster-ar-storage-class-list-storage-classes) block (within [`voltstack\_cluster\_ar.storage\_class\_list`](#voltstack-cluster-ar-storage-class-list)) supports the following:
+A [`storage_classes`](#voltstack-cluster-ar-storage-class-list-storage-classes) block (within [`voltstack_cluster_ar.storage_class_list`](#voltstack-cluster-ar-storage-class-list)) supports the following:
 
-<a id="voltstack-cluster-ar-storage-class-list-storage-classes-default-storage-class"></a>&#x2022; [`default\_storage\_class`](#voltstack-cluster-ar-storage-class-list-storage-classes-default-storage-class) - Optional Bool<br>Default Storage Class. Make this storage class default storage class for the K8S cluster
+<a id="voltstack-cluster-ar-storage-class-list-storage-classes-default-storage-class"></a>&#x2022; [`default_storage_class`](#voltstack-cluster-ar-storage-class-list-storage-classes-default-storage-class) - Optional Bool<br>Default Storage Class. Make this storage class default storage class for the K8S cluster
 
-<a id="voltstack-cluster-ar-storage-class-list-storage-classes-storage-class-name"></a>&#x2022; [`storage\_class\_name`](#voltstack-cluster-ar-storage-class-list-storage-classes-storage-class-name) - Optional String<br>Storage Class Name. Name of the storage class as it will appear in K8S
+<a id="voltstack-cluster-ar-storage-class-list-storage-classes-storage-class-name"></a>&#x2022; [`storage_class_name`](#voltstack-cluster-ar-storage-class-list-storage-classes-storage-class-name) - Optional String<br>Storage Class Name. Name of the storage class as it will appear in K8S
 
 ## Import
 
@@ -2310,5 +2310,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_azure_vnet\_site.example system/example
+terraform import f5xc_azure_vnet_site.example system/example
 ```

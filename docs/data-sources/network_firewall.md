@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_network\_firewall Data Source - terraform-provider-f5xc"
+page_title: "f5xc_network_firewall Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages a NetworkFirewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.
 ---
 
-# f5xc\_network\_firewall (Data Source)
+# f5xc_network_firewall (Data Source)
 
 Manages a NetworkFirewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.
 
@@ -18,14 +18,14 @@ Manages a NetworkFirewall resource in F5 Distributed Cloud for network firewall 
 # Retrieves information about an existing Network Firewall
 
 # Look up an existing Network Firewall by name
-data "f5xc\_network\_firewall" "example" {
+data "f5xc_network_firewall" "example" {
   name      = "example-network-firewall"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "network\_firewall\_id" {
-#   value = data.f5xc\_network\_firewall.example.id
+# output "network_firewall_id" {
+#   value = data.f5xc_network_firewall.example.id
 # }
 ```
 

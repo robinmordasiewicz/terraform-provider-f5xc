@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_code_base\_integration Data Source - terraform-provider-f5xc"
+page_title: "f5xc_code_base_integration Data Source - terraform-provider-f5xc"
 subcategory: "Integrations"
 description: |-
   Manages integration details in F5 Distributed Cloud.
 ---
 
-# f5xc\_code_base\_integration (Data Source)
+# f5xc_code_base_integration (Data Source)
 
 Manages integration details in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages integration details in F5 Distributed Cloud.
 # Retrieves information about an existing Code Base Integration
 
 # Look up an existing Code Base Integration by name
-data "f5xc\_code_base\_integration" "example" {
+data "f5xc_code_base_integration" "example" {
   name      = "example-code-base-integration"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "code\_base_integration\_id" {
-#   value = data.f5xc\_code_base\_integration.example.id
+# output "code_base_integration_id" {
+#   value = data.f5xc_code_base_integration.example.id
 # }
 ```
 

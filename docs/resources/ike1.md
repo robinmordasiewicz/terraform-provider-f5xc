@@ -32,15 +32,15 @@ resource "f5xc_ike1" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: ike\_keylifetime\_hours, ike\_keylifetime\_minutes, u...
-  ike\_keylifetime\_hours {
-    # Configure ike\_keylifetime\_hours settings
+  # [OneOf: ike_keylifetime_hours, ike_keylifetime_minutes, u...
+  ike_keylifetime_hours {
+    # Configure ike_keylifetime_hours settings
   }
   # Minutes. Set IKE Key Lifetime in minutes
-  ike\_keylifetime\_minutes {
-    # Configure ike\_keylifetime\_minutes settings
+  ike_keylifetime_minutes {
+    # Configure ike_keylifetime_minutes settings
   }
-  # [OneOf: reauth_disabled, reauth\_timeout\_days, reauth_time...
+  # [OneOf: reauth_disabled, reauth_timeout_days, reauth_time...
   reauth_disabled {
     # Configure reauth_disabled settings
   }
@@ -67,14 +67,14 @@ resource "f5xc_ike1" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="ike-keylifetime-hours"></a>[`ike\_keylifetime\_hours`](#ike-keylifetime-hours) - Optional Block<br>Hours. Input Hours<br>See [IKE Keylifetime Hours](#ike-keylifetime-hours) below for details.
-<br><br>&#x2022; <a id="ike-keylifetime-minutes"></a>[`ike\_keylifetime\_minutes`](#ike-keylifetime-minutes) - Optional Block<br>Minutes. Set IKE Key Lifetime in minutes<br>See [IKE Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
-<br><br>&#x2022; <a id="use-default-keylifetime"></a>[`use\_default\_keylifetime`](#use-default-keylifetime) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="ike-keylifetime-hours"></a>[`ike_keylifetime_hours`](#ike-keylifetime-hours) - Optional Block<br>Hours. Input Hours<br>See [IKE Keylifetime Hours](#ike-keylifetime-hours) below for details.
+<br><br>&#x2022; <a id="ike-keylifetime-minutes"></a>[`ike_keylifetime_minutes`](#ike-keylifetime-minutes) - Optional Block<br>Minutes. Set IKE Key Lifetime in minutes<br>See [IKE Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
+<br><br>&#x2022; <a id="use-default-keylifetime"></a>[`use_default_keylifetime`](#use-default-keylifetime) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; <a id="reauth-disabled"></a>[`reauth_disabled`](#reauth-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="reauth-timeout-days"></a>[`reauth\_timeout\_days`](#reauth-timeout-days) - Optional Block<br>Days. Set Duration in days<br>See [Reauth Timeout Days](#reauth-timeout-days) below for details.
-<br><br>&#x2022; <a id="reauth-timeout-hours"></a>[`reauth\_timeout\_hours`](#reauth-timeout-hours) - Optional Block<br>Hours. Input Hours<br>See [Reauth Timeout Hours](#reauth-timeout-hours) below for details.
+<br><br>&#x2022; <a id="reauth-timeout-days"></a>[`reauth_timeout_days`](#reauth-timeout-days) - Optional Block<br>Days. Set Duration in days<br>See [Reauth Timeout Days](#reauth-timeout-days) below for details.
+<br><br>&#x2022; <a id="reauth-timeout-hours"></a>[`reauth_timeout_hours`](#reauth-timeout-hours) - Optional Block<br>Hours. Input Hours<br>See [Reauth Timeout Hours](#reauth-timeout-hours) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -88,25 +88,25 @@ In addition to all arguments above, the following attributes are exported:
 
 #### IKE Keylifetime Hours
 
-An [`ike\_keylifetime\_hours`](#ike-keylifetime-hours) block supports the following:
+An [`ike_keylifetime_hours`](#ike-keylifetime-hours) block supports the following:
 
 <a id="ike-keylifetime-hours-duration"></a>&#x2022; [`duration`](#ike-keylifetime-hours-duration) - Optional Number<br>Duration
 
 #### IKE Keylifetime Minutes
 
-An [`ike\_keylifetime\_minutes`](#ike-keylifetime-minutes) block supports the following:
+An [`ike_keylifetime_minutes`](#ike-keylifetime-minutes) block supports the following:
 
 <a id="ike-keylifetime-minutes-duration"></a>&#x2022; [`duration`](#ike-keylifetime-minutes-duration) - Optional Number<br>Duration
 
 #### Reauth Timeout Days
 
-A [`reauth\_timeout\_days`](#reauth-timeout-days) block supports the following:
+A [`reauth_timeout_days`](#reauth-timeout-days) block supports the following:
 
 <a id="reauth-timeout-days-duration"></a>&#x2022; [`duration`](#reauth-timeout-days-duration) - Optional Number<br>Duration
 
 #### Reauth Timeout Hours
 
-A [`reauth\_timeout\_hours`](#reauth-timeout-hours) block supports the following:
+A [`reauth_timeout_hours`](#reauth-timeout-hours) block supports the following:
 
 <a id="reauth-timeout-hours-duration"></a>&#x2022; [`duration`](#reauth-timeout-hours-duration) - Optional Number<br>Duration
 

@@ -33,8 +33,8 @@ resource "f5xc_policer" "example" {
 
   # API-discovered default values (shown for reference)
   # These values are applied by the API if not specified
-  # policer_mode = "POLICER\_MODE_NOT\_SHARED"  # API default
-  # policer_type = "POLICER\_SINGLE_RATE_TWO\_COLOR"  # API default
+  # policer_mode = "POLICER_MODE_NOT_SHARED"  # API default
+  # policer_type = "POLICER_SINGLE_RATE_TWO_COLOR"  # API default
 }
 ```
 
@@ -59,11 +59,11 @@ resource "f5xc_policer" "example" {
 
 <a id="burst-size"></a>&#x2022; [`burst_size`](#burst-size) - Optional Number<br>Burst Size(pps). The maximum size permitted for bursts of data. e.g. 10000 pps burst
 
-<a id="committed-information-rate"></a>&#x2022; [`committed\_information\_rate`](#committed-information-rate) - Optional Number<br>Committed Information Rate(pps). The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions. e.g. 10000 pps
+<a id="committed-information-rate"></a>&#x2022; [`committed_information_rate`](#committed-information-rate) - Optional Number<br>Committed Information Rate(pps). The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions. e.g. 10000 pps
 
-<a id="policer-mode"></a>&#x2022; [`policer_mode`](#policer-mode) - Optional String  Defaults to `POLICER\_MODE_NOT\_SHARED`<br>Possible values are `POLICER\_MODE_NOT\_SHARED`, `POLICER\_MODE\_SHARED`<br>Policer Mode. - POLICER\_MODE_NOT\_SHARED: Not Shared A separate policer instance is created for each reference to the policer - POLICER\_MODE\_SHARED: Shared A common policer instance is used for for all references to the policer
+<a id="policer-mode"></a>&#x2022; [`policer_mode`](#policer-mode) - Optional String  Defaults to `POLICER_MODE_NOT_SHARED`<br>Possible values are `POLICER_MODE_NOT_SHARED`, `POLICER_MODE_SHARED`<br>Policer Mode. - POLICER_MODE_NOT_SHARED: Not Shared A separate policer instance is created for each reference to the policer - POLICER_MODE_SHARED: Shared A common policer instance is used for for all references to the policer
 
-<a id="policer-type"></a>&#x2022; [`policer_type`](#policer-type) - Optional String  Defaults to `POLICER\_SINGLE_RATE_TWO\_COLOR`<br>Policer Type. Specifies the type of Policer Basic Single-Rate Two-Color Policer. The only possible value is `POLICER\_SINGLE_RATE_TWO\_COLOR`
+<a id="policer-type"></a>&#x2022; [`policer_type`](#policer-type) - Optional String  Defaults to `POLICER_SINGLE_RATE_TWO_COLOR`<br>Policer Type. Specifies the type of Policer Basic Single-Rate Two-Color Policer. The only possible value is `POLICER_SINGLE_RATE_TWO_COLOR`
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

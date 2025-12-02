@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_tpm\_category Data Source - terraform-provider-f5xc"
+page_title: "f5xc_tpm_category Data Source - terraform-provider-f5xc"
 subcategory: "Integrations"
 description: |-
   Manages Category object, which is a grouping of APIKeys used for TPM provisioning in F5 Distributed Cloud.
 ---
 
-# f5xc\_tpm\_category (Data Source)
+# f5xc_tpm_category (Data Source)
 
 Manages Category object, which is a grouping of APIKeys used for TPM provisioning in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages Category object, which is a grouping of APIKeys used for TPM provisionin
 # Retrieves information about an existing Tpm Category
 
 # Look up an existing Tpm Category by name
-data "f5xc\_tpm\_category" "example" {
+data "f5xc_tpm_category" "example" {
   name      = "example-tpm-category"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "tpm\_category\_id" {
-#   value = data.f5xc\_tpm\_category.example.id
+# output "tpm_category_id" {
+#   value = data.f5xc_tpm_category.example.id
 # }
 ```
 

@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc\_srv6_network\_slice Data Source - terraform-provider-f5xc"
+page_title: "f5xc_srv6_network_slice Data Source - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages srv6\_network\_slice creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  Manages srv6_network_slice creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc\_srv6_network\_slice (Data Source)
+# f5xc_srv6_network_slice (Data Source)
 
-Manages srv6\_network\_slice creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+Manages srv6_network_slice creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Srv6 Network Slice API docs](https://docs.cloud.f5.com/docs-v2/api/srv6-network-slice) to learn more.
 
@@ -18,14 +18,14 @@ Manages srv6\_network\_slice creates a new object in the storage backend for met
 # Retrieves information about an existing Srv6 Network Slice
 
 # Look up an existing Srv6 Network Slice by name
-data "f5xc\_srv6_network\_slice" "example" {
+data "f5xc_srv6_network_slice" "example" {
   name      = "example-srv6-network-slice"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "srv6\_network_slice\_id" {
-#   value = data.f5xc\_srv6_network\_slice.example.id
+# output "srv6_network_slice_id" {
+#   value = data.f5xc_srv6_network_slice.example.id
 # }
 ```
 

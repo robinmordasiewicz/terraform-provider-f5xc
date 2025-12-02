@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_voltstack\_site Data Source - terraform-provider-f5xc"
+page_title: "f5xc_voltstack_site Data Source - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
   Manages a VoltstackSite resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
 ---
 
-# f5xc\_voltstack\_site (Data Source)
+# f5xc_voltstack_site (Data Source)
 
 Manages a VoltstackSite resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
 
@@ -18,14 +18,14 @@ Manages a VoltstackSite resource in F5 Distributed Cloud for deploying Volterra 
 # Retrieves information about an existing Voltstack Site
 
 # Look up an existing Voltstack Site by name
-data "f5xc\_voltstack\_site" "example" {
+data "f5xc_voltstack_site" "example" {
   name      = "example-voltstack-site"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "voltstack\_site\_id" {
-#   value = data.f5xc\_voltstack\_site.example.id
+# output "voltstack_site_id" {
+#   value = data.f5xc_voltstack_site.example.id
 # }
 ```
 

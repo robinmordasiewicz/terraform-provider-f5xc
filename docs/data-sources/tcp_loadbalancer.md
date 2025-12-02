@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_tcp\_loadbalancer Data Source - terraform-provider-f5xc"
+page_title: "f5xc_tcp_loadbalancer Data Source - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
   Manages a TCPLoadBalancer resource in F5 Distributed Cloud for load balancing TCP traffic across origin pools.
 ---
 
-# f5xc\_tcp\_loadbalancer (Data Source)
+# f5xc_tcp_loadbalancer (Data Source)
 
 Manages a TCPLoadBalancer resource in F5 Distributed Cloud for load balancing TCP traffic across origin pools.
 
@@ -18,14 +18,14 @@ Manages a TCPLoadBalancer resource in F5 Distributed Cloud for load balancing TC
 # Retrieves information about an existing TCP Loadbalancer
 
 # Look up an existing TCP Loadbalancer by name
-data "f5xc\_tcp\_loadbalancer" "example" {
+data "f5xc_tcp_loadbalancer" "example" {
   name      = "example-tcp-loadbalancer"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "tcp\_loadbalancer\_id" {
-#   value = data.f5xc\_tcp\_loadbalancer.example.id
+# output "tcp_loadbalancer_id" {
+#   value = data.f5xc_tcp_loadbalancer.example.id
 # }
 ```
 

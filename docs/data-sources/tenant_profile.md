@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_tenant\_profile Data Source - terraform-provider-f5xc"
+page_title: "f5xc_tenant_profile Data Source - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
   Manages tenant_profile config instance. Name of the object is the name of the tenant profile to be created. in F5 Distributed Cloud.
 ---
 
-# f5xc\_tenant\_profile (Data Source)
+# f5xc_tenant_profile (Data Source)
 
 Manages tenant_profile config instance. Name of the object is the name of the tenant profile to be created. in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages tenant_profile config instance. Name of the object is the name of the te
 # Retrieves information about an existing Tenant Profile
 
 # Look up an existing Tenant Profile by name
-data "f5xc\_tenant\_profile" "example" {
+data "f5xc_tenant_profile" "example" {
   name      = "example-tenant-profile"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "tenant\_profile\_id" {
-#   value = data.f5xc\_tenant\_profile.example.id
+# output "tenant_profile_id" {
+#   value = data.f5xc_tenant_profile.example.id
 # }
 ```
 

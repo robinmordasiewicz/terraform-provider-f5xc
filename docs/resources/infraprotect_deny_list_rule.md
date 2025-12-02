@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_infraprotect_deny_list\_rule Resource - terraform-provider-f5xc"
+page_title: "f5xc_infraprotect_deny_list_rule Resource - terraform-provider-f5xc"
 subcategory: "Infrastructure Protection"
 description: |-
   Manages DDoS transit Deny List Rule in F5 Distributed Cloud.
 ---
 
-# f5xc\_infraprotect_deny_list\_rule (Resource)
+# f5xc_infraprotect_deny_list_rule (Resource)
 
 Manages DDoS transit Deny List Rule in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages DDoS transit Deny List Rule in F5 Distributed Cloud.
 # Manages DDoS transit Deny List Rule in F5 Distributed Cloud.
 
 # Basic Infraprotect Deny List Rule configuration
-resource "f5xc\_infraprotect_deny_list\_rule" "example" {
+resource "f5xc_infraprotect_deny_list_rule" "example" {
   name      = "example-infraprotect-deny-list-rule"
   namespace = "staging"
 
@@ -104,5 +104,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_infraprotect_deny_list\_rule.example system/example
+terraform import f5xc_infraprotect_deny_list_rule.example system/example
 ```

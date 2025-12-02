@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_api\_definition Resource - terraform-provider-f5xc"
+page_title: "f5xc_api_definition Resource - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
   Manages a APIDefinition resource in F5 Distributed Cloud for x-required create api definition. configuration.
 ---
 
-# f5xc\_api\_definition (Resource)
+# f5xc_api_definition (Resource)
 
 Manages a APIDefinition resource in F5 Distributed Cloud for x-required create api definition. configuration.
 
@@ -18,7 +18,7 @@ Manages a APIDefinition resource in F5 Distributed Cloud for x-required create a
 # Manages a APIDefinition resource in F5 Distributed Cloud for x-required create api definition. configuration.
 
 # Basic API Definition configuration
-resource "f5xc\_api\_definition" "example" {
+resource "f5xc_api_definition" "example" {
   name      = "example-api-definition"
   namespace = "shared"
 
@@ -36,7 +36,7 @@ resource "f5xc\_api\_definition" "example" {
   swagger_specs = ["string:///base64-openapi-spec"]
 
   # Non-validation mode
-  non\_validation\_mode {}
+  non_validation_mode {}
 }
 ```
 
@@ -59,15 +59,15 @@ resource "f5xc\_api\_definition" "example" {
 
 ### Spec Argument Reference
 
-<a id="api-inventory-exclusion-list"></a>&#x2022; [`api\_inventory_exclusion\_list`](#api-inventory-exclusion-list) - Optional Block<br>API Inventory Exclusion List. List of API Endpoints excluded from the API Inventory<br>See [API Inventory Exclusion List](#api-inventory-exclusion-list) below for details.
+<a id="api-inventory-exclusion-list"></a>&#x2022; [`api_inventory_exclusion_list`](#api-inventory-exclusion-list) - Optional Block<br>API Inventory Exclusion List. List of API Endpoints excluded from the API Inventory<br>See [API Inventory Exclusion List](#api-inventory-exclusion-list) below for details.
 
-<a id="api-inventory-inclusion-list"></a>&#x2022; [`api\_inventory_inclusion\_list`](#api-inventory-inclusion-list) - Optional Block<br>API Inventory Inclusion List. List of API Endpoints included in the API Inventory. Typically, discovered API endpoints are added to the API Inventory using this list<br>See [API Inventory Inclusion List](#api-inventory-inclusion-list) below for details.
+<a id="api-inventory-inclusion-list"></a>&#x2022; [`api_inventory_inclusion_list`](#api-inventory-inclusion-list) - Optional Block<br>API Inventory Inclusion List. List of API Endpoints included in the API Inventory. Typically, discovered API endpoints are added to the API Inventory using this list<br>See [API Inventory Inclusion List](#api-inventory-inclusion-list) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="mixed-schema-origin"></a>[`mixed\_schema\_origin`](#mixed-schema-origin) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="strict-schema-origin"></a>[`strict\_schema\_origin`](#strict-schema-origin) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="mixed-schema-origin"></a>[`mixed_schema_origin`](#mixed-schema-origin) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="strict-schema-origin"></a>[`strict_schema_origin`](#strict-schema-origin) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="non-api-endpoints"></a>&#x2022; [`non\_api\_endpoints`](#non-api-endpoints) - Optional Block<br>API Discovery Exclusion List. List of Non-API Endpoints<br>See [Non API Endpoints](#non-api-endpoints) below for details.
+<a id="non-api-endpoints"></a>&#x2022; [`non_api_endpoints`](#non-api-endpoints) - Optional Block<br>API Discovery Exclusion List. List of Non-API Endpoints<br>See [Non API Endpoints](#non-api-endpoints) below for details.
 
 <a id="swagger-specs"></a>&#x2022; [`swagger_specs`](#swagger-specs) - Optional List<br>File Path. Define your application API by single or multiple OpenAPI files. 1. Upload your OpenAPI files via Web App & API Protection-> Files-> Swagger Files. 2. Select from the list of uploaded files. Notice file versions. If OpenAPI file is updated, need to select a new version here to redefine the API
 
@@ -83,7 +83,7 @@ In addition to all arguments above, the following attributes are exported:
 
 #### API Inventory Exclusion List
 
-An [`api\_inventory_exclusion\_list`](#api-inventory-exclusion-list) block supports the following:
+An [`api_inventory_exclusion_list`](#api-inventory-exclusion-list) block supports the following:
 
 <a id="api-inventory-exclusion-list-method"></a>&#x2022; [`method`](#api-inventory-exclusion-list-method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
 
@@ -91,7 +91,7 @@ An [`api\_inventory_exclusion\_list`](#api-inventory-exclusion-list) block suppo
 
 #### API Inventory Inclusion List
 
-An [`api\_inventory_inclusion\_list`](#api-inventory-inclusion-list) block supports the following:
+An [`api_inventory_inclusion_list`](#api-inventory-inclusion-list) block supports the following:
 
 <a id="api-inventory-inclusion-list-method"></a>&#x2022; [`method`](#api-inventory-inclusion-list-method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
 
@@ -99,7 +99,7 @@ An [`api\_inventory_inclusion\_list`](#api-inventory-inclusion-list) block suppo
 
 #### Non API Endpoints
 
-A [`non\_api\_endpoints`](#non-api-endpoints) block supports the following:
+A [`non_api_endpoints`](#non-api-endpoints) block supports the following:
 
 <a id="non-api-endpoints-method"></a>&#x2022; [`method`](#non-api-endpoints-method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
 
@@ -123,5 +123,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_api\_definition.example system/example
+terraform import f5xc_api_definition.example system/example
 ```

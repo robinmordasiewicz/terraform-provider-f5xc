@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_child\_tenant Resource - terraform-provider-f5xc"
+page_title: "f5xc_child_tenant Resource - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
   Manages child_tenant config instance. Name of the object is the name of the child tenant to be created. in F5 Distributed Cloud.
 ---
 
-# f5xc\_child\_tenant (Resource)
+# f5xc_child_tenant (Resource)
 
 Manages child_tenant config instance. Name of the object is the name of the child tenant to be created. in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages child_tenant config instance. Name of the object is the name of the chil
 # Manages child_tenant config instance. Name of the object is the name of the child tenant to be created. in F5 Distributed Cloud.
 
 # Basic Child Tenant configuration
-resource "f5xc\_child\_tenant" "example" {
+resource "f5xc_child_tenant" "example" {
   name      = "example-child-tenant"
   namespace = "staging"
 
@@ -33,8 +33,8 @@ resource "f5xc\_child\_tenant" "example" {
 
   # Resource-specific configuration
   # Object reference. This type establishes a direct referenc...
-  child\_tenant\_manager {
-    # Configure child\_tenant\_manager settings
+  child_tenant_manager {
+    # Configure child_tenant_manager settings
   }
   # Contact. Instance of one single contact that can be used ...
   contact_detail {
@@ -54,8 +54,6 @@ resource "f5xc\_child\_tenant" "example" {
 
 <a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the ChildTenant. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the ChildTenant will be created
-
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
 <a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
@@ -64,9 +62,11 @@ resource "f5xc\_child\_tenant" "example" {
 
 <a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace for the ChildTenant. For this resource type, namespace should be empty or omitted
+
 ### Spec Argument Reference
 
-<a id="child-tenant-manager"></a>&#x2022; [`child\_tenant\_manager`](#child-tenant-manager) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Child Tenant Manager](#child-tenant-manager) below for details.
+<a id="child-tenant-manager"></a>&#x2022; [`child_tenant_manager`](#child-tenant-manager) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Child Tenant Manager](#child-tenant-manager) below for details.
 
 <a id="company-name"></a>&#x2022; [`company_name`](#company-name) - Optional String<br>Company Name. Company name (enterprise only)
 
@@ -90,7 +90,7 @@ In addition to all arguments above, the following attributes are exported:
 
 #### Child Tenant Manager
 
-A [`child\_tenant\_manager`](#child-tenant-manager) block supports the following:
+A [`child_tenant_manager`](#child-tenant-manager) block supports the following:
 
 <a id="child-tenant-manager-name"></a>&#x2022; [`name`](#child-tenant-manager-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -162,5 +162,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_child\_tenant.example system/example
+terraform import f5xc_child_tenant.example system/example
 ```

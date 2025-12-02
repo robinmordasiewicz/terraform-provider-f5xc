@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_bot_defense_app\_infrastructure Data Source - terraform-provider-f5xc"
+page_title: "f5xc_bot_defense_app_infrastructure Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages Bot Defense App Infrastructure in a given namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc\_bot_defense_app\_infrastructure (Data Source)
+# f5xc_bot_defense_app_infrastructure (Data Source)
 
 Manages Bot Defense App Infrastructure in a given namespace. in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages Bot Defense App Infrastructure in a given namespace. in F5 Distributed C
 # Retrieves information about an existing Bot Defense App Infrastructure
 
 # Look up an existing Bot Defense App Infrastructure by name
-data "f5xc\_bot_defense_app\_infrastructure" "example" {
+data "f5xc_bot_defense_app_infrastructure" "example" {
   name      = "example-bot-defense-app-infrastructure"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "bot\_defense_app_infrastructure\_id" {
-#   value = data.f5xc\_bot_defense_app\_infrastructure.example.id
+# output "bot_defense_app_infrastructure_id" {
+#   value = data.f5xc_bot_defense_app_infrastructure.example.id
 # }
 ```
 

@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_infraprotect_asn\_prefix Data Source - terraform-provider-f5xc"
+page_title: "f5xc_infraprotect_asn_prefix Data Source - terraform-provider-f5xc"
 subcategory: "Infrastructure Protection"
 description: |-
   Manages DDoS transit Prefix in F5 Distributed Cloud.
 ---
 
-# f5xc\_infraprotect_asn\_prefix (Data Source)
+# f5xc_infraprotect_asn_prefix (Data Source)
 
 Manages DDoS transit Prefix in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages DDoS transit Prefix in F5 Distributed Cloud.
 # Retrieves information about an existing Infraprotect Asn Prefix
 
 # Look up an existing Infraprotect Asn Prefix by name
-data "f5xc\_infraprotect_asn\_prefix" "example" {
+data "f5xc_infraprotect_asn_prefix" "example" {
   name      = "example-infraprotect-asn-prefix"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "infraprotect\_asn_prefix\_id" {
-#   value = data.f5xc\_infraprotect_asn\_prefix.example.id
+# output "infraprotect_asn_prefix_id" {
+#   value = data.f5xc_infraprotect_asn_prefix.example.id
 # }
 ```
 

@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_network\_policy Resource - terraform-provider-f5xc"
+page_title: "f5xc_network_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages new network policy with configured parameters in specified namespace in F5 Distributed Cloud.
 ---
 
-# f5xc\_network\_policy (Resource)
+# f5xc_network_policy (Resource)
 
 Manages new network policy with configured parameters in specified namespace in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages new network policy with configured parameters in specified namespace in 
 # Manages new network policy with configured parameters in specified namespace in F5 Distributed Cloud.
 
 # Basic Network Policy configuration
-resource "f5xc\_network\_policy" "example" {
+resource "f5xc_network_policy" "example" {
   name      = "example-network-policy"
   namespace = "staging"
 
@@ -133,11 +133,11 @@ An [`egress_rules`](#rules-egress-rules) block (within [`rules`](#rules)) suppor
 
 <a id="rules-egress-rules-adv-action"></a>&#x2022; [`adv_action`](#rules-egress-rules-adv-action) - Optional Block<br>Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction<br>See [Adv Action](#rules-egress-rules-adv-action) below.
 
-<a id="rules-egress-rules-all-tcp-traffic"></a>&#x2022; [`all\_tcp\_traffic`](#rules-egress-rules-all-tcp-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rules-egress-rules-all-tcp-traffic"></a>&#x2022; [`all_tcp_traffic`](#rules-egress-rules-all-tcp-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="rules-egress-rules-all-traffic"></a>&#x2022; [`all_traffic`](#rules-egress-rules-all-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="rules-egress-rules-all-udp-traffic"></a>&#x2022; [`all\_udp\_traffic`](#rules-egress-rules-all-udp-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rules-egress-rules-all-udp-traffic"></a>&#x2022; [`all_udp_traffic`](#rules-egress-rules-all-udp-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="rules-egress-rules-any"></a>&#x2022; [`any`](#rules-egress-rules-any) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -145,7 +145,7 @@ An [`egress_rules`](#rules-egress-rules) block (within [`rules`](#rules)) suppor
 
 <a id="rules-egress-rules-inside-endpoints"></a>&#x2022; [`inside_endpoints`](#rules-egress-rules-inside-endpoints) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="rules-egress-rules-ip-prefix-set"></a>&#x2022; [`ip\_prefix\_set`](#rules-egress-rules-ip-prefix-set) - Optional Block<br>IP Prefix Set Reference. A list of references to ip\_prefix\_set objects<br>See [IP Prefix Set](#rules-egress-rules-ip-prefix-set) below.
+<a id="rules-egress-rules-ip-prefix-set"></a>&#x2022; [`ip_prefix_set`](#rules-egress-rules-ip-prefix-set) - Optional Block<br>IP Prefix Set Reference. A list of references to ip_prefix_set objects<br>See [IP Prefix Set](#rules-egress-rules-ip-prefix-set) below.
 
 <a id="rules-egress-rules-label-matcher"></a>&#x2022; [`label_matcher`](#rules-egress-rules-label-matcher) - Optional Block<br>Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name<br>See [Label Matcher](#rules-egress-rules-label-matcher) below.
 
@@ -157,7 +157,7 @@ An [`egress_rules`](#rules-egress-rules) block (within [`rules`](#rules)) suppor
 
 <a id="rules-egress-rules-prefix-list"></a>&#x2022; [`prefix_list`](#rules-egress-rules-prefix-list) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#rules-egress-rules-prefix-list) below.
 
-<a id="rules-egress-rules-protocol-port-range"></a>&#x2022; [`protocol\_port\_range`](#rules-egress-rules-protocol-port-range) - Optional Block<br>Protocol and Port. Protocol and Port ranges<br>See [Protocol Port Range](#rules-egress-rules-protocol-port-range) below.
+<a id="rules-egress-rules-protocol-port-range"></a>&#x2022; [`protocol_port_range`](#rules-egress-rules-protocol-port-range) - Optional Block<br>Protocol and Port. Protocol and Port ranges<br>See [Protocol Port Range](#rules-egress-rules-protocol-port-range) below.
 
 #### Rules Egress Rules Adv Action
 
@@ -173,13 +173,13 @@ An [`applications`](#rules-egress-rules-applications) block (within [`rules.egre
 
 #### Rules Egress Rules IP Prefix Set
 
-An [`ip\_prefix\_set`](#rules-egress-rules-ip-prefix-set) block (within [`rules.egress_rules`](#rules-egress-rules)) supports the following:
+An [`ip_prefix_set`](#rules-egress-rules-ip-prefix-set) block (within [`rules.egress_rules`](#rules-egress-rules)) supports the following:
 
-<a id="rules-egress-rules-ip-prefix-set-ref"></a>&#x2022; [`ref`](#rules-egress-rules-ip-prefix-set-ref) - Optional Block<br>Reference. A list of references to ip\_prefix\_set objects<br>See [Ref](#rules-egress-rules-ip-prefix-set-ref) below.
+<a id="rules-egress-rules-ip-prefix-set-ref"></a>&#x2022; [`ref`](#rules-egress-rules-ip-prefix-set-ref) - Optional Block<br>Reference. A list of references to ip_prefix_set objects<br>See [Ref](#rules-egress-rules-ip-prefix-set-ref) below.
 
 #### Rules Egress Rules IP Prefix Set Ref
 
-A [`ref`](#rules-egress-rules-ip-prefix-set-ref) block (within [`rules.egress_rules.ip\_prefix\_set`](#rules-egress-rules-ip-prefix-set)) supports the following:
+A [`ref`](#rules-egress-rules-ip-prefix-set-ref) block (within [`rules.egress_rules.ip_prefix_set`](#rules-egress-rules-ip-prefix-set)) supports the following:
 
 <a id="rules-egress-rules-ip-prefix-set-ref-kind"></a>&#x2022; [`kind`](#rules-egress-rules-ip-prefix-set-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -219,7 +219,7 @@ A [`prefix_list`](#rules-egress-rules-prefix-list) block (within [`rules.egress_
 
 #### Rules Egress Rules Protocol Port Range
 
-A [`protocol\_port\_range`](#rules-egress-rules-protocol-port-range) block (within [`rules.egress_rules`](#rules-egress-rules)) supports the following:
+A [`protocol_port_range`](#rules-egress-rules-protocol-port-range) block (within [`rules.egress_rules`](#rules-egress-rules)) supports the following:
 
 <a id="rules-egress-rules-protocol-port-range-port-ranges"></a>&#x2022; [`port_ranges`](#rules-egress-rules-protocol-port-range-port-ranges) - Optional List<br>List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192
 
@@ -233,11 +233,11 @@ An [`ingress_rules`](#rules-ingress-rules) block (within [`rules`](#rules)) supp
 
 <a id="rules-ingress-rules-adv-action"></a>&#x2022; [`adv_action`](#rules-ingress-rules-adv-action) - Optional Block<br>Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction<br>See [Adv Action](#rules-ingress-rules-adv-action) below.
 
-<a id="rules-ingress-rules-all-tcp-traffic"></a>&#x2022; [`all\_tcp\_traffic`](#rules-ingress-rules-all-tcp-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rules-ingress-rules-all-tcp-traffic"></a>&#x2022; [`all_tcp_traffic`](#rules-ingress-rules-all-tcp-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="rules-ingress-rules-all-traffic"></a>&#x2022; [`all_traffic`](#rules-ingress-rules-all-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="rules-ingress-rules-all-udp-traffic"></a>&#x2022; [`all\_udp\_traffic`](#rules-ingress-rules-all-udp-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rules-ingress-rules-all-udp-traffic"></a>&#x2022; [`all_udp_traffic`](#rules-ingress-rules-all-udp-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="rules-ingress-rules-any"></a>&#x2022; [`any`](#rules-ingress-rules-any) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -245,7 +245,7 @@ An [`ingress_rules`](#rules-ingress-rules) block (within [`rules`](#rules)) supp
 
 <a id="rules-ingress-rules-inside-endpoints"></a>&#x2022; [`inside_endpoints`](#rules-ingress-rules-inside-endpoints) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="rules-ingress-rules-ip-prefix-set"></a>&#x2022; [`ip\_prefix\_set`](#rules-ingress-rules-ip-prefix-set) - Optional Block<br>IP Prefix Set Reference. A list of references to ip\_prefix\_set objects<br>See [IP Prefix Set](#rules-ingress-rules-ip-prefix-set) below.
+<a id="rules-ingress-rules-ip-prefix-set"></a>&#x2022; [`ip_prefix_set`](#rules-ingress-rules-ip-prefix-set) - Optional Block<br>IP Prefix Set Reference. A list of references to ip_prefix_set objects<br>See [IP Prefix Set](#rules-ingress-rules-ip-prefix-set) below.
 
 <a id="rules-ingress-rules-label-matcher"></a>&#x2022; [`label_matcher`](#rules-ingress-rules-label-matcher) - Optional Block<br>Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name<br>See [Label Matcher](#rules-ingress-rules-label-matcher) below.
 
@@ -257,7 +257,7 @@ An [`ingress_rules`](#rules-ingress-rules) block (within [`rules`](#rules)) supp
 
 <a id="rules-ingress-rules-prefix-list"></a>&#x2022; [`prefix_list`](#rules-ingress-rules-prefix-list) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#rules-ingress-rules-prefix-list) below.
 
-<a id="rules-ingress-rules-protocol-port-range"></a>&#x2022; [`protocol\_port\_range`](#rules-ingress-rules-protocol-port-range) - Optional Block<br>Protocol and Port. Protocol and Port ranges<br>See [Protocol Port Range](#rules-ingress-rules-protocol-port-range) below.
+<a id="rules-ingress-rules-protocol-port-range"></a>&#x2022; [`protocol_port_range`](#rules-ingress-rules-protocol-port-range) - Optional Block<br>Protocol and Port. Protocol and Port ranges<br>See [Protocol Port Range](#rules-ingress-rules-protocol-port-range) below.
 
 #### Rules Ingress Rules Adv Action
 
@@ -273,13 +273,13 @@ An [`applications`](#rules-ingress-rules-applications) block (within [`rules.ing
 
 #### Rules Ingress Rules IP Prefix Set
 
-An [`ip\_prefix\_set`](#rules-ingress-rules-ip-prefix-set) block (within [`rules.ingress_rules`](#rules-ingress-rules)) supports the following:
+An [`ip_prefix_set`](#rules-ingress-rules-ip-prefix-set) block (within [`rules.ingress_rules`](#rules-ingress-rules)) supports the following:
 
-<a id="rules-ingress-rules-ip-prefix-set-ref"></a>&#x2022; [`ref`](#rules-ingress-rules-ip-prefix-set-ref) - Optional Block<br>Reference. A list of references to ip\_prefix\_set objects<br>See [Ref](#rules-ingress-rules-ip-prefix-set-ref) below.
+<a id="rules-ingress-rules-ip-prefix-set-ref"></a>&#x2022; [`ref`](#rules-ingress-rules-ip-prefix-set-ref) - Optional Block<br>Reference. A list of references to ip_prefix_set objects<br>See [Ref](#rules-ingress-rules-ip-prefix-set-ref) below.
 
 #### Rules Ingress Rules IP Prefix Set Ref
 
-A [`ref`](#rules-ingress-rules-ip-prefix-set-ref) block (within [`rules.ingress_rules.ip\_prefix\_set`](#rules-ingress-rules-ip-prefix-set)) supports the following:
+A [`ref`](#rules-ingress-rules-ip-prefix-set-ref) block (within [`rules.ingress_rules.ip_prefix_set`](#rules-ingress-rules-ip-prefix-set)) supports the following:
 
 <a id="rules-ingress-rules-ip-prefix-set-ref-kind"></a>&#x2022; [`kind`](#rules-ingress-rules-ip-prefix-set-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -319,7 +319,7 @@ A [`prefix_list`](#rules-ingress-rules-prefix-list) block (within [`rules.ingres
 
 #### Rules Ingress Rules Protocol Port Range
 
-A [`protocol\_port\_range`](#rules-ingress-rules-protocol-port-range) block (within [`rules.ingress_rules`](#rules-ingress-rules)) supports the following:
+A [`protocol_port_range`](#rules-ingress-rules-protocol-port-range) block (within [`rules.ingress_rules`](#rules-ingress-rules)) supports the following:
 
 <a id="rules-ingress-rules-protocol-port-range-port-ranges"></a>&#x2022; [`port_ranges`](#rules-ingress-rules-protocol-port-range-port-ranges) - Optional List<br>List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192
 
@@ -343,5 +343,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_network\_policy.example system/example
+terraform import f5xc_network_policy.example system/example
 ```

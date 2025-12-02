@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc\_protocol\_policer Resource - terraform-provider-f5xc"
+page_title: "f5xc_protocol_policer Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits in F5 Distributed Cloud.
 ---
 
-# f5xc\_protocol\_policer (Resource)
+# f5xc_protocol_policer (Resource)
 
 Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages protocol_policer object, protocol_policer object contains list of L4 pro
 # Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits in F5 Distributed Cloud.
 
 # Basic Protocol Policer configuration
-resource "f5xc\_protocol\_policer" "example" {
+resource "f5xc_protocol_policer" "example" {
   name      = "example-protocol-policer"
   namespace = "shared"
 
@@ -116,13 +116,13 @@ A [`protocol`](#protocol-policer-protocol) block (within [`protocol_policer`](#p
 
 An [`icmp`](#protocol-policer-protocol-icmp) block (within [`protocol_policer.protocol`](#protocol-policer-protocol)) supports the following:
 
-<a id="protocol-policer-protocol-icmp-type"></a>&#x2022; [`type`](#protocol-policer-protocol-icmp-type) - Optional List  Defaults to `ECHO_REPLY`<br>Possible values are `ECHO_REPLY`, `ECHO_REQUEST`, `ALL\_ICMP\_MSG`<br>ICMP type. ICMP message type to be matched in packet
+<a id="protocol-policer-protocol-icmp-type"></a>&#x2022; [`type`](#protocol-policer-protocol-icmp-type) - Optional List  Defaults to `ECHO_REPLY`<br>Possible values are `ECHO_REPLY`, `ECHO_REQUEST`, `ALL_ICMP_MSG`<br>ICMP type. ICMP message type to be matched in packet
 
 #### Protocol Policer Protocol TCP
 
 A [`tcp`](#protocol-policer-protocol-tcp) block (within [`protocol_policer.protocol`](#protocol-policer-protocol)) supports the following:
 
-<a id="protocol-policer-protocol-tcp-flags"></a>&#x2022; [`flags`](#protocol-policer-protocol-tcp-flags) - Optional List  Defaults to `FIN`<br>Possible values are `FIN`, `SYN`, `RST`, `PSH`, `ACK`, `URG`, `ALL\_TCP\_FLAGS`, `KEEPALIVE`<br>TCP flags. TCP flag to be matched in a TCP packet
+<a id="protocol-policer-protocol-tcp-flags"></a>&#x2022; [`flags`](#protocol-policer-protocol-tcp-flags) - Optional List  Defaults to `FIN`<br>Possible values are `FIN`, `SYN`, `RST`, `PSH`, `ACK`, `URG`, `ALL_TCP_FLAGS`, `KEEPALIVE`<br>TCP flags. TCP flag to be matched in a TCP packet
 
 #### Timeouts
 
@@ -142,5 +142,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_protocol\_policer.example system/example
+terraform import f5xc_protocol_policer.example system/example
 ```

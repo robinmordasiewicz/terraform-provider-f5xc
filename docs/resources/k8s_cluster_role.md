@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc\_k8s_cluster\_role Resource - terraform-provider-f5xc"
+page_title: "f5xc_k8s_cluster_role Resource - terraform-provider-f5xc"
 subcategory: "Kubernetes"
 description: |-
-  Manages k8s\_cluster\_role will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+  Manages k8s_cluster_role will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 ---
 
-# f5xc\_k8s_cluster\_role (Resource)
+# f5xc_k8s_cluster_role (Resource)
 
-Manages k8s\_cluster\_role will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+Manages k8s_cluster_role will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [K8S Cluster Role API docs](https://docs.cloud.f5.com/docs-v2/api/k8s-cluster-role) to learn more.
 
@@ -15,10 +15,10 @@ Manages k8s\_cluster\_role will create the object in the storage backend for nam
 
 ```terraform
 # K8S Cluster Role Resource Example
-# Manages k8s\_cluster\_role will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+# Manages k8s_cluster_role will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
 # Basic K8S Cluster Role configuration
-resource "f5xc\_k8s_cluster\_role" "example" {
+resource "f5xc_k8s_cluster_role" "example" {
   name      = "example-k8s-cluster-role"
   namespace = "system"
 
@@ -32,13 +32,13 @@ resource "f5xc\_k8s_cluster\_role" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: k8s\_cluster_role\_selector, policy\_rule\_list, yaml...
-  k8s\_cluster_role\_selector {
-    # Configure k8s\_cluster_role\_selector settings
+  # [OneOf: k8s_cluster_role_selector, policy_rule_list, yaml...
+  k8s_cluster_role_selector {
+    # Configure k8s_cluster_role_selector settings
   }
   # Policy Rule List. List of rules for role permissions
-  policy\_rule\_list {
-    # Configure policy\_rule\_list settings
+  policy_rule_list {
+    # Configure policy_rule_list settings
   }
   # Policy Rules. List of rules for role permissions
   policy_rule {
@@ -67,8 +67,8 @@ resource "f5xc\_k8s_cluster\_role" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="k8s-cluster-role-selector"></a>[`k8s\_cluster_role\_selector`](#k8s-cluster-role-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [K8S Cluster Role Selector](#k8s-cluster-role-selector) below for details.
-<br><br>&#x2022; <a id="policy-rule-list"></a>[`policy\_rule\_list`](#policy-rule-list) - Optional Block<br>Policy Rule List. List of rules for role permissions<br>See [Policy Rule List](#policy-rule-list) below for details.
+&#x2022; <a id="k8s-cluster-role-selector"></a>[`k8s_cluster_role_selector`](#k8s-cluster-role-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [K8S Cluster Role Selector](#k8s-cluster-role-selector) below for details.
+<br><br>&#x2022; <a id="policy-rule-list"></a>[`policy_rule_list`](#policy-rule-list) - Optional Block<br>Policy Rule List. List of rules for role permissions<br>See [Policy Rule List](#policy-rule-list) below for details.
 <br><br>&#x2022; <a id="yaml"></a>[`yaml`](#yaml) - Optional String<br>K8S YAML. K8S YAML for ClusterRole
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
@@ -83,27 +83,27 @@ In addition to all arguments above, the following attributes are exported:
 
 #### K8S Cluster Role Selector
 
-A [`k8s\_cluster_role\_selector`](#k8s-cluster-role-selector) block supports the following:
+A [`k8s_cluster_role_selector`](#k8s-cluster-role-selector) block supports the following:
 
 <a id="k8s-cluster-role-selector-expressions"></a>&#x2022; [`expressions`](#k8s-cluster-role-selector-expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
 #### Policy Rule List
 
-A [`policy\_rule\_list`](#policy-rule-list) block supports the following:
+A [`policy_rule_list`](#policy-rule-list) block supports the following:
 
 <a id="policy-rule-list-policy-rule"></a>&#x2022; [`policy_rule`](#policy-rule-list-policy-rule) - Optional Block<br>Policy Rules. List of rules for role permissions<br>See [Policy Rule](#policy-rule-list-policy-rule) below.
 
 #### Policy Rule List Policy Rule
 
-A [`policy_rule`](#policy-rule-list-policy-rule) block (within [`policy\_rule\_list`](#policy-rule-list)) supports the following:
+A [`policy_rule`](#policy-rule-list-policy-rule) block (within [`policy_rule_list`](#policy-rule-list)) supports the following:
 
-<a id="policy-rule-list-policy-rule-non-resource-url-list"></a>&#x2022; [`non\_resource_url\_list`](#policy-rule-list-policy-rule-non-resource-url-list) - Optional Block<br>List of Non Resource URL(s). permissions for URL(s) that do not represent K8S resource<br>See [Non Resource URL List](#policy-rule-list-policy-rule-non-resource-url-list) below.
+<a id="policy-rule-list-policy-rule-non-resource-url-list"></a>&#x2022; [`non_resource_url_list`](#policy-rule-list-policy-rule-non-resource-url-list) - Optional Block<br>List of Non Resource URL(s). permissions for URL(s) that do not represent K8S resource<br>See [Non Resource URL List](#policy-rule-list-policy-rule-non-resource-url-list) below.
 
 <a id="policy-rule-list-policy-rule-resource-list"></a>&#x2022; [`resource_list`](#policy-rule-list-policy-rule-resource-list) - Optional Block<br>Resource List. List of resources in terms of API groups/resource types/resource instances and verbs allowed<br>See [Resource List](#policy-rule-list-policy-rule-resource-list) below.
 
 #### Policy Rule List Policy Rule Non Resource URL List
 
-A [`non\_resource_url\_list`](#policy-rule-list-policy-rule-non-resource-url-list) block (within [`policy\_rule\_list.policy_rule`](#policy-rule-list-policy-rule)) supports the following:
+A [`non_resource_url_list`](#policy-rule-list-policy-rule-non-resource-url-list) block (within [`policy_rule_list.policy_rule`](#policy-rule-list-policy-rule)) supports the following:
 
 <a id="policy-rule-list-policy-rule-non-resource-url-list-urls"></a>&#x2022; [`urls`](#policy-rule-list-policy-rule-non-resource-url-list-urls) - Optional List<br>Non Resource URL(s). allowed URL(s) that do not represent any K8S resource. URL can be suffix or regex
 
@@ -111,7 +111,7 @@ A [`non\_resource_url\_list`](#policy-rule-list-policy-rule-non-resource-url-lis
 
 #### Policy Rule List Policy Rule Resource List
 
-A [`resource_list`](#policy-rule-list-policy-rule-resource-list) block (within [`policy\_rule\_list.policy_rule`](#policy-rule-list-policy-rule)) supports the following:
+A [`resource_list`](#policy-rule-list-policy-rule-resource-list) block (within [`policy_rule_list.policy_rule`](#policy-rule-list-policy-rule)) supports the following:
 
 <a id="policy-rule-list-policy-rule-resource-list-api-groups"></a>&#x2022; [`api_groups`](#policy-rule-list-policy-rule-resource-list-api-groups) - Optional List<br>API Groups. Allowed list of API group that contains resources, all resources of a given API group
 
@@ -139,5 +139,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc\_k8s_cluster\_role.example system/example
+terraform import f5xc_k8s_cluster_role.example system/example
 ```

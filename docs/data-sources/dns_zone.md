@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc\_dns\_zone Data Source - terraform-provider-f5xc"
+page_title: "f5xc_dns_zone Data Source - terraform-provider-f5xc"
 subcategory: "DNS"
 description: |-
-  Manages DNS Zone in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
+  Manages a DNSZone resource in F5 Distributed Cloud.
 ---
 
-# f5xc\_dns\_zone (Data Source)
+# f5xc_dns_zone (Data Source)
 
-Manages DNS Zone in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
+Manages a DNSZone resource in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [DNS Zone API docs](https://docs.cloud.f5.com/docs-v2/api/dns-zone) to learn more.
 
@@ -18,24 +18,24 @@ Manages DNS Zone in a given namespace. If one already exist it will give a error
 # Retrieves information about an existing DNS Zone
 
 # Look up an existing DNS Zone by name
-data "f5xc\_dns\_zone" "example" {
+data "f5xc_dns_zone" "example" {
   name      = "example-dns-zone"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "dns\_zone\_id" {
-#   value = data.f5xc\_dns\_zone.example.id
+# output "dns_zone_id" {
+#   value = data.f5xc_dns_zone.example.id
 # }
 
 # Example: Reference DNS zone in DNS load balancer
-# resource "f5xc\_dns_load\_balancer" "example" {
+# resource "f5xc_dns_load_balancer" "example" {
 #   name      = "example-dns-lb"
 #   namespace = "system"
 #
 #   dns_zone {
-#     name      = data.f5xc\_dns\_zone.example.name
-#     namespace = data.f5xc\_dns\_zone.example.namespace
+#     name      = data.f5xc_dns_zone.example.name
+#     namespace = data.f5xc_dns_zone.example.namespace
 #   }
 # }
 ```

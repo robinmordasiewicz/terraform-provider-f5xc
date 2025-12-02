@@ -3435,7 +3435,7 @@ func (r *RouteResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		apiResource.Spec["routes"] = routesList
 	}
 
-	updated, err := r.client.UpdateRoute(ctx, apiResource)
+	_, err := r.client.UpdateRoute(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Route: %s", err))
 		return
@@ -3444,18 +3444,471 @@ func (r *RouteResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetRoute(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Route after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetRoute(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["routes"].([]interface{}); ok && len(listData) > 0 {
+		var routesList []RouteRoutesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				routesList = append(routesList, RouteRoutesModel{
+					BotDefenseJavascriptInjection: func() *RouteRoutesBotDefenseJavascriptInjectionModel {
+						if nestedMap, ok := itemMap["bot_defense_javascript_injection"].(map[string]interface{}); ok {
+							return &RouteRoutesBotDefenseJavascriptInjectionModel{
+								JavascriptLocation: func() types.String {
+									if v, ok := nestedMap["javascript_location"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					DisableLocationAdd: func() types.Bool {
+						if v, ok := itemMap["disable_location_add"].(bool); ok {
+							return types.BoolValue(v)
+						}
+						return types.BoolNull()
+					}(),
+					InheritedBotDefenseJavascriptInjection: func() *RouteEmptyModel {
+						if !isImport && len(data.Routes) > listIdx && data.Routes[listIdx].InheritedBotDefenseJavascriptInjection != nil {
+							return &RouteEmptyModel{}
+						}
+						return nil
+					}(),
+					InheritedWAFExclusion: func() *RouteEmptyModel {
+						if !isImport && len(data.Routes) > listIdx && data.Routes[listIdx].InheritedWAFExclusion != nil {
+							return &RouteEmptyModel{}
+						}
+						return nil
+					}(),
+					Match: func() []RouteRoutesMatchModel {
+						if nestedListData, ok := itemMap["match"].([]interface{}); ok && len(nestedListData) > 0 {
+							var result []RouteRoutesMatchModel
+							for _, nestedItem := range nestedListData {
+								if nestedItemMap, ok := nestedItem.(map[string]interface{}); ok {
+									result = append(result, RouteRoutesMatchModel{
+										HTTPMethod: func() types.String {
+											if v, ok := nestedItemMap["http_method"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+									})
+								}
+							}
+							return result
+						}
+						return nil
+					}(),
+					RequestCookiesToAdd: func() []RouteRoutesRequestCookiesToAddModel {
+						if nestedListData, ok := itemMap["request_cookies_to_add"].([]interface{}); ok && len(nestedListData) > 0 {
+							var result []RouteRoutesRequestCookiesToAddModel
+							for _, nestedItem := range nestedListData {
+								if nestedItemMap, ok := nestedItem.(map[string]interface{}); ok {
+									result = append(result, RouteRoutesRequestCookiesToAddModel{
+										Name: func() types.String {
+											if v, ok := nestedItemMap["name"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Overwrite: func() types.Bool {
+											if v, ok := nestedItemMap["overwrite"].(bool); ok {
+												return types.BoolValue(v)
+											}
+											return types.BoolNull()
+										}(),
+										Value: func() types.String {
+											if v, ok := nestedItemMap["value"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+									})
+								}
+							}
+							return result
+						}
+						return nil
+					}(),
+					RequestCookiesToRemove: func() types.List {
+						if v, ok := itemMap["request_cookies_to_remove"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
+					RequestHeadersToAdd: func() []RouteRoutesRequestHeadersToAddModel {
+						if nestedListData, ok := itemMap["request_headers_to_add"].([]interface{}); ok && len(nestedListData) > 0 {
+							var result []RouteRoutesRequestHeadersToAddModel
+							for _, nestedItem := range nestedListData {
+								if nestedItemMap, ok := nestedItem.(map[string]interface{}); ok {
+									result = append(result, RouteRoutesRequestHeadersToAddModel{
+										Append: func() types.Bool {
+											if v, ok := nestedItemMap["append"].(bool); ok {
+												return types.BoolValue(v)
+											}
+											return types.BoolNull()
+										}(),
+										Name: func() types.String {
+											if v, ok := nestedItemMap["name"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Value: func() types.String {
+											if v, ok := nestedItemMap["value"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+									})
+								}
+							}
+							return result
+						}
+						return nil
+					}(),
+					RequestHeadersToRemove: func() types.List {
+						if v, ok := itemMap["request_headers_to_remove"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
+					ResponseCookiesToAdd: func() []RouteRoutesResponseCookiesToAddModel {
+						if nestedListData, ok := itemMap["response_cookies_to_add"].([]interface{}); ok && len(nestedListData) > 0 {
+							var result []RouteRoutesResponseCookiesToAddModel
+							for _, nestedItem := range nestedListData {
+								if nestedItemMap, ok := nestedItem.(map[string]interface{}); ok {
+									result = append(result, RouteRoutesResponseCookiesToAddModel{
+										AddDomain: func() types.String {
+											if v, ok := nestedItemMap["add_domain"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										AddExpiry: func() types.String {
+											if v, ok := nestedItemMap["add_expiry"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										AddPath: func() types.String {
+											if v, ok := nestedItemMap["add_path"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										MaxAgeValue: func() types.Int64 {
+											if v, ok := nestedItemMap["max_age_value"].(float64); ok && v != 0 {
+												return types.Int64Value(int64(v))
+											}
+											return types.Int64Null()
+										}(),
+										Name: func() types.String {
+											if v, ok := nestedItemMap["name"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Overwrite: func() types.Bool {
+											if v, ok := nestedItemMap["overwrite"].(bool); ok {
+												return types.BoolValue(v)
+											}
+											return types.BoolNull()
+										}(),
+										Value: func() types.String {
+											if v, ok := nestedItemMap["value"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+									})
+								}
+							}
+							return result
+						}
+						return nil
+					}(),
+					ResponseCookiesToRemove: func() types.List {
+						if v, ok := itemMap["response_cookies_to_remove"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
+					ResponseHeadersToAdd: func() []RouteRoutesResponseHeadersToAddModel {
+						if nestedListData, ok := itemMap["response_headers_to_add"].([]interface{}); ok && len(nestedListData) > 0 {
+							var result []RouteRoutesResponseHeadersToAddModel
+							for _, nestedItem := range nestedListData {
+								if nestedItemMap, ok := nestedItem.(map[string]interface{}); ok {
+									result = append(result, RouteRoutesResponseHeadersToAddModel{
+										Append: func() types.Bool {
+											if v, ok := nestedItemMap["append"].(bool); ok {
+												return types.BoolValue(v)
+											}
+											return types.BoolNull()
+										}(),
+										Name: func() types.String {
+											if v, ok := nestedItemMap["name"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Value: func() types.String {
+											if v, ok := nestedItemMap["value"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+									})
+								}
+							}
+							return result
+						}
+						return nil
+					}(),
+					ResponseHeadersToRemove: func() types.List {
+						if v, ok := itemMap["response_headers_to_remove"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
+					RouteDestination: func() *RouteRoutesRouteDestinationModel {
+						if nestedMap, ok := itemMap["route_destination"].(map[string]interface{}); ok {
+							return &RouteRoutesRouteDestinationModel{
+								AutoHostRewrite: func() types.Bool {
+									if v, ok := nestedMap["auto_host_rewrite"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								DoNotRetractCluster: func() *RouteEmptyModel {
+									if !isImport && len(data.Routes) > listIdx && data.Routes[listIdx].RouteDestination != nil && data.Routes[listIdx].RouteDestination.DoNotRetractCluster != nil {
+										return &RouteEmptyModel{}
+									}
+									return nil
+								}(),
+								EndpointSubsets: func() *RouteEmptyModel {
+									if !isImport && len(data.Routes) > listIdx && data.Routes[listIdx].RouteDestination != nil && data.Routes[listIdx].RouteDestination.EndpointSubsets != nil {
+										return &RouteEmptyModel{}
+									}
+									return nil
+								}(),
+								HostRewrite: func() types.String {
+									if v, ok := nestedMap["host_rewrite"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								PrefixRewrite: func() types.String {
+									if v, ok := nestedMap["prefix_rewrite"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Priority: func() types.String {
+									if v, ok := nestedMap["priority"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								RetractCluster: func() *RouteEmptyModel {
+									if !isImport && len(data.Routes) > listIdx && data.Routes[listIdx].RouteDestination != nil && data.Routes[listIdx].RouteDestination.RetractCluster != nil {
+										return &RouteEmptyModel{}
+									}
+									return nil
+								}(),
+								Timeout: func() types.Int64 {
+									if v, ok := nestedMap["timeout"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					RouteDirectResponse: func() *RouteRoutesRouteDirectResponseModel {
+						if nestedMap, ok := itemMap["route_direct_response"].(map[string]interface{}); ok {
+							return &RouteRoutesRouteDirectResponseModel{
+								ResponseBodyEncoded: func() types.String {
+									if v, ok := nestedMap["response_body_encoded"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ResponseCode: func() types.Int64 {
+									if v, ok := nestedMap["response_code"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					RouteRedirect: func() *RouteRoutesRouteRedirectModel {
+						if nestedMap, ok := itemMap["route_redirect"].(map[string]interface{}); ok {
+							return &RouteRoutesRouteRedirectModel{
+								HostRedirect: func() types.String {
+									if v, ok := nestedMap["host_redirect"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								PathRedirect: func() types.String {
+									if v, ok := nestedMap["path_redirect"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								PrefixRewrite: func() types.String {
+									if v, ok := nestedMap["prefix_rewrite"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ProtoRedirect: func() types.String {
+									if v, ok := nestedMap["proto_redirect"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								RemoveAllParams: func() *RouteEmptyModel {
+									if !isImport && len(data.Routes) > listIdx && data.Routes[listIdx].RouteRedirect != nil && data.Routes[listIdx].RouteRedirect.RemoveAllParams != nil {
+										return &RouteEmptyModel{}
+									}
+									return nil
+								}(),
+								ReplaceParams: func() types.String {
+									if v, ok := nestedMap["replace_params"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ResponseCode: func() types.Int64 {
+									if v, ok := nestedMap["response_code"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								RetainAllParams: func() *RouteEmptyModel {
+									if !isImport && len(data.Routes) > listIdx && data.Routes[listIdx].RouteRedirect != nil && data.Routes[listIdx].RouteRedirect.RetainAllParams != nil {
+										return &RouteEmptyModel{}
+									}
+									return nil
+								}(),
+							}
+						}
+						return nil
+					}(),
+					ServicePolicy: func() *RouteRoutesServicePolicyModel {
+						if nestedMap, ok := itemMap["service_policy"].(map[string]interface{}); ok {
+							return &RouteRoutesServicePolicyModel{
+								Disable: func() types.Bool {
+									if v, ok := nestedMap["disable"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					WAFExclusionPolicy: func() *RouteRoutesWAFExclusionPolicyModel {
+						if nestedMap, ok := itemMap["waf_exclusion_policy"].(map[string]interface{}); ok {
+							return &RouteRoutesWAFExclusionPolicyModel{
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := nestedMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := nestedMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					WAFType: func() *RouteRoutesWAFTypeModel {
+						if _, ok := itemMap["waf_type"].(map[string]interface{}); ok {
+							return &RouteRoutesWAFTypeModel{
+								DisableWAF: func() *RouteEmptyModel {
+									if !isImport && len(data.Routes) > listIdx && data.Routes[listIdx].WAFType != nil && data.Routes[listIdx].WAFType.DisableWAF != nil {
+										return &RouteEmptyModel{}
+									}
+									return nil
+								}(),
+								InheritWAF: func() *RouteEmptyModel {
+									if !isImport && len(data.Routes) > listIdx && data.Routes[listIdx].WAFType != nil && data.Routes[listIdx].WAFType.InheritWAF != nil {
+										return &RouteEmptyModel{}
+									}
+									return nil
+								}(),
+							}
+						}
+						return nil
+					}(),
+				})
+			}
 		}
+		data.Routes = routesList
 	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

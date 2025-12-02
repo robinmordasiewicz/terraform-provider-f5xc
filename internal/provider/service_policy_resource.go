@@ -3522,7 +3522,7 @@ func (r *ServicePolicyResource) Update(ctx context.Context, req resource.UpdateR
 		apiResource.Spec["server_name"] = data.ServerName.ValueString()
 	}
 
-	updated, err := r.client.UpdateServicePolicy(ctx, apiResource)
+	_, err := r.client.UpdateServicePolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update ServicePolicy: %s", err))
 		return
@@ -3531,8 +3531,16 @@ func (r *ServicePolicyResource) Update(ctx context.Context, req resource.UpdateR
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetServicePolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read ServicePolicy after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["server_name"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["server_name"].(string); ok && v != "" {
 		data.ServerName = types.StringValue(v)
 	} else if data.ServerName.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -3540,16 +3548,542 @@ func (r *ServicePolicyResource) Update(ctx context.Context, req resource.UpdateR
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetServicePolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["allow_all_requests"].(map[string]interface{}); ok && isImport && data.AllowAllRequests == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AllowAllRequests = &ServicePolicyEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["allow_list"].(map[string]interface{}); ok && (isImport || data.AllowList != nil) {
+		data.AllowList = &ServicePolicyAllowListModel{
+			AsnList: func() *ServicePolicyAllowListAsnListModel {
+				if !isImport && data.AllowList != nil && data.AllowList.AsnList != nil {
+					// Normal Read: preserve existing state value
+					return data.AllowList.AsnList
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["asn_list"].(map[string]interface{}); ok {
+					return &ServicePolicyAllowListAsnListModel{
+						AsNumbers: func() types.List {
+							if v, ok := nestedBlockData["as_numbers"].([]interface{}); ok && len(v) > 0 {
+								var items []int64
+								for _, item := range v {
+									if n, ok := item.(float64); ok {
+										items = append(items, int64(n))
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.Int64Type, items)
+								return listVal
+							}
+							return types.ListNull(types.Int64Type)
+						}(),
+					}
+				}
+				return nil
+			}(),
+			AsnSet: func() []ServicePolicyAllowListAsnSetModel {
+				if listData, ok := blockData["asn_set"].([]interface{}); ok && len(listData) > 0 {
+					var result []ServicePolicyAllowListAsnSetModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, ServicePolicyAllowListAsnSetModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			CountryList: func() types.List {
+				if v, ok := blockData["country_list"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			DefaultActionAllow: func() *ServicePolicyEmptyModel {
+				if !isImport && data.AllowList != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AllowList.DefaultActionAllow
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_action_allow"].(map[string]interface{}); ok {
+					return &ServicePolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultActionDeny: func() *ServicePolicyEmptyModel {
+				if !isImport && data.AllowList != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AllowList.DefaultActionDeny
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_action_deny"].(map[string]interface{}); ok {
+					return &ServicePolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultActionNextPolicy: func() *ServicePolicyEmptyModel {
+				if !isImport && data.AllowList != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AllowList.DefaultActionNextPolicy
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_action_next_policy"].(map[string]interface{}); ok {
+					return &ServicePolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			IPPrefixSet: func() []ServicePolicyAllowListIPPrefixSetModel {
+				if listData, ok := blockData["ip_prefix_set"].([]interface{}); ok && len(listData) > 0 {
+					var result []ServicePolicyAllowListIPPrefixSetModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, ServicePolicyAllowListIPPrefixSetModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			PrefixList: func() *ServicePolicyAllowListPrefixListModel {
+				if !isImport && data.AllowList != nil && data.AllowList.PrefixList != nil {
+					// Normal Read: preserve existing state value
+					return data.AllowList.PrefixList
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["prefix_list"].(map[string]interface{}); ok {
+					return &ServicePolicyAllowListPrefixListModel{
+						Prefixes: func() types.List {
+							if v, ok := nestedBlockData["prefixes"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+					}
+				}
+				return nil
+			}(),
+			TLSFingerprintClasses: func() types.List {
+				if v, ok := blockData["tls_fingerprint_classes"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			TLSFingerprintValues: func() types.List {
+				if v, ok := blockData["tls_fingerprint_values"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
 		}
 	}
+	if _, ok := apiResource.Spec["any_server"].(map[string]interface{}); ok && isImport && data.AnyServer == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AnyServer = &ServicePolicyEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["deny_all_requests"].(map[string]interface{}); ok && isImport && data.DenyAllRequests == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DenyAllRequests = &ServicePolicyEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["deny_list"].(map[string]interface{}); ok && (isImport || data.DenyList != nil) {
+		data.DenyList = &ServicePolicyDenyListModel{
+			AsnList: func() *ServicePolicyDenyListAsnListModel {
+				if !isImport && data.DenyList != nil && data.DenyList.AsnList != nil {
+					// Normal Read: preserve existing state value
+					return data.DenyList.AsnList
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["asn_list"].(map[string]interface{}); ok {
+					return &ServicePolicyDenyListAsnListModel{
+						AsNumbers: func() types.List {
+							if v, ok := nestedBlockData["as_numbers"].([]interface{}); ok && len(v) > 0 {
+								var items []int64
+								for _, item := range v {
+									if n, ok := item.(float64); ok {
+										items = append(items, int64(n))
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.Int64Type, items)
+								return listVal
+							}
+							return types.ListNull(types.Int64Type)
+						}(),
+					}
+				}
+				return nil
+			}(),
+			AsnSet: func() []ServicePolicyDenyListAsnSetModel {
+				if listData, ok := blockData["asn_set"].([]interface{}); ok && len(listData) > 0 {
+					var result []ServicePolicyDenyListAsnSetModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, ServicePolicyDenyListAsnSetModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			CountryList: func() types.List {
+				if v, ok := blockData["country_list"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			DefaultActionAllow: func() *ServicePolicyEmptyModel {
+				if !isImport && data.DenyList != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DenyList.DefaultActionAllow
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_action_allow"].(map[string]interface{}); ok {
+					return &ServicePolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultActionDeny: func() *ServicePolicyEmptyModel {
+				if !isImport && data.DenyList != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DenyList.DefaultActionDeny
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_action_deny"].(map[string]interface{}); ok {
+					return &ServicePolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultActionNextPolicy: func() *ServicePolicyEmptyModel {
+				if !isImport && data.DenyList != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DenyList.DefaultActionNextPolicy
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_action_next_policy"].(map[string]interface{}); ok {
+					return &ServicePolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			IPPrefixSet: func() []ServicePolicyDenyListIPPrefixSetModel {
+				if listData, ok := blockData["ip_prefix_set"].([]interface{}); ok && len(listData) > 0 {
+					var result []ServicePolicyDenyListIPPrefixSetModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, ServicePolicyDenyListIPPrefixSetModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			PrefixList: func() *ServicePolicyDenyListPrefixListModel {
+				if !isImport && data.DenyList != nil && data.DenyList.PrefixList != nil {
+					// Normal Read: preserve existing state value
+					return data.DenyList.PrefixList
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["prefix_list"].(map[string]interface{}); ok {
+					return &ServicePolicyDenyListPrefixListModel{
+						Prefixes: func() types.List {
+							if v, ok := nestedBlockData["prefixes"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+					}
+				}
+				return nil
+			}(),
+			TLSFingerprintClasses: func() types.List {
+				if v, ok := blockData["tls_fingerprint_classes"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			TLSFingerprintValues: func() types.List {
+				if v, ok := blockData["tls_fingerprint_values"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["rule_list"].(map[string]interface{}); ok && (isImport || data.RuleList != nil) {
+		data.RuleList = &ServicePolicyRuleListModel{
+			Rules: func() []ServicePolicyRuleListRulesModel {
+				if listData, ok := blockData["rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []ServicePolicyRuleListRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, ServicePolicyRuleListRulesModel{
+								Metadata: func() *ServicePolicyRuleListRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &ServicePolicyRuleListRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Spec: func() *ServicePolicyRuleListRulesSpecModel {
+									if deepMap, ok := itemMap["spec"].(map[string]interface{}); ok {
+										return &ServicePolicyRuleListRulesSpecModel{
+											Action: func() types.String {
+												if v, ok := deepMap["action"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											AnyAsn: func() *ServicePolicyEmptyModel {
+												if _, ok := deepMap["any_asn"].(map[string]interface{}); ok {
+													return &ServicePolicyEmptyModel{}
+												}
+												return nil
+											}(),
+											AnyClient: func() *ServicePolicyEmptyModel {
+												if _, ok := deepMap["any_client"].(map[string]interface{}); ok {
+													return &ServicePolicyEmptyModel{}
+												}
+												return nil
+											}(),
+											AnyIP: func() *ServicePolicyEmptyModel {
+												if _, ok := deepMap["any_ip"].(map[string]interface{}); ok {
+													return &ServicePolicyEmptyModel{}
+												}
+												return nil
+											}(),
+											ClientName: func() types.String {
+												if v, ok := deepMap["client_name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											ExpirationTimestamp: func() types.String {
+												if v, ok := deepMap["expiration_timestamp"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["server_name_matcher"].(map[string]interface{}); ok && (isImport || data.ServerNameMatcher != nil) {
+		data.ServerNameMatcher = &ServicePolicyServerNameMatcherModel{
+			ExactValues: func() types.List {
+				if v, ok := blockData["exact_values"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			RegexValues: func() types.List {
+				if v, ok := blockData["regex_values"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["server_selector"].(map[string]interface{}); ok && (isImport || data.ServerSelector != nil) {
+		data.ServerSelector = &ServicePolicyServerSelectorModel{
+			Expressions: func() types.List {
+				if v, ok := blockData["expressions"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["server_name"].(string); ok && v != "" {
+		data.ServerName = types.StringValue(v)
+	} else {
+		data.ServerName = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

@@ -531,7 +531,7 @@ func (r *GeoLocationSetResource) Update(ctx context.Context, req resource.Update
 		apiResource.Spec["global"] = globalMap
 	}
 
-	updated, err := r.client.UpdateGeoLocationSet(ctx, apiResource)
+	_, err := r.client.UpdateGeoLocationSet(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update GeoLocationSet: %s", err))
 		return
@@ -540,18 +540,46 @@ func (r *GeoLocationSetResource) Update(ctx context.Context, req resource.Update
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetGeoLocationSet(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read GeoLocationSet after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetGeoLocationSet(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["custom_geo_location_selector"].(map[string]interface{}); ok && (isImport || data.CustomGeoLocationSelector != nil) {
+		data.CustomGeoLocationSelector = &GeoLocationSetCustomGeoLocationSelectorModel{
+			Expressions: func() types.List {
+				if v, ok := blockData["expressions"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
 		}
 	}
+	if _, ok := apiResource.Spec["global"].(map[string]interface{}); ok && isImport && data.Global == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Global = &GeoLocationSetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

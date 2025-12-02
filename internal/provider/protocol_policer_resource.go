@@ -813,7 +813,7 @@ func (r *ProtocolPolicerResource) Update(ctx context.Context, req resource.Updat
 		apiResource.Spec["protocol_policer"] = protocol_policerList
 	}
 
-	updated, err := r.client.UpdateProtocolPolicer(ctx, apiResource)
+	_, err := r.client.UpdateProtocolPolicer(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update ProtocolPolicer: %s", err))
 		return
@@ -822,18 +822,97 @@ func (r *ProtocolPolicerResource) Update(ctx context.Context, req resource.Updat
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetProtocolPolicer(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read ProtocolPolicer after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetProtocolPolicer(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["protocol_policer"].([]interface{}); ok && len(listData) > 0 {
+		var protocol_policerList []ProtocolPolicerProtocolPolicerModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				protocol_policerList = append(protocol_policerList, ProtocolPolicerProtocolPolicerModel{
+					Policer: func() []ProtocolPolicerProtocolPolicerPolicerModel {
+						if nestedListData, ok := itemMap["policer"].([]interface{}); ok && len(nestedListData) > 0 {
+							var result []ProtocolPolicerProtocolPolicerPolicerModel
+							for _, nestedItem := range nestedListData {
+								if nestedItemMap, ok := nestedItem.(map[string]interface{}); ok {
+									result = append(result, ProtocolPolicerProtocolPolicerPolicerModel{
+										Kind: func() types.String {
+											if v, ok := nestedItemMap["kind"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Name: func() types.String {
+											if v, ok := nestedItemMap["name"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Namespace: func() types.String {
+											if v, ok := nestedItemMap["namespace"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Tenant: func() types.String {
+											if v, ok := nestedItemMap["tenant"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Uid: func() types.String {
+											if v, ok := nestedItemMap["uid"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+									})
+								}
+							}
+							return result
+						}
+						return nil
+					}(),
+					Protocol: func() *ProtocolPolicerProtocolPolicerProtocolModel {
+						if _, ok := itemMap["protocol"].(map[string]interface{}); ok {
+							return &ProtocolPolicerProtocolPolicerProtocolModel{
+								DNS: func() *ProtocolPolicerEmptyModel {
+									if !isImport && len(data.ProtocolPolicer) > listIdx && data.ProtocolPolicer[listIdx].Protocol != nil && data.ProtocolPolicer[listIdx].Protocol.DNS != nil {
+										return &ProtocolPolicerEmptyModel{}
+									}
+									return nil
+								}(),
+								UDP: func() *ProtocolPolicerEmptyModel {
+									if !isImport && len(data.ProtocolPolicer) > listIdx && data.ProtocolPolicer[listIdx].Protocol != nil && data.ProtocolPolicer[listIdx].Protocol.UDP != nil {
+										return &ProtocolPolicerEmptyModel{}
+									}
+									return nil
+								}(),
+							}
+						}
+						return nil
+					}(),
+				})
+			}
 		}
+		data.ProtocolPolicer = protocol_policerList
 	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

@@ -1377,7 +1377,7 @@ func (r *AlertReceiverResource) Update(ctx context.Context, req resource.UpdateR
 		apiResource.Spec["webhook"] = webhookMap
 	}
 
-	updated, err := r.client.UpdateAlertReceiver(ctx, apiResource)
+	_, err := r.client.UpdateAlertReceiver(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update AlertReceiver: %s", err))
 		return
@@ -1386,18 +1386,112 @@ func (r *AlertReceiverResource) Update(ctx context.Context, req resource.UpdateR
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetAlertReceiver(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read AlertReceiver after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetAlertReceiver(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["email"].(map[string]interface{}); ok && (isImport || data.Email != nil) {
+		data.Email = &AlertReceiverEmailModel{
+			Email: func() types.String {
+				if v, ok := blockData["email"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["opsgenie"].(map[string]interface{}); ok && (isImport || data.Opsgenie != nil) {
+		data.Opsgenie = &AlertReceiverOpsgenieModel{
+			APIKey: func() *AlertReceiverOpsgenieAPIKeyModel {
+				if !isImport && data.Opsgenie != nil && data.Opsgenie.APIKey != nil {
+					// Normal Read: preserve existing state value
+					return data.Opsgenie.APIKey
+				}
+				// Import case: read from API
+				if _, ok := blockData["api_key"].(map[string]interface{}); ok {
+					return &AlertReceiverOpsgenieAPIKeyModel{}
+				}
+				return nil
+			}(),
+			URL: func() types.String {
+				if v, ok := blockData["url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["pagerduty"].(map[string]interface{}); ok && (isImport || data.Pagerduty != nil) {
+		data.Pagerduty = &AlertReceiverPagerdutyModel{
+			RoutingKey: func() *AlertReceiverPagerdutyRoutingKeyModel {
+				if !isImport && data.Pagerduty != nil && data.Pagerduty.RoutingKey != nil {
+					// Normal Read: preserve existing state value
+					return data.Pagerduty.RoutingKey
+				}
+				// Import case: read from API
+				if _, ok := blockData["routing_key"].(map[string]interface{}); ok {
+					return &AlertReceiverPagerdutyRoutingKeyModel{}
+				}
+				return nil
+			}(),
+			URL: func() types.String {
+				if v, ok := blockData["url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["slack"].(map[string]interface{}); ok && (isImport || data.Slack != nil) {
+		data.Slack = &AlertReceiverSlackModel{
+			Channel: func() types.String {
+				if v, ok := blockData["channel"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			URL: func() *AlertReceiverSlackURLModel {
+				if !isImport && data.Slack != nil && data.Slack.URL != nil {
+					// Normal Read: preserve existing state value
+					return data.Slack.URL
+				}
+				// Import case: read from API
+				if _, ok := blockData["url"].(map[string]interface{}); ok {
+					return &AlertReceiverSlackURLModel{}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["sms"].(map[string]interface{}); ok && (isImport || data.Sms != nil) {
+		data.Sms = &AlertReceiverSmsModel{
+			ContactNumber: func() types.String {
+				if v, ok := blockData["contact_number"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["webhook"].(map[string]interface{}); ok && isImport && data.Webhook == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Webhook = &AlertReceiverWebhookModel{}
+	}
+	// Normal Read: preserve existing state value
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

@@ -1811,7 +1811,7 @@ func (r *NetworkPolicyResource) Update(ctx context.Context, req resource.UpdateR
 		apiResource.Spec["rules"] = rulesMap
 	}
 
-	updated, err := r.client.UpdateNetworkPolicy(ctx, apiResource)
+	_, err := r.client.UpdateNetworkPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update NetworkPolicy: %s", err))
 		return
@@ -1820,18 +1820,293 @@ func (r *NetworkPolicyResource) Update(ctx context.Context, req resource.UpdateR
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetNetworkPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read NetworkPolicy after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetNetworkPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["endpoint"].(map[string]interface{}); ok && isImport && data.Endpoint == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Endpoint = &NetworkPolicyEndpointModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["rules"].(map[string]interface{}); ok && (isImport || data.Rules != nil) {
+		data.Rules = &NetworkPolicyRulesModel{
+			EgressRules: func() []NetworkPolicyRulesEgressRulesModel {
+				if listData, ok := blockData["egress_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []NetworkPolicyRulesEgressRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, NetworkPolicyRulesEgressRulesModel{
+								Action: func() types.String {
+									if v, ok := itemMap["action"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								AdvAction: func() *NetworkPolicyRulesEgressRulesAdvActionModel {
+									if deepMap, ok := itemMap["adv_action"].(map[string]interface{}); ok {
+										return &NetworkPolicyRulesEgressRulesAdvActionModel{
+											Action: func() types.String {
+												if v, ok := deepMap["action"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								AllTCPTraffic: func() *NetworkPolicyEmptyModel {
+									if _, ok := itemMap["all_tcp_traffic"].(map[string]interface{}); ok {
+										return &NetworkPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								AllTraffic: func() *NetworkPolicyEmptyModel {
+									if _, ok := itemMap["all_traffic"].(map[string]interface{}); ok {
+										return &NetworkPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								AllUDPTraffic: func() *NetworkPolicyEmptyModel {
+									if _, ok := itemMap["all_udp_traffic"].(map[string]interface{}); ok {
+										return &NetworkPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								Any: func() *NetworkPolicyEmptyModel {
+									if _, ok := itemMap["any"].(map[string]interface{}); ok {
+										return &NetworkPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								Applications: func() *NetworkPolicyRulesEgressRulesApplicationsModel {
+									if _, ok := itemMap["applications"].(map[string]interface{}); ok {
+										return &NetworkPolicyRulesEgressRulesApplicationsModel{}
+									}
+									return nil
+								}(),
+								InsideEndpoints: func() *NetworkPolicyEmptyModel {
+									if _, ok := itemMap["inside_endpoints"].(map[string]interface{}); ok {
+										return &NetworkPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								IPPrefixSet: func() *NetworkPolicyRulesEgressRulesIPPrefixSetModel {
+									if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
+										return &NetworkPolicyRulesEgressRulesIPPrefixSetModel{}
+									}
+									return nil
+								}(),
+								LabelMatcher: func() *NetworkPolicyRulesEgressRulesLabelMatcherModel {
+									if _, ok := itemMap["label_matcher"].(map[string]interface{}); ok {
+										return &NetworkPolicyRulesEgressRulesLabelMatcherModel{}
+									}
+									return nil
+								}(),
+								LabelSelector: func() *NetworkPolicyRulesEgressRulesLabelSelectorModel {
+									if _, ok := itemMap["label_selector"].(map[string]interface{}); ok {
+										return &NetworkPolicyRulesEgressRulesLabelSelectorModel{}
+									}
+									return nil
+								}(),
+								Metadata: func() *NetworkPolicyRulesEgressRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &NetworkPolicyRulesEgressRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								OutsideEndpoints: func() *NetworkPolicyEmptyModel {
+									if _, ok := itemMap["outside_endpoints"].(map[string]interface{}); ok {
+										return &NetworkPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								PrefixList: func() *NetworkPolicyRulesEgressRulesPrefixListModel {
+									if _, ok := itemMap["prefix_list"].(map[string]interface{}); ok {
+										return &NetworkPolicyRulesEgressRulesPrefixListModel{}
+									}
+									return nil
+								}(),
+								ProtocolPortRange: func() *NetworkPolicyRulesEgressRulesProtocolPortRangeModel {
+									if deepMap, ok := itemMap["protocol_port_range"].(map[string]interface{}); ok {
+										return &NetworkPolicyRulesEgressRulesProtocolPortRangeModel{
+											Protocol: func() types.String {
+												if v, ok := deepMap["protocol"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			IngressRules: func() []NetworkPolicyRulesIngressRulesModel {
+				if listData, ok := blockData["ingress_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []NetworkPolicyRulesIngressRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, NetworkPolicyRulesIngressRulesModel{
+								Action: func() types.String {
+									if v, ok := itemMap["action"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								AdvAction: func() *NetworkPolicyRulesIngressRulesAdvActionModel {
+									if deepMap, ok := itemMap["adv_action"].(map[string]interface{}); ok {
+										return &NetworkPolicyRulesIngressRulesAdvActionModel{
+											Action: func() types.String {
+												if v, ok := deepMap["action"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								AllTCPTraffic: func() *NetworkPolicyEmptyModel {
+									if _, ok := itemMap["all_tcp_traffic"].(map[string]interface{}); ok {
+										return &NetworkPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								AllTraffic: func() *NetworkPolicyEmptyModel {
+									if _, ok := itemMap["all_traffic"].(map[string]interface{}); ok {
+										return &NetworkPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								AllUDPTraffic: func() *NetworkPolicyEmptyModel {
+									if _, ok := itemMap["all_udp_traffic"].(map[string]interface{}); ok {
+										return &NetworkPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								Any: func() *NetworkPolicyEmptyModel {
+									if _, ok := itemMap["any"].(map[string]interface{}); ok {
+										return &NetworkPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								Applications: func() *NetworkPolicyRulesIngressRulesApplicationsModel {
+									if _, ok := itemMap["applications"].(map[string]interface{}); ok {
+										return &NetworkPolicyRulesIngressRulesApplicationsModel{}
+									}
+									return nil
+								}(),
+								InsideEndpoints: func() *NetworkPolicyEmptyModel {
+									if _, ok := itemMap["inside_endpoints"].(map[string]interface{}); ok {
+										return &NetworkPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								IPPrefixSet: func() *NetworkPolicyRulesIngressRulesIPPrefixSetModel {
+									if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
+										return &NetworkPolicyRulesIngressRulesIPPrefixSetModel{}
+									}
+									return nil
+								}(),
+								LabelMatcher: func() *NetworkPolicyRulesIngressRulesLabelMatcherModel {
+									if _, ok := itemMap["label_matcher"].(map[string]interface{}); ok {
+										return &NetworkPolicyRulesIngressRulesLabelMatcherModel{}
+									}
+									return nil
+								}(),
+								LabelSelector: func() *NetworkPolicyRulesIngressRulesLabelSelectorModel {
+									if _, ok := itemMap["label_selector"].(map[string]interface{}); ok {
+										return &NetworkPolicyRulesIngressRulesLabelSelectorModel{}
+									}
+									return nil
+								}(),
+								Metadata: func() *NetworkPolicyRulesIngressRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &NetworkPolicyRulesIngressRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								OutsideEndpoints: func() *NetworkPolicyEmptyModel {
+									if _, ok := itemMap["outside_endpoints"].(map[string]interface{}); ok {
+										return &NetworkPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								PrefixList: func() *NetworkPolicyRulesIngressRulesPrefixListModel {
+									if _, ok := itemMap["prefix_list"].(map[string]interface{}); ok {
+										return &NetworkPolicyRulesIngressRulesPrefixListModel{}
+									}
+									return nil
+								}(),
+								ProtocolPortRange: func() *NetworkPolicyRulesIngressRulesProtocolPortRangeModel {
+									if deepMap, ok := itemMap["protocol_port_range"].(map[string]interface{}); ok {
+										return &NetworkPolicyRulesIngressRulesProtocolPortRangeModel{
+											Protocol: func() types.String {
+												if v, ok := deepMap["protocol"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
 		}
 	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

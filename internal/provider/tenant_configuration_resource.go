@@ -755,7 +755,7 @@ func (r *TenantConfigurationResource) Update(ctx context.Context, req resource.U
 		apiResource.Spec["password_policy"] = password_policyMap
 	}
 
-	updated, err := r.client.UpdateTenantConfiguration(ctx, apiResource)
+	_, err := r.client.UpdateTenantConfiguration(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update TenantConfiguration: %s", err))
 		return
@@ -764,18 +764,101 @@ func (r *TenantConfigurationResource) Update(ctx context.Context, req resource.U
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetTenantConfiguration(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read TenantConfiguration after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetTenantConfiguration(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["basic_configuration"].(map[string]interface{}); ok && (isImport || data.BasicConfiguration != nil) {
+		data.BasicConfiguration = &TenantConfigurationBasicConfigurationModel{
+			DisplayName: func() types.String {
+				if v, ok := blockData["display_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["brute_force_detection_settings"].(map[string]interface{}); ok && (isImport || data.BruteForceDetectionSettings != nil) {
+		data.BruteForceDetectionSettings = &TenantConfigurationBruteForceDetectionSettingsModel{
+			MaxLoginFailures: func() types.Int64 {
+				if v, ok := blockData["max_login_failures"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["password_policy"].(map[string]interface{}); ok && (isImport || data.PasswordPolicy != nil) {
+		data.PasswordPolicy = &TenantConfigurationPasswordPolicyModel{
+			Digits: func() types.Int64 {
+				if v, ok := blockData["digits"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			ExpirePassword: func() types.Int64 {
+				if v, ok := blockData["expire_password"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			LowercaseCharacters: func() types.Int64 {
+				if v, ok := blockData["lowercase_characters"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			MinimumLength: func() types.Int64 {
+				if v, ok := blockData["minimum_length"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			NotRecentlyUsed: func() types.Int64 {
+				if v, ok := blockData["not_recently_used"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			NotUsername: func() types.Bool {
+				if !isImport && data.PasswordPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PasswordPolicy.NotUsername
+				}
+				// Import case: read from API
+				if v, ok := blockData["not_username"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			SpecialCharacters: func() types.Int64 {
+				if v, ok := blockData["special_characters"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			UppercaseCharacters: func() types.Int64 {
+				if v, ok := blockData["uppercase_characters"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

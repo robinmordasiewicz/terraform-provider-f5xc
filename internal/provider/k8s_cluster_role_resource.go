@@ -712,7 +712,7 @@ func (r *K8SClusterRoleResource) Update(ctx context.Context, req resource.Update
 		apiResource.Spec["yaml"] = data.Yaml.ValueString()
 	}
 
-	updated, err := r.client.UpdateK8SClusterRole(ctx, apiResource)
+	_, err := r.client.UpdateK8SClusterRole(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update K8SClusterRole: %s", err))
 		return
@@ -721,8 +721,16 @@ func (r *K8SClusterRoleResource) Update(ctx context.Context, req resource.Update
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetK8SClusterRole(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read K8SClusterRole after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["yaml"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["yaml"].(string); ok && v != "" {
 		data.Yaml = types.StringValue(v)
 	} else if data.Yaml.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -730,16 +738,65 @@ func (r *K8SClusterRoleResource) Update(ctx context.Context, req resource.Update
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetK8SClusterRole(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["k8s_cluster_role_selector"].(map[string]interface{}); ok && (isImport || data.K8SClusterRoleSelector != nil) {
+		data.K8SClusterRoleSelector = &K8SClusterRoleK8SClusterRoleSelectorModel{
+			Expressions: func() types.List {
+				if v, ok := blockData["expressions"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["policy_rule_list"].(map[string]interface{}); ok && (isImport || data.PolicyRuleList != nil) {
+		data.PolicyRuleList = &K8SClusterRolePolicyRuleListModel{
+			PolicyRule: func() []K8SClusterRolePolicyRuleListPolicyRuleModel {
+				if listData, ok := blockData["policy_rule"].([]interface{}); ok && len(listData) > 0 {
+					var result []K8SClusterRolePolicyRuleListPolicyRuleModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, K8SClusterRolePolicyRuleListPolicyRuleModel{
+								NonResourceURLList: func() *K8SClusterRolePolicyRuleListPolicyRuleNonResourceURLListModel {
+									if _, ok := itemMap["non_resource_url_list"].(map[string]interface{}); ok {
+										return &K8SClusterRolePolicyRuleListPolicyRuleNonResourceURLListModel{}
+									}
+									return nil
+								}(),
+								ResourceList: func() *K8SClusterRolePolicyRuleListPolicyRuleResourceListModel {
+									if _, ok := itemMap["resource_list"].(map[string]interface{}); ok {
+										return &K8SClusterRolePolicyRuleListPolicyRuleResourceListModel{}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["yaml"].(string); ok && v != "" {
+		data.Yaml = types.StringValue(v)
+	} else {
+		data.Yaml = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

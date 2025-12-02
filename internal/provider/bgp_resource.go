@@ -1809,7 +1809,7 @@ func (r *BGPResource) Update(ctx context.Context, req resource.UpdateRequest, re
 		apiResource.Spec["where"] = whereMap
 	}
 
-	updated, err := r.client.UpdateBGP(ctx, apiResource)
+	_, err := r.client.UpdateBGP(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update BGP: %s", err))
 		return
@@ -1818,18 +1818,269 @@ func (r *BGPResource) Update(ctx context.Context, req resource.UpdateRequest, re
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetBGP(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read BGP after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetBGP(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["bgp_parameters"].(map[string]interface{}); ok && (isImport || data.BGPParameters != nil) {
+		data.BGPParameters = &BGPBGPParametersModel{
+			Asn: func() types.Int64 {
+				if v, ok := blockData["asn"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			FromSite: func() *BGPEmptyModel {
+				if !isImport && data.BGPParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.BGPParameters.FromSite
+				}
+				// Import case: read from API
+				if _, ok := blockData["from_site"].(map[string]interface{}); ok {
+					return &BGPEmptyModel{}
+				}
+				return nil
+			}(),
+			IPAddress: func() types.String {
+				if v, ok := blockData["ip_address"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			LocalAddress: func() *BGPEmptyModel {
+				if !isImport && data.BGPParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.BGPParameters.LocalAddress
+				}
+				// Import case: read from API
+				if _, ok := blockData["local_address"].(map[string]interface{}); ok {
+					return &BGPEmptyModel{}
+				}
+				return nil
+			}(),
 		}
 	}
+	if listData, ok := apiResource.Spec["peers"].([]interface{}); ok && len(listData) > 0 {
+		var peersList []BGPPeersModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				peersList = append(peersList, BGPPeersModel{
+					BfdDisabled: func() *BGPEmptyModel {
+						if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].BfdDisabled != nil {
+							return &BGPEmptyModel{}
+						}
+						return nil
+					}(),
+					BfdEnabled: func() *BGPPeersBfdEnabledModel {
+						if nestedMap, ok := itemMap["bfd_enabled"].(map[string]interface{}); ok {
+							return &BGPPeersBfdEnabledModel{
+								Multiplier: func() types.Int64 {
+									if v, ok := nestedMap["multiplier"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								ReceiveIntervalMilliseconds: func() types.Int64 {
+									if v, ok := nestedMap["receive_interval_milliseconds"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								TransmitIntervalMilliseconds: func() types.Int64 {
+									if v, ok := nestedMap["transmit_interval_milliseconds"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Disable: func() *BGPEmptyModel {
+						if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].Disable != nil {
+							return &BGPEmptyModel{}
+						}
+						return nil
+					}(),
+					External: func() *BGPPeersExternalModel {
+						if nestedMap, ok := itemMap["external"].(map[string]interface{}); ok {
+							return &BGPPeersExternalModel{
+								Address: func() types.String {
+									if v, ok := nestedMap["address"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								AddressIPV6: func() types.String {
+									if v, ok := nestedMap["address_ipv6"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Asn: func() types.Int64 {
+									if v, ok := nestedMap["asn"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								DefaultGateway: func() *BGPEmptyModel {
+									if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].External != nil && data.Peers[listIdx].External.DefaultGateway != nil {
+										return &BGPEmptyModel{}
+									}
+									return nil
+								}(),
+								DefaultGatewayV6: func() *BGPEmptyModel {
+									if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].External != nil && data.Peers[listIdx].External.DefaultGatewayV6 != nil {
+										return &BGPEmptyModel{}
+									}
+									return nil
+								}(),
+								Disable: func() *BGPEmptyModel {
+									if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].External != nil && data.Peers[listIdx].External.Disable != nil {
+										return &BGPEmptyModel{}
+									}
+									return nil
+								}(),
+								DisableV6: func() *BGPEmptyModel {
+									if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].External != nil && data.Peers[listIdx].External.DisableV6 != nil {
+										return &BGPEmptyModel{}
+									}
+									return nil
+								}(),
+								ExternalConnector: func() *BGPEmptyModel {
+									if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].External != nil && data.Peers[listIdx].External.ExternalConnector != nil {
+										return &BGPEmptyModel{}
+									}
+									return nil
+								}(),
+								FromSite: func() *BGPEmptyModel {
+									if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].External != nil && data.Peers[listIdx].External.FromSite != nil {
+										return &BGPEmptyModel{}
+									}
+									return nil
+								}(),
+								FromSiteV6: func() *BGPEmptyModel {
+									if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].External != nil && data.Peers[listIdx].External.FromSiteV6 != nil {
+										return &BGPEmptyModel{}
+									}
+									return nil
+								}(),
+								Md5AuthKey: func() types.String {
+									if v, ok := nestedMap["md5_auth_key"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								NoAuthentication: func() *BGPEmptyModel {
+									if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].External != nil && data.Peers[listIdx].External.NoAuthentication != nil {
+										return &BGPEmptyModel{}
+									}
+									return nil
+								}(),
+								Port: func() types.Int64 {
+									if v, ok := nestedMap["port"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								SubnetBeginOffset: func() types.Int64 {
+									if v, ok := nestedMap["subnet_begin_offset"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								SubnetBeginOffsetV6: func() types.Int64 {
+									if v, ok := nestedMap["subnet_begin_offset_v6"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								SubnetEndOffset: func() types.Int64 {
+									if v, ok := nestedMap["subnet_end_offset"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								SubnetEndOffsetV6: func() types.Int64 {
+									if v, ok := nestedMap["subnet_end_offset_v6"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Label: func() types.String {
+						if v, ok := itemMap["label"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Metadata: func() *BGPPeersMetadataModel {
+						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+							return &BGPPeersMetadataModel{
+								DescriptionSpec: func() types.String {
+									if v, ok := nestedMap["description"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					PassiveModeDisabled: func() *BGPEmptyModel {
+						if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].PassiveModeDisabled != nil {
+							return &BGPEmptyModel{}
+						}
+						return nil
+					}(),
+					PassiveModeEnabled: func() *BGPEmptyModel {
+						if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].PassiveModeEnabled != nil {
+							return &BGPEmptyModel{}
+						}
+						return nil
+					}(),
+					RoutingPolicies: func() *BGPPeersRoutingPoliciesModel {
+						if _, ok := itemMap["routing_policies"].(map[string]interface{}); ok {
+							return &BGPPeersRoutingPoliciesModel{}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.Peers = peersList
+	}
+	if _, ok := apiResource.Spec["where"].(map[string]interface{}); ok && isImport && data.Where == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Where = &BGPWhereModel{}
+	}
+	// Normal Read: preserve existing state value
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

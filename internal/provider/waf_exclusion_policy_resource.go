@@ -1033,7 +1033,7 @@ func (r *WAFExclusionPolicyResource) Update(ctx context.Context, req resource.Up
 		apiResource.Spec["waf_exclusion_rules"] = waf_exclusion_rulesList
 	}
 
-	updated, err := r.client.UpdateWAFExclusionPolicy(ctx, apiResource)
+	_, err := r.client.UpdateWAFExclusionPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update WAFExclusionPolicy: %s", err))
 		return
@@ -1042,18 +1042,121 @@ func (r *WAFExclusionPolicyResource) Update(ctx context.Context, req resource.Up
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetWAFExclusionPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read WAFExclusionPolicy after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetWAFExclusionPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["waf_exclusion_rules"].([]interface{}); ok && len(listData) > 0 {
+		var waf_exclusion_rulesList []WAFExclusionPolicyWAFExclusionRulesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				waf_exclusion_rulesList = append(waf_exclusion_rulesList, WAFExclusionPolicyWAFExclusionRulesModel{
+					AnyDomain: func() *WAFExclusionPolicyEmptyModel {
+						if !isImport && len(data.WAFExclusionRules) > listIdx && data.WAFExclusionRules[listIdx].AnyDomain != nil {
+							return &WAFExclusionPolicyEmptyModel{}
+						}
+						return nil
+					}(),
+					AnyPath: func() *WAFExclusionPolicyEmptyModel {
+						if !isImport && len(data.WAFExclusionRules) > listIdx && data.WAFExclusionRules[listIdx].AnyPath != nil {
+							return &WAFExclusionPolicyEmptyModel{}
+						}
+						return nil
+					}(),
+					AppFirewallDetectionControl: func() *WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlModel {
+						if _, ok := itemMap["app_firewall_detection_control"].(map[string]interface{}); ok {
+							return &WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlModel{}
+						}
+						return nil
+					}(),
+					ExactValue: func() types.String {
+						if v, ok := itemMap["exact_value"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					ExpirationTimestamp: func() types.String {
+						if v, ok := itemMap["expiration_timestamp"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Metadata: func() *WAFExclusionPolicyWAFExclusionRulesMetadataModel {
+						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+							return &WAFExclusionPolicyWAFExclusionRulesMetadataModel{
+								DescriptionSpec: func() types.String {
+									if v, ok := nestedMap["description"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Methods: func() types.List {
+						if v, ok := itemMap["methods"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
+					PathPrefix: func() types.String {
+						if v, ok := itemMap["path_prefix"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					PathRegex: func() types.String {
+						if v, ok := itemMap["path_regex"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					SuffixValue: func() types.String {
+						if v, ok := itemMap["suffix_value"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					WAFSkipProcessing: func() *WAFExclusionPolicyEmptyModel {
+						if !isImport && len(data.WAFExclusionRules) > listIdx && data.WAFExclusionRules[listIdx].WAFSkipProcessing != nil {
+							return &WAFExclusionPolicyEmptyModel{}
+						}
+						return nil
+					}(),
+				})
+			}
 		}
+		data.WAFExclusionRules = waf_exclusion_rulesList
 	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

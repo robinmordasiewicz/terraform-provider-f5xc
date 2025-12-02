@@ -1081,7 +1081,7 @@ func (r *BotDefenseAppInfrastructureResource) Update(ctx context.Context, req re
 		apiResource.Spec["traffic_type"] = data.TrafficType.ValueString()
 	}
 
-	updated, err := r.client.UpdateBotDefenseAppInfrastructure(ctx, apiResource)
+	_, err := r.client.UpdateBotDefenseAppInfrastructure(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update BotDefenseAppInfrastructure: %s", err))
 		return
@@ -1090,15 +1090,23 @@ func (r *BotDefenseAppInfrastructureResource) Update(ctx context.Context, req re
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetBotDefenseAppInfrastructure(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read BotDefenseAppInfrastructure after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["environment_type"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["environment_type"].(string); ok && v != "" {
 		data.EnvironmentType = types.StringValue(v)
 	} else if data.EnvironmentType.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.EnvironmentType = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["traffic_type"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["traffic_type"].(string); ok && v != "" {
 		data.TrafficType = types.StringValue(v)
 	} else if data.TrafficType.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -1106,16 +1114,168 @@ func (r *BotDefenseAppInfrastructureResource) Update(ctx context.Context, req re
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetBotDefenseAppInfrastructure(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["cloud_hosted"].(map[string]interface{}); ok && (isImport || data.CloudHosted != nil) {
+		data.CloudHosted = &BotDefenseAppInfrastructureCloudHostedModel{
+			Egress: func() []BotDefenseAppInfrastructureCloudHostedEgressModel {
+				if listData, ok := blockData["egress"].([]interface{}); ok && len(listData) > 0 {
+					var result []BotDefenseAppInfrastructureCloudHostedEgressModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, BotDefenseAppInfrastructureCloudHostedEgressModel{
+								IPAddress: func() types.String {
+									if v, ok := itemMap["ip_address"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Location: func() types.String {
+									if v, ok := itemMap["location"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			InfraHostName: func() types.String {
+				if v, ok := blockData["infra_host_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Ingress: func() []BotDefenseAppInfrastructureCloudHostedIngressModel {
+				if listData, ok := blockData["ingress"].([]interface{}); ok && len(listData) > 0 {
+					var result []BotDefenseAppInfrastructureCloudHostedIngressModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, BotDefenseAppInfrastructureCloudHostedIngressModel{
+								HostName: func() types.String {
+									if v, ok := itemMap["host_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								IPAddress: func() types.String {
+									if v, ok := itemMap["ip_address"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Location: func() types.String {
+									if v, ok := itemMap["location"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			Region: func() types.String {
+				if v, ok := blockData["region"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["data_center_hosted"].(map[string]interface{}); ok && (isImport || data.DataCenterHosted != nil) {
+		data.DataCenterHosted = &BotDefenseAppInfrastructureDataCenterHostedModel{
+			Egress: func() []BotDefenseAppInfrastructureDataCenterHostedEgressModel {
+				if listData, ok := blockData["egress"].([]interface{}); ok && len(listData) > 0 {
+					var result []BotDefenseAppInfrastructureDataCenterHostedEgressModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, BotDefenseAppInfrastructureDataCenterHostedEgressModel{
+								IPAddress: func() types.String {
+									if v, ok := itemMap["ip_address"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Location: func() types.String {
+									if v, ok := itemMap["location"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			InfraHostName: func() types.String {
+				if v, ok := blockData["infra_host_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Ingress: func() []BotDefenseAppInfrastructureDataCenterHostedIngressModel {
+				if listData, ok := blockData["ingress"].([]interface{}); ok && len(listData) > 0 {
+					var result []BotDefenseAppInfrastructureDataCenterHostedIngressModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, BotDefenseAppInfrastructureDataCenterHostedIngressModel{
+								HostName: func() types.String {
+									if v, ok := itemMap["host_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								IPAddress: func() types.String {
+									if v, ok := itemMap["ip_address"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Location: func() types.String {
+									if v, ok := itemMap["location"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			Region: func() types.String {
+				if v, ok := blockData["region"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["environment_type"].(string); ok && v != "" {
+		data.EnvironmentType = types.StringValue(v)
+	} else {
+		data.EnvironmentType = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["traffic_type"].(string); ok && v != "" {
+		data.TrafficType = types.StringValue(v)
+	} else {
+		data.TrafficType = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

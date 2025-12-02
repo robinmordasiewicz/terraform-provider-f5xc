@@ -554,7 +554,7 @@ func (r *DataGroupResource) Update(ctx context.Context, req resource.UpdateReque
 		apiResource.Spec["string_records"] = string_recordsMap
 	}
 
-	updated, err := r.client.UpdateDataGroup(ctx, apiResource)
+	_, err := r.client.UpdateDataGroup(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update DataGroup: %s", err))
 		return
@@ -563,18 +563,39 @@ func (r *DataGroupResource) Update(ctx context.Context, req resource.UpdateReque
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetDataGroup(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read DataGroup after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetDataGroup(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
-		}
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["address_records"].(map[string]interface{}); ok && isImport && data.AddressRecords == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AddressRecords = &DataGroupAddressRecordsModel{}
 	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["integer_records"].(map[string]interface{}); ok && isImport && data.IntegerRecords == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.IntegerRecords = &DataGroupIntegerRecordsModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["string_records"].(map[string]interface{}); ok && isImport && data.StringRecords == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.StringRecords = &DataGroupStringRecordsModel{}
+	}
+	// Normal Read: preserve existing state value
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

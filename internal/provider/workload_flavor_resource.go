@@ -509,7 +509,7 @@ func (r *WorkloadFlavorResource) Update(ctx context.Context, req resource.Update
 		apiResource.Spec["vcpus"] = data.Vcpus.ValueInt64()
 	}
 
-	updated, err := r.client.UpdateWorkloadFlavor(ctx, apiResource)
+	_, err := r.client.UpdateWorkloadFlavor(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update WorkloadFlavor: %s", err))
 		return
@@ -518,22 +518,30 @@ func (r *WorkloadFlavorResource) Update(ctx context.Context, req resource.Update
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetWorkloadFlavor(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read WorkloadFlavor after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["ephemeral_storage"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["ephemeral_storage"].(string); ok && v != "" {
 		data.EphemeralStorage = types.StringValue(v)
 	} else if data.EphemeralStorage.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.EphemeralStorage = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["memory"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["memory"].(string); ok && v != "" {
 		data.Memory = types.StringValue(v)
 	} else if data.Memory.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.Memory = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["vcpus"].(float64); ok {
+	if v, ok := fetched.Spec["vcpus"].(float64); ok {
 		data.Vcpus = types.Int64Value(int64(v))
 	} else if data.Vcpus.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -541,16 +549,29 @@ func (r *WorkloadFlavorResource) Update(ctx context.Context, req resource.Update
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetWorkloadFlavor(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
-		}
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if v, ok := apiResource.Spec["ephemeral_storage"].(string); ok && v != "" {
+		data.EphemeralStorage = types.StringValue(v)
+	} else {
+		data.EphemeralStorage = types.StringNull()
 	}
+	if v, ok := apiResource.Spec["memory"].(string); ok && v != "" {
+		data.Memory = types.StringValue(v)
+	} else {
+		data.Memory = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["vcpus"].(float64); ok {
+		data.Vcpus = types.Int64Value(int64(v))
+	} else {
+		data.Vcpus = types.Int64Null()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

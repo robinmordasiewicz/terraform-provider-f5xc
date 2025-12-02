@@ -794,7 +794,7 @@ func (r *CertificateResource) Update(ctx context.Context, req resource.UpdateReq
 		apiResource.Spec["certificate_url"] = data.CertificateURL.ValueString()
 	}
 
-	updated, err := r.client.UpdateCertificate(ctx, apiResource)
+	_, err := r.client.UpdateCertificate(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Certificate: %s", err))
 		return
@@ -803,8 +803,16 @@ func (r *CertificateResource) Update(ctx context.Context, req resource.UpdateReq
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetCertificate(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Certificate after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["certificate_url"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["certificate_url"].(string); ok && v != "" {
 		data.CertificateURL = types.StringValue(v)
 	} else if data.CertificateURL.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -812,16 +820,73 @@ func (r *CertificateResource) Update(ctx context.Context, req resource.UpdateReq
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetCertificate(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["certificate_chain"].(map[string]interface{}); ok && (isImport || data.CertificateChain != nil) {
+		data.CertificateChain = &CertificateCertificateChainModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["custom_hash_algorithms"].(map[string]interface{}); ok && (isImport || data.CustomHashAlgorithms != nil) {
+		data.CustomHashAlgorithms = &CertificateCustomHashAlgorithmsModel{
+			HashAlgorithms: func() types.List {
+				if v, ok := blockData["hash_algorithms"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["disable_ocsp_stapling"].(map[string]interface{}); ok && isImport && data.DisableOcspStapling == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableOcspStapling = &CertificateEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["private_key"].(map[string]interface{}); ok && isImport && data.PrivateKey == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PrivateKey = &CertificatePrivateKeyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["use_system_defaults"].(map[string]interface{}); ok && isImport && data.UseSystemDefaults == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UseSystemDefaults = &CertificateEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["certificate_url"].(string); ok && v != "" {
+		data.CertificateURL = types.StringValue(v)
+	} else {
+		data.CertificateURL = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

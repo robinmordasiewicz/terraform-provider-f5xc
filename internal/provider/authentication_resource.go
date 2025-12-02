@@ -1041,7 +1041,7 @@ func (r *AuthenticationResource) Update(ctx context.Context, req resource.Update
 		apiResource.Spec["oidc_auth"] = oidc_authMap
 	}
 
-	updated, err := r.client.UpdateAuthentication(ctx, apiResource)
+	_, err := r.client.UpdateAuthentication(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Authentication: %s", err))
 		return
@@ -1050,18 +1050,139 @@ func (r *AuthenticationResource) Update(ctx context.Context, req resource.Update
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetAuthentication(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Authentication after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetAuthentication(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["cookie_params"].(map[string]interface{}); ok && (isImport || data.CookieParams != nil) {
+		data.CookieParams = &AuthenticationCookieParamsModel{
+			AuthHmac: func() *AuthenticationCookieParamsAuthHmacModel {
+				if !isImport && data.CookieParams != nil && data.CookieParams.AuthHmac != nil {
+					// Normal Read: preserve existing state value
+					return data.CookieParams.AuthHmac
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["auth_hmac"].(map[string]interface{}); ok {
+					return &AuthenticationCookieParamsAuthHmacModel{
+						PrimKeyExpiry: func() types.String {
+							if v, ok := nestedBlockData["prim_key_expiry"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						SecKeyExpiry: func() types.String {
+							if v, ok := nestedBlockData["sec_key_expiry"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			CookieExpiry: func() types.Int64 {
+				if v, ok := blockData["cookie_expiry"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			CookieRefreshInterval: func() types.Int64 {
+				if v, ok := blockData["cookie_refresh_interval"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			KmsKeyHmac: func() *AuthenticationEmptyModel {
+				if !isImport && data.CookieParams != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CookieParams.KmsKeyHmac
+				}
+				// Import case: read from API
+				if _, ok := blockData["kms_key_hmac"].(map[string]interface{}); ok {
+					return &AuthenticationEmptyModel{}
+				}
+				return nil
+			}(),
+			SessionExpiry: func() types.Int64 {
+				if v, ok := blockData["session_expiry"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["oidc_auth"].(map[string]interface{}); ok && (isImport || data.OidcAuth != nil) {
+		data.OidcAuth = &AuthenticationOidcAuthModel{
+			ClientSecret: func() *AuthenticationOidcAuthClientSecretModel {
+				if !isImport && data.OidcAuth != nil && data.OidcAuth.ClientSecret != nil {
+					// Normal Read: preserve existing state value
+					return data.OidcAuth.ClientSecret
+				}
+				// Import case: read from API
+				if _, ok := blockData["client_secret"].(map[string]interface{}); ok {
+					return &AuthenticationOidcAuthClientSecretModel{}
+				}
+				return nil
+			}(),
+			OidcAuthParams: func() *AuthenticationOidcAuthOidcAuthParamsModel {
+				if !isImport && data.OidcAuth != nil && data.OidcAuth.OidcAuthParams != nil {
+					// Normal Read: preserve existing state value
+					return data.OidcAuth.OidcAuthParams
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["oidc_auth_params"].(map[string]interface{}); ok {
+					return &AuthenticationOidcAuthOidcAuthParamsModel{
+						AuthEndpointURL: func() types.String {
+							if v, ok := nestedBlockData["auth_endpoint_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						EndSessionEndpointURL: func() types.String {
+							if v, ok := nestedBlockData["end_session_endpoint_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						TokenEndpointURL: func() types.String {
+							if v, ok := nestedBlockData["token_endpoint_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			OidcClientID: func() types.String {
+				if v, ok := blockData["oidc_client_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			OidcWellKnownConfigURL: func() types.String {
+				if v, ok := blockData["oidc_well_known_config_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

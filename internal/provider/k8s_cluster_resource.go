@@ -1713,7 +1713,7 @@ func (r *K8SClusterResource) Update(ctx context.Context, req resource.UpdateRequ
 		apiResource.Spec["vk8s_namespace_access_permit"] = vk8s_namespace_access_permitMap
 	}
 
-	updated, err := r.client.UpdateK8SCluster(ctx, apiResource)
+	_, err := r.client.UpdateK8SCluster(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update K8SCluster: %s", err))
 		return
@@ -1722,18 +1722,302 @@ func (r *K8SClusterResource) Update(ctx context.Context, req resource.UpdateRequ
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetK8SCluster(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read K8SCluster after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetK8SCluster(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["cluster_scoped_access_deny"].(map[string]interface{}); ok && isImport && data.ClusterScopedAccessDeny == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ClusterScopedAccessDeny = &K8SClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["cluster_scoped_access_permit"].(map[string]interface{}); ok && isImport && data.ClusterScopedAccessPermit == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ClusterScopedAccessPermit = &K8SClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["cluster_wide_app_list"].(map[string]interface{}); ok && (isImport || data.ClusterWideAppList != nil) {
+		data.ClusterWideAppList = &K8SClusterClusterWideAppListModel{
+			ClusterWideApps: func() []K8SClusterClusterWideAppListClusterWideAppsModel {
+				if listData, ok := blockData["cluster_wide_apps"].([]interface{}); ok && len(listData) > 0 {
+					var result []K8SClusterClusterWideAppListClusterWideAppsModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, K8SClusterClusterWideAppListClusterWideAppsModel{
+								ArgoCd: func() *K8SClusterClusterWideAppListClusterWideAppsArgoCdModel {
+									if _, ok := itemMap["argo_cd"].(map[string]interface{}); ok {
+										return &K8SClusterClusterWideAppListClusterWideAppsArgoCdModel{}
+									}
+									return nil
+								}(),
+								Dashboard: func() *K8SClusterEmptyModel {
+									if _, ok := itemMap["dashboard"].(map[string]interface{}); ok {
+										return &K8SClusterEmptyModel{}
+									}
+									return nil
+								}(),
+								MetricsServer: func() *K8SClusterEmptyModel {
+									if _, ok := itemMap["metrics_server"].(map[string]interface{}); ok {
+										return &K8SClusterEmptyModel{}
+									}
+									return nil
+								}(),
+								Prometheus: func() *K8SClusterEmptyModel {
+									if _, ok := itemMap["prometheus"].(map[string]interface{}); ok {
+										return &K8SClusterEmptyModel{}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
 		}
 	}
+	if _, ok := apiResource.Spec["global_access_enable"].(map[string]interface{}); ok && isImport && data.GlobalAccessEnable == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.GlobalAccessEnable = &K8SClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["insecure_registry_list"].(map[string]interface{}); ok && (isImport || data.InsecureRegistryList != nil) {
+		data.InsecureRegistryList = &K8SClusterInsecureRegistryListModel{
+			InsecureRegistries: func() types.List {
+				if v, ok := blockData["insecure_registries"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["local_access_config"].(map[string]interface{}); ok && (isImport || data.LocalAccessConfig != nil) {
+		data.LocalAccessConfig = &K8SClusterLocalAccessConfigModel{
+			DefaultPort: func() *K8SClusterEmptyModel {
+				if !isImport && data.LocalAccessConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.LocalAccessConfig.DefaultPort
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_port"].(map[string]interface{}); ok {
+					return &K8SClusterEmptyModel{}
+				}
+				return nil
+			}(),
+			LocalDomain: func() types.String {
+				if v, ok := blockData["local_domain"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Port: func() types.Int64 {
+				if v, ok := blockData["port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["no_cluster_wide_apps"].(map[string]interface{}); ok && isImport && data.NoClusterWideApps == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoClusterWideApps = &K8SClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_global_access"].(map[string]interface{}); ok && isImport && data.NoGlobalAccess == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoGlobalAccess = &K8SClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_insecure_registries"].(map[string]interface{}); ok && isImport && data.NoInsecureRegistries == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoInsecureRegistries = &K8SClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_local_access"].(map[string]interface{}); ok && isImport && data.NoLocalAccess == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoLocalAccess = &K8SClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["use_custom_cluster_role_bindings"].(map[string]interface{}); ok && (isImport || data.UseCustomClusterRoleBindings != nil) {
+		data.UseCustomClusterRoleBindings = &K8SClusterUseCustomClusterRoleBindingsModel{
+			ClusterRoleBindings: func() []K8SClusterUseCustomClusterRoleBindingsClusterRoleBindingsModel {
+				if listData, ok := blockData["cluster_role_bindings"].([]interface{}); ok && len(listData) > 0 {
+					var result []K8SClusterUseCustomClusterRoleBindingsClusterRoleBindingsModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, K8SClusterUseCustomClusterRoleBindingsClusterRoleBindingsModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["use_custom_cluster_role_list"].(map[string]interface{}); ok && (isImport || data.UseCustomClusterRoleList != nil) {
+		data.UseCustomClusterRoleList = &K8SClusterUseCustomClusterRoleListModel{
+			ClusterRoles: func() []K8SClusterUseCustomClusterRoleListClusterRolesModel {
+				if listData, ok := blockData["cluster_roles"].([]interface{}); ok && len(listData) > 0 {
+					var result []K8SClusterUseCustomClusterRoleListClusterRolesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, K8SClusterUseCustomClusterRoleListClusterRolesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["use_custom_pod_security_admission"].(map[string]interface{}); ok && (isImport || data.UseCustomPodSecurityAdmission != nil) {
+		data.UseCustomPodSecurityAdmission = &K8SClusterUseCustomPodSecurityAdmissionModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["use_custom_psp_list"].(map[string]interface{}); ok && (isImport || data.UseCustomPspList != nil) {
+		data.UseCustomPspList = &K8SClusterUseCustomPspListModel{
+			PodSecurityPolicies: func() []K8SClusterUseCustomPspListPodSecurityPoliciesModel {
+				if listData, ok := blockData["pod_security_policies"].([]interface{}); ok && len(listData) > 0 {
+					var result []K8SClusterUseCustomPspListPodSecurityPoliciesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, K8SClusterUseCustomPspListPodSecurityPoliciesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["use_default_cluster_role_bindings"].(map[string]interface{}); ok && isImport && data.UseDefaultClusterRoleBindings == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UseDefaultClusterRoleBindings = &K8SClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["use_default_cluster_roles"].(map[string]interface{}); ok && isImport && data.UseDefaultClusterRoles == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UseDefaultClusterRoles = &K8SClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["use_default_pod_security_admission"].(map[string]interface{}); ok && isImport && data.UseDefaultPodSecurityAdmission == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UseDefaultPodSecurityAdmission = &K8SClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["use_default_psp"].(map[string]interface{}); ok && isImport && data.UseDefaultPsp == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UseDefaultPsp = &K8SClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["vk8s_namespace_access_deny"].(map[string]interface{}); ok && isImport && data.Vk8sNamespaceAccessDeny == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Vk8sNamespaceAccessDeny = &K8SClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["vk8s_namespace_access_permit"].(map[string]interface{}); ok && isImport && data.Vk8sNamespaceAccessPermit == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Vk8sNamespaceAccessPermit = &K8SClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

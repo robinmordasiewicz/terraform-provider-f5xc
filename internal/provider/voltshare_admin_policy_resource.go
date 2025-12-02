@@ -872,7 +872,7 @@ func (r *VoltshareAdminPolicyResource) Update(ctx context.Context, req resource.
 		apiResource.Spec["max_validity_duration"] = data.MaxValidityDuration.ValueString()
 	}
 
-	updated, err := r.client.UpdateVoltshareAdminPolicy(ctx, apiResource)
+	_, err := r.client.UpdateVoltshareAdminPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update VoltshareAdminPolicy: %s", err))
 		return
@@ -881,8 +881,16 @@ func (r *VoltshareAdminPolicyResource) Update(ctx context.Context, req resource.
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetVoltshareAdminPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read VoltshareAdminPolicy after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["max_validity_duration"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["max_validity_duration"].(string); ok && v != "" {
 		data.MaxValidityDuration = types.StringValue(v)
 	} else if data.MaxValidityDuration.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -890,16 +898,72 @@ func (r *VoltshareAdminPolicyResource) Update(ctx context.Context, req resource.
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetVoltshareAdminPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
-		}
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["author_restrictions"].(map[string]interface{}); ok && isImport && data.AuthorRestrictions == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AuthorRestrictions = &VoltshareAdminPolicyAuthorRestrictionsModel{}
 	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["user_restrictions"].([]interface{}); ok && len(listData) > 0 {
+		var user_restrictionsList []VoltshareAdminPolicyUserRestrictionsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				user_restrictionsList = append(user_restrictionsList, VoltshareAdminPolicyUserRestrictionsModel{
+					AllTenants: func() *VoltshareAdminPolicyEmptyModel {
+						if !isImport && len(data.UserRestrictions) > listIdx && data.UserRestrictions[listIdx].AllTenants != nil {
+							return &VoltshareAdminPolicyEmptyModel{}
+						}
+						return nil
+					}(),
+					IndividualUsers: func() *VoltshareAdminPolicyEmptyModel {
+						if !isImport && len(data.UserRestrictions) > listIdx && data.UserRestrictions[listIdx].IndividualUsers != nil {
+							return &VoltshareAdminPolicyEmptyModel{}
+						}
+						return nil
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					UserRestrictions: func() *VoltshareAdminPolicyUserRestrictionsUserRestrictionsModel {
+						if _, ok := itemMap["user_restrictions"].(map[string]interface{}); ok {
+							return &VoltshareAdminPolicyUserRestrictionsUserRestrictionsModel{
+								AllowAll: func() *VoltshareAdminPolicyEmptyModel {
+									if !isImport && len(data.UserRestrictions) > listIdx && data.UserRestrictions[listIdx].UserRestrictions != nil && data.UserRestrictions[listIdx].UserRestrictions.AllowAll != nil {
+										return &VoltshareAdminPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								DenyAll: func() *VoltshareAdminPolicyEmptyModel {
+									if !isImport && len(data.UserRestrictions) > listIdx && data.UserRestrictions[listIdx].UserRestrictions != nil && data.UserRestrictions[listIdx].UserRestrictions.DenyAll != nil {
+										return &VoltshareAdminPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.UserRestrictions = user_restrictionsList
+	}
+	if v, ok := apiResource.Spec["max_validity_duration"].(string); ok && v != "" {
+		data.MaxValidityDuration = types.StringValue(v)
+	} else {
+		data.MaxValidityDuration = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

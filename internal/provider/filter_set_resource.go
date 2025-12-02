@@ -767,7 +767,7 @@ func (r *FilterSetResource) Update(ctx context.Context, req resource.UpdateReque
 		apiResource.Spec["context_key"] = data.ContextKey.ValueString()
 	}
 
-	updated, err := r.client.UpdateFilterSet(ctx, apiResource)
+	_, err := r.client.UpdateFilterSet(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update FilterSet: %s", err))
 		return
@@ -776,8 +776,16 @@ func (r *FilterSetResource) Update(ctx context.Context, req resource.UpdateReque
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetFilterSet(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read FilterSet after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["context_key"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["context_key"].(string); ok && v != "" {
 		data.ContextKey = types.StringValue(v)
 	} else if data.ContextKey.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -785,16 +793,82 @@ func (r *FilterSetResource) Update(ctx context.Context, req resource.UpdateReque
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetFilterSet(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["filter_fields"].([]interface{}); ok && len(listData) > 0 {
+		var filter_fieldsList []FilterSetFilterFieldsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				filter_fieldsList = append(filter_fieldsList, FilterSetFilterFieldsModel{
+					DateField: func() *FilterSetFilterFieldsDateFieldModel {
+						if nestedMap, ok := itemMap["date_field"].(map[string]interface{}); ok {
+							return &FilterSetFilterFieldsDateFieldModel{
+								Relative: func() types.String {
+									if v, ok := nestedMap["relative"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					FieldID: func() types.String {
+						if v, ok := itemMap["field_id"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					FilterExpressionField: func() *FilterSetFilterFieldsFilterExpressionFieldModel {
+						if nestedMap, ok := itemMap["filter_expression_field"].(map[string]interface{}); ok {
+							return &FilterSetFilterFieldsFilterExpressionFieldModel{
+								Expression: func() types.String {
+									if v, ok := nestedMap["expression"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					StringField: func() *FilterSetFilterFieldsStringFieldModel {
+						if nestedMap, ok := itemMap["string_field"].(map[string]interface{}); ok {
+							return &FilterSetFilterFieldsStringFieldModel{
+								FieldValues: func() types.List {
+									if v, ok := nestedMap["field_values"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
+							}
+						}
+						return nil
+					}(),
+				})
+			}
 		}
+		data.FilterFields = filter_fieldsList
 	}
+	if v, ok := apiResource.Spec["context_key"].(string); ok && v != "" {
+		data.ContextKey = types.StringValue(v)
+	} else {
+		data.ContextKey = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

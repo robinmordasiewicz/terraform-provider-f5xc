@@ -888,7 +888,7 @@ func (r *LogReceiverResource) Update(ctx context.Context, req resource.UpdateReq
 		apiResource.Spec["syslog"] = syslogMap
 	}
 
-	updated, err := r.client.UpdateLogReceiver(ctx, apiResource)
+	_, err := r.client.UpdateLogReceiver(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update LogReceiver: %s", err))
 		return
@@ -897,18 +897,117 @@ func (r *LogReceiverResource) Update(ctx context.Context, req resource.UpdateReq
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetLogReceiver(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read LogReceiver after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetLogReceiver(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["site_local"].(map[string]interface{}); ok && isImport && data.SiteLocal == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SiteLocal = &LogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["syslog"].(map[string]interface{}); ok && (isImport || data.Syslog != nil) {
+		data.Syslog = &LogReceiverSyslogModel{
+			SyslogRfc5424: func() types.Int64 {
+				if v, ok := blockData["syslog_rfc5424"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			TCPServer: func() *LogReceiverSyslogTCPServerModel {
+				if !isImport && data.Syslog != nil && data.Syslog.TCPServer != nil {
+					// Normal Read: preserve existing state value
+					return data.Syslog.TCPServer
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["tcp_server"].(map[string]interface{}); ok {
+					return &LogReceiverSyslogTCPServerModel{
+						Port: func() types.Int64 {
+							if v, ok := nestedBlockData["port"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						ServerName: func() types.String {
+							if v, ok := nestedBlockData["server_name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			TLSServer: func() *LogReceiverSyslogTLSServerModel {
+				if !isImport && data.Syslog != nil && data.Syslog.TLSServer != nil {
+					// Normal Read: preserve existing state value
+					return data.Syslog.TLSServer
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["tls_server"].(map[string]interface{}); ok {
+					return &LogReceiverSyslogTLSServerModel{
+						Port: func() types.Int64 {
+							if v, ok := nestedBlockData["port"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						ServerName: func() types.String {
+							if v, ok := nestedBlockData["server_name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						TrustedCaURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			UDPServer: func() *LogReceiverSyslogUDPServerModel {
+				if !isImport && data.Syslog != nil && data.Syslog.UDPServer != nil {
+					// Normal Read: preserve existing state value
+					return data.Syslog.UDPServer
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["udp_server"].(map[string]interface{}); ok {
+					return &LogReceiverSyslogUDPServerModel{
+						Port: func() types.Int64 {
+							if v, ok := nestedBlockData["port"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						ServerName: func() types.String {
+							if v, ok := nestedBlockData["server_name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
 		}
 	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

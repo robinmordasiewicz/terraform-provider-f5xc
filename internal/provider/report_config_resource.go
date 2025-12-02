@@ -760,7 +760,7 @@ func (r *ReportConfigResource) Update(ctx context.Context, req resource.UpdateRe
 		apiResource.Spec["waap"] = waapMap
 	}
 
-	updated, err := r.client.UpdateReportConfig(ctx, apiResource)
+	_, err := r.client.UpdateReportConfig(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update ReportConfig: %s", err))
 		return
@@ -769,18 +769,64 @@ func (r *ReportConfigResource) Update(ctx context.Context, req resource.UpdateRe
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetReportConfig(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read ReportConfig after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetReportConfig(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["report_recipients"].(map[string]interface{}); ok && (isImport || data.ReportRecipients != nil) {
+		data.ReportRecipients = &ReportConfigReportRecipientsModel{
+			UserGroups: func() []ReportConfigReportRecipientsUserGroupsModel {
+				if listData, ok := blockData["user_groups"].([]interface{}); ok && len(listData) > 0 {
+					var result []ReportConfigReportRecipientsUserGroupsModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, ReportConfigReportRecipientsUserGroupsModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
 		}
 	}
+	if _, ok := apiResource.Spec["waap"].(map[string]interface{}); ok && isImport && data.Waap == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Waap = &ReportConfigWaapModel{}
+	}
+	// Normal Read: preserve existing state value
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

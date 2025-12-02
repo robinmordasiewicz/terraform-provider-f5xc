@@ -620,7 +620,7 @@ func (r *K8SPodSecurityAdmissionResource) Update(ctx context.Context, req resour
 		apiResource.Spec["pod_security_admission_specs"] = pod_security_admission_specsList
 	}
 
-	updated, err := r.client.UpdateK8SPodSecurityAdmission(ctx, apiResource)
+	_, err := r.client.UpdateK8SPodSecurityAdmission(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update K8SPodSecurityAdmission: %s", err))
 		return
@@ -629,18 +629,71 @@ func (r *K8SPodSecurityAdmissionResource) Update(ctx context.Context, req resour
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetK8SPodSecurityAdmission(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read K8SPodSecurityAdmission after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetK8SPodSecurityAdmission(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["pod_security_admission_specs"].([]interface{}); ok && len(listData) > 0 {
+		var pod_security_admission_specsList []K8SPodSecurityAdmissionPodSecurityAdmissionSpecsModel
+		for listIdx := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			{
+				pod_security_admission_specsList = append(pod_security_admission_specsList, K8SPodSecurityAdmissionPodSecurityAdmissionSpecsModel{
+					Audit: func() *K8SPodSecurityAdmissionEmptyModel {
+						if !isImport && len(data.PodSecurityAdmissionSpecs) > listIdx && data.PodSecurityAdmissionSpecs[listIdx].Audit != nil {
+							return &K8SPodSecurityAdmissionEmptyModel{}
+						}
+						return nil
+					}(),
+					Baseline: func() *K8SPodSecurityAdmissionEmptyModel {
+						if !isImport && len(data.PodSecurityAdmissionSpecs) > listIdx && data.PodSecurityAdmissionSpecs[listIdx].Baseline != nil {
+							return &K8SPodSecurityAdmissionEmptyModel{}
+						}
+						return nil
+					}(),
+					Enforce: func() *K8SPodSecurityAdmissionEmptyModel {
+						if !isImport && len(data.PodSecurityAdmissionSpecs) > listIdx && data.PodSecurityAdmissionSpecs[listIdx].Enforce != nil {
+							return &K8SPodSecurityAdmissionEmptyModel{}
+						}
+						return nil
+					}(),
+					Privileged: func() *K8SPodSecurityAdmissionEmptyModel {
+						if !isImport && len(data.PodSecurityAdmissionSpecs) > listIdx && data.PodSecurityAdmissionSpecs[listIdx].Privileged != nil {
+							return &K8SPodSecurityAdmissionEmptyModel{}
+						}
+						return nil
+					}(),
+					Restricted: func() *K8SPodSecurityAdmissionEmptyModel {
+						if !isImport && len(data.PodSecurityAdmissionSpecs) > listIdx && data.PodSecurityAdmissionSpecs[listIdx].Restricted != nil {
+							return &K8SPodSecurityAdmissionEmptyModel{}
+						}
+						return nil
+					}(),
+					Warn: func() *K8SPodSecurityAdmissionEmptyModel {
+						if !isImport && len(data.PodSecurityAdmissionSpecs) > listIdx && data.PodSecurityAdmissionSpecs[listIdx].Warn != nil {
+							return &K8SPodSecurityAdmissionEmptyModel{}
+						}
+						return nil
+					}(),
+				})
+			}
 		}
+		data.PodSecurityAdmissionSpecs = pod_security_admission_specsList
 	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

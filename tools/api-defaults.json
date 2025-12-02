@@ -1,0 +1,1085 @@
+{
+  "version": "1.0.0",
+  "generated_at": "2025-12-02T08:25:24Z",
+  "api_endpoint": "https://nferreira.staging.volterra.us",
+  "total_resources": 22,
+  "discovered": 12,
+  "skipped": 0,
+  "failed": 10,
+  "resources": {
+    "alert_policy": {
+      "resource_name": "alert_policy",
+      "category": "Security",
+      "status": "discovered",
+      "discovered_at": "2025-12-02T08:25:27Z",
+      "defaults": {
+        "spec.notification_parameters": {
+          "path": "spec.notification_parameters",
+          "default_value": null,
+          "type": "null"
+        },
+        "spec.receivers": {
+          "path": "spec.receivers",
+          "default_value": [],
+          "type": "array"
+        },
+        "spec.routes": {
+          "path": "spec.routes",
+          "default_value": [],
+          "type": "array"
+        }
+      },
+      "request_sent": {
+        "metadata": {
+          "name": "tf-discover-1764663926420295000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "spec": {
+          "policy": [
+            {
+              "receivers": []
+            }
+          ]
+        }
+      },
+      "response_got": {
+        "create_form": null,
+        "deleted_referred_objects": [],
+        "disabled_referred_objects": [],
+        "metadata": {
+          "annotations": {},
+          "description": "",
+          "disable": false,
+          "labels": {},
+          "name": "tf-discover-1764663926420295000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "referring_objects": [],
+        "replace_form": null,
+        "resource_version": "5197681674",
+        "spec": {
+          "notification_parameters": null,
+          "receivers": [],
+          "routes": []
+        },
+        "status": [],
+        "system_metadata": {
+          "creation_timestamp": "2025-12-02T08:25:26.599586464Z",
+          "creator_class": "prism",
+          "creator_id": "r.mordasiewicz@f5.com",
+          "deletion_timestamp": null,
+          "finalizers": [],
+          "initializers": null,
+          "labels": {},
+          "modification_timestamp": null,
+          "object_index": 0,
+          "owner_view": null,
+          "tenant": "nferreira-cuxnbbdn",
+          "uid": "11e4a24c-e6a5-485c-a431-3260427f5fa8"
+        }
+      }
+    },
+    "alert_receiver": {
+      "resource_name": "alert_receiver",
+      "category": "Monitoring",
+      "status": "discovered",
+      "discovered_at": "2025-12-02T08:25:28Z",
+      "request_sent": {
+        "metadata": {
+          "name": "tf-discover-1764663927361920000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "spec": {
+          "email": {
+            "email": "test@example.com"
+          }
+        }
+      },
+      "response_got": {
+        "create_form": null,
+        "deleted_referred_objects": [],
+        "disabled_referred_objects": [],
+        "metadata": {
+          "annotations": {},
+          "description": "",
+          "disable": false,
+          "labels": {},
+          "name": "tf-discover-1764663927361920000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "referring_objects": [],
+        "replace_form": null,
+        "resource_version": "5197681680",
+        "spec": {
+          "email": {
+            "email": "test@example.com"
+          }
+        },
+        "status": [
+          {
+            "conditions": [
+              {
+                "hostname": "",
+                "last_update_time": "2025-12-02T08:25:27.612721886Z",
+                "reason": "",
+                "service_name": "",
+                "status": "Incomplete",
+                "type": "Operational"
+              }
+            ],
+            "metadata": {
+              "creation_timestamp": "2025-12-02T08:25:27.612721886Z",
+              "creator_class": "athena",
+              "creator_id": "",
+              "publish": "STATUS_PUBLISH",
+              "status_id": "",
+              "uid": "8389570d-fd2b-4085-ac6e-c446e19cc3d7",
+              "vtrp_id": "mars2.gc1-iad-01.int.volterra.us",
+              "vtrp_stale": false
+            },
+            "object_refs": [
+              {
+                "kind": "ves.io.schema.alert_receiver.Object",
+                "name": "",
+                "namespace": "tf-discover-1764663924",
+                "tenant": "nferreira-cuxnbbdn",
+                "uid": "61e0472e-bc9f-4c5f-9bb4-cc35c1536858"
+              }
+            ]
+          }
+        ],
+        "system_metadata": {
+          "creation_timestamp": "2025-12-02T08:25:27.507066747Z",
+          "creator_class": "prism",
+          "creator_id": "r.mordasiewicz@f5.com",
+          "deletion_timestamp": null,
+          "finalizers": [],
+          "initializers": null,
+          "labels": {},
+          "modification_timestamp": null,
+          "object_index": 0,
+          "owner_view": null,
+          "tenant": "nferreira-cuxnbbdn",
+          "uid": "61e0472e-bc9f-4c5f-9bb4-cc35c1536858"
+        }
+      }
+    },
+    "app_firewall": {
+      "resource_name": "app_firewall",
+      "category": "Security",
+      "status": "failed",
+      "error": "create failed: [BAD_REQUEST] Invalid request parameters (resource: /api/config/namespaces/tf-discover-1764663924/app_firewalls) (operation: POST) (status: 400)",
+      "request_sent": {
+        "metadata": {
+          "name": "tf-discover-1764663928262883000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "spec": {
+          "allow_all_response_codes": true,
+          "blocking": {},
+          "default_anonymization": true,
+          "default_bot_setting": true,
+          "default_detection_settings": true,
+          "use_default_blocking_page": true,
+          "use_loadbalancer_setting": true
+        }
+      }
+    },
+    "bgp_asn_set": {
+      "resource_name": "bgp_asn_set",
+      "category": "Networking",
+      "status": "discovered",
+      "discovered_at": "2025-12-02T08:25:29Z",
+      "request_sent": {
+        "metadata": {
+          "name": "tf-discover-1764663928399043000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "spec": {
+          "as_numbers": [
+            65000
+          ]
+        }
+      },
+      "response_got": {
+        "create_form": null,
+        "deleted_referred_objects": [],
+        "disabled_referred_objects": [],
+        "metadata": {
+          "annotations": {},
+          "description": "",
+          "disable": false,
+          "labels": {},
+          "name": "tf-discover-1764663928399043000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "referring_objects": [],
+        "replace_form": null,
+        "resource_version": "5197681708",
+        "spec": {
+          "as_numbers": [
+            65000
+          ]
+        },
+        "status": [],
+        "system_metadata": {
+          "creation_timestamp": "2025-12-02T08:25:28.548083043Z",
+          "creator_class": "prism",
+          "creator_id": "r.mordasiewicz@f5.com",
+          "deletion_timestamp": null,
+          "finalizers": [],
+          "initializers": null,
+          "labels": {},
+          "modification_timestamp": null,
+          "object_index": 0,
+          "owner_view": null,
+          "tenant": "nferreira-cuxnbbdn",
+          "uid": "919097d3-5668-46ac-816f-cc7aad943088"
+        }
+      }
+    },
+    "certificate": {
+      "resource_name": "certificate",
+      "category": "Certificates",
+      "status": "failed",
+      "error": "create failed: [BAD_REQUEST] Invalid request parameters (resource: /api/config/namespaces/tf-discover-1764663924/certificates) (operation: POST) (status: 400)",
+      "request_sent": {
+        "metadata": {
+          "name": "tf-discover-1764663929263875000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "spec": {
+          "certificate_url": "string:///LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJrakNDQVRlZ0F3SUJBZ0lSQU1aSEJLY0MvMEw0RnJXQy9oVlBWS0F3Q2dZSUtvWkl6ajBFQXdJd0VURVAKTUE4R0ExVUVDaE1JWkdselkyOTJaWEl3SGhjTk1qTXdNVEF4TURBd01EQXdXaGNOTWpRd01UQXhNREF3TURBdwpXakFSTVE4d0RRWURWUVFLRXdaa2FYTmpiM1psY2pCWk1CTUdCeXFHU000OUFnRUdDQ3FHU000OUF3RUhBMElBCkJMM2lqMG5oTEVhd0hMb29JRlBKT1JMVmRVRFFYYi9nTG0vWjJGekF6Y3VGRUtPWGdUV1RHK0tCMVdVSUZRNmYKY1VhTStGREJpZ2MxNStPUStLQ1A1dmFqWlRCak1BNEdBMVVkRHdFQi93UUVBd0lDaERBZEJnTlZIU1VFRmpBVQpCZ2dyQmdFRkJRY0RBZ1lJS3dZQkJRVUhBd0V3RHdZRFZSMFRBUUgvQkFVd0F3RUIvekFkQmdOVkhRNEVGZ1FVCnhGRHRDeE1BSzF4Q0NRSHFGcEFjT3ovMGptb3dDZ1lJS29aSXpqMEVBd0lEU1FBd1JnSWhBTnlLd3VkYWNxc3oKZjgrbk5WTGU5N1NsZXBHNHpOcFRjSHJ4WTIxam5SY1ZBaUVBcjk3TXQwK1VUdkVOdUJKSGVZcC9YOVFXOUxxegpJSHJtM2xmVGhHdENodHc9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K",
+          "private_key": {
+            "blindfold_secret_info_internal": {
+              "decryption_provider": "",
+              "location": "string:///LS0tLS1CRUdJTiBFQyBQUklWQVRFIEtFWS0tLS0tCk1IUUNBUUVFSUlFTUNZR2Yxd2gvZWUvSEt3Z0tnN3JSY0NSOE5IRFA0S0VZUDFDL3FCNjNvQWNHQlN1QkJBQU4Kb1VRRFFnQUV2ZUtQU2VFc1JyQWN1aWdnVThrNUV0VjFRTkJkditBdWI5bllYTUROeTRVUW81ZUJOWk1iNG9IVgpaUWdWRHA5eFJvejRVTUdLQnpYbjQ1RDRvSS9tOWc9PQotLS0tLUVORCBFQyBQUklWQVRFIEtFWS0tLS0tCg==",
+              "store_provider": ""
+            }
+          }
+        }
+      }
+    },
+    "contact": {
+      "resource_name": "contact",
+      "category": "Organization",
+      "status": "failed",
+      "error": "create failed: [NOT_FOUND] /api/web/system/contacts not found (resource: /api/web/system/contacts) (operation: POST) (status: 404)",
+      "request_sent": {
+        "metadata": {
+          "name": "tf-discover-1764663929368121000"
+        },
+        "spec": {
+          "contact_info": {
+            "email": "test@example.com"
+          }
+        }
+      }
+    },
+    "data_group": {
+      "resource_name": "data_group",
+      "category": "BIG-IP Integration",
+      "status": "failed",
+      "error": "create failed: [BAD_REQUEST] Invalid request parameters (resource: /api/config/namespaces/tf-discover-1764663924/data_groups) (operation: POST) (status: 400)",
+      "request_sent": {
+        "metadata": {
+          "name": "tf-discover-1764663929450239000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "spec": {
+          "data": [
+            {
+              "ip_prefix": {
+                "prefix": [
+                  "10.0.0.0/8"
+                ]
+              }
+            }
+          ],
+          "type": "IP_PREFIX"
+        }
+      }
+    },
+    "data_type": {
+      "resource_name": "data_type",
+      "category": "Security",
+      "status": "failed",
+      "error": "create failed: [BAD_REQUEST] Invalid request parameters (resource: /api/config/namespaces/tf-discover-1764663924/data_types) (operation: POST) (status: 400)",
+      "request_sent": {
+        "metadata": {
+          "name": "tf-discover-1764663929548476000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "spec": {
+          "pattern": {
+            "regex": ".*test.*"
+          }
+        }
+      }
+    },
+    "filter_set": {
+      "resource_name": "filter_set",
+      "category": "Applications",
+      "status": "failed",
+      "error": "create failed: [BAD_REQUEST] Invalid request parameters (resource: /api/config/namespaces/tf-discover-1764663924/filter_sets) (operation: POST) (status: 400)",
+      "request_sent": {
+        "metadata": {
+          "name": "tf-discover-1764663929656424000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "spec": {
+          "filters": [
+            {
+              "metadata": {
+                "name": "test-filter"
+              },
+              "spec": {
+                "request_headers": {
+                  "headers": [
+                    {
+                      "exact": "value",
+                      "invert_matcher": false,
+                      "name": "X-Test"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "forwarding_class": {
+      "resource_name": "forwarding_class",
+      "category": "Networking",
+      "status": "failed",
+      "error": "create failed: [NOT_FOUND] /api/config/namespaces/tf-discover-1764663924/forwarding_classes not found (resource: /api/config/namespaces/tf-discover-1764663924/forwarding_classes) (operation: POST) (status: 404)",
+      "request_sent": {
+        "metadata": {
+          "name": "tf-discover-1764663929760505000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "spec": {
+          "dscp_value": 46,
+          "priority": "HIGH"
+        }
+      }
+    },
+    "geo_location_set": {
+      "resource_name": "geo_location_set",
+      "category": "Cloud Resources",
+      "status": "failed",
+      "error": "create failed: [NOT_FOUND] /api/config/namespaces/tf-discover-1764663924/geo_location_sets not found (resource: /api/config/namespaces/tf-discover-1764663924/geo_location_sets) (operation: POST) (status: 404)",
+      "request_sent": {
+        "metadata": {
+          "name": "tf-discover-1764663929896536000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "spec": {
+          "geoip": {
+            "country": [
+              "US"
+            ]
+          }
+        }
+      }
+    },
+    "healthcheck": {
+      "resource_name": "healthcheck",
+      "category": "Load Balancing",
+      "status": "discovered",
+      "discovered_at": "2025-12-02T08:25:30Z",
+      "defaults": {
+        "spec.http_health_check.expected_status_codes": {
+          "path": "spec.http_health_check.expected_status_codes",
+          "default_value": [],
+          "type": "array"
+        },
+        "spec.http_health_check.headers": {
+          "path": "spec.http_health_check.headers",
+          "default_value": {},
+          "type": "object",
+          "is_marker_block": true
+        },
+        "spec.http_health_check.request_headers_to_remove": {
+          "path": "spec.http_health_check.request_headers_to_remove",
+          "default_value": [],
+          "type": "array"
+        },
+        "spec.http_health_check.use_http2": {
+          "path": "spec.http_health_check.use_http2",
+          "default_value": false,
+          "type": "bool"
+        },
+        "spec.jitter": {
+          "path": "spec.jitter",
+          "default_value": 0,
+          "type": "number"
+        },
+        "spec.jitter_percent": {
+          "path": "spec.jitter_percent",
+          "default_value": 0,
+          "type": "number"
+        }
+      },
+      "request_sent": {
+        "metadata": {
+          "name": "tf-discover-1764663930032642000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "spec": {
+          "healthy_threshold": 3,
+          "http_health_check": {
+            "path": "/healthz",
+            "use_origin_server_name": {}
+          },
+          "interval": 10,
+          "timeout": 1,
+          "unhealthy_threshold": 2
+        }
+      },
+      "response_got": {
+        "create_form": null,
+        "deleted_referred_objects": [],
+        "disabled_referred_objects": [],
+        "metadata": {
+          "annotations": {},
+          "description": "",
+          "disable": false,
+          "labels": {},
+          "name": "tf-discover-1764663930032642000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "referring_objects": [],
+        "replace_form": null,
+        "resource_version": "5197681742",
+        "spec": {
+          "healthy_threshold": 3,
+          "http_health_check": {
+            "expected_status_codes": [],
+            "headers": {},
+            "path": "/healthz",
+            "request_headers_to_remove": [],
+            "use_http2": false,
+            "use_origin_server_name": {}
+          },
+          "interval": 10,
+          "jitter": 0,
+          "jitter_percent": 0,
+          "timeout": 1,
+          "unhealthy_threshold": 2
+        },
+        "status": [],
+        "system_metadata": {
+          "creation_timestamp": "2025-12-02T08:25:30.177625423Z",
+          "creator_class": "prism",
+          "creator_id": "r.mordasiewicz@f5.com",
+          "deletion_timestamp": null,
+          "finalizers": [],
+          "initializers": null,
+          "labels": {},
+          "modification_timestamp": null,
+          "object_index": 32933,
+          "owner_view": null,
+          "tenant": "nferreira-cuxnbbdn",
+          "uid": "11c42d54-aada-40b2-ba21-8fb9c9c044d3"
+        }
+      }
+    },
+    "http_loadbalancer": {
+      "resource_name": "http_loadbalancer",
+      "category": "Load Balancing",
+      "status": "failed",
+      "error": "create failed: [BAD_REQUEST] Invalid request parameters (resource: /api/config/namespaces/tf-discover-1764663924/http_loadbalancers) (operation: POST) (status: 400)",
+      "request_sent": {
+        "metadata": {
+          "name": "tf-discover-1764663930941590000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "spec": {
+          "advertise_on_public_default_vip": {},
+          "default_route_pools": [],
+          "disable_rate_limit": {},
+          "disable_waf": {},
+          "domains": [
+            "test.example.com"
+          ],
+          "http": {
+            "dns_volterra_managed": true,
+            "port": 80
+          },
+          "no_service_policies": {},
+          "round_robin": {}
+        }
+      }
+    },
+    "ip_prefix_set": {
+      "resource_name": "ip_prefix_set",
+      "category": "Networking",
+      "status": "discovered",
+      "discovered_at": "2025-12-02T08:25:31Z",
+      "defaults": {
+        "spec.ipv4_prefixes": {
+          "path": "spec.ipv4_prefixes",
+          "default_value": [
+            {
+              "description": "",
+              "ipv4_prefix": "10.0.0.0/8"
+            }
+          ],
+          "type": "array"
+        },
+        "spec.ipv6_prefix": {
+          "path": "spec.ipv6_prefix",
+          "default_value": [],
+          "type": "array"
+        },
+        "spec.ipv6_prefixes": {
+          "path": "spec.ipv6_prefixes",
+          "default_value": [],
+          "type": "array"
+        }
+      },
+      "request_sent": {
+        "metadata": {
+          "name": "tf-discover-1764663931135866000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "spec": {
+          "prefix": [
+            "10.0.0.0/8"
+          ]
+        }
+      },
+      "response_got": {
+        "create_form": null,
+        "deleted_referred_objects": [],
+        "disabled_referred_objects": [],
+        "metadata": {
+          "annotations": {},
+          "description": "",
+          "disable": false,
+          "labels": {},
+          "name": "tf-discover-1764663931135866000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "referring_objects": [],
+        "replace_form": null,
+        "resource_version": "5197681755",
+        "spec": {
+          "ipv4_prefixes": [
+            {
+              "description": "",
+              "ipv4_prefix": "10.0.0.0/8"
+            }
+          ],
+          "ipv6_prefix": [],
+          "ipv6_prefixes": [],
+          "prefix": [
+            "10.0.0.0/8"
+          ]
+        },
+        "status": [],
+        "system_metadata": {
+          "creation_timestamp": "2025-12-02T08:25:31.279397918Z",
+          "creator_class": "prism",
+          "creator_id": "r.mordasiewicz@f5.com",
+          "deletion_timestamp": null,
+          "finalizers": [],
+          "initializers": null,
+          "labels": {},
+          "modification_timestamp": null,
+          "object_index": 0,
+          "owner_view": null,
+          "tenant": "nferreira-cuxnbbdn",
+          "uid": "87234a93-3ebe-402a-91a9-5ae287fe4a41"
+        }
+      }
+    },
+    "namespace": {
+      "resource_name": "namespace",
+      "category": "Organization",
+      "status": "discovered",
+      "discovered_at": "2025-12-02T08:25:32Z",
+      "request_sent": {
+        "metadata": {
+          "name": "tf-discover-1764663931972546000"
+        },
+        "spec": {}
+      },
+      "response_got": {
+        "create_form": null,
+        "deleted_referred_objects": [],
+        "disabled_referred_objects": [],
+        "metadata": {
+          "annotations": {},
+          "description": "",
+          "disable": false,
+          "labels": {},
+          "name": "tf-discover-1764663931972546000",
+          "namespace": ""
+        },
+        "referring_objects": [],
+        "replace_form": null,
+        "resource_version": "5197681775",
+        "spec": {},
+        "status": [],
+        "system_metadata": {
+          "creation_timestamp": "2025-12-02T08:25:32.116142772Z",
+          "creator_class": "prism",
+          "creator_id": "r.mordasiewicz@f5.com",
+          "deletion_timestamp": null,
+          "finalizers": [],
+          "initializers": {
+            "pending": [],
+            "result": null
+          },
+          "labels": {},
+          "modification_timestamp": "2025-12-02T08:25:32.257836302Z",
+          "object_index": 0,
+          "owner_view": null,
+          "tenant": "nferreira-cuxnbbdn",
+          "uid": "21d6f936-502e-4aa0-b846-f8e999d93225"
+        }
+      }
+    },
+    "origin_pool": {
+      "resource_name": "origin_pool",
+      "category": "Load Balancing",
+      "status": "discovered",
+      "discovered_at": "2025-12-02T08:25:40Z",
+      "defaults": {
+        "spec.advanced_options": {
+          "path": "spec.advanced_options",
+          "default_value": null,
+          "type": "null"
+        },
+        "spec.healthcheck": {
+          "path": "spec.healthcheck",
+          "default_value": [],
+          "type": "array"
+        },
+        "spec.upstream_conn_pool_reuse_type": {
+          "path": "spec.upstream_conn_pool_reuse_type",
+          "default_value": null,
+          "type": "null"
+        }
+      },
+      "request_sent": {
+        "metadata": {
+          "name": "tf-discover-1764663940163262000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "spec": {
+          "endpoint_selection": "LOCAL_PREFERRED",
+          "loadbalancer_algorithm": "LB_OVERRIDE",
+          "no_tls": {},
+          "origin_servers": [
+            {
+              "public_ip": {
+                "ip": "1.2.3.4"
+              }
+            }
+          ],
+          "port": 80
+        }
+      },
+      "response_got": {
+        "create_form": null,
+        "deleted_referred_objects": [],
+        "disabled_referred_objects": [],
+        "metadata": {
+          "annotations": {},
+          "description": "",
+          "disable": false,
+          "labels": {},
+          "name": "tf-discover-1764663940163262000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "referring_objects": [],
+        "replace_form": null,
+        "resource_version": "5197681866",
+        "spec": {
+          "advanced_options": null,
+          "endpoint_selection": "LOCAL_PREFERRED",
+          "healthcheck": [],
+          "loadbalancer_algorithm": "LB_OVERRIDE",
+          "no_tls": {},
+          "origin_servers": [
+            {
+              "labels": {},
+              "public_ip": {
+                "ip": "1.2.3.4"
+              }
+            }
+          ],
+          "port": 80,
+          "upstream_conn_pool_reuse_type": null
+        },
+        "system_metadata": {
+          "creation_timestamp": "2025-12-02T08:25:40.295398655Z",
+          "creator_class": "prism",
+          "creator_id": "r.mordasiewicz@f5.com",
+          "deletion_timestamp": null,
+          "finalizers": [],
+          "initializers": null,
+          "labels": {},
+          "modification_timestamp": null,
+          "object_index": 0,
+          "owner_view": null,
+          "tenant": "nferreira-cuxnbbdn",
+          "uid": "d17b2dcc-445f-48d7-802e-26dbc4bfbdf8"
+        }
+      }
+    },
+    "policer": {
+      "resource_name": "policer",
+      "category": "Service Mesh",
+      "status": "discovered",
+      "discovered_at": "2025-12-02T08:25:41Z",
+      "defaults": {
+        "spec.policer_mode": {
+          "path": "spec.policer_mode",
+          "default_value": "POLICER_MODE_NOT_SHARED",
+          "type": "string"
+        },
+        "spec.policer_type": {
+          "path": "spec.policer_type",
+          "default_value": "POLICER_SINGLE_RATE_TWO_COLOR",
+          "type": "string"
+        }
+      },
+      "request_sent": {
+        "metadata": {
+          "name": "tf-discover-1764663941151721000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "spec": {
+          "burst_size": 10000,
+          "committed_burst_size": 10000,
+          "committed_information_rate": 10000,
+          "peak_information_rate": 20000,
+          "single_rate_two_color": {}
+        }
+      },
+      "response_got": {
+        "create_form": null,
+        "deleted_referred_objects": [],
+        "disabled_referred_objects": [],
+        "metadata": {
+          "annotations": {},
+          "description": "",
+          "disable": false,
+          "labels": {},
+          "name": "tf-discover-1764663941151721000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "referring_objects": [],
+        "replace_form": null,
+        "resource_version": "5197681896",
+        "spec": {
+          "burst_size": 10000,
+          "committed_information_rate": 10000,
+          "policer_mode": "POLICER_MODE_NOT_SHARED",
+          "policer_type": "POLICER_SINGLE_RATE_TWO_COLOR"
+        },
+        "status": [],
+        "system_metadata": {
+          "creation_timestamp": "2025-12-02T08:25:41.280078616Z",
+          "creator_class": "prism",
+          "creator_id": "r.mordasiewicz@f5.com",
+          "deletion_timestamp": null,
+          "finalizers": [],
+          "initializers": null,
+          "labels": {},
+          "modification_timestamp": null,
+          "object_index": 0,
+          "owner_view": null,
+          "tenant": "nferreira-cuxnbbdn",
+          "uid": "c33b8ff6-de5a-4cc6-8555-5266826e2f0a"
+        }
+      }
+    },
+    "rate_limiter": {
+      "resource_name": "rate_limiter",
+      "category": "Security",
+      "status": "discovered",
+      "discovered_at": "2025-12-02T08:25:42Z",
+      "defaults": {
+        "spec.limits": {
+          "path": "spec.limits",
+          "default_value": [],
+          "type": "array"
+        },
+        "spec.user_identification": {
+          "path": "spec.user_identification",
+          "default_value": [],
+          "type": "array"
+        }
+      },
+      "request_sent": {
+        "metadata": {
+          "name": "tf-discover-1764663942006619000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "spec": {
+          "burst_multiplier": 1,
+          "total_number": 100,
+          "unit": "SECOND"
+        }
+      },
+      "response_got": {
+        "create_form": null,
+        "deleted_referred_objects": [],
+        "disabled_referred_objects": [],
+        "metadata": {
+          "annotations": {},
+          "description": "",
+          "disable": false,
+          "labels": {},
+          "name": "tf-discover-1764663942006619000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "referring_objects": [],
+        "replace_form": null,
+        "resource_version": "5197681921",
+        "spec": {
+          "limits": [],
+          "user_identification": []
+        },
+        "status": [],
+        "system_metadata": {
+          "creation_timestamp": "2025-12-02T08:25:42.154447857Z",
+          "creator_class": "prism",
+          "creator_id": "r.mordasiewicz@f5.com",
+          "deletion_timestamp": null,
+          "finalizers": [],
+          "initializers": null,
+          "labels": {},
+          "modification_timestamp": null,
+          "object_index": 0,
+          "owner_view": null,
+          "tenant": "nferreira-cuxnbbdn",
+          "uid": "1229fc29-bb5e-4956-af65-cfdbf0347214"
+        }
+      }
+    },
+    "service_policy": {
+      "resource_name": "service_policy",
+      "category": "Security",
+      "status": "discovered",
+      "discovered_at": "2025-12-02T08:25:43Z",
+      "defaults": {
+        "spec.port_matcher": {
+          "path": "spec.port_matcher",
+          "default_value": null,
+          "type": "null"
+        },
+        "spec.rules": {
+          "path": "spec.rules",
+          "default_value": [],
+          "type": "array"
+        },
+        "spec.simple_rules": {
+          "path": "spec.simple_rules",
+          "default_value": [],
+          "type": "array"
+        }
+      },
+      "request_sent": {
+        "metadata": {
+          "name": "tf-discover-1764663942851498000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "spec": {
+          "algo": "FIRST_MATCH",
+          "any_server": {},
+          "rule_list": {
+            "rules": []
+          }
+        }
+      },
+      "response_got": {
+        "create_form": null,
+        "deleted_referred_objects": [],
+        "disabled_referred_objects": [],
+        "metadata": {
+          "annotations": {},
+          "description": "",
+          "disable": false,
+          "labels": {},
+          "name": "tf-discover-1764663942851498000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "referring_objects": [],
+        "replace_form": null,
+        "resource_version": "5197681951",
+        "spec": {
+          "algo": "FIRST_MATCH",
+          "any_server": {},
+          "port_matcher": null,
+          "rule_list": {
+            "rules": []
+          },
+          "rules": [],
+          "simple_rules": []
+        },
+        "status": [],
+        "system_metadata": {
+          "creation_timestamp": "2025-12-02T08:25:42.977388284Z",
+          "creator_class": "prism",
+          "creator_id": "r.mordasiewicz@f5.com",
+          "deletion_timestamp": null,
+          "finalizers": [],
+          "initializers": null,
+          "labels": {},
+          "modification_timestamp": null,
+          "object_index": 0,
+          "owner_view": null,
+          "tenant": "nferreira-cuxnbbdn",
+          "uid": "f3186ed0-88ce-42a5-9cbe-47cf8318b67b"
+        }
+      }
+    },
+    "tcp_loadbalancer": {
+      "resource_name": "tcp_loadbalancer",
+      "category": "Load Balancing",
+      "status": "failed",
+      "error": "create failed: [SERVER_ERROR] F5 XC API server error (resource: /api/config/namespaces/tf-discover-1764663924/tcp_loadbalancers) (operation: POST) (status: 500)",
+      "request_sent": {
+        "metadata": {
+          "name": "tf-discover-1764663943762470000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "spec": {
+          "advertise_on_public_default_vip": {},
+          "domains": [
+            "test.example.com"
+          ],
+          "listen_port": 8080,
+          "origin_pools_weights": [],
+          "tcp": {},
+          "with_sni": {}
+        }
+      }
+    },
+    "user_identification": {
+      "resource_name": "user_identification",
+      "category": "Security",
+      "status": "discovered",
+      "discovered_at": "2025-12-02T08:25:51Z",
+      "request_sent": {
+        "metadata": {
+          "name": "tf-discover-1764663951207885000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "spec": {
+          "rules": [
+            {
+              "client_identifier": {
+                "ip_and_tls_fingerprint": {}
+              }
+            }
+          ]
+        }
+      },
+      "response_got": {
+        "create_form": null,
+        "deleted_referred_objects": [],
+        "disabled_referred_objects": [],
+        "metadata": {
+          "annotations": {},
+          "description": "",
+          "disable": false,
+          "labels": {},
+          "name": "tf-discover-1764663951207885000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "referring_objects": [],
+        "replace_form": null,
+        "resource_version": "5197682258",
+        "spec": {
+          "rules": [
+            {
+              "client_ip": {}
+            }
+          ]
+        },
+        "status": [],
+        "system_metadata": {
+          "creation_timestamp": "2025-12-02T08:25:51.354589406Z",
+          "creator_class": "prism",
+          "creator_id": "r.mordasiewicz@f5.com",
+          "deletion_timestamp": null,
+          "finalizers": [],
+          "initializers": null,
+          "labels": {},
+          "modification_timestamp": null,
+          "object_index": 0,
+          "owner_view": null,
+          "tenant": "nferreira-cuxnbbdn",
+          "uid": "a21abff4-9cb5-4239-be3e-3de989cf34eb"
+        }
+      }
+    },
+    "virtual_site": {
+      "resource_name": "virtual_site",
+      "category": "Sites",
+      "status": "discovered",
+      "discovered_at": "2025-12-02T08:25:52Z",
+      "request_sent": {
+        "metadata": {
+          "name": "tf-discover-1764663952045085000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "spec": {
+          "site_selector": {
+            "expressions": [
+              "site.name in (ves-io-mia-1)"
+            ]
+          },
+          "site_type": "REGIONAL_EDGE"
+        }
+      },
+      "response_got": {
+        "create_form": null,
+        "deleted_referred_objects": [],
+        "disabled_referred_objects": [],
+        "metadata": {
+          "annotations": {},
+          "description": "",
+          "disable": false,
+          "labels": {},
+          "name": "tf-discover-1764663952045085000",
+          "namespace": "tf-discover-1764663924"
+        },
+        "referring_objects": [],
+        "replace_form": null,
+        "resource_version": "5197682268",
+        "spec": {
+          "site_selector": {
+            "expressions": [
+              "site.name in (ves-io-mia-1)"
+            ]
+          },
+          "site_type": "REGIONAL_EDGE"
+        },
+        "status": [],
+        "system_metadata": {
+          "creation_timestamp": "2025-12-02T08:25:52.188791532Z",
+          "creator_class": "prism",
+          "creator_id": "r.mordasiewicz@f5.com",
+          "deletion_timestamp": null,
+          "finalizers": [],
+          "initializers": null,
+          "labels": {},
+          "modification_timestamp": null,
+          "object_index": 0,
+          "owner_view": null,
+          "tenant": "nferreira-cuxnbbdn",
+          "uid": "586c7eba-49cb-4a98-92af-dc62766e1516"
+        }
+      }
+    }
+  }
+}

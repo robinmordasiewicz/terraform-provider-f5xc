@@ -89,39 +89,8 @@ const (
 // Skip List - Resources that cannot be tested
 // ============================================================================
 
-// SkipList defines resources that should be skipped during discovery
-// with documented reasons
-var SkipList = map[string]string{
-	// Cloud Provider Sites - require external credentials
-	"aws_vpc_site":    "Requires AWS credentials and VPC infrastructure",
-	"azure_vnet_site": "Requires Azure credentials and VNet infrastructure",
-	"gcp_vpc_site":    "Requires GCP credentials and VPC infrastructure",
-	"aws_tgw_site":    "Requires AWS credentials and Transit Gateway",
-
-	// Cloud Credentials - require external secrets
-	"cloud_credentials": "Requires cloud provider API secrets",
-
-	// Tenant Operations - require special permissions
-	"tenant_configuration": "Requires tenant administrator privileges",
-	"child_tenant":         "Requires MSP (Multi-Service Provider) tenant",
-	"child_tenant_manager": "Requires MSP tenant administrator",
-	"managed_tenant":       "Requires MSP tenant",
-	"allowed_tenant":       "Requires cross-tenant configuration",
-
-	// Physical Infrastructure - require hardware
-	"securemesh_site":    "Requires physical Secure Mesh hardware",
-	"securemesh_site_v2": "Requires physical Secure Mesh hardware v2",
-	"voltstack_site":     "Requires physical VoltStack hardware",
-	"registration":       "Requires physical site registration token",
-
-	// Special Resources
-	"fleet":    "Requires existing site infrastructure",
-	"workload": "Requires existing Kubernetes infrastructure",
-
-	// Premium/Licensed Features
-	"cminstance":         "Requires Cloud Manager subscription",
-	"addon_subscription": "Requires active subscription",
-}
+// Skip list is now centralized in tools/pkg/resource/resource.go
+// Use resource.IsSkippedForAPITest() and resource.GetSkipReason() to check
 
 // ============================================================================
 // Resource Configuration Templates
@@ -469,8 +438,8 @@ func main() {
 		skipped := 0
 		noConfig := 0
 		for _, name := range resourcesToDiscover {
-			if reason, skip := SkipList[name]; skip {
-				fmt.Printf("  SKIP:      %s (%s)\n", name, reason)
+			if resource.IsSkippedForAPITest(name) {
+				fmt.Printf("  SKIP:      %s (%s)\n", name, resource.GetSkipReason(name))
 				skipped++
 			} else if _, hasConfig := ResourceConfigs[name]; hasConfig {
 				fmt.Printf("  DISCOVER:  %s\n", name)
@@ -663,10 +632,10 @@ func discoverResource(apiClient *client.Client, resourceName string) *DiscoveryR
 		Category:     resource.GetCategory(resourceName),
 	}
 
-	// Check skip list
-	if reason, skip := SkipList[resourceName]; skip {
+	// Check skip list (centralized in tools/pkg/resource)
+	if resource.IsSkippedForAPITest(resourceName) {
 		result.Status = "skipped"
-		result.SkipReason = reason
+		result.SkipReason = resource.GetSkipReason(resourceName)
 		return result
 	}
 

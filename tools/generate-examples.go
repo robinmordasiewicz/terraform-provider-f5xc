@@ -15,9 +15,13 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/defaults"
 	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/naming"
 	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/namespace"
 )
+
+// Global defaults store for API-discovered default values
+var apiDefaultsStore *defaults.Store
 
 type SchemaInfo struct {
 	ResourceName string
@@ -65,6 +69,15 @@ func getNamespaceForReference(referencedResourceType string) string {
 func main() {
 	providerDir := "internal/provider"
 	examplesDir := "examples/resources"
+
+	// Load API-discovered defaults for enhanced example generation
+	apiDefaultsStore = defaults.GetStore()
+	if err := apiDefaultsStore.LoadFromFile("tools/api-defaults.json"); err != nil {
+		fmt.Printf("Note: API defaults not loaded (%v) - using basic examples only\n", err)
+	} else {
+		resources := apiDefaultsStore.ListResources()
+		fmt.Printf("Loaded API defaults for %d resources\n", len(resources))
+	}
 
 	files, err := filepath.Glob(filepath.Join(providerDir, "*_resource.go"))
 	if err != nil {
@@ -1245,11 +1258,107 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  trusted_ca_url = \"string:///LS0tLS1CRUdJTi...\"\n")
 
 	default:
-		// Generic blocks based on schema
-		if len(schema.Blocks) > 0 {
+		// Try to generate example from API-discovered defaults first
+		if addAPIDefaultsExample(sb, resourceName) {
+			// Successfully added API defaults-based example
+		} else if len(schema.Blocks) > 0 {
+			// Fall back to generic blocks based on schema
 			sb.WriteString("\n  # Resource-specific configuration\n")
 			addGenericBlocks(sb, schema.Blocks, 1, 1)
 		}
+	}
+}
+
+// addAPIDefaultsExample generates example configuration from API-discovered defaults.
+// Returns true if defaults were found and added, false otherwise.
+func addAPIDefaultsExample(sb *strings.Builder, resourceName string) bool {
+	if apiDefaultsStore == nil || !apiDefaultsStore.IsLoaded() {
+		return false
+	}
+
+	resourceDefaults, found := apiDefaultsStore.GetResourceDefaults(resourceName)
+	if !found || len(resourceDefaults) == 0 {
+		return false
+	}
+
+	// Filter out trivial defaults (empty arrays, objects, null values)
+	var meaningfulDefaults []struct {
+		path  string
+		value string
+		typ   string
+	}
+
+	for path, def := range resourceDefaults {
+		formattedVal := defaults.FormatDefaultValue(def.DefaultValue)
+
+		// Skip trivial values
+		if formattedVal == "[]" || formattedVal == "{}" || formattedVal == "null" || formattedVal == `""` {
+			continue
+		}
+
+		// Convert spec.field_name to field_name for Terraform
+		tfPath := path
+		if strings.HasPrefix(path, "spec.") {
+			tfPath = strings.TrimPrefix(path, "spec.")
+		}
+
+		// Skip nested paths for now (e.g., spec.http_health_check.use_http2)
+		// These require block generation which is more complex
+		if strings.Contains(tfPath, ".") {
+			continue
+		}
+
+		meaningfulDefaults = append(meaningfulDefaults, struct {
+			path  string
+			value string
+			typ   string
+		}{
+			path:  tfPath,
+			value: formattedVal,
+			typ:   def.Type,
+		})
+	}
+
+	if len(meaningfulDefaults) == 0 {
+		return false
+	}
+
+	// Sort for consistent output
+	sort.Slice(meaningfulDefaults, func(i, j int) bool {
+		return meaningfulDefaults[i].path < meaningfulDefaults[j].path
+	})
+
+	sb.WriteString("\n  # API-discovered default values (shown for reference)\n")
+	sb.WriteString("  # These values are applied by the API if not specified\n")
+
+	for _, def := range meaningfulDefaults {
+		// Format the value appropriately for Terraform HCL
+		hclValue := formatHCLValue(def.value, def.typ)
+		sb.WriteString(fmt.Sprintf("  # %s = %s  # API default\n", def.path, hclValue))
+	}
+
+	return true
+}
+
+// formatHCLValue formats a value for Terraform HCL syntax
+func formatHCLValue(value, typ string) string {
+	switch typ {
+	case "string":
+		// Already quoted or needs quoting
+		if strings.HasPrefix(value, `"`) {
+			return value
+		}
+		return fmt.Sprintf(`"%s"`, value)
+	case "bool", "number":
+		return value
+	default:
+		// For unknown types, quote if it looks like a string
+		if _, err := fmt.Sscanf(value, "%d", new(int)); err != nil {
+			if value != "true" && value != "false" {
+				return fmt.Sprintf(`"%s"`, value)
+			}
+		}
+		return value
 	}
 }
 

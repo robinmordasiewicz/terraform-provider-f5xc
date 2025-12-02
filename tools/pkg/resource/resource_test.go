@@ -102,9 +102,10 @@ func TestIsSkipped(t *testing.T) {
 		resourceName string
 		expected     bool
 	}{
-		{"blindfold", true},
-		{"http_loadbalancer", false},
-		{"origin_pool", false},
+		{"blindfold", true},           // SkipGenerate=true
+		{"http_loadbalancer", false},  // Not in skip list
+		{"origin_pool", false},        // Not in skip list
+		{"aws_vpc_site", false},       // SkipGenerate=false, only SkipAPITest=true
 	}
 
 	for _, tt := range tests {
@@ -115,6 +116,79 @@ func TestIsSkipped(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestIsSkippedForAPITest(t *testing.T) {
+	tests := []struct {
+		resourceName string
+		expected     bool
+	}{
+		{"blindfold", true},          // SkipAPITest=true
+		{"aws_vpc_site", true},       // Requires AWS credentials
+		{"azure_vnet_site", true},    // Requires Azure credentials
+		{"gcp_vpc_site", true},       // Requires GCP credentials
+		{"cloud_credentials", true},  // Requires cloud provider secrets
+		{"securemesh_site", true},    // Requires physical hardware
+		{"fleet", true},              // Requires existing infrastructure
+		{"cminstance", true},         // Requires subscription
+		{"http_loadbalancer", false}, // Not in skip list
+		{"origin_pool", false},       // Not in skip list
+		{"namespace", false},         // Not in skip list
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.resourceName, func(t *testing.T) {
+			result := IsSkippedForAPITest(tt.resourceName)
+			if result != tt.expected {
+				t.Errorf("IsSkippedForAPITest(%q) = %v, want %v", tt.resourceName, result, tt.expected)
+			}
+		})
+	}
+}
+
+func TestGetSkipReason(t *testing.T) {
+	tests := []struct {
+		resourceName string
+		expectEmpty  bool
+		contains     string // substring to check if not empty
+	}{
+		{"blindfold", false, "provider-defined functions"},
+		{"aws_vpc_site", false, "AWS credentials"},
+		{"cloud_credentials", false, "cloud provider"},
+		{"http_loadbalancer", true, ""},
+		{"namespace", true, ""},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.resourceName, func(t *testing.T) {
+			result := GetSkipReason(tt.resourceName)
+			if tt.expectEmpty && result != "" {
+				t.Errorf("GetSkipReason(%q) = %q, want empty", tt.resourceName, result)
+			}
+			if !tt.expectEmpty && result == "" {
+				t.Errorf("GetSkipReason(%q) = empty, want non-empty containing %q", tt.resourceName, tt.contains)
+			}
+			if !tt.expectEmpty && tt.contains != "" {
+				if !contains(result, tt.contains) {
+					t.Errorf("GetSkipReason(%q) = %q, want to contain %q", tt.resourceName, result, tt.contains)
+				}
+			}
+		})
+	}
+}
+
+func contains(s, substr string) bool {
+	return len(s) >= len(substr) && (s == substr || len(substr) == 0 ||
+		(len(s) > 0 && len(substr) > 0 && findSubstring(s, substr)))
+}
+
+func findSubstring(s, substr string) bool {
+	for i := 0; i <= len(s)-len(substr); i++ {
+		if s[i:i+len(substr)] == substr {
+			return true
+		}
+	}
+	return false
 }
 
 func TestIsManuallyMaintained(t *testing.T) {

@@ -243,3 +243,79 @@ jobs:
           go run tools/transform-docs.go
 
           echo "Documentation generation validated successfully"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # Validate Mock Fixtures (Issue #327)
+  # Ensures generated mock defaults are in sync with api-defaults.json
+  # ═══════════════════════════════════════════════════════════════════════════
+  validate-mock-fixtures:
+    name: Validate Mock Fixtures
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Check if mock fixture regeneration needed
+        id: check
+        run: |
+          # Check if files that affect mock generation changed
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD 2>/dev/null || echo "")
+
+          if echo "$CHANGED_FILES" | grep -qE "^tools/api-defaults\.json$|^tools/generate-mock-fixtures\.go$|^internal/mocks/generated_defaults"; then
+            echo "needs_validation=true" >> $GITHUB_OUTPUT
+          else
+            echo "needs_validation=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Set up Go
+        if: steps.check.outputs.needs_validation == 'true'
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: 'go.mod'
+          cache: true
+
+      - name: Validate mock fixtures are in sync
+        if: steps.check.outputs.needs_validation == 'true'
+        run: |
+          echo "::group::Regenerating mock fixtures"
+
+          # Check if api-defaults.json exists
+          if [ ! -f "tools/api-defaults.json" ]; then
+            echo "tools/api-defaults.json not found - skipping validation"
+            exit 0
+          fi
+
+          # Save current state
+          cp internal/mocks/generated_defaults.go /tmp/generated_defaults.go.before
+
+          # Regenerate
+          go run tools/generate-mock-fixtures.go
+          gofmt -s -w internal/mocks/generated_defaults.go
+
+          echo "::endgroup::"
+
+          # Compare
+          if ! diff -q internal/mocks/generated_defaults.go /tmp/generated_defaults.go.before > /dev/null 2>&1; then
+            echo "::error::Mock fixtures are out of sync with api-defaults.json"
+            echo ""
+            echo "The generated_defaults.go file does not match what would be"
+            echo "generated from the current api-defaults.json."
+            echo ""
+            echo "To fix:"
+            echo "  1. Run: go run tools/generate-mock-fixtures.go"
+            echo "  2. Commit the updated internal/mocks/generated_defaults.go"
+            echo ""
+            echo "Diff:"
+            diff internal/mocks/generated_defaults.go /tmp/generated_defaults.go.before || true
+            exit 1
+          fi
+
+          echo "Mock fixtures are in sync with api-defaults.json"
+
+      - name: Run mock tests
+        if: steps.check.outputs.needs_validation == 'true'
+        run: |
+          echo "::group::Running mock tests"
+          go test -v ./internal/mocks/...
+          echo "::endgroup::"

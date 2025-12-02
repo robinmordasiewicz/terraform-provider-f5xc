@@ -15,9 +15,13 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/defaults"
 	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/naming"
 	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/resource"
 )
+
+// Global defaults store for API-discovered default values
+var apiDefaultsStore *defaults.Store
 
 // metadataFields defines the standard F5 XC metadata fields that should be grouped
 // under "Metadata Argument Reference" section, following Volterra provider conventions
@@ -129,6 +133,15 @@ type docWarning struct {
 func main() {
 	// Build resource-to-API-path mapping from OpenAPI specs
 	buildResourceAPIPathMap()
+
+	// Load API-discovered defaults for documentation enhancement
+	apiDefaultsStore = defaults.GetStore()
+	if err := apiDefaultsStore.LoadFromFile("tools/api-defaults.json"); err != nil {
+		fmt.Printf("Note: API defaults not loaded (%v) - using schema defaults only\n", err)
+	} else {
+		resources := apiDefaultsStore.ListResources()
+		fmt.Printf("Loaded API defaults for %d resources\n", len(resources))
+	}
 
 	docsDir := "docs/resources"
 	var docWarnings []docWarning
@@ -1111,6 +1124,10 @@ func transformDoc(filePath string) error {
 
 		// Extract metadata from description
 		defaultVal, desc := extractDefaults(desc)
+		// If no default found in description, check API-discovered defaults
+		if defaultVal == "" {
+			defaultVal = getAPIDefault(resourceName, attr.name)
+		}
 		specifiedIn, desc := extractSpecifiedIn(desc)
 		possibleValues, desc := extractPossibleValues(desc)
 		desc = strings.TrimSpace(desc)
@@ -1421,6 +1438,12 @@ func transformDoc(filePath string) error {
 
 					// Extract metadata from description
 					defaultVal, desc := extractDefaults(desc)
+					// If no default found in description, check API-discovered defaults
+					// For nested attributes, use the full path: currentBlockName.name
+					if defaultVal == "" {
+						fullAttrPath := currentBlockName + "." + name
+						defaultVal = getAPIDefault(resourceName, fullAttrPath)
+					}
 					specifiedIn, desc := extractSpecifiedIn(desc)
 					possibleValues, desc := extractPossibleValues(desc)
 					desc = strings.TrimSpace(desc)
@@ -1857,6 +1880,30 @@ func wrapDefaultInBackticks(value string) string {
 	}
 	// Wrap in backticks for red code styling
 	return "`" + value + "`"
+}
+
+// getAPIDefault looks up an API-discovered default value for a resource attribute.
+// It tries both direct path and spec-prefixed path formats.
+// Returns the formatted "Defaults to `X`" string or empty if not found.
+func getAPIDefault(resourceName, attrPath string) string {
+	if apiDefaultsStore == nil || !apiDefaultsStore.IsLoaded() {
+		return ""
+	}
+
+	// Try to look up the default value
+	formattedVal, found := apiDefaultsStore.GetDefaultFormattedByTerraformPath(resourceName, attrPath)
+	if !found {
+		return ""
+	}
+
+	// Skip empty/trivial defaults that add no documentation value
+	// Empty arrays [], empty objects {}, and empty strings "" are often just type defaults
+	if formattedVal == "[]" || formattedVal == "{}" || formattedVal == `""` {
+		return ""
+	}
+
+	// Format with backticks for red code styling (Azure RM standard)
+	return "Defaults to " + wrapDefaultInBackticks(formattedVal)
 }
 
 // extractSpecifiedIn extracts "Specified in X" patterns from description

@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_tpm_manager Resource - terraform-provider-f5xc"
+page_title: "f5xc\_tpm\_manager Resource - terraform-provider-f5xc"
 subcategory: "Integrations"
 description: |-
   Manages a TpmManager resource in F5 Distributed Cloud for create a tpm manager configuration.
 ---
 
-# f5xc_tpm_manager (Resource)
+# f5xc\_tpm\_manager (Resource)
 
 Manages a TpmManager resource in F5 Distributed Cloud for create a tpm manager configuration.
 
@@ -18,7 +18,7 @@ Manages a TpmManager resource in F5 Distributed Cloud for create a tpm manager c
 # Manages a TpmManager resource in F5 Distributed Cloud for create a tpm manager configuration.
 
 # Basic Tpm Manager configuration
-resource "f5xc_tpm_manager" "example" {
+resource "f5xc\_tpm\_manager" "example" {
   name      = "example-tpm-manager"
   namespace = "staging"
 
@@ -80,5 +80,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_tpm_manager.example system/example
+terraform import f5xc\_tpm\_manager.example system/example
 ```

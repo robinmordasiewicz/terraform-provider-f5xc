@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_infraprotect_tunnel Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_infraprotect\_tunnel Data Source - terraform-provider-f5xc"
 subcategory: "Infrastructure Protection"
 description: |-
   Manages DDoS transit tunnel in F5 Distributed Cloud.
 ---
 
-# f5xc_infraprotect_tunnel (Data Source)
+# f5xc\_infraprotect\_tunnel (Data Source)
 
 Manages DDoS transit tunnel in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages DDoS transit tunnel in F5 Distributed Cloud.
 # Retrieves information about an existing Infraprotect Tunnel
 
 # Look up an existing Infraprotect Tunnel by name
-data "f5xc_infraprotect_tunnel" "example" {
+data "f5xc\_infraprotect\_tunnel" "example" {
   name      = "example-infraprotect-tunnel"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "infraprotect_tunnel_id" {
-#   value = data.f5xc_infraprotect_tunnel.example.id
+# output "infraprotect\_tunnel\_id" {
+#   value = data.f5xc\_infraprotect\_tunnel.example.id
 # }
 ```
 

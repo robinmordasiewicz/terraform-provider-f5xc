@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_tpm_api_key Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_tpm_api\_key Data Source - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
   Manages a TpmAPIKey resource in F5 Distributed Cloud for apikey object when successfully created returns actual apikey bytes which is used by the users to call in to tpm provisioning api. configuration.
 ---
 
-# f5xc_tpm_api_key (Data Source)
+# f5xc\_tpm_api\_key (Data Source)
 
 Manages a TpmAPIKey resource in F5 Distributed Cloud for apikey object when successfully created returns actual apikey bytes which is used by the users to call in to tpm provisioning api. configuration.
 
@@ -18,14 +18,14 @@ Manages a TpmAPIKey resource in F5 Distributed Cloud for apikey object when succ
 # Retrieves information about an existing Tpm API Key
 
 # Look up an existing Tpm API Key by name
-data "f5xc_tpm_api_key" "example" {
+data "f5xc\_tpm_api\_key" "example" {
   name      = "example-tpm-api-key"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "tpm_api_key_id" {
-#   value = data.f5xc_tpm_api_key.example.id
+# output "tpm\_api_key\_id" {
+#   value = data.f5xc\_tpm_api\_key.example.id
 # }
 ```
 

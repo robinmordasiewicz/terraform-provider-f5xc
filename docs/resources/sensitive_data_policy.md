@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc_sensitive_data_policy Resource - terraform-provider-f5xc"
+page_title: "f5xc\_sensitive_data\_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages sensitive_data_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  Manages sensitive\_data\_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc_sensitive_data_policy (Resource)
+# f5xc\_sensitive_data\_policy (Resource)
 
-Manages sensitive_data_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+Manages sensitive\_data\_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Sensitive Data Policy API docs](https://docs.cloud.f5.com/docs-v2/api/sensitive-data-policy) to learn more.
 
@@ -15,10 +15,10 @@ Manages sensitive_data_policy creates a new object in the storage backend for me
 
 ```terraform
 # Sensitive Data Policy Resource Example
-# Manages sensitive_data_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# Manages sensitive\_data\_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Sensitive Data Policy configuration
-resource "f5xc_sensitive_data_policy" "example" {
+resource "f5xc\_sensitive_data\_policy" "example" {
   name      = "example-sensitive-data-policy"
   namespace = "shared"
 
@@ -33,12 +33,12 @@ resource "f5xc_sensitive_data_policy" "example" {
 
   # Resource-specific configuration
   # Defined Custom Sensitive Data Types. Select your custom d...
-  custom_data_types {
-    # Configure custom_data_types settings
+  custom\_data\_types {
+    # Configure custom\_data\_types settings
   }
   # Object reference. This type establishes a direct referenc...
-  custom_data_type_ref {
-    # Configure custom_data_type_ref settings
+  custom\_data_type\_ref {
+    # Configure custom\_data_type\_ref settings
   }
 }
 ```
@@ -62,11 +62,11 @@ resource "f5xc_sensitive_data_policy" "example" {
 
 ### Spec Argument Reference
 
-<a id="compliances"></a>&#x2022; [`compliances`](#compliances) - Optional List<br>Possible values are `GDPR`, `CCPA`, `PIPEDA`, `LGPD`, `DPA_UK`, `PDPA_SG`, `APPI`, `HIPAA`, `CPRA_2023`, `CPA_CO`, `SOC2`, `PCI_DSS`, `ISO_IEC_27001`, `ISO_IEC_27701`, `EPRIVACY_DIRECTIVE`, `GLBA`, `SOX`<br>Compliance Frameworks. Select relevant compliance frameworks, such as GDPR, HIPAA, or PCI-DSS, to ensure monitoring under your sensitive data discovery
+<a id="compliances"></a>&#x2022; [`compliances`](#compliances) - Optional List<br>Possible values are `GDPR`, `CCPA`, `PIPEDA`, `LGPD`, `DPA_UK`, `PDPA_SG`, `APPI`, `HIPAA`, `CPRA_2023`, `CPA_CO`, `SOC2`, `PCI_DSS`, `ISO\_IEC\_27001`, `ISO\_IEC\_27701`, `EPRIVACY_DIRECTIVE`, `GLBA`, `SOX`<br>Compliance Frameworks. Select relevant compliance frameworks, such as GDPR, HIPAA, or PCI-DSS, to ensure monitoring under your sensitive data discovery
 
-<a id="custom-data-types"></a>&#x2022; [`custom_data_types`](#custom-data-types) - Optional Block<br>Defined Custom Sensitive Data Types. Select your custom data types to be monitored in the API discovery<br>See [Custom Data Types](#custom-data-types) below for details.
+<a id="custom-data-types"></a>&#x2022; [`custom\_data\_types`](#custom-data-types) - Optional Block<br>Defined Custom Sensitive Data Types. Select your custom data types to be monitored in the API discovery<br>See [Custom Data Types](#custom-data-types) below for details.
 
-<a id="disabled-predefined-data-types"></a>&#x2022; [`disabled_predefined_data_types`](#disabled-predefined-data-types) - Optional List<br>Disabled Built-In Sensitive Data Types. Select which pre-configured data types to disable, disabled data types will not be shown as sensitive in the API discovery
+<a id="disabled-predefined-data-types"></a>&#x2022; [`disabled\_predefined_data\_types`](#disabled-predefined-data-types) - Optional List<br>Disabled Built-In Sensitive Data Types. Select which pre-configured data types to disable, disabled data types will not be shown as sensitive in the API discovery
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -80,13 +80,13 @@ In addition to all arguments above, the following attributes are exported:
 
 #### Custom Data Types
 
-A [`custom_data_types`](#custom-data-types) block supports the following:
+A [`custom\_data\_types`](#custom-data-types) block supports the following:
 
-<a id="custom-data-types-custom-data-type-ref"></a>&#x2022; [`custom_data_type_ref`](#custom-data-types-custom-data-type-ref) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Data Type Ref](#custom-data-types-custom-data-type-ref) below.
+<a id="custom-data-types-custom-data-type-ref"></a>&#x2022; [`custom\_data_type\_ref`](#custom-data-types-custom-data-type-ref) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Data Type Ref](#custom-data-types-custom-data-type-ref) below.
 
 #### Custom Data Types Custom Data Type Ref
 
-A [`custom_data_type_ref`](#custom-data-types-custom-data-type-ref) block (within [`custom_data_types`](#custom-data-types)) supports the following:
+A [`custom\_data_type\_ref`](#custom-data-types-custom-data-type-ref) block (within [`custom\_data\_types`](#custom-data-types)) supports the following:
 
 <a id="custom-data-types-custom-data-type-ref-name"></a>&#x2022; [`name`](#custom-data-types-custom-data-type-ref-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -112,5 +112,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_sensitive_data_policy.example system/example
+terraform import f5xc\_sensitive_data\_policy.example system/example
 ```

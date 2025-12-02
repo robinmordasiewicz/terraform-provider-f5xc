@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_tpm_api_key Resource - terraform-provider-f5xc"
+page_title: "f5xc\_tpm_api\_key Resource - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
   Manages a TpmAPIKey resource in F5 Distributed Cloud for apikey object when successfully created returns actual apikey bytes which is used by the users to call in to tpm provisioning api. configuration.
 ---
 
-# f5xc_tpm_api_key (Resource)
+# f5xc\_tpm_api\_key (Resource)
 
 Manages a TpmAPIKey resource in F5 Distributed Cloud for apikey object when successfully created returns actual apikey bytes which is used by the users to call in to tpm provisioning api. configuration.
 
@@ -18,7 +18,7 @@ Manages a TpmAPIKey resource in F5 Distributed Cloud for apikey object when succ
 # Manages a TpmAPIKey resource in F5 Distributed Cloud for apikey object when successfully created returns actual apikey bytes which is used by the users to call in to tpm provisioning api. configuration.
 
 # Basic Tpm API Key configuration
-resource "f5xc_tpm_api_key" "example" {
+resource "f5xc\_tpm_api\_key" "example" {
   name      = "example-tpm-api-key"
   namespace = "staging"
 
@@ -104,5 +104,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_tpm_api_key.example system/example
+terraform import f5xc\_tpm_api\_key.example system/example
 ```

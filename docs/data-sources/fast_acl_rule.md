@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc_fast_acl_rule Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_fast_acl\_rule Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages new Fast ACL rule, fast_acl_rule has specification to match source IP, source port and action to apply in F5 Distributed Cloud.
+  Manages new Fast ACL rule, fast\_acl\_rule has specification to match source IP, source port and action to apply in F5 Distributed Cloud.
 ---
 
-# f5xc_fast_acl_rule (Data Source)
+# f5xc\_fast_acl\_rule (Data Source)
 
-Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP, source port and action to apply in F5 Distributed Cloud.
+Manages new Fast ACL rule, `fast\_acl\_rule` has specification to match source IP, source port and action to apply in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Fast ACL Rule API docs](https://docs.cloud.f5.com/docs-v2/api/fast-acl-rule) to learn more.
 
@@ -18,14 +18,14 @@ Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP,
 # Retrieves information about an existing Fast ACL Rule
 
 # Look up an existing Fast ACL Rule by name
-data "f5xc_fast_acl_rule" "example" {
+data "f5xc\_fast_acl\_rule" "example" {
   name      = "example-fast-acl-rule"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "fast_acl_rule_id" {
-#   value = data.f5xc_fast_acl_rule.example.id
+# output "fast\_acl_rule\_id" {
+#   value = data.f5xc\_fast_acl\_rule.example.id
 # }
 ```
 

@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc_bgp_asn_set Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_bgp_asn\_set Data Source - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages bgp_asn_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  Manages bgp\_asn\_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc_bgp_asn_set (Data Source)
+# f5xc\_bgp_asn\_set (Data Source)
 
-Manages bgp_asn_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+Manages bgp\_asn\_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [BGP Asn Set API docs](https://docs.cloud.f5.com/docs-v2/api/bgp-asn-set) to learn more.
 
@@ -18,14 +18,14 @@ Manages bgp_asn_set creates a new object in the storage backend for metadata.nam
 # Retrieves information about an existing BGP Asn Set
 
 # Look up an existing BGP Asn Set by name
-data "f5xc_bgp_asn_set" "example" {
+data "f5xc\_bgp_asn\_set" "example" {
   name      = "example-bgp-asn-set"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "bgp_asn_set_id" {
-#   value = data.f5xc_bgp_asn_set.example.id
+# output "bgp\_asn_set\_id" {
+#   value = data.f5xc\_bgp_asn\_set.example.id
 # }
 ```
 

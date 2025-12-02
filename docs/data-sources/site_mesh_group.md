@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_site_mesh_group Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_site_mesh\_group Data Source - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
   Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.
 ---
 
-# f5xc_site_mesh_group (Data Source)
+# f5xc\_site_mesh\_group (Data Source)
 
 Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.
 # Retrieves information about an existing Site Mesh Group
 
 # Look up an existing Site Mesh Group by name
-data "f5xc_site_mesh_group" "example" {
+data "f5xc\_site_mesh\_group" "example" {
   name      = "example-site-mesh-group"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "site_mesh_group_id" {
-#   value = data.f5xc_site_mesh_group.example.id
+# output "site\_mesh_group\_id" {
+#   value = data.f5xc\_site_mesh\_group.example.id
 # }
 ```
 

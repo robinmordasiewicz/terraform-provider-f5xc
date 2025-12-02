@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_dc_cluster_group Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_dc_cluster\_group Data Source - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
   Manages DC Cluster group in given namespace in F5 Distributed Cloud.
 ---
 
-# f5xc_dc_cluster_group (Data Source)
+# f5xc\_dc_cluster\_group (Data Source)
 
 Manages DC Cluster group in given namespace in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages DC Cluster group in given namespace in F5 Distributed Cloud.
 # Retrieves information about an existing Dc Cluster Group
 
 # Look up an existing Dc Cluster Group by name
-data "f5xc_dc_cluster_group" "example" {
+data "f5xc\_dc_cluster\_group" "example" {
   name      = "example-dc-cluster-group"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "dc_cluster_group_id" {
-#   value = data.f5xc_dc_cluster_group.example.id
+# output "dc\_cluster_group\_id" {
+#   value = data.f5xc\_dc_cluster\_group.example.id
 # }
 ```
 

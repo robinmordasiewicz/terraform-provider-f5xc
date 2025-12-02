@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc_child_tenant_manager Resource - terraform-provider-f5xc"
+page_title: "f5xc\_child_tenant\_manager Resource - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
-  Manages child_tenant_manager config instance. Name of the object is the name of the child tenant manager to be created. in F5 Distributed Cloud.
+  Manages child\_tenant\_manager config instance. Name of the object is the name of the child tenant manager to be created. in F5 Distributed Cloud.
 ---
 
-# f5xc_child_tenant_manager (Resource)
+# f5xc\_child_tenant\_manager (Resource)
 
-Manages child_tenant_manager config instance. Name of the object is the name of the child tenant manager to be created. in F5 Distributed Cloud.
+Manages child\_tenant\_manager config instance. Name of the object is the name of the child tenant manager to be created. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Child Tenant Manager API docs](https://docs.cloud.f5.com/docs-v2/api/tenant-management-child-tenant-manager) to learn more.
 
@@ -15,10 +15,10 @@ Manages child_tenant_manager config instance. Name of the object is the name of 
 
 ```terraform
 # Child Tenant Manager Resource Example
-# Manages child_tenant_manager config instance. Name of the object is the name of the child tenant manager to be created. in F5 Distributed Cloud.
+# Manages child\_tenant\_manager config instance. Name of the object is the name of the child tenant manager to be created. in F5 Distributed Cloud.
 
 # Basic Child Tenant Manager configuration
-resource "f5xc_child_tenant_manager" "example" {
+resource "f5xc\_child_tenant\_manager" "example" {
   name      = "example-child-tenant-manager"
   namespace = "staging"
 
@@ -41,8 +41,8 @@ resource "f5xc_child_tenant_manager" "example" {
     # Configure group settings
   }
   # Object reference. This type establishes a direct referenc...
-  tenant_owner_group {
-    # Configure tenant_owner_group settings
+  tenant\_owner\_group {
+    # Configure tenant\_owner\_group settings
   }
 }
 ```
@@ -68,7 +68,7 @@ resource "f5xc_child_tenant_manager" "example" {
 
 <a id="group-assignments"></a>&#x2022; [`group_assignments`](#group-assignments) - Optional Block<br>Group Mapping. The Group Mapping field is used to associate local user groups with user groups in child tenants<br>See [Group Assignments](#group-assignments) below for details.
 
-<a id="tenant-owner-group"></a>&#x2022; [`tenant_owner_group`](#tenant-owner-group) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Tenant Owner Group](#tenant-owner-group) below for details.
+<a id="tenant-owner-group"></a>&#x2022; [`tenant\_owner\_group`](#tenant-owner-group) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Tenant Owner Group](#tenant-owner-group) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -84,7 +84,7 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`group_assignments`](#group-assignments) block supports the following:
 
-<a id="group-assignments-child-tenant-groups"></a>&#x2022; [`child_tenant_groups`](#group-assignments-child-tenant-groups) - Optional List<br>Child Tenant User Groups. List of group names in child tenant. Note - To establish access, child tenant group names must be a subset of child tenant groups configured in tenant profile. Once it's setup, when user from msp tenant access child tenant, underlying roles from child tenant will be applied to user
+<a id="group-assignments-child-tenant-groups"></a>&#x2022; [`child\_tenant\_groups`](#group-assignments-child-tenant-groups) - Optional List<br>Child Tenant User Groups. List of group names in child tenant. Note - To establish access, child tenant group names must be a subset of child tenant groups configured in tenant profile. Once it's setup, when user from msp tenant access child tenant, underlying roles from child tenant will be applied to user
 
 <a id="group-assignments-group"></a>&#x2022; [`group`](#group-assignments-group) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Group](#group-assignments-group) below.
 
@@ -100,7 +100,7 @@ A [`group`](#group-assignments-group) block (within [`group_assignments`](#group
 
 #### Tenant Owner Group
 
-A [`tenant_owner_group`](#tenant-owner-group) block supports the following:
+A [`tenant\_owner\_group`](#tenant-owner-group) block supports the following:
 
 <a id="tenant-owner-group-name"></a>&#x2022; [`name`](#tenant-owner-group-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -126,5 +126,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_child_tenant_manager.example system/example
+terraform import f5xc\_child_tenant\_manager.example system/example
 ```

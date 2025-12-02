@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_data_group Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_data\_group Data Source - terraform-provider-f5xc"
 subcategory: "BIG-IP Integration"
 description: |-
   Manages data group in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 ---
 
-# f5xc_data_group (Data Source)
+# f5xc\_data\_group (Data Source)
 
 Manages data group in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages data group in a given namespace. If one already exists it will give an e
 # Retrieves information about an existing Data Group
 
 # Look up an existing Data Group by name
-data "f5xc_data_group" "example" {
+data "f5xc\_data\_group" "example" {
   name      = "example-data-group"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "data_group_id" {
-#   value = data.f5xc_data_group.example.id
+# output "data\_group\_id" {
+#   value = data.f5xc\_data\_group.example.id
 # }
 ```
 

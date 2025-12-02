@@ -34,7 +34,7 @@ resource "f5xc_certificate" "example" {
   # Certificate configuration
   certificate_url = "string:///LS0tLS1CRUdJTi..."
   private_key {
-    clear_secret_info {
+    clear\_secret\_info {
       url = "string:///LS0tLS1CRUdJTi..."
     }
   }
@@ -65,9 +65,9 @@ resource "f5xc_certificate" "example" {
 <a id="certificate-url"></a>&#x2022; [`certificate_url`](#certificate-url) - Optional String<br>Certificate. Certificate. Certificate or certificate chain in PEM format including the PEM headers
 
 -> **One of the following:**
-&#x2022; <a id="custom-hash-algorithms"></a>[`custom_hash_algorithms`](#custom-hash-algorithms) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#custom-hash-algorithms) below for details.
-<br><br>&#x2022; <a id="disable-ocsp-stapling"></a>[`disable_ocsp_stapling`](#disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="use-system-defaults"></a>[`use_system_defaults`](#use-system-defaults) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="custom-hash-algorithms"></a>[`custom\_hash\_algorithms`](#custom-hash-algorithms) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#custom-hash-algorithms) below for details.
+<br><br>&#x2022; <a id="disable-ocsp-stapling"></a>[`disable\_ocsp\_stapling`](#disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="use-system-defaults"></a>[`use\_system\_defaults`](#use-system-defaults) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="private-key"></a>&#x2022; [`private_key`](#private-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#private-key) below for details.
 
@@ -93,21 +93,21 @@ A [`certificate_chain`](#certificate-chain) block supports the following:
 
 #### Custom Hash Algorithms
 
-A [`custom_hash_algorithms`](#custom-hash-algorithms) block supports the following:
+A [`custom\_hash\_algorithms`](#custom-hash-algorithms) block supports the following:
 
-<a id="custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID\_HASH\_ALGORITHM`<br>Possible values are `INVALID\_HASH\_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
 #### Private Key
 
 A [`private_key`](#private-key) block supports the following:
 
-<a id="private-key-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#private-key-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#private-key-blindfold-secret-info) below.
+<a id="private-key-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#private-key-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#private-key-blindfold-secret-info) below.
 
-<a id="private-key-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#private-key-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#private-key-clear-secret-info) below.
+<a id="private-key-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#private-key-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#private-key-clear-secret-info) below.
 
 #### Private Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#private-key-blindfold-secret-info) block (within [`private_key`](#private-key)) supports the following:
+A [`blindfold\_secret\_info`](#private-key-blindfold-secret-info) block (within [`private_key`](#private-key)) supports the following:
 
 <a id="private-key-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#private-key-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -117,7 +117,7 @@ A [`blindfold_secret_info`](#private-key-blindfold-secret-info) block (within [`
 
 #### Private Key Clear Secret Info
 
-A [`clear_secret_info`](#private-key-clear-secret-info) block (within [`private_key`](#private-key)) supports the following:
+A [`clear\_secret\_info`](#private-key-clear-secret-info) block (within [`private_key`](#private-key)) supports the following:
 
 <a id="private-key-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#private-key-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 

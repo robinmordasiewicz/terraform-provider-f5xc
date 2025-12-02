@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_k8s_cluster Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_k8s\_cluster Data Source - terraform-provider-f5xc"
 subcategory: "Kubernetes"
 description: |-
   Manages k8s_cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 ---
 
-# f5xc_k8s_cluster (Data Source)
+# f5xc\_k8s\_cluster (Data Source)
 
 Manages k8s_cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages k8s_cluster will create the object in the storage backend for namespace 
 # Retrieves information about an existing K8s Cluster
 
 # Look up an existing K8s Cluster by name
-data "f5xc_k8s_cluster" "example" {
+data "f5xc\_k8s\_cluster" "example" {
   name      = "example-k8s-cluster"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "k8s_cluster_id" {
-#   value = data.f5xc_k8s_cluster.example.id
+# output "k8s\_cluster\_id" {
+#   value = data.f5xc\_k8s\_cluster.example.id
 # }
 ```
 

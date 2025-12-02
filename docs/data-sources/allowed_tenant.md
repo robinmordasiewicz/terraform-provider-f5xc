@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_allowed_tenant Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_allowed\_tenant Data Source - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
   Manages allowed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.
 ---
 
-# f5xc_allowed_tenant (Data Source)
+# f5xc\_allowed\_tenant (Data Source)
 
 Manages allowed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages allowed_tenant config instance. Name of the object is name of the tenant
 # Retrieves information about an existing Allowed Tenant
 
 # Look up an existing Allowed Tenant by name
-data "f5xc_allowed_tenant" "example" {
+data "f5xc\_allowed\_tenant" "example" {
   name      = "example-allowed-tenant"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "allowed_tenant_id" {
-#   value = data.f5xc_allowed_tenant.example.id
+# output "allowed\_tenant\_id" {
+#   value = data.f5xc\_allowed\_tenant.example.id
 # }
 ```
 

@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_infraprotect_firewall_rule Resource - terraform-provider-f5xc"
+page_title: "f5xc\_infraprotect_firewall\_rule Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages DDoS transit Firewall Rule in F5 Distributed Cloud.
 ---
 
-# f5xc_infraprotect_firewall_rule (Resource)
+# f5xc\_infraprotect_firewall\_rule (Resource)
 
 Manages DDoS transit Firewall Rule in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages DDoS transit Firewall Rule in F5 Distributed Cloud.
 # Manages DDoS transit Firewall Rule in F5 Distributed Cloud.
 
 # Basic Infraprotect Firewall Rule configuration
-resource "f5xc_infraprotect_firewall_rule" "example" {
+resource "f5xc\_infraprotect_firewall\_rule" "example" {
   name      = "example-infraprotect-firewall-rule"
   namespace = "staging"
 
@@ -40,9 +40,9 @@ resource "f5xc_infraprotect_firewall_rule" "example" {
   action_deny {
     # Configure action_deny settings
   }
-  # [OneOf: destination_prefix_all, destination_prefix_single...
-  destination_prefix_all {
-    # Configure destination_prefix_all settings
+  # [OneOf: destination\_prefix\_all, destination\_prefix\_single...
+  destination\_prefix\_all {
+    # Configure destination\_prefix\_all settings
   }
 }
 ```
@@ -71,8 +71,8 @@ resource "f5xc_infraprotect_firewall_rule" "example" {
 <br><br>&#x2022; <a id="action-deny"></a>[`action_deny`](#action-deny) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; <a id="destination-prefix-all"></a>[`destination_prefix_all`](#destination-prefix-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="destination-prefix-single"></a>[`destination_prefix_single`](#destination-prefix-single) - Optional String<br>Prefix. Prefix
+&#x2022; <a id="destination-prefix-all"></a>[`destination\_prefix\_all`](#destination-prefix-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="destination-prefix-single"></a>[`destination\_prefix\_single`](#destination-prefix-single) - Optional String<br>Prefix. Prefix
 
 -> **One of the following:**
 &#x2022; <a id="fragments-allow"></a>[`fragments_allow`](#fragments-allow) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -90,8 +90,8 @@ resource "f5xc_infraprotect_firewall_rule" "example" {
 <br><br>&#x2022; <a id="protocol-udp"></a>[`protocol_udp`](#protocol-udp) - Optional Block<br>UDP Protocol. x-required UDP Protocol<br>See [Protocol UDP](#protocol-udp) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="source-prefix-all"></a>[`source_prefix_all`](#source-prefix-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="source-prefix-single"></a>[`source_prefix_single`](#source-prefix-single) - Optional String<br>Prefix. Prefix
+&#x2022; <a id="source-prefix-all"></a>[`source\_prefix\_all`](#source-prefix-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="source-prefix-single"></a>[`source\_prefix\_single`](#source-prefix-single) - Optional String<br>Prefix. Prefix
 
 -> **One of the following:**
 &#x2022; <a id="state-off"></a>[`state_off`](#state-off) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -143,7 +143,7 @@ A [`protocol_icmp6`](#protocol-icmp6) block supports the following:
 
 <a id="protocol-icmp6-neighbor-solicit"></a>&#x2022; [`neighbor_solicit`](#protocol-icmp6-neighbor-solicit) - Optional Bool<br>Neighbor-Solicit. Neighbor-Solicit
 
-<a id="protocol-icmp6-packet-too-big"></a>&#x2022; [`packet_too_big`](#protocol-icmp6-packet-too-big) - Optional Bool<br>Packet-Too-Big. Packet-Too-Big
+<a id="protocol-icmp6-packet-too-big"></a>&#x2022; [`packet\_too\_big`](#protocol-icmp6-packet-too-big) - Optional Bool<br>Packet-Too-Big. Packet-Too-Big
 
 <a id="protocol-icmp6-parameter-problem"></a>&#x2022; [`parameter_problem`](#protocol-icmp6-parameter-problem) - Optional Bool<br>Parameter-Problem. Parameter-Problem
 
@@ -161,13 +161,13 @@ A [`protocol_tcp`](#protocol-tcp) block supports the following:
 
 <a id="protocol-tcp-description-spec"></a>&#x2022; [`description_spec`](#protocol-tcp-description-spec) - Optional String<br>Description. Description
 
-<a id="protocol-tcp-destination-port-all"></a>&#x2022; [`destination_port_all`](#protocol-tcp-destination-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="protocol-tcp-destination-port-all"></a>&#x2022; [`destination\_port\_all`](#protocol-tcp-destination-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="protocol-tcp-destination-port-range"></a>&#x2022; [`destination_port_range`](#protocol-tcp-destination-port-range) - Optional String<br>Port Range. Port Range
+<a id="protocol-tcp-destination-port-range"></a>&#x2022; [`destination\_port\_range`](#protocol-tcp-destination-port-range) - Optional String<br>Port Range. Port Range
 
-<a id="protocol-tcp-source-port-all"></a>&#x2022; [`source_port_all`](#protocol-tcp-source-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="protocol-tcp-source-port-all"></a>&#x2022; [`source\_port\_all`](#protocol-tcp-source-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="protocol-tcp-source-port-range"></a>&#x2022; [`source_port_range`](#protocol-tcp-source-port-range) - Optional String<br>Port Range. Port Range
+<a id="protocol-tcp-source-port-range"></a>&#x2022; [`source\_port\_range`](#protocol-tcp-source-port-range) - Optional String<br>Port Range. Port Range
 
 #### Protocol UDP
 
@@ -175,13 +175,13 @@ A [`protocol_udp`](#protocol-udp) block supports the following:
 
 <a id="protocol-udp-description-spec"></a>&#x2022; [`description_spec`](#protocol-udp-description-spec) - Optional String<br>Description. Description
 
-<a id="protocol-udp-destination-port-all"></a>&#x2022; [`destination_port_all`](#protocol-udp-destination-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="protocol-udp-destination-port-all"></a>&#x2022; [`destination\_port\_all`](#protocol-udp-destination-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="protocol-udp-destination-port-range"></a>&#x2022; [`destination_port_range`](#protocol-udp-destination-port-range) - Optional String<br>Port Range. Port Range
+<a id="protocol-udp-destination-port-range"></a>&#x2022; [`destination\_port\_range`](#protocol-udp-destination-port-range) - Optional String<br>Port Range. Port Range
 
-<a id="protocol-udp-source-port-all"></a>&#x2022; [`source_port_all`](#protocol-udp-source-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="protocol-udp-source-port-all"></a>&#x2022; [`source\_port\_all`](#protocol-udp-source-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="protocol-udp-source-port-range"></a>&#x2022; [`source_port_range`](#protocol-udp-source-port-range) - Optional String<br>Port Range. Port Range
+<a id="protocol-udp-source-port-range"></a>&#x2022; [`source\_port\_range`](#protocol-udp-source-port-range) - Optional String<br>Port Range. Port Range
 
 #### Timeouts
 
@@ -201,5 +201,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_infraprotect_firewall_rule.example system/example
+terraform import f5xc\_infraprotect_firewall\_rule.example system/example
 ```

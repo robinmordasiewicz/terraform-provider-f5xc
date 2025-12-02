@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_dns_lb_pool Resource - terraform-provider-f5xc"
+page_title: "f5xc\_dns_lb\_pool Resource - terraform-provider-f5xc"
 subcategory: "DNS"
 description: |-
   Manages DNS Load Balancer Pool in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 ---
 
-# f5xc_dns_lb_pool (Resource)
+# f5xc\_dns_lb\_pool (Resource)
 
 Manages DNS Load Balancer Pool in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages DNS Load Balancer Pool in a given namespace. If one already exist it wil
 # Manages DNS Load Balancer Pool in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
 # Basic DNS LB Pool configuration
-resource "f5xc_dns_lb_pool" "example" {
+resource "f5xc\_dns_lb\_pool" "example" {
   name      = "example-dns-lb-pool"
   namespace = "staging"
 
@@ -37,8 +37,8 @@ resource "f5xc_dns_lb_pool" "example" {
     # Configure a_pool settings
   }
   # Empty. This can be used for messages where no values are ...
-  disable_health_check {
-    # Configure disable_health_check settings
+  disable\_health\_check {
+    # Configure disable\_health\_check settings
   }
   # Object reference. This type establishes a direct referenc...
   health_check {
@@ -73,13 +73,13 @@ resource "f5xc_dns_lb_pool" "example" {
 <br><br>&#x2022; <a id="mx-pool"></a>[`mx_pool`](#mx-pool) - Optional Block<br>Pool for MX Record<br>See [Mx Pool](#mx-pool) below for details.
 <br><br>&#x2022; <a id="srv-pool"></a>[`srv_pool`](#srv-pool) - Optional Block<br>Pool for SRV Record<br>See [Srv Pool](#srv-pool) below for details.
 
-<a id="load-balancing-mode"></a>&#x2022; [`load_balancing_mode`](#load-balancing-mode) - Optional String  Defaults to `ROUND_ROBIN`<br>Possible values are `ROUND_ROBIN`, `RATIO_MEMBER`, `STATIC_PERSIST`, `PRIORITY`<br>LoadBalancing Algorithm. - ROUND_ROBIN: Round-Robin Round Robin will ensure random equal distribution of requests among all pool members in a pool. - RATIO_MEMBER: Ratio-Member Ratio-Member performs load balancing of requests across the pool members based on the ratio assigned to each pool member - STATIC_PERSIST: Static-Persist The Static Persist load balancing method uses the persist mask, with the source IP address of the Local Domain Name Server (LDNS), in a deterministic algorithm to send requests to a specific pool member. If the DNS resolver passes ECS (EDNS-Client-Subnet) information, then a hash of it will be used, to send the client to the same pool member - PRIORITY: Priority The Priority load balancing method returns all available endpoints in a pool with the highest priority. Pool Members have a priority value, starting from zero, where a lower value means a higher priority
+<a id="load-balancing-mode"></a>&#x2022; [`load\_balancing\_mode`](#load-balancing-mode) - Optional String  Defaults to `ROUND_ROBIN`<br>Possible values are `ROUND_ROBIN`, `RATIO_MEMBER`, `STATIC_PERSIST`, `PRIORITY`<br>LoadBalancing Algorithm. - ROUND_ROBIN: Round-Robin Round Robin will ensure random equal distribution of requests among all pool members in a pool. - RATIO_MEMBER: Ratio-Member Ratio-Member performs load balancing of requests across the pool members based on the ratio assigned to each pool member - STATIC_PERSIST: Static-Persist The Static Persist load balancing method uses the persist mask, with the source IP address of the Local Domain Name Server (LDNS), in a deterministic algorithm to send requests to a specific pool member. If the DNS resolver passes ECS (EDNS-Client-Subnet) information, then a hash of it will be used, to send the client to the same pool member - PRIORITY: Priority The Priority load balancing method returns all available endpoints in a pool with the highest priority. Pool Members have a priority value, starting from zero, where a lower value means a higher priority
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 -> **One of the following:**
 &#x2022; <a id="ttl"></a>[`ttl`](#ttl) - Optional Number<br>TTL. Custom TTL in seconds (default 30) for responses from this pool
-<br><br>&#x2022; <a id="use-rrset-ttl"></a>[`use_rrset_ttl`](#use-rrset-ttl) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="use-rrset-ttl"></a>[`use\_rrset\_ttl`](#use-rrset-ttl) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 ### Attributes Reference
 
@@ -93,7 +93,7 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`a_pool`](#a-pool) block supports the following:
 
-<a id="a-pool-disable-health-check"></a>&#x2022; [`disable_health_check`](#a-pool-disable-health-check) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="a-pool-disable-health-check"></a>&#x2022; [`disable\_health\_check`](#a-pool-disable-health-check) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="a-pool-health-check"></a>&#x2022; [`health_check`](#a-pool-health-check) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Health Check](#a-pool-health-check) below.
 
@@ -229,5 +229,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_dns_lb_pool.example system/example
+terraform import f5xc\_dns_lb\_pool.example system/example
 ```

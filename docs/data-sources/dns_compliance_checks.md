@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_dns_compliance_checks Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_dns_compliance\_checks Data Source - terraform-provider-f5xc"
 subcategory: "DNS"
 description: |-
   Manages DNS Compliance Checks Specification in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 ---
 
-# f5xc_dns_compliance_checks (Data Source)
+# f5xc\_dns_compliance\_checks (Data Source)
 
 Manages DNS Compliance Checks Specification in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages DNS Compliance Checks Specification in a given namespace. If one already
 # Retrieves information about an existing DNS Compliance Checks
 
 # Look up an existing DNS Compliance Checks by name
-data "f5xc_dns_compliance_checks" "example" {
+data "f5xc\_dns_compliance\_checks" "example" {
   name      = "example-dns-compliance-checks"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "dns_compliance_checks_id" {
-#   value = data.f5xc_dns_compliance_checks.example.id
+# output "dns\_compliance_checks\_id" {
+#   value = data.f5xc\_dns_compliance\_checks.example.id
 # }
 ```
 

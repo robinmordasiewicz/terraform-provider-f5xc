@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_rate_limiter_policy Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_rate_limiter\_policy Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages a RateLimiterPolicy resource in F5 Distributed Cloud for rate limiter policy create configuration.
 ---
 
-# f5xc_rate_limiter_policy (Data Source)
+# f5xc\_rate_limiter\_policy (Data Source)
 
 Manages a RateLimiterPolicy resource in F5 Distributed Cloud for rate limiter policy create configuration.
 
@@ -18,14 +18,14 @@ Manages a RateLimiterPolicy resource in F5 Distributed Cloud for rate limiter po
 # Retrieves information about an existing Rate Limiter Policy
 
 # Look up an existing Rate Limiter Policy by name
-data "f5xc_rate_limiter_policy" "example" {
+data "f5xc\_rate_limiter\_policy" "example" {
   name      = "example-rate-limiter-policy"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "rate_limiter_policy_id" {
-#   value = data.f5xc_rate_limiter_policy.example.id
+# output "rate\_limiter_policy\_id" {
+#   value = data.f5xc\_rate_limiter\_policy.example.id
 # }
 ```
 

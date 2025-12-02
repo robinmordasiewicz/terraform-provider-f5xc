@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_log_receiver Resource - terraform-provider-f5xc"
+page_title: "f5xc\_log\_receiver Resource - terraform-provider-f5xc"
 subcategory: "Monitoring"
 description: |-
   Manages a LogReceiver resource in F5 Distributed Cloud for log collection and forwarding configuration.
 ---
 
-# f5xc_log_receiver (Resource)
+# f5xc\_log\_receiver (Resource)
 
 Manages a LogReceiver resource in F5 Distributed Cloud for log collection and forwarding configuration.
 
@@ -18,7 +18,7 @@ Manages a LogReceiver resource in F5 Distributed Cloud for log collection and fo
 # Manages a LogReceiver resource in F5 Distributed Cloud for log collection and forwarding configuration.
 
 # Basic Log Receiver configuration
-resource "f5xc_log_receiver" "example" {
+resource "f5xc\_log\_receiver" "example" {
   name      = "example-log-receiver"
   namespace = "shared"
 
@@ -40,7 +40,7 @@ resource "f5xc_log_receiver" "example" {
       max_events      = 100
       timeout_seconds = 5
     }
-    no_tls_verify_hostname {}
+    no\_tls_verify\_hostname {}
     no_compression {}
   }
 }
@@ -103,9 +103,9 @@ A [`tcp_server`](#syslog-tcp-server) block (within [`syslog`](#syslog)) supports
 
 A [`tls_server`](#syslog-tls-server) block (within [`syslog`](#syslog)) supports the following:
 
-<a id="syslog-tls-server-default-https-port"></a>&#x2022; [`default_https_port`](#syslog-tls-server-default-https-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="syslog-tls-server-default-https-port"></a>&#x2022; [`default\_https\_port`](#syslog-tls-server-default-https-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="syslog-tls-server-default-syslog-tls-port"></a>&#x2022; [`default_syslog_tls_port`](#syslog-tls-server-default-syslog-tls-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="syslog-tls-server-default-syslog-tls-port"></a>&#x2022; [`default\_syslog_tls\_port`](#syslog-tls-server-default-syslog-tls-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="syslog-tls-server-mtls-disabled"></a>&#x2022; [`mtls_disabled`](#syslog-tls-server-mtls-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -115,7 +115,7 @@ A [`tls_server`](#syslog-tls-server) block (within [`syslog`](#syslog)) supports
 
 <a id="syslog-tls-server-server-name"></a>&#x2022; [`server_name`](#syslog-tls-server-server-name) - Optional String<br>SNI name. ServerName is passed to the server for SNI and is used in the client to check server certificates against
 
-<a id="syslog-tls-server-trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#syslog-tls-server-trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
+<a id="syslog-tls-server-trusted-ca-url"></a>&#x2022; [`trusted\_ca\_url`](#syslog-tls-server-trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
 
 <a id="syslog-tls-server-volterra-ca"></a>&#x2022; [`volterra_ca`](#syslog-tls-server-volterra-ca) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -131,13 +131,13 @@ A [`mtls_enable`](#syslog-tls-server-mtls-enable) block (within [`syslog.tls_ser
 
 A [`key_url`](#syslog-tls-server-mtls-enable-key-url) block (within [`syslog.tls_server.mtls_enable`](#syslog-tls-server-mtls-enable)) supports the following:
 
-<a id="syslog-tls-server-mtls-enable-key-url-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#syslog-tls-server-mtls-enable-key-url-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#syslog-tls-server-mtls-enable-key-url-blindfold-secret-info) below.
+<a id="syslog-tls-server-mtls-enable-key-url-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#syslog-tls-server-mtls-enable-key-url-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#syslog-tls-server-mtls-enable-key-url-blindfold-secret-info) below.
 
-<a id="syslog-tls-server-mtls-enable-key-url-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#syslog-tls-server-mtls-enable-key-url-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#syslog-tls-server-mtls-enable-key-url-clear-secret-info) below.
+<a id="syslog-tls-server-mtls-enable-key-url-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#syslog-tls-server-mtls-enable-key-url-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#syslog-tls-server-mtls-enable-key-url-clear-secret-info) below.
 
 #### Syslog TLS Server mTLS Enable Key URL Blindfold Secret Info
 
-A [`blindfold_secret_info`](#syslog-tls-server-mtls-enable-key-url-blindfold-secret-info) block (within [`syslog.tls_server.mtls_enable.key_url`](#syslog-tls-server-mtls-enable-key-url)) supports the following:
+A [`blindfold\_secret\_info`](#syslog-tls-server-mtls-enable-key-url-blindfold-secret-info) block (within [`syslog.tls_server.mtls_enable.key_url`](#syslog-tls-server-mtls-enable-key-url)) supports the following:
 
 <a id="syslog-tls-server-mtls-enable-key-url-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#syslog-tls-server-mtls-enable-key-url-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -147,7 +147,7 @@ A [`blindfold_secret_info`](#syslog-tls-server-mtls-enable-key-url-blindfold-sec
 
 #### Syslog TLS Server mTLS Enable Key URL Clear Secret Info
 
-A [`clear_secret_info`](#syslog-tls-server-mtls-enable-key-url-clear-secret-info) block (within [`syslog.tls_server.mtls_enable.key_url`](#syslog-tls-server-mtls-enable-key-url)) supports the following:
+A [`clear\_secret\_info`](#syslog-tls-server-mtls-enable-key-url-clear-secret-info) block (within [`syslog.tls_server.mtls_enable.key_url`](#syslog-tls-server-mtls-enable-key-url)) supports the following:
 
 <a id="syslog-tls-server-mtls-enable-key-url-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#syslog-tls-server-mtls-enable-key-url-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -179,5 +179,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_log_receiver.example system/example
+terraform import f5xc\_log\_receiver.example system/example
 ```

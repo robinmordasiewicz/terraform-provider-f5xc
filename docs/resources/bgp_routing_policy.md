@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_bgp_routing_policy Resource - terraform-provider-f5xc"
+page_title: "f5xc\_bgp_routing\_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages a BGPRoutingPolicy resource in F5 Distributed Cloud for bgp routing policy is a list of rules containing match criteria and action to be applied. these rules help contol routes which are imported or exported to bgp peers configuration.
 ---
 
-# f5xc_bgp_routing_policy (Resource)
+# f5xc\_bgp_routing\_policy (Resource)
 
 Manages a BGPRoutingPolicy resource in F5 Distributed Cloud for bgp routing policy is a list of rules containing match criteria and action to be applied. these rules help contol routes which are imported or exported to bgp peers configuration.
 
@@ -18,7 +18,7 @@ Manages a BGPRoutingPolicy resource in F5 Distributed Cloud for bgp routing poli
 # Manages a BGPRoutingPolicy resource in F5 Distributed Cloud for bgp routing policy is a list of rules containing match criteria and action to be applied. these rules help contol routes which are imported or exported to bgp peers configuration.
 
 # Basic BGP Routing Policy configuration
-resource "f5xc_bgp_routing_policy" "example" {
+resource "f5xc\_bgp_routing\_policy" "example" {
   name      = "example-bgp-routing-policy"
   namespace = "system"
 
@@ -136,7 +136,7 @@ An [`ip_prefixes`](#rules-match-ip-prefixes) block (within [`rules.match`](#rule
 
 A [`prefixes`](#rules-match-ip-prefixes-prefixes) block (within [`rules.match.ip_prefixes`](#rules-match-ip-prefixes)) supports the following:
 
-<a id="rules-match-ip-prefixes-prefixes-equal-or-longer-than"></a>&#x2022; [`equal_or_longer_than`](#rules-match-ip-prefixes-prefixes-equal-or-longer-than) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rules-match-ip-prefixes-prefixes-equal-or-longer-than"></a>&#x2022; [`equal\_or_longer\_than`](#rules-match-ip-prefixes-prefixes-equal-or-longer-than) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="rules-match-ip-prefixes-prefixes-exact-match"></a>&#x2022; [`exact_match`](#rules-match-ip-prefixes-prefixes-exact-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -162,5 +162,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_bgp_routing_policy.example system/example
+terraform import f5xc\_bgp_routing\_policy.example system/example
 ```

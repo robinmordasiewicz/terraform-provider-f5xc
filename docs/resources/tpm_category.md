@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_tpm_category Resource - terraform-provider-f5xc"
+page_title: "f5xc\_tpm\_category Resource - terraform-provider-f5xc"
 subcategory: "Integrations"
 description: |-
   Manages Category object, which is a grouping of APIKeys used for TPM provisioning in F5 Distributed Cloud.
 ---
 
-# f5xc_tpm_category (Resource)
+# f5xc\_tpm\_category (Resource)
 
 Manages Category object, which is a grouping of APIKeys used for TPM provisioning in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages Category object, which is a grouping of APIKeys used for TPM provisionin
 # Manages Category object, which is a grouping of APIKeys used for TPM provisioning in F5 Distributed Cloud.
 
 # Basic Tpm Category configuration
-resource "f5xc_tpm_category" "example" {
+resource "f5xc\_tpm\_category" "example" {
   name      = "example-tpm-category"
   namespace = "staging"
 
@@ -33,8 +33,8 @@ resource "f5xc_tpm_category" "example" {
 
   # Resource-specific configuration
   # TPM Manager reference. Reference to TPM Manager
-  tpm_manager_ref {
-    # Configure tpm_manager_ref settings
+  tpm\_manager\_ref {
+    # Configure tpm\_manager\_ref settings
   }
 }
 ```
@@ -60,9 +60,9 @@ resource "f5xc_tpm_category" "example" {
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-<a id="tpm-allow-list"></a>&#x2022; [`tpm_allow_list`](#tpm-allow-list) - Optional List<br>list of allowed TPM EK Certificates. A TPM manufacturer is typically identified by its EK certificate. TPMAdmin can configure a allow-list of EK certificates for a given category When a TPM provision request is called, TPMAuthority verifies that EK certificate provided in provision matches one the EK certificate on this allow-list Allow list of TPM EK Certificates
+<a id="tpm-allow-list"></a>&#x2022; [`tpm\_allow\_list`](#tpm-allow-list) - Optional List<br>list of allowed TPM EK Certificates. A TPM manufacturer is typically identified by its EK certificate. TPMAdmin can configure a allow-list of EK certificates for a given category When a TPM provision request is called, TPMAuthority verifies that EK certificate provided in provision matches one the EK certificate on this allow-list Allow list of TPM EK Certificates
 
-<a id="tpm-manager-ref"></a>&#x2022; [`tpm_manager_ref`](#tpm-manager-ref) - Optional Block<br>TPM Manager reference. Reference to TPM Manager<br>See [Tpm Manager Ref](#tpm-manager-ref) below for details.
+<a id="tpm-manager-ref"></a>&#x2022; [`tpm\_manager\_ref`](#tpm-manager-ref) - Optional Block<br>TPM Manager reference. Reference to TPM Manager<br>See [Tpm Manager Ref](#tpm-manager-ref) below for details.
 
 ### Attributes Reference
 
@@ -86,7 +86,7 @@ A [`timeouts`](#timeouts) block supports the following:
 
 #### Tpm Manager Ref
 
-A [`tpm_manager_ref`](#tpm-manager-ref) block supports the following:
+A [`tpm\_manager\_ref`](#tpm-manager-ref) block supports the following:
 
 <a id="tpm-manager-ref-kind"></a>&#x2022; [`kind`](#tpm-manager-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -104,5 +104,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_tpm_category.example system/example
+terraform import f5xc\_tpm\_category.example system/example
 ```

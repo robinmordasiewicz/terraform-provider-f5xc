@@ -32,17 +32,17 @@ resource "f5xc_ike2" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: dh_group_set, disable_pfs] Diffie Hellman Groups....
-  dh_group_set {
-    # Configure dh_group_set settings
+  # [OneOf: dh\_group\_set, disable_pfs] Diffie Hellman Groups....
+  dh\_group\_set {
+    # Configure dh\_group\_set settings
   }
   # Empty. This can be used for messages where no values are ...
   disable_pfs {
     # Configure disable_pfs settings
   }
-  # [OneOf: ike_keylifetime_hours, ike_keylifetime_minutes, u...
-  ike_keylifetime_hours {
-    # Configure ike_keylifetime_hours settings
+  # [OneOf: ike\_keylifetime\_hours, ike\_keylifetime\_minutes, u...
+  ike\_keylifetime\_hours {
+    # Configure ike\_keylifetime\_hours settings
   }
 }
 ```
@@ -67,13 +67,13 @@ resource "f5xc_ike2" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="dh-group-set"></a>[`dh_group_set`](#dh-group-set) - Optional Block<br>Diffie Hellman Groups. Choose the acceptable Diffie Hellman(DH) Group or Groups that you are willing to accept as part of this profile<br>See [Dh Group Set](#dh-group-set) below for details.
+&#x2022; <a id="dh-group-set"></a>[`dh\_group\_set`](#dh-group-set) - Optional Block<br>Diffie Hellman Groups. Choose the acceptable Diffie Hellman(DH) Group or Groups that you are willing to accept as part of this profile<br>See [Dh Group Set](#dh-group-set) below for details.
 <br><br>&#x2022; <a id="disable-pfs"></a>[`disable_pfs`](#disable-pfs) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; <a id="ike-keylifetime-hours"></a>[`ike_keylifetime_hours`](#ike-keylifetime-hours) - Optional Block<br>Hours. Input Hours<br>See [IKE Keylifetime Hours](#ike-keylifetime-hours) below for details.
-<br><br>&#x2022; <a id="ike-keylifetime-minutes"></a>[`ike_keylifetime_minutes`](#ike-keylifetime-minutes) - Optional Block<br>Minutes. Set IKE Key Lifetime in minutes<br>See [IKE Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
-<br><br>&#x2022; <a id="use-default-keylifetime"></a>[`use_default_keylifetime`](#use-default-keylifetime) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="ike-keylifetime-hours"></a>[`ike\_keylifetime\_hours`](#ike-keylifetime-hours) - Optional Block<br>Hours. Input Hours<br>See [IKE Keylifetime Hours](#ike-keylifetime-hours) below for details.
+<br><br>&#x2022; <a id="ike-keylifetime-minutes"></a>[`ike\_keylifetime\_minutes`](#ike-keylifetime-minutes) - Optional Block<br>Minutes. Set IKE Key Lifetime in minutes<br>See [IKE Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
+<br><br>&#x2022; <a id="use-default-keylifetime"></a>[`use\_default\_keylifetime`](#use-default-keylifetime) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -87,19 +87,19 @@ In addition to all arguments above, the following attributes are exported:
 
 #### Dh Group Set
 
-A [`dh_group_set`](#dh-group-set) block supports the following:
+A [`dh\_group\_set`](#dh-group-set) block supports the following:
 
-<a id="dh-group-set-dh-groups"></a>&#x2022; [`dh_groups`](#dh-group-set-dh-groups) - Optional List  Defaults to `DH_GROUP_DEFAULT`<br>Possible values are `DH_GROUP_DEFAULT`, `DH_GROUP_14`, `DH_GROUP_15`, `DH_GROUP_16`, `DH_GROUP_17`, `DH_GROUP_18`, `DH_GROUP_19`, `DH_GROUP_20`, `DH_GROUP_21`, `DH_GROUP_26`<br>Diffie Hellman Groups
+<a id="dh-group-set-dh-groups"></a>&#x2022; [`dh_groups`](#dh-group-set-dh-groups) - Optional List  Defaults to `DH\_GROUP\_DEFAULT`<br>Possible values are `DH\_GROUP\_DEFAULT`, `DH\_GROUP\_14`, `DH\_GROUP\_15`, `DH\_GROUP\_16`, `DH\_GROUP\_17`, `DH\_GROUP\_18`, `DH\_GROUP\_19`, `DH\_GROUP\_20`, `DH\_GROUP\_21`, `DH\_GROUP\_26`<br>Diffie Hellman Groups
 
 #### IKE Keylifetime Hours
 
-An [`ike_keylifetime_hours`](#ike-keylifetime-hours) block supports the following:
+An [`ike\_keylifetime\_hours`](#ike-keylifetime-hours) block supports the following:
 
 <a id="ike-keylifetime-hours-duration"></a>&#x2022; [`duration`](#ike-keylifetime-hours-duration) - Optional Number<br>Duration
 
 #### IKE Keylifetime Minutes
 
-An [`ike_keylifetime_minutes`](#ike-keylifetime-minutes) block supports the following:
+An [`ike\_keylifetime\_minutes`](#ike-keylifetime-minutes) block supports the following:
 
 <a id="ike-keylifetime-minutes-duration"></a>&#x2022; [`duration`](#ike-keylifetime-minutes-duration) - Optional Number<br>Duration
 

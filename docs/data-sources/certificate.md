@@ -29,12 +29,12 @@ data "f5xc_certificate" "example" {
 # }
 
 # Example: Reference certificate in HTTPS configuration
-# resource "f5xc_http_loadbalancer" "example" {
+# resource "f5xc\_http\_loadbalancer" "example" {
 #   name      = "https-lb"
 #   namespace = "system"
 #
 #   https {
-#     tls_cert_params {
+#     tls\_cert\_params {
 #       certificates {
 #         name      = data.f5xc_certificate.example.name
 #         namespace = data.f5xc_certificate.example.namespace

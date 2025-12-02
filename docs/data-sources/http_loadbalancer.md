@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_http_loadbalancer Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_http\_loadbalancer Data Source - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
   Manages a HTTPLoadBalancer resource in F5 Distributed Cloud for load balancing HTTP/HTTPS traffic with advanced routing and security.
 ---
 
-# f5xc_http_loadbalancer (Data Source)
+# f5xc\_http\_loadbalancer (Data Source)
 
 Manages a HTTPLoadBalancer resource in F5 Distributed Cloud for load balancing HTTP/HTTPS traffic with advanced routing and security.
 
@@ -18,23 +18,23 @@ Manages a HTTPLoadBalancer resource in F5 Distributed Cloud for load balancing H
 # Retrieves information about an existing HTTP Loadbalancer
 
 # Look up an existing HTTP Loadbalancer by name
-data "f5xc_http_loadbalancer" "example" {
+data "f5xc\_http\_loadbalancer" "example" {
   name      = "example-http-loadbalancer"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "http_loadbalancer_id" {
-#   value = data.f5xc_http_loadbalancer.example.id
+# output "http\_loadbalancer\_id" {
+#   value = data.f5xc\_http\_loadbalancer.example.id
 # }
 
 # Example: Reference in another load balancer configuration
-# resource "f5xc_service_policy" "example" {
+# resource "f5xc\_service\_policy" "example" {
 #   name      = "policy-for-lb"
 #   namespace = "system"
 #
 #   # Use the load balancer's domains
-#   # domain = data.f5xc_http_loadbalancer.example.domains[0]
+#   # domain = data.f5xc\_http\_loadbalancer.example.domains[0]
 # }
 ```
 

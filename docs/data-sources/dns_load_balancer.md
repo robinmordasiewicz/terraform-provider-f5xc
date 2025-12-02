@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_dns_load_balancer Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_dns_load\_balancer Data Source - terraform-provider-f5xc"
 subcategory: "DNS"
 description: |-
   Manages DNS Load Balancer in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 ---
 
-# f5xc_dns_load_balancer (Data Source)
+# f5xc\_dns_load\_balancer (Data Source)
 
 Manages DNS Load Balancer in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages DNS Load Balancer in a given namespace. If one already exist it will giv
 # Retrieves information about an existing DNS Load Balancer
 
 # Look up an existing DNS Load Balancer by name
-data "f5xc_dns_load_balancer" "example" {
+data "f5xc\_dns_load\_balancer" "example" {
   name      = "example-dns-load-balancer"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "dns_load_balancer_id" {
-#   value = data.f5xc_dns_load_balancer.example.id
+# output "dns\_load_balancer\_id" {
+#   value = data.f5xc\_dns_load\_balancer.example.id
 # }
 ```
 

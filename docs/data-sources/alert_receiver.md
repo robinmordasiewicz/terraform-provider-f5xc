@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_alert_receiver Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_alert\_receiver Data Source - terraform-provider-f5xc"
 subcategory: "Monitoring"
 description: |-
   Manages a AlertReceiver resource in F5 Distributed Cloud for alert notification endpoints.
 ---
 
-# f5xc_alert_receiver (Data Source)
+# f5xc\_alert\_receiver (Data Source)
 
 Manages a AlertReceiver resource in F5 Distributed Cloud for alert notification endpoints.
 
@@ -18,24 +18,24 @@ Manages a AlertReceiver resource in F5 Distributed Cloud for alert notification 
 # Retrieves information about an existing Alert Receiver
 
 # Look up an existing Alert Receiver by name
-data "f5xc_alert_receiver" "example" {
+data "f5xc\_alert\_receiver" "example" {
   name      = "example-alert-receiver"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "alert_receiver_id" {
-#   value = data.f5xc_alert_receiver.example.id
+# output "alert\_receiver\_id" {
+#   value = data.f5xc\_alert\_receiver.example.id
 # }
 
 # Example: Reference alert receiver in alert policy
-# resource "f5xc_alert_policy" "example" {
+# resource "f5xc\_alert\_policy" "example" {
 #   name      = "example-policy"
 #   namespace = "system"
 #
 #   receivers {
-#     name      = data.f5xc_alert_receiver.example.name
-#     namespace = data.f5xc_alert_receiver.example.namespace
+#     name      = data.f5xc\_alert\_receiver.example.name
+#     namespace = data.f5xc\_alert\_receiver.example.namespace
 #   }
 # }
 ```

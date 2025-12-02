@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_alert_policy Resource - terraform-provider-f5xc"
+page_title: "f5xc\_alert\_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages a AlertPolicy resource in F5 Distributed Cloud for alerting rules and notification policies.
 ---
 
-# f5xc_alert_policy (Resource)
+# f5xc\_alert\_policy (Resource)
 
 Manages a AlertPolicy resource in F5 Distributed Cloud for alerting rules and notification policies.
 
@@ -18,7 +18,7 @@ Manages a AlertPolicy resource in F5 Distributed Cloud for alerting rules and no
 # Manages a AlertPolicy resource in F5 Distributed Cloud for alerting rules and notification policies.
 
 # Basic Alert Policy configuration
-resource "f5xc_alert_policy" "example" {
+resource "f5xc\_alert\_policy" "example" {
   name      = "example-alert-policy"
   namespace = "shared"
 
@@ -104,7 +104,7 @@ A [`notification_parameters`](#notification-parameters) block supports the follo
 
 <a id="notification-parameters-repeat-interval"></a>&#x2022; [`repeat_interval`](#notification-parameters-repeat-interval) - Optional String<br>Notify Interval For a Alert. Repeat Interval is used to specify how long to wait before sending a notification again if it has already been sent successfully. Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '4h'
 
-<a id="notification-parameters-ves-io-group"></a>&#x2022; [`ves_io_group`](#notification-parameters-ves-io-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="notification-parameters-ves-io-group"></a>&#x2022; [`ves\_io\_group`](#notification-parameters-ves-io-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Notification Parameters Custom
 
@@ -130,7 +130,7 @@ A [`receivers`](#receivers) block supports the following:
 
 A [`routes`](#routes) block supports the following:
 
-<a id="routes-alertname"></a>&#x2022; [`alertname`](#routes-alertname) - Optional String  Defaults to `SITE_CUSTOMER_TUNNEL_INTERFACE_DOWN`<br>Possible values are `SITE_CUSTOMER_TUNNEL_INTERFACE_DOWN`, `SITE_PHYSICAL_INTERFACE_DOWN`, `TUNNELS_TO_CUSTOMER_SITE_DOWN`, `SERVICE_SERVER_ERROR`, `SERVICE_CLIENT_ERROR`, `SERVICE_HEALTH_LOW`, `SERVICE_UNAVAILABLE`, `SERVICE_SERVER_ERROR_PER_SOURCE_SITE`, `SERVICE_CLIENT_ERROR_PER_SOURCE_SITE`, `SERVICE_ENDPOINT_HEALTHCHECK_FAILURE`, `SYNTHETIC_MONITOR_HEALTH_CRITICAL`, `MALICIOUS_USER_DETECTED`, `WAF_TOO_MANY_ATTACKS`, `API_SECURITY_TOO_MANY_ATTACKS`, `SERVICE_POLICY_TOO_MANY_ATTACKS`, `WAF_TOO_MANY_MALICIOUS_BOTS`, `BOT_DEFENSE_TOO_MANY_SECURITY_EVENTS`, `THREAT_CAMPAIGN`, `VES_CLIENT_SIDE_DEFENSE_SUSPICIOUS_DOMAIN`, `VES_CLIENT_SIDE_DEFENSE_SENSITIVE_FIELD_READ`, `ERROR_RATE_ANOMALY`, `REQUEST_RATE_ANOMALY`, `REQUEST_THROUGHPUT_ANOMALY`, `RESPONSE_LATENCY_ANOMALY`, `RESPONSE_THROUGHPUT_ANOMALY`, `TLS_AUTOMATIC_CERTIFICATE_RENEWAL_FAILURE`, `TLS_AUTOMATIC_CERTIFICATE_RENEWAL_STILL_FAILING`, `TLS_AUTOMATIC_CERTIFICATE_EXPIRED`, `TLS_CUSTOM_CERTIFICATE_EXPIRING`, `TLS_CUSTOM_CERTIFICATE_EXPIRING_SOON`, `TLS_CUSTOM_CERTIFICATE_EXPIRED`, `L7DDOS`, `DNS_ZONE_IGNORED_DUPLICATE_RECORD`, `API_SECURITY_UNUSED_API_DETECTED`, `API_SECURITY_SHADOW_API_DETECTED`, `API_SECURITY_SENSITIVE_DATA_IN_RESPONSE_DETECTED`, `API_SECURITY_RISK_SCORE_HIGH_DETECTED`, `ROUTED_DDOS_ALERT_NOTIFICATION`, `ROUTED_DDOS_MITIGATION_NOTIFICATION`<br>AlertName. List of Alert Names Customer tunnel interface down Physical Interface down Tunnel Interfaces to Customer Site Down Virutal Host server error Virtual Host client error Service Health Low Service Unavailable Virtual Host server error Virtual Host client error Endpoint Healthcheck failure Synthetic monitor health critical Malicious user detected Virtual Host WAF security events detected Virtual Host API security events detected Virtual Host Service Policy security events detected Virtual Host Many Malicious Bots based WAF security events detected Virtual Host Many Malicious Bots based Bot Defense security events detected Virtual Host Many Threat campaign based WAF security events detected Suspicious domain identified by Client-Side Defense service Client-Side Defense has identified a suspicious script that is reading sensitive form field Error rate anomaly detected Request rate anomaly detected Request throughput anomaly detected Response latency anomaly detected Response throughput anomaly detected TLS Automatic Certificate renewal is failing TLS Automatic Certificate renewal is still failing after multiple retries TLS Automatic Certificate has expired TLS Custom Certificate will expire in less than 28 days TLS Custom Certificate will expire in less than 15 days TLS Custom Certificate has expired DDOS security event detected DNS Zone Ignored a Duplicate Record Create Request Unused APIs Detected Shadow APIs Detected Endpoints With Sensitive Data In Response Detected High Risk Score Endpoints Detected A routed DDOS traffic anomaly has been detected A routed DDOS mitigation has been implemented to block malicious traffic
+<a id="routes-alertname"></a>&#x2022; [`alertname`](#routes-alertname) - Optional String  Defaults to `SITE\_CUSTOMER_TUNNEL_INTERFACE\_DOWN`<br>Possible values are `SITE\_CUSTOMER_TUNNEL_INTERFACE\_DOWN`, `SITE\_PHYSICAL_INTERFACE\_DOWN`, `TUNNELS\_TO_CUSTOMER_SITE\_DOWN`, `SERVICE\_SERVER\_ERROR`, `SERVICE\_CLIENT\_ERROR`, `SERVICE\_HEALTH\_LOW`, `SERVICE_UNAVAILABLE`, `SERVICE\_SERVER_ERROR_PER_SOURCE\_SITE`, `SERVICE\_CLIENT_ERROR_PER_SOURCE\_SITE`, `SERVICE\_ENDPOINT_HEALTHCHECK\_FAILURE`, `SYNTHETIC\_MONITOR_HEALTH\_CRITICAL`, `MALICIOUS\_USER\_DETECTED`, `WAF\_TOO_MANY\_ATTACKS`, `API\_SECURITY_TOO_MANY\_ATTACKS`, `SERVICE\_POLICY_TOO_MANY\_ATTACKS`, `WAF\_TOO_MANY_MALICIOUS\_BOTS`, `BOT\_DEFENSE_TOO_MANY_SECURITY\_EVENTS`, `THREAT_CAMPAIGN`, `VES\_CLIENT_SIDE_DEFENSE_SUSPICIOUS\_DOMAIN`, `VES\_CLIENT_SIDE_DEFENSE_SENSITIVE_FIELD\_READ`, `ERROR\_RATE\_ANOMALY`, `REQUEST\_RATE\_ANOMALY`, `REQUEST\_THROUGHPUT\_ANOMALY`, `RESPONSE\_LATENCY\_ANOMALY`, `RESPONSE\_THROUGHPUT\_ANOMALY`, `TLS\_AUTOMATIC_CERTIFICATE_RENEWAL\_FAILURE`, `TLS\_AUTOMATIC_CERTIFICATE_RENEWAL_STILL\_FAILING`, `TLS\_AUTOMATIC_CERTIFICATE\_EXPIRED`, `TLS\_CUSTOM_CERTIFICATE\_EXPIRING`, `TLS\_CUSTOM_CERTIFICATE_EXPIRING\_SOON`, `TLS\_CUSTOM_CERTIFICATE\_EXPIRED`, `L7DDOS`, `DNS\_ZONE_IGNORED_DUPLICATE\_RECORD`, `API\_SECURITY_UNUSED_API\_DETECTED`, `API\_SECURITY_SHADOW_API\_DETECTED`, `API\_SECURITY_SENSITIVE_DATA_IN_RESPONSE\_DETECTED`, `API\_SECURITY_RISK_SCORE_HIGH\_DETECTED`, `ROUTED\_DDOS_ALERT\_NOTIFICATION`, `ROUTED\_DDOS_MITIGATION\_NOTIFICATION`<br>AlertName. List of Alert Names Customer tunnel interface down Physical Interface down Tunnel Interfaces to Customer Site Down Virutal Host server error Virtual Host client error Service Health Low Service Unavailable Virtual Host server error Virtual Host client error Endpoint Healthcheck failure Synthetic monitor health critical Malicious user detected Virtual Host WAF security events detected Virtual Host API security events detected Virtual Host Service Policy security events detected Virtual Host Many Malicious Bots based WAF security events detected Virtual Host Many Malicious Bots based Bot Defense security events detected Virtual Host Many Threat campaign based WAF security events detected Suspicious domain identified by Client-Side Defense service Client-Side Defense has identified a suspicious script that is reading sensitive form field Error rate anomaly detected Request rate anomaly detected Request throughput anomaly detected Response latency anomaly detected Response throughput anomaly detected TLS Automatic Certificate renewal is failing TLS Automatic Certificate renewal is still failing after multiple retries TLS Automatic Certificate has expired TLS Custom Certificate will expire in less than 28 days TLS Custom Certificate will expire in less than 15 days TLS Custom Certificate has expired DDOS security event detected DNS Zone Ignored a Duplicate Record Create Request Unused APIs Detected Shadow APIs Detected Endpoints With Sensitive Data In Response Detected High Risk Score Endpoints Detected A routed DDOS traffic anomaly has been detected A routed DDOS mitigation has been implemented to block malicious traffic
 
 <a id="routes-alertname-regex"></a>&#x2022; [`alertname_regex`](#routes-alertname-regex) - Optional String<br>Matching RegEx of Alertname. Regular Expression match for the alertname
 
@@ -188,7 +188,7 @@ A [`severity`](#routes-custom-severity) block (within [`routes.custom`](#routes-
 
 A [`group`](#routes-group) block (within [`routes`](#routes)) supports the following:
 
-<a id="routes-group-groups"></a>&#x2022; [`groups`](#routes-group-groups) - Optional List  Defaults to `INFRASTRUCTURE`<br>Possible values are `INFRASTRUCTURE`, `IAAS_CAAS`, `VIRTUAL_HOST`, `VOLT_SHARE`, `UAM`, `SECURITY`, `TIMESERIES_ANOMALY`, `SHAPE_SECURITY`, `SECURITY_CSD`, `CDN`, `SYNTHETIC_MONITORS`, `TLS`, `SECURITY_BOT_DEFENSE`, `CLOUD_LINK`, `DNS`, `ROUTED_DDOS`<br>Groups. Name of groups to match the alert
+<a id="routes-group-groups"></a>&#x2022; [`groups`](#routes-group-groups) - Optional List  Defaults to `INFRASTRUCTURE`<br>Possible values are `INFRASTRUCTURE`, `IAAS_CAAS`, `VIRTUAL_HOST`, `VOLT_SHARE`, `UAM`, `SECURITY`, `TIMESERIES_ANOMALY`, `SHAPE_SECURITY`, `SECURITY_CSD`, `CDN`, `SYNTHETIC_MONITORS`, `TLS`, `SECURITY\_BOT\_DEFENSE`, `CLOUD_LINK`, `DNS`, `ROUTED_DDOS`<br>Groups. Name of groups to match the alert
 
 #### Routes Notification Parameters
 
@@ -206,7 +206,7 @@ A [`notification_parameters`](#routes-notification-parameters) block (within [`r
 
 <a id="routes-notification-parameters-repeat-interval"></a>&#x2022; [`repeat_interval`](#routes-notification-parameters-repeat-interval) - Optional String<br>Notify Interval For a Alert. Repeat Interval is used to specify how long to wait before sending a notification again if it has already been sent successfully. Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '4h'
 
-<a id="routes-notification-parameters-ves-io-group"></a>&#x2022; [`ves_io_group`](#routes-notification-parameters-ves-io-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="routes-notification-parameters-ves-io-group"></a>&#x2022; [`ves\_io\_group`](#routes-notification-parameters-ves-io-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Routes Notification Parameters Custom
 
@@ -238,5 +238,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_alert_policy.example system/example
+terraform import f5xc\_alert\_policy.example system/example
 ```

@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc_k8s_pod_security_admission Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_k8s_pod_security\_admission Data Source - terraform-provider-f5xc"
 subcategory: "Kubernetes"
 description: |-
-  Manages k8s_pod_security_admission will create the object in the storage backend in F5 Distributed Cloud.
+  Manages k8s\_pod_security\_admission will create the object in the storage backend in F5 Distributed Cloud.
 ---
 
-# f5xc_k8s_pod_security_admission (Data Source)
+# f5xc\_k8s_pod_security\_admission (Data Source)
 
-Manages k8s_pod_security_admission will create the object in the storage backend in F5 Distributed Cloud.
+Manages k8s\_pod_security\_admission will create the object in the storage backend in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [K8S Pod Security Admission API docs](https://docs.cloud.f5.com/docs-v2/api/k8s-pod-security-admission) to learn more.
 
@@ -18,14 +18,14 @@ Manages k8s_pod_security_admission will create the object in the storage backend
 # Retrieves information about an existing K8s Pod Security Admission
 
 # Look up an existing K8s Pod Security Admission by name
-data "f5xc_k8s_pod_security_admission" "example" {
+data "f5xc\_k8s_pod_security\_admission" "example" {
   name      = "example-k8s-pod-security-admission"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "k8s_pod_security_admission_id" {
-#   value = data.f5xc_k8s_pod_security_admission.example.id
+# output "k8s\_pod_security_admission\_id" {
+#   value = data.f5xc\_k8s_pod_security\_admission.example.id
 # }
 ```
 

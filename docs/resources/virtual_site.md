@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_virtual_site Resource - terraform-provider-f5xc"
+page_title: "f5xc\_virtual\_site Resource - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
   Manages virtual site object in given namespace in F5 Distributed Cloud.
 ---
 
-# f5xc_virtual_site (Resource)
+# f5xc\_virtual\_site (Resource)
 
 Manages virtual site object in given namespace in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages virtual site object in given namespace in F5 Distributed Cloud.
 # Manages virtual site object in given namespace in F5 Distributed Cloud.
 
 # Basic Virtual Site configuration
-resource "f5xc_virtual_site" "example" {
+resource "f5xc\_virtual\_site" "example" {
   name      = "example-virtual-site"
   namespace = "system"
 
@@ -98,5 +98,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_virtual_site.example system/example
+terraform import f5xc\_virtual\_site.example system/example
 ```

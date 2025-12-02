@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_enhanced_firewall_policy Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_enhanced_firewall\_policy Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages a EnhancedFirewallPolicy resource in F5 Distributed Cloud for enhanced firewall policy configuration.
 ---
 
-# f5xc_enhanced_firewall_policy (Data Source)
+# f5xc\_enhanced_firewall\_policy (Data Source)
 
 Manages a EnhancedFirewallPolicy resource in F5 Distributed Cloud for enhanced firewall policy configuration.
 
@@ -18,14 +18,14 @@ Manages a EnhancedFirewallPolicy resource in F5 Distributed Cloud for enhanced f
 # Retrieves information about an existing Enhanced Firewall Policy
 
 # Look up an existing Enhanced Firewall Policy by name
-data "f5xc_enhanced_firewall_policy" "example" {
+data "f5xc\_enhanced_firewall\_policy" "example" {
   name      = "example-enhanced-firewall-policy"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "enhanced_firewall_policy_id" {
-#   value = data.f5xc_enhanced_firewall_policy.example.id
+# output "enhanced\_firewall_policy\_id" {
+#   value = data.f5xc\_enhanced_firewall\_policy.example.id
 # }
 ```
 

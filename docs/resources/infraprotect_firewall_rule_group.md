@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_infraprotect_firewall_rule_group Resource - terraform-provider-f5xc"
+page_title: "f5xc\_infraprotect_firewall_rule\_group Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages a InfraprotectFirewallRuleGroup resource in F5 Distributed Cloud for amends a ddos transit firewall rule group configuration.
 ---
 
-# f5xc_infraprotect_firewall_rule_group (Resource)
+# f5xc\_infraprotect_firewall_rule\_group (Resource)
 
 Manages a InfraprotectFirewallRuleGroup resource in F5 Distributed Cloud for amends a ddos transit firewall rule group configuration.
 
@@ -18,7 +18,7 @@ Manages a InfraprotectFirewallRuleGroup resource in F5 Distributed Cloud for ame
 # Manages a InfraprotectFirewallRuleGroup resource in F5 Distributed Cloud for amends a ddos transit firewall rule group configuration.
 
 # Basic Infraprotect Firewall Rule Group configuration
-resource "f5xc_infraprotect_firewall_rule_group" "example" {
+resource "f5xc\_infraprotect_firewall_rule\_group" "example" {
   name      = "example-infraprotect-firewall-rule-group"
   namespace = "staging"
 
@@ -52,7 +52,7 @@ resource "f5xc_infraprotect_firewall_rule_group" "example" {
 
 ### Spec Argument Reference
 
-<a id="firewall-rule-group-name"></a>&#x2022; [`firewall_rule_group_name`](#firewall-rule-group-name) - Optional String<br>Firewall Rule Group Name. Firewall Rule Group Name
+<a id="firewall-rule-group-name"></a>&#x2022; [`firewall\_rule_group\_name`](#firewall-rule-group-name) - Optional String<br>Firewall Rule Group Name. Firewall Rule Group Name
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -82,5 +82,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_infraprotect_firewall_rule_group.example system/example
+terraform import f5xc\_infraprotect_firewall_rule\_group.example system/example
 ```

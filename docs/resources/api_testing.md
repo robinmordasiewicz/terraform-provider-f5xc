@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_api_testing Resource - terraform-provider-f5xc"
+page_title: "f5xc\_api\_testing Resource - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
   Manages a APITesting resource in F5 Distributed Cloud.
 ---
 
-# f5xc_api_testing (Resource)
+# f5xc\_api\_testing (Resource)
 
 Manages a APITesting resource in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages a APITesting resource in F5 Distributed Cloud.
 # Manages a APITesting resource in F5 Distributed Cloud.
 
 # Basic API Testing configuration
-resource "f5xc_api_testing" "example" {
+resource "f5xc\_api\_testing" "example" {
   name      = "example-api-testing"
   namespace = "staging"
 
@@ -66,7 +66,7 @@ resource "f5xc_api_testing" "example" {
 
 ### Spec Argument Reference
 
-<a id="custom-header-value"></a>&#x2022; [`custom_header_value`](#custom-header-value) - Optional String<br>Custom Header. Add x-f5-API-testing-identifier header value to prevent security flags on API testing traffic
+<a id="custom-header-value"></a>&#x2022; [`custom\_header\_value`](#custom-header-value) - Optional String<br>Custom Header. Add x-f5-API-testing-identifier header value to prevent security flags on API testing traffic
 
 <a id="domains"></a>&#x2022; [`domains`](#domains) - Optional Block<br>Testing Environments. Add and configure testing domains and credentials<br>See [Domains](#domains) below for details.
 
@@ -89,7 +89,7 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`domains`](#domains) block supports the following:
 
-<a id="domains-allow-destructive-methods"></a>&#x2022; [`allow_destructive_methods`](#domains-allow-destructive-methods) - Optional Bool<br>Run API tests for destructive methods (e.g., DELETE, PUT). Enable to allow API test to execute destructive methods. Be cautious as these can alter or delete data
+<a id="domains-allow-destructive-methods"></a>&#x2022; [`allow\_destructive\_methods`](#domains-allow-destructive-methods) - Optional Bool<br>Run API tests for destructive methods (e.g., DELETE, PUT). Enable to allow API test to execute destructive methods. Be cautious as these can alter or delete data
 
 <a id="domains-credentials"></a>&#x2022; [`credentials`](#domains-credentials) - Optional Block<br>Credentials. Add credentials for API testing to use in the selected environment<br>See [Credentials](#domains-credentials) below.
 
@@ -125,13 +125,13 @@ An [`api_key`](#domains-credentials-api-key) block (within [`domains.credentials
 
 A [`value`](#domains-credentials-api-key-value) block (within [`domains.credentials.api_key`](#domains-credentials-api-key)) supports the following:
 
-<a id="domains-credentials-api-key-value-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#domains-credentials-api-key-value-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#domains-credentials-api-key-value-blindfold-secret-info) below.
+<a id="domains-credentials-api-key-value-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#domains-credentials-api-key-value-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#domains-credentials-api-key-value-blindfold-secret-info) below.
 
-<a id="domains-credentials-api-key-value-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#domains-credentials-api-key-value-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#domains-credentials-api-key-value-clear-secret-info) below.
+<a id="domains-credentials-api-key-value-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#domains-credentials-api-key-value-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#domains-credentials-api-key-value-clear-secret-info) below.
 
 #### Domains Credentials API Key Value Blindfold Secret Info
 
-A [`blindfold_secret_info`](#domains-credentials-api-key-value-blindfold-secret-info) block (within [`domains.credentials.api_key.value`](#domains-credentials-api-key-value)) supports the following:
+A [`blindfold\_secret\_info`](#domains-credentials-api-key-value-blindfold-secret-info) block (within [`domains.credentials.api_key.value`](#domains-credentials-api-key-value)) supports the following:
 
 <a id="domains-credentials-api-key-value-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#domains-credentials-api-key-value-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -141,7 +141,7 @@ A [`blindfold_secret_info`](#domains-credentials-api-key-value-blindfold-secret-
 
 #### Domains Credentials API Key Value Clear Secret Info
 
-A [`clear_secret_info`](#domains-credentials-api-key-value-clear-secret-info) block (within [`domains.credentials.api_key.value`](#domains-credentials-api-key-value)) supports the following:
+A [`clear\_secret\_info`](#domains-credentials-api-key-value-clear-secret-info) block (within [`domains.credentials.api_key.value`](#domains-credentials-api-key-value)) supports the following:
 
 <a id="domains-credentials-api-key-value-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#domains-credentials-api-key-value-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -159,13 +159,13 @@ A [`basic_auth`](#domains-credentials-basic-auth) block (within [`domains.creden
 
 A [`password`](#domains-credentials-basic-auth-password) block (within [`domains.credentials.basic_auth`](#domains-credentials-basic-auth)) supports the following:
 
-<a id="domains-credentials-basic-auth-password-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#domains-credentials-basic-auth-password-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#domains-credentials-basic-auth-password-blindfold-secret-info) below.
+<a id="domains-credentials-basic-auth-password-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#domains-credentials-basic-auth-password-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#domains-credentials-basic-auth-password-blindfold-secret-info) below.
 
-<a id="domains-credentials-basic-auth-password-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#domains-credentials-basic-auth-password-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#domains-credentials-basic-auth-password-clear-secret-info) below.
+<a id="domains-credentials-basic-auth-password-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#domains-credentials-basic-auth-password-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#domains-credentials-basic-auth-password-clear-secret-info) below.
 
 #### Domains Credentials Basic Auth Password Blindfold Secret Info
 
-A [`blindfold_secret_info`](#domains-credentials-basic-auth-password-blindfold-secret-info) block (within [`domains.credentials.basic_auth.password`](#domains-credentials-basic-auth-password)) supports the following:
+A [`blindfold\_secret\_info`](#domains-credentials-basic-auth-password-blindfold-secret-info) block (within [`domains.credentials.basic_auth.password`](#domains-credentials-basic-auth-password)) supports the following:
 
 <a id="domains-credentials-basic-auth-password-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#domains-credentials-basic-auth-password-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -175,7 +175,7 @@ A [`blindfold_secret_info`](#domains-credentials-basic-auth-password-blindfold-s
 
 #### Domains Credentials Basic Auth Password Clear Secret Info
 
-A [`clear_secret_info`](#domains-credentials-basic-auth-password-clear-secret-info) block (within [`domains.credentials.basic_auth.password`](#domains-credentials-basic-auth-password)) supports the following:
+A [`clear\_secret\_info`](#domains-credentials-basic-auth-password-clear-secret-info) block (within [`domains.credentials.basic_auth.password`](#domains-credentials-basic-auth-password)) supports the following:
 
 <a id="domains-credentials-basic-auth-password-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#domains-credentials-basic-auth-password-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -191,13 +191,13 @@ A [`bearer_token`](#domains-credentials-bearer-token) block (within [`domains.cr
 
 A [`token`](#domains-credentials-bearer-token-token) block (within [`domains.credentials.bearer_token`](#domains-credentials-bearer-token)) supports the following:
 
-<a id="domains-credentials-bearer-token-token-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#domains-credentials-bearer-token-token-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#domains-credentials-bearer-token-token-blindfold-secret-info) below.
+<a id="domains-credentials-bearer-token-token-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#domains-credentials-bearer-token-token-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#domains-credentials-bearer-token-token-blindfold-secret-info) below.
 
-<a id="domains-credentials-bearer-token-token-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#domains-credentials-bearer-token-token-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#domains-credentials-bearer-token-token-clear-secret-info) below.
+<a id="domains-credentials-bearer-token-token-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#domains-credentials-bearer-token-token-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#domains-credentials-bearer-token-token-clear-secret-info) below.
 
 #### Domains Credentials Bearer Token Token Blindfold Secret Info
 
-A [`blindfold_secret_info`](#domains-credentials-bearer-token-token-blindfold-secret-info) block (within [`domains.credentials.bearer_token.token`](#domains-credentials-bearer-token-token)) supports the following:
+A [`blindfold\_secret\_info`](#domains-credentials-bearer-token-token-blindfold-secret-info) block (within [`domains.credentials.bearer_token.token`](#domains-credentials-bearer-token-token)) supports the following:
 
 <a id="domains-credentials-bearer-token-token-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#domains-credentials-bearer-token-token-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -207,7 +207,7 @@ A [`blindfold_secret_info`](#domains-credentials-bearer-token-token-blindfold-se
 
 #### Domains Credentials Bearer Token Token Clear Secret Info
 
-A [`clear_secret_info`](#domains-credentials-bearer-token-token-clear-secret-info) block (within [`domains.credentials.bearer_token.token`](#domains-credentials-bearer-token-token)) supports the following:
+A [`clear\_secret\_info`](#domains-credentials-bearer-token-token-clear-secret-info) block (within [`domains.credentials.bearer_token.token`](#domains-credentials-bearer-token-token)) supports the following:
 
 <a id="domains-credentials-bearer-token-token-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#domains-credentials-bearer-token-token-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -223,19 +223,19 @@ A [`login_endpoint`](#domains-credentials-login-endpoint) block (within [`domain
 
 <a id="domains-credentials-login-endpoint-path"></a>&#x2022; [`path`](#domains-credentials-login-endpoint-path) - Optional String<br>Path
 
-<a id="domains-credentials-login-endpoint-token-response-key"></a>&#x2022; [`token_response_key`](#domains-credentials-login-endpoint-token-response-key) - Optional String<br>Token Response Key
+<a id="domains-credentials-login-endpoint-token-response-key"></a>&#x2022; [`token\_response\_key`](#domains-credentials-login-endpoint-token-response-key) - Optional String<br>Token Response Key
 
 #### Domains Credentials Login Endpoint JSON Payload
 
 A [`json_payload`](#domains-credentials-login-endpoint-json-payload) block (within [`domains.credentials.login_endpoint`](#domains-credentials-login-endpoint)) supports the following:
 
-<a id="domains-credentials-login-endpoint-json-payload-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#domains-credentials-login-endpoint-json-payload-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#domains-credentials-login-endpoint-json-payload-blindfold-secret-info) below.
+<a id="domains-credentials-login-endpoint-json-payload-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#domains-credentials-login-endpoint-json-payload-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#domains-credentials-login-endpoint-json-payload-blindfold-secret-info) below.
 
-<a id="domains-credentials-login-endpoint-json-payload-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#domains-credentials-login-endpoint-json-payload-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#domains-credentials-login-endpoint-json-payload-clear-secret-info) below.
+<a id="domains-credentials-login-endpoint-json-payload-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#domains-credentials-login-endpoint-json-payload-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#domains-credentials-login-endpoint-json-payload-clear-secret-info) below.
 
 #### Domains Credentials Login Endpoint JSON Payload Blindfold Secret Info
 
-A [`blindfold_secret_info`](#domains-credentials-login-endpoint-json-payload-blindfold-secret-info) block (within [`domains.credentials.login_endpoint.json_payload`](#domains-credentials-login-endpoint-json-payload)) supports the following:
+A [`blindfold\_secret\_info`](#domains-credentials-login-endpoint-json-payload-blindfold-secret-info) block (within [`domains.credentials.login_endpoint.json_payload`](#domains-credentials-login-endpoint-json-payload)) supports the following:
 
 <a id="domains-credentials-login-endpoint-json-payload-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#domains-credentials-login-endpoint-json-payload-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -245,7 +245,7 @@ A [`blindfold_secret_info`](#domains-credentials-login-endpoint-json-payload-bli
 
 #### Domains Credentials Login Endpoint JSON Payload Clear Secret Info
 
-A [`clear_secret_info`](#domains-credentials-login-endpoint-json-payload-clear-secret-info) block (within [`domains.credentials.login_endpoint.json_payload`](#domains-credentials-login-endpoint-json-payload)) supports the following:
+A [`clear\_secret\_info`](#domains-credentials-login-endpoint-json-payload-clear-secret-info) block (within [`domains.credentials.login_endpoint.json_payload`](#domains-credentials-login-endpoint-json-payload)) supports the following:
 
 <a id="domains-credentials-login-endpoint-json-payload-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#domains-credentials-login-endpoint-json-payload-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -269,5 +269,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_api_testing.example system/example
+terraform import f5xc\_api\_testing.example system/example
 ```

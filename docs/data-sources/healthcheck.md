@@ -29,7 +29,7 @@ data "f5xc_healthcheck" "example" {
 # }
 
 # Example: Reference healthcheck in origin pool
-# resource "f5xc_origin_pool" "example" {
+# resource "f5xc\_origin\_pool" "example" {
 #   name      = "example-pool"
 #   namespace = "system"
 #

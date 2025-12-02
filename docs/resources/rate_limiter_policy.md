@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_rate_limiter_policy Resource - terraform-provider-f5xc"
+page_title: "f5xc\_rate_limiter\_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages a RateLimiterPolicy resource in F5 Distributed Cloud for rate limiter policy create configuration.
 ---
 
-# f5xc_rate_limiter_policy (Resource)
+# f5xc\_rate_limiter\_policy (Resource)
 
 Manages a RateLimiterPolicy resource in F5 Distributed Cloud for rate limiter policy create configuration.
 
@@ -18,7 +18,7 @@ Manages a RateLimiterPolicy resource in F5 Distributed Cloud for rate limiter po
 # Manages a RateLimiterPolicy resource in F5 Distributed Cloud for rate limiter policy create configuration.
 
 # Basic Rate Limiter Policy configuration
-resource "f5xc_rate_limiter_policy" "example" {
+resource "f5xc\_rate_limiter\_policy" "example" {
   name      = "example-rate-limiter-policy"
   namespace = "shared"
 
@@ -32,7 +32,7 @@ resource "f5xc_rate_limiter_policy" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: any_server, server_name, server_name_matcher, ser...
+  # [OneOf: any_server, server_name, server\_name\_matcher, ser...
   any_server {
     # Configure any_server settings
   }
@@ -65,7 +65,7 @@ resource "f5xc_rate_limiter_policy" "example" {
 -> **One of the following:**
 &#x2022; <a id="any-server"></a>[`any_server`](#any-server) - Optional Block<br>Empty. This can be used for messages where no values are needed
 <br><br>&#x2022; <a id="server-name"></a>[`server_name`](#server-name) - Optional String<br>Server Name. The expected name of the server. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host for the request
-<br><br>&#x2022; <a id="server-name-matcher"></a>[`server_name_matcher`](#server-name-matcher) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Server Name Matcher](#server-name-matcher) below for details.
+<br><br>&#x2022; <a id="server-name-matcher"></a>[`server\_name\_matcher`](#server-name-matcher) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Server Name Matcher](#server-name-matcher) below for details.
 <br><br>&#x2022; <a id="server-selector"></a>[`server_selector`](#server-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Server Selector](#server-selector) below for details.
 
 <a id="rules"></a>&#x2022; [`rules`](#rules) - Optional Block<br>Rules. A list of RateLimiterRules that are evaluated sequentially till a matching rule is identified<br>See [Rules](#rules) below for details.
@@ -106,17 +106,17 @@ A [`spec`](#rules-spec) block (within [`rules`](#rules)) supports the following:
 
 <a id="rules-spec-any-ip"></a>&#x2022; [`any_ip`](#rules-spec-any-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="rules-spec-apply-rate-limiter"></a>&#x2022; [`apply_rate_limiter`](#rules-spec-apply-rate-limiter) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rules-spec-apply-rate-limiter"></a>&#x2022; [`apply\_rate\_limiter`](#rules-spec-apply-rate-limiter) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="rules-spec-asn-list"></a>&#x2022; [`asn_list`](#rules-spec-asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#rules-spec-asn-list) below.
 
-<a id="rules-spec-asn-matcher"></a>&#x2022; [`asn_matcher`](#rules-spec-asn-matcher) - Optional Block<br>ASN Matcher. Match any AS number contained in the list of bgp_asn_sets<br>See [Asn Matcher](#rules-spec-asn-matcher) below.
+<a id="rules-spec-asn-matcher"></a>&#x2022; [`asn_matcher`](#rules-spec-asn-matcher) - Optional Block<br>ASN Matcher. Match any AS number contained in the list of bgp\_asn\_sets<br>See [Asn Matcher](#rules-spec-asn-matcher) below.
 
-<a id="rules-spec-bypass-rate-limiter"></a>&#x2022; [`bypass_rate_limiter`](#rules-spec-bypass-rate-limiter) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rules-spec-bypass-rate-limiter"></a>&#x2022; [`bypass\_rate\_limiter`](#rules-spec-bypass-rate-limiter) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="rules-spec-country-list"></a>&#x2022; [`country_list`](#rules-spec-country-list) - Optional Block<br>Country Codes List. List of Country Codes to match against<br>See [Country List](#rules-spec-country-list) below.
 
-<a id="rules-spec-custom-rate-limiter"></a>&#x2022; [`custom_rate_limiter`](#rules-spec-custom-rate-limiter) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Rate Limiter](#rules-spec-custom-rate-limiter) below.
+<a id="rules-spec-custom-rate-limiter"></a>&#x2022; [`custom\_rate\_limiter`](#rules-spec-custom-rate-limiter) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Rate Limiter](#rules-spec-custom-rate-limiter) below.
 
 <a id="rules-spec-domain-matcher"></a>&#x2022; [`domain_matcher`](#rules-spec-domain-matcher) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Domain Matcher](#rules-spec-domain-matcher) below.
 
@@ -124,9 +124,9 @@ A [`spec`](#rules-spec) block (within [`rules`](#rules)) supports the following:
 
 <a id="rules-spec-http-method"></a>&#x2022; [`http_method`](#rules-spec-http-method) - Optional Block<br>HTTP Method Matcher. A HTTP method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. The result of the match based on the method list is inverted if invert_matcher is true<br>See [HTTP Method](#rules-spec-http-method) below.
 
-<a id="rules-spec-ip-matcher"></a>&#x2022; [`ip_matcher`](#rules-spec-ip-matcher) - Optional Block<br>IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true<br>See [IP Matcher](#rules-spec-ip-matcher) below.
+<a id="rules-spec-ip-matcher"></a>&#x2022; [`ip_matcher`](#rules-spec-ip-matcher) - Optional Block<br>IP Prefix Matcher. Match any IP prefix contained in the list of ip\_prefix\_sets. The result of the match is inverted if invert_matcher is true<br>See [IP Matcher](#rules-spec-ip-matcher) below.
 
-<a id="rules-spec-ip-prefix-list"></a>&#x2022; [`ip_prefix_list`](#rules-spec-ip-prefix-list) - Optional Block<br>IP Prefix Match List. List of IP Prefix strings to match against<br>See [IP Prefix List](#rules-spec-ip-prefix-list) below.
+<a id="rules-spec-ip-prefix-list"></a>&#x2022; [`ip\_prefix\_list`](#rules-spec-ip-prefix-list) - Optional Block<br>IP Prefix Match List. List of IP Prefix strings to match against<br>See [IP Prefix List](#rules-spec-ip-prefix-list) below.
 
 <a id="rules-spec-path"></a>&#x2022; [`path`](#rules-spec-path) - Optional Block<br>Path Matcher. A path matcher specifies multiple criteria for matching an HTTP path string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of path prefixes, a list of exact path values and a list of regular expressions<br>See [Path](#rules-spec-path) below.
 
@@ -140,7 +140,7 @@ An [`asn_list`](#rules-spec-asn-list) block (within [`rules.spec`](#rules-spec))
 
 An [`asn_matcher`](#rules-spec-asn-matcher) block (within [`rules.spec`](#rules-spec)) supports the following:
 
-<a id="rules-spec-asn-matcher-asn-sets"></a>&#x2022; [`asn_sets`](#rules-spec-asn-matcher-asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#rules-spec-asn-matcher-asn-sets) below.
+<a id="rules-spec-asn-matcher-asn-sets"></a>&#x2022; [`asn_sets`](#rules-spec-asn-matcher-asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp\_asn\_set objects<br>See [Asn Sets](#rules-spec-asn-matcher-asn-sets) below.
 
 #### Rules Spec Asn Matcher Asn Sets
 
@@ -166,7 +166,7 @@ A [`country_list`](#rules-spec-country-list) block (within [`rules.spec`](#rules
 
 #### Rules Spec Custom Rate Limiter
 
-A [`custom_rate_limiter`](#rules-spec-custom-rate-limiter) block (within [`rules.spec`](#rules-spec)) supports the following:
+A [`custom\_rate\_limiter`](#rules-spec-custom-rate-limiter) block (within [`rules.spec`](#rules-spec)) supports the following:
 
 <a id="rules-spec-custom-rate-limiter-name"></a>&#x2022; [`name`](#rules-spec-custom-rate-limiter-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -186,7 +186,7 @@ A [`domain_matcher`](#rules-spec-domain-matcher) block (within [`rules.spec`](#r
 
 A [`headers`](#rules-spec-headers) block (within [`rules.spec`](#rules-spec)) supports the following:
 
-<a id="rules-spec-headers-check-not-present"></a>&#x2022; [`check_not_present`](#rules-spec-headers-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rules-spec-headers-check-not-present"></a>&#x2022; [`check\_not\_present`](#rules-spec-headers-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="rules-spec-headers-check-present"></a>&#x2022; [`check_present`](#rules-spec-headers-check-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -220,7 +220,7 @@ An [`ip_matcher`](#rules-spec-ip-matcher) block (within [`rules.spec`](#rules-sp
 
 <a id="rules-spec-ip-matcher-invert-matcher"></a>&#x2022; [`invert_matcher`](#rules-spec-ip-matcher-invert-matcher) - Optional Bool<br>Invert IP Matcher. Invert the match result
 
-<a id="rules-spec-ip-matcher-prefix-sets"></a>&#x2022; [`prefix_sets`](#rules-spec-ip-matcher-prefix-sets) - Optional Block<br>IP Prefix Sets. A list of references to ip_prefix_set objects<br>See [Prefix Sets](#rules-spec-ip-matcher-prefix-sets) below.
+<a id="rules-spec-ip-matcher-prefix-sets"></a>&#x2022; [`prefix_sets`](#rules-spec-ip-matcher-prefix-sets) - Optional Block<br>IP Prefix Sets. A list of references to ip\_prefix\_set objects<br>See [Prefix Sets](#rules-spec-ip-matcher-prefix-sets) below.
 
 #### Rules Spec IP Matcher Prefix Sets
 
@@ -238,7 +238,7 @@ A [`prefix_sets`](#rules-spec-ip-matcher-prefix-sets) block (within [`rules.spec
 
 #### Rules Spec IP Prefix List
 
-An [`ip_prefix_list`](#rules-spec-ip-prefix-list) block (within [`rules.spec`](#rules-spec)) supports the following:
+An [`ip\_prefix\_list`](#rules-spec-ip-prefix-list) block (within [`rules.spec`](#rules-spec)) supports the following:
 
 <a id="rules-spec-ip-prefix-list-invert-match"></a>&#x2022; [`invert_match`](#rules-spec-ip-prefix-list-invert-match) - Optional Bool<br>Invert Match Result. Invert the match result
 
@@ -262,7 +262,7 @@ A [`path`](#rules-spec-path) block (within [`rules.spec`](#rules-spec)) supports
 
 #### Server Name Matcher
 
-A [`server_name_matcher`](#server-name-matcher) block supports the following:
+A [`server\_name\_matcher`](#server-name-matcher) block supports the following:
 
 <a id="server-name-matcher-exact-values"></a>&#x2022; [`exact_values`](#server-name-matcher-exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -292,5 +292,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_rate_limiter_policy.example system/example
+terraform import f5xc\_rate_limiter\_policy.example system/example
 ```

@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_workload_flavor Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_workload\_flavor Data Source - terraform-provider-f5xc"
 subcategory: "Kubernetes"
 description: |-
   Manages workload_flavor in F5 Distributed Cloud.
 ---
 
-# f5xc_workload_flavor (Data Source)
+# f5xc\_workload\_flavor (Data Source)
 
 Manages workload_flavor in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages workload_flavor in F5 Distributed Cloud.
 # Retrieves information about an existing Workload Flavor
 
 # Look up an existing Workload Flavor by name
-data "f5xc_workload_flavor" "example" {
+data "f5xc\_workload\_flavor" "example" {
   name      = "example-workload-flavor"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "workload_flavor_id" {
-#   value = data.f5xc_workload_flavor.example.id
+# output "workload\_flavor\_id" {
+#   value = data.f5xc\_workload\_flavor.example.id
 # }
 ```
 

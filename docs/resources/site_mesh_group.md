@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_site_mesh_group Resource - terraform-provider-f5xc"
+page_title: "f5xc\_site_mesh\_group Resource - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
   Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.
 ---
 
-# f5xc_site_mesh_group (Resource)
+# f5xc\_site_mesh\_group (Resource)
 
 Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.
 # Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.
 
 # Basic Site Mesh Group configuration
-resource "f5xc_site_mesh_group" "example" {
+resource "f5xc\_site_mesh\_group" "example" {
   name      = "example-site-mesh-group"
   namespace = "system"
 
@@ -32,11 +32,11 @@ resource "f5xc_site_mesh_group" "example" {
   }
 
   # Site Mesh Group configuration
-  type = "SITE_MESH_GROUP_TYPE_FULL_MESH"
+  type = "SITE\_MESH_GROUP_TYPE_FULL\_MESH"
 
   # Control and data plane settings
   full_mesh {
-    control_and_data_plane_mesh {}
+    control\_and_data_plane\_mesh {}
   }
 
   # Hub status
@@ -70,8 +70,8 @@ resource "f5xc_site_mesh_group" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="disable-re-fallback"></a>[`disable_re_fallback`](#disable-re-fallback) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="enable-re-fallback"></a>[`enable_re_fallback`](#enable-re-fallback) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="disable-re-fallback"></a>[`disable\_re\_fallback`](#disable-re-fallback) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="enable-re-fallback"></a>[`enable\_re\_fallback`](#enable-re-fallback) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; <a id="full-mesh"></a>[`full_mesh`](#full-mesh) - Optional Block<br>Full Mesh. Details of Full Mesh Group Type<br>See [Full Mesh](#full-mesh) below for details.
@@ -94,31 +94,31 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`full_mesh`](#full-mesh) block supports the following:
 
-<a id="full-mesh-control-and-data-plane-mesh"></a>&#x2022; [`control_and_data_plane_mesh`](#full-mesh-control-and-data-plane-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="full-mesh-control-and-data-plane-mesh"></a>&#x2022; [`control\_and_data_plane\_mesh`](#full-mesh-control-and-data-plane-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="full-mesh-data-plane-mesh"></a>&#x2022; [`data_plane_mesh`](#full-mesh-data-plane-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="full-mesh-data-plane-mesh"></a>&#x2022; [`data\_plane\_mesh`](#full-mesh-data-plane-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Hub Mesh
 
 A [`hub_mesh`](#hub-mesh) block supports the following:
 
-<a id="hub-mesh-control-and-data-plane-mesh"></a>&#x2022; [`control_and_data_plane_mesh`](#hub-mesh-control-and-data-plane-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="hub-mesh-control-and-data-plane-mesh"></a>&#x2022; [`control\_and_data_plane\_mesh`](#hub-mesh-control-and-data-plane-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="hub-mesh-data-plane-mesh"></a>&#x2022; [`data_plane_mesh`](#hub-mesh-data-plane-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="hub-mesh-data-plane-mesh"></a>&#x2022; [`data\_plane\_mesh`](#hub-mesh-data-plane-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Spoke Mesh
 
 A [`spoke_mesh`](#spoke-mesh) block supports the following:
 
-<a id="spoke-mesh-control-and-data-plane-mesh"></a>&#x2022; [`control_and_data_plane_mesh`](#spoke-mesh-control-and-data-plane-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="spoke-mesh-control-and-data-plane-mesh"></a>&#x2022; [`control\_and_data_plane\_mesh`](#spoke-mesh-control-and-data-plane-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="spoke-mesh-data-plane-mesh"></a>&#x2022; [`data_plane_mesh`](#spoke-mesh-data-plane-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="spoke-mesh-data-plane-mesh"></a>&#x2022; [`data\_plane\_mesh`](#spoke-mesh-data-plane-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="spoke-mesh-hub-mesh-group"></a>&#x2022; [`hub_mesh_group`](#spoke-mesh-hub-mesh-group) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Hub Mesh Group](#spoke-mesh-hub-mesh-group) below.
+<a id="spoke-mesh-hub-mesh-group"></a>&#x2022; [`hub\_mesh\_group`](#spoke-mesh-hub-mesh-group) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Hub Mesh Group](#spoke-mesh-hub-mesh-group) below.
 
 #### Spoke Mesh Hub Mesh Group
 
-A [`hub_mesh_group`](#spoke-mesh-hub-mesh-group) block (within [`spoke_mesh`](#spoke-mesh)) supports the following:
+A [`hub\_mesh\_group`](#spoke-mesh-hub-mesh-group) block (within [`spoke_mesh`](#spoke-mesh)) supports the following:
 
 <a id="spoke-mesh-hub-mesh-group-name"></a>&#x2022; [`name`](#spoke-mesh-hub-mesh-group-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -158,5 +158,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_site_mesh_group.example system/example
+terraform import f5xc\_site_mesh\_group.example system/example
 ```

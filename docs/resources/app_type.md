@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_app_type Resource - terraform-provider-f5xc"
+page_title: "f5xc\_app\_type Resource - terraform-provider-f5xc"
 subcategory: "Applications"
 description: |-
   Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.
 ---
 
-# f5xc_app_type (Resource)
+# f5xc\_app\_type (Resource)
 
 Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages App type will create the configuration in namespace metadata.namespace i
 # Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.
 
 # Basic App Type configuration
-resource "f5xc_app_type" "example" {
+resource "f5xc\_app\_type" "example" {
   name      = "example-app-type"
   namespace = "staging"
 
@@ -33,16 +33,16 @@ resource "f5xc_app_type" "example" {
 
   # Resource-specific configuration
   # API Discovery Settings. Settings specifying how API Disco...
-  business_logic_markup_setting {
-    # Configure business_logic_markup_setting settings
+  business\_logic_markup\_setting {
+    # Configure business\_logic_markup\_setting settings
   }
   # Empty. This can be used for messages where no values are ...
   disable {
     # Configure disable settings
   }
   # Discovered API Settings. x-example: '2' Configure Discove...
-  discovered_api_settings {
-    # Configure discovered_api_settings settings
+  discovered\_api\_settings {
+    # Configure discovered\_api\_settings settings
   }
 }
 ```
@@ -66,7 +66,7 @@ resource "f5xc_app_type" "example" {
 
 ### Spec Argument Reference
 
-<a id="business-logic-markup-setting"></a>&#x2022; [`business_logic_markup_setting`](#business-logic-markup-setting) - Optional Block<br>API Discovery Settings. Settings specifying how API Discovery will be performed<br>See [Business Logic Markup Setting](#business-logic-markup-setting) below for details.
+<a id="business-logic-markup-setting"></a>&#x2022; [`business\_logic_markup\_setting`](#business-logic-markup-setting) - Optional Block<br>API Discovery Settings. Settings specifying how API Discovery will be performed<br>See [Business Logic Markup Setting](#business-logic-markup-setting) below for details.
 
 <a id="features"></a>&#x2022; [`features`](#features) - Optional Block<br>Features. List of various AI/ML features enabled<br>See [Features](#features) below for details.
 
@@ -82,25 +82,25 @@ In addition to all arguments above, the following attributes are exported:
 
 #### Business Logic Markup Setting
 
-A [`business_logic_markup_setting`](#business-logic-markup-setting) block supports the following:
+A [`business\_logic_markup\_setting`](#business-logic-markup-setting) block supports the following:
 
 <a id="business-logic-markup-setting-disable"></a>&#x2022; [`disable`](#business-logic-markup-setting-disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="business-logic-markup-setting-discovered-api-settings"></a>&#x2022; [`discovered_api_settings`](#business-logic-markup-setting-discovered-api-settings) - Optional Block<br>Discovered API Settings. x-example: '2' Configure Discovered API Settings<br>See [Discovered API Settings](#business-logic-markup-setting-discovered-api-settings) below.
+<a id="business-logic-markup-setting-discovered-api-settings"></a>&#x2022; [`discovered\_api\_settings`](#business-logic-markup-setting-discovered-api-settings) - Optional Block<br>Discovered API Settings. x-example: '2' Configure Discovered API Settings<br>See [Discovered API Settings](#business-logic-markup-setting-discovered-api-settings) below.
 
 <a id="business-logic-markup-setting-enable"></a>&#x2022; [`enable`](#business-logic-markup-setting-enable) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Business Logic Markup Setting Discovered API Settings
 
-A [`discovered_api_settings`](#business-logic-markup-setting-discovered-api-settings) block (within [`business_logic_markup_setting`](#business-logic-markup-setting)) supports the following:
+A [`discovered\_api\_settings`](#business-logic-markup-setting-discovered-api-settings) block (within [`business\_logic_markup\_setting`](#business-logic-markup-setting)) supports the following:
 
-<a id="business-logic-markup-setting-discovered-api-settings-purge-duration-for-inactive-discovered-apis"></a>&#x2022; [`purge_duration_for_inactive_discovered_apis`](#business-logic-markup-setting-discovered-api-settings-purge-duration-for-inactive-discovered-apis) - Optional Number<br>Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration
+<a id="business-logic-markup-setting-discovered-api-settings-purge-duration-for-inactive-discovered-apis"></a>&#x2022; [`purge\_duration_for_inactive_discovered\_apis`](#business-logic-markup-setting-discovered-api-settings-purge-duration-for-inactive-discovered-apis) - Optional Number<br>Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration
 
 #### Features
 
 A [`features`](#features) block supports the following:
 
-<a id="features-type"></a>&#x2022; [`type`](#features-type) - Optional String  Defaults to `BUSINESS_LOGIC_MARKUP`<br>Possible values are `BUSINESS_LOGIC_MARKUP`, `TIMESERIES_ANOMALY_DETECTION`, `PER_REQ_ANOMALY_DETECTION`, `USER_BEHAVIOR_ANALYSIS`<br>AI/ML Features. Enumeration for AI/ML features supported API Discovery enables generation of model for various API interactions between services of App type. Enable analysis of timeseries for various metric collected like requests, errors, latency etc. Enable anomaly detection per API request, i.e. the probability density function (PDF) charts generation for API endpoints Enable user behavior analysis
+<a id="features-type"></a>&#x2022; [`type`](#features-type) - Optional String  Defaults to `BUSINESS\_LOGIC\_MARKUP`<br>Possible values are `BUSINESS\_LOGIC\_MARKUP`, `TIMESERIES\_ANOMALY\_DETECTION`, `PER\_REQ_ANOMALY\_DETECTION`, `USER\_BEHAVIOR\_ANALYSIS`<br>AI/ML Features. Enumeration for AI/ML features supported API Discovery enables generation of model for various API interactions between services of App type. Enable analysis of timeseries for various metric collected like requests, errors, latency etc. Enable anomaly detection per API request, i.e. the probability density function (PDF) charts generation for API endpoints Enable user behavior analysis
 
 #### Timeouts
 
@@ -120,5 +120,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_app_type.example system/example
+terraform import f5xc\_app\_type.example system/example
 ```

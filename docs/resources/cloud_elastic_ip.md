@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_cloud_elastic_ip Resource - terraform-provider-f5xc"
+page_title: "f5xc\_cloud_elastic\_ip Resource - terraform-provider-f5xc"
 subcategory: "Cloud Resources"
 description: |-
   Manages Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a site in F5 Distributed Cloud.
 ---
 
-# f5xc_cloud_elastic_ip (Resource)
+# f5xc\_cloud_elastic\_ip (Resource)
 
 Manages Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a site in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a
 # Manages Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a site in F5 Distributed Cloud.
 
 # Basic Cloud Elastic IP configuration
-resource "f5xc_cloud_elastic_ip" "example" {
+resource "f5xc\_cloud_elastic\_ip" "example" {
   name      = "example-cloud-elastic-ip"
   namespace = "system"
 
@@ -104,5 +104,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_cloud_elastic_ip.example system/example
+terraform import f5xc\_cloud_elastic\_ip.example system/example
 ```

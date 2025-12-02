@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_dc_cluster_group Resource - terraform-provider-f5xc"
+page_title: "f5xc\_dc_cluster\_group Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
   Manages DC Cluster group in given namespace in F5 Distributed Cloud.
 ---
 
-# f5xc_dc_cluster_group (Resource)
+# f5xc\_dc_cluster\_group (Resource)
 
 Manages DC Cluster group in given namespace in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages DC Cluster group in given namespace in F5 Distributed Cloud.
 # Manages DC Cluster group in given namespace in F5 Distributed Cloud.
 
 # Basic Dc Cluster Group configuration
-resource "f5xc_dc_cluster_group" "example" {
+resource "f5xc\_dc_cluster\_group" "example" {
   name      = "example-dc-cluster-group"
   namespace = "system"
 
@@ -37,12 +37,12 @@ resource "f5xc_dc_cluster_group" "example" {
     # Configure type settings
   }
   # Empty. This can be used for messages where no values are ...
-  control_and_data_plane_mesh {
-    # Configure control_and_data_plane_mesh settings
+  control\_and_data_plane\_mesh {
+    # Configure control\_and_data_plane\_mesh settings
   }
   # Empty. This can be used for messages where no values are ...
-  data_plane_mesh {
-    # Configure data_plane_mesh settings
+  data\_plane\_mesh {
+    # Configure data\_plane\_mesh settings
   }
 }
 ```
@@ -94,9 +94,9 @@ A [`timeouts`](#timeouts) block supports the following:
 
 A [`type`](#type) block supports the following:
 
-<a id="type-control-and-data-plane-mesh"></a>&#x2022; [`control_and_data_plane_mesh`](#type-control-and-data-plane-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="type-control-and-data-plane-mesh"></a>&#x2022; [`control\_and_data_plane\_mesh`](#type-control-and-data-plane-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="type-data-plane-mesh"></a>&#x2022; [`data_plane_mesh`](#type-data-plane-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="type-data-plane-mesh"></a>&#x2022; [`data\_plane\_mesh`](#type-data-plane-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 ## Import
 
@@ -104,5 +104,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_dc_cluster_group.example system/example
+terraform import f5xc\_dc_cluster\_group.example system/example
 ```

@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_infraprotect_tunnel Resource - terraform-provider-f5xc"
+page_title: "f5xc\_infraprotect\_tunnel Resource - terraform-provider-f5xc"
 subcategory: "Infrastructure Protection"
 description: |-
   Manages DDoS transit tunnel in F5 Distributed Cloud.
 ---
 
-# f5xc_infraprotect_tunnel (Resource)
+# f5xc\_infraprotect\_tunnel (Resource)
 
 Manages DDoS transit tunnel in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages DDoS transit tunnel in F5 Distributed Cloud.
 # Manages DDoS transit tunnel in F5 Distributed Cloud.
 
 # Basic Infraprotect Tunnel configuration
-resource "f5xc_infraprotect_tunnel" "example" {
+resource "f5xc\_infraprotect\_tunnel" "example" {
   name      = "example-infraprotect-tunnel"
   namespace = "staging"
 
@@ -70,13 +70,13 @@ resource "f5xc_infraprotect_tunnel" "example" {
 
 <a id="bgp-information"></a>&#x2022; [`bgp_information`](#bgp-information) - Optional Block<br>BGP. BGP information associated with a DDOS transit tunnel<br>See [BGP Information](#bgp-information) below for details.
 
-<a id="firewall-rule-group"></a>&#x2022; [`firewall_rule_group`](#firewall-rule-group) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Firewall Rule Group](#firewall-rule-group) below for details.
+<a id="firewall-rule-group"></a>&#x2022; [`firewall\_rule\_group`](#firewall-rule-group) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Firewall Rule Group](#firewall-rule-group) below for details.
 
 -> **One of the following:**
 &#x2022; <a id="gre-ipv4"></a>[`gre_ipv4`](#gre-ipv4) - Optional Block<br>GRE IPv4 Tunnel. IPv4 Tunnel<br>See [Gre IPv4](#gre-ipv4) below for details.
 <br><br>&#x2022; <a id="gre-ipv6"></a>[`gre_ipv6`](#gre-ipv6) - Optional Block<br>GRE IPv6 Tunnel. IPv6 Tunnel<br>See [Gre IPv6](#gre-ipv6) below for details.
-<br><br>&#x2022; <a id="ip-in-ip"></a>[`ip_in_ip`](#ip-in-ip) - Optional Block<br>IP in IP Tunnel. IP in IP Tunnel<br>See [IP In IP](#ip-in-ip) below for details.
-<br><br>&#x2022; <a id="ipv6-to-ipv6"></a>[`ipv6_to_ipv6`](#ipv6-to-ipv6) - Optional Block<br>IPv6 to IPv6 Tunnel. IPv6 to IPv6 Tunnel<br>See [IPv6 To IPv6](#ipv6-to-ipv6) below for details.
+<br><br>&#x2022; <a id="ip-in-ip"></a>[`ip\_in\_ip`](#ip-in-ip) - Optional Block<br>IP in IP Tunnel. IP in IP Tunnel<br>See [IP In IP](#ip-in-ip) below for details.
+<br><br>&#x2022; <a id="ipv6-to-ipv6"></a>[`ipv6\_to\_ipv6`](#ipv6-to-ipv6) - Optional Block<br>IPv6 to IPv6 Tunnel. IPv6 to IPv6 Tunnel<br>See [IPv6 To IPv6](#ipv6-to-ipv6) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -94,7 +94,7 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`bandwidth`](#bandwidth) block supports the following:
 
-<a id="bandwidth-bandwidth-max-mb"></a>&#x2022; [`bandwidth_max_mb`](#bandwidth-bandwidth-max-mb) - Optional Number<br>Bandwidth Max in MB. Bandwidth max allowed
+<a id="bandwidth-bandwidth-max-mb"></a>&#x2022; [`bandwidth\_max\_mb`](#bandwidth-bandwidth-max-mb) - Optional Number<br>Bandwidth Max in MB. Bandwidth max allowed
 
 #### BGP Information
 
@@ -102,13 +102,13 @@ A [`bgp_information`](#bgp-information) block supports the following:
 
 <a id="bgp-information-asn"></a>&#x2022; [`asn`](#bgp-information-asn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Asn](#bgp-information-asn) below.
 
-<a id="bgp-information-holddown-timer-seconds"></a>&#x2022; [`holddown_timer_seconds`](#bgp-information-holddown-timer-seconds) - Optional Number<br>Hold down Timer. BGP hold down timer, in seconds
+<a id="bgp-information-holddown-timer-seconds"></a>&#x2022; [`holddown\_timer\_seconds`](#bgp-information-holddown-timer-seconds) - Optional Number<br>Hold down Timer. BGP hold down timer, in seconds
 
 <a id="bgp-information-no-secret"></a>&#x2022; [`no_secret`](#bgp-information-no-secret) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="bgp-information-peer-secret-override"></a>&#x2022; [`peer_secret_override`](#bgp-information-peer-secret-override) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Peer Secret Override](#bgp-information-peer-secret-override) below.
+<a id="bgp-information-peer-secret-override"></a>&#x2022; [`peer\_secret\_override`](#bgp-information-peer-secret-override) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Peer Secret Override](#bgp-information-peer-secret-override) below.
 
-<a id="bgp-information-use-default-secret"></a>&#x2022; [`use_default_secret`](#bgp-information-use-default-secret) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bgp-information-use-default-secret"></a>&#x2022; [`use\_default\_secret`](#bgp-information-use-default-secret) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### BGP Information Asn
 
@@ -122,15 +122,15 @@ An [`asn`](#bgp-information-asn) block (within [`bgp_information`](#bgp-informat
 
 #### BGP Information Peer Secret Override
 
-A [`peer_secret_override`](#bgp-information-peer-secret-override) block (within [`bgp_information`](#bgp-information)) supports the following:
+A [`peer\_secret\_override`](#bgp-information-peer-secret-override) block (within [`bgp_information`](#bgp-information)) supports the following:
 
-<a id="bgp-information-peer-secret-override-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#bgp-information-peer-secret-override-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#bgp-information-peer-secret-override-blindfold-secret-info) below.
+<a id="bgp-information-peer-secret-override-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#bgp-information-peer-secret-override-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#bgp-information-peer-secret-override-blindfold-secret-info) below.
 
-<a id="bgp-information-peer-secret-override-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#bgp-information-peer-secret-override-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#bgp-information-peer-secret-override-clear-secret-info) below.
+<a id="bgp-information-peer-secret-override-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#bgp-information-peer-secret-override-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#bgp-information-peer-secret-override-clear-secret-info) below.
 
 #### BGP Information Peer Secret Override Blindfold Secret Info
 
-A [`blindfold_secret_info`](#bgp-information-peer-secret-override-blindfold-secret-info) block (within [`bgp_information.peer_secret_override`](#bgp-information-peer-secret-override)) supports the following:
+A [`blindfold\_secret\_info`](#bgp-information-peer-secret-override-blindfold-secret-info) block (within [`bgp_information.peer\_secret\_override`](#bgp-information-peer-secret-override)) supports the following:
 
 <a id="bgp-information-peer-secret-override-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#bgp-information-peer-secret-override-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -140,7 +140,7 @@ A [`blindfold_secret_info`](#bgp-information-peer-secret-override-blindfold-secr
 
 #### BGP Information Peer Secret Override Clear Secret Info
 
-A [`clear_secret_info`](#bgp-information-peer-secret-override-clear-secret-info) block (within [`bgp_information.peer_secret_override`](#bgp-information-peer-secret-override)) supports the following:
+A [`clear\_secret\_info`](#bgp-information-peer-secret-override-clear-secret-info) block (within [`bgp_information.peer\_secret\_override`](#bgp-information-peer-secret-override)) supports the following:
 
 <a id="bgp-information-peer-secret-override-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#bgp-information-peer-secret-override-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -148,7 +148,7 @@ A [`clear_secret_info`](#bgp-information-peer-secret-override-clear-secret-info)
 
 #### Firewall Rule Group
 
-A [`firewall_rule_group`](#firewall-rule-group) block supports the following:
+A [`firewall\_rule\_group`](#firewall-rule-group) block supports the following:
 
 <a id="firewall-rule-group-name"></a>&#x2022; [`name`](#firewall-rule-group-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -160,15 +160,15 @@ A [`firewall_rule_group`](#firewall-rule-group) block supports the following:
 
 A [`gre_ipv4`](#gre-ipv4) block supports the following:
 
-<a id="gre-ipv4-customer-endpoint-ipv4"></a>&#x2022; [`customer_endpoint_ipv4`](#gre-ipv4-customer-endpoint-ipv4) - Optional String<br>Customer Endpoint IP. IPv4 address for the customer endpoint of the tunnel
+<a id="gre-ipv4-customer-endpoint-ipv4"></a>&#x2022; [`customer\_endpoint\_ipv4`](#gre-ipv4-customer-endpoint-ipv4) - Optional String<br>Customer Endpoint IP. IPv4 address for the customer endpoint of the tunnel
 
 <a id="gre-ipv4-fragmentation-disabled"></a>&#x2022; [`fragmentation_disabled`](#gre-ipv4-fragmentation-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="gre-ipv4-fragmentation-enabled"></a>&#x2022; [`fragmentation_enabled`](#gre-ipv4-fragmentation-enabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="gre-ipv4-ipv6-interconnect-disabled"></a>&#x2022; [`ipv6_interconnect_disabled`](#gre-ipv4-ipv6-interconnect-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="gre-ipv4-ipv6-interconnect-disabled"></a>&#x2022; [`ipv6\_interconnect\_disabled`](#gre-ipv4-ipv6-interconnect-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="gre-ipv4-ipv6-interconnect-enabled"></a>&#x2022; [`ipv6_interconnect_enabled`](#gre-ipv4-ipv6-interconnect-enabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="gre-ipv4-ipv6-interconnect-enabled"></a>&#x2022; [`ipv6\_interconnect\_enabled`](#gre-ipv4-ipv6-interconnect-enabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="gre-ipv4-keepalive-disabled"></a>&#x2022; [`keepalive_disabled`](#gre-ipv4-keepalive-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -178,23 +178,23 @@ A [`gre_ipv4`](#gre-ipv4) block supports the following:
 
 A [`gre_ipv6`](#gre-ipv6) block supports the following:
 
-<a id="gre-ipv6-customer-endpoint-ipv6"></a>&#x2022; [`customer_endpoint_ipv6`](#gre-ipv6-customer-endpoint-ipv6) - Optional String<br>Customer Endpoint IP. IPv6 address for the customer endpoint of the tunnel
+<a id="gre-ipv6-customer-endpoint-ipv6"></a>&#x2022; [`customer\_endpoint\_ipv6`](#gre-ipv6-customer-endpoint-ipv6) - Optional String<br>Customer Endpoint IP. IPv6 address for the customer endpoint of the tunnel
 
-<a id="gre-ipv6-ipv4-interconnect-disabled"></a>&#x2022; [`ipv4_interconnect_disabled`](#gre-ipv6-ipv4-interconnect-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="gre-ipv6-ipv4-interconnect-disabled"></a>&#x2022; [`ipv4\_interconnect\_disabled`](#gre-ipv6-ipv4-interconnect-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="gre-ipv6-ipv4-interconnect-enabled"></a>&#x2022; [`ipv4_interconnect_enabled`](#gre-ipv6-ipv4-interconnect-enabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="gre-ipv6-ipv4-interconnect-enabled"></a>&#x2022; [`ipv4\_interconnect\_enabled`](#gre-ipv6-ipv4-interconnect-enabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### IP In IP
 
-An [`ip_in_ip`](#ip-in-ip) block supports the following:
+An [`ip\_in\_ip`](#ip-in-ip) block supports the following:
 
-<a id="ip-in-ip-customer-endpoint-ipv4"></a>&#x2022; [`customer_endpoint_ipv4`](#ip-in-ip-customer-endpoint-ipv4) - Optional String<br>Customer Endpoint IP. IPv4 address for the customer endpoint of the tunnel
+<a id="ip-in-ip-customer-endpoint-ipv4"></a>&#x2022; [`customer\_endpoint\_ipv4`](#ip-in-ip-customer-endpoint-ipv4) - Optional String<br>Customer Endpoint IP. IPv4 address for the customer endpoint of the tunnel
 
 #### IPv6 To IPv6
 
-An [`ipv6_to_ipv6`](#ipv6-to-ipv6) block supports the following:
+An [`ipv6\_to\_ipv6`](#ipv6-to-ipv6) block supports the following:
 
-<a id="ipv6-to-ipv6-customer-endpoint-ipv6"></a>&#x2022; [`customer_endpoint_ipv6`](#ipv6-to-ipv6-customer-endpoint-ipv6) - Optional String<br>Customer Endpoint IP. IPv6 address for the customer endpoint of the tunnel
+<a id="ipv6-to-ipv6-customer-endpoint-ipv6"></a>&#x2022; [`customer\_endpoint\_ipv6`](#ipv6-to-ipv6-customer-endpoint-ipv6) - Optional String<br>Customer Endpoint IP. IPv6 address for the customer endpoint of the tunnel
 
 #### Timeouts
 
@@ -224,5 +224,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_infraprotect_tunnel.example system/example
+terraform import f5xc\_infraprotect\_tunnel.example system/example
 ```

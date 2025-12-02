@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_user_identification Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_user\_identification Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages user_identification creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc_user_identification (Data Source)
+# f5xc\_user\_identification (Data Source)
 
 Manages user_identification creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages user_identification creates a new object in the storage backend for meta
 # Retrieves information about an existing User Identification
 
 # Look up an existing User Identification by name
-data "f5xc_user_identification" "example" {
+data "f5xc\_user\_identification" "example" {
   name      = "example-user-identification"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "user_identification_id" {
-#   value = data.f5xc_user_identification.example.id
+# output "user\_identification\_id" {
+#   value = data.f5xc\_user\_identification.example.id
 # }
 ```
 

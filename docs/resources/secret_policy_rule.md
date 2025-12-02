@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc_secret_policy_rule Resource - terraform-provider-f5xc"
+page_title: "f5xc\_secret_policy\_rule Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages secret_policy_rule creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
+  Manages secret\_policy\_rule creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc_secret_policy_rule (Resource)
+# f5xc\_secret_policy\_rule (Resource)
 
-Manages secret_policy_rule creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
+Manages secret\_policy\_rule creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Secret Policy Rule API docs](https://docs.cloud.f5.com/docs-v2/api/secret-policy-rule) to learn more.
 
@@ -15,10 +15,10 @@ Manages secret_policy_rule creates a new object in storage backend for metadata.
 
 ```terraform
 # Secret Policy Rule Resource Example
-# Manages secret_policy_rule creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
+# Manages secret\_policy\_rule creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Secret Policy Rule configuration
-resource "f5xc_secret_policy_rule" "example" {
+resource "f5xc\_secret_policy\_rule" "example" {
   name      = "example-secret-policy-rule"
   namespace = "shared"
 
@@ -33,8 +33,8 @@ resource "f5xc_secret_policy_rule" "example" {
 
   # Resource-specific configuration
   # Matcher. A matcher specifies multiple criteria for matchi...
-  client_name_matcher {
-    # Configure client_name_matcher settings
+  client\_name\_matcher {
+    # Configure client\_name\_matcher settings
   }
   # Label Selector. This type can be used to establish a 'sel...
   client_selector {
@@ -62,11 +62,11 @@ resource "f5xc_secret_policy_rule" "example" {
 
 ### Spec Argument Reference
 
-<a id="action"></a>&#x2022; [`action`](#action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`<br>Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY Deny the request. - ALLOW: ALLOW Allow the request to proceed. - NEXT_POLICY_SET: NEXT_POLICY_SET Terminate evaluation of the current policy set and begin evaluating the next policy set in the chain. Note that the evaluation of any remaining policies in the current policy set is skipped. - NEXT_POLICY: NEXT_POLICY Terminate evaluation of the current policy and begin evaluating the next policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - LAST_POLICY: LAST_POLICY Terminate evaluation of the current policy and begin evaluating the last policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - GOTO_POLICY: GOTO_POLICY Terminate evaluation of the current policy and begin evaluating a specific policy in the policy set. The policy is specified using the goto_policy field in the rule and must be after the current policy in the policy set
+<a id="action"></a>&#x2022; [`action`](#action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`<br>Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT\_POLICY\_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY Deny the request. - ALLOW: ALLOW Allow the request to proceed. - NEXT\_POLICY\_SET: NEXT\_POLICY\_SET Terminate evaluation of the current policy set and begin evaluating the next policy set in the chain. Note that the evaluation of any remaining policies in the current policy set is skipped. - NEXT_POLICY: NEXT_POLICY Terminate evaluation of the current policy and begin evaluating the next policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - LAST_POLICY: LAST_POLICY Terminate evaluation of the current policy and begin evaluating the last policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - GOTO_POLICY: GOTO_POLICY Terminate evaluation of the current policy and begin evaluating a specific policy in the policy set. The policy is specified using the goto_policy field in the rule and must be after the current policy in the policy set
 
 -> **One of the following:**
 &#x2022; <a id="client-name"></a>[`client_name`](#client-name) - Optional String<br>Client Name. The name of the client trying to access the secret. Name of the client will be extracted from client TLS certificate. This predicate evaluates to true if client name matches the configured name
-<br><br>&#x2022; <a id="client-name-matcher"></a>[`client_name_matcher`](#client-name-matcher) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Client Name Matcher](#client-name-matcher) below for details.
+<br><br>&#x2022; <a id="client-name-matcher"></a>[`client\_name\_matcher`](#client-name-matcher) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Client Name Matcher](#client-name-matcher) below for details.
 <br><br>&#x2022; <a id="client-selector"></a>[`client_selector`](#client-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Client Selector](#client-selector) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
@@ -81,7 +81,7 @@ In addition to all arguments above, the following attributes are exported:
 
 #### Client Name Matcher
 
-A [`client_name_matcher`](#client-name-matcher) block supports the following:
+A [`client\_name\_matcher`](#client-name-matcher) block supports the following:
 
 <a id="client-name-matcher-exact-values"></a>&#x2022; [`exact_values`](#client-name-matcher-exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -111,5 +111,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_secret_policy_rule.example system/example
+terraform import f5xc\_secret_policy\_rule.example system/example
 ```

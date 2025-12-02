@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_dns_lb_health_check Resource - terraform-provider-f5xc"
+page_title: "f5xc\_dns_lb_health\_check Resource - terraform-provider-f5xc"
 subcategory: "DNS"
 description: |-
   Manages DNS Load Balancer Health Check in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 ---
 
-# f5xc_dns_lb_health_check (Resource)
+# f5xc\_dns_lb_health\_check (Resource)
 
 Manages DNS Load Balancer Health Check in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages DNS Load Balancer Health Check in a given namespace. If one already exis
 # Manages DNS Load Balancer Health Check in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
 # Basic DNS LB Health Check configuration
-resource "f5xc_dns_lb_health_check" "example" {
+resource "f5xc\_dns_lb_health\_check" "example" {
   name      = "example-dns-lb-health-check"
   namespace = "staging"
 
@@ -32,17 +32,17 @@ resource "f5xc_dns_lb_health_check" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: http_health_check, https_health_check, icmp_healt...
-  http_health_check {
-    # Configure http_health_check settings
+  # [OneOf: http\_health\_check, https\_health\_check, icmp_healt...
+  http\_health\_check {
+    # Configure http\_health\_check settings
   }
   # HTTP Health Check.
-  https_health_check {
-    # Configure https_health_check settings
+  https\_health\_check {
+    # Configure https\_health\_check settings
   }
   # Empty. This can be used for messages where no values are ...
-  icmp_health_check {
-    # Configure icmp_health_check settings
+  icmp\_health\_check {
+    # Configure icmp\_health\_check settings
   }
 }
 ```
@@ -67,12 +67,12 @@ resource "f5xc_dns_lb_health_check" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="http-health-check"></a>[`http_health_check`](#http-health-check) - Optional Block<br>HTTP Health Check<br>See [HTTP Health Check](#http-health-check) below for details.
-<br><br>&#x2022; <a id="https-health-check"></a>[`https_health_check`](#https-health-check) - Optional Block<br>HTTP Health Check<br>See [HTTPS Health Check](#https-health-check) below for details.
-<br><br>&#x2022; <a id="icmp-health-check"></a>[`icmp_health_check`](#icmp-health-check) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="tcp-health-check"></a>[`tcp_health_check`](#tcp-health-check) - Optional Block<br>TCP Health Check<br>See [TCP Health Check](#tcp-health-check) below for details.
-<br><br>&#x2022; <a id="tcp-hex-health-check"></a>[`tcp_hex_health_check`](#tcp-hex-health-check) - Optional Block<br>TCP Hex Health Check<br>See [TCP Hex Health Check](#tcp-hex-health-check) below for details.
-<br><br>&#x2022; <a id="udp-health-check"></a>[`udp_health_check`](#udp-health-check) - Optional Block<br>UDP Health Check<br>See [UDP Health Check](#udp-health-check) below for details.
+&#x2022; <a id="http-health-check"></a>[`http\_health\_check`](#http-health-check) - Optional Block<br>HTTP Health Check<br>See [HTTP Health Check](#http-health-check) below for details.
+<br><br>&#x2022; <a id="https-health-check"></a>[`https\_health\_check`](#https-health-check) - Optional Block<br>HTTP Health Check<br>See [HTTPS Health Check](#https-health-check) below for details.
+<br><br>&#x2022; <a id="icmp-health-check"></a>[`icmp\_health\_check`](#icmp-health-check) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="tcp-health-check"></a>[`tcp\_health\_check`](#tcp-health-check) - Optional Block<br>TCP Health Check<br>See [TCP Health Check](#tcp-health-check) below for details.
+<br><br>&#x2022; <a id="tcp-hex-health-check"></a>[`tcp\_hex_health\_check`](#tcp-hex-health-check) - Optional Block<br>TCP Hex Health Check<br>See [TCP Hex Health Check](#tcp-hex-health-check) below for details.
+<br><br>&#x2022; <a id="udp-health-check"></a>[`udp\_health\_check`](#udp-health-check) - Optional Block<br>UDP Health Check<br>See [UDP Health Check](#udp-health-check) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -86,11 +86,11 @@ In addition to all arguments above, the following attributes are exported:
 
 #### HTTP Health Check
 
-A [`http_health_check`](#http-health-check) block supports the following:
+A [`http\_health\_check`](#http-health-check) block supports the following:
 
-<a id="http-health-check-health-check-port"></a>&#x2022; [`health_check_port`](#http-health-check-health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
+<a id="http-health-check-health-check-port"></a>&#x2022; [`health\_check\_port`](#http-health-check-health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
 
-<a id="http-health-check-health-check-secondary-port"></a>&#x2022; [`health_check_secondary_port`](#http-health-check-health-check-secondary-port) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
+<a id="http-health-check-health-check-secondary-port"></a>&#x2022; [`health\_check_secondary\_port`](#http-health-check-health-check-secondary-port) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
 
 <a id="http-health-check-receive"></a>&#x2022; [`receive`](#http-health-check-receive) - Optional String<br>Receive String. Regular expression used to match against the response to the health check's request. Mark node up upon receipt of a successful regular expression match. Uses re2 regular expression syntax
 
@@ -98,11 +98,11 @@ A [`http_health_check`](#http-health-check) block supports the following:
 
 #### HTTPS Health Check
 
-A [`https_health_check`](#https-health-check) block supports the following:
+A [`https\_health\_check`](#https-health-check) block supports the following:
 
-<a id="https-health-check-health-check-port"></a>&#x2022; [`health_check_port`](#https-health-check-health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
+<a id="https-health-check-health-check-port"></a>&#x2022; [`health\_check\_port`](#https-health-check-health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
 
-<a id="https-health-check-health-check-secondary-port"></a>&#x2022; [`health_check_secondary_port`](#https-health-check-health-check-secondary-port) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
+<a id="https-health-check-health-check-secondary-port"></a>&#x2022; [`health\_check_secondary\_port`](#https-health-check-health-check-secondary-port) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
 
 <a id="https-health-check-receive"></a>&#x2022; [`receive`](#https-health-check-receive) - Optional String<br>Receive String. Regular expression used to match against the response to the health check's request. Mark node up upon receipt of a successful regular expression match. Uses re2 regular expression syntax
 
@@ -110,11 +110,11 @@ A [`https_health_check`](#https-health-check) block supports the following:
 
 #### TCP Health Check
 
-A [`tcp_health_check`](#tcp-health-check) block supports the following:
+A [`tcp\_health\_check`](#tcp-health-check) block supports the following:
 
-<a id="tcp-health-check-health-check-port"></a>&#x2022; [`health_check_port`](#tcp-health-check-health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
+<a id="tcp-health-check-health-check-port"></a>&#x2022; [`health\_check\_port`](#tcp-health-check-health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
 
-<a id="tcp-health-check-health-check-secondary-port"></a>&#x2022; [`health_check_secondary_port`](#tcp-health-check-health-check-secondary-port) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
+<a id="tcp-health-check-health-check-secondary-port"></a>&#x2022; [`health\_check_secondary\_port`](#tcp-health-check-health-check-secondary-port) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
 
 <a id="tcp-health-check-receive"></a>&#x2022; [`receive`](#tcp-health-check-receive) - Optional String<br>Receive String. Regular expression used to match against the response to the monitor's request. Mark node up upon receipt of a successful regular expression match. Uses re2 regular expression syntax
 
@@ -122,11 +122,11 @@ A [`tcp_health_check`](#tcp-health-check) block supports the following:
 
 #### TCP Hex Health Check
 
-A [`tcp_hex_health_check`](#tcp-hex-health-check) block supports the following:
+A [`tcp\_hex_health\_check`](#tcp-hex-health-check) block supports the following:
 
-<a id="tcp-hex-health-check-health-check-port"></a>&#x2022; [`health_check_port`](#tcp-hex-health-check-health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
+<a id="tcp-hex-health-check-health-check-port"></a>&#x2022; [`health\_check\_port`](#tcp-hex-health-check-health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
 
-<a id="tcp-hex-health-check-health-check-secondary-port"></a>&#x2022; [`health_check_secondary_port`](#tcp-hex-health-check-health-check-secondary-port) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
+<a id="tcp-hex-health-check-health-check-secondary-port"></a>&#x2022; [`health\_check_secondary\_port`](#tcp-hex-health-check-health-check-secondary-port) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
 
 <a id="tcp-hex-health-check-receive"></a>&#x2022; [`receive`](#tcp-hex-health-check-receive) - Optional String<br>Receive Payload. Hex encoded raw bytes expected in the response
 
@@ -146,11 +146,11 @@ A [`timeouts`](#timeouts) block supports the following:
 
 #### UDP Health Check
 
-An [`udp_health_check`](#udp-health-check) block supports the following:
+An [`udp\_health\_check`](#udp-health-check) block supports the following:
 
-<a id="udp-health-check-health-check-port"></a>&#x2022; [`health_check_port`](#udp-health-check-health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
+<a id="udp-health-check-health-check-port"></a>&#x2022; [`health\_check\_port`](#udp-health-check-health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
 
-<a id="udp-health-check-health-check-secondary-port"></a>&#x2022; [`health_check_secondary_port`](#udp-health-check-health-check-secondary-port) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
+<a id="udp-health-check-health-check-secondary-port"></a>&#x2022; [`health\_check_secondary\_port`](#udp-health-check-health-check-secondary-port) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
 
 <a id="udp-health-check-receive"></a>&#x2022; [`receive`](#udp-health-check-receive) - Optional String<br>Receive String. UDP response to be matched. It can be a regex
 
@@ -162,5 +162,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_dns_lb_health_check.example system/example
+terraform import f5xc\_dns_lb_health\_check.example system/example
 ```

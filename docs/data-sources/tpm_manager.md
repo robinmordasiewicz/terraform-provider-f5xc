@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_tpm_manager Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_tpm\_manager Data Source - terraform-provider-f5xc"
 subcategory: "Integrations"
 description: |-
   Manages a TpmManager resource in F5 Distributed Cloud for create a tpm manager configuration.
 ---
 
-# f5xc_tpm_manager (Data Source)
+# f5xc\_tpm\_manager (Data Source)
 
 Manages a TpmManager resource in F5 Distributed Cloud for create a tpm manager configuration.
 
@@ -18,14 +18,14 @@ Manages a TpmManager resource in F5 Distributed Cloud for create a tpm manager c
 # Retrieves information about an existing Tpm Manager
 
 # Look up an existing Tpm Manager by name
-data "f5xc_tpm_manager" "example" {
+data "f5xc\_tpm\_manager" "example" {
   name      = "example-tpm-manager"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "tpm_manager_id" {
-#   value = data.f5xc_tpm_manager.example.id
+# output "tpm\_manager\_id" {
+#   value = data.f5xc\_tpm\_manager.example.id
 # }
 ```
 

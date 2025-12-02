@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc_app_api_group Resource - terraform-provider-f5xc"
+page_title: "f5xc\_app_api\_group Resource - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
-  Manages app_api_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  Manages app\_api\_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc_app_api_group (Resource)
+# f5xc\_app_api\_group (Resource)
 
-Manages app_api_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+Manages app\_api\_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [App API Group API docs](https://docs.cloud.f5.com/docs-v2/api/views-app-api-group) to learn more.
 
@@ -15,10 +15,10 @@ Manages app_api_group creates a new object in the storage backend for metadata.n
 
 ```terraform
 # App API Group Resource Example
-# Manages app_api_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# Manages app\_api\_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic App API Group configuration
-resource "f5xc_app_api_group" "example" {
+resource "f5xc\_app_api\_group" "example" {
   name      = "example-app-api-group"
   namespace = "staging"
 
@@ -32,9 +32,9 @@ resource "f5xc_app_api_group" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: bigip_virtual_server, cdn_loadbalancer, http_load...
-  bigip_virtual_server {
-    # Configure bigip_virtual_server settings
+  # [OneOf: bigip\_virtual\_server, cdn_loadbalancer, http_load...
+  bigip\_virtual\_server {
+    # Configure bigip\_virtual\_server settings
   }
   # API Group Scope CDN Loadbalancer. Set the scope of the AP...
   cdn_loadbalancer {
@@ -67,7 +67,7 @@ resource "f5xc_app_api_group" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="bigip-virtual-server"></a>[`bigip_virtual_server`](#bigip-virtual-server) - Optional Block<br>API Group Scope BIGIP Virtual Server. Set the scope of the API Group to a specific BIGIP Virtual Server<br>See [Bigip Virtual Server](#bigip-virtual-server) below for details.
+&#x2022; <a id="bigip-virtual-server"></a>[`bigip\_virtual\_server`](#bigip-virtual-server) - Optional Block<br>API Group Scope BIGIP Virtual Server. Set the scope of the API Group to a specific BIGIP Virtual Server<br>See [Bigip Virtual Server](#bigip-virtual-server) below for details.
 <br><br>&#x2022; <a id="cdn-loadbalancer"></a>[`cdn_loadbalancer`](#cdn-loadbalancer) - Optional Block<br>API Group Scope CDN Loadbalancer. Set the scope of the API Group to a specific CDN Loadbalancer<br>See [CDN Loadbalancer](#cdn-loadbalancer) below for details.
 <br><br>&#x2022; <a id="http-loadbalancer"></a>[`http_loadbalancer`](#http-loadbalancer) - Optional Block<br>API Group Scope HTTP Loadbalancer. Set the scope of the API Group to a specific HTTP Loadbalancer<br>See [HTTP Loadbalancer](#http-loadbalancer) below for details.
 
@@ -85,13 +85,13 @@ In addition to all arguments above, the following attributes are exported:
 
 #### Bigip Virtual Server
 
-A [`bigip_virtual_server`](#bigip-virtual-server) block supports the following:
+A [`bigip\_virtual\_server`](#bigip-virtual-server) block supports the following:
 
-<a id="bigip-virtual-server-bigip-virtual-server"></a>&#x2022; [`bigip_virtual_server`](#bigip-virtual-server-bigip-virtual-server) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Bigip Virtual Server](#bigip-virtual-server-bigip-virtual-server) below.
+<a id="bigip-virtual-server-bigip-virtual-server"></a>&#x2022; [`bigip\_virtual\_server`](#bigip-virtual-server-bigip-virtual-server) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Bigip Virtual Server](#bigip-virtual-server-bigip-virtual-server) below.
 
 #### Bigip Virtual Server Bigip Virtual Server
 
-A [`bigip_virtual_server`](#bigip-virtual-server-bigip-virtual-server) block (within [`bigip_virtual_server`](#bigip-virtual-server)) supports the following:
+A [`bigip\_virtual\_server`](#bigip-virtual-server-bigip-virtual-server) block (within [`bigip\_virtual\_server`](#bigip-virtual-server)) supports the following:
 
 <a id="bigip-virtual-server-bigip-virtual-server-name"></a>&#x2022; [`name`](#bigip-virtual-server-bigip-virtual-server-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -157,5 +157,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_app_api_group.example system/example
+terraform import f5xc\_app_api\_group.example system/example
 ```

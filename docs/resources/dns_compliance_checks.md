@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_dns_compliance_checks Resource - terraform-provider-f5xc"
+page_title: "f5xc\_dns_compliance\_checks Resource - terraform-provider-f5xc"
 subcategory: "DNS"
 description: |-
   Manages DNS Compliance Checks Specification in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 ---
 
-# f5xc_dns_compliance_checks (Resource)
+# f5xc\_dns_compliance\_checks (Resource)
 
 Manages DNS Compliance Checks Specification in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages DNS Compliance Checks Specification in a given namespace. If one already
 # Manages DNS Compliance Checks Specification in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 
 # Basic DNS Compliance Checks configuration
-resource "f5xc_dns_compliance_checks" "example" {
+resource "f5xc\_dns_compliance\_checks" "example" {
   name      = "example-dns-compliance-checks"
   namespace = "staging"
 
@@ -52,9 +52,9 @@ resource "f5xc_dns_compliance_checks" "example" {
 
 ### Spec Argument Reference
 
-<a id="disallowed-query-type-list"></a>&#x2022; [`disallowed_query_type_list`](#disallowed-query-type-list) - Optional List  Defaults to `QUERY`<br>Possible values are `QUERY`, `IQUERY`, `STATUS`, `NOTIFY`, `UPDATE`<br>Disallowed Query Type Values. Disallowed Query Type Values
+<a id="disallowed-query-type-list"></a>&#x2022; [`disallowed\_query_type\_list`](#disallowed-query-type-list) - Optional List  Defaults to `QUERY`<br>Possible values are `QUERY`, `IQUERY`, `STATUS`, `NOTIFY`, `UPDATE`<br>Disallowed Query Type Values. Disallowed Query Type Values
 
-<a id="disallowed-resource-record-type-list"></a>&#x2022; [`disallowed_resource_record_type_list`](#disallowed-resource-record-type-list) - Optional List  Defaults to `T`<br>Possible values are `T`, `A`, `NS`, `MD`, `MF`, `CNAME`, `SOA`, `MB`, `MG`, `MR`, `NULL`, `WKS`, `PTR`, `HINFO`, `MINFO`, `MX`, `TXT`, `RP`, `AFSDB`, `X25`, `ISDN`, `RT`, `NSAP`, `NSAP_PTR`, `SIG`, `KEY`, `PX`, `GPOS`, `AAAA`, `LOC`, `NXT`, `EID`, `NIMLOC`, `SRV`, `ATMA`, `NAPTR`, `KX`, `CERT`, `A6`, `DNAME`, `SINK`, `OPT`, `APL`, `DS`, `SSHFP`, `IPSECKEY`, `RRSIG`, `NSEC`, `DNSKEY`, `DHCID`, `NSEC3`, `NSEC3PARAM`, `TLSA`, `SMIMEA`, `HIP`, `NINFO`, `RKEY`, `TALINK`, `CDS`, `CDNSKEY`, `OPENPGPKEY`, `CSYNC`, `SPF`, `UINFO`, `UID`, `GID`, `UNSPEC`, `NID`, `L32`, `L64`, `LP`, `EUI48`, `EUI64`, `TKEY`, `TSIG`, `IXFR`, `AXFR`, `MAILB`, `MAILA`, `URI`, `CAA`, `TA`, `DLV`<br>Disallowed Resource Record Types. Disallowed Resource Record Type List
+<a id="disallowed-resource-record-type-list"></a>&#x2022; [`disallowed\_resource_record_type\_list`](#disallowed-resource-record-type-list) - Optional List  Defaults to `T`<br>Possible values are `T`, `A`, `NS`, `MD`, `MF`, `CNAME`, `SOA`, `MB`, `MG`, `MR`, `NULL`, `WKS`, `PTR`, `HINFO`, `MINFO`, `MX`, `TXT`, `RP`, `AFSDB`, `X25`, `ISDN`, `RT`, `NSAP`, `NSAP_PTR`, `SIG`, `KEY`, `PX`, `GPOS`, `AAAA`, `LOC`, `NXT`, `EID`, `NIMLOC`, `SRV`, `ATMA`, `NAPTR`, `KX`, `CERT`, `A6`, `DNAME`, `SINK`, `OPT`, `APL`, `DS`, `SSHFP`, `IPSECKEY`, `RRSIG`, `NSEC`, `DNSKEY`, `DHCID`, `NSEC3`, `NSEC3PARAM`, `TLSA`, `SMIMEA`, `HIP`, `NINFO`, `RKEY`, `TALINK`, `CDS`, `CDNSKEY`, `OPENPGPKEY`, `CSYNC`, `SPF`, `UINFO`, `UID`, `GID`, `UNSPEC`, `NID`, `L32`, `L64`, `LP`, `EUI48`, `EUI64`, `TKEY`, `TSIG`, `IXFR`, `AXFR`, `MAILB`, `MAILA`, `URI`, `CAA`, `TA`, `DLV`<br>Disallowed Resource Record Types. Disallowed Resource Record Type List
 
 <a id="domain-denylist"></a>&#x2022; [`domain_denylist`](#domain-denylist) - Optional List<br>Domain Deny list. List of domains to be denied by configuration object
 
@@ -86,5 +86,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_dns_compliance_checks.example system/example
+terraform import f5xc\_dns_compliance\_checks.example system/example
 ```

@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_report_config Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_report\_config Data Source - terraform-provider-f5xc"
 subcategory: "Monitoring"
 description: |-
   Manages a ReportConfig resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.
 ---
 
-# f5xc_report_config (Data Source)
+# f5xc\_report\_config (Data Source)
 
 Manages a ReportConfig resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.
 
@@ -18,14 +18,14 @@ Manages a ReportConfig resource in F5 Distributed Cloud for report configuration
 # Retrieves information about an existing Report Config
 
 # Look up an existing Report Config by name
-data "f5xc_report_config" "example" {
+data "f5xc\_report\_config" "example" {
   name      = "example-report-config"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "report_config_id" {
-#   value = data.f5xc_report_config.example.id
+# output "report\_config\_id" {
+#   value = data.f5xc\_report\_config.example.id
 # }
 ```
 

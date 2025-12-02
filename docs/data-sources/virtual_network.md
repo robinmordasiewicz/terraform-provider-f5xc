@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_virtual_network Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_virtual\_network Data Source - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
   Manages virtual network in given namespace in F5 Distributed Cloud.
 ---
 
-# f5xc_virtual_network (Data Source)
+# f5xc\_virtual\_network (Data Source)
 
 Manages virtual network in given namespace in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages virtual network in given namespace in F5 Distributed Cloud.
 # Retrieves information about an existing Virtual Network
 
 # Look up an existing Virtual Network by name
-data "f5xc_virtual_network" "example" {
+data "f5xc\_virtual\_network" "example" {
   name      = "example-virtual-network"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "virtual_network_id" {
-#   value = data.f5xc_virtual_network.example.id
+# output "virtual\_network\_id" {
+#   value = data.f5xc\_virtual\_network.example.id
 # }
 ```
 

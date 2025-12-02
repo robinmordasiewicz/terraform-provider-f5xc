@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_api_testing Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_api\_testing Data Source - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
   Manages a APITesting resource in F5 Distributed Cloud.
 ---
 
-# f5xc_api_testing (Data Source)
+# f5xc\_api\_testing (Data Source)
 
 Manages a APITesting resource in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages a APITesting resource in F5 Distributed Cloud.
 # Retrieves information about an existing API Testing
 
 # Look up an existing API Testing by name
-data "f5xc_api_testing" "example" {
+data "f5xc\_api\_testing" "example" {
   name      = "example-api-testing"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "api_testing_id" {
-#   value = data.f5xc_api_testing.example.id
+# output "api\_testing\_id" {
+#   value = data.f5xc\_api\_testing.example.id
 # }
 ```
 

@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_virtual_k8s Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_virtual\_k8s Data Source - terraform-provider-f5xc"
 subcategory: "Kubernetes"
 description: |-
   Manages virtual_k8s will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 ---
 
-# f5xc_virtual_k8s (Data Source)
+# f5xc\_virtual\_k8s (Data Source)
 
 Manages virtual_k8s will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages virtual_k8s will create the object in the storage backend for namespace 
 # Retrieves information about an existing Virtual K8s
 
 # Look up an existing Virtual K8s by name
-data "f5xc_virtual_k8s" "example" {
+data "f5xc\_virtual\_k8s" "example" {
   name      = "example-virtual-k8s"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "virtual_k8s_id" {
-#   value = data.f5xc_virtual_k8s.example.id
+# output "virtual\_k8s\_id" {
+#   value = data.f5xc\_virtual\_k8s.example.id
 # }
 ```
 

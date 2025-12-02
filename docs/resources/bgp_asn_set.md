@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc_bgp_asn_set Resource - terraform-provider-f5xc"
+page_title: "f5xc\_bgp_asn\_set Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages bgp_asn_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  Manages bgp\_asn\_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc_bgp_asn_set (Resource)
+# f5xc\_bgp_asn\_set (Resource)
 
-Manages bgp_asn_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+Manages bgp\_asn\_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [BGP Asn Set API docs](https://docs.cloud.f5.com/docs-v2/api/bgp-asn-set) to learn more.
 
@@ -15,10 +15,10 @@ Manages bgp_asn_set creates a new object in the storage backend for metadata.nam
 
 ```terraform
 # BGP Asn Set Resource Example
-# Manages bgp_asn_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# Manages bgp\_asn\_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic BGP Asn Set configuration
-resource "f5xc_bgp_asn_set" "example" {
+resource "f5xc\_bgp_asn\_set" "example" {
   name      = "example-bgp-asn-set"
   namespace = "system"
 
@@ -82,5 +82,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_bgp_asn_set.example system/example
+terraform import f5xc\_bgp_asn\_set.example system/example
 ```

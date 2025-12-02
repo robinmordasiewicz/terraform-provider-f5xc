@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_secret_policy Resource - terraform-provider-f5xc"
+page_title: "f5xc\_secret\_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages secret_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc_secret_policy (Resource)
+# f5xc\_secret\_policy (Resource)
 
 Manages secret_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages secret_policy creates a new object in the storage backend for metadata.n
 # Manages secret_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Secret Policy configuration
-resource "f5xc_secret_policy" "example" {
+resource "f5xc\_secret\_policy" "example" {
   name      = "example-secret-policy"
   namespace = "shared"
 
@@ -71,7 +71,7 @@ resource "f5xc_secret_policy" "example" {
 
 <a id="allow-f5xc"></a>&#x2022; [`allow_f5xc`](#allow-f5xc) - Optional Bool<br>Allow F5XC. if allow_f5xc is set to true, it allows relevant F5XC infrastructure services to decrypt the secret encrypted using this policy
 
-<a id="decrypt-cache-timeout"></a>&#x2022; [`decrypt_cache_timeout`](#decrypt-cache-timeout) - Optional String<br>Decrypt Cache Timeout. decrypt_cache_timeout contains the amount of time a decrypted secret is cached in wingman. Value for this parameter is a string ending in the suffix 's' (indicating seconds), suffix 'm' (indicating minutes) or suffix 'h' (indicating hours)
+<a id="decrypt-cache-timeout"></a>&#x2022; [`decrypt\_cache\_timeout`](#decrypt-cache-timeout) - Optional String<br>Decrypt Cache Timeout. decrypt\_cache\_timeout contains the amount of time a decrypted secret is cached in wingman. Value for this parameter is a string ending in the suffix 's' (indicating seconds), suffix 'm' (indicating minutes) or suffix 'h' (indicating hours)
 
 <a id="rule-list"></a>&#x2022; [`rule_list`](#rule-list) - Optional Block<br>Rule List. A list of rules. The order of evaluation of the rules depends on the rule combining algorithm<br>See [Rule List](#rule-list) below for details.
 
@@ -97,7 +97,7 @@ A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports 
 
 <a id="rule-list-rules-metadata"></a>&#x2022; [`metadata`](#rule-list-rules-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#rule-list-rules-metadata) below.
 
-<a id="rule-list-rules-spec"></a>&#x2022; [`spec`](#rule-list-rules-spec) - Optional Block<br>Global Specifications. A secret_policy_rule object consists of an unordered list of predicates and an action. The predicates are evaluated against a set of input fields that are extracted from client certificate. A rule is considered to match if all predicates in the rule evaluate to true for that request. Any predicates that are not specified in a rule are implicitly considered to be true. If a rule is matched, the action specified for the rule is enforced for that request. A secret_policy_rule can be part of exactly one secret_policy and must belong to the same namespace as the secret policy<br>See [Spec](#rule-list-rules-spec) below.
+<a id="rule-list-rules-spec"></a>&#x2022; [`spec`](#rule-list-rules-spec) - Optional Block<br>Global Specifications. A secret\_policy\_rule object consists of an unordered list of predicates and an action. The predicates are evaluated against a set of input fields that are extracted from client certificate. A rule is considered to match if all predicates in the rule evaluate to true for that request. Any predicates that are not specified in a rule are implicitly considered to be true. If a rule is matched, the action specified for the rule is enforced for that request. A secret\_policy\_rule can be part of exactly one secret_policy and must belong to the same namespace as the secret policy<br>See [Spec](#rule-list-rules-spec) below.
 
 #### Rule List Rules Metadata
 
@@ -111,17 +111,17 @@ A [`metadata`](#rule-list-rules-metadata) block (within [`rule_list.rules`](#rul
 
 A [`spec`](#rule-list-rules-spec) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
-<a id="rule-list-rules-spec-action"></a>&#x2022; [`action`](#rule-list-rules-spec-action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`<br>Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY Deny the request. - ALLOW: ALLOW Allow the request to proceed. - NEXT_POLICY_SET: NEXT_POLICY_SET Terminate evaluation of the current policy set and begin evaluating the next policy set in the chain. Note that the evaluation of any remaining policies in the current policy set is skipped. - NEXT_POLICY: NEXT_POLICY Terminate evaluation of the current policy and begin evaluating the next policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - LAST_POLICY: LAST_POLICY Terminate evaluation of the current policy and begin evaluating the last policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - GOTO_POLICY: GOTO_POLICY Terminate evaluation of the current policy and begin evaluating a specific policy in the policy set. The policy is specified using the goto_policy field in the rule and must be after the current policy in the policy set
+<a id="rule-list-rules-spec-action"></a>&#x2022; [`action`](#rule-list-rules-spec-action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`<br>Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT\_POLICY\_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY Deny the request. - ALLOW: ALLOW Allow the request to proceed. - NEXT\_POLICY\_SET: NEXT\_POLICY\_SET Terminate evaluation of the current policy set and begin evaluating the next policy set in the chain. Note that the evaluation of any remaining policies in the current policy set is skipped. - NEXT_POLICY: NEXT_POLICY Terminate evaluation of the current policy and begin evaluating the next policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - LAST_POLICY: LAST_POLICY Terminate evaluation of the current policy and begin evaluating the last policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - GOTO_POLICY: GOTO_POLICY Terminate evaluation of the current policy and begin evaluating a specific policy in the policy set. The policy is specified using the goto_policy field in the rule and must be after the current policy in the policy set
 
 <a id="rule-list-rules-spec-client-name"></a>&#x2022; [`client_name`](#rule-list-rules-spec-client-name) - Optional String<br>Client Name. The name of the client trying to access the secret. Name of the client will be extracted from client TLS certificate. This predicate evaluates to true if client name matches the configured name
 
-<a id="rule-list-rules-spec-client-name-matcher"></a>&#x2022; [`client_name_matcher`](#rule-list-rules-spec-client-name-matcher) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Client Name Matcher](#rule-list-rules-spec-client-name-matcher) below.
+<a id="rule-list-rules-spec-client-name-matcher"></a>&#x2022; [`client\_name\_matcher`](#rule-list-rules-spec-client-name-matcher) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Client Name Matcher](#rule-list-rules-spec-client-name-matcher) below.
 
 <a id="rule-list-rules-spec-client-selector"></a>&#x2022; [`client_selector`](#rule-list-rules-spec-client-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Client Selector](#rule-list-rules-spec-client-selector) below.
 
 #### Rule List Rules Spec Client Name Matcher
 
-A [`client_name_matcher`](#rule-list-rules-spec-client-name-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
+A [`client\_name\_matcher`](#rule-list-rules-spec-client-name-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
 <a id="rule-list-rules-spec-client-name-matcher-exact-values"></a>&#x2022; [`exact_values`](#rule-list-rules-spec-client-name-matcher-exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -153,5 +153,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_secret_policy.example system/example
+terraform import f5xc\_secret\_policy.example system/example
 ```

@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_dns_domain Resource - terraform-provider-f5xc"
+page_title: "f5xc\_dns\_domain Resource - terraform-provider-f5xc"
 subcategory: "DNS"
 description: |-
   Manages DNS Domain in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 ---
 
-# f5xc_dns_domain (Resource)
+# f5xc\_dns\_domain (Resource)
 
 Manages DNS Domain in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages DNS Domain in a given namespace. If one already exist it will give a err
 # Manages DNS Domain in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
 # Basic DNS Domain configuration
-resource "f5xc_dns_domain" "example" {
+resource "f5xc\_dns\_domain" "example" {
   name      = "example-dns-domain"
   namespace = "staging"
 
@@ -90,5 +90,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_dns_domain.example system/example
+terraform import f5xc\_dns\_domain.example system/example
 ```

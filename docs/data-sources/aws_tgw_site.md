@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_aws_tgw_site Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_aws_tgw\_site Data Source - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
   Manages a AWSTGWSite resource in F5 Distributed Cloud for deploying F5 sites connected via AWS Transit Gateway.
 ---
 
-# f5xc_aws_tgw_site (Data Source)
+# f5xc\_aws_tgw\_site (Data Source)
 
 Manages a AWSTGWSite resource in F5 Distributed Cloud for deploying F5 sites connected via AWS Transit Gateway.
 
@@ -18,14 +18,14 @@ Manages a AWSTGWSite resource in F5 Distributed Cloud for deploying F5 sites con
 # Retrieves information about an existing AWS TGW Site
 
 # Look up an existing AWS TGW Site by name
-data "f5xc_aws_tgw_site" "example" {
+data "f5xc\_aws_tgw\_site" "example" {
   name      = "example-aws-tgw-site"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "aws_tgw_site_id" {
-#   value = data.f5xc_aws_tgw_site.example.id
+# output "aws\_tgw_site\_id" {
+#   value = data.f5xc\_aws_tgw\_site.example.id
 # }
 ```
 

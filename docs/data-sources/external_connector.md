@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_external_connector Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_external\_connector Data Source - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
   Manages a ExternalConnector resource in F5 Distributed Cloud for external_connector configuration configuration.
 ---
 
-# f5xc_external_connector (Data Source)
+# f5xc\_external\_connector (Data Source)
 
 Manages a ExternalConnector resource in F5 Distributed Cloud for external_connector configuration configuration.
 
@@ -18,14 +18,14 @@ Manages a ExternalConnector resource in F5 Distributed Cloud for external_connec
 # Retrieves information about an existing External Connector
 
 # Look up an existing External Connector by name
-data "f5xc_external_connector" "example" {
+data "f5xc\_external\_connector" "example" {
   name      = "example-external-connector"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "external_connector_id" {
-#   value = data.f5xc_external_connector.example.id
+# output "external\_connector\_id" {
+#   value = data.f5xc\_external\_connector.example.id
 # }
 ```
 

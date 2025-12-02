@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_usb_policy Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_usb\_policy Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages a UsbPolicy resource in F5 Distributed Cloud for creates a new usb policy configuration.
 ---
 
-# f5xc_usb_policy (Data Source)
+# f5xc\_usb\_policy (Data Source)
 
 Manages a UsbPolicy resource in F5 Distributed Cloud for creates a new usb policy configuration.
 
@@ -18,14 +18,14 @@ Manages a UsbPolicy resource in F5 Distributed Cloud for creates a new usb polic
 # Retrieves information about an existing Usb Policy
 
 # Look up an existing Usb Policy by name
-data "f5xc_usb_policy" "example" {
+data "f5xc\_usb\_policy" "example" {
   name      = "example-usb-policy"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "usb_policy_id" {
-#   value = data.f5xc_usb_policy.example.id
+# output "usb\_policy\_id" {
+#   value = data.f5xc\_usb\_policy.example.id
 # }
 ```
 

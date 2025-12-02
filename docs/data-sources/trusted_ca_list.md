@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_trusted_ca_list Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_trusted_ca\_list Data Source - terraform-provider-f5xc"
 subcategory: "Certificates"
 description: |-
   Manages a TrustedCAList resource in F5 Distributed Cloud for trusted certificate authority list management.
 ---
 
-# f5xc_trusted_ca_list (Data Source)
+# f5xc\_trusted_ca\_list (Data Source)
 
 Manages a TrustedCAList resource in F5 Distributed Cloud for trusted certificate authority list management.
 
@@ -18,14 +18,14 @@ Manages a TrustedCAList resource in F5 Distributed Cloud for trusted certificate
 # Retrieves information about an existing Trusted Ca List
 
 # Look up an existing Trusted Ca List by name
-data "f5xc_trusted_ca_list" "example" {
+data "f5xc\_trusted_ca\_list" "example" {
   name      = "example-trusted-ca-list"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "trusted_ca_list_id" {
-#   value = data.f5xc_trusted_ca_list.example.id
+# output "trusted\_ca_list\_id" {
+#   value = data.f5xc\_trusted_ca\_list.example.id
 # }
 ```
 

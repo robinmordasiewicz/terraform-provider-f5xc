@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_forward_proxy_policy Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_forward_proxy\_policy Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages a ForwardProxyPolicy resource in F5 Distributed Cloud for forward proxy policy configuration.
 ---
 
-# f5xc_forward_proxy_policy (Data Source)
+# f5xc\_forward_proxy\_policy (Data Source)
 
 Manages a ForwardProxyPolicy resource in F5 Distributed Cloud for forward proxy policy configuration.
 
@@ -18,14 +18,14 @@ Manages a ForwardProxyPolicy resource in F5 Distributed Cloud for forward proxy 
 # Retrieves information about an existing Forward Proxy Policy
 
 # Look up an existing Forward Proxy Policy by name
-data "f5xc_forward_proxy_policy" "example" {
+data "f5xc\_forward_proxy\_policy" "example" {
   name      = "example-forward-proxy-policy"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "forward_proxy_policy_id" {
-#   value = data.f5xc_forward_proxy_policy.example.id
+# output "forward\_proxy_policy\_id" {
+#   value = data.f5xc\_forward_proxy\_policy.example.id
 # }
 ```
 

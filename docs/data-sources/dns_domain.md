@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_dns_domain Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_dns\_domain Data Source - terraform-provider-f5xc"
 subcategory: "DNS"
 description: |-
   Manages DNS Domain in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 ---
 
-# f5xc_dns_domain (Data Source)
+# f5xc\_dns\_domain (Data Source)
 
 Manages DNS Domain in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages DNS Domain in a given namespace. If one already exist it will give a err
 # Retrieves information about an existing DNS Domain
 
 # Look up an existing DNS Domain by name
-data "f5xc_dns_domain" "example" {
+data "f5xc\_dns\_domain" "example" {
   name      = "example-dns-domain"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "dns_domain_id" {
-#   value = data.f5xc_dns_domain.example.id
+# output "dns\_domain\_id" {
+#   value = data.f5xc\_dns\_domain.example.id
 # }
 ```
 

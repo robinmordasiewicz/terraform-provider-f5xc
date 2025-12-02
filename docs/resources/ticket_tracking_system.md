@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_ticket_tracking_system Resource - terraform-provider-f5xc"
+page_title: "f5xc\_ticket_tracking\_system Resource - terraform-provider-f5xc"
 subcategory: "Integrations"
 description: |-
   Manages Ticket Tracking System in F5 Distributed Cloud.
 ---
 
-# f5xc_ticket_tracking_system (Resource)
+# f5xc\_ticket_tracking\_system (Resource)
 
 Manages Ticket Tracking System in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages Ticket Tracking System in F5 Distributed Cloud.
 # Manages Ticket Tracking System in F5 Distributed Cloud.
 
 # Basic Ticket Tracking System configuration
-resource "f5xc_ticket_tracking_system" "example" {
+resource "f5xc\_ticket_tracking\_system" "example" {
   name      = "example-ticket-tracking-system"
   namespace = "staging"
 
@@ -37,8 +37,8 @@ resource "f5xc_ticket_tracking_system" "example" {
     # Configure jira_config settings
   }
   # JIRA Ad-hoc REST API Configuration Type. v3 API Basic Aut...
-  adhoc_rest_api {
-    # Configure adhoc_rest_api settings
+  adhoc\_rest\_api {
+    # Configure adhoc\_rest\_api settings
   }
 }
 ```
@@ -78,11 +78,11 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`jira_config`](#jira-config) block supports the following:
 
-<a id="jira-config-adhoc-rest-api"></a>&#x2022; [`adhoc_rest_api`](#jira-config-adhoc-rest-api) - Optional Block<br>JIRA Ad-hoc REST API Configuration Type. v3 API Basic Auth for Ad-hoc API Calls - `HTTPS://developer.atlassian.com/cloud/jira/platform/REST/v3/` This message represents what is stored in the XC database. To see the API format, refer to the JiraAdhocRestApiConfigurationSpec message<br>See [Adhoc REST API](#jira-config-adhoc-rest-api) below.
+<a id="jira-config-adhoc-rest-api"></a>&#x2022; [`adhoc\_rest\_api`](#jira-config-adhoc-rest-api) - Optional Block<br>JIRA Ad-hoc REST API Configuration Type. v3 API Basic Auth for Ad-hoc API Calls - `HTTPS://developer.atlassian.com/cloud/jira/platform/REST/v3/` This message represents what is stored in the XC database. To see the API format, refer to the JiraAdhocRestApiConfigurationSpec message<br>See [Adhoc REST API](#jira-config-adhoc-rest-api) below.
 
 #### Jira Config Adhoc REST API
 
-An [`adhoc_rest_api`](#jira-config-adhoc-rest-api) block (within [`jira_config`](#jira-config)) supports the following:
+An [`adhoc\_rest\_api`](#jira-config-adhoc-rest-api) block (within [`jira_config`](#jira-config)) supports the following:
 
 <a id="jira-config-adhoc-rest-api-account-email"></a>&#x2022; [`account_email`](#jira-config-adhoc-rest-api-account-email) - Optional String<br>Account Email. Username (email) for the Atlassian account
 
@@ -108,5 +108,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_ticket_tracking_system.example system/example
+terraform import f5xc\_ticket_tracking\_system.example system/example
 ```

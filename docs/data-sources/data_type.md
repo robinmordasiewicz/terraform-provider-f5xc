@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_data_type Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_data\_type Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages data_type creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc_data_type (Data Source)
+# f5xc\_data\_type (Data Source)
 
 Manages data_type creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages data_type creates a new object in the storage backend for metadata.names
 # Retrieves information about an existing Data Type
 
 # Look up an existing Data Type by name
-data "f5xc_data_type" "example" {
+data "f5xc\_data\_type" "example" {
   name      = "example-data-type"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "data_type_id" {
-#   value = data.f5xc_data_type.example.id
+# output "data\_type\_id" {
+#   value = data.f5xc\_data\_type.example.id
 # }
 ```
 

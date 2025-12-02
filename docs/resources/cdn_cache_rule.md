@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_cdn_cache_rule Resource - terraform-provider-f5xc"
+page_title: "f5xc\_cdn_cache\_rule Resource - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
   Manages a CDNCacheRule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
 ---
 
-# f5xc_cdn_cache_rule (Resource)
+# f5xc\_cdn_cache\_rule (Resource)
 
 Manages a CDNCacheRule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
 
@@ -18,7 +18,7 @@ Manages a CDNCacheRule resource in F5 Distributed Cloud for cdn loadbalancer con
 # Manages a CDNCacheRule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
 
 # Basic CDN Cache Rule configuration
-resource "f5xc_cdn_cache_rule" "example" {
+resource "f5xc\_cdn_cache\_rule" "example" {
   name      = "example-cdn-cache-rule"
   namespace = "staging"
 
@@ -41,8 +41,8 @@ resource "f5xc_cdn_cache_rule" "example" {
     # Configure cache_bypass settings
   }
   # Cache Action Options. List of options for Cache Action
-  eligible_for_cache {
-    # Configure eligible_for_cache settings
+  eligible\_for\_cache {
+    # Configure eligible\_for\_cache settings
   }
 }
 ```
@@ -84,51 +84,51 @@ A [`cache_rules`](#cache-rules) block supports the following:
 
 <a id="cache-rules-cache-bypass"></a>&#x2022; [`cache_bypass`](#cache-rules-cache-bypass) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="cache-rules-eligible-for-cache"></a>&#x2022; [`eligible_for_cache`](#cache-rules-eligible-for-cache) - Optional Block<br>Cache Action Options. List of options for Cache Action<br>See [Eligible For Cache](#cache-rules-eligible-for-cache) below.
+<a id="cache-rules-eligible-for-cache"></a>&#x2022; [`eligible\_for\_cache`](#cache-rules-eligible-for-cache) - Optional Block<br>Cache Action Options. List of options for Cache Action<br>See [Eligible For Cache](#cache-rules-eligible-for-cache) below.
 
-<a id="cache-rules-rule-expression-list"></a>&#x2022; [`rule_expression_list`](#cache-rules-rule-expression-list) - Optional Block<br>Expressions. Expressions are evaluated in the order in which they are specified. The evaluation stops when the first rule match occurs<br>See [Rule Expression List](#cache-rules-rule-expression-list) below.
+<a id="cache-rules-rule-expression-list"></a>&#x2022; [`rule\_expression\_list`](#cache-rules-rule-expression-list) - Optional Block<br>Expressions. Expressions are evaluated in the order in which they are specified. The evaluation stops when the first rule match occurs<br>See [Rule Expression List](#cache-rules-rule-expression-list) below.
 
 <a id="cache-rules-rule-name"></a>&#x2022; [`rule_name`](#cache-rules-rule-name) - Optional String<br>Rule Name. Name of the Cache Rule
 
 #### Cache Rules Eligible For Cache
 
-An [`eligible_for_cache`](#cache-rules-eligible-for-cache) block (within [`cache_rules`](#cache-rules)) supports the following:
+An [`eligible\_for\_cache`](#cache-rules-eligible-for-cache) block (within [`cache_rules`](#cache-rules)) supports the following:
 
-<a id="cache-rules-eligible-for-cache-scheme-proxy-host-request-uri"></a>&#x2022; [`scheme_proxy_host_request_uri`](#cache-rules-eligible-for-cache-scheme-proxy-host-request-uri) - Optional Block<br>Cache TTL Enable Props. Cache TTL Enable Values<br>See [Scheme Proxy Host Request URI](#cache-rules-eligible-for-cache-scheme-proxy-host-request-uri) below.
+<a id="cache-rules-eligible-for-cache-scheme-proxy-host-request-uri"></a>&#x2022; [`scheme\_proxy_host_request\_uri`](#cache-rules-eligible-for-cache-scheme-proxy-host-request-uri) - Optional Block<br>Cache TTL Enable Props. Cache TTL Enable Values<br>See [Scheme Proxy Host Request URI](#cache-rules-eligible-for-cache-scheme-proxy-host-request-uri) below.
 
-<a id="cache-rules-eligible-for-cache-scheme-proxy-host-uri"></a>&#x2022; [`scheme_proxy_host_uri`](#cache-rules-eligible-for-cache-scheme-proxy-host-uri) - Optional Block<br>Cache TTL Enable Props. Cache TTL Enable Values<br>See [Scheme Proxy Host URI](#cache-rules-eligible-for-cache-scheme-proxy-host-uri) below.
+<a id="cache-rules-eligible-for-cache-scheme-proxy-host-uri"></a>&#x2022; [`scheme\_proxy_host\_uri`](#cache-rules-eligible-for-cache-scheme-proxy-host-uri) - Optional Block<br>Cache TTL Enable Props. Cache TTL Enable Values<br>See [Scheme Proxy Host URI](#cache-rules-eligible-for-cache-scheme-proxy-host-uri) below.
 
 #### Cache Rules Eligible For Cache Scheme Proxy Host Request URI
 
-A [`scheme_proxy_host_request_uri`](#cache-rules-eligible-for-cache-scheme-proxy-host-request-uri) block (within [`cache_rules.eligible_for_cache`](#cache-rules-eligible-for-cache)) supports the following:
+A [`scheme\_proxy_host_request\_uri`](#cache-rules-eligible-for-cache-scheme-proxy-host-request-uri) block (within [`cache_rules.eligible\_for\_cache`](#cache-rules-eligible-for-cache)) supports the following:
 
 <a id="cache-rules-eligible-for-cache-scheme-proxy-host-request-uri-cache-override"></a>&#x2022; [`cache_override`](#cache-rules-eligible-for-cache-scheme-proxy-host-request-uri-cache-override) - Optional Bool<br>Cache Override. Honour Cache Override
 
 <a id="cache-rules-eligible-for-cache-scheme-proxy-host-request-uri-cache-ttl"></a>&#x2022; [`cache_ttl`](#cache-rules-eligible-for-cache-scheme-proxy-host-request-uri-cache-ttl) - Optional String<br>Cache TTL. Cache TTL value is used to cache the resource/content for the specified amount of time Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days
 
-<a id="cache-rules-eligible-for-cache-scheme-proxy-host-request-uri-ignore-response-cookie"></a>&#x2022; [`ignore_response_cookie`](#cache-rules-eligible-for-cache-scheme-proxy-host-request-uri-ignore-response-cookie) - Optional Bool<br>Ignore-Response-Cookie. By default, response will not be cached if set-cookie header is present. This option will override the behavior and cache response even with set-cookie header present
+<a id="cache-rules-eligible-for-cache-scheme-proxy-host-request-uri-ignore-response-cookie"></a>&#x2022; [`ignore\_response\_cookie`](#cache-rules-eligible-for-cache-scheme-proxy-host-request-uri-ignore-response-cookie) - Optional Bool<br>Ignore-Response-Cookie. By default, response will not be cached if set-cookie header is present. This option will override the behavior and cache response even with set-cookie header present
 
 #### Cache Rules Eligible For Cache Scheme Proxy Host URI
 
-A [`scheme_proxy_host_uri`](#cache-rules-eligible-for-cache-scheme-proxy-host-uri) block (within [`cache_rules.eligible_for_cache`](#cache-rules-eligible-for-cache)) supports the following:
+A [`scheme\_proxy_host\_uri`](#cache-rules-eligible-for-cache-scheme-proxy-host-uri) block (within [`cache_rules.eligible\_for\_cache`](#cache-rules-eligible-for-cache)) supports the following:
 
 <a id="cache-rules-eligible-for-cache-scheme-proxy-host-uri-cache-override"></a>&#x2022; [`cache_override`](#cache-rules-eligible-for-cache-scheme-proxy-host-uri-cache-override) - Optional Bool<br>Cache Override. Honour Cache Override
 
 <a id="cache-rules-eligible-for-cache-scheme-proxy-host-uri-cache-ttl"></a>&#x2022; [`cache_ttl`](#cache-rules-eligible-for-cache-scheme-proxy-host-uri-cache-ttl) - Optional String<br>Cache TTL. Cache TTL value is used to cache the resource/content for the specified amount of time Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days
 
-<a id="cache-rules-eligible-for-cache-scheme-proxy-host-uri-ignore-response-cookie"></a>&#x2022; [`ignore_response_cookie`](#cache-rules-eligible-for-cache-scheme-proxy-host-uri-ignore-response-cookie) - Optional Bool<br>Ignore-Response-Cookie. By default, response will not be cached if set-cookie header is present. This option will override the behavior and cache response even with set-cookie header present
+<a id="cache-rules-eligible-for-cache-scheme-proxy-host-uri-ignore-response-cookie"></a>&#x2022; [`ignore\_response\_cookie`](#cache-rules-eligible-for-cache-scheme-proxy-host-uri-ignore-response-cookie) - Optional Bool<br>Ignore-Response-Cookie. By default, response will not be cached if set-cookie header is present. This option will override the behavior and cache response even with set-cookie header present
 
 #### Cache Rules Rule Expression List
 
-A [`rule_expression_list`](#cache-rules-rule-expression-list) block (within [`cache_rules`](#cache-rules)) supports the following:
+A [`rule\_expression\_list`](#cache-rules-rule-expression-list) block (within [`cache_rules`](#cache-rules)) supports the following:
 
-<a id="cache-rules-rule-expression-list-cache-rule-expression"></a>&#x2022; [`cache_rule_expression`](#cache-rules-rule-expression-list-cache-rule-expression) - Optional Block<br>Terms. The Cache Rule Expression Terms that are ANDed<br>See [Cache Rule Expression](#cache-rules-rule-expression-list-cache-rule-expression) below.
+<a id="cache-rules-rule-expression-list-cache-rule-expression"></a>&#x2022; [`cache\_rule\_expression`](#cache-rules-rule-expression-list-cache-rule-expression) - Optional Block<br>Terms. The Cache Rule Expression Terms that are ANDed<br>See [Cache Rule Expression](#cache-rules-rule-expression-list-cache-rule-expression) below.
 
 <a id="cache-rules-rule-expression-list-expression-name"></a>&#x2022; [`expression_name`](#cache-rules-rule-expression-list-expression-name) - Optional String<br>Expression Name. Name of the Expressions items that are ANDed
 
 #### Cache Rules Rule Expression List Cache Rule Expression
 
-A [`cache_rule_expression`](#cache-rules-rule-expression-list-cache-rule-expression) block (within [`cache_rules.rule_expression_list`](#cache-rules-rule-expression-list)) supports the following:
+A [`cache\_rule\_expression`](#cache-rules-rule-expression-list-cache-rule-expression) block (within [`cache_rules.rule\_expression\_list`](#cache-rules-rule-expression-list)) supports the following:
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-cache-headers"></a>&#x2022; [`cache_headers`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers) - Optional Block<br>Cache Headers. Configure cache rule headers to match the criteria<br>See [Cache Headers](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers) below.
 
@@ -140,7 +140,7 @@ A [`cache_rule_expression`](#cache-rules-rule-expression-list-cache-rule-express
 
 #### Cache Rules Rule Expression List Cache Rule Expression Cache Headers
 
-A [`cache_headers`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers) block (within [`cache_rules.rule_expression_list.cache_rule_expression`](#cache-rules-rule-expression-list-cache-rule-expression)) supports the following:
+A [`cache_headers`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers) block (within [`cache_rules.rule\_expression\_list.cache\_rule\_expression`](#cache-rules-rule-expression-list-cache-rule-expression)) supports the following:
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-cache-headers-name"></a>&#x2022; [`name`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers-name) - Optional String  Defaults to `PROXY_HOST`<br>Possible values are `PROXY_HOST`, `REFERER`, `SCHEME`, `USER_AGENT`<br>Header Options. - PROXY_HOST: Proxy Host Name of the proxied server - REFERER: Referer This is the address of the previous web page from which a link to the currently requested page was followed - SCHEME: Scheme The HTTP scheme used: HTTP or HTTPS - USER_AGENT: User Agent The user agent string of the user agent
 
@@ -148,17 +148,17 @@ A [`cache_headers`](#cache-rules-rule-expression-list-cache-rule-expression-cach
 
 #### Cache Rules Rule Expression List Cache Rule Expression Cache Headers Operator
 
-An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator) block (within [`cache_rules.rule_expression_list.cache_rule_expression.cache_headers`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers)) supports the following:
+An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator) block (within [`cache_rules.rule\_expression\_list.cache\_rule\_expression.cache_headers`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers)) supports the following:
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator-contains"></a>&#x2022; [`contains`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator-contains) - Optional String<br>Contains. Field must contain
 
-<a id="cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator-does-not-contain"></a>&#x2022; [`does_not_contain`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator-does-not-contain) - Optional String<br>Does Not Contain. Field must not contain
+<a id="cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator-does-not-contain"></a>&#x2022; [`does\_not\_contain`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator-does-not-contain) - Optional String<br>Does Not Contain. Field must not contain
 
-<a id="cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator-does-not-end-with"></a>&#x2022; [`does_not_end_with`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator-does-not-end-with) - Optional String<br>Does Not End With. Field must not end with
+<a id="cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator-does-not-end-with"></a>&#x2022; [`does\_not_end\_with`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator-does-not-end-with) - Optional String<br>Does Not End With. Field must not end with
 
-<a id="cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator-does-not-equal"></a>&#x2022; [`does_not_equal`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator-does-not-equal) - Optional String<br>Does Not Equal. Field must not equal
+<a id="cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator-does-not-equal"></a>&#x2022; [`does\_not\_equal`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator-does-not-equal) - Optional String<br>Does Not Equal. Field must not equal
 
-<a id="cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator-does-not-start-with"></a>&#x2022; [`does_not_start_with`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator-does-not-start-with) - Optional String<br>Does Not Start With. Field must not start with
+<a id="cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator-does-not-start-with"></a>&#x2022; [`does\_not_start\_with`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator-does-not-start-with) - Optional String<br>Does Not Start With. Field must not start with
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator-endswith"></a>&#x2022; [`endswith`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator-endswith) - Optional String<br>Ends With. Field must end with
 
@@ -170,7 +170,7 @@ An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-cache-he
 
 #### Cache Rules Rule Expression List Cache Rule Expression Cookie Matcher
 
-A [`cookie_matcher`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher) block (within [`cache_rules.rule_expression_list.cache_rule_expression`](#cache-rules-rule-expression-list-cache-rule-expression)) supports the following:
+A [`cookie_matcher`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher) block (within [`cache_rules.rule\_expression\_list.cache\_rule\_expression`](#cache-rules-rule-expression-list-cache-rule-expression)) supports the following:
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-name"></a>&#x2022; [`name`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-name) - Optional String<br>Cookie Name. A case-sensitive cookie name
 
@@ -178,17 +178,17 @@ A [`cookie_matcher`](#cache-rules-rule-expression-list-cache-rule-expression-coo
 
 #### Cache Rules Rule Expression List Cache Rule Expression Cookie Matcher Operator
 
-An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator) block (within [`cache_rules.rule_expression_list.cache_rule_expression.cookie_matcher`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher)) supports the following:
+An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator) block (within [`cache_rules.rule\_expression\_list.cache\_rule\_expression.cookie_matcher`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher)) supports the following:
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator-contains"></a>&#x2022; [`contains`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator-contains) - Optional String<br>Contains. Field must contain
 
-<a id="cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator-does-not-contain"></a>&#x2022; [`does_not_contain`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator-does-not-contain) - Optional String<br>Does Not Contain. Field must not contain
+<a id="cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator-does-not-contain"></a>&#x2022; [`does\_not\_contain`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator-does-not-contain) - Optional String<br>Does Not Contain. Field must not contain
 
-<a id="cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator-does-not-end-with"></a>&#x2022; [`does_not_end_with`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator-does-not-end-with) - Optional String<br>Does Not End With. Field must not end with
+<a id="cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator-does-not-end-with"></a>&#x2022; [`does\_not_end\_with`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator-does-not-end-with) - Optional String<br>Does Not End With. Field must not end with
 
-<a id="cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator-does-not-equal"></a>&#x2022; [`does_not_equal`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator-does-not-equal) - Optional String<br>Does Not Equal. Field must not equal
+<a id="cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator-does-not-equal"></a>&#x2022; [`does\_not\_equal`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator-does-not-equal) - Optional String<br>Does Not Equal. Field must not equal
 
-<a id="cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator-does-not-start-with"></a>&#x2022; [`does_not_start_with`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator-does-not-start-with) - Optional String<br>Does Not Start With. Field must not start with
+<a id="cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator-does-not-start-with"></a>&#x2022; [`does\_not_start\_with`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator-does-not-start-with) - Optional String<br>Does Not Start With. Field must not start with
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator-endswith"></a>&#x2022; [`endswith`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator-endswith) - Optional String<br>Ends With. Field must end with
 
@@ -200,23 +200,23 @@ An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-m
 
 #### Cache Rules Rule Expression List Cache Rule Expression Path Match
 
-A [`path_match`](#cache-rules-rule-expression-list-cache-rule-expression-path-match) block (within [`cache_rules.rule_expression_list.cache_rule_expression`](#cache-rules-rule-expression-list-cache-rule-expression)) supports the following:
+A [`path_match`](#cache-rules-rule-expression-list-cache-rule-expression-path-match) block (within [`cache_rules.rule\_expression\_list.cache\_rule\_expression`](#cache-rules-rule-expression-list-cache-rule-expression)) supports the following:
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-path-match-operator"></a>&#x2022; [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-path-match-operator) - Optional Block<br>Operator<br>See [Operator](#cache-rules-rule-expression-list-cache-rule-expression-path-match-operator) below.
 
 #### Cache Rules Rule Expression List Cache Rule Expression Path Match Operator
 
-An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-path-match-operator) block (within [`cache_rules.rule_expression_list.cache_rule_expression.path_match`](#cache-rules-rule-expression-list-cache-rule-expression-path-match)) supports the following:
+An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-path-match-operator) block (within [`cache_rules.rule\_expression\_list.cache\_rule\_expression.path_match`](#cache-rules-rule-expression-list-cache-rule-expression-path-match)) supports the following:
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-path-match-operator-contains"></a>&#x2022; [`contains`](#cache-rules-rule-expression-list-cache-rule-expression-path-match-operator-contains) - Optional String<br>Contains. Field must contain
 
-<a id="cache-rules-rule-expression-list-cache-rule-expression-path-match-operator-does-not-contain"></a>&#x2022; [`does_not_contain`](#cache-rules-rule-expression-list-cache-rule-expression-path-match-operator-does-not-contain) - Optional String<br>Does Not Contain. Field must not contain
+<a id="cache-rules-rule-expression-list-cache-rule-expression-path-match-operator-does-not-contain"></a>&#x2022; [`does\_not\_contain`](#cache-rules-rule-expression-list-cache-rule-expression-path-match-operator-does-not-contain) - Optional String<br>Does Not Contain. Field must not contain
 
-<a id="cache-rules-rule-expression-list-cache-rule-expression-path-match-operator-does-not-end-with"></a>&#x2022; [`does_not_end_with`](#cache-rules-rule-expression-list-cache-rule-expression-path-match-operator-does-not-end-with) - Optional String<br>Does Not End With. Field must not end with
+<a id="cache-rules-rule-expression-list-cache-rule-expression-path-match-operator-does-not-end-with"></a>&#x2022; [`does\_not_end\_with`](#cache-rules-rule-expression-list-cache-rule-expression-path-match-operator-does-not-end-with) - Optional String<br>Does Not End With. Field must not end with
 
-<a id="cache-rules-rule-expression-list-cache-rule-expression-path-match-operator-does-not-equal"></a>&#x2022; [`does_not_equal`](#cache-rules-rule-expression-list-cache-rule-expression-path-match-operator-does-not-equal) - Optional String<br>Does Not Equal. Field must not equal
+<a id="cache-rules-rule-expression-list-cache-rule-expression-path-match-operator-does-not-equal"></a>&#x2022; [`does\_not\_equal`](#cache-rules-rule-expression-list-cache-rule-expression-path-match-operator-does-not-equal) - Optional String<br>Does Not Equal. Field must not equal
 
-<a id="cache-rules-rule-expression-list-cache-rule-expression-path-match-operator-does-not-start-with"></a>&#x2022; [`does_not_start_with`](#cache-rules-rule-expression-list-cache-rule-expression-path-match-operator-does-not-start-with) - Optional String<br>Does Not Start With. Field must not start with
+<a id="cache-rules-rule-expression-list-cache-rule-expression-path-match-operator-does-not-start-with"></a>&#x2022; [`does\_not_start\_with`](#cache-rules-rule-expression-list-cache-rule-expression-path-match-operator-does-not-start-with) - Optional String<br>Does Not Start With. Field must not start with
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-path-match-operator-endswith"></a>&#x2022; [`endswith`](#cache-rules-rule-expression-list-cache-rule-expression-path-match-operator-endswith) - Optional String<br>Ends With. Field must end with
 
@@ -228,7 +228,7 @@ An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-path-mat
 
 #### Cache Rules Rule Expression List Cache Rule Expression Query Parameters
 
-A [`query_parameters`](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters) block (within [`cache_rules.rule_expression_list.cache_rule_expression`](#cache-rules-rule-expression-list-cache-rule-expression)) supports the following:
+A [`query_parameters`](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters) block (within [`cache_rules.rule\_expression\_list.cache\_rule\_expression`](#cache-rules-rule-expression-list-cache-rule-expression)) supports the following:
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-query-parameters-key"></a>&#x2022; [`key`](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters-key) - Optional String<br>Key. Query parameter key In the above example, assignee_username is the key
 
@@ -236,17 +236,17 @@ A [`query_parameters`](#cache-rules-rule-expression-list-cache-rule-expression-q
 
 #### Cache Rules Rule Expression List Cache Rule Expression Query Parameters Operator
 
-An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator) block (within [`cache_rules.rule_expression_list.cache_rule_expression.query_parameters`](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters)) supports the following:
+An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator) block (within [`cache_rules.rule\_expression\_list.cache\_rule\_expression.query_parameters`](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters)) supports the following:
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator-contains"></a>&#x2022; [`contains`](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator-contains) - Optional String<br>Contains. Field must contain
 
-<a id="cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator-does-not-contain"></a>&#x2022; [`does_not_contain`](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator-does-not-contain) - Optional String<br>Does Not Contain. Field must not contain
+<a id="cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator-does-not-contain"></a>&#x2022; [`does\_not\_contain`](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator-does-not-contain) - Optional String<br>Does Not Contain. Field must not contain
 
-<a id="cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator-does-not-end-with"></a>&#x2022; [`does_not_end_with`](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator-does-not-end-with) - Optional String<br>Does Not End With. Field must not end with
+<a id="cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator-does-not-end-with"></a>&#x2022; [`does\_not_end\_with`](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator-does-not-end-with) - Optional String<br>Does Not End With. Field must not end with
 
-<a id="cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator-does-not-equal"></a>&#x2022; [`does_not_equal`](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator-does-not-equal) - Optional String<br>Does Not Equal. Field must not equal
+<a id="cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator-does-not-equal"></a>&#x2022; [`does\_not\_equal`](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator-does-not-equal) - Optional String<br>Does Not Equal. Field must not equal
 
-<a id="cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator-does-not-start-with"></a>&#x2022; [`does_not_start_with`](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator-does-not-start-with) - Optional String<br>Does Not Start With. Field must not start with
+<a id="cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator-does-not-start-with"></a>&#x2022; [`does\_not_start\_with`](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator-does-not-start-with) - Optional String<br>Does Not Start With. Field must not start with
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator-endswith"></a>&#x2022; [`endswith`](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator-endswith) - Optional String<br>Ends With. Field must end with
 
@@ -274,5 +274,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_cdn_cache_rule.example system/example
+terraform import f5xc\_cdn_cache\_rule.example system/example
 ```

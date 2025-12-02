@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_virtual_site Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_virtual\_site Data Source - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
   Manages virtual site object in given namespace in F5 Distributed Cloud.
 ---
 
-# f5xc_virtual_site (Data Source)
+# f5xc\_virtual\_site (Data Source)
 
 Manages virtual site object in given namespace in F5 Distributed Cloud.
 
@@ -18,18 +18,18 @@ Manages virtual site object in given namespace in F5 Distributed Cloud.
 # Retrieves information about an existing Virtual Site
 
 # Look up an existing Virtual Site by name
-data "f5xc_virtual_site" "example" {
+data "f5xc\_virtual\_site" "example" {
   name      = "example-virtual-site"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "virtual_site_id" {
-#   value = data.f5xc_virtual_site.example.id
+# output "virtual\_site\_id" {
+#   value = data.f5xc\_virtual\_site.example.id
 # }
 
 # Example: Reference virtual site for site selection
-# resource "f5xc_http_loadbalancer" "example" {
+# resource "f5xc\_http\_loadbalancer" "example" {
 #   name      = "vs-advertised-lb"
 #   namespace = "system"
 #
@@ -37,8 +37,8 @@ data "f5xc_virtual_site" "example" {
 #     advertise_where {
 #       virtual_site {
 #         virtual_site {
-#           name      = data.f5xc_virtual_site.example.name
-#           namespace = data.f5xc_virtual_site.example.namespace
+#           name      = data.f5xc\_virtual\_site.example.name
+#           namespace = data.f5xc\_virtual\_site.example.namespace
 #         }
 #       }
 #     }

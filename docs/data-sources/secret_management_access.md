@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc_secret_management_access Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_secret_management\_access Data Source - terraform-provider-f5xc"
 subcategory: "Authentication"
 description: |-
-  Manages secret_management_access creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
+  Manages secret\_management\_access creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc_secret_management_access (Data Source)
+# f5xc\_secret_management\_access (Data Source)
 
-Manages secret_management_access creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
+Manages secret\_management\_access creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Secret Management Access API docs](https://docs.cloud.f5.com/docs-v2/api/secret-management-access) to learn more.
 
@@ -18,14 +18,14 @@ Manages secret_management_access creates a new object in storage backend for met
 # Retrieves information about an existing Secret Management Access
 
 # Look up an existing Secret Management Access by name
-data "f5xc_secret_management_access" "example" {
+data "f5xc\_secret_management\_access" "example" {
   name      = "example-secret-management-access"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "secret_management_access_id" {
-#   value = data.f5xc_secret_management_access.example.id
+# output "secret\_management_access\_id" {
+#   value = data.f5xc\_secret_management\_access.example.id
 # }
 ```
 

@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_app_firewall Resource - terraform-provider-f5xc"
+page_title: "f5xc\_app\_firewall Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages Application Firewall in F5 Distributed Cloud.
 ---
 
-# f5xc_app_firewall (Resource)
+# f5xc\_app\_firewall (Resource)
 
 Manages Application Firewall in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages Application Firewall in F5 Distributed Cloud.
 # Manages Application Firewall in F5 Distributed Cloud.
 
 # Basic App Firewall configuration
-resource "f5xc_app_firewall" "example" {
+resource "f5xc\_app\_firewall" "example" {
   name      = "example-app-firewall"
   namespace = "shared"
 
@@ -35,25 +35,25 @@ resource "f5xc_app_firewall" "example" {
 
   blocking {}
 
-  // One of the arguments from this list "blocking_page use_default_blocking_page" must be set
+  // One of the arguments from this list "blocking_page use\_default_blocking\_page" must be set
 
-  use_default_blocking_page {}
+  use\_default_blocking\_page {}
 
-  // One of the arguments from this list "bot_protection_setting default_bot_setting" must be set
+  // One of the arguments from this list "bot\_protection\_setting default\_bot\_setting" must be set
 
-  bot_protection_setting {
-    malicious_bot_action  = "BLOCK"
-    suspicious_bot_action = "REPORT"
-    good_bot_action       = "REPORT"
+  bot\_protection\_setting {
+    malicious\_bot\_action  = "BLOCK"
+    suspicious\_bot\_action = "REPORT"
+    good\_bot\_action       = "REPORT"
   }
 
-  // One of the arguments from this list "ai_risk_based_blocking default_detection_settings detection_settings" must be set
+  // One of the arguments from this list "ai\_risk_based\_blocking default\_detection\_settings detection_settings" must be set
 
-  default_detection_settings {}
+  default\_detection\_settings {}
 
-  // One of the arguments from this list "allow_all_response_codes allowed_response_codes" must be set
+  // One of the arguments from this list "allow\_all_response\_codes allowed\_response\_codes" must be set
 
-  allow_all_response_codes {}
+  allow\_all_response\_codes {}
 }
 ```
 
@@ -77,13 +77,13 @@ resource "f5xc_app_firewall" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="ai-risk-based-blocking"></a>[`ai_risk_based_blocking`](#ai-risk-based-blocking) - Optional Block<br>Risk-Based Blocking (Powered by AI) - Preview. All Attack Types, including high, medium, and low accuracy signatures, automatic Attack Signature tuning, Threat Campaigns, and all Violations will be enabled. AI and ML algorithms will assess request risk, and only high-risk requests will be blocked by default. This feature is in preview mode<br>See [Ai Risk Based Blocking](#ai-risk-based-blocking) below for details.
-<br><br>&#x2022; <a id="default-detection-settings"></a>[`default_detection_settings`](#default-detection-settings) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="ai-risk-based-blocking"></a>[`ai\_risk_based\_blocking`](#ai-risk-based-blocking) - Optional Block<br>Risk-Based Blocking (Powered by AI) - Preview. All Attack Types, including high, medium, and low accuracy signatures, automatic Attack Signature tuning, Threat Campaigns, and all Violations will be enabled. AI and ML algorithms will assess request risk, and only high-risk requests will be blocked by default. This feature is in preview mode<br>See [Ai Risk Based Blocking](#ai-risk-based-blocking) below for details.
+<br><br>&#x2022; <a id="default-detection-settings"></a>[`default\_detection\_settings`](#default-detection-settings) - Optional Block<br>Empty. This can be used for messages where no values are needed
 <br><br>&#x2022; <a id="detection-settings"></a>[`detection_settings`](#detection-settings) - Optional Block<br>Detection Settings. Specifies detection settings to be used by WAF<br>See [Detection Settings](#detection-settings) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="allow-all-response-codes"></a>[`allow_all_response_codes`](#allow-all-response-codes) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="allowed-response-codes"></a>[`allowed_response_codes`](#allowed-response-codes) - Optional Block<br>Allowed Response Codes. List of HTTP response status codes that are allowed<br>See [Allowed Response Codes](#allowed-response-codes) below for details.
+&#x2022; <a id="allow-all-response-codes"></a>[`allow\_all_response\_codes`](#allow-all-response-codes) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="allowed-response-codes"></a>[`allowed\_response\_codes`](#allowed-response-codes) - Optional Block<br>Allowed Response Codes. List of HTTP response status codes that are allowed<br>See [Allowed Response Codes](#allowed-response-codes) below for details.
 
 -> **One of the following:**
 &#x2022; <a id="blocking"></a>[`blocking`](#blocking) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -91,11 +91,11 @@ resource "f5xc_app_firewall" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="blocking-page"></a>[`blocking_page`](#blocking-page) - Optional Block<br>Custom Blocking Response Page. Custom blocking response page body<br>See [Blocking Page](#blocking-page) below for details.
-<br><br>&#x2022; <a id="use-default-blocking-page"></a>[`use_default_blocking_page`](#use-default-blocking-page) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="use-default-blocking-page"></a>[`use\_default_blocking\_page`](#use-default-blocking-page) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; <a id="bot-protection-setting"></a>[`bot_protection_setting`](#bot-protection-setting) - Optional Block<br>Bot Protection. Configuration of WAF Bot Protection<br>See [Bot Protection Setting](#bot-protection-setting) below for details.
-<br><br>&#x2022; <a id="default-bot-setting"></a>[`default_bot_setting`](#default-bot-setting) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="bot-protection-setting"></a>[`bot\_protection\_setting`](#bot-protection-setting) - Optional Block<br>Bot Protection. Configuration of WAF Bot Protection<br>See [Bot Protection Setting](#bot-protection-setting) below for details.
+<br><br>&#x2022; <a id="default-bot-setting"></a>[`default\_bot\_setting`](#default-bot-setting) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; <a id="custom-anonymization"></a>[`custom_anonymization`](#custom-anonymization) - Optional Block<br>Anonymization Configuration. Anonymization settings which is a list of HTTP headers, parameters and cookies<br>See [Custom Anonymization](#custom-anonymization) below for details.
@@ -114,17 +114,17 @@ In addition to all arguments above, the following attributes are exported:
 
 #### Ai Risk Based Blocking
 
-An [`ai_risk_based_blocking`](#ai-risk-based-blocking) block supports the following:
+An [`ai\_risk_based\_blocking`](#ai-risk-based-blocking) block supports the following:
 
-<a id="ai-risk-based-blocking-high-risk-action"></a>&#x2022; [`high_risk_action`](#ai-risk-based-blocking-high-risk-action) - Optional String  Defaults to `AI_BLOCK`<br>Possible values are `AI_BLOCK`, `AI_REPORT`<br>Risk Based Blocking Action. Action to be performed on the request Log and block Log only
+<a id="ai-risk-based-blocking-high-risk-action"></a>&#x2022; [`high\_risk\_action`](#ai-risk-based-blocking-high-risk-action) - Optional String  Defaults to `AI_BLOCK`<br>Possible values are `AI_BLOCK`, `AI_REPORT`<br>Risk Based Blocking Action. Action to be performed on the request Log and block Log only
 
-<a id="ai-risk-based-blocking-low-risk-action"></a>&#x2022; [`low_risk_action`](#ai-risk-based-blocking-low-risk-action) - Optional String  Defaults to `AI_BLOCK`<br>Possible values are `AI_BLOCK`, `AI_REPORT`<br>Risk Based Blocking Action. Action to be performed on the request Log and block Log only
+<a id="ai-risk-based-blocking-low-risk-action"></a>&#x2022; [`low\_risk\_action`](#ai-risk-based-blocking-low-risk-action) - Optional String  Defaults to `AI_BLOCK`<br>Possible values are `AI_BLOCK`, `AI_REPORT`<br>Risk Based Blocking Action. Action to be performed on the request Log and block Log only
 
-<a id="ai-risk-based-blocking-medium-risk-action"></a>&#x2022; [`medium_risk_action`](#ai-risk-based-blocking-medium-risk-action) - Optional String  Defaults to `AI_BLOCK`<br>Possible values are `AI_BLOCK`, `AI_REPORT`<br>Risk Based Blocking Action. Action to be performed on the request Log and block Log only
+<a id="ai-risk-based-blocking-medium-risk-action"></a>&#x2022; [`medium\_risk\_action`](#ai-risk-based-blocking-medium-risk-action) - Optional String  Defaults to `AI_BLOCK`<br>Possible values are `AI_BLOCK`, `AI_REPORT`<br>Risk Based Blocking Action. Action to be performed on the request Log and block Log only
 
 #### Allowed Response Codes
 
-An [`allowed_response_codes`](#allowed-response-codes) block supports the following:
+An [`allowed\_response\_codes`](#allowed-response-codes) block supports the following:
 
 <a id="allowed-response-codes-response-code"></a>&#x2022; [`response_code`](#allowed-response-codes-response-code) - Optional List<br>Response Code. List of HTTP response status codes that are allowed
 
@@ -138,13 +138,13 @@ A [`blocking_page`](#blocking-page) block supports the following:
 
 #### Bot Protection Setting
 
-A [`bot_protection_setting`](#bot-protection-setting) block supports the following:
+A [`bot\_protection\_setting`](#bot-protection-setting) block supports the following:
 
-<a id="bot-protection-setting-good-bot-action"></a>&#x2022; [`good_bot_action`](#bot-protection-setting-good-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>Bot Action. Action to be performed on the request Log and block Log only Disable detection
+<a id="bot-protection-setting-good-bot-action"></a>&#x2022; [`good\_bot\_action`](#bot-protection-setting-good-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>Bot Action. Action to be performed on the request Log and block Log only Disable detection
 
-<a id="bot-protection-setting-malicious-bot-action"></a>&#x2022; [`malicious_bot_action`](#bot-protection-setting-malicious-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>Bot Action. Action to be performed on the request Log and block Log only Disable detection
+<a id="bot-protection-setting-malicious-bot-action"></a>&#x2022; [`malicious\_bot\_action`](#bot-protection-setting-malicious-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>Bot Action. Action to be performed on the request Log and block Log only Disable detection
 
-<a id="bot-protection-setting-suspicious-bot-action"></a>&#x2022; [`suspicious_bot_action`](#bot-protection-setting-suspicious-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>Bot Action. Action to be performed on the request Log and block Log only Disable detection
+<a id="bot-protection-setting-suspicious-bot-action"></a>&#x2022; [`suspicious\_bot\_action`](#bot-protection-setting-suspicious-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>Bot Action. Action to be performed on the request Log and block Log only Disable detection
 
 #### Custom Anonymization
 
@@ -178,75 +178,75 @@ A [`http_header`](#custom-anonymization-anonymization-config-http-header) block 
 
 A [`query_parameter`](#custom-anonymization-anonymization-config-query-parameter) block (within [`custom_anonymization.anonymization_config`](#custom-anonymization-anonymization-config)) supports the following:
 
-<a id="custom-anonymization-anonymization-config-query-parameter-query-param-name"></a>&#x2022; [`query_param_name`](#custom-anonymization-anonymization-config-query-parameter-query-param-name) - Optional String<br>Query Parameter Name. Masks the query parameter value. The setting does not mask the query parameter name
+<a id="custom-anonymization-anonymization-config-query-parameter-query-param-name"></a>&#x2022; [`query\_param\_name`](#custom-anonymization-anonymization-config-query-parameter-query-param-name) - Optional String<br>Query Parameter Name. Masks the query parameter value. The setting does not mask the query parameter name
 
 #### Detection Settings
 
 A [`detection_settings`](#detection-settings) block supports the following:
 
-<a id="detection-settings-bot-protection-setting"></a>&#x2022; [`bot_protection_setting`](#detection-settings-bot-protection-setting) - Optional Block<br>Bot Protection. Configuration of WAF Bot Protection<br>See [Bot Protection Setting](#detection-settings-bot-protection-setting) below.
+<a id="detection-settings-bot-protection-setting"></a>&#x2022; [`bot\_protection\_setting`](#detection-settings-bot-protection-setting) - Optional Block<br>Bot Protection. Configuration of WAF Bot Protection<br>See [Bot Protection Setting](#detection-settings-bot-protection-setting) below.
 
-<a id="detection-settings-default-bot-setting"></a>&#x2022; [`default_bot_setting`](#detection-settings-default-bot-setting) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="detection-settings-default-bot-setting"></a>&#x2022; [`default\_bot\_setting`](#detection-settings-default-bot-setting) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="detection-settings-default-violation-settings"></a>&#x2022; [`default_violation_settings`](#detection-settings-default-violation-settings) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="detection-settings-default-violation-settings"></a>&#x2022; [`default\_violation\_settings`](#detection-settings-default-violation-settings) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="detection-settings-disable-staging"></a>&#x2022; [`disable_staging`](#detection-settings-disable-staging) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="detection-settings-disable-suppression"></a>&#x2022; [`disable_suppression`](#detection-settings-disable-suppression) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="detection-settings-disable-threat-campaigns"></a>&#x2022; [`disable_threat_campaigns`](#detection-settings-disable-threat-campaigns) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="detection-settings-disable-threat-campaigns"></a>&#x2022; [`disable\_threat\_campaigns`](#detection-settings-disable-threat-campaigns) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="detection-settings-enable-suppression"></a>&#x2022; [`enable_suppression`](#detection-settings-enable-suppression) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="detection-settings-enable-threat-campaigns"></a>&#x2022; [`enable_threat_campaigns`](#detection-settings-enable-threat-campaigns) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="detection-settings-enable-threat-campaigns"></a>&#x2022; [`enable\_threat\_campaigns`](#detection-settings-enable-threat-campaigns) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="detection-settings-signature-selection-setting"></a>&#x2022; [`signature_selection_setting`](#detection-settings-signature-selection-setting) - Optional Block<br>Attack Signatures. Attack Signatures are patterns that identify attacks on a web application and its components<br>See [Signature Selection Setting](#detection-settings-signature-selection-setting) below.
+<a id="detection-settings-signature-selection-setting"></a>&#x2022; [`signature\_selection\_setting`](#detection-settings-signature-selection-setting) - Optional Block<br>Attack Signatures. Attack Signatures are patterns that identify attacks on a web application and its components<br>See [Signature Selection Setting](#detection-settings-signature-selection-setting) below.
 
-<a id="detection-settings-stage-new-and-updated-signatures"></a>&#x2022; [`stage_new_and_updated_signatures`](#detection-settings-stage-new-and-updated-signatures) - Optional Block<br>Attack Signatures Staging Settings. Attack Signatures staging configuration<br>See [Stage New And Updated Signatures](#detection-settings-stage-new-and-updated-signatures) below.
+<a id="detection-settings-stage-new-and-updated-signatures"></a>&#x2022; [`stage\_new_and_updated\_signatures`](#detection-settings-stage-new-and-updated-signatures) - Optional Block<br>Attack Signatures Staging Settings. Attack Signatures staging configuration<br>See [Stage New And Updated Signatures](#detection-settings-stage-new-and-updated-signatures) below.
 
-<a id="detection-settings-stage-new-signatures"></a>&#x2022; [`stage_new_signatures`](#detection-settings-stage-new-signatures) - Optional Block<br>Attack Signatures Staging Settings. Attack Signatures staging configuration<br>See [Stage New Signatures](#detection-settings-stage-new-signatures) below.
+<a id="detection-settings-stage-new-signatures"></a>&#x2022; [`stage\_new\_signatures`](#detection-settings-stage-new-signatures) - Optional Block<br>Attack Signatures Staging Settings. Attack Signatures staging configuration<br>See [Stage New Signatures](#detection-settings-stage-new-signatures) below.
 
 <a id="detection-settings-violation-settings"></a>&#x2022; [`violation_settings`](#detection-settings-violation-settings) - Optional Block<br>Violation Settings. Specifies violation settings to be used by WAF<br>See [Violation Settings](#detection-settings-violation-settings) below.
 
 #### Detection Settings Bot Protection Setting
 
-A [`bot_protection_setting`](#detection-settings-bot-protection-setting) block (within [`detection_settings`](#detection-settings)) supports the following:
+A [`bot\_protection\_setting`](#detection-settings-bot-protection-setting) block (within [`detection_settings`](#detection-settings)) supports the following:
 
-<a id="detection-settings-bot-protection-setting-good-bot-action"></a>&#x2022; [`good_bot_action`](#detection-settings-bot-protection-setting-good-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>Bot Action. Action to be performed on the request Log and block Log only Disable detection
+<a id="detection-settings-bot-protection-setting-good-bot-action"></a>&#x2022; [`good\_bot\_action`](#detection-settings-bot-protection-setting-good-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>Bot Action. Action to be performed on the request Log and block Log only Disable detection
 
-<a id="detection-settings-bot-protection-setting-malicious-bot-action"></a>&#x2022; [`malicious_bot_action`](#detection-settings-bot-protection-setting-malicious-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>Bot Action. Action to be performed on the request Log and block Log only Disable detection
+<a id="detection-settings-bot-protection-setting-malicious-bot-action"></a>&#x2022; [`malicious\_bot\_action`](#detection-settings-bot-protection-setting-malicious-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>Bot Action. Action to be performed on the request Log and block Log only Disable detection
 
-<a id="detection-settings-bot-protection-setting-suspicious-bot-action"></a>&#x2022; [`suspicious_bot_action`](#detection-settings-bot-protection-setting-suspicious-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>Bot Action. Action to be performed on the request Log and block Log only Disable detection
+<a id="detection-settings-bot-protection-setting-suspicious-bot-action"></a>&#x2022; [`suspicious\_bot\_action`](#detection-settings-bot-protection-setting-suspicious-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>Bot Action. Action to be performed on the request Log and block Log only Disable detection
 
 #### Detection Settings Signature Selection Setting
 
-A [`signature_selection_setting`](#detection-settings-signature-selection-setting) block (within [`detection_settings`](#detection-settings)) supports the following:
+A [`signature\_selection\_setting`](#detection-settings-signature-selection-setting) block (within [`detection_settings`](#detection-settings)) supports the following:
 
-<a id="detection-settings-signature-selection-setting-attack-type-settings"></a>&#x2022; [`attack_type_settings`](#detection-settings-signature-selection-setting-attack-type-settings) - Optional Block<br>Attack Type Settings. Specifies attack-type settings to be used by WAF<br>See [Attack Type Settings](#detection-settings-signature-selection-setting-attack-type-settings) below.
+<a id="detection-settings-signature-selection-setting-attack-type-settings"></a>&#x2022; [`attack\_type\_settings`](#detection-settings-signature-selection-setting-attack-type-settings) - Optional Block<br>Attack Type Settings. Specifies attack-type settings to be used by WAF<br>See [Attack Type Settings](#detection-settings-signature-selection-setting-attack-type-settings) below.
 
-<a id="detection-settings-signature-selection-setting-default-attack-type-settings"></a>&#x2022; [`default_attack_type_settings`](#detection-settings-signature-selection-setting-default-attack-type-settings) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="detection-settings-signature-selection-setting-default-attack-type-settings"></a>&#x2022; [`default\_attack_type\_settings`](#detection-settings-signature-selection-setting-default-attack-type-settings) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="detection-settings-signature-selection-setting-high-medium-accuracy-signatures"></a>&#x2022; [`high_medium_accuracy_signatures`](#detection-settings-signature-selection-setting-high-medium-accuracy-signatures) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="detection-settings-signature-selection-setting-high-medium-accuracy-signatures"></a>&#x2022; [`high\_medium_accuracy\_signatures`](#detection-settings-signature-selection-setting-high-medium-accuracy-signatures) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="detection-settings-signature-selection-setting-high-medium-low-accuracy-signatures"></a>&#x2022; [`high_medium_low_accuracy_signatures`](#detection-settings-signature-selection-setting-high-medium-low-accuracy-signatures) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="detection-settings-signature-selection-setting-high-medium-low-accuracy-signatures"></a>&#x2022; [`high\_medium_low_accuracy\_signatures`](#detection-settings-signature-selection-setting-high-medium-low-accuracy-signatures) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="detection-settings-signature-selection-setting-only-high-accuracy-signatures"></a>&#x2022; [`only_high_accuracy_signatures`](#detection-settings-signature-selection-setting-only-high-accuracy-signatures) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="detection-settings-signature-selection-setting-only-high-accuracy-signatures"></a>&#x2022; [`only\_high_accuracy\_signatures`](#detection-settings-signature-selection-setting-only-high-accuracy-signatures) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Detection Settings Signature Selection Setting Attack Type Settings
 
-An [`attack_type_settings`](#detection-settings-signature-selection-setting-attack-type-settings) block (within [`detection_settings.signature_selection_setting`](#detection-settings-signature-selection-setting)) supports the following:
+An [`attack\_type\_settings`](#detection-settings-signature-selection-setting-attack-type-settings) block (within [`detection_settings.signature\_selection\_setting`](#detection-settings-signature-selection-setting)) supports the following:
 
-<a id="detection-settings-signature-selection-setting-attack-type-settings-disabled-attack-types"></a>&#x2022; [`disabled_attack_types`](#detection-settings-signature-selection-setting-attack-type-settings-disabled-attack-types) - Optional List  Defaults to `ATTACK_TYPE_NONE`<br>Possible values are `ATTACK_TYPE_NONE`, `ATTACK_TYPE_NON_BROWSER_CLIENT`, `ATTACK_TYPE_OTHER_APPLICATION_ATTACKS`, `ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE`, `ATTACK_TYPE_DETECTION_EVASION`, `ATTACK_TYPE_VULNERABILITY_SCAN`, `ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY`, `ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS`, `ATTACK_TYPE_BUFFER_OVERFLOW`, `ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION`, `ATTACK_TYPE_INFORMATION_LEAKAGE`, `ATTACK_TYPE_DIRECTORY_INDEXING`, `ATTACK_TYPE_PATH_TRAVERSAL`, `ATTACK_TYPE_XPATH_INJECTION`, `ATTACK_TYPE_LDAP_INJECTION`, `ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION`, `ATTACK_TYPE_COMMAND_EXECUTION`, `ATTACK_TYPE_SQL_INJECTION`, `ATTACK_TYPE_CROSS_SITE_SCRIPTING`, `ATTACK_TYPE_DENIAL_OF_SERVICE`, `ATTACK_TYPE_HTTP_PARSER_ATTACK`, `ATTACK_TYPE_SESSION_HIJACKING`, `ATTACK_TYPE_HTTP_RESPONSE_SPLITTING`, `ATTACK_TYPE_FORCEFUL_BROWSING`, `ATTACK_TYPE_REMOTE_FILE_INCLUDE`, `ATTACK_TYPE_MALICIOUS_FILE_UPLOAD`, `ATTACK_TYPE_GRAPHQL_PARSER_ATTACK`<br>Disabled Attack Types. List of Attack Types that will be ignored and not trigger a detection
+<a id="detection-settings-signature-selection-setting-attack-type-settings-disabled-attack-types"></a>&#x2022; [`disabled\_attack\_types`](#detection-settings-signature-selection-setting-attack-type-settings-disabled-attack-types) - Optional List  Defaults to `ATTACK\_TYPE\_NONE`<br>Possible values are `ATTACK\_TYPE\_NONE`, `ATTACK\_TYPE_NON_BROWSER\_CLIENT`, `ATTACK\_TYPE_OTHER_APPLICATION\_ATTACKS`, `ATTACK\_TYPE_TROJAN_BACKDOOR\_SPYWARE`, `ATTACK\_TYPE_DETECTION\_EVASION`, `ATTACK\_TYPE_VULNERABILITY\_SCAN`, `ATTACK\_TYPE_ABUSE_OF\_FUNCTIONALITY`, `ATTACK\_TYPE_AUTHENTICATION_AUTHORIZATION\_ATTACKS`, `ATTACK\_TYPE_BUFFER\_OVERFLOW`, `ATTACK\_TYPE_PREDICTABLE_RESOURCE\_LOCATION`, `ATTACK\_TYPE_INFORMATION\_LEAKAGE`, `ATTACK\_TYPE_DIRECTORY\_INDEXING`, `ATTACK\_TYPE_PATH\_TRAVERSAL`, `ATTACK\_TYPE_XPATH\_INJECTION`, `ATTACK\_TYPE_LDAP\_INJECTION`, `ATTACK\_TYPE_SERVER_SIDE_CODE\_INJECTION`, `ATTACK\_TYPE_COMMAND\_EXECUTION`, `ATTACK\_TYPE_SQL\_INJECTION`, `ATTACK\_TYPE_CROSS_SITE\_SCRIPTING`, `ATTACK\_TYPE_DENIAL_OF\_SERVICE`, `ATTACK\_TYPE_HTTP_PARSER\_ATTACK`, `ATTACK\_TYPE_SESSION\_HIJACKING`, `ATTACK\_TYPE_HTTP_RESPONSE\_SPLITTING`, `ATTACK\_TYPE_FORCEFUL\_BROWSING`, `ATTACK\_TYPE_REMOTE_FILE\_INCLUDE`, `ATTACK\_TYPE_MALICIOUS_FILE\_UPLOAD`, `ATTACK\_TYPE_GRAPHQL_PARSER\_ATTACK`<br>Disabled Attack Types. List of Attack Types that will be ignored and not trigger a detection
 
 #### Detection Settings Stage New And Updated Signatures
 
-A [`stage_new_and_updated_signatures`](#detection-settings-stage-new-and-updated-signatures) block (within [`detection_settings`](#detection-settings)) supports the following:
+A [`stage\_new_and_updated\_signatures`](#detection-settings-stage-new-and-updated-signatures) block (within [`detection_settings`](#detection-settings)) supports the following:
 
 <a id="detection-settings-stage-new-and-updated-signatures-staging-period"></a>&#x2022; [`staging_period`](#detection-settings-stage-new-and-updated-signatures-staging-period) - Optional Number<br>Staging Period. Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days
 
 #### Detection Settings Stage New Signatures
 
-A [`stage_new_signatures`](#detection-settings-stage-new-signatures) block (within [`detection_settings`](#detection-settings)) supports the following:
+A [`stage\_new\_signatures`](#detection-settings-stage-new-signatures) block (within [`detection_settings`](#detection-settings)) supports the following:
 
 <a id="detection-settings-stage-new-signatures-staging-period"></a>&#x2022; [`staging_period`](#detection-settings-stage-new-signatures-staging-period) - Optional Number<br>Staging Period. Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days
 
@@ -254,7 +254,7 @@ A [`stage_new_signatures`](#detection-settings-stage-new-signatures) block (with
 
 A [`violation_settings`](#detection-settings-violation-settings) block (within [`detection_settings`](#detection-settings)) supports the following:
 
-<a id="detection-settings-violation-settings-disabled-violation-types"></a>&#x2022; [`disabled_violation_types`](#detection-settings-violation-settings-disabled-violation-types) - Optional List  Defaults to `VIOL_NONE`<br>Possible values are `VIOL_NONE`, `VIOL_FILETYPE`, `VIOL_METHOD`, `VIOL_MANDATORY_HEADER`, `VIOL_HTTP_RESPONSE_STATUS`, `VIOL_REQUEST_MAX_LENGTH`, `VIOL_FILE_UPLOAD`, `VIOL_FILE_UPLOAD_IN_BODY`, `VIOL_XML_MALFORMED`, `VIOL_JSON_MALFORMED`, `VIOL_ASM_COOKIE_MODIFIED`, `VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS`, `VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE`, `VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT`, `VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST`, `VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION`, `VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS`, `VIOL_EVASION_DIRECTORY_TRAVERSALS`, `VIOL_MALFORMED_REQUEST`, `VIOL_EVASION_MULTIPLE_DECODING`, `VIOL_DATA_GUARD`, `VIOL_EVASION_APACHE_WHITESPACE`, `VIOL_COOKIE_MODIFIED`, `VIOL_EVASION_IIS_UNICODE_CODEPOINTS`, `VIOL_EVASION_IIS_BACKSLASHES`, `VIOL_EVASION_PERCENT_U_DECODING`, `VIOL_EVASION_BARE_BYTE_DECODING`, `VIOL_EVASION_BAD_UNESCAPE`, `VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST`, `VIOL_ENCODING`, `VIOL_COOKIE_MALFORMED`, `VIOL_GRAPHQL_FORMAT`, `VIOL_GRAPHQL_MALFORMED`, `VIOL_GRAPHQL_INTROSPECTION_QUERY`<br>Disabled Violations. List of violations to be excluded
+<a id="detection-settings-violation-settings-disabled-violation-types"></a>&#x2022; [`disabled\_violation\_types`](#detection-settings-violation-settings-disabled-violation-types) - Optional List  Defaults to `VIOL_NONE`<br>Possible values are `VIOL_NONE`, `VIOL_FILETYPE`, `VIOL_METHOD`, `VIOL\_MANDATORY\_HEADER`, `VIOL\_HTTP_RESPONSE\_STATUS`, `VIOL\_REQUEST_MAX\_LENGTH`, `VIOL\_FILE\_UPLOAD`, `VIOL\_FILE_UPLOAD_IN\_BODY`, `VIOL\_XML\_MALFORMED`, `VIOL\_JSON\_MALFORMED`, `VIOL\_ASM_COOKIE\_MODIFIED`, `VIOL\_HTTP_PROTOCOL_MULTIPLE_HOST\_HEADERS`, `VIOL\_HTTP_PROTOCOL_BAD_HOST_HEADER\_VALUE`, `VIOL\_HTTP_PROTOCOL_UNPARSABLE_REQUEST\_CONTENT`, `VIOL\_HTTP_PROTOCOL_NULL_IN\_REQUEST`, `VIOL\_HTTP_PROTOCOL_BAD_HTTP\_VERSION`, `VIOL\_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH\_HEADERS`, `VIOL\_EVASION_DIRECTORY\_TRAVERSALS`, `VIOL\_MALFORMED\_REQUEST`, `VIOL\_EVASION_MULTIPLE\_DECODING`, `VIOL\_DATA\_GUARD`, `VIOL\_EVASION_APACHE\_WHITESPACE`, `VIOL\_COOKIE\_MODIFIED`, `VIOL\_EVASION_IIS_UNICODE\_CODEPOINTS`, `VIOL\_EVASION_IIS\_BACKSLASHES`, `VIOL\_EVASION_PERCENT_U\_DECODING`, `VIOL\_EVASION_BARE_BYTE\_DECODING`, `VIOL\_EVASION_BAD\_UNESCAPE`, `VIOL\_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD\_REQUEST`, `VIOL_ENCODING`, `VIOL\_COOKIE\_MALFORMED`, `VIOL\_GRAPHQL\_FORMAT`, `VIOL\_GRAPHQL\_MALFORMED`, `VIOL\_GRAPHQL_INTROSPECTION\_QUERY`<br>Disabled Violations. List of violations to be excluded
 
 #### Timeouts
 
@@ -274,5 +274,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_app_firewall.example system/example
+terraform import f5xc\_app\_firewall.example system/example
 ```

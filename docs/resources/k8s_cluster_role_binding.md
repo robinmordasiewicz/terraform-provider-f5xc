@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc_k8s_cluster_role_binding Resource - terraform-provider-f5xc"
+page_title: "f5xc\_k8s_cluster_role\_binding Resource - terraform-provider-f5xc"
 subcategory: "Kubernetes"
 description: |-
-  Manages k8s_cluster_role_binding will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+  Manages k8s\_cluster_role\_binding will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 ---
 
-# f5xc_k8s_cluster_role_binding (Resource)
+# f5xc\_k8s_cluster_role\_binding (Resource)
 
-Manages k8s_cluster_role_binding will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+Manages k8s\_cluster_role\_binding will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [K8S Cluster Role Binding API docs](https://docs.cloud.f5.com/docs-v2/api/k8s-cluster-role-binding) to learn more.
 
@@ -15,10 +15,10 @@ Manages k8s_cluster_role_binding will create the object in the storage backend f
 
 ```terraform
 # K8S Cluster Role Binding Resource Example
-# Manages k8s_cluster_role_binding will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+# Manages k8s\_cluster_role\_binding will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
 # Basic K8S Cluster Role Binding configuration
-resource "f5xc_k8s_cluster_role_binding" "example" {
+resource "f5xc\_k8s_cluster_role\_binding" "example" {
   name      = "example-k8s-cluster-role-binding"
   namespace = "system"
 
@@ -33,8 +33,8 @@ resource "f5xc_k8s_cluster_role_binding" "example" {
 
   # Resource-specific configuration
   # Object reference. This type establishes a direct referenc...
-  k8s_cluster_role {
-    # Configure k8s_cluster_role settings
+  k8s\_cluster\_role {
+    # Configure k8s\_cluster\_role settings
   }
   # Subjects. List of subjects (user, group or service accoun...
   subjects {
@@ -66,7 +66,7 @@ resource "f5xc_k8s_cluster_role_binding" "example" {
 
 ### Spec Argument Reference
 
-<a id="k8s-cluster-role"></a>&#x2022; [`k8s_cluster_role`](#k8s-cluster-role) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [K8S Cluster Role](#k8s-cluster-role) below for details.
+<a id="k8s-cluster-role"></a>&#x2022; [`k8s\_cluster\_role`](#k8s-cluster-role) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [K8S Cluster Role](#k8s-cluster-role) below for details.
 
 <a id="subjects"></a>&#x2022; [`subjects`](#subjects) - Optional Block<br>Subjects. List of subjects (user, group or service account) to which this role is bound<br>See [Subjects](#subjects) below for details.
 
@@ -82,7 +82,7 @@ In addition to all arguments above, the following attributes are exported:
 
 #### K8S Cluster Role
 
-A [`k8s_cluster_role`](#k8s-cluster-role) block supports the following:
+A [`k8s\_cluster\_role`](#k8s-cluster-role) block supports the following:
 
 <a id="k8s-cluster-role-name"></a>&#x2022; [`name`](#k8s-cluster-role-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -126,5 +126,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_k8s_cluster_role_binding.example system/example
+terraform import f5xc\_k8s_cluster_role\_binding.example system/example
 ```

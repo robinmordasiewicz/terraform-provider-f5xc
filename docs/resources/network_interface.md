@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_network_interface Resource - terraform-provider-f5xc"
+page_title: "f5xc\_network\_interface Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
   Manages a NetworkInterface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.
 ---
 
-# f5xc_network_interface (Resource)
+# f5xc\_network\_interface (Resource)
 
 Manages a NetworkInterface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.
 
@@ -18,7 +18,7 @@ Manages a NetworkInterface resource in F5 Distributed Cloud for network interfac
 # Manages a NetworkInterface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.
 
 # Basic Network Interface configuration
-resource "f5xc_network_interface" "example" {
+resource "f5xc\_network\_interface" "example" {
   name      = "example-network-interface"
   namespace = "system"
 
@@ -32,7 +32,7 @@ resource "f5xc_network_interface" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: dedicated_interface, dedicated_management_interfa...
+  # [OneOf: dedicated_interface, dedicated\_management\_interfa...
   dedicated_interface {
     # Configure dedicated_interface settings
   }
@@ -68,7 +68,7 @@ resource "f5xc_network_interface" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="dedicated-interface"></a>[`dedicated_interface`](#dedicated-interface) - Optional Block<br>Dedicated Interface. Dedicated Interface Configuration<br>See [Dedicated Interface](#dedicated-interface) below for details.
-<br><br>&#x2022; <a id="dedicated-management-interface"></a>[`dedicated_management_interface`](#dedicated-management-interface) - Optional Block<br>Dedicated Management Interface. Dedicated Interface Configuration<br>See [Dedicated Management Interface](#dedicated-management-interface) below for details.
+<br><br>&#x2022; <a id="dedicated-management-interface"></a>[`dedicated\_management\_interface`](#dedicated-management-interface) - Optional Block<br>Dedicated Management Interface. Dedicated Interface Configuration<br>See [Dedicated Management Interface](#dedicated-management-interface) below for details.
 <br><br>&#x2022; <a id="ethernet-interface"></a>[`ethernet_interface`](#ethernet-interface) - Optional Block<br>Ethernet Interface. Ethernet Interface Configuration<br>See [Ethernet Interface](#ethernet-interface) below for details.
 <br><br>&#x2022; <a id="layer2-interface"></a>[`layer2_interface`](#layer2-interface) - Optional Block<br>Layer2 Interface. Layer2 Interface Configuration<br>See [Layer2 Interface](#layer2-interface) below for details.
 <br><br>&#x2022; <a id="tunnel-interface"></a>[`tunnel_interface`](#tunnel-interface) - Optional Block<br>Tunnel Interface. Tunnel Interface Configuration
@@ -107,7 +107,7 @@ A [`dedicated_interface`](#dedicated-interface) block supports the following:
 
 #### Dedicated Management Interface
 
-A [`dedicated_management_interface`](#dedicated-management-interface) block supports the following:
+A [`dedicated\_management\_interface`](#dedicated-management-interface) block supports the following:
 
 <a id="dedicated-management-interface-cluster"></a>&#x2022; [`cluster`](#dedicated-management-interface-cluster) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -129,7 +129,7 @@ An [`ethernet_interface`](#ethernet-interface) block supports the following:
 
 <a id="ethernet-interface-dhcp-server"></a>&#x2022; [`dhcp_server`](#ethernet-interface-dhcp-server) - Optional Block<br>DHCPServerParametersType<br>See [DHCP Server](#ethernet-interface-dhcp-server) below.
 
-<a id="ethernet-interface-ipv6-auto-config"></a>&#x2022; [`ipv6_auto_config`](#ethernet-interface-ipv6-auto-config) - Optional Block<br>IPV6AutoConfigType<br>See [IPv6 Auto Config](#ethernet-interface-ipv6-auto-config) below.
+<a id="ethernet-interface-ipv6-auto-config"></a>&#x2022; [`ipv6\_auto\_config`](#ethernet-interface-ipv6-auto-config) - Optional Block<br>IPV6AutoConfigType<br>See [IPv6 Auto Config](#ethernet-interface-ipv6-auto-config) below.
 
 <a id="ethernet-interface-is-primary"></a>&#x2022; [`is_primary`](#ethernet-interface-is-primary) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -139,7 +139,7 @@ An [`ethernet_interface`](#ethernet-interface) block supports the following:
 
 <a id="ethernet-interface-mtu"></a>&#x2022; [`mtu`](#ethernet-interface-mtu) - Optional Number<br>Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
 
-<a id="ethernet-interface-no-ipv6-address"></a>&#x2022; [`no_ipv6_address`](#ethernet-interface-no-ipv6-address) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ethernet-interface-no-ipv6-address"></a>&#x2022; [`no\_ipv6\_address`](#ethernet-interface-no-ipv6-address) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="ethernet-interface-node"></a>&#x2022; [`node`](#ethernet-interface-node) - Optional String<br>Specific Node. Configuration will apply to a device on the given node
 
@@ -147,13 +147,13 @@ An [`ethernet_interface`](#ethernet-interface) block supports the following:
 
 <a id="ethernet-interface-priority"></a>&#x2022; [`priority`](#ethernet-interface-priority) - Optional Number<br>Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority
 
-<a id="ethernet-interface-site-local-inside-network"></a>&#x2022; [`site_local_inside_network`](#ethernet-interface-site-local-inside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ethernet-interface-site-local-inside-network"></a>&#x2022; [`site\_local_inside\_network`](#ethernet-interface-site-local-inside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ethernet-interface-site-local-network"></a>&#x2022; [`site_local_network`](#ethernet-interface-site-local-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ethernet-interface-site-local-network"></a>&#x2022; [`site\_local\_network`](#ethernet-interface-site-local-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="ethernet-interface-static-ip"></a>&#x2022; [`static_ip`](#ethernet-interface-static-ip) - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IP](#ethernet-interface-static-ip) below.
 
-<a id="ethernet-interface-static-ipv6-address"></a>&#x2022; [`static_ipv6_address`](#ethernet-interface-static-ipv6-address) - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IPv6 Address](#ethernet-interface-static-ipv6-address) below.
+<a id="ethernet-interface-static-ipv6-address"></a>&#x2022; [`static\_ipv6\_address`](#ethernet-interface-static-ipv6-address) - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IPv6 Address](#ethernet-interface-static-ipv6-address) below.
 
 <a id="ethernet-interface-storage-network"></a>&#x2022; [`storage_network`](#ethernet-interface-storage-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -165,15 +165,15 @@ An [`ethernet_interface`](#ethernet-interface) block supports the following:
 
 A [`dhcp_server`](#ethernet-interface-dhcp-server) block (within [`ethernet_interface`](#ethernet-interface)) supports the following:
 
-<a id="ethernet-interface-dhcp-server-automatic-from-end"></a>&#x2022; [`automatic_from_end`](#ethernet-interface-dhcp-server-automatic-from-end) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ethernet-interface-dhcp-server-automatic-from-end"></a>&#x2022; [`automatic\_from\_end`](#ethernet-interface-dhcp-server-automatic-from-end) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ethernet-interface-dhcp-server-automatic-from-start"></a>&#x2022; [`automatic_from_start`](#ethernet-interface-dhcp-server-automatic-from-start) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ethernet-interface-dhcp-server-automatic-from-start"></a>&#x2022; [`automatic\_from\_start`](#ethernet-interface-dhcp-server-automatic-from-start) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="ethernet-interface-dhcp-server-dhcp-networks"></a>&#x2022; [`dhcp_networks`](#ethernet-interface-dhcp-server-dhcp-networks) - Optional Block<br>DHCP Networks. List of networks from which DHCP Server can allocate IPv4 Addresses<br>See [DHCP Networks](#ethernet-interface-dhcp-server-dhcp-networks) below.
 
-<a id="ethernet-interface-dhcp-server-fixed-ip-map"></a>&#x2022; [`fixed_ip_map`](#ethernet-interface-dhcp-server-fixed-ip-map) - Optional Block<br>Fixed MAC Address to IPv4 Assignments. Assign fixed IPv4 addresses based on the MAC Address of the DHCP Client
+<a id="ethernet-interface-dhcp-server-fixed-ip-map"></a>&#x2022; [`fixed\_ip\_map`](#ethernet-interface-dhcp-server-fixed-ip-map) - Optional Block<br>Fixed MAC Address to IPv4 Assignments. Assign fixed IPv4 addresses based on the MAC Address of the DHCP Client
 
-<a id="ethernet-interface-dhcp-server-interface-ip-map"></a>&#x2022; [`interface_ip_map`](#ethernet-interface-dhcp-server-interface-ip-map) - Optional Block<br>Interface IPv4 Assignments. Specify static IPv4 addresses per node<br>See [Interface IP Map](#ethernet-interface-dhcp-server-interface-ip-map) below.
+<a id="ethernet-interface-dhcp-server-interface-ip-map"></a>&#x2022; [`interface\_ip\_map`](#ethernet-interface-dhcp-server-interface-ip-map) - Optional Block<br>Interface IPv4 Assignments. Specify static IPv4 addresses per node<br>See [Interface IP Map](#ethernet-interface-dhcp-server-interface-ip-map) below.
 
 #### Ethernet Interface DHCP Server DHCP Networks
 
@@ -189,11 +189,11 @@ A [`dhcp_networks`](#ethernet-interface-dhcp-server-dhcp-networks) block (within
 
 <a id="ethernet-interface-dhcp-server-dhcp-networks-network-prefix"></a>&#x2022; [`network_prefix`](#ethernet-interface-dhcp-server-dhcp-networks-network-prefix) - Optional String<br>Network Prefix. Set the network prefix for the site. ex: 10.1.1.0/24
 
-<a id="ethernet-interface-dhcp-server-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#ethernet-interface-dhcp-server-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
+<a id="ethernet-interface-dhcp-server-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#ethernet-interface-dhcp-server-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE\_IP_ADDRESSES_FROM_DHCP\_POOLS`<br>Possible values are `INCLUDE\_IP_ADDRESSES_FROM_DHCP\_POOLS`, `EXCLUDE\_IP_ADDRESSES_FROM_DHCP\_POOLS`<br>Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
 
 <a id="ethernet-interface-dhcp-server-dhcp-networks-pools"></a>&#x2022; [`pools`](#ethernet-interface-dhcp-server-dhcp-networks-pools) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#ethernet-interface-dhcp-server-dhcp-networks-pools) below.
 
-<a id="ethernet-interface-dhcp-server-dhcp-networks-same-as-dgw"></a>&#x2022; [`same_as_dgw`](#ethernet-interface-dhcp-server-dhcp-networks-same-as-dgw) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ethernet-interface-dhcp-server-dhcp-networks-same-as-dgw"></a>&#x2022; [`same\_as\_dgw`](#ethernet-interface-dhcp-server-dhcp-networks-same-as-dgw) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Ethernet Interface DHCP Server DHCP Networks Pools
 
@@ -205,13 +205,13 @@ A [`pools`](#ethernet-interface-dhcp-server-dhcp-networks-pools) block (within [
 
 #### Ethernet Interface DHCP Server Interface IP Map
 
-An [`interface_ip_map`](#ethernet-interface-dhcp-server-interface-ip-map) block (within [`ethernet_interface.dhcp_server`](#ethernet-interface-dhcp-server)) supports the following:
+An [`interface\_ip\_map`](#ethernet-interface-dhcp-server-interface-ip-map) block (within [`ethernet_interface.dhcp_server`](#ethernet-interface-dhcp-server)) supports the following:
 
-<a id="ethernet-interface-dhcp-server-interface-ip-map-interface-ip-map"></a>&#x2022; [`interface_ip_map`](#ethernet-interface-dhcp-server-interface-ip-map-interface-ip-map) - Optional Block<br>Site:Node to IPv4 Address Mapping. Specify static IPv4 addresses per site:node
+<a id="ethernet-interface-dhcp-server-interface-ip-map-interface-ip-map"></a>&#x2022; [`interface\_ip\_map`](#ethernet-interface-dhcp-server-interface-ip-map-interface-ip-map) - Optional Block<br>Site:Node to IPv4 Address Mapping. Specify static IPv4 addresses per site:node
 
 #### Ethernet Interface IPv6 Auto Config
 
-An [`ipv6_auto_config`](#ethernet-interface-ipv6-auto-config) block (within [`ethernet_interface`](#ethernet-interface)) supports the following:
+An [`ipv6\_auto\_config`](#ethernet-interface-ipv6-auto-config) block (within [`ethernet_interface`](#ethernet-interface)) supports the following:
 
 <a id="ethernet-interface-ipv6-auto-config-host"></a>&#x2022; [`host`](#ethernet-interface-ipv6-auto-config-host) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -219,7 +219,7 @@ An [`ipv6_auto_config`](#ethernet-interface-ipv6-auto-config) block (within [`et
 
 #### Ethernet Interface IPv6 Auto Config Router
 
-A [`router`](#ethernet-interface-ipv6-auto-config-router) block (within [`ethernet_interface.ipv6_auto_config`](#ethernet-interface-ipv6-auto-config)) supports the following:
+A [`router`](#ethernet-interface-ipv6-auto-config-router) block (within [`ethernet_interface.ipv6\_auto\_config`](#ethernet-interface-ipv6-auto-config)) supports the following:
 
 <a id="ethernet-interface-ipv6-auto-config-router-dns-config"></a>&#x2022; [`dns_config`](#ethernet-interface-ipv6-auto-config-router-dns-config) - Optional Block<br>IPV6DnsConfig<br>See [DNS Config](#ethernet-interface-ipv6-auto-config-router-dns-config) below.
 
@@ -229,7 +229,7 @@ A [`router`](#ethernet-interface-ipv6-auto-config-router) block (within [`ethern
 
 #### Ethernet Interface IPv6 Auto Config Router DNS Config
 
-A [`dns_config`](#ethernet-interface-ipv6-auto-config-router-dns-config) block (within [`ethernet_interface.ipv6_auto_config.router`](#ethernet-interface-ipv6-auto-config-router)) supports the following:
+A [`dns_config`](#ethernet-interface-ipv6-auto-config-router-dns-config) block (within [`ethernet_interface.ipv6\_auto\_config.router`](#ethernet-interface-ipv6-auto-config-router)) supports the following:
 
 <a id="ethernet-interface-ipv6-auto-config-router-dns-config-configured-list"></a>&#x2022; [`configured_list`](#ethernet-interface-ipv6-auto-config-router-dns-config-configured-list) - Optional Block<br>IPV6DnsList<br>See [Configured List](#ethernet-interface-ipv6-auto-config-router-dns-config-configured-list) below.
 
@@ -237,13 +237,13 @@ A [`dns_config`](#ethernet-interface-ipv6-auto-config-router-dns-config) block (
 
 #### Ethernet Interface IPv6 Auto Config Router DNS Config Configured List
 
-A [`configured_list`](#ethernet-interface-ipv6-auto-config-router-dns-config-configured-list) block (within [`ethernet_interface.ipv6_auto_config.router.dns_config`](#ethernet-interface-ipv6-auto-config-router-dns-config)) supports the following:
+A [`configured_list`](#ethernet-interface-ipv6-auto-config-router-dns-config-configured-list) block (within [`ethernet_interface.ipv6\_auto\_config.router.dns_config`](#ethernet-interface-ipv6-auto-config-router-dns-config)) supports the following:
 
 <a id="ethernet-interface-ipv6-auto-config-router-dns-config-configured-list-dns-list"></a>&#x2022; [`dns_list`](#ethernet-interface-ipv6-auto-config-router-dns-config-configured-list-dns-list) - Optional List<br>DNS List. List of IPv6 Addresses acting as DNS servers
 
 #### Ethernet Interface IPv6 Auto Config Router DNS Config Local DNS
 
-A [`local_dns`](#ethernet-interface-ipv6-auto-config-router-dns-config-local-dns) block (within [`ethernet_interface.ipv6_auto_config.router.dns_config`](#ethernet-interface-ipv6-auto-config-router-dns-config)) supports the following:
+A [`local_dns`](#ethernet-interface-ipv6-auto-config-router-dns-config-local-dns) block (within [`ethernet_interface.ipv6\_auto\_config.router.dns_config`](#ethernet-interface-ipv6-auto-config-router-dns-config)) supports the following:
 
 <a id="ethernet-interface-ipv6-auto-config-router-dns-config-local-dns-configured-address"></a>&#x2022; [`configured_address`](#ethernet-interface-ipv6-auto-config-router-dns-config-local-dns-configured-address) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
 
@@ -253,31 +253,31 @@ A [`local_dns`](#ethernet-interface-ipv6-auto-config-router-dns-config-local-dns
 
 #### Ethernet Interface IPv6 Auto Config Router Stateful
 
-A [`stateful`](#ethernet-interface-ipv6-auto-config-router-stateful) block (within [`ethernet_interface.ipv6_auto_config.router`](#ethernet-interface-ipv6-auto-config-router)) supports the following:
+A [`stateful`](#ethernet-interface-ipv6-auto-config-router-stateful) block (within [`ethernet_interface.ipv6\_auto\_config.router`](#ethernet-interface-ipv6-auto-config-router)) supports the following:
 
-<a id="ethernet-interface-ipv6-auto-config-router-stateful-automatic-from-end"></a>&#x2022; [`automatic_from_end`](#ethernet-interface-ipv6-auto-config-router-stateful-automatic-from-end) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ethernet-interface-ipv6-auto-config-router-stateful-automatic-from-end"></a>&#x2022; [`automatic\_from\_end`](#ethernet-interface-ipv6-auto-config-router-stateful-automatic-from-end) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ethernet-interface-ipv6-auto-config-router-stateful-automatic-from-start"></a>&#x2022; [`automatic_from_start`](#ethernet-interface-ipv6-auto-config-router-stateful-automatic-from-start) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ethernet-interface-ipv6-auto-config-router-stateful-automatic-from-start"></a>&#x2022; [`automatic\_from\_start`](#ethernet-interface-ipv6-auto-config-router-stateful-automatic-from-start) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks"></a>&#x2022; [`dhcp_networks`](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks) - Optional Block<br>DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses<br>See [DHCP Networks](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks) below.
 
-<a id="ethernet-interface-ipv6-auto-config-router-stateful-fixed-ip-map"></a>&#x2022; [`fixed_ip_map`](#ethernet-interface-ipv6-auto-config-router-stateful-fixed-ip-map) - Optional Block<br>Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client
+<a id="ethernet-interface-ipv6-auto-config-router-stateful-fixed-ip-map"></a>&#x2022; [`fixed\_ip\_map`](#ethernet-interface-ipv6-auto-config-router-stateful-fixed-ip-map) - Optional Block<br>Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client
 
-<a id="ethernet-interface-ipv6-auto-config-router-stateful-interface-ip-map"></a>&#x2022; [`interface_ip_map`](#ethernet-interface-ipv6-auto-config-router-stateful-interface-ip-map) - Optional Block<br>Interface IPv6 Assignments. Map of Interface IPv6 assignments per node<br>See [Interface IP Map](#ethernet-interface-ipv6-auto-config-router-stateful-interface-ip-map) below.
+<a id="ethernet-interface-ipv6-auto-config-router-stateful-interface-ip-map"></a>&#x2022; [`interface\_ip\_map`](#ethernet-interface-ipv6-auto-config-router-stateful-interface-ip-map) - Optional Block<br>Interface IPv6 Assignments. Map of Interface IPv6 assignments per node<br>See [Interface IP Map](#ethernet-interface-ipv6-auto-config-router-stateful-interface-ip-map) below.
 
 #### Ethernet Interface IPv6 Auto Config Router Stateful DHCP Networks
 
-A [`dhcp_networks`](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks) block (within [`ethernet_interface.ipv6_auto_config.router.stateful`](#ethernet-interface-ipv6-auto-config-router-stateful)) supports the following:
+A [`dhcp_networks`](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks) block (within [`ethernet_interface.ipv6\_auto\_config.router.stateful`](#ethernet-interface-ipv6-auto-config-router-stateful)) supports the following:
 
 <a id="ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix"></a>&#x2022; [`network_prefix`](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
 
-<a id="ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
+<a id="ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE\_IP_ADDRESSES_FROM_DHCP\_POOLS`<br>Possible values are `INCLUDE\_IP_ADDRESSES_FROM_DHCP\_POOLS`, `EXCLUDE\_IP_ADDRESSES_FROM_DHCP\_POOLS`<br>Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
 
 <a id="ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>&#x2022; [`pools`](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
 
 #### Ethernet Interface IPv6 Auto Config Router Stateful DHCP Networks Pools
 
-A [`pools`](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools) block (within [`ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks`](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks)) supports the following:
+A [`pools`](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools) block (within [`ethernet_interface.ipv6\_auto\_config.router.stateful.dhcp_networks`](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks)) supports the following:
 
 <a id="ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools-end-ip"></a>&#x2022; [`end_ip`](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools-end-ip) - Optional String<br>Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix
 
@@ -285,27 +285,27 @@ A [`pools`](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-p
 
 #### Ethernet Interface IPv6 Auto Config Router Stateful Interface IP Map
 
-An [`interface_ip_map`](#ethernet-interface-ipv6-auto-config-router-stateful-interface-ip-map) block (within [`ethernet_interface.ipv6_auto_config.router.stateful`](#ethernet-interface-ipv6-auto-config-router-stateful)) supports the following:
+An [`interface\_ip\_map`](#ethernet-interface-ipv6-auto-config-router-stateful-interface-ip-map) block (within [`ethernet_interface.ipv6\_auto\_config.router.stateful`](#ethernet-interface-ipv6-auto-config-router-stateful)) supports the following:
 
-<a id="ethernet-interface-ipv6-auto-config-router-stateful-interface-ip-map-interface-ip-map"></a>&#x2022; [`interface_ip_map`](#ethernet-interface-ipv6-auto-config-router-stateful-interface-ip-map-interface-ip-map) - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
+<a id="ethernet-interface-ipv6-auto-config-router-stateful-interface-ip-map-interface-ip-map"></a>&#x2022; [`interface\_ip\_map`](#ethernet-interface-ipv6-auto-config-router-stateful-interface-ip-map-interface-ip-map) - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
 
 #### Ethernet Interface Static IP
 
 A [`static_ip`](#ethernet-interface-static-ip) block (within [`ethernet_interface`](#ethernet-interface)) supports the following:
 
-<a id="ethernet-interface-static-ip-cluster-static-ip"></a>&#x2022; [`cluster_static_ip`](#ethernet-interface-static-ip-cluster-static-ip) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#ethernet-interface-static-ip-cluster-static-ip) below.
+<a id="ethernet-interface-static-ip-cluster-static-ip"></a>&#x2022; [`cluster\_static\_ip`](#ethernet-interface-static-ip-cluster-static-ip) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#ethernet-interface-static-ip-cluster-static-ip) below.
 
-<a id="ethernet-interface-static-ip-node-static-ip"></a>&#x2022; [`node_static_ip`](#ethernet-interface-static-ip-node-static-ip) - Optional Block<br>Node: Static IP Parameters. Configure Static IP parameters for a node<br>See [Node Static IP](#ethernet-interface-static-ip-node-static-ip) below.
+<a id="ethernet-interface-static-ip-node-static-ip"></a>&#x2022; [`node\_static\_ip`](#ethernet-interface-static-ip-node-static-ip) - Optional Block<br>Node: Static IP Parameters. Configure Static IP parameters for a node<br>See [Node Static IP](#ethernet-interface-static-ip-node-static-ip) below.
 
 #### Ethernet Interface Static IP Cluster Static IP
 
-A [`cluster_static_ip`](#ethernet-interface-static-ip-cluster-static-ip) block (within [`ethernet_interface.static_ip`](#ethernet-interface-static-ip)) supports the following:
+A [`cluster\_static\_ip`](#ethernet-interface-static-ip-cluster-static-ip) block (within [`ethernet_interface.static_ip`](#ethernet-interface-static-ip)) supports the following:
 
-<a id="ethernet-interface-static-ip-cluster-static-ip-interface-ip-map"></a>&#x2022; [`interface_ip_map`](#ethernet-interface-static-ip-cluster-static-ip-interface-ip-map) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
+<a id="ethernet-interface-static-ip-cluster-static-ip-interface-ip-map"></a>&#x2022; [`interface\_ip\_map`](#ethernet-interface-static-ip-cluster-static-ip-interface-ip-map) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
 
 #### Ethernet Interface Static IP Node Static IP
 
-A [`node_static_ip`](#ethernet-interface-static-ip-node-static-ip) block (within [`ethernet_interface.static_ip`](#ethernet-interface-static-ip)) supports the following:
+A [`node\_static\_ip`](#ethernet-interface-static-ip-node-static-ip) block (within [`ethernet_interface.static_ip`](#ethernet-interface-static-ip)) supports the following:
 
 <a id="ethernet-interface-static-ip-node-static-ip-default-gw"></a>&#x2022; [`default_gw`](#ethernet-interface-static-ip-node-static-ip-default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -313,21 +313,21 @@ A [`node_static_ip`](#ethernet-interface-static-ip-node-static-ip) block (within
 
 #### Ethernet Interface Static IPv6 Address
 
-A [`static_ipv6_address`](#ethernet-interface-static-ipv6-address) block (within [`ethernet_interface`](#ethernet-interface)) supports the following:
+A [`static\_ipv6\_address`](#ethernet-interface-static-ipv6-address) block (within [`ethernet_interface`](#ethernet-interface)) supports the following:
 
-<a id="ethernet-interface-static-ipv6-address-cluster-static-ip"></a>&#x2022; [`cluster_static_ip`](#ethernet-interface-static-ipv6-address-cluster-static-ip) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#ethernet-interface-static-ipv6-address-cluster-static-ip) below.
+<a id="ethernet-interface-static-ipv6-address-cluster-static-ip"></a>&#x2022; [`cluster\_static\_ip`](#ethernet-interface-static-ipv6-address-cluster-static-ip) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#ethernet-interface-static-ipv6-address-cluster-static-ip) below.
 
-<a id="ethernet-interface-static-ipv6-address-node-static-ip"></a>&#x2022; [`node_static_ip`](#ethernet-interface-static-ipv6-address-node-static-ip) - Optional Block<br>Node: Static IP Parameters. Configure Static IP parameters for a node<br>See [Node Static IP](#ethernet-interface-static-ipv6-address-node-static-ip) below.
+<a id="ethernet-interface-static-ipv6-address-node-static-ip"></a>&#x2022; [`node\_static\_ip`](#ethernet-interface-static-ipv6-address-node-static-ip) - Optional Block<br>Node: Static IP Parameters. Configure Static IP parameters for a node<br>See [Node Static IP](#ethernet-interface-static-ipv6-address-node-static-ip) below.
 
 #### Ethernet Interface Static IPv6 Address Cluster Static IP
 
-A [`cluster_static_ip`](#ethernet-interface-static-ipv6-address-cluster-static-ip) block (within [`ethernet_interface.static_ipv6_address`](#ethernet-interface-static-ipv6-address)) supports the following:
+A [`cluster\_static\_ip`](#ethernet-interface-static-ipv6-address-cluster-static-ip) block (within [`ethernet_interface.static\_ipv6\_address`](#ethernet-interface-static-ipv6-address)) supports the following:
 
-<a id="ethernet-interface-static-ipv6-address-cluster-static-ip-interface-ip-map"></a>&#x2022; [`interface_ip_map`](#ethernet-interface-static-ipv6-address-cluster-static-ip-interface-ip-map) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
+<a id="ethernet-interface-static-ipv6-address-cluster-static-ip-interface-ip-map"></a>&#x2022; [`interface\_ip\_map`](#ethernet-interface-static-ipv6-address-cluster-static-ip-interface-ip-map) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
 
 #### Ethernet Interface Static IPv6 Address Node Static IP
 
-A [`node_static_ip`](#ethernet-interface-static-ipv6-address-node-static-ip) block (within [`ethernet_interface.static_ipv6_address`](#ethernet-interface-static-ipv6-address)) supports the following:
+A [`node\_static\_ip`](#ethernet-interface-static-ipv6-address-node-static-ip) block (within [`ethernet_interface.static\_ipv6\_address`](#ethernet-interface-static-ipv6-address)) supports the following:
 
 <a id="ethernet-interface-static-ipv6-address-node-static-ip-default-gw"></a>&#x2022; [`default_gw`](#ethernet-interface-static-ipv6-address-node-static-ip-default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -341,7 +341,7 @@ A [`layer2_interface`](#layer2-interface) block supports the following:
 
 <a id="layer2-interface-l2vlan-interface"></a>&#x2022; [`l2vlan_interface`](#layer2-interface-l2vlan-interface) - Optional Block<br>Layer2 VLAN Interface. Layer2 VLAN Interface Configuration<br>See [L2vlan Interface](#layer2-interface-l2vlan-interface) below.
 
-<a id="layer2-interface-l2vlan-slo-interface"></a>&#x2022; [`l2vlan_slo_interface`](#layer2-interface-l2vlan-slo-interface) - Optional Block<br>VLAN on Site Local Outside Interface. Layer2 Site Local Outside VLAN Interface Configuration<br>See [L2vlan Slo Interface](#layer2-interface-l2vlan-slo-interface) below.
+<a id="layer2-interface-l2vlan-slo-interface"></a>&#x2022; [`l2vlan\_slo\_interface`](#layer2-interface-l2vlan-slo-interface) - Optional Block<br>VLAN on Site Local Outside Interface. Layer2 Site Local Outside VLAN Interface Configuration<br>See [L2vlan Slo Interface](#layer2-interface-l2vlan-slo-interface) below.
 
 #### Layer2 Interface L2sriov Interface
 
@@ -363,7 +363,7 @@ A [`l2vlan_interface`](#layer2-interface-l2vlan-interface) block (within [`layer
 
 #### Layer2 Interface L2vlan Slo Interface
 
-A [`l2vlan_slo_interface`](#layer2-interface-l2vlan-slo-interface) block (within [`layer2_interface`](#layer2-interface)) supports the following:
+A [`l2vlan\_slo\_interface`](#layer2-interface-l2vlan-slo-interface) block (within [`layer2_interface`](#layer2-interface)) supports the following:
 
 <a id="layer2-interface-l2vlan-slo-interface-vlan-id"></a>&#x2022; [`vlan_id`](#layer2-interface-l2vlan-slo-interface-vlan-id) - Optional Number<br>VLAN ID. VLAN ID
 
@@ -389,9 +389,9 @@ A [`tunnel_interface`](#tunnel-interface) block supports the following:
 
 <a id="tunnel-interface-priority"></a>&#x2022; [`priority`](#tunnel-interface-priority) - Optional Number<br>Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority
 
-<a id="tunnel-interface-site-local-inside-network"></a>&#x2022; [`site_local_inside_network`](#tunnel-interface-site-local-inside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="tunnel-interface-site-local-inside-network"></a>&#x2022; [`site\_local_inside\_network`](#tunnel-interface-site-local-inside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="tunnel-interface-site-local-network"></a>&#x2022; [`site_local_network`](#tunnel-interface-site-local-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="tunnel-interface-site-local-network"></a>&#x2022; [`site\_local\_network`](#tunnel-interface-site-local-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="tunnel-interface-static-ip"></a>&#x2022; [`static_ip`](#tunnel-interface-static-ip) - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IP](#tunnel-interface-static-ip) below.
 
@@ -401,19 +401,19 @@ A [`tunnel_interface`](#tunnel-interface) block supports the following:
 
 A [`static_ip`](#tunnel-interface-static-ip) block (within [`tunnel_interface`](#tunnel-interface)) supports the following:
 
-<a id="tunnel-interface-static-ip-cluster-static-ip"></a>&#x2022; [`cluster_static_ip`](#tunnel-interface-static-ip-cluster-static-ip) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#tunnel-interface-static-ip-cluster-static-ip) below.
+<a id="tunnel-interface-static-ip-cluster-static-ip"></a>&#x2022; [`cluster\_static\_ip`](#tunnel-interface-static-ip-cluster-static-ip) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#tunnel-interface-static-ip-cluster-static-ip) below.
 
-<a id="tunnel-interface-static-ip-node-static-ip"></a>&#x2022; [`node_static_ip`](#tunnel-interface-static-ip-node-static-ip) - Optional Block<br>Node: Static IP Parameters. Configure Static IP parameters for a node<br>See [Node Static IP](#tunnel-interface-static-ip-node-static-ip) below.
+<a id="tunnel-interface-static-ip-node-static-ip"></a>&#x2022; [`node\_static\_ip`](#tunnel-interface-static-ip-node-static-ip) - Optional Block<br>Node: Static IP Parameters. Configure Static IP parameters for a node<br>See [Node Static IP](#tunnel-interface-static-ip-node-static-ip) below.
 
 #### Tunnel Interface Static IP Cluster Static IP
 
-A [`cluster_static_ip`](#tunnel-interface-static-ip-cluster-static-ip) block (within [`tunnel_interface.static_ip`](#tunnel-interface-static-ip)) supports the following:
+A [`cluster\_static\_ip`](#tunnel-interface-static-ip-cluster-static-ip) block (within [`tunnel_interface.static_ip`](#tunnel-interface-static-ip)) supports the following:
 
-<a id="tunnel-interface-static-ip-cluster-static-ip-interface-ip-map"></a>&#x2022; [`interface_ip_map`](#tunnel-interface-static-ip-cluster-static-ip-interface-ip-map) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
+<a id="tunnel-interface-static-ip-cluster-static-ip-interface-ip-map"></a>&#x2022; [`interface\_ip\_map`](#tunnel-interface-static-ip-cluster-static-ip-interface-ip-map) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
 
 #### Tunnel Interface Static IP Node Static IP
 
-A [`node_static_ip`](#tunnel-interface-static-ip-node-static-ip) block (within [`tunnel_interface.static_ip`](#tunnel-interface-static-ip)) supports the following:
+A [`node\_static\_ip`](#tunnel-interface-static-ip-node-static-ip) block (within [`tunnel_interface.static_ip`](#tunnel-interface-static-ip)) supports the following:
 
 <a id="tunnel-interface-static-ip-node-static-ip-default-gw"></a>&#x2022; [`default_gw`](#tunnel-interface-static-ip-node-static-ip-default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -435,5 +435,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_network_interface.example system/example
+terraform import f5xc\_network\_interface.example system/example
 ```

@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_aws_vpc_site Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_aws_vpc\_site Data Source - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
   Manages a AWSVPCSite resource in F5 Distributed Cloud for deploying F5 sites within AWS VPC environments.
 ---
 
-# f5xc_aws_vpc_site (Data Source)
+# f5xc\_aws_vpc\_site (Data Source)
 
 Manages a AWSVPCSite resource in F5 Distributed Cloud for deploying F5 sites within AWS VPC environments.
 
@@ -18,18 +18,18 @@ Manages a AWSVPCSite resource in F5 Distributed Cloud for deploying F5 sites wit
 # Retrieves information about an existing AWS VPC Site
 
 # Look up an existing AWS VPC Site by name
-data "f5xc_aws_vpc_site" "example" {
+data "f5xc\_aws_vpc\_site" "example" {
   name      = "example-aws-vpc-site"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "aws_vpc_site_id" {
-#   value = data.f5xc_aws_vpc_site.example.id
+# output "aws\_vpc_site\_id" {
+#   value = data.f5xc\_aws_vpc\_site.example.id
 # }
 
 # Example: Reference cloud site for advertising load balancer
-# resource "f5xc_http_loadbalancer" "example" {
+# resource "f5xc\_http\_loadbalancer" "example" {
 #   name      = "site-advertised-lb"
 #   namespace = "system"
 #
@@ -37,8 +37,8 @@ data "f5xc_aws_vpc_site" "example" {
 #     advertise_where {
 #       site {
 #         site {
-#           name      = data.f5xc_aws_vpc_site.example.name
-#           namespace = data.f5xc_aws_vpc_site.example.namespace
+#           name      = data.f5xc\_aws_vpc\_site.example.name
+#           namespace = data.f5xc\_aws_vpc\_site.example.namespace
 #         }
 #       }
 #     }

@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_waf_exclusion_policy Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_waf_exclusion\_policy Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages WAF exclusion policy in F5 Distributed Cloud.
 ---
 
-# f5xc_waf_exclusion_policy (Data Source)
+# f5xc\_waf_exclusion\_policy (Data Source)
 
 Manages WAF exclusion policy in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages WAF exclusion policy in F5 Distributed Cloud.
 # Retrieves information about an existing WAF Exclusion Policy
 
 # Look up an existing WAF Exclusion Policy by name
-data "f5xc_waf_exclusion_policy" "example" {
+data "f5xc\_waf_exclusion\_policy" "example" {
   name      = "example-waf-exclusion-policy"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "waf_exclusion_policy_id" {
-#   value = data.f5xc_waf_exclusion_policy.example.id
+# output "waf\_exclusion_policy\_id" {
+#   value = data.f5xc\_waf_exclusion\_policy.example.id
 # }
 ```
 

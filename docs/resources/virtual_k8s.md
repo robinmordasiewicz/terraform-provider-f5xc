@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_virtual_k8s Resource - terraform-provider-f5xc"
+page_title: "f5xc\_virtual\_k8s Resource - terraform-provider-f5xc"
 subcategory: "Kubernetes"
 description: |-
   Manages virtual_k8s will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 ---
 
-# f5xc_virtual_k8s (Resource)
+# f5xc\_virtual\_k8s (Resource)
 
 Manages virtual_k8s will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages virtual_k8s will create the object in the storage backend for namespace 
 # Manages virtual_k8s will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
 # Basic Virtual K8S configuration
-resource "f5xc_virtual_k8s" "example" {
+resource "f5xc\_virtual\_k8s" "example" {
   name      = "example-virtual-k8s"
   namespace = "staging"
 
@@ -42,7 +42,7 @@ resource "f5xc_virtual_k8s" "example" {
   isolated {}
 
   // Default workload flavor reference
-  default_flavor_ref {
+  default\_flavor\_ref {
     name      = "example-workload-flavor"
     namespace = "staging"
   }
@@ -68,7 +68,7 @@ resource "f5xc_virtual_k8s" "example" {
 
 ### Spec Argument Reference
 
-<a id="default-flavor-ref"></a>&#x2022; [`default_flavor_ref`](#default-flavor-ref) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Default Flavor Ref](#default-flavor-ref) below for details.
+<a id="default-flavor-ref"></a>&#x2022; [`default\_flavor\_ref`](#default-flavor-ref) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Default Flavor Ref](#default-flavor-ref) below for details.
 
 -> **One of the following:**
 &#x2022; <a id="disabled"></a>[`disabled`](#disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -88,7 +88,7 @@ In addition to all arguments above, the following attributes are exported:
 
 #### Default Flavor Ref
 
-A [`default_flavor_ref`](#default-flavor-ref) block supports the following:
+A [`default\_flavor\_ref`](#default-flavor-ref) block supports the following:
 
 <a id="default-flavor-ref-name"></a>&#x2022; [`name`](#default-flavor-ref-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -128,5 +128,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_virtual_k8s.example system/example
+terraform import f5xc\_virtual\_k8s.example system/example
 ```

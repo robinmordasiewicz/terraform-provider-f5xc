@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_global_log_receiver Resource - terraform-provider-f5xc"
+page_title: "f5xc\_global_log\_receiver Resource - terraform-provider-f5xc"
 subcategory: "Monitoring"
 description: |-
   Manages a GlobalLogReceiver resource in F5 Distributed Cloud for global log aggregation settings.
 ---
 
-# f5xc_global_log_receiver (Resource)
+# f5xc\_global_log\_receiver (Resource)
 
 Manages a GlobalLogReceiver resource in F5 Distributed Cloud for global log aggregation settings.
 
@@ -18,7 +18,7 @@ Manages a GlobalLogReceiver resource in F5 Distributed Cloud for global log aggr
 # Manages a GlobalLogReceiver resource in F5 Distributed Cloud for global log aggregation settings.
 
 # Basic Global Log Receiver configuration
-resource "f5xc_global_log_receiver" "example" {
+resource "f5xc\_global_log\_receiver" "example" {
   name      = "example-global-log-receiver"
   namespace = "system"
 
@@ -36,9 +36,9 @@ resource "f5xc_global_log_receiver" "example" {
   audit_logs {
     # Configure audit_logs settings
   }
-  # [OneOf: aws_cloud_watch_receiver, azure_event_hubs_receiv...
-  aws_cloud_watch_receiver {
-    # Configure aws_cloud_watch_receiver settings
+  # [OneOf: aws\_cloud_watch\_receiver, azure\_event_hubs\_receiv...
+  aws\_cloud_watch\_receiver {
+    # Configure aws\_cloud_watch\_receiver settings
   }
   # Object reference. This type establishes a direct referenc...
   aws_cred {
@@ -73,18 +73,18 @@ resource "f5xc_global_log_receiver" "example" {
 <br><br>&#x2022; <a id="security-events"></a>[`security_events`](#security-events) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; <a id="aws-cloud-watch-receiver"></a>[`aws_cloud_watch_receiver`](#aws-cloud-watch-receiver) - Optional Block<br>AWS Cloudwatch Logs Configuration. AWS Cloudwatch Logs Configuration for Global Log Receiver<br>See [AWS Cloud Watch Receiver](#aws-cloud-watch-receiver) below for details.
-<br><br>&#x2022; <a id="azure-event-hubs-receiver"></a>[`azure_event_hubs_receiver`](#azure-event-hubs-receiver) - Optional Block<br>Azure Event Hubs Configuration. Azure Event Hubs Configuration for Global Log Receiver<br>See [Azure Event Hubs Receiver](#azure-event-hubs-receiver) below for details.
+&#x2022; <a id="aws-cloud-watch-receiver"></a>[`aws\_cloud_watch\_receiver`](#aws-cloud-watch-receiver) - Optional Block<br>AWS Cloudwatch Logs Configuration. AWS Cloudwatch Logs Configuration for Global Log Receiver<br>See [AWS Cloud Watch Receiver](#aws-cloud-watch-receiver) below for details.
+<br><br>&#x2022; <a id="azure-event-hubs-receiver"></a>[`azure\_event_hubs\_receiver`](#azure-event-hubs-receiver) - Optional Block<br>Azure Event Hubs Configuration. Azure Event Hubs Configuration for Global Log Receiver<br>See [Azure Event Hubs Receiver](#azure-event-hubs-receiver) below for details.
 <br><br>&#x2022; <a id="azure-receiver"></a>[`azure_receiver`](#azure-receiver) - Optional Block<br>Azure Blob Configuration. Azure Blob Configuration for Global Log Receiver<br>See [Azure Receiver](#azure-receiver) below for details.
 <br><br>&#x2022; <a id="datadog-receiver"></a>[`datadog_receiver`](#datadog-receiver) - Optional Block<br>Datadog Configuration. Configuration for Datadog endpoint<br>See [Datadog Receiver](#datadog-receiver) below for details.
-<br><br>&#x2022; <a id="gcp-bucket-receiver"></a>[`gcp_bucket_receiver`](#gcp-bucket-receiver) - Optional Block<br>GCP BucketConfiguration. GCP Bucket Configuration for Global Log Receiver<br>See [GCP Bucket Receiver](#gcp-bucket-receiver) below for details.
+<br><br>&#x2022; <a id="gcp-bucket-receiver"></a>[`gcp\_bucket\_receiver`](#gcp-bucket-receiver) - Optional Block<br>GCP BucketConfiguration. GCP Bucket Configuration for Global Log Receiver<br>See [GCP Bucket Receiver](#gcp-bucket-receiver) below for details.
 <br><br>&#x2022; <a id="http-receiver"></a>[`http_receiver`](#http-receiver) - Optional Block<br>HTTP Configuration. Configuration for HTTP endpoint
 <br><br>&#x2022; <a id="kafka-receiver"></a>[`kafka_receiver`](#kafka-receiver) - Optional Block<br>Kafka Configuration. Kafka Configuration for Global Log Receiver
-<br><br>&#x2022; <a id="new-relic-receiver"></a>[`new_relic_receiver`](#new-relic-receiver) - Optional Block<br>NewRelic Configuration. Configuration for NewRelic endpoint
+<br><br>&#x2022; <a id="new-relic-receiver"></a>[`new\_relic\_receiver`](#new-relic-receiver) - Optional Block<br>NewRelic Configuration. Configuration for NewRelic endpoint
 <br><br>&#x2022; <a id="qradar-receiver"></a>[`qradar_receiver`](#qradar-receiver) - Optional Block<br>IBM QRadar Configuration. Configuration for IBM QRadar endpoint
 <br><br>&#x2022; <a id="s3-receiver"></a>[`s3_receiver`](#s3-receiver) - Optional Block<br>S3 Configuration. S3 Configuration for Global Log Receiver
 <br><br>&#x2022; <a id="splunk-receiver"></a>[`splunk_receiver`](#splunk-receiver) - Optional Block<br>Splunk HEC Logs Configuration. Configuration for Splunk HEC Logs endpoint
-<br><br>&#x2022; <a id="sumo-logic-receiver"></a>[`sumo_logic_receiver`](#sumo-logic-receiver) - Optional Block<br>SumoLogic Configuration. Configuration for SumoLogic endpoint
+<br><br>&#x2022; <a id="sumo-logic-receiver"></a>[`sumo\_logic\_receiver`](#sumo-logic-receiver) - Optional Block<br>SumoLogic Configuration. Configuration for SumoLogic endpoint
 
 -> **One of the following:**
 &#x2022; <a id="ns-all"></a>[`ns_all`](#ns-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -103,7 +103,7 @@ In addition to all arguments above, the following attributes are exported:
 
 #### AWS Cloud Watch Receiver
 
-An [`aws_cloud_watch_receiver`](#aws-cloud-watch-receiver) block supports the following:
+An [`aws\_cloud_watch\_receiver`](#aws-cloud-watch-receiver) block supports the following:
 
 <a id="aws-cloud-watch-receiver-aws-cred"></a>&#x2022; [`aws_cred`](#aws-cloud-watch-receiver-aws-cred) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [AWS Cred](#aws-cloud-watch-receiver-aws-cred) below.
 
@@ -119,7 +119,7 @@ An [`aws_cloud_watch_receiver`](#aws-cloud-watch-receiver) block supports the fo
 
 #### AWS Cloud Watch Receiver AWS Cred
 
-An [`aws_cred`](#aws-cloud-watch-receiver-aws-cred) block (within [`aws_cloud_watch_receiver`](#aws-cloud-watch-receiver)) supports the following:
+An [`aws_cred`](#aws-cloud-watch-receiver-aws-cred) block (within [`aws\_cloud_watch\_receiver`](#aws-cloud-watch-receiver)) supports the following:
 
 <a id="aws-cloud-watch-receiver-aws-cred-name"></a>&#x2022; [`name`](#aws-cloud-watch-receiver-aws-cred-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -129,23 +129,23 @@ An [`aws_cred`](#aws-cloud-watch-receiver-aws-cred) block (within [`aws_cloud_wa
 
 #### AWS Cloud Watch Receiver Batch
 
-A [`batch`](#aws-cloud-watch-receiver-batch) block (within [`aws_cloud_watch_receiver`](#aws-cloud-watch-receiver)) supports the following:
+A [`batch`](#aws-cloud-watch-receiver-batch) block (within [`aws\_cloud_watch\_receiver`](#aws-cloud-watch-receiver)) supports the following:
 
 <a id="aws-cloud-watch-receiver-batch-max-bytes"></a>&#x2022; [`max_bytes`](#aws-cloud-watch-receiver-batch-max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
-<a id="aws-cloud-watch-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#aws-cloud-watch-receiver-batch-max-bytes-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="aws-cloud-watch-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max\_bytes\_disabled`](#aws-cloud-watch-receiver-batch-max-bytes-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="aws-cloud-watch-receiver-batch-max-events"></a>&#x2022; [`max_events`](#aws-cloud-watch-receiver-batch-max-events) - Optional Number<br>Max Events. Send batch to endpoint after this many log messages are in the batch
 
-<a id="aws-cloud-watch-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#aws-cloud-watch-receiver-batch-max-events-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="aws-cloud-watch-receiver-batch-max-events-disabled"></a>&#x2022; [`max\_events\_disabled`](#aws-cloud-watch-receiver-batch-max-events-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="aws-cloud-watch-receiver-batch-timeout-seconds"></a>&#x2022; [`timeout_seconds`](#aws-cloud-watch-receiver-batch-timeout-seconds) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
 
-<a id="aws-cloud-watch-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#aws-cloud-watch-receiver-batch-timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="aws-cloud-watch-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout\_seconds\_default`](#aws-cloud-watch-receiver-batch-timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### AWS Cloud Watch Receiver Compression
 
-A [`compression`](#aws-cloud-watch-receiver-compression) block (within [`aws_cloud_watch_receiver`](#aws-cloud-watch-receiver)) supports the following:
+A [`compression`](#aws-cloud-watch-receiver-compression) block (within [`aws\_cloud_watch\_receiver`](#aws-cloud-watch-receiver)) supports the following:
 
 <a id="aws-cloud-watch-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#aws-cloud-watch-receiver-compression-compression-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -155,7 +155,7 @@ A [`compression`](#aws-cloud-watch-receiver-compression) block (within [`aws_clo
 
 #### Azure Event Hubs Receiver
 
-An [`azure_event_hubs_receiver`](#azure-event-hubs-receiver) block supports the following:
+An [`azure\_event_hubs\_receiver`](#azure-event-hubs-receiver) block supports the following:
 
 <a id="azure-event-hubs-receiver-connection-string"></a>&#x2022; [`connection_string`](#azure-event-hubs-receiver-connection-string) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Connection String](#azure-event-hubs-receiver-connection-string) below.
 
@@ -165,15 +165,15 @@ An [`azure_event_hubs_receiver`](#azure-event-hubs-receiver) block supports the 
 
 #### Azure Event Hubs Receiver Connection String
 
-A [`connection_string`](#azure-event-hubs-receiver-connection-string) block (within [`azure_event_hubs_receiver`](#azure-event-hubs-receiver)) supports the following:
+A [`connection_string`](#azure-event-hubs-receiver-connection-string) block (within [`azure\_event_hubs\_receiver`](#azure-event-hubs-receiver)) supports the following:
 
-<a id="azure-event-hubs-receiver-connection-string-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#azure-event-hubs-receiver-connection-string-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#azure-event-hubs-receiver-connection-string-blindfold-secret-info) below.
+<a id="azure-event-hubs-receiver-connection-string-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#azure-event-hubs-receiver-connection-string-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#azure-event-hubs-receiver-connection-string-blindfold-secret-info) below.
 
-<a id="azure-event-hubs-receiver-connection-string-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#azure-event-hubs-receiver-connection-string-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#azure-event-hubs-receiver-connection-string-clear-secret-info) below.
+<a id="azure-event-hubs-receiver-connection-string-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#azure-event-hubs-receiver-connection-string-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#azure-event-hubs-receiver-connection-string-clear-secret-info) below.
 
 #### Azure Event Hubs Receiver Connection String Blindfold Secret Info
 
-A [`blindfold_secret_info`](#azure-event-hubs-receiver-connection-string-blindfold-secret-info) block (within [`azure_event_hubs_receiver.connection_string`](#azure-event-hubs-receiver-connection-string)) supports the following:
+A [`blindfold\_secret\_info`](#azure-event-hubs-receiver-connection-string-blindfold-secret-info) block (within [`azure\_event_hubs\_receiver.connection_string`](#azure-event-hubs-receiver-connection-string)) supports the following:
 
 <a id="azure-event-hubs-receiver-connection-string-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#azure-event-hubs-receiver-connection-string-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -183,7 +183,7 @@ A [`blindfold_secret_info`](#azure-event-hubs-receiver-connection-string-blindfo
 
 #### Azure Event Hubs Receiver Connection String Clear Secret Info
 
-A [`clear_secret_info`](#azure-event-hubs-receiver-connection-string-clear-secret-info) block (within [`azure_event_hubs_receiver.connection_string`](#azure-event-hubs-receiver-connection-string)) supports the following:
+A [`clear\_secret\_info`](#azure-event-hubs-receiver-connection-string-clear-secret-info) block (within [`azure\_event_hubs\_receiver.connection_string`](#azure-event-hubs-receiver-connection-string)) supports the following:
 
 <a id="azure-event-hubs-receiver-connection-string-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#azure-event-hubs-receiver-connection-string-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -209,15 +209,15 @@ A [`batch`](#azure-receiver-batch) block (within [`azure_receiver`](#azure-recei
 
 <a id="azure-receiver-batch-max-bytes"></a>&#x2022; [`max_bytes`](#azure-receiver-batch-max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
-<a id="azure-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#azure-receiver-batch-max-bytes-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="azure-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max\_bytes\_disabled`](#azure-receiver-batch-max-bytes-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="azure-receiver-batch-max-events"></a>&#x2022; [`max_events`](#azure-receiver-batch-max-events) - Optional Number<br>Max Events. Send batch to endpoint after this many log messages are in the batch
 
-<a id="azure-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#azure-receiver-batch-max-events-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="azure-receiver-batch-max-events-disabled"></a>&#x2022; [`max\_events\_disabled`](#azure-receiver-batch-max-events-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="azure-receiver-batch-timeout-seconds"></a>&#x2022; [`timeout_seconds`](#azure-receiver-batch-timeout-seconds) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
 
-<a id="azure-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#azure-receiver-batch-timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="azure-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout\_seconds\_default`](#azure-receiver-batch-timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Azure Receiver Compression
 
@@ -233,13 +233,13 @@ A [`compression`](#azure-receiver-compression) block (within [`azure_receiver`](
 
 A [`connection_string`](#azure-receiver-connection-string) block (within [`azure_receiver`](#azure-receiver)) supports the following:
 
-<a id="azure-receiver-connection-string-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#azure-receiver-connection-string-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#azure-receiver-connection-string-blindfold-secret-info) below.
+<a id="azure-receiver-connection-string-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#azure-receiver-connection-string-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#azure-receiver-connection-string-blindfold-secret-info) below.
 
-<a id="azure-receiver-connection-string-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#azure-receiver-connection-string-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#azure-receiver-connection-string-clear-secret-info) below.
+<a id="azure-receiver-connection-string-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#azure-receiver-connection-string-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#azure-receiver-connection-string-clear-secret-info) below.
 
 #### Azure Receiver Connection String Blindfold Secret Info
 
-A [`blindfold_secret_info`](#azure-receiver-connection-string-blindfold-secret-info) block (within [`azure_receiver.connection_string`](#azure-receiver-connection-string)) supports the following:
+A [`blindfold\_secret\_info`](#azure-receiver-connection-string-blindfold-secret-info) block (within [`azure_receiver.connection_string`](#azure-receiver-connection-string)) supports the following:
 
 <a id="azure-receiver-connection-string-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#azure-receiver-connection-string-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -249,7 +249,7 @@ A [`blindfold_secret_info`](#azure-receiver-connection-string-blindfold-secret-i
 
 #### Azure Receiver Connection String Clear Secret Info
 
-A [`clear_secret_info`](#azure-receiver-connection-string-clear-secret-info) block (within [`azure_receiver.connection_string`](#azure-receiver-connection-string)) supports the following:
+A [`clear\_secret\_info`](#azure-receiver-connection-string-clear-secret-info) block (within [`azure_receiver.connection_string`](#azure-receiver-connection-string)) supports the following:
 
 <a id="azure-receiver-connection-string-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#azure-receiver-connection-string-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -261,7 +261,7 @@ A [`filename_options`](#azure-receiver-filename-options) block (within [`azure_r
 
 <a id="azure-receiver-filename-options-custom-folder"></a>&#x2022; [`custom_folder`](#azure-receiver-filename-options-custom-folder) - Optional String<br>Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_]\[a-z0-9\-\._]*$/i`
 
-<a id="azure-receiver-filename-options-log-type-folder"></a>&#x2022; [`log_type_folder`](#azure-receiver-filename-options-log-type-folder) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="azure-receiver-filename-options-log-type-folder"></a>&#x2022; [`log\_type\_folder`](#azure-receiver-filename-options-log-type-folder) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="azure-receiver-filename-options-no-folder"></a>&#x2022; [`no_folder`](#azure-receiver-filename-options-no-folder) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -273,7 +273,7 @@ A [`datadog_receiver`](#datadog-receiver) block supports the following:
 
 <a id="datadog-receiver-compression"></a>&#x2022; [`compression`](#datadog-receiver-compression) - Optional Block<br>Compression Type. Compression Type<br>See [Compression](#datadog-receiver-compression) below.
 
-<a id="datadog-receiver-datadog-api-key"></a>&#x2022; [`datadog_api_key`](#datadog-receiver-datadog-api-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Datadog API Key](#datadog-receiver-datadog-api-key) below.
+<a id="datadog-receiver-datadog-api-key"></a>&#x2022; [`datadog\_api\_key`](#datadog-receiver-datadog-api-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Datadog API Key](#datadog-receiver-datadog-api-key) below.
 
 <a id="datadog-receiver-endpoint"></a>&#x2022; [`endpoint`](#datadog-receiver-endpoint) - Optional String<br>Datadog Endpoint. Datadog Endpoint, example: `example.com:9000`
 
@@ -289,15 +289,15 @@ A [`batch`](#datadog-receiver-batch) block (within [`datadog_receiver`](#datadog
 
 <a id="datadog-receiver-batch-max-bytes"></a>&#x2022; [`max_bytes`](#datadog-receiver-batch-max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
-<a id="datadog-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#datadog-receiver-batch-max-bytes-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="datadog-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max\_bytes\_disabled`](#datadog-receiver-batch-max-bytes-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="datadog-receiver-batch-max-events"></a>&#x2022; [`max_events`](#datadog-receiver-batch-max-events) - Optional Number<br>Max Events. Send batch to endpoint after this many log messages are in the batch
 
-<a id="datadog-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#datadog-receiver-batch-max-events-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="datadog-receiver-batch-max-events-disabled"></a>&#x2022; [`max\_events\_disabled`](#datadog-receiver-batch-max-events-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="datadog-receiver-batch-timeout-seconds"></a>&#x2022; [`timeout_seconds`](#datadog-receiver-batch-timeout-seconds) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
 
-<a id="datadog-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#datadog-receiver-batch-timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="datadog-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout\_seconds\_default`](#datadog-receiver-batch-timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Datadog Receiver Compression
 
@@ -311,15 +311,15 @@ A [`compression`](#datadog-receiver-compression) block (within [`datadog_receive
 
 #### Datadog Receiver Datadog API Key
 
-A [`datadog_api_key`](#datadog-receiver-datadog-api-key) block (within [`datadog_receiver`](#datadog-receiver)) supports the following:
+A [`datadog\_api\_key`](#datadog-receiver-datadog-api-key) block (within [`datadog_receiver`](#datadog-receiver)) supports the following:
 
-<a id="datadog-receiver-datadog-api-key-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#datadog-receiver-datadog-api-key-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#datadog-receiver-datadog-api-key-blindfold-secret-info) below.
+<a id="datadog-receiver-datadog-api-key-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#datadog-receiver-datadog-api-key-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#datadog-receiver-datadog-api-key-blindfold-secret-info) below.
 
-<a id="datadog-receiver-datadog-api-key-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#datadog-receiver-datadog-api-key-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#datadog-receiver-datadog-api-key-clear-secret-info) below.
+<a id="datadog-receiver-datadog-api-key-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#datadog-receiver-datadog-api-key-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#datadog-receiver-datadog-api-key-clear-secret-info) below.
 
 #### Datadog Receiver Datadog API Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#datadog-receiver-datadog-api-key-blindfold-secret-info) block (within [`datadog_receiver.datadog_api_key`](#datadog-receiver-datadog-api-key)) supports the following:
+A [`blindfold\_secret\_info`](#datadog-receiver-datadog-api-key-blindfold-secret-info) block (within [`datadog_receiver.datadog\_api\_key`](#datadog-receiver-datadog-api-key)) supports the following:
 
 <a id="datadog-receiver-datadog-api-key-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#datadog-receiver-datadog-api-key-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -329,7 +329,7 @@ A [`blindfold_secret_info`](#datadog-receiver-datadog-api-key-blindfold-secret-i
 
 #### Datadog Receiver Datadog API Key Clear Secret Info
 
-A [`clear_secret_info`](#datadog-receiver-datadog-api-key-clear-secret-info) block (within [`datadog_receiver.datadog_api_key`](#datadog-receiver-datadog-api-key)) supports the following:
+A [`clear\_secret\_info`](#datadog-receiver-datadog-api-key-clear-secret-info) block (within [`datadog_receiver.datadog\_api\_key`](#datadog-receiver-datadog-api-key)) supports the following:
 
 <a id="datadog-receiver-datadog-api-key-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#datadog-receiver-datadog-api-key-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -339,13 +339,13 @@ A [`clear_secret_info`](#datadog-receiver-datadog-api-key-clear-secret-info) blo
 
 An [`use_tls`](#datadog-receiver-use-tls) block (within [`datadog_receiver`](#datadog-receiver)) supports the following:
 
-<a id="datadog-receiver-use-tls-disable-verify-certificate"></a>&#x2022; [`disable_verify_certificate`](#datadog-receiver-use-tls-disable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="datadog-receiver-use-tls-disable-verify-certificate"></a>&#x2022; [`disable\_verify\_certificate`](#datadog-receiver-use-tls-disable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="datadog-receiver-use-tls-disable-verify-hostname"></a>&#x2022; [`disable_verify_hostname`](#datadog-receiver-use-tls-disable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="datadog-receiver-use-tls-disable-verify-hostname"></a>&#x2022; [`disable\_verify\_hostname`](#datadog-receiver-use-tls-disable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="datadog-receiver-use-tls-enable-verify-certificate"></a>&#x2022; [`enable_verify_certificate`](#datadog-receiver-use-tls-enable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="datadog-receiver-use-tls-enable-verify-certificate"></a>&#x2022; [`enable\_verify\_certificate`](#datadog-receiver-use-tls-enable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="datadog-receiver-use-tls-enable-verify-hostname"></a>&#x2022; [`enable_verify_hostname`](#datadog-receiver-use-tls-enable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="datadog-receiver-use-tls-enable-verify-hostname"></a>&#x2022; [`enable\_verify\_hostname`](#datadog-receiver-use-tls-enable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="datadog-receiver-use-tls-mtls-disabled"></a>&#x2022; [`mtls_disabled`](#datadog-receiver-use-tls-mtls-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -353,7 +353,7 @@ An [`use_tls`](#datadog-receiver-use-tls) block (within [`datadog_receiver`](#da
 
 <a id="datadog-receiver-use-tls-no-ca"></a>&#x2022; [`no_ca`](#datadog-receiver-use-tls-no-ca) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="datadog-receiver-use-tls-trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#datadog-receiver-use-tls-trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
+<a id="datadog-receiver-use-tls-trusted-ca-url"></a>&#x2022; [`trusted\_ca\_url`](#datadog-receiver-use-tls-trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
 
 #### Datadog Receiver Use TLS mTLS Enable
 
@@ -367,13 +367,13 @@ A [`mtls_enable`](#datadog-receiver-use-tls-mtls-enable) block (within [`datadog
 
 A [`key_url`](#datadog-receiver-use-tls-mtls-enable-key-url) block (within [`datadog_receiver.use_tls.mtls_enable`](#datadog-receiver-use-tls-mtls-enable)) supports the following:
 
-<a id="datadog-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#datadog-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#datadog-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) below.
+<a id="datadog-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#datadog-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#datadog-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) below.
 
-<a id="datadog-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#datadog-receiver-use-tls-mtls-enable-key-url-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#datadog-receiver-use-tls-mtls-enable-key-url-clear-secret-info) below.
+<a id="datadog-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#datadog-receiver-use-tls-mtls-enable-key-url-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#datadog-receiver-use-tls-mtls-enable-key-url-clear-secret-info) below.
 
 #### Datadog Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info
 
-A [`blindfold_secret_info`](#datadog-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) block (within [`datadog_receiver.use_tls.mtls_enable.key_url`](#datadog-receiver-use-tls-mtls-enable-key-url)) supports the following:
+A [`blindfold\_secret\_info`](#datadog-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) block (within [`datadog_receiver.use_tls.mtls_enable.key_url`](#datadog-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
 <a id="datadog-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#datadog-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -383,7 +383,7 @@ A [`blindfold_secret_info`](#datadog-receiver-use-tls-mtls-enable-key-url-blindf
 
 #### Datadog Receiver Use TLS mTLS Enable Key URL Clear Secret Info
 
-A [`clear_secret_info`](#datadog-receiver-use-tls-mtls-enable-key-url-clear-secret-info) block (within [`datadog_receiver.use_tls.mtls_enable.key_url`](#datadog-receiver-use-tls-mtls-enable-key-url)) supports the following:
+A [`clear\_secret\_info`](#datadog-receiver-use-tls-mtls-enable-key-url-clear-secret-info) block (within [`datadog_receiver.use_tls.mtls_enable.key_url`](#datadog-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
 <a id="datadog-receiver-use-tls-mtls-enable-key-url-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#datadog-receiver-use-tls-mtls-enable-key-url-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -391,7 +391,7 @@ A [`clear_secret_info`](#datadog-receiver-use-tls-mtls-enable-key-url-clear-secr
 
 #### GCP Bucket Receiver
 
-A [`gcp_bucket_receiver`](#gcp-bucket-receiver) block supports the following:
+A [`gcp\_bucket\_receiver`](#gcp-bucket-receiver) block supports the following:
 
 <a id="gcp-bucket-receiver-batch"></a>&#x2022; [`batch`](#gcp-bucket-receiver-batch) - Optional Block<br>Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint<br>See [Batch](#gcp-bucket-receiver-batch) below.
 
@@ -405,23 +405,23 @@ A [`gcp_bucket_receiver`](#gcp-bucket-receiver) block supports the following:
 
 #### GCP Bucket Receiver Batch
 
-A [`batch`](#gcp-bucket-receiver-batch) block (within [`gcp_bucket_receiver`](#gcp-bucket-receiver)) supports the following:
+A [`batch`](#gcp-bucket-receiver-batch) block (within [`gcp\_bucket\_receiver`](#gcp-bucket-receiver)) supports the following:
 
 <a id="gcp-bucket-receiver-batch-max-bytes"></a>&#x2022; [`max_bytes`](#gcp-bucket-receiver-batch-max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
-<a id="gcp-bucket-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#gcp-bucket-receiver-batch-max-bytes-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="gcp-bucket-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max\_bytes\_disabled`](#gcp-bucket-receiver-batch-max-bytes-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="gcp-bucket-receiver-batch-max-events"></a>&#x2022; [`max_events`](#gcp-bucket-receiver-batch-max-events) - Optional Number<br>Max Events. Send batch to endpoint after this many log messages are in the batch
 
-<a id="gcp-bucket-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#gcp-bucket-receiver-batch-max-events-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="gcp-bucket-receiver-batch-max-events-disabled"></a>&#x2022; [`max\_events\_disabled`](#gcp-bucket-receiver-batch-max-events-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="gcp-bucket-receiver-batch-timeout-seconds"></a>&#x2022; [`timeout_seconds`](#gcp-bucket-receiver-batch-timeout-seconds) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
 
-<a id="gcp-bucket-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#gcp-bucket-receiver-batch-timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="gcp-bucket-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout\_seconds\_default`](#gcp-bucket-receiver-batch-timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### GCP Bucket Receiver Compression
 
-A [`compression`](#gcp-bucket-receiver-compression) block (within [`gcp_bucket_receiver`](#gcp-bucket-receiver)) supports the following:
+A [`compression`](#gcp-bucket-receiver-compression) block (within [`gcp\_bucket\_receiver`](#gcp-bucket-receiver)) supports the following:
 
 <a id="gcp-bucket-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#gcp-bucket-receiver-compression-compression-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -431,17 +431,17 @@ A [`compression`](#gcp-bucket-receiver-compression) block (within [`gcp_bucket_r
 
 #### GCP Bucket Receiver Filename Options
 
-A [`filename_options`](#gcp-bucket-receiver-filename-options) block (within [`gcp_bucket_receiver`](#gcp-bucket-receiver)) supports the following:
+A [`filename_options`](#gcp-bucket-receiver-filename-options) block (within [`gcp\_bucket\_receiver`](#gcp-bucket-receiver)) supports the following:
 
 <a id="gcp-bucket-receiver-filename-options-custom-folder"></a>&#x2022; [`custom_folder`](#gcp-bucket-receiver-filename-options-custom-folder) - Optional String<br>Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_]\[a-z0-9\-\._]*$/i`
 
-<a id="gcp-bucket-receiver-filename-options-log-type-folder"></a>&#x2022; [`log_type_folder`](#gcp-bucket-receiver-filename-options-log-type-folder) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="gcp-bucket-receiver-filename-options-log-type-folder"></a>&#x2022; [`log\_type\_folder`](#gcp-bucket-receiver-filename-options-log-type-folder) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="gcp-bucket-receiver-filename-options-no-folder"></a>&#x2022; [`no_folder`](#gcp-bucket-receiver-filename-options-no-folder) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### GCP Bucket Receiver GCP Cred
 
-A [`gcp_cred`](#gcp-bucket-receiver-gcp-cred) block (within [`gcp_bucket_receiver`](#gcp-bucket-receiver)) supports the following:
+A [`gcp_cred`](#gcp-bucket-receiver-gcp-cred) block (within [`gcp\_bucket\_receiver`](#gcp-bucket-receiver)) supports the following:
 
 <a id="gcp-bucket-receiver-gcp-cred-name"></a>&#x2022; [`name`](#gcp-bucket-receiver-gcp-cred-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -481,13 +481,13 @@ An [`auth_basic`](#http-receiver-auth-basic) block (within [`http_receiver`](#ht
 
 A [`password`](#http-receiver-auth-basic-password) block (within [`http_receiver.auth_basic`](#http-receiver-auth-basic)) supports the following:
 
-<a id="http-receiver-auth-basic-password-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#http-receiver-auth-basic-password-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#http-receiver-auth-basic-password-blindfold-secret-info) below.
+<a id="http-receiver-auth-basic-password-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#http-receiver-auth-basic-password-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#http-receiver-auth-basic-password-blindfold-secret-info) below.
 
-<a id="http-receiver-auth-basic-password-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#http-receiver-auth-basic-password-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#http-receiver-auth-basic-password-clear-secret-info) below.
+<a id="http-receiver-auth-basic-password-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#http-receiver-auth-basic-password-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#http-receiver-auth-basic-password-clear-secret-info) below.
 
 #### HTTP Receiver Auth Basic Password Blindfold Secret Info
 
-A [`blindfold_secret_info`](#http-receiver-auth-basic-password-blindfold-secret-info) block (within [`http_receiver.auth_basic.password`](#http-receiver-auth-basic-password)) supports the following:
+A [`blindfold\_secret\_info`](#http-receiver-auth-basic-password-blindfold-secret-info) block (within [`http_receiver.auth_basic.password`](#http-receiver-auth-basic-password)) supports the following:
 
 <a id="http-receiver-auth-basic-password-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#http-receiver-auth-basic-password-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -497,7 +497,7 @@ A [`blindfold_secret_info`](#http-receiver-auth-basic-password-blindfold-secret-
 
 #### HTTP Receiver Auth Basic Password Clear Secret Info
 
-A [`clear_secret_info`](#http-receiver-auth-basic-password-clear-secret-info) block (within [`http_receiver.auth_basic.password`](#http-receiver-auth-basic-password)) supports the following:
+A [`clear\_secret\_info`](#http-receiver-auth-basic-password-clear-secret-info) block (within [`http_receiver.auth_basic.password`](#http-receiver-auth-basic-password)) supports the following:
 
 <a id="http-receiver-auth-basic-password-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#http-receiver-auth-basic-password-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -513,13 +513,13 @@ An [`auth_token`](#http-receiver-auth-token) block (within [`http_receiver`](#ht
 
 A [`token`](#http-receiver-auth-token-token) block (within [`http_receiver.auth_token`](#http-receiver-auth-token)) supports the following:
 
-<a id="http-receiver-auth-token-token-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#http-receiver-auth-token-token-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#http-receiver-auth-token-token-blindfold-secret-info) below.
+<a id="http-receiver-auth-token-token-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#http-receiver-auth-token-token-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#http-receiver-auth-token-token-blindfold-secret-info) below.
 
-<a id="http-receiver-auth-token-token-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#http-receiver-auth-token-token-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#http-receiver-auth-token-token-clear-secret-info) below.
+<a id="http-receiver-auth-token-token-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#http-receiver-auth-token-token-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#http-receiver-auth-token-token-clear-secret-info) below.
 
 #### HTTP Receiver Auth Token Token Blindfold Secret Info
 
-A [`blindfold_secret_info`](#http-receiver-auth-token-token-blindfold-secret-info) block (within [`http_receiver.auth_token.token`](#http-receiver-auth-token-token)) supports the following:
+A [`blindfold\_secret\_info`](#http-receiver-auth-token-token-blindfold-secret-info) block (within [`http_receiver.auth_token.token`](#http-receiver-auth-token-token)) supports the following:
 
 <a id="http-receiver-auth-token-token-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#http-receiver-auth-token-token-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -529,7 +529,7 @@ A [`blindfold_secret_info`](#http-receiver-auth-token-token-blindfold-secret-inf
 
 #### HTTP Receiver Auth Token Token Clear Secret Info
 
-A [`clear_secret_info`](#http-receiver-auth-token-token-clear-secret-info) block (within [`http_receiver.auth_token.token`](#http-receiver-auth-token-token)) supports the following:
+A [`clear\_secret\_info`](#http-receiver-auth-token-token-clear-secret-info) block (within [`http_receiver.auth_token.token`](#http-receiver-auth-token-token)) supports the following:
 
 <a id="http-receiver-auth-token-token-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#http-receiver-auth-token-token-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -541,15 +541,15 @@ A [`batch`](#http-receiver-batch) block (within [`http_receiver`](#http-receiver
 
 <a id="http-receiver-batch-max-bytes"></a>&#x2022; [`max_bytes`](#http-receiver-batch-max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
-<a id="http-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#http-receiver-batch-max-bytes-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max\_bytes\_disabled`](#http-receiver-batch-max-bytes-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="http-receiver-batch-max-events"></a>&#x2022; [`max_events`](#http-receiver-batch-max-events) - Optional Number<br>Max Events. Send batch to endpoint after this many log messages are in the batch
 
-<a id="http-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#http-receiver-batch-max-events-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-receiver-batch-max-events-disabled"></a>&#x2022; [`max\_events\_disabled`](#http-receiver-batch-max-events-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="http-receiver-batch-timeout-seconds"></a>&#x2022; [`timeout_seconds`](#http-receiver-batch-timeout-seconds) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
 
-<a id="http-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#http-receiver-batch-timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout\_seconds\_default`](#http-receiver-batch-timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### HTTP Receiver Compression
 
@@ -565,13 +565,13 @@ A [`compression`](#http-receiver-compression) block (within [`http_receiver`](#h
 
 An [`use_tls`](#http-receiver-use-tls) block (within [`http_receiver`](#http-receiver)) supports the following:
 
-<a id="http-receiver-use-tls-disable-verify-certificate"></a>&#x2022; [`disable_verify_certificate`](#http-receiver-use-tls-disable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-receiver-use-tls-disable-verify-certificate"></a>&#x2022; [`disable\_verify\_certificate`](#http-receiver-use-tls-disable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="http-receiver-use-tls-disable-verify-hostname"></a>&#x2022; [`disable_verify_hostname`](#http-receiver-use-tls-disable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-receiver-use-tls-disable-verify-hostname"></a>&#x2022; [`disable\_verify\_hostname`](#http-receiver-use-tls-disable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="http-receiver-use-tls-enable-verify-certificate"></a>&#x2022; [`enable_verify_certificate`](#http-receiver-use-tls-enable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-receiver-use-tls-enable-verify-certificate"></a>&#x2022; [`enable\_verify\_certificate`](#http-receiver-use-tls-enable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="http-receiver-use-tls-enable-verify-hostname"></a>&#x2022; [`enable_verify_hostname`](#http-receiver-use-tls-enable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-receiver-use-tls-enable-verify-hostname"></a>&#x2022; [`enable\_verify\_hostname`](#http-receiver-use-tls-enable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="http-receiver-use-tls-mtls-disabled"></a>&#x2022; [`mtls_disabled`](#http-receiver-use-tls-mtls-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -579,7 +579,7 @@ An [`use_tls`](#http-receiver-use-tls) block (within [`http_receiver`](#http-rec
 
 <a id="http-receiver-use-tls-no-ca"></a>&#x2022; [`no_ca`](#http-receiver-use-tls-no-ca) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="http-receiver-use-tls-trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#http-receiver-use-tls-trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
+<a id="http-receiver-use-tls-trusted-ca-url"></a>&#x2022; [`trusted\_ca\_url`](#http-receiver-use-tls-trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
 
 #### HTTP Receiver Use TLS mTLS Enable
 
@@ -593,13 +593,13 @@ A [`mtls_enable`](#http-receiver-use-tls-mtls-enable) block (within [`http_recei
 
 A [`key_url`](#http-receiver-use-tls-mtls-enable-key-url) block (within [`http_receiver.use_tls.mtls_enable`](#http-receiver-use-tls-mtls-enable)) supports the following:
 
-<a id="http-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#http-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#http-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) below.
+<a id="http-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#http-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#http-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) below.
 
-<a id="http-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#http-receiver-use-tls-mtls-enable-key-url-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#http-receiver-use-tls-mtls-enable-key-url-clear-secret-info) below.
+<a id="http-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#http-receiver-use-tls-mtls-enable-key-url-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#http-receiver-use-tls-mtls-enable-key-url-clear-secret-info) below.
 
 #### HTTP Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info
 
-A [`blindfold_secret_info`](#http-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) block (within [`http_receiver.use_tls.mtls_enable.key_url`](#http-receiver-use-tls-mtls-enable-key-url)) supports the following:
+A [`blindfold\_secret\_info`](#http-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) block (within [`http_receiver.use_tls.mtls_enable.key_url`](#http-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
 <a id="http-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#http-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -609,7 +609,7 @@ A [`blindfold_secret_info`](#http-receiver-use-tls-mtls-enable-key-url-blindfold
 
 #### HTTP Receiver Use TLS mTLS Enable Key URL Clear Secret Info
 
-A [`clear_secret_info`](#http-receiver-use-tls-mtls-enable-key-url-clear-secret-info) block (within [`http_receiver.use_tls.mtls_enable.key_url`](#http-receiver-use-tls-mtls-enable-key-url)) supports the following:
+A [`clear\_secret\_info`](#http-receiver-use-tls-mtls-enable-key-url-clear-secret-info) block (within [`http_receiver.use_tls.mtls_enable.key_url`](#http-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
 <a id="http-receiver-use-tls-mtls-enable-key-url-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#http-receiver-use-tls-mtls-enable-key-url-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -637,15 +637,15 @@ A [`batch`](#kafka-receiver-batch) block (within [`kafka_receiver`](#kafka-recei
 
 <a id="kafka-receiver-batch-max-bytes"></a>&#x2022; [`max_bytes`](#kafka-receiver-batch-max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
-<a id="kafka-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#kafka-receiver-batch-max-bytes-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kafka-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max\_bytes\_disabled`](#kafka-receiver-batch-max-bytes-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="kafka-receiver-batch-max-events"></a>&#x2022; [`max_events`](#kafka-receiver-batch-max-events) - Optional Number<br>Max Events. Send batch to endpoint after this many log messages are in the batch
 
-<a id="kafka-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#kafka-receiver-batch-max-events-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kafka-receiver-batch-max-events-disabled"></a>&#x2022; [`max\_events\_disabled`](#kafka-receiver-batch-max-events-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="kafka-receiver-batch-timeout-seconds"></a>&#x2022; [`timeout_seconds`](#kafka-receiver-batch-timeout-seconds) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
 
-<a id="kafka-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#kafka-receiver-batch-timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kafka-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout\_seconds\_default`](#kafka-receiver-batch-timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Kafka Receiver Compression
 
@@ -661,13 +661,13 @@ A [`compression`](#kafka-receiver-compression) block (within [`kafka_receiver`](
 
 An [`use_tls`](#kafka-receiver-use-tls) block (within [`kafka_receiver`](#kafka-receiver)) supports the following:
 
-<a id="kafka-receiver-use-tls-disable-verify-certificate"></a>&#x2022; [`disable_verify_certificate`](#kafka-receiver-use-tls-disable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kafka-receiver-use-tls-disable-verify-certificate"></a>&#x2022; [`disable\_verify\_certificate`](#kafka-receiver-use-tls-disable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="kafka-receiver-use-tls-disable-verify-hostname"></a>&#x2022; [`disable_verify_hostname`](#kafka-receiver-use-tls-disable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kafka-receiver-use-tls-disable-verify-hostname"></a>&#x2022; [`disable\_verify\_hostname`](#kafka-receiver-use-tls-disable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="kafka-receiver-use-tls-enable-verify-certificate"></a>&#x2022; [`enable_verify_certificate`](#kafka-receiver-use-tls-enable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kafka-receiver-use-tls-enable-verify-certificate"></a>&#x2022; [`enable\_verify\_certificate`](#kafka-receiver-use-tls-enable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="kafka-receiver-use-tls-enable-verify-hostname"></a>&#x2022; [`enable_verify_hostname`](#kafka-receiver-use-tls-enable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kafka-receiver-use-tls-enable-verify-hostname"></a>&#x2022; [`enable\_verify\_hostname`](#kafka-receiver-use-tls-enable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="kafka-receiver-use-tls-mtls-disabled"></a>&#x2022; [`mtls_disabled`](#kafka-receiver-use-tls-mtls-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -675,7 +675,7 @@ An [`use_tls`](#kafka-receiver-use-tls) block (within [`kafka_receiver`](#kafka-
 
 <a id="kafka-receiver-use-tls-no-ca"></a>&#x2022; [`no_ca`](#kafka-receiver-use-tls-no-ca) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="kafka-receiver-use-tls-trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#kafka-receiver-use-tls-trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
+<a id="kafka-receiver-use-tls-trusted-ca-url"></a>&#x2022; [`trusted\_ca\_url`](#kafka-receiver-use-tls-trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
 
 #### Kafka Receiver Use TLS mTLS Enable
 
@@ -689,13 +689,13 @@ A [`mtls_enable`](#kafka-receiver-use-tls-mtls-enable) block (within [`kafka_rec
 
 A [`key_url`](#kafka-receiver-use-tls-mtls-enable-key-url) block (within [`kafka_receiver.use_tls.mtls_enable`](#kafka-receiver-use-tls-mtls-enable)) supports the following:
 
-<a id="kafka-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#kafka-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#kafka-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) below.
+<a id="kafka-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#kafka-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#kafka-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) below.
 
-<a id="kafka-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#kafka-receiver-use-tls-mtls-enable-key-url-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#kafka-receiver-use-tls-mtls-enable-key-url-clear-secret-info) below.
+<a id="kafka-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#kafka-receiver-use-tls-mtls-enable-key-url-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#kafka-receiver-use-tls-mtls-enable-key-url-clear-secret-info) below.
 
 #### Kafka Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info
 
-A [`blindfold_secret_info`](#kafka-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) block (within [`kafka_receiver.use_tls.mtls_enable.key_url`](#kafka-receiver-use-tls-mtls-enable-key-url)) supports the following:
+A [`blindfold\_secret\_info`](#kafka-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) block (within [`kafka_receiver.use_tls.mtls_enable.key_url`](#kafka-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
 <a id="kafka-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#kafka-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -705,7 +705,7 @@ A [`blindfold_secret_info`](#kafka-receiver-use-tls-mtls-enable-key-url-blindfol
 
 #### Kafka Receiver Use TLS mTLS Enable Key URL Clear Secret Info
 
-A [`clear_secret_info`](#kafka-receiver-use-tls-mtls-enable-key-url-clear-secret-info) block (within [`kafka_receiver.use_tls.mtls_enable.key_url`](#kafka-receiver-use-tls-mtls-enable-key-url)) supports the following:
+A [`clear\_secret\_info`](#kafka-receiver-use-tls-mtls-enable-key-url-clear-secret-info) block (within [`kafka_receiver.use_tls.mtls_enable.key_url`](#kafka-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
 <a id="kafka-receiver-use-tls-mtls-enable-key-url-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#kafka-receiver-use-tls-mtls-enable-key-url-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -713,7 +713,7 @@ A [`clear_secret_info`](#kafka-receiver-use-tls-mtls-enable-key-url-clear-secret
 
 #### New Relic Receiver
 
-A [`new_relic_receiver`](#new-relic-receiver) block supports the following:
+A [`new\_relic\_receiver`](#new-relic-receiver) block supports the following:
 
 <a id="new-relic-receiver-api-key"></a>&#x2022; [`api_key`](#new-relic-receiver-api-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [API Key](#new-relic-receiver-api-key) below.
 
@@ -723,15 +723,15 @@ A [`new_relic_receiver`](#new-relic-receiver) block supports the following:
 
 #### New Relic Receiver API Key
 
-An [`api_key`](#new-relic-receiver-api-key) block (within [`new_relic_receiver`](#new-relic-receiver)) supports the following:
+An [`api_key`](#new-relic-receiver-api-key) block (within [`new\_relic\_receiver`](#new-relic-receiver)) supports the following:
 
-<a id="new-relic-receiver-api-key-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#new-relic-receiver-api-key-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#new-relic-receiver-api-key-blindfold-secret-info) below.
+<a id="new-relic-receiver-api-key-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#new-relic-receiver-api-key-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#new-relic-receiver-api-key-blindfold-secret-info) below.
 
-<a id="new-relic-receiver-api-key-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#new-relic-receiver-api-key-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#new-relic-receiver-api-key-clear-secret-info) below.
+<a id="new-relic-receiver-api-key-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#new-relic-receiver-api-key-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#new-relic-receiver-api-key-clear-secret-info) below.
 
 #### New Relic Receiver API Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#new-relic-receiver-api-key-blindfold-secret-info) block (within [`new_relic_receiver.api_key`](#new-relic-receiver-api-key)) supports the following:
+A [`blindfold\_secret\_info`](#new-relic-receiver-api-key-blindfold-secret-info) block (within [`new\_relic\_receiver.api_key`](#new-relic-receiver-api-key)) supports the following:
 
 <a id="new-relic-receiver-api-key-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#new-relic-receiver-api-key-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -741,7 +741,7 @@ A [`blindfold_secret_info`](#new-relic-receiver-api-key-blindfold-secret-info) b
 
 #### New Relic Receiver API Key Clear Secret Info
 
-A [`clear_secret_info`](#new-relic-receiver-api-key-clear-secret-info) block (within [`new_relic_receiver.api_key`](#new-relic-receiver-api-key)) supports the following:
+A [`clear\_secret\_info`](#new-relic-receiver-api-key-clear-secret-info) block (within [`new\_relic\_receiver.api_key`](#new-relic-receiver-api-key)) supports the following:
 
 <a id="new-relic-receiver-api-key-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#new-relic-receiver-api-key-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -773,15 +773,15 @@ A [`batch`](#qradar-receiver-batch) block (within [`qradar_receiver`](#qradar-re
 
 <a id="qradar-receiver-batch-max-bytes"></a>&#x2022; [`max_bytes`](#qradar-receiver-batch-max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
-<a id="qradar-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#qradar-receiver-batch-max-bytes-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="qradar-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max\_bytes\_disabled`](#qradar-receiver-batch-max-bytes-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="qradar-receiver-batch-max-events"></a>&#x2022; [`max_events`](#qradar-receiver-batch-max-events) - Optional Number<br>Max Events. Send batch to endpoint after this many log messages are in the batch
 
-<a id="qradar-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#qradar-receiver-batch-max-events-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="qradar-receiver-batch-max-events-disabled"></a>&#x2022; [`max\_events\_disabled`](#qradar-receiver-batch-max-events-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="qradar-receiver-batch-timeout-seconds"></a>&#x2022; [`timeout_seconds`](#qradar-receiver-batch-timeout-seconds) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
 
-<a id="qradar-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#qradar-receiver-batch-timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="qradar-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout\_seconds\_default`](#qradar-receiver-batch-timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Qradar Receiver Compression
 
@@ -797,13 +797,13 @@ A [`compression`](#qradar-receiver-compression) block (within [`qradar_receiver`
 
 An [`use_tls`](#qradar-receiver-use-tls) block (within [`qradar_receiver`](#qradar-receiver)) supports the following:
 
-<a id="qradar-receiver-use-tls-disable-verify-certificate"></a>&#x2022; [`disable_verify_certificate`](#qradar-receiver-use-tls-disable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="qradar-receiver-use-tls-disable-verify-certificate"></a>&#x2022; [`disable\_verify\_certificate`](#qradar-receiver-use-tls-disable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="qradar-receiver-use-tls-disable-verify-hostname"></a>&#x2022; [`disable_verify_hostname`](#qradar-receiver-use-tls-disable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="qradar-receiver-use-tls-disable-verify-hostname"></a>&#x2022; [`disable\_verify\_hostname`](#qradar-receiver-use-tls-disable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="qradar-receiver-use-tls-enable-verify-certificate"></a>&#x2022; [`enable_verify_certificate`](#qradar-receiver-use-tls-enable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="qradar-receiver-use-tls-enable-verify-certificate"></a>&#x2022; [`enable\_verify\_certificate`](#qradar-receiver-use-tls-enable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="qradar-receiver-use-tls-enable-verify-hostname"></a>&#x2022; [`enable_verify_hostname`](#qradar-receiver-use-tls-enable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="qradar-receiver-use-tls-enable-verify-hostname"></a>&#x2022; [`enable\_verify\_hostname`](#qradar-receiver-use-tls-enable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="qradar-receiver-use-tls-mtls-disabled"></a>&#x2022; [`mtls_disabled`](#qradar-receiver-use-tls-mtls-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -811,7 +811,7 @@ An [`use_tls`](#qradar-receiver-use-tls) block (within [`qradar_receiver`](#qrad
 
 <a id="qradar-receiver-use-tls-no-ca"></a>&#x2022; [`no_ca`](#qradar-receiver-use-tls-no-ca) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="qradar-receiver-use-tls-trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#qradar-receiver-use-tls-trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
+<a id="qradar-receiver-use-tls-trusted-ca-url"></a>&#x2022; [`trusted\_ca\_url`](#qradar-receiver-use-tls-trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
 
 #### Qradar Receiver Use TLS mTLS Enable
 
@@ -825,13 +825,13 @@ A [`mtls_enable`](#qradar-receiver-use-tls-mtls-enable) block (within [`qradar_r
 
 A [`key_url`](#qradar-receiver-use-tls-mtls-enable-key-url) block (within [`qradar_receiver.use_tls.mtls_enable`](#qradar-receiver-use-tls-mtls-enable)) supports the following:
 
-<a id="qradar-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#qradar-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#qradar-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) below.
+<a id="qradar-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#qradar-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#qradar-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) below.
 
-<a id="qradar-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#qradar-receiver-use-tls-mtls-enable-key-url-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#qradar-receiver-use-tls-mtls-enable-key-url-clear-secret-info) below.
+<a id="qradar-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#qradar-receiver-use-tls-mtls-enable-key-url-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#qradar-receiver-use-tls-mtls-enable-key-url-clear-secret-info) below.
 
 #### Qradar Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info
 
-A [`blindfold_secret_info`](#qradar-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) block (within [`qradar_receiver.use_tls.mtls_enable.key_url`](#qradar-receiver-use-tls-mtls-enable-key-url)) supports the following:
+A [`blindfold\_secret\_info`](#qradar-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) block (within [`qradar_receiver.use_tls.mtls_enable.key_url`](#qradar-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
 <a id="qradar-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#qradar-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -841,7 +841,7 @@ A [`blindfold_secret_info`](#qradar-receiver-use-tls-mtls-enable-key-url-blindfo
 
 #### Qradar Receiver Use TLS mTLS Enable Key URL Clear Secret Info
 
-A [`clear_secret_info`](#qradar-receiver-use-tls-mtls-enable-key-url-clear-secret-info) block (within [`qradar_receiver.use_tls.mtls_enable.key_url`](#qradar-receiver-use-tls-mtls-enable-key-url)) supports the following:
+A [`clear\_secret\_info`](#qradar-receiver-use-tls-mtls-enable-key-url-clear-secret-info) block (within [`qradar_receiver.use_tls.mtls_enable.key_url`](#qradar-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
 <a id="qradar-receiver-use-tls-mtls-enable-key-url-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#qradar-receiver-use-tls-mtls-enable-key-url-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -879,15 +879,15 @@ A [`batch`](#s3-receiver-batch) block (within [`s3_receiver`](#s3-receiver)) sup
 
 <a id="s3-receiver-batch-max-bytes"></a>&#x2022; [`max_bytes`](#s3-receiver-batch-max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
-<a id="s3-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#s3-receiver-batch-max-bytes-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="s3-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max\_bytes\_disabled`](#s3-receiver-batch-max-bytes-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="s3-receiver-batch-max-events"></a>&#x2022; [`max_events`](#s3-receiver-batch-max-events) - Optional Number<br>Max Events. Send batch to endpoint after this many log messages are in the batch
 
-<a id="s3-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#s3-receiver-batch-max-events-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="s3-receiver-batch-max-events-disabled"></a>&#x2022; [`max\_events\_disabled`](#s3-receiver-batch-max-events-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="s3-receiver-batch-timeout-seconds"></a>&#x2022; [`timeout_seconds`](#s3-receiver-batch-timeout-seconds) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
 
-<a id="s3-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#s3-receiver-batch-timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="s3-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout\_seconds\_default`](#s3-receiver-batch-timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### S3 Receiver Compression
 
@@ -905,7 +905,7 @@ A [`filename_options`](#s3-receiver-filename-options) block (within [`s3_receive
 
 <a id="s3-receiver-filename-options-custom-folder"></a>&#x2022; [`custom_folder`](#s3-receiver-filename-options-custom-folder) - Optional String<br>Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_]\[a-z0-9\-\._]*$/i`
 
-<a id="s3-receiver-filename-options-log-type-folder"></a>&#x2022; [`log_type_folder`](#s3-receiver-filename-options-log-type-folder) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="s3-receiver-filename-options-log-type-folder"></a>&#x2022; [`log\_type\_folder`](#s3-receiver-filename-options-log-type-folder) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="s3-receiver-filename-options-no-folder"></a>&#x2022; [`no_folder`](#s3-receiver-filename-options-no-folder) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -921,7 +921,7 @@ A [`splunk_receiver`](#splunk-receiver) block supports the following:
 
 <a id="splunk-receiver-no-tls"></a>&#x2022; [`no_tls`](#splunk-receiver-no-tls) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="splunk-receiver-splunk-hec-token"></a>&#x2022; [`splunk_hec_token`](#splunk-receiver-splunk-hec-token) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Splunk Hec Token](#splunk-receiver-splunk-hec-token) below.
+<a id="splunk-receiver-splunk-hec-token"></a>&#x2022; [`splunk\_hec\_token`](#splunk-receiver-splunk-hec-token) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Splunk Hec Token](#splunk-receiver-splunk-hec-token) below.
 
 <a id="splunk-receiver-use-tls"></a>&#x2022; [`use_tls`](#splunk-receiver-use-tls) - Optional Block<br>TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint<br>See [Use TLS](#splunk-receiver-use-tls) below.
 
@@ -931,15 +931,15 @@ A [`batch`](#splunk-receiver-batch) block (within [`splunk_receiver`](#splunk-re
 
 <a id="splunk-receiver-batch-max-bytes"></a>&#x2022; [`max_bytes`](#splunk-receiver-batch-max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
-<a id="splunk-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#splunk-receiver-batch-max-bytes-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="splunk-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max\_bytes\_disabled`](#splunk-receiver-batch-max-bytes-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="splunk-receiver-batch-max-events"></a>&#x2022; [`max_events`](#splunk-receiver-batch-max-events) - Optional Number<br>Max Events. Send batch to endpoint after this many log messages are in the batch
 
-<a id="splunk-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#splunk-receiver-batch-max-events-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="splunk-receiver-batch-max-events-disabled"></a>&#x2022; [`max\_events\_disabled`](#splunk-receiver-batch-max-events-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="splunk-receiver-batch-timeout-seconds"></a>&#x2022; [`timeout_seconds`](#splunk-receiver-batch-timeout-seconds) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
 
-<a id="splunk-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#splunk-receiver-batch-timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="splunk-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout\_seconds\_default`](#splunk-receiver-batch-timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Splunk Receiver Compression
 
@@ -953,15 +953,15 @@ A [`compression`](#splunk-receiver-compression) block (within [`splunk_receiver`
 
 #### Splunk Receiver Splunk Hec Token
 
-A [`splunk_hec_token`](#splunk-receiver-splunk-hec-token) block (within [`splunk_receiver`](#splunk-receiver)) supports the following:
+A [`splunk\_hec\_token`](#splunk-receiver-splunk-hec-token) block (within [`splunk_receiver`](#splunk-receiver)) supports the following:
 
-<a id="splunk-receiver-splunk-hec-token-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#splunk-receiver-splunk-hec-token-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#splunk-receiver-splunk-hec-token-blindfold-secret-info) below.
+<a id="splunk-receiver-splunk-hec-token-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#splunk-receiver-splunk-hec-token-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#splunk-receiver-splunk-hec-token-blindfold-secret-info) below.
 
-<a id="splunk-receiver-splunk-hec-token-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#splunk-receiver-splunk-hec-token-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#splunk-receiver-splunk-hec-token-clear-secret-info) below.
+<a id="splunk-receiver-splunk-hec-token-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#splunk-receiver-splunk-hec-token-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#splunk-receiver-splunk-hec-token-clear-secret-info) below.
 
 #### Splunk Receiver Splunk Hec Token Blindfold Secret Info
 
-A [`blindfold_secret_info`](#splunk-receiver-splunk-hec-token-blindfold-secret-info) block (within [`splunk_receiver.splunk_hec_token`](#splunk-receiver-splunk-hec-token)) supports the following:
+A [`blindfold\_secret\_info`](#splunk-receiver-splunk-hec-token-blindfold-secret-info) block (within [`splunk_receiver.splunk\_hec\_token`](#splunk-receiver-splunk-hec-token)) supports the following:
 
 <a id="splunk-receiver-splunk-hec-token-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#splunk-receiver-splunk-hec-token-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -971,7 +971,7 @@ A [`blindfold_secret_info`](#splunk-receiver-splunk-hec-token-blindfold-secret-i
 
 #### Splunk Receiver Splunk Hec Token Clear Secret Info
 
-A [`clear_secret_info`](#splunk-receiver-splunk-hec-token-clear-secret-info) block (within [`splunk_receiver.splunk_hec_token`](#splunk-receiver-splunk-hec-token)) supports the following:
+A [`clear\_secret\_info`](#splunk-receiver-splunk-hec-token-clear-secret-info) block (within [`splunk_receiver.splunk\_hec\_token`](#splunk-receiver-splunk-hec-token)) supports the following:
 
 <a id="splunk-receiver-splunk-hec-token-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#splunk-receiver-splunk-hec-token-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -981,13 +981,13 @@ A [`clear_secret_info`](#splunk-receiver-splunk-hec-token-clear-secret-info) blo
 
 An [`use_tls`](#splunk-receiver-use-tls) block (within [`splunk_receiver`](#splunk-receiver)) supports the following:
 
-<a id="splunk-receiver-use-tls-disable-verify-certificate"></a>&#x2022; [`disable_verify_certificate`](#splunk-receiver-use-tls-disable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="splunk-receiver-use-tls-disable-verify-certificate"></a>&#x2022; [`disable\_verify\_certificate`](#splunk-receiver-use-tls-disable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="splunk-receiver-use-tls-disable-verify-hostname"></a>&#x2022; [`disable_verify_hostname`](#splunk-receiver-use-tls-disable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="splunk-receiver-use-tls-disable-verify-hostname"></a>&#x2022; [`disable\_verify\_hostname`](#splunk-receiver-use-tls-disable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="splunk-receiver-use-tls-enable-verify-certificate"></a>&#x2022; [`enable_verify_certificate`](#splunk-receiver-use-tls-enable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="splunk-receiver-use-tls-enable-verify-certificate"></a>&#x2022; [`enable\_verify\_certificate`](#splunk-receiver-use-tls-enable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="splunk-receiver-use-tls-enable-verify-hostname"></a>&#x2022; [`enable_verify_hostname`](#splunk-receiver-use-tls-enable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="splunk-receiver-use-tls-enable-verify-hostname"></a>&#x2022; [`enable\_verify\_hostname`](#splunk-receiver-use-tls-enable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="splunk-receiver-use-tls-mtls-disabled"></a>&#x2022; [`mtls_disabled`](#splunk-receiver-use-tls-mtls-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -995,7 +995,7 @@ An [`use_tls`](#splunk-receiver-use-tls) block (within [`splunk_receiver`](#splu
 
 <a id="splunk-receiver-use-tls-no-ca"></a>&#x2022; [`no_ca`](#splunk-receiver-use-tls-no-ca) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="splunk-receiver-use-tls-trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#splunk-receiver-use-tls-trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
+<a id="splunk-receiver-use-tls-trusted-ca-url"></a>&#x2022; [`trusted\_ca\_url`](#splunk-receiver-use-tls-trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
 
 #### Splunk Receiver Use TLS mTLS Enable
 
@@ -1009,13 +1009,13 @@ A [`mtls_enable`](#splunk-receiver-use-tls-mtls-enable) block (within [`splunk_r
 
 A [`key_url`](#splunk-receiver-use-tls-mtls-enable-key-url) block (within [`splunk_receiver.use_tls.mtls_enable`](#splunk-receiver-use-tls-mtls-enable)) supports the following:
 
-<a id="splunk-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#splunk-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#splunk-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) below.
+<a id="splunk-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#splunk-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#splunk-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) below.
 
-<a id="splunk-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#splunk-receiver-use-tls-mtls-enable-key-url-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#splunk-receiver-use-tls-mtls-enable-key-url-clear-secret-info) below.
+<a id="splunk-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#splunk-receiver-use-tls-mtls-enable-key-url-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#splunk-receiver-use-tls-mtls-enable-key-url-clear-secret-info) below.
 
 #### Splunk Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info
 
-A [`blindfold_secret_info`](#splunk-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) block (within [`splunk_receiver.use_tls.mtls_enable.key_url`](#splunk-receiver-use-tls-mtls-enable-key-url)) supports the following:
+A [`blindfold\_secret\_info`](#splunk-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) block (within [`splunk_receiver.use_tls.mtls_enable.key_url`](#splunk-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
 <a id="splunk-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#splunk-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -1025,7 +1025,7 @@ A [`blindfold_secret_info`](#splunk-receiver-use-tls-mtls-enable-key-url-blindfo
 
 #### Splunk Receiver Use TLS mTLS Enable Key URL Clear Secret Info
 
-A [`clear_secret_info`](#splunk-receiver-use-tls-mtls-enable-key-url-clear-secret-info) block (within [`splunk_receiver.use_tls.mtls_enable.key_url`](#splunk-receiver-use-tls-mtls-enable-key-url)) supports the following:
+A [`clear\_secret\_info`](#splunk-receiver-use-tls-mtls-enable-key-url-clear-secret-info) block (within [`splunk_receiver.use_tls.mtls_enable.key_url`](#splunk-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
 <a id="splunk-receiver-use-tls-mtls-enable-key-url-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#splunk-receiver-use-tls-mtls-enable-key-url-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -1033,21 +1033,21 @@ A [`clear_secret_info`](#splunk-receiver-use-tls-mtls-enable-key-url-clear-secre
 
 #### Sumo Logic Receiver
 
-A [`sumo_logic_receiver`](#sumo-logic-receiver) block supports the following:
+A [`sumo\_logic\_receiver`](#sumo-logic-receiver) block supports the following:
 
 <a id="sumo-logic-receiver-url"></a>&#x2022; [`url`](#sumo-logic-receiver-url) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [URL](#sumo-logic-receiver-url) below.
 
 #### Sumo Logic Receiver URL
 
-An [`url`](#sumo-logic-receiver-url) block (within [`sumo_logic_receiver`](#sumo-logic-receiver)) supports the following:
+An [`url`](#sumo-logic-receiver-url) block (within [`sumo\_logic\_receiver`](#sumo-logic-receiver)) supports the following:
 
-<a id="sumo-logic-receiver-url-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#sumo-logic-receiver-url-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#sumo-logic-receiver-url-blindfold-secret-info) below.
+<a id="sumo-logic-receiver-url-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#sumo-logic-receiver-url-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#sumo-logic-receiver-url-blindfold-secret-info) below.
 
-<a id="sumo-logic-receiver-url-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#sumo-logic-receiver-url-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#sumo-logic-receiver-url-clear-secret-info) below.
+<a id="sumo-logic-receiver-url-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#sumo-logic-receiver-url-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#sumo-logic-receiver-url-clear-secret-info) below.
 
 #### Sumo Logic Receiver URL Blindfold Secret Info
 
-A [`blindfold_secret_info`](#sumo-logic-receiver-url-blindfold-secret-info) block (within [`sumo_logic_receiver.url`](#sumo-logic-receiver-url)) supports the following:
+A [`blindfold\_secret\_info`](#sumo-logic-receiver-url-blindfold-secret-info) block (within [`sumo\_logic\_receiver.url`](#sumo-logic-receiver-url)) supports the following:
 
 <a id="sumo-logic-receiver-url-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#sumo-logic-receiver-url-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -1057,7 +1057,7 @@ A [`blindfold_secret_info`](#sumo-logic-receiver-url-blindfold-secret-info) bloc
 
 #### Sumo Logic Receiver URL Clear Secret Info
 
-A [`clear_secret_info`](#sumo-logic-receiver-url-clear-secret-info) block (within [`sumo_logic_receiver.url`](#sumo-logic-receiver-url)) supports the following:
+A [`clear\_secret\_info`](#sumo-logic-receiver-url-clear-secret-info) block (within [`sumo\_logic\_receiver.url`](#sumo-logic-receiver-url)) supports the following:
 
 <a id="sumo-logic-receiver-url-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#sumo-logic-receiver-url-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -1081,5 +1081,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_global_log_receiver.example system/example
+terraform import f5xc\_global_log\_receiver.example system/example
 ```

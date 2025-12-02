@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_origin_pool Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_origin\_pool Data Source - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
   Manages a OriginPool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
 ---
 
-# f5xc_origin_pool (Data Source)
+# f5xc\_origin\_pool (Data Source)
 
 Manages a OriginPool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
 
@@ -18,26 +18,26 @@ Manages a OriginPool resource in F5 Distributed Cloud for defining backend serve
 # Retrieves information about an existing Origin Pool
 
 # Look up an existing Origin Pool by name
-data "f5xc_origin_pool" "example" {
+data "f5xc\_origin\_pool" "example" {
   name      = "example-origin-pool"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "origin_pool_id" {
-#   value = data.f5xc_origin_pool.example.id
+# output "origin\_pool\_id" {
+#   value = data.f5xc\_origin\_pool.example.id
 # }
 
 # Example: Use origin pool data in HTTP load balancer
-# resource "f5xc_http_loadbalancer" "example" {
+# resource "f5xc\_http\_loadbalancer" "example" {
 #   name      = "example-lb"
 #   namespace = "system"
 #   domains   = ["app.example.com"]
 #
-#   default_route_pools {
+#   default\_route\_pools {
 #     pool {
-#       name      = data.f5xc_origin_pool.example.name
-#       namespace = data.f5xc_origin_pool.example.namespace
+#       name      = data.f5xc\_origin\_pool.example.name
+#       namespace = data.f5xc\_origin\_pool.example.namespace
 #     }
 #   }
 # }

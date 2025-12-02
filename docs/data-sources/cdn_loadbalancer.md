@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_cdn_loadbalancer Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_cdn\_loadbalancer Data Source - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
   Manages a CDNLoadBalancer resource in F5 Distributed Cloud for content delivery and edge caching with load balancing.
 ---
 
-# f5xc_cdn_loadbalancer (Data Source)
+# f5xc\_cdn\_loadbalancer (Data Source)
 
 Manages a CDNLoadBalancer resource in F5 Distributed Cloud for content delivery and edge caching with load balancing.
 
@@ -18,14 +18,14 @@ Manages a CDNLoadBalancer resource in F5 Distributed Cloud for content delivery 
 # Retrieves information about an existing CDN Loadbalancer
 
 # Look up an existing CDN Loadbalancer by name
-data "f5xc_cdn_loadbalancer" "example" {
+data "f5xc\_cdn\_loadbalancer" "example" {
   name      = "example-cdn-loadbalancer"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "cdn_loadbalancer_id" {
-#   value = data.f5xc_cdn_loadbalancer.example.id
+# output "cdn\_loadbalancer\_id" {
+#   value = data.f5xc\_cdn\_loadbalancer.example.id
 # }
 ```
 

@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_nfv_service Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_nfv\_service Data Source - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
   Manages new NFV service with configured parameters in F5 Distributed Cloud.
 ---
 
-# f5xc_nfv_service (Data Source)
+# f5xc\_nfv\_service (Data Source)
 
 Manages new NFV service with configured parameters in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages new NFV service with configured parameters in F5 Distributed Cloud.
 # Retrieves information about an existing Nfv Service
 
 # Look up an existing Nfv Service by name
-data "f5xc_nfv_service" "example" {
+data "f5xc\_nfv\_service" "example" {
   name      = "example-nfv-service"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "nfv_service_id" {
-#   value = data.f5xc_nfv_service.example.id
+# output "nfv\_service\_id" {
+#   value = data.f5xc\_nfv\_service.example.id
 # }
 ```
 

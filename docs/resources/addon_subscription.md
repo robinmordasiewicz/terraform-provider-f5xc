@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_addon_subscription Resource - terraform-provider-f5xc"
+page_title: "f5xc\_addon\_subscription Resource - terraform-provider-f5xc"
 subcategory: "Subscriptions"
 description: |-
   Manages new Addon Subscription with Addon Subscription State in F5 Distributed Cloud.
 ---
 
-# f5xc_addon_subscription (Resource)
+# f5xc\_addon\_subscription (Resource)
 
 Manages new Addon Subscription with Addon Subscription State in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages new Addon Subscription with Addon Subscription State in F5 Distributed C
 # Manages new Addon Subscription with Addon Subscription State in F5 Distributed Cloud.
 
 # Basic Addon Subscription configuration
-resource "f5xc_addon_subscription" "example" {
+resource "f5xc\_addon\_subscription" "example" {
   name      = "example-addon-subscription"
   namespace = "staging"
 
@@ -70,7 +70,7 @@ resource "f5xc_addon_subscription" "example" {
 
 <a id="notification-preference"></a>&#x2022; [`notification_preference`](#notification-preference) - Optional Block<br>Notification Preference. NotificationPreference preference for receiving addon subscription notifications<br>See [Notification Preference](#notification-preference) below for details.
 
-<a id="status"></a>&#x2022; [`status`](#status) - Optional String  Defaults to `SUBSCRIPTION_PENDING`<br>Possible values are `SUBSCRIPTION_PENDING`, `SUBSCRIPTION_ENABLED`, `SUBSCRIPTION_DISABLE_PENDING`, `SUBSCRIPTION_DISABLED`<br>Addon Subscription Type. Represents the different states of an addon subscription. - SUBSCRIPTION_PENDING: Subscription Pending Indicates that the subscription is pending enablement. - SUBSCRIPTION_ENABLED: Subscription Enabled Indicates that the subscription is currently enabled and active. - SUBSCRIPTION_DISABLE_PENDING: Subscription Disable Pending Indicates that the addon disable process is pending. - SUBSCRIPTION_DISABLED: Subscription Disabled Indicates that the addon has been disabled
+<a id="status"></a>&#x2022; [`status`](#status) - Optional String  Defaults to `SUBSCRIPTION_PENDING`<br>Possible values are `SUBSCRIPTION_PENDING`, `SUBSCRIPTION_ENABLED`, `SUBSCRIPTION\_DISABLE\_PENDING`, `SUBSCRIPTION_DISABLED`<br>Addon Subscription Type. Represents the different states of an addon subscription. - SUBSCRIPTION_PENDING: Subscription Pending Indicates that the subscription is pending enablement. - SUBSCRIPTION_ENABLED: Subscription Enabled Indicates that the subscription is currently enabled and active. - SUBSCRIPTION\_DISABLE\_PENDING: Subscription Disable Pending Indicates that the addon disable process is pending. - SUBSCRIPTION_DISABLED: Subscription Disabled Indicates that the addon has been disabled
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -98,7 +98,7 @@ A [`notification_preference`](#notification-preference) block supports the follo
 
 <a id="notification-preference-emails"></a>&#x2022; [`emails`](#notification-preference-emails) - Optional Block<br>Addon Subscription Associated Emails. Addon Subscription Emails associated with the Addon Subscription<br>See [Emails](#notification-preference-emails) below.
 
-<a id="notification-preference-support-ticket-id"></a>&#x2022; [`support_ticket_id`](#notification-preference-support-ticket-id) - Optional Block<br>Support Ticket ID. SupportTicketId gives the information about ticket created for managed addon subscription<br>See [Support Ticket ID](#notification-preference-support-ticket-id) below.
+<a id="notification-preference-support-ticket-id"></a>&#x2022; [`support\_ticket\_id`](#notification-preference-support-ticket-id) - Optional Block<br>Support Ticket ID. SupportTicketId gives the information about ticket created for managed addon subscription<br>See [Support Ticket ID](#notification-preference-support-ticket-id) below.
 
 #### Notification Preference Emails
 
@@ -108,11 +108,11 @@ An [`emails`](#notification-preference-emails) block (within [`notification_pref
 
 #### Notification Preference Support Ticket ID
 
-A [`support_ticket_id`](#notification-preference-support-ticket-id) block (within [`notification_preference`](#notification-preference)) supports the following:
+A [`support\_ticket\_id`](#notification-preference-support-ticket-id) block (within [`notification_preference`](#notification-preference)) supports the following:
 
-<a id="notification-preference-support-ticket-id-subscription-ticket-id"></a>&#x2022; [`subscription_ticket_id`](#notification-preference-support-ticket-id-subscription-ticket-id) - Optional String<br>Subscription Ticket ID. subscription_ticket_id associated with the Addon Subscription subscription
+<a id="notification-preference-support-ticket-id-subscription-ticket-id"></a>&#x2022; [`subscription\_ticket\_id`](#notification-preference-support-ticket-id-subscription-ticket-id) - Optional String<br>Subscription Ticket ID. subscription\_ticket\_id associated with the Addon Subscription subscription
 
-<a id="notification-preference-support-ticket-id-unsubscription-ticket-id"></a>&#x2022; [`unsubscription_ticket_id`](#notification-preference-support-ticket-id-unsubscription-ticket-id) - Optional String<br>Unsubscription Ticket ID. unsubscription_ticket_id associated with the Addon Subscription unsubscription
+<a id="notification-preference-support-ticket-id-unsubscription-ticket-id"></a>&#x2022; [`unsubscription\_ticket\_id`](#notification-preference-support-ticket-id-unsubscription-ticket-id) - Optional String<br>Unsubscription Ticket ID. unsubscription\_ticket\_id associated with the Addon Subscription unsubscription
 
 #### Timeouts
 
@@ -132,5 +132,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_addon_subscription.example system/example
+terraform import f5xc\_addon\_subscription.example system/example
 ```

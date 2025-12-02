@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_nat_policy Resource - terraform-provider-f5xc"
+page_title: "f5xc\_nat\_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages a NATPolicy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
 ---
 
-# f5xc_nat_policy (Resource)
+# f5xc\_nat\_policy (Resource)
 
 Manages a NATPolicy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
 
@@ -18,7 +18,7 @@ Manages a NATPolicy resource in F5 Distributed Cloud for nat policy create speci
 # Manages a NATPolicy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
 
 # Basic NAT Policy configuration
-resource "f5xc_nat_policy" "example" {
+resource "f5xc\_nat\_policy" "example" {
   name      = "example-nat-policy"
   namespace = "staging"
 
@@ -194,7 +194,7 @@ A [`criteria`](#rules-criteria) block (within [`rules`](#rules)) supports the fo
 
 A [`destination_port`](#rules-criteria-destination-port) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
-<a id="rules-criteria-destination-port-no-port-match"></a>&#x2022; [`no_port_match`](#rules-criteria-destination-port-no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rules-criteria-destination-port-no-port-match"></a>&#x2022; [`no\_port\_match`](#rules-criteria-destination-port-no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="rules-criteria-destination-port-port"></a>&#x2022; [`port`](#rules-criteria-destination-port-port) - Optional Number<br>Port. Exact Port to match
 
@@ -224,7 +224,7 @@ A [`refs`](#rules-criteria-segment-refs) block (within [`rules.criteria.segment`
 
 A [`source_port`](#rules-criteria-source-port) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
-<a id="rules-criteria-source-port-no-port-match"></a>&#x2022; [`no_port_match`](#rules-criteria-source-port-no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rules-criteria-source-port-no-port-match"></a>&#x2022; [`no\_port\_match`](#rules-criteria-source-port-no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="rules-criteria-source-port-port"></a>&#x2022; [`port`](#rules-criteria-source-port-port) - Optional Number<br>Port. Exact Port to match
 
@@ -242,7 +242,7 @@ A [`tcp`](#rules-criteria-tcp) block (within [`rules.criteria`](#rules-criteria)
 
 A [`destination_port`](#rules-criteria-tcp-destination-port) block (within [`rules.criteria.tcp`](#rules-criteria-tcp)) supports the following:
 
-<a id="rules-criteria-tcp-destination-port-no-port-match"></a>&#x2022; [`no_port_match`](#rules-criteria-tcp-destination-port-no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rules-criteria-tcp-destination-port-no-port-match"></a>&#x2022; [`no\_port\_match`](#rules-criteria-tcp-destination-port-no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="rules-criteria-tcp-destination-port-port"></a>&#x2022; [`port`](#rules-criteria-tcp-destination-port-port) - Optional Number<br>Port. Exact Port to match
 
@@ -252,7 +252,7 @@ A [`destination_port`](#rules-criteria-tcp-destination-port) block (within [`rul
 
 A [`source_port`](#rules-criteria-tcp-source-port) block (within [`rules.criteria.tcp`](#rules-criteria-tcp)) supports the following:
 
-<a id="rules-criteria-tcp-source-port-no-port-match"></a>&#x2022; [`no_port_match`](#rules-criteria-tcp-source-port-no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rules-criteria-tcp-source-port-no-port-match"></a>&#x2022; [`no\_port\_match`](#rules-criteria-tcp-source-port-no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="rules-criteria-tcp-source-port-port"></a>&#x2022; [`port`](#rules-criteria-tcp-source-port-port) - Optional Number<br>Port. Exact Port to match
 
@@ -270,7 +270,7 @@ An [`udp`](#rules-criteria-udp) block (within [`rules.criteria`](#rules-criteria
 
 A [`destination_port`](#rules-criteria-udp-destination-port) block (within [`rules.criteria.udp`](#rules-criteria-udp)) supports the following:
 
-<a id="rules-criteria-udp-destination-port-no-port-match"></a>&#x2022; [`no_port_match`](#rules-criteria-udp-destination-port-no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rules-criteria-udp-destination-port-no-port-match"></a>&#x2022; [`no\_port\_match`](#rules-criteria-udp-destination-port-no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="rules-criteria-udp-destination-port-port"></a>&#x2022; [`port`](#rules-criteria-udp-destination-port-port) - Optional Number<br>Port. Exact Port to match
 
@@ -280,7 +280,7 @@ A [`destination_port`](#rules-criteria-udp-destination-port) block (within [`rul
 
 A [`source_port`](#rules-criteria-udp-source-port) block (within [`rules.criteria.udp`](#rules-criteria-udp)) supports the following:
 
-<a id="rules-criteria-udp-source-port-no-port-match"></a>&#x2022; [`no_port_match`](#rules-criteria-udp-source-port-no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rules-criteria-udp-source-port-no-port-match"></a>&#x2022; [`no\_port\_match`](#rules-criteria-udp-source-port-no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="rules-criteria-udp-source-port-port"></a>&#x2022; [`port`](#rules-criteria-udp-source-port-port) - Optional Number<br>Port. Exact Port to match
 
@@ -404,5 +404,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_nat_policy.example system/example
+terraform import f5xc\_nat\_policy.example system/example
 ```

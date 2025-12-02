@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_securemesh_site Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_securemesh\_site Data Source - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
   Manages a SecuremeshSite resource in F5 Distributed Cloud for deploying secure mesh edge sites with distributed security capabilities.
 ---
 
-# f5xc_securemesh_site (Data Source)
+# f5xc\_securemesh\_site (Data Source)
 
 Manages a SecuremeshSite resource in F5 Distributed Cloud for deploying secure mesh edge sites with distributed security capabilities.
 
@@ -18,14 +18,14 @@ Manages a SecuremeshSite resource in F5 Distributed Cloud for deploying secure m
 # Retrieves information about an existing Securemesh Site
 
 # Look up an existing Securemesh Site by name
-data "f5xc_securemesh_site" "example" {
+data "f5xc\_securemesh\_site" "example" {
   name      = "example-securemesh-site"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "securemesh_site_id" {
-#   value = data.f5xc_securemesh_site.example.id
+# output "securemesh\_site\_id" {
+#   value = data.f5xc\_securemesh\_site.example.id
 # }
 ```
 

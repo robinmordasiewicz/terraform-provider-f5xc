@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_data_type Resource - terraform-provider-f5xc"
+page_title: "f5xc\_data\_type Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages data_type creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc_data_type (Resource)
+# f5xc\_data\_type (Resource)
 
 Manages data_type creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages data_type creates a new object in the storage backend for metadata.names
 # Manages data_type creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Data Type configuration
-resource "f5xc_data_type" "example" {
+resource "f5xc\_data\_type" "example" {
   name      = "example-data-type"
   namespace = "shared"
 
@@ -66,11 +66,11 @@ resource "f5xc_data_type" "example" {
 
 ### Spec Argument Reference
 
-<a id="compliances"></a>&#x2022; [`compliances`](#compliances) - Optional List<br>Possible values are `GDPR`, `CCPA`, `PIPEDA`, `LGPD`, `DPA_UK`, `PDPA_SG`, `APPI`, `HIPAA`, `CPRA_2023`, `CPA_CO`, `SOC2`, `PCI_DSS`, `ISO_IEC_27001`, `ISO_IEC_27701`, `EPRIVACY_DIRECTIVE`, `GLBA`, `SOX`<br>Relevant Compliances. Choose applicable compliance frameworks such as GDPR, PCI/DSS, or CCPA to ensure the platform identifies whether vulnerabilities in API endpoints handling this data type may cause a compliance breach
+<a id="compliances"></a>&#x2022; [`compliances`](#compliances) - Optional List<br>Possible values are `GDPR`, `CCPA`, `PIPEDA`, `LGPD`, `DPA_UK`, `PDPA_SG`, `APPI`, `HIPAA`, `CPRA_2023`, `CPA_CO`, `SOC2`, `PCI_DSS`, `ISO\_IEC\_27001`, `ISO\_IEC\_27701`, `EPRIVACY_DIRECTIVE`, `GLBA`, `SOX`<br>Relevant Compliances. Choose applicable compliance frameworks such as GDPR, PCI/DSS, or CCPA to ensure the platform identifies whether vulnerabilities in API endpoints handling this data type may cause a compliance breach
 
 <a id="is-pii"></a>&#x2022; [`is_pii`](#is-pii) - Optional Bool<br>Mark as PII. Select this option to classify the custom data type as personally identifiable information (PII)
 
-<a id="is-sensitive-data"></a>&#x2022; [`is_sensitive_data`](#is-sensitive-data) - Optional Bool<br>Mark as Sensitive Data. Select this option to classify the custom data type as sensitive, enabling detection of API vulnerabilities related to this data type
+<a id="is-sensitive-data"></a>&#x2022; [`is\_sensitive\_data`](#is-sensitive-data) - Optional Bool<br>Mark as Sensitive Data. Select this option to classify the custom data type as sensitive, enabling detection of API vulnerabilities related to this data type
 
 <a id="rules"></a>&#x2022; [`rules`](#rules) - Optional Block<br>Data Type Rules. Configure key/value or regex match rules to enable the platform to detect this custom data type in the API request or response<br>See [Rules](#rules) below for details.
 
@@ -90,7 +90,7 @@ A [`rules`](#rules) block supports the following:
 
 <a id="rules-key-pattern"></a>&#x2022; [`key_pattern`](#rules-key-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Key Pattern](#rules-key-pattern) below.
 
-<a id="rules-key-value-pattern"></a>&#x2022; [`key_value_pattern`](#rules-key-value-pattern) - Optional Block<br>Key & Value Pattern. Search for specific key & value patterns in the specified sections<br>See [Key Value Pattern](#rules-key-value-pattern) below.
+<a id="rules-key-value-pattern"></a>&#x2022; [`key\_value\_pattern`](#rules-key-value-pattern) - Optional Block<br>Key & Value Pattern. Search for specific key & value patterns in the specified sections<br>See [Key Value Pattern](#rules-key-value-pattern) below.
 
 <a id="rules-value-pattern"></a>&#x2022; [`value_pattern`](#rules-value-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Value Pattern](#rules-value-pattern) below.
 
@@ -112,7 +112,7 @@ An [`exact_values`](#rules-key-pattern-exact-values) block (within [`rules.key_p
 
 #### Rules Key Value Pattern
 
-A [`key_value_pattern`](#rules-key-value-pattern) block (within [`rules`](#rules)) supports the following:
+A [`key\_value\_pattern`](#rules-key-value-pattern) block (within [`rules`](#rules)) supports the following:
 
 <a id="rules-key-value-pattern-key-pattern"></a>&#x2022; [`key_pattern`](#rules-key-value-pattern-key-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Key Pattern](#rules-key-value-pattern-key-pattern) below.
 
@@ -120,7 +120,7 @@ A [`key_value_pattern`](#rules-key-value-pattern) block (within [`rules`](#rules
 
 #### Rules Key Value Pattern Key Pattern
 
-A [`key_pattern`](#rules-key-value-pattern-key-pattern) block (within [`rules.key_value_pattern`](#rules-key-value-pattern)) supports the following:
+A [`key_pattern`](#rules-key-value-pattern-key-pattern) block (within [`rules.key\_value\_pattern`](#rules-key-value-pattern)) supports the following:
 
 <a id="rules-key-value-pattern-key-pattern-exact-values"></a>&#x2022; [`exact_values`](#rules-key-value-pattern-key-pattern-exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-key-value-pattern-key-pattern-exact-values) below.
 
@@ -130,13 +130,13 @@ A [`key_pattern`](#rules-key-value-pattern-key-pattern) block (within [`rules.ke
 
 #### Rules Key Value Pattern Key Pattern Exact Values
 
-An [`exact_values`](#rules-key-value-pattern-key-pattern-exact-values) block (within [`rules.key_value_pattern.key_pattern`](#rules-key-value-pattern-key-pattern)) supports the following:
+An [`exact_values`](#rules-key-value-pattern-key-pattern-exact-values) block (within [`rules.key\_value\_pattern.key_pattern`](#rules-key-value-pattern-key-pattern)) supports the following:
 
 <a id="rules-key-value-pattern-key-pattern-exact-values-exact-values"></a>&#x2022; [`exact_values`](#rules-key-value-pattern-key-pattern-exact-values-exact-values) - Optional List<br>Exact Values. List of exact values to match
 
 #### Rules Key Value Pattern Value Pattern
 
-A [`value_pattern`](#rules-key-value-pattern-value-pattern) block (within [`rules.key_value_pattern`](#rules-key-value-pattern)) supports the following:
+A [`value_pattern`](#rules-key-value-pattern-value-pattern) block (within [`rules.key\_value\_pattern`](#rules-key-value-pattern)) supports the following:
 
 <a id="rules-key-value-pattern-value-pattern-exact-values"></a>&#x2022; [`exact_values`](#rules-key-value-pattern-value-pattern-exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-key-value-pattern-value-pattern-exact-values) below.
 
@@ -146,7 +146,7 @@ A [`value_pattern`](#rules-key-value-pattern-value-pattern) block (within [`rule
 
 #### Rules Key Value Pattern Value Pattern Exact Values
 
-An [`exact_values`](#rules-key-value-pattern-value-pattern-exact-values) block (within [`rules.key_value_pattern.value_pattern`](#rules-key-value-pattern-value-pattern)) supports the following:
+An [`exact_values`](#rules-key-value-pattern-value-pattern-exact-values) block (within [`rules.key\_value\_pattern.value_pattern`](#rules-key-value-pattern-value-pattern)) supports the following:
 
 <a id="rules-key-value-pattern-value-pattern-exact-values-exact-values"></a>&#x2022; [`exact_values`](#rules-key-value-pattern-value-pattern-exact-values-exact-values) - Optional List<br>Exact Values. List of exact values to match
 
@@ -184,5 +184,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_data_type.example system/example
+terraform import f5xc\_data\_type.example system/example
 ```

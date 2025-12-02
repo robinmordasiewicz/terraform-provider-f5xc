@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_infraprotect_asn Resource - terraform-provider-f5xc"
+page_title: "f5xc\_infraprotect\_asn Resource - terraform-provider-f5xc"
 subcategory: "Infrastructure Protection"
 description: |-
   Manages DDoS transit ASN in F5 Distributed Cloud.
 ---
 
-# f5xc_infraprotect_asn (Resource)
+# f5xc\_infraprotect\_asn (Resource)
 
 Manages DDoS transit ASN in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages DDoS transit ASN in F5 Distributed Cloud.
 # Manages DDoS transit ASN in F5 Distributed Cloud.
 
 # Basic Infraprotect Asn configuration
-resource "f5xc_infraprotect_asn" "example" {
+resource "f5xc\_infraprotect\_asn" "example" {
   name      = "example-infraprotect-asn"
   namespace = "staging"
 
@@ -32,13 +32,13 @@ resource "f5xc_infraprotect_asn" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: bgp_session_disabled, bgp_session_enabled] Empty....
-  bgp_session_disabled {
-    # Configure bgp_session_disabled settings
+  # [OneOf: bgp\_session\_disabled, bgp\_session\_enabled] Empty....
+  bgp\_session\_disabled {
+    # Configure bgp\_session\_disabled settings
   }
   # Empty. This can be used for messages where no values are ...
-  bgp_session_enabled {
-    # Configure bgp_session_enabled settings
+  bgp\_session\_enabled {
+    # Configure bgp\_session\_enabled settings
   }
 }
 ```
@@ -65,8 +65,8 @@ resource "f5xc_infraprotect_asn" "example" {
 <a id="asn"></a>&#x2022; [`asn`](#asn) - Optional Number<br>ASN. 2-byte or 4-byte Autonomous System Number (ASN)
 
 -> **One of the following:**
-&#x2022; <a id="bgp-session-disabled"></a>[`bgp_session_disabled`](#bgp-session-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="bgp-session-enabled"></a>[`bgp_session_enabled`](#bgp-session-enabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="bgp-session-disabled"></a>[`bgp\_session\_disabled`](#bgp-session-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="bgp-session-enabled"></a>[`bgp\_session\_enabled`](#bgp-session-enabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -96,5 +96,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_infraprotect_asn.example system/example
+terraform import f5xc\_infraprotect\_asn.example system/example
 ```

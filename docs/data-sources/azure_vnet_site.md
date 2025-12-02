@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_azure_vnet_site Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_azure_vnet\_site Data Source - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
   Manages a AzureVNETSite resource in F5 Distributed Cloud for deploying F5 sites within Azure Virtual Network environments.
 ---
 
-# f5xc_azure_vnet_site (Data Source)
+# f5xc\_azure_vnet\_site (Data Source)
 
 Manages a AzureVNETSite resource in F5 Distributed Cloud for deploying F5 sites within Azure Virtual Network environments.
 
@@ -18,18 +18,18 @@ Manages a AzureVNETSite resource in F5 Distributed Cloud for deploying F5 sites 
 # Retrieves information about an existing Azure VNET Site
 
 # Look up an existing Azure VNET Site by name
-data "f5xc_azure_vnet_site" "example" {
+data "f5xc\_azure_vnet\_site" "example" {
   name      = "example-azure-vnet-site"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "azure_vnet_site_id" {
-#   value = data.f5xc_azure_vnet_site.example.id
+# output "azure\_vnet_site\_id" {
+#   value = data.f5xc\_azure_vnet\_site.example.id
 # }
 
 # Example: Reference cloud site for advertising load balancer
-# resource "f5xc_http_loadbalancer" "example" {
+# resource "f5xc\_http\_loadbalancer" "example" {
 #   name      = "site-advertised-lb"
 #   namespace = "system"
 #
@@ -37,8 +37,8 @@ data "f5xc_azure_vnet_site" "example" {
 #     advertise_where {
 #       site {
 #         site {
-#           name      = data.f5xc_azure_vnet_site.example.name
-#           namespace = data.f5xc_azure_vnet_site.example.namespace
+#           name      = data.f5xc\_azure_vnet\_site.example.name
+#           namespace = data.f5xc\_azure_vnet\_site.example.namespace
 #         }
 #       }
 #     }

@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_infraprotect_internet_prefix_advertisement Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_infraprotect_internet_prefix\_advertisement Data Source - terraform-provider-f5xc"
 subcategory: "Infrastructure Protection"
 description: |-
   Manages DDoS transit Internet Prefix in F5 Distributed Cloud.
 ---
 
-# f5xc_infraprotect_internet_prefix_advertisement (Data Source)
+# f5xc\_infraprotect_internet_prefix\_advertisement (Data Source)
 
 Manages DDoS transit Internet Prefix in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages DDoS transit Internet Prefix in F5 Distributed Cloud.
 # Retrieves information about an existing Infraprotect Internet Prefix Advertisement
 
 # Look up an existing Infraprotect Internet Prefix Advertisement by name
-data "f5xc_infraprotect_internet_prefix_advertisement" "example" {
+data "f5xc\_infraprotect_internet_prefix\_advertisement" "example" {
   name      = "example-infraprotect-internet-prefix-advertisement"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "infraprotect_internet_prefix_advertisement_id" {
-#   value = data.f5xc_infraprotect_internet_prefix_advertisement.example.id
+# output "infraprotect\_internet_prefix_advertisement\_id" {
+#   value = data.f5xc\_infraprotect_internet_prefix\_advertisement.example.id
 # }
 ```
 

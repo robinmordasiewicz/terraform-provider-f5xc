@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_data_group Resource - terraform-provider-f5xc"
+page_title: "f5xc\_data\_group Resource - terraform-provider-f5xc"
 subcategory: "BIG-IP Integration"
 description: |-
   Manages data group in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 ---
 
-# f5xc_data_group (Resource)
+# f5xc\_data\_group (Resource)
 
 Manages data group in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages data group in a given namespace. If one already exists it will give an e
 # Manages data group in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 
 # Basic Data Group configuration
-resource "f5xc_data_group" "example" {
+resource "f5xc\_data\_group" "example" {
   name      = "example-data-group"
   namespace = "shared"
 
@@ -117,5 +117,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_data_group.example system/example
+terraform import f5xc\_data\_group.example system/example
 ```

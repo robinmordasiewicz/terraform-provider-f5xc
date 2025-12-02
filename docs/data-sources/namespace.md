@@ -29,7 +29,7 @@ data "f5xc_namespace" "example" {
 # }
 
 # Example: Create resources in a namespace discovered via data source
-# resource "f5xc_origin_pool" "example" {
+# resource "f5xc\_origin\_pool" "example" {
 #   name      = "example-pool"
 #   namespace = data.f5xc_namespace.example.name
 #   # ... other configuration

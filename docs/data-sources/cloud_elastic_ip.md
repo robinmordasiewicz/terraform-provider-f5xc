@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_cloud_elastic_ip Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_cloud_elastic\_ip Data Source - terraform-provider-f5xc"
 subcategory: "Cloud Resources"
 description: |-
   Manages Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a site in F5 Distributed Cloud.
 ---
 
-# f5xc_cloud_elastic_ip (Data Source)
+# f5xc\_cloud_elastic\_ip (Data Source)
 
 Manages Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a site in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a
 # Retrieves information about an existing Cloud Elastic IP
 
 # Look up an existing Cloud Elastic IP by name
-data "f5xc_cloud_elastic_ip" "example" {
+data "f5xc\_cloud_elastic\_ip" "example" {
   name      = "example-cloud-elastic-ip"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "cloud_elastic_ip_id" {
-#   value = data.f5xc_cloud_elastic_ip.example.id
+# output "cloud\_elastic_ip\_id" {
+#   value = data.f5xc\_cloud_elastic\_ip.example.id
 # }
 ```
 

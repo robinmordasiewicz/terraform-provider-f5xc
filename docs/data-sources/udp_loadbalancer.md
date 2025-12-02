@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_udp_loadbalancer Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_udp\_loadbalancer Data Source - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
   Manages a UDPLoadBalancer resource in F5 Distributed Cloud for load balancing UDP traffic across origin pools.
 ---
 
-# f5xc_udp_loadbalancer (Data Source)
+# f5xc\_udp\_loadbalancer (Data Source)
 
 Manages a UDPLoadBalancer resource in F5 Distributed Cloud for load balancing UDP traffic across origin pools.
 
@@ -18,14 +18,14 @@ Manages a UDPLoadBalancer resource in F5 Distributed Cloud for load balancing UD
 # Retrieves information about an existing UDP Loadbalancer
 
 # Look up an existing UDP Loadbalancer by name
-data "f5xc_udp_loadbalancer" "example" {
+data "f5xc\_udp\_loadbalancer" "example" {
   name      = "example-udp-loadbalancer"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "udp_loadbalancer_id" {
-#   value = data.f5xc_udp_loadbalancer.example.id
+# output "udp\_loadbalancer\_id" {
+#   value = data.f5xc\_udp\_loadbalancer.example.id
 # }
 ```
 

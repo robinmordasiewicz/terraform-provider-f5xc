@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_managed_tenant Resource - terraform-provider-f5xc"
+page_title: "f5xc\_managed\_tenant Resource - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
   Manages managed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.
 ---
 
-# f5xc_managed_tenant (Resource)
+# f5xc\_managed\_tenant (Resource)
 
 Manages managed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages managed_tenant config instance. Name of the object is name of the tenant
 # Manages managed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.
 
 # Basic Managed Tenant configuration
-resource "f5xc_managed_tenant" "example" {
+resource "f5xc\_managed\_tenant" "example" {
   name      = "example-managed-tenant"
   namespace = "staging"
 
@@ -82,7 +82,7 @@ A [`groups`](#groups) block supports the following:
 
 <a id="groups-group"></a>&#x2022; [`group`](#groups-group) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Group](#groups-group) below.
 
-<a id="groups-managed-tenant-groups"></a>&#x2022; [`managed_tenant_groups`](#groups-managed-tenant-groups) - Optional List<br>Managed Tenant Groups. List of group names in managed tenant (MT). Note - To properly establish access, admin of managed tenant need to create corresponding Allowed Tenant configuration object with access to use same group names. Once it's setup, when user from original tenant access managed tenant, underlying roles from managed tenant will be applied to user
+<a id="groups-managed-tenant-groups"></a>&#x2022; [`managed\_tenant\_groups`](#groups-managed-tenant-groups) - Optional List<br>Managed Tenant Groups. List of group names in managed tenant (MT). Note - To properly establish access, admin of managed tenant need to create corresponding Allowed Tenant configuration object with access to use same group names. Once it's setup, when user from original tenant access managed tenant, underlying roles from managed tenant will be applied to user
 
 #### Groups Group
 
@@ -112,5 +112,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_managed_tenant.example system/example
+terraform import f5xc\_managed\_tenant.example system/example
 ```

@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_dns_zone Resource - terraform-provider-f5xc"
+page_title: "f5xc\_dns\_zone Resource - terraform-provider-f5xc"
 subcategory: "DNS"
 description: |-
   Manages a DNSZone resource in F5 Distributed Cloud.
 ---
 
-# f5xc_dns_zone (Resource)
+# f5xc\_dns\_zone (Resource)
 
 Manages a DNSZone resource in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages a DNSZone resource in F5 Distributed Cloud.
 # Manages a DNSZone resource in F5 Distributed Cloud.
 
 # Basic DNS Zone configuration
-resource "f5xc_dns_zone" "example" {
+resource "f5xc\_dns\_zone" "example" {
   name      = "example-dns-zone"
   namespace = "staging"
 
@@ -34,15 +34,15 @@ resource "f5xc_dns_zone" "example" {
   # DNS Zone configuration
   # Primary DNS zone
   primary {
-    soa_record_parameters {
+    soa\_record\_parameters {
       refresh = 86400
       retry   = 7200
       expire  = 3600000
       ttl     = 86400
       neg_ttl = 1800
     }
-    default_rr_set_group {}
-    default_soa_parameters {}
+    default\_rr_set\_group {}
+    default\_soa\_parameters {}
     dnssec_mode {
       disable {}
     }
@@ -73,11 +73,11 @@ resource "f5xc_dns_zone" "example" {
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-<a id="tsig-key-algorithm"></a>&#x2022; [`tsig_key_algorithm`](#tsig-key-algorithm) - Optional String  Defaults to `UNDEFINED`<br>Possible values are `HMAC_MD5`, `UNDEFINED`, `HMAC_SHA1`, `HMAC_SHA224`, `HMAC_SHA256`, `HMAC_SHA384`, `HMAC_SHA512`<br>TSIG Key Algorithm. TSIG key value must be compatible with the specified algorithm - UNDEFINED: UNDEFINED - HMAC_MD5: HMAC_MD5 - HMAC_SHA1: HMAC_SHA1 - HMAC_SHA224: HMAC_SHA224 - HMAC_SHA256: HMAC_SHA256 - HMAC_SHA384: HMAC_SHA384 - HMAC_SHA512: HMAC_SHA512
+<a id="tsig-key-algorithm"></a>&#x2022; [`tsig\_key\_algorithm`](#tsig-key-algorithm) - Optional String  Defaults to `UNDEFINED`<br>Possible values are `HMAC_MD5`, `UNDEFINED`, `HMAC_SHA1`, `HMAC_SHA224`, `HMAC_SHA256`, `HMAC_SHA384`, `HMAC_SHA512`<br>TSIG Key Algorithm. TSIG key value must be compatible with the specified algorithm - UNDEFINED: UNDEFINED - HMAC_MD5: HMAC_MD5 - HMAC_SHA1: HMAC_SHA1 - HMAC_SHA224: HMAC_SHA224 - HMAC_SHA256: HMAC_SHA256 - HMAC_SHA384: HMAC_SHA384 - HMAC_SHA512: HMAC_SHA512
 
-<a id="tsig-key-name"></a>&#x2022; [`tsig_key_name`](#tsig-key-name) - Optional String<br>TSIG Key Name. TSIG key name as used in TSIG protocol extension
+<a id="tsig-key-name"></a>&#x2022; [`tsig\_key\_name`](#tsig-key-name) - Optional String<br>TSIG Key Name. TSIG key name as used in TSIG protocol extension
 
-<a id="tsig-key-value"></a>&#x2022; [`tsig_key_value`](#tsig-key-value) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Tsig Key Value](#tsig-key-value) below for details.
+<a id="tsig-key-value"></a>&#x2022; [`tsig\_key\_value`](#tsig-key-value) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Tsig Key Value](#tsig-key-value) below for details.
 
 ### Attributes Reference
 
@@ -101,15 +101,15 @@ A [`timeouts`](#timeouts) block supports the following:
 
 #### Tsig Key Value
 
-A [`tsig_key_value`](#tsig-key-value) block supports the following:
+A [`tsig\_key\_value`](#tsig-key-value) block supports the following:
 
-<a id="tsig-key-value-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#tsig-key-value-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#tsig-key-value-blindfold-secret-info) below.
+<a id="tsig-key-value-blindfold-secret-info"></a>&#x2022; [`blindfold\_secret\_info`](#tsig-key-value-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#tsig-key-value-blindfold-secret-info) below.
 
-<a id="tsig-key-value-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#tsig-key-value-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#tsig-key-value-clear-secret-info) below.
+<a id="tsig-key-value-clear-secret-info"></a>&#x2022; [`clear\_secret\_info`](#tsig-key-value-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#tsig-key-value-clear-secret-info) below.
 
 #### Tsig Key Value Blindfold Secret Info
 
-A [`blindfold_secret_info`](#tsig-key-value-blindfold-secret-info) block (within [`tsig_key_value`](#tsig-key-value)) supports the following:
+A [`blindfold\_secret\_info`](#tsig-key-value-blindfold-secret-info) block (within [`tsig\_key\_value`](#tsig-key-value)) supports the following:
 
 <a id="tsig-key-value-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#tsig-key-value-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -119,7 +119,7 @@ A [`blindfold_secret_info`](#tsig-key-value-blindfold-secret-info) block (within
 
 #### Tsig Key Value Clear Secret Info
 
-A [`clear_secret_info`](#tsig-key-value-clear-secret-info) block (within [`tsig_key_value`](#tsig-key-value)) supports the following:
+A [`clear\_secret\_info`](#tsig-key-value-clear-secret-info) block (within [`tsig\_key\_value`](#tsig-key-value)) supports the following:
 
 <a id="tsig-key-value-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#tsig-key-value-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -131,5 +131,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_dns_zone.example system/example
+terraform import f5xc\_dns\_zone.example system/example
 ```

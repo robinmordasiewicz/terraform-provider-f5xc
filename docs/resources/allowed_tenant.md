@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_allowed_tenant Resource - terraform-provider-f5xc"
+page_title: "f5xc\_allowed\_tenant Resource - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
   Manages allowed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.
 ---
 
-# f5xc_allowed_tenant (Resource)
+# f5xc\_allowed\_tenant (Resource)
 
 Manages allowed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages allowed_tenant config instance. Name of the object is name of the tenant
 # Manages allowed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.
 
 # Basic Allowed Tenant configuration
-resource "f5xc_allowed_tenant" "example" {
+resource "f5xc\_allowed\_tenant" "example" {
   name      = "example-allowed-tenant"
   namespace = "staging"
 
@@ -100,5 +100,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_allowed_tenant.example system/example
+terraform import f5xc\_allowed\_tenant.example system/example
 ```

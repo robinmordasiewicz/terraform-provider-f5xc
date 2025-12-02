@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_child_tenant Resource - terraform-provider-f5xc"
+page_title: "f5xc\_child\_tenant Resource - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
   Manages child_tenant config instance. Name of the object is the name of the child tenant to be created. in F5 Distributed Cloud.
 ---
 
-# f5xc_child_tenant (Resource)
+# f5xc\_child\_tenant (Resource)
 
 Manages child_tenant config instance. Name of the object is the name of the child tenant to be created. in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages child_tenant config instance. Name of the object is the name of the chil
 # Manages child_tenant config instance. Name of the object is the name of the child tenant to be created. in F5 Distributed Cloud.
 
 # Basic Child Tenant configuration
-resource "f5xc_child_tenant" "example" {
+resource "f5xc\_child\_tenant" "example" {
   name      = "example-child-tenant"
   namespace = "staging"
 
@@ -33,8 +33,8 @@ resource "f5xc_child_tenant" "example" {
 
   # Resource-specific configuration
   # Object reference. This type establishes a direct referenc...
-  child_tenant_manager {
-    # Configure child_tenant_manager settings
+  child\_tenant\_manager {
+    # Configure child\_tenant\_manager settings
   }
   # Contact. Instance of one single contact that can be used ...
   contact_detail {
@@ -66,7 +66,7 @@ resource "f5xc_child_tenant" "example" {
 
 ### Spec Argument Reference
 
-<a id="child-tenant-manager"></a>&#x2022; [`child_tenant_manager`](#child-tenant-manager) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Child Tenant Manager](#child-tenant-manager) below for details.
+<a id="child-tenant-manager"></a>&#x2022; [`child\_tenant\_manager`](#child-tenant-manager) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Child Tenant Manager](#child-tenant-manager) below for details.
 
 <a id="company-name"></a>&#x2022; [`company_name`](#company-name) - Optional String<br>Company Name. Company name (enterprise only)
 
@@ -90,7 +90,7 @@ In addition to all arguments above, the following attributes are exported:
 
 #### Child Tenant Manager
 
-A [`child_tenant_manager`](#child-tenant-manager) block supports the following:
+A [`child\_tenant\_manager`](#child-tenant-manager) block supports the following:
 
 <a id="child-tenant-manager-name"></a>&#x2022; [`name`](#child-tenant-manager-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -162,5 +162,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_child_tenant.example system/example
+terraform import f5xc\_child\_tenant.example system/example
 ```

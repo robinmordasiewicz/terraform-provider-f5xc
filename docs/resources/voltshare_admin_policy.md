@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc_voltshare_admin_policy Resource - terraform-provider-f5xc"
+page_title: "f5xc\_voltshare_admin\_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages voltshare_admin_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  Manages voltshare\_admin\_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc_voltshare_admin_policy (Resource)
+# f5xc\_voltshare_admin\_policy (Resource)
 
-Manages voltshare_admin_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+Manages voltshare\_admin\_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Voltshare Admin Policy API docs](https://docs.cloud.f5.com/docs-v2/api/voltshare-admin-policy) to learn more.
 
@@ -15,10 +15,10 @@ Manages voltshare_admin_policy creates a new object in the storage backend for m
 
 ```terraform
 # Voltshare Admin Policy Resource Example
-# Manages voltshare_admin_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# Manages voltshare\_admin\_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Voltshare Admin Policy configuration
-resource "f5xc_voltshare_admin_policy" "example" {
+resource "f5xc\_voltshare_admin\_policy" "example" {
   name      = "example-voltshare-admin-policy"
   namespace = "staging"
 
@@ -68,7 +68,7 @@ resource "f5xc_voltshare_admin_policy" "example" {
 
 <a id="author-restrictions"></a>&#x2022; [`author_restrictions`](#author-restrictions) - Optional Block<br>User Matcher. user_matcher contains contains the allow/deny list of users/authors<br>See [Author Restrictions](#author-restrictions) below for details.
 
-<a id="max-validity-duration"></a>&#x2022; [`max_validity_duration`](#max-validity-duration) - Optional String<br>Maximum Duration for Validity. max_validity_duration contains the maximum amount of time a secret from any users from this team/tenant is valid. Value for this parameter is a string ending in the suffix 's' (indicating seconds), suffix 'm' (indicating minutes) or suffix 'h' (indicating hours)
+<a id="max-validity-duration"></a>&#x2022; [`max\_validity\_duration`](#max-validity-duration) - Optional String<br>Maximum Duration for Validity. max\_validity\_duration contains the maximum amount of time a secret from any users from this team/tenant is valid. Value for this parameter is a string ending in the suffix 's' (indicating seconds), suffix 'm' (indicating minutes) or suffix 'h' (indicating hours)
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -192,5 +192,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_voltshare_admin_policy.example system/example
+terraform import f5xc\_voltshare_admin\_policy.example system/example
 ```

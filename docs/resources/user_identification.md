@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_user_identification Resource - terraform-provider-f5xc"
+page_title: "f5xc\_user\_identification Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages user_identification creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc_user_identification (Resource)
+# f5xc\_user\_identification (Resource)
 
 Manages user_identification creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
@@ -18,7 +18,7 @@ Manages user_identification creates a new object in the storage backend for meta
 # Manages user_identification creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic User Identification configuration
-resource "f5xc_user_identification" "example" {
+resource "f5xc\_user\_identification" "example" {
   name      = "example-user-identification"
   namespace = "shared"
 
@@ -86,21 +86,21 @@ A [`rules`](#rules) block supports the following:
 
 <a id="rules-cookie-name"></a>&#x2022; [`cookie_name`](#rules-cookie-name) - Optional String<br>Cookie Name. Use the HTTP cookie value for the given name as user identifier
 
-<a id="rules-http-header-name"></a>&#x2022; [`http_header_name`](#rules-http-header-name) - Optional String<br>HTTP Header Name. Use the HTTP header value for the given name as user identifier
+<a id="rules-http-header-name"></a>&#x2022; [`http\_header\_name`](#rules-http-header-name) - Optional String<br>HTTP Header Name. Use the HTTP header value for the given name as user identifier
 
-<a id="rules-ip-and-http-header-name"></a>&#x2022; [`ip_and_http_header_name`](#rules-ip-and-http-header-name) - Optional String<br>HTTP Header Name. Name of HTTP header from which the value should be extracted
+<a id="rules-ip-and-http-header-name"></a>&#x2022; [`ip\_and_http_header\_name`](#rules-ip-and-http-header-name) - Optional String<br>HTTP Header Name. Name of HTTP header from which the value should be extracted
 
-<a id="rules-ip-and-ja4-tls-fingerprint"></a>&#x2022; [`ip_and_ja4_tls_fingerprint`](#rules-ip-and-ja4-tls-fingerprint) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rules-ip-and-ja4-tls-fingerprint"></a>&#x2022; [`ip\_and_ja4_tls\_fingerprint`](#rules-ip-and-ja4-tls-fingerprint) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="rules-ip-and-tls-fingerprint"></a>&#x2022; [`ip_and_tls_fingerprint`](#rules-ip-and-tls-fingerprint) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rules-ip-and-tls-fingerprint"></a>&#x2022; [`ip\_and_tls\_fingerprint`](#rules-ip-and-tls-fingerprint) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="rules-ja4-tls-fingerprint"></a>&#x2022; [`ja4_tls_fingerprint`](#rules-ja4-tls-fingerprint) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rules-ja4-tls-fingerprint"></a>&#x2022; [`ja4\_tls\_fingerprint`](#rules-ja4-tls-fingerprint) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="rules-jwt-claim-name"></a>&#x2022; [`jwt_claim_name`](#rules-jwt-claim-name) - Optional String<br>JWT Claim Name. Use the JWT claim value as user identifier
+<a id="rules-jwt-claim-name"></a>&#x2022; [`jwt\_claim\_name`](#rules-jwt-claim-name) - Optional String<br>JWT Claim Name. Use the JWT claim value as user identifier
 
 <a id="rules-none"></a>&#x2022; [`none`](#rules-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="rules-query-param-key"></a>&#x2022; [`query_param_key`](#rules-query-param-key) - Optional String<br>Query Parameter Key. Use the query parameter value for the given key as user identifier
+<a id="rules-query-param-key"></a>&#x2022; [`query\_param\_key`](#rules-query-param-key) - Optional String<br>Query Parameter Key. Use the query parameter value for the given key as user identifier
 
 <a id="rules-tls-fingerprint"></a>&#x2022; [`tls_fingerprint`](#rules-tls-fingerprint) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -122,5 +122,5 @@ Import is supported using the following syntax:
 
 ```shell
 # Import using namespace/name format
-terraform import f5xc_user_identification.example system/example
+terraform import f5xc\_user\_identification.example system/example
 ```

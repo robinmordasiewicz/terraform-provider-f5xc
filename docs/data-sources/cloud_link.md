@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_cloud_link Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_cloud\_link Data Source - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
   Manages new CloudLink with configured parameters in F5 Distributed Cloud.
 ---
 
-# f5xc_cloud_link (Data Source)
+# f5xc\_cloud\_link (Data Source)
 
 Manages new CloudLink with configured parameters in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages new CloudLink with configured parameters in F5 Distributed Cloud.
 # Retrieves information about an existing Cloud Link
 
 # Look up an existing Cloud Link by name
-data "f5xc_cloud_link" "example" {
+data "f5xc\_cloud\_link" "example" {
   name      = "example-cloud-link"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "cloud_link_id" {
-#   value = data.f5xc_cloud_link.example.id
+# output "cloud\_link\_id" {
+#   value = data.f5xc\_cloud\_link.example.id
 # }
 ```
 

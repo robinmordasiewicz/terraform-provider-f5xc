@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_protocol_policer Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_protocol\_policer Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
   Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits in F5 Distributed Cloud.
 ---
 
-# f5xc_protocol_policer (Data Source)
+# f5xc\_protocol\_policer (Data Source)
 
 Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages protocol_policer object, protocol_policer object contains list of L4 pro
 # Retrieves information about an existing Protocol Policer
 
 # Look up an existing Protocol Policer by name
-data "f5xc_protocol_policer" "example" {
+data "f5xc\_protocol\_policer" "example" {
   name      = "example-protocol-policer"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "protocol_policer_id" {
-#   value = data.f5xc_protocol_policer.example.id
+# output "protocol\_policer\_id" {
+#   value = data.f5xc\_protocol\_policer.example.id
 # }
 ```
 

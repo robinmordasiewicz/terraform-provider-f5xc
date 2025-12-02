@@ -1,13 +1,13 @@
 ---
-page_title: "f5xc_sensitive_data_policy Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_sensitive_data\_policy Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages sensitive_data_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  Manages sensitive\_data\_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
-# f5xc_sensitive_data_policy (Data Source)
+# f5xc\_sensitive_data\_policy (Data Source)
 
-Manages sensitive_data_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+Manages sensitive\_data\_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Sensitive Data Policy API docs](https://docs.cloud.f5.com/docs-v2/api/sensitive-data-policy) to learn more.
 
@@ -18,14 +18,14 @@ Manages sensitive_data_policy creates a new object in the storage backend for me
 # Retrieves information about an existing Sensitive Data Policy
 
 # Look up an existing Sensitive Data Policy by name
-data "f5xc_sensitive_data_policy" "example" {
+data "f5xc\_sensitive_data\_policy" "example" {
   name      = "example-sensitive-data-policy"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "sensitive_data_policy_id" {
-#   value = data.f5xc_sensitive_data_policy.example.id
+# output "sensitive\_data_policy\_id" {
+#   value = data.f5xc\_sensitive_data\_policy.example.id
 # }
 ```
 

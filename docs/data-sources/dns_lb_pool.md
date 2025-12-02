@@ -1,11 +1,11 @@
 ---
-page_title: "f5xc_dns_lb_pool Data Source - terraform-provider-f5xc"
+page_title: "f5xc\_dns_lb\_pool Data Source - terraform-provider-f5xc"
 subcategory: "DNS"
 description: |-
   Manages DNS Load Balancer Pool in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 ---
 
-# f5xc_dns_lb_pool (Data Source)
+# f5xc\_dns_lb\_pool (Data Source)
 
 Manages DNS Load Balancer Pool in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
@@ -18,14 +18,14 @@ Manages DNS Load Balancer Pool in a given namespace. If one already exist it wil
 # Retrieves information about an existing DNS LB Pool
 
 # Look up an existing DNS LB Pool by name
-data "f5xc_dns_lb_pool" "example" {
+data "f5xc\_dns_lb\_pool" "example" {
   name      = "example-dns-lb-pool"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "dns_lb_pool_id" {
-#   value = data.f5xc_dns_lb_pool.example.id
+# output "dns\_lb_pool\_id" {
+#   value = data.f5xc\_dns_lb\_pool.example.id
 # }
 ```
 

@@ -1,5 +1,5 @@
 # Enhanced Firewall Policy Resource Example
-# Manages a EnhancedFirewallPolicy resource in F5 Distributed Cloud for enhanced firewall policy configuration.
+# Manages a Enhanced Firewall Policy resource in F5 Distributed Cloud for enhanced firewall policy configuration.
 
 # Basic Enhanced Firewall Policy configuration
 resource "f5xc_enhanced_firewall_policy" "example" {

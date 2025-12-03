@@ -2,12 +2,12 @@
 page_title: "f5xc_tenant_configuration Resource - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
-  Manages a TenantConfiguration resource in F5 Distributed Cloud for tenant configuration configuration.
+  Manages a Tenant Configuration resource in F5 Distributed Cloud for tenant configuration configuration.
 ---
 
 # f5xc_tenant_configuration (Resource)
 
-Manages a TenantConfiguration resource in F5 Distributed Cloud for tenant configuration configuration.
+Manages a Tenant Configuration resource in F5 Distributed Cloud for tenant configuration configuration.
 
 ~> **Note** Please refer to [Tenant Configuration API docs](https://docs.cloud.f5.com/docs-v2/api/views-tenant-configuration) to learn more.
 
@@ -15,7 +15,7 @@ Manages a TenantConfiguration resource in F5 Distributed Cloud for tenant config
 
 ```terraform
 # Tenant Configuration Resource Example
-# Manages a TenantConfiguration resource in F5 Distributed Cloud for tenant configuration configuration.
+# Manages a Tenant Configuration resource in F5 Distributed Cloud for tenant configuration configuration.
 
 # Basic Tenant Configuration configuration
 resource "f5xc_tenant_configuration" "example" {
@@ -52,9 +52,9 @@ resource "f5xc_tenant_configuration" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the TenantConfiguration. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Tenant Configuration. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the TenantConfiguration will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Tenant Configuration will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

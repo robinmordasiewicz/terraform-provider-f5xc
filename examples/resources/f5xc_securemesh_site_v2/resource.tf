@@ -1,5 +1,5 @@
 # Securemesh Site V2 Resource Example
-# Manages a SecuremeshSiteV2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.
+# Manages a Securemesh Site V2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.
 
 # Basic Securemesh Site V2 configuration
 resource "f5xc_securemesh_site_v2" "example" {

@@ -2,12 +2,12 @@
 page_title: "f5xc_api_crawler Resource - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
-  Manages a APICrawler resource in F5 Distributed Cloud.
+  Manages a API Crawler resource in F5 Distributed Cloud.
 ---
 
 # f5xc_api_crawler (Resource)
 
-Manages a APICrawler resource in F5 Distributed Cloud.
+Manages a API Crawler resource in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [API Crawler API docs](https://docs.cloud.f5.com/docs-v2/api/api-sec-api-crawler) to learn more.
 
@@ -15,7 +15,7 @@ Manages a APICrawler resource in F5 Distributed Cloud.
 
 ```terraform
 # API Crawler Resource Example
-# Manages a APICrawler resource in F5 Distributed Cloud.
+# Manages a API Crawler resource in F5 Distributed Cloud.
 
 # Basic API Crawler configuration
 resource "f5xc_api_crawler" "example" {
@@ -52,9 +52,9 @@ resource "f5xc_api_crawler" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the APICrawler. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the API Crawler. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the APICrawler will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the API Crawler will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

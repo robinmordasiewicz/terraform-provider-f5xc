@@ -2,12 +2,12 @@
 page_title: "f5xc_tpm_api_key Resource - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
-  Manages a TpmAPIKey resource in F5 Distributed Cloud for apikey object when successfully created returns actual apikey bytes which is used by the users to call in to tpm provisioning api. configuration.
+  Manages a Tpm API Key resource in F5 Distributed Cloud for apikey object when successfully created returns actual apikey bytes which is used by the users to call in to tpm provisioning api. configuration.
 ---
 
 # f5xc_tpm_api_key (Resource)
 
-Manages a TpmAPIKey resource in F5 Distributed Cloud for apikey object when successfully created returns actual apikey bytes which is used by the users to call in to tpm provisioning api. configuration.
+Manages a Tpm API Key resource in F5 Distributed Cloud for apikey object when successfully created returns actual apikey bytes which is used by the users to call in to tpm provisioning api. configuration.
 
 ~> **Note** Please refer to [Tpm API Key API docs](https://docs.cloud.f5.com/docs-v2/api/tpm-api-key) to learn more.
 
@@ -15,7 +15,7 @@ Manages a TpmAPIKey resource in F5 Distributed Cloud for apikey object when succ
 
 ```terraform
 # Tpm API Key Resource Example
-# Manages a TpmAPIKey resource in F5 Distributed Cloud for apikey object when successfully created returns actual apikey bytes which is used by the users to call in to tpm provisioning api. configuration.
+# Manages a Tpm API Key resource in F5 Distributed Cloud for apikey object when successfully created returns actual apikey bytes which is used by the users to call in to tpm provisioning api. configuration.
 
 # Basic Tpm API Key configuration
 resource "f5xc_tpm_api_key" "example" {
@@ -44,9 +44,9 @@ resource "f5xc_tpm_api_key" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the TpmAPIKey. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Tpm API Key. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the TpmAPIKey will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Tpm API Key will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

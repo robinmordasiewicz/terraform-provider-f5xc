@@ -2,12 +2,12 @@
 page_title: "f5xc_advertise_policy Resource - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  Manages a AdvertisePolicy resource in F5 Distributed Cloud for advertise_policy object controls how and where a service represented by a given virtual_host object is advertised to consumers. configuration.
+  Manages a Advertise Policy resource in F5 Distributed Cloud for advertise_policy object controls how and where a service represented by a given virtual_host object is advertised to consumers. configuration.
 ---
 
 # f5xc_advertise_policy (Resource)
 
-Manages a AdvertisePolicy resource in F5 Distributed Cloud for advertise_policy object controls how and where a service represented by a given virtual_host object is advertised to consumers. configuration.
+Manages a Advertise Policy resource in F5 Distributed Cloud for advertise_policy object controls how and where a service represented by a given virtual_host object is advertised to consumers. configuration.
 
 ~> **Note** Please refer to [Advertise Policy API docs](https://docs.cloud.f5.com/docs-v2/api/advertise-policy) to learn more.
 
@@ -15,7 +15,7 @@ Manages a AdvertisePolicy resource in F5 Distributed Cloud for advertise_policy 
 
 ```terraform
 # Advertise Policy Resource Example
-# Manages a AdvertisePolicy resource in F5 Distributed Cloud for advertise_policy object controls how and where a service represented by a given virtual_host object is advertised to consumers. configuration.
+# Manages a Advertise Policy resource in F5 Distributed Cloud for advertise_policy object controls how and where a service represented by a given virtual_host object is advertised to consumers. configuration.
 
 # Basic Advertise Policy configuration
 resource "f5xc_advertise_policy" "example" {
@@ -52,9 +52,9 @@ resource "f5xc_advertise_policy" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the AdvertisePolicy. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Advertise Policy. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the AdvertisePolicy will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Advertise Policy will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

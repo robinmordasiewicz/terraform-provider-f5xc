@@ -52,9 +52,9 @@ resource "f5xc_fast_acl" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the FastACL. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Fast ACL. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the FastACL will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Fast ACL will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

@@ -1,5 +1,5 @@
 # Certificate Chain Resource Example
-# Manages a CertificateChain resource in F5 Distributed Cloud for certificate chain configuration for TLS.
+# Manages a Certificate Chain resource in F5 Distributed Cloud for certificate chain configuration for TLS.
 
 # Basic Certificate Chain configuration
 resource "f5xc_certificate_chain" "example" {

@@ -2,12 +2,12 @@
 page_title: "f5xc_rate_limiter_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages a RateLimiterPolicy resource in F5 Distributed Cloud for rate limiter policy create configuration.
+  Manages a Rate Limiter Policy resource in F5 Distributed Cloud for rate limiter policy create configuration.
 ---
 
 # f5xc_rate_limiter_policy (Resource)
 
-Manages a RateLimiterPolicy resource in F5 Distributed Cloud for rate limiter policy create configuration.
+Manages a Rate Limiter Policy resource in F5 Distributed Cloud for rate limiter policy create configuration.
 
 ~> **Note** Please refer to [Rate Limiter Policy API docs](https://docs.cloud.f5.com/docs-v2/api/views-rate-limiter-policy) to learn more.
 
@@ -15,7 +15,7 @@ Manages a RateLimiterPolicy resource in F5 Distributed Cloud for rate limiter po
 
 ```terraform
 # Rate Limiter Policy Resource Example
-# Manages a RateLimiterPolicy resource in F5 Distributed Cloud for rate limiter policy create configuration.
+# Manages a Rate Limiter Policy resource in F5 Distributed Cloud for rate limiter policy create configuration.
 
 # Basic Rate Limiter Policy configuration
 resource "f5xc_rate_limiter_policy" "example" {
@@ -48,9 +48,9 @@ resource "f5xc_rate_limiter_policy" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the RateLimiterPolicy. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Rate Limiter Policy. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the RateLimiterPolicy will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Rate Limiter Policy will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

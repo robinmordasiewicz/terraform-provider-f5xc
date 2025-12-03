@@ -2,12 +2,12 @@
 page_title: "f5xc_network_interface Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages a NetworkInterface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.
+  Manages a Network Interface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.
 ---
 
 # f5xc_network_interface (Resource)
 
-Manages a NetworkInterface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.
+Manages a Network Interface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.
 
 ~> **Note** Please refer to [Network Interface API docs](https://docs.cloud.f5.com/docs-v2/api/network-interface) to learn more.
 
@@ -15,7 +15,7 @@ Manages a NetworkInterface resource in F5 Distributed Cloud for network interfac
 
 ```terraform
 # Network Interface Resource Example
-# Manages a NetworkInterface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.
+# Manages a Network Interface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.
 
 # Basic Network Interface configuration
 resource "f5xc_network_interface" "example" {
@@ -52,9 +52,9 @@ resource "f5xc_network_interface" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the NetworkInterface. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Network Interface. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the NetworkInterface will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Network Interface will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

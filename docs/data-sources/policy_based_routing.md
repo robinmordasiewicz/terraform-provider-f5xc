@@ -2,12 +2,12 @@
 page_title: "f5xc_policy_based_routing Data Source - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages a PolicyBasedRouting resource in F5 Distributed Cloud for network policy based routing create configuration.
+  Manages a Policy Based Routing resource in F5 Distributed Cloud for network policy based routing create configuration.
 ---
 
 # f5xc_policy_based_routing (Data Source)
 
-Manages a PolicyBasedRouting resource in F5 Distributed Cloud for network policy based routing create configuration.
+Manages a Policy Based Routing resource in F5 Distributed Cloud for network policy based routing create configuration.
 
 ~> **Note** Please refer to [Policy Based Routing API docs](https://docs.cloud.f5.com/docs-v2/api/views-policy-based-routing) to learn more.
 

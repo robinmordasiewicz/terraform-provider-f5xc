@@ -1,5 +1,5 @@
 # External Connector Resource Example
-# Manages a ExternalConnector resource in F5 Distributed Cloud for external_connector configuration configuration.
+# Manages a External Connector resource in F5 Distributed Cloud for external_connector configuration configuration.
 
 # Basic External Connector configuration
 resource "f5xc_external_connector" "example" {

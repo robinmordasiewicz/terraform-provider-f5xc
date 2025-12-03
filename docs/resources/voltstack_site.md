@@ -2,12 +2,12 @@
 page_title: "f5xc_voltstack_site Resource - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
-  Manages a VoltstackSite resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
+  Manages a Voltstack Site resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
 ---
 
 # f5xc_voltstack_site (Resource)
 
-Manages a VoltstackSite resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
+Manages a Voltstack Site resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
 
 ~> **Note** Please refer to [Voltstack Site API docs](https://docs.cloud.f5.com/docs-v2/api/views-voltstack-site) to learn more.
 
@@ -15,7 +15,7 @@ Manages a VoltstackSite resource in F5 Distributed Cloud for deploying Volterra 
 
 ```terraform
 # Voltstack Site Resource Example
-# Manages a VoltstackSite resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
+# Manages a Voltstack Site resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
 
 # Basic Voltstack Site configuration
 resource "f5xc_voltstack_site" "example" {
@@ -62,9 +62,9 @@ resource "f5xc_voltstack_site" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the VoltstackSite. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Voltstack Site. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the VoltstackSite will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Voltstack Site will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

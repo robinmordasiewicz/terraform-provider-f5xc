@@ -2,12 +2,12 @@
 page_title: "f5xc_securemesh_site_v2 Resource - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
-  Manages a SecuremeshSiteV2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.
+  Manages a Securemesh Site V2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.
 ---
 
 # f5xc_securemesh_site_v2 (Resource)
 
-Manages a SecuremeshSiteV2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.
+Manages a Securemesh Site V2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.
 
 ~> **Note** Please refer to [Securemesh Site V2 API docs](https://docs.cloud.f5.com/docs-v2/api/views-securemesh-site-v2) to learn more.
 
@@ -15,7 +15,7 @@ Manages a SecuremeshSiteV2 resource in F5 Distributed Cloud for deploying secure
 
 ```terraform
 # Securemesh Site V2 Resource Example
-# Manages a SecuremeshSiteV2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.
+# Manages a Securemesh Site V2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.
 
 # Basic Securemesh Site V2 configuration
 resource "f5xc_securemesh_site_v2" "example" {
@@ -52,9 +52,9 @@ resource "f5xc_securemesh_site_v2" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the SecuremeshSiteV2. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Securemesh Site V2. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the SecuremeshSiteV2 will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Securemesh Site V2 will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

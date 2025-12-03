@@ -2,12 +2,12 @@
 page_title: "f5xc_usb_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages a UsbPolicy resource in F5 Distributed Cloud for creates a new usb policy configuration.
+  Manages a Usb Policy resource in F5 Distributed Cloud for creates a new usb policy configuration.
 ---
 
 # f5xc_usb_policy (Resource)
 
-Manages a UsbPolicy resource in F5 Distributed Cloud for creates a new usb policy configuration.
+Manages a Usb Policy resource in F5 Distributed Cloud for creates a new usb policy configuration.
 
 ~> **Note** Please refer to [Usb Policy API docs](https://docs.cloud.f5.com/docs-v2/api/usb-policy) to learn more.
 
@@ -15,7 +15,7 @@ Manages a UsbPolicy resource in F5 Distributed Cloud for creates a new usb polic
 
 ```terraform
 # Usb Policy Resource Example
-# Manages a UsbPolicy resource in F5 Distributed Cloud for creates a new usb policy configuration.
+# Manages a Usb Policy resource in F5 Distributed Cloud for creates a new usb policy configuration.
 
 # Basic Usb Policy configuration
 resource "f5xc_usb_policy" "example" {
@@ -44,9 +44,9 @@ resource "f5xc_usb_policy" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the UsbPolicy. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Usb Policy. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the UsbPolicy will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Usb Policy will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

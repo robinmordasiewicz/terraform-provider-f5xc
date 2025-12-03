@@ -48,7 +48,7 @@ resource "f5xc_managed_tenant" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the ManagedTenant. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Managed Tenant. Must be unique within the namespace
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
@@ -58,7 +58,7 @@ resource "f5xc_managed_tenant" "example" {
 
 <a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace for the ManagedTenant. For this resource type, namespace should be empty or omitted
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace for the Managed Tenant. For this resource type, namespace should be empty or omitted
 
 ### Spec Argument Reference
 

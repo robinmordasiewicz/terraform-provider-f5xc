@@ -2,12 +2,12 @@
 page_title: "f5xc_certificate_chain Resource - terraform-provider-f5xc"
 subcategory: "Certificates"
 description: |-
-  Manages a CertificateChain resource in F5 Distributed Cloud for certificate chain configuration for TLS.
+  Manages a Certificate Chain resource in F5 Distributed Cloud for certificate chain configuration for TLS.
 ---
 
 # f5xc_certificate_chain (Resource)
 
-Manages a CertificateChain resource in F5 Distributed Cloud for certificate chain configuration for TLS.
+Manages a Certificate Chain resource in F5 Distributed Cloud for certificate chain configuration for TLS.
 
 ~> **Note** Please refer to [Certificate Chain API docs](https://docs.cloud.f5.com/docs-v2/api/certificate-chain) to learn more.
 
@@ -15,7 +15,7 @@ Manages a CertificateChain resource in F5 Distributed Cloud for certificate chai
 
 ```terraform
 # Certificate Chain Resource Example
-# Manages a CertificateChain resource in F5 Distributed Cloud for certificate chain configuration for TLS.
+# Manages a Certificate Chain resource in F5 Distributed Cloud for certificate chain configuration for TLS.
 
 # Basic Certificate Chain configuration
 resource "f5xc_certificate_chain" "example" {
@@ -38,9 +38,9 @@ resource "f5xc_certificate_chain" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the CertificateChain. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Certificate Chain. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the CertificateChain will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Certificate Chain will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

@@ -2,12 +2,12 @@
 page_title: "f5xc_alert_policy Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages a AlertPolicy resource in F5 Distributed Cloud for alerting rules and notification policies.
+  Manages a Alert Policy resource in F5 Distributed Cloud for alerting rules and notification policies.
 ---
 
 # f5xc_alert_policy (Data Source)
 
-Manages a AlertPolicy resource in F5 Distributed Cloud for alerting rules and notification policies.
+Manages a Alert Policy resource in F5 Distributed Cloud for alerting rules and notification policies.
 
 ~> **Note** Please refer to [Alert Policy API docs](https://docs.cloud.f5.com/docs-v2/api/alert-policy) to learn more.
 

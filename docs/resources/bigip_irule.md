@@ -2,12 +2,12 @@
 page_title: "f5xc_bigip_irule Resource - terraform-provider-f5xc"
 subcategory: "BIG-IP Integration"
 description: |-
-  Manages a BigIPIrule resource in F5 Distributed Cloud for desired state for big-ip irule service configuration.
+  Manages a BIG-IP Irule resource in F5 Distributed Cloud for desired state for big-ip irule service configuration.
 ---
 
 # f5xc_bigip_irule (Resource)
 
-Manages a BigIPIrule resource in F5 Distributed Cloud for desired state for big-ip irule service configuration.
+Manages a BIG-IP Irule resource in F5 Distributed Cloud for desired state for big-ip irule service configuration.
 
 ~> **Note** Please refer to [Bigip Irule API docs](https://docs.cloud.f5.com/docs-v2/api/bigip-irule) to learn more.
 
@@ -15,7 +15,7 @@ Manages a BigIPIrule resource in F5 Distributed Cloud for desired state for big-
 
 ```terraform
 # Bigip Irule Resource Example
-# Manages a BigIPIrule resource in F5 Distributed Cloud for desired state for big-ip irule service configuration.
+# Manages a BIG-IP Irule resource in F5 Distributed Cloud for desired state for big-ip irule service configuration.
 
 # Basic Bigip Irule configuration
 resource "f5xc_bigip_irule" "example" {
@@ -38,9 +38,9 @@ resource "f5xc_bigip_irule" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the BigIPIrule. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the BIG-IP Irule. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the BigIPIrule will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the BIG-IP Irule will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

@@ -1,5 +1,5 @@
 # API Testing Resource Example
-# Manages a APITesting resource in F5 Distributed Cloud.
+# Manages a API Testing resource in F5 Distributed Cloud.
 
 # Basic API Testing configuration
 resource "f5xc_api_testing" "example" {

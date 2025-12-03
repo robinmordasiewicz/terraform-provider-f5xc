@@ -44,9 +44,9 @@ resource "f5xc_dns_domain" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Domain name for the DNSDomain (e.g., example.com). Must be a valid DNS domain name
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Domain name for the DNS Domain (e.g., example.com). Must be a valid DNS domain name
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the DNSDomain will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the DNS Domain will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

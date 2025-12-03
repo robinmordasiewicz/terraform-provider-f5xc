@@ -2,12 +2,12 @@
 page_title: "f5xc_tpm_manager Resource - terraform-provider-f5xc"
 subcategory: "Integrations"
 description: |-
-  Manages a TpmManager resource in F5 Distributed Cloud for create a tpm manager configuration.
+  Manages a Tpm Manager resource in F5 Distributed Cloud for create a tpm manager configuration.
 ---
 
 # f5xc_tpm_manager (Resource)
 
-Manages a TpmManager resource in F5 Distributed Cloud for create a tpm manager configuration.
+Manages a Tpm Manager resource in F5 Distributed Cloud for create a tpm manager configuration.
 
 ~> **Note** Please refer to [Tpm Manager API docs](https://docs.cloud.f5.com/docs-v2/api/tpm-manager) to learn more.
 
@@ -15,7 +15,7 @@ Manages a TpmManager resource in F5 Distributed Cloud for create a tpm manager c
 
 ```terraform
 # Tpm Manager Resource Example
-# Manages a TpmManager resource in F5 Distributed Cloud for create a tpm manager configuration.
+# Manages a Tpm Manager resource in F5 Distributed Cloud for create a tpm manager configuration.
 
 # Basic Tpm Manager configuration
 resource "f5xc_tpm_manager" "example" {
@@ -38,9 +38,9 @@ resource "f5xc_tpm_manager" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the TpmManager. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Tpm Manager. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the TpmManager will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Tpm Manager will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

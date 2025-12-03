@@ -2,12 +2,12 @@
 page_title: "f5xc_origin_pool Resource - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  Manages a OriginPool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
+  Manages a Origin Pool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
 ---
 
 # f5xc_origin_pool (Resource)
 
-Manages a OriginPool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
+Manages a Origin Pool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
 
 ~> **Note** Please refer to [Origin Pool API docs](https://docs.cloud.f5.com/docs-v2/api/views-origin-pool) to learn more.
 
@@ -15,7 +15,7 @@ Manages a OriginPool resource in F5 Distributed Cloud for defining backend serve
 
 ```terraform
 # Origin Pool Resource Example
-# Manages a OriginPool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
+# Manages a Origin Pool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
 
 # Basic Origin Pool configuration
 resource "f5xc_origin_pool" "example" {
@@ -107,9 +107,9 @@ resource "f5xc_origin_pool" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the OriginPool. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Origin Pool. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the OriginPool will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Origin Pool will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

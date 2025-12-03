@@ -2,12 +2,12 @@
 page_title: "f5xc_cloud_credentials Resource - terraform-provider-f5xc"
 subcategory: "Authentication"
 description: |-
-  Manages a CloudCredentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.
+  Manages a Cloud Credentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.
 ---
 
 # f5xc_cloud_credentials (Resource)
 
-Manages a CloudCredentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.
+Manages a Cloud Credentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.
 
 ~> **Note** Please refer to [Cloud Credentials API docs](https://docs.cloud.f5.com/docs-v2/api/cloud-credentials) to learn more.
 
@@ -15,7 +15,7 @@ Manages a CloudCredentials resource in F5 Distributed Cloud for cloud provider c
 
 ```terraform
 # Cloud Credentials Resource Example
-# Manages a CloudCredentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.
+# Manages a Cloud Credentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.
 
 # Basic Cloud Credentials configuration
 resource "f5xc_cloud_credentials" "example" {
@@ -49,9 +49,9 @@ resource "f5xc_cloud_credentials" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the CloudCredentials. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Cloud Credentials. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the CloudCredentials will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Cloud Credentials will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

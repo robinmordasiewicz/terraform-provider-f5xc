@@ -1,5 +1,5 @@
 # Securemesh Site Resource Example
-# Manages a SecuremeshSite resource in F5 Distributed Cloud for deploying secure mesh edge sites with distributed security capabilities.
+# Manages a Securemesh Site resource in F5 Distributed Cloud for deploying secure mesh edge sites with distributed security capabilities.
 
 # Basic Securemesh Site configuration
 resource "f5xc_securemesh_site" "example" {

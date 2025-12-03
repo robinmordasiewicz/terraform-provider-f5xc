@@ -1,5 +1,5 @@
 # Forward Proxy Policy Resource Example
-# Manages a ForwardProxyPolicy resource in F5 Distributed Cloud for forward proxy policy configuration.
+# Manages a Forward Proxy Policy resource in F5 Distributed Cloud for forward proxy policy configuration.
 
 # Basic Forward Proxy Policy configuration
 resource "f5xc_forward_proxy_policy" "example" {

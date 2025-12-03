@@ -2,12 +2,12 @@
 page_title: "f5xc_api_testing Resource - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
-  Manages a APITesting resource in F5 Distributed Cloud.
+  Manages a API Testing resource in F5 Distributed Cloud.
 ---
 
 # f5xc_api_testing (Resource)
 
-Manages a APITesting resource in F5 Distributed Cloud.
+Manages a API Testing resource in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [API Testing API docs](https://docs.cloud.f5.com/docs-v2/api/api-sec-api-testing) to learn more.
 
@@ -15,7 +15,7 @@ Manages a APITesting resource in F5 Distributed Cloud.
 
 ```terraform
 # API Testing Resource Example
-# Manages a APITesting resource in F5 Distributed Cloud.
+# Manages a API Testing resource in F5 Distributed Cloud.
 
 # Basic API Testing configuration
 resource "f5xc_api_testing" "example" {
@@ -52,9 +52,9 @@ resource "f5xc_api_testing" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the APITesting. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the API Testing. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the APITesting will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the API Testing will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

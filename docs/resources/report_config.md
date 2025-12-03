@@ -2,12 +2,12 @@
 page_title: "f5xc_report_config Resource - terraform-provider-f5xc"
 subcategory: "Monitoring"
 description: |-
-  Manages a ReportConfig resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.
+  Manages a Report Config resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.
 ---
 
 # f5xc_report_config (Resource)
 
-Manages a ReportConfig resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.
+Manages a Report Config resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.
 
 ~> **Note** Please refer to [Report Config API docs](https://docs.cloud.f5.com/docs-v2/api/report-config) to learn more.
 
@@ -15,7 +15,7 @@ Manages a ReportConfig resource in F5 Distributed Cloud for report configuration
 
 ```terraform
 # Report Config Resource Example
-# Manages a ReportConfig resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.
+# Manages a Report Config resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.
 
 # Basic Report Config configuration
 resource "f5xc_report_config" "example" {
@@ -52,9 +52,9 @@ resource "f5xc_report_config" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the ReportConfig. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Report Config. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the ReportConfig will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Report Config will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

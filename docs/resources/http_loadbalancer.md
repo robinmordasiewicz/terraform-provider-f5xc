@@ -2,12 +2,12 @@
 page_title: "f5xc_http_loadbalancer Resource - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  Manages a HTTPLoadBalancer resource in F5 Distributed Cloud for load balancing HTTP/HTTPS traffic with advanced routing and security.
+  Manages a HTTP Load Balancer resource in F5 Distributed Cloud for load balancing HTTP/HTTPS traffic with advanced routing and security.
 ---
 
 # f5xc_http_loadbalancer (Resource)
 
-Manages a HTTPLoadBalancer resource in F5 Distributed Cloud for load balancing HTTP/HTTPS traffic with advanced routing and security.
+Manages a HTTP Load Balancer resource in F5 Distributed Cloud for load balancing HTTP/HTTPS traffic with advanced routing and security.
 
 ~> **Note** Please refer to [HTTP Loadbalancer API docs](https://docs.cloud.f5.com/docs-v2/api/views-http-loadbalancer) to learn more.
 
@@ -15,7 +15,7 @@ Manages a HTTPLoadBalancer resource in F5 Distributed Cloud for load balancing H
 
 ```terraform
 # HTTP Loadbalancer Resource Example
-# Manages a HTTPLoadBalancer resource in F5 Distributed Cloud for load balancing HTTP/HTTPS traffic with advanced routing and security.
+# Manages a HTTP Load Balancer resource in F5 Distributed Cloud for load balancing HTTP/HTTPS traffic with advanced routing and security.
 
 # Basic HTTP Loadbalancer configuration
 resource "f5xc_http_loadbalancer" "example" {
@@ -182,9 +182,9 @@ resource "f5xc_http_loadbalancer" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the HTTPLoadBalancer. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the HTTP Load Balancer. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the HTTPLoadBalancer will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the HTTP Load Balancer will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

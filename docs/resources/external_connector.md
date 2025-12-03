@@ -2,12 +2,12 @@
 page_title: "f5xc_external_connector Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages a ExternalConnector resource in F5 Distributed Cloud for external_connector configuration configuration.
+  Manages a External Connector resource in F5 Distributed Cloud for external_connector configuration configuration.
 ---
 
 # f5xc_external_connector (Resource)
 
-Manages a ExternalConnector resource in F5 Distributed Cloud for external_connector configuration configuration.
+Manages a External Connector resource in F5 Distributed Cloud for external_connector configuration configuration.
 
 ~> **Note** Please refer to [External Connector API docs](https://docs.cloud.f5.com/docs-v2/api/views-external-connector) to learn more.
 
@@ -15,7 +15,7 @@ Manages a ExternalConnector resource in F5 Distributed Cloud for external_connec
 
 ```terraform
 # External Connector Resource Example
-# Manages a ExternalConnector resource in F5 Distributed Cloud for external_connector configuration configuration.
+# Manages a External Connector resource in F5 Distributed Cloud for external_connector configuration configuration.
 
 # Basic External Connector configuration
 resource "f5xc_external_connector" "example" {
@@ -52,9 +52,9 @@ resource "f5xc_external_connector" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the ExternalConnector. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the External Connector. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the ExternalConnector will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the External Connector will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

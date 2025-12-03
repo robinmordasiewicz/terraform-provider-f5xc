@@ -2,12 +2,12 @@
 page_title: "f5xc_bgp_routing_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages a BGPRoutingPolicy resource in F5 Distributed Cloud for bgp routing policy is a list of rules containing match criteria and action to be applied. these rules help contol routes which are imported or exported to bgp peers configuration.
+  Manages a BGP Routing Policy resource in F5 Distributed Cloud for bgp routing policy is a list of rules containing match criteria and action to be applied. these rules help contol routes which are imported or exported to bgp peers configuration.
 ---
 
 # f5xc_bgp_routing_policy (Resource)
 
-Manages a BGPRoutingPolicy resource in F5 Distributed Cloud for bgp routing policy is a list of rules containing match criteria and action to be applied. these rules help contol routes which are imported or exported to bgp peers configuration.
+Manages a BGP Routing Policy resource in F5 Distributed Cloud for bgp routing policy is a list of rules containing match criteria and action to be applied. these rules help contol routes which are imported or exported to bgp peers configuration.
 
 ~> **Note** Please refer to [BGP Routing Policy API docs](https://docs.cloud.f5.com/docs-v2/api/bgp-routing-policy) to learn more.
 
@@ -15,7 +15,7 @@ Manages a BGPRoutingPolicy resource in F5 Distributed Cloud for bgp routing poli
 
 ```terraform
 # BGP Routing Policy Resource Example
-# Manages a BGPRoutingPolicy resource in F5 Distributed Cloud for bgp routing policy is a list of rules containing match criteria and action to be applied. these rules help contol routes which are imported or exported to bgp peers configuration.
+# Manages a BGP Routing Policy resource in F5 Distributed Cloud for bgp routing policy is a list of rules containing match criteria and action to be applied. these rules help contol routes which are imported or exported to bgp peers configuration.
 
 # Basic BGP Routing Policy configuration
 resource "f5xc_bgp_routing_policy" "example" {
@@ -52,9 +52,9 @@ resource "f5xc_bgp_routing_policy" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the BGPRoutingPolicy. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the BGP Routing Policy. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the BGPRoutingPolicy will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the BGP Routing Policy will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

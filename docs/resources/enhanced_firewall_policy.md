@@ -2,12 +2,12 @@
 page_title: "f5xc_enhanced_firewall_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages a EnhancedFirewallPolicy resource in F5 Distributed Cloud for enhanced firewall policy configuration.
+  Manages a Enhanced Firewall Policy resource in F5 Distributed Cloud for enhanced firewall policy configuration.
 ---
 
 # f5xc_enhanced_firewall_policy (Resource)
 
-Manages a EnhancedFirewallPolicy resource in F5 Distributed Cloud for enhanced firewall policy configuration.
+Manages a Enhanced Firewall Policy resource in F5 Distributed Cloud for enhanced firewall policy configuration.
 
 ~> **Note** Please refer to [Enhanced Firewall Policy API docs](https://docs.cloud.f5.com/docs-v2/api/enhanced-firewall-policy) to learn more.
 
@@ -15,7 +15,7 @@ Manages a EnhancedFirewallPolicy resource in F5 Distributed Cloud for enhanced f
 
 ```terraform
 # Enhanced Firewall Policy Resource Example
-# Manages a EnhancedFirewallPolicy resource in F5 Distributed Cloud for enhanced firewall policy configuration.
+# Manages a Enhanced Firewall Policy resource in F5 Distributed Cloud for enhanced firewall policy configuration.
 
 # Basic Enhanced Firewall Policy configuration
 resource "f5xc_enhanced_firewall_policy" "example" {
@@ -58,9 +58,9 @@ resource "f5xc_enhanced_firewall_policy" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the EnhancedFirewallPolicy. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Enhanced Firewall Policy. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the EnhancedFirewallPolicy will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Enhanced Firewall Policy will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

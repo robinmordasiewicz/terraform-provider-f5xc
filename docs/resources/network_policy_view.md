@@ -2,12 +2,12 @@
 page_title: "f5xc_network_policy_view Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages a NetworkPolicyView resource in F5 Distributed Cloud for network policy view configuration.
+  Manages a Network Policy View resource in F5 Distributed Cloud for network policy view configuration.
 ---
 
 # f5xc_network_policy_view (Resource)
 
-Manages a NetworkPolicyView resource in F5 Distributed Cloud for network policy view configuration.
+Manages a Network Policy View resource in F5 Distributed Cloud for network policy view configuration.
 
 ~> **Note** Please refer to [Network Policy View API docs](https://docs.cloud.f5.com/docs-v2/api/views-network-policy-view) to learn more.
 
@@ -15,7 +15,7 @@ Manages a NetworkPolicyView resource in F5 Distributed Cloud for network policy 
 
 ```terraform
 # Network Policy View Resource Example
-# Manages a NetworkPolicyView resource in F5 Distributed Cloud for network policy view configuration.
+# Manages a Network Policy View resource in F5 Distributed Cloud for network policy view configuration.
 
 # Basic Network Policy View configuration
 resource "f5xc_network_policy_view" "example" {
@@ -52,9 +52,9 @@ resource "f5xc_network_policy_view" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the NetworkPolicyView. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Network Policy View. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the NetworkPolicyView will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Network Policy View will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

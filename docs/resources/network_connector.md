@@ -2,12 +2,12 @@
 page_title: "f5xc_network_connector Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages a NetworkConnector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
+  Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
 ---
 
 # f5xc_network_connector (Resource)
 
-Manages a NetworkConnector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
+Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
 
 ~> **Note** Please refer to [Network Connector API docs](https://docs.cloud.f5.com/docs-v2/api/network-connector) to learn more.
 
@@ -15,7 +15,7 @@ Manages a NetworkConnector resource in F5 Distributed Cloud for network connecto
 
 ```terraform
 # Network Connector Resource Example
-# Manages a NetworkConnector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
+# Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
 
 # Basic Network Connector configuration
 resource "f5xc_network_connector" "example" {
@@ -50,9 +50,9 @@ resource "f5xc_network_connector" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the NetworkConnector. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Network Connector. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the NetworkConnector will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Network Connector will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

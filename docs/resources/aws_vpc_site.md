@@ -2,12 +2,12 @@
 page_title: "f5xc_aws_vpc_site Resource - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
-  Manages a AWSVPCSite resource in F5 Distributed Cloud for deploying F5 sites within AWS VPC environments.
+  Manages a AWS VPC Site resource in F5 Distributed Cloud for deploying F5 sites within AWS VPC environments.
 ---
 
 # f5xc_aws_vpc_site (Resource)
 
-Manages a AWSVPCSite resource in F5 Distributed Cloud for deploying F5 sites within AWS VPC environments.
+Manages a AWS VPC Site resource in F5 Distributed Cloud for deploying F5 sites within AWS VPC environments.
 
 ~> **Note** Please refer to [AWS VPC Site API docs](https://docs.cloud.f5.com/docs-v2/api/views-aws-vpc-site) to learn more.
 
@@ -15,7 +15,7 @@ Manages a AWSVPCSite resource in F5 Distributed Cloud for deploying F5 sites wit
 
 ```terraform
 # AWS VPC Site Resource Example
-# Manages a AWSVPCSite resource in F5 Distributed Cloud for deploying F5 sites within AWS VPC environments.
+# Manages a AWS VPC Site resource in F5 Distributed Cloud for deploying F5 sites within AWS VPC environments.
 
 # Basic AWS VPC Site configuration
 resource "f5xc_aws_vpc_site" "example" {
@@ -79,9 +79,9 @@ resource "f5xc_aws_vpc_site" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the AWSVPCSite. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the AWS VPC Site. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the AWSVPCSite will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the AWS VPC Site will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

@@ -2,12 +2,12 @@
 page_title: "f5xc_oidc_provider Resource - terraform-provider-f5xc"
 subcategory: "Authentication"
 description: |-
-  Manages a OIDCProvider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.
+  Manages a OIDC Provider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.
 ---
 
 # f5xc_oidc_provider (Resource)
 
-Manages a OIDCProvider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.
+Manages a OIDC Provider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.
 
 ~> **Note** Please refer to [OIDC Provider API docs](https://docs.cloud.f5.com/docs-v2/api/oidc-provider) to learn more.
 
@@ -15,7 +15,7 @@ Manages a OIDCProvider resource in F5 Distributed Cloud for customcreatespectype
 
 ```terraform
 # OIDC Provider Resource Example
-# Manages a OIDCProvider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.
+# Manages a OIDC Provider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.
 
 # Basic OIDC Provider configuration
 resource "f5xc_oidc_provider" "example" {
@@ -52,9 +52,9 @@ resource "f5xc_oidc_provider" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the OIDCProvider. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the OIDC Provider. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the OIDCProvider will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the OIDC Provider will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

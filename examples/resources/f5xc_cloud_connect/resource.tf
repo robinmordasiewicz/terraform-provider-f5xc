@@ -1,5 +1,5 @@
 # Cloud Connect Resource Example
-# Manages a CloudConnect resource in F5 Distributed Cloud for establishing connectivity to cloud provider networks.
+# Manages a Cloud Connect resource in F5 Distributed Cloud for establishing connectivity to cloud provider networks.
 
 # Basic Cloud Connect configuration
 resource "f5xc_cloud_connect" "example" {

@@ -2,12 +2,12 @@
 page_title: "f5xc_infraprotect_firewall_rule_group Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages a InfraprotectFirewallRuleGroup resource in F5 Distributed Cloud for amends a ddos transit firewall rule group configuration.
+  Manages a Infraprotect Firewall Rule Group resource in F5 Distributed Cloud for amends a ddos transit firewall rule group configuration.
 ---
 
 # f5xc_infraprotect_firewall_rule_group (Resource)
 
-Manages a InfraprotectFirewallRuleGroup resource in F5 Distributed Cloud for amends a ddos transit firewall rule group configuration.
+Manages a Infraprotect Firewall Rule Group resource in F5 Distributed Cloud for amends a ddos transit firewall rule group configuration.
 
 ~> **Note** Please refer to [Infraprotect Firewall Rule Group API docs](https://docs.cloud.f5.com/docs-v2/api/infraprotect-firewall-rule-group) to learn more.
 
@@ -15,7 +15,7 @@ Manages a InfraprotectFirewallRuleGroup resource in F5 Distributed Cloud for ame
 
 ```terraform
 # Infraprotect Firewall Rule Group Resource Example
-# Manages a InfraprotectFirewallRuleGroup resource in F5 Distributed Cloud for amends a ddos transit firewall rule group configuration.
+# Manages a Infraprotect Firewall Rule Group resource in F5 Distributed Cloud for amends a ddos transit firewall rule group configuration.
 
 # Basic Infraprotect Firewall Rule Group configuration
 resource "f5xc_infraprotect_firewall_rule_group" "example" {
@@ -38,9 +38,9 @@ resource "f5xc_infraprotect_firewall_rule_group" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the InfraprotectFirewallRuleGroup. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Infraprotect Firewall Rule Group. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the InfraprotectFirewallRuleGroup will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Infraprotect Firewall Rule Group will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

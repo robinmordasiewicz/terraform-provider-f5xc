@@ -1,5 +1,5 @@
 # NAT Policy Resource Example
-# Manages a NATPolicy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
+# Manages a NAT Policy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
 
 # Basic NAT Policy configuration
 resource "f5xc_nat_policy" "example" {

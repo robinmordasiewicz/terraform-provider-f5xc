@@ -2,12 +2,12 @@
 page_title: "f5xc_forwarding_class Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages a ForwardingClass resource in F5 Distributed Cloud for forwarding class is created by users in system namespace configuration.
+  Manages a Forwarding Class resource in F5 Distributed Cloud for forwarding class is created by users in system namespace configuration.
 ---
 
 # f5xc_forwarding_class (Resource)
 
-Manages a ForwardingClass resource in F5 Distributed Cloud for forwarding class is created by users in system namespace configuration.
+Manages a Forwarding Class resource in F5 Distributed Cloud for forwarding class is created by users in system namespace configuration.
 
 ~> **Note** Please refer to [Forwarding Class API docs](https://docs.cloud.f5.com/docs-v2/api/forwarding-class) to learn more.
 
@@ -15,7 +15,7 @@ Manages a ForwardingClass resource in F5 Distributed Cloud for forwarding class 
 
 ```terraform
 # Forwarding Class Resource Example
-# Manages a ForwardingClass resource in F5 Distributed Cloud for forwarding class is created by users in system namespace configuration.
+# Manages a Forwarding Class resource in F5 Distributed Cloud for forwarding class is created by users in system namespace configuration.
 
 # Basic Forwarding Class configuration
 resource "f5xc_forwarding_class" "example" {
@@ -52,9 +52,9 @@ resource "f5xc_forwarding_class" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the ForwardingClass. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Forwarding Class. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the ForwardingClass will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Forwarding Class will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

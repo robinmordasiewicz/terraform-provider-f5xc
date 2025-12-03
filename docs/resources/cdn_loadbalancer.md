@@ -2,12 +2,12 @@
 page_title: "f5xc_cdn_loadbalancer Resource - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  Manages a CDNLoadBalancer resource in F5 Distributed Cloud for content delivery and edge caching with load balancing.
+  Manages a CDN Load Balancer resource in F5 Distributed Cloud for content delivery and edge caching with load balancing.
 ---
 
 # f5xc_cdn_loadbalancer (Resource)
 
-Manages a CDNLoadBalancer resource in F5 Distributed Cloud for content delivery and edge caching with load balancing.
+Manages a CDN Load Balancer resource in F5 Distributed Cloud for content delivery and edge caching with load balancing.
 
 ~> **Note** Please refer to [CDN Loadbalancer API docs](https://docs.cloud.f5.com/docs-v2/api/views-cdn-loadbalancer) to learn more.
 
@@ -15,7 +15,7 @@ Manages a CDNLoadBalancer resource in F5 Distributed Cloud for content delivery 
 
 ```terraform
 # CDN Loadbalancer Resource Example
-# Manages a CDNLoadBalancer resource in F5 Distributed Cloud for content delivery and edge caching with load balancing.
+# Manages a CDN Load Balancer resource in F5 Distributed Cloud for content delivery and edge caching with load balancing.
 
 # Basic CDN Loadbalancer configuration
 resource "f5xc_cdn_loadbalancer" "example" {
@@ -63,9 +63,9 @@ resource "f5xc_cdn_loadbalancer" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the CDNLoadBalancer. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the CDN Load Balancer. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the CDNLoadBalancer will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the CDN Load Balancer will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

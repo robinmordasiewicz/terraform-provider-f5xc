@@ -2,12 +2,12 @@
 page_title: "f5xc_container_registry Resource - terraform-provider-f5xc"
 subcategory: "Kubernetes"
 description: |-
-  Manages a ContainerRegistry resource in F5 Distributed Cloud for container image registry configuration.
+  Manages a Container Registry resource in F5 Distributed Cloud for container image registry configuration.
 ---
 
 # f5xc_container_registry (Resource)
 
-Manages a ContainerRegistry resource in F5 Distributed Cloud for container image registry configuration.
+Manages a Container Registry resource in F5 Distributed Cloud for container image registry configuration.
 
 ~> **Note** Please refer to [Container Registry API docs](https://docs.cloud.f5.com/docs-v2/api/container-registry) to learn more.
 
@@ -15,7 +15,7 @@ Manages a ContainerRegistry resource in F5 Distributed Cloud for container image
 
 ```terraform
 # Container Registry Resource Example
-# Manages a ContainerRegistry resource in F5 Distributed Cloud for container image registry configuration.
+# Manages a Container Registry resource in F5 Distributed Cloud for container image registry configuration.
 
 # Basic Container Registry configuration
 resource "f5xc_container_registry" "example" {
@@ -52,9 +52,9 @@ resource "f5xc_container_registry" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the ContainerRegistry. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Container Registry. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the ContainerRegistry will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Container Registry will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

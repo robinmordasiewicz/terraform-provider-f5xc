@@ -2,12 +2,12 @@
 page_title: "f5xc_ike_phase1_profile Resource - terraform-provider-f5xc"
 subcategory: "VPN"
 description: |-
-  Manages a IKEPhase1Profile resource in F5 Distributed Cloud for ike phase1 profile configuration.
+  Manages a IKE Phase1 Profile resource in F5 Distributed Cloud for ike phase1 profile configuration.
 ---
 
 # f5xc_ike_phase1_profile (Resource)
 
-Manages a IKEPhase1Profile resource in F5 Distributed Cloud for ike phase1 profile configuration.
+Manages a IKE Phase1 Profile resource in F5 Distributed Cloud for ike phase1 profile configuration.
 
 ~> **Note** Please refer to [IKE Phase1 Profile API docs](https://docs.cloud.f5.com/docs-v2/api/views-ike-phase1-profile) to learn more.
 
@@ -15,7 +15,7 @@ Manages a IKEPhase1Profile resource in F5 Distributed Cloud for ike phase1 profi
 
 ```terraform
 # IKE Phase1 Profile Resource Example
-# Manages a IKEPhase1Profile resource in F5 Distributed Cloud for ike phase1 profile configuration.
+# Manages a IKE Phase1 Profile resource in F5 Distributed Cloud for ike phase1 profile configuration.
 
 # Basic IKE Phase1 Profile configuration
 resource "f5xc_ike_phase1_profile" "example" {
@@ -52,9 +52,9 @@ resource "f5xc_ike_phase1_profile" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the IKEPhase1Profile. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the IKE Phase1 Profile. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the IKEPhase1Profile will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the IKE Phase1 Profile will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

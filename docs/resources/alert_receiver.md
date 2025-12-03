@@ -2,12 +2,12 @@
 page_title: "f5xc_alert_receiver Resource - terraform-provider-f5xc"
 subcategory: "Monitoring"
 description: |-
-  Manages a AlertReceiver resource in F5 Distributed Cloud for alert notification endpoints.
+  Manages a Alert Receiver resource in F5 Distributed Cloud for alert notification endpoints.
 ---
 
 # f5xc_alert_receiver (Resource)
 
-Manages a AlertReceiver resource in F5 Distributed Cloud for alert notification endpoints.
+Manages a Alert Receiver resource in F5 Distributed Cloud for alert notification endpoints.
 
 ~> **Note** Please refer to [Alert Receiver API docs](https://docs.cloud.f5.com/docs-v2/api/alert-receiver) to learn more.
 
@@ -15,7 +15,7 @@ Manages a AlertReceiver resource in F5 Distributed Cloud for alert notification 
 
 ```terraform
 # Alert Receiver Resource Example
-# Manages a AlertReceiver resource in F5 Distributed Cloud for alert notification endpoints.
+# Manages a Alert Receiver resource in F5 Distributed Cloud for alert notification endpoints.
 
 # Basic Alert Receiver configuration
 resource "f5xc_alert_receiver" "example" {
@@ -44,9 +44,9 @@ resource "f5xc_alert_receiver" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the AlertReceiver. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Alert Receiver. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the AlertReceiver will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Alert Receiver will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

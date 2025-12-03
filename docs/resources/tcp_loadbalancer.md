@@ -2,12 +2,12 @@
 page_title: "f5xc_tcp_loadbalancer Resource - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  Manages a TCPLoadBalancer resource in F5 Distributed Cloud for load balancing TCP traffic across origin pools.
+  Manages a TCP Load Balancer resource in F5 Distributed Cloud for load balancing TCP traffic across origin pools.
 ---
 
 # f5xc_tcp_loadbalancer (Resource)
 
-Manages a TCPLoadBalancer resource in F5 Distributed Cloud for load balancing TCP traffic across origin pools.
+Manages a TCP Load Balancer resource in F5 Distributed Cloud for load balancing TCP traffic across origin pools.
 
 ~> **Note** Please refer to [TCP Loadbalancer API docs](https://docs.cloud.f5.com/docs-v2/api/views-tcp-loadbalancer) to learn more.
 
@@ -15,7 +15,7 @@ Manages a TCPLoadBalancer resource in F5 Distributed Cloud for load balancing TC
 
 ```terraform
 # TCP Loadbalancer Resource Example
-# Manages a TCPLoadBalancer resource in F5 Distributed Cloud for load balancing TCP traffic across origin pools.
+# Manages a TCP Load Balancer resource in F5 Distributed Cloud for load balancing TCP traffic across origin pools.
 
 # Basic TCP Loadbalancer configuration
 resource "f5xc_tcp_loadbalancer" "example" {
@@ -61,9 +61,9 @@ resource "f5xc_tcp_loadbalancer" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the TCPLoadBalancer. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the TCP Load Balancer. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the TCPLoadBalancer will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the TCP Load Balancer will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

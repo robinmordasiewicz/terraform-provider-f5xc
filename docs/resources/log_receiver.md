@@ -2,12 +2,12 @@
 page_title: "f5xc_log_receiver Resource - terraform-provider-f5xc"
 subcategory: "Monitoring"
 description: |-
-  Manages a LogReceiver resource in F5 Distributed Cloud for log collection and forwarding configuration.
+  Manages a Log Receiver resource in F5 Distributed Cloud for log collection and forwarding configuration.
 ---
 
 # f5xc_log_receiver (Resource)
 
-Manages a LogReceiver resource in F5 Distributed Cloud for log collection and forwarding configuration.
+Manages a Log Receiver resource in F5 Distributed Cloud for log collection and forwarding configuration.
 
 ~> **Note** Please refer to [Log Receiver API docs](https://docs.cloud.f5.com/docs-v2/api/log-receiver) to learn more.
 
@@ -15,7 +15,7 @@ Manages a LogReceiver resource in F5 Distributed Cloud for log collection and fo
 
 ```terraform
 # Log Receiver Resource Example
-# Manages a LogReceiver resource in F5 Distributed Cloud for log collection and forwarding configuration.
+# Manages a Log Receiver resource in F5 Distributed Cloud for log collection and forwarding configuration.
 
 # Basic Log Receiver configuration
 resource "f5xc_log_receiver" "example" {
@@ -51,9 +51,9 @@ resource "f5xc_log_receiver" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the LogReceiver. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Log Receiver. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the LogReceiver will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Log Receiver will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

@@ -2,12 +2,12 @@
 page_title: "f5xc_voltstack_site Data Source - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
-  Manages a VoltstackSite resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
+  Manages a Voltstack Site resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
 ---
 
 # f5xc_voltstack_site (Data Source)
 
-Manages a VoltstackSite resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
+Manages a Voltstack Site resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
 
 ~> **Note** Please refer to [Voltstack Site API docs](https://docs.cloud.f5.com/docs-v2/api/views-voltstack-site) to learn more.
 

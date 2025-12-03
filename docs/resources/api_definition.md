@@ -2,12 +2,12 @@
 page_title: "f5xc_api_definition Resource - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
-  Manages a APIDefinition resource in F5 Distributed Cloud for x-required create api definition. configuration.
+  Manages a API Definition resource in F5 Distributed Cloud for x-required create api definition. configuration.
 ---
 
 # f5xc_api_definition (Resource)
 
-Manages a APIDefinition resource in F5 Distributed Cloud for x-required create api definition. configuration.
+Manages a API Definition resource in F5 Distributed Cloud for x-required create api definition. configuration.
 
 ~> **Note** Please refer to [API Definition API docs](https://docs.cloud.f5.com/docs-v2/api/views-api-definition) to learn more.
 
@@ -15,7 +15,7 @@ Manages a APIDefinition resource in F5 Distributed Cloud for x-required create a
 
 ```terraform
 # API Definition Resource Example
-# Manages a APIDefinition resource in F5 Distributed Cloud for x-required create api definition. configuration.
+# Manages a API Definition resource in F5 Distributed Cloud for x-required create api definition. configuration.
 
 # Basic API Definition configuration
 resource "f5xc_api_definition" "example" {
@@ -45,9 +45,9 @@ resource "f5xc_api_definition" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the APIDefinition. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the API Definition. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the APIDefinition will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the API Definition will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

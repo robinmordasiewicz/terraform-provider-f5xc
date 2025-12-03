@@ -2,12 +2,12 @@
 page_title: "f5xc_cdn_cache_rule Resource - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  Manages a CDNCacheRule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
+  Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
 ---
 
 # f5xc_cdn_cache_rule (Resource)
 
-Manages a CDNCacheRule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
+Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
 
 ~> **Note** Please refer to [CDN Cache Rule API docs](https://docs.cloud.f5.com/docs-v2/api/cdn-cache-rule) to learn more.
 
@@ -15,7 +15,7 @@ Manages a CDNCacheRule resource in F5 Distributed Cloud for cdn loadbalancer con
 
 ```terraform
 # CDN Cache Rule Resource Example
-# Manages a CDNCacheRule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
+# Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
 
 # Basic CDN Cache Rule configuration
 resource "f5xc_cdn_cache_rule" "example" {
@@ -52,9 +52,9 @@ resource "f5xc_cdn_cache_rule" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the CDNCacheRule. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the CDN Cache Rule. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the CDNCacheRule will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the CDN Cache Rule will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

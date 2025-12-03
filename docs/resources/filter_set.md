@@ -2,12 +2,12 @@
 page_title: "f5xc_filter_set Resource - terraform-provider-f5xc"
 subcategory: "Applications"
 description: |-
-  Manages a FilterSet resource in F5 Distributed Cloud for create configuration.
+  Manages a Filter Set resource in F5 Distributed Cloud for create configuration.
 ---
 
 # f5xc_filter_set (Resource)
 
-Manages a FilterSet resource in F5 Distributed Cloud for create configuration.
+Manages a Filter Set resource in F5 Distributed Cloud for create configuration.
 
 ~> **Note** Please refer to [Filter Set API docs](https://docs.cloud.f5.com/docs-v2/api/filter-set) to learn more.
 
@@ -15,7 +15,7 @@ Manages a FilterSet resource in F5 Distributed Cloud for create configuration.
 
 ```terraform
 # Filter Set Resource Example
-# Manages a FilterSet resource in F5 Distributed Cloud for create configuration.
+# Manages a Filter Set resource in F5 Distributed Cloud for create configuration.
 
 # Basic Filter Set configuration
 resource "f5xc_filter_set" "example" {
@@ -52,9 +52,9 @@ resource "f5xc_filter_set" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the FilterSet. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Filter Set. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the FilterSet will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Filter Set will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

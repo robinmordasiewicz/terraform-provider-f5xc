@@ -2,12 +2,12 @@
 page_title: "f5xc_securemesh_site_v2 Data Source - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
-  Manages a SecuremeshSiteV2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.
+  Manages a Securemesh Site V2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.
 ---
 
 # f5xc_securemesh_site_v2 (Data Source)
 
-Manages a SecuremeshSiteV2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.
+Manages a Securemesh Site V2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.
 
 ~> **Note** Please refer to [Securemesh Site V2 API docs](https://docs.cloud.f5.com/docs-v2/api/views-securemesh-site-v2) to learn more.
 

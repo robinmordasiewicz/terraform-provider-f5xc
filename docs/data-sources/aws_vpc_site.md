@@ -2,12 +2,12 @@
 page_title: "f5xc_aws_vpc_site Data Source - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
-  Manages a AWSVPCSite resource in F5 Distributed Cloud for deploying F5 sites within AWS VPC environments.
+  Manages a AWS VPC Site resource in F5 Distributed Cloud for deploying F5 sites within AWS VPC environments.
 ---
 
 # f5xc_aws_vpc_site (Data Source)
 
-Manages a AWSVPCSite resource in F5 Distributed Cloud for deploying F5 sites within AWS VPC environments.
+Manages a AWS VPC Site resource in F5 Distributed Cloud for deploying F5 sites within AWS VPC environments.
 
 ~> **Note** Please refer to [AWS VPC Site API docs](https://docs.cloud.f5.com/docs-v2/api/views-aws-vpc-site) to learn more.
 

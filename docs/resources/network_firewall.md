@@ -2,12 +2,12 @@
 page_title: "f5xc_network_firewall Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages a NetworkFirewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.
+  Manages a Network Firewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.
 ---
 
 # f5xc_network_firewall (Resource)
 
-Manages a NetworkFirewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.
+Manages a Network Firewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.
 
 ~> **Note** Please refer to [Network Firewall API docs](https://docs.cloud.f5.com/docs-v2/api/network-firewall) to learn more.
 
@@ -15,7 +15,7 @@ Manages a NetworkFirewall resource in F5 Distributed Cloud for network firewall 
 
 ```terraform
 # Network Firewall Resource Example
-# Manages a NetworkFirewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.
+# Manages a Network Firewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.
 
 # Basic Network Firewall configuration
 resource "f5xc_network_firewall" "example" {
@@ -52,9 +52,9 @@ resource "f5xc_network_firewall" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the NetworkFirewall. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Network Firewall. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the NetworkFirewall will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Network Firewall will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

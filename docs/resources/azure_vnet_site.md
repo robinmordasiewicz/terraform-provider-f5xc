@@ -2,12 +2,12 @@
 page_title: "f5xc_azure_vnet_site Resource - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
-  Manages a AzureVNETSite resource in F5 Distributed Cloud for deploying F5 sites within Azure Virtual Network environments.
+  Manages a Azure VNET Site resource in F5 Distributed Cloud for deploying F5 sites within Azure Virtual Network environments.
 ---
 
 # f5xc_azure_vnet_site (Resource)
 
-Manages a AzureVNETSite resource in F5 Distributed Cloud for deploying F5 sites within Azure Virtual Network environments.
+Manages a Azure VNET Site resource in F5 Distributed Cloud for deploying F5 sites within Azure Virtual Network environments.
 
 ~> **Note** Please refer to [Azure VNET Site API docs](https://docs.cloud.f5.com/docs-v2/api/views-azure-vnet-site) to learn more.
 
@@ -15,7 +15,7 @@ Manages a AzureVNETSite resource in F5 Distributed Cloud for deploying F5 sites 
 
 ```terraform
 # Azure VNET Site Resource Example
-# Manages a AzureVNETSite resource in F5 Distributed Cloud for deploying F5 sites within Azure Virtual Network environments.
+# Manages a Azure VNET Site resource in F5 Distributed Cloud for deploying F5 sites within Azure Virtual Network environments.
 
 # Basic Azure VNET Site configuration
 resource "f5xc_azure_vnet_site" "example" {
@@ -82,9 +82,9 @@ resource "f5xc_azure_vnet_site" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the AzureVNETSite. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Azure VNET Site. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the AzureVNETSite will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Azure VNET Site will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

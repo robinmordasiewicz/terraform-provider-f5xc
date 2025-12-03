@@ -2,12 +2,12 @@
 page_title: "f5xc_securemesh_site Resource - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
-  Manages a SecuremeshSite resource in F5 Distributed Cloud for deploying secure mesh edge sites with distributed security capabilities.
+  Manages a Securemesh Site resource in F5 Distributed Cloud for deploying secure mesh edge sites with distributed security capabilities.
 ---
 
 # f5xc_securemesh_site (Resource)
 
-Manages a SecuremeshSite resource in F5 Distributed Cloud for deploying secure mesh edge sites with distributed security capabilities.
+Manages a Securemesh Site resource in F5 Distributed Cloud for deploying secure mesh edge sites with distributed security capabilities.
 
 ~> **Note** Please refer to [Securemesh Site API docs](https://docs.cloud.f5.com/docs-v2/api/views-securemesh-site) to learn more.
 
@@ -15,7 +15,7 @@ Manages a SecuremeshSite resource in F5 Distributed Cloud for deploying secure m
 
 ```terraform
 # Securemesh Site Resource Example
-# Manages a SecuremeshSite resource in F5 Distributed Cloud for deploying secure mesh edge sites with distributed security capabilities.
+# Manages a Securemesh Site resource in F5 Distributed Cloud for deploying secure mesh edge sites with distributed security capabilities.
 
 # Basic Securemesh Site configuration
 resource "f5xc_securemesh_site" "example" {
@@ -59,9 +59,9 @@ resource "f5xc_securemesh_site" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the SecuremeshSite. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Securemesh Site. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the SecuremeshSite will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Securemesh Site will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

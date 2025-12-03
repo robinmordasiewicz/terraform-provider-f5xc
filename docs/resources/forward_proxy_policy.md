@@ -2,12 +2,12 @@
 page_title: "f5xc_forward_proxy_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages a ForwardProxyPolicy resource in F5 Distributed Cloud for forward proxy policy configuration.
+  Manages a Forward Proxy Policy resource in F5 Distributed Cloud for forward proxy policy configuration.
 ---
 
 # f5xc_forward_proxy_policy (Resource)
 
-Manages a ForwardProxyPolicy resource in F5 Distributed Cloud for forward proxy policy configuration.
+Manages a Forward Proxy Policy resource in F5 Distributed Cloud for forward proxy policy configuration.
 
 ~> **Note** Please refer to [Forward Proxy Policy API docs](https://docs.cloud.f5.com/docs-v2/api/views-forward-proxy-policy) to learn more.
 
@@ -15,7 +15,7 @@ Manages a ForwardProxyPolicy resource in F5 Distributed Cloud for forward proxy 
 
 ```terraform
 # Forward Proxy Policy Resource Example
-# Manages a ForwardProxyPolicy resource in F5 Distributed Cloud for forward proxy policy configuration.
+# Manages a Forward Proxy Policy resource in F5 Distributed Cloud for forward proxy policy configuration.
 
 # Basic Forward Proxy Policy configuration
 resource "f5xc_forward_proxy_policy" "example" {
@@ -60,9 +60,9 @@ resource "f5xc_forward_proxy_policy" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the ForwardProxyPolicy. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Forward Proxy Policy. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the ForwardProxyPolicy will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Forward Proxy Policy will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

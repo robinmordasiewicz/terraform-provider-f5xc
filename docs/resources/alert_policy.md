@@ -2,12 +2,12 @@
 page_title: "f5xc_alert_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages a AlertPolicy resource in F5 Distributed Cloud for alerting rules and notification policies.
+  Manages a Alert Policy resource in F5 Distributed Cloud for alerting rules and notification policies.
 ---
 
 # f5xc_alert_policy (Resource)
 
-Manages a AlertPolicy resource in F5 Distributed Cloud for alerting rules and notification policies.
+Manages a Alert Policy resource in F5 Distributed Cloud for alerting rules and notification policies.
 
 ~> **Note** Please refer to [Alert Policy API docs](https://docs.cloud.f5.com/docs-v2/api/alert-policy) to learn more.
 
@@ -15,7 +15,7 @@ Manages a AlertPolicy resource in F5 Distributed Cloud for alerting rules and no
 
 ```terraform
 # Alert Policy Resource Example
-# Manages a AlertPolicy resource in F5 Distributed Cloud for alerting rules and notification policies.
+# Manages a Alert Policy resource in F5 Distributed Cloud for alerting rules and notification policies.
 
 # Basic Alert Policy configuration
 resource "f5xc_alert_policy" "example" {
@@ -58,9 +58,9 @@ resource "f5xc_alert_policy" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the AlertPolicy. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Alert Policy. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the AlertPolicy will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Alert Policy will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

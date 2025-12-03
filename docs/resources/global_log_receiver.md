@@ -2,12 +2,12 @@
 page_title: "f5xc_global_log_receiver Resource - terraform-provider-f5xc"
 subcategory: "Monitoring"
 description: |-
-  Manages a GlobalLogReceiver resource in F5 Distributed Cloud for global log aggregation settings.
+  Manages a Global Log Receiver resource in F5 Distributed Cloud for global log aggregation settings.
 ---
 
 # f5xc_global_log_receiver (Resource)
 
-Manages a GlobalLogReceiver resource in F5 Distributed Cloud for global log aggregation settings.
+Manages a Global Log Receiver resource in F5 Distributed Cloud for global log aggregation settings.
 
 ~> **Note** Please refer to [Global Log Receiver API docs](https://docs.cloud.f5.com/docs-v2/api/global-log-receiver) to learn more.
 
@@ -15,7 +15,7 @@ Manages a GlobalLogReceiver resource in F5 Distributed Cloud for global log aggr
 
 ```terraform
 # Global Log Receiver Resource Example
-# Manages a GlobalLogReceiver resource in F5 Distributed Cloud for global log aggregation settings.
+# Manages a Global Log Receiver resource in F5 Distributed Cloud for global log aggregation settings.
 
 # Basic Global Log Receiver configuration
 resource "f5xc_global_log_receiver" "example" {
@@ -52,9 +52,9 @@ resource "f5xc_global_log_receiver" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the GlobalLogReceiver. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Global Log Receiver. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the GlobalLogReceiver will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Global Log Receiver will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

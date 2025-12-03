@@ -2,12 +2,12 @@
 page_title: "f5xc_policy_based_routing Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages a PolicyBasedRouting resource in F5 Distributed Cloud for network policy based routing create configuration.
+  Manages a Policy Based Routing resource in F5 Distributed Cloud for network policy based routing create configuration.
 ---
 
 # f5xc_policy_based_routing (Resource)
 
-Manages a PolicyBasedRouting resource in F5 Distributed Cloud for network policy based routing create configuration.
+Manages a Policy Based Routing resource in F5 Distributed Cloud for network policy based routing create configuration.
 
 ~> **Note** Please refer to [Policy Based Routing API docs](https://docs.cloud.f5.com/docs-v2/api/views-policy-based-routing) to learn more.
 
@@ -15,7 +15,7 @@ Manages a PolicyBasedRouting resource in F5 Distributed Cloud for network policy
 
 ```terraform
 # Policy Based Routing Resource Example
-# Manages a PolicyBasedRouting resource in F5 Distributed Cloud for network policy based routing create configuration.
+# Manages a Policy Based Routing resource in F5 Distributed Cloud for network policy based routing create configuration.
 
 # Basic Policy Based Routing configuration
 resource "f5xc_policy_based_routing" "example" {
@@ -52,9 +52,9 @@ resource "f5xc_policy_based_routing" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the PolicyBasedRouting. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Policy Based Routing. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the PolicyBasedRouting will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Policy Based Routing will be created
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 

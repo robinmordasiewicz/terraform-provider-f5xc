@@ -143,11 +143,12 @@ jobs:
           # Run mock tests and capture output
           # Note: TF_ACC=1 is required for resource.Test() even with mock server
           # F5XC_MOCK_MODE=1 ensures mock server is used instead of real API
+          # Tests include both provider resources AND provider-defined functions
           TF_ACC=1 F5XC_MOCK_MODE=1 go test -json \
             -parallel "$PARALLEL" \
             -timeout "${TIMEOUT}m" \
             -run 'TestMock.*' \
-            ./internal/provider/... 2>&1 | tee test-reports/test-output-mock.json || true
+            ./internal/provider/... ./internal/functions/... 2>&1 | tee test-reports/test-output-mock.json || true
 
           # Generate reports
           cat test-reports/test-output-mock.json | go run tools/test-report/main.go \
@@ -296,11 +297,12 @@ jobs:
           echo "Timeout per test: ${TIMEOUT}m"
 
           # Real API tests run SEQUENTIALLY (-parallel 1) with rate limiting
+          # Tests include both provider resources AND provider-defined functions
           go test -json \
             -parallel 1 \
             -timeout "${TIMEOUT}m" \
             -run 'TestAcc.*' \
-            ./internal/provider/... 2>&1 | tee test-reports/test-output-real.json || true
+            ./internal/provider/... ./internal/functions/... 2>&1 | tee test-reports/test-output-real.json || true
 
           # Generate reports
           cat test-reports/test-output-real.json | go run tools/test-report/main.go \

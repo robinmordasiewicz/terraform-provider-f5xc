@@ -311,7 +311,10 @@ jobs:
           echo "::endgroup::"
 
       - name: Regenerate documentation (if needed)
-        if: needs.regenerate-docs.outputs.changed == 'true'
+        # Regenerate docs if:
+        # 1. The standalone docs job found changes (template/example changes), OR
+        # 2. Provider was regenerated (schema descriptions may have changed)
+        if: needs.regenerate-docs.outputs.changed == 'true' || needs.regenerate-provider.outputs.changed == 'true'
         run: |
           go run tools/generate-examples.go
           # Retry tfplugindocs generate

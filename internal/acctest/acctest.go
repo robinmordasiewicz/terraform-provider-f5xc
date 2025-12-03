@@ -223,20 +223,12 @@ func CheckResourceExists(resourceName string) resource.TestCheckFunc {
 
 // CheckResourceDestroyed returns a resource.TestCheckFunc that verifies a resource is destroyed
 func CheckResourceDestroyed(resourceType string) resource.TestCheckFunc {
-	return func(s *terraform.State) error {
-		for _, rs := range s.RootModule().Resources {
-			if rs.Type != resourceType {
-				continue
-			}
-
-			// In a real implementation, you would make an API call here
-			// to verify the resource no longer exists.
-			// For now, we assume if the resource is in the destroyed state,
-			// Terraform has already verified it doesn't exist.
-			_ = rs.Primary.ID // Placeholder for future API verification
-		}
-		return nil
-	}
+	// Use the registry-based API verification when available
+	// This delegates to CheckResourceDestroyedWithAPIVerification which:
+	// - Performs actual API calls to verify resource deletion
+	// - Includes retry logic for async deletion
+	// - Falls back to state-only check for unregistered types
+	return CheckResourceDestroyedWithAPIVerification(resourceType)
 }
 
 // CheckResourceAttr is a convenience wrapper around resource.TestCheckResourceAttr

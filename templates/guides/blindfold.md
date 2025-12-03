@@ -369,17 +369,28 @@ RSA-OAEP encryption has a maximum plaintext size based on the key size:
 
 ### Output Format
 
-The blindfold functions return a sealed secret string in this format:
+The blindfold functions return a sealed secret string with the `string:///` prefix followed by a base64-encoded JSON structure:
 
 ```
-string:///<base64-encoded-sealed-json>
+string:///eyJrZXlfdmVyc2lvbiI6InYxLjIuMyIsInBvbGljeV9pZCI6InNoYXJlZC92ZXMtaW8tYWxsb3ctdm9sdGVycmEiLCJ0ZW5hbnQiOiJ5b3VyLXRlbmFudCIsImRhdGEiOiJBQkNERUYxMjM0NTY3ODkwLi4uIn0=
 ```
 
-The sealed JSON contains:
+When base64-decoded, the sealed JSON contains these fields:
+
+```json
+{
+  "key_version": "v1.2.3",
+  "policy_id": "shared/ves-io-allow-volterra",
+  "tenant": "your-tenant",
+  "data": "ABCDEF1234567890..."
+}
+```
+
+Field descriptions:
 - `key_version`: Public key version used for encryption
-- `policy_id`: Reference to the SecretPolicy
+- `policy_id`: Reference to the SecretPolicy (namespace/name format)
 - `tenant`: Your F5XC tenant identifier
-- `data`: The encrypted ciphertext
+- `data`: Base64-encoded RSA-OAEP ciphertext
 
 ### Function Behavior
 

@@ -97,7 +97,7 @@ func (r *AddonSubscriptionResource) Schema(ctx context.Context, req resource.Sch
 		MarkdownDescription: "Manages new Addon Subscription with Addon Subscription State in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the AddonSubscription. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Addon Subscription. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -107,7 +107,7 @@ func (r *AddonSubscriptionResource) Schema(ctx context.Context, req resource.Sch
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the AddonSubscription will be created.",
+				MarkdownDescription: "Namespace where the Addon Subscription will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

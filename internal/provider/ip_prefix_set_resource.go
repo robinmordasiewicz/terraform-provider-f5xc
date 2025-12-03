@@ -77,7 +77,7 @@ func (r *IPPrefixSetResource) Schema(ctx context.Context, req resource.SchemaReq
 		MarkdownDescription: "Manages ip_prefix_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the IPPrefixSet. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the IP Prefix Set. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -87,7 +87,7 @@ func (r *IPPrefixSetResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the IPPrefixSet will be created.",
+				MarkdownDescription: "Namespace where the IP Prefix Set will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

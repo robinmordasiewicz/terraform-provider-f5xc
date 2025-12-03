@@ -188,7 +188,7 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 		MarkdownDescription: "Manages Application Firewall in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the AppFirewall. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the App Firewall. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -198,7 +198,7 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the AppFirewall will be created.",
+				MarkdownDescription: "Namespace where the App Firewall will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

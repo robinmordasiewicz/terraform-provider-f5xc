@@ -72,7 +72,7 @@ func (r *DNSDomainResource) Schema(ctx context.Context, req resource.SchemaReque
 		MarkdownDescription: "Manages DNS Domain in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Domain name for the DNSDomain (e.g., example.com). Must be a valid DNS domain name.",
+				MarkdownDescription: "Domain name for the DNS Domain (e.g., example.com). Must be a valid DNS domain name.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -82,7 +82,7 @@ func (r *DNSDomainResource) Schema(ctx context.Context, req resource.SchemaReque
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the DNSDomain will be created.",
+				MarkdownDescription: "Namespace where the DNS Domain will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

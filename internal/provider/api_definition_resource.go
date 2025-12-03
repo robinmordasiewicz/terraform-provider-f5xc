@@ -91,10 +91,10 @@ func (r *APIDefinitionResource) Metadata(ctx context.Context, req resource.Metad
 func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             api_definitionSchemaVersion,
-		MarkdownDescription: "Manages a APIDefinition resource in F5 Distributed Cloud for x-required create api definition. configuration.",
+		MarkdownDescription: "Manages a API Definition resource in F5 Distributed Cloud for x-required create api definition. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the APIDefinition. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the API Definition. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -104,7 +104,7 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the APIDefinition will be created.",
+				MarkdownDescription: "Namespace where the API Definition will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

@@ -177,7 +177,7 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 		MarkdownDescription: "Manages new CloudLink with configured parameters in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the CloudLink. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Cloud Link. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -187,7 +187,7 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the CloudLink will be created.",
+				MarkdownDescription: "Namespace where the Cloud Link will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

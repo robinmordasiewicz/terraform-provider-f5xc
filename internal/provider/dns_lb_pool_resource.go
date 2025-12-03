@@ -162,7 +162,7 @@ func (r *DNSLBPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 		MarkdownDescription: "Manages DNS Load Balancer Pool in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the DNSLBPool. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the DNS LB Pool. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -172,7 +172,7 @@ func (r *DNSLBPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the DNSLBPool will be created.",
+				MarkdownDescription: "Namespace where the DNS LB Pool will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

@@ -90,7 +90,7 @@ func (r *VirtualK8SResource) Schema(ctx context.Context, req resource.SchemaRequ
 		MarkdownDescription: "Manages virtual_k8s will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the VirtualK8S. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Virtual K8S. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -100,7 +100,7 @@ func (r *VirtualK8SResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the VirtualK8S will be created.",
+				MarkdownDescription: "Namespace where the Virtual K8S will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

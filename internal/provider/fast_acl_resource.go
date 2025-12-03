@@ -263,7 +263,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 		MarkdownDescription: "Manages `fast_acl` object, `fast_acl` object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to `fast_acl_rule` in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the FastACL. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Fast ACL. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -273,7 +273,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the FastACL will be created.",
+				MarkdownDescription: "Namespace where the Fast ACL will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

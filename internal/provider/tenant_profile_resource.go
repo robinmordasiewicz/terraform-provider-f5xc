@@ -110,7 +110,7 @@ func (r *TenantProfileResource) Schema(ctx context.Context, req resource.SchemaR
 		MarkdownDescription: "Manages tenant_profile config instance. Name of the object is the name of the tenant profile to be created. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the TenantProfile. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Tenant Profile. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -120,7 +120,7 @@ func (r *TenantProfileResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the TenantProfile will be created.",
+				MarkdownDescription: "Namespace where the Tenant Profile will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

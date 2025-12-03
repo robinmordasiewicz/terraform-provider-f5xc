@@ -42,7 +42,7 @@ func (d *PolicyBasedRoutingDataSource) Metadata(ctx context.Context, req datasou
 
 func (d *PolicyBasedRoutingDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages a PolicyBasedRouting resource in F5 Distributed Cloud for network policy based routing create configuration.",
+		MarkdownDescription: "Manages a Policy Based Routing resource in F5 Distributed Cloud for network policy based routing create configuration.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

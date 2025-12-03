@@ -160,10 +160,10 @@ func (r *AlertPolicyResource) Metadata(ctx context.Context, req resource.Metadat
 func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             alert_policySchemaVersion,
-		MarkdownDescription: "Manages a AlertPolicy resource in F5 Distributed Cloud for alerting rules and notification policies.",
+		MarkdownDescription: "Manages a Alert Policy resource in F5 Distributed Cloud for alerting rules and notification policies.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the AlertPolicy. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Alert Policy. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -173,7 +173,7 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the AlertPolicy will be created.",
+				MarkdownDescription: "Namespace where the Alert Policy will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

@@ -82,7 +82,7 @@ func (r *CloudElasticIPResource) Schema(ctx context.Context, req resource.Schema
 		MarkdownDescription: "Manages Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a site in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the CloudElasticIP. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Cloud Elastic IP. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -92,7 +92,7 @@ func (r *CloudElasticIPResource) Schema(ctx context.Context, req resource.Schema
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the CloudElasticIP will be created.",
+				MarkdownDescription: "Namespace where the Cloud Elastic IP will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

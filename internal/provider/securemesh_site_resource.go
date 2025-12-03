@@ -635,10 +635,10 @@ func (r *SecuremeshSiteResource) Metadata(ctx context.Context, req resource.Meta
 func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             securemesh_siteSchemaVersion,
-		MarkdownDescription: "Manages a SecuremeshSite resource in F5 Distributed Cloud for deploying secure mesh edge sites with distributed security capabilities.",
+		MarkdownDescription: "Manages a Securemesh Site resource in F5 Distributed Cloud for deploying secure mesh edge sites with distributed security capabilities.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the SecuremeshSite. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Securemesh Site. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -648,7 +648,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the SecuremeshSite will be created.",
+				MarkdownDescription: "Namespace where the Securemesh Site will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

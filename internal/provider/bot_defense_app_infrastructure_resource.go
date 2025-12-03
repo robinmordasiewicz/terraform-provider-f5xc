@@ -116,7 +116,7 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 		MarkdownDescription: "Manages Bot Defense App Infrastructure in a given namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the BotDefenseAppInfrastructure. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Bot Defense App Infrastructure. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -126,7 +126,7 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the BotDefenseAppInfrastructure will be created.",
+				MarkdownDescription: "Namespace where the Bot Defense App Infrastructure will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

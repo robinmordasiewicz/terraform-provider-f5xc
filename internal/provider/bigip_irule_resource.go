@@ -66,10 +66,10 @@ func (r *BigIPIruleResource) Metadata(ctx context.Context, req resource.Metadata
 func (r *BigIPIruleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             bigip_iruleSchemaVersion,
-		MarkdownDescription: "Manages a BigIPIrule resource in F5 Distributed Cloud for desired state for big-ip irule service configuration.",
+		MarkdownDescription: "Manages a BIG-IP Irule resource in F5 Distributed Cloud for desired state for big-ip irule service configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the BigIPIrule. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the BIG-IP Irule. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -79,7 +79,7 @@ func (r *BigIPIruleResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the BigIPIrule will be created.",
+				MarkdownDescription: "Namespace where the BIG-IP Irule will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

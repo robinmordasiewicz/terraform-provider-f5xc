@@ -160,7 +160,7 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 		MarkdownDescription: "Manages DDoS transit tunnel in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the InfraprotectTunnel. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Infraprotect Tunnel. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -170,7 +170,7 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the InfraprotectTunnel will be created.",
+				MarkdownDescription: "Namespace where the Infraprotect Tunnel will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

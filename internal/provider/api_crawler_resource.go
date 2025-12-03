@@ -99,10 +99,10 @@ func (r *APICrawlerResource) Metadata(ctx context.Context, req resource.Metadata
 func (r *APICrawlerResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             api_crawlerSchemaVersion,
-		MarkdownDescription: "Manages a APICrawler resource in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages a API Crawler resource in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the APICrawler. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the API Crawler. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -112,7 +112,7 @@ func (r *APICrawlerResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the APICrawler will be created.",
+				MarkdownDescription: "Namespace where the API Crawler will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

@@ -99,10 +99,10 @@ func (r *FilterSetResource) Metadata(ctx context.Context, req resource.MetadataR
 func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             filter_setSchemaVersion,
-		MarkdownDescription: "Manages a FilterSet resource in F5 Distributed Cloud for create configuration.",
+		MarkdownDescription: "Manages a Filter Set resource in F5 Distributed Cloud for create configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the FilterSet. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Filter Set. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -112,7 +112,7 @@ func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaReque
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the FilterSet will be created.",
+				MarkdownDescription: "Namespace where the Filter Set will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

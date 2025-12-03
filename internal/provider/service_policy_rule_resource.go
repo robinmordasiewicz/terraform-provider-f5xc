@@ -412,7 +412,7 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 		MarkdownDescription: "Manages service_policy_rule creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the ServicePolicyRule. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Service Policy Rule. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -422,7 +422,7 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the ServicePolicyRule will be created.",
+				MarkdownDescription: "Namespace where the Service Policy Rule will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

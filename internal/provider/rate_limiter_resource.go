@@ -115,7 +115,7 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 		MarkdownDescription: "Manages rate_limiter creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the RateLimiter. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Rate Limiter. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -125,7 +125,7 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the RateLimiter will be created.",
+				MarkdownDescription: "Namespace where the Rate Limiter will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

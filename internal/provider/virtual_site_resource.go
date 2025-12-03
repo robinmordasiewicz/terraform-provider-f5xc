@@ -77,7 +77,7 @@ func (r *VirtualSiteResource) Schema(ctx context.Context, req resource.SchemaReq
 		MarkdownDescription: "Manages virtual site object in given namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the VirtualSite. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Virtual Site. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -87,7 +87,7 @@ func (r *VirtualSiteResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the VirtualSite will be created.",
+				MarkdownDescription: "Namespace where the Virtual Site will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

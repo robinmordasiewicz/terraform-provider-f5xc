@@ -92,7 +92,7 @@ func (r *ProtocolInspectionResource) Schema(ctx context.Context, req resource.Sc
 		MarkdownDescription: "Manages Protocol Inspection Specification in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the ProtocolInspection. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Protocol Inspection. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -102,7 +102,7 @@ func (r *ProtocolInspectionResource) Schema(ctx context.Context, req resource.Sc
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the ProtocolInspection will be created.",
+				MarkdownDescription: "Namespace where the Protocol Inspection will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

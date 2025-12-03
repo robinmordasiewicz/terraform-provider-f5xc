@@ -126,7 +126,7 @@ func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.Sc
 		MarkdownDescription: "Manages WAF exclusion policy in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the WAFExclusionPolicy. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the WAF Exclusion Policy. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -136,7 +136,7 @@ func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.Sc
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the WAFExclusionPolicy will be created.",
+				MarkdownDescription: "Namespace where the WAF Exclusion Policy will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

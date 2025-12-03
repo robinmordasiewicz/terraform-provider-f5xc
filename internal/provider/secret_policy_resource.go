@@ -111,7 +111,7 @@ func (r *SecretPolicyResource) Schema(ctx context.Context, req resource.SchemaRe
 		MarkdownDescription: "Manages secret_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the SecretPolicy. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Secret Policy. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -121,7 +121,7 @@ func (r *SecretPolicyResource) Schema(ctx context.Context, req resource.SchemaRe
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the SecretPolicy will be created.",
+				MarkdownDescription: "Namespace where the Secret Policy will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

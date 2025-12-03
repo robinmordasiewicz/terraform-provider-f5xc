@@ -79,7 +79,7 @@ func (r *InfraprotectAsnPrefixResource) Schema(ctx context.Context, req resource
 		MarkdownDescription: "Manages DDoS transit Prefix in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the InfraprotectAsnPrefix. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Infraprotect Asn Prefix. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -89,7 +89,7 @@ func (r *InfraprotectAsnPrefixResource) Schema(ctx context.Context, req resource
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the InfraprotectAsnPrefix will be created.",
+				MarkdownDescription: "Namespace where the Infraprotect Asn Prefix will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

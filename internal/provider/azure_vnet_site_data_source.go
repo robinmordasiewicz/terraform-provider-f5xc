@@ -42,7 +42,7 @@ func (d *AzureVNETSiteDataSource) Metadata(ctx context.Context, req datasource.M
 
 func (d *AzureVNETSiteDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages a AzureVNETSite resource in F5 Distributed Cloud for deploying F5 sites within Azure Virtual Network environments.",
+		MarkdownDescription: "Manages a Azure VNET Site resource in F5 Distributed Cloud for deploying F5 sites within Azure Virtual Network environments.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

@@ -85,7 +85,7 @@ func (r *ManagedTenantResource) Schema(ctx context.Context, req resource.SchemaR
 		MarkdownDescription: "Manages managed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the ManagedTenant. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Managed Tenant. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -95,11 +95,10 @@ func (r *ManagedTenantResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace for the ManagedTenant. For this resource type, namespace should be empty or omitted.",
-				Optional:            true,
-				Computed:            true,
+				MarkdownDescription: "Namespace where the Managed Tenant will be created.",
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
+					stringplanmodifier.RequiresReplace(),
 				},
 				Validators: []validator.String{
 					validators.NamespaceValidator(),

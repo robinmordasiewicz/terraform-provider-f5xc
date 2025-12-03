@@ -92,10 +92,10 @@ func (r *TenantConfigurationResource) Metadata(ctx context.Context, req resource
 func (r *TenantConfigurationResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             tenant_configurationSchemaVersion,
-		MarkdownDescription: "Manages a TenantConfiguration resource in F5 Distributed Cloud for tenant configuration configuration.",
+		MarkdownDescription: "Manages a Tenant Configuration resource in F5 Distributed Cloud for tenant configuration configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the TenantConfiguration. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Tenant Configuration. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -105,7 +105,7 @@ func (r *TenantConfigurationResource) Schema(ctx context.Context, req resource.S
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the TenantConfiguration will be created.",
+				MarkdownDescription: "Namespace where the Tenant Configuration will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

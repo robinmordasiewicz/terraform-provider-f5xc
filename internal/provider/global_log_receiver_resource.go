@@ -743,10 +743,10 @@ func (r *GlobalLogReceiverResource) Metadata(ctx context.Context, req resource.M
 func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             global_log_receiverSchemaVersion,
-		MarkdownDescription: "Manages a GlobalLogReceiver resource in F5 Distributed Cloud for global log aggregation settings.",
+		MarkdownDescription: "Manages a Global Log Receiver resource in F5 Distributed Cloud for global log aggregation settings.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the GlobalLogReceiver. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Global Log Receiver. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -756,7 +756,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the GlobalLogReceiver will be created.",
+				MarkdownDescription: "Namespace where the Global Log Receiver will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

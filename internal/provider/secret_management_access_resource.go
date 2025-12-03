@@ -346,7 +346,7 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 		MarkdownDescription: "Manages secret_management_access creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the SecretManagementAccess. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Secret Management Access. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -356,7 +356,7 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the SecretManagementAccess will be created.",
+				MarkdownDescription: "Namespace where the Secret Management Access will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

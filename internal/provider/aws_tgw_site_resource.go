@@ -637,10 +637,10 @@ func (r *AWSTGWSiteResource) Metadata(ctx context.Context, req resource.Metadata
 func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             aws_tgw_siteSchemaVersion,
-		MarkdownDescription: "Manages a AWSTGWSite resource in F5 Distributed Cloud for deploying F5 sites connected via AWS Transit Gateway.",
+		MarkdownDescription: "Manages a AWS TGW Site resource in F5 Distributed Cloud for deploying F5 sites connected via AWS Transit Gateway.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the AWSTGWSite. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the AWS TGW Site. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -650,7 +650,7 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the AWSTGWSite will be created.",
+				MarkdownDescription: "Namespace where the AWS TGW Site will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

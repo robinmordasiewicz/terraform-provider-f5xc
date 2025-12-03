@@ -187,10 +187,10 @@ func (r *CloudCredentialsResource) Metadata(ctx context.Context, req resource.Me
 func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             cloud_credentialsSchemaVersion,
-		MarkdownDescription: "Manages a CloudCredentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.",
+		MarkdownDescription: "Manages a Cloud Credentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the CloudCredentials. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Cloud Credentials. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -200,7 +200,7 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the CloudCredentials will be created.",
+				MarkdownDescription: "Namespace where the Cloud Credentials will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

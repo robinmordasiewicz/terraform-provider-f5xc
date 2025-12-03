@@ -77,7 +77,7 @@ func (r *DcClusterGroupResource) Schema(ctx context.Context, req resource.Schema
 		MarkdownDescription: "Manages DC Cluster group in given namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the DcClusterGroup. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Dc Cluster Group. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -87,7 +87,7 @@ func (r *DcClusterGroupResource) Schema(ctx context.Context, req resource.Schema
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the DcClusterGroup will be created.",
+				MarkdownDescription: "Namespace where the Dc Cluster Group will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

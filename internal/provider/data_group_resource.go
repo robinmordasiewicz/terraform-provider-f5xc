@@ -88,7 +88,7 @@ func (r *DataGroupResource) Schema(ctx context.Context, req resource.SchemaReque
 		MarkdownDescription: "Manages data group in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the DataGroup. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Data Group. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -98,7 +98,7 @@ func (r *DataGroupResource) Schema(ctx context.Context, req resource.SchemaReque
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the DataGroup will be created.",
+				MarkdownDescription: "Namespace where the Data Group will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

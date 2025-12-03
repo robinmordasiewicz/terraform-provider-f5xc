@@ -79,7 +79,7 @@ func (r *AllowedTenantResource) Schema(ctx context.Context, req resource.SchemaR
 		MarkdownDescription: "Manages allowed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the AllowedTenant. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Allowed Tenant. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -89,7 +89,7 @@ func (r *AllowedTenantResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the AllowedTenant will be created.",
+				MarkdownDescription: "Namespace where the Allowed Tenant will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

@@ -131,10 +131,10 @@ func (r *OIDCProviderResource) Metadata(ctx context.Context, req resource.Metada
 func (r *OIDCProviderResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             oidc_providerSchemaVersion,
-		MarkdownDescription: "Manages a OIDCProvider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.",
+		MarkdownDescription: "Manages a OIDC Provider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the OIDCProvider. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the OIDC Provider. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -144,7 +144,7 @@ func (r *OIDCProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the OIDCProvider will be created.",
+				MarkdownDescription: "Namespace where the OIDC Provider will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

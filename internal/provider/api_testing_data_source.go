@@ -42,7 +42,7 @@ func (d *APITestingDataSource) Metadata(ctx context.Context, req datasource.Meta
 
 func (d *APITestingDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages a APITesting resource in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages a API Testing resource in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

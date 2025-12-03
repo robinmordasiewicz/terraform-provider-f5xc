@@ -104,7 +104,7 @@ func (r *ProtocolPolicerResource) Schema(ctx context.Context, req resource.Schem
 		MarkdownDescription: "Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the ProtocolPolicer. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Protocol Policer. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -114,7 +114,7 @@ func (r *ProtocolPolicerResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the ProtocolPolicer will be created.",
+				MarkdownDescription: "Namespace where the Protocol Policer will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

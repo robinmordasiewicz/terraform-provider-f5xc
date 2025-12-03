@@ -77,7 +77,7 @@ func (r *APIDiscoveryResource) Schema(ctx context.Context, req resource.SchemaRe
 		MarkdownDescription: "Manages api discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the APIDiscovery. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the API Discovery. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -87,7 +87,7 @@ func (r *APIDiscoveryResource) Schema(ctx context.Context, req resource.SchemaRe
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the APIDiscovery will be created.",
+				MarkdownDescription: "Namespace where the API Discovery will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

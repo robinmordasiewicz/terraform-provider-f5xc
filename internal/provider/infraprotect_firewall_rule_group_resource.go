@@ -64,10 +64,10 @@ func (r *InfraprotectFirewallRuleGroupResource) Metadata(ctx context.Context, re
 func (r *InfraprotectFirewallRuleGroupResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             infraprotect_firewall_rule_groupSchemaVersion,
-		MarkdownDescription: "Manages a InfraprotectFirewallRuleGroup resource in F5 Distributed Cloud for amends a ddos transit firewall rule group configuration.",
+		MarkdownDescription: "Manages a Infraprotect Firewall Rule Group resource in F5 Distributed Cloud for amends a ddos transit firewall rule group configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the InfraprotectFirewallRuleGroup. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Infraprotect Firewall Rule Group. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -77,7 +77,7 @@ func (r *InfraprotectFirewallRuleGroupResource) Schema(ctx context.Context, req 
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the InfraprotectFirewallRuleGroup will be created.",
+				MarkdownDescription: "Namespace where the Infraprotect Firewall Rule Group will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

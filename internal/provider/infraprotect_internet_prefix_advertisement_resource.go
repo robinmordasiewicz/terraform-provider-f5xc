@@ -75,7 +75,7 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Schema(ctx context.Con
 		MarkdownDescription: "Manages DDoS transit Internet Prefix in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the InfraprotectInternetPrefixAdvertisement. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Infraprotect Internet Prefix Advertisement. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -85,7 +85,7 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Schema(ctx context.Con
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the InfraprotectInternetPrefixAdvertisement will be created.",
+				MarkdownDescription: "Namespace where the Infraprotect Internet Prefix Advertisement will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

@@ -111,7 +111,7 @@ func (r *SiteMeshGroupResource) Schema(ctx context.Context, req resource.SchemaR
 		MarkdownDescription: "Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the SiteMeshGroup. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Site Mesh Group. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -121,7 +121,7 @@ func (r *SiteMeshGroupResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the SiteMeshGroup will be created.",
+				MarkdownDescription: "Namespace where the Site Mesh Group will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

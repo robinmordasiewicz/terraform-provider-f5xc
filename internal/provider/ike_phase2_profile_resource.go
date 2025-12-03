@@ -89,10 +89,10 @@ func (r *IKEPhase2ProfileResource) Metadata(ctx context.Context, req resource.Me
 func (r *IKEPhase2ProfileResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             ike_phase2_profileSchemaVersion,
-		MarkdownDescription: "Manages a IKEPhase2Profile resource in F5 Distributed Cloud for ike phase2 profile configuration.",
+		MarkdownDescription: "Manages a IKE Phase2 Profile resource in F5 Distributed Cloud for ike phase2 profile configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the IKEPhase2Profile. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the IKE Phase2 Profile. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -102,7 +102,7 @@ func (r *IKEPhase2ProfileResource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the IKEPhase2Profile will be created.",
+				MarkdownDescription: "Namespace where the IKE Phase2 Profile will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

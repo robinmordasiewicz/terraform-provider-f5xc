@@ -259,7 +259,7 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 		MarkdownDescription: "Manages integration details in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the CodeBaseIntegration. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Code Base Integration. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -269,7 +269,7 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the CodeBaseIntegration will be created.",
+				MarkdownDescription: "Namespace where the Code Base Integration will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

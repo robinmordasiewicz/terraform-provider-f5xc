@@ -96,7 +96,7 @@ func (r *MaliciousUserMitigationResource) Schema(ctx context.Context, req resour
 		MarkdownDescription: "Manages malicious_user_mitigation creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the MaliciousUserMitigation. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Malicious User Mitigation. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -106,7 +106,7 @@ func (r *MaliciousUserMitigationResource) Schema(ctx context.Context, req resour
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the MaliciousUserMitigation will be created.",
+				MarkdownDescription: "Namespace where the Malicious User Mitigation will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

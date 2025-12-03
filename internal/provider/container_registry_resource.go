@@ -90,10 +90,10 @@ func (r *ContainerRegistryResource) Metadata(ctx context.Context, req resource.M
 func (r *ContainerRegistryResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             container_registrySchemaVersion,
-		MarkdownDescription: "Manages a ContainerRegistry resource in F5 Distributed Cloud for container image registry configuration.",
+		MarkdownDescription: "Manages a Container Registry resource in F5 Distributed Cloud for container image registry configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the ContainerRegistry. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Container Registry. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -103,7 +103,7 @@ func (r *ContainerRegistryResource) Schema(ctx context.Context, req resource.Sch
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the ContainerRegistry will be created.",
+				MarkdownDescription: "Namespace where the Container Registry will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

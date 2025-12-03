@@ -42,7 +42,7 @@ func (d *GCPVPCSiteDataSource) Metadata(ctx context.Context, req datasource.Meta
 
 func (d *GCPVPCSiteDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages a GCPVPCSite resource in F5 Distributed Cloud for deploying F5 sites within Google Cloud VPC environments.",
+		MarkdownDescription: "Manages a GCP VPC Site resource in F5 Distributed Cloud for deploying F5 sites within Google Cloud VPC environments.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

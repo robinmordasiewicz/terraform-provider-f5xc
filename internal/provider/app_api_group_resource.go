@@ -116,7 +116,7 @@ func (r *AppAPIGroupResource) Schema(ctx context.Context, req resource.SchemaReq
 		MarkdownDescription: "Manages app_api_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the AppAPIGroup. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the App API Group. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -126,7 +126,7 @@ func (r *AppAPIGroupResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the AppAPIGroup will be created.",
+				MarkdownDescription: "Namespace where the App API Group will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

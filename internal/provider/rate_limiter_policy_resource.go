@@ -205,10 +205,10 @@ func (r *RateLimiterPolicyResource) Metadata(ctx context.Context, req resource.M
 func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             rate_limiter_policySchemaVersion,
-		MarkdownDescription: "Manages a RateLimiterPolicy resource in F5 Distributed Cloud for rate limiter policy create configuration.",
+		MarkdownDescription: "Manages a Rate Limiter Policy resource in F5 Distributed Cloud for rate limiter policy create configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the RateLimiterPolicy. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Rate Limiter Policy. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -218,7 +218,7 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the RateLimiterPolicy will be created.",
+				MarkdownDescription: "Namespace where the Rate Limiter Policy will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

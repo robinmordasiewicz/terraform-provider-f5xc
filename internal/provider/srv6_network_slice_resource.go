@@ -71,7 +71,7 @@ func (r *Srv6NetworkSliceResource) Schema(ctx context.Context, req resource.Sche
 		MarkdownDescription: "Manages srv6_network_slice creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the Srv6NetworkSlice. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Srv6 Network Slice. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -81,7 +81,7 @@ func (r *Srv6NetworkSliceResource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the Srv6NetworkSlice will be created.",
+				MarkdownDescription: "Namespace where the Srv6 Network Slice will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

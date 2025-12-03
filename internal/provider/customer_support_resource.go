@@ -113,7 +113,7 @@ func (r *CustomerSupportResource) Schema(ctx context.Context, req resource.Schem
 		MarkdownDescription: "Manages new customer support ticket in our customer support provider system. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the CustomerSupport. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Customer Support. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -123,7 +123,7 @@ func (r *CustomerSupportResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the CustomerSupport will be created.",
+				MarkdownDescription: "Namespace where the Customer Support will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

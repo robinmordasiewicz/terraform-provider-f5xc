@@ -157,7 +157,7 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 		MarkdownDescription: "Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the AppSetting. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the App Setting. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -167,7 +167,7 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the AppSetting will be created.",
+				MarkdownDescription: "Namespace where the App Setting will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

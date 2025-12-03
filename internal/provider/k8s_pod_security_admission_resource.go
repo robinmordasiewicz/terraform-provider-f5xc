@@ -81,7 +81,7 @@ func (r *K8SPodSecurityAdmissionResource) Schema(ctx context.Context, req resour
 		MarkdownDescription: "Manages k8s_pod_security_admission will create the object in the storage backend in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the K8SPodSecurityAdmission. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the K8S Pod Security Admission. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -91,7 +91,7 @@ func (r *K8SPodSecurityAdmissionResource) Schema(ctx context.Context, req resour
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the K8SPodSecurityAdmission will be created.",
+				MarkdownDescription: "Namespace where the K8S Pod Security Admission will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

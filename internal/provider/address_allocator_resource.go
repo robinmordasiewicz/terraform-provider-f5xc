@@ -80,7 +80,7 @@ func (r *AddressAllocatorResource) Schema(ctx context.Context, req resource.Sche
 		MarkdownDescription: "Manages Address Allocator will create an address allocator object in 'system' namespace of the user in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the AddressAllocator. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Address Allocator. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -90,7 +90,7 @@ func (r *AddressAllocatorResource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the AddressAllocator will be created.",
+				MarkdownDescription: "Namespace where the Address Allocator will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

@@ -684,7 +684,7 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 		MarkdownDescription: "Manages new NFV service with configured parameters in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the NfvService. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Nfv Service. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -694,7 +694,7 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the NfvService will be created.",
+				MarkdownDescription: "Namespace where the Nfv Service will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

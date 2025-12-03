@@ -92,7 +92,7 @@ func (r *ChildTenantManagerResource) Schema(ctx context.Context, req resource.Sc
 		MarkdownDescription: "Manages child_tenant_manager config instance. Name of the object is the name of the child tenant manager to be created. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the ChildTenantManager. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Child Tenant Manager. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -102,7 +102,7 @@ func (r *ChildTenantManagerResource) Schema(ctx context.Context, req resource.Sc
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the ChildTenantManager will be created.",
+				MarkdownDescription: "Namespace where the Child Tenant Manager will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

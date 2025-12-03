@@ -122,10 +122,10 @@ func (r *NetworkFirewallResource) Metadata(ctx context.Context, req resource.Met
 func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             network_firewallSchemaVersion,
-		MarkdownDescription: "Manages a NetworkFirewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.",
+		MarkdownDescription: "Manages a Network Firewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the NetworkFirewall. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Network Firewall. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -135,7 +135,7 @@ func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the NetworkFirewall will be created.",
+				MarkdownDescription: "Namespace where the Network Firewall will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

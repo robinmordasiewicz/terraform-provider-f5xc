@@ -1503,10 +1503,10 @@ func (r *VoltstackSiteResource) Metadata(ctx context.Context, req resource.Metad
 func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             voltstack_siteSchemaVersion,
-		MarkdownDescription: "Manages a VoltstackSite resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.",
+		MarkdownDescription: "Manages a Voltstack Site resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the VoltstackSite. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Voltstack Site. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -1516,7 +1516,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the VoltstackSite will be created.",
+				MarkdownDescription: "Namespace where the Voltstack Site will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

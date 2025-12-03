@@ -81,7 +81,7 @@ func (r *TpmCategoryResource) Schema(ctx context.Context, req resource.SchemaReq
 		MarkdownDescription: "Manages Category object, which is a grouping of APIKeys used for TPM provisioning in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the TpmCategory. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Tpm Category. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -91,7 +91,7 @@ func (r *TpmCategoryResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the TpmCategory will be created.",
+				MarkdownDescription: "Namespace where the Tpm Category will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

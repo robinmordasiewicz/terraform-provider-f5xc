@@ -77,7 +77,7 @@ func (r *GeoLocationSetResource) Schema(ctx context.Context, req resource.Schema
 		MarkdownDescription: "Manages Geolocation Set in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the GeoLocationSet. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Geo Location Set. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -87,7 +87,7 @@ func (r *GeoLocationSetResource) Schema(ctx context.Context, req resource.Schema
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the GeoLocationSet will be created.",
+				MarkdownDescription: "Namespace where the Geo Location Set will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

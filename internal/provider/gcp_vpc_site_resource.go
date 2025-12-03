@@ -810,10 +810,10 @@ func (r *GCPVPCSiteResource) Metadata(ctx context.Context, req resource.Metadata
 func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             gcp_vpc_siteSchemaVersion,
-		MarkdownDescription: "Manages a GCPVPCSite resource in F5 Distributed Cloud for deploying F5 sites within Google Cloud VPC environments.",
+		MarkdownDescription: "Manages a GCP VPC Site resource in F5 Distributed Cloud for deploying F5 sites within Google Cloud VPC environments.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the GCPVPCSite. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the GCP VPC Site. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -823,7 +823,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the GCPVPCSite will be created.",
+				MarkdownDescription: "Namespace where the GCP VPC Site will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

@@ -237,7 +237,7 @@ func (r *NetworkPolicyResource) Schema(ctx context.Context, req resource.SchemaR
 		MarkdownDescription: "Manages new network policy with configured parameters in specified namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the NetworkPolicy. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Network Policy. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -247,7 +247,7 @@ func (r *NetworkPolicyResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the NetworkPolicy will be created.",
+				MarkdownDescription: "Namespace where the Network Policy will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

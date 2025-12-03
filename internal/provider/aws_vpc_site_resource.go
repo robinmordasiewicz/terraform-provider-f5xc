@@ -869,10 +869,10 @@ func (r *AWSVPCSiteResource) Metadata(ctx context.Context, req resource.Metadata
 func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             aws_vpc_siteSchemaVersion,
-		MarkdownDescription: "Manages a AWSVPCSite resource in F5 Distributed Cloud for deploying F5 sites within AWS VPC environments.",
+		MarkdownDescription: "Manages a AWS VPC Site resource in F5 Distributed Cloud for deploying F5 sites within AWS VPC environments.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the AWSVPCSite. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the AWS VPC Site. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -882,7 +882,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the AWSVPCSite will be created.",
+				MarkdownDescription: "Namespace where the AWS VPC Site will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

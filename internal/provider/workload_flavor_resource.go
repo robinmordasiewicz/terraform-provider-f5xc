@@ -70,7 +70,7 @@ func (r *WorkloadFlavorResource) Schema(ctx context.Context, req resource.Schema
 		MarkdownDescription: "Manages workload_flavor in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the WorkloadFlavor. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Workload Flavor. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -80,7 +80,7 @@ func (r *WorkloadFlavorResource) Schema(ctx context.Context, req resource.Schema
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the WorkloadFlavor will be created.",
+				MarkdownDescription: "Namespace where the Workload Flavor will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

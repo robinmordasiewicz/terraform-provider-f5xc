@@ -89,7 +89,7 @@ func (r *AppTypeResource) Schema(ctx context.Context, req resource.SchemaRequest
 		MarkdownDescription: "Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the AppType. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the App Type. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -99,7 +99,7 @@ func (r *AppTypeResource) Schema(ctx context.Context, req resource.SchemaRequest
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the AppType will be created.",
+				MarkdownDescription: "Namespace where the App Type will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

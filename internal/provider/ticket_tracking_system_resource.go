@@ -83,7 +83,7 @@ func (r *TicketTrackingSystemResource) Schema(ctx context.Context, req resource.
 		MarkdownDescription: "Manages Ticket Tracking System in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the TicketTrackingSystem. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Ticket Tracking System. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -93,7 +93,7 @@ func (r *TicketTrackingSystemResource) Schema(ctx context.Context, req resource.
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the TicketTrackingSystem will be created.",
+				MarkdownDescription: "Namespace where the Ticket Tracking System will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

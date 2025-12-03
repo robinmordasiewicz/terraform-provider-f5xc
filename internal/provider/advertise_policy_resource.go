@@ -215,10 +215,10 @@ func (r *AdvertisePolicyResource) Metadata(ctx context.Context, req resource.Met
 func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             advertise_policySchemaVersion,
-		MarkdownDescription: "Manages a AdvertisePolicy resource in F5 Distributed Cloud for advertise_policy object controls how and where a service represented by a given virtual_host object is advertised to consumers. configuration.",
+		MarkdownDescription: "Manages a Advertise Policy resource in F5 Distributed Cloud for advertise_policy object controls how and where a service represented by a given virtual_host object is advertised to consumers. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the AdvertisePolicy. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Advertise Policy. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -228,7 +228,7 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the AdvertisePolicy will be created.",
+				MarkdownDescription: "Namespace where the Advertise Policy will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

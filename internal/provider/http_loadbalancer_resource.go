@@ -4745,10 +4745,10 @@ func (r *HTTPLoadBalancerResource) Metadata(ctx context.Context, req resource.Me
 func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             http_loadbalancerSchemaVersion,
-		MarkdownDescription: "Manages a HTTPLoadBalancer resource in F5 Distributed Cloud for load balancing HTTP/HTTPS traffic with advanced routing and security.",
+		MarkdownDescription: "Manages a HTTP Load Balancer resource in F5 Distributed Cloud for load balancing HTTP/HTTPS traffic with advanced routing and security.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the HTTPLoadBalancer. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the HTTP Load Balancer. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -4758,7 +4758,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the HTTPLoadBalancer will be created.",
+				MarkdownDescription: "Namespace where the HTTP Load Balancer will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

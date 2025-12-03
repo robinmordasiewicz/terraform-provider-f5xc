@@ -103,7 +103,7 @@ func (r *K8SClusterRoleResource) Schema(ctx context.Context, req resource.Schema
 		MarkdownDescription: "Manages k8s_cluster_role will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the K8SClusterRole. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the K8S Cluster Role. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -113,7 +113,7 @@ func (r *K8SClusterRoleResource) Schema(ctx context.Context, req resource.Schema
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the K8SClusterRole will be created.",
+				MarkdownDescription: "Namespace where the K8S Cluster Role will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

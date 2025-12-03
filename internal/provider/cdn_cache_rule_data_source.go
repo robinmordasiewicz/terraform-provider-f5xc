@@ -42,7 +42,7 @@ func (d *CDNCacheRuleDataSource) Metadata(ctx context.Context, req datasource.Me
 
 func (d *CDNCacheRuleDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages a CDNCacheRule resource in F5 Distributed Cloud for cdn loadbalancer configuration.",
+		MarkdownDescription: "Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer configuration.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

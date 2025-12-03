@@ -42,7 +42,7 @@ func (d *TpmManagerDataSource) Metadata(ctx context.Context, req datasource.Meta
 
 func (d *TpmManagerDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages a TpmManager resource in F5 Distributed Cloud for create a tpm manager configuration.",
+		MarkdownDescription: "Manages a Tpm Manager resource in F5 Distributed Cloud for create a tpm manager configuration.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

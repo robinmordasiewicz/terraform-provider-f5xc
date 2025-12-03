@@ -69,7 +69,7 @@ func (r *DNSComplianceChecksResource) Schema(ctx context.Context, req resource.S
 		MarkdownDescription: "Manages DNS Compliance Checks Specification in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the DNSComplianceChecks. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the DNS Compliance Checks. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -79,7 +79,7 @@ func (r *DNSComplianceChecksResource) Schema(ctx context.Context, req resource.S
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the DNSComplianceChecks will be created.",
+				MarkdownDescription: "Namespace where the DNS Compliance Checks will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

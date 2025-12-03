@@ -64,10 +64,10 @@ func (r *CertificateChainResource) Metadata(ctx context.Context, req resource.Me
 func (r *CertificateChainResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             certificate_chainSchemaVersion,
-		MarkdownDescription: "Manages a CertificateChain resource in F5 Distributed Cloud for certificate chain configuration for TLS.",
+		MarkdownDescription: "Manages a Certificate Chain resource in F5 Distributed Cloud for certificate chain configuration for TLS.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the CertificateChain. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Certificate Chain. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -77,7 +77,7 @@ func (r *CertificateChainResource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the CertificateChain will be created.",
+				MarkdownDescription: "Namespace where the Certificate Chain will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

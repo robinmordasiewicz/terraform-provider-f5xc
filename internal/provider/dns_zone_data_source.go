@@ -42,7 +42,7 @@ func (d *DNSZoneDataSource) Metadata(ctx context.Context, req datasource.Metadat
 
 func (d *DNSZoneDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages a DNSZone resource in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages a DNS Zone resource in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

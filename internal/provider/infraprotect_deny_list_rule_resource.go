@@ -77,7 +77,7 @@ func (r *InfraprotectDenyListRuleResource) Schema(ctx context.Context, req resou
 		MarkdownDescription: "Manages DDoS transit Deny List Rule in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the InfraprotectDenyListRule. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Infraprotect Deny List Rule. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -87,7 +87,7 @@ func (r *InfraprotectDenyListRuleResource) Schema(ctx context.Context, req resou
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the InfraprotectDenyListRule will be created.",
+				MarkdownDescription: "Namespace where the Infraprotect Deny List Rule will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

@@ -85,7 +85,7 @@ func (r *SensitiveDataPolicyResource) Schema(ctx context.Context, req resource.S
 		MarkdownDescription: "Manages sensitive_data_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the SensitiveDataPolicy. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Sensitive Data Policy. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -95,7 +95,7 @@ func (r *SensitiveDataPolicyResource) Schema(ctx context.Context, req resource.S
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the SensitiveDataPolicy will be created.",
+				MarkdownDescription: "Namespace where the Sensitive Data Policy will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

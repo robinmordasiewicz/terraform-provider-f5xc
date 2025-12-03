@@ -185,10 +185,10 @@ func (r *CDNCacheRuleResource) Metadata(ctx context.Context, req resource.Metada
 func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             cdn_cache_ruleSchemaVersion,
-		MarkdownDescription: "Manages a CDNCacheRule resource in F5 Distributed Cloud for cdn loadbalancer configuration.",
+		MarkdownDescription: "Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the CDNCacheRule. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the CDN Cache Rule. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -198,7 +198,7 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the CDNCacheRule will be created.",
+				MarkdownDescription: "Namespace where the CDN Cache Rule will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

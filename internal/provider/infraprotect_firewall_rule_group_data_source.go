@@ -42,7 +42,7 @@ func (d *InfraprotectFirewallRuleGroupDataSource) Metadata(ctx context.Context, 
 
 func (d *InfraprotectFirewallRuleGroupDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages a InfraprotectFirewallRuleGroup resource in F5 Distributed Cloud for amends a ddos transit firewall rule group configuration.",
+		MarkdownDescription: "Manages a Infraprotect Firewall Rule Group resource in F5 Distributed Cloud for amends a ddos transit firewall rule group configuration.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

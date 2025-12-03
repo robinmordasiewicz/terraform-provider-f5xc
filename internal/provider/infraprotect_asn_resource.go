@@ -74,7 +74,7 @@ func (r *InfraprotectAsnResource) Schema(ctx context.Context, req resource.Schem
 		MarkdownDescription: "Manages DDoS transit ASN in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the InfraprotectAsn. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Infraprotect Asn. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -84,7 +84,7 @@ func (r *InfraprotectAsnResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the InfraprotectAsn will be created.",
+				MarkdownDescription: "Namespace where the Infraprotect Asn will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

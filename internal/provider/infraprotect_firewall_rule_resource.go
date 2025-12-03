@@ -135,7 +135,7 @@ func (r *InfraprotectFirewallRuleResource) Schema(ctx context.Context, req resou
 		MarkdownDescription: "Manages DDoS transit Firewall Rule in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the InfraprotectFirewallRule. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Infraprotect Firewall Rule. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -145,7 +145,7 @@ func (r *InfraprotectFirewallRuleResource) Schema(ctx context.Context, req resou
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the InfraprotectFirewallRule will be created.",
+				MarkdownDescription: "Namespace where the Infraprotect Firewall Rule will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

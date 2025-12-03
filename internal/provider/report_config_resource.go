@@ -112,10 +112,10 @@ func (r *ReportConfigResource) Metadata(ctx context.Context, req resource.Metada
 func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             report_configSchemaVersion,
-		MarkdownDescription: "Manages a ReportConfig resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.",
+		MarkdownDescription: "Manages a Report Config resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the ReportConfig. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Report Config. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -125,7 +125,7 @@ func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRe
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the ReportConfig will be created.",
+				MarkdownDescription: "Namespace where the Report Config will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

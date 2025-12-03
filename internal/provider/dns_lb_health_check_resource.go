@@ -116,7 +116,7 @@ func (r *DNSLBHealthCheckResource) Schema(ctx context.Context, req resource.Sche
 		MarkdownDescription: "Manages DNS Load Balancer Health Check in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the DNSLBHealthCheck. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the DNS LB Health Check. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -126,7 +126,7 @@ func (r *DNSLBHealthCheckResource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the DNSLBHealthCheck will be created.",
+				MarkdownDescription: "Namespace where the DNS LB Health Check will be created.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

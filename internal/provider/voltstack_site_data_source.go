@@ -42,7 +42,7 @@ func (d *VoltstackSiteDataSource) Metadata(ctx context.Context, req datasource.M
 
 func (d *VoltstackSiteDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages a VoltstackSite resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.",
+		MarkdownDescription: "Manages a Voltstack Site resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

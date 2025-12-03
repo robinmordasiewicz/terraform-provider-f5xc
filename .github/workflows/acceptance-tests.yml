@@ -143,11 +143,12 @@ jobs:
           # Run mock tests and capture output
           # Note: TF_ACC=1 is required for resource.Test() even with mock server
           # F5XC_MOCK_MODE=1 ensures mock server is used instead of real API
+          # Tests include both provider resources AND provider-defined functions
           TF_ACC=1 F5XC_MOCK_MODE=1 go test -json \
             -parallel "$PARALLEL" \
             -timeout "${TIMEOUT}m" \
             -run 'TestMock.*' \
-            ./internal/provider/... 2>&1 | tee test-reports/test-output-mock.json || true
+            ./internal/provider/... ./internal/functions/... 2>&1 | tee test-reports/test-output-mock.json || true
 
           # Generate reports
           cat test-reports/test-output-mock.json | go run tools/test-report/main.go \
@@ -296,11 +297,12 @@ jobs:
           echo "Timeout per test: ${TIMEOUT}m"
 
           # Real API tests run SEQUENTIALLY (-parallel 1) with rate limiting
+          # Tests include both provider resources AND provider-defined functions
           go test -json \
             -parallel 1 \
             -timeout "${TIMEOUT}m" \
             -run 'TestAcc.*' \
-            ./internal/provider/... 2>&1 | tee test-reports/test-output-real.json || true
+            ./internal/provider/... ./internal/functions/... 2>&1 | tee test-reports/test-output-real.json || true
 
           # Generate reports
           cat test-reports/test-output-real.json | go run tools/test-report/main.go \
@@ -346,6 +348,98 @@ jobs:
           report_paths: 'test-reports/real-tests.xml'
           check_name: 'Real API Test Results'
           fail_on_failure: false
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # Resource Cleanup - Run sweepers to clean up test resources (even on failure)
+  # ═══════════════════════════════════════════════════════════════════════════
+  cleanup:
+    name: Cleanup Test Resources
+    runs-on: ${{ github.event.inputs.runner || 'self-hosted' }}
+    needs: [real-api-tests]
+    # ALWAYS run after real API tests, even if they failed
+    if: |
+      always() &&
+      needs.real-api-tests.result != 'skipped'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache: true
+
+      - name: Setup P12 certificate (if using P12 auth)
+        id: setup-p12
+        if: ${{ secrets.F5XC_API_P12_BASE64 != '' }}
+        env:
+          F5XC_API_P12_BASE64: ${{ secrets.F5XC_API_P12_BASE64 }}
+        run: |
+          # Create secure temp directory
+          P12_DIR=$(mktemp -d)
+          P12_FILE="${P12_DIR}/api-creds.p12"
+
+          # Decode base64 P12 to temp file
+          echo "$F5XC_API_P12_BASE64" | base64 -d > "$P12_FILE"
+
+          # Verify file was created and has content
+          if [ ! -s "$P12_FILE" ]; then
+            echo "::error::Failed to decode P12 certificate"
+            exit 1
+          fi
+
+          echo "✓ P12 certificate decoded to temporary file"
+          echo "p12_file=$P12_FILE" >> $GITHUB_OUTPUT
+          echo "p12_dir=$P12_DIR" >> $GITHUB_OUTPUT
+
+      - name: Run sweepers
+        id: sweep
+        env:
+          F5XC_API_URL: ${{ secrets.F5XC_API_URL }}
+          F5XC_API_TOKEN: ${{ secrets.F5XC_API_TOKEN }}
+          F5XC_API_P12_FILE: ${{ steps.setup-p12.outputs.p12_file }}
+          F5XC_P12_PASSWORD: ${{ secrets.F5XC_P12_PASSWORD }}
+          TF_ACC: '1'
+        run: |
+          echo "Running sweepers to clean up test resources..."
+          echo ""
+
+          # Run all sweepers to clean up leftover test resources
+          # This runs even if tests failed to ensure cleanup
+          go test ./internal/acctest -v -sweep=all -timeout 30m 2>&1 | tee sweep-output.txt || SWEEP_EXIT=$?
+
+          # Count swept resources (for summary)
+          NAMESPACE_COUNT=$(grep -c "Successfully deleted namespace" sweep-output.txt || echo "0")
+          echo "swept_namespaces=$NAMESPACE_COUNT" >> $GITHUB_OUTPUT
+
+          # Report results
+          echo ""
+          echo "Sweep completed."
+          echo "Namespaces cleaned: $NAMESPACE_COUNT"
+
+          # Sweeper failures are warnings, not errors (resources may already be gone)
+          if [[ "${SWEEP_EXIT:-0}" -ne 0 ]]; then
+            echo "::warning::Some sweepers encountered issues (check logs)"
+          fi
+
+      - name: Cleanup P12 certificate
+        if: always() && steps.setup-p12.outputs.p12_dir != ''
+        run: |
+          P12_DIR="${{ steps.setup-p12.outputs.p12_dir }}"
+          if [ -n "$P12_DIR" ] && [ -d "$P12_DIR" ]; then
+            rm -rf "$P12_DIR"
+            echo "✓ Temporary P12 certificate cleaned up"
+          fi
+
+      - name: Post cleanup summary
+        run: |
+          echo "## Resource Cleanup" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Sweepers ran to clean up test resources left behind by acceptance tests." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- Namespaces cleaned: ${{ steps.sweep.outputs.swept_namespaces || '0' }}" >> $GITHUB_STEP_SUMMARY
 
   # ═══════════════════════════════════════════════════════════════════════════
   # Mock vs Real Comparison - Ensures mock server behavioral consistency
@@ -463,7 +557,7 @@ jobs:
   summary:
     name: Test Summary
     runs-on: ubuntu-latest
-    needs: [mock-tests, real-api-tests, compare-results]
+    needs: [mock-tests, real-api-tests, compare-results, cleanup]
     if: always()
 
     steps:
@@ -529,6 +623,18 @@ jobs:
             echo "- Status: ⏭️ Skipped (requires both mock and real tests)" >> $GITHUB_STEP_SUMMARY
           else
             echo "- Status: ❌ Comparison failed" >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Resource cleanup results
+          echo "### Resource Cleanup" >> $GITHUB_STEP_SUMMARY
+          if [[ "${{ needs.cleanup.result }}" == "success" ]]; then
+            echo "- Status: ✅ Cleanup completed" >> $GITHUB_STEP_SUMMARY
+            echo "- Sweepers ran after tests to clean up leftover resources" >> $GITHUB_STEP_SUMMARY
+          elif [[ "${{ needs.cleanup.result }}" == "skipped" ]]; then
+            echo "- Status: ⏭️ Skipped (real API tests did not run)" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- Status: ⚠️ Cleanup had issues (check logs)" >> $GITHUB_STEP_SUMMARY
           fi
           echo "" >> $GITHUB_STEP_SUMMARY
 

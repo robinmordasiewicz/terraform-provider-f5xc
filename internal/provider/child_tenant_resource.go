@@ -122,11 +122,10 @@ func (r *ChildTenantResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace for the Child Tenant. For this resource type, namespace should be empty or omitted.",
-				Optional:            true,
-				Computed:            true,
+				MarkdownDescription: "Namespace where the Child Tenant will be created.",
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
+					stringplanmodifier.RequiresReplace(),
 				},
 				Validators: []validator.String{
 					validators.NamespaceValidator(),

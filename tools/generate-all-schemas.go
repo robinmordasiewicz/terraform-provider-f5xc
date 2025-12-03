@@ -1391,6 +1391,7 @@ func toTitleCase(s string) string {
 
 // toHumanName converts a resource name to human-readable format for documentation.
 // Unlike toTitleCase which produces Go type names, this produces readable names with spaces.
+// Used in transformResourceDescription() to generate user-friendly resource descriptions.
 // Example: "http_loadbalancer" -> "HTTP Load Balancer"
 func toHumanName(s string) string {
 	return naming.ToHumanReadableName(s)

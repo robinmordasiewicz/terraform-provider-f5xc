@@ -123,7 +123,9 @@ jobs:
           echo "Running mock tests with parallelism: $PARALLEL"
 
           # Run mock tests and capture output
-          F5XC_MOCK_MODE=1 go test -json \
+          # Note: TF_ACC=1 is required for resource.Test() even with mock server
+          # F5XC_MOCK_MODE=1 ensures mock server is used instead of real API
+          TF_ACC=1 F5XC_MOCK_MODE=1 go test -json \
             -parallel "$PARALLEL" \
             -timeout "${TIMEOUT}m" \
             -run 'TestMock.*' \

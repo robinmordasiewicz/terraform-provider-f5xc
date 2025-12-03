@@ -12,7 +12,17 @@
 #   5. Starts the runner
 #
 # Usage:
-#   ./scripts/setup-self-hosted-runner.sh
+#   ./scripts/setup-self-hosted-runner.sh [OPTIONS]
+#
+# Options:
+#   -y, --yes           Auto-confirm all prompts
+#   --skip-secrets      Skip configuring GitHub secrets (use if already set)
+#   --skip-start        Skip starting the runner after setup
+#   --runner-name NAME  Set runner name (default: hostname-f5xc)
+#
+# Environment Variables:
+#   F5XC_API_URL    - F5 XC API URL (used in non-interactive mode)
+#   F5XC_API_TOKEN  - F5 XC API Token (used in non-interactive mode)
 #
 # Requirements:
 #   - GitHub CLI (gh) authenticated with repo admin access
@@ -20,6 +30,43 @@
 #   - curl, jq installed
 
 set -euo pipefail
+
+# Command line options
+AUTO_YES=false
+SKIP_SECRETS=false
+SKIP_START=false
+RUNNER_NAME_ARG=""
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -y|--yes)
+            AUTO_YES=true
+            shift
+            ;;
+        --skip-secrets)
+            SKIP_SECRETS=true
+            shift
+            ;;
+        --skip-start)
+            SKIP_START=true
+            shift
+            ;;
+        --runner-name)
+            RUNNER_NAME_ARG="$2"
+            shift 2
+            ;;
+        --help|-h)
+            sed -n '2,/^set -euo pipefail/p' "$0" | head -n -1
+            exit 0
+            ;;
+        *)
+            echo "Unknown option: $1"
+            echo "Use --help for usage information"
+            exit 1
+            ;;
+    esac
+done
 
 # Colors
 RED='\033[0;31m'
@@ -77,6 +124,10 @@ prompt_input() {
 
 # Confirm prompt
 confirm() {
+    if [[ "$AUTO_YES" == "true" ]]; then
+        echo -e "${YELLOW}$1 (y/N): ${NC}y (auto)"
+        return 0
+    fi
     echo -en "${YELLOW}$1 (y/N): ${NC}"
     read -r response
     [[ "$response" =~ ^[Yy]$ ]]
@@ -146,20 +197,30 @@ get_repo_info() {
 
 # Configure credentials
 configure_credentials() {
+    if [[ "$SKIP_SECRETS" == "true" ]]; then  # pragma: allowlist secret
+        log_step "Skipping credential configuration (--skip-secrets)"
+        return 0
+    fi
+
     log_step "Configuring F5 XC API credentials"
 
-    echo ""
-    echo "To get an API token from F5 XC Console:"
-    echo "  1. Administration → Personal Management → Credentials"
-    echo "  2. Add Credentials → API Token"
-    echo "  3. Copy the token"
-    echo ""
+    # Use environment variables if available (non-interactive mode)
+    if [[ -n "${F5XC_API_URL:-}" ]] && [[ -n "${F5XC_API_TOKEN:-}" ]]; then
+        log_info "Using credentials from environment variables"
+    else
+        echo ""
+        echo "To get an API token from F5 XC Console:"
+        echo "  1. Administration → Personal Management → Credentials"
+        echo "  2. Add Credentials → API Token"
+        echo "  3. Copy the token"
+        echo ""
 
-    prompt_input "F5 XC API URL" "https://console.ves.volterra.io" "F5XC_API_URL" "false"
-    prompt_input "F5 XC API Token" "" "F5XC_API_TOKEN" "true"
+        prompt_input "F5 XC API URL" "https://console.ves.volterra.io" "F5XC_API_URL" "false"
+        prompt_input "F5 XC API Token" "" "F5XC_API_TOKEN" "true"
+    fi
 
-    if [[ -z "$F5XC_API_TOKEN" ]]; then
-        log_error "API Token is required"
+    if [[ -z "${F5XC_API_TOKEN:-}" ]]; then
+        log_error "API Token is required (set F5XC_API_TOKEN or provide interactively)"
         exit 1
     fi
 
@@ -249,7 +310,15 @@ configure_runner() {
 
     # Configure
     local runner_name="${HOSTNAME:-$(hostname)}-f5xc"
-    prompt_input "Runner name" "$runner_name" "RUNNER_NAME" "false"
+    if [[ -n "$RUNNER_NAME_ARG" ]]; then
+        RUNNER_NAME="$RUNNER_NAME_ARG"
+        log_info "Using runner name: $RUNNER_NAME"
+    elif [[ "$AUTO_YES" == "true" ]]; then
+        RUNNER_NAME="$runner_name"
+        log_info "Using default runner name: $RUNNER_NAME"
+    else
+        prompt_input "Runner name" "$runner_name" "RUNNER_NAME" "false"
+    fi
 
     log_info "Registering runner..."
     ./config.sh \
@@ -266,19 +335,31 @@ configure_runner() {
 
 # Start runner
 start_runner() {
+    if [[ "$SKIP_START" == "true" ]]; then
+        log_step "Skipping runner start (--skip-start)"
+        log_info "To start manually: cd $RUNNER_DIR && ./run.sh"
+        return 0
+    fi
+
     log_step "Starting runner"
 
     cd "$RUNNER_DIR"
 
-    echo ""
-    echo "Run options:"
-    echo "  1) Foreground - Interactive (Ctrl+C to stop)"
-    echo "  2) Background - Runs in background"
-    echo "  3) Service    - Install as system service"
-    echo "  4) Skip       - Don't start now"
-    echo ""
+    if [[ "$AUTO_YES" == "true" ]]; then
+        # In auto mode, start in background
+        START_OPTION="2"
+        log_info "Auto mode: starting in background"
+    else
+        echo ""
+        echo "Run options:"
+        echo "  1) Foreground - Interactive (Ctrl+C to stop)"
+        echo "  2) Background - Runs in background"
+        echo "  3) Service    - Install as system service"
+        echo "  4) Skip       - Don't start now"
+        echo ""
 
-    prompt_input "Choose option" "1" "START_OPTION" "false"
+        prompt_input "Choose option" "1" "START_OPTION" "false"
+    fi
 
     case "$START_OPTION" in
         1)
@@ -314,7 +395,7 @@ print_summary() {
     echo ""
     echo "  Repository:  $REPO_FULL"
     echo "  Runner:      $RUNNER_DIR"
-    echo "  API URL:     $F5XC_API_URL"
+    [[ -n "${F5XC_API_URL:-}" ]] && echo "  API URL:     $F5XC_API_URL"
     echo ""
     echo "  Trigger tests:"
     echo "    gh workflow run acceptance-tests.yml -f mode=full"

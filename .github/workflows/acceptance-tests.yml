@@ -1,18 +1,22 @@
 # Acceptance Tests Workflow
 #
 # This workflow runs comprehensive acceptance tests for the F5 XC Terraform Provider.
-# It supports both mock tests (fast, parallel) and real API tests (self-hosted runner).
+# It supports both mock tests (fast, parallel) and real API tests.
 #
 # Triggers:
-#   - Manual dispatch with mode selection
+#   - Manual dispatch with mode and runner selection
 #   - Pull requests (mock tests only for safety)
 #   - Weekly scheduled run (full suite)
 #
 # Test Modes:
 #   - mock-only: Parallel mock tests, runs on ubuntu-latest
-#   - real-only: Sequential real API tests, requires self-hosted runner
+#   - real-only: Sequential real API tests
 #   - full: Mock tests first, then real API tests
 #   - pr-subset: Mock tests only (safe for PRs)
+#
+# Runner Options:
+#   - ubuntu-latest: Standard GitHub runner for public API access (default)
+#   - self-hosted: Docker-based runner for VPN-only API access
 #
 # Required Secrets for Real API Tests (choose ONE auth method):
 #
@@ -58,6 +62,14 @@ on:
         required: false
         default: '10'
         type: string
+      runner:
+        description: 'Runner type (self-hosted for VPN-only APIs)'
+        required: false
+        default: 'ubuntu-latest'
+        type: choice
+        options:
+          - ubuntu-latest   # Public API access
+          - self-hosted     # VPN-required API access
 
   pull_request:
     branches: [main]
@@ -165,12 +177,13 @@ jobs:
           fail_on_failure: false
 
   # ═══════════════════════════════════════════════════════════════════════════
-  # Real API Tests - Require Self-Hosted Runner (SEQUENTIAL with rate limiting)
+  # Real API Tests - SEQUENTIAL with rate limiting
+  # Use self-hosted for VPN-only APIs, ubuntu-latest for public APIs
   # ═══════════════════════════════════════════════════════════════════════════
   real-api-tests:
     name: Real API Tests (Sequential)
-    # Self-hosted runner with VPN access to F5 XC staging
-    runs-on: self-hosted
+    # Runner selection: ubuntu-latest (public) or self-hosted (VPN-required)
+    runs-on: ${{ github.event.inputs.runner || 'ubuntu-latest' }}
     needs: [mock-tests]
     # Only run for full or real-only mode, and not on PRs
     if: |

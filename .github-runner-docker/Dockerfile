@@ -13,7 +13,7 @@ FROM ubuntu:22.04
 
 # Versions - update these as needed
 ARG RUNNER_VERSION=2.329.0
-ARG GO_VERSION=1.23.3
+ARG GO_VERSION=1.24.2
 ARG TERRAFORM_VERSION=1.9.8
 # TARGETARCH is automatically set by Docker buildx (amd64, arm64)
 ARG TARGETARCH
@@ -65,7 +65,11 @@ RUN useradd -m -s /bin/bash runner \
 WORKDIR /home/runner/actions-runner
 
 # Download and extract GitHub Actions runner
-RUN curl -fsSL "https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-${TARGETARCH}-${RUNNER_VERSION}.tar.gz" | tar -xzf - \
+RUN curl -fsSL "https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-${TARGETARCH}-${RUNNER_VERSION}.tar.gz" | tar -xzf -
+
+# Create tool cache directory for actions/setup-go and other actions
+# This prevents permission errors when GitHub Actions try to cache tools
+RUN mkdir -p /home/runner/actions-runner/_work/_tool \
     && chown -R runner:runner /home/runner
 
 # Switch to runner user

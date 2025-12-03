@@ -16,7 +16,7 @@ services:
       context: .
       args:
         - RUNNER_VERSION=2.321.0
-        - GO_VERSION=1.23.3
+        - GO_VERSION=1.24.2
         - TERRAFORM_VERSION=1.9.8
     image: f5xc-runner:latest
     container_name: f5xc-github-runner

@@ -1,7 +1,8 @@
 # Acceptance Tests Workflow
 #
 # This workflow runs comprehensive acceptance tests for the F5 XC Terraform Provider.
-# It supports both mock tests (fast, parallel) and real API tests.
+# It supports both mock tests (fast, parallel) and real API tests, plus behavioral
+# consistency comparison between mock and real API results.
 #
 # Triggers:
 #   - Manual dispatch with mode and runner selection
@@ -11,8 +12,13 @@
 # Test Modes:
 #   - mock-only: Parallel mock tests, runs on ubuntu-latest
 #   - real-only: Sequential real API tests
-#   - full: Mock tests first, then real API tests
+#   - full: Mock tests first, then real API tests, then comparison
 #   - pr-subset: Mock tests only (safe for PRs)
+#
+# Comparison Feature:
+#   When both mock and real tests run, the workflow compares results to ensure
+#   the mock server behaves identically to the real F5 XC API. Any discrepancies
+#   indicate the mock server needs fixes (tests that pass on real but fail on mock).
 #
 # Runner Options:
 #   - ubuntu-latest: Standard GitHub runner for public API access (default)
@@ -342,12 +348,122 @@ jobs:
           fail_on_failure: false
 
   # ═══════════════════════════════════════════════════════════════════════════
+  # Mock vs Real Comparison - Ensures mock server behavioral consistency
+  # ═══════════════════════════════════════════════════════════════════════════
+  compare-results:
+    name: Compare Mock vs Real
+    runs-on: ubuntu-latest
+    needs: [mock-tests, real-api-tests]
+    # Only run when both mock and real tests have completed
+    if: |
+      always() &&
+      needs.mock-tests.result == 'success' &&
+      needs.real-api-tests.result == 'success'
+
+    outputs:
+      mock_consistent: ${{ steps.compare.outputs.consistent }}
+      mock_needs_fix: ${{ steps.compare.outputs.needs_fix }}
+      comparison_available: ${{ steps.compare.outputs.available }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache: true
+
+      - name: Download mock test reports
+        uses: actions/download-artifact@v4
+        with:
+          name: mock-test-reports
+          path: mock-reports/
+
+      - name: Download real API test reports
+        uses: actions/download-artifact@v4
+        with:
+          name: real-api-test-reports
+          path: real-reports/
+
+      - name: Run comparison
+        id: compare
+        run: |
+          mkdir -p comparison-reports
+
+          # Check if both JSON reports exist
+          if [[ ! -f "mock-reports/mock-tests.json" ]]; then
+            echo "::warning::Mock test JSON report not found"
+            echo "available=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          if [[ ! -f "real-reports/real-tests.json" ]]; then
+            echo "::warning::Real API test JSON report not found"
+            echo "available=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          echo "available=true" >> $GITHUB_OUTPUT
+
+          # Run the comparison tool
+          go run tools/compare-test-results/main.go \
+            -mock=mock-reports/mock-tests.json \
+            -real=real-reports/real-tests.json \
+            -format=markdown \
+            -output=comparison-reports/comparison.md || COMPARE_EXIT=$?
+
+          # Also generate JSON format for downstream processing
+          go run tools/compare-test-results/main.go \
+            -mock=mock-reports/mock-tests.json \
+            -real=real-reports/real-tests.json \
+            -format=json \
+            -output=comparison-reports/comparison.json || true
+
+          # Extract metrics from JSON comparison
+          if [[ -f "comparison-reports/comparison.json" ]]; then
+            CONSISTENT=$(jq -r '.summary.consistent // 0' comparison-reports/comparison.json)
+            NEEDS_FIX=$(jq -r '.summary.mock_needs_fix // 0' comparison-reports/comparison.json)
+            echo "consistent=$CONSISTENT" >> $GITHUB_OUTPUT
+            echo "needs_fix=$NEEDS_FIX" >> $GITHUB_OUTPUT
+          else
+            echo "consistent=0" >> $GITHUB_OUTPUT
+            echo "needs_fix=0" >> $GITHUB_OUTPUT
+          fi
+
+          # Comparison tool exits non-zero if mock needs fixing
+          if [[ "${COMPARE_EXIT:-0}" -ne 0 ]]; then
+            echo "::warning::Mock server has discrepancies with real API"
+          fi
+
+      - name: Upload comparison reports
+        uses: actions/upload-artifact@v4
+        if: steps.compare.outputs.available == 'true'
+        with:
+          name: comparison-reports
+          path: comparison-reports/
+          retention-days: 30
+
+      - name: Post comparison to step summary
+        if: steps.compare.outputs.available == 'true'
+        run: |
+          echo "## Mock vs Real API Comparison" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [[ -f "comparison-reports/comparison.md" ]]; then
+            cat "comparison-reports/comparison.md" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ Comparison report not generated" >> $GITHUB_STEP_SUMMARY
+          fi
+
+  # ═══════════════════════════════════════════════════════════════════════════
   # Summary Job - Aggregates results and posts to GitHub
   # ═══════════════════════════════════════════════════════════════════════════
   summary:
     name: Test Summary
     runs-on: ubuntu-latest
-    needs: [mock-tests, real-api-tests]
+    needs: [mock-tests, real-api-tests, compare-results]
     if: always()
 
     steps:
@@ -393,6 +509,29 @@ jobs:
           fi
           echo "" >> $GITHUB_STEP_SUMMARY
 
+          # Mock vs Real comparison results
+          echo "### Mock vs Real Comparison" >> $GITHUB_STEP_SUMMARY
+          if [[ "${{ needs.compare-results.result }}" == "success" ]]; then
+            if [[ "${{ needs.compare-results.outputs.comparison_available }}" == "true" ]]; then
+              CONSISTENT="${{ needs.compare-results.outputs.mock_consistent || 0 }}"
+              NEEDS_FIX="${{ needs.compare-results.outputs.mock_needs_fix || 0 }}"
+              echo "- Status: ✅ Comparison completed" >> $GITHUB_STEP_SUMMARY
+              echo "- Mock Consistent: $CONSISTENT tests" >> $GITHUB_STEP_SUMMARY
+              if [[ "$NEEDS_FIX" -gt 0 ]]; then
+                echo "- ⚠️ Mock Needs Fix: $NEEDS_FIX tests" >> $GITHUB_STEP_SUMMARY
+              else
+                echo "- Mock Needs Fix: 0 tests ✅" >> $GITHUB_STEP_SUMMARY
+              fi
+            else
+              echo "- Status: ⚠️ Reports not available for comparison" >> $GITHUB_STEP_SUMMARY
+            fi
+          elif [[ "${{ needs.compare-results.result }}" == "skipped" ]]; then
+            echo "- Status: ⏭️ Skipped (requires both mock and real tests)" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- Status: ❌ Comparison failed" >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+
           # Include markdown report if available
           if [[ -f "all-reports/mock-test-reports/mock-tests.md" ]]; then
             echo "### Detailed Mock Test Report" >> $GITHUB_STEP_SUMMARY
@@ -402,6 +541,11 @@ jobs:
           if [[ -f "all-reports/real-api-test-reports/real-tests.md" ]]; then
             echo "### Detailed Real API Test Report" >> $GITHUB_STEP_SUMMARY
             cat "all-reports/real-api-test-reports/real-tests.md" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [[ -f "all-reports/comparison-reports/comparison.md" ]]; then
+            echo "### Detailed Mock vs Real Comparison Report" >> $GITHUB_STEP_SUMMARY
+            cat "all-reports/comparison-reports/comparison.md" >> $GITHUB_STEP_SUMMARY
           fi
 
       - name: Check overall status

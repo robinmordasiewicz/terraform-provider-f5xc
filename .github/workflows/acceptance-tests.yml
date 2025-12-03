@@ -14,8 +14,14 @@
 #   - full: Mock tests first, then real API tests
 #   - pr-subset: Mock tests only (safe for PRs)
 #
-# IMPORTANT: Real API tests require self-hosted runner with VPN access
-# to the F5 XC staging environment.
+# Required Secrets for Real API Tests:
+#   - F5XC_API_URL: F5 XC Console API URL (e.g., https://tenant.console.ves.volterra.io)
+#   - F5XC_API_P12_BASE64: Base64-encoded P12 certificate file
+#     Generate with: base64 -i /path/to/cert.p12 | tr -d '\n'
+#   - F5XC_P12_PASSWORD: Password for the P12 certificate
+#
+# IMPORTANT: Real API tests require self-hosted runner with network access
+# to the F5 XC environment.
 
 name: Acceptance Tests
 
@@ -193,7 +199,7 @@ jobs:
       - name: Verify API credentials
         env:
           F5XC_API_URL: ${{ secrets.F5XC_API_URL }}
-          F5XC_API_P12_FILE: ${{ secrets.F5XC_API_P12_FILE }}
+          F5XC_API_P12_BASE64: ${{ secrets.F5XC_API_P12_BASE64 }}
           F5XC_P12_PASSWORD: ${{ secrets.F5XC_P12_PASSWORD }}
         run: |
           echo "Checking API credentials..."
@@ -202,19 +208,48 @@ jobs:
             echo "::error::F5XC_API_URL secret not configured"
             exit 1
           fi
-          echo "API URL configured: $F5XC_API_URL"
+          echo "✓ API URL configured: $F5XC_API_URL"
 
-          if [ -z "$F5XC_API_P12_FILE" ] || [ -z "$F5XC_P12_PASSWORD" ]; then
-            echo "::error::F5XC_API_P12_FILE or F5XC_P12_PASSWORD not configured"
+          if [ -z "$F5XC_API_P12_BASE64" ]; then
+            echo "::error::F5XC_API_P12_BASE64 secret not configured"
+            echo "Generate with: base64 -i /path/to/cert.p12 | tr -d '\\n'"
             exit 1
           fi
-          echo "P12 credentials configured"
+          echo "✓ P12 certificate (base64) configured"
+
+          if [ -z "$F5XC_P12_PASSWORD" ]; then
+            echo "::error::F5XC_P12_PASSWORD secret not configured"
+            exit 1
+          fi
+          echo "✓ P12 password configured"
+
+      - name: Setup P12 certificate
+        id: setup-p12
+        env:
+          F5XC_API_P12_BASE64: ${{ secrets.F5XC_API_P12_BASE64 }}
+        run: |
+          # Create secure temp directory
+          P12_DIR=$(mktemp -d)
+          P12_FILE="${P12_DIR}/api-creds.p12"
+
+          # Decode base64 P12 to temp file
+          echo "$F5XC_API_P12_BASE64" | base64 -d > "$P12_FILE"
+
+          # Verify file was created and has content
+          if [ ! -s "$P12_FILE" ]; then
+            echo "::error::Failed to decode P12 certificate"
+            exit 1
+          fi
+
+          echo "✓ P12 certificate decoded to temporary file"
+          echo "p12_file=$P12_FILE" >> $GITHUB_OUTPUT
+          echo "p12_dir=$P12_DIR" >> $GITHUB_OUTPUT
 
       - name: Run real API tests
         id: run-tests
         env:
           F5XC_API_URL: ${{ secrets.F5XC_API_URL }}
-          F5XC_API_P12_FILE: ${{ secrets.F5XC_API_P12_FILE }}
+          F5XC_API_P12_FILE: ${{ steps.setup-p12.outputs.p12_file }}
           F5XC_P12_PASSWORD: ${{ secrets.F5XC_P12_PASSWORD }}
           TF_ACC: '1'
         run: |
@@ -250,6 +285,16 @@ jobs:
           echo "passed=$PASSED" >> $GITHUB_OUTPUT
           echo "failed=$FAILED" >> $GITHUB_OUTPUT
           echo "transient=$TRANSIENT" >> $GITHUB_OUTPUT
+
+      - name: Cleanup P12 certificate
+        if: always()
+        run: |
+          # Securely remove the temporary P12 file
+          P12_DIR="${{ steps.setup-p12.outputs.p12_dir }}"
+          if [ -n "$P12_DIR" ] && [ -d "$P12_DIR" ]; then
+            rm -rf "$P12_DIR"
+            echo "✓ Temporary P12 certificate cleaned up"
+          fi
 
       - name: Upload real API test reports
         uses: actions/upload-artifact@v4

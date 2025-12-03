@@ -487,9 +487,9 @@ func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTe
 
 	// DNS zone and DNS domain resources use domain names (with dots), not standard names
 	useDomainValidator := resourceName == "dns_zone" || resourceName == "dns_domain"
-	nameDescription := fmt.Sprintf("Name of the %s. Must be unique within the namespace.", toTitleCase(resourceName))
+	nameDescription := fmt.Sprintf("Name of the %s. Must be unique within the namespace.", toHumanName(resourceName))
 	if useDomainValidator {
-		nameDescription = fmt.Sprintf("Domain name for the %s (e.g., example.com). Must be a valid DNS domain name.", toTitleCase(resourceName))
+		nameDescription = fmt.Sprintf("Domain name for the %s (e.g., example.com). Must be a valid DNS domain name.", toHumanName(resourceName))
 	}
 
 	idComponentAttrs := []TerraformAttribute{
@@ -502,12 +502,12 @@ func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTe
 	if hasNamespace {
 		idComponentAttrs = append(idComponentAttrs, TerraformAttribute{
 			Name: "namespace", GoName: "Namespace", TfsdkTag: "namespace", Type: "string",
-			Description: fmt.Sprintf("Namespace where the %s will be created.", toTitleCase(resourceName)),
+			Description: fmt.Sprintf("Namespace where the %s will be created.", toHumanName(resourceName)),
 			Required:    true, PlanModifier: "RequiresReplace"})
 	} else {
 		idComponentAttrs = append(idComponentAttrs, TerraformAttribute{
 			Name: "namespace", GoName: "Namespace", TfsdkTag: "namespace", Type: "string",
-			Description: fmt.Sprintf("Namespace for the %s. For this resource type, namespace should be empty or omitted.", toTitleCase(resourceName)),
+			Description: fmt.Sprintf("Namespace for the %s. For this resource type, namespace should be empty or omitted.", toHumanName(resourceName)),
 			Optional:    true, Computed: true, PlanModifier: "UseStateForUnknown"})
 	}
 
@@ -1086,7 +1086,7 @@ func formatEnumDescription(desc string, enumValues []interface{}) string {
 // Terraform resource descriptions following HashiCorp best practices.
 // Pattern: "Manages a [Resource] in F5 Distributed Cloud [for purpose/capability]."
 func transformResourceDescription(resourceName, rawDescription string) string {
-	titleCase := toTitleCase(resourceName)
+	humanName := toHumanName(resourceName)
 
 	// Clean and normalize the raw description first
 	desc := cleanDescription(rawDescription)
@@ -1094,7 +1094,7 @@ func transformResourceDescription(resourceName, rawDescription string) string {
 
 	// If empty, use default
 	if desc == "" {
-		return fmt.Sprintf("Manages a %s resource in F5 Distributed Cloud.", titleCase)
+		return fmt.Sprintf("Manages a %s resource in F5 Distributed Cloud.", humanName)
 	}
 
 	// Detect and transform common technical description patterns
@@ -1102,13 +1102,13 @@ func transformResourceDescription(resourceName, rawDescription string) string {
 
 	// Pattern 1: "Shape of the X specification" -> extract X and make user-friendly
 	if strings.Contains(lowerDesc, "shape of") {
-		return generateCapabilityDescription(resourceName, titleCase, desc)
+		return generateCapabilityDescription(resourceName, humanName, desc)
 	}
 
 	// Pattern 2: "X object" or "X configuration" - technical object reference
 	if strings.HasSuffix(lowerDesc, " object") || strings.HasSuffix(lowerDesc, " configuration") ||
 		strings.HasSuffix(lowerDesc, " spec") || strings.HasSuffix(lowerDesc, " specification") {
-		return generateCapabilityDescription(resourceName, titleCase, desc)
+		return generateCapabilityDescription(resourceName, humanName, desc)
 	}
 
 	// Pattern 3: Already starts with a verb like "Create", "Configure", "Define"
@@ -1136,9 +1136,9 @@ func transformResourceDescription(resourceName, rawDescription string) string {
 		// Use the description as the capability explanation
 		capability := extractCapabilityFromDescription(desc)
 		if capability != "" {
-			return fmt.Sprintf("Manages a %s resource in F5 Distributed Cloud for %s.", titleCase, capability)
+			return fmt.Sprintf("Manages a %s resource in F5 Distributed Cloud for %s.", humanName, capability)
 		}
-		return fmt.Sprintf("Manages a %s resource in F5 Distributed Cloud. %s", titleCase, desc)
+		return fmt.Sprintf("Manages a %s resource in F5 Distributed Cloud. %s", humanName, desc)
 	}
 
 	// If description already looks good, just ensure it ends properly
@@ -1150,7 +1150,7 @@ func transformResourceDescription(resourceName, rawDescription string) string {
 
 // generateCapabilityDescription creates a user-friendly description based on resource name
 // and any capability hints from the original description
-func generateCapabilityDescription(resourceName, titleCase, rawDesc string) string {
+func generateCapabilityDescription(resourceName, humanName, rawDesc string) string {
 	// Resource-specific capability mappings for common F5 XC resources
 	capabilities := map[string]string{
 		// Sites
@@ -1239,17 +1239,17 @@ func generateCapabilityDescription(resourceName, titleCase, rawDesc string) stri
 
 	// Check if we have a specific capability mapping
 	if capability, ok := capabilities[resourceName]; ok {
-		return fmt.Sprintf("Manages a %s resource in F5 Distributed Cloud for %s.", titleCase, capability)
+		return fmt.Sprintf("Manages a %s resource in F5 Distributed Cloud for %s.", humanName, capability)
 	}
 
 	// Try to extract capability from raw description
 	capability := extractCapabilityFromDescription(rawDesc)
 	if capability != "" {
-		return fmt.Sprintf("Manages a %s resource in F5 Distributed Cloud for %s.", titleCase, capability)
+		return fmt.Sprintf("Manages a %s resource in F5 Distributed Cloud for %s.", humanName, capability)
 	}
 
 	// Default fallback
-	return fmt.Sprintf("Manages a %s resource in F5 Distributed Cloud.", titleCase)
+	return fmt.Sprintf("Manages a %s resource in F5 Distributed Cloud.", humanName)
 }
 
 // extractCapabilityFromDescription tries to extract a meaningful capability phrase
@@ -1387,6 +1387,13 @@ func addOneOfConstraint(desc string, oneOfFields []string) string {
 // Example: "http_loadbalancer" -> "HTTPLoadBalancer"
 func toTitleCase(s string) string {
 	return naming.ToResourceTypeName(s)
+}
+
+// toHumanName converts a resource name to human-readable format for documentation.
+// Unlike toTitleCase which produces Go type names, this produces readable names with spaces.
+// Example: "http_loadbalancer" -> "HTTP Load Balancer"
+func toHumanName(s string) string {
+	return naming.ToHumanReadableName(s)
 }
 
 // toSnakeCase converts a string to lowercase snake_case for Terraform attribute names

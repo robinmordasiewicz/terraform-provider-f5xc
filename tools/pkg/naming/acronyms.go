@@ -61,6 +61,16 @@ var CompoundWords = map[string]string{
 	"fastcgi":      "FastCGI",
 }
 
+// CompoundWordsHumanReadable defines compound words for human-readable documentation.
+// These are split with spaces unlike CompoundWords which are for Go type names.
+// Example: "loadbalancer" -> "Load Balancer"
+var CompoundWordsHumanReadable = map[string]string{
+	"loadbalancer": "Load Balancer",
+	"bigip":        "BIG-IP",
+	"websocket":    "WebSocket",
+	"fastcgi":      "FastCGI",
+}
+
 // IsUppercaseAcronym returns true if the given string (in any case) is a known uppercase acronym.
 func IsUppercaseAcronym(s string) bool {
 	return UppercaseAcronyms[ToUpper(s)]

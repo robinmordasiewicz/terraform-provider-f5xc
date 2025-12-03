@@ -101,6 +101,35 @@ func TestToHumanName(t *testing.T) {
 	}
 }
 
+func TestToHumanReadableName(t *testing.T) {
+	tests := []struct {
+		input    string
+		expected string
+	}{
+		{"http_loadbalancer", "HTTP Load Balancer"},   // compound word with spaces
+		{"tcp_loadbalancer", "TCP Load Balancer"},     // compound word with spaces
+		{"udp_loadbalancer", "UDP Load Balancer"},     // compound word with spaces
+		{"cdn_loadbalancer", "CDN Load Balancer"},     // compound word with spaces
+		{"dns_zone", "DNS Zone"},                      // acronym + word
+		{"aws_vpc_site", "AWS VPC Site"},              // multiple acronyms
+		{"origin_pool", "Origin Pool"},                // regular words
+		{"app_firewall", "App Firewall"},              // regular words
+		{"mtls_config", "mTLS Config"},                // mixed case acronym
+		{"oauth_provider", "OAuth Provider"},          // mixed case acronym
+		{"bigip_server", "BIG-IP Server"},             // compound word with special formatting
+		{"websocket_connection", "WebSocket Connection"}, // mixed case compound word
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.input, func(t *testing.T) {
+			result := ToHumanReadableName(tt.input)
+			if result != tt.expected {
+				t.Errorf("ToHumanReadableName(%q) = %q, want %q", tt.input, result, tt.expected)
+			}
+		})
+	}
+}
+
 func TestToAnchorName(t *testing.T) {
 	tests := []struct {
 		input    string

@@ -95,6 +95,33 @@ func ToHumanName(resourceName string) string {
 	return strings.Join(result, " ")
 }
 
+// ToHumanReadableName converts a resource name to human-readable format with proper spacing.
+// Unlike ToHumanName, this function also handles compound words with spaces.
+// Example: "http_loadbalancer" -> "HTTP Load Balancer"
+func ToHumanReadableName(resourceName string) string {
+	parts := strings.Split(resourceName, "_")
+	var result []string
+
+	for _, part := range parts {
+		lower := strings.ToLower(part)
+		upper := strings.ToUpper(part)
+
+		if UppercaseAcronyms[upper] {
+			result = append(result, upper)
+		} else if compound, ok := CompoundWordsHumanReadable[lower]; ok {
+			// Handle compound words with spaces (e.g., "loadbalancer" -> "Load Balancer")
+			result = append(result, compound)
+		} else if mixed, ok := MixedCaseAcronyms[lower]; ok {
+			result = append(result, mixed)
+		} else {
+			// Capitalize first letter
+			result = append(result, strings.Title(lower)) //nolint:staticcheck // strings.Title is fine for single words
+		}
+	}
+
+	return strings.Join(result, " ")
+}
+
 // ToAnchorName converts a name to an anchor-friendly format (kebab-case).
 // Example: "http_load_balancer" -> "http-load-balancer"
 func ToAnchorName(name string) string {

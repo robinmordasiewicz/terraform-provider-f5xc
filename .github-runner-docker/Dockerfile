@@ -12,7 +12,7 @@
 FROM ubuntu:22.04
 
 # Versions - update these as needed
-ARG RUNNER_VERSION=2.321.0
+ARG RUNNER_VERSION=2.329.0
 ARG GO_VERSION=1.23.3
 ARG TERRAFORM_VERSION=1.9.8
 # TARGETARCH is automatically set by Docker buildx (amd64, arm64)

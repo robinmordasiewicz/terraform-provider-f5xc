@@ -21,8 +21,8 @@
 #   indicate the mock server needs fixes (tests that pass on real but fail on mock).
 #
 # Runner Options:
-#   - ubuntu-latest: Standard GitHub runner for public API access (default)
-#   - self-hosted: Docker-based runner for VPN-only API access
+#   - self-hosted: Docker-based runner for VPN-only API access (default)
+#   - ubuntu-latest: Standard GitHub runner for public API access
 #
 # Required Secrets for Real API Tests (choose ONE auth method):
 #
@@ -71,11 +71,11 @@ on:
       runner:
         description: 'Runner type (self-hosted for VPN-only APIs)'
         required: false
-        default: 'ubuntu-latest'
+        default: 'self-hosted'
         type: choice
         options:
+          - self-hosted     # VPN-required API access (default)
           - ubuntu-latest   # Public API access
-          - self-hosted     # VPN-required API access
 
   pull_request:
     branches: [main]
@@ -188,8 +188,8 @@ jobs:
   # ═══════════════════════════════════════════════════════════════════════════
   real-api-tests:
     name: Real API Tests (Sequential)
-    # Runner selection: ubuntu-latest (public) or self-hosted (VPN-required)
-    runs-on: ${{ github.event.inputs.runner || 'ubuntu-latest' }}
+    # Runner selection: self-hosted (VPN-required, default) or ubuntu-latest (public)
+    runs-on: ${{ github.event.inputs.runner || 'self-hosted' }}
     needs: [mock-tests]
     # Only run for full or real-only mode, and not on PRs
     if: |

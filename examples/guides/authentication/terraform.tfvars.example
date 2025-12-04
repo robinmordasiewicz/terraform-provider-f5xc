@@ -1,0 +1,80 @@
+# F5 Distributed Cloud Provider - Authentication Configuration
+# =============================================================
+#
+# QUICK START:
+# 1. Copy this file: cp terraform.tfvars.example terraform.tfvars
+# 2. Choose your authentication method below
+# 3. Fill in the required values
+# 4. Run: terraform init && terraform plan
+#
+# IMPORTANT: Never commit terraform.tfvars with real credentials!
+# Add "terraform.tfvars" to your .gitignore file.
+#
+# RECOMMENDED APPROACH: Use environment variables instead of this file
+# for sensitive values. See below for examples.
+
+# =============================================================================
+# OPTION 1: Environment Variables (RECOMMENDED)
+# =============================================================================
+#
+# Instead of using this file, set environment variables:
+#
+# For API Token:
+#   export F5XC_API_URL="https://your-tenant.console.ves.volterra.io/api"
+#   export F5XC_API_TOKEN="your-api-token"
+#
+# For P12 Certificate:
+#   export F5XC_API_URL="https://your-tenant.console.ves.volterra.io/api"
+#   export F5XC_API_P12_FILE="/path/to/credentials.p12"
+#   export F5XC_P12_PASSWORD="your-p12-password"  # pragma: allowlist secret
+#
+# For PEM Certificate:
+#   export F5XC_API_URL="https://your-tenant.console.ves.volterra.io/api"
+#   export F5XC_API_CERT="/path/to/certificate.pem"
+#   export F5XC_API_KEY="/path/to/private-key.pem"
+#
+# Then leave the provider block empty in main.tf:
+#   provider "f5xc" {}
+
+# =============================================================================
+# OPTION 2: Configuration File (if you must use tfvars)
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# API URL (Required for all methods)
+# -----------------------------------------------------------------------------
+# Your F5 Distributed Cloud tenant API URL
+# Format: https://your-tenant.console.ves.volterra.io/api
+
+f5xc_api_url = "https://your-tenant.console.ves.volterra.io/api"
+
+# -----------------------------------------------------------------------------
+# API Token Authentication
+# -----------------------------------------------------------------------------
+# Uncomment and fill in to use API token authentication.
+# Create token in Console: Administration > Personal Management > Credentials
+
+# f5xc_api_token = "your-api-token-here"
+
+# -----------------------------------------------------------------------------
+# P12 Certificate Authentication (Recommended for Production)
+# -----------------------------------------------------------------------------
+# Uncomment and fill in to use P12 certificate authentication.
+# Download P12 from Console: Administration > Personal Management > Credentials
+
+# f5xc_api_p12_file = "/absolute/path/to/your-credentials.p12"
+# f5xc_p12_password = "your-p12-password"  # pragma: allowlist secret
+
+# -----------------------------------------------------------------------------
+# PEM Certificate Authentication
+# -----------------------------------------------------------------------------
+# Uncomment and fill in to use PEM certificate authentication.
+# Extract from P12 using OpenSSL:
+#   openssl pkcs12 -in creds.p12 -nodes -nokeys -out cert.pem
+#   openssl pkcs12 -in creds.p12 -nodes -nocerts -out key.pem
+
+# f5xc_api_cert = "/absolute/path/to/certificate.pem"
+# f5xc_api_key  = "/absolute/path/to/private-key.pem"
+
+# Optional: CA certificate for server verification
+# f5xc_api_ca_cert = "/absolute/path/to/ca-cert.pem"

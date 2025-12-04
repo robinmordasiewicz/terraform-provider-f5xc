@@ -12,9 +12,9 @@ This is a community-maintained provider built from public F5 API documentation.
 
 ## Requirements
 
-| Name | Version |
-|------|---------|
-| terraform | >= 1.8 |
+| Name      | Version |
+|-----------|---------|
+| terraform | >= 1.8  |
 
 -> **Note:** This provider uses provider-defined functions which require Terraform 1.8 or later. For details, see the [Functions](/docs/functions) documentation.
 

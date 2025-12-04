@@ -23,22 +23,6 @@ Before you begin, ensure you have:
 - **Terraform >= 1.8** - Download and install from <https://www.terraform.io/downloads>
 - **Console Access** - Ability to create credentials in the F5XC Console
 
-## Quick Start
-
-The fastest way to authenticate is using environment variables with an API token:
-
-```bash
-# Set your tenant URL and API token
-export F5XC_API_URL="https://your-tenant.console.ves.volterra.io/api"
-export F5XC_API_TOKEN="your-api-token"
-
-# Verify authentication
-terraform init
-terraform plan
-```
-
--> **Tip:** F5 recommends API certificates for production as they offer more robust security via Mutual TLS (mTLS) authentication. API tokens use one-way TLS authentication.
-
 ## Creating Credentials in F5 Distributed Cloud
 
 ### Personal Credentials

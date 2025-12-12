@@ -20,18 +20,18 @@
 # Instead of using this file, set environment variables:
 #
 # For API Token:
-#   export F5XC_API_URL="https://your-tenant.console.ves.volterra.io/api"
-#   export F5XC_API_TOKEN="your-api-token"
+#   export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
+#   export VES_API_TOKEN="your-api-token"
 #
 # For P12 Certificate:
-#   export F5XC_API_URL="https://your-tenant.console.ves.volterra.io/api"
-#   export F5XC_API_P12_FILE="/path/to/credentials.p12"
-#   export F5XC_P12_PASSWORD="your-p12-password"  # pragma: allowlist secret
+#   export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
+#   export VES_P12_FILE="/path/to/credentials.p12"
+#   export VES_P12_PASSWORD="your-p12-password"  # pragma: allowlist secret
 #
 # For PEM Certificate:
-#   export F5XC_API_URL="https://your-tenant.console.ves.volterra.io/api"
-#   export F5XC_API_CERT="/path/to/certificate.pem"
-#   export F5XC_API_KEY="/path/to/private-key.pem"
+#   export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
+#   export VES_CERT="/path/to/certificate.pem"
+#   export VES_KEY="/path/to/private-key.pem"
 #
 # Then leave the provider block empty in main.tf:
 #   provider "f5xc" {}
@@ -46,7 +46,7 @@
 # Your F5 Distributed Cloud tenant API URL
 # Format: https://your-tenant.console.ves.volterra.io/api
 
-f5xc_api_url = "https://your-tenant.console.ves.volterra.io/api"
+ves_api_url = "https://your-tenant.console.ves.volterra.io/api"
 
 # -----------------------------------------------------------------------------
 # API Token Authentication
@@ -54,7 +54,7 @@ f5xc_api_url = "https://your-tenant.console.ves.volterra.io/api"
 # Uncomment and fill in to use API token authentication.
 # Create token in Console: Administration > Personal Management > Credentials
 
-# f5xc_api_token = "your-api-token-here"
+# ves_api_token = "your-api-token-here"
 
 # -----------------------------------------------------------------------------
 # P12 Certificate Authentication (Recommended for Production)
@@ -62,8 +62,8 @@ f5xc_api_url = "https://your-tenant.console.ves.volterra.io/api"
 # Uncomment and fill in to use P12 certificate authentication.
 # Download P12 from Console: Administration > Personal Management > Credentials
 
-# f5xc_api_p12_file = "/absolute/path/to/your-credentials.p12"
-# f5xc_p12_password = "your-p12-password"  # pragma: allowlist secret
+# ves_p12_file = "/absolute/path/to/your-credentials.p12"
+# ves_p12_password = "your-p12-password"  # pragma: allowlist secret
 
 # -----------------------------------------------------------------------------
 # PEM Certificate Authentication
@@ -73,8 +73,8 @@ f5xc_api_url = "https://your-tenant.console.ves.volterra.io/api"
 #   openssl pkcs12 -in creds.p12 -nodes -nokeys -out cert.pem
 #   openssl pkcs12 -in creds.p12 -nodes -nocerts -out key.pem
 
-# f5xc_api_cert = "/absolute/path/to/certificate.pem"
-# f5xc_api_key  = "/absolute/path/to/private-key.pem"
+# ves_cert = "/absolute/path/to/certificate.pem"
+# ves_key  = "/absolute/path/to/private-key.pem"
 
 # Optional: CA certificate for server verification
-# f5xc_api_ca_cert = "/absolute/path/to/ca-cert.pem"
+# ves_cacert = "/absolute/path/to/ca-cert.pem"

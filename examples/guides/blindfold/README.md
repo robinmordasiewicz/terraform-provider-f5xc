@@ -20,8 +20,8 @@ This example demonstrates how to use F5XC Blindfold functions to securely encryp
 
 2. **Configure authentication:**
    ```bash
-   export F5XC_API_URL="https://your-tenant.console.ves.volterra.io/api"
-   export F5XC_API_TOKEN="your-api-token"
+   export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
+   export VES_API_TOKEN="your-api-token"
    ```
 
 3. **Copy and edit the configuration:**

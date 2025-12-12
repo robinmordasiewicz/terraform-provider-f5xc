@@ -32,27 +32,28 @@ var (
 )
 
 // Environment variable names for acceptance tests
+// Using VES_* prefix for vesctl CLI compatibility.
 const (
 	// EnvF5XCURL is the environment variable for the F5 XC API URL
-	EnvF5XCURL = "F5XC_API_URL"
+	EnvF5XCURL = "VES_API_URL"
 
 	// EnvF5XCToken is the environment variable for the F5 XC API token
-	EnvF5XCToken = "F5XC_API_TOKEN"
+	EnvF5XCToken = "VES_API_TOKEN"
 
 	// EnvF5XCP12File is the environment variable for the P12 certificate file path
-	EnvF5XCP12File = "F5XC_API_P12_FILE"
+	EnvF5XCP12File = "VES_P12_FILE"
 
 	// EnvF5XCP12Password is the environment variable for the P12 certificate password
-	EnvF5XCP12Password = "F5XC_P12_PASSWORD"
+	EnvF5XCP12Password = "VES_P12_PASSWORD" // pragma: allowlist secret
 
 	// EnvF5XCCert is the environment variable for the PEM certificate file path
-	EnvF5XCCert = "F5XC_API_CERT"
+	EnvF5XCCert = "VES_CERT"
 
 	// EnvF5XCKey is the environment variable for the PEM key file path
-	EnvF5XCKey = "F5XC_API_KEY"
+	EnvF5XCKey = "VES_KEY"
 
 	// EnvF5XCTenantName is the environment variable for the F5 XC tenant name
-	EnvF5XCTenantName = "F5XC_TENANT_NAME"
+	EnvF5XCTenantName = "VES_TENANT_NAME"
 
 	// EnvTFAccTest enables acceptance tests
 	EnvTFAccTest = "TF_ACC"
@@ -107,7 +108,7 @@ func DetectAuthMethod() AuthMethod {
 
 // PreCheck validates that required environment variables are set before running tests.
 // It also logs the test category as REAL_API for reporting purposes.
-// When F5XC_MOCK_MODE is set, it automatically configures the environment to use
+// When VES_MOCK_MODE is set, it automatically configures the environment to use
 // the global mock server instead of requiring real credentials.
 func PreCheck(t *testing.T) {
 	t.Helper()
@@ -119,7 +120,7 @@ func PreCheck(t *testing.T) {
 	// Log test category for reporting
 	if IsMockMode() {
 		LogTestCategory(t, TestCategoryMock)
-		t.Logf("Using mock server mode (F5XC_MOCK_MODE=1)")
+		t.Logf("Using mock server mode (VES_MOCK_MODE=1)")
 		return // Skip credential validation for mock mode
 	}
 
@@ -154,7 +155,7 @@ func PreCheck(t *testing.T) {
 }
 
 // SkipIfNotAccTest skips the test if TF_ACC is not set and mock mode is not enabled.
-// When F5XC_MOCK_MODE is set, tests run without requiring TF_ACC.
+// When VES_MOCK_MODE is set, tests run without requiring TF_ACC.
 func SkipIfNotAccTest(t *testing.T) {
 	t.Helper()
 
@@ -178,12 +179,12 @@ func RandomNameWithSuffix(prefix, suffix string) string {
 	return fmt.Sprintf("%s-%s-%s", prefix, acctest.RandStringFromCharSet(6, acctest.CharSetAlphaNum), suffix)
 }
 
-// TestNamespace returns the namespace for tests (default: "system")
+// TestNamespace returns the namespace for tests (default: "default")
 func TestNamespace() string {
-	if ns := os.Getenv("F5XC_TEST_NAMESPACE"); ns != "" {
+	if ns := os.Getenv("VES_DEFAULT_NAMESPACE"); ns != "" {
 		return ns
 	}
-	return "system"
+	return "default"
 }
 
 // ConfigCompose composes multiple Terraform configurations

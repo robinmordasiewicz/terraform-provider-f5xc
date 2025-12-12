@@ -13,7 +13,7 @@
 // Usage: go run tools/generate-all-schemas.go [--spec-dir=/path/to/specs] [--dry-run]
 //
 // Environment Variables:
-//   F5XC_SPEC_DIR - Directory containing OpenAPI spec files (default: /tmp)
+//   VES_SPEC_DIR - Directory containing OpenAPI spec files (default: /tmp)
 
 package main
 
@@ -141,7 +141,7 @@ func main() {
 
 	// Check for spec directory
 	if specDir == "" {
-		specDir = os.Getenv("F5XC_SPEC_DIR")
+		specDir = os.Getenv("VES_SPEC_DIR")
 	}
 	if specDir == "" {
 		specDir = "docs/specifications/api"
@@ -166,7 +166,7 @@ func main() {
 
 	if len(specFiles) == 0 {
 		fmt.Printf("❌ No spec files found matching pattern: %s\n", pattern)
-		fmt.Println("💡 Tip: Download specs from docs.cloud.f5.com or set F5XC_SPEC_DIR")
+		fmt.Println("💡 Tip: Download specs from docs.cloud.f5.com or set VES_SPEC_DIR")
 		os.Exit(1)
 	}
 
@@ -3317,44 +3317,44 @@ func (p *F5XCProvider) Schema(ctx context.Context, req provider.SchemaRequest, r
 				MarkdownDescription: "F5 Distributed Cloud API URL (base URL without '/api' suffix). " +
 					"Defaults to https://console.ves.volterra.io. " +
 					"Example: https://tenant.console.ves.volterra.io (NOT https://tenant.console.ves.volterra.io/api). " +
-					"Can also be set via F5XC_API_URL environment variable.",
+					"Can also be set via VES_API_URL environment variable.",
 				Optional: true,
 			},
 			"api_token": schema.StringAttribute{
 				MarkdownDescription: "F5 Distributed Cloud API Token for token-based authentication. " +
-					"Can also be set via F5XC_API_TOKEN environment variable. " +
+					"Can also be set via VES_API_TOKEN environment variable. " +
 					"Either api_token or api_p12_file/api_cert must be specified.",
 				Optional:  true,
 				Sensitive: true,
 			},
 			"api_p12_file": schema.StringAttribute{
 				MarkdownDescription: "Path to PKCS#12 certificate bundle file for certificate-based authentication. " +
-					"Can also be set via F5XC_API_P12_FILE environment variable. " +
+					"Can also be set via VES_P12_FILE environment variable. " +
 					"When using P12 authentication, p12_password must also be provided.",
 				Optional:  true,
 				Sensitive: false,
 			},
 			"p12_password": schema.StringAttribute{
 				MarkdownDescription: "Password for the PKCS#12 certificate bundle. " +
-					"Can also be set via F5XC_P12_PASSWORD environment variable.",
+					"Can also be set via VES_P12_PASSWORD environment variable.",
 				Optional:  true,
 				Sensitive: true,
 			},
 			"api_cert": schema.StringAttribute{
 				MarkdownDescription: "Path to PEM-encoded client certificate file for certificate-based authentication. " +
-					"Can also be set via F5XC_API_CERT environment variable. " +
+					"Can also be set via VES_CERT environment variable. " +
 					"When using certificate authentication, api_key must also be provided.",
 				Optional: true,
 			},
 			"api_key": schema.StringAttribute{
 				MarkdownDescription: "Path to PEM-encoded client private key file for certificate-based authentication. " +
-					"Can also be set via F5XC_API_KEY environment variable.",
+					"Can also be set via VES_KEY environment variable.",
 				Optional:  true,
 				Sensitive: true,
 			},
 			"api_ca_cert": schema.StringAttribute{
 				MarkdownDescription: "Path to PEM-encoded CA certificate file for verifying the F5XC API server. " +
-					"Can also be set via F5XC_API_CA_CERT environment variable. Optional.",
+					"Can also be set via VES_CACERT environment variable. Optional.",
 				Optional: true,
 			},
 		},
@@ -3373,13 +3373,13 @@ func (p *F5XCProvider) Configure(ctx context.Context, req provider.ConfigureRequ
 	}
 
 	// Get configuration values from environment variables first
-	apiURL := os.Getenv("F5XC_API_URL")
-	apiToken := os.Getenv("F5XC_API_TOKEN")
-	apiP12File := os.Getenv("F5XC_API_P12_FILE")
-	p12Password := os.Getenv("F5XC_P12_PASSWORD")
-	apiCert := os.Getenv("F5XC_API_CERT")
-	apiKey := os.Getenv("F5XC_API_KEY")
-	apiCACert := os.Getenv("F5XC_API_CA_CERT")
+	apiURL := os.Getenv("VES_API_URL")
+	apiToken := os.Getenv("VES_API_TOKEN")
+	apiP12File := os.Getenv("VES_P12_FILE")
+	p12Password := os.Getenv("VES_P12_PASSWORD")
+	apiCert := os.Getenv("VES_CERT")
+	apiKey := os.Getenv("VES_KEY")
+	apiCACert := os.Getenv("VES_CACERT")
 
 	// Configuration values override environment variables
 	if !config.APIURL.IsNull() {
@@ -3421,7 +3421,7 @@ func (p *F5XCProvider) Configure(ctx context.Context, req provider.ConfigureRequ
 				path.Root("p12_password"),
 				"Missing P12 Password",
 				"When using P12 certificate authentication (api_p12_file), the p12_password must be provided. "+
-					"Set the p12_password value in the configuration or use the F5XC_P12_PASSWORD environment variable.",
+					"Set the p12_password value in the configuration or use the VES_P12_PASSWORD environment variable.",
 			)
 			return
 		}
@@ -3456,9 +3456,9 @@ func (p *F5XCProvider) Configure(ctx context.Context, req provider.ConfigureRequ
 		resp.Diagnostics.AddError(
 			"Missing Authentication Configuration",
 			"The provider requires authentication. Please configure one of the following:\n"+
-				"  - api_token (or F5XC_API_TOKEN environment variable) for API token authentication\n"+
-				"  - api_p12_file and p12_password (or F5XC_API_P12_FILE and F5XC_P12_PASSWORD environment variables) for P12 certificate authentication\n"+
-				"  - api_cert and api_key (or F5XC_API_CERT and F5XC_API_KEY environment variables) for PEM certificate authentication",
+				"  - api_token (or VES_API_TOKEN environment variable) for API token authentication\n"+
+				"  - api_p12_file and p12_password (or VES_P12_FILE and VES_P12_PASSWORD environment variables) for P12 certificate authentication\n"+
+				"  - api_cert and api_key (or VES_CERT and VES_KEY environment variables) for PEM certificate authentication",
 		)
 		return
 	}

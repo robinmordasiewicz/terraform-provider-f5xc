@@ -97,20 +97,20 @@ jobs:
 
       - name: Verify API credentials
         env:
-          F5XC_API_URL: ${{ secrets.F5XC_API_URL }}
-          F5XC_API_P12_FILE: ${{ secrets.F5XC_API_P12_FILE }}
-          F5XC_P12_PASSWORD: ${{ secrets.F5XC_P12_PASSWORD }}
+          VES_API_URL: ${{ secrets.VES_API_URL }}
+          VES_P12_FILE: ${{ secrets.VES_P12_FILE }}
+          VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }}
         run: |
           echo "Checking API credentials..."
-          if [ -z "$F5XC_API_URL" ]; then
-            echo "::error::F5XC_API_URL secret not configured"
+          if [ -z "$VES_API_URL" ]; then
+            echo "::error::VES_API_URL secret not configured"
             echo "Configure repository secrets for API access"
             exit 1
           fi
-          echo "API URL configured: $F5XC_API_URL"
+          echo "API URL configured: $VES_API_URL"
 
-          if [ -z "$F5XC_API_P12_FILE" ] || [ -z "$F5XC_P12_PASSWORD" ]; then
-            echo "::error::F5XC_API_P12_FILE or F5XC_P12_PASSWORD not configured"
+          if [ -z "$VES_P12_FILE" ] || [ -z "$VES_P12_PASSWORD" ]; then
+            echo "::error::VES_P12_FILE or VES_P12_PASSWORD not configured"
             exit 1
           fi
           echo "P12 credentials configured"
@@ -118,9 +118,9 @@ jobs:
       - name: Run discovery
         id: discover
         env:
-          F5XC_API_URL: ${{ secrets.F5XC_API_URL }}
-          F5XC_API_P12_FILE: ${{ secrets.F5XC_API_P12_FILE }}
-          F5XC_P12_PASSWORD: ${{ secrets.F5XC_P12_PASSWORD }}
+          VES_API_URL: ${{ secrets.VES_API_URL }}
+          VES_P12_FILE: ${{ secrets.VES_P12_FILE }}
+          VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }}
         run: |
           MODE="${{ inputs.mode || 'discover' }}"
           RESOURCE="${{ inputs.resource }}"

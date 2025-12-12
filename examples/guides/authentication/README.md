@@ -8,8 +8,8 @@ This example demonstrates the three authentication methods supported by the F5XC
 
 ```bash
 # For API Token authentication
-export F5XC_API_URL="https://your-tenant.console.ves.volterra.io/api"
-export F5XC_API_TOKEN="your-api-token"
+export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
+export VES_API_TOKEN="your-api-token"
 
 # Initialize and apply
 terraform init
@@ -32,9 +32,9 @@ terraform plan
 
 | Method | Environment Variables | Security Level |
 |--------|----------------------|----------------|
-| API Token | `F5XC_API_TOKEN` | Standard (one-way TLS) |
-| P12 Certificate | `F5XC_API_P12_FILE`, `F5XC_P12_PASSWORD` | High (mTLS) |
-| PEM Certificate | `F5XC_API_CERT`, `F5XC_API_KEY` | High (mTLS) |
+| API Token | `VES_API_TOKEN` | Standard (one-way TLS) |
+| P12 Certificate | `VES_P12_FILE`, `VES_P12_PASSWORD` | High (mTLS) |
+| PEM Certificate | `VES_CERT`, `VES_KEY` | High (mTLS) |
 
 ## Files
 

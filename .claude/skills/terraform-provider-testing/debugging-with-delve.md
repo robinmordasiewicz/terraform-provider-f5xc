@@ -35,9 +35,9 @@ dlv version
             ],
             "env": {
                 "TF_ACC": "1",
-                "F5XC_API_P12_FILE": "/path/to/cert.p12",
-                "F5XC_P12_PASSWORD": "password",  // pragma: allowlist secret
-                "F5XC_API_URL": "https://api.example.com"
+                "VES_P12_FILE": "/path/to/cert.p12",
+                "VES_P12_PASSWORD": "password",  // pragma: allowlist secret
+                "VES_API_URL": "https://api.example.com"
             }
         }
     ]
@@ -322,9 +322,9 @@ dlv connect :2345
 ### Debug Namespace Resource
 
 ```bash
-TF_ACC=1 F5XC_API_P12_FILE="/path/to/cert.p12" \
-  F5XC_P12_PASSWORD="password" \  # pragma: allowlist secret
-  F5XC_API_URL="https://api.example.com" \
+TF_ACC=1 VES_P12_FILE="/path/to/cert.p12" \
+  VES_P12_PASSWORD="password" \  # pragma: allowlist secret
+  VES_API_URL="https://api.example.com" \
   dlv test ./internal/provider/... -- -test.run TestAccNamespaceResource_basic -test.v
 
 (dlv) break internal/provider/namespace_resource.go:resourceNamespaceCreate

@@ -18,8 +18,8 @@ terraform {
 }
 
 # Provider configuration uses environment variables:
-# F5XC_API_URL   - Your tenant URL (e.g., https://tenant.console.ves.volterra.io/api)
-# F5XC_API_TOKEN - Your API token
+# VES_API_URL   - Your tenant URL (e.g., https://tenant.console.ves.volterra.io/api)
+# VES_API_TOKEN - Your API token
 provider "f5xc" {}
 
 # -----------------------------------------------------------------------------

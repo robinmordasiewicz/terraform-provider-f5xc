@@ -74,14 +74,14 @@ help:
 	@echo ""
 	@echo "Environment Variables:"
 	@echo "  TF_ACC=1           - Enable real acceptance tests"
-	@echo "  F5XC_MOCK_MODE=1   - Enable mock server tests"
+	@echo "  VES_MOCK_MODE=1    - Enable mock server tests"
 	@echo "  SPEC_DIR           - Directory containing OpenAPI specs (default: /tmp)"
-	@echo "  F5XC_SPEC_DIR      - Alternative env var for spec directory"
+	@echo "  VES_SPEC_DIR       - Alternative env var for spec directory"
 	@echo ""
 	@echo "For real acceptance tests, set one of:"
-	@echo "  F5XC_API_URL + F5XC_API_P12_FILE + F5XC_P12_PASSWORD (P12 auth)"
-	@echo "  F5XC_API_URL + F5XC_API_CERT + F5XC_API_KEY (PEM auth)"
-	@echo "  F5XC_API_URL + F5XC_API_TOKEN (Token auth)"
+	@echo "  VES_API_URL + VES_P12_FILE + VES_P12_PASSWORD (P12 auth)"
+	@echo "  VES_API_URL + VES_CERT + VES_KEY (PEM auth)"
+	@echo "  VES_API_URL + VES_API_TOKEN (Token auth)"
 
 # Build the provider
 build:
@@ -166,10 +166,10 @@ testacc:
 #
 # Usage: make sweep
 # Environment variables required:
-#   - F5XC_API_URL: F5 XC API URL
-#   - F5XC_API_P12_FILE and F5XC_P12_PASSWORD (for P12 auth)
-#   - OR F5XC_API_CERT and F5XC_API_KEY (for PEM auth)
-#   - OR F5XC_API_TOKEN (for token auth)
+#   - VES_API_URL: F5 XC API URL
+#   - VES_P12_FILE and VES_P12_PASSWORD (for P12 auth)
+#   - OR VES_CERT and VES_KEY (for PEM auth)
+#   - OR VES_API_TOKEN (for token auth)
 sweep:
 	@echo "⚠️  WARNING: Prefix-based sweep - will delete ALL test resources!"
 	@echo "Sweeping resources with prefix 'tf-acc-test-' or 'tf-test-'..."
@@ -251,7 +251,7 @@ testacc-mock:
 	@echo "Running MOCK API acceptance tests (TestMock*)..."
 	@echo "Category: MOCK_API - Tests against local mock server"
 	@echo ""
-	F5XC_MOCK_MODE=1 $(GO) test -v -timeout 30m ./internal/provider/... -run "^TestMock" 2>&1 | tee .test-output-mock.txt
+	VES_MOCK_MODE=1 $(GO) test -v -timeout 30m ./internal/provider/... -run "^TestMock" 2>&1 | tee .test-output-mock.txt
 	@echo ""
 	@echo "Test output saved to .test-output-mock.txt"
 
@@ -262,15 +262,15 @@ testacc-all:
 	@echo "========================================================================"
 	@echo "PHASE 1: MOCK API TESTS (no credentials required)"
 	@echo "========================================================================"
-	F5XC_MOCK_MODE=1 $(GO) test -json -timeout 30m ./internal/provider/... -run "^TestMock" 2>&1 | tee .test-json-mock.txt | $(GO) run $(TOOLS_DIR)/test-report/main.go || true
+	VES_MOCK_MODE=1 $(GO) test -json -timeout 30m ./internal/provider/... -run "^TestMock" 2>&1 | tee .test-json-mock.txt | $(GO) run $(TOOLS_DIR)/test-report/main.go || true
 	@echo ""
 	@echo "========================================================================"
 	@echo "PHASE 2: REAL API TESTS (requires credentials)"
 	@echo "========================================================================"
-	@if [ -n "$$F5XC_API_URL" ]; then \
+	@if [ -n "$$VES_API_URL" ]; then \
 		TF_ACC=1 $(GO) test -json -timeout 120m ./internal/provider/... -run "^TestAcc" 2>&1 | tee .test-json-real.txt | $(GO) run $(TOOLS_DIR)/test-report/main.go || true; \
 	else \
-		echo "⚠️  Skipping real API tests: F5XC_API_URL not set"; \
+		echo "⚠️  Skipping real API tests: VES_API_URL not set"; \
 	fi
 	@echo ""
 	@echo "========================================================================"
@@ -310,7 +310,7 @@ clean-test-output:
 #
 # Local Development:
 #   1. Connect to VPN
-#   2. Set environment variables (F5XC_API_URL, F5XC_API_P12_FILE, F5XC_P12_PASSWORD)
+#   2. Set environment variables (VES_API_URL, VES_P12_FILE, VES_P12_PASSWORD)
 #   3. Run: make discover-defaults
 #
 # CI/CD Note:
@@ -320,14 +320,14 @@ clean-test-output:
 .PHONY: discover-defaults discover-defaults-resource validate-defaults generate-mock-fixtures
 
 # Discover API defaults for all resources
-# Requires: VPN access + F5XC_API_URL + F5XC_API_P12_FILE + F5XC_P12_PASSWORD
+# Requires: VPN access + VES_API_URL + VES_P12_FILE + VES_P12_PASSWORD
 discover-defaults:
 	@echo "Discovering API defaults for all resources..."
 	@echo "This requires VPN access to the F5 XC staging environment."
 	@echo ""
-	@if [ -z "$$F5XC_API_URL" ]; then \
-		echo "Error: F5XC_API_URL not set"; \
-		echo "Set F5XC_API_URL, F5XC_API_P12_FILE, and F5XC_P12_PASSWORD"; \
+	@if [ -z "$$VES_API_URL" ]; then \
+		echo "Error: VES_API_URL not set"; \
+		echo "Set VES_API_URL, VES_P12_FILE, and VES_P12_PASSWORD"; \
 		exit 1; \
 	fi
 	$(GO) run $(TOOLS_DIR)/discover-defaults.go -all
@@ -343,8 +343,8 @@ discover-defaults-resource:
 		echo "Usage: make discover-defaults-resource RESOURCE=namespace"; \
 		exit 1; \
 	fi
-	@if [ -z "$$F5XC_API_URL" ]; then \
-		echo "Error: F5XC_API_URL not set"; \
+	@if [ -z "$$VES_API_URL" ]; then \
+		echo "Error: VES_API_URL not set"; \
 		exit 1; \
 	fi
 	$(GO) run $(TOOLS_DIR)/discover-defaults.go -resource=$(RESOURCE)
@@ -353,8 +353,8 @@ discover-defaults-resource:
 # Compares tools/api-defaults.json against live API responses
 validate-defaults:
 	@echo "Validating stored API defaults..."
-	@if [ -z "$$F5XC_API_URL" ]; then \
-		echo "Error: F5XC_API_URL not set"; \
+	@if [ -z "$$VES_API_URL" ]; then \
+		echo "Error: VES_API_URL not set"; \
 		exit 1; \
 	fi
 	$(GO) run $(TOOLS_DIR)/discover-defaults.go -validate
@@ -406,7 +406,7 @@ test-comprehensive-mock:
 	./scripts/run-comprehensive-tests.sh --mode mock-only
 
 # Run real API tests only - SEQUENTIAL with rate limiting
-# Requires: F5XC_API_URL, F5XC_API_P12_FILE, F5XC_P12_PASSWORD
+# Requires: VES_API_URL, VES_P12_FILE, VES_P12_PASSWORD (or VES_API_TOKEN)
 test-comprehensive-real:
 	@echo "Running comprehensive real API tests (sequential)..."
 	./scripts/run-comprehensive-tests.sh --mode real-only

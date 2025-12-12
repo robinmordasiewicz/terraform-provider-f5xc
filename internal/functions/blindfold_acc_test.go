@@ -3,8 +3,8 @@
 // Acceptance tests for blindfold functions.
 // These tests require:
 //   - TF_ACC=1
-//   - F5XC_API_URL set to F5XC console URL
-//   - Either F5XC_API_TOKEN or (F5XC_API_P12_FILE + F5XC_P12_PASSWORD)
+//   - VES_API_URL set to F5XC console URL
+//   - Either VES_API_TOKEN or (VES_P12_FILE + VES_P12_PASSWORD)
 //
 // Run with: TF_ACC=1 go test -v -timeout 15m -run "TestAcc.*Blindfold" ./internal/functions/...
 
@@ -41,7 +41,7 @@ func skipIfNoAuth(t *testing.T) {
 	p12File := os.Getenv(blindfold.EnvP12File)
 
 	if token == "" && p12File == "" {
-		t.Skip("Acceptance tests skipped: no authentication configured (F5XC_API_TOKEN or F5XC_API_P12_FILE)")
+		t.Skip("Acceptance tests skipped: no authentication configured (VES_API_TOKEN or VES_P12_FILE)")
 	}
 }
 
@@ -49,7 +49,7 @@ func skipIfNoAuth(t *testing.T) {
 func skipIfNoURL(t *testing.T) {
 	t.Helper()
 	if os.Getenv(blindfold.EnvAPIURL) == "" {
-		t.Skip("Acceptance tests skipped: F5XC_API_URL not set")
+		t.Skip("Acceptance tests skipped: VES_API_URL not set")
 	}
 }
 
@@ -452,7 +452,7 @@ func TestAccBlindfoldFunction_P12Auth(t *testing.T) {
 	p12Password := os.Getenv(blindfold.EnvP12Password)
 
 	if p12File == "" || p12Password == "" {
-		t.Skip("Skipping P12 auth test: F5XC_API_P12_FILE and F5XC_P12_PASSWORD not set")
+		t.Skip("Skipping P12 auth test: VES_P12_FILE and VES_P12_PASSWORD not set")
 	}
 
 	// Temporarily unset token to force P12 auth
@@ -494,7 +494,7 @@ func TestAccBlindfoldFunction_TokenAuth(t *testing.T) {
 	token := os.Getenv(blindfold.EnvAPIToken)
 
 	if token == "" {
-		t.Skip("Skipping token auth test: F5XC_API_TOKEN not set")
+		t.Skip("Skipping token auth test: VES_API_TOKEN not set")
 	}
 
 	fn := &BlindfoldFunction{}

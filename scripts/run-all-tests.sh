@@ -2,26 +2,27 @@
 # Sequential test runner with rate limit protection
 #
 # Required environment variables:
-#   F5XC_API_URL - F5 XC API URL (e.g., https://console.ves.volterra.io/api)
-#   F5XC_API_P12_FILE - Path to P12 certificate file
-#   F5XC_P12_PASSWORD - Password for P12 certificate
+#   VES_API_URL - F5 XC API URL (e.g., https://console.ves.volterra.io/api)
+#   VES_P12_FILE - Path to P12 certificate file (or VES_API_TOKEN for token auth)
+#   VES_P12_PASSWORD - Password for P12 certificate (required with VES_P12_FILE)
 #   TF_ACC=1 - Enable acceptance tests
 
 set -e
 
 # Validate required environment variables
-if [[ -z "$F5XC_API_URL" ]]; then
-    echo "ERROR: F5XC_API_URL environment variable is required"
+if [[ -z "${VES_API_URL:-}" ]]; then
+    echo "ERROR: VES_API_URL environment variable is required"
     exit 1
 fi
 
-if [[ -z "$F5XC_API_P12_FILE" ]]; then
-    echo "ERROR: F5XC_API_P12_FILE environment variable is required"
+# Check for authentication (either P12 or token)
+if [[ -z "${VES_P12_FILE:-}" ]] && [[ -z "${VES_API_TOKEN:-}" ]]; then
+    echo "ERROR: VES_P12_FILE or VES_API_TOKEN environment variable is required"
     exit 1
 fi
 
-if [[ -z "$F5XC_P12_PASSWORD" ]]; then
-    echo "ERROR: F5XC_P12_PASSWORD environment variable is required"
+if [[ -n "${VES_P12_FILE:-}" ]] && [[ -z "${VES_P12_PASSWORD:-}" ]]; then
+    echo "ERROR: VES_P12_PASSWORD environment variable is required when using VES_P12_FILE"
     exit 1
 fi
 

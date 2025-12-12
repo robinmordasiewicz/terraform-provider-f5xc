@@ -31,8 +31,8 @@ services:
       # Optional: Additional labels
       - RUNNER_LABELS=${RUNNER_LABELS:-self-hosted,Linux,X64,container}
       # F5 XC API credentials (passed to workflow jobs)
-      - F5XC_API_URL=${F5XC_API_URL:-}
-      - F5XC_API_TOKEN=${F5XC_API_TOKEN:-}
+      - VES_API_URL=${VES_API_URL:-}
+      - VES_API_TOKEN=${VES_API_TOKEN:-}
     volumes:
       # Persist runner work directory for caching
       - runner-work:/home/runner/actions-runner/_work

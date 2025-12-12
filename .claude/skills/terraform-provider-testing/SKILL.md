@@ -196,9 +196,9 @@ Every test development follows this iterative pattern:
 vim internal/provider/example_resource_test.go
 
 # Phase 2: Run Test (expect failures)
-F5XC_API_URL="https://tenant.console.ves.volterra.io/api" \
-F5XC_API_P12_FILE="/path/to/cert.p12" \
-F5XC_P12_PASSWORD="password" \  # pragma: allowlist secret
+VES_API_URL="https://tenant.console.ves.volterra.io/api" \
+VES_P12_FILE="/path/to/cert.p12" \
+VES_P12_PASSWORD="password" \  # pragma: allowlist secret
 TF_ACC=1 go test -v -timeout 15m \
   -run TestAccExampleResource_basic ./internal/provider/...
 
@@ -764,9 +764,9 @@ func TestAccBotDefenseAdvanced_basic(t *testing.T) {
 
 ```bash
 # Required for ALL acceptance tests
-export F5XC_API_P12_FILE="/path/to/api-certificate.p12"
-export F5XC_P12_PASSWORD="your-password"  # pragma: allowlist secret
-export F5XC_API_URL="https://tenant.console.ves.volterra.io/api"
+export VES_P12_FILE="/path/to/api-certificate.p12"
+export VES_P12_PASSWORD="your-password"  # pragma: allowlist secret
+export VES_API_URL="https://tenant.console.ves.volterra.io/api"
 export TF_ACC=1
 ```
 

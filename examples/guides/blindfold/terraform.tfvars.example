@@ -7,13 +7,13 @@
 # 2. Edit terraform.tfvars with your values
 #
 # 3. Set F5XC authentication environment variables:
-#    export F5XC_API_URL="https://your-tenant.console.ves.volterra.io/api"
-#    export F5XC_API_TOKEN="your-api-token"
+#    export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
+#    export VES_API_TOKEN="your-api-token"
 #
 #    OR for P12 certificate authentication:
-#    export F5XC_API_URL="https://your-tenant.console.ves.volterra.io/api"
-#    export F5XC_API_P12_FILE="/path/to/your-credentials.p12"
-#    export F5XC_P12_PASSWORD="your-p12-password"  # pragma: allowlist secret
+#    export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
+#    export VES_P12_FILE="/path/to/your-credentials.p12"
+#    export VES_P12_PASSWORD="your-p12-password"  # pragma: allowlist secret
 #
 # 4. Run terraform:
 #    terraform init

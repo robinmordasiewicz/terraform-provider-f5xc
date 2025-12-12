@@ -13,9 +13,9 @@
 //
 // Environment Variables Required:
 //
-//	F5XC_API_URL - API URL (e.g., https://tenant.console.ves.volterra.io/api)
-//	F5XC_API_P12_FILE + F5XC_P12_PASSWORD - P12 certificate authentication
-//	or F5XC_API_TOKEN - Token authentication
+//	VES_API_URL - API URL (e.g., https://tenant.console.ves.volterra.io/api)
+//	VES_P12_FILE + VES_P12_PASSWORD - P12 certificate authentication
+//	or VES_API_TOKEN - Token authentication
 package main
 
 import (
@@ -459,9 +459,9 @@ func main() {
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error creating API client: %v\n", err)
 		fmt.Fprintf(os.Stderr, "\nRequired environment variables:\n")
-		fmt.Fprintf(os.Stderr, "  F5XC_API_URL - API URL\n")
-		fmt.Fprintf(os.Stderr, "  F5XC_API_P12_FILE + F5XC_P12_PASSWORD - P12 cert auth\n")
-		fmt.Fprintf(os.Stderr, "  or F5XC_API_TOKEN - Token auth\n")
+		fmt.Fprintf(os.Stderr, "  VES_API_URL - API URL\n")
+		fmt.Fprintf(os.Stderr, "  VES_P12_FILE + VES_P12_PASSWORD - P12 cert auth\n")
+		fmt.Fprintf(os.Stderr, "  or VES_API_TOKEN - Token auth\n")
 		os.Exit(1)
 	}
 
@@ -469,7 +469,7 @@ func main() {
 	db := &DefaultsDatabase{
 		Version:     "1.0.0",
 		GeneratedAt: time.Now().UTC().Format(time.RFC3339),
-		APIEndpoint: os.Getenv("F5XC_API_URL"),
+		APIEndpoint: os.Getenv("VES_API_URL"),
 		Resources:   make(map[string]*DiscoveryResult),
 	}
 
@@ -576,20 +576,20 @@ func main() {
 // ============================================================================
 
 func createClient() (*client.Client, error) {
-	apiURL := os.Getenv("F5XC_API_URL")
+	apiURL := os.Getenv("VES_API_URL")
 	if apiURL == "" {
-		return nil, fmt.Errorf("F5XC_API_URL environment variable not set")
+		return nil, fmt.Errorf("VES_API_URL environment variable not set")
 	}
 
 	// Try P12 authentication first
-	p12File := os.Getenv("F5XC_API_P12_FILE")
-	p12Password := os.Getenv("F5XC_P12_PASSWORD")
+	p12File := os.Getenv("VES_P12_FILE")
+	p12Password := os.Getenv("VES_P12_PASSWORD")
 	if p12File != "" && p12Password != "" {
 		return client.NewClientWithP12(apiURL, p12File, p12Password)
 	}
 
 	// Fall back to token authentication
-	apiToken := os.Getenv("F5XC_API_TOKEN")
+	apiToken := os.Getenv("VES_API_TOKEN")
 	if apiToken != "" {
 		return client.NewClient(apiURL, apiToken), nil
 	}

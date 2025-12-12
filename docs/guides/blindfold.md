@@ -101,7 +101,7 @@ Edit `terraform.tfvars` to enable the examples you want to test:
 enable_certificate_example = true
 
 # Namespace configuration
-namespace_name   = "my-blindfold-test"
+namespace_name   = "example-blindfold-test"
 create_namespace = true
 ```
 
@@ -193,7 +193,7 @@ Store TLS certificates for load balancers. Note that TLS private keys are typica
 
 ```hcl
 resource "f5xc_certificate" "example" {
-  name      = "my-certificate"
+  name      = "example-certificate"
   namespace = "shared"
 
   certificate_url = "string:///${base64encode(file("${path.module}/certs/server.crt"))}"
@@ -319,8 +319,8 @@ While the built-in `ves-io-allow-volterra` policy works for most cases, you can 
 
 ```hcl
 locals {
-  policy_name = "my-custom-policy"
-  policy_ns   = "my-namespace"
+  policy_name = "example-custom-policy"
+  policy_ns   = "example-namespace"
 }
 
 # Reference your custom policy

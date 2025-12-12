@@ -160,7 +160,7 @@ export VES_CACERT="/path/to/ca-certificate.crt"  # Optional
 
 ```hcl
 resource "f5xc_namespace" "example" {
-  name = "my-namespace"
+  name = "example-namespace"
 }
 ```
 
@@ -168,8 +168,8 @@ resource "f5xc_namespace" "example" {
 
 ```hcl
 resource "f5xc_http_loadbalancer" "example" {
-  name      = "my-load-balancer"
-  namespace = "my-namespace"
+  name      = "example-load-balancer"
+  namespace = "example-namespace"
   domains   = ["example.com"]
 }
 ```

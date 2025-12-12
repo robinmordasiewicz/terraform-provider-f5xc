@@ -66,15 +66,15 @@ Configure one of these authentication methods via environment variables:
 
 **Option 1: API Token (Recommended for development)**
 ```bash
-export F5XC_API_URL="https://your-tenant.console.ves.volterra.io/api"
-export F5XC_API_TOKEN="your-api-token"
+export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
+export VES_API_TOKEN="your-api-token"
 ```
 
 **Option 2: P12 Certificate (Recommended for production)**
 ```bash
-export F5XC_API_URL="https://your-tenant.console.ves.volterra.io/api"
-export F5XC_API_P12_FILE="/path/to/your-credentials.p12"
-export F5XC_P12_PASSWORD="your-p12-password"  # pragma: allowlist secret
+export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
+export VES_P12_FILE="/path/to/your-credentials.p12"
+export VES_P12_PASSWORD="your-p12-password"  # pragma: allowlist secret
 ```
 
 -> **Tip:** Add these to your shell profile (`~/.bashrc` or `~/.zshrc`) for persistence across terminal sessions.
@@ -407,12 +407,12 @@ Field descriptions:
 **Solution:**
 ```bash
 # Verify environment variables are set
-echo $F5XC_API_URL
-echo $F5XC_API_TOKEN  # or F5XC_API_P12_FILE
+echo $VES_API_URL
+echo $VES_API_TOKEN  # or VES_P12_FILE
 
 # Set them if missing
-export F5XC_API_URL="https://your-tenant.console.ves.volterra.io/api"
-export F5XC_API_TOKEN="your-api-token"
+export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
+export VES_API_TOKEN="your-api-token"
 ```
 
 ### Policy Not Found

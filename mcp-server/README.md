@@ -62,25 +62,25 @@ Or if running from source:
 
 | Tool | Description |
 |------|-------------|
-| `f5xc_search_docs` | Search provider documentation by keyword |
-| `f5xc_get_doc` | Get complete documentation for a resource |
-| `f5xc_list_docs` | List all available documentation |
+| `f5xc_terraform_search_docs` | Search provider documentation by keyword |
+| `f5xc_terraform_get_doc` | Get complete documentation for a resource |
+| `f5xc_terraform_list_docs` | List all available documentation |
 
 ### API Specification Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc_search_api_specs` | Search OpenAPI specifications |
-| `f5xc_get_api_spec` | Get a specific API specification |
-| `f5xc_find_endpoints` | Find API endpoints by URL pattern |
-| `f5xc_get_schema_definition` | Get a schema definition from a spec |
-| `f5xc_list_definitions` | List all definitions in a spec |
+| `f5xc_terraform_search_api_specs` | Search OpenAPI specifications |
+| `f5xc_terraform_get_api_spec` | Get a specific API specification |
+| `f5xc_terraform_find_endpoints` | Find API endpoints by URL pattern |
+| `f5xc_terraform_get_schema_definition` | Get a schema definition from a spec |
+| `f5xc_terraform_list_definitions` | List all definitions in a spec |
 
 ### Utility Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc_get_summary` | Get overview of all available docs and specs |
+| `f5xc_terraform_get_summary` | Get overview of all available docs and specs |
 
 ## Usage Examples
 
@@ -89,8 +89,8 @@ Or if running from source:
 ```
 User: How do I configure an HTTP load balancer in F5XC with Terraform?
 
-Claude: [Uses f5xc_search_docs with query "http_loadbalancer"]
-        [Uses f5xc_get_doc with name "http_loadbalancer"]
+Claude: [Uses f5xc_terraform_search_docs with query "http_loadbalancer"]
+        [Uses f5xc_terraform_get_doc with name "http_loadbalancer"]
 ```
 
 ### Discover API Endpoints
@@ -98,7 +98,7 @@ Claude: [Uses f5xc_search_docs with query "http_loadbalancer"]
 ```
 User: What API endpoints are available for managing namespaces?
 
-Claude: [Uses f5xc_find_endpoints with pattern "/namespaces"]
+Claude: [Uses f5xc_terraform_find_endpoints with pattern "/namespaces"]
 ```
 
 ### Explore Schema Definitions
@@ -106,9 +106,9 @@ Claude: [Uses f5xc_find_endpoints with pattern "/namespaces"]
 ```
 User: What fields are available in the app_firewall configuration?
 
-Claude: [Uses f5xc_get_api_spec with name "app_firewall"]
-        [Uses f5xc_list_definitions with spec_name "app_firewall"]
-        [Uses f5xc_get_schema_definition for specific type]
+Claude: [Uses f5xc_terraform_get_api_spec with name "app_firewall"]
+        [Uses f5xc_terraform_list_definitions with spec_name "app_firewall"]
+        [Uses f5xc_terraform_get_schema_definition for specific type]
 ```
 
 ## Development

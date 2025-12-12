@@ -65,7 +65,7 @@ const server = new McpServer({
 // =============================================================================
 
 server.registerTool(
-  'f5xc_search_docs',
+  'f5xc_terraform_search_docs',
   {
     title: 'Search F5XC Documentation',
     description: `Search the F5 Distributed Cloud Terraform provider documentation.
@@ -144,7 +144,7 @@ Examples:
 );
 
 server.registerTool(
-  'f5xc_get_doc',
+  'f5xc_terraform_get_doc',
   {
     title: 'Get F5XC Resource Documentation',
     description: `Get complete documentation for a specific F5XC Terraform resource.
@@ -183,7 +183,7 @@ Examples:
       return {
         content: [{
           type: 'text',
-          text: `Documentation not found for "${params.name}"${params.type ? ` (type: ${params.type})` : ''}. Use f5xc_search_docs to find available documentation.`,
+          text: `Documentation not found for "${params.name}"${params.type ? ` (type: ${params.type})` : ''}. Use f5xc_terraform_search_docs to find available documentation.`,
         }],
       };
     }
@@ -215,7 +215,7 @@ Examples:
 );
 
 server.registerTool(
-  'f5xc_list_docs',
+  'f5xc_terraform_list_docs',
   {
     title: 'List F5XC Documentation',
     description: `List all available F5 Distributed Cloud Terraform provider documentation.
@@ -287,7 +287,7 @@ Returns:
 // =============================================================================
 
 server.registerTool(
-  'f5xc_search_api_specs',
+  'f5xc_terraform_search_api_specs',
   {
     title: 'Search F5XC API Specifications',
     description: `Search the F5 Distributed Cloud OpenAPI specifications.
@@ -363,7 +363,7 @@ Examples:
 );
 
 server.registerTool(
-  'f5xc_get_api_spec',
+  'f5xc_terraform_get_api_spec',
   {
     title: 'Get F5XC API Specification',
     description: `Get a specific F5 Distributed Cloud OpenAPI specification.
@@ -397,7 +397,7 @@ Returns:
       return {
         content: [{
           type: 'text',
-          text: `API specification not found for "${params.name}". Use f5xc_search_api_specs to find available specs.`,
+          text: `API specification not found for "${params.name}". Use f5xc_terraform_search_api_specs to find available specs.`,
         }],
       };
     }
@@ -469,7 +469,7 @@ Returns:
 );
 
 server.registerTool(
-  'f5xc_find_endpoints',
+  'f5xc_terraform_find_endpoints',
   {
     title: 'Find F5XC API Endpoints',
     description: `Find API endpoints across all F5XC OpenAPI specifications.
@@ -544,7 +544,7 @@ Examples:
 );
 
 server.registerTool(
-  'f5xc_get_schema_definition',
+  'f5xc_terraform_get_schema_definition',
   {
     title: 'Get API Schema Definition',
     description: `Get a specific schema definition from an F5XC OpenAPI spec.
@@ -574,7 +574,7 @@ Returns:
       return {
         content: [{
           type: 'text',
-          text: `Schema definition "${params.definition_name}" not found in spec "${params.spec_name}". Use f5xc_list_definitions to see available definitions.`,
+          text: `Schema definition "${params.definition_name}" not found in spec "${params.spec_name}". Use f5xc_terraform_list_definitions to see available definitions.`,
         }],
       };
     }
@@ -614,7 +614,7 @@ Returns:
 );
 
 server.registerTool(
-  'f5xc_list_definitions',
+  'f5xc_terraform_list_definitions',
   {
     title: 'List API Schema Definitions',
     description: `List all schema definitions in an F5XC OpenAPI spec.
@@ -643,7 +643,7 @@ Returns:
       return {
         content: [{
           type: 'text',
-          text: `No definitions found in spec "${params.spec_name}". Use f5xc_search_api_specs to find available specs.`,
+          text: `No definitions found in spec "${params.spec_name}". Use f5xc_terraform_search_api_specs to find available specs.`,
         }],
       };
     }
@@ -680,7 +680,7 @@ Returns:
 // =============================================================================
 
 server.registerTool(
-  'f5xc_get_summary',
+  'f5xc_terraform_get_summary',
   {
     title: 'Get F5XC Provider Summary',
     description: `Get a summary of all available F5 Distributed Cloud Terraform provider documentation and API specifications.
@@ -742,14 +742,14 @@ Returns:
       lines.push('');
       lines.push('### Available Tools');
       lines.push('');
-      lines.push('- `f5xc_search_docs` - Search documentation');
-      lines.push('- `f5xc_get_doc` - Get specific resource documentation');
-      lines.push('- `f5xc_list_docs` - List all documentation');
-      lines.push('- `f5xc_search_api_specs` - Search API specifications');
-      lines.push('- `f5xc_get_api_spec` - Get specific API spec');
-      lines.push('- `f5xc_find_endpoints` - Find API endpoints');
-      lines.push('- `f5xc_get_schema_definition` - Get schema definition');
-      lines.push('- `f5xc_list_definitions` - List definitions in a spec');
+      lines.push('- `f5xc_terraform_search_docs` - Search documentation');
+      lines.push('- `f5xc_terraform_get_doc` - Get specific resource documentation');
+      lines.push('- `f5xc_terraform_list_docs` - List all documentation');
+      lines.push('- `f5xc_terraform_search_api_specs` - Search API specifications');
+      lines.push('- `f5xc_terraform_get_api_spec` - Get specific API spec');
+      lines.push('- `f5xc_terraform_find_endpoints` - Find API endpoints');
+      lines.push('- `f5xc_terraform_get_schema_definition` - Get schema definition');
+      lines.push('- `f5xc_terraform_list_definitions` - List definitions in a spec');
 
       textContent = lines.join('\n');
     } else {

@@ -29,7 +29,7 @@ import (
 //
 // Run with:
 //
-//	TF_ACC=1 F5XC_API_URL="..." F5XC_API_P12_FILE="..." F5XC_P12_PASSWORD="..." \
+//	TF_ACC=1 VES_API_URL="..." VES_P12_FILE="..." VES_P12_PASSWORD="..." \
 //	go test -v ./internal/provider/ -run TestAccTokenResource -timeout 30m
 //
 // =============================================================================

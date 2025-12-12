@@ -952,6 +952,8 @@ func cleanDescription(desc string) string {
 	desc = strings.TrimSpace(desc)
 	// Remove trailing periods that were left after cleanup
 	desc = regexp.MustCompile(`\.\s*\.`).ReplaceAllString(desc, ".")
+	// Normalize example names from F5 internal conventions ("my-*") to provider standard ("example-*")
+	desc = naming.NormalizeExampleNames(desc)
 	return desc
 }
 

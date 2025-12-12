@@ -57,6 +57,8 @@ jobs:
       code-changed: ${{ steps.changes.outputs.code }}
       tools-changed: ${{ steps.changes.outputs.tools }}
       functions-changed: ${{ steps.changes.outputs.functions }}
+      mcp-changed: ${{ steps.changes.outputs.mcp }}
+      docs-changed: ${{ steps.changes.outputs.docs }}
       is-bot-commit: ${{ steps.check-author.outputs.is_bot }}
       should-process: ${{ steps.should-process.outputs.result }}
       needs-regeneration: ${{ steps.should-process.outputs.needs_regeneration }}
@@ -138,6 +140,22 @@ jobs:
             echo "functions=false" >> $GITHUB_OUTPUT
           fi
 
+          # Check for MCP server source changes
+          if echo "$CHANGED" | grep -qE '^mcp-server/src/'; then
+            echo "mcp=true" >> $GITHUB_OUTPUT
+            echo "MCP server source changed"
+          else
+            echo "mcp=false" >> $GITHUB_OUTPUT
+          fi
+
+          # Check for documentation changes (triggers MCP server rebuild)
+          if echo "$CHANGED" | grep -qE '^docs/(resources|data-sources|functions|guides)/'; then
+            echo "docs=true" >> $GITHUB_OUTPUT
+            echo "Documentation changed (will trigger MCP server rebuild)"
+          else
+            echo "docs=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Determine if processing should proceed
         id: should-process
         run: |
@@ -214,7 +232,32 @@ jobs:
     uses: ./.github/workflows/_generate-docs.yml
 
   # ===========================================================================
-  # STEP 5: Create PR for regenerated content (human commits only)
+  # STEP 5: Build MCP Server (when docs, specs, or MCP source changes)
+  # ===========================================================================
+  build-mcp-server:
+    name: Build MCP Server
+    needs: [detect-changes, build-test, regenerate-docs]
+    # Build MCP server when:
+    # 1. MCP server source changed, OR
+    # 2. Documentation was regenerated, OR
+    # 3. OpenAPI specs changed (MCP server serves these)
+    if: |
+      always() &&
+      needs.detect-changes.outputs.should-process == 'true' &&
+      needs.detect-changes.outputs.is-bot-commit != 'true' &&
+      needs.build-test.result == 'success' &&
+      (needs.detect-changes.outputs.mcp-changed == 'true' ||
+       needs.detect-changes.outputs.docs-changed == 'true' ||
+       needs.detect-changes.outputs.specs-changed == 'true' ||
+       needs.regenerate-docs.outputs.changed == 'true')
+    uses: ./.github/workflows/_build-mcp-server.yml
+    with:
+      publish: true
+    secrets:
+      npm-token: ${{ secrets.NPM_TOKEN }}
+
+  # ===========================================================================
+  # STEP 6: Create PR for regenerated content (human commits only)
   # ===========================================================================
   # NOTE: We create a PR instead of pushing directly to respect branch protection.
   # The delayed tagging pattern ensures we DON'T tag here - tagging happens when
@@ -460,7 +503,7 @@ jobs:
   # ===========================================================================
   summary:
     name: Workflow Summary
-    needs: [detect-changes, build-test, regenerate-provider, regenerate-docs, create-regeneration-pr, tag-release]
+    needs: [detect-changes, build-test, regenerate-provider, regenerate-docs, build-mcp-server, create-regeneration-pr, tag-release]
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -477,9 +520,12 @@ jobs:
           echo "| Code Changed | ${{ needs.detect-changes.outputs.code-changed }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Tools Changed | ${{ needs.detect-changes.outputs.tools-changed }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Functions Changed | ${{ needs.detect-changes.outputs.functions-changed }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| MCP Server Changed | ${{ needs.detect-changes.outputs.mcp-changed }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Docs Changed | ${{ needs.detect-changes.outputs.docs-changed }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Build/Test | ${{ needs.build-test.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Provider Regenerated | ${{ needs.regenerate-provider.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Docs Regenerated | ${{ needs.regenerate-docs.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| MCP Server Built | ${{ needs.build-mcp-server.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Regeneration PR Created | ${{ needs.create-regeneration-pr.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Tagged/Released | ${{ needs.tag-release.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY

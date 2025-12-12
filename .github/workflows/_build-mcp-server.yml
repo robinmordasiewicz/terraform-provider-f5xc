@@ -1,0 +1,92 @@
+# Reusable workflow for building and optionally publishing the MCP server
+# Called by on-merge.yml when MCP server source or documentation changes
+name: Build MCP Server
+
+on:
+  workflow_call:
+    inputs:
+      publish:
+        description: 'Whether to publish to npm'
+        required: false
+        default: false
+        type: boolean
+    outputs:
+      changed:
+        description: 'Whether the MCP server had changes'
+        value: ${{ jobs.build.outputs.changed }}
+      version:
+        description: 'The MCP server version'
+        value: ${{ jobs.build.outputs.version }}
+    secrets:
+      npm-token:
+        description: 'NPM token for publishing'
+        required: false
+
+jobs:
+  build:
+    name: Build MCP Server
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.check.outputs.has_changes }}
+      version: ${{ steps.version.outputs.version }}
+    defaults:
+      run:
+        working-directory: mcp-server
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
+          cache-dependency-path: mcp-server/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build
+
+      - name: Get version
+        id: version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "MCP Server version: $VERSION"
+
+      - name: Check for changes
+        id: check
+        run: |
+          cd ..
+          CHANGED=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || git diff --name-only HEAD)
+          if echo "$CHANGED" | grep -qE '^mcp-server/|^docs/'; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "MCP server or documentation changed"
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Publish to npm
+        if: inputs.publish && steps.check.outputs.has_changes == 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.npm-token }}
+        run: |
+          # Check if version exists on npm
+          VERSION=$(node -p "require('./package.json').version")
+          PACKAGE_NAME=$(node -p "require('./package.json').name")
+
+          if npm view "$PACKAGE_NAME@$VERSION" version 2>/dev/null; then
+            echo "Version $VERSION already exists on npm, skipping publish"
+          else
+            echo "Publishing $PACKAGE_NAME@$VERSION to npm"
+            npm publish --access public
+          fi

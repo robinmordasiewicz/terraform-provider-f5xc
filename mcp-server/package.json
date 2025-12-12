@@ -1,0 +1,61 @@
+{
+  "name": "@robinmordasiewicz/f5xc-terraform-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for F5 Distributed Cloud Terraform provider - provides documentation and API specification access for AI assistants",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "f5xc-terraform-mcp": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx watch src/index.ts",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build",
+    "lint": "eslint src/**/*.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "f5",
+    "f5xc",
+    "f5-distributed-cloud",
+    "terraform",
+    "terraform-provider",
+    "ai",
+    "claude",
+    "openapi"
+  ],
+  "author": "Robin Mordasiewicz",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robinmordasiewicz/terraform-provider-f5xc.git",
+    "directory": "mcp-server"
+  },
+  "bugs": {
+    "url": "https://github.com/robinmordasiewicz/terraform-provider-f5xc/issues"
+  },
+  "homepage": "https://github.com/robinmordasiewicz/terraform-provider-f5xc/tree/main/mcp-server#readme",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.6.1",
+    "glob": "^11.0.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  },
+  "mcpName": "io.github.robinmordasiewicz/f5xc-terraform-mcp"
+}

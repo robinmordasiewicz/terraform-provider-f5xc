@@ -322,3 +322,63 @@ jobs:
           echo "::group::Running mock tests"
           go test -v ./internal/mocks/...
           echo "::endgroup::"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # Validate MCP Server Build (for PRs affecting MCP server)
+  # ═══════════════════════════════════════════════════════════════════════════
+  validate-mcp-server:
+    name: Validate MCP Server
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    defaults:
+      run:
+        working-directory: mcp-server
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Check if MCP server validation needed
+        id: check
+        run: |
+          cd ..
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD 2>/dev/null || echo "")
+
+          # Check if MCP server source changed
+          if echo "$CHANGED_FILES" | grep -qE "^mcp-server/"; then
+            echo "needs_validation=true" >> $GITHUB_OUTPUT
+            echo "MCP server files changed - validation needed"
+          else
+            echo "needs_validation=false" >> $GITHUB_OUTPUT
+            echo "No MCP server changes - skipping validation"
+          fi
+
+      - name: Setup Node.js
+        if: steps.check.outputs.needs_validation == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: mcp-server/package-lock.json
+
+      - name: Install dependencies
+        if: steps.check.outputs.needs_validation == 'true'
+        run: npm ci
+
+      - name: Type check
+        if: steps.check.outputs.needs_validation == 'true'
+        run: npm run typecheck
+
+      - name: Build
+        if: steps.check.outputs.needs_validation == 'true'
+        run: npm run build
+
+      - name: Verify build output
+        if: steps.check.outputs.needs_validation == 'true'
+        run: |
+          if [ ! -f "dist/index.js" ]; then
+            echo "::error::MCP server build did not produce dist/index.js"
+            exit 1
+          fi
+          echo "MCP server build validated successfully"

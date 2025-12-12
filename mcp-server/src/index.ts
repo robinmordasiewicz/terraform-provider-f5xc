@@ -6,6 +6,9 @@
  * - Terraform provider documentation (resources, data sources, functions, guides)
  * - F5 Distributed Cloud OpenAPI specifications (270+ specs)
  * - Search and query capabilities for both documentation and API specs
+ *
+ * Version is synced with the Terraform provider release version.
+ * @see https://github.com/robinmordasiewicz/terraform-provider-f5xc
  */
 
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';

@@ -65,7 +65,7 @@ origin_server = "origin.example.com"
 origin_port   = 443
 
 # Namespace configuration
-namespace_name   = "my-app"
+namespace_name   = "example-app"
 create_namespace = true
 
 # Security features (all enabled by default)
@@ -108,7 +108,7 @@ After deployment, Terraform outputs a CNAME target. Create a DNS record:
 To deploy into an existing namespace instead of creating a new one:
 
 ```hcl
-namespace_name   = "my-existing-namespace"
+namespace_name   = "example-namespace"
 create_namespace = false
 ```
 

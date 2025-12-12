@@ -227,7 +227,7 @@ func (r *EnhancedFirewallPolicyResource) Metadata(ctx context.Context, req resou
 func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             enhanced_firewall_policySchemaVersion,
-		MarkdownDescription: "Manages a Enhanced Firewall Policy resource in F5 Distributed Cloud for enhanced firewall policy configuration.",
+		MarkdownDescription: "[Category: Security] [Namespace: required] Manages a Enhanced Firewall Policy resource in F5 Distributed Cloud for enhanced firewall policy configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Enhanced Firewall Policy. Must be unique within the namespace.",
@@ -341,7 +341,7 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 									MarkdownDescription: "Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction",
 									Attributes: map[string]schema.Attribute{
 										"action": schema.StringAttribute{
-											MarkdownDescription: "Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule. Possible values are `NOLOG`, `LOG`. Defaults to `NOLOG`.",
+											MarkdownDescription: "[Enum: NOLOG|LOG] Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule. Possible values are `NOLOG`, `LOG`. Defaults to `NOLOG`.",
 											Optional:            true,
 										},
 									},
@@ -374,7 +374,7 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 									MarkdownDescription: "Applications. Application protocols like HTTP, SNMP",
 									Attributes: map[string]schema.Attribute{
 										"applications": schema.ListAttribute{
-											MarkdownDescription: "Application Protocols. Application protocols like HTTP, SNMP. Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`. Defaults to `APPLICATION_HTTP`.",
+											MarkdownDescription: "[Enum: APPLICATION_HTTP|APPLICATION_HTTPS|APPLICATION_SNMP|APPLICATION_DNS] Application Protocols. Application protocols like HTTP, SNMP. Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`. Defaults to `APPLICATION_HTTP`.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},

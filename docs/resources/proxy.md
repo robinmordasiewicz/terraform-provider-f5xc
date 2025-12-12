@@ -2,12 +2,12 @@
 page_title: "f5xc_proxy Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create configuration.
+  [Namespace: required] Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create configuration.
 ---
 
 # f5xc_proxy (Resource)
 
-Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create configuration.
+[Namespace: required] Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create configuration.
 
 ~> **Note** Please refer to [Proxy API docs](https://docs.cloud.f5.com/docs-v2/api/views-proxy) to learn more.
 
@@ -15,7 +15,7 @@ Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create con
 
 ```terraform
 # Proxy Resource Example
-# Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create configuration.
+# [Namespace: required] Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create configuration.
 
 # Basic Proxy configuration
 resource "f5xc_proxy" "example" {
@@ -57,7 +57,6 @@ resource "f5xc_proxy" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="active-forward-proxy-policies"></a>[`active_forward_proxy_policies`](#active-forward-proxy-policies) - Optional Block<br>Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
-<br><br>&#x2022; <a id="no-forward-proxy-policy"></a>[`no_forward_proxy_policy`](#no-forward-proxy-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="connection-timeout"></a>&#x2022; [`connection_timeout`](#connection-timeout) - Optional Number  Defaults to `2000`  Specified in milliseconds<br>Connection Timeout. The timeout for new network connections to upstream server.  The (2 seconds)
 
@@ -69,15 +68,18 @@ resource "f5xc_proxy" "example" {
 &#x2022; <a id="dynamic-proxy"></a>[`dynamic_proxy`](#dynamic-proxy) - Optional Block<br>DynamicProxyType<br>See [Dynamic Proxy](#dynamic-proxy) below for details.
 <br><br>&#x2022; <a id="http-proxy"></a>[`http_proxy`](#http-proxy) - Optional Block<br>HTTP Connect Proxy. Parameters for HTTP Connect Proxy
 
+<a id="no-forward-proxy-policy"></a>&#x2022; [`no_forward_proxy_policy`](#no-forward-proxy-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+
 -> **One of the following:**
 &#x2022; <a id="no-interception"></a>[`no_interception`](#no-interception) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="tls-intercept"></a>[`tls_intercept`](#tls-intercept) - Optional Block<br>Configuration for TLS interception. Configuration to enable TLS interception
 
 -> **One of the following:**
 &#x2022; <a id="site-local-inside-network"></a>[`site_local_inside_network`](#site-local-inside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 <br><br>&#x2022; <a id="site-local-network"></a>[`site_local_network`](#site-local-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block
+
+<a id="tls-intercept"></a>&#x2022; [`tls_intercept`](#tls-intercept) - Optional Block<br>Configuration for TLS interception. Configuration to enable TLS interception
 
 ### Attributes Reference
 
@@ -657,7 +659,7 @@ A [`tls_certificates`](#dynamic-proxy-https-proxy-tls-params-tls-certificates) b
 
 A [`custom_hash_algorithms`](#dynamic-proxy-https-proxy-tls-params-tls-certificates-custom-hash-algorithms) block (within [`dynamic_proxy.https_proxy.tls_params.tls_certificates`](#dynamic-proxy-https-proxy-tls-params-tls-certificates)) supports the following:
 
-<a id="dynamic-proxy-https-proxy-tls-params-tls-certificates-custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#dynamic-proxy-https-proxy-tls-params-tls-certificates-custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="dynamic-proxy-https-proxy-tls-params-tls-certificates-custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#dynamic-proxy-https-proxy-tls-params-tls-certificates-custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
 
 #### Dynamic Proxy HTTPS Proxy TLS Params TLS Certificates Private Key
 
@@ -703,9 +705,9 @@ A [`custom_security`](#dynamic-proxy-https-proxy-tls-params-tls-config-custom-se
 
 <a id="dynamic-proxy-https-proxy-tls-params-tls-config-custom-security-cipher-suites"></a>&#x2022; [`cipher_suites`](#dynamic-proxy-https-proxy-tls-params-tls-config-custom-security-cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
-<a id="dynamic-proxy-https-proxy-tls-params-tls-config-custom-security-max-version"></a>&#x2022; [`max_version`](#dynamic-proxy-https-proxy-tls-params-tls-config-custom-security-max-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="dynamic-proxy-https-proxy-tls-params-tls-config-custom-security-max-version"></a>&#x2022; [`max_version`](#dynamic-proxy-https-proxy-tls-params-tls-config-custom-security-max-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
-<a id="dynamic-proxy-https-proxy-tls-params-tls-config-custom-security-min-version"></a>&#x2022; [`min_version`](#dynamic-proxy-https-proxy-tls-params-tls-config-custom-security-min-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="dynamic-proxy-https-proxy-tls-params-tls-config-custom-security-min-version"></a>&#x2022; [`min_version`](#dynamic-proxy-https-proxy-tls-params-tls-config-custom-security-min-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
 #### Dynamic Proxy HTTPS Proxy TLS Params Use mTLS
 
@@ -749,7 +751,7 @@ A [`trusted_ca`](#dynamic-proxy-https-proxy-tls-params-use-mtls-trusted-ca) bloc
 
 A [`xfcc_options`](#dynamic-proxy-https-proxy-tls-params-use-mtls-xfcc-options) block (within [`dynamic_proxy.https_proxy.tls_params.use_mtls`](#dynamic-proxy-https-proxy-tls-params-use-mtls)) supports the following:
 
-<a id="dynamic-proxy-https-proxy-tls-params-use-mtls-xfcc-options-xfcc-header-elements"></a>&#x2022; [`xfcc_header_elements`](#dynamic-proxy-https-proxy-tls-params-use-mtls-xfcc-options-xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="dynamic-proxy-https-proxy-tls-params-use-mtls-xfcc-options-xfcc-header-elements"></a>&#x2022; [`xfcc_header_elements`](#dynamic-proxy-https-proxy-tls-params-use-mtls-xfcc-options-xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 #### Dynamic Proxy Sni Proxy
 
@@ -1035,7 +1037,7 @@ A [`site`](#site-virtual-sites-advertise-where-site) block (within [`site_virtua
 
 <a id="site-virtual-sites-advertise-where-site-ip"></a>&#x2022; [`ip`](#site-virtual-sites-advertise-where-site-ip) - Optional String<br>IP Address. Use given IP address as VIP on the site
 
-<a id="site-virtual-sites-advertise-where-site-network"></a>&#x2022; [`network`](#site-virtual-sites-advertise-where-site-network) - Optional String  Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`<br>Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`<br>Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network
+<a id="site-virtual-sites-advertise-where-site-network"></a>&#x2022; [`network`](#site-virtual-sites-advertise-where-site-network) - Optional String  Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`<br>Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`<br>[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network
 
 <a id="site-virtual-sites-advertise-where-site-site"></a>&#x2022; [`site`](#site-virtual-sites-advertise-where-site-site) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#site-virtual-sites-advertise-where-site-site) below.
 
@@ -1053,7 +1055,7 @@ A [`site`](#site-virtual-sites-advertise-where-site-site) block (within [`site_v
 
 A [`virtual_site`](#site-virtual-sites-advertise-where-virtual-site) block (within [`site_virtual_sites.advertise_where`](#site-virtual-sites-advertise-where)) supports the following:
 
-<a id="site-virtual-sites-advertise-where-virtual-site-network"></a>&#x2022; [`network`](#site-virtual-sites-advertise-where-virtual-site-network) - Optional String  Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`<br>Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`<br>Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network
+<a id="site-virtual-sites-advertise-where-virtual-site-network"></a>&#x2022; [`network`](#site-virtual-sites-advertise-where-virtual-site-network) - Optional String  Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`<br>Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`<br>[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network
 
 <a id="site-virtual-sites-advertise-where-virtual-site-virtual-site"></a>&#x2022; [`virtual_site`](#site-virtual-sites-advertise-where-virtual-site-virtual-site) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Site](#site-virtual-sites-advertise-where-virtual-site-virtual-site) below.
 
@@ -1115,7 +1117,7 @@ A [`custom_certificate`](#tls-intercept-custom-certificate) block (within [`tls_
 
 A [`custom_hash_algorithms`](#tls-intercept-custom-certificate-custom-hash-algorithms) block (within [`tls_intercept.custom_certificate`](#tls-intercept-custom-certificate)) supports the following:
 
-<a id="tls-intercept-custom-certificate-custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#tls-intercept-custom-certificate-custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="tls-intercept-custom-certificate-custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#tls-intercept-custom-certificate-custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
 
 #### TLS Intercept Custom Certificate Private Key
 

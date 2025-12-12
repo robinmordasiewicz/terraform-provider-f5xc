@@ -1,5 +1,5 @@
 # Container Registry Resource Example
-# Manages a Container Registry resource in F5 Distributed Cloud for container image registry configuration.
+# [Category: Kubernetes] [Namespace: required] Manages a Container Registry resource in F5 Distributed Cloud for container image registry configuration.
 
 # Basic Container Registry configuration
 resource "f5xc_container_registry" "example" {

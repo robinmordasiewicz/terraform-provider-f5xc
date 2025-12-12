@@ -42,7 +42,7 @@ func (d *GeoLocationSetDataSource) Metadata(ctx context.Context, req datasource.
 
 func (d *GeoLocationSetDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages Geolocation Set in F5 Distributed Cloud.",
+		MarkdownDescription: "[Namespace: required] Manages Geolocation Set in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

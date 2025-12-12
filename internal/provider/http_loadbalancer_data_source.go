@@ -42,7 +42,7 @@ func (d *HTTPLoadBalancerDataSource) Metadata(ctx context.Context, req datasourc
 
 func (d *HTTPLoadBalancerDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages a HTTP Load Balancer resource in F5 Distributed Cloud for load balancing HTTP/HTTPS traffic with advanced routing and security.",
+		MarkdownDescription: "[Category: Load Balancing] [Namespace: required] [DependsOn: namespace, origin_pool] Manages a HTTP Load Balancer resource in F5 Distributed Cloud for load balancing HTTP/HTTPS traffic with advanced routing and security.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

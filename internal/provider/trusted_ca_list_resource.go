@@ -64,7 +64,7 @@ func (r *TrustedCAListResource) Metadata(ctx context.Context, req resource.Metad
 func (r *TrustedCAListResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             trusted_ca_listSchemaVersion,
-		MarkdownDescription: "Manages a Trusted CA List resource in F5 Distributed Cloud for trusted certificate authority list management.",
+		MarkdownDescription: "[Category: Certificates] [Namespace: not_required] Manages a Trusted CA List resource in F5 Distributed Cloud for trusted certificate authority list management.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Trusted CA List. Must be unique within the namespace.",

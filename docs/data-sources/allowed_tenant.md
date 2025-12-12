@@ -2,12 +2,12 @@
 page_title: "f5xc_allowed_tenant Data Source - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
-  Manages allowed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.
+  [Category: Organization] [Namespace: not_required] Manages allowed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.
 ---
 
 # f5xc_allowed_tenant (Data Source)
 
-Manages allowed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.
+[Category: Organization] [Namespace: not_required] Manages allowed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Allowed Tenant API docs](https://docs.cloud.f5.com/docs-v2/api/tenant-management-allowed-tenant) to learn more.
 

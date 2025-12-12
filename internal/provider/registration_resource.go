@@ -257,7 +257,7 @@ func (r *RegistrationResource) Metadata(ctx context.Context, req resource.Metada
 func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             registrationSchemaVersion,
-		MarkdownDescription: "Manages a Registration resource in F5 Distributed Cloud for vpm creates registration using this message, never used by users. configuration.",
+		MarkdownDescription: "[Namespace: required] Manages a Registration resource in F5 Distributed Cloud for vpm creates registration using this message, never used by users. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Registration. Must be unique within the namespace.",
@@ -348,7 +348,7 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 						Optional:            true,
 					},
 					"provider_ref": schema.StringAttribute{
-						MarkdownDescription: "Infrastructure Provider. Infrastructure provider enum for registration. It describes where is instance running. Provider was not detected AWS cloud instance Google cloud instance Azure cloud instance VMWare VM KVM VM Other provider, which was not identified by system. F5XC HW device. IBM Cloud instance. Kubernetes cluster in AWS Kubernetes cluster in GCP Kubernetes cluster in Azure Kubernetes cluster in Vmware Kubernetes cluster in VMware Kubernetes cluster in Other provider Kubernetes cluster in Volterra Kubernetes cluster in IBM Cloud F5OS HW device. RSeries Device OCI Cloud Instance Nutanix instance Openstack Instance Equinix Instance. Possible values are `UNKNOWN`, `AWS`, `GOOGLE`, `AZURE`, `VMWARE`, `KVM`, `OTHER`, `VOLTERRA`, `IBMCLOUD`, `UNKNOWN_K8S`, `AWS_K8S`, `GCP_K8S`, `AZURE_K8S`, `VMWARE_K8S`, `KVM_K8S`, `OTHER_K8S`, `VOLTERRA_K8S`, `IBMCLOUD_K8S`, `F5OS`, `RSERIES`, `OCI`, `NUTANIX`, `OPENSTACK`, `EQUINIX`.",
+						MarkdownDescription: "[Enum: UNKNOWN|AWS|GOOGLE|AZURE|VMWARE|KVM|OTHER|VOLTERRA|IBMCLOUD|UNKNOWN_K8S|AWS_K8S|GCP_K8S|AZURE_K8S|VMWARE_K8S|KVM_K8S|OTHER_K8S|VOLTERRA_K8S|IBMCLOUD_K8S|F5OS|RSERIES|OCI|NUTANIX|OPENSTACK|EQUINIX] Infrastructure Provider. Infrastructure provider enum for registration. It describes where is instance running. Provider was not detected AWS cloud instance Google cloud instance Azure cloud instance VMWare VM KVM VM Other provider, which was not identified by system. F5XC HW device. IBM Cloud instance. Kubernetes cluster in AWS Kubernetes cluster in GCP Kubernetes cluster in Azure Kubernetes cluster in Vmware Kubernetes cluster in VMware Kubernetes cluster in Other provider Kubernetes cluster in Volterra Kubernetes cluster in IBM Cloud F5OS HW device. RSeries Device OCI Cloud Instance Nutanix instance Openstack Instance Equinix Instance. Possible values are `UNKNOWN`, `AWS`, `GOOGLE`, `AZURE`, `VMWARE`, `KVM`, `OTHER`, `VOLTERRA`, `IBMCLOUD`, `UNKNOWN_K8S`, `AWS_K8S`, `GCP_K8S`, `AZURE_K8S`, `VMWARE_K8S`, `KVM_K8S`, `OTHER_K8S`, `VOLTERRA_K8S`, `IBMCLOUD_K8S`, `F5OS`, `RSERIES`, `OCI`, `NUTANIX`, `OPENSTACK`, `EQUINIX`.",
 						Optional:            true,
 					},
 					"timestamp": schema.StringAttribute{
@@ -552,11 +552,11 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 											ElementType:         types.StringType,
 										},
 										"link_quality": schema.StringAttribute{
-											MarkdownDescription: "Link quality. Link quality determined by VER using different probes Unknown quality Link quality is good Link quality is poor Quality disabled. Possible values are `QUALITY_UNKNOWN`, `QUALITY_GOOD`, `QUALITY_POOR`, `QUALITY_DISABLED`. Defaults to `QUALITY_UNKNOWN`.",
+											MarkdownDescription: "[Enum: QUALITY_UNKNOWN|QUALITY_GOOD|QUALITY_POOR|QUALITY_DISABLED] Link quality. Link quality determined by VER using different probes Unknown quality Link quality is good Link quality is poor Quality disabled. Possible values are `QUALITY_UNKNOWN`, `QUALITY_GOOD`, `QUALITY_POOR`, `QUALITY_DISABLED`. Defaults to `QUALITY_UNKNOWN`.",
 											Optional:            true,
 										},
 										"link_type": schema.StringAttribute{
-											MarkdownDescription: "Link type. Link type of interface determined operationally Link type unknown Link type ethernet WiFi link of type 802.11ac WiFi link of type 802.11bgn Link type 4G WiFi link Wan link. Possible values are `LINK_TYPE_UNKNOWN`, `LINK_TYPE_ETHERNET`, `LINK_TYPE_WIFI_802_11AC`, `LINK_TYPE_WIFI_802_11BGN`, `LINK_TYPE_4G`, `LINK_TYPE_WIFI`, `LINK_TYPE_WAN`. Defaults to `LINK_TYPE_UNKNOWN`.",
+											MarkdownDescription: "[Enum: LINK_TYPE_UNKNOWN|LINK_TYPE_ETHERNET|LINK_TYPE_WIFI_802_11AC|LINK_TYPE_WIFI_802_11BGN|LINK_TYPE_4G|LINK_TYPE_WIFI|LINK_TYPE_WAN] Link type. Link type of interface determined operationally Link type unknown Link type ethernet WiFi link of type 802.11ac WiFi link of type 802.11bgn Link type 4G WiFi link Wan link. Possible values are `LINK_TYPE_UNKNOWN`, `LINK_TYPE_ETHERNET`, `LINK_TYPE_WIFI_802_11AC`, `LINK_TYPE_WIFI_802_11BGN`, `LINK_TYPE_4G`, `LINK_TYPE_WIFI`, `LINK_TYPE_WAN`. Defaults to `LINK_TYPE_UNKNOWN`.",
 											Optional:            true,
 										},
 										"mac_address": schema.StringAttribute{
@@ -728,7 +728,7 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 											Optional:            true,
 										},
 										"usb_type": schema.StringAttribute{
-											MarkdownDescription: "USB Type. Type of USB device Unknown USB device type Internal USB present in Certified HW USB device present during node registration USB device that can be matched by USB rules. Possible values are `UNKNOWN_USB`, `INTERNAL`, `REGISTERED`, `CONFIGURABLE`. Defaults to `UNKNOWN_USB`.",
+											MarkdownDescription: "[Enum: UNKNOWN_USB|INTERNAL|REGISTERED|CONFIGURABLE] USB Type. Type of USB device Unknown USB device type Internal USB present in Certified HW USB device present during node registration USB device that can be matched by USB rules. Possible values are `UNKNOWN_USB`, `INTERNAL`, `REGISTERED`, `CONFIGURABLE`. Defaults to `UNKNOWN_USB`.",
 											Optional:            true,
 										},
 										"vendor_name": schema.StringAttribute{

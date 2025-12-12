@@ -1,5 +1,5 @@
 # Bigip Irule Resource Example
-# Manages a BIG-IP Irule resource in F5 Distributed Cloud for desired state for big-ip irule service configuration.
+# [Namespace: required] Manages a BIG-IP Irule resource in F5 Distributed Cloud for desired state for big-ip irule service configuration.
 
 # Basic Bigip Irule configuration
 resource "f5xc_bigip_irule" "example" {

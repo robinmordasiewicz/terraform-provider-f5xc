@@ -2,12 +2,12 @@
 page_title: "f5xc_ike1 Data Source - terraform-provider-f5xc"
 subcategory: "VPN"
 description: |-
-  Manages a Ike1 resource in F5 Distributed Cloud for ike phase1 profile configuration.
+  [Namespace: required] Manages a Ike1 resource in F5 Distributed Cloud for ike phase1 profile configuration.
 ---
 
 # f5xc_ike1 (Data Source)
 
-Manages a Ike1 resource in F5 Distributed Cloud for ike phase1 profile configuration.
+[Namespace: required] Manages a Ike1 resource in F5 Distributed Cloud for ike phase1 profile configuration.
 
 ~> **Note** Please refer to [Ike1 API docs](https://docs.cloud.f5.com/docs-v2/api/ike1) to learn more.
 

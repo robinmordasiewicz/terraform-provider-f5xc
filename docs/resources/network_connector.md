@@ -2,12 +2,12 @@
 page_title: "f5xc_network_connector Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
+  [Category: Networking] [Namespace: required] Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
 ---
 
 # f5xc_network_connector (Resource)
 
-Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
+[Category: Networking] [Namespace: required] Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
 
 ~> **Note** Please refer to [Network Connector API docs](https://docs.cloud.f5.com/docs-v2/api/network-connector) to learn more.
 
@@ -15,7 +15,7 @@ Manages a Network Connector resource in F5 Distributed Cloud for network connect
 
 ```terraform
 # Network Connector Resource Example
-# Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
+# [Category: Networking] [Namespace: required] Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
 
 # Basic Network Connector configuration
 resource "f5xc_network_connector" "example" {
@@ -66,7 +66,8 @@ resource "f5xc_network_connector" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="disable-forward-proxy"></a>[`disable_forward_proxy`](#disable-forward-proxy) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="enable-forward-proxy"></a>[`enable_forward_proxy`](#enable-forward-proxy) - Optional Block<br>Forward Proxy Configuration. Fine tune forward proxy behavior Few configurations allowed are White listed ports and IP prefixes: Forward proxy does application protocol detection and server name(SNI) detection by peeking into the traffic on the incoming downstream connection. Few protocols doesn't have client sending the first data. In such cases, protocol and SNI detection fails. This configuration allows, skipping protocol and SNI detection for whitelisted IP-prefix-list and ports connection_timeout: The timeout for new network connections to upstream server. max_connect_attempts: Maximum number of attempts made to make new network connection to upstream server<br>See [Enable Forward Proxy](#enable-forward-proxy) below for details.
+
+<a id="enable-forward-proxy"></a>&#x2022; [`enable_forward_proxy`](#enable-forward-proxy) - Optional Block<br>Forward Proxy Configuration. Fine tune forward proxy behavior Few configurations allowed are White listed ports and IP prefixes: Forward proxy does application protocol detection and server name(SNI) detection by peeking into the traffic on the incoming downstream connection. Few protocols doesn't have client sending the first data. In such cases, protocol and SNI detection fails. This configuration allows, skipping protocol and SNI detection for whitelisted IP-prefix-list and ports connection_timeout: The timeout for new network connections to upstream server. max_connect_attempts: Maximum number of attempts made to make new network connection to upstream server<br>See [Enable Forward Proxy](#enable-forward-proxy) below for details.
 
 -> **One of the following:**
 &#x2022; <a id="sli-to-global-dr"></a>[`sli_to_global_dr`](#sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#sli-to-global-dr) below for details.
@@ -135,7 +136,7 @@ A [`custom_certificate`](#enable-forward-proxy-tls-intercept-custom-certificate)
 
 A [`custom_hash_algorithms`](#enable-forward-proxy-tls-intercept-custom-certificate-custom-hash-algorithms) block (within [`enable_forward_proxy.tls_intercept.custom_certificate`](#enable-forward-proxy-tls-intercept-custom-certificate)) supports the following:
 
-<a id="enable-forward-proxy-tls-intercept-custom-certificate-custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#enable-forward-proxy-tls-intercept-custom-certificate-custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="enable-forward-proxy-tls-intercept-custom-certificate-custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#enable-forward-proxy-tls-intercept-custom-certificate-custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
 
 #### Enable Forward Proxy TLS Intercept Custom Certificate Private Key
 

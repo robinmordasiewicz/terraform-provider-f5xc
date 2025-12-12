@@ -2,12 +2,12 @@
 page_title: "f5xc_irule Data Source - terraform-provider-f5xc"
 subcategory: "BIG-IP Integration"
 description: |-
-  Manages iRule in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
+  [Namespace: required] Manages iRule in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 ---
 
 # f5xc_irule (Data Source)
 
-Manages iRule in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
+[Namespace: required] Manages iRule in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Irule API docs](https://docs.cloud.f5.com/docs-v2/api/bigcne-irule) to learn more.
 

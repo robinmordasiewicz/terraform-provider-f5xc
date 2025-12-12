@@ -2,12 +2,12 @@
 page_title: "f5xc_filter_set Resource - terraform-provider-f5xc"
 subcategory: "Applications"
 description: |-
-  Manages a Filter Set resource in F5 Distributed Cloud for create configuration.
+  [Namespace: required] Manages a Filter Set resource in F5 Distributed Cloud for create configuration.
 ---
 
 # f5xc_filter_set (Resource)
 
-Manages a Filter Set resource in F5 Distributed Cloud for create configuration.
+[Namespace: required] Manages a Filter Set resource in F5 Distributed Cloud for create configuration.
 
 ~> **Note** Please refer to [Filter Set API docs](https://docs.cloud.f5.com/docs-v2/api/filter-set) to learn more.
 
@@ -15,7 +15,7 @@ Manages a Filter Set resource in F5 Distributed Cloud for create configuration.
 
 ```terraform
 # Filter Set Resource Example
-# Manages a Filter Set resource in F5 Distributed Cloud for create configuration.
+# [Namespace: required] Manages a Filter Set resource in F5 Distributed Cloud for create configuration.
 
 # Basic Filter Set configuration
 resource "f5xc_filter_set" "example" {

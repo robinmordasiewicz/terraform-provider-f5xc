@@ -2,12 +2,12 @@
 page_title: "f5xc_protocol_policer Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits in F5 Distributed Cloud.
+  [Namespace: required] Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits in F5 Distributed Cloud.
 ---
 
 # f5xc_protocol_policer (Resource)
 
-Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits in F5 Distributed Cloud.
+[Namespace: required] Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Protocol Policer API docs](https://docs.cloud.f5.com/docs-v2/api/protocol-policer) to learn more.
 
@@ -15,7 +15,7 @@ Manages protocol_policer object, protocol_policer object contains list of L4 pro
 
 ```terraform
 # Protocol Policer Resource Example
-# Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits in F5 Distributed Cloud.
+# [Namespace: required] Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits in F5 Distributed Cloud.
 
 # Basic Protocol Policer configuration
 resource "f5xc_protocol_policer" "example" {
@@ -116,13 +116,13 @@ A [`protocol`](#protocol-policer-protocol) block (within [`protocol_policer`](#p
 
 An [`icmp`](#protocol-policer-protocol-icmp) block (within [`protocol_policer.protocol`](#protocol-policer-protocol)) supports the following:
 
-<a id="protocol-policer-protocol-icmp-type"></a>&#x2022; [`type`](#protocol-policer-protocol-icmp-type) - Optional List  Defaults to `ECHO_REPLY`<br>Possible values are `ECHO_REPLY`, `ECHO_REQUEST`, `ALL_ICMP_MSG`<br>ICMP type. ICMP message type to be matched in packet
+<a id="protocol-policer-protocol-icmp-type"></a>&#x2022; [`type`](#protocol-policer-protocol-icmp-type) - Optional List  Defaults to `ECHO_REPLY`<br>Possible values are `ECHO_REPLY`, `ECHO_REQUEST`, `ALL_ICMP_MSG`<br>[Enum: ECHO_REPLY|ECHO_REQUEST|ALL_ICMP_MSG] ICMP type. ICMP message type to be matched in packet
 
 #### Protocol Policer Protocol TCP
 
 A [`tcp`](#protocol-policer-protocol-tcp) block (within [`protocol_policer.protocol`](#protocol-policer-protocol)) supports the following:
 
-<a id="protocol-policer-protocol-tcp-flags"></a>&#x2022; [`flags`](#protocol-policer-protocol-tcp-flags) - Optional List  Defaults to `FIN`<br>Possible values are `FIN`, `SYN`, `RST`, `PSH`, `ACK`, `URG`, `ALL_TCP_FLAGS`, `KEEPALIVE`<br>TCP flags. TCP flag to be matched in a TCP packet
+<a id="protocol-policer-protocol-tcp-flags"></a>&#x2022; [`flags`](#protocol-policer-protocol-tcp-flags) - Optional List  Defaults to `FIN`<br>Possible values are `FIN`, `SYN`, `RST`, `PSH`, `ACK`, `URG`, `ALL_TCP_FLAGS`, `KEEPALIVE`<br>[Enum: FIN|SYN|RST|PSH|ACK|URG|ALL_TCP_FLAGS|KEEPALIVE] TCP flags. TCP flag to be matched in a TCP packet
 
 #### Timeouts
 

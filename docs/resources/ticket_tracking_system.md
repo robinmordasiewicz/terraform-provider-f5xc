@@ -2,12 +2,12 @@
 page_title: "f5xc_ticket_tracking_system Resource - terraform-provider-f5xc"
 subcategory: "Integrations"
 description: |-
-  Manages Ticket Tracking System in F5 Distributed Cloud.
+  [Namespace: required] Manages Ticket Tracking System in F5 Distributed Cloud.
 ---
 
 # f5xc_ticket_tracking_system (Resource)
 
-Manages Ticket Tracking System in F5 Distributed Cloud.
+[Namespace: required] Manages Ticket Tracking System in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Ticket Tracking System API docs](https://docs.cloud.f5.com/docs-v2/api/ticket-management-ticket-tracking-system) to learn more.
 
@@ -15,7 +15,7 @@ Manages Ticket Tracking System in F5 Distributed Cloud.
 
 ```terraform
 # Ticket Tracking System Resource Example
-# Manages Ticket Tracking System in F5 Distributed Cloud.
+# [Namespace: required] Manages Ticket Tracking System in F5 Distributed Cloud.
 
 # Basic Ticket Tracking System configuration
 resource "f5xc_ticket_tracking_system" "example" {

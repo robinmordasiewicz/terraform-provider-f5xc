@@ -42,7 +42,7 @@ func (d *UsbPolicyDataSource) Metadata(ctx context.Context, req datasource.Metad
 
 func (d *UsbPolicyDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages a Usb Policy resource in F5 Distributed Cloud for creates a new usb policy configuration.",
+		MarkdownDescription: "[Namespace: required] Manages a Usb Policy resource in F5 Distributed Cloud for creates a new usb policy configuration.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

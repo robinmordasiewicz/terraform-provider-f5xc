@@ -1,5 +1,5 @@
 # Geo Location Set Resource Example
-# Manages Geolocation Set in F5 Distributed Cloud.
+# [Namespace: required] Manages Geolocation Set in F5 Distributed Cloud.
 
 # Basic Geo Location Set configuration
 resource "f5xc_geo_location_set" "example" {

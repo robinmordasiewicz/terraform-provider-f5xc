@@ -2,12 +2,12 @@
 page_title: "f5xc_log_receiver Resource - terraform-provider-f5xc"
 subcategory: "Monitoring"
 description: |-
-  Manages a Log Receiver resource in F5 Distributed Cloud for log collection and forwarding configuration.
+  [Category: Monitoring] [Namespace: required] Manages a Log Receiver resource in F5 Distributed Cloud for log collection and forwarding configuration.
 ---
 
 # f5xc_log_receiver (Resource)
 
-Manages a Log Receiver resource in F5 Distributed Cloud for log collection and forwarding configuration.
+[Category: Monitoring] [Namespace: required] Manages a Log Receiver resource in F5 Distributed Cloud for log collection and forwarding configuration.
 
 ~> **Note** Please refer to [Log Receiver API docs](https://docs.cloud.f5.com/docs-v2/api/log-receiver) to learn more.
 
@@ -15,7 +15,7 @@ Manages a Log Receiver resource in F5 Distributed Cloud for log collection and f
 
 ```terraform
 # Log Receiver Resource Example
-# Manages a Log Receiver resource in F5 Distributed Cloud for log collection and forwarding configuration.
+# [Category: Monitoring] [Namespace: required] Manages a Log Receiver resource in F5 Distributed Cloud for log collection and forwarding configuration.
 
 # Basic Log Receiver configuration
 resource "f5xc_log_receiver" "example" {

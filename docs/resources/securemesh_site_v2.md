@@ -2,12 +2,12 @@
 page_title: "f5xc_securemesh_site_v2 Resource - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
-  Manages a Securemesh Site V2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.
+  [Category: Sites] [Namespace: required] Manages a Securemesh Site V2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.
 ---
 
 # f5xc_securemesh_site_v2 (Resource)
 
-Manages a Securemesh Site V2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.
+[Category: Sites] [Namespace: required] Manages a Securemesh Site V2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.
 
 ~> **Note** Please refer to [Securemesh Site V2 API docs](https://docs.cloud.f5.com/docs-v2/api/views-securemesh-site-v2) to learn more.
 
@@ -15,7 +15,7 @@ Manages a Securemesh Site V2 resource in F5 Distributed Cloud for deploying secu
 
 ```terraform
 # Securemesh Site V2 Resource Example
-# Manages a Securemesh Site V2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.
+# [Category: Sites] [Namespace: required] Manages a Securemesh Site V2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.
 
 # Basic Securemesh Site V2 configuration
 resource "f5xc_securemesh_site_v2" "example" {
@@ -40,7 +40,7 @@ resource "f5xc_securemesh_site_v2" "example" {
   enhanced_firewall_policies {
     # Configure enhanced_firewall_policies settings
   }
-  # [OneOf: active_forward_proxy_policies, no_forward_proxy] ...
+  # [OneOf: active_forward_proxy_policies, no_forward_proxy; ...
   active_forward_proxy_policies {
     # Configure active_forward_proxy_policies settings
   }
@@ -68,11 +68,9 @@ resource "f5xc_securemesh_site_v2" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="active-enhanced-firewall-policies"></a>[`active_enhanced_firewall_policies`](#active-enhanced-firewall-policies) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#active-enhanced-firewall-policies) below for details.
-<br><br>&#x2022; <a id="no-network-policy"></a>[`no_network_policy`](#no-network-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; <a id="active-forward-proxy-policies"></a>[`active_forward_proxy_policies`](#active-forward-proxy-policies) - Optional Block<br>Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
-<br><br>&#x2022; <a id="no-forward-proxy"></a>[`no_forward_proxy`](#no-forward-proxy) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="admin-user-credentials"></a>&#x2022; [`admin_user_credentials`](#admin-user-credentials) - Optional Block<br>Admin User Credentials. Setup user credentials to manage access to nodes belonging to the site. When configured, 'admin' user will be setup and customers can access these nodes via either the node local WebUI or via SSH to access shell/CLI Ensure 'Node Local Services' are enabled to allow for required access<br>See [Admin User Credentials](#admin-user-credentials) below for details.
 
@@ -98,26 +96,25 @@ resource "f5xc_securemesh_site_v2" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="custom-proxy-bypass"></a>[`custom_proxy_bypass`](#custom-proxy-bypass) - Optional Block<br>Proxy Bypass. List of domains to bypass the proxy
-<br><br>&#x2022; <a id="no-proxy-bypass"></a>[`no_proxy_bypass`](#no-proxy-bypass) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; <a id="dc-cluster-group-sli"></a>[`dc_cluster_group_sli`](#dc-cluster-group-sli) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
-<br><br>&#x2022; <a id="no-s2s-connectivity-sli"></a>[`no_s2s_connectivity_sli`](#no-s2s-connectivity-sli) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; <a id="dc-cluster-group-slo"></a>[`dc_cluster_group_slo`](#dc-cluster-group-slo) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
 <br><br>&#x2022; <a id="no-s2s-connectivity-slo"></a>[`no_s2s_connectivity_slo`](#no-s2s-connectivity-slo) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="site-mesh-group-on-slo"></a>[`site_mesh_group_on_slo`](#site-mesh-group-on-slo) - Optional Block<br>Site Mesh Group Type. Select how the site mesh group will be connected. By default, public IPs of the control nodes of the site will be used
 
 -> **One of the following:**
 &#x2022; <a id="disable-ha"></a>[`disable_ha`](#disable-ha) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="enable-ha"></a>[`enable_ha`](#enable-ha) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; <a id="disable-url-categorization"></a>[`disable_url_categorization`](#disable-url-categorization) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="enable-url-categorization"></a>[`enable_url_categorization`](#enable-url-categorization) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="dns-ntp-config"></a>&#x2022; [`dns_ntp_config`](#dns-ntp-config) - Optional Block<br>DNS & NTP Servers Settings. Specify DNS and NTP servers that will be used by the nodes in this Customer Edge site
+
+<a id="enable-ha"></a>&#x2022; [`enable_ha`](#enable-ha) - Optional Block<br>Empty. This can be used for messages where no values are needed
+
+<a id="enable-url-categorization"></a>&#x2022; [`enable_url_categorization`](#enable-url-categorization) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="load-balancing"></a>&#x2022; [`load_balancing`](#load-balancing) - Optional Block<br>Load Balancing Settings. This section contains settings on the site that relate to Load Balancing functionality
 
@@ -127,11 +124,21 @@ resource "f5xc_securemesh_site_v2" "example" {
 &#x2022; <a id="log-receiver"></a>[`log_receiver`](#log-receiver) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
 <br><br>&#x2022; <a id="logs-streaming-disabled"></a>[`logs_streaming_disabled`](#logs-streaming-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
+<a id="no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#no-forward-proxy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+
+<a id="no-network-policy"></a>&#x2022; [`no_network_policy`](#no-network-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+
+<a id="no-proxy-bypass"></a>&#x2022; [`no_proxy_bypass`](#no-proxy-bypass) - Optional Block<br>Empty. This can be used for messages where no values are needed
+
+<a id="no-s2s-connectivity-sli"></a>&#x2022; [`no_s2s_connectivity_sli`](#no-s2s-connectivity-sli) - Optional Block<br>Empty. This can be used for messages where no values are needed
+
 <a id="offline-survivability-mode"></a>&#x2022; [`offline_survivability_mode`](#offline-survivability-mode) - Optional Block<br>Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen
 
 <a id="performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default
 
 <a id="re-select"></a>&#x2022; [`re_select`](#re-select) - Optional Block<br>Regional Edge Selection. Selection criteria to connect the site with F5 Distributed Cloud Regional Edge(s)
+
+<a id="site-mesh-group-on-slo"></a>&#x2022; [`site_mesh_group_on_slo`](#site-mesh-group-on-slo) - Optional Block<br>Site Mesh Group Type. Select how the site mesh group will be connected. By default, public IPs of the control nodes of the site will be used
 
 <a id="software-settings"></a>&#x2022; [`software_settings`](#software-settings) - Optional Block<br>F5XC Software Settings. Select OS and Software version for the site. All nodes in the site will run the same OS and Software version. These settings cannot be changed after the site is created
 
@@ -139,7 +146,7 @@ resource "f5xc_securemesh_site_v2" "example" {
 
 <a id="tunnel-dead-timeout"></a>&#x2022; [`tunnel_dead_timeout`](#tunnel-dead-timeout) - Optional Number<br>Tunnel Dead Timeout (msec). Time interval, in millisec, within which any ipsec / SSL connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used
 
-<a id="tunnel-type"></a>&#x2022; [`tunnel_type`](#tunnel-type) - Optional String  Defaults to `SITE_TO_SITE_TUNNEL_IPSEC_OR_SSL`<br>Possible values are `SITE_TO_SITE_TUNNEL_IPSEC_OR_SSL`, `SITE_TO_SITE_TUNNEL_IPSEC`, `SITE_TO_SITE_TUNNEL_SSL`<br>Tunnel type. Tunnel encapsulation to be used between sites Tunnel can operate in both IPsec and SSL, with IPsec being prefered over SSL. Tunnel is of type IPsec Tunnel is of type SSL
+<a id="tunnel-type"></a>&#x2022; [`tunnel_type`](#tunnel-type) - Optional String  Defaults to `SITE_TO_SITE_TUNNEL_IPSEC_OR_SSL`<br>Possible values are `SITE_TO_SITE_TUNNEL_IPSEC_OR_SSL`, `SITE_TO_SITE_TUNNEL_IPSEC`, `SITE_TO_SITE_TUNNEL_SSL`<br>[Enum: SITE_TO_SITE_TUNNEL_IPSEC_OR_SSL|SITE_TO_SITE_TUNNEL_IPSEC|SITE_TO_SITE_TUNNEL_SSL] Tunnel type. Tunnel encapsulation to be used between sites Tunnel can operate in both IPsec and SSL, with IPsec being prefered over SSL. Tunnel is of type IPsec Tunnel is of type SSL
 
 <a id="upgrade-settings"></a>&#x2022; [`upgrade_settings`](#upgrade-settings) - Optional Block<br>Upgrade Settings. Specify how a site will be upgraded
 
@@ -375,7 +382,7 @@ A [`dhcp_networks`](#aws-not-managed-node-list-interface-list-ipv6-auto-config-r
 
 <a id="aws-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix"></a>&#x2022; [`network_prefix`](#aws-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
 
-<a id="aws-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#aws-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
+<a id="aws-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#aws-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
 
 <a id="aws-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>&#x2022; [`pools`](#aws-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#aws-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
 
@@ -597,7 +604,7 @@ A [`dhcp_networks`](#azure-not-managed-node-list-interface-list-ipv6-auto-config
 
 <a id="azure-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix"></a>&#x2022; [`network_prefix`](#azure-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
 
-<a id="azure-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#azure-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
+<a id="azure-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#azure-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
 
 <a id="azure-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>&#x2022; [`pools`](#azure-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#azure-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
 
@@ -819,7 +826,7 @@ A [`dhcp_networks`](#baremetal-not-managed-node-list-interface-list-ipv6-auto-co
 
 <a id="baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix"></a>&#x2022; [`network_prefix`](#baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
 
-<a id="baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
+<a id="baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
 
 <a id="baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>&#x2022; [`pools`](#baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
 
@@ -895,7 +902,7 @@ A [`blocked_sevice`](#blocked-services-blocked-sevice) block (within [`blocked_s
 
 <a id="blocked-services-blocked-sevice-dns"></a>&#x2022; [`dns`](#blocked-services-blocked-sevice-dns) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="blocked-services-blocked-sevice-network-type"></a>&#x2022; [`network_type`](#blocked-services-blocked-sevice-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
+<a id="blocked-services-blocked-sevice-network-type"></a>&#x2022; [`network_type`](#blocked-services-blocked-sevice-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
 <a id="blocked-services-blocked-sevice-ssh"></a>&#x2022; [`ssh`](#blocked-services-blocked-sevice-ssh) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1151,7 +1158,7 @@ A [`dhcp_networks`](#equinix-not-managed-node-list-interface-list-ipv6-auto-conf
 
 <a id="equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix"></a>&#x2022; [`network_prefix`](#equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
 
-<a id="equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
+<a id="equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
 
 <a id="equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>&#x2022; [`pools`](#equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
 
@@ -1373,7 +1380,7 @@ A [`dhcp_networks`](#gcp-not-managed-node-list-interface-list-ipv6-auto-config-r
 
 <a id="gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix"></a>&#x2022; [`network_prefix`](#gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
 
-<a id="gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
+<a id="gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
 
 <a id="gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>&#x2022; [`pools`](#gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
 
@@ -1595,7 +1602,7 @@ A [`dhcp_networks`](#kvm-not-managed-node-list-interface-list-ipv6-auto-config-r
 
 <a id="kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix"></a>&#x2022; [`network_prefix`](#kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
 
-<a id="kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
+<a id="kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
 
 <a id="kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>&#x2022; [`pools`](#kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
 
@@ -1663,7 +1670,7 @@ A [`vlan_interface`](#kvm-not-managed-node-list-interface-list-vlan-interface) b
 
 A [`load_balancing`](#load-balancing) block supports the following:
 
-<a id="load-balancing-vip-vrrp-mode"></a>&#x2022; [`vip_vrrp_mode`](#load-balancing-vip-vrrp-mode) - Optional String  Defaults to `VIP_VRRP_INVALID`<br>Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE`<br>VRRP Virtual-IP. VRRP advertisement mode for VIP Invalid VRRP mode
+<a id="load-balancing-vip-vrrp-mode"></a>&#x2022; [`vip_vrrp_mode`](#load-balancing-vip-vrrp-mode) - Optional String  Defaults to `VIP_VRRP_INVALID`<br>Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE`<br>[Enum: VIP_VRRP_INVALID|VIP_VRRP_ENABLE|VIP_VRRP_DISABLE] VRRP Virtual-IP. VRRP advertisement mode for VIP Invalid VRRP mode
 
 #### Local Vrf
 
@@ -1705,7 +1712,7 @@ A [`static_routes`](#local-vrf-sli-config-static-routes) block (within [`local_v
 
 A [`static_routes`](#local-vrf-sli-config-static-routes-static-routes) block (within [`local_vrf.sli_config.static_routes`](#local-vrf-sli-config-static-routes)) supports the following:
 
-<a id="local-vrf-sli-config-static-routes-static-routes-attrs"></a>&#x2022; [`attrs`](#local-vrf-sli-config-static-routes-static-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
+<a id="local-vrf-sli-config-static-routes-static-routes-attrs"></a>&#x2022; [`attrs`](#local-vrf-sli-config-static-routes-static-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
 <a id="local-vrf-sli-config-static-routes-static-routes-default-gateway"></a>&#x2022; [`default_gateway`](#local-vrf-sli-config-static-routes-static-routes-default-gateway) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1753,7 +1760,7 @@ A [`static_v6_routes`](#local-vrf-sli-config-static-v6-routes) block (within [`l
 
 A [`static_routes`](#local-vrf-sli-config-static-v6-routes-static-routes) block (within [`local_vrf.sli_config.static_v6_routes`](#local-vrf-sli-config-static-v6-routes)) supports the following:
 
-<a id="local-vrf-sli-config-static-v6-routes-static-routes-attrs"></a>&#x2022; [`attrs`](#local-vrf-sli-config-static-v6-routes-static-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
+<a id="local-vrf-sli-config-static-v6-routes-static-routes-attrs"></a>&#x2022; [`attrs`](#local-vrf-sli-config-static-v6-routes-static-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
 <a id="local-vrf-sli-config-static-v6-routes-static-routes-default-gateway"></a>&#x2022; [`default_gateway`](#local-vrf-sli-config-static-v6-routes-static-routes-default-gateway) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1819,7 +1826,7 @@ A [`static_routes`](#local-vrf-slo-config-static-routes) block (within [`local_v
 
 A [`static_routes`](#local-vrf-slo-config-static-routes-static-routes) block (within [`local_vrf.slo_config.static_routes`](#local-vrf-slo-config-static-routes)) supports the following:
 
-<a id="local-vrf-slo-config-static-routes-static-routes-attrs"></a>&#x2022; [`attrs`](#local-vrf-slo-config-static-routes-static-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
+<a id="local-vrf-slo-config-static-routes-static-routes-attrs"></a>&#x2022; [`attrs`](#local-vrf-slo-config-static-routes-static-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
 <a id="local-vrf-slo-config-static-routes-static-routes-default-gateway"></a>&#x2022; [`default_gateway`](#local-vrf-slo-config-static-routes-static-routes-default-gateway) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1867,7 +1874,7 @@ A [`static_v6_routes`](#local-vrf-slo-config-static-v6-routes) block (within [`l
 
 A [`static_routes`](#local-vrf-slo-config-static-v6-routes-static-routes) block (within [`local_vrf.slo_config.static_v6_routes`](#local-vrf-slo-config-static-v6-routes)) supports the following:
 
-<a id="local-vrf-slo-config-static-v6-routes-static-routes-attrs"></a>&#x2022; [`attrs`](#local-vrf-slo-config-static-v6-routes-static-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
+<a id="local-vrf-slo-config-static-v6-routes-static-routes-attrs"></a>&#x2022; [`attrs`](#local-vrf-slo-config-static-v6-routes-static-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
 <a id="local-vrf-slo-config-static-v6-routes-static-routes-default-gateway"></a>&#x2022; [`default_gateway`](#local-vrf-slo-config-static-v6-routes-static-routes-default-gateway) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2073,7 +2080,7 @@ A [`dhcp_networks`](#nutanix-not-managed-node-list-interface-list-ipv6-auto-conf
 
 <a id="nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix"></a>&#x2022; [`network_prefix`](#nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
 
-<a id="nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
+<a id="nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
 
 <a id="nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>&#x2022; [`pools`](#nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
 
@@ -2295,7 +2302,7 @@ A [`dhcp_networks`](#oci-not-managed-node-list-interface-list-ipv6-auto-config-r
 
 <a id="oci-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix"></a>&#x2022; [`network_prefix`](#oci-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
 
-<a id="oci-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#oci-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
+<a id="oci-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#oci-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
 
 <a id="oci-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>&#x2022; [`pools`](#oci-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#oci-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
 
@@ -2525,7 +2532,7 @@ A [`dhcp_networks`](#openstack-not-managed-node-list-interface-list-ipv6-auto-co
 
 <a id="openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix"></a>&#x2022; [`network_prefix`](#openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
 
-<a id="openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
+<a id="openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
 
 <a id="openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>&#x2022; [`pools`](#openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
 
@@ -2861,7 +2868,7 @@ A [`dhcp_networks`](#vmware-not-managed-node-list-interface-list-ipv6-auto-confi
 
 <a id="vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix"></a>&#x2022; [`network_prefix`](#vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
 
-<a id="vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
+<a id="vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
 
 <a id="vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>&#x2022; [`pools`](#vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
 

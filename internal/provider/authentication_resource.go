@@ -158,7 +158,7 @@ func (r *AuthenticationResource) Metadata(ctx context.Context, req resource.Meta
 func (r *AuthenticationResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             authenticationSchemaVersion,
-		MarkdownDescription: "Manages a Authentication resource in F5 Distributed Cloud.",
+		MarkdownDescription: "[Category: Authentication] [Namespace: required] Manages a Authentication resource in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Authentication. Must be unique within the namespace.",

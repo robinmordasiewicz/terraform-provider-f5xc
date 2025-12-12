@@ -2,12 +2,12 @@
 page_title: "f5xc_api_definition Data Source - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
-  Manages a API Definition resource in F5 Distributed Cloud for x-required create api definition. configuration.
+  [Category: API Security] [Namespace: required] [DependsOn: namespace] Manages a API Definition resource in F5 Distributed Cloud for x-required create api definition. configuration.
 ---
 
 # f5xc_api_definition (Data Source)
 
-Manages a API Definition resource in F5 Distributed Cloud for x-required create api definition. configuration.
+[Category: API Security] [Namespace: required] [DependsOn: namespace] Manages a API Definition resource in F5 Distributed Cloud for x-required create api definition. configuration.
 
 ~> **Note** Please refer to [API Definition API docs](https://docs.cloud.f5.com/docs-v2/api/views-api-definition) to learn more.
 

@@ -2,12 +2,12 @@
 page_title: "f5xc_virtual_site Data Source - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
-  Manages virtual site object in given namespace in F5 Distributed Cloud.
+  [Category: Networking] [Namespace: not_required] Manages virtual site object in given namespace in F5 Distributed Cloud.
 ---
 
 # f5xc_virtual_site (Data Source)
 
-Manages virtual site object in given namespace in F5 Distributed Cloud.
+[Category: Networking] [Namespace: not_required] Manages virtual site object in given namespace in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Virtual Site API docs](https://docs.cloud.f5.com/docs-v2/api/virtual-site) to learn more.
 

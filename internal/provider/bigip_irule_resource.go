@@ -66,7 +66,7 @@ func (r *BigIPIruleResource) Metadata(ctx context.Context, req resource.Metadata
 func (r *BigIPIruleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             bigip_iruleSchemaVersion,
-		MarkdownDescription: "Manages a BIG-IP Irule resource in F5 Distributed Cloud for desired state for big-ip irule service configuration.",
+		MarkdownDescription: "[Namespace: required] Manages a BIG-IP Irule resource in F5 Distributed Cloud for desired state for big-ip irule service configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the BIG-IP Irule. Must be unique within the namespace.",

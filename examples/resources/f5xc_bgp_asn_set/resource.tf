@@ -1,5 +1,5 @@
 # BGP Asn Set Resource Example
-# Manages bgp_asn_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# [Namespace: required] Manages bgp_asn_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic BGP Asn Set configuration
 resource "f5xc_bgp_asn_set" "example" {

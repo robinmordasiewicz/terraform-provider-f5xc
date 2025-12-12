@@ -42,7 +42,7 @@ func (d *RouteDataSource) Metadata(ctx context.Context, req datasource.MetadataR
 
 func (d *RouteDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages a Route resource in F5 Distributed Cloud for defining traffic routing rules for load balancers.",
+		MarkdownDescription: "[Category: Load Balancing] [Namespace: required] [DependsOn: namespace, http_loadbalancer] Manages a Route resource in F5 Distributed Cloud for defining traffic routing rules for load balancers.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

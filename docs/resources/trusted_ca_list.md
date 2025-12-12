@@ -2,12 +2,12 @@
 page_title: "f5xc_trusted_ca_list Resource - terraform-provider-f5xc"
 subcategory: "Certificates"
 description: |-
-  Manages a Trusted CA List resource in F5 Distributed Cloud for trusted certificate authority list management.
+  [Category: Certificates] [Namespace: not_required] Manages a Trusted CA List resource in F5 Distributed Cloud for trusted certificate authority list management.
 ---
 
 # f5xc_trusted_ca_list (Resource)
 
-Manages a Trusted CA List resource in F5 Distributed Cloud for trusted certificate authority list management.
+[Category: Certificates] [Namespace: not_required] Manages a Trusted CA List resource in F5 Distributed Cloud for trusted certificate authority list management.
 
 ~> **Note** Please refer to [Trusted CA List API docs](https://docs.cloud.f5.com/docs-v2/api/trusted-ca-list) to learn more.
 
@@ -15,7 +15,7 @@ Manages a Trusted CA List resource in F5 Distributed Cloud for trusted certifica
 
 ```terraform
 # Trusted CA List Resource Example
-# Manages a Trusted CA List resource in F5 Distributed Cloud for trusted certificate authority list management.
+# [Category: Certificates] [Namespace: not_required] Manages a Trusted CA List resource in F5 Distributed Cloud for trusted certificate authority list management.
 
 # Basic Trusted CA List configuration
 resource "f5xc_trusted_ca_list" "example" {

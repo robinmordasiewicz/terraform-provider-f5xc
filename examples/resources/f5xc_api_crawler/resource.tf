@@ -1,5 +1,5 @@
 # API Crawler Resource Example
-# Manages a API Crawler resource in F5 Distributed Cloud.
+# [Category: API Security] [Namespace: required] Manages a API Crawler resource in F5 Distributed Cloud.
 
 # Basic API Crawler configuration
 resource "f5xc_api_crawler" "example" {

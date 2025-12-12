@@ -2,12 +2,12 @@
 page_title: "f5xc_alert_receiver Resource - terraform-provider-f5xc"
 subcategory: "Monitoring"
 description: |-
-  Manages a Alert Receiver resource in F5 Distributed Cloud for alert notification endpoints.
+  [Category: Monitoring] [Namespace: required] Manages a Alert Receiver resource in F5 Distributed Cloud for alert notification endpoints.
 ---
 
 # f5xc_alert_receiver (Resource)
 
-Manages a Alert Receiver resource in F5 Distributed Cloud for alert notification endpoints.
+[Category: Monitoring] [Namespace: required] Manages a Alert Receiver resource in F5 Distributed Cloud for alert notification endpoints.
 
 ~> **Note** Please refer to [Alert Receiver API docs](https://docs.cloud.f5.com/docs-v2/api/alert-receiver) to learn more.
 
@@ -15,7 +15,7 @@ Manages a Alert Receiver resource in F5 Distributed Cloud for alert notification
 
 ```terraform
 # Alert Receiver Resource Example
-# Manages a Alert Receiver resource in F5 Distributed Cloud for alert notification endpoints.
+# [Category: Monitoring] [Namespace: required] Manages a Alert Receiver resource in F5 Distributed Cloud for alert notification endpoints.
 
 # Basic Alert Receiver configuration
 resource "f5xc_alert_receiver" "example" {
@@ -322,9 +322,9 @@ An [`use_tls`](#webhook-http-config-use-tls) block (within [`webhook.http_config
 
 <a id="webhook-http-config-use-tls-disable-sni"></a>&#x2022; [`disable_sni`](#webhook-http-config-use-tls-disable-sni) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="webhook-http-config-use-tls-max-version"></a>&#x2022; [`max_version`](#webhook-http-config-use-tls-max-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="webhook-http-config-use-tls-max-version"></a>&#x2022; [`max_version`](#webhook-http-config-use-tls-max-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
-<a id="webhook-http-config-use-tls-min-version"></a>&#x2022; [`min_version`](#webhook-http-config-use-tls-min-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="webhook-http-config-use-tls-min-version"></a>&#x2022; [`min_version`](#webhook-http-config-use-tls-min-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
 <a id="webhook-http-config-use-tls-sni"></a>&#x2022; [`sni`](#webhook-http-config-use-tls-sni) - Optional String<br>SNI Value. SNI value to be used
 

@@ -2,12 +2,12 @@
 page_title: "f5xc_ike2 Data Source - terraform-provider-f5xc"
 subcategory: "VPN"
 description: |-
-  Manages a Ike2 resource in F5 Distributed Cloud for ike phase2 profile configuration.
+  [Namespace: required] Manages a Ike2 resource in F5 Distributed Cloud for ike phase2 profile configuration.
 ---
 
 # f5xc_ike2 (Data Source)
 
-Manages a Ike2 resource in F5 Distributed Cloud for ike phase2 profile configuration.
+[Namespace: required] Manages a Ike2 resource in F5 Distributed Cloud for ike phase2 profile configuration.
 
 ~> **Note** Please refer to [Ike2 API docs](https://docs.cloud.f5.com/docs-v2/api/ike2) to learn more.
 

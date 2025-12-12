@@ -2,12 +2,12 @@
 page_title: "f5xc_report_config Resource - terraform-provider-f5xc"
 subcategory: "Monitoring"
 description: |-
-  Manages a Report Config resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.
+  [Namespace: required] Manages a Report Config resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.
 ---
 
 # f5xc_report_config (Resource)
 
-Manages a Report Config resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.
+[Namespace: required] Manages a Report Config resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.
 
 ~> **Note** Please refer to [Report Config API docs](https://docs.cloud.f5.com/docs-v2/api/report-config) to learn more.
 
@@ -15,7 +15,7 @@ Manages a Report Config resource in F5 Distributed Cloud for report configuratio
 
 ```terraform
 # Report Config Resource Example
-# Manages a Report Config resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.
+# [Namespace: required] Manages a Report Config resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.
 
 # Basic Report Config configuration
 resource "f5xc_report_config" "example" {
@@ -132,7 +132,7 @@ A [`daily`](#waap-daily) block (within [`waap`](#waap)) supports the following:
 
 A [`monthly`](#waap-monthly) block (within [`waap`](#waap)) supports the following:
 
-<a id="waap-monthly-date"></a>&#x2022; [`date`](#waap-monthly-date) - Optional String  Defaults to `DATE_NONE`<br>Possible values are `DATE_NONE`, `DATE_ONE`, `DATE_TWO`, `DATE_THREE`, `DATE_FOUR`, `DATE_FIVE`, `DATE_SIX`, `DATE_SEVEN`, `DATE_EIGHT`, `DATE_NINE`, `DATE_TEN`, `DATE_ELEVEN`, `DATE_TWELVE`, `DATE_THIRTEEN`, `DATE_FOURTEEN`, `DATE_FIFTEEN`, `DATE_SIXTEEN`, `DATE_SEVENTEEN`, `DATE_EIGHTEEN`, `DATE_NINETEEN`, `DATE_TWENTY`, `DATE_TWENTYONE`, `DATE_TWENTYTWO`, `DATE_TWENTYTHREE`, `DATE_TWENTYFOUR`, `DATE_TWENTYFIVE`, `DATE_TWENTYSIX`, `DATE_TWENTYSEVEN`, `DATE_TWENTYEIGHT`, `DATE_LAST`<br>Report Generation Date. report generation date Indicates field not being set Create report on Last day of month
+<a id="waap-monthly-date"></a>&#x2022; [`date`](#waap-monthly-date) - Optional String  Defaults to `DATE_NONE`<br>Possible values are `DATE_NONE`, `DATE_ONE`, `DATE_TWO`, `DATE_THREE`, `DATE_FOUR`, `DATE_FIVE`, `DATE_SIX`, `DATE_SEVEN`, `DATE_EIGHT`, `DATE_NINE`, `DATE_TEN`, `DATE_ELEVEN`, `DATE_TWELVE`, `DATE_THIRTEEN`, `DATE_FOURTEEN`, `DATE_FIFTEEN`, `DATE_SIXTEEN`, `DATE_SEVENTEEN`, `DATE_EIGHTEEN`, `DATE_NINETEEN`, `DATE_TWENTY`, `DATE_TWENTYONE`, `DATE_TWENTYTWO`, `DATE_TWENTYTHREE`, `DATE_TWENTYFOUR`, `DATE_TWENTYFIVE`, `DATE_TWENTYSIX`, `DATE_TWENTYSEVEN`, `DATE_TWENTYEIGHT`, `DATE_LAST`<br>[Enum: DATE_NONE|DATE_ONE|DATE_TWO|DATE_THREE|DATE_FOUR|DATE_FIVE|DATE_SIX|DATE_SEVEN|DATE_EIGHT|DATE_NINE|DATE_TEN|DATE_ELEVEN|DATE_TWELVE|DATE_THIRTEEN|DATE_FOURTEEN|DATE_FIFTEEN|DATE_SIXTEEN|DATE_SEVENTEEN|DATE_EIGHTEEN|DATE_NINETEEN|DATE_TWENTY|DATE_TWENTYONE|DATE_TWENTYTWO|DATE_TWENTYTHREE|DATE_TWENTYFOUR|DATE_TWENTYFIVE|DATE_TWENTYSIX|DATE_TWENTYSEVEN|DATE_TWENTYEIGHT|DATE_LAST] Report Generation Date. report generation date Indicates field not being set Create report on Last day of month
 
 <a id="waap-monthly-report-generation-time"></a>&#x2022; [`report_generation_time`](#waap-monthly-report-generation-time) - Optional String<br>Time Report is Generated. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set
 
@@ -146,7 +146,7 @@ A [`namespaces`](#waap-namespaces) block (within [`waap`](#waap)) supports the f
 
 A [`weekly`](#waap-weekly) block (within [`waap`](#waap)) supports the following:
 
-<a id="waap-weekly-day"></a>&#x2022; [`day`](#waap-weekly-day) - Optional String  Defaults to `WEEKDAY_NONE`<br>Possible values are `WEEKDAY_NONE`, `WEEKDAY_MONDAY`, `WEEKDAY_TUESDAY`, `WEEKDAY_WEDNESDAY`, `WEEKDAY_THURSDAY`, `WEEKDAY_FRIDAY`, `WEEKDAY_SATURDAY`, `WEEKDAY_SUNDAY`<br>Report Generation Weekday. report generation weekday Indicates field not being set
+<a id="waap-weekly-day"></a>&#x2022; [`day`](#waap-weekly-day) - Optional String  Defaults to `WEEKDAY_NONE`<br>Possible values are `WEEKDAY_NONE`, `WEEKDAY_MONDAY`, `WEEKDAY_TUESDAY`, `WEEKDAY_WEDNESDAY`, `WEEKDAY_THURSDAY`, `WEEKDAY_FRIDAY`, `WEEKDAY_SATURDAY`, `WEEKDAY_SUNDAY`<br>[Enum: WEEKDAY_NONE|WEEKDAY_MONDAY|WEEKDAY_TUESDAY|WEEKDAY_WEDNESDAY|WEEKDAY_THURSDAY|WEEKDAY_FRIDAY|WEEKDAY_SATURDAY|WEEKDAY_SUNDAY] Report Generation Weekday. report generation weekday Indicates field not being set
 
 <a id="waap-weekly-report-generation-time"></a>&#x2022; [`report_generation_time`](#waap-weekly-report-generation-time) - Optional String<br>Report Generation Time. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set
 

@@ -2,12 +2,12 @@
 page_title: "f5xc_child_tenant Resource - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
-  Manages child_tenant config instance. Name of the object is the name of the child tenant to be created. in F5 Distributed Cloud.
+  [Namespace: required] Manages child_tenant config instance. Name of the object is the name of the child tenant to be created. in F5 Distributed Cloud.
 ---
 
 # f5xc_child_tenant (Resource)
 
-Manages child_tenant config instance. Name of the object is the name of the child tenant to be created. in F5 Distributed Cloud.
+[Namespace: required] Manages child_tenant config instance. Name of the object is the name of the child tenant to be created. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Child Tenant API docs](https://docs.cloud.f5.com/docs-v2/api/tenant-management-child-tenant) to learn more.
 
@@ -15,7 +15,7 @@ Manages child_tenant config instance. Name of the object is the name of the chil
 
 ```terraform
 # Child Tenant Resource Example
-# Manages child_tenant config instance. Name of the object is the name of the child tenant to be created. in F5 Distributed Cloud.
+# [Namespace: required] Manages child_tenant config instance. Name of the object is the name of the child tenant to be created. in F5 Distributed Cloud.
 
 # Basic Child Tenant configuration
 resource "f5xc_child_tenant" "example" {
@@ -54,6 +54,8 @@ resource "f5xc_child_tenant" "example" {
 
 <a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Child Tenant. Must be unique within the namespace
 
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Child Tenant will be created
+
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
 <a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
@@ -61,8 +63,6 @@ resource "f5xc_child_tenant" "example" {
 <a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
 <a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
-
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace for the Child Tenant. For this resource type, namespace should be empty or omitted
 
 ### Spec Argument Reference
 
@@ -108,7 +108,7 @@ A [`contact_detail`](#contact-detail) block supports the following:
 
 <a id="contact-detail-city"></a>&#x2022; [`city`](#contact-detail-city) - Optional String<br>City
 
-<a id="contact-detail-contact-type"></a>&#x2022; [`contact_type`](#contact-detail-contact-type) - Optional String  Defaults to `MAILING`<br>Possible values are `MAILING`, `BILLING`, `PAYMENT`<br>Contact Type. Determines the contact type Indicates snail mail address (used for correspondence) Indicates billing address (this address will appear on invoices) Indicates contact used for a payment method (this address is used when charging a payment method)
+<a id="contact-detail-contact-type"></a>&#x2022; [`contact_type`](#contact-detail-contact-type) - Optional String  Defaults to `MAILING`<br>Possible values are `MAILING`, `BILLING`, `PAYMENT`<br>[Enum: MAILING|BILLING|PAYMENT] Contact Type. Determines the contact type Indicates snail mail address (used for correspondence) Indicates billing address (this address will appear on invoices) Indicates contact used for a payment method (this address is used when charging a payment method)
 
 <a id="contact-detail-country"></a>&#x2022; [`country`](#contact-detail-country) - Optional String<br>Country
 

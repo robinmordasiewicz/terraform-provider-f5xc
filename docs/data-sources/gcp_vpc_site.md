@@ -2,12 +2,12 @@
 page_title: "f5xc_gcp_vpc_site Data Source - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
-  Manages a GCP VPC Site resource in F5 Distributed Cloud for deploying F5 sites within Google Cloud VPC environments.
+  [Category: Sites] [Namespace: required] Manages a GCP VPC Site resource in F5 Distributed Cloud for deploying F5 sites within Google Cloud VPC environments.
 ---
 
 # f5xc_gcp_vpc_site (Data Source)
 
-Manages a GCP VPC Site resource in F5 Distributed Cloud for deploying F5 sites within Google Cloud VPC environments.
+[Category: Sites] [Namespace: required] Manages a GCP VPC Site resource in F5 Distributed Cloud for deploying F5 sites within Google Cloud VPC environments.
 
 ~> **Note** Please refer to [GCP VPC Site API docs](https://docs.cloud.f5.com/docs-v2/api/views-gcp-vpc-site) to learn more.
 

@@ -159,7 +159,7 @@ func (r *DNSLBPoolResource) Metadata(ctx context.Context, req resource.MetadataR
 func (r *DNSLBPoolResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             dns_lb_poolSchemaVersion,
-		MarkdownDescription: "Manages DNS Load Balancer Pool in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
+		MarkdownDescription: "[Category: DNS] [Namespace: required] Manages DNS Load Balancer Pool in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the DNS LB Pool. Must be unique within the namespace.",
@@ -207,7 +207,7 @@ func (r *DNSLBPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 				},
 			},
 			"load_balancing_mode": schema.StringAttribute{
-				MarkdownDescription: "LoadBalancing Algorithm. - ROUND_ROBIN: Round-Robin Round Robin will ensure random equal distribution of requests among all pool members in a pool. - RATIO_MEMBER: Ratio-Member Ratio-Member performs load balancing of requests across the pool members based on the ratio assigned to each pool member - STATIC_PERSIST: Static-Persist The Static Persist load balancing method uses the persist mask, with the source IP address of the Local Domain Name Server (LDNS), in a deterministic algorithm to send requests to a specific pool member. If the DNS resolver passes ECS (EDNS-Client-Subnet) information, then a hash of it will be used, to send the client to the same pool member - PRIORITY: Priority The Priority load balancing method returns all available endpoints in a pool with the highest priority. Pool Members have a priority value, starting from zero, where a lower value means a higher priority. Possible values are `ROUND_ROBIN`, `RATIO_MEMBER`, `STATIC_PERSIST`, `PRIORITY`. Defaults to `ROUND_ROBIN`.",
+				MarkdownDescription: "[Enum: ROUND_ROBIN|RATIO_MEMBER|STATIC_PERSIST|PRIORITY] LoadBalancing Algorithm. - ROUND_ROBIN: Round-Robin Round Robin will ensure random equal distribution of requests among all pool members in a pool. - RATIO_MEMBER: Ratio-Member Ratio-Member performs load balancing of requests across the pool members based on the ratio assigned to each pool member - STATIC_PERSIST: Static-Persist The Static Persist load balancing method uses the persist mask, with the source IP address of the Local Domain Name Server (LDNS), in a deterministic algorithm to send requests to a specific pool member. If the DNS resolver passes ECS (EDNS-Client-Subnet) information, then a hash of it will be used, to send the client to the same pool member - PRIORITY: Priority The Priority load balancing method returns all available endpoints in a pool with the highest priority. Pool Members have a priority value, starting from zero, where a lower value means a higher priority. Possible values are `ROUND_ROBIN`, `RATIO_MEMBER`, `STATIC_PERSIST`, `PRIORITY`. Defaults to `ROUND_ROBIN`.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{

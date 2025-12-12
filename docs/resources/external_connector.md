@@ -2,12 +2,12 @@
 page_title: "f5xc_external_connector Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages a External Connector resource in F5 Distributed Cloud for external_connector configuration configuration.
+  [Namespace: required] Manages a External Connector resource in F5 Distributed Cloud for external_connector configuration configuration.
 ---
 
 # f5xc_external_connector (Resource)
 
-Manages a External Connector resource in F5 Distributed Cloud for external_connector configuration configuration.
+[Namespace: required] Manages a External Connector resource in F5 Distributed Cloud for external_connector configuration configuration.
 
 ~> **Note** Please refer to [External Connector API docs](https://docs.cloud.f5.com/docs-v2/api/views-external-connector) to learn more.
 
@@ -15,7 +15,7 @@ Manages a External Connector resource in F5 Distributed Cloud for external_conne
 
 ```terraform
 # External Connector Resource Example
-# Manages a External Connector resource in F5 Distributed Cloud for external_connector configuration configuration.
+# [Namespace: required] Manages a External Connector resource in F5 Distributed Cloud for external_connector configuration configuration.
 
 # Basic External Connector configuration
 resource "f5xc_external_connector" "example" {

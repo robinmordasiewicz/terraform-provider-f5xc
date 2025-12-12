@@ -2,12 +2,12 @@
 page_title: "f5xc_app_api_group Resource - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
-  Manages app_api_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  [Namespace: required] Manages app_api_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_app_api_group (Resource)
 
-Manages app_api_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+[Namespace: required] Manages app_api_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [App API Group API docs](https://docs.cloud.f5.com/docs-v2/api/views-app-api-group) to learn more.
 
@@ -15,7 +15,7 @@ Manages app_api_group creates a new object in the storage backend for metadata.n
 
 ```terraform
 # App API Group Resource Example
-# Manages app_api_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# [Namespace: required] Manages app_api_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic App API Group configuration
 resource "f5xc_app_api_group" "example" {
@@ -119,7 +119,7 @@ A [`cdn_loadbalancer`](#cdn-loadbalancer-cdn-loadbalancer) block (within [`cdn_l
 
 An [`elements`](#elements) block supports the following:
 
-<a id="elements-methods"></a>&#x2022; [`methods`](#elements-methods) - Optional List  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Methods. List of method values to match the input request API method against. The match is considered to succeed if the input request API method is a member of the list
+<a id="elements-methods"></a>&#x2022; [`methods`](#elements-methods) - Optional List  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Methods. List of method values to match the input request API method against. The match is considered to succeed if the input request API method is a member of the list
 
 <a id="elements-path-regex"></a>&#x2022; [`path_regex`](#elements-path-regex) - Optional String<br>Path Regex. Regular expression to match the input request API path against. The match is considered to succeed if the input request API path matches the specified path regex
 

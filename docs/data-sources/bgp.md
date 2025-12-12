@@ -2,12 +2,12 @@
 page_title: "f5xc_bgp Data Source - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages a BGP resource in F5 Distributed Cloud for bgp object is the configuration for peering with external bgp servers. it is created by users in system namespace. configuration.
+  [Category: Networking] [Namespace: required] Manages a BGP resource in F5 Distributed Cloud for bgp object is the configuration for peering with external bgp servers. it is created by users in system namespace. configuration.
 ---
 
 # f5xc_bgp (Data Source)
 
-Manages a BGP resource in F5 Distributed Cloud for bgp object is the configuration for peering with external bgp servers. it is created by users in system namespace. configuration.
+[Category: Networking] [Namespace: required] Manages a BGP resource in F5 Distributed Cloud for bgp object is the configuration for peering with external bgp servers. it is created by users in system namespace. configuration.
 
 ~> **Note** Please refer to [BGP API docs](https://docs.cloud.f5.com/docs-v2/api/operate-bgp) to learn more.
 

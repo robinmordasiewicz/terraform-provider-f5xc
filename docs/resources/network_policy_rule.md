@@ -2,12 +2,12 @@
 page_title: "f5xc_network_policy_rule Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages network policy rule with configured parameters in specified namespace in F5 Distributed Cloud.
+  [Namespace: required] Manages network policy rule with configured parameters in specified namespace in F5 Distributed Cloud.
 ---
 
 # f5xc_network_policy_rule (Resource)
 
-Manages network policy rule with configured parameters in specified namespace in F5 Distributed Cloud.
+[Namespace: required] Manages network policy rule with configured parameters in specified namespace in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Network Policy Rule API docs](https://docs.cloud.f5.com/docs-v2/api/network-policy-rule) to learn more.
 
@@ -15,7 +15,7 @@ Manages network policy rule with configured parameters in specified namespace in
 
 ```terraform
 # Network Policy Rule Resource Example
-# Manages network policy rule with configured parameters in specified namespace in F5 Distributed Cloud.
+# [Namespace: required] Manages network policy rule with configured parameters in specified namespace in F5 Distributed Cloud.
 
 # Basic Network Policy Rule configuration
 resource "f5xc_network_policy_rule" "example" {
@@ -66,7 +66,7 @@ resource "f5xc_network_policy_rule" "example" {
 
 ### Spec Argument Reference
 
-<a id="action"></a>&#x2022; [`action`](#action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`<br>Network Policy Rule Action. Network policy rule action configures the action to be taken on rule match Apply deny action on rule match Apply allow action on rule match
+<a id="action"></a>&#x2022; [`action`](#action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`<br>[Enum: DENY|ALLOW] Network Policy Rule Action. Network policy rule action configures the action to be taken on rule match Apply deny action on rule match Apply allow action on rule match
 
 <a id="advanced-action"></a>&#x2022; [`advanced_action`](#advanced-action) - Optional Block<br>Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction<br>See [Advanced Action](#advanced-action) below for details.
 
@@ -95,7 +95,7 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`advanced_action`](#advanced-action) block supports the following:
 
-<a id="advanced-action-action"></a>&#x2022; [`action`](#advanced-action-action) - Optional String  Defaults to `NOLOG`<br>Possible values are `NOLOG`, `LOG`<br>Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule
+<a id="advanced-action-action"></a>&#x2022; [`action`](#advanced-action-action) - Optional String  Defaults to `NOLOG`<br>Possible values are `NOLOG`, `LOG`<br>[Enum: NOLOG|LOG] Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule
 
 #### IP Prefix Set
 

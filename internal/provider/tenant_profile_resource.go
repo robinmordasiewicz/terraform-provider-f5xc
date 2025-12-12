@@ -107,7 +107,7 @@ func (r *TenantProfileResource) Metadata(ctx context.Context, req resource.Metad
 func (r *TenantProfileResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             tenant_profileSchemaVersion,
-		MarkdownDescription: "Manages tenant_profile config instance. Name of the object is the name of the tenant profile to be created. in F5 Distributed Cloud.",
+		MarkdownDescription: "[Namespace: required] Manages tenant_profile config instance. Name of the object is the name of the tenant profile to be created. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Tenant Profile. Must be unique within the namespace.",

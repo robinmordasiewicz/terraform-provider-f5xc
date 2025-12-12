@@ -2,12 +2,12 @@
 page_title: "f5xc_k8s_cluster Data Source - terraform-provider-f5xc"
 subcategory: "Kubernetes"
 description: |-
-  Manages k8s_cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+  [Category: Kubernetes] [Namespace: required] Manages k8s_cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 ---
 
 # f5xc_k8s_cluster (Data Source)
 
-Manages k8s_cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+[Category: Kubernetes] [Namespace: required] Manages k8s_cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [K8S Cluster API docs](https://docs.cloud.f5.com/docs-v2/api/k8s-cluster) to learn more.
 

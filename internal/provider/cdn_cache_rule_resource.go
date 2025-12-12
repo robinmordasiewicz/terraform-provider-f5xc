@@ -185,7 +185,7 @@ func (r *CDNCacheRuleResource) Metadata(ctx context.Context, req resource.Metada
 func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             cdn_cache_ruleSchemaVersion,
-		MarkdownDescription: "Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer configuration.",
+		MarkdownDescription: "[Namespace: required] Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the CDN Cache Rule. Must be unique within the namespace.",
@@ -312,7 +312,7 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 												NestedObject: schema.NestedBlockObject{
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Header Options. - PROXY_HOST: Proxy Host Name of the proxied server - REFERER: Referer This is the address of the previous web page from which a link to the currently requested page was followed - SCHEME: Scheme The http scheme used: http or https - USER_AGENT: User Agent The user agent string of the user agent. Possible values are `PROXY_HOST`, `REFERER`, `SCHEME`, `USER_AGENT`. Defaults to `PROXY_HOST`.",
+															MarkdownDescription: "[Enum: PROXY_HOST|REFERER|SCHEME|USER_AGENT] Header Options. - PROXY_HOST: Proxy Host Name of the proxied server - REFERER: Referer This is the address of the previous web page from which a link to the currently requested page was followed - SCHEME: Scheme The http scheme used: http or https - USER_AGENT: User Agent The user agent string of the user agent. Possible values are `PROXY_HOST`, `REFERER`, `SCHEME`, `USER_AGENT`. Defaults to `PROXY_HOST`.",
 															Optional:            true,
 														},
 													},

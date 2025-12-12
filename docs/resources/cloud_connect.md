@@ -2,12 +2,12 @@
 page_title: "f5xc_cloud_connect Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages a Cloud Connect resource in F5 Distributed Cloud for establishing connectivity to cloud provider networks.
+  [Category: Networking] [Namespace: required] Manages a Cloud Connect resource in F5 Distributed Cloud for establishing connectivity to cloud provider networks.
 ---
 
 # f5xc_cloud_connect (Resource)
 
-Manages a Cloud Connect resource in F5 Distributed Cloud for establishing connectivity to cloud provider networks.
+[Category: Networking] [Namespace: required] Manages a Cloud Connect resource in F5 Distributed Cloud for establishing connectivity to cloud provider networks.
 
 ~> **Note** Please refer to [Cloud Connect API docs](https://docs.cloud.f5.com/docs-v2/api/cloud-connect) to learn more.
 
@@ -15,7 +15,7 @@ Manages a Cloud Connect resource in F5 Distributed Cloud for establishing connec
 
 ```terraform
 # Cloud Connect Resource Example
-# Manages a Cloud Connect resource in F5 Distributed Cloud for establishing connectivity to cloud provider networks.
+# [Category: Networking] [Namespace: required] Manages a Cloud Connect resource in F5 Distributed Cloud for establishing connectivity to cloud provider networks.
 
 # Basic Cloud Connect configuration
 resource "f5xc_cloud_connect" "example" {
@@ -54,6 +54,8 @@ resource "f5xc_cloud_connect" "example" {
 
 <a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Cloud Connect. Must be unique within the namespace
 
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Cloud Connect will be created
+
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
 <a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
@@ -61,8 +63,6 @@ resource "f5xc_cloud_connect" "example" {
 <a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
 <a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
-
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace for the Cloud Connect. For this resource type, namespace should be empty or omitted
 
 ### Spec Argument Reference
 

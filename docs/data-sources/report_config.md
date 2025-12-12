@@ -2,12 +2,12 @@
 page_title: "f5xc_report_config Data Source - terraform-provider-f5xc"
 subcategory: "Monitoring"
 description: |-
-  Manages a Report Config resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.
+  [Namespace: required] Manages a Report Config resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.
 ---
 
 # f5xc_report_config (Data Source)
 
-Manages a Report Config resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.
+[Namespace: required] Manages a Report Config resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.
 
 ~> **Note** Please refer to [Report Config API docs](https://docs.cloud.f5.com/docs-v2/api/report-config) to learn more.
 

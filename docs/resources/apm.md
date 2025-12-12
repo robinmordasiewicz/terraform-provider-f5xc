@@ -2,12 +2,12 @@
 page_title: "f5xc_apm Resource - terraform-provider-f5xc"
 subcategory: "Monitoring"
 description: |-
-  Manages new APM as a service with configured parameters in F5 Distributed Cloud.
+  [Namespace: required] Manages new APM as a service with configured parameters in F5 Distributed Cloud.
 ---
 
 # f5xc_apm (Resource)
 
-Manages new APM as a service with configured parameters in F5 Distributed Cloud.
+[Namespace: required] Manages new APM as a service with configured parameters in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [APM API docs](https://docs.cloud.f5.com/docs-v2/api/bigip-apm) to learn more.
 
@@ -15,7 +15,7 @@ Manages new APM as a service with configured parameters in F5 Distributed Cloud.
 
 ```terraform
 # APM Resource Example
-# Manages new APM as a service with configured parameters in F5 Distributed Cloud.
+# [Namespace: required] Manages new APM as a service with configured parameters in F5 Distributed Cloud.
 
 # Basic APM configuration
 resource "f5xc_apm" "example" {
@@ -332,9 +332,9 @@ A [`clear_secret_info`](#baremetal-site-type-choice-f5-bare-metal-site-bigiq-ins
 
 A [`nodes`](#baremetal-site-type-choice-f5-bare-metal-site-nodes) block (within [`baremetal_site_type_choice.f5_bare_metal_site`](#baremetal-site-type-choice-f5-bare-metal-site)) supports the following:
 
-<a id="baremetal-site-type-choice-f5-bare-metal-site-nodes-bm-node-memory-size"></a>&#x2022; [`bm_node_memory_size`](#baremetal-site-type-choice-f5-bare-metal-site-nodes-bm-node-memory-size) - Optional String  Defaults to `BM_8_GB_MEMORY`<br>Possible values are `BM_8_GB_MEMORY`, `BM_16_GB_MEMORY`, `BM_32_GB_MEMORY`<br>Bare Metal ServiceNode Memory Size. Enum to define amount of memory to be assigned to the node - BM_8_GB_MEMORY: 8 GB - BM_16_GB_MEMORY: 16 GB - BM_32_GB_MEMORY: 32 GB
+<a id="baremetal-site-type-choice-f5-bare-metal-site-nodes-bm-node-memory-size"></a>&#x2022; [`bm_node_memory_size`](#baremetal-site-type-choice-f5-bare-metal-site-nodes-bm-node-memory-size) - Optional String  Defaults to `BM_8_GB_MEMORY`<br>Possible values are `BM_8_GB_MEMORY`, `BM_16_GB_MEMORY`, `BM_32_GB_MEMORY`<br>[Enum: BM_8_GB_MEMORY|BM_16_GB_MEMORY|BM_32_GB_MEMORY] Bare Metal ServiceNode Memory Size. Enum to define amount of memory to be assigned to the node - BM_8_GB_MEMORY: 8 GB - BM_16_GB_MEMORY: 16 GB - BM_32_GB_MEMORY: 32 GB
 
-<a id="baremetal-site-type-choice-f5-bare-metal-site-nodes-bm-virtual-cpu-count"></a>&#x2022; [`bm_virtual_cpu_count`](#baremetal-site-type-choice-f5-bare-metal-site-nodes-bm-virtual-cpu-count) - Optional String  Defaults to `BM_4_VCPU`<br>Possible values are `BM_4_VCPU`, `BM_8_VCPU`<br>Bare Metal ServiceNode Virtual CPU Count. Enum to define number of virtual CPU's to be assigned to the node - BM_4_VCPU: 4 virtual CPUs - BM_8_VCPU: 8 virtual CPUs
+<a id="baremetal-site-type-choice-f5-bare-metal-site-nodes-bm-virtual-cpu-count"></a>&#x2022; [`bm_virtual_cpu_count`](#baremetal-site-type-choice-f5-bare-metal-site-nodes-bm-virtual-cpu-count) - Optional String  Defaults to `BM_4_VCPU`<br>Possible values are `BM_4_VCPU`, `BM_8_VCPU`<br>[Enum: BM_4_VCPU|BM_8_VCPU] Bare Metal ServiceNode Virtual CPU Count. Enum to define number of virtual CPU's to be assigned to the node - BM_4_VCPU: 4 virtual CPUs - BM_8_VCPU: 8 virtual CPUs
 
 <a id="baremetal-site-type-choice-f5-bare-metal-site-nodes-external-interface"></a>&#x2022; [`external_interface`](#baremetal-site-type-choice-f5-bare-metal-site-nodes-external-interface) - Optional Block<br>Interface. x-required BIG-IP interface details<br>See [External Interface](#baremetal-site-type-choice-f5-bare-metal-site-nodes-external-interface) below.
 
@@ -452,7 +452,7 @@ A [`tls_certificates`](#https-management-advertise-on-sli-vip-tls-certificates) 
 
 A [`custom_hash_algorithms`](#https-management-advertise-on-sli-vip-tls-certificates-custom-hash-algorithms) block (within [`https_management.advertise_on_sli_vip.tls_certificates`](#https-management-advertise-on-sli-vip-tls-certificates)) supports the following:
 
-<a id="https-management-advertise-on-sli-vip-tls-certificates-custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#https-management-advertise-on-sli-vip-tls-certificates-custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="https-management-advertise-on-sli-vip-tls-certificates-custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#https-management-advertise-on-sli-vip-tls-certificates-custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
 
 #### HTTPS Management Advertise On SLI VIP TLS Certificates Private Key
 
@@ -498,9 +498,9 @@ A [`custom_security`](#https-management-advertise-on-sli-vip-tls-config-custom-s
 
 <a id="https-management-advertise-on-sli-vip-tls-config-custom-security-cipher-suites"></a>&#x2022; [`cipher_suites`](#https-management-advertise-on-sli-vip-tls-config-custom-security-cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
-<a id="https-management-advertise-on-sli-vip-tls-config-custom-security-max-version"></a>&#x2022; [`max_version`](#https-management-advertise-on-sli-vip-tls-config-custom-security-max-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="https-management-advertise-on-sli-vip-tls-config-custom-security-max-version"></a>&#x2022; [`max_version`](#https-management-advertise-on-sli-vip-tls-config-custom-security-max-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
-<a id="https-management-advertise-on-sli-vip-tls-config-custom-security-min-version"></a>&#x2022; [`min_version`](#https-management-advertise-on-sli-vip-tls-config-custom-security-min-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="https-management-advertise-on-sli-vip-tls-config-custom-security-min-version"></a>&#x2022; [`min_version`](#https-management-advertise-on-sli-vip-tls-config-custom-security-min-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
 #### HTTPS Management Advertise On SLI VIP Use mTLS
 
@@ -544,7 +544,7 @@ A [`trusted_ca`](#https-management-advertise-on-sli-vip-use-mtls-trusted-ca) blo
 
 A [`xfcc_options`](#https-management-advertise-on-sli-vip-use-mtls-xfcc-options) block (within [`https_management.advertise_on_sli_vip.use_mtls`](#https-management-advertise-on-sli-vip-use-mtls)) supports the following:
 
-<a id="https-management-advertise-on-sli-vip-use-mtls-xfcc-options-xfcc-header-elements"></a>&#x2022; [`xfcc_header_elements`](#https-management-advertise-on-sli-vip-use-mtls-xfcc-options-xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="https-management-advertise-on-sli-vip-use-mtls-xfcc-options-xfcc-header-elements"></a>&#x2022; [`xfcc_header_elements`](#https-management-advertise-on-sli-vip-use-mtls-xfcc-options-xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 #### HTTPS Management Advertise On Slo Internet VIP
 
@@ -578,7 +578,7 @@ A [`tls_certificates`](#https-management-advertise-on-slo-internet-vip-tls-certi
 
 A [`custom_hash_algorithms`](#https-management-advertise-on-slo-internet-vip-tls-certificates-custom-hash-algorithms) block (within [`https_management.advertise_on_slo_internet_vip.tls_certificates`](#https-management-advertise-on-slo-internet-vip-tls-certificates)) supports the following:
 
-<a id="https-management-advertise-on-slo-internet-vip-tls-certificates-custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#https-management-advertise-on-slo-internet-vip-tls-certificates-custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="https-management-advertise-on-slo-internet-vip-tls-certificates-custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#https-management-advertise-on-slo-internet-vip-tls-certificates-custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
 
 #### HTTPS Management Advertise On Slo Internet VIP TLS Certificates Private Key
 
@@ -624,9 +624,9 @@ A [`custom_security`](#https-management-advertise-on-slo-internet-vip-tls-config
 
 <a id="https-management-advertise-on-slo-internet-vip-tls-config-custom-security-cipher-suites"></a>&#x2022; [`cipher_suites`](#https-management-advertise-on-slo-internet-vip-tls-config-custom-security-cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
-<a id="https-management-advertise-on-slo-internet-vip-tls-config-custom-security-max-version"></a>&#x2022; [`max_version`](#https-management-advertise-on-slo-internet-vip-tls-config-custom-security-max-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="https-management-advertise-on-slo-internet-vip-tls-config-custom-security-max-version"></a>&#x2022; [`max_version`](#https-management-advertise-on-slo-internet-vip-tls-config-custom-security-max-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
-<a id="https-management-advertise-on-slo-internet-vip-tls-config-custom-security-min-version"></a>&#x2022; [`min_version`](#https-management-advertise-on-slo-internet-vip-tls-config-custom-security-min-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="https-management-advertise-on-slo-internet-vip-tls-config-custom-security-min-version"></a>&#x2022; [`min_version`](#https-management-advertise-on-slo-internet-vip-tls-config-custom-security-min-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
 #### HTTPS Management Advertise On Slo Internet VIP Use mTLS
 
@@ -670,7 +670,7 @@ A [`trusted_ca`](#https-management-advertise-on-slo-internet-vip-use-mtls-truste
 
 A [`xfcc_options`](#https-management-advertise-on-slo-internet-vip-use-mtls-xfcc-options) block (within [`https_management.advertise_on_slo_internet_vip.use_mtls`](#https-management-advertise-on-slo-internet-vip-use-mtls)) supports the following:
 
-<a id="https-management-advertise-on-slo-internet-vip-use-mtls-xfcc-options-xfcc-header-elements"></a>&#x2022; [`xfcc_header_elements`](#https-management-advertise-on-slo-internet-vip-use-mtls-xfcc-options-xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="https-management-advertise-on-slo-internet-vip-use-mtls-xfcc-options-xfcc-header-elements"></a>&#x2022; [`xfcc_header_elements`](#https-management-advertise-on-slo-internet-vip-use-mtls-xfcc-options-xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 #### HTTPS Management Advertise On Slo SLI
 
@@ -704,7 +704,7 @@ A [`tls_certificates`](#https-management-advertise-on-slo-sli-tls-certificates) 
 
 A [`custom_hash_algorithms`](#https-management-advertise-on-slo-sli-tls-certificates-custom-hash-algorithms) block (within [`https_management.advertise_on_slo_sli.tls_certificates`](#https-management-advertise-on-slo-sli-tls-certificates)) supports the following:
 
-<a id="https-management-advertise-on-slo-sli-tls-certificates-custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#https-management-advertise-on-slo-sli-tls-certificates-custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="https-management-advertise-on-slo-sli-tls-certificates-custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#https-management-advertise-on-slo-sli-tls-certificates-custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
 
 #### HTTPS Management Advertise On Slo SLI TLS Certificates Private Key
 
@@ -750,9 +750,9 @@ A [`custom_security`](#https-management-advertise-on-slo-sli-tls-config-custom-s
 
 <a id="https-management-advertise-on-slo-sli-tls-config-custom-security-cipher-suites"></a>&#x2022; [`cipher_suites`](#https-management-advertise-on-slo-sli-tls-config-custom-security-cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
-<a id="https-management-advertise-on-slo-sli-tls-config-custom-security-max-version"></a>&#x2022; [`max_version`](#https-management-advertise-on-slo-sli-tls-config-custom-security-max-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="https-management-advertise-on-slo-sli-tls-config-custom-security-max-version"></a>&#x2022; [`max_version`](#https-management-advertise-on-slo-sli-tls-config-custom-security-max-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
-<a id="https-management-advertise-on-slo-sli-tls-config-custom-security-min-version"></a>&#x2022; [`min_version`](#https-management-advertise-on-slo-sli-tls-config-custom-security-min-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="https-management-advertise-on-slo-sli-tls-config-custom-security-min-version"></a>&#x2022; [`min_version`](#https-management-advertise-on-slo-sli-tls-config-custom-security-min-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
 #### HTTPS Management Advertise On Slo SLI Use mTLS
 
@@ -796,7 +796,7 @@ A [`trusted_ca`](#https-management-advertise-on-slo-sli-use-mtls-trusted-ca) blo
 
 A [`xfcc_options`](#https-management-advertise-on-slo-sli-use-mtls-xfcc-options) block (within [`https_management.advertise_on_slo_sli.use_mtls`](#https-management-advertise-on-slo-sli-use-mtls)) supports the following:
 
-<a id="https-management-advertise-on-slo-sli-use-mtls-xfcc-options-xfcc-header-elements"></a>&#x2022; [`xfcc_header_elements`](#https-management-advertise-on-slo-sli-use-mtls-xfcc-options-xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="https-management-advertise-on-slo-sli-use-mtls-xfcc-options-xfcc-header-elements"></a>&#x2022; [`xfcc_header_elements`](#https-management-advertise-on-slo-sli-use-mtls-xfcc-options-xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 #### HTTPS Management Advertise On Slo VIP
 
@@ -830,7 +830,7 @@ A [`tls_certificates`](#https-management-advertise-on-slo-vip-tls-certificates) 
 
 A [`custom_hash_algorithms`](#https-management-advertise-on-slo-vip-tls-certificates-custom-hash-algorithms) block (within [`https_management.advertise_on_slo_vip.tls_certificates`](#https-management-advertise-on-slo-vip-tls-certificates)) supports the following:
 
-<a id="https-management-advertise-on-slo-vip-tls-certificates-custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#https-management-advertise-on-slo-vip-tls-certificates-custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="https-management-advertise-on-slo-vip-tls-certificates-custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#https-management-advertise-on-slo-vip-tls-certificates-custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
 
 #### HTTPS Management Advertise On Slo VIP TLS Certificates Private Key
 
@@ -876,9 +876,9 @@ A [`custom_security`](#https-management-advertise-on-slo-vip-tls-config-custom-s
 
 <a id="https-management-advertise-on-slo-vip-tls-config-custom-security-cipher-suites"></a>&#x2022; [`cipher_suites`](#https-management-advertise-on-slo-vip-tls-config-custom-security-cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
-<a id="https-management-advertise-on-slo-vip-tls-config-custom-security-max-version"></a>&#x2022; [`max_version`](#https-management-advertise-on-slo-vip-tls-config-custom-security-max-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="https-management-advertise-on-slo-vip-tls-config-custom-security-max-version"></a>&#x2022; [`max_version`](#https-management-advertise-on-slo-vip-tls-config-custom-security-max-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
-<a id="https-management-advertise-on-slo-vip-tls-config-custom-security-min-version"></a>&#x2022; [`min_version`](#https-management-advertise-on-slo-vip-tls-config-custom-security-min-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="https-management-advertise-on-slo-vip-tls-config-custom-security-min-version"></a>&#x2022; [`min_version`](#https-management-advertise-on-slo-vip-tls-config-custom-security-min-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
 #### HTTPS Management Advertise On Slo VIP Use mTLS
 
@@ -922,7 +922,7 @@ A [`trusted_ca`](#https-management-advertise-on-slo-vip-use-mtls-trusted-ca) blo
 
 A [`xfcc_options`](#https-management-advertise-on-slo-vip-use-mtls-xfcc-options) block (within [`https_management.advertise_on_slo_vip.use_mtls`](#https-management-advertise-on-slo-vip-use-mtls)) supports the following:
 
-<a id="https-management-advertise-on-slo-vip-use-mtls-xfcc-options-xfcc-header-elements"></a>&#x2022; [`xfcc_header_elements`](#https-management-advertise-on-slo-vip-use-mtls-xfcc-options-xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="https-management-advertise-on-slo-vip-use-mtls-xfcc-options-xfcc-header-elements"></a>&#x2022; [`xfcc_header_elements`](#https-management-advertise-on-slo-vip-use-mtls-xfcc-options-xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 #### Timeouts
 

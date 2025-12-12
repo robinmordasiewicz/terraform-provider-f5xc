@@ -104,7 +104,7 @@ func (r *CertificateResource) Metadata(ctx context.Context, req resource.Metadat
 func (r *CertificateResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             certificateSchemaVersion,
-		MarkdownDescription: "Manages a Certificate resource in F5 Distributed Cloud for TLS/SSL certificate management.",
+		MarkdownDescription: "[Category: Certificates] [Namespace: not_required] [DependsOn: namespace] Manages a Certificate resource in F5 Distributed Cloud for TLS/SSL certificate management.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Certificate. Must be unique within the namespace.",
@@ -186,10 +186,10 @@ func (r *CertificateResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"custom_hash_algorithms": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: custom_hash_algorithms, disable_ocsp_stapling, use_system_defaults] Hash Algorithms. Specifies the hash algorithms to be used",
+				MarkdownDescription: "[OneOf: custom_hash_algorithms, disable_ocsp_stapling, use_system_defaults; Default: use_system_defaults] Hash Algorithms. Specifies the hash algorithms to be used",
 				Attributes: map[string]schema.Attribute{
 					"hash_algorithms": schema.ListAttribute{
-						MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
+						MarkdownDescription: "[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
 						Optional:            true,
 						ElementType:         types.StringType,
 					},

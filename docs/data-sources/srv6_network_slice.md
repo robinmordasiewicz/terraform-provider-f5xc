@@ -2,12 +2,12 @@
 page_title: "f5xc_srv6_network_slice Data Source - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages srv6_network_slice creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  [Namespace: required] Manages srv6_network_slice creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_srv6_network_slice (Data Source)
 
-Manages srv6_network_slice creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+[Namespace: required] Manages srv6_network_slice creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Srv6 Network Slice API docs](https://docs.cloud.f5.com/docs-v2/api/srv6-network-slice) to learn more.
 

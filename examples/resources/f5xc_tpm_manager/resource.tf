@@ -1,5 +1,5 @@
 # Tpm Manager Resource Example
-# Manages a Tpm Manager resource in F5 Distributed Cloud for create a tpm manager configuration.
+# [Namespace: required] Manages a Tpm Manager resource in F5 Distributed Cloud for create a tpm manager configuration.
 
 # Basic Tpm Manager configuration
 resource "f5xc_tpm_manager" "example" {

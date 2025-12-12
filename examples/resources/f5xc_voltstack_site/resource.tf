@@ -1,5 +1,5 @@
 # Voltstack Site Resource Example
-# Manages a Voltstack Site resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
+# [Category: Sites] [Namespace: required] Manages a Voltstack Site resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
 
 # Basic Voltstack Site configuration
 resource "f5xc_voltstack_site" "example" {

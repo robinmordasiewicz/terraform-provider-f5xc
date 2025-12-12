@@ -74,7 +74,7 @@ func (r *APIDiscoveryResource) Metadata(ctx context.Context, req resource.Metada
 func (r *APIDiscoveryResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             api_discoverySchemaVersion,
-		MarkdownDescription: "Manages api discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+		MarkdownDescription: "[Category: API Security] [Namespace: required] Manages api discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the API Discovery. Must be unique within the namespace.",
@@ -138,7 +138,7 @@ func (r *APIDiscoveryResource) Schema(ctx context.Context, req resource.SchemaRe
 							Optional:            true,
 						},
 						"parameter_type": schema.StringAttribute{
-							MarkdownDescription: "Authentication Parameter Type. Enumeration for authentication parameter types. Possible values are `QUERY_PARAMETER`, `HEADER`, `COOKIE`. Defaults to `QUERY_PARAMETER`.",
+							MarkdownDescription: "[Enum: QUERY_PARAMETER|HEADER|COOKIE] Authentication Parameter Type. Enumeration for authentication parameter types. Possible values are `QUERY_PARAMETER`, `HEADER`, `COOKIE`. Defaults to `QUERY_PARAMETER`.",
 							Optional:            true,
 						},
 					},

@@ -2,12 +2,12 @@
 page_title: "f5xc_api_testing Resource - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
-  Manages a API Testing resource in F5 Distributed Cloud.
+  [Category: API Security] [Namespace: required] Manages a API Testing resource in F5 Distributed Cloud.
 ---
 
 # f5xc_api_testing (Resource)
 
-Manages a API Testing resource in F5 Distributed Cloud.
+[Category: API Security] [Namespace: required] Manages a API Testing resource in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [API Testing API docs](https://docs.cloud.f5.com/docs-v2/api/api-sec-api-testing) to learn more.
 
@@ -15,7 +15,7 @@ Manages a API Testing resource in F5 Distributed Cloud.
 
 ```terraform
 # API Testing Resource Example
-# Manages a API Testing resource in F5 Distributed Cloud.
+# [Category: API Security] [Namespace: required] Manages a API Testing resource in F5 Distributed Cloud.
 
 # Basic API Testing configuration
 resource "f5xc_api_testing" "example" {
@@ -219,7 +219,7 @@ A [`login_endpoint`](#domains-credentials-login-endpoint) block (within [`domain
 
 <a id="domains-credentials-login-endpoint-json-payload"></a>&#x2022; [`json_payload`](#domains-credentials-login-endpoint-json-payload) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [JSON Payload](#domains-credentials-login-endpoint-json-payload) below.
 
-<a id="domains-credentials-login-endpoint-method"></a>&#x2022; [`method`](#domains-credentials-login-endpoint-method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
+<a id="domains-credentials-login-endpoint-method"></a>&#x2022; [`method`](#domains-credentials-login-endpoint-method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
 
 <a id="domains-credentials-login-endpoint-path"></a>&#x2022; [`path`](#domains-credentials-login-endpoint-path) - Optional String<br>Path
 

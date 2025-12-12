@@ -2,12 +2,12 @@
 page_title: "f5xc_api_definition Resource - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
-  Manages a API Definition resource in F5 Distributed Cloud for x-required create api definition. configuration.
+  [Category: API Security] [Namespace: required] [DependsOn: namespace] Manages a API Definition resource in F5 Distributed Cloud for x-required create api definition. configuration.
 ---
 
 # f5xc_api_definition (Resource)
 
-Manages a API Definition resource in F5 Distributed Cloud for x-required create api definition. configuration.
+[Category: API Security] [Namespace: required] [DependsOn: namespace] Manages a API Definition resource in F5 Distributed Cloud for x-required create api definition. configuration.
 
 ~> **Note** Please refer to [API Definition API docs](https://docs.cloud.f5.com/docs-v2/api/views-api-definition) to learn more.
 
@@ -15,7 +15,7 @@ Manages a API Definition resource in F5 Distributed Cloud for x-required create 
 
 ```terraform
 # API Definition Resource Example
-# Manages a API Definition resource in F5 Distributed Cloud for x-required create api definition. configuration.
+# [Category: API Security] [Namespace: required] [DependsOn: namespace] Manages a API Definition resource in F5 Distributed Cloud for x-required create api definition. configuration.
 
 # Basic API Definition configuration
 resource "f5xc_api_definition" "example" {
@@ -85,7 +85,7 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`api_inventory_exclusion_list`](#api-inventory-exclusion-list) block supports the following:
 
-<a id="api-inventory-exclusion-list-method"></a>&#x2022; [`method`](#api-inventory-exclusion-list-method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
+<a id="api-inventory-exclusion-list-method"></a>&#x2022; [`method`](#api-inventory-exclusion-list-method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
 
 <a id="api-inventory-exclusion-list-path"></a>&#x2022; [`path`](#api-inventory-exclusion-list-path) - Optional String<br>Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification
 
@@ -93,7 +93,7 @@ An [`api_inventory_exclusion_list`](#api-inventory-exclusion-list) block support
 
 An [`api_inventory_inclusion_list`](#api-inventory-inclusion-list) block supports the following:
 
-<a id="api-inventory-inclusion-list-method"></a>&#x2022; [`method`](#api-inventory-inclusion-list-method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
+<a id="api-inventory-inclusion-list-method"></a>&#x2022; [`method`](#api-inventory-inclusion-list-method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
 
 <a id="api-inventory-inclusion-list-path"></a>&#x2022; [`path`](#api-inventory-inclusion-list-path) - Optional String<br>Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification
 
@@ -101,7 +101,7 @@ An [`api_inventory_inclusion_list`](#api-inventory-inclusion-list) block support
 
 A [`non_api_endpoints`](#non-api-endpoints) block supports the following:
 
-<a id="non-api-endpoints-method"></a>&#x2022; [`method`](#non-api-endpoints-method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
+<a id="non-api-endpoints-method"></a>&#x2022; [`method`](#non-api-endpoints-method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
 
 <a id="non-api-endpoints-path"></a>&#x2022; [`path`](#non-api-endpoints-path) - Optional String<br>Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification
 

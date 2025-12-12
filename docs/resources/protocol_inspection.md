@@ -2,12 +2,12 @@
 page_title: "f5xc_protocol_inspection Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages Protocol Inspection Specification in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
+  [Namespace: required] Manages Protocol Inspection Specification in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 ---
 
 # f5xc_protocol_inspection (Resource)
 
-Manages Protocol Inspection Specification in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
+[Namespace: required] Manages Protocol Inspection Specification in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Protocol Inspection API docs](https://docs.cloud.f5.com/docs-v2/api/protocol-inspection) to learn more.
 
@@ -15,7 +15,7 @@ Manages Protocol Inspection Specification in a given namespace. If one already e
 
 ```terraform
 # Protocol Inspection Resource Example
-# Manages Protocol Inspection Specification in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
+# [Namespace: required] Manages Protocol Inspection Specification in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 
 # Basic Protocol Inspection configuration
 resource "f5xc_protocol_inspection" "example" {
@@ -66,7 +66,7 @@ resource "f5xc_protocol_inspection" "example" {
 
 ### Spec Argument Reference
 
-<a id="action"></a>&#x2022; [`action`](#action) - Optional String  Defaults to `ALLOW`<br>Possible values are `ALLOW`, `DENY`, `DROP`<br>Action. Action after inspection - ALLOW: Allow Allow traffic - DENY: Deny Throw RST error for TCP and ICMP error for UDP - DROP: DROP Silently drop traffic
+<a id="action"></a>&#x2022; [`action`](#action) - Optional String  Defaults to `ALLOW`<br>Possible values are `ALLOW`, `DENY`, `DROP`<br>[Enum: ALLOW|DENY|DROP] Action. Action after inspection - ALLOW: Allow Allow traffic - DENY: Deny Throw RST error for TCP and ICMP error for UDP - DROP: DROP Silently drop traffic
 
 <a id="enable-disable-compliance-checks"></a>&#x2022; [`enable_disable_compliance_checks`](#enable-disable-compliance-checks) - Optional Block<br>Enable/Disable Compliance Checks. x-required Enable Disable Compliance Checks Choice<br>See [Enable Disable Compliance Checks](#enable-disable-compliance-checks) below for details.
 

@@ -80,7 +80,7 @@ func (r *TicketTrackingSystemResource) Metadata(ctx context.Context, req resourc
 func (r *TicketTrackingSystemResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             ticket_tracking_systemSchemaVersion,
-		MarkdownDescription: "Manages Ticket Tracking System in F5 Distributed Cloud.",
+		MarkdownDescription: "[Namespace: required] Manages Ticket Tracking System in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Ticket Tracking System. Must be unique within the namespace.",

@@ -2,12 +2,12 @@
 page_title: "f5xc_nat_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages a NAT Policy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
+  [Namespace: required] Manages a NAT Policy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
 ---
 
 # f5xc_nat_policy (Resource)
 
-Manages a NAT Policy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
+[Namespace: required] Manages a NAT Policy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
 
 ~> **Note** Please refer to [NAT Policy API docs](https://docs.cloud.f5.com/docs-v2/api/nat-policy) to learn more.
 
@@ -15,7 +15,7 @@ Manages a NAT Policy resource in F5 Distributed Cloud for nat policy create spec
 
 ```terraform
 # NAT Policy Resource Example
-# Manages a NAT Policy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
+# [Namespace: required] Manages a NAT Policy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
 
 # Basic NAT Policy configuration
 resource "f5xc_nat_policy" "example" {
@@ -176,7 +176,7 @@ A [`criteria`](#rules-criteria) block (within [`rules`](#rules)) supports the fo
 
 <a id="rules-criteria-icmp"></a>&#x2022; [`icmp`](#rules-criteria-icmp) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="rules-criteria-protocol"></a>&#x2022; [`protocol`](#rules-criteria-protocol) - Optional String  Defaults to `ALL`<br>Possible values are `ALL`, `ICMP`, `TCP`, `UDP`<br>Protocols. Protocols like TCP, UDP
+<a id="rules-criteria-protocol"></a>&#x2022; [`protocol`](#rules-criteria-protocol) - Optional String  Defaults to `ALL`<br>Possible values are `ALL`, `ICMP`, `TCP`, `UDP`<br>[Enum: ALL|ICMP|TCP|UDP] Protocols. Protocols like TCP, UDP
 
 <a id="rules-criteria-segment"></a>&#x2022; [`segment`](#rules-criteria-segment) - Optional Block<br>Segment Reference Type. Reference to Segment Object<br>See [Segment](#rules-criteria-segment) below.
 

@@ -2,12 +2,12 @@
 page_title: "f5xc_container_registry Resource - terraform-provider-f5xc"
 subcategory: "Kubernetes"
 description: |-
-  Manages a Container Registry resource in F5 Distributed Cloud for container image registry configuration.
+  [Category: Kubernetes] [Namespace: required] Manages a Container Registry resource in F5 Distributed Cloud for container image registry configuration.
 ---
 
 # f5xc_container_registry (Resource)
 
-Manages a Container Registry resource in F5 Distributed Cloud for container image registry configuration.
+[Category: Kubernetes] [Namespace: required] Manages a Container Registry resource in F5 Distributed Cloud for container image registry configuration.
 
 ~> **Note** Please refer to [Container Registry API docs](https://docs.cloud.f5.com/docs-v2/api/container-registry) to learn more.
 
@@ -15,7 +15,7 @@ Manages a Container Registry resource in F5 Distributed Cloud for container imag
 
 ```terraform
 # Container Registry Resource Example
-# Manages a Container Registry resource in F5 Distributed Cloud for container image registry configuration.
+# [Category: Kubernetes] [Namespace: required] Manages a Container Registry resource in F5 Distributed Cloud for container image registry configuration.
 
 # Basic Container Registry configuration
 resource "f5xc_container_registry" "example" {

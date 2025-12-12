@@ -108,7 +108,7 @@ func (r *SiteMeshGroupResource) Metadata(ctx context.Context, req resource.Metad
 func (r *SiteMeshGroupResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             site_mesh_groupSchemaVersion,
-		MarkdownDescription: "Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.",
+		MarkdownDescription: "[Namespace: required] Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Site Mesh Group. Must be unique within the namespace.",
@@ -164,7 +164,7 @@ func (r *SiteMeshGroupResource) Schema(ctx context.Context, req resource.SchemaR
 				Delete: true,
 			}),
 			"disable_re_fallback": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: disable_re_fallback, enable_re_fallback] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: disable_re_fallback, enable_re_fallback; Default: disable_re_fallback] Empty. This can be used for messages where no values are needed",
 			},
 			"enable_re_fallback": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",

@@ -2,12 +2,12 @@
 page_title: "f5xc_cloud_credentials Resource - terraform-provider-f5xc"
 subcategory: "Authentication"
 description: |-
-  Manages a Cloud Credentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.
+  [Category: Authentication] [Namespace: not_required] Manages a Cloud Credentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.
 ---
 
 # f5xc_cloud_credentials (Resource)
 
-Manages a Cloud Credentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.
+[Category: Authentication] [Namespace: not_required] Manages a Cloud Credentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.
 
 ~> **Note** Please refer to [Cloud Credentials API docs](https://docs.cloud.f5.com/docs-v2/api/cloud-credentials) to learn more.
 
@@ -15,7 +15,7 @@ Manages a Cloud Credentials resource in F5 Distributed Cloud for cloud provider 
 
 ```terraform
 # Cloud Credentials Resource Example
-# Manages a Cloud Credentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.
+# [Category: Authentication] [Namespace: not_required] Manages a Cloud Credentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.
 
 # Basic Cloud Credentials configuration
 resource "f5xc_cloud_credentials" "example" {

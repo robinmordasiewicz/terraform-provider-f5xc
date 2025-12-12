@@ -97,7 +97,7 @@ func (r *IKEPhase1ProfileResource) Metadata(ctx context.Context, req resource.Me
 func (r *IKEPhase1ProfileResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             ike_phase1_profileSchemaVersion,
-		MarkdownDescription: "Manages a IKE Phase1 Profile resource in F5 Distributed Cloud for ike phase1 profile configuration.",
+		MarkdownDescription: "[Namespace: required] Manages a IKE Phase1 Profile resource in F5 Distributed Cloud for ike phase1 profile configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the IKE Phase1 Profile. Must be unique within the namespace.",
@@ -125,7 +125,7 @@ func (r *IKEPhase1ProfileResource) Schema(ctx context.Context, req resource.Sche
 				ElementType:         types.StringType,
 			},
 			"authentication_algos": schema.ListAttribute{
-				MarkdownDescription: "Authentication Algorithms. Choose one or more Authentication Algorithm. Use None option when using the aes-gcm or aes-ccm encryption algorithms. Possible values are `AUTH_ALG_DEFAULT`, `SHA256_HMAC`, `SHA384_HMAC`, `SHA512_HMAC`, `AUTH_ALG_NONE`. Defaults to `AUTH_ALG_DEFAULT`.",
+				MarkdownDescription: "[Enum: AUTH_ALG_DEFAULT|SHA256_HMAC|SHA384_HMAC|SHA512_HMAC|AUTH_ALG_NONE] Authentication Algorithms. Choose one or more Authentication Algorithm. Use None option when using the aes-gcm or aes-ccm encryption algorithms. Possible values are `AUTH_ALG_DEFAULT`, `SHA256_HMAC`, `SHA384_HMAC`, `SHA512_HMAC`, `AUTH_ALG_NONE`. Defaults to `AUTH_ALG_DEFAULT`.",
 				Optional:            true,
 				ElementType:         types.StringType,
 			},
@@ -134,7 +134,7 @@ func (r *IKEPhase1ProfileResource) Schema(ctx context.Context, req resource.Sche
 				Optional:            true,
 			},
 			"dh_group": schema.ListAttribute{
-				MarkdownDescription: "Diffie Hellman Groups. Choose the acceptable Diffie Hellman (DH) Group or Groups that you are willing to accept as part of this profile. Possible values are `DH_GROUP_DEFAULT`, `DH_GROUP_14`, `DH_GROUP_15`, `DH_GROUP_16`, `DH_GROUP_17`, `DH_GROUP_18`, `DH_GROUP_19`, `DH_GROUP_20`, `DH_GROUP_21`, `DH_GROUP_26`. Defaults to `DH_GROUP_DEFAULT`.",
+				MarkdownDescription: "[Enum: DH_GROUP_DEFAULT|DH_GROUP_14|DH_GROUP_15|DH_GROUP_16|DH_GROUP_17|DH_GROUP_18|DH_GROUP_19|DH_GROUP_20|DH_GROUP_21|DH_GROUP_26] Diffie Hellman Groups. Choose the acceptable Diffie Hellman (DH) Group or Groups that you are willing to accept as part of this profile. Possible values are `DH_GROUP_DEFAULT`, `DH_GROUP_14`, `DH_GROUP_15`, `DH_GROUP_16`, `DH_GROUP_17`, `DH_GROUP_18`, `DH_GROUP_19`, `DH_GROUP_20`, `DH_GROUP_21`, `DH_GROUP_26`. Defaults to `DH_GROUP_DEFAULT`.",
 				Optional:            true,
 				ElementType:         types.StringType,
 			},
@@ -143,7 +143,7 @@ func (r *IKEPhase1ProfileResource) Schema(ctx context.Context, req resource.Sche
 				Optional:            true,
 			},
 			"encryption_algos": schema.ListAttribute{
-				MarkdownDescription: "Configure Encryption Algorithms. Choose one or more encryption algorithms. Possible values are `ENC_ALG_DEFAULT`, `AES128_CBC`, `AES192_CBC`, `AES256_CBC`, `TRIPLE_DES_CBC`, `AES128_GCM`, `AES192_GCM`, `AES256_GCM`. Defaults to `ENC_ALG_DEFAULT`.",
+				MarkdownDescription: "[Enum: ENC_ALG_DEFAULT|AES128_CBC|AES192_CBC|AES256_CBC|TRIPLE_DES_CBC|AES128_GCM|AES192_GCM|AES256_GCM] Configure Encryption Algorithms. Choose one or more encryption algorithms. Possible values are `ENC_ALG_DEFAULT`, `AES128_CBC`, `AES192_CBC`, `AES256_CBC`, `TRIPLE_DES_CBC`, `AES128_GCM`, `AES192_GCM`, `AES256_GCM`. Defaults to `ENC_ALG_DEFAULT`.",
 				Optional:            true,
 				ElementType:         types.StringType,
 			},
@@ -153,7 +153,7 @@ func (r *IKEPhase1ProfileResource) Schema(ctx context.Context, req resource.Sche
 				ElementType:         types.StringType,
 			},
 			"prf": schema.ListAttribute{
-				MarkdownDescription: "PseudoRandomFunction. Select PseudoRandomFunction for IKE SA. Possible values are `PRF_DEFAULT`, `PRFSHA256`, `PRFSHA384`, `PRFSHA512`. Defaults to `PRF_DEFAULT`.",
+				MarkdownDescription: "[Enum: PRF_DEFAULT|PRFSHA256|PRFSHA384|PRFSHA512] PseudoRandomFunction. Select PseudoRandomFunction for IKE SA. Possible values are `PRF_DEFAULT`, `PRFSHA256`, `PRFSHA384`, `PRFSHA512`. Defaults to `PRF_DEFAULT`.",
 				Optional:            true,
 				ElementType:         types.StringType,
 			},
@@ -173,7 +173,7 @@ func (r *IKEPhase1ProfileResource) Schema(ctx context.Context, req resource.Sche
 				Delete: true,
 			}),
 			"ike_keylifetime_hours": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: ike_keylifetime_hours, ike_keylifetime_minutes, use_default_keylifetime] Hours. Input Hours",
+				MarkdownDescription: "[OneOf: ike_keylifetime_hours, ike_keylifetime_minutes, use_default_keylifetime; Default: use_default_keylifetime] Hours. Input Hours",
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.Int64Attribute{
 						MarkdownDescription: "Duration.",

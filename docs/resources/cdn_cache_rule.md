@@ -2,12 +2,12 @@
 page_title: "f5xc_cdn_cache_rule Resource - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
+  [Namespace: required] Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
 ---
 
 # f5xc_cdn_cache_rule (Resource)
 
-Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
+[Namespace: required] Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
 
 ~> **Note** Please refer to [CDN Cache Rule API docs](https://docs.cloud.f5.com/docs-v2/api/cdn-cache-rule) to learn more.
 
@@ -15,7 +15,7 @@ Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer c
 
 ```terraform
 # CDN Cache Rule Resource Example
-# Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
+# [Namespace: required] Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
 
 # Basic CDN Cache Rule configuration
 resource "f5xc_cdn_cache_rule" "example" {
@@ -142,7 +142,7 @@ A [`cache_rule_expression`](#cache-rules-rule-expression-list-cache-rule-express
 
 A [`cache_headers`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers) block (within [`cache_rules.rule_expression_list.cache_rule_expression`](#cache-rules-rule-expression-list-cache-rule-expression)) supports the following:
 
-<a id="cache-rules-rule-expression-list-cache-rule-expression-cache-headers-name"></a>&#x2022; [`name`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers-name) - Optional String  Defaults to `PROXY_HOST`<br>Possible values are `PROXY_HOST`, `REFERER`, `SCHEME`, `USER_AGENT`<br>Header Options. - PROXY_HOST: Proxy Host Name of the proxied server - REFERER: Referer This is the address of the previous web page from which a link to the currently requested page was followed - SCHEME: Scheme The HTTP scheme used: HTTP or HTTPS - USER_AGENT: User Agent The user agent string of the user agent
+<a id="cache-rules-rule-expression-list-cache-rule-expression-cache-headers-name"></a>&#x2022; [`name`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers-name) - Optional String  Defaults to `PROXY_HOST`<br>Possible values are `PROXY_HOST`, `REFERER`, `SCHEME`, `USER_AGENT`<br>[Enum: PROXY_HOST|REFERER|SCHEME|USER_AGENT] Header Options. - PROXY_HOST: Proxy Host Name of the proxied server - REFERER: Referer This is the address of the previous web page from which a link to the currently requested page was followed - SCHEME: Scheme The HTTP scheme used: HTTP or HTTPS - USER_AGENT: User Agent The user agent string of the user agent
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator"></a>&#x2022; [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator) - Optional Block<br>Operator<br>See [Operator](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator) below.
 

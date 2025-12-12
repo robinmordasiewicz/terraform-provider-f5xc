@@ -2,12 +2,12 @@
 page_title: "f5xc_secret_policy_rule Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages secret_policy_rule creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
+  [Namespace: required] Manages secret_policy_rule creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_secret_policy_rule (Data Source)
 
-Manages secret_policy_rule creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
+[Namespace: required] Manages secret_policy_rule creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Secret Policy Rule API docs](https://docs.cloud.f5.com/docs-v2/api/secret-policy-rule) to learn more.
 

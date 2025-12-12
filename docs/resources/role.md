@@ -2,12 +2,12 @@
 page_title: "f5xc_role Resource - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
-  Manages role in F5 Distributed Cloud.
+  [Category: Organization] [Namespace: not_required] Manages role in F5 Distributed Cloud.
 ---
 
 # f5xc_role (Resource)
 
-Manages role in F5 Distributed Cloud.
+[Category: Organization] [Namespace: not_required] Manages role in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Role API docs](https://docs.cloud.f5.com/docs-v2/api/role) to learn more.
 
@@ -15,7 +15,7 @@ Manages role in F5 Distributed Cloud.
 
 ```terraform
 # Role Resource Example
-# Manages role in F5 Distributed Cloud.
+# [Category: Organization] [Namespace: not_required] Manages role in F5 Distributed Cloud.
 
 # Basic Role configuration
 resource "f5xc_role" "example" {

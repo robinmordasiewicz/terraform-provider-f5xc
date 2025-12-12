@@ -1,5 +1,5 @@
 # Network Firewall Resource Example
-# Manages a Network Firewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.
+# [Category: Security] [Namespace: required] Manages a Network Firewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.
 
 # Basic Network Firewall configuration
 resource "f5xc_network_firewall" "example" {
@@ -24,7 +24,7 @@ resource "f5xc_network_firewall" "example" {
   enhanced_firewall_policies {
     # Configure enhanced_firewall_policies settings
   }
-  # [OneOf: active_fast_acls, disable_fast_acl] Active Fast A...
+  # [OneOf: active_fast_acls, disable_fast_acl; Default: disa...
   active_fast_acls {
     # Configure active_fast_acls settings
   }

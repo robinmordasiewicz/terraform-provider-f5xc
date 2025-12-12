@@ -2,12 +2,12 @@
 page_title: "f5xc_dns_load_balancer Resource - terraform-provider-f5xc"
 subcategory: "DNS"
 description: |-
-  Manages DNS Load Balancer in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
+  [Category: Load Balancing] [Namespace: required] Manages DNS Load Balancer in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 ---
 
 # f5xc_dns_load_balancer (Resource)
 
-Manages DNS Load Balancer in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
+[Category: Load Balancing] [Namespace: required] Manages DNS Load Balancer in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [DNS Load Balancer API docs](https://docs.cloud.f5.com/docs-v2/api/dns-load-balancer) to learn more.
 
@@ -15,7 +15,7 @@ Manages DNS Load Balancer in a given namespace. If one already exist it will giv
 
 ```terraform
 # DNS Load Balancer Resource Example
-# Manages DNS Load Balancer in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
+# [Category: Load Balancing] [Namespace: required] Manages DNS Load Balancer in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
 # Basic DNS Load Balancer configuration
 resource "f5xc_dns_load_balancer" "example" {
@@ -78,7 +78,7 @@ resource "f5xc_dns_load_balancer" "example" {
 
 <a id="fallback-pool"></a>&#x2022; [`fallback_pool`](#fallback-pool) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Fallback Pool](#fallback-pool) below for details.
 
-<a id="record-type"></a>&#x2022; [`record_type`](#record-type) - Optional String  Defaults to `A`<br>Possible values are `A`, `AAAA`, `MX`, `CNAME`, `SRV`<br>Resource Record Type. Resource Record Type - A: A - AAAA: AAAA - MX: MX - CNAME: CNAME - SRV: SRV
+<a id="record-type"></a>&#x2022; [`record_type`](#record-type) - Optional String  Defaults to `A`<br>Possible values are `A`, `AAAA`, `MX`, `CNAME`, `SRV`<br>[Enum: A|AAAA|MX|CNAME|SRV] Resource Record Type. Resource Record Type - A: A - AAAA: AAAA - MX: MX - CNAME: CNAME - SRV: SRV
 
 <a id="response-cache"></a>&#x2022; [`response_cache`](#response-cache) - Optional Block<br>Response Cache. Response Cache x-required<br>See [Response Cache](#response-cache) below for details.
 

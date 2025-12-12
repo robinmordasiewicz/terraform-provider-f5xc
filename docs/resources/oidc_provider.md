@@ -2,12 +2,12 @@
 page_title: "f5xc_oidc_provider Resource - terraform-provider-f5xc"
 subcategory: "Authentication"
 description: |-
-  Manages a OIDC Provider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.
+  [Namespace: required] Manages a OIDC Provider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.
 ---
 
 # f5xc_oidc_provider (Resource)
 
-Manages a OIDC Provider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.
+[Namespace: required] Manages a OIDC Provider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.
 
 ~> **Note** Please refer to [OIDC Provider API docs](https://docs.cloud.f5.com/docs-v2/api/oidc-provider) to learn more.
 
@@ -15,7 +15,7 @@ Manages a OIDC Provider resource in F5 Distributed Cloud for customcreatespectyp
 
 ```terraform
 # OIDC Provider Resource Example
-# Manages a OIDC Provider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.
+# [Namespace: required] Manages a OIDC Provider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.
 
 # Basic OIDC Provider configuration
 resource "f5xc_oidc_provider" "example" {
@@ -72,7 +72,7 @@ resource "f5xc_oidc_provider" "example" {
 <br><br>&#x2022; <a id="oidc-v10-spec-type"></a>[`oidc_v10_spec_type`](#oidc-v10-spec-type) - Optional Block<br>OpenID Connect v1.0 Spec Type. OIDCV10SpecType specifies the attributes required to configure OIDC provider<br>See [OIDC V10 Spec Type](#oidc-v10-spec-type) below for details.
 <br><br>&#x2022; <a id="okta-oidc-spec-type"></a>[`okta_oidc_spec_type`](#okta-oidc-spec-type) - Optional Block<br>Okta OpenID Connect Spec Type. OKTAOIDCSpecType specifies the attributes required to configure okta OIDC provider<br>See [Okta OIDC Spec Type](#okta-oidc-spec-type) below for details.
 
-<a id="provider-type"></a>&#x2022; [`provider_type`](#provider-type) - Optional String  Defaults to `DEFAULT`<br>Possible values are `DEFAULT`, `GOOGLE`, `AZURE`, `OKTA`<br>Provider Type. Types of OIDC providers Default provider. use this for standard OpenIDConnect v1.0 Authenticate with Google OIDC Authenticate with Azure OIDC Authenticate with Okta OIDC
+<a id="provider-type"></a>&#x2022; [`provider_type`](#provider-type) - Optional String  Defaults to `DEFAULT`<br>Possible values are `DEFAULT`, `GOOGLE`, `AZURE`, `OKTA`<br>[Enum: DEFAULT|GOOGLE|AZURE|OKTA] Provider Type. Types of OIDC providers Default provider. use this for standard OpenIDConnect v1.0 Authenticate with Google OIDC Authenticate with Azure OIDC Authenticate with Okta OIDC
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -104,7 +104,7 @@ An [`azure_oidc_spec_type`](#azure-oidc-spec-type) block supports the following:
 
 <a id="azure-oidc-spec-type-logout-url"></a>&#x2022; [`logout_url`](#azure-oidc-spec-type-logout-url) - Optional String<br>Logout URL. Logout URL specified in your OIDC application
 
-<a id="azure-oidc-spec-type-prompt"></a>&#x2022; [`prompt`](#azure-oidc-spec-type-prompt) - Optional String<br>Possible values are `UNSPECIFIED`, `NONE`, `CONSENT`, `LOGIN`, `SELECT_ACCOUNT`<br>Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the End-User to select a user account. This enables an End-User who has multiple accounts at the Authorization Server to select amongst the multiple accounts that they might have current sessions for
+<a id="azure-oidc-spec-type-prompt"></a>&#x2022; [`prompt`](#azure-oidc-spec-type-prompt) - Optional String<br>Possible values are `UNSPECIFIED`, `NONE`, `CONSENT`, `LOGIN`, `SELECT_ACCOUNT`<br>[Enum: UNSPECIFIED|NONE|CONSENT|LOGIN|SELECT_ACCOUNT] Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the End-User to select a user account. This enables an End-User who has multiple accounts at the Authorization Server to select amongst the multiple accounts that they might have current sessions for
 
 <a id="azure-oidc-spec-type-token-url"></a>&#x2022; [`token_url`](#azure-oidc-spec-type-token-url) - Optional String<br>Token URL. The token URL of your OIDC application
 
@@ -152,7 +152,7 @@ An [`oidc_v10_spec_type`](#oidc-v10-spec-type) block supports the following:
 
 <a id="oidc-v10-spec-type-pass-login-hint"></a>&#x2022; [`pass_login_hint`](#oidc-v10-spec-type-pass-login-hint) - Optional Bool<br>Pass Login Hint. Pass login_hint to identity provider
 
-<a id="oidc-v10-spec-type-prompt"></a>&#x2022; [`prompt`](#oidc-v10-spec-type-prompt) - Optional String<br>Possible values are `UNSPECIFIED`, `NONE`, `CONSENT`, `LOGIN`, `SELECT_ACCOUNT`<br>Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the End-User to select a user account. This enables an End-User who has multiple accounts at the Authorization Server to select amongst the multiple accounts that they might have current sessions for
+<a id="oidc-v10-spec-type-prompt"></a>&#x2022; [`prompt`](#oidc-v10-spec-type-prompt) - Optional String<br>Possible values are `UNSPECIFIED`, `NONE`, `CONSENT`, `LOGIN`, `SELECT_ACCOUNT`<br>[Enum: UNSPECIFIED|NONE|CONSENT|LOGIN|SELECT_ACCOUNT] Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the End-User to select a user account. This enables an End-User who has multiple accounts at the Authorization Server to select amongst the multiple accounts that they might have current sessions for
 
 <a id="oidc-v10-spec-type-token-url"></a>&#x2022; [`token_url`](#oidc-v10-spec-type-token-url) - Optional String<br>Token URL. The token URL of your OIDC application
 
@@ -180,7 +180,7 @@ An [`okta_oidc_spec_type`](#okta-oidc-spec-type) block supports the following:
 
 <a id="okta-oidc-spec-type-logout-url"></a>&#x2022; [`logout_url`](#okta-oidc-spec-type-logout-url) - Optional String<br>Logout URL. Logout URL specified in your OIDC application
 
-<a id="okta-oidc-spec-type-prompt"></a>&#x2022; [`prompt`](#okta-oidc-spec-type-prompt) - Optional String<br>Possible values are `UNSPECIFIED`, `NONE`, `CONSENT`, `LOGIN`, `SELECT_ACCOUNT`<br>Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the End-User to select a user account. This enables an End-User who has multiple accounts at the Authorization Server to select amongst the multiple accounts that they might have current sessions for
+<a id="okta-oidc-spec-type-prompt"></a>&#x2022; [`prompt`](#okta-oidc-spec-type-prompt) - Optional String<br>Possible values are `UNSPECIFIED`, `NONE`, `CONSENT`, `LOGIN`, `SELECT_ACCOUNT`<br>[Enum: UNSPECIFIED|NONE|CONSENT|LOGIN|SELECT_ACCOUNT] Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the End-User to select a user account. This enables an End-User who has multiple accounts at the Authorization Server to select amongst the multiple accounts that they might have current sessions for
 
 <a id="okta-oidc-spec-type-token-url"></a>&#x2022; [`token_url`](#okta-oidc-spec-type-token-url) - Optional String<br>Token URL. The token URL of your OIDC application
 

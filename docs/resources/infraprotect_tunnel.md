@@ -2,12 +2,12 @@
 page_title: "f5xc_infraprotect_tunnel Resource - terraform-provider-f5xc"
 subcategory: "Infrastructure Protection"
 description: |-
-  Manages DDoS transit tunnel in F5 Distributed Cloud.
+  [Namespace: required] Manages DDoS transit tunnel in F5 Distributed Cloud.
 ---
 
 # f5xc_infraprotect_tunnel (Resource)
 
-Manages DDoS transit tunnel in F5 Distributed Cloud.
+[Namespace: required] Manages DDoS transit tunnel in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Infraprotect Tunnel API docs](https://docs.cloud.f5.com/docs-v2/api/infraprotect-tunnel) to learn more.
 
@@ -15,7 +15,7 @@ Manages DDoS transit tunnel in F5 Distributed Cloud.
 
 ```terraform
 # Infraprotect Tunnel Resource Example
-# Manages DDoS transit tunnel in F5 Distributed Cloud.
+# [Namespace: required] Manages DDoS transit tunnel in F5 Distributed Cloud.
 
 # Basic Infraprotect Tunnel configuration
 resource "f5xc_infraprotect_tunnel" "example" {

@@ -2,12 +2,12 @@
 page_title: "f5xc_app_type Resource - terraform-provider-f5xc"
 subcategory: "Applications"
 description: |-
-  Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.
+  [Namespace: required] Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.
 ---
 
 # f5xc_app_type (Resource)
 
-Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.
+[Namespace: required] Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [App Type API docs](https://docs.cloud.f5.com/docs-v2/api/app-type) to learn more.
 
@@ -15,7 +15,7 @@ Manages App type will create the configuration in namespace metadata.namespace i
 
 ```terraform
 # App Type Resource Example
-# Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.
+# [Namespace: required] Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.
 
 # Basic App Type configuration
 resource "f5xc_app_type" "example" {
@@ -100,7 +100,7 @@ A [`discovered_api_settings`](#business-logic-markup-setting-discovered-api-sett
 
 A [`features`](#features) block supports the following:
 
-<a id="features-type"></a>&#x2022; [`type`](#features-type) - Optional String  Defaults to `BUSINESS_LOGIC_MARKUP`<br>Possible values are `BUSINESS_LOGIC_MARKUP`, `TIMESERIES_ANOMALY_DETECTION`, `PER_REQ_ANOMALY_DETECTION`, `USER_BEHAVIOR_ANALYSIS`<br>AI/ML Features. Enumeration for AI/ML features supported API Discovery enables generation of model for various API interactions between services of App type. Enable analysis of timeseries for various metric collected like requests, errors, latency etc. Enable anomaly detection per API request, i.e. the probability density function (PDF) charts generation for API endpoints Enable user behavior analysis
+<a id="features-type"></a>&#x2022; [`type`](#features-type) - Optional String  Defaults to `BUSINESS_LOGIC_MARKUP`<br>Possible values are `BUSINESS_LOGIC_MARKUP`, `TIMESERIES_ANOMALY_DETECTION`, `PER_REQ_ANOMALY_DETECTION`, `USER_BEHAVIOR_ANALYSIS`<br>[Enum: BUSINESS_LOGIC_MARKUP|TIMESERIES_ANOMALY_DETECTION|PER_REQ_ANOMALY_DETECTION|USER_BEHAVIOR_ANALYSIS] AI/ML Features. Enumeration for AI/ML features supported API Discovery enables generation of model for various API interactions between services of App type. Enable analysis of timeseries for various metric collected like requests, errors, latency etc. Enable anomaly detection per API request, i.e. the probability density function (PDF) charts generation for API endpoints Enable user behavior analysis
 
 #### Timeouts
 

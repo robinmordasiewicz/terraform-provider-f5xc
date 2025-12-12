@@ -2,12 +2,12 @@
 page_title: "f5xc_addon_subscription Resource - terraform-provider-f5xc"
 subcategory: "Subscriptions"
 description: |-
-  Manages new Addon Subscription with Addon Subscription State in F5 Distributed Cloud.
+  [Namespace: required] Manages new Addon Subscription with Addon Subscription State in F5 Distributed Cloud.
 ---
 
 # f5xc_addon_subscription (Resource)
 
-Manages new Addon Subscription with Addon Subscription State in F5 Distributed Cloud.
+[Namespace: required] Manages new Addon Subscription with Addon Subscription State in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Addon Subscription API docs](https://docs.cloud.f5.com/docs-v2/api/pbac-addon-subscription) to learn more.
 
@@ -15,7 +15,7 @@ Manages new Addon Subscription with Addon Subscription State in F5 Distributed C
 
 ```terraform
 # Addon Subscription Resource Example
-# Manages new Addon Subscription with Addon Subscription State in F5 Distributed Cloud.
+# [Namespace: required] Manages new Addon Subscription with Addon Subscription State in F5 Distributed Cloud.
 
 # Basic Addon Subscription configuration
 resource "f5xc_addon_subscription" "example" {
@@ -70,7 +70,7 @@ resource "f5xc_addon_subscription" "example" {
 
 <a id="notification-preference"></a>&#x2022; [`notification_preference`](#notification-preference) - Optional Block<br>Notification Preference. NotificationPreference preference for receiving addon subscription notifications<br>See [Notification Preference](#notification-preference) below for details.
 
-<a id="status"></a>&#x2022; [`status`](#status) - Optional String  Defaults to `SUBSCRIPTION_PENDING`<br>Possible values are `SUBSCRIPTION_PENDING`, `SUBSCRIPTION_ENABLED`, `SUBSCRIPTION_DISABLE_PENDING`, `SUBSCRIPTION_DISABLED`<br>Addon Subscription Type. Represents the different states of an addon subscription. - SUBSCRIPTION_PENDING: Subscription Pending Indicates that the subscription is pending enablement. - SUBSCRIPTION_ENABLED: Subscription Enabled Indicates that the subscription is currently enabled and active. - SUBSCRIPTION_DISABLE_PENDING: Subscription Disable Pending Indicates that the addon disable process is pending. - SUBSCRIPTION_DISABLED: Subscription Disabled Indicates that the addon has been disabled
+<a id="status"></a>&#x2022; [`status`](#status) - Optional String  Defaults to `SUBSCRIPTION_PENDING`<br>Possible values are `SUBSCRIPTION_PENDING`, `SUBSCRIPTION_ENABLED`, `SUBSCRIPTION_DISABLE_PENDING`, `SUBSCRIPTION_DISABLED`<br>[Enum: SUBSCRIPTION_PENDING|SUBSCRIPTION_ENABLED|SUBSCRIPTION_DISABLE_PENDING|SUBSCRIPTION_DISABLED] Addon Subscription Type. Represents the different states of an addon subscription. - SUBSCRIPTION_PENDING: Subscription Pending Indicates that the subscription is pending enablement. - SUBSCRIPTION_ENABLED: Subscription Enabled Indicates that the subscription is currently enabled and active. - SUBSCRIPTION_DISABLE_PENDING: Subscription Disable Pending Indicates that the addon disable process is pending. - SUBSCRIPTION_DISABLED: Subscription Disabled Indicates that the addon has been disabled
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

@@ -2,12 +2,12 @@
 page_title: "f5xc_malicious_user_mitigation Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages malicious_user_mitigation creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  [Category: Security] [Namespace: required] Manages malicious_user_mitigation creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_malicious_user_mitigation (Resource)
 
-Manages malicious_user_mitigation creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+[Category: Security] [Namespace: required] Manages malicious_user_mitigation creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Malicious User Mitigation API docs](https://docs.cloud.f5.com/docs-v2/api/malicious-user-mitigation) to learn more.
 
@@ -15,7 +15,7 @@ Manages malicious_user_mitigation creates a new object in the storage backend fo
 
 ```terraform
 # Malicious User Mitigation Resource Example
-# Manages malicious_user_mitigation creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# [Category: Security] [Namespace: required] Manages malicious_user_mitigation creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Malicious User Mitigation configuration
 resource "f5xc_malicious_user_mitigation" "example" {

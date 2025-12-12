@@ -1,5 +1,5 @@
 # Data Type Resource Example
-# Manages data_type creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# [Namespace: required] Manages data_type creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Data Type configuration
 resource "f5xc_data_type" "example" {

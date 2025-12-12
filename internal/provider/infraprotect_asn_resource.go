@@ -71,7 +71,7 @@ func (r *InfraprotectAsnResource) Metadata(ctx context.Context, req resource.Met
 func (r *InfraprotectAsnResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             infraprotect_asnSchemaVersion,
-		MarkdownDescription: "Manages DDoS transit ASN in F5 Distributed Cloud.",
+		MarkdownDescription: "[Namespace: required] Manages DDoS transit ASN in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Infraprotect Asn. Must be unique within the namespace.",

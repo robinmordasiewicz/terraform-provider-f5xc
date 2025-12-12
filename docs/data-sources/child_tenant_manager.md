@@ -2,12 +2,12 @@
 page_title: "f5xc_child_tenant_manager Data Source - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
-  Manages child_tenant_manager config instance. Name of the object is the name of the child tenant manager to be created. in F5 Distributed Cloud.
+  [Namespace: required] Manages child_tenant_manager config instance. Name of the object is the name of the child tenant manager to be created. in F5 Distributed Cloud.
 ---
 
 # f5xc_child_tenant_manager (Data Source)
 
-Manages child_tenant_manager config instance. Name of the object is the name of the child tenant manager to be created. in F5 Distributed Cloud.
+[Namespace: required] Manages child_tenant_manager config instance. Name of the object is the name of the child tenant manager to be created. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Child Tenant Manager API docs](https://docs.cloud.f5.com/docs-v2/api/tenant-management-child-tenant-manager) to learn more.
 

@@ -2,12 +2,12 @@
 page_title: "f5xc_healthcheck Resource - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  Manages a Healthcheck resource in F5 Distributed Cloud for healthcheck object defines method to determine if the given endpoint is healthy. single healthcheck object can be referred to by one or many cluster objects. configuration.
+  [Category: Load Balancing] [Namespace: required] [DependsOn: namespace] Manages a Healthcheck resource in F5 Distributed Cloud for healthcheck object defines method to determine if the given endpoint is healthy. single healthcheck object can be referred to by one or many cluster objects. configuration.
 ---
 
 # f5xc_healthcheck (Resource)
 
-Manages a Healthcheck resource in F5 Distributed Cloud for healthcheck object defines method to determine if the given endpoint is healthy. single healthcheck object can be referred to by one or many cluster objects. configuration.
+[Category: Load Balancing] [Namespace: required] [DependsOn: namespace] Manages a Healthcheck resource in F5 Distributed Cloud for healthcheck object defines method to determine if the given endpoint is healthy. single healthcheck object can be referred to by one or many cluster objects. configuration.
 
 ~> **Note** Please refer to [Healthcheck API docs](https://docs.cloud.f5.com/docs-v2/api/healthcheck) to learn more.
 
@@ -15,7 +15,7 @@ Manages a Healthcheck resource in F5 Distributed Cloud for healthcheck object de
 
 ```terraform
 # Healthcheck Resource Example
-# Manages a Healthcheck resource in F5 Distributed Cloud for healthcheck object defines method to determine if the given endpoint is healthy. single healthcheck object can be referred to by one or many cluster objects. configuration.
+# [Category: Load Balancing] [Namespace: required] [DependsOn: namespace] Manages a Healthcheck resource in F5 Distributed Cloud for healthcheck object defines method to determine if the given endpoint is healthy. single healthcheck object can be referred to by one or many cluster objects. configuration.
 
 # Basic Healthcheck configuration
 resource "f5xc_healthcheck" "example" {

@@ -260,7 +260,7 @@ func (r *FastACLResource) Metadata(ctx context.Context, req resource.MetadataReq
 func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             fast_aclSchemaVersion,
-		MarkdownDescription: "Manages `fast_acl` object, `fast_acl` object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to `fast_acl_rule` in F5 Distributed Cloud.",
+		MarkdownDescription: "[Namespace: required] Manages `fast_acl` object, `fast_acl` object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to `fast_acl_rule` in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Fast ACL. Must be unique within the namespace.",
@@ -352,7 +352,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "Action. FastAclRuleAction specifies possible action to be applied on traffic, possible action include dropping, forwarding or ratelimiting the traffic",
 									Attributes: map[string]schema.Attribute{
 										"simple_action": schema.StringAttribute{
-											MarkdownDescription: "Simple Action. FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic. Possible values are `DENY`, `ALLOW`. Defaults to `DENY`.",
+											MarkdownDescription: "[Enum: DENY|ALLOW] Simple Action. FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic. Possible values are `DENY`, `ALLOW`. Defaults to `DENY`.",
 											Optional:            true,
 										},
 									},
@@ -561,7 +561,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "Action. FastAclRuleAction specifies possible action to be applied on traffic, possible action include dropping, forwarding or ratelimiting the traffic",
 									Attributes: map[string]schema.Attribute{
 										"simple_action": schema.StringAttribute{
-											MarkdownDescription: "Simple Action. FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic. Possible values are `DENY`, `ALLOW`. Defaults to `DENY`.",
+											MarkdownDescription: "[Enum: DENY|ALLOW] Simple Action. FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic. Possible values are `DENY`, `ALLOW`. Defaults to `DENY`.",
 											Optional:            true,
 										},
 									},

@@ -1,5 +1,5 @@
 # API Credential Resource Example
-# Manages request specification. in F5 Distributed Cloud.
+# [Category: Authentication] [Namespace: required] Manages request specification. in F5 Distributed Cloud.
 
 # Basic API Credential configuration
 resource "f5xc_api_credential" "example" {

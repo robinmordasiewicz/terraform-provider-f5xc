@@ -2,12 +2,12 @@
 page_title: "f5xc_service_policy Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages service_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  [Category: Security] [Namespace: required] [DependsOn: namespace] Manages service_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_service_policy (Data Source)
 
-Manages service_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+[Category: Security] [Namespace: required] [DependsOn: namespace] Manages service_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Service Policy API docs](https://docs.cloud.f5.com/docs-v2/api/service-policy) to learn more.
 

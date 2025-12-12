@@ -2,12 +2,12 @@
 page_title: "f5xc_network_connector Data Source - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
+  [Category: Networking] [Namespace: required] Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
 ---
 
 # f5xc_network_connector (Data Source)
 
-Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
+[Category: Networking] [Namespace: required] Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
 
 ~> **Note** Please refer to [Network Connector API docs](https://docs.cloud.f5.com/docs-v2/api/network-connector) to learn more.
 

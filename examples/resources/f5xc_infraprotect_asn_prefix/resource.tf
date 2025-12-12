@@ -1,5 +1,5 @@
 # Infraprotect Asn Prefix Resource Example
-# Manages DDoS transit Prefix in F5 Distributed Cloud.
+# [Namespace: required] Manages DDoS transit Prefix in F5 Distributed Cloud.
 
 # Basic Infraprotect Asn Prefix configuration
 resource "f5xc_infraprotect_asn_prefix" "example" {

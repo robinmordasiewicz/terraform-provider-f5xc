@@ -1,5 +1,5 @@
 # Log Receiver Resource Example
-# Manages a Log Receiver resource in F5 Distributed Cloud for log collection and forwarding configuration.
+# [Category: Monitoring] [Namespace: required] Manages a Log Receiver resource in F5 Distributed Cloud for log collection and forwarding configuration.
 
 # Basic Log Receiver configuration
 resource "f5xc_log_receiver" "example" {

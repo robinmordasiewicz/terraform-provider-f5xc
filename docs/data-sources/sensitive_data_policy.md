@@ -2,12 +2,12 @@
 page_title: "f5xc_sensitive_data_policy Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages sensitive_data_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  [Namespace: required] Manages sensitive_data_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_sensitive_data_policy (Data Source)
 
-Manages sensitive_data_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+[Namespace: required] Manages sensitive_data_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Sensitive Data Policy API docs](https://docs.cloud.f5.com/docs-v2/api/sensitive-data-policy) to learn more.
 

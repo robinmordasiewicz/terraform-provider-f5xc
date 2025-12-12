@@ -2,12 +2,12 @@
 page_title: "f5xc_origin_pool Resource - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  Manages a Origin Pool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
+  [Category: Load Balancing] [Namespace: required] [DependsOn: namespace, healthcheck] Manages a Origin Pool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
 ---
 
 # f5xc_origin_pool (Resource)
 
-Manages a Origin Pool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
+[Category: Load Balancing] [Namespace: required] [DependsOn: namespace, healthcheck] Manages a Origin Pool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
 
 ~> **Note** Please refer to [Origin Pool API docs](https://docs.cloud.f5.com/docs-v2/api/views-origin-pool) to learn more.
 
@@ -15,7 +15,7 @@ Manages a Origin Pool resource in F5 Distributed Cloud for defining backend serv
 
 ```terraform
 # Origin Pool Resource Example
-# Manages a Origin Pool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
+# [Category: Load Balancing] [Namespace: required] [DependsOn: namespace, healthcheck] Manages a Origin Pool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
 
 # Basic Origin Pool configuration
 resource "f5xc_origin_pool" "example" {
@@ -128,7 +128,7 @@ resource "f5xc_origin_pool" "example" {
 <br><br>&#x2022; <a id="lb-port"></a>[`lb_port`](#lb-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
 <br><br>&#x2022; <a id="port"></a>[`port`](#port) - Optional Number<br>Port. Endpoint service is available on this port
 
-<a id="endpoint-selection"></a>&#x2022; [`endpoint_selection`](#endpoint-selection) - Optional String  Defaults to `DISTRIBUTED`<br>Possible values are `DISTRIBUTED`, `LOCAL_ONLY`, `LOCAL_PREFERRED`<br>Endpoint Selection Policy. Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints for load balancing Enable this policy to load balance ONLY among locally discovered endpoints Prefer the local endpoints for load balancing. If local endpoints are not present remote endpoints will be considered
+<a id="endpoint-selection"></a>&#x2022; [`endpoint_selection`](#endpoint-selection) - Optional String  Defaults to `DISTRIBUTED`<br>Possible values are `DISTRIBUTED`, `LOCAL_ONLY`, `LOCAL_PREFERRED`<br>[Enum: DISTRIBUTED|LOCAL_ONLY|LOCAL_PREFERRED] Endpoint Selection Policy. Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints for load balancing Enable this policy to load balance ONLY among locally discovered endpoints Prefer the local endpoints for load balancing. If local endpoints are not present remote endpoints will be considered
 
 -> **One of the following:**
 &#x2022; <a id="health-check-port"></a>[`health_check_port`](#health-check-port) - Optional Number<br>Health check port. Port used for performing health check
@@ -136,17 +136,18 @@ resource "f5xc_origin_pool" "example" {
 
 <a id="healthcheck"></a>&#x2022; [`healthcheck`](#healthcheck) - Optional Block<br>Health Check object. Reference to healthcheck configuration objects<br>See [Healthcheck](#healthcheck) below for details.
 
-<a id="loadbalancer-algorithm"></a>&#x2022; [`loadbalancer_algorithm`](#loadbalancer-algorithm) - Optional String  Defaults to `ROUND_ROBIN`<br>Possible values are `ROUND_ROBIN`, `LEAST_REQUEST`, `RING_HASH`, `RANDOM`, `LB_OVERRIDE`<br>Load Balancer Algorithm. Different load balancing algorithms supported When a connection to a endpoint in an upstream cluster is required, the load balancer uses loadbalancer_algorithm to determine which host is selected. - ROUND_ROBIN: ROUND_ROBIN Policy in which each healthy/available upstream endpoint is selected in round robin order. - LEAST_REQUEST: LEAST_REQUEST Policy in which loadbalancer picks the upstream endpoint which has the fewest active requests - RING_HASH: RING_HASH Policy implements consistent hashing to upstream endpoints using ring hash of endpoint names Hash of the incoming request is calculated using request hash policy. The ring/modulo hash load balancer implements consistent hashing to upstream hosts. The algorithm is based on mapping all hosts onto a circle such that the addition or removal of a host from the host set changes only affect 1/N requests. This technique is also commonly known as “ketama” hashing. A consistent hashing load balancer is only effective when protocol routing is used that specifies a value to hash on. The minimum ring size governs the replication factor for each host in the ring. For example, if the minimum ring size is 1024 and there are 16 hosts, each host will be replicated 64 times. - RANDOM: RANDOM Policy in which each available upstream endpoint is selected in random order. The random load balancer selects a random healthy host. The random load balancer generally performs better than round robin if no health checking policy is configured. Random selection avoids bias towards the host in the set that comes after a failed host. - LB_OVERRIDE: Load Balancer Override Hash policy is taken from from the load balancer which is using this origin pool
+<a id="loadbalancer-algorithm"></a>&#x2022; [`loadbalancer_algorithm`](#loadbalancer-algorithm) - Optional String  Defaults to `ROUND_ROBIN`<br>Possible values are `ROUND_ROBIN`, `LEAST_REQUEST`, `RING_HASH`, `RANDOM`, `LB_OVERRIDE`<br>[Enum: ROUND_ROBIN|LEAST_REQUEST|RING_HASH|RANDOM|LB_OVERRIDE] Load Balancer Algorithm. Different load balancing algorithms supported When a connection to a endpoint in an upstream cluster is required, the load balancer uses loadbalancer_algorithm to determine which host is selected. - ROUND_ROBIN: ROUND_ROBIN Policy in which each healthy/available upstream endpoint is selected in round robin order. - LEAST_REQUEST: LEAST_REQUEST Policy in which loadbalancer picks the upstream endpoint which has the fewest active requests - RING_HASH: RING_HASH Policy implements consistent hashing to upstream endpoints using ring hash of endpoint names Hash of the incoming request is calculated using request hash policy. The ring/modulo hash load balancer implements consistent hashing to upstream hosts. The algorithm is based on mapping all hosts onto a circle such that the addition or removal of a host from the host set changes only affect 1/N requests. This technique is also commonly known as “ketama” hashing. A consistent hashing load balancer is only effective when protocol routing is used that specifies a value to hash on. The minimum ring size governs the replication factor for each host in the ring. For example, if the minimum ring size is 1024 and there are 16 hosts, each host will be replicated 64 times. - RANDOM: RANDOM Policy in which each available upstream endpoint is selected in random order. The random load balancer selects a random healthy host. The random load balancer generally performs better than round robin if no health checking policy is configured. Random selection avoids bias towards the host in the set that comes after a failed host. - LB_OVERRIDE: Load Balancer Override Hash policy is taken from from the load balancer which is using this origin pool
 
 -> **One of the following:**
 &#x2022; <a id="no-tls"></a>[`no_tls`](#no-tls) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="use-tls"></a>[`use_tls`](#use-tls) - Optional Block<br>TLS Parameters for Origin Servers. Upstream TLS Parameters
 
 <a id="origin-servers"></a>&#x2022; [`origin_servers`](#origin-servers) - Optional Block<br>Origin Servers. List of origin servers in this pool<br>See [Origin Servers](#origin-servers) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block
 
 <a id="upstream-conn-pool-reuse-type"></a>&#x2022; [`upstream_conn_pool_reuse_type`](#upstream-conn-pool-reuse-type) - Optional Block  Defaults to `null`<br>Select upstream connection pool reuse state. Select upstream connection pool reuse state for every downstream connection. This configuration choice is for HTTP(S) LB only
+
+<a id="use-tls"></a>&#x2022; [`use_tls`](#use-tls) - Optional Block<br>TLS Parameters for Origin Servers. Upstream TLS Parameters
 
 ### Attributes Reference
 
@@ -208,7 +209,7 @@ A [`circuit_breaker`](#advanced-options-circuit-breaker) block (within [`advance
 
 <a id="advanced-options-circuit-breaker-pending-requests"></a>&#x2022; [`pending_requests`](#advanced-options-circuit-breaker-pending-requests) - Optional Number<br>Pending Requests. The maximum number of requests that will be queued while waiting for a ready connection pool connection. Since HTTP/2 requests are sent over a single connection, this circuit breaker only comes into play as the initial connection is created, as requests will be multiplexed immediately afterwards. For HTTP/1.1, requests are added to the list of pending requests whenever there aren’t enough upstream connections available to immediately dispatch the request, so this circuit breaker will remain in play for the lifetime of the process. Remove endpoint out of load balancing decision, if pending request reach pending_request
 
-<a id="advanced-options-circuit-breaker-priority"></a>&#x2022; [`priority`](#advanced-options-circuit-breaker-priority) - Optional String  Defaults to `DEFAULT`<br>Possible values are `DEFAULT`, `HIGH`<br>Routing Priority. Priority routing for each request. Different connection pools are used based on the priority selected for the request. Also, circuit-breaker configuration at destination cluster is chosen based on selected priority. Default routing mechanism High-Priority routing mechanism
+<a id="advanced-options-circuit-breaker-priority"></a>&#x2022; [`priority`](#advanced-options-circuit-breaker-priority) - Optional String  Defaults to `DEFAULT`<br>Possible values are `DEFAULT`, `HIGH`<br>[Enum: DEFAULT|HIGH] Routing Priority. Priority routing for each request. Different connection pools are used based on the priority selected for the request. Also, circuit-breaker configuration at destination cluster is chosen based on selected priority. Default routing mechanism High-Priority routing mechanism
 
 <a id="advanced-options-circuit-breaker-retries"></a>&#x2022; [`retries`](#advanced-options-circuit-breaker-retries) - Optional Number<br>Retry Count. The maximum number of retries that can be outstanding to all hosts in a cluster at any given time. Remove endpoint out of load balancing decision, if retries for request exceed this count
 
@@ -396,7 +397,7 @@ A [`k8s_service`](#origin-servers-k8s-service) block (within [`origin_servers`](
 
 <a id="origin-servers-k8s-service-outside-network"></a>&#x2022; [`outside_network`](#origin-servers-k8s-service-outside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="origin-servers-k8s-service-protocol"></a>&#x2022; [`protocol`](#origin-servers-k8s-service-protocol) - Optional String  Defaults to `PROTOCOL_TCP`<br>Possible values are `PROTOCOL_TCP`, `PROTOCOL_UDP`<br>Protocol Type. Type of protocol - PROTOCOL_TCP: TCP - PROTOCOL_UDP: UDP
+<a id="origin-servers-k8s-service-protocol"></a>&#x2022; [`protocol`](#origin-servers-k8s-service-protocol) - Optional String  Defaults to `PROTOCOL_TCP`<br>Possible values are `PROTOCOL_TCP`, `PROTOCOL_UDP`<br>[Enum: PROTOCOL_TCP|PROTOCOL_UDP] Protocol Type. Type of protocol - PROTOCOL_TCP: TCP - PROTOCOL_UDP: UDP
 
 <a id="origin-servers-k8s-service-service-name"></a>&#x2022; [`service_name`](#origin-servers-k8s-service-service-name) - Optional String<br>Service Name. K8S service name of the origin server will be listed, including the namespace and cluster-ID. For vK8s services, you need to enter a string with the format servicename.namespace:cluster-ID. If the servicename is 'frontend', namespace is 'speedtest' and cluster-ID is 'prod', then you will enter 'frontend.speedtest:prod'. Both namespace and cluster-ID are optional
 
@@ -704,9 +705,9 @@ A [`custom_security`](#use-tls-tls-config-custom-security) block (within [`use_t
 
 <a id="use-tls-tls-config-custom-security-cipher-suites"></a>&#x2022; [`cipher_suites`](#use-tls-tls-config-custom-security-cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
-<a id="use-tls-tls-config-custom-security-max-version"></a>&#x2022; [`max_version`](#use-tls-tls-config-custom-security-max-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="use-tls-tls-config-custom-security-max-version"></a>&#x2022; [`max_version`](#use-tls-tls-config-custom-security-max-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
-<a id="use-tls-tls-config-custom-security-min-version"></a>&#x2022; [`min_version`](#use-tls-tls-config-custom-security-min-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="use-tls-tls-config-custom-security-min-version"></a>&#x2022; [`min_version`](#use-tls-tls-config-custom-security-min-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
 #### Use TLS Use mTLS
 
@@ -734,7 +735,7 @@ A [`tls_certificates`](#use-tls-use-mtls-tls-certificates) block (within [`use_t
 
 A [`custom_hash_algorithms`](#use-tls-use-mtls-tls-certificates-custom-hash-algorithms) block (within [`use_tls.use_mtls.tls_certificates`](#use-tls-use-mtls-tls-certificates)) supports the following:
 
-<a id="use-tls-use-mtls-tls-certificates-custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#use-tls-use-mtls-tls-certificates-custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="use-tls-use-mtls-tls-certificates-custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#use-tls-use-mtls-tls-certificates-custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
 
 #### Use TLS Use mTLS TLS Certificates Private Key
 

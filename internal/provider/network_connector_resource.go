@@ -175,7 +175,7 @@ func (r *NetworkConnectorResource) Metadata(ctx context.Context, req resource.Me
 func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             network_connectorSchemaVersion,
-		MarkdownDescription: "Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.",
+		MarkdownDescription: "[Category: Networking] [Namespace: required] Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Network Connector. Must be unique within the namespace.",
@@ -231,7 +231,7 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 				Delete: true,
 			}),
 			"disable_forward_proxy": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: disable_forward_proxy, enable_forward_proxy] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: disable_forward_proxy, enable_forward_proxy; Default: disable_forward_proxy] Empty. This can be used for messages where no values are needed",
 			},
 			"enable_forward_proxy": schema.SingleNestedBlock{
 				MarkdownDescription: "Forward Proxy Configuration. Fine tune forward proxy behavior Few configurations allowed are White listed ports and ip prefixes: Forward proxy does application protocol detection and server name(SNI) detection by peeking into the traffic on the incoming downstream connection. Few protocols doesn't have client sending the first data. In such cases, protocol and SNI detection fails. This configuration allows, skipping protocol and SNI detection for whitelisted ip-prefix-list and ports connection_timeout: The timeout for new network connections to upstream server. max_connect_attempts: Maximum number of attempts made to make new network connection to upstream server.",
@@ -285,7 +285,7 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 										MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used",
 										Attributes: map[string]schema.Attribute{
 											"hash_algorithms": schema.ListAttribute{
-												MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
+												MarkdownDescription: "[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
 												Optional:            true,
 												ElementType:         types.StringType,
 											},

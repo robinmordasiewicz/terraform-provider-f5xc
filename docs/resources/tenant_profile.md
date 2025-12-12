@@ -2,12 +2,12 @@
 page_title: "f5xc_tenant_profile Resource - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
-  Manages tenant_profile config instance. Name of the object is the name of the tenant profile to be created. in F5 Distributed Cloud.
+  [Namespace: required] Manages tenant_profile config instance. Name of the object is the name of the tenant profile to be created. in F5 Distributed Cloud.
 ---
 
 # f5xc_tenant_profile (Resource)
 
-Manages tenant_profile config instance. Name of the object is the name of the tenant profile to be created. in F5 Distributed Cloud.
+[Namespace: required] Manages tenant_profile config instance. Name of the object is the name of the tenant profile to be created. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Tenant Profile API docs](https://docs.cloud.f5.com/docs-v2/api/tenant-management-tenant-profile) to learn more.
 
@@ -15,7 +15,7 @@ Manages tenant_profile config instance. Name of the object is the name of the te
 
 ```terraform
 # Tenant Profile Resource Example
-# Manages tenant_profile config instance. Name of the object is the name of the tenant profile to be created. in F5 Distributed Cloud.
+# [Namespace: required] Manages tenant_profile config instance. Name of the object is the name of the tenant profile to be created. in F5 Distributed Cloud.
 
 # Basic Tenant Profile configuration
 resource "f5xc_tenant_profile" "example" {

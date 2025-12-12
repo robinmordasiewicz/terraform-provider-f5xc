@@ -76,7 +76,7 @@ func (r *InfraprotectAsnPrefixResource) Metadata(ctx context.Context, req resour
 func (r *InfraprotectAsnPrefixResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             infraprotect_asn_prefixSchemaVersion,
-		MarkdownDescription: "Manages DDoS transit Prefix in F5 Distributed Cloud.",
+		MarkdownDescription: "[Namespace: required] Manages DDoS transit Prefix in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Infraprotect Asn Prefix. Must be unique within the namespace.",

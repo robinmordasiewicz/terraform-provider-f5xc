@@ -1,5 +1,5 @@
 # Segment Resource Example
-# Manages a Segment resource in F5 Distributed Cloud for segment configuration.
+# [Namespace: required] Manages a Segment resource in F5 Distributed Cloud for segment configuration.
 
 # Basic Segment configuration
 resource "f5xc_segment" "example" {

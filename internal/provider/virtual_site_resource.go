@@ -74,7 +74,7 @@ func (r *VirtualSiteResource) Metadata(ctx context.Context, req resource.Metadat
 func (r *VirtualSiteResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             virtual_siteSchemaVersion,
-		MarkdownDescription: "Manages virtual site object in given namespace in F5 Distributed Cloud.",
+		MarkdownDescription: "[Category: Networking] [Namespace: not_required] Manages virtual site object in given namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Virtual Site. Must be unique within the namespace.",
@@ -122,7 +122,7 @@ func (r *VirtualSiteResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"site_type": schema.StringAttribute{
-				MarkdownDescription: "Site Type. Site Type which can either RE or CE Invalid type of site Regional Edge site Customer Edge site. Possible values are `INVALID`, `REGIONAL_EDGE`, `CUSTOMER_EDGE`, `NGINX_ONE`.",
+				MarkdownDescription: "[Enum: INVALID|REGIONAL_EDGE|CUSTOMER_EDGE|NGINX_ONE] Site Type. Site Type which can either RE or CE Invalid type of site Regional Edge site Customer Edge site. Possible values are `INVALID`, `REGIONAL_EDGE`, `CUSTOMER_EDGE`, `NGINX_ONE`.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{

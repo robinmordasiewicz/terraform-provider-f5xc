@@ -256,7 +256,7 @@ func (r *CodeBaseIntegrationResource) Metadata(ctx context.Context, req resource
 func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             code_base_integrationSchemaVersion,
-		MarkdownDescription: "Manages integration details in F5 Distributed Cloud.",
+		MarkdownDescription: "[Namespace: required] Manages integration details in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Code Base Integration. Must be unique within the namespace.",

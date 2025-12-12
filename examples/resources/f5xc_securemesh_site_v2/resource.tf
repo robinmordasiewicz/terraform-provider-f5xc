@@ -1,5 +1,5 @@
 # Securemesh Site V2 Resource Example
-# Manages a Securemesh Site V2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.
+# [Category: Sites] [Namespace: required] Manages a Securemesh Site V2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.
 
 # Basic Securemesh Site V2 configuration
 resource "f5xc_securemesh_site_v2" "example" {
@@ -24,7 +24,7 @@ resource "f5xc_securemesh_site_v2" "example" {
   enhanced_firewall_policies {
     # Configure enhanced_firewall_policies settings
   }
-  # [OneOf: active_forward_proxy_policies, no_forward_proxy] ...
+  # [OneOf: active_forward_proxy_policies, no_forward_proxy; ...
   active_forward_proxy_policies {
     # Configure active_forward_proxy_policies settings
   }

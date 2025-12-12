@@ -2,12 +2,12 @@
 page_title: "f5xc_data_group Data Source - terraform-provider-f5xc"
 subcategory: "BIG-IP Integration"
 description: |-
-  Manages data group in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
+  [Namespace: required] Manages data group in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 ---
 
 # f5xc_data_group (Data Source)
 
-Manages data group in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
+[Namespace: required] Manages data group in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Data Group API docs](https://docs.cloud.f5.com/docs-v2/api/bigcne-data-group) to learn more.
 

@@ -2,12 +2,12 @@
 page_title: "f5xc_secret_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages secret_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  [Category: Authentication] [Namespace: required] Manages secret_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_secret_policy (Resource)
 
-Manages secret_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+[Category: Authentication] [Namespace: required] Manages secret_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Secret Policy API docs](https://docs.cloud.f5.com/docs-v2/api/secret-policy) to learn more.
 
@@ -15,7 +15,7 @@ Manages secret_policy creates a new object in the storage backend for metadata.n
 
 ```terraform
 # Secret Policy Resource Example
-# Manages secret_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# [Category: Authentication] [Namespace: required] Manages secret_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Secret Policy configuration
 resource "f5xc_secret_policy" "example" {
@@ -111,7 +111,7 @@ A [`metadata`](#rule-list-rules-metadata) block (within [`rule_list.rules`](#rul
 
 A [`spec`](#rule-list-rules-spec) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
-<a id="rule-list-rules-spec-action"></a>&#x2022; [`action`](#rule-list-rules-spec-action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`<br>Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY Deny the request. - ALLOW: ALLOW Allow the request to proceed. - NEXT_POLICY_SET: NEXT_POLICY_SET Terminate evaluation of the current policy set and begin evaluating the next policy set in the chain. Note that the evaluation of any remaining policies in the current policy set is skipped. - NEXT_POLICY: NEXT_POLICY Terminate evaluation of the current policy and begin evaluating the next policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - LAST_POLICY: LAST_POLICY Terminate evaluation of the current policy and begin evaluating the last policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - GOTO_POLICY: GOTO_POLICY Terminate evaluation of the current policy and begin evaluating a specific policy in the policy set. The policy is specified using the goto_policy field in the rule and must be after the current policy in the policy set
+<a id="rule-list-rules-spec-action"></a>&#x2022; [`action`](#rule-list-rules-spec-action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`<br>[Enum: DENY|ALLOW|NEXT_POLICY] Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY Deny the request. - ALLOW: ALLOW Allow the request to proceed. - NEXT_POLICY_SET: NEXT_POLICY_SET Terminate evaluation of the current policy set and begin evaluating the next policy set in the chain. Note that the evaluation of any remaining policies in the current policy set is skipped. - NEXT_POLICY: NEXT_POLICY Terminate evaluation of the current policy and begin evaluating the next policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - LAST_POLICY: LAST_POLICY Terminate evaluation of the current policy and begin evaluating the last policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - GOTO_POLICY: GOTO_POLICY Terminate evaluation of the current policy and begin evaluating a specific policy in the policy set. The policy is specified using the goto_policy field in the rule and must be after the current policy in the policy set
 
 <a id="rule-list-rules-spec-client-name"></a>&#x2022; [`client_name`](#rule-list-rules-spec-client-name) - Optional String<br>Client Name. The name of the client trying to access the secret. Name of the client will be extracted from client TLS certificate. This predicate evaluates to true if client name matches the configured name
 
@@ -127,7 +127,7 @@ A [`client_name_matcher`](#rule-list-rules-spec-client-name-matcher) block (with
 
 <a id="rule-list-rules-spec-client-name-matcher-regex-values"></a>&#x2022; [`regex_values`](#rule-list-rules-spec-client-name-matcher-regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input against
 
-<a id="rule-list-rules-spec-client-name-matcher-transformers"></a>&#x2022; [`transformers`](#rule-list-rules-spec-client-name-matcher-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="rule-list-rules-spec-client-name-matcher-transformers"></a>&#x2022; [`transformers`](#rule-list-rules-spec-client-name-matcher-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Rule List Rules Spec Client Selector
 

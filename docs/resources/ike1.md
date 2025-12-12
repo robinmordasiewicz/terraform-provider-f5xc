@@ -2,12 +2,12 @@
 page_title: "f5xc_ike1 Resource - terraform-provider-f5xc"
 subcategory: "VPN"
 description: |-
-  Manages a Ike1 resource in F5 Distributed Cloud for ike phase1 profile configuration.
+  [Namespace: required] Manages a Ike1 resource in F5 Distributed Cloud for ike phase1 profile configuration.
 ---
 
 # f5xc_ike1 (Resource)
 
-Manages a Ike1 resource in F5 Distributed Cloud for ike phase1 profile configuration.
+[Namespace: required] Manages a Ike1 resource in F5 Distributed Cloud for ike phase1 profile configuration.
 
 ~> **Note** Please refer to [Ike1 API docs](https://docs.cloud.f5.com/docs-v2/api/ike1) to learn more.
 
@@ -15,7 +15,7 @@ Manages a Ike1 resource in F5 Distributed Cloud for ike phase1 profile configura
 
 ```terraform
 # Ike1 Resource Example
-# Manages a Ike1 resource in F5 Distributed Cloud for ike phase1 profile configuration.
+# [Namespace: required] Manages a Ike1 resource in F5 Distributed Cloud for ike phase1 profile configuration.
 
 # Basic Ike1 configuration
 resource "f5xc_ike1" "example" {
@@ -69,7 +69,6 @@ resource "f5xc_ike1" "example" {
 -> **One of the following:**
 &#x2022; <a id="ike-keylifetime-hours"></a>[`ike_keylifetime_hours`](#ike-keylifetime-hours) - Optional Block<br>Hours. Input Hours<br>See [IKE Keylifetime Hours](#ike-keylifetime-hours) below for details.
 <br><br>&#x2022; <a id="ike-keylifetime-minutes"></a>[`ike_keylifetime_minutes`](#ike-keylifetime-minutes) - Optional Block<br>Minutes. Set IKE Key Lifetime in minutes<br>See [IKE Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
-<br><br>&#x2022; <a id="use-default-keylifetime"></a>[`use_default_keylifetime`](#use-default-keylifetime) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; <a id="reauth-disabled"></a>[`reauth_disabled`](#reauth-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -77,6 +76,8 @@ resource "f5xc_ike1" "example" {
 <br><br>&#x2022; <a id="reauth-timeout-hours"></a>[`reauth_timeout_hours`](#reauth-timeout-hours) - Optional Block<br>Hours. Input Hours<br>See [Reauth Timeout Hours](#reauth-timeout-hours) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+
+<a id="use-default-keylifetime"></a>&#x2022; [`use_default_keylifetime`](#use-default-keylifetime) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 ### Attributes Reference
 

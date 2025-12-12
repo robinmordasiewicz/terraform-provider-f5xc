@@ -2,12 +2,12 @@
 page_title: "f5xc_cminstance Resource - terraform-provider-f5xc"
 subcategory: "Subscriptions"
 description: |-
-  Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.
+  [Namespace: required] Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.
 ---
 
 # f5xc_cminstance (Resource)
 
-Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.
+[Namespace: required] Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Cminstance API docs](https://docs.cloud.f5.com/docs-v2/api/cminstance) to learn more.
 
@@ -15,7 +15,7 @@ Manages App type will create the configuration in namespace metadata.namespace i
 
 ```terraform
 # Cminstance Resource Example
-# Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.
+# [Namespace: required] Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.
 
 # Basic Cminstance configuration
 resource "f5xc_cminstance" "example" {

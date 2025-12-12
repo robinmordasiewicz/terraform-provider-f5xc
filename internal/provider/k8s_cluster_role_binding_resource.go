@@ -89,7 +89,7 @@ func (r *K8SClusterRoleBindingResource) Metadata(ctx context.Context, req resour
 func (r *K8SClusterRoleBindingResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             k8s_cluster_role_bindingSchemaVersion,
-		MarkdownDescription: "Manages k8s_cluster_role_binding will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.",
+		MarkdownDescription: "[Category: Kubernetes] [Namespace: required] Manages k8s_cluster_role_binding will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the K8S Cluster Role Binding. Must be unique within the namespace.",

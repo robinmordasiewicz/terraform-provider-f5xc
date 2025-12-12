@@ -1,5 +1,5 @@
 # Secret Policy Rule Resource Example
-# Manages secret_policy_rule creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
+# [Namespace: required] Manages secret_policy_rule creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Secret Policy Rule configuration
 resource "f5xc_secret_policy_rule" "example" {

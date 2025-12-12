@@ -42,7 +42,7 @@ func (d *NamespaceDataSource) Metadata(ctx context.Context, req datasource.Metad
 
 func (d *NamespaceDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages new namespace. Name of the object is name of the name space. in F5 Distributed Cloud.",
+		MarkdownDescription: "[Category: Organization] [Namespace: not_required] Manages new namespace. Name of the object is name of the name space. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

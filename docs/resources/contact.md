@@ -2,12 +2,12 @@
 page_title: "f5xc_contact Resource - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
-  Manages new customer's contact detail record with us, including address and phone number. in F5 Distributed Cloud.
+  [Namespace: required] Manages new customer's contact detail record with us, including address and phone number. in F5 Distributed Cloud.
 ---
 
 # f5xc_contact (Resource)
 
-Manages new customer's contact detail record with us, including address and phone number. in F5 Distributed Cloud.
+[Namespace: required] Manages new customer's contact detail record with us, including address and phone number. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Contact API docs](https://docs.cloud.f5.com/docs-v2/api/contact) to learn more.
 
@@ -15,7 +15,7 @@ Manages new customer's contact detail record with us, including address and phon
 
 ```terraform
 # Contact Resource Example
-# Manages new customer's contact detail record with us, including address and phone number. in F5 Distributed Cloud.
+# [Namespace: required] Manages new customer's contact detail record with us, including address and phone number. in F5 Distributed Cloud.
 
 # Basic Contact configuration
 resource "f5xc_contact" "example" {
@@ -58,7 +58,7 @@ resource "f5xc_contact" "example" {
 
 <a id="city"></a>&#x2022; [`city`](#city) - Optional String<br>City
 
-<a id="contact-type"></a>&#x2022; [`contact_type`](#contact-type) - Optional String  Defaults to `MAILING`<br>Possible values are `MAILING`, `BILLING`, `PAYMENT`<br>Contact Type. Determines the contact type Indicates snail mail address (used for correspondence) Indicates billing address (this address will appear on invoices) Indicates contact used for a payment method (this address is used when charging a payment method)
+<a id="contact-type"></a>&#x2022; [`contact_type`](#contact-type) - Optional String  Defaults to `MAILING`<br>Possible values are `MAILING`, `BILLING`, `PAYMENT`<br>[Enum: MAILING|BILLING|PAYMENT] Contact Type. Determines the contact type Indicates snail mail address (used for correspondence) Indicates billing address (this address will appear on invoices) Indicates contact used for a payment method (this address is used when charging a payment method)
 
 <a id="country"></a>&#x2022; [`country`](#country) - Optional String<br>Country
 

@@ -2,12 +2,12 @@
 page_title: "f5xc_tunnel Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages tunnel in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
+  [Namespace: required] Manages tunnel in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 ---
 
 # f5xc_tunnel (Resource)
 
-Manages tunnel in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
+[Namespace: required] Manages tunnel in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Tunnel API docs](https://docs.cloud.f5.com/docs-v2/api/tunnel) to learn more.
 
@@ -15,7 +15,7 @@ Manages tunnel in a given namespace. If one already exist it will give a error. 
 
 ```terraform
 # Tunnel Resource Example
-# Manages tunnel in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
+# [Namespace: required] Manages tunnel in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
 # Basic Tunnel configuration
 resource "f5xc_tunnel" "example" {
@@ -78,7 +78,7 @@ resource "f5xc_tunnel" "example" {
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-<a id="tunnel-type"></a>&#x2022; [`tunnel_type`](#tunnel-type) - Optional String  Defaults to `IPSEC_PSK`<br>Possible values are `IPSEC_PSK`, `GRE`<br>Tunnel Type. Supported tunnel types are IPSec IPSEC tunnel type with PSK GRE tunnel type
+<a id="tunnel-type"></a>&#x2022; [`tunnel_type`](#tunnel-type) - Optional String  Defaults to `IPSEC_PSK`<br>Possible values are `IPSEC_PSK`, `GRE`<br>[Enum: IPSEC_PSK|GRE] Tunnel Type. Supported tunnel types are IPSec IPSEC tunnel type with PSK GRE tunnel type
 
 ### Attributes Reference
 

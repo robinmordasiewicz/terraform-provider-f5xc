@@ -280,7 +280,7 @@ func (r *NATPolicyResource) Metadata(ctx context.Context, req resource.MetadataR
 func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             nat_policySchemaVersion,
-		MarkdownDescription: "Manages a NAT Policy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.",
+		MarkdownDescription: "[Namespace: required] Manages a NAT Policy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the NAT Policy. Must be unique within the namespace.",
@@ -453,7 +453,7 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 									ElementType:         types.StringType,
 								},
 								"protocol": schema.StringAttribute{
-									MarkdownDescription: "Protocols. Protocols like TCP, UDP. Possible values are `ALL`, `ICMP`, `TCP`, `UDP`. Defaults to `ALL`.",
+									MarkdownDescription: "[Enum: ALL|ICMP|TCP|UDP] Protocols. Protocols like TCP, UDP. Possible values are `ALL`, `ICMP`, `TCP`, `UDP`. Defaults to `ALL`.",
 									Optional:            true,
 								},
 								"source_cidr": schema.ListAttribute{

@@ -2,12 +2,12 @@
 page_title: "f5xc_addon_subscription Data Source - terraform-provider-f5xc"
 subcategory: "Subscriptions"
 description: |-
-  Manages new Addon Subscription with Addon Subscription State in F5 Distributed Cloud.
+  [Namespace: required] Manages new Addon Subscription with Addon Subscription State in F5 Distributed Cloud.
 ---
 
 # f5xc_addon_subscription (Data Source)
 
-Manages new Addon Subscription with Addon Subscription State in F5 Distributed Cloud.
+[Namespace: required] Manages new Addon Subscription with Addon Subscription State in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Addon Subscription API docs](https://docs.cloud.f5.com/docs-v2/api/pbac-addon-subscription) to learn more.
 

@@ -2,12 +2,12 @@
 page_title: "f5xc_api_discovery Resource - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
-  Manages api discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  [Category: API Security] [Namespace: required] Manages api discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_api_discovery (Resource)
 
-Manages api discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+[Category: API Security] [Namespace: required] Manages api discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [API Discovery API docs](https://docs.cloud.f5.com/docs-v2/api/api-sec-api-discovery) to learn more.
 
@@ -15,7 +15,7 @@ Manages api discovery creates a new object in the storage backend for metadata.n
 
 ```terraform
 # API Discovery Resource Example
-# Manages api discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# [Category: API Security] [Namespace: required] Manages api discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic API Discovery configuration
 resource "f5xc_api_discovery" "example" {
@@ -76,7 +76,7 @@ A [`custom_auth_types`](#custom-auth-types) block supports the following:
 
 <a id="custom-auth-types-parameter-name"></a>&#x2022; [`parameter_name`](#custom-auth-types-parameter-name) - Optional String<br>Parameter Name. The authentication parameter name
 
-<a id="custom-auth-types-parameter-type"></a>&#x2022; [`parameter_type`](#custom-auth-types-parameter-type) - Optional String  Defaults to `QUERY_PARAMETER`<br>Possible values are `QUERY_PARAMETER`, `HEADER`, `COOKIE`<br>Authentication Parameter Type. Enumeration for authentication parameter types
+<a id="custom-auth-types-parameter-type"></a>&#x2022; [`parameter_type`](#custom-auth-types-parameter-type) - Optional String  Defaults to `QUERY_PARAMETER`<br>Possible values are `QUERY_PARAMETER`, `HEADER`, `COOKIE`<br>[Enum: QUERY_PARAMETER|HEADER|COOKIE] Authentication Parameter Type. Enumeration for authentication parameter types
 
 #### Timeouts
 

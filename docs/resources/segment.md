@@ -2,12 +2,12 @@
 page_title: "f5xc_segment Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages a Segment resource in F5 Distributed Cloud for segment configuration.
+  [Namespace: required] Manages a Segment resource in F5 Distributed Cloud for segment configuration.
 ---
 
 # f5xc_segment (Resource)
 
-Manages a Segment resource in F5 Distributed Cloud for segment configuration.
+[Namespace: required] Manages a Segment resource in F5 Distributed Cloud for segment configuration.
 
 ~> **Note** Please refer to [Segment API docs](https://docs.cloud.f5.com/docs-v2/api/segment) to learn more.
 
@@ -15,7 +15,7 @@ Manages a Segment resource in F5 Distributed Cloud for segment configuration.
 
 ```terraform
 # Segment Resource Example
-# Manages a Segment resource in F5 Distributed Cloud for segment configuration.
+# [Namespace: required] Manages a Segment resource in F5 Distributed Cloud for segment configuration.
 
 # Basic Segment configuration
 resource "f5xc_segment" "example" {

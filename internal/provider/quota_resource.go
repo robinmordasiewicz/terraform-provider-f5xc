@@ -70,7 +70,7 @@ func (r *QuotaResource) Metadata(ctx context.Context, req resource.MetadataReque
 func (r *QuotaResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             quotaSchemaVersion,
-		MarkdownDescription: "Manages quota creates a given object from storage backend for metadata.namespace. in F5 Distributed Cloud.",
+		MarkdownDescription: "[Namespace: required] Manages quota creates a given object from storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Quota. Must be unique within the namespace.",

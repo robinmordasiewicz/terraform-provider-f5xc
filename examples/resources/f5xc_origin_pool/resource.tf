@@ -1,5 +1,5 @@
 # Origin Pool Resource Example
-# Manages a Origin Pool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
+# [Category: Load Balancing] [Namespace: required] [DependsOn: namespace, healthcheck] Manages a Origin Pool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
 
 # Basic Origin Pool configuration
 resource "f5xc_origin_pool" "example" {

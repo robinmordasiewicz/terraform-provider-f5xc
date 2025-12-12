@@ -2,12 +2,12 @@
 page_title: "f5xc_oidc_provider Data Source - terraform-provider-f5xc"
 subcategory: "Authentication"
 description: |-
-  Manages a OIDC Provider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.
+  [Namespace: required] Manages a OIDC Provider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.
 ---
 
 # f5xc_oidc_provider (Data Source)
 
-Manages a OIDC Provider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.
+[Namespace: required] Manages a OIDC Provider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.
 
 ~> **Note** Please refer to [OIDC Provider API docs](https://docs.cloud.f5.com/docs-v2/api/oidc-provider) to learn more.
 

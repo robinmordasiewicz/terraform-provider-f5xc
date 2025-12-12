@@ -191,7 +191,7 @@ func (r *APITestingResource) Metadata(ctx context.Context, req resource.Metadata
 func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             api_testingSchemaVersion,
-		MarkdownDescription: "Manages a API Testing resource in F5 Distributed Cloud.",
+		MarkdownDescription: "[Category: API Security] [Namespace: required] Manages a API Testing resource in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the API Testing. Must be unique within the namespace.",
@@ -421,7 +421,7 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 										MarkdownDescription: "Login Endpoint.",
 										Attributes: map[string]schema.Attribute{
 											"method": schema.StringAttribute{
-												MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+												MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 												Optional:            true,
 											},
 											"path": schema.StringAttribute{

@@ -2,12 +2,12 @@
 page_title: "f5xc_route Data Source - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  Manages a Route resource in F5 Distributed Cloud for defining traffic routing rules for load balancers.
+  [Category: Load Balancing] [Namespace: required] [DependsOn: namespace, http_loadbalancer] Manages a Route resource in F5 Distributed Cloud for defining traffic routing rules for load balancers.
 ---
 
 # f5xc_route (Data Source)
 
-Manages a Route resource in F5 Distributed Cloud for defining traffic routing rules for load balancers.
+[Category: Load Balancing] [Namespace: required] [DependsOn: namespace, http_loadbalancer] Manages a Route resource in F5 Distributed Cloud for defining traffic routing rules for load balancers.
 
 ~> **Note** Please refer to [Route API docs](https://docs.cloud.f5.com/docs-v2/api/operate-route) to learn more.
 

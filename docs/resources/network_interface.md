@@ -2,12 +2,12 @@
 page_title: "f5xc_network_interface Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages a Network Interface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.
+  [Category: Networking] [Namespace: required] Manages a Network Interface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.
 ---
 
 # f5xc_network_interface (Resource)
 
-Manages a Network Interface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.
+[Category: Networking] [Namespace: required] Manages a Network Interface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.
 
 ~> **Note** Please refer to [Network Interface API docs](https://docs.cloud.f5.com/docs-v2/api/network-interface) to learn more.
 
@@ -15,7 +15,7 @@ Manages a Network Interface resource in F5 Distributed Cloud for network interfa
 
 ```terraform
 # Network Interface Resource Example
-# Manages a Network Interface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.
+# [Category: Networking] [Namespace: required] Manages a Network Interface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.
 
 # Basic Network Interface configuration
 resource "f5xc_network_interface" "example" {
@@ -189,7 +189,7 @@ A [`dhcp_networks`](#ethernet-interface-dhcp-server-dhcp-networks) block (within
 
 <a id="ethernet-interface-dhcp-server-dhcp-networks-network-prefix"></a>&#x2022; [`network_prefix`](#ethernet-interface-dhcp-server-dhcp-networks-network-prefix) - Optional String<br>Network Prefix. Set the network prefix for the site. ex: 10.1.1.0/24
 
-<a id="ethernet-interface-dhcp-server-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#ethernet-interface-dhcp-server-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
+<a id="ethernet-interface-dhcp-server-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#ethernet-interface-dhcp-server-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
 
 <a id="ethernet-interface-dhcp-server-dhcp-networks-pools"></a>&#x2022; [`pools`](#ethernet-interface-dhcp-server-dhcp-networks-pools) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#ethernet-interface-dhcp-server-dhcp-networks-pools) below.
 
@@ -271,7 +271,7 @@ A [`dhcp_networks`](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-ne
 
 <a id="ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix"></a>&#x2022; [`network_prefix`](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
 
-<a id="ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
+<a id="ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
 
 <a id="ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>&#x2022; [`pools`](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
 

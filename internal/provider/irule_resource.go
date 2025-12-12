@@ -65,7 +65,7 @@ func (r *IruleResource) Metadata(ctx context.Context, req resource.MetadataReque
 func (r *IruleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             iruleSchemaVersion,
-		MarkdownDescription: "Manages iRule in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.",
+		MarkdownDescription: "[Namespace: required] Manages iRule in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Irule. Must be unique within the namespace.",

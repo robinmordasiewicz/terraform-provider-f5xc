@@ -2,12 +2,12 @@
 page_title: "f5xc_dns_lb_pool Resource - terraform-provider-f5xc"
 subcategory: "DNS"
 description: |-
-  Manages DNS Load Balancer Pool in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
+  [Category: DNS] [Namespace: required] Manages DNS Load Balancer Pool in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 ---
 
 # f5xc_dns_lb_pool (Resource)
 
-Manages DNS Load Balancer Pool in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
+[Category: DNS] [Namespace: required] Manages DNS Load Balancer Pool in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [DNS LB Pool API docs](https://docs.cloud.f5.com/docs-v2/api/dns-lb-pool) to learn more.
 
@@ -15,7 +15,7 @@ Manages DNS Load Balancer Pool in a given namespace. If one already exist it wil
 
 ```terraform
 # DNS LB Pool Resource Example
-# Manages DNS Load Balancer Pool in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
+# [Category: DNS] [Namespace: required] Manages DNS Load Balancer Pool in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
 # Basic DNS LB Pool configuration
 resource "f5xc_dns_lb_pool" "example" {
@@ -73,7 +73,7 @@ resource "f5xc_dns_lb_pool" "example" {
 <br><br>&#x2022; <a id="mx-pool"></a>[`mx_pool`](#mx-pool) - Optional Block<br>Pool for MX Record<br>See [Mx Pool](#mx-pool) below for details.
 <br><br>&#x2022; <a id="srv-pool"></a>[`srv_pool`](#srv-pool) - Optional Block<br>Pool for SRV Record<br>See [Srv Pool](#srv-pool) below for details.
 
-<a id="load-balancing-mode"></a>&#x2022; [`load_balancing_mode`](#load-balancing-mode) - Optional String  Defaults to `ROUND_ROBIN`<br>Possible values are `ROUND_ROBIN`, `RATIO_MEMBER`, `STATIC_PERSIST`, `PRIORITY`<br>LoadBalancing Algorithm. - ROUND_ROBIN: Round-Robin Round Robin will ensure random equal distribution of requests among all pool members in a pool. - RATIO_MEMBER: Ratio-Member Ratio-Member performs load balancing of requests across the pool members based on the ratio assigned to each pool member - STATIC_PERSIST: Static-Persist The Static Persist load balancing method uses the persist mask, with the source IP address of the Local Domain Name Server (LDNS), in a deterministic algorithm to send requests to a specific pool member. If the DNS resolver passes ECS (EDNS-Client-Subnet) information, then a hash of it will be used, to send the client to the same pool member - PRIORITY: Priority The Priority load balancing method returns all available endpoints in a pool with the highest priority. Pool Members have a priority value, starting from zero, where a lower value means a higher priority
+<a id="load-balancing-mode"></a>&#x2022; [`load_balancing_mode`](#load-balancing-mode) - Optional String  Defaults to `ROUND_ROBIN`<br>Possible values are `ROUND_ROBIN`, `RATIO_MEMBER`, `STATIC_PERSIST`, `PRIORITY`<br>[Enum: ROUND_ROBIN|RATIO_MEMBER|STATIC_PERSIST|PRIORITY] LoadBalancing Algorithm. - ROUND_ROBIN: Round-Robin Round Robin will ensure random equal distribution of requests among all pool members in a pool. - RATIO_MEMBER: Ratio-Member Ratio-Member performs load balancing of requests across the pool members based on the ratio assigned to each pool member - STATIC_PERSIST: Static-Persist The Static Persist load balancing method uses the persist mask, with the source IP address of the Local Domain Name Server (LDNS), in a deterministic algorithm to send requests to a specific pool member. If the DNS resolver passes ECS (EDNS-Client-Subnet) information, then a hash of it will be used, to send the client to the same pool member - PRIORITY: Priority The Priority load balancing method returns all available endpoints in a pool with the highest priority. Pool Members have a priority value, starting from zero, where a lower value means a higher priority
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

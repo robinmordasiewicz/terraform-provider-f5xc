@@ -2,12 +2,12 @@
 page_title: "f5xc_cloud_link Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages new CloudLink with configured parameters in F5 Distributed Cloud.
+  [Category: Networking] [Namespace: required] Manages new CloudLink with configured parameters in F5 Distributed Cloud.
 ---
 
 # f5xc_cloud_link (Resource)
 
-Manages new CloudLink with configured parameters in F5 Distributed Cloud.
+[Category: Networking] [Namespace: required] Manages new CloudLink with configured parameters in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Cloud Link API docs](https://docs.cloud.f5.com/docs-v2/api/cloud-link) to learn more.
 
@@ -15,7 +15,7 @@ Manages new CloudLink with configured parameters in F5 Distributed Cloud.
 
 ```terraform
 # Cloud Link Resource Example
-# Manages new CloudLink with configured parameters in F5 Distributed Cloud.
+# [Category: Networking] [Namespace: required] Manages new CloudLink with configured parameters in F5 Distributed Cloud.
 
 # Basic Cloud Link configuration
 resource "f5xc_cloud_link" "example" {
@@ -132,7 +132,7 @@ A [`connections`](#aws-byoc-connections) block (within [`aws.byoc`](#aws-byoc)) 
 
 <a id="aws-byoc-connections-user-assigned-name"></a>&#x2022; [`user_assigned_name`](#aws-byoc-connections-user-assigned-name) - Optional String<br>User Assigned. User is managing the AWS resource name
 
-<a id="aws-byoc-connections-virtual-interface-type"></a>&#x2022; [`virtual_interface_type`](#aws-byoc-connections-virtual-interface-type) - Optional String  Defaults to `PRIVATE`<br>Virtual Interface Type. Defines the type of virtual interface that needs to be configured on AWS - PRIVATE: Private A private virtual interface should be used to access an Amazon VPC using private IP addresses. - TRANSIT: Transit A transit virtual interface is a VLAN that transports traffic from a Direct Connect gateway to one or more transit gateways. The only possible value is `PRIVATE`
+<a id="aws-byoc-connections-virtual-interface-type"></a>&#x2022; [`virtual_interface_type`](#aws-byoc-connections-virtual-interface-type) - Optional String  Defaults to `PRIVATE`<br>[Enum: PRIVATE] Virtual Interface Type. Defines the type of virtual interface that needs to be configured on AWS - PRIVATE: Private A private virtual interface should be used to access an Amazon VPC using private IP addresses. - TRANSIT: Transit A transit virtual interface is a VLAN that transports traffic from a Direct Connect gateway to one or more transit gateways. The only possible value is `PRIVATE`
 
 <a id="aws-byoc-connections-vlan"></a>&#x2022; [`vlan`](#aws-byoc-connections-vlan) - Optional Number<br>Virtual Local Area Network (VLAN). Virtual Local Area Network number for the new virtual interface to be configured on the AWS. This tag is required for any traffic traversing the AWS Direct Connect connection
 

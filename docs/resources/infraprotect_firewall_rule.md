@@ -2,12 +2,12 @@
 page_title: "f5xc_infraprotect_firewall_rule Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages DDoS transit Firewall Rule in F5 Distributed Cloud.
+  [Namespace: required] Manages DDoS transit Firewall Rule in F5 Distributed Cloud.
 ---
 
 # f5xc_infraprotect_firewall_rule (Resource)
 
-Manages DDoS transit Firewall Rule in F5 Distributed Cloud.
+[Namespace: required] Manages DDoS transit Firewall Rule in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Infraprotect Firewall Rule API docs](https://docs.cloud.f5.com/docs-v2/api/infraprotect-firewall-rule) to learn more.
 
@@ -15,7 +15,7 @@ Manages DDoS transit Firewall Rule in F5 Distributed Cloud.
 
 ```terraform
 # Infraprotect Firewall Rule Resource Example
-# Manages DDoS transit Firewall Rule in F5 Distributed Cloud.
+# [Namespace: required] Manages DDoS transit Firewall Rule in F5 Distributed Cloud.
 
 # Basic Infraprotect Firewall Rule configuration
 resource "f5xc_infraprotect_firewall_rule" "example" {

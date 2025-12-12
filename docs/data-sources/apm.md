@@ -2,12 +2,12 @@
 page_title: "f5xc_apm Data Source - terraform-provider-f5xc"
 subcategory: "Monitoring"
 description: |-
-  Manages new APM as a service with configured parameters in F5 Distributed Cloud.
+  [Namespace: required] Manages new APM as a service with configured parameters in F5 Distributed Cloud.
 ---
 
 # f5xc_apm (Data Source)
 
-Manages new APM as a service with configured parameters in F5 Distributed Cloud.
+[Namespace: required] Manages new APM as a service with configured parameters in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [APM API docs](https://docs.cloud.f5.com/docs-v2/api/bigip-apm) to learn more.
 

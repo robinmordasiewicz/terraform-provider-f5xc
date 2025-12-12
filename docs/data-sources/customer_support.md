@@ -2,12 +2,12 @@
 page_title: "f5xc_customer_support Data Source - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
-  Manages new customer support ticket in our customer support provider system. in F5 Distributed Cloud.
+  [Namespace: required] Manages new customer support ticket in our customer support provider system. in F5 Distributed Cloud.
 ---
 
 # f5xc_customer_support (Data Source)
 
-Manages new customer support ticket in our customer support provider system. in F5 Distributed Cloud.
+[Namespace: required] Manages new customer support ticket in our customer support provider system. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Customer Support API docs](https://docs.cloud.f5.com/docs-v2/api/customer-support) to learn more.
 

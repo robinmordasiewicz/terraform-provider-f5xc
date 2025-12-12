@@ -89,7 +89,7 @@ func (r *ForwardingClassResource) Metadata(ctx context.Context, req resource.Met
 func (r *ForwardingClassResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             forwarding_classSchemaVersion,
-		MarkdownDescription: "Manages a Forwarding Class resource in F5 Distributed Cloud for forwarding class is created by users in system namespace configuration.",
+		MarkdownDescription: "[Namespace: required] Manages a Forwarding Class resource in F5 Distributed Cloud for forwarding class is created by users in system namespace configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Forwarding Class. Must be unique within the namespace.",
@@ -137,7 +137,7 @@ func (r *ForwardingClassResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"interface_group": schema.StringAttribute{
-				MarkdownDescription: "Interface Group. Interface group, group membership by adding group label to interface Choose any of the available interfaces Choose all interfaces with label group1 Choose all interfaces with label group2 Choose all interfaces with label group3. Possible values are `ANY_AVAILABLE_INTERFACE`, `INTERFACE_GROUP1`, `INTERFACE_GROUP2`, `INTERFACE_GROUP3`. Defaults to `ANY_AVAILABLE_INTERFACE`.",
+				MarkdownDescription: "[Enum: ANY_AVAILABLE_INTERFACE|INTERFACE_GROUP1|INTERFACE_GROUP2|INTERFACE_GROUP3] Interface Group. Interface group, group membership by adding group label to interface Choose any of the available interfaces Choose all interfaces with label group1 Choose all interfaces with label group2 Choose all interfaces with label group3. Possible values are `ANY_AVAILABLE_INTERFACE`, `INTERFACE_GROUP1`, `INTERFACE_GROUP2`, `INTERFACE_GROUP3`. Defaults to `ANY_AVAILABLE_INTERFACE`.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -145,7 +145,7 @@ func (r *ForwardingClassResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"queue_id_to_use": schema.StringAttribute{
-				MarkdownDescription: "Precedence Level Values. DSCP Precedence Level Values Best Effort service will get any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended. Possible values are `DSCP_BEST_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP_EXPRESS_FORWARDING`, `DSCP_CONTROL_L3`, `DSCP_CONTROL_L2`. Defaults to `DSCP_BEST_EFFORT`.",
+				MarkdownDescription: "[Enum: DSCP_BEST_EFFORT|DSCP_CLASS1|DSCP_CLASS2|DSCP_CLASS3|DSCP_CLASS4|DSCP_EXPRESS_FORWARDING|DSCP_CONTROL_L3|DSCP_CONTROL_L2] Precedence Level Values. DSCP Precedence Level Values Best Effort service will get any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended. Possible values are `DSCP_BEST_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP_EXPRESS_FORWARDING`, `DSCP_CONTROL_L3`, `DSCP_CONTROL_L2`. Defaults to `DSCP_BEST_EFFORT`.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -169,14 +169,14 @@ func (r *ForwardingClassResource) Schema(ctx context.Context, req resource.Schem
 				Delete: true,
 			}),
 			"dscp": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: dscp, no_marking, tos_value] DSCP Marking setting. DSCP marking setting as per RFC 2475",
+				MarkdownDescription: "[OneOf: dscp, no_marking, tos_value; Default: no_marking] DSCP Marking setting. DSCP marking setting as per RFC 2475",
 				Attributes: map[string]schema.Attribute{
 					"drop_precedence": schema.StringAttribute{
-						MarkdownDescription: "DSCP AF Drop Precedence. DSCP Assured forwarding drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP drop precedence value is taken from output of policer. Possible values are `DSCP_AF_LOW`, `DSCP_AF_MEDIUM`, `DSCP_AF_HIGH`, `DSCP_AF_POLICER`. Defaults to `DSCP_AF_FAKE`.",
+						MarkdownDescription: "[Enum: DSCP_AF_LOW|DSCP_AF_MEDIUM|DSCP_AF_HIGH|DSCP_AF_POLICER] DSCP AF Drop Precedence. DSCP Assured forwarding drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP drop precedence value is taken from output of policer. Possible values are `DSCP_AF_LOW`, `DSCP_AF_MEDIUM`, `DSCP_AF_HIGH`, `DSCP_AF_POLICER`. Defaults to `DSCP_AF_FAKE`.",
 						Optional:            true,
 					},
 					"dscp_class": schema.StringAttribute{
-						MarkdownDescription: "Precedence Level Values. DSCP Precedence Level Values Best Effort service will get any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended. Possible values are `DSCP_BEST_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP_EXPRESS_FORWARDING`, `DSCP_CONTROL_L3`, `DSCP_CONTROL_L2`. Defaults to `DSCP_BEST_EFFORT`.",
+						MarkdownDescription: "[Enum: DSCP_BEST_EFFORT|DSCP_CLASS1|DSCP_CLASS2|DSCP_CLASS3|DSCP_CLASS4|DSCP_EXPRESS_FORWARDING|DSCP_CONTROL_L3|DSCP_CONTROL_L2] Precedence Level Values. DSCP Precedence Level Values Best Effort service will get any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended. Possible values are `DSCP_BEST_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP_EXPRESS_FORWARDING`, `DSCP_CONTROL_L3`, `DSCP_CONTROL_L2`. Defaults to `DSCP_BEST_EFFORT`.",
 						Optional:            true,
 					},
 				},
@@ -188,7 +188,7 @@ func (r *ForwardingClassResource) Schema(ctx context.Context, req resource.Schem
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 			},
 			"no_policer": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: no_policer, policer] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: no_policer, policer; Default: no_policer] Empty. This can be used for messages where no values are needed",
 			},
 			"policer": schema.SingleNestedBlock{
 				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",

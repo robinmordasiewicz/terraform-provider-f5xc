@@ -2,12 +2,12 @@
 page_title: "f5xc_nfv_service Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages new NFV service with configured parameters in F5 Distributed Cloud.
+  [Namespace: required] Manages new NFV service with configured parameters in F5 Distributed Cloud.
 ---
 
 # f5xc_nfv_service (Resource)
 
-Manages new NFV service with configured parameters in F5 Distributed Cloud.
+[Namespace: required] Manages new NFV service with configured parameters in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Nfv Service API docs](https://docs.cloud.f5.com/docs-v2/api/nfv-service) to learn more.
 
@@ -15,7 +15,7 @@ Manages new NFV service with configured parameters in F5 Distributed Cloud.
 
 ```terraform
 # Nfv Service Resource Example
-# Manages new NFV service with configured parameters in F5 Distributed Cloud.
+# [Namespace: required] Manages new NFV service with configured parameters in F5 Distributed Cloud.
 
 # Basic Nfv Service configuration
 resource "f5xc_nfv_service" "example" {
@@ -32,11 +32,11 @@ resource "f5xc_nfv_service" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: disable_https_management, https_management] Empty...
+  # [OneOf: disable_https_management, https_management; Defau...
   disable_https_management {
     # Configure disable_https_management settings
   }
-  # [OneOf: disable_ssh_access, enabled_ssh_access] Empty. Th...
+  # [OneOf: disable_ssh_access, enabled_ssh_access; Default: ...
   disable_ssh_access {
     # Configure disable_ssh_access settings
   }
@@ -68,15 +68,17 @@ resource "f5xc_nfv_service" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="disable-https-management"></a>[`disable_https_management`](#disable-https-management) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="https-management"></a>[`https_management`](#https-management) - Optional Block<br>HTTPS based management. HTTPS based configuration<br>See [HTTPS Management](#https-management) below for details.
 
 -> **One of the following:**
 &#x2022; <a id="disable-ssh-access"></a>[`disable_ssh_access`](#disable-ssh-access) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="enabled-ssh-access"></a>[`enabled_ssh_access`](#enabled-ssh-access) - Optional Block<br>SSH based management. SSH based configuration<br>See [Enabled SSH Access](#enabled-ssh-access) below for details.
+
+<a id="enabled-ssh-access"></a>&#x2022; [`enabled_ssh_access`](#enabled-ssh-access) - Optional Block<br>SSH based management. SSH based configuration<br>See [Enabled SSH Access](#enabled-ssh-access) below for details.
 
 -> **One of the following:**
 &#x2022; <a id="f5-big-ip-aws-service"></a>[`f5_big_ip_aws_service`](#f5-big-ip-aws-service) - Optional Block<br>Virtual BIG-IP AWS. Virtual BIG-IP specification for AWS<br>See [F5 Big IP AWS Service](#f5-big-ip-aws-service) below for details.
 <br><br>&#x2022; <a id="palo-alto-fw-service"></a>[`palo_alto_fw_service`](#palo-alto-fw-service) - Optional Block<br>Palo Alto Networks VM-Series Firewall. Palo Alto Networks VM-Series next-generation firewall configuration
+
+<a id="https-management"></a>&#x2022; [`https_management`](#https-management) - Optional Block<br>HTTPS based management. HTTPS based configuration<br>See [HTTPS Management](#https-management) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block
 
@@ -320,7 +322,7 @@ A [`tls_certificates`](#https-management-advertise-on-sli-vip-tls-certificates) 
 
 A [`custom_hash_algorithms`](#https-management-advertise-on-sli-vip-tls-certificates-custom-hash-algorithms) block (within [`https_management.advertise_on_sli_vip.tls_certificates`](#https-management-advertise-on-sli-vip-tls-certificates)) supports the following:
 
-<a id="https-management-advertise-on-sli-vip-tls-certificates-custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#https-management-advertise-on-sli-vip-tls-certificates-custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="https-management-advertise-on-sli-vip-tls-certificates-custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#https-management-advertise-on-sli-vip-tls-certificates-custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
 
 #### HTTPS Management Advertise On SLI VIP TLS Certificates Private Key
 
@@ -366,9 +368,9 @@ A [`custom_security`](#https-management-advertise-on-sli-vip-tls-config-custom-s
 
 <a id="https-management-advertise-on-sli-vip-tls-config-custom-security-cipher-suites"></a>&#x2022; [`cipher_suites`](#https-management-advertise-on-sli-vip-tls-config-custom-security-cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
-<a id="https-management-advertise-on-sli-vip-tls-config-custom-security-max-version"></a>&#x2022; [`max_version`](#https-management-advertise-on-sli-vip-tls-config-custom-security-max-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="https-management-advertise-on-sli-vip-tls-config-custom-security-max-version"></a>&#x2022; [`max_version`](#https-management-advertise-on-sli-vip-tls-config-custom-security-max-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
-<a id="https-management-advertise-on-sli-vip-tls-config-custom-security-min-version"></a>&#x2022; [`min_version`](#https-management-advertise-on-sli-vip-tls-config-custom-security-min-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="https-management-advertise-on-sli-vip-tls-config-custom-security-min-version"></a>&#x2022; [`min_version`](#https-management-advertise-on-sli-vip-tls-config-custom-security-min-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
 #### HTTPS Management Advertise On SLI VIP Use mTLS
 
@@ -412,7 +414,7 @@ A [`trusted_ca`](#https-management-advertise-on-sli-vip-use-mtls-trusted-ca) blo
 
 A [`xfcc_options`](#https-management-advertise-on-sli-vip-use-mtls-xfcc-options) block (within [`https_management.advertise_on_sli_vip.use_mtls`](#https-management-advertise-on-sli-vip-use-mtls)) supports the following:
 
-<a id="https-management-advertise-on-sli-vip-use-mtls-xfcc-options-xfcc-header-elements"></a>&#x2022; [`xfcc_header_elements`](#https-management-advertise-on-sli-vip-use-mtls-xfcc-options-xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="https-management-advertise-on-sli-vip-use-mtls-xfcc-options-xfcc-header-elements"></a>&#x2022; [`xfcc_header_elements`](#https-management-advertise-on-sli-vip-use-mtls-xfcc-options-xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 #### HTTPS Management Advertise On Slo Internet VIP
 
@@ -446,7 +448,7 @@ A [`tls_certificates`](#https-management-advertise-on-slo-internet-vip-tls-certi
 
 A [`custom_hash_algorithms`](#https-management-advertise-on-slo-internet-vip-tls-certificates-custom-hash-algorithms) block (within [`https_management.advertise_on_slo_internet_vip.tls_certificates`](#https-management-advertise-on-slo-internet-vip-tls-certificates)) supports the following:
 
-<a id="https-management-advertise-on-slo-internet-vip-tls-certificates-custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#https-management-advertise-on-slo-internet-vip-tls-certificates-custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="https-management-advertise-on-slo-internet-vip-tls-certificates-custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#https-management-advertise-on-slo-internet-vip-tls-certificates-custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
 
 #### HTTPS Management Advertise On Slo Internet VIP TLS Certificates Private Key
 
@@ -492,9 +494,9 @@ A [`custom_security`](#https-management-advertise-on-slo-internet-vip-tls-config
 
 <a id="https-management-advertise-on-slo-internet-vip-tls-config-custom-security-cipher-suites"></a>&#x2022; [`cipher_suites`](#https-management-advertise-on-slo-internet-vip-tls-config-custom-security-cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
-<a id="https-management-advertise-on-slo-internet-vip-tls-config-custom-security-max-version"></a>&#x2022; [`max_version`](#https-management-advertise-on-slo-internet-vip-tls-config-custom-security-max-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="https-management-advertise-on-slo-internet-vip-tls-config-custom-security-max-version"></a>&#x2022; [`max_version`](#https-management-advertise-on-slo-internet-vip-tls-config-custom-security-max-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
-<a id="https-management-advertise-on-slo-internet-vip-tls-config-custom-security-min-version"></a>&#x2022; [`min_version`](#https-management-advertise-on-slo-internet-vip-tls-config-custom-security-min-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="https-management-advertise-on-slo-internet-vip-tls-config-custom-security-min-version"></a>&#x2022; [`min_version`](#https-management-advertise-on-slo-internet-vip-tls-config-custom-security-min-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
 #### HTTPS Management Advertise On Slo Internet VIP Use mTLS
 
@@ -538,7 +540,7 @@ A [`trusted_ca`](#https-management-advertise-on-slo-internet-vip-use-mtls-truste
 
 A [`xfcc_options`](#https-management-advertise-on-slo-internet-vip-use-mtls-xfcc-options) block (within [`https_management.advertise_on_slo_internet_vip.use_mtls`](#https-management-advertise-on-slo-internet-vip-use-mtls)) supports the following:
 
-<a id="https-management-advertise-on-slo-internet-vip-use-mtls-xfcc-options-xfcc-header-elements"></a>&#x2022; [`xfcc_header_elements`](#https-management-advertise-on-slo-internet-vip-use-mtls-xfcc-options-xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="https-management-advertise-on-slo-internet-vip-use-mtls-xfcc-options-xfcc-header-elements"></a>&#x2022; [`xfcc_header_elements`](#https-management-advertise-on-slo-internet-vip-use-mtls-xfcc-options-xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 #### HTTPS Management Advertise On Slo SLI
 
@@ -572,7 +574,7 @@ A [`tls_certificates`](#https-management-advertise-on-slo-sli-tls-certificates) 
 
 A [`custom_hash_algorithms`](#https-management-advertise-on-slo-sli-tls-certificates-custom-hash-algorithms) block (within [`https_management.advertise_on_slo_sli.tls_certificates`](#https-management-advertise-on-slo-sli-tls-certificates)) supports the following:
 
-<a id="https-management-advertise-on-slo-sli-tls-certificates-custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#https-management-advertise-on-slo-sli-tls-certificates-custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="https-management-advertise-on-slo-sli-tls-certificates-custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#https-management-advertise-on-slo-sli-tls-certificates-custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
 
 #### HTTPS Management Advertise On Slo SLI TLS Certificates Private Key
 
@@ -618,9 +620,9 @@ A [`custom_security`](#https-management-advertise-on-slo-sli-tls-config-custom-s
 
 <a id="https-management-advertise-on-slo-sli-tls-config-custom-security-cipher-suites"></a>&#x2022; [`cipher_suites`](#https-management-advertise-on-slo-sli-tls-config-custom-security-cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
-<a id="https-management-advertise-on-slo-sli-tls-config-custom-security-max-version"></a>&#x2022; [`max_version`](#https-management-advertise-on-slo-sli-tls-config-custom-security-max-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="https-management-advertise-on-slo-sli-tls-config-custom-security-max-version"></a>&#x2022; [`max_version`](#https-management-advertise-on-slo-sli-tls-config-custom-security-max-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
-<a id="https-management-advertise-on-slo-sli-tls-config-custom-security-min-version"></a>&#x2022; [`min_version`](#https-management-advertise-on-slo-sli-tls-config-custom-security-min-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="https-management-advertise-on-slo-sli-tls-config-custom-security-min-version"></a>&#x2022; [`min_version`](#https-management-advertise-on-slo-sli-tls-config-custom-security-min-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
 #### HTTPS Management Advertise On Slo SLI Use mTLS
 
@@ -664,7 +666,7 @@ A [`trusted_ca`](#https-management-advertise-on-slo-sli-use-mtls-trusted-ca) blo
 
 A [`xfcc_options`](#https-management-advertise-on-slo-sli-use-mtls-xfcc-options) block (within [`https_management.advertise_on_slo_sli.use_mtls`](#https-management-advertise-on-slo-sli-use-mtls)) supports the following:
 
-<a id="https-management-advertise-on-slo-sli-use-mtls-xfcc-options-xfcc-header-elements"></a>&#x2022; [`xfcc_header_elements`](#https-management-advertise-on-slo-sli-use-mtls-xfcc-options-xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="https-management-advertise-on-slo-sli-use-mtls-xfcc-options-xfcc-header-elements"></a>&#x2022; [`xfcc_header_elements`](#https-management-advertise-on-slo-sli-use-mtls-xfcc-options-xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 #### HTTPS Management Advertise On Slo VIP
 
@@ -698,7 +700,7 @@ A [`tls_certificates`](#https-management-advertise-on-slo-vip-tls-certificates) 
 
 A [`custom_hash_algorithms`](#https-management-advertise-on-slo-vip-tls-certificates-custom-hash-algorithms) block (within [`https_management.advertise_on_slo_vip.tls_certificates`](#https-management-advertise-on-slo-vip-tls-certificates)) supports the following:
 
-<a id="https-management-advertise-on-slo-vip-tls-certificates-custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#https-management-advertise-on-slo-vip-tls-certificates-custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="https-management-advertise-on-slo-vip-tls-certificates-custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#https-management-advertise-on-slo-vip-tls-certificates-custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
 
 #### HTTPS Management Advertise On Slo VIP TLS Certificates Private Key
 
@@ -744,9 +746,9 @@ A [`custom_security`](#https-management-advertise-on-slo-vip-tls-config-custom-s
 
 <a id="https-management-advertise-on-slo-vip-tls-config-custom-security-cipher-suites"></a>&#x2022; [`cipher_suites`](#https-management-advertise-on-slo-vip-tls-config-custom-security-cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
-<a id="https-management-advertise-on-slo-vip-tls-config-custom-security-max-version"></a>&#x2022; [`max_version`](#https-management-advertise-on-slo-vip-tls-config-custom-security-max-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="https-management-advertise-on-slo-vip-tls-config-custom-security-max-version"></a>&#x2022; [`max_version`](#https-management-advertise-on-slo-vip-tls-config-custom-security-max-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
-<a id="https-management-advertise-on-slo-vip-tls-config-custom-security-min-version"></a>&#x2022; [`min_version`](#https-management-advertise-on-slo-vip-tls-config-custom-security-min-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="https-management-advertise-on-slo-vip-tls-config-custom-security-min-version"></a>&#x2022; [`min_version`](#https-management-advertise-on-slo-vip-tls-config-custom-security-min-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
 #### HTTPS Management Advertise On Slo VIP Use mTLS
 
@@ -790,7 +792,7 @@ A [`trusted_ca`](#https-management-advertise-on-slo-vip-use-mtls-trusted-ca) blo
 
 A [`xfcc_options`](#https-management-advertise-on-slo-vip-use-mtls-xfcc-options) block (within [`https_management.advertise_on_slo_vip.use_mtls`](#https-management-advertise-on-slo-vip-use-mtls)) supports the following:
 
-<a id="https-management-advertise-on-slo-vip-use-mtls-xfcc-options-xfcc-header-elements"></a>&#x2022; [`xfcc_header_elements`](#https-management-advertise-on-slo-vip-use-mtls-xfcc-options-xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="https-management-advertise-on-slo-vip-use-mtls-xfcc-options-xfcc-header-elements"></a>&#x2022; [`xfcc_header_elements`](#https-management-advertise-on-slo-vip-use-mtls-xfcc-options-xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 #### Palo Alto Fw Service
 
@@ -802,7 +804,7 @@ A [`palo_alto_fw_service`](#palo-alto-fw-service) block supports the following:
 
 <a id="palo-alto-fw-service-disable-panaroma"></a>&#x2022; [`disable_panaroma`](#palo-alto-fw-service-disable-panaroma) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="palo-alto-fw-service-instance-type"></a>&#x2022; [`instance_type`](#palo-alto-fw-service-instance-type) - Optional String  Defaults to `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_XLARGE`<br>Possible values are `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_12XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_8XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_9XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_18XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_9XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_18XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_R5_2XLARGE`<br>Palo Alto Networks VM-Series Instance Typ. - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_XLARGE: m4.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_2XLARGE: m4.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_4XLARGE: m4.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_LARGE: m5.large - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_XLARGE: m5.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_2XLARGE: m5.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_4XLARGE: m5.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_12XLARGE: m5.12xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_LARGE: m5n.large - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_XLARGE: m5n.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_2XLARGE: m5n.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_4XLARGE: m5n.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_LARGE: c4.large - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_XLARGE: c4.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_2XLARGE: c4.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_4XLARGE: c4.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_8XLARGE: c4.8xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_LARGE: c5.large - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_XLARGE: c5.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_2XLARGE: c5.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_4XLARGE: c5.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_9XLARGE: c5.9xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_18XLARGE: c5.18xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_LARGE: c5n.large - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_XLARGE: c5n.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_2XLARGE: c5n.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_4XLARGE: c5n.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_9XLARGE: c5n.9xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_18XLARGE: c5n.18xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_R5_2XLARGE: r5.2xlarge
+<a id="palo-alto-fw-service-instance-type"></a>&#x2022; [`instance_type`](#palo-alto-fw-service-instance-type) - Optional String  Defaults to `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_XLARGE`<br>Possible values are `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_12XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_8XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_9XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_18XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_9XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_18XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_R5_2XLARGE`<br>[Enum: PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_2XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_4XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_LARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_2XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_4XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_12XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_LARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_2XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_4XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_LARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_2XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_4XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_8XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_LARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_2XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_4XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_9XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_18XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_LARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_2XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_4XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_9XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_18XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_R5_2XLARGE] Palo Alto Networks VM-Series Instance Typ. - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_XLARGE: m4.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_2XLARGE: m4.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_4XLARGE: m4.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_LARGE: m5.large - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_XLARGE: m5.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_2XLARGE: m5.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_4XLARGE: m5.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_12XLARGE: m5.12xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_LARGE: m5n.large - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_XLARGE: m5n.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_2XLARGE: m5n.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_4XLARGE: m5n.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_LARGE: c4.large - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_XLARGE: c4.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_2XLARGE: c4.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_4XLARGE: c4.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_8XLARGE: c4.8xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_LARGE: c5.large - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_XLARGE: c5.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_2XLARGE: c5.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_4XLARGE: c5.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_9XLARGE: c5.9xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_18XLARGE: c5.18xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_LARGE: c5n.large - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_XLARGE: c5n.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_2XLARGE: c5n.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_4XLARGE: c5n.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_9XLARGE: c5n.9xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_18XLARGE: c5n.18xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_R5_2XLARGE: r5.2xlarge
 
 <a id="palo-alto-fw-service-pan-ami-bundle1"></a>&#x2022; [`pan_ami_bundle1`](#palo-alto-fw-service-pan-ami-bundle1) - Optional Block<br>Empty. This can be used for messages where no values are needed
 

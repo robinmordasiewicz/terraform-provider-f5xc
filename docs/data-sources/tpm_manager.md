@@ -2,12 +2,12 @@
 page_title: "f5xc_tpm_manager Data Source - terraform-provider-f5xc"
 subcategory: "Integrations"
 description: |-
-  Manages a Tpm Manager resource in F5 Distributed Cloud for create a tpm manager configuration.
+  [Namespace: required] Manages a Tpm Manager resource in F5 Distributed Cloud for create a tpm manager configuration.
 ---
 
 # f5xc_tpm_manager (Data Source)
 
-Manages a Tpm Manager resource in F5 Distributed Cloud for create a tpm manager configuration.
+[Namespace: required] Manages a Tpm Manager resource in F5 Distributed Cloud for create a tpm manager configuration.
 
 ~> **Note** Please refer to [Tpm Manager API docs](https://docs.cloud.f5.com/docs-v2/api/tpm-manager) to learn more.
 

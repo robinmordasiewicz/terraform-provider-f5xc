@@ -2,12 +2,12 @@
 page_title: "f5xc_policy_based_routing Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages a Policy Based Routing resource in F5 Distributed Cloud for network policy based routing create configuration.
+  [Namespace: required] Manages a Policy Based Routing resource in F5 Distributed Cloud for network policy based routing create configuration.
 ---
 
 # f5xc_policy_based_routing (Resource)
 
-Manages a Policy Based Routing resource in F5 Distributed Cloud for network policy based routing create configuration.
+[Namespace: required] Manages a Policy Based Routing resource in F5 Distributed Cloud for network policy based routing create configuration.
 
 ~> **Note** Please refer to [Policy Based Routing API docs](https://docs.cloud.f5.com/docs-v2/api/views-policy-based-routing) to learn more.
 
@@ -15,7 +15,7 @@ Manages a Policy Based Routing resource in F5 Distributed Cloud for network poli
 
 ```terraform
 # Policy Based Routing Resource Example
-# Manages a Policy Based Routing resource in F5 Distributed Cloud for network policy based routing create configuration.
+# [Namespace: required] Manages a Policy Based Routing resource in F5 Distributed Cloud for network policy based routing create configuration.
 
 # Basic Policy Based Routing configuration
 resource "f5xc_policy_based_routing" "example" {
@@ -248,7 +248,7 @@ A [`network_pbr_rules`](#network-pbr-network-pbr-rules) block (within [`network_
 
 An [`applications`](#network-pbr-network-pbr-rules-applications) block (within [`network_pbr.network_pbr_rules`](#network-pbr-network-pbr-rules)) supports the following:
 
-<a id="network-pbr-network-pbr-rules-applications-applications"></a>&#x2022; [`applications`](#network-pbr-network-pbr-rules-applications-applications) - Optional List  Defaults to `APPLICATION_HTTP`<br>Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`<br>Application Protocols. Application protocols like HTTP, SNMP
+<a id="network-pbr-network-pbr-rules-applications-applications"></a>&#x2022; [`applications`](#network-pbr-network-pbr-rules-applications-applications) - Optional List  Defaults to `APPLICATION_HTTP`<br>Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`<br>[Enum: APPLICATION_HTTP|APPLICATION_HTTPS|APPLICATION_SNMP|APPLICATION_DNS] Application Protocols. Application protocols like HTTP, SNMP
 
 #### Network Pbr Network Pbr Rules Forwarding Class List
 

@@ -2,12 +2,12 @@
 page_title: "f5xc_tpm_category Resource - terraform-provider-f5xc"
 subcategory: "Integrations"
 description: |-
-  Manages Category object, which is a grouping of APIKeys used for TPM provisioning in F5 Distributed Cloud.
+  [Namespace: required] Manages Category object, which is a grouping of APIKeys used for TPM provisioning in F5 Distributed Cloud.
 ---
 
 # f5xc_tpm_category (Resource)
 
-Manages Category object, which is a grouping of APIKeys used for TPM provisioning in F5 Distributed Cloud.
+[Namespace: required] Manages Category object, which is a grouping of APIKeys used for TPM provisioning in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Tpm Category API docs](https://docs.cloud.f5.com/docs-v2/api/tpm-category) to learn more.
 
@@ -15,7 +15,7 @@ Manages Category object, which is a grouping of APIKeys used for TPM provisionin
 
 ```terraform
 # Tpm Category Resource Example
-# Manages Category object, which is a grouping of APIKeys used for TPM provisioning in F5 Distributed Cloud.
+# [Namespace: required] Manages Category object, which is a grouping of APIKeys used for TPM provisioning in F5 Distributed Cloud.
 
 # Basic Tpm Category configuration
 resource "f5xc_tpm_category" "example" {

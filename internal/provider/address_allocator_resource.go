@@ -77,7 +77,7 @@ func (r *AddressAllocatorResource) Metadata(ctx context.Context, req resource.Me
 func (r *AddressAllocatorResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             address_allocatorSchemaVersion,
-		MarkdownDescription: "Manages Address Allocator will create an address allocator object in 'system' namespace of the user in F5 Distributed Cloud.",
+		MarkdownDescription: "[Namespace: required] Manages Address Allocator will create an address allocator object in 'system' namespace of the user in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Address Allocator. Must be unique within the namespace.",
@@ -130,7 +130,7 @@ func (r *AddressAllocatorResource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"mode": schema.StringAttribute{
-				MarkdownDescription: "Allocator Mode. Mode of the address allocator Address allocator is for VERs within the local cluster or site Allocation is per site and then per node. Possible values are `LOCAL`, `GLOBAL_PER_SITE_NODE`. Defaults to `LOCAL`.",
+				MarkdownDescription: "[Enum: LOCAL|GLOBAL_PER_SITE_NODE] Allocator Mode. Mode of the address allocator Address allocator is for VERs within the local cluster or site Allocation is per site and then per node. Possible values are `LOCAL`, `GLOBAL_PER_SITE_NODE`. Defaults to `LOCAL`.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -157,7 +157,7 @@ func (r *AddressAllocatorResource) Schema(ctx context.Context, req resource.Sche
 						Optional:            true,
 					},
 					"local_interface_address_type": schema.StringAttribute{
-						MarkdownDescription: "Local Interface Address Type. Dictates how local interface address is derived from the allocated subnet Use Nth address of the allocated subnet as the local interface address, N being the Local Interface Address Offset. For example, if the allocated subnet is 169.254.0.0/30, Local Interface Address Offset is set to 2 and Local Interface Address Type is set to 'Offset from beginning of Subnet', local address of 169.254.0.2 is used. Use Nth last address of the allocated subnet as the local interface address, N being the Local Interface Address Offset. For example, if the allocated subnet is 169.254.0.0/30, Local Interface Address Offset is set to 1 and Local Interface Address Type is set to 'Offset from end of Subnet', local address of 169.254.0.2 is used. This case is used for external_connector. Possible values are `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_BEGIN`, `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_END`, `LOCAL_INTERFACE_ADDRESS_FROM_PREFIX`. Defaults to `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_BEGIN`.",
+						MarkdownDescription: "[Enum: LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_BEGIN|LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_END|LOCAL_INTERFACE_ADDRESS_FROM_PREFIX] Local Interface Address Type. Dictates how local interface address is derived from the allocated subnet Use Nth address of the allocated subnet as the local interface address, N being the Local Interface Address Offset. For example, if the allocated subnet is 169.254.0.0/30, Local Interface Address Offset is set to 2 and Local Interface Address Type is set to 'Offset from beginning of Subnet', local address of 169.254.0.2 is used. Use Nth last address of the allocated subnet as the local interface address, N being the Local Interface Address Offset. For example, if the allocated subnet is 169.254.0.0/30, Local Interface Address Offset is set to 1 and Local Interface Address Type is set to 'Offset from end of Subnet', local address of 169.254.0.2 is used. This case is used for external_connector. Possible values are `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_BEGIN`, `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_END`, `LOCAL_INTERFACE_ADDRESS_FROM_PREFIX`. Defaults to `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_BEGIN`.",
 						Optional:            true,
 					},
 				},

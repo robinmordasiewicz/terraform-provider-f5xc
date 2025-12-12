@@ -78,7 +78,7 @@ func (r *TpmCategoryResource) Metadata(ctx context.Context, req resource.Metadat
 func (r *TpmCategoryResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             tpm_categorySchemaVersion,
-		MarkdownDescription: "Manages Category object, which is a grouping of APIKeys used for TPM provisioning in F5 Distributed Cloud.",
+		MarkdownDescription: "[Namespace: required] Manages Category object, which is a grouping of APIKeys used for TPM provisioning in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Tpm Category. Must be unique within the namespace.",

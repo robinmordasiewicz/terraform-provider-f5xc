@@ -1,5 +1,5 @@
 # Tenant Configuration Resource Example
-# Manages a Tenant Configuration resource in F5 Distributed Cloud for tenant configuration configuration.
+# [Namespace: required] Manages a Tenant Configuration resource in F5 Distributed Cloud for tenant configuration configuration.
 
 # Basic Tenant Configuration configuration
 resource "f5xc_tenant_configuration" "example" {

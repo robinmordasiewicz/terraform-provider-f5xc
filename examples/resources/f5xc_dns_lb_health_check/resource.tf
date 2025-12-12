@@ -1,5 +1,5 @@
 # DNS LB Health Check Resource Example
-# Manages DNS Load Balancer Health Check in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
+# [Category: DNS] [Namespace: required] Manages DNS Load Balancer Health Check in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
 # Basic DNS LB Health Check configuration
 resource "f5xc_dns_lb_health_check" "example" {

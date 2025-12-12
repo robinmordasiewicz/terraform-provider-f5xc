@@ -1,5 +1,5 @@
 # API Discovery Resource Example
-# Manages api discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# [Category: API Security] [Namespace: required] Manages api discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic API Discovery configuration
 resource "f5xc_api_discovery" "example" {

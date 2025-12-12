@@ -112,7 +112,7 @@ func (r *ReportConfigResource) Metadata(ctx context.Context, req resource.Metada
 func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             report_configSchemaVersion,
-		MarkdownDescription: "Manages a Report Config resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.",
+		MarkdownDescription: "[Namespace: required] Manages a Report Config resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Report Config. Must be unique within the namespace.",
@@ -213,7 +213,7 @@ func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRe
 						MarkdownDescription: "Report Frequency Monthly. create report monthly",
 						Attributes: map[string]schema.Attribute{
 							"date": schema.StringAttribute{
-								MarkdownDescription: "Report Generation Date. report generation date Indicates field not being set Create report on Last day of month. Possible values are `DATE_NONE`, `DATE_ONE`, `DATE_TWO`, `DATE_THREE`, `DATE_FOUR`, `DATE_FIVE`, `DATE_SIX`, `DATE_SEVEN`, `DATE_EIGHT`, `DATE_NINE`, `DATE_TEN`, `DATE_ELEVEN`, `DATE_TWELVE`, `DATE_THIRTEEN`, `DATE_FOURTEEN`, `DATE_FIFTEEN`, `DATE_SIXTEEN`, `DATE_SEVENTEEN`, `DATE_EIGHTEEN`, `DATE_NINETEEN`, `DATE_TWENTY`, `DATE_TWENTYONE`, `DATE_TWENTYTWO`, `DATE_TWENTYTHREE`, `DATE_TWENTYFOUR`, `DATE_TWENTYFIVE`, `DATE_TWENTYSIX`, `DATE_TWENTYSEVEN`, `DATE_TWENTYEIGHT`, `DATE_LAST`. Defaults to `DATE_NONE`.",
+								MarkdownDescription: "[Enum: DATE_NONE|DATE_ONE|DATE_TWO|DATE_THREE|DATE_FOUR|DATE_FIVE|DATE_SIX|DATE_SEVEN|DATE_EIGHT|DATE_NINE|DATE_TEN|DATE_ELEVEN|DATE_TWELVE|DATE_THIRTEEN|DATE_FOURTEEN|DATE_FIFTEEN|DATE_SIXTEEN|DATE_SEVENTEEN|DATE_EIGHTEEN|DATE_NINETEEN|DATE_TWENTY|DATE_TWENTYONE|DATE_TWENTYTWO|DATE_TWENTYTHREE|DATE_TWENTYFOUR|DATE_TWENTYFIVE|DATE_TWENTYSIX|DATE_TWENTYSEVEN|DATE_TWENTYEIGHT|DATE_LAST] Report Generation Date. report generation date Indicates field not being set Create report on Last day of month. Possible values are `DATE_NONE`, `DATE_ONE`, `DATE_TWO`, `DATE_THREE`, `DATE_FOUR`, `DATE_FIVE`, `DATE_SIX`, `DATE_SEVEN`, `DATE_EIGHT`, `DATE_NINE`, `DATE_TEN`, `DATE_ELEVEN`, `DATE_TWELVE`, `DATE_THIRTEEN`, `DATE_FOURTEEN`, `DATE_FIFTEEN`, `DATE_SIXTEEN`, `DATE_SEVENTEEN`, `DATE_EIGHTEEN`, `DATE_NINETEEN`, `DATE_TWENTY`, `DATE_TWENTYONE`, `DATE_TWENTYTWO`, `DATE_TWENTYTHREE`, `DATE_TWENTYFOUR`, `DATE_TWENTYFIVE`, `DATE_TWENTYSIX`, `DATE_TWENTYSEVEN`, `DATE_TWENTYEIGHT`, `DATE_LAST`. Defaults to `DATE_NONE`.",
 								Optional:            true,
 							},
 							"report_generation_time": schema.StringAttribute{
@@ -236,7 +236,7 @@ func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRe
 						MarkdownDescription: "Report Frequency Weekly. create report weekly",
 						Attributes: map[string]schema.Attribute{
 							"day": schema.StringAttribute{
-								MarkdownDescription: "Report Generation Weekday. report generation weekday Indicates field not being set. Possible values are `WEEKDAY_NONE`, `WEEKDAY_MONDAY`, `WEEKDAY_TUESDAY`, `WEEKDAY_WEDNESDAY`, `WEEKDAY_THURSDAY`, `WEEKDAY_FRIDAY`, `WEEKDAY_SATURDAY`, `WEEKDAY_SUNDAY`. Defaults to `WEEKDAY_NONE`.",
+								MarkdownDescription: "[Enum: WEEKDAY_NONE|WEEKDAY_MONDAY|WEEKDAY_TUESDAY|WEEKDAY_WEDNESDAY|WEEKDAY_THURSDAY|WEEKDAY_FRIDAY|WEEKDAY_SATURDAY|WEEKDAY_SUNDAY] Report Generation Weekday. report generation weekday Indicates field not being set. Possible values are `WEEKDAY_NONE`, `WEEKDAY_MONDAY`, `WEEKDAY_TUESDAY`, `WEEKDAY_WEDNESDAY`, `WEEKDAY_THURSDAY`, `WEEKDAY_FRIDAY`, `WEEKDAY_SATURDAY`, `WEEKDAY_SUNDAY`. Defaults to `WEEKDAY_NONE`.",
 								Optional:            true,
 							},
 							"report_generation_time": schema.StringAttribute{

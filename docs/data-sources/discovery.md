@@ -2,12 +2,12 @@
 page_title: "f5xc_discovery Data Source - terraform-provider-f5xc"
 subcategory: "Applications"
 description: |-
-  Manages a Discovery resource in F5 Distributed Cloud for api to create discovery object for a site or virtual site in system namespace configuration.
+  [Namespace: required] Manages a Discovery resource in F5 Distributed Cloud for api to create discovery object for a site or virtual site in system namespace configuration.
 ---
 
 # f5xc_discovery (Data Source)
 
-Manages a Discovery resource in F5 Distributed Cloud for api to create discovery object for a site or virtual site in system namespace configuration.
+[Namespace: required] Manages a Discovery resource in F5 Distributed Cloud for api to create discovery object for a site or virtual site in system namespace configuration.
 
 ~> **Note** Please refer to [Discovery API docs](https://docs.cloud.f5.com/docs-v2/api/discovery) to learn more.
 

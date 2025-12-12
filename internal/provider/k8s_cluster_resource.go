@@ -187,7 +187,7 @@ func (r *K8SClusterResource) Metadata(ctx context.Context, req resource.Metadata
 func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             k8s_clusterSchemaVersion,
-		MarkdownDescription: "Manages k8s_cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.",
+		MarkdownDescription: "[Category: Kubernetes] [Namespace: required] Manages k8s_cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the K8S Cluster. Must be unique within the namespace.",
@@ -249,7 +249,7 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 			},
 			"cluster_wide_app_list": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: cluster_wide_app_list, no_cluster_wide_apps] Cluster Wide Application List. List of cluster wide applications",
+				MarkdownDescription: "[OneOf: cluster_wide_app_list, no_cluster_wide_apps; Default: no_cluster_wide_apps] Cluster Wide Application List. List of cluster wide applications",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"cluster_wide_apps": schema.ListNestedBlock{
@@ -332,10 +332,10 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"global_access_enable": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: global_access_enable, no_global_access] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: global_access_enable, no_global_access; Default: no_global_access] Empty. This can be used for messages where no values are needed",
 			},
 			"insecure_registry_list": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: insecure_registry_list, no_insecure_registries] Docker Insecure Registry List. List of docker insecure registries",
+				MarkdownDescription: "[OneOf: insecure_registry_list, no_insecure_registries; Default: no_insecure_registries] Docker Insecure Registry List. List of docker insecure registries",
 				Attributes: map[string]schema.Attribute{
 					"insecure_registries": schema.ListAttribute{
 						MarkdownDescription: "Docker Insecure Registry List. List of docker insecure registries in format 'example.com:5000'",
@@ -345,7 +345,7 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"local_access_config": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: local_access_config, no_local_access] Local Access Configuration. Parameters required to enable local access",
+				MarkdownDescription: "[OneOf: local_access_config, no_local_access; Default: no_local_access] Local Access Configuration. Parameters required to enable local access",
 				Attributes: map[string]schema.Attribute{
 					"local_domain": schema.StringAttribute{
 						MarkdownDescription: "Local Domain. Local K8s API server will be accessible at <site name>.<local domain>.",
@@ -375,7 +375,7 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 			},
 			"use_custom_cluster_role_bindings": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: use_custom_cluster_role_bindings, use_default_cluster_role_bindings] Cluster Role Binding List. List of active cluster role binding list for a K8s cluster",
+				MarkdownDescription: "[OneOf: use_custom_cluster_role_bindings, use_default_cluster_role_bindings; Default: use_default_cluster_role_bindings] Cluster Role Binding List. List of active cluster role binding list for a K8s cluster",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"cluster_role_bindings": schema.ListNestedBlock{
@@ -401,7 +401,7 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"use_custom_cluster_role_list": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: use_custom_cluster_role_list, use_default_cluster_roles] Cluster Role List. List of active cluster role list for a K8s cluster",
+				MarkdownDescription: "[OneOf: use_custom_cluster_role_list, use_default_cluster_roles; Default: use_default_cluster_roles] Cluster Role List. List of active cluster role list for a K8s cluster",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"cluster_roles": schema.ListNestedBlock{
@@ -427,7 +427,7 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"use_custom_pod_security_admission": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: use_custom_pod_security_admission, use_default_pod_security_admission] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+				MarkdownDescription: "[OneOf: use_custom_pod_security_admission, use_default_pod_security_admission; Default: use_default_pod_security_admission] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -445,7 +445,7 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"use_custom_psp_list": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: use_custom_psp_list, use_default_psp] Pod Security Policy List. List of active Pod security policies for a K8s cluster",
+				MarkdownDescription: "[OneOf: use_custom_psp_list, use_default_psp; Default: use_default_psp] Pod Security Policy List. List of active Pod security policies for a K8s cluster",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"pod_security_policies": schema.ListNestedBlock{

@@ -2,12 +2,12 @@
 page_title: "f5xc_cluster Data Source - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  Manages cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+  [Namespace: required] Manages cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 ---
 
 # f5xc_cluster (Data Source)
 
-Manages cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+[Namespace: required] Manages cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Cluster API docs](https://docs.cloud.f5.com/docs-v2/api/cluster) to learn more.
 

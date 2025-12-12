@@ -2,12 +2,12 @@
 page_title: "f5xc_app_type Data Source - terraform-provider-f5xc"
 subcategory: "Applications"
 description: |-
-  Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.
+  [Namespace: required] Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.
 ---
 
 # f5xc_app_type (Data Source)
 
-Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.
+[Namespace: required] Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [App Type API docs](https://docs.cloud.f5.com/docs-v2/api/app-type) to learn more.
 

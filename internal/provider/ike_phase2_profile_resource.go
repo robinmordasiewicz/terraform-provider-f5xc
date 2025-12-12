@@ -89,7 +89,7 @@ func (r *IKEPhase2ProfileResource) Metadata(ctx context.Context, req resource.Me
 func (r *IKEPhase2ProfileResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             ike_phase2_profileSchemaVersion,
-		MarkdownDescription: "Manages a IKE Phase2 Profile resource in F5 Distributed Cloud for ike phase2 profile configuration.",
+		MarkdownDescription: "[Namespace: required] Manages a IKE Phase2 Profile resource in F5 Distributed Cloud for ike phase2 profile configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the IKE Phase2 Profile. Must be unique within the namespace.",
@@ -117,7 +117,7 @@ func (r *IKEPhase2ProfileResource) Schema(ctx context.Context, req resource.Sche
 				ElementType:         types.StringType,
 			},
 			"authentication_algos": schema.ListAttribute{
-				MarkdownDescription: "Authentication Algorithms. Choose one or more Authentication Algorithm. Use None option when using the aes-gcm or aes-ccm encryption algorithms. Possible values are `AUTH_ALG_DEFAULT`, `SHA256_HMAC`, `SHA384_HMAC`, `SHA512_HMAC`, `AUTH_ALG_NONE`. Defaults to `AUTH_ALG_DEFAULT`.",
+				MarkdownDescription: "[Enum: AUTH_ALG_DEFAULT|SHA256_HMAC|SHA384_HMAC|SHA512_HMAC|AUTH_ALG_NONE] Authentication Algorithms. Choose one or more Authentication Algorithm. Use None option when using the aes-gcm or aes-ccm encryption algorithms. Possible values are `AUTH_ALG_DEFAULT`, `SHA256_HMAC`, `SHA384_HMAC`, `SHA512_HMAC`, `AUTH_ALG_NONE`. Defaults to `AUTH_ALG_DEFAULT`.",
 				Optional:            true,
 				ElementType:         types.StringType,
 			},
@@ -130,7 +130,7 @@ func (r *IKEPhase2ProfileResource) Schema(ctx context.Context, req resource.Sche
 				Optional:            true,
 			},
 			"encryption_algos": schema.ListAttribute{
-				MarkdownDescription: "Encryption Algorithms. Choose one or more encryption algorithms. Possible values are `ENC_ALG_DEFAULT`, `AES128_CBC`, `AES192_CBC`, `AES256_CBC`, `TRIPLE_DES_CBC`, `AES128_GCM`, `AES192_GCM`, `AES256_GCM`. Defaults to `ENC_ALG_DEFAULT`.",
+				MarkdownDescription: "[Enum: ENC_ALG_DEFAULT|AES128_CBC|AES192_CBC|AES256_CBC|TRIPLE_DES_CBC|AES128_GCM|AES192_GCM|AES256_GCM] Encryption Algorithms. Choose one or more encryption algorithms. Possible values are `ENC_ALG_DEFAULT`, `AES128_CBC`, `AES192_CBC`, `AES256_CBC`, `TRIPLE_DES_CBC`, `AES128_GCM`, `AES192_GCM`, `AES256_GCM`. Defaults to `ENC_ALG_DEFAULT`.",
 				Optional:            true,
 				ElementType:         types.StringType,
 			},
@@ -155,10 +155,10 @@ func (r *IKEPhase2ProfileResource) Schema(ctx context.Context, req resource.Sche
 				Delete: true,
 			}),
 			"dh_group_set": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: dh_group_set, disable_pfs] Diffie Hellman Groups. Choose the acceptable Diffie Hellman(DH) Group or Groups that you are willing to accept as part of this profile.",
+				MarkdownDescription: "[OneOf: dh_group_set, disable_pfs; Default: disable_pfs] Diffie Hellman Groups. Choose the acceptable Diffie Hellman(DH) Group or Groups that you are willing to accept as part of this profile.",
 				Attributes: map[string]schema.Attribute{
 					"dh_groups": schema.ListAttribute{
-						MarkdownDescription: "Diffie Hellman Groups. Choose the acceptable Diffie Hellman(DH) Group or Groups that you are willing to accept as part of this profile. Possible values are `DH_GROUP_DEFAULT`, `DH_GROUP_14`, `DH_GROUP_15`, `DH_GROUP_16`, `DH_GROUP_17`, `DH_GROUP_18`, `DH_GROUP_19`, `DH_GROUP_20`, `DH_GROUP_21`, `DH_GROUP_26`. Defaults to `DH_GROUP_DEFAULT`.",
+						MarkdownDescription: "[Enum: DH_GROUP_DEFAULT|DH_GROUP_14|DH_GROUP_15|DH_GROUP_16|DH_GROUP_17|DH_GROUP_18|DH_GROUP_19|DH_GROUP_20|DH_GROUP_21|DH_GROUP_26] Diffie Hellman Groups. Choose the acceptable Diffie Hellman(DH) Group or Groups that you are willing to accept as part of this profile. Possible values are `DH_GROUP_DEFAULT`, `DH_GROUP_14`, `DH_GROUP_15`, `DH_GROUP_16`, `DH_GROUP_17`, `DH_GROUP_18`, `DH_GROUP_19`, `DH_GROUP_20`, `DH_GROUP_21`, `DH_GROUP_26`. Defaults to `DH_GROUP_DEFAULT`.",
 						Optional:            true,
 						ElementType:         types.StringType,
 					},
@@ -168,7 +168,7 @@ func (r *IKEPhase2ProfileResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 			},
 			"ike_keylifetime_hours": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: ike_keylifetime_hours, ike_keylifetime_minutes, use_default_keylifetime] Hours. Input Hours",
+				MarkdownDescription: "[OneOf: ike_keylifetime_hours, ike_keylifetime_minutes, use_default_keylifetime; Default: use_default_keylifetime] Hours. Input Hours",
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.Int64Attribute{
 						MarkdownDescription: "Duration.",

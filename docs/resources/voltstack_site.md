@@ -2,12 +2,12 @@
 page_title: "f5xc_voltstack_site Resource - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
-  Manages a Voltstack Site resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
+  [Category: Sites] [Namespace: required] Manages a Voltstack Site resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
 ---
 
 # f5xc_voltstack_site (Resource)
 
-Manages a Voltstack Site resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
+[Category: Sites] [Namespace: required] Manages a Voltstack Site resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
 
 ~> **Note** Please refer to [Voltstack Site API docs](https://docs.cloud.f5.com/docs-v2/api/views-voltstack-site) to learn more.
 
@@ -15,7 +15,7 @@ Manages a Voltstack Site resource in F5 Distributed Cloud for deploying Volterra
 
 ```terraform
 # Voltstack Site Resource Example
-# Manages a Voltstack Site resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
+# [Category: Sites] [Namespace: required] Manages a Voltstack Site resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
 
 # Basic Voltstack Site configuration
 resource "f5xc_voltstack_site" "example" {
@@ -85,11 +85,9 @@ resource "f5xc_voltstack_site" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="blocked-services"></a>[`blocked_services`](#blocked-services) - Optional Block<br>Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site<br>See [Blocked Services](#blocked-services) below for details.
-<br><br>&#x2022; <a id="default-blocked-services"></a>[`default_blocked_services`](#default-blocked-services) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; <a id="bond-device-list"></a>[`bond_device_list`](#bond-device-list) - Optional Block<br>Bond Devices List. List of bond devices for this fleet<br>See [Bond Device List](#bond-device-list) below for details.
-<br><br>&#x2022; <a id="no-bond-devices"></a>[`no_bond_devices`](#no-bond-devices) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="coordinates"></a>&#x2022; [`coordinates`](#coordinates) - Optional Block<br>Site Coordinates. Coordinates of the site which provides the site physical location<br>See [Coordinates](#coordinates) below for details.
 
@@ -97,34 +95,37 @@ resource "f5xc_voltstack_site" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="custom-network-config"></a>[`custom_network_config`](#custom-network-config) - Optional Block<br>VssNetworkConfiguration<br>See [Custom Network Config](#custom-network-config) below for details.
-<br><br>&#x2022; <a id="default-network-config"></a>[`default_network_config`](#default-network-config) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; <a id="custom-storage-config"></a>[`custom_storage_config`](#custom-storage-config) - Optional Block<br>VssStorageConfiguration
-<br><br>&#x2022; <a id="default-storage-config"></a>[`default_storage_config`](#default-storage-config) - Optional Block<br>Empty. This can be used for messages where no values are needed
+
+<a id="default-blocked-services"></a>&#x2022; [`default_blocked_services`](#default-blocked-services) - Optional Block<br>Empty. This can be used for messages where no values are needed
+
+<a id="default-network-config"></a>&#x2022; [`default_network_config`](#default-network-config) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; <a id="default-sriov-interface"></a>[`default_sriov_interface`](#default-sriov-interface) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="sriov-interfaces"></a>[`sriov_interfaces`](#sriov-interfaces) - Optional Block<br>Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration
+
+<a id="default-storage-config"></a>&#x2022; [`default_storage_config`](#default-storage-config) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; <a id="disable-gpu"></a>[`disable_gpu`](#disable-gpu) - Optional Block<br>Empty. This can be used for messages where no values are needed
 <br><br>&#x2022; <a id="enable-gpu"></a>[`enable_gpu`](#enable-gpu) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="enable-vgpu"></a>[`enable_vgpu`](#enable-vgpu) - Optional Block<br>vGPU Configuration. Licensing configuration for NVIDIA vGPU
 
 -> **One of the following:**
 &#x2022; <a id="disable-vm"></a>[`disable_vm`](#disable-vm) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="enable-vm"></a>[`enable_vm`](#enable-vm) - Optional Block<br>VM Configuration. VMs support configuration
+
+<a id="enable-vgpu"></a>&#x2022; [`enable_vgpu`](#enable-vgpu) - Optional Block<br>vGPU Configuration. Licensing configuration for NVIDIA vGPU
+
+<a id="enable-vm"></a>&#x2022; [`enable_vm`](#enable-vm) - Optional Block<br>VM Configuration. VMs support configuration
 
 -> **One of the following:**
 &#x2022; <a id="k8s-cluster"></a>[`k8s_cluster`](#k8s-cluster) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
-<br><br>&#x2022; <a id="no-k8s-cluster"></a>[`no_k8s_cluster`](#no-k8s-cluster) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="kubernetes-upgrade-drain"></a>&#x2022; [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain) - Optional Block<br>Node by Node Upgrade. Specify how worker nodes within a site will be upgraded
 
 -> **One of the following:**
 &#x2022; <a id="local-control-plane"></a>[`local_control_plane`](#local-control-plane) - Optional Block<br>Local Control Plane. Enable local control plane for L3VPN, SRV6, EVPN etc
-<br><br>&#x2022; <a id="no-local-control-plane"></a>[`no_local_control_plane`](#no-local-control-plane) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; <a id="log-receiver"></a>[`log_receiver`](#log-receiver) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
@@ -132,9 +133,17 @@ resource "f5xc_voltstack_site" "example" {
 
 <a id="master-node-configuration"></a>&#x2022; [`master_node_configuration`](#master-node-configuration) - Optional Block<br>Master Nodes. Configuration of master nodes
 
+<a id="no-bond-devices"></a>&#x2022; [`no_bond_devices`](#no-bond-devices) - Optional Block<br>Empty. This can be used for messages where no values are needed
+
+<a id="no-k8s-cluster"></a>&#x2022; [`no_k8s_cluster`](#no-k8s-cluster) - Optional Block<br>Empty. This can be used for messages where no values are needed
+
+<a id="no-local-control-plane"></a>&#x2022; [`no_local_control_plane`](#no-local-control-plane) - Optional Block<br>Empty. This can be used for messages where no values are needed
+
 <a id="offline-survivability-mode"></a>&#x2022; [`offline_survivability_mode`](#offline-survivability-mode) - Optional Block<br>Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen
 
 <a id="os"></a>&#x2022; [`os`](#os) - Optional Block<br>Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions
+
+<a id="sriov-interfaces"></a>&#x2022; [`sriov_interfaces`](#sriov-interfaces) - Optional Block<br>Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration
 
 <a id="sw"></a>&#x2022; [`sw`](#sw) - Optional Block<br>F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions
 
@@ -164,7 +173,7 @@ A [`blocked_sevice`](#blocked-services-blocked-sevice) block (within [`blocked_s
 
 <a id="blocked-services-blocked-sevice-dns"></a>&#x2022; [`dns`](#blocked-services-blocked-sevice-dns) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="blocked-services-blocked-sevice-network-type"></a>&#x2022; [`network_type`](#blocked-services-blocked-sevice-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
+<a id="blocked-services-blocked-sevice-network-type"></a>&#x2022; [`network_type`](#blocked-services-blocked-sevice-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
 <a id="blocked-services-blocked-sevice-ssh"></a>&#x2022; [`ssh`](#blocked-services-blocked-sevice-ssh) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -262,7 +271,7 @@ A [`custom_network_config`](#custom-network-config) block supports the following
 
 <a id="custom-network-config-tunnel-dead-timeout"></a>&#x2022; [`tunnel_dead_timeout`](#custom-network-config-tunnel-dead-timeout) - Optional Number<br>Tunnel Dead Timeout (msec). Time interval, in millisec, within which any ipsec / SSL connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used
 
-<a id="custom-network-config-vip-vrrp-mode"></a>&#x2022; [`vip_vrrp_mode`](#custom-network-config-vip-vrrp-mode) - Optional String  Defaults to `VIP_VRRP_INVALID`<br>Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE`<br>VRRP Virtual-IP. VRRP advertisement mode for VIP Invalid VRRP mode
+<a id="custom-network-config-vip-vrrp-mode"></a>&#x2022; [`vip_vrrp_mode`](#custom-network-config-vip-vrrp-mode) - Optional String  Defaults to `VIP_VRRP_INVALID`<br>Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE`<br>[Enum: VIP_VRRP_INVALID|VIP_VRRP_ENABLE|VIP_VRRP_DISABLE] VRRP Virtual-IP. VRRP advertisement mode for VIP Invalid VRRP mode
 
 #### Custom Network Config Active Enhanced Firewall Policies
 
@@ -490,7 +499,7 @@ A [`dhcp_networks`](#custom-network-config-interface-list-interfaces-ethernet-in
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-network-prefix"></a>&#x2022; [`network_prefix`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-network-prefix) - Optional String<br>Network Prefix. Set the network prefix for the site. ex: 10.1.1.0/24
 
-<a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-pools"></a>&#x2022; [`pools`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-pools) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-pools) below.
 
@@ -572,7 +581,7 @@ A [`dhcp_networks`](#custom-network-config-interface-list-interfaces-ethernet-in
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix"></a>&#x2022; [`network_prefix`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
 
-<a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>&#x2022; [`pools`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
 
@@ -706,7 +715,7 @@ A [`static_routes`](#custom-network-config-sli-config-static-routes) block (with
 
 A [`static_routes`](#custom-network-config-sli-config-static-routes-static-routes) block (within [`custom_network_config.sli_config.static_routes`](#custom-network-config-sli-config-static-routes)) supports the following:
 
-<a id="custom-network-config-sli-config-static-routes-static-routes-attrs"></a>&#x2022; [`attrs`](#custom-network-config-sli-config-static-routes-static-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
+<a id="custom-network-config-sli-config-static-routes-static-routes-attrs"></a>&#x2022; [`attrs`](#custom-network-config-sli-config-static-routes-static-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
 <a id="custom-network-config-sli-config-static-routes-static-routes-default-gateway"></a>&#x2022; [`default_gateway`](#custom-network-config-sli-config-static-routes-static-routes-default-gateway) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -754,7 +763,7 @@ A [`static_v6_routes`](#custom-network-config-sli-config-static-v6-routes) block
 
 A [`static_routes`](#custom-network-config-sli-config-static-v6-routes-static-routes) block (within [`custom_network_config.sli_config.static_v6_routes`](#custom-network-config-sli-config-static-v6-routes)) supports the following:
 
-<a id="custom-network-config-sli-config-static-v6-routes-static-routes-attrs"></a>&#x2022; [`attrs`](#custom-network-config-sli-config-static-v6-routes-static-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
+<a id="custom-network-config-sli-config-static-v6-routes-static-routes-attrs"></a>&#x2022; [`attrs`](#custom-network-config-sli-config-static-v6-routes-static-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
 <a id="custom-network-config-sli-config-static-v6-routes-static-routes-default-gateway"></a>&#x2022; [`default_gateway`](#custom-network-config-sli-config-static-v6-routes-static-routes-default-gateway) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -830,7 +839,7 @@ A [`static_routes`](#custom-network-config-slo-config-static-routes) block (with
 
 A [`static_routes`](#custom-network-config-slo-config-static-routes-static-routes) block (within [`custom_network_config.slo_config.static_routes`](#custom-network-config-slo-config-static-routes)) supports the following:
 
-<a id="custom-network-config-slo-config-static-routes-static-routes-attrs"></a>&#x2022; [`attrs`](#custom-network-config-slo-config-static-routes-static-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
+<a id="custom-network-config-slo-config-static-routes-static-routes-attrs"></a>&#x2022; [`attrs`](#custom-network-config-slo-config-static-routes-static-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
 <a id="custom-network-config-slo-config-static-routes-static-routes-default-gateway"></a>&#x2022; [`default_gateway`](#custom-network-config-slo-config-static-routes-static-routes-default-gateway) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -878,7 +887,7 @@ A [`static_v6_routes`](#custom-network-config-slo-config-static-v6-routes) block
 
 A [`static_routes`](#custom-network-config-slo-config-static-v6-routes-static-routes) block (within [`custom_network_config.slo_config.static_v6_routes`](#custom-network-config-slo-config-static-v6-routes)) supports the following:
 
-<a id="custom-network-config-slo-config-static-v6-routes-static-routes-attrs"></a>&#x2022; [`attrs`](#custom-network-config-slo-config-static-v6-routes-static-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
+<a id="custom-network-config-slo-config-static-v6-routes-static-routes-attrs"></a>&#x2022; [`attrs`](#custom-network-config-slo-config-static-v6-routes-static-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
 <a id="custom-network-config-slo-config-static-v6-routes-static-routes-default-gateway"></a>&#x2022; [`default_gateway`](#custom-network-config-slo-config-static-v6-routes-static-routes-default-gateway) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -946,7 +955,7 @@ A [`static_routes`](#custom-storage-config-static-routes) block (within [`custom
 
 A [`static_routes`](#custom-storage-config-static-routes-static-routes) block (within [`custom_storage_config.static_routes`](#custom-storage-config-static-routes)) supports the following:
 
-<a id="custom-storage-config-static-routes-static-routes-attrs"></a>&#x2022; [`attrs`](#custom-storage-config-static-routes-static-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
+<a id="custom-storage-config-static-routes-static-routes-attrs"></a>&#x2022; [`attrs`](#custom-storage-config-static-routes-static-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
 <a id="custom-storage-config-static-routes-static-routes-default-gateway"></a>&#x2022; [`default_gateway`](#custom-storage-config-static-routes-static-routes-default-gateway) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1800,7 +1809,7 @@ A [`dhcp_networks`](#custom-storage-config-storage-interface-list-storage-interf
 
 <a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-network-prefix"></a>&#x2022; [`network_prefix`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-network-prefix) - Optional String<br>Network Prefix. Set the network prefix for the site. ex: 10.1.1.0/24
 
-<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
 
 <a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-pools"></a>&#x2022; [`pools`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-pools) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-pools) below.
 
@@ -1882,7 +1891,7 @@ A [`dhcp_networks`](#custom-storage-config-storage-interface-list-storage-interf
 
 <a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix"></a>&#x2022; [`network_prefix`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful-dhcp-networks-network-prefix) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
 
-<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings"></a>&#x2022; [`pool_settings`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful-dhcp-networks-pool-settings) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
 
 <a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>&#x2022; [`pools`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
 
@@ -1948,7 +1957,7 @@ A [`node_static_ip`](#custom-storage-config-storage-interface-list-storage-inter
 
 An [`enable_vgpu`](#enable-vgpu) block supports the following:
 
-<a id="enable-vgpu-feature-type"></a>&#x2022; [`feature_type`](#enable-vgpu-feature-type) - Optional String  Defaults to `UNLICENSED`<br>Possible values are `UNLICENSED`, `VGPU`, `VWS`, `VCS`<br>Feature Type. Set feature to be enabled Operate with a degraded vGPU performance Enable NVIDIA vGPU Enable NVIDIA RTX Virtual Workstation Enable NVIDIA Virtual Compute Server
+<a id="enable-vgpu-feature-type"></a>&#x2022; [`feature_type`](#enable-vgpu-feature-type) - Optional String  Defaults to `UNLICENSED`<br>Possible values are `UNLICENSED`, `VGPU`, `VWS`, `VCS`<br>[Enum: UNLICENSED|VGPU|VWS|VCS] Feature Type. Set feature to be enabled Operate with a degraded vGPU performance Enable NVIDIA vGPU Enable NVIDIA RTX Virtual Workstation Enable NVIDIA Virtual Compute Server
 
 <a id="enable-vgpu-server-address"></a>&#x2022; [`server_address`](#enable-vgpu-server-address) - Optional String<br>License Server Address. Set License Server Address
 

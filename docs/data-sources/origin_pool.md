@@ -2,12 +2,12 @@
 page_title: "f5xc_origin_pool Data Source - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  Manages a Origin Pool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
+  [Category: Load Balancing] [Namespace: required] [DependsOn: namespace, healthcheck] Manages a Origin Pool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
 ---
 
 # f5xc_origin_pool (Data Source)
 
-Manages a Origin Pool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
+[Category: Load Balancing] [Namespace: required] [DependsOn: namespace, healthcheck] Manages a Origin Pool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
 
 ~> **Note** Please refer to [Origin Pool API docs](https://docs.cloud.f5.com/docs-v2/api/views-origin-pool) to learn more.
 

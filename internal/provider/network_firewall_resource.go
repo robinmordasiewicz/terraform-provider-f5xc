@@ -122,7 +122,7 @@ func (r *NetworkFirewallResource) Metadata(ctx context.Context, req resource.Met
 func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             network_firewallSchemaVersion,
-		MarkdownDescription: "Manages a Network Firewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.",
+		MarkdownDescription: "[Category: Security] [Namespace: required] Manages a Network Firewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Network Firewall. Must be unique within the namespace.",
@@ -178,7 +178,7 @@ func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.Schem
 				Delete: true,
 			}),
 			"active_enhanced_firewall_policies": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: active_enhanced_firewall_policies, active_network_policies, disable_network_policy] Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion.",
+				MarkdownDescription: "[OneOf: active_enhanced_firewall_policies, active_network_policies, disable_network_policy; Default: disable_network_policy] Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"enhanced_firewall_policies": schema.ListNestedBlock{
@@ -204,7 +204,7 @@ func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"active_fast_acls": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: active_fast_acls, disable_fast_acl] Active Fast ACL(s). List of Fast ACL(s).",
+				MarkdownDescription: "[OneOf: active_fast_acls, disable_fast_acl; Default: disable_fast_acl] Active Fast ACL(s). List of Fast ACL(s).",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"fast_acls": schema.ListNestedBlock{
@@ -230,7 +230,7 @@ func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"active_forward_proxy_policies": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: active_forward_proxy_policies, disable_forward_proxy_policy] Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active",
+				MarkdownDescription: "[OneOf: active_forward_proxy_policies, disable_forward_proxy_policy; Default: disable_forward_proxy_policy] Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"forward_proxy_policies": schema.ListNestedBlock{

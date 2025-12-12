@@ -2,12 +2,12 @@
 page_title: "f5xc_address_allocator Resource - terraform-provider-f5xc"
 subcategory: "Cloud Resources"
 description: |-
-  Manages Address Allocator will create an address allocator object in 'system' namespace of the user in F5 Distributed Cloud.
+  [Namespace: required] Manages Address Allocator will create an address allocator object in 'system' namespace of the user in F5 Distributed Cloud.
 ---
 
 # f5xc_address_allocator (Resource)
 
-Manages Address Allocator will create an address allocator object in 'system' namespace of the user in F5 Distributed Cloud.
+[Namespace: required] Manages Address Allocator will create an address allocator object in 'system' namespace of the user in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Address Allocator API docs](https://docs.cloud.f5.com/docs-v2/api/address-allocator) to learn more.
 
@@ -15,7 +15,7 @@ Manages Address Allocator will create an address allocator object in 'system' na
 
 ```terraform
 # Address Allocator Resource Example
-# Manages Address Allocator will create an address allocator object in 'system' namespace of the user in F5 Distributed Cloud.
+# [Namespace: required] Manages Address Allocator will create an address allocator object in 'system' namespace of the user in F5 Distributed Cloud.
 
 # Basic Address Allocator configuration
 resource "f5xc_address_allocator" "example" {
@@ -62,7 +62,7 @@ resource "f5xc_address_allocator" "example" {
 
 <a id="address-pool"></a>&#x2022; [`address_pool`](#address-pool) - Optional List<br>Address Pool. Address pool from which the allocator carves out subnets or addresses to its clients
 
-<a id="mode"></a>&#x2022; [`mode`](#mode) - Optional String  Defaults to `LOCAL`<br>Possible values are `LOCAL`, `GLOBAL_PER_SITE_NODE`<br>Allocator Mode. Mode of the address allocator Address allocator is for VERs within the local cluster or site Allocation is per site and then per node
+<a id="mode"></a>&#x2022; [`mode`](#mode) - Optional String  Defaults to `LOCAL`<br>Possible values are `LOCAL`, `GLOBAL_PER_SITE_NODE`<br>[Enum: LOCAL|GLOBAL_PER_SITE_NODE] Allocator Mode. Mode of the address allocator Address allocator is for VERs within the local cluster or site Allocation is per site and then per node
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -82,7 +82,7 @@ An [`address_allocation_scheme`](#address-allocation-scheme) block supports the 
 
 <a id="address-allocation-scheme-local-interface-address-offset"></a>&#x2022; [`local_interface_address_offset`](#address-allocation-scheme-local-interface-address-offset) - Optional Number<br>Local Interface Address Offset. This is used to derive address for the local interface from the allocated subnet. If Local Interface Address Type is set to 'Offset from beginning of Subnet', this offset value is added to the allocated subnet and used as the local interface address. For example, if the allocated subnet is 169.254.0.0/30 and offset is set to 2 with Local Interface Address Type set to 'Offset from beginning of Subnet', local interface address of 169.254.0.2 is used. If Local Interface Address Type is set to 'Offset from end of Subnet', this offset value is subtracted from the end of the allocated subnet and used as the local interface address. For example, if the allocated subnet is 169.254.0.0/30 and offset is set to 1 with Local Interface Address Type set to 'Offset from end of Subnet', local interface address of 169.254.0.2 is used
 
-<a id="address-allocation-scheme-local-interface-address-type"></a>&#x2022; [`local_interface_address_type`](#address-allocation-scheme-local-interface-address-type) - Optional String  Defaults to `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_BEGIN`<br>Possible values are `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_BEGIN`, `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_END`, `LOCAL_INTERFACE_ADDRESS_FROM_PREFIX`<br>Local Interface Address Type. Dictates how local interface address is derived from the allocated subnet Use Nth address of the allocated subnet as the local interface address, N being the Local Interface Address Offset. For example, if the allocated subnet is 169.254.0.0/30, Local Interface Address Offset is set to 2 and Local Interface Address Type is set to 'Offset from beginning of Subnet', local address of 169.254.0.2 is used. Use Nth last address of the allocated subnet as the local interface address, N being the Local Interface Address Offset. For example, if the allocated subnet is 169.254.0.0/30, Local Interface Address Offset is set to 1 and Local Interface Address Type is set to 'Offset from end of Subnet', local address of 169.254.0.2 is used. This case is used for external_connector
+<a id="address-allocation-scheme-local-interface-address-type"></a>&#x2022; [`local_interface_address_type`](#address-allocation-scheme-local-interface-address-type) - Optional String  Defaults to `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_BEGIN`<br>Possible values are `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_BEGIN`, `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_END`, `LOCAL_INTERFACE_ADDRESS_FROM_PREFIX`<br>[Enum: LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_BEGIN|LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_END|LOCAL_INTERFACE_ADDRESS_FROM_PREFIX] Local Interface Address Type. Dictates how local interface address is derived from the allocated subnet Use Nth address of the allocated subnet as the local interface address, N being the Local Interface Address Offset. For example, if the allocated subnet is 169.254.0.0/30, Local Interface Address Offset is set to 2 and Local Interface Address Type is set to 'Offset from beginning of Subnet', local address of 169.254.0.2 is used. Use Nth last address of the allocated subnet as the local interface address, N being the Local Interface Address Offset. For example, if the allocated subnet is 169.254.0.0/30, Local Interface Address Offset is set to 1 and Local Interface Address Type is set to 'Offset from end of Subnet', local address of 169.254.0.2 is used. This case is used for external_connector
 
 #### Timeouts
 

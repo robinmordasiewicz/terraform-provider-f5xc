@@ -64,7 +64,7 @@ func (r *BGPAsnSetResource) Metadata(ctx context.Context, req resource.MetadataR
 func (r *BGPAsnSetResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             bgp_asn_setSchemaVersion,
-		MarkdownDescription: "Manages bgp_asn_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+		MarkdownDescription: "[Namespace: required] Manages bgp_asn_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the BGP Asn Set. Must be unique within the namespace.",

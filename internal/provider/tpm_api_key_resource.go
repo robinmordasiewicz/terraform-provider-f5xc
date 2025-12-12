@@ -79,7 +79,7 @@ func (r *TpmAPIKeyResource) Metadata(ctx context.Context, req resource.MetadataR
 func (r *TpmAPIKeyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             tpm_api_keySchemaVersion,
-		MarkdownDescription: "Manages a Tpm API Key resource in F5 Distributed Cloud for apikey object when successfully created returns actual apikey bytes which is used by the users to call in to tpm provisioning api. configuration.",
+		MarkdownDescription: "[Namespace: required] Manages a Tpm API Key resource in F5 Distributed Cloud for apikey object when successfully created returns actual apikey bytes which is used by the users to call in to tpm provisioning api. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Tpm API Key. Must be unique within the namespace.",

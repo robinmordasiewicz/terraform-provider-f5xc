@@ -2,12 +2,12 @@
 page_title: "f5xc_bgp_asn_set Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages bgp_asn_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  [Namespace: required] Manages bgp_asn_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_bgp_asn_set (Resource)
 
-Manages bgp_asn_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+[Namespace: required] Manages bgp_asn_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [BGP Asn Set API docs](https://docs.cloud.f5.com/docs-v2/api/bgp-asn-set) to learn more.
 
@@ -15,7 +15,7 @@ Manages bgp_asn_set creates a new object in the storage backend for metadata.nam
 
 ```terraform
 # BGP Asn Set Resource Example
-# Manages bgp_asn_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# [Namespace: required] Manages bgp_asn_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic BGP Asn Set configuration
 resource "f5xc_bgp_asn_set" "example" {

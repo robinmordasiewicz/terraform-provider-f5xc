@@ -1,5 +1,5 @@
 # IP Prefix Set Resource Example
-# Manages ip_prefix_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# [Category: Networking] [Namespace: required] Manages ip_prefix_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic IP Prefix Set configuration
 resource "f5xc_ip_prefix_set" "example" {

@@ -1,5 +1,5 @@
 # Policer Resource Example
-# Manages new policer with traffic rate limits in F5 Distributed Cloud.
+# [Namespace: required] Manages new policer with traffic rate limits in F5 Distributed Cloud.
 
 # Basic Policer configuration
 resource "f5xc_policer" "example" {

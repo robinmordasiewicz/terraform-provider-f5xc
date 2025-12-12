@@ -174,7 +174,7 @@ func (r *CloudLinkResource) Metadata(ctx context.Context, req resource.MetadataR
 func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             cloud_linkSchemaVersion,
-		MarkdownDescription: "Manages new CloudLink with configured parameters in F5 Distributed Cloud.",
+		MarkdownDescription: "[Category: Networking] [Namespace: required] Manages new CloudLink with configured parameters in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Cloud Link. Must be unique within the namespace.",
@@ -281,7 +281,7 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 											Optional:            true,
 										},
 										"virtual_interface_type": schema.StringAttribute{
-											MarkdownDescription: "Virtual Interface Type. Defines the type of virtual interface that needs to be configured on AWS - PRIVATE: Private A private virtual interface should be used to access an Amazon VPC using private IP addresses. - TRANSIT: Transit A transit virtual interface is a VLAN that transports traffic from a Direct Connect gateway to one or more transit gateways. The only possible value is `PRIVATE`. Defaults to `PRIVATE`.",
+											MarkdownDescription: "[Enum: PRIVATE] Virtual Interface Type. Defines the type of virtual interface that needs to be configured on AWS - PRIVATE: Private A private virtual interface should be used to access an Amazon VPC using private IP addresses. - TRANSIT: Transit A transit virtual interface is a VLAN that transports traffic from a Direct Connect gateway to one or more transit gateways. The only possible value is `PRIVATE`. Defaults to `PRIVATE`.",
 											Optional:            true,
 										},
 										"vlan": schema.Int64Attribute{

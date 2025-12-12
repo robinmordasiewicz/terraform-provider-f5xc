@@ -93,7 +93,7 @@ func (r *HealthcheckResource) Metadata(ctx context.Context, req resource.Metadat
 func (r *HealthcheckResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             healthcheckSchemaVersion,
-		MarkdownDescription: "Manages a Healthcheck resource in F5 Distributed Cloud for healthcheck object defines method to determine if the given endpoint is healthy. single healthcheck object can be referred to by one or many cluster objects. configuration.",
+		MarkdownDescription: "[Category: Load Balancing] [Namespace: required] [DependsOn: namespace] Manages a Healthcheck resource in F5 Distributed Cloud for healthcheck object defines method to determine if the given endpoint is healthy. single healthcheck object can be referred to by one or many cluster objects. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Healthcheck. Must be unique within the namespace.",

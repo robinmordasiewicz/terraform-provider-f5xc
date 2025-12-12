@@ -101,7 +101,7 @@ func (r *ProtocolPolicerResource) Metadata(ctx context.Context, req resource.Met
 func (r *ProtocolPolicerResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             protocol_policerSchemaVersion,
-		MarkdownDescription: "Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits in F5 Distributed Cloud.",
+		MarkdownDescription: "[Namespace: required] Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Protocol Policer. Must be unique within the namespace.",
@@ -202,7 +202,7 @@ func (r *ProtocolPolicerResource) Schema(ctx context.Context, req resource.Schem
 									MarkdownDescription: "ICMP Packet Type. ICMP message type to match in packet",
 									Attributes: map[string]schema.Attribute{
 										"type": schema.ListAttribute{
-											MarkdownDescription: "ICMP type. ICMP message type to be matched in packet. Possible values are `ECHO_REPLY`, `ECHO_REQUEST`, `ALL_ICMP_MSG`. Defaults to `ECHO_REPLY`.",
+											MarkdownDescription: "[Enum: ECHO_REPLY|ECHO_REQUEST|ALL_ICMP_MSG] ICMP type. ICMP message type to be matched in packet. Possible values are `ECHO_REPLY`, `ECHO_REQUEST`, `ALL_ICMP_MSG`. Defaults to `ECHO_REPLY`.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},
@@ -212,7 +212,7 @@ func (r *ProtocolPolicerResource) Schema(ctx context.Context, req resource.Schem
 									MarkdownDescription: "TCP Packet Type. Specification of TCP flag to be matched in a TCP packet",
 									Attributes: map[string]schema.Attribute{
 										"flags": schema.ListAttribute{
-											MarkdownDescription: "TCP flags. TCP flag to be matched in a TCP packet. Possible values are `FIN`, `SYN`, `RST`, `PSH`, `ACK`, `URG`, `ALL_TCP_FLAGS`, `KEEPALIVE`. Defaults to `FIN`.",
+											MarkdownDescription: "[Enum: FIN|SYN|RST|PSH|ACK|URG|ALL_TCP_FLAGS|KEEPALIVE] TCP flags. TCP flag to be matched in a TCP packet. Possible values are `FIN`, `SYN`, `RST`, `PSH`, `ACK`, `URG`, `ALL_TCP_FLAGS`, `KEEPALIVE`. Defaults to `FIN`.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},

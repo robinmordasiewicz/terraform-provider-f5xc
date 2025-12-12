@@ -2,12 +2,12 @@
 page_title: "f5xc_global_log_receiver Data Source - terraform-provider-f5xc"
 subcategory: "Monitoring"
 description: |-
-  Manages a Global Log Receiver resource in F5 Distributed Cloud for global log aggregation settings.
+  [Category: Monitoring] [Namespace: required] Manages a Global Log Receiver resource in F5 Distributed Cloud for global log aggregation settings.
 ---
 
 # f5xc_global_log_receiver (Data Source)
 
-Manages a Global Log Receiver resource in F5 Distributed Cloud for global log aggregation settings.
+[Category: Monitoring] [Namespace: required] Manages a Global Log Receiver resource in F5 Distributed Cloud for global log aggregation settings.
 
 ~> **Note** Please refer to [Global Log Receiver API docs](https://docs.cloud.f5.com/docs-v2/api/global-log-receiver) to learn more.
 

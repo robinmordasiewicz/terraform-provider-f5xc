@@ -68,7 +68,7 @@ func (r *PolicerResource) Metadata(ctx context.Context, req resource.MetadataReq
 func (r *PolicerResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             policerSchemaVersion,
-		MarkdownDescription: "Manages new policer with traffic rate limits in F5 Distributed Cloud.",
+		MarkdownDescription: "[Namespace: required] Manages new policer with traffic rate limits in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Policer. Must be unique within the namespace.",
@@ -132,7 +132,7 @@ func (r *PolicerResource) Schema(ctx context.Context, req resource.SchemaRequest
 				},
 			},
 			"policer_mode": schema.StringAttribute{
-				MarkdownDescription: "Policer Mode. - POLICER_MODE_NOT_SHARED: Not Shared A separate policer instance is created for each reference to the policer - POLICER_MODE_SHARED: Shared A common policer instance is used for for all references to the policer. Possible values are `POLICER_MODE_NOT_SHARED`, `POLICER_MODE_SHARED`. Defaults to `POLICER_MODE_NOT_SHARED`.",
+				MarkdownDescription: "[Enum: POLICER_MODE_NOT_SHARED|POLICER_MODE_SHARED] Policer Mode. - POLICER_MODE_NOT_SHARED: Not Shared A separate policer instance is created for each reference to the policer - POLICER_MODE_SHARED: Shared A common policer instance is used for for all references to the policer. Possible values are `POLICER_MODE_NOT_SHARED`, `POLICER_MODE_SHARED`. Defaults to `POLICER_MODE_NOT_SHARED`.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -140,7 +140,7 @@ func (r *PolicerResource) Schema(ctx context.Context, req resource.SchemaRequest
 				},
 			},
 			"policer_type": schema.StringAttribute{
-				MarkdownDescription: "Policer Type. Specifies the type of Policer Basic Single-Rate Two-Color Policer. The only possible value is `POLICER_SINGLE_RATE_TWO_COLOR`. Defaults to `POLICER_SINGLE_RATE_TWO_COLOR`.",
+				MarkdownDescription: "[Enum: POLICER_SINGLE_RATE_TWO_COLOR] Policer Type. Specifies the type of Policer Basic Single-Rate Two-Color Policer. The only possible value is `POLICER_SINGLE_RATE_TWO_COLOR`. Defaults to `POLICER_SINGLE_RATE_TWO_COLOR`.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{

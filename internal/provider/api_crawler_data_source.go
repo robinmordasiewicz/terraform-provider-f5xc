@@ -42,7 +42,7 @@ func (d *APICrawlerDataSource) Metadata(ctx context.Context, req datasource.Meta
 
 func (d *APICrawlerDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages a API Crawler resource in F5 Distributed Cloud.",
+		MarkdownDescription: "[Category: API Security] [Namespace: required] Manages a API Crawler resource in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

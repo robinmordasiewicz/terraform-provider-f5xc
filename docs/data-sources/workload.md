@@ -2,12 +2,12 @@
 page_title: "f5xc_workload Data Source - terraform-provider-f5xc"
 subcategory: "Kubernetes"
 description: |-
-  Manages a Workload resource in F5 Distributed Cloud for workload configuration.
+  [Namespace: required] Manages a Workload resource in F5 Distributed Cloud for workload configuration.
 ---
 
 # f5xc_workload (Data Source)
 
-Manages a Workload resource in F5 Distributed Cloud for workload configuration.
+[Namespace: required] Manages a Workload resource in F5 Distributed Cloud for workload configuration.
 
 ~> **Note** Please refer to [Workload API docs](https://docs.cloud.f5.com/docs-v2/api/views-workload) to learn more.
 

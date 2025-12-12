@@ -72,7 +72,7 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Metadata(ctx context.C
 func (r *InfraprotectInternetPrefixAdvertisementResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             infraprotect_internet_prefix_advertisementSchemaVersion,
-		MarkdownDescription: "Manages DDoS transit Internet Prefix in F5 Distributed Cloud.",
+		MarkdownDescription: "[Namespace: required] Manages DDoS transit Internet Prefix in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Infraprotect Internet Prefix Advertisement. Must be unique within the namespace.",

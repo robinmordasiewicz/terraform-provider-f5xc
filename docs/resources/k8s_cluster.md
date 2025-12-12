@@ -2,12 +2,12 @@
 page_title: "f5xc_k8s_cluster Resource - terraform-provider-f5xc"
 subcategory: "Kubernetes"
 description: |-
-  Manages k8s_cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+  [Category: Kubernetes] [Namespace: required] Manages k8s_cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 ---
 
 # f5xc_k8s_cluster (Resource)
 
-Manages k8s_cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+[Category: Kubernetes] [Namespace: required] Manages k8s_cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [K8S Cluster API docs](https://docs.cloud.f5.com/docs-v2/api/k8s-cluster) to learn more.
 
@@ -15,7 +15,7 @@ Manages k8s_cluster will create the object in the storage backend for namespace 
 
 ```terraform
 # K8S Cluster Resource Example
-# Manages k8s_cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+# [Category: Kubernetes] [Namespace: required] Manages k8s_cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
 # Basic K8S Cluster configuration
 resource "f5xc_k8s_cluster" "example" {
@@ -81,37 +81,45 @@ resource "f5xc_k8s_cluster" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="cluster-wide-app-list"></a>[`cluster_wide_app_list`](#cluster-wide-app-list) - Optional Block<br>Cluster Wide Application List. List of cluster wide applications<br>See [Cluster Wide App List](#cluster-wide-app-list) below for details.
-<br><br>&#x2022; <a id="no-cluster-wide-apps"></a>[`no_cluster_wide_apps`](#no-cluster-wide-apps) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; <a id="global-access-enable"></a>[`global_access_enable`](#global-access-enable) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="no-global-access"></a>[`no_global_access`](#no-global-access) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; <a id="insecure-registry-list"></a>[`insecure_registry_list`](#insecure-registry-list) - Optional Block<br>Docker Insecure Registry List. List of docker insecure registries<br>See [Insecure Registry List](#insecure-registry-list) below for details.
-<br><br>&#x2022; <a id="no-insecure-registries"></a>[`no_insecure_registries`](#no-insecure-registries) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; <a id="local-access-config"></a>[`local_access_config`](#local-access-config) - Optional Block<br>Local Access Configuration. Parameters required to enable local access<br>See [Local Access Config](#local-access-config) below for details.
-<br><br>&#x2022; <a id="no-local-access"></a>[`no_local_access`](#no-local-access) - Optional Block<br>Empty. This can be used for messages where no values are needed
+
+<a id="no-cluster-wide-apps"></a>&#x2022; [`no_cluster_wide_apps`](#no-cluster-wide-apps) - Optional Block<br>Empty. This can be used for messages where no values are needed
+
+<a id="no-global-access"></a>&#x2022; [`no_global_access`](#no-global-access) - Optional Block<br>Empty. This can be used for messages where no values are needed
+
+<a id="no-insecure-registries"></a>&#x2022; [`no_insecure_registries`](#no-insecure-registries) - Optional Block<br>Empty. This can be used for messages where no values are needed
+
+<a id="no-local-access"></a>&#x2022; [`no_local_access`](#no-local-access) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 -> **One of the following:**
 &#x2022; <a id="use-custom-cluster-role-bindings"></a>[`use_custom_cluster_role_bindings`](#use-custom-cluster-role-bindings) - Optional Block<br>Cluster Role Binding List. List of active cluster role binding list for a K8S cluster<br>See [Use Custom Cluster Role Bindings](#use-custom-cluster-role-bindings) below for details.
-<br><br>&#x2022; <a id="use-default-cluster-role-bindings"></a>[`use_default_cluster_role_bindings`](#use-default-cluster-role-bindings) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; <a id="use-custom-cluster-role-list"></a>[`use_custom_cluster_role_list`](#use-custom-cluster-role-list) - Optional Block<br>Cluster Role List. List of active cluster role list for a K8S cluster<br>See [Use Custom Cluster Role List](#use-custom-cluster-role-list) below for details.
-<br><br>&#x2022; <a id="use-default-cluster-roles"></a>[`use_default_cluster_roles`](#use-default-cluster-roles) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; <a id="use-custom-pod-security-admission"></a>[`use_custom_pod_security_admission`](#use-custom-pod-security-admission) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Use Custom Pod Security Admission](#use-custom-pod-security-admission) below for details.
-<br><br>&#x2022; <a id="use-default-pod-security-admission"></a>[`use_default_pod_security_admission`](#use-default-pod-security-admission) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; <a id="use-custom-psp-list"></a>[`use_custom_psp_list`](#use-custom-psp-list) - Optional Block<br>Pod Security Policy List. List of active Pod security policies for a K8S cluster<br>See [Use Custom Psp List](#use-custom-psp-list) below for details.
-<br><br>&#x2022; <a id="use-default-psp"></a>[`use_default_psp`](#use-default-psp) - Optional Block<br>Empty. This can be used for messages where no values are needed
+
+<a id="use-default-cluster-role-bindings"></a>&#x2022; [`use_default_cluster_role_bindings`](#use-default-cluster-role-bindings) - Optional Block<br>Empty. This can be used for messages where no values are needed
+
+<a id="use-default-cluster-roles"></a>&#x2022; [`use_default_cluster_roles`](#use-default-cluster-roles) - Optional Block<br>Empty. This can be used for messages where no values are needed
+
+<a id="use-default-pod-security-admission"></a>&#x2022; [`use_default_pod_security_admission`](#use-default-pod-security-admission) - Optional Block<br>Empty. This can be used for messages where no values are needed
+
+<a id="use-default-psp"></a>&#x2022; [`use_default_psp`](#use-default-psp) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; <a id="vk8s-namespace-access-deny"></a>[`vk8s_namespace_access_deny`](#vk8s-namespace-access-deny) - Optional Block<br>Empty. This can be used for messages where no values are needed

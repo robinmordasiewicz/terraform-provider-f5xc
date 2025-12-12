@@ -2,12 +2,12 @@
 page_title: "f5xc_fast_acl_rule Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages new Fast ACL rule, fast_acl_rule has specification to match source IP, source port and action to apply in F5 Distributed Cloud.
+  [Namespace: required] Manages new Fast ACL rule, fast_acl_rule has specification to match source IP, source port and action to apply in F5 Distributed Cloud.
 ---
 
 # f5xc_fast_acl_rule (Resource)
 
-Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP, source port and action to apply in F5 Distributed Cloud.
+[Namespace: required] Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP, source port and action to apply in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Fast ACL Rule API docs](https://docs.cloud.f5.com/docs-v2/api/fast-acl-rule) to learn more.
 
@@ -15,7 +15,7 @@ Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP,
 
 ```terraform
 # Fast ACL Rule Resource Example
-# Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP, source port and action to apply in F5 Distributed Cloud.
+# [Namespace: required] Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP, source port and action to apply in F5 Distributed Cloud.
 
 # Basic Fast ACL Rule configuration
 resource "f5xc_fast_acl_rule" "example" {
@@ -92,7 +92,7 @@ An [`action`](#action) block supports the following:
 
 <a id="action-protocol-policer-action"></a>&#x2022; [`protocol_policer_action`](#action-protocol-policer-action) - Optional Block<br>Protocol Policer Reference. Reference to policer object<br>See [Protocol Policer Action](#action-protocol-policer-action) below.
 
-<a id="action-simple-action"></a>&#x2022; [`simple_action`](#action-simple-action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`<br>Simple Action. FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic
+<a id="action-simple-action"></a>&#x2022; [`simple_action`](#action-simple-action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`<br>[Enum: DENY|ALLOW] Simple Action. FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic
 
 #### Action Policer Action
 

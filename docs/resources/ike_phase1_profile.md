@@ -2,12 +2,12 @@
 page_title: "f5xc_ike_phase1_profile Resource - terraform-provider-f5xc"
 subcategory: "VPN"
 description: |-
-  Manages a IKE Phase1 Profile resource in F5 Distributed Cloud for ike phase1 profile configuration.
+  [Namespace: required] Manages a IKE Phase1 Profile resource in F5 Distributed Cloud for ike phase1 profile configuration.
 ---
 
 # f5xc_ike_phase1_profile (Resource)
 
-Manages a IKE Phase1 Profile resource in F5 Distributed Cloud for ike phase1 profile configuration.
+[Namespace: required] Manages a IKE Phase1 Profile resource in F5 Distributed Cloud for ike phase1 profile configuration.
 
 ~> **Note** Please refer to [IKE Phase1 Profile API docs](https://docs.cloud.f5.com/docs-v2/api/views-ike-phase1-profile) to learn more.
 
@@ -15,7 +15,7 @@ Manages a IKE Phase1 Profile resource in F5 Distributed Cloud for ike phase1 pro
 
 ```terraform
 # IKE Phase1 Profile Resource Example
-# Manages a IKE Phase1 Profile resource in F5 Distributed Cloud for ike phase1 profile configuration.
+# [Namespace: required] Manages a IKE Phase1 Profile resource in F5 Distributed Cloud for ike phase1 profile configuration.
 
 # Basic IKE Phase1 Profile configuration
 resource "f5xc_ike_phase1_profile" "example" {
@@ -66,18 +66,17 @@ resource "f5xc_ike_phase1_profile" "example" {
 
 ### Spec Argument Reference
 
-<a id="authentication-algos"></a>&#x2022; [`authentication_algos`](#authentication-algos) - Optional List  Defaults to `AUTH_ALG_DEFAULT`<br>Possible values are `AUTH_ALG_DEFAULT`, `SHA256_HMAC`, `SHA384_HMAC`, `SHA512_HMAC`, `AUTH_ALG_NONE`<br>Authentication Algorithms. Choose one or more Authentication Algorithm. Use None option when using the AES-gcm or AES-ccm encryption algorithms
+<a id="authentication-algos"></a>&#x2022; [`authentication_algos`](#authentication-algos) - Optional List  Defaults to `AUTH_ALG_DEFAULT`<br>Possible values are `AUTH_ALG_DEFAULT`, `SHA256_HMAC`, `SHA384_HMAC`, `SHA512_HMAC`, `AUTH_ALG_NONE`<br>[Enum: AUTH_ALG_DEFAULT|SHA256_HMAC|SHA384_HMAC|SHA512_HMAC|AUTH_ALG_NONE] Authentication Algorithms. Choose one or more Authentication Algorithm. Use None option when using the AES-gcm or AES-ccm encryption algorithms
 
-<a id="dh-group"></a>&#x2022; [`dh_group`](#dh-group) - Optional List  Defaults to `DH_GROUP_DEFAULT`<br>Possible values are `DH_GROUP_DEFAULT`, `DH_GROUP_14`, `DH_GROUP_15`, `DH_GROUP_16`, `DH_GROUP_17`, `DH_GROUP_18`, `DH_GROUP_19`, `DH_GROUP_20`, `DH_GROUP_21`, `DH_GROUP_26`<br>Diffie Hellman Groups. Choose the acceptable Diffie Hellman (DH) Group or Groups that you are willing to accept as part of this profile
+<a id="dh-group"></a>&#x2022; [`dh_group`](#dh-group) - Optional List  Defaults to `DH_GROUP_DEFAULT`<br>Possible values are `DH_GROUP_DEFAULT`, `DH_GROUP_14`, `DH_GROUP_15`, `DH_GROUP_16`, `DH_GROUP_17`, `DH_GROUP_18`, `DH_GROUP_19`, `DH_GROUP_20`, `DH_GROUP_21`, `DH_GROUP_26`<br>[Enum: DH_GROUP_DEFAULT|DH_GROUP_14|DH_GROUP_15|DH_GROUP_16|DH_GROUP_17|DH_GROUP_18|DH_GROUP_19|DH_GROUP_20|DH_GROUP_21|DH_GROUP_26] Diffie Hellman Groups. Choose the acceptable Diffie Hellman (DH) Group or Groups that you are willing to accept as part of this profile
 
-<a id="encryption-algos"></a>&#x2022; [`encryption_algos`](#encryption-algos) - Optional List  Defaults to `ENC_ALG_DEFAULT`<br>Possible values are `ENC_ALG_DEFAULT`, `AES128_CBC`, `AES192_CBC`, `AES256_CBC`, `TRIPLE_DES_CBC`, `AES128_GCM`, `AES192_GCM`, `AES256_GCM`<br>Configure Encryption Algorithms. Choose one or more encryption algorithms
+<a id="encryption-algos"></a>&#x2022; [`encryption_algos`](#encryption-algos) - Optional List  Defaults to `ENC_ALG_DEFAULT`<br>Possible values are `ENC_ALG_DEFAULT`, `AES128_CBC`, `AES192_CBC`, `AES256_CBC`, `TRIPLE_DES_CBC`, `AES128_GCM`, `AES192_GCM`, `AES256_GCM`<br>[Enum: ENC_ALG_DEFAULT|AES128_CBC|AES192_CBC|AES256_CBC|TRIPLE_DES_CBC|AES128_GCM|AES192_GCM|AES256_GCM] Configure Encryption Algorithms. Choose one or more encryption algorithms
 
 -> **One of the following:**
 &#x2022; <a id="ike-keylifetime-hours"></a>[`ike_keylifetime_hours`](#ike-keylifetime-hours) - Optional Block<br>Hours. Input Hours<br>See [IKE Keylifetime Hours](#ike-keylifetime-hours) below for details.
 <br><br>&#x2022; <a id="ike-keylifetime-minutes"></a>[`ike_keylifetime_minutes`](#ike-keylifetime-minutes) - Optional Block<br>Minutes. Set IKE Key Lifetime in minutes<br>See [IKE Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
-<br><br>&#x2022; <a id="use-default-keylifetime"></a>[`use_default_keylifetime`](#use-default-keylifetime) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="prf"></a>&#x2022; [`prf`](#prf) - Optional List  Defaults to `PRF_DEFAULT`<br>Possible values are `PRF_DEFAULT`, `PRFSHA256`, `PRFSHA384`, `PRFSHA512`<br>PseudoRandomFunction. Select PseudoRandomFunction for IKE SA
+<a id="prf"></a>&#x2022; [`prf`](#prf) - Optional List  Defaults to `PRF_DEFAULT`<br>Possible values are `PRF_DEFAULT`, `PRFSHA256`, `PRFSHA384`, `PRFSHA512`<br>[Enum: PRF_DEFAULT|PRFSHA256|PRFSHA384|PRFSHA512] PseudoRandomFunction. Select PseudoRandomFunction for IKE SA
 
 -> **One of the following:**
 &#x2022; <a id="reauth-disabled"></a>[`reauth_disabled`](#reauth-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -85,6 +84,8 @@ resource "f5xc_ike_phase1_profile" "example" {
 <br><br>&#x2022; <a id="reauth-timeout-hours"></a>[`reauth_timeout_hours`](#reauth-timeout-hours) - Optional Block<br>Hours. Input Hours<br>See [Reauth Timeout Hours](#reauth-timeout-hours) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+
+<a id="use-default-keylifetime"></a>&#x2022; [`use_default_keylifetime`](#use-default-keylifetime) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 ### Attributes Reference
 

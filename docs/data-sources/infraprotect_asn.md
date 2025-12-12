@@ -2,12 +2,12 @@
 page_title: "f5xc_infraprotect_asn Data Source - terraform-provider-f5xc"
 subcategory: "Infrastructure Protection"
 description: |-
-  Manages DDoS transit ASN in F5 Distributed Cloud.
+  [Namespace: required] Manages DDoS transit ASN in F5 Distributed Cloud.
 ---
 
 # f5xc_infraprotect_asn (Data Source)
 
-Manages DDoS transit ASN in F5 Distributed Cloud.
+[Namespace: required] Manages DDoS transit ASN in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Infraprotect Asn API docs](https://docs.cloud.f5.com/docs-v2/api/infraprotect-asn) to learn more.
 

@@ -42,7 +42,7 @@ func (d *TenantConfigurationDataSource) Metadata(ctx context.Context, req dataso
 
 func (d *TenantConfigurationDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages a Tenant Configuration resource in F5 Distributed Cloud for tenant configuration configuration.",
+		MarkdownDescription: "[Namespace: required] Manages a Tenant Configuration resource in F5 Distributed Cloud for tenant configuration configuration.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

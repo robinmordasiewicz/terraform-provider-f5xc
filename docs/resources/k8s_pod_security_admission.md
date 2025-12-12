@@ -2,12 +2,12 @@
 page_title: "f5xc_k8s_pod_security_admission Resource - terraform-provider-f5xc"
 subcategory: "Kubernetes"
 description: |-
-  Manages k8s_pod_security_admission will create the object in the storage backend in F5 Distributed Cloud.
+  [Namespace: required] Manages k8s_pod_security_admission will create the object in the storage backend in F5 Distributed Cloud.
 ---
 
 # f5xc_k8s_pod_security_admission (Resource)
 
-Manages k8s_pod_security_admission will create the object in the storage backend in F5 Distributed Cloud.
+[Namespace: required] Manages k8s_pod_security_admission will create the object in the storage backend in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [K8S Pod Security Admission API docs](https://docs.cloud.f5.com/docs-v2/api/k8s-pod-security-admission) to learn more.
 
@@ -15,7 +15,7 @@ Manages k8s_pod_security_admission will create the object in the storage backend
 
 ```terraform
 # K8S Pod Security Admission Resource Example
-# Manages k8s_pod_security_admission will create the object in the storage backend in F5 Distributed Cloud.
+# [Namespace: required] Manages k8s_pod_security_admission will create the object in the storage backend in F5 Distributed Cloud.
 
 # Basic K8S Pod Security Admission configuration
 resource "f5xc_k8s_pod_security_admission" "example" {

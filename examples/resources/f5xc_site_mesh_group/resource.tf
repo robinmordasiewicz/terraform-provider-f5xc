@@ -1,5 +1,5 @@
 # Site Mesh Group Resource Example
-# Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.
+# [Namespace: required] Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.
 
 # Basic Site Mesh Group configuration
 resource "f5xc_site_mesh_group" "example" {

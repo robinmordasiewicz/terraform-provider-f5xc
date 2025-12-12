@@ -131,7 +131,7 @@ func (r *OIDCProviderResource) Metadata(ctx context.Context, req resource.Metada
 func (r *OIDCProviderResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             oidc_providerSchemaVersion,
-		MarkdownDescription: "Manages a OIDC Provider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.",
+		MarkdownDescription: "[Namespace: required] Manages a OIDC Provider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the OIDC Provider. Must be unique within the namespace.",
@@ -179,7 +179,7 @@ func (r *OIDCProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 				},
 			},
 			"provider_type": schema.StringAttribute{
-				MarkdownDescription: "Provider Type. Types of OIDC providers Default provider. use this for standard OpenIDConnect v1.0 Authenticate with Google OIDC Authenticate with Azure OIDC Authenticate with Okta OIDC. Possible values are `DEFAULT`, `GOOGLE`, `AZURE`, `OKTA`. Defaults to `DEFAULT`.",
+				MarkdownDescription: "[Enum: DEFAULT|GOOGLE|AZURE|OKTA] Provider Type. Types of OIDC providers Default provider. use this for standard OpenIDConnect v1.0 Authenticate with Google OIDC Authenticate with Azure OIDC Authenticate with Okta OIDC. Possible values are `DEFAULT`, `GOOGLE`, `AZURE`, `OKTA`. Defaults to `DEFAULT`.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -230,7 +230,7 @@ func (r *OIDCProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 						Optional:            true,
 					},
 					"prompt": schema.StringAttribute{
-						MarkdownDescription: "Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the End-User to select a user account. This enables an End-User who has multiple accounts at the Authorization Server to select amongst the multiple accounts that they might have current sessions for. Possible values are `UNSPECIFIED`, `NONE`, `CONSENT`, `LOGIN`, `SELECT_ACCOUNT`.",
+						MarkdownDescription: "[Enum: UNSPECIFIED|NONE|CONSENT|LOGIN|SELECT_ACCOUNT] Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the End-User to select a user account. This enables an End-User who has multiple accounts at the Authorization Server to select amongst the multiple accounts that they might have current sessions for. Possible values are `UNSPECIFIED`, `NONE`, `CONSENT`, `LOGIN`, `SELECT_ACCOUNT`.",
 						Optional:            true,
 					},
 					"token_url": schema.StringAttribute{
@@ -320,7 +320,7 @@ func (r *OIDCProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 						Optional:            true,
 					},
 					"prompt": schema.StringAttribute{
-						MarkdownDescription: "Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the End-User to select a user account. This enables an End-User who has multiple accounts at the Authorization Server to select amongst the multiple accounts that they might have current sessions for. Possible values are `UNSPECIFIED`, `NONE`, `CONSENT`, `LOGIN`, `SELECT_ACCOUNT`.",
+						MarkdownDescription: "[Enum: UNSPECIFIED|NONE|CONSENT|LOGIN|SELECT_ACCOUNT] Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the End-User to select a user account. This enables an End-User who has multiple accounts at the Authorization Server to select amongst the multiple accounts that they might have current sessions for. Possible values are `UNSPECIFIED`, `NONE`, `CONSENT`, `LOGIN`, `SELECT_ACCOUNT`.",
 						Optional:            true,
 					},
 					"token_url": schema.StringAttribute{
@@ -373,7 +373,7 @@ func (r *OIDCProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 						Optional:            true,
 					},
 					"prompt": schema.StringAttribute{
-						MarkdownDescription: "Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the End-User to select a user account. This enables an End-User who has multiple accounts at the Authorization Server to select amongst the multiple accounts that they might have current sessions for. Possible values are `UNSPECIFIED`, `NONE`, `CONSENT`, `LOGIN`, `SELECT_ACCOUNT`.",
+						MarkdownDescription: "[Enum: UNSPECIFIED|NONE|CONSENT|LOGIN|SELECT_ACCOUNT] Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the End-User to select a user account. This enables an End-User who has multiple accounts at the Authorization Server to select amongst the multiple accounts that they might have current sessions for. Possible values are `UNSPECIFIED`, `NONE`, `CONSENT`, `LOGIN`, `SELECT_ACCOUNT`.",
 						Optional:            true,
 					},
 					"token_url": schema.StringAttribute{

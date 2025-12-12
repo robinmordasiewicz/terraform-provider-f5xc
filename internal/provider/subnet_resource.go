@@ -108,7 +108,7 @@ func (r *SubnetResource) Metadata(ctx context.Context, req resource.MetadataRequ
 func (r *SubnetResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             subnetSchemaVersion,
-		MarkdownDescription: "Manages a Subnet resource in F5 Distributed Cloud for subnet object contains configuration for an interface of a vm/pod. it is created in user or shared namespace. configuration.",
+		MarkdownDescription: "[Namespace: required] Manages a Subnet resource in F5 Distributed Cloud for subnet object contains configuration for an interface of a vm/pod. it is created in user or shared namespace. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Subnet. Must be unique within the namespace.",

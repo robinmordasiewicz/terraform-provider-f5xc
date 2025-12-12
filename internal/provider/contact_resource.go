@@ -73,7 +73,7 @@ func (r *ContactResource) Metadata(ctx context.Context, req resource.MetadataReq
 func (r *ContactResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             contactSchemaVersion,
-		MarkdownDescription: "Manages new customer's contact detail record with us, including address and phone number. in F5 Distributed Cloud.",
+		MarkdownDescription: "[Namespace: required] Manages new customer's contact detail record with us, including address and phone number. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Contact. Must be unique within the namespace.",
@@ -145,7 +145,7 @@ func (r *ContactResource) Schema(ctx context.Context, req resource.SchemaRequest
 				},
 			},
 			"contact_type": schema.StringAttribute{
-				MarkdownDescription: "Contact Type. Determines the contact type Indicates snail mail address (used for correspondence) Indicates billing address (this address will appear on invoices) Indicates contact used for a payment method (this address is used when charging a payment method). Possible values are `MAILING`, `BILLING`, `PAYMENT`. Defaults to `MAILING`.",
+				MarkdownDescription: "[Enum: MAILING|BILLING|PAYMENT] Contact Type. Determines the contact type Indicates snail mail address (used for correspondence) Indicates billing address (this address will appear on invoices) Indicates contact used for a payment method (this address is used when charging a payment method). Possible values are `MAILING`, `BILLING`, `PAYMENT`. Defaults to `MAILING`.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{

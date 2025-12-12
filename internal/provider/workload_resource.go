@@ -4097,7 +4097,7 @@ func (r *WorkloadResource) Metadata(ctx context.Context, req resource.MetadataRe
 func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             workloadSchemaVersion,
-		MarkdownDescription: "Manages a Workload resource in F5 Distributed Cloud for workload configuration.",
+		MarkdownDescription: "[Namespace: required] Manages a Workload resource in F5 Distributed Cloud for workload configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Workload. Must be unique within the namespace.",
@@ -4204,7 +4204,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
 													Attributes: map[string]schema.Attribute{
 														"mode": schema.StringAttribute{
-															MarkdownDescription: "Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
+															MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
 															Optional:            true,
 														},
 														"mount_path": schema.StringAttribute{
@@ -4239,7 +4239,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									ElementType:         types.StringType,
 								},
 								"flavor": schema.StringAttribute{
-									MarkdownDescription: "Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have limit of 1 vCPU and 2048 MiB (mebibyte) memory. Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`. Defaults to `CONTAINER_FLAVOR_TYPE_TINY`.",
+									MarkdownDescription: "[Enum: CONTAINER_FLAVOR_TYPE_TINY|CONTAINER_FLAVOR_TYPE_MEDIUM|CONTAINER_FLAVOR_TYPE_LARGE] Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have limit of 1 vCPU and 2048 MiB (mebibyte) memory. Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`. Defaults to `CONTAINER_FLAVOR_TYPE_TINY`.",
 									Optional:            true,
 								},
 								"init_container": schema.BoolAttribute{
@@ -4281,7 +4281,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											Optional:            true,
 										},
 										"pull_policy": schema.StringAttribute{
-											MarkdownDescription: "Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS: Always Always pull the image - IMAGE_PULL_POLICY_NEVER: Never Never pull the image. Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT`.",
+											MarkdownDescription: "[Enum: IMAGE_PULL_POLICY_DEFAULT|IMAGE_PULL_POLICY_IF_NOT_PRESENT|IMAGE_PULL_POLICY_ALWAYS|IMAGE_PULL_POLICY_NEVER] Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS: Always Always pull the image - IMAGE_PULL_POLICY_NEVER: Never Never pull the image. Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT`.",
 											Optional:            true,
 										},
 									},
@@ -4625,7 +4625,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
 											Attributes: map[string]schema.Attribute{
 												"mode": schema.StringAttribute{
-													MarkdownDescription: "Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
+													MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
 													Optional:            true,
 												},
 												"mount_path": schema.StringAttribute{
@@ -4653,7 +4653,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
 											Attributes: map[string]schema.Attribute{
 												"mode": schema.StringAttribute{
-													MarkdownDescription: "Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
+													MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
 													Optional:            true,
 												},
 												"mount_path": schema.StringAttribute{
@@ -4676,7 +4676,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
 											Attributes: map[string]schema.Attribute{
 												"mode": schema.StringAttribute{
-													MarkdownDescription: "Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
+													MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
 													Optional:            true,
 												},
 												"mount_path": schema.StringAttribute{
@@ -4693,7 +4693,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											MarkdownDescription: "Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC)",
 											Attributes: map[string]schema.Attribute{
 												"access_mode": schema.StringAttribute{
-													MarkdownDescription: "Persistent Storage Access Mode. Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used to mount persistent storage in read/write mode to many hosts - ACCESS_MODE_READ_ONLY_MANY: Read Only Many Read Only Many is used to mount persistent storage in read-only mode to many hosts. Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`. Defaults to `ACCESS_MODE_READ_WRITE_ONCE`.",
+													MarkdownDescription: "[Enum: ACCESS_MODE_READ_WRITE_ONCE|ACCESS_MODE_READ_WRITE_MANY|ACCESS_MODE_READ_ONLY_MANY] Persistent Storage Access Mode. Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used to mount persistent storage in read/write mode to many hosts - ACCESS_MODE_READ_ONLY_MANY: Read Only Many Read Only Many is used to mount persistent storage in read-only mode to many hosts. Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`. Defaults to `ACCESS_MODE_READ_WRITE_ONCE`.",
 													Optional:            true,
 												},
 												"class_name": schema.StringAttribute{
@@ -4748,7 +4748,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 															Optional:            true,
 														},
 														"network": schema.StringAttribute{
-															MarkdownDescription: "Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`.",
+															MarkdownDescription: "[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`.",
 															Optional:            true,
 														},
 													},
@@ -4777,7 +4777,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													MarkdownDescription: "Virtual Site. This defines a reference to a customer site virtual site along with network type where a load balancer could be advertised",
 													Attributes: map[string]schema.Attribute{
 														"network": schema.StringAttribute{
-															MarkdownDescription: "Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`.",
+															MarkdownDescription: "[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`.",
 															Optional:            true,
 														},
 													},
@@ -5035,11 +5035,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							ElementType:         types.StringType,
 																						},
 																						"max_version": schema.StringAttribute{
-																							MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																							MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																							Optional:            true,
 																						},
 																						"min_version": schema.StringAttribute{
-																							MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																							MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																							Optional:            true,
 																						},
 																					},
@@ -5114,7 +5114,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
 																					Attributes: map[string]schema.Attribute{
 																						"xfcc_header_elements": schema.ListAttribute{
-																							MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																							MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																							Optional:            true,
 																							ElementType:         types.StringType,
 																						},
@@ -5149,7 +5149,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used",
 																						Attributes: map[string]schema.Attribute{
 																							"hash_algorithms": schema.ListAttribute{
-																								MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
+																								MarkdownDescription: "[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
 																								Optional:            true,
 																								ElementType:         types.StringType,
 																							},
@@ -5213,11 +5213,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							ElementType:         types.StringType,
 																						},
 																						"max_version": schema.StringAttribute{
-																							MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																							MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																							Optional:            true,
 																						},
 																						"min_version": schema.StringAttribute{
-																							MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																							MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																							Optional:            true,
 																						},
 																					},
@@ -5292,7 +5292,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
 																					Attributes: map[string]schema.Attribute{
 																						"xfcc_header_elements": schema.ListAttribute{
-																							MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																							MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																							Optional:            true,
 																							ElementType:         types.StringType,
 																						},
@@ -5419,11 +5419,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					ElementType:         types.StringType,
 																				},
 																				"max_version": schema.StringAttribute{
-																					MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																					MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																					Optional:            true,
 																				},
 																				"min_version": schema.StringAttribute{
-																					MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																					MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																					Optional:            true,
 																				},
 																			},
@@ -5498,7 +5498,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
 																			Attributes: map[string]schema.Attribute{
 																				"xfcc_header_elements": schema.ListAttribute{
-																					MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																					MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																					Optional:            true,
 																					ElementType:         types.StringType,
 																				},
@@ -5545,7 +5545,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				MarkdownDescription: "Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic",
 																				Attributes: map[string]schema.Attribute{
 																					"http_method": schema.StringAttribute{
-																						MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+																						MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 																						Optional:            true,
 																					},
 																				},
@@ -5631,7 +5631,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				MarkdownDescription: "Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL",
 																				Attributes: map[string]schema.Attribute{
 																					"http_method": schema.StringAttribute{
-																						MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+																						MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 																						Optional:            true,
 																					},
 																				},
@@ -5745,7 +5745,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						Optional:            true,
 																					},
 																					"http_method": schema.StringAttribute{
-																						MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+																						MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 																						Optional:            true,
 																					},
 																				},
@@ -5799,7 +5799,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	Optional:            true,
 																},
 																"protocol": schema.StringAttribute{
-																	MarkdownDescription: "Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP`.",
+																	MarkdownDescription: "[Enum: PROTOCOL_TCP|PROTOCOL_HTTP|PROTOCOL_HTTP2|PROTOCOL_TLS_WITH_SNI|PROTOCOL_UDP] Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP`.",
 																	Optional:            true,
 																},
 																"target_port": schema.Int64Attribute{
@@ -5860,7 +5860,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	Optional:            true,
 																},
 																"protocol": schema.StringAttribute{
-																	MarkdownDescription: "Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP`.",
+																	MarkdownDescription: "[Enum: PROTOCOL_TCP|PROTOCOL_HTTP|PROTOCOL_HTTP2|PROTOCOL_TLS_WITH_SNI|PROTOCOL_UDP] Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP`.",
 																	Optional:            true,
 																},
 																"target_port": schema.Int64Attribute{
@@ -5891,7 +5891,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 														Optional:            true,
 													},
 													"protocol": schema.StringAttribute{
-														MarkdownDescription: "Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP`.",
+														MarkdownDescription: "[Enum: PROTOCOL_TCP|PROTOCOL_HTTP|PROTOCOL_HTTP2|PROTOCOL_TLS_WITH_SNI|PROTOCOL_UDP] Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP`.",
 														Optional:            true,
 													},
 													"target_port": schema.Int64Attribute{
@@ -6105,11 +6105,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																									ElementType:         types.StringType,
 																								},
 																								"max_version": schema.StringAttribute{
-																									MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																									MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																									Optional:            true,
 																								},
 																								"min_version": schema.StringAttribute{
-																									MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																									MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																									Optional:            true,
 																								},
 																							},
@@ -6184,7 +6184,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
 																							Attributes: map[string]schema.Attribute{
 																								"xfcc_header_elements": schema.ListAttribute{
-																									MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																									MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																									Optional:            true,
 																									ElementType:         types.StringType,
 																								},
@@ -6219,7 +6219,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																								MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used",
 																								Attributes: map[string]schema.Attribute{
 																									"hash_algorithms": schema.ListAttribute{
-																										MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
+																										MarkdownDescription: "[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
 																										Optional:            true,
 																										ElementType:         types.StringType,
 																									},
@@ -6283,11 +6283,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																									ElementType:         types.StringType,
 																								},
 																								"max_version": schema.StringAttribute{
-																									MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																									MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																									Optional:            true,
 																								},
 																								"min_version": schema.StringAttribute{
-																									MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																									MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																									Optional:            true,
 																								},
 																							},
@@ -6362,7 +6362,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
 																							Attributes: map[string]schema.Attribute{
 																								"xfcc_header_elements": schema.ListAttribute{
-																									MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																									MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																									Optional:            true,
 																									ElementType:         types.StringType,
 																								},
@@ -6489,11 +6489,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							ElementType:         types.StringType,
 																						},
 																						"max_version": schema.StringAttribute{
-																							MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																							MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																							Optional:            true,
 																						},
 																						"min_version": schema.StringAttribute{
-																							MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																							MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																							Optional:            true,
 																						},
 																					},
@@ -6568,7 +6568,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
 																					Attributes: map[string]schema.Attribute{
 																						"xfcc_header_elements": schema.ListAttribute{
-																							MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																							MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																							Optional:            true,
 																							ElementType:         types.StringType,
 																						},
@@ -6615,7 +6615,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						MarkdownDescription: "Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic",
 																						Attributes: map[string]schema.Attribute{
 																							"http_method": schema.StringAttribute{
-																								MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+																								MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 																								Optional:            true,
 																							},
 																						},
@@ -6701,7 +6701,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						MarkdownDescription: "Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL",
 																						Attributes: map[string]schema.Attribute{
 																							"http_method": schema.StringAttribute{
-																								MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+																								MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 																								Optional:            true,
 																							},
 																						},
@@ -6815,7 +6815,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																								Optional:            true,
 																							},
 																							"http_method": schema.StringAttribute{
-																								MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+																								MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 																								Optional:            true,
 																							},
 																						},
@@ -6869,7 +6869,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			Optional:            true,
 																		},
 																		"protocol": schema.StringAttribute{
-																			MarkdownDescription: "Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP`.",
+																			MarkdownDescription: "[Enum: PROTOCOL_TCP|PROTOCOL_HTTP|PROTOCOL_HTTP2|PROTOCOL_TLS_WITH_SNI|PROTOCOL_UDP] Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP`.",
 																			Optional:            true,
 																		},
 																		"target_port": schema.Int64Attribute{
@@ -7091,11 +7091,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						ElementType:         types.StringType,
 																					},
 																					"max_version": schema.StringAttribute{
-																						MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																						MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																						Optional:            true,
 																					},
 																					"min_version": schema.StringAttribute{
-																						MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																						MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																						Optional:            true,
 																					},
 																				},
@@ -7170,7 +7170,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
 																				Attributes: map[string]schema.Attribute{
 																					"xfcc_header_elements": schema.ListAttribute{
-																						MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																						MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																						Optional:            true,
 																						ElementType:         types.StringType,
 																					},
@@ -7205,7 +7205,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used",
 																					Attributes: map[string]schema.Attribute{
 																						"hash_algorithms": schema.ListAttribute{
-																							MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
+																							MarkdownDescription: "[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
 																							Optional:            true,
 																							ElementType:         types.StringType,
 																						},
@@ -7269,11 +7269,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						ElementType:         types.StringType,
 																					},
 																					"max_version": schema.StringAttribute{
-																						MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																						MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																						Optional:            true,
 																					},
 																					"min_version": schema.StringAttribute{
-																						MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																						MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																						Optional:            true,
 																					},
 																				},
@@ -7348,7 +7348,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
 																				Attributes: map[string]schema.Attribute{
 																					"xfcc_header_elements": schema.ListAttribute{
-																						MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																						MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																						Optional:            true,
 																						ElementType:         types.StringType,
 																					},
@@ -7475,11 +7475,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				ElementType:         types.StringType,
 																			},
 																			"max_version": schema.StringAttribute{
-																				MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																				MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																				Optional:            true,
 																			},
 																			"min_version": schema.StringAttribute{
-																				MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																				MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																				Optional:            true,
 																			},
 																		},
@@ -7554,7 +7554,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																		MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
 																		Attributes: map[string]schema.Attribute{
 																			"xfcc_header_elements": schema.ListAttribute{
-																				MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																				MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																				Optional:            true,
 																				ElementType:         types.StringType,
 																			},
@@ -7601,7 +7601,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			MarkdownDescription: "Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic",
 																			Attributes: map[string]schema.Attribute{
 																				"http_method": schema.StringAttribute{
-																					MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+																					MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 																					Optional:            true,
 																				},
 																			},
@@ -7687,7 +7687,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			MarkdownDescription: "Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL",
 																			Attributes: map[string]schema.Attribute{
 																				"http_method": schema.StringAttribute{
-																					MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+																					MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 																					Optional:            true,
 																				},
 																			},
@@ -7801,7 +7801,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					Optional:            true,
 																				},
 																				"http_method": schema.StringAttribute{
-																					MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+																					MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 																					Optional:            true,
 																				},
 																			},
@@ -7850,7 +7850,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																Optional:            true,
 															},
 															"protocol": schema.StringAttribute{
-																MarkdownDescription: "Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP`.",
+																MarkdownDescription: "[Enum: PROTOCOL_TCP|PROTOCOL_HTTP|PROTOCOL_HTTP2|PROTOCOL_TLS_WITH_SNI|PROTOCOL_UDP] Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP`.",
 																Optional:            true,
 															},
 															"target_port": schema.Int64Attribute{
@@ -7932,7 +7932,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
 													Attributes: map[string]schema.Attribute{
 														"mode": schema.StringAttribute{
-															MarkdownDescription: "Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
+															MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
 															Optional:            true,
 														},
 														"mount_path": schema.StringAttribute{
@@ -7967,7 +7967,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									ElementType:         types.StringType,
 								},
 								"flavor": schema.StringAttribute{
-									MarkdownDescription: "Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have limit of 1 vCPU and 2048 MiB (mebibyte) memory. Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`. Defaults to `CONTAINER_FLAVOR_TYPE_TINY`.",
+									MarkdownDescription: "[Enum: CONTAINER_FLAVOR_TYPE_TINY|CONTAINER_FLAVOR_TYPE_MEDIUM|CONTAINER_FLAVOR_TYPE_LARGE] Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have limit of 1 vCPU and 2048 MiB (mebibyte) memory. Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`. Defaults to `CONTAINER_FLAVOR_TYPE_TINY`.",
 									Optional:            true,
 								},
 								"init_container": schema.BoolAttribute{
@@ -8009,7 +8009,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											Optional:            true,
 										},
 										"pull_policy": schema.StringAttribute{
-											MarkdownDescription: "Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS: Always Always pull the image - IMAGE_PULL_POLICY_NEVER: Never Never pull the image. Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT`.",
+											MarkdownDescription: "[Enum: IMAGE_PULL_POLICY_DEFAULT|IMAGE_PULL_POLICY_IF_NOT_PRESENT|IMAGE_PULL_POLICY_ALWAYS|IMAGE_PULL_POLICY_NEVER] Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS: Always Always pull the image - IMAGE_PULL_POLICY_NEVER: Never Never pull the image. Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT`.",
 											Optional:            true,
 										},
 									},
@@ -8356,7 +8356,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
 											Attributes: map[string]schema.Attribute{
 												"mode": schema.StringAttribute{
-													MarkdownDescription: "Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
+													MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
 													Optional:            true,
 												},
 												"mount_path": schema.StringAttribute{
@@ -8384,7 +8384,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
 											Attributes: map[string]schema.Attribute{
 												"mode": schema.StringAttribute{
-													MarkdownDescription: "Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
+													MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
 													Optional:            true,
 												},
 												"mount_path": schema.StringAttribute{
@@ -8407,7 +8407,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
 											Attributes: map[string]schema.Attribute{
 												"mode": schema.StringAttribute{
-													MarkdownDescription: "Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
+													MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
 													Optional:            true,
 												},
 												"mount_path": schema.StringAttribute{
@@ -8424,7 +8424,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											MarkdownDescription: "Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC)",
 											Attributes: map[string]schema.Attribute{
 												"access_mode": schema.StringAttribute{
-													MarkdownDescription: "Persistent Storage Access Mode. Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used to mount persistent storage in read/write mode to many hosts - ACCESS_MODE_READ_ONLY_MANY: Read Only Many Read Only Many is used to mount persistent storage in read-only mode to many hosts. Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`. Defaults to `ACCESS_MODE_READ_WRITE_ONCE`.",
+													MarkdownDescription: "[Enum: ACCESS_MODE_READ_WRITE_ONCE|ACCESS_MODE_READ_WRITE_MANY|ACCESS_MODE_READ_ONLY_MANY] Persistent Storage Access Mode. Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used to mount persistent storage in read/write mode to many hosts - ACCESS_MODE_READ_ONLY_MANY: Read Only Many Read Only Many is used to mount persistent storage in read-only mode to many hosts. Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`. Defaults to `ACCESS_MODE_READ_WRITE_ONCE`.",
 													Optional:            true,
 												},
 												"class_name": schema.StringAttribute{
@@ -8501,7 +8501,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
 													Attributes: map[string]schema.Attribute{
 														"mode": schema.StringAttribute{
-															MarkdownDescription: "Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
+															MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
 															Optional:            true,
 														},
 														"mount_path": schema.StringAttribute{
@@ -8535,7 +8535,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								ElementType:         types.StringType,
 							},
 							"flavor": schema.StringAttribute{
-								MarkdownDescription: "Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have limit of 1 vCPU and 2048 MiB (mebibyte) memory. Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`. Defaults to `CONTAINER_FLAVOR_TYPE_TINY`.",
+								MarkdownDescription: "[Enum: CONTAINER_FLAVOR_TYPE_TINY|CONTAINER_FLAVOR_TYPE_MEDIUM|CONTAINER_FLAVOR_TYPE_LARGE] Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have limit of 1 vCPU and 2048 MiB (mebibyte) memory. Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`. Defaults to `CONTAINER_FLAVOR_TYPE_TINY`.",
 								Optional:            true,
 							},
 							"init_container": schema.BoolAttribute{
@@ -8577,7 +8577,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 										Optional:            true,
 									},
 									"pull_policy": schema.StringAttribute{
-										MarkdownDescription: "Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS: Always Always pull the image - IMAGE_PULL_POLICY_NEVER: Never Never pull the image. Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT`.",
+										MarkdownDescription: "[Enum: IMAGE_PULL_POLICY_DEFAULT|IMAGE_PULL_POLICY_IF_NOT_PRESENT|IMAGE_PULL_POLICY_ALWAYS|IMAGE_PULL_POLICY_NEVER] Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS: Always Always pull the image - IMAGE_PULL_POLICY_NEVER: Never Never pull the image. Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT`.",
 										Optional:            true,
 									},
 								},
@@ -8804,7 +8804,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 										MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
 										Attributes: map[string]schema.Attribute{
 											"mode": schema.StringAttribute{
-												MarkdownDescription: "Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
+												MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
 												Optional:            true,
 											},
 											"mount_path": schema.StringAttribute{
@@ -8821,7 +8821,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 										MarkdownDescription: "Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC)",
 										Attributes: map[string]schema.Attribute{
 											"access_mode": schema.StringAttribute{
-												MarkdownDescription: "Persistent Storage Access Mode. Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used to mount persistent storage in read/write mode to many hosts - ACCESS_MODE_READ_ONLY_MANY: Read Only Many Read Only Many is used to mount persistent storage in read-only mode to many hosts. Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`. Defaults to `ACCESS_MODE_READ_WRITE_ONCE`.",
+												MarkdownDescription: "[Enum: ACCESS_MODE_READ_WRITE_ONCE|ACCESS_MODE_READ_WRITE_MANY|ACCESS_MODE_READ_ONLY_MANY] Persistent Storage Access Mode. Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used to mount persistent storage in read/write mode to many hosts - ACCESS_MODE_READ_ONLY_MANY: Read Only Many Read Only Many is used to mount persistent storage in read-only mode to many hosts. Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`. Defaults to `ACCESS_MODE_READ_WRITE_ONCE`.",
 												Optional:            true,
 											},
 											"class_name": schema.StringAttribute{
@@ -8889,7 +8889,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 															Optional:            true,
 														},
 														"network": schema.StringAttribute{
-															MarkdownDescription: "Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`.",
+															MarkdownDescription: "[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`.",
 															Optional:            true,
 														},
 													},
@@ -8918,7 +8918,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													MarkdownDescription: "Virtual Site. This defines a reference to a customer site virtual site along with network type where a load balancer could be advertised",
 													Attributes: map[string]schema.Attribute{
 														"network": schema.StringAttribute{
-															MarkdownDescription: "Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`.",
+															MarkdownDescription: "[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`.",
 															Optional:            true,
 														},
 													},
@@ -9176,11 +9176,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							ElementType:         types.StringType,
 																						},
 																						"max_version": schema.StringAttribute{
-																							MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																							MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																							Optional:            true,
 																						},
 																						"min_version": schema.StringAttribute{
-																							MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																							MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																							Optional:            true,
 																						},
 																					},
@@ -9255,7 +9255,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
 																					Attributes: map[string]schema.Attribute{
 																						"xfcc_header_elements": schema.ListAttribute{
-																							MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																							MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																							Optional:            true,
 																							ElementType:         types.StringType,
 																						},
@@ -9290,7 +9290,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used",
 																						Attributes: map[string]schema.Attribute{
 																							"hash_algorithms": schema.ListAttribute{
-																								MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
+																								MarkdownDescription: "[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
 																								Optional:            true,
 																								ElementType:         types.StringType,
 																							},
@@ -9354,11 +9354,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							ElementType:         types.StringType,
 																						},
 																						"max_version": schema.StringAttribute{
-																							MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																							MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																							Optional:            true,
 																						},
 																						"min_version": schema.StringAttribute{
-																							MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																							MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																							Optional:            true,
 																						},
 																					},
@@ -9433,7 +9433,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
 																					Attributes: map[string]schema.Attribute{
 																						"xfcc_header_elements": schema.ListAttribute{
-																							MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																							MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																							Optional:            true,
 																							ElementType:         types.StringType,
 																						},
@@ -9560,11 +9560,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					ElementType:         types.StringType,
 																				},
 																				"max_version": schema.StringAttribute{
-																					MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																					MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																					Optional:            true,
 																				},
 																				"min_version": schema.StringAttribute{
-																					MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																					MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																					Optional:            true,
 																				},
 																			},
@@ -9639,7 +9639,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
 																			Attributes: map[string]schema.Attribute{
 																				"xfcc_header_elements": schema.ListAttribute{
-																					MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																					MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																					Optional:            true,
 																					ElementType:         types.StringType,
 																				},
@@ -9686,7 +9686,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				MarkdownDescription: "Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic",
 																				Attributes: map[string]schema.Attribute{
 																					"http_method": schema.StringAttribute{
-																						MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+																						MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 																						Optional:            true,
 																					},
 																				},
@@ -9772,7 +9772,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				MarkdownDescription: "Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL",
 																				Attributes: map[string]schema.Attribute{
 																					"http_method": schema.StringAttribute{
-																						MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+																						MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 																						Optional:            true,
 																					},
 																				},
@@ -9886,7 +9886,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						Optional:            true,
 																					},
 																					"http_method": schema.StringAttribute{
-																						MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+																						MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 																						Optional:            true,
 																					},
 																				},
@@ -9940,7 +9940,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	Optional:            true,
 																},
 																"protocol": schema.StringAttribute{
-																	MarkdownDescription: "Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP`.",
+																	MarkdownDescription: "[Enum: PROTOCOL_TCP|PROTOCOL_HTTP|PROTOCOL_HTTP2|PROTOCOL_TLS_WITH_SNI|PROTOCOL_UDP] Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP`.",
 																	Optional:            true,
 																},
 																"target_port": schema.Int64Attribute{
@@ -10001,7 +10001,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	Optional:            true,
 																},
 																"protocol": schema.StringAttribute{
-																	MarkdownDescription: "Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP`.",
+																	MarkdownDescription: "[Enum: PROTOCOL_TCP|PROTOCOL_HTTP|PROTOCOL_HTTP2|PROTOCOL_TLS_WITH_SNI|PROTOCOL_UDP] Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP`.",
 																	Optional:            true,
 																},
 																"target_port": schema.Int64Attribute{
@@ -10032,7 +10032,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 														Optional:            true,
 													},
 													"protocol": schema.StringAttribute{
-														MarkdownDescription: "Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP`.",
+														MarkdownDescription: "[Enum: PROTOCOL_TCP|PROTOCOL_HTTP|PROTOCOL_HTTP2|PROTOCOL_TLS_WITH_SNI|PROTOCOL_UDP] Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP`.",
 														Optional:            true,
 													},
 													"target_port": schema.Int64Attribute{
@@ -10246,11 +10246,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																									ElementType:         types.StringType,
 																								},
 																								"max_version": schema.StringAttribute{
-																									MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																									MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																									Optional:            true,
 																								},
 																								"min_version": schema.StringAttribute{
-																									MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																									MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																									Optional:            true,
 																								},
 																							},
@@ -10325,7 +10325,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
 																							Attributes: map[string]schema.Attribute{
 																								"xfcc_header_elements": schema.ListAttribute{
-																									MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																									MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																									Optional:            true,
 																									ElementType:         types.StringType,
 																								},
@@ -10360,7 +10360,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																								MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used",
 																								Attributes: map[string]schema.Attribute{
 																									"hash_algorithms": schema.ListAttribute{
-																										MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
+																										MarkdownDescription: "[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
 																										Optional:            true,
 																										ElementType:         types.StringType,
 																									},
@@ -10424,11 +10424,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																									ElementType:         types.StringType,
 																								},
 																								"max_version": schema.StringAttribute{
-																									MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																									MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																									Optional:            true,
 																								},
 																								"min_version": schema.StringAttribute{
-																									MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																									MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																									Optional:            true,
 																								},
 																							},
@@ -10503,7 +10503,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
 																							Attributes: map[string]schema.Attribute{
 																								"xfcc_header_elements": schema.ListAttribute{
-																									MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																									MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																									Optional:            true,
 																									ElementType:         types.StringType,
 																								},
@@ -10630,11 +10630,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							ElementType:         types.StringType,
 																						},
 																						"max_version": schema.StringAttribute{
-																							MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																							MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																							Optional:            true,
 																						},
 																						"min_version": schema.StringAttribute{
-																							MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																							MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																							Optional:            true,
 																						},
 																					},
@@ -10709,7 +10709,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
 																					Attributes: map[string]schema.Attribute{
 																						"xfcc_header_elements": schema.ListAttribute{
-																							MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																							MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																							Optional:            true,
 																							ElementType:         types.StringType,
 																						},
@@ -10756,7 +10756,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						MarkdownDescription: "Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic",
 																						Attributes: map[string]schema.Attribute{
 																							"http_method": schema.StringAttribute{
-																								MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+																								MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 																								Optional:            true,
 																							},
 																						},
@@ -10842,7 +10842,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						MarkdownDescription: "Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL",
 																						Attributes: map[string]schema.Attribute{
 																							"http_method": schema.StringAttribute{
-																								MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+																								MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 																								Optional:            true,
 																							},
 																						},
@@ -10956,7 +10956,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																								Optional:            true,
 																							},
 																							"http_method": schema.StringAttribute{
-																								MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+																								MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 																								Optional:            true,
 																							},
 																						},
@@ -11010,7 +11010,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			Optional:            true,
 																		},
 																		"protocol": schema.StringAttribute{
-																			MarkdownDescription: "Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP`.",
+																			MarkdownDescription: "[Enum: PROTOCOL_TCP|PROTOCOL_HTTP|PROTOCOL_HTTP2|PROTOCOL_TLS_WITH_SNI|PROTOCOL_UDP] Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP`.",
 																			Optional:            true,
 																		},
 																		"target_port": schema.Int64Attribute{
@@ -11232,11 +11232,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						ElementType:         types.StringType,
 																					},
 																					"max_version": schema.StringAttribute{
-																						MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																						MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																						Optional:            true,
 																					},
 																					"min_version": schema.StringAttribute{
-																						MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																						MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																						Optional:            true,
 																					},
 																				},
@@ -11311,7 +11311,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
 																				Attributes: map[string]schema.Attribute{
 																					"xfcc_header_elements": schema.ListAttribute{
-																						MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																						MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																						Optional:            true,
 																						ElementType:         types.StringType,
 																					},
@@ -11346,7 +11346,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used",
 																					Attributes: map[string]schema.Attribute{
 																						"hash_algorithms": schema.ListAttribute{
-																							MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
+																							MarkdownDescription: "[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
 																							Optional:            true,
 																							ElementType:         types.StringType,
 																						},
@@ -11410,11 +11410,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						ElementType:         types.StringType,
 																					},
 																					"max_version": schema.StringAttribute{
-																						MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																						MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																						Optional:            true,
 																					},
 																					"min_version": schema.StringAttribute{
-																						MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																						MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																						Optional:            true,
 																					},
 																				},
@@ -11489,7 +11489,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
 																				Attributes: map[string]schema.Attribute{
 																					"xfcc_header_elements": schema.ListAttribute{
-																						MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																						MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																						Optional:            true,
 																						ElementType:         types.StringType,
 																					},
@@ -11616,11 +11616,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				ElementType:         types.StringType,
 																			},
 																			"max_version": schema.StringAttribute{
-																				MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																				MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																				Optional:            true,
 																			},
 																			"min_version": schema.StringAttribute{
-																				MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+																				MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 																				Optional:            true,
 																			},
 																		},
@@ -11695,7 +11695,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																		MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
 																		Attributes: map[string]schema.Attribute{
 																			"xfcc_header_elements": schema.ListAttribute{
-																				MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																				MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																				Optional:            true,
 																				ElementType:         types.StringType,
 																			},
@@ -11742,7 +11742,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			MarkdownDescription: "Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic",
 																			Attributes: map[string]schema.Attribute{
 																				"http_method": schema.StringAttribute{
-																					MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+																					MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 																					Optional:            true,
 																				},
 																			},
@@ -11828,7 +11828,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			MarkdownDescription: "Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL",
 																			Attributes: map[string]schema.Attribute{
 																				"http_method": schema.StringAttribute{
-																					MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+																					MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 																					Optional:            true,
 																				},
 																			},
@@ -11942,7 +11942,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					Optional:            true,
 																				},
 																				"http_method": schema.StringAttribute{
-																					MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+																					MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 																					Optional:            true,
 																				},
 																			},
@@ -11991,7 +11991,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																Optional:            true,
 															},
 															"protocol": schema.StringAttribute{
-																MarkdownDescription: "Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP`.",
+																MarkdownDescription: "[Enum: PROTOCOL_TCP|PROTOCOL_HTTP|PROTOCOL_HTTP2|PROTOCOL_TLS_WITH_SNI|PROTOCOL_UDP] Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP`.",
 																Optional:            true,
 															},
 															"target_port": schema.Int64Attribute{
@@ -12073,7 +12073,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
 													Attributes: map[string]schema.Attribute{
 														"mode": schema.StringAttribute{
-															MarkdownDescription: "Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
+															MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
 															Optional:            true,
 														},
 														"mount_path": schema.StringAttribute{
@@ -12108,7 +12108,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									ElementType:         types.StringType,
 								},
 								"flavor": schema.StringAttribute{
-									MarkdownDescription: "Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have limit of 1 vCPU and 2048 MiB (mebibyte) memory. Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`. Defaults to `CONTAINER_FLAVOR_TYPE_TINY`.",
+									MarkdownDescription: "[Enum: CONTAINER_FLAVOR_TYPE_TINY|CONTAINER_FLAVOR_TYPE_MEDIUM|CONTAINER_FLAVOR_TYPE_LARGE] Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have limit of 1 vCPU and 2048 MiB (mebibyte) memory. Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`. Defaults to `CONTAINER_FLAVOR_TYPE_TINY`.",
 									Optional:            true,
 								},
 								"init_container": schema.BoolAttribute{
@@ -12150,7 +12150,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											Optional:            true,
 										},
 										"pull_policy": schema.StringAttribute{
-											MarkdownDescription: "Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS: Always Always pull the image - IMAGE_PULL_POLICY_NEVER: Never Never pull the image. Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT`.",
+											MarkdownDescription: "[Enum: IMAGE_PULL_POLICY_DEFAULT|IMAGE_PULL_POLICY_IF_NOT_PRESENT|IMAGE_PULL_POLICY_ALWAYS|IMAGE_PULL_POLICY_NEVER] Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS: Always Always pull the image - IMAGE_PULL_POLICY_NEVER: Never Never pull the image. Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT`.",
 											Optional:            true,
 										},
 									},
@@ -12489,7 +12489,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
 											Attributes: map[string]schema.Attribute{
 												"mode": schema.StringAttribute{
-													MarkdownDescription: "Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
+													MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
 													Optional:            true,
 												},
 												"mount_path": schema.StringAttribute{
@@ -12506,7 +12506,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											MarkdownDescription: "Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC)",
 											Attributes: map[string]schema.Attribute{
 												"access_mode": schema.StringAttribute{
-													MarkdownDescription: "Persistent Storage Access Mode. Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used to mount persistent storage in read/write mode to many hosts - ACCESS_MODE_READ_ONLY_MANY: Read Only Many Read Only Many is used to mount persistent storage in read-only mode to many hosts. Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`. Defaults to `ACCESS_MODE_READ_WRITE_ONCE`.",
+													MarkdownDescription: "[Enum: ACCESS_MODE_READ_WRITE_ONCE|ACCESS_MODE_READ_WRITE_MANY|ACCESS_MODE_READ_ONLY_MANY] Persistent Storage Access Mode. Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used to mount persistent storage in read/write mode to many hosts - ACCESS_MODE_READ_ONLY_MANY: Read Only Many Read Only Many is used to mount persistent storage in read-only mode to many hosts. Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`. Defaults to `ACCESS_MODE_READ_WRITE_ONCE`.",
 													Optional:            true,
 												},
 												"class_name": schema.StringAttribute{
@@ -12555,7 +12555,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
 											Attributes: map[string]schema.Attribute{
 												"mode": schema.StringAttribute{
-													MarkdownDescription: "Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
+													MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
 													Optional:            true,
 												},
 												"mount_path": schema.StringAttribute{
@@ -12583,7 +12583,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
 											Attributes: map[string]schema.Attribute{
 												"mode": schema.StringAttribute{
-													MarkdownDescription: "Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
+													MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
 													Optional:            true,
 												},
 												"mount_path": schema.StringAttribute{

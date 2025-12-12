@@ -1,5 +1,5 @@
 # Secret Management Access Resource Example
-# Manages secret_management_access creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
+# [Namespace: required] Manages secret_management_access creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Secret Management Access configuration
 resource "f5xc_secret_management_access" "example" {

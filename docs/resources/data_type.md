@@ -2,12 +2,12 @@
 page_title: "f5xc_data_type Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages data_type creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  [Namespace: required] Manages data_type creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_data_type (Resource)
 
-Manages data_type creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+[Namespace: required] Manages data_type creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Data Type API docs](https://docs.cloud.f5.com/docs-v2/api/data-type) to learn more.
 
@@ -15,7 +15,7 @@ Manages data_type creates a new object in the storage backend for metadata.names
 
 ```terraform
 # Data Type Resource Example
-# Manages data_type creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# [Namespace: required] Manages data_type creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Data Type configuration
 resource "f5xc_data_type" "example" {
@@ -66,7 +66,7 @@ resource "f5xc_data_type" "example" {
 
 ### Spec Argument Reference
 
-<a id="compliances"></a>&#x2022; [`compliances`](#compliances) - Optional List<br>Possible values are `GDPR`, `CCPA`, `PIPEDA`, `LGPD`, `DPA_UK`, `PDPA_SG`, `APPI`, `HIPAA`, `CPRA_2023`, `CPA_CO`, `SOC2`, `PCI_DSS`, `ISO_IEC_27001`, `ISO_IEC_27701`, `EPRIVACY_DIRECTIVE`, `GLBA`, `SOX`<br>Relevant Compliances. Choose applicable compliance frameworks such as GDPR, PCI/DSS, or CCPA to ensure the platform identifies whether vulnerabilities in API endpoints handling this data type may cause a compliance breach
+<a id="compliances"></a>&#x2022; [`compliances`](#compliances) - Optional List<br>Possible values are `GDPR`, `CCPA`, `PIPEDA`, `LGPD`, `DPA_UK`, `PDPA_SG`, `APPI`, `HIPAA`, `CPRA_2023`, `CPA_CO`, `SOC2`, `PCI_DSS`, `ISO_IEC_27001`, `ISO_IEC_27701`, `EPRIVACY_DIRECTIVE`, `GLBA`, `SOX`<br>[Enum: GDPR|CCPA|PIPEDA|LGPD|DPA_UK|PDPA_SG|APPI|HIPAA|CPRA_2023|CPA_CO|SOC2|PCI_DSS|ISO_IEC_27001|ISO_IEC_27701|EPRIVACY_DIRECTIVE|GLBA|SOX] Relevant Compliances. Choose applicable compliance frameworks such as GDPR, PCI/DSS, or CCPA to ensure the platform identifies whether vulnerabilities in API endpoints handling this data type may cause a compliance breach
 
 <a id="is-pii"></a>&#x2022; [`is_pii`](#is-pii) - Optional Bool<br>Mark as PII. Select this option to classify the custom data type as personally identifiable information (PII)
 

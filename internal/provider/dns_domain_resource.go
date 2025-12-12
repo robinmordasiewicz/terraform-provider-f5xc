@@ -69,7 +69,7 @@ func (r *DNSDomainResource) Metadata(ctx context.Context, req resource.MetadataR
 func (r *DNSDomainResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             dns_domainSchemaVersion,
-		MarkdownDescription: "Manages DNS Domain in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
+		MarkdownDescription: "[Category: DNS] [Namespace: not_required] Manages DNS Domain in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Domain name for the DNS Domain (e.g., example.com). Must be a valid DNS domain name.",
@@ -117,7 +117,7 @@ func (r *DNSDomainResource) Schema(ctx context.Context, req resource.SchemaReque
 				},
 			},
 			"dnssec_mode": schema.StringAttribute{
-				MarkdownDescription: "DNSSEC Mode. Enable or disable DNSSEC on the DNS Domain DNSSEC is disabled DNSSEC is enabled. Possible values are `DNSSEC_DISABLE`, `DNSSEC_ENABLE`. Defaults to `DNSSEC_DISABLE`.",
+				MarkdownDescription: "[Enum: DNSSEC_DISABLE|DNSSEC_ENABLE] DNSSEC Mode. Enable or disable DNSSEC on the DNS Domain DNSSEC is disabled DNSSEC is enabled. Possible values are `DNSSEC_DISABLE`, `DNSSEC_ENABLE`. Defaults to `DNSSEC_DISABLE`.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{

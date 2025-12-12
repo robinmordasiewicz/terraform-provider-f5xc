@@ -2,12 +2,12 @@
 page_title: "f5xc_app_setting Resource - terraform-provider-f5xc"
 subcategory: "Applications"
 description: |-
-  Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.
+  [Namespace: required] Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.
 ---
 
 # f5xc_app_setting (Resource)
 
-Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.
+[Namespace: required] Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [App Setting API docs](https://docs.cloud.f5.com/docs-v2/api/app-setting) to learn more.
 
@@ -15,7 +15,7 @@ Manages App setting configuration in namespace metadata.namespace in F5 Distribu
 
 ```terraform
 # App Setting Resource Example
-# Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.
+# [Namespace: required] Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.
 
 # Basic App Setting configuration
 resource "f5xc_app_setting" "example" {
@@ -122,9 +122,9 @@ A [`timeseries_analyses_setting`](#app-type-settings-timeseries-analyses-setting
 
 A [`metric_selectors`](#app-type-settings-timeseries-analyses-setting-metric-selectors) block (within [`app_type_settings.timeseries_analyses_setting`](#app-type-settings-timeseries-analyses-setting)) supports the following:
 
-<a id="app-type-settings-timeseries-analyses-setting-metric-selectors-metric"></a>&#x2022; [`metric`](#app-type-settings-timeseries-analyses-setting-metric-selectors-metric) - Optional List  Defaults to `NO_METRICS`<br>Possible values are `NO_METRICS`, `REQUEST_RATE`, `ERROR_RATE`, `LATENCY`, `THROUGHPUT`<br>Metrics. Choose one or more metrics to be included in the detection logic
+<a id="app-type-settings-timeseries-analyses-setting-metric-selectors-metric"></a>&#x2022; [`metric`](#app-type-settings-timeseries-analyses-setting-metric-selectors-metric) - Optional List  Defaults to `NO_METRICS`<br>Possible values are `NO_METRICS`, `REQUEST_RATE`, `ERROR_RATE`, `LATENCY`, `THROUGHPUT`<br>[Enum: NO_METRICS|REQUEST_RATE|ERROR_RATE|LATENCY|THROUGHPUT] Metrics. Choose one or more metrics to be included in the detection logic
 
-<a id="app-type-settings-timeseries-analyses-setting-metric-selectors-metrics-source"></a>&#x2022; [`metrics_source`](#app-type-settings-timeseries-analyses-setting-metric-selectors-metrics-source) - Optional String<br>Possible values are `NONE`, `NODES`, `EDGES`, `VIRTUAL_HOSTS`<br>Metrics Source. Supported sources from which Metrics can be analyzed All edges in the service mesh graph. Metrics are analyzed separately between all source and destination service combinations
+<a id="app-type-settings-timeseries-analyses-setting-metric-selectors-metrics-source"></a>&#x2022; [`metrics_source`](#app-type-settings-timeseries-analyses-setting-metric-selectors-metrics-source) - Optional String<br>Possible values are `NONE`, `NODES`, `EDGES`, `VIRTUAL_HOSTS`<br>[Enum: NONE|NODES|EDGES|VIRTUAL_HOSTS] Metrics Source. Supported sources from which Metrics can be analyzed All edges in the service mesh graph. Metrics are analyzed separately between all source and destination service combinations
 
 #### App Type Settings User Behavior Analysis Setting
 

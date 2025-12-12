@@ -2,12 +2,12 @@
 page_title: "f5xc_infraprotect_internet_prefix_advertisement Data Source - terraform-provider-f5xc"
 subcategory: "Infrastructure Protection"
 description: |-
-  Manages DDoS transit Internet Prefix in F5 Distributed Cloud.
+  [Namespace: required] Manages DDoS transit Internet Prefix in F5 Distributed Cloud.
 ---
 
 # f5xc_infraprotect_internet_prefix_advertisement (Data Source)
 
-Manages DDoS transit Internet Prefix in F5 Distributed Cloud.
+[Namespace: required] Manages DDoS transit Internet Prefix in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Infraprotect Internet Prefix Advertisement API docs](https://docs.cloud.f5.com/docs-v2/api/infraprotect-internet-prefix-advertisement) to learn more.
 

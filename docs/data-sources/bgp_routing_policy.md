@@ -2,12 +2,12 @@
 page_title: "f5xc_bgp_routing_policy Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages a BGP Routing Policy resource in F5 Distributed Cloud for bgp routing policy is a list of rules containing match criteria and action to be applied. these rules help contol routes which are imported or exported to bgp peers configuration.
+  [Namespace: required] Manages a BGP Routing Policy resource in F5 Distributed Cloud for bgp routing policy is a list of rules containing match criteria and action to be applied. these rules help contol routes which are imported or exported to bgp peers configuration.
 ---
 
 # f5xc_bgp_routing_policy (Data Source)
 
-Manages a BGP Routing Policy resource in F5 Distributed Cloud for bgp routing policy is a list of rules containing match criteria and action to be applied. these rules help contol routes which are imported or exported to bgp peers configuration.
+[Namespace: required] Manages a BGP Routing Policy resource in F5 Distributed Cloud for bgp routing policy is a list of rules containing match criteria and action to be applied. these rules help contol routes which are imported or exported to bgp peers configuration.
 
 ~> **Note** Please refer to [BGP Routing Policy API docs](https://docs.cloud.f5.com/docs-v2/api/bgp-routing-policy) to learn more.
 

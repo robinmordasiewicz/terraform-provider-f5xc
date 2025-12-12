@@ -1,5 +1,5 @@
 # Service Policy Rule Resource Example
-# Manages service_policy_rule creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# [Namespace: required] Manages service_policy_rule creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Service Policy Rule configuration
 resource "f5xc_service_policy_rule" "example" {

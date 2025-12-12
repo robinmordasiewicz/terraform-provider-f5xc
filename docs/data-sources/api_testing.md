@@ -2,12 +2,12 @@
 page_title: "f5xc_api_testing Data Source - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
-  Manages a API Testing resource in F5 Distributed Cloud.
+  [Category: API Security] [Namespace: required] Manages a API Testing resource in F5 Distributed Cloud.
 ---
 
 # f5xc_api_testing (Data Source)
 
-Manages a API Testing resource in F5 Distributed Cloud.
+[Category: API Security] [Namespace: required] Manages a API Testing resource in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [API Testing API docs](https://docs.cloud.f5.com/docs-v2/api/api-sec-api-testing) to learn more.
 

@@ -2,12 +2,12 @@
 page_title: "f5xc_dns_domain Resource - terraform-provider-f5xc"
 subcategory: "DNS"
 description: |-
-  Manages DNS Domain in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
+  [Category: DNS] [Namespace: not_required] Manages DNS Domain in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 ---
 
 # f5xc_dns_domain (Resource)
 
-Manages DNS Domain in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
+[Category: DNS] [Namespace: not_required] Manages DNS Domain in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [DNS Domain API docs](https://docs.cloud.f5.com/docs-v2/api/dns-domain) to learn more.
 
@@ -15,7 +15,7 @@ Manages DNS Domain in a given namespace. If one already exist it will give a err
 
 ```terraform
 # DNS Domain Resource Example
-# Manages DNS Domain in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
+# [Category: DNS] [Namespace: not_required] Manages DNS Domain in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
 # Basic DNS Domain configuration
 resource "f5xc_dns_domain" "example" {
@@ -58,7 +58,7 @@ resource "f5xc_dns_domain" "example" {
 
 ### Spec Argument Reference
 
-<a id="dnssec-mode"></a>&#x2022; [`dnssec_mode`](#dnssec-mode) - Optional String  Defaults to `DNSSEC_DISABLE`<br>Possible values are `DNSSEC_DISABLE`, `DNSSEC_ENABLE`<br>DNSSEC Mode. Enable or disable DNSSEC on the DNS Domain DNSSEC is disabled DNSSEC is enabled
+<a id="dnssec-mode"></a>&#x2022; [`dnssec_mode`](#dnssec-mode) - Optional String  Defaults to `DNSSEC_DISABLE`<br>Possible values are `DNSSEC_DISABLE`, `DNSSEC_ENABLE`<br>[Enum: DNSSEC_DISABLE|DNSSEC_ENABLE] DNSSEC Mode. Enable or disable DNSSEC on the DNS Domain DNSSEC is disabled DNSSEC is enabled
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

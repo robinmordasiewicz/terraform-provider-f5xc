@@ -1,5 +1,5 @@
 # Report Config Resource Example
-# Manages a Report Config resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.
+# [Namespace: required] Manages a Report Config resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.
 
 # Basic Report Config configuration
 resource "f5xc_report_config" "example" {

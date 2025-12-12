@@ -94,7 +94,7 @@ func (r *AddonSubscriptionResource) Metadata(ctx context.Context, req resource.M
 func (r *AddonSubscriptionResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             addon_subscriptionSchemaVersion,
-		MarkdownDescription: "Manages new Addon Subscription with Addon Subscription State in F5 Distributed Cloud.",
+		MarkdownDescription: "[Namespace: required] Manages new Addon Subscription with Addon Subscription State in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Addon Subscription. Must be unique within the namespace.",
@@ -142,7 +142,7 @@ func (r *AddonSubscriptionResource) Schema(ctx context.Context, req resource.Sch
 				},
 			},
 			"status": schema.StringAttribute{
-				MarkdownDescription: "Addon Subscription Type. Represents the different states of an addon subscription. - SUBSCRIPTION_PENDING: Subscription Pending Indicates that the subscription is pending enablement. - SUBSCRIPTION_ENABLED: Subscription Enabled Indicates that the subscription is currently enabled and active. - SUBSCRIPTION_DISABLE_PENDING: Subscription Disable Pending Indicates that the addon disable process is pending. - SUBSCRIPTION_DISABLED: Subscription Disabled Indicates that the addon has been disabled. Possible values are `SUBSCRIPTION_PENDING`, `SUBSCRIPTION_ENABLED`, `SUBSCRIPTION_DISABLE_PENDING`, `SUBSCRIPTION_DISABLED`. Defaults to `SUBSCRIPTION_PENDING`.",
+				MarkdownDescription: "[Enum: SUBSCRIPTION_PENDING|SUBSCRIPTION_ENABLED|SUBSCRIPTION_DISABLE_PENDING|SUBSCRIPTION_DISABLED] Addon Subscription Type. Represents the different states of an addon subscription. - SUBSCRIPTION_PENDING: Subscription Pending Indicates that the subscription is pending enablement. - SUBSCRIPTION_ENABLED: Subscription Enabled Indicates that the subscription is currently enabled and active. - SUBSCRIPTION_DISABLE_PENDING: Subscription Disable Pending Indicates that the addon disable process is pending. - SUBSCRIPTION_DISABLED: Subscription Disabled Indicates that the addon has been disabled. Possible values are `SUBSCRIPTION_PENDING`, `SUBSCRIPTION_ENABLED`, `SUBSCRIPTION_DISABLE_PENDING`, `SUBSCRIPTION_DISABLED`. Defaults to `SUBSCRIPTION_PENDING`.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{

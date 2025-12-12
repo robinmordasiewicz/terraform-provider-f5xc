@@ -287,7 +287,7 @@ func (r *AlertReceiverResource) Metadata(ctx context.Context, req resource.Metad
 func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             alert_receiverSchemaVersion,
-		MarkdownDescription: "Manages a Alert Receiver resource in F5 Distributed Cloud for alert notification endpoints.",
+		MarkdownDescription: "[Category: Monitoring] [Namespace: required] Manages a Alert Receiver resource in F5 Distributed Cloud for alert notification endpoints.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Alert Receiver. Must be unique within the namespace.",
@@ -653,11 +653,11 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 								MarkdownDescription: "TLS Config. Configures the token request's TLS settings.",
 								Attributes: map[string]schema.Attribute{
 									"max_version": schema.StringAttribute{
-										MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+										MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 										Optional:            true,
 									},
 									"min_version": schema.StringAttribute{
-										MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+										MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 										Optional:            true,
 									},
 									"sni": schema.StringAttribute{

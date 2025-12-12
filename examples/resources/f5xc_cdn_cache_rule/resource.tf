@@ -1,5 +1,5 @@
 # CDN Cache Rule Resource Example
-# Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
+# [Namespace: required] Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
 
 # Basic CDN Cache Rule configuration
 resource "f5xc_cdn_cache_rule" "example" {

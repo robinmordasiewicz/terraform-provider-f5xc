@@ -2,12 +2,12 @@
 page_title: "f5xc_forwarding_class Data Source - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages a Forwarding Class resource in F5 Distributed Cloud for forwarding class is created by users in system namespace configuration.
+  [Namespace: required] Manages a Forwarding Class resource in F5 Distributed Cloud for forwarding class is created by users in system namespace configuration.
 ---
 
 # f5xc_forwarding_class (Data Source)
 
-Manages a Forwarding Class resource in F5 Distributed Cloud for forwarding class is created by users in system namespace configuration.
+[Namespace: required] Manages a Forwarding Class resource in F5 Distributed Cloud for forwarding class is created by users in system namespace configuration.
 
 ~> **Note** Please refer to [Forwarding Class API docs](https://docs.cloud.f5.com/docs-v2/api/forwarding-class) to learn more.
 

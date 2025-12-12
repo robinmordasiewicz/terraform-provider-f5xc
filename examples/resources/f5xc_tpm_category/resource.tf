@@ -1,5 +1,5 @@
 # Tpm Category Resource Example
-# Manages Category object, which is a grouping of APIKeys used for TPM provisioning in F5 Distributed Cloud.
+# [Namespace: required] Manages Category object, which is a grouping of APIKeys used for TPM provisioning in F5 Distributed Cloud.
 
 # Basic Tpm Category configuration
 resource "f5xc_tpm_category" "example" {

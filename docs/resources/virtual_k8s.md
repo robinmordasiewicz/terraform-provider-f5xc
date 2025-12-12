@@ -2,12 +2,12 @@
 page_title: "f5xc_virtual_k8s Resource - terraform-provider-f5xc"
 subcategory: "Kubernetes"
 description: |-
-  Manages virtual_k8s will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+  [Category: Kubernetes] [Namespace: required] Manages virtual_k8s will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 ---
 
 # f5xc_virtual_k8s (Resource)
 
-Manages virtual_k8s will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+[Category: Kubernetes] [Namespace: required] Manages virtual_k8s will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Virtual K8S API docs](https://docs.cloud.f5.com/docs-v2/api/virtual-k8s) to learn more.
 
@@ -15,7 +15,7 @@ Manages virtual_k8s will create the object in the storage backend for namespace 
 
 ```terraform
 # Virtual K8S Resource Example
-# Manages virtual_k8s will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+# [Category: Kubernetes] [Namespace: required] Manages virtual_k8s will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
 # Basic Virtual K8S configuration
 resource "f5xc_virtual_k8s" "example" {

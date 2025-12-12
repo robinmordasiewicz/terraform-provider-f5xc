@@ -2,12 +2,12 @@
 page_title: "f5xc_policer Resource - terraform-provider-f5xc"
 subcategory: "Service Mesh"
 description: |-
-  Manages new policer with traffic rate limits in F5 Distributed Cloud.
+  [Namespace: required] Manages new policer with traffic rate limits in F5 Distributed Cloud.
 ---
 
 # f5xc_policer (Resource)
 
-Manages new policer with traffic rate limits in F5 Distributed Cloud.
+[Namespace: required] Manages new policer with traffic rate limits in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Policer API docs](https://docs.cloud.f5.com/docs-v2/api/policer) to learn more.
 
@@ -15,7 +15,7 @@ Manages new policer with traffic rate limits in F5 Distributed Cloud.
 
 ```terraform
 # Policer Resource Example
-# Manages new policer with traffic rate limits in F5 Distributed Cloud.
+# [Namespace: required] Manages new policer with traffic rate limits in F5 Distributed Cloud.
 
 # Basic Policer configuration
 resource "f5xc_policer" "example" {
@@ -61,9 +61,9 @@ resource "f5xc_policer" "example" {
 
 <a id="committed-information-rate"></a>&#x2022; [`committed_information_rate`](#committed-information-rate) - Optional Number<br>Committed Information Rate(pps). The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions. e.g. 10000 pps
 
-<a id="policer-mode"></a>&#x2022; [`policer_mode`](#policer-mode) - Optional String  Defaults to `POLICER_MODE_NOT_SHARED`<br>Possible values are `POLICER_MODE_NOT_SHARED`, `POLICER_MODE_SHARED`<br>Policer Mode. - POLICER_MODE_NOT_SHARED: Not Shared A separate policer instance is created for each reference to the policer - POLICER_MODE_SHARED: Shared A common policer instance is used for for all references to the policer
+<a id="policer-mode"></a>&#x2022; [`policer_mode`](#policer-mode) - Optional String  Defaults to `POLICER_MODE_NOT_SHARED`<br>Possible values are `POLICER_MODE_NOT_SHARED`, `POLICER_MODE_SHARED`<br>[Enum: POLICER_MODE_NOT_SHARED|POLICER_MODE_SHARED] Policer Mode. - POLICER_MODE_NOT_SHARED: Not Shared A separate policer instance is created for each reference to the policer - POLICER_MODE_SHARED: Shared A common policer instance is used for for all references to the policer
 
-<a id="policer-type"></a>&#x2022; [`policer_type`](#policer-type) - Optional String  Defaults to `POLICER_SINGLE_RATE_TWO_COLOR`<br>Policer Type. Specifies the type of Policer Basic Single-Rate Two-Color Policer. The only possible value is `POLICER_SINGLE_RATE_TWO_COLOR`
+<a id="policer-type"></a>&#x2022; [`policer_type`](#policer-type) - Optional String  Defaults to `POLICER_SINGLE_RATE_TWO_COLOR`<br>[Enum: POLICER_SINGLE_RATE_TWO_COLOR] Policer Type. Specifies the type of Policer Basic Single-Rate Two-Color Policer. The only possible value is `POLICER_SINGLE_RATE_TWO_COLOR`
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

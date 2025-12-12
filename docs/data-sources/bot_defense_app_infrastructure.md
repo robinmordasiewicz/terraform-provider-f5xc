@@ -2,12 +2,12 @@
 page_title: "f5xc_bot_defense_app_infrastructure Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages Bot Defense App Infrastructure in a given namespace. in F5 Distributed Cloud.
+  [Category: Security] [Namespace: required] Manages Bot Defense App Infrastructure in a given namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_bot_defense_app_infrastructure (Data Source)
 
-Manages Bot Defense App Infrastructure in a given namespace. in F5 Distributed Cloud.
+[Category: Security] [Namespace: required] Manages Bot Defense App Infrastructure in a given namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Bot Defense App Infrastructure API docs](https://docs.cloud.f5.com/docs-v2/api/views-bot-defense-app-infrastructure) to learn more.
 

@@ -2,12 +2,12 @@
 page_title: "f5xc_route Resource - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  Manages a Route resource in F5 Distributed Cloud for defining traffic routing rules for load balancers.
+  [Category: Load Balancing] [Namespace: required] [DependsOn: namespace, http_loadbalancer] Manages a Route resource in F5 Distributed Cloud for defining traffic routing rules for load balancers.
 ---
 
 # f5xc_route (Resource)
 
-Manages a Route resource in F5 Distributed Cloud for defining traffic routing rules for load balancers.
+[Category: Load Balancing] [Namespace: required] [DependsOn: namespace, http_loadbalancer] Manages a Route resource in F5 Distributed Cloud for defining traffic routing rules for load balancers.
 
 ~> **Note** Please refer to [Route API docs](https://docs.cloud.f5.com/docs-v2/api/operate-route) to learn more.
 
@@ -15,7 +15,7 @@ Manages a Route resource in F5 Distributed Cloud for defining traffic routing ru
 
 ```terraform
 # Route Resource Example
-# Manages a Route resource in F5 Distributed Cloud for defining traffic routing rules for load balancers.
+# [Category: Load Balancing] [Namespace: required] [DependsOn: namespace, http_loadbalancer] Manages a Route resource in F5 Distributed Cloud for defining traffic routing rules for load balancers.
 
 # Basic Route configuration
 resource "f5xc_route" "example" {
@@ -128,7 +128,7 @@ A [`routes`](#routes) block supports the following:
 
 A [`bot_defense_javascript_injection`](#routes-bot-defense-javascript-injection) block (within [`routes`](#routes)) supports the following:
 
-<a id="routes-bot-defense-javascript-injection-javascript-location"></a>&#x2022; [`javascript_location`](#routes-bot-defense-javascript-injection-javascript-location) - Optional String  Defaults to `AFTER_HEAD`<br>Possible values are `AFTER_HEAD`, `AFTER_TITLE_END`, `BEFORE_SCRIPT`<br>JavaScript Location. All inside networks. Insert JavaScript after `<head>` tag Insert JavaScript after `</title>` tag. Insert JavaScript before first `<script>` tag
+<a id="routes-bot-defense-javascript-injection-javascript-location"></a>&#x2022; [`javascript_location`](#routes-bot-defense-javascript-injection-javascript-location) - Optional String  Defaults to `AFTER_HEAD`<br>Possible values are `AFTER_HEAD`, `AFTER_TITLE_END`, `BEFORE_SCRIPT`<br>[Enum: AFTER_HEAD|AFTER_TITLE_END|BEFORE_SCRIPT] JavaScript Location. All inside networks. Insert JavaScript after `<head>` tag Insert JavaScript after `</title>` tag. Insert JavaScript before first `<script>` tag
 
 <a id="routes-bot-defense-javascript-injection-javascript-tags"></a>&#x2022; [`javascript_tags`](#routes-bot-defense-javascript-injection-javascript-tags) - Optional Block<br>JavaScript Tags. Select Add item to configure your javascript tag. If adding both Bot Adv and Fraud, the Bot Javascript should be added first<br>See [Javascript Tags](#routes-bot-defense-javascript-injection-javascript-tags) below.
 
@@ -144,7 +144,7 @@ A [`javascript_tags`](#routes-bot-defense-javascript-injection-javascript-tags) 
 
 A [`tag_attributes`](#routes-bot-defense-javascript-injection-javascript-tags-tag-attributes) block (within [`routes.bot_defense_javascript_injection.javascript_tags`](#routes-bot-defense-javascript-injection-javascript-tags)) supports the following:
 
-<a id="routes-bot-defense-javascript-injection-javascript-tags-tag-attributes-javascript-tag"></a>&#x2022; [`javascript_tag`](#routes-bot-defense-javascript-injection-javascript-tags-tag-attributes-javascript-tag) - Optional String  Defaults to `JS_ATTR_ID`<br>Possible values are `JS_ATTR_ID`, `JS_ATTR_CID`, `JS_ATTR_CN`, `JS_ATTR_API_DOMAIN`, `JS_ATTR_API_URL`, `JS_ATTR_API_PATH`, `JS_ATTR_ASYNC`, `JS_ATTR_DEFER`<br>Tag Attribute Name. Select from one of the predefined tag attributes
+<a id="routes-bot-defense-javascript-injection-javascript-tags-tag-attributes-javascript-tag"></a>&#x2022; [`javascript_tag`](#routes-bot-defense-javascript-injection-javascript-tags-tag-attributes-javascript-tag) - Optional String  Defaults to `JS_ATTR_ID`<br>Possible values are `JS_ATTR_ID`, `JS_ATTR_CID`, `JS_ATTR_CN`, `JS_ATTR_API_DOMAIN`, `JS_ATTR_API_URL`, `JS_ATTR_API_PATH`, `JS_ATTR_ASYNC`, `JS_ATTR_DEFER`<br>[Enum: JS_ATTR_ID|JS_ATTR_CID|JS_ATTR_CN|JS_ATTR_API_DOMAIN|JS_ATTR_API_URL|JS_ATTR_API_PATH|JS_ATTR_ASYNC|JS_ATTR_DEFER] Tag Attribute Name. Select from one of the predefined tag attributes
 
 <a id="routes-bot-defense-javascript-injection-javascript-tags-tag-attributes-tag-value"></a>&#x2022; [`tag_value`](#routes-bot-defense-javascript-injection-javascript-tags-tag-attributes-tag-value) - Optional String<br>Value. Add the tag attribute value
 
@@ -154,7 +154,7 @@ A [`match`](#routes-match) block (within [`routes`](#routes)) supports the follo
 
 <a id="routes-match-headers"></a>&#x2022; [`headers`](#routes-match-headers) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#routes-match-headers) below.
 
-<a id="routes-match-http-method"></a>&#x2022; [`http_method`](#routes-match-http-method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
+<a id="routes-match-http-method"></a>&#x2022; [`http_method`](#routes-match-http-method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
 
 <a id="routes-match-incoming-port"></a>&#x2022; [`incoming_port`](#routes-match-incoming-port) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Incoming Port](#routes-match-incoming-port) below.
 
@@ -422,7 +422,7 @@ A [`route_destination`](#routes-route-destination) block (within [`routes`](#rou
 
 <a id="routes-route-destination-prefix-rewrite"></a>&#x2022; [`prefix_rewrite`](#routes-route-destination-prefix-rewrite) - Optional String<br>Prefix Rewrite. prefix_rewrite indicates that during forwarding, the matched prefix (or path) should be swapped with its value. When using regex path matching, the entire path (not including the query string) will be swapped with this value. This option allows application URLs to be rooted at a different path from those exposed at the reverse proxy layer. Example : gcSpec: routes: - match: - headers: [] path: prefix : /register/ query_params: [] - headers: [] path: prefix: /register query_params: [] routeDestination: prefixRewrite: '/' destinations: - cluster: - kind: cluster.Object uid: cluster-1 Having above entries in the config, requests to /register will be stripped to /, while requests to /register/public will be stripped to /public
 
-<a id="routes-route-destination-priority"></a>&#x2022; [`priority`](#routes-route-destination-priority) - Optional String  Defaults to `DEFAULT`<br>Possible values are `DEFAULT`, `HIGH`<br>Routing Priority. Priority routing for each request. Different connection pools are used based on the priority selected for the request. Also, circuit-breaker configuration at destination cluster is chosen based on selected priority. Default routing mechanism High-Priority routing mechanism
+<a id="routes-route-destination-priority"></a>&#x2022; [`priority`](#routes-route-destination-priority) - Optional String  Defaults to `DEFAULT`<br>Possible values are `DEFAULT`, `HIGH`<br>[Enum: DEFAULT|HIGH] Routing Priority. Priority routing for each request. Different connection pools are used based on the priority selected for the request. Also, circuit-breaker configuration at destination cluster is chosen based on selected priority. Default routing mechanism High-Priority routing mechanism
 
 <a id="routes-route-destination-query-params"></a>&#x2022; [`query_params`](#routes-route-destination-query-params) - Optional Block<br>Query Parameters. Handling of incoming query parameters in simple route<br>See [Query Params](#routes-route-destination-query-params) below.
 
@@ -572,7 +572,7 @@ A [`cluster`](#routes-route-destination-mirror-policy-cluster) block (within [`r
 
 A [`percent`](#routes-route-destination-mirror-policy-percent) block (within [`routes.route_destination.mirror_policy`](#routes-route-destination-mirror-policy)) supports the following:
 
-<a id="routes-route-destination-mirror-policy-percent-denominator"></a>&#x2022; [`denominator`](#routes-route-destination-mirror-policy-percent-denominator) - Optional String  Defaults to `HUNDRED`<br>Possible values are `HUNDRED`, `TEN_THOUSAND`, `MILLION`<br>Denominator. Denominator used in fraction where sampling percentages are needed. example sampled requests Use hundred as denominator Use ten thousand as denominator Use million as denominator
+<a id="routes-route-destination-mirror-policy-percent-denominator"></a>&#x2022; [`denominator`](#routes-route-destination-mirror-policy-percent-denominator) - Optional String  Defaults to `HUNDRED`<br>Possible values are `HUNDRED`, `TEN_THOUSAND`, `MILLION`<br>[Enum: HUNDRED|TEN_THOUSAND|MILLION] Denominator. Denominator used in fraction where sampling percentages are needed. example sampled requests Use hundred as denominator Use ten thousand as denominator Use million as denominator
 
 <a id="routes-route-destination-mirror-policy-percent-numerator"></a>&#x2022; [`numerator`](#routes-route-destination-mirror-policy-percent-numerator) - Optional Number<br>Numerator. sampled parts per denominator. If denominator was 10000, then value of 5 will be 5 in 10000
 

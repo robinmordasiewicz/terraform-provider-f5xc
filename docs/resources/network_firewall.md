@@ -2,12 +2,12 @@
 page_title: "f5xc_network_firewall Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages a Network Firewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.
+  [Category: Security] [Namespace: required] Manages a Network Firewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.
 ---
 
 # f5xc_network_firewall (Resource)
 
-Manages a Network Firewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.
+[Category: Security] [Namespace: required] Manages a Network Firewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.
 
 ~> **Note** Please refer to [Network Firewall API docs](https://docs.cloud.f5.com/docs-v2/api/network-firewall) to learn more.
 
@@ -15,7 +15,7 @@ Manages a Network Firewall resource in F5 Distributed Cloud for network firewall
 
 ```terraform
 # Network Firewall Resource Example
-# Manages a Network Firewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.
+# [Category: Security] [Namespace: required] Manages a Network Firewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.
 
 # Basic Network Firewall configuration
 resource "f5xc_network_firewall" "example" {
@@ -40,7 +40,7 @@ resource "f5xc_network_firewall" "example" {
   enhanced_firewall_policies {
     # Configure enhanced_firewall_policies settings
   }
-  # [OneOf: active_fast_acls, disable_fast_acl] Active Fast A...
+  # [OneOf: active_fast_acls, disable_fast_acl; Default: disa...
   active_fast_acls {
     # Configure active_fast_acls settings
   }
@@ -69,15 +69,18 @@ resource "f5xc_network_firewall" "example" {
 -> **One of the following:**
 &#x2022; <a id="active-enhanced-firewall-policies"></a>[`active_enhanced_firewall_policies`](#active-enhanced-firewall-policies) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#active-enhanced-firewall-policies) below for details.
 <br><br>&#x2022; <a id="active-network-policies"></a>[`active_network_policies`](#active-network-policies) - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#active-network-policies) below for details.
-<br><br>&#x2022; <a id="disable-network-policy"></a>[`disable_network_policy`](#disable-network-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; <a id="active-fast-acls"></a>[`active_fast_acls`](#active-fast-acls) - Optional Block<br>Active Fast ACL(s). List of Fast ACL(s)<br>See [Active Fast Acls](#active-fast-acls) below for details.
-<br><br>&#x2022; <a id="disable-fast-acl"></a>[`disable_fast_acl`](#disable-fast-acl) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; <a id="active-forward-proxy-policies"></a>[`active_forward_proxy_policies`](#active-forward-proxy-policies) - Optional Block<br>Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
-<br><br>&#x2022; <a id="disable-forward-proxy-policy"></a>[`disable_forward_proxy_policy`](#disable-forward-proxy-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+
+<a id="disable-fast-acl"></a>&#x2022; [`disable_fast_acl`](#disable-fast-acl) - Optional Block<br>Empty. This can be used for messages where no values are needed
+
+<a id="disable-forward-proxy-policy"></a>&#x2022; [`disable_forward_proxy_policy`](#disable-forward-proxy-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+
+<a id="disable-network-policy"></a>&#x2022; [`disable_network_policy`](#disable-network-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

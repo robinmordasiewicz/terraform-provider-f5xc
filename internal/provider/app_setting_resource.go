@@ -154,7 +154,7 @@ func (r *AppSettingResource) Metadata(ctx context.Context, req resource.Metadata
 func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             app_settingSchemaVersion,
-		MarkdownDescription: "Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.",
+		MarkdownDescription: "[Namespace: required] Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the App Setting. Must be unique within the namespace.",
@@ -265,12 +265,12 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"metric": schema.ListAttribute{
-												MarkdownDescription: "Metrics. Choose one or more metrics to be included in the detection logic. Possible values are `NO_METRICS`, `REQUEST_RATE`, `ERROR_RATE`, `LATENCY`, `THROUGHPUT`. Defaults to `NO_METRICS`.",
+												MarkdownDescription: "[Enum: NO_METRICS|REQUEST_RATE|ERROR_RATE|LATENCY|THROUGHPUT] Metrics. Choose one or more metrics to be included in the detection logic. Possible values are `NO_METRICS`, `REQUEST_RATE`, `ERROR_RATE`, `LATENCY`, `THROUGHPUT`. Defaults to `NO_METRICS`.",
 												Optional:            true,
 												ElementType:         types.StringType,
 											},
 											"metrics_source": schema.StringAttribute{
-												MarkdownDescription: "Metrics Source. Supported sources from which Metrics can be analyzed All edges in the service mesh graph. Metrics are analyzed separately between all source and destination service combinations. Possible values are `NONE`, `NODES`, `EDGES`, `VIRTUAL_HOSTS`.",
+												MarkdownDescription: "[Enum: NONE|NODES|EDGES|VIRTUAL_HOSTS] Metrics Source. Supported sources from which Metrics can be analyzed All edges in the service mesh graph. Metrics are analyzed separately between all source and destination service combinations. Possible values are `NONE`, `NODES`, `EDGES`, `VIRTUAL_HOSTS`.",
 												Optional:            true,
 											},
 										},

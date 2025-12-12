@@ -2,12 +2,12 @@
 page_title: "f5xc_site_mesh_group Resource - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
-  Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.
+  [Namespace: required] Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.
 ---
 
 # f5xc_site_mesh_group (Resource)
 
-Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.
+[Namespace: required] Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Site Mesh Group API docs](https://docs.cloud.f5.com/docs-v2/api/site-mesh-group) to learn more.
 
@@ -15,7 +15,7 @@ Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.
 
 ```terraform
 # Site Mesh Group Resource Example
-# Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.
+# [Namespace: required] Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.
 
 # Basic Site Mesh Group configuration
 resource "f5xc_site_mesh_group" "example" {
@@ -71,7 +71,8 @@ resource "f5xc_site_mesh_group" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="disable-re-fallback"></a>[`disable_re_fallback`](#disable-re-fallback) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="enable-re-fallback"></a>[`enable_re_fallback`](#enable-re-fallback) - Optional Block<br>Empty. This can be used for messages where no values are needed
+
+<a id="enable-re-fallback"></a>&#x2022; [`enable_re_fallback`](#enable-re-fallback) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; <a id="full-mesh"></a>[`full_mesh`](#full-mesh) - Optional Block<br>Full Mesh. Details of Full Mesh Group Type<br>See [Full Mesh](#full-mesh) below for details.

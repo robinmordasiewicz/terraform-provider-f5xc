@@ -42,7 +42,7 @@ func (d *InfraprotectDenyListRuleDataSource) Metadata(ctx context.Context, req d
 
 func (d *InfraprotectDenyListRuleDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages DDoS transit Deny List Rule in F5 Distributed Cloud.",
+		MarkdownDescription: "[Namespace: required] Manages DDoS transit Deny List Rule in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

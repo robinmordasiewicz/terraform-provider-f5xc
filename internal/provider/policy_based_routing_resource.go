@@ -229,7 +229,7 @@ func (r *PolicyBasedRoutingResource) Metadata(ctx context.Context, req resource.
 func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             policy_based_routingSchemaVersion,
-		MarkdownDescription: "Manages a Policy Based Routing resource in F5 Distributed Cloud for network policy based routing create configuration.",
+		MarkdownDescription: "[Namespace: required] Manages a Policy Based Routing resource in F5 Distributed Cloud for network policy based routing create configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Policy Based Routing. Must be unique within the namespace.",
@@ -505,7 +505,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									MarkdownDescription: "Applications. Application protocols like HTTP, SNMP",
 									Attributes: map[string]schema.Attribute{
 										"applications": schema.ListAttribute{
-											MarkdownDescription: "Application Protocols. Application protocols like HTTP, SNMP. Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`. Defaults to `APPLICATION_HTTP`.",
+											MarkdownDescription: "[Enum: APPLICATION_HTTP|APPLICATION_HTTPS|APPLICATION_SNMP|APPLICATION_DNS] Application Protocols. Application protocols like HTTP, SNMP. Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`. Defaults to `APPLICATION_HTTP`.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},

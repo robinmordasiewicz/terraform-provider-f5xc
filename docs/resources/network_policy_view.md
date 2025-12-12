@@ -2,12 +2,12 @@
 page_title: "f5xc_network_policy_view Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages a Network Policy View resource in F5 Distributed Cloud for network policy view configuration.
+  [Namespace: required] Manages a Network Policy View resource in F5 Distributed Cloud for network policy view configuration.
 ---
 
 # f5xc_network_policy_view (Resource)
 
-Manages a Network Policy View resource in F5 Distributed Cloud for network policy view configuration.
+[Namespace: required] Manages a Network Policy View resource in F5 Distributed Cloud for network policy view configuration.
 
 ~> **Note** Please refer to [Network Policy View API docs](https://docs.cloud.f5.com/docs-v2/api/views-network-policy-view) to learn more.
 
@@ -15,7 +15,7 @@ Manages a Network Policy View resource in F5 Distributed Cloud for network polic
 
 ```terraform
 # Network Policy View Resource Example
-# Manages a Network Policy View resource in F5 Distributed Cloud for network policy view configuration.
+# [Namespace: required] Manages a Network Policy View resource in F5 Distributed Cloud for network policy view configuration.
 
 # Basic Network Policy View configuration
 resource "f5xc_network_policy_view" "example" {
@@ -86,7 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`egress_rules`](#egress-rules) block supports the following:
 
-<a id="egress-rules-action"></a>&#x2022; [`action`](#egress-rules-action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`<br>Network Policy Rule Action. Network policy rule action configures the action to be taken on rule match Apply deny action on rule match Apply allow action on rule match
+<a id="egress-rules-action"></a>&#x2022; [`action`](#egress-rules-action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`<br>[Enum: DENY|ALLOW] Network Policy Rule Action. Network policy rule action configures the action to be taken on rule match Apply deny action on rule match Apply allow action on rule match
 
 <a id="egress-rules-adv-action"></a>&#x2022; [`adv_action`](#egress-rules-adv-action) - Optional Block<br>Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction<br>See [Adv Action](#egress-rules-adv-action) below.
 
@@ -120,13 +120,13 @@ An [`egress_rules`](#egress-rules) block supports the following:
 
 An [`adv_action`](#egress-rules-adv-action) block (within [`egress_rules`](#egress-rules)) supports the following:
 
-<a id="egress-rules-adv-action-action"></a>&#x2022; [`action`](#egress-rules-adv-action-action) - Optional String  Defaults to `NOLOG`<br>Possible values are `NOLOG`, `LOG`<br>Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule
+<a id="egress-rules-adv-action-action"></a>&#x2022; [`action`](#egress-rules-adv-action-action) - Optional String  Defaults to `NOLOG`<br>Possible values are `NOLOG`, `LOG`<br>[Enum: NOLOG|LOG] Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule
 
 #### Egress Rules Applications
 
 An [`applications`](#egress-rules-applications) block (within [`egress_rules`](#egress-rules)) supports the following:
 
-<a id="egress-rules-applications-applications"></a>&#x2022; [`applications`](#egress-rules-applications-applications) - Optional List  Defaults to `APPLICATION_HTTP`<br>Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`<br>Application Protocols. Application protocols like HTTP, SNMP
+<a id="egress-rules-applications-applications"></a>&#x2022; [`applications`](#egress-rules-applications-applications) - Optional List  Defaults to `APPLICATION_HTTP`<br>Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`<br>[Enum: APPLICATION_HTTP|APPLICATION_HTTPS|APPLICATION_SNMP|APPLICATION_DNS] Application Protocols. Application protocols like HTTP, SNMP
 
 #### Egress Rules IP Prefix Set
 
@@ -212,7 +212,7 @@ A [`prefix_list`](#endpoint-prefix-list) block (within [`endpoint`](#endpoint)) 
 
 An [`ingress_rules`](#ingress-rules) block supports the following:
 
-<a id="ingress-rules-action"></a>&#x2022; [`action`](#ingress-rules-action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`<br>Network Policy Rule Action. Network policy rule action configures the action to be taken on rule match Apply deny action on rule match Apply allow action on rule match
+<a id="ingress-rules-action"></a>&#x2022; [`action`](#ingress-rules-action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`<br>[Enum: DENY|ALLOW] Network Policy Rule Action. Network policy rule action configures the action to be taken on rule match Apply deny action on rule match Apply allow action on rule match
 
 <a id="ingress-rules-adv-action"></a>&#x2022; [`adv_action`](#ingress-rules-adv-action) - Optional Block<br>Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction<br>See [Adv Action](#ingress-rules-adv-action) below.
 
@@ -246,13 +246,13 @@ An [`ingress_rules`](#ingress-rules) block supports the following:
 
 An [`adv_action`](#ingress-rules-adv-action) block (within [`ingress_rules`](#ingress-rules)) supports the following:
 
-<a id="ingress-rules-adv-action-action"></a>&#x2022; [`action`](#ingress-rules-adv-action-action) - Optional String  Defaults to `NOLOG`<br>Possible values are `NOLOG`, `LOG`<br>Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule
+<a id="ingress-rules-adv-action-action"></a>&#x2022; [`action`](#ingress-rules-adv-action-action) - Optional String  Defaults to `NOLOG`<br>Possible values are `NOLOG`, `LOG`<br>[Enum: NOLOG|LOG] Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule
 
 #### Ingress Rules Applications
 
 An [`applications`](#ingress-rules-applications) block (within [`ingress_rules`](#ingress-rules)) supports the following:
 
-<a id="ingress-rules-applications-applications"></a>&#x2022; [`applications`](#ingress-rules-applications-applications) - Optional List  Defaults to `APPLICATION_HTTP`<br>Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`<br>Application Protocols. Application protocols like HTTP, SNMP
+<a id="ingress-rules-applications-applications"></a>&#x2022; [`applications`](#ingress-rules-applications-applications) - Optional List  Defaults to `APPLICATION_HTTP`<br>Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`<br>[Enum: APPLICATION_HTTP|APPLICATION_HTTPS|APPLICATION_SNMP|APPLICATION_DNS] Application Protocols. Application protocols like HTTP, SNMP
 
 #### Ingress Rules IP Prefix Set
 

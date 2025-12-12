@@ -2,12 +2,12 @@
 page_title: "f5xc_user_identification Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages user_identification creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  [Namespace: required] Manages user_identification creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_user_identification (Data Source)
 
-Manages user_identification creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+[Namespace: required] Manages user_identification creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [User Identification API docs](https://docs.cloud.f5.com/docs-v2/api/user-identification) to learn more.
 

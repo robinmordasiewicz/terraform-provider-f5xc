@@ -2,12 +2,12 @@
 page_title: "f5xc_dns_domain Data Source - terraform-provider-f5xc"
 subcategory: "DNS"
 description: |-
-  Manages DNS Domain in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
+  [Category: DNS] [Namespace: not_required] Manages DNS Domain in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 ---
 
 # f5xc_dns_domain (Data Source)
 
-Manages DNS Domain in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
+[Category: DNS] [Namespace: not_required] Manages DNS Domain in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [DNS Domain API docs](https://docs.cloud.f5.com/docs-v2/api/dns-domain) to learn more.
 

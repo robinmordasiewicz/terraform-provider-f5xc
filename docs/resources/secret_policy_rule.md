@@ -2,12 +2,12 @@
 page_title: "f5xc_secret_policy_rule Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages secret_policy_rule creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
+  [Namespace: required] Manages secret_policy_rule creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_secret_policy_rule (Resource)
 
-Manages secret_policy_rule creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
+[Namespace: required] Manages secret_policy_rule creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Secret Policy Rule API docs](https://docs.cloud.f5.com/docs-v2/api/secret-policy-rule) to learn more.
 
@@ -15,7 +15,7 @@ Manages secret_policy_rule creates a new object in storage backend for metadata.
 
 ```terraform
 # Secret Policy Rule Resource Example
-# Manages secret_policy_rule creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
+# [Namespace: required] Manages secret_policy_rule creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Secret Policy Rule configuration
 resource "f5xc_secret_policy_rule" "example" {
@@ -62,7 +62,7 @@ resource "f5xc_secret_policy_rule" "example" {
 
 ### Spec Argument Reference
 
-<a id="action"></a>&#x2022; [`action`](#action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`<br>Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY Deny the request. - ALLOW: ALLOW Allow the request to proceed. - NEXT_POLICY_SET: NEXT_POLICY_SET Terminate evaluation of the current policy set and begin evaluating the next policy set in the chain. Note that the evaluation of any remaining policies in the current policy set is skipped. - NEXT_POLICY: NEXT_POLICY Terminate evaluation of the current policy and begin evaluating the next policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - LAST_POLICY: LAST_POLICY Terminate evaluation of the current policy and begin evaluating the last policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - GOTO_POLICY: GOTO_POLICY Terminate evaluation of the current policy and begin evaluating a specific policy in the policy set. The policy is specified using the goto_policy field in the rule and must be after the current policy in the policy set
+<a id="action"></a>&#x2022; [`action`](#action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`<br>[Enum: DENY|ALLOW|NEXT_POLICY] Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY Deny the request. - ALLOW: ALLOW Allow the request to proceed. - NEXT_POLICY_SET: NEXT_POLICY_SET Terminate evaluation of the current policy set and begin evaluating the next policy set in the chain. Note that the evaluation of any remaining policies in the current policy set is skipped. - NEXT_POLICY: NEXT_POLICY Terminate evaluation of the current policy and begin evaluating the next policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - LAST_POLICY: LAST_POLICY Terminate evaluation of the current policy and begin evaluating the last policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - GOTO_POLICY: GOTO_POLICY Terminate evaluation of the current policy and begin evaluating a specific policy in the policy set. The policy is specified using the goto_policy field in the rule and must be after the current policy in the policy set
 
 -> **One of the following:**
 &#x2022; <a id="client-name"></a>[`client_name`](#client-name) - Optional String<br>Client Name. The name of the client trying to access the secret. Name of the client will be extracted from client TLS certificate. This predicate evaluates to true if client name matches the configured name

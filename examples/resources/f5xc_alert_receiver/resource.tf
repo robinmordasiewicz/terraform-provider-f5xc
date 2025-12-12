@@ -1,5 +1,5 @@
 # Alert Receiver Resource Example
-# Manages a Alert Receiver resource in F5 Distributed Cloud for alert notification endpoints.
+# [Category: Monitoring] [Namespace: required] Manages a Alert Receiver resource in F5 Distributed Cloud for alert notification endpoints.
 
 # Basic Alert Receiver configuration
 resource "f5xc_alert_receiver" "example" {

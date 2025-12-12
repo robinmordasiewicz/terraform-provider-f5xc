@@ -1,5 +1,5 @@
 # Proxy Resource Example
-# Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create configuration.
+# [Namespace: required] Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create configuration.
 
 # Basic Proxy configuration
 resource "f5xc_proxy" "example" {

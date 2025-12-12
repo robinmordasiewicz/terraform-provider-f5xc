@@ -2,12 +2,12 @@
 page_title: "f5xc_rate_limiter Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages rate_limiter creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  [Category: Security] [Namespace: required] [DependsOn: namespace] Manages rate_limiter creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_rate_limiter (Resource)
 
-Manages rate_limiter creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+[Category: Security] [Namespace: required] [DependsOn: namespace] Manages rate_limiter creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Rate Limiter API docs](https://docs.cloud.f5.com/docs-v2/api/rate-limiter) to learn more.
 
@@ -15,7 +15,7 @@ Manages rate_limiter creates a new object in the storage backend for metadata.na
 
 ```terraform
 # Rate Limiter Resource Example
-# Manages rate_limiter creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# [Category: Security] [Namespace: required] [DependsOn: namespace] Manages rate_limiter creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Rate Limiter configuration
 resource "f5xc_rate_limiter" "example" {
@@ -89,7 +89,7 @@ A [`limits`](#limits) block supports the following:
 
 <a id="limits-total-number"></a>&#x2022; [`total_number`](#limits-total-number) - Optional Number<br>Number Of Requests. The total number of allowed requests per rate-limiting period
 
-<a id="limits-unit"></a>&#x2022; [`unit`](#limits-unit) - Optional String  Defaults to `SECOND`<br>Possible values are `SECOND`, `MINUTE`, `HOUR`<br>Rate Limit Period Unit. Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days
+<a id="limits-unit"></a>&#x2022; [`unit`](#limits-unit) - Optional String  Defaults to `SECOND`<br>Possible values are `SECOND`, `MINUTE`, `HOUR`<br>[Enum: SECOND|MINUTE|HOUR] Rate Limit Period Unit. Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days
 
 #### Limits Action Block
 

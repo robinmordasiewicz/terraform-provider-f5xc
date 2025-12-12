@@ -2,12 +2,12 @@
 page_title: "f5xc_fleet Resource - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
-  Manages fleet will create a fleet object in 'system' namespace of the user in F5 Distributed Cloud.
+  [Namespace: required] Manages fleet will create a fleet object in 'system' namespace of the user in F5 Distributed Cloud.
 ---
 
 # f5xc_fleet (Resource)
 
-Manages fleet will create a fleet object in 'system' namespace of the user in F5 Distributed Cloud.
+[Namespace: required] Manages fleet will create a fleet object in 'system' namespace of the user in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Fleet API docs](https://docs.cloud.f5.com/docs-v2/api/fleet) to learn more.
 
@@ -15,7 +15,7 @@ Manages fleet will create a fleet object in 'system' namespace of the user in F5
 
 ```terraform
 # Fleet Resource Example
-# Manages fleet will create a fleet object in 'system' namespace of the user in F5 Distributed Cloud.
+# [Namespace: required] Manages fleet will create a fleet object in 'system' namespace of the user in F5 Distributed Cloud.
 
 # Basic Fleet configuration
 resource "f5xc_fleet" "example" {
@@ -78,40 +78,39 @@ resource "f5xc_fleet" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="bond-device-list"></a>[`bond_device_list`](#bond-device-list) - Optional Block<br>Bond Devices List. List of bond devices for this fleet<br>See [Bond Device List](#bond-device-list) below for details.
-<br><br>&#x2022; <a id="no-bond-devices"></a>[`no_bond_devices`](#no-bond-devices) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; <a id="dc-cluster-group"></a>[`dc_cluster_group`](#dc-cluster-group) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group](#dc-cluster-group) below for details.
 <br><br>&#x2022; <a id="dc-cluster-group-inside"></a>[`dc_cluster_group_inside`](#dc-cluster-group-inside) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group Inside](#dc-cluster-group-inside) below for details.
-<br><br>&#x2022; <a id="no-dc-cluster-group"></a>[`no_dc_cluster_group`](#no-dc-cluster-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; <a id="default-config"></a>[`default_config`](#default-config) - Optional Block<br>Empty. This can be used for messages where no values are needed
 <br><br>&#x2022; <a id="device-list"></a>[`device_list`](#device-list) - Optional Block<br>List of Devices. Add device for all interfaces belonging to this fleet<br>See [Device List](#device-list) below for details.
-<br><br>&#x2022; <a id="interface-list"></a>[`interface_list`](#interface-list) - Optional Block<br>List of Interfaces. Add all interfaces belonging to this fleet<br>See [Interface List](#interface-list) below for details.
 
 -> **One of the following:**
 &#x2022; <a id="default-sriov-interface"></a>[`default_sriov_interface`](#default-sriov-interface) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="sriov-interfaces"></a>[`sriov_interfaces`](#sriov-interfaces) - Optional Block<br>Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration<br>See [Sriov Interfaces](#sriov-interfaces) below for details.
 
 -> **One of the following:**
 &#x2022; <a id="default-storage-class"></a>[`default_storage_class`](#default-storage-class) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="storage-class-list"></a>[`storage_class_list`](#storage-class-list) - Optional Block<br>Custom Storage Class List. Add additional custom storage classes in kubernetes for this fleet<br>See [Storage Class List](#storage-class-list) below for details.
 
 -> **One of the following:**
 &#x2022; <a id="disable-gpu"></a>[`disable_gpu`](#disable-gpu) - Optional Block<br>Empty. This can be used for messages where no values are needed
 <br><br>&#x2022; <a id="enable-gpu"></a>[`enable_gpu`](#enable-gpu) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="enable-vgpu"></a>[`enable_vgpu`](#enable-vgpu) - Optional Block<br>vGPU Configuration. Licensing configuration for NVIDIA vGPU<br>See [Enable Vgpu](#enable-vgpu) below for details.
 
 -> **One of the following:**
 &#x2022; <a id="disable-vm"></a>[`disable_vm`](#disable-vm) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="enable-vm"></a>[`enable_vm`](#enable-vm) - Optional Block<br>VM Configuration. VMs support configuration
 
 <a id="enable-default-fleet-config-download"></a>&#x2022; [`enable_default_fleet_config_download`](#enable-default-fleet-config-download) - Optional Bool<br>Enable Default Fleet Config Download. Enable default fleet config, It must be set for storage config and GPU config
+
+<a id="enable-vgpu"></a>&#x2022; [`enable_vgpu`](#enable-vgpu) - Optional Block<br>vGPU Configuration. Licensing configuration for NVIDIA vGPU<br>See [Enable Vgpu](#enable-vgpu) below for details.
+
+<a id="enable-vm"></a>&#x2022; [`enable_vm`](#enable-vm) - Optional Block<br>VM Configuration. VMs support configuration
 
 <a id="fleet-label"></a>&#x2022; [`fleet_label`](#fleet-label) - Optional String<br>Fleet Label Value. fleet_label value is used to create known_label 'ves.io/fleet=`<fleet_label>`' The known_label is created in the 'shared' namespace for the tenant. A virtual_site object with name `<fleet_label>` is also created in 'shared' namespace for tenant. The virtual_site object will select all sites configured with the known_label above fleet_label with 'sfo' will create a known_label 'ves.io/fleet=sfo' in tenant for the fleet
 
 <a id="inside-virtual-network"></a>&#x2022; [`inside_virtual_network`](#inside-virtual-network) - Optional Block<br>Site Local Inside Virtual Network. Default inside (site local) virtual network for the fleet<br>See [Inside Virtual Network](#inside-virtual-network) below for details.
+
+<a id="interface-list"></a>&#x2022; [`interface_list`](#interface-list) - Optional Block<br>List of Interfaces. Add all interfaces belonging to this fleet<br>See [Interface List](#interface-list) below for details.
 
 <a id="kubernetes-upgrade-drain"></a>&#x2022; [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain) - Optional Block<br>Node by Node Upgrade. Specify how worker nodes within a site will be upgraded<br>See [Kubernetes Upgrade Drain](#kubernetes-upgrade-drain) below for details.
 
@@ -123,23 +122,34 @@ resource "f5xc_fleet" "example" {
 
 <a id="network-firewall"></a>&#x2022; [`network_firewall`](#network-firewall) - Optional Block<br>Network Firewall. Network Firewall defines firewall to be applied for the virtual networks in the fleet. The network firewall configuration is applied on all sites that are member of the fleet. Constraints The Network Firewall is applied on Virtual Networks of type site local network and site local inside network<br>See [Network Firewall](#network-firewall) below for details.
 
+<a id="no-bond-devices"></a>&#x2022; [`no_bond_devices`](#no-bond-devices) - Optional Block<br>Empty. This can be used for messages where no values are needed
+
+<a id="no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#no-dc-cluster-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+
 -> **One of the following:**
 &#x2022; <a id="no-storage-device"></a>[`no_storage_device`](#no-storage-device) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="storage-device-list"></a>[`storage_device_list`](#storage-device-list) - Optional Block<br>Custom Storage Device List. Add additional custom storage classes in kubernetes for this fleet
 
 -> **One of the following:**
 &#x2022; <a id="no-storage-interfaces"></a>[`no_storage_interfaces`](#no-storage-interfaces) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="storage-interface-list"></a>[`storage_interface_list`](#storage-interface-list) - Optional Block<br>List of Interfaces. Add all interfaces belonging to this fleet
 
 -> **One of the following:**
 &#x2022; <a id="no-storage-static-routes"></a>[`no_storage_static_routes`](#no-storage-static-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="storage-static-routes"></a>[`storage_static_routes`](#storage-static-routes) - Optional Block<br>Storage Static Routes List. List of storage static routes
 
 <a id="operating-system-version"></a>&#x2022; [`operating_system_version`](#operating-system-version) - Optional String<br>Operating System Version. Desired Operating System version that is applied to all sites that are member of the fleet. Current Operating System version can be overridden via site config
 
 <a id="outside-virtual-network"></a>&#x2022; [`outside_virtual_network`](#outside-virtual-network) - Optional Block<br>Outside (Site Local) Virtual Network. Default outside (site local) virtual network for the fleet<br>See [Outside Virtual Network](#outside-virtual-network) below for details.
 
 <a id="performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#performance-enhancement-mode) below for details.
+
+<a id="sriov-interfaces"></a>&#x2022; [`sriov_interfaces`](#sriov-interfaces) - Optional Block<br>Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration<br>See [Sriov Interfaces](#sriov-interfaces) below for details.
+
+<a id="storage-class-list"></a>&#x2022; [`storage_class_list`](#storage-class-list) - Optional Block<br>Custom Storage Class List. Add additional custom storage classes in kubernetes for this fleet<br>See [Storage Class List](#storage-class-list) below for details.
+
+<a id="storage-device-list"></a>&#x2022; [`storage_device_list`](#storage-device-list) - Optional Block<br>Custom Storage Device List. Add additional custom storage classes in kubernetes for this fleet
+
+<a id="storage-interface-list"></a>&#x2022; [`storage_interface_list`](#storage-interface-list) - Optional Block<br>List of Interfaces. Add all interfaces belonging to this fleet
+
+<a id="storage-static-routes"></a>&#x2022; [`storage_static_routes`](#storage-static-routes) - Optional Block<br>Storage Static Routes List. List of storage static routes
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block
 
@@ -159,7 +169,7 @@ A [`blocked_services`](#blocked-services) block supports the following:
 
 <a id="blocked-services-dns"></a>&#x2022; [`dns`](#blocked-services-dns) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="blocked-services-network-type"></a>&#x2022; [`network_type`](#blocked-services-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
+<a id="blocked-services-network-type"></a>&#x2022; [`network_type`](#blocked-services-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
 <a id="blocked-services-ssh"></a>&#x2022; [`ssh`](#blocked-services-ssh) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -227,7 +237,7 @@ A [`devices`](#device-list-devices) block (within [`device_list`](#device-list))
 
 <a id="device-list-devices-network-device"></a>&#x2022; [`network_device`](#device-list-devices-network-device) - Optional Block<br>Network Device Type. Represents physical network interface. The 'interface' reference points to a Network Interface object. Attributes such as Labels, MTU from Network Interface must be applied to the device. Device mapping to nodes A fleet can have many devices and nodes in VER customer edge site can have many interfaces. An interface in node inherits configuration from a device by matching, - device_name in Network Interface for the device - device name for physical-interface in the node<br>See [Network Device](#device-list-devices-network-device) below.
 
-<a id="device-list-devices-owner"></a>&#x2022; [`owner`](#device-list-devices-owner) - Optional String  Defaults to `DEVICE_OWNER_INVALID`<br>Possible values are `DEVICE_OWNER_INVALID`, `DEVICE_OWNER_VER`, `DEVICE_OWNER_VK8S_WORK_LOAD`, `DEVICE_OWNER_HOST`<br>Device Owner Type. Defines ownership for a device. Device owner is invalid Device is owned by VER pod. usually it will be network interface device or accelerator like crypto engine. Device is available to be owned by vK8s workload on the site, like camera GPU etc. Device is not available to be owned by vK8s or VER. Can be exposed via some other service. Like TPM
+<a id="device-list-devices-owner"></a>&#x2022; [`owner`](#device-list-devices-owner) - Optional String  Defaults to `DEVICE_OWNER_INVALID`<br>Possible values are `DEVICE_OWNER_INVALID`, `DEVICE_OWNER_VER`, `DEVICE_OWNER_VK8S_WORK_LOAD`, `DEVICE_OWNER_HOST`<br>[Enum: DEVICE_OWNER_INVALID|DEVICE_OWNER_VER|DEVICE_OWNER_VK8S_WORK_LOAD|DEVICE_OWNER_HOST] Device Owner Type. Defines ownership for a device. Device owner is invalid Device is owned by VER pod. usually it will be network interface device or accelerator like crypto engine. Device is available to be owned by vK8s workload on the site, like camera GPU etc. Device is not available to be owned by vK8s or VER. Can be exposed via some other service. Like TPM
 
 #### Device List Devices Network Device
 
@@ -235,7 +245,7 @@ A [`network_device`](#device-list-devices-network-device) block (within [`device
 
 <a id="device-list-devices-network-device-interface"></a>&#x2022; [`interface`](#device-list-devices-network-device-interface) - Optional Block<br>Network Interface. Network Interface attributes for the device. User network interface configuration for this network device. Attributes like labels, MTU from the 'interface' are applied to corresponding interface in VER node If network interface refers to a virtual-network, the virtual-netowrk type must be consistent with use attribute given below If use is NETWORK_INTERFACE_USE_REGULAR, the virtual-network must be of type VIRTUAL_NETWORK_SITE_LOCAL or VIRTUAL_NETWORK_SITE_LOCAL_INSIDE if use is NETWORK_INTERFACE_USE_OUTSIDE, the virtual-network must of type VIRTUAL_NETWORK_SITE_LOCAL if use is NETWORK_INTERFACE_USE_INSIDE, the virtual-network must of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE<br>See [Interface](#device-list-devices-network-device-interface) below.
 
-<a id="device-list-devices-network-device-use"></a>&#x2022; [`use`](#device-list-devices-network-device-use) - Optional String  Defaults to `NETWORK_INTERFACE_USE_REGULAR`<br>Possible values are `NETWORK_INTERFACE_USE_REGULAR`, `NETWORK_INTERFACE_USE_OUTSIDE`, `NETWORK_INTERFACE_USE_INSIDE`<br>Network Device Use. Defines how the device is used If networking device is owned by VER, it is available for users to configure as required If networking device is owned by VER, it is included in bootstrap config and member of outside network. If networking device is owned by VER, it is included in bootstrap config and member of inside network
+<a id="device-list-devices-network-device-use"></a>&#x2022; [`use`](#device-list-devices-network-device-use) - Optional String  Defaults to `NETWORK_INTERFACE_USE_REGULAR`<br>Possible values are `NETWORK_INTERFACE_USE_REGULAR`, `NETWORK_INTERFACE_USE_OUTSIDE`, `NETWORK_INTERFACE_USE_INSIDE`<br>[Enum: NETWORK_INTERFACE_USE_REGULAR|NETWORK_INTERFACE_USE_OUTSIDE|NETWORK_INTERFACE_USE_INSIDE] Network Device Use. Defines how the device is used If networking device is owned by VER, it is available for users to configure as required If networking device is owned by VER, it is included in bootstrap config and member of outside network. If networking device is owned by VER, it is included in bootstrap config and member of inside network
 
 #### Device List Devices Network Device Interface
 
@@ -255,7 +265,7 @@ An [`interface`](#device-list-devices-network-device-interface) block (within [`
 
 An [`enable_vgpu`](#enable-vgpu) block supports the following:
 
-<a id="enable-vgpu-feature-type"></a>&#x2022; [`feature_type`](#enable-vgpu-feature-type) - Optional String  Defaults to `UNLICENSED`<br>Possible values are `UNLICENSED`, `VGPU`, `VWS`, `VCS`<br>Feature Type. Set feature to be enabled Operate with a degraded vGPU performance Enable NVIDIA vGPU Enable NVIDIA RTX Virtual Workstation Enable NVIDIA Virtual Compute Server
+<a id="enable-vgpu-feature-type"></a>&#x2022; [`feature_type`](#enable-vgpu-feature-type) - Optional String  Defaults to `UNLICENSED`<br>Possible values are `UNLICENSED`, `VGPU`, `VWS`, `VCS`<br>[Enum: UNLICENSED|VGPU|VWS|VCS] Feature Type. Set feature to be enabled Operate with a degraded vGPU performance Enable NVIDIA vGPU Enable NVIDIA RTX Virtual Workstation Enable NVIDIA Virtual Compute Server
 
 <a id="enable-vgpu-server-address"></a>&#x2022; [`server_address`](#enable-vgpu-server-address) - Optional String<br>License Server Address. Set License Server Address
 
@@ -1149,7 +1159,7 @@ A [`storage_static_routes`](#storage-static-routes) block supports the following
 
 A [`storage_routes`](#storage-static-routes-storage-routes) block (within [`storage_static_routes`](#storage-static-routes)) supports the following:
 
-<a id="storage-static-routes-storage-routes-attrs"></a>&#x2022; [`attrs`](#storage-static-routes-storage-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of route attributes associated with the static route
+<a id="storage-static-routes-storage-routes-attrs"></a>&#x2022; [`attrs`](#storage-static-routes-storage-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of route attributes associated with the static route
 
 <a id="storage-static-routes-storage-routes-labels"></a>&#x2022; [`labels`](#storage-static-routes-storage-routes-labels) - Optional Block<br>Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy
 
@@ -1165,7 +1175,7 @@ A [`nexthop`](#storage-static-routes-storage-routes-nexthop) block (within [`sto
 
 <a id="storage-static-routes-storage-routes-nexthop-nexthop-address"></a>&#x2022; [`nexthop_address`](#storage-static-routes-storage-routes-nexthop-nexthop-address) - Optional Block<br>IP Address. IP Address used to specify an IPv4 or IPv6 address<br>See [Nexthop Address](#storage-static-routes-storage-routes-nexthop-nexthop-address) below.
 
-<a id="storage-static-routes-storage-routes-nexthop-type"></a>&#x2022; [`type`](#storage-static-routes-storage-routes-nexthop-type) - Optional String  Defaults to `NEXT_HOP_DEFAULT_GATEWAY`<br>Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`<br>Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network
+<a id="storage-static-routes-storage-routes-nexthop-type"></a>&#x2022; [`type`](#storage-static-routes-storage-routes-nexthop-type) - Optional String  Defaults to `NEXT_HOP_DEFAULT_GATEWAY`<br>Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`<br>[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network
 
 #### Storage Static Routes Storage Routes Nexthop Interface
 

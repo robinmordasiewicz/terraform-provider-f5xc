@@ -2,12 +2,12 @@
 page_title: "f5xc_geo_location_set Data Source - terraform-provider-f5xc"
 subcategory: "Cloud Resources"
 description: |-
-  Manages Geolocation Set in F5 Distributed Cloud.
+  [Namespace: required] Manages Geolocation Set in F5 Distributed Cloud.
 ---
 
 # f5xc_geo_location_set (Data Source)
 
-Manages Geolocation Set in F5 Distributed Cloud.
+[Namespace: required] Manages Geolocation Set in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Geo Location Set API docs](https://docs.cloud.f5.com/docs-v2/api/geo-location-set) to learn more.
 

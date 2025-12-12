@@ -2,12 +2,12 @@
 page_title: "f5xc_voltshare_admin_policy Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages voltshare_admin_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  [Namespace: required] Manages voltshare_admin_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_voltshare_admin_policy (Data Source)
 
-Manages voltshare_admin_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+[Namespace: required] Manages voltshare_admin_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Voltshare Admin Policy API docs](https://docs.cloud.f5.com/docs-v2/api/voltshare-admin-policy) to learn more.
 

@@ -2,12 +2,12 @@
 page_title: "f5xc_cdn_loadbalancer Data Source - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  Manages a CDN Load Balancer resource in F5 Distributed Cloud for content delivery and edge caching with load balancing.
+  [Category: Load Balancing] [Namespace: required] Manages a CDN Load Balancer resource in F5 Distributed Cloud for content delivery and edge caching with load balancing.
 ---
 
 # f5xc_cdn_loadbalancer (Data Source)
 
-Manages a CDN Load Balancer resource in F5 Distributed Cloud for content delivery and edge caching with load balancing.
+[Category: Load Balancing] [Namespace: required] Manages a CDN Load Balancer resource in F5 Distributed Cloud for content delivery and edge caching with load balancing.
 
 ~> **Note** Please refer to [CDN Loadbalancer API docs](https://docs.cloud.f5.com/docs-v2/api/views-cdn-loadbalancer) to learn more.
 

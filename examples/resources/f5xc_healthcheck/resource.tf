@@ -1,5 +1,5 @@
 # Healthcheck Resource Example
-# Manages a Healthcheck resource in F5 Distributed Cloud for healthcheck object defines method to determine if the given endpoint is healthy. single healthcheck object can be referred to by one or many cluster objects. configuration.
+# [Category: Load Balancing] [Namespace: required] [DependsOn: namespace] Manages a Healthcheck resource in F5 Distributed Cloud for healthcheck object defines method to determine if the given endpoint is healthy. single healthcheck object can be referred to by one or many cluster objects. configuration.
 
 # Basic Healthcheck configuration
 resource "f5xc_healthcheck" "example" {

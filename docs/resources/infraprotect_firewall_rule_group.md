@@ -2,12 +2,12 @@
 page_title: "f5xc_infraprotect_firewall_rule_group Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages a Infraprotect Firewall Rule Group resource in F5 Distributed Cloud for amends a ddos transit firewall rule group configuration.
+  [Namespace: required] Manages a Infraprotect Firewall Rule Group resource in F5 Distributed Cloud for amends a ddos transit firewall rule group configuration.
 ---
 
 # f5xc_infraprotect_firewall_rule_group (Resource)
 
-Manages a Infraprotect Firewall Rule Group resource in F5 Distributed Cloud for amends a ddos transit firewall rule group configuration.
+[Namespace: required] Manages a Infraprotect Firewall Rule Group resource in F5 Distributed Cloud for amends a ddos transit firewall rule group configuration.
 
 ~> **Note** Please refer to [Infraprotect Firewall Rule Group API docs](https://docs.cloud.f5.com/docs-v2/api/infraprotect-firewall-rule-group) to learn more.
 
@@ -15,7 +15,7 @@ Manages a Infraprotect Firewall Rule Group resource in F5 Distributed Cloud for 
 
 ```terraform
 # Infraprotect Firewall Rule Group Resource Example
-# Manages a Infraprotect Firewall Rule Group resource in F5 Distributed Cloud for amends a ddos transit firewall rule group configuration.
+# [Namespace: required] Manages a Infraprotect Firewall Rule Group resource in F5 Distributed Cloud for amends a ddos transit firewall rule group configuration.
 
 # Basic Infraprotect Firewall Rule Group configuration
 resource "f5xc_infraprotect_firewall_rule_group" "example" {

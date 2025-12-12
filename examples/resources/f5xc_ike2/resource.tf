@@ -1,5 +1,5 @@
 # Ike2 Resource Example
-# Manages a Ike2 resource in F5 Distributed Cloud for ike phase2 profile configuration.
+# [Namespace: required] Manages a Ike2 resource in F5 Distributed Cloud for ike phase2 profile configuration.
 
 # Basic Ike2 configuration
 resource "f5xc_ike2" "example" {
@@ -16,7 +16,7 @@ resource "f5xc_ike2" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: dh_group_set, disable_pfs] Diffie Hellman Groups....
+  # [OneOf: dh_group_set, disable_pfs; Default: disable_pfs] ...
   dh_group_set {
     # Configure dh_group_set settings
   }

@@ -2,12 +2,12 @@
 page_title: "f5xc_fast_acl Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages fast_acl object, fast_acl object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to fast_acl_rule in F5 Distributed Cloud.
+  [Namespace: required] Manages fast_acl object, fast_acl object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to fast_acl_rule in F5 Distributed Cloud.
 ---
 
 # f5xc_fast_acl (Resource)
 
-Manages `fast_acl` object, `fast_acl` object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to `fast_acl_rule` in F5 Distributed Cloud.
+[Namespace: required] Manages `fast_acl` object, `fast_acl` object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to `fast_acl_rule` in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Fast ACL API docs](https://docs.cloud.f5.com/docs-v2/api/fast-acl) to learn more.
 
@@ -15,7 +15,7 @@ Manages `fast_acl` object, `fast_acl` object contains rules to protect site from
 
 ```terraform
 # Fast ACL Resource Example
-# Manages `fast_acl` object, `fast_acl` object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to `fast_acl_rule` in F5 Distributed Cloud.
+# [Namespace: required] Manages `fast_acl` object, `fast_acl` object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to `fast_acl_rule` in F5 Distributed Cloud.
 
 # Basic Fast ACL configuration
 resource "f5xc_fast_acl" "example" {
@@ -126,7 +126,7 @@ An [`action`](#re-acl-fast-acl-rules-action) block (within [`re_acl.fast_acl_rul
 
 <a id="re-acl-fast-acl-rules-action-protocol-policer-action"></a>&#x2022; [`protocol_policer_action`](#re-acl-fast-acl-rules-action-protocol-policer-action) - Optional Block<br>Protocol Policer Reference. Reference to policer object<br>See [Protocol Policer Action](#re-acl-fast-acl-rules-action-protocol-policer-action) below.
 
-<a id="re-acl-fast-acl-rules-action-simple-action"></a>&#x2022; [`simple_action`](#re-acl-fast-acl-rules-action-simple-action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`<br>Simple Action. FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic
+<a id="re-acl-fast-acl-rules-action-simple-action"></a>&#x2022; [`simple_action`](#re-acl-fast-acl-rules-action-simple-action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`<br>[Enum: DENY|ALLOW] Simple Action. FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic
 
 #### RE ACL Fast ACL Rules Action Policer Action
 
@@ -268,7 +268,7 @@ An [`action`](#site-acl-fast-acl-rules-action) block (within [`site_acl.fast_acl
 
 <a id="site-acl-fast-acl-rules-action-protocol-policer-action"></a>&#x2022; [`protocol_policer_action`](#site-acl-fast-acl-rules-action-protocol-policer-action) - Optional Block<br>Protocol Policer Reference. Reference to policer object<br>See [Protocol Policer Action](#site-acl-fast-acl-rules-action-protocol-policer-action) below.
 
-<a id="site-acl-fast-acl-rules-action-simple-action"></a>&#x2022; [`simple_action`](#site-acl-fast-acl-rules-action-simple-action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`<br>Simple Action. FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic
+<a id="site-acl-fast-acl-rules-action-simple-action"></a>&#x2022; [`simple_action`](#site-acl-fast-acl-rules-action-simple-action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`<br>[Enum: DENY|ALLOW] Simple Action. FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic
 
 #### Site ACL Fast ACL Rules Action Policer Action
 

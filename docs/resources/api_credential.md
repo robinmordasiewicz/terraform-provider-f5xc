@@ -2,12 +2,12 @@
 page_title: "f5xc_api_credential Resource - terraform-provider-f5xc"
 subcategory: "Authentication"
 description: |-
-  Manages request specification. in F5 Distributed Cloud.
+  [Category: Authentication] [Namespace: required] Manages request specification. in F5 Distributed Cloud.
 ---
 
 # f5xc_api_credential (Resource)
 
-Manages request specification. in F5 Distributed Cloud.
+[Category: Authentication] [Namespace: required] Manages request specification. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [API Credential API docs](https://docs.cloud.f5.com/docs-v2/api/api-credential) to learn more.
 
@@ -15,7 +15,7 @@ Manages request specification. in F5 Distributed Cloud.
 
 ```terraform
 # API Credential Resource Example
-# Manages request specification. in F5 Distributed Cloud.
+# [Category: Authentication] [Namespace: required] Manages request specification. in F5 Distributed Cloud.
 
 # Basic API Credential configuration
 resource "f5xc_api_credential" "example" {
@@ -65,7 +65,7 @@ resource "f5xc_api_credential" "example" {
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-<a id="type"></a>&#x2022; [`type`](#type) - Optional String  Defaults to `API_CERTIFICATE`<br>Possible values are `API_CERTIFICATE`, `KUBE_CONFIG`, `API_TOKEN`, `SERVICE_API_TOKEN`, `SERVICE_API_CERTIFICATE`, `SERVICE_KUBE_CONFIG`, `SITE_GLOBAL_KUBE_CONFIG`, `SCIM_API_TOKEN`, `SERVICE_SITE_GLOBAL_KUBE_CONFIG`<br>Credential Type. Types of API credential given when requesting credentials from volterra F5XC user certificate to access F5XC public API using mTLS using self credential (my credential) Kubernetes config file to access Virtual Kubernetes API in Volterra using self credential (my credential) API token to access F5XC public API using self credential (my credential) API token for service credentials using service user credential (service credential) API certificate for service credentials using service user credential (service credential) Service Credential kubeconfig using service user credential (service credential) Kubeconfig for accessing Site via Global Controller using self credential (my credential) Token for the SCIM public APIs used to sync users and groups with the F5XC platform. External identity provider's SCIM client can use this token as Bearer token with Authorization header Service Credential Kubeconfig for accessing Site via Global Controller using service user credential (service credential)
+<a id="type"></a>&#x2022; [`type`](#type) - Optional String  Defaults to `API_CERTIFICATE`<br>Possible values are `API_CERTIFICATE`, `KUBE_CONFIG`, `API_TOKEN`, `SERVICE_API_TOKEN`, `SERVICE_API_CERTIFICATE`, `SERVICE_KUBE_CONFIG`, `SITE_GLOBAL_KUBE_CONFIG`, `SCIM_API_TOKEN`, `SERVICE_SITE_GLOBAL_KUBE_CONFIG`<br>[Enum: API_CERTIFICATE|KUBE_CONFIG|API_TOKEN|SERVICE_API_TOKEN|SERVICE_API_CERTIFICATE|SERVICE_KUBE_CONFIG|SITE_GLOBAL_KUBE_CONFIG|SCIM_API_TOKEN|SERVICE_SITE_GLOBAL_KUBE_CONFIG] Credential Type. Types of API credential given when requesting credentials from volterra F5XC user certificate to access F5XC public API using mTLS using self credential (my credential) Kubernetes config file to access Virtual Kubernetes API in Volterra using self credential (my credential) API token to access F5XC public API using self credential (my credential) API token for service credentials using service user credential (service credential) API certificate for service credentials using service user credential (service credential) Service Credential kubeconfig using service user credential (service credential) Kubeconfig for accessing Site via Global Controller using self credential (my credential) Token for the SCIM public APIs used to sync users and groups with the F5XC platform. External identity provider's SCIM client can use this token as Bearer token with Authorization header Service Credential Kubeconfig for accessing Site via Global Controller using service user credential (service credential)
 
 <a id="virtual-k8s-name"></a>&#x2022; [`virtual_k8s_name`](#virtual-k8s-name) - Optional String<br>vK8s Cluster. Name of virtual K8S cluster. Applicable for KUBE_CONFIG
 

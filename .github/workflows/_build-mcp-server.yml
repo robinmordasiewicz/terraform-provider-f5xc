@@ -37,7 +37,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
         with:
-          fetch-depth: 2
+          fetch-depth: 0  # Need full history for tags
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -56,12 +56,21 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Get version
+      - name: Sync version with provider
         id: version
         run: |
+          cd ..
+          # Get the latest provider version from git tags
+          PROVIDER_VERSION=$(git describe --tags --abbrev=0 2>/dev/null | sed 's/^v//' || echo "0.0.0")
+          echo "Provider version from tag: $PROVIDER_VERSION"
+
+          # Update package.json with provider version
+          cd mcp-server
+          npm version "$PROVIDER_VERSION" --no-git-tag-version --allow-same-version
+
           VERSION=$(node -p "require('./package.json').version")
           echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "MCP Server version: $VERSION"
+          echo "MCP Server version synced to: $VERSION"
 
       - name: Check for changes
         id: check

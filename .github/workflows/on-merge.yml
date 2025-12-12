@@ -164,6 +164,7 @@ jobs:
           CODE="${{ steps.changes.outputs.code }}"
           TOOLS="${{ steps.changes.outputs.tools }}"
           FUNCTIONS="${{ steps.changes.outputs.functions }}"
+          MCP="${{ steps.changes.outputs.mcp }}"
 
           # Determine if regeneration would be needed
           NEEDS_REGEN="false"
@@ -172,11 +173,17 @@ jobs:
           fi
           echo "needs_regeneration=$NEEDS_REGEN" >> $GITHUB_OUTPUT
 
+          # Determine if MCP server build is needed (separate from regeneration)
+          NEEDS_MCP="false"
+          if [[ "$MCP" == "true" ]]; then
+            NEEDS_MCP="true"
+          fi
+
           if [[ "$IS_BOT" == "true" ]]; then
             # Bot commits (from regeneration PR merge) should proceed to tagging
             echo "Processing: Bot commit - will proceed to tag/release"
             echo "result=true" >> $GITHUB_OUTPUT
-          elif [[ "$NEEDS_REGEN" == "false" ]]; then
+          elif [[ "$NEEDS_REGEN" == "false" && "$NEEDS_MCP" == "false" ]]; then
             echo "Skipping: No relevant changes detected"
             echo "result=false" >> $GITHUB_OUTPUT
           else

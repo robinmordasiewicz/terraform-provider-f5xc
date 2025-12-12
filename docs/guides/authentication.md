@@ -8,89 +8,102 @@ description: |-
 
 # Authentication Methods
 
-This guide walks you through configuring authentication for the F5 Distributed Cloud Terraform provider. By the end, you'll understand:
+This guide covers authentication configuration for the F5 Distributed Cloud Terraform provider.
 
-- **Three authentication methods** - API Token, P12 Certificate, and PEM Certificate
-- **Configuration approaches** - Environment variables, provider blocks, and tfvars files
-- **CI/CD integration** - GitHub Actions workflows with secure credential handling
-- **Security best practices** - Protecting credentials in different environments
+## Quick Reference
+
+| Method | Complexity | Best For | Security |
+|--------|------------|----------|----------|
+| API Token | Simplest | Development, quick testing | Bearer token over TLS |
+| P12 Certificate | Moderate | Production, CI/CD | Mutual TLS (mTLS) |
+| PEM Certificate | Advanced | When tooling requires PEM format | Derived from P12, mTLS |
 
 ## Prerequisites
 
-Before you begin, ensure you have:
-
 - **F5 Distributed Cloud Account** - Sign up at <https://www.f5.com/cloud/products/distributed-cloud-console>
-- **Terraform >= 1.8** - Download and install from <https://www.terraform.io/downloads>
+- **Terraform >= 1.8** - Download from <https://www.terraform.io/downloads>
 - **Console Access** - Ability to create credentials in the F5XC Console
 
 ## Creating Credentials in F5 Distributed Cloud
 
 ### Personal Credentials
 
-Personal credentials are tied to your user account and are ideal for development and testing.
+Personal credentials are tied to your user account and ideal for development.
 
 #### Creating an API Token
 
-1. Open the F5 Distributed Cloud Console homepage
-2. Select **Administration** from the main menu
-3. Select **Personal Management** → **Credentials**
-4. Click **+ Add Credentials**
-5. Enter a descriptive name (e.g., "terraform-dev-token")
-6. Select **API Token** from the "Credential type" dropdown
-7. Choose an expiry date from the calendar
-8. Click **Generate** to create the token
-9. Click **Copy** to copy the token value
+1. Open the F5 Distributed Cloud Console
+2. Navigate to **Administration** → **Personal Management** → **Credentials**
+3. Click **+ Add Credentials**
+4. Enter a name (e.g., "terraform-dev-token")
+5. Select **API Token** from the dropdown
+6. Choose an expiry date
+7. Click **Generate**, then **Copy** the token value
 
 !> **Warning:** Copy and save your token immediately. You cannot retrieve it after closing this dialog.
-
-10. Click **Done** to exit
 
 #### Creating a P12 Certificate
 
 1. Navigate to **Administration** → **Personal Management** → **Credentials**
 2. Click **+ Add Credentials**
-3. Enter a certificate name (e.g., "terraform-dev-cert")
-4. Select **API Certificate** from the "Credential type" dropdown
-5. Enter and confirm a password (you'll need this password to use the certificate)
-6. Select an expiry date from the calendar
-7. Click **Download** to generate and download the `.p12` file
+3. Enter a name (e.g., "terraform-dev-cert")
+4. Select **API Certificate** from the dropdown
+5. Enter and confirm a password
+6. Select an expiry date
+7. Click **Download** to get the `.p12` file
 
 -> **Tip:** Store the P12 file securely and never commit it to version control.
 
 ### Service Credentials (IAM)
 
-Service credentials are managed through IAM and recommended for production and CI/CD pipelines. They can be scoped to specific roles and namespaces.
+Service credentials are managed through IAM and recommended for production. They can be scoped to specific roles and namespaces.
 
 #### Creating a Service API Token
 
 1. Navigate to **Administration** → **IAM** → **Service Credentials**
 2. Click **+ Add Service Credentials**
-3. Enter a descriptive name (e.g., "terraform-cicd-token")
-4. Select **API Token** from the "Credential type" dropdown
-5. Optionally assign the credential to groups
-6. Optionally assign specific roles and namespaces to limit scope
-7. Choose an expiry date
-8. Click **Generate**, then **Copy** the token value
-9. Click **Done** to exit
+3. Enter a name (e.g., "terraform-cicd-token")
+4. Select **API Token** from the dropdown
+5. Optionally assign roles and namespaces to limit scope
+6. Choose an expiry date
+7. Click **Generate**, then **Copy** the token value
 
 #### Creating a Service P12 Certificate
 
 1. Navigate to **Administration** → **IAM** → **Service Credentials**
 2. Click **+ Add Service Credentials**
-3. Enter a certificate name
-4. Select **API Certificate** from the "Credential type" dropdown
-5. Optionally assign to groups, roles, and namespaces
+3. Enter a name
+4. Select **API Certificate** from the dropdown
+5. Optionally assign roles and namespaces
 6. Enter and confirm a password
 7. Select an expiry date
-8. Click **Download** to generate the `.p12` file
+8. Click **Download** to get the `.p12` file
 
 ## Authentication Methods
 
-The provider supports three authentication methods. Choose based on your security requirements and operational context.
+### Method 1: API Token Authentication (Simplest)
 
-### Method 1: P12 Certificate Authentication (Recommended for Production)
+API tokens provide bearer token authentication over TLS. This is the quickest way to get started.
 
-P12 certificates provide mutual TLS (mTLS) authentication, where both the client and server verify each other's identity.
+**Using Environment Variables:**
+
+```bash
+export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
+export VES_API_TOKEN="your-api-token"
+```
+
+**Using Provider Configuration:**
+
+```hcl
+provider "f5xc" {
+  api_url   = var.f5xc_api_url
+  api_token = var.f5xc_api_token
+}
+```
+
+### Method 2: P12 Certificate Authentication (Recommended for Production)
+
+P12 certificates provide mutual TLS (mTLS) authentication, where both client and server verify each other's identity.
 
 **Using Environment Variables:**
 
@@ -110,11 +123,13 @@ provider "f5xc" {
 }
 ```
 
-### Method 2: PEM Certificate Authentication
+### Method 3: PEM Certificate Authentication (Derived from P12)
 
-PEM certificate authentication uses separate certificate and private key files extracted from a P12 file. This is useful when your tooling prefers PEM format.
+PEM authentication uses separate certificate and private key files. Since F5XC only provides P12 certificates, you must extract PEM files using OpenSSL.
 
-**Extracting PEM from P12:**
+**When to use this method:** Only when your tooling specifically requires PEM format instead of P12.
+
+**Step 1: Extract PEM files from P12:**
 
 ```bash
 # Create a directory for certificates
@@ -130,6 +145,8 @@ openssl pkcs12 -in ~/your-tenant.console.ves.volterra.io.api-creds.p12 \
   -nodes -nocerts -out certs/f5xc.key
 # Enter Import Password: <your p12 password>
 ```
+
+**Step 2: Configure the provider:**
 
 **Using Environment Variables:**
 
@@ -149,40 +166,9 @@ provider "f5xc" {
 }
 ```
 
-~> **Note:** If you need to verify the server certificate, you can also specify a CA certificate using `VES_CACERT` environment variable or `api_ca_cert` provider attribute.
+~> **Note:** For server certificate verification, specify a CA certificate using `VES_CACERT` environment variable or `api_ca_cert` provider attribute.
 
-### Method 3: API Token Authentication (Simplest)
-
-API tokens provide the simplest authentication method using bearer token authentication over TLS.
-
-**Using Environment Variables:**
-
-```bash
-export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
-export VES_API_TOKEN="your-api-token"
-```
-
-**Using Provider Configuration:**
-
-```hcl
-provider "f5xc" {
-  api_url   = var.f5xc_api_url
-  api_token = var.f5xc_api_token
-}
-```
-
-## Configuration Approaches
-
-### Environment Variables (Recommended)
-
-Environment variables are the recommended approach because they:
-
-- Keep credentials out of configuration files
-- Work consistently across local development and CI/CD
-- Are easy to rotate without changing code
-- Never risk being committed to version control
-
-**Complete Environment Variable Reference:**
+## Environment Variable Reference
 
 | Variable | Description | Required |
 |----------|-------------|----------|
@@ -196,57 +182,26 @@ Environment variables are the recommended approach because they:
 
 **Adding to Shell Profile:**
 
-For persistence across terminal sessions, add exports to your shell profile:
-
 ```bash
 # Add to ~/.bashrc or ~/.zshrc
 export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
 export VES_API_TOKEN="your-api-token"
 ```
 
-Then reload your shell: `source ~/.zshrc` or `source ~/.bashrc`
-
-### Provider Configuration Block
-
-When you need explicit configuration or want to use Terraform variables:
-
-```hcl
-# Using environment variables (recommended)
-provider "f5xc" {}
-
-# Explicit configuration with variables
-provider "f5xc" {
-  api_url   = var.f5xc_api_url
-  api_token = var.f5xc_api_token  # Marked sensitive in variables.tf
-}
-```
-
-### Using terraform.tfvars
-
-You can define variable values in a `terraform.tfvars` file, but **never commit files containing credentials**:
-
-```hcl
-# terraform.tfvars - DO NOT COMMIT THIS FILE
-f5xc_api_url   = "https://your-tenant.console.ves.volterra.io/api"
-f5xc_api_token = "your-api-token"
-```
-
-!> **Warning:** Add `*.tfvars` to your `.gitignore` if it contains credentials. Better yet, use environment variables for sensitive values.
+Then reload: `source ~/.zshrc` or `source ~/.bashrc`
 
 ### Authentication Priority
 
-When multiple authentication methods are configured, the provider uses this priority:
+When multiple methods are configured, the provider uses this priority:
 
 1. **P12 Certificate** - If `api_p12_file` is set (requires `p12_password`)
 2. **PEM Certificate** - If both `api_cert` and `api_key` are set
 3. **API Token** - If `api_token` is set
-4. **Error** - If none of the above are provided
+4. **Error** - If none are provided
 
 ## CI/CD Integration
 
 ### GitHub Actions with API Token
-
-This is the simplest approach for GitHub Actions:
 
 ```yaml
 name: Terraform Deploy
@@ -261,11 +216,9 @@ jobs:
   terraform:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+      - uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: "1.8.0"
 
@@ -286,40 +239,31 @@ jobs:
         run: terraform apply -auto-approve tfplan
 ```
 
-**Setting Up GitHub Secrets:**
-
-1. Navigate to your repository on GitHub
-2. Go to **Settings** → **Secrets and variables** → **Actions**
-3. Click **New repository secret**
-4. Add the following secrets:
+**GitHub Secrets to configure:**
 
 | Secret Name | Value |
 |-------------|-------|
 | `VES_API_URL` | `https://your-tenant.console.ves.volterra.io/api` |
 | `VES_API_TOKEN` | Your API token value |
 
-### GitHub Actions with P12 Certificate (More Secure)
+### GitHub Actions with P12 Certificate
 
 For production deployments requiring mTLS:
 
 ```yaml
-name: Terraform Deploy with P12 Certificate
+name: Terraform Deploy with P12
 
 on:
   push:
-    branches: [main]
-  pull_request:
     branches: [main]
 
 jobs:
   terraform:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+      - uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: "1.8.0"
 
@@ -339,33 +283,28 @@ jobs:
         run: terraform plan -out=tfplan
 
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         env:
           VES_API_URL: ${{ secrets.VES_API_URL }}
           VES_P12_FILE: /tmp/f5xc-credentials.p12
           VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }}
         run: terraform apply -auto-approve tfplan
 
-      - name: Cleanup Credentials
+      - name: Cleanup
         if: always()
         run: rm -f /tmp/f5xc-credentials.p12
 ```
 
 **Encoding P12 for GitHub Secrets:**
 
-Before adding the P12 file as a secret, encode it as base64:
-
 ```bash
 # On macOS
 base64 -i your-credentials.p12 | pbcopy
-# The base64 string is now in your clipboard
 
 # On Linux
 base64 -w 0 your-credentials.p12
-# Copy the output
 ```
 
-**Setting Up GitHub Secrets for P12:**
+**GitHub Secrets to configure:**
 
 | Secret Name | Value |
 |-------------|-------|
@@ -374,8 +313,6 @@ base64 -w 0 your-credentials.p12
 | `VES_P12_PASSWORD` | Password for the P12 file |
 
 ## Security Best Practices
-
-### Credential Protection
 
 - **Never commit credentials** to version control. Add `*.tfvars`, `*.p12`, and `*.pem` to `.gitignore`
 - **Use environment variables** for sensitive values in local development
@@ -389,97 +326,64 @@ base64 -w 0 your-credentials.p12
 | Local development | API Token | Simplest setup |
 | CI/CD pipelines | P12 Certificate | mTLS security |
 | Production automation | Service Credentials | Role-based access control |
-| Quick testing | API Token | Fast iteration |
-
-### Credential Expiry
-
-When creating credentials, consider:
-
-- **Development credentials**: Shorter expiry (30-90 days)
-- **CI/CD credentials**: Align with your rotation schedule
-- **Use Service Credentials**: Easier to manage across teams
 
 ## Troubleshooting
 
 ### Authentication Failed (401 Unauthorized)
 
-**Symptom:** Terraform returns 401 errors.
-
-**Solutions:**
-
-1. Verify your API URL is correct (includes `/api` suffix)
-2. Check that your token hasn't expired
-3. Verify the token was copied correctly (no extra whitespace)
-4. Ensure environment variables are set in the current shell
+1. Verify API URL includes `/api` suffix
+2. Check token hasn't expired
+3. Verify token copied correctly (no whitespace)
+4. Ensure environment variables are exported:
 
 ```bash
-# Verify environment variables are set
 echo $VES_API_URL
 echo $VES_API_TOKEN
 ```
 
 ### Certificate Verification Failed
 
-**Symptom:** TLS/SSL certificate errors.
-
-**Solutions:**
-
-1. Verify the P12 password is correct
-2. Check that the P12 file path is absolute or correctly relative
-3. Ensure the P12 file hasn't been corrupted during transfer
+1. Verify P12 password is correct
+2. Check file path is absolute or correctly relative
+3. Test P12 file:
 
 ```bash
-# Test P12 file with OpenSSL
 openssl pkcs12 -in your-credentials.p12 -nokeys -info
 ```
 
-### Permission Denied
+### Permission Denied (403 Forbidden)
 
-**Symptom:** 403 Forbidden errors on specific operations.
-
-**Solutions:**
-
-1. Verify your credential has the required permissions
+1. Verify credential has required permissions
 2. For Service Credentials, check role and namespace assignments
 3. Some operations require specific system roles
 
 ### Environment Variables Not Working
 
-**Symptom:** Provider asks for credentials despite environment variables being set.
+1. Ensure variables are exported:
 
-**Solutions:**
+```bash
+export VES_API_TOKEN="token"  # Correct
+VES_API_TOKEN="token"         # Won't work
+```
 
-1. Ensure variables are exported (not just set)
+2. Verify spelling is exact (case-sensitive)
+3. Check for hidden characters in values
 
-   ```bash
-   export VES_API_TOKEN="token"  # Correct
-   VES_API_TOKEN="token"         # Won't work with Terraform
-   ```
-
-2. Verify spelling matches exactly (case-sensitive)
-3. Check for hidden characters or quotes in the value
-
-## Clean Up
-
-To revoke credentials when no longer needed:
+## Revoking Credentials
 
 1. Navigate to **Administration** → **Personal Management** → **Credentials** (or **IAM** → **Service Credentials**)
-2. Find the credential in the list
-3. Click the **Actions** menu (three dots)
-4. Select **Force Expiry** to immediately invalidate the credential
+2. Find the credential
+3. Click **Actions** (three dots) → **Force Expiry**
 
 ## Next Steps
-
-Now that you have authentication configured, explore:
 
 - [HTTP Load Balancer Guide](http-loadbalancer) - Deploy your first load balancer
 - [Blindfold Functions Guide](blindfold) - Secure secret management
 - [Namespace Resource](../resources/namespace) - Organize your resources
-- [Origin Pool Resource](../resources/origin_pool) - Configure backend servers
 
 ## Support
 
-- **Provider Documentation:** [F5XC Provider](../index)
-- **F5 Documentation:** [F5 Distributed Cloud Docs](https://docs.cloud.f5.com/)
-- **Credential Management:** [F5 Credentials Guide](https://docs.cloud.f5.com/docs-v2/administration/how-tos/user-mgmt/Credentials)
-- **Issues:** [GitHub Issues](https://github.com/robinmordasiewicz/terraform-provider-f5xc/issues)
+- [Provider Documentation](../index)
+- [F5 Distributed Cloud Docs](https://docs.cloud.f5.com/)
+- [F5 Credentials Guide](https://docs.cloud.f5.com/docs-v2/administration/how-tos/user-mgmt/Credentials)
+- [GitHub Issues](https://github.com/robinmordasiewicz/terraform-provider-f5xc/issues)

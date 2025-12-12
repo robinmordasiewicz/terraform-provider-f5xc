@@ -427,8 +427,9 @@ func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTe
 	// Create reverse mapping: field -> group name + all fields in group
 	// Also track which field should get the constraint (first alphabetically)
 	fieldToOneOf := make(map[string][]string)
-	fieldIsFirst := make(map[string]bool) // Only first field in each group gets the constraint
-	for _, fields := range oneOfGroups {
+	fieldToGroupName := make(map[string]string) // Track the group name for AI-friendly defaults
+	fieldIsFirst := make(map[string]bool)       // Only first field in each group gets the constraint
+	for groupName, fields := range oneOfGroups {
 		// Sort fields to determine which is first
 		sortedFields := make([]string, len(fields))
 		copy(sortedFields, fields)
@@ -437,6 +438,7 @@ func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTe
 
 		for _, field := range fields {
 			fieldToOneOf[field] = fields
+			fieldToGroupName[field] = groupName
 			if field == firstField {
 				fieldIsFirst[field] = true
 			}
@@ -452,10 +454,12 @@ func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTe
 
 	for propName, propSchema := range createSpec.Properties {
 		oneOfFields := fieldToOneOf[propName]
+		groupName := fieldToGroupName[propName]
 		attr := convertToTerraformAttribute(propName, propSchema, requiredSet[propName], "", spec)
 		// Add OneOf constraint hint to description only for the first field in each group
+		// Include group name for AI-friendly default recommendations
 		if len(oneOfFields) > 1 && fieldIsFirst[propName] {
-			attr.Description = addOneOfConstraint(attr.Description, oneOfFields)
+			attr.Description = addOneOfConstraintWithGroup(attr.Description, groupName, oneOfFields)
 		}
 		attributes = append(attributes, attr)
 	}
@@ -1046,14 +1050,17 @@ func formatDefaultDescription(desc string, defaultValue interface{}) string {
 	return fmt.Sprintf("%s Defaults to `%s`.", desc, defaultStr)
 }
 
-// formatEnumDescription appends enum values to a description per HashiCorp standards.
-// Format: "Possible values are `value1`, `value2`" or "The only possible value is `value1`"
+// formatEnumDescription adds AI-parseable enum metadata and human-readable values to description.
+// Format: "[Enum: val1|val2|val3] Human description. Possible values are `val1`, `val2`, `val3`."
+// The [Enum: ...] prefix enables AI tools to deterministically extract valid values from
+// `terraform providers schema -json` output without parsing natural language.
 func formatEnumDescription(desc string, enumValues []interface{}) string {
 	if len(enumValues) == 0 {
 		return desc
 	}
 
-	// Convert enum values to strings with backtick formatting
+	// Convert enum values to strings (raw values for AI prefix, backtick for human)
+	var rawValues []string
 	var formattedValues []string
 	for _, v := range enumValues {
 		str := fmt.Sprintf("%v", v)
@@ -1061,12 +1068,16 @@ func formatEnumDescription(desc string, enumValues []interface{}) string {
 		if str == "" || len(str) > 50 {
 			continue
 		}
+		rawValues = append(rawValues, str)
 		formattedValues = append(formattedValues, fmt.Sprintf("`%s`", str))
 	}
 
-	if len(formattedValues) == 0 {
+	if len(rawValues) == 0 {
 		return desc
 	}
+
+	// Build AI-parseable prefix: [Enum: val1|val2|val3]
+	aiPrefix := fmt.Sprintf("[Enum: %s]", strings.Join(rawValues, "|"))
 
 	// Ensure description ends properly before adding enum info
 	desc = strings.TrimSpace(desc)
@@ -1075,82 +1086,246 @@ func formatEnumDescription(desc string, enumValues []interface{}) string {
 	}
 
 	// Format based on number of values per HashiCorp standards
+	var humanSuffix string
 	if len(formattedValues) == 1 {
-		return fmt.Sprintf("%s The only possible value is %s.", desc, formattedValues[0])
+		humanSuffix = fmt.Sprintf("The only possible value is %s.", formattedValues[0])
+	} else {
+		humanSuffix = fmt.Sprintf("Possible values are %s.", strings.Join(formattedValues, ", "))
 	}
 
-	return fmt.Sprintf("%s Possible values are %s.", desc, strings.Join(formattedValues, ", "))
+	// Combine: [AI prefix] Human description. Human enum list.
+	if desc == "" {
+		return fmt.Sprintf("%s %s", aiPrefix, humanSuffix)
+	}
+	return fmt.Sprintf("%s %s %s", aiPrefix, desc, humanSuffix)
+}
+
+// resourceCategories maps resource names to their functional categories for AI discovery
+var resourceCategories = map[string]string{
+	// Load Balancing
+	"http_loadbalancer": "Load Balancing",
+	"tcp_loadbalancer":  "Load Balancing",
+	"udp_loadbalancer":  "Load Balancing",
+	"dns_load_balancer": "Load Balancing",
+	"cdn_loadbalancer":  "Load Balancing",
+	"origin_pool":       "Load Balancing",
+	"healthcheck":       "Load Balancing",
+	"route":             "Load Balancing",
+
+	// Security
+	"app_firewall":                   "Security",
+	"service_policy":                 "Security",
+	"network_firewall":               "Security",
+	"rate_limiter":                   "Security",
+	"bot_defense_app_infrastructure": "Security",
+	"malicious_user_mitigation":      "Security",
+	"waf_exclusion_policy":           "Security",
+	"enhanced_firewall_policy":       "Security",
+	"forward_proxy_policy":           "Security",
+
+	// Networking
+	"network_connector": "Networking",
+	"virtual_network":   "Networking",
+	"cloud_connect":     "Networking",
+	"cloud_link":        "Networking",
+	"bgp":               "Networking",
+	"ip_prefix_set":     "Networking",
+	"network_interface": "Networking",
+	"virtual_site":      "Networking",
+
+	// Sites & Infrastructure
+	"securemesh_site":    "Sites",
+	"securemesh_site_v2": "Sites",
+	"aws_vpc_site":       "Sites",
+	"azure_vnet_site":    "Sites",
+	"gcp_vpc_site":       "Sites",
+	"aws_tgw_site":       "Sites",
+	"voltstack_site":     "Sites",
+
+	// DNS
+	"dns_zone":              "DNS",
+	"dns_domain":            "DNS",
+	"dns_lb_pool":           "DNS",
+	"dns_lb_health_check":   "DNS",
+	"dns_compliance_checks": "DNS",
+
+	// Kubernetes
+	"k8s_cluster":              "Kubernetes",
+	"virtual_k8s":              "Kubernetes",
+	"k8s_cluster_role":         "Kubernetes",
+	"k8s_cluster_role_binding": "Kubernetes",
+	"k8s_pod_security_policy":  "Kubernetes",
+	"container_registry":       "Kubernetes",
+
+	// Authentication & Credentials
+	"authentication":    "Authentication",
+	"cloud_credentials": "Authentication",
+	"api_credential":    "Authentication",
+	"token":             "Authentication",
+	"secret_policy":     "Authentication",
+
+	// Certificates
+	"certificate":       "Certificates",
+	"certificate_chain": "Certificates",
+	"trusted_ca_list":   "Certificates",
+
+	// Monitoring
+	"log_receiver":        "Monitoring",
+	"global_log_receiver": "Monitoring",
+	"alert_policy":        "Monitoring",
+	"alert_receiver":      "Monitoring",
+
+	// API Security
+	"api_definition": "API Security",
+	"api_discovery":  "API Security",
+	"api_testing":    "API Security",
+	"api_crawler":    "API Security",
+
+	// Organization
+	"namespace":      "Organization",
+	"tenant":         "Organization",
+	"role":           "Organization",
+	"allowed_tenant": "Organization",
+}
+
+// resourceDependencies maps resource names to their common dependencies
+// This helps AI tools understand creation order
+var resourceDependencies = map[string][]string{
+	"http_loadbalancer": {"namespace", "origin_pool"},
+	"tcp_loadbalancer":  {"namespace", "origin_pool"},
+	"udp_loadbalancer":  {"namespace", "origin_pool"},
+	"origin_pool":       {"namespace", "healthcheck"},
+	"healthcheck":       {"namespace"},
+	"route":             {"namespace", "http_loadbalancer"},
+	"app_firewall":      {"namespace"},
+	"service_policy":    {"namespace"},
+	"rate_limiter":      {"namespace"},
+	"certificate":       {"namespace"},
+	"api_definition":    {"namespace"},
+	"dns_zone":          {},
+	"virtual_site":      {},
+	"namespace":         {},
+}
+
+// getResourceAIMetadata generates AI-parseable metadata prefix for a resource
+// Format: [Category: X] [Namespace: required|optional] [DependsOn: res1, res2]
+func getResourceAIMetadata(resourceName string) string {
+	var parts []string
+
+	// Add category if known
+	if category, ok := resourceCategories[resourceName]; ok {
+		parts = append(parts, fmt.Sprintf("[Category: %s]", category))
+	}
+
+	// Add namespace requirement
+	// Most F5 XC resources require a namespace except for system-level resources
+	systemResources := map[string]bool{
+		"namespace": true, "tenant": true, "role": true, "allowed_tenant": true,
+		"dns_zone": true, "dns_domain": true, "virtual_site": true,
+		"cloud_credentials": true, "certificate": true, "trusted_ca_list": true,
+	}
+	if systemResources[resourceName] {
+		parts = append(parts, "[Namespace: not_required]")
+	} else {
+		parts = append(parts, "[Namespace: required]")
+	}
+
+	// Add dependencies if known
+	if deps, ok := resourceDependencies[resourceName]; ok && len(deps) > 0 {
+		parts = append(parts, fmt.Sprintf("[DependsOn: %s]", strings.Join(deps, ", ")))
+	}
+
+	if len(parts) == 0 {
+		return ""
+	}
+	return strings.Join(parts, " ")
 }
 
 // transformResourceDescription converts technical API descriptions into user-friendly
 // Terraform resource descriptions following HashiCorp best practices.
-// Pattern: "Manages a [Resource] in F5 Distributed Cloud [for purpose/capability]."
+// Pattern: "[AI Metadata] Manages a [Resource] in F5 Distributed Cloud [for purpose/capability]."
 func transformResourceDescription(resourceName, rawDescription string) string {
 	humanName := toHumanName(resourceName)
+
+	// Get AI-parseable metadata prefix
+	aiMetadata := getResourceAIMetadata(resourceName)
 
 	// Clean and normalize the raw description first
 	desc := cleanDescription(rawDescription)
 	desc = strings.TrimSpace(desc)
 
+	// Generate the human-readable description
+	var humanDesc string
+
 	// If empty, use default
 	if desc == "" {
-		return fmt.Sprintf("Manages a %s resource in F5 Distributed Cloud.", humanName)
-	}
+		humanDesc = fmt.Sprintf("Manages a %s resource in F5 Distributed Cloud.", humanName)
+	} else {
+		// Detect and transform common technical description patterns
+		lowerDesc := strings.ToLower(desc)
 
-	// Detect and transform common technical description patterns
-	lowerDesc := strings.ToLower(desc)
+		// Pattern 1: "Shape of the X specification" -> extract X and make user-friendly
+		if strings.Contains(lowerDesc, "shape of") {
+			humanDesc = generateCapabilityDescriptionOnly(resourceName, humanName, desc)
+		} else if strings.HasSuffix(lowerDesc, " object") || strings.HasSuffix(lowerDesc, " configuration") ||
+			strings.HasSuffix(lowerDesc, " spec") || strings.HasSuffix(lowerDesc, " specification") {
+			// Pattern 2: "X object" or "X configuration" - technical object reference
+			humanDesc = generateCapabilityDescriptionOnly(resourceName, humanName, desc)
+		} else {
+			// Pattern 3: Already starts with a verb like "Create", "Configure", "Define"
+			// Transform to "Manages" for consistency
+			actionVerbs := []string{"create", "configure", "define", "set up", "establish", "provision"}
+			matched := false
+			for _, verb := range actionVerbs {
+				if strings.HasPrefix(lowerDesc, verb) {
+					// Replace the action verb with "Manages" for Terraform consistency
+					remainder := desc[len(verb):]
+					remainder = strings.TrimPrefix(remainder, "s") // handle "Creates" -> "Create"
+					remainder = strings.TrimSpace(remainder)
+					if remainder != "" {
+						// Clean up articles
+						remainder = strings.TrimPrefix(remainder, "a ")
+						remainder = strings.TrimPrefix(remainder, "an ")
+						remainder = strings.TrimPrefix(remainder, "the ")
+						humanDesc = fmt.Sprintf("Manages %s in F5 Distributed Cloud.", remainder)
+						matched = true
+						break
+					}
+				}
+			}
 
-	// Pattern 1: "Shape of the X specification" -> extract X and make user-friendly
-	if strings.Contains(lowerDesc, "shape of") {
-		return generateCapabilityDescription(resourceName, humanName, desc)
-	}
-
-	// Pattern 2: "X object" or "X configuration" - technical object reference
-	if strings.HasSuffix(lowerDesc, " object") || strings.HasSuffix(lowerDesc, " configuration") ||
-		strings.HasSuffix(lowerDesc, " spec") || strings.HasSuffix(lowerDesc, " specification") {
-		return generateCapabilityDescription(resourceName, humanName, desc)
-	}
-
-	// Pattern 3: Already starts with a verb like "Create", "Configure", "Define"
-	// Transform to "Manages" for consistency
-	actionVerbs := []string{"create", "configure", "define", "set up", "establish", "provision"}
-	for _, verb := range actionVerbs {
-		if strings.HasPrefix(lowerDesc, verb) {
-			// Replace the action verb with "Manages" for Terraform consistency
-			remainder := desc[len(verb):]
-			remainder = strings.TrimPrefix(remainder, "s") // handle "Creates" -> "Create"
-			remainder = strings.TrimSpace(remainder)
-			if remainder != "" {
-				// Clean up articles
-				remainder = strings.TrimPrefix(remainder, "a ")
-				remainder = strings.TrimPrefix(remainder, "an ")
-				remainder = strings.TrimPrefix(remainder, "the ")
-				return fmt.Sprintf("Manages %s in F5 Distributed Cloud.", remainder)
+			if !matched {
+				// Pattern 4: Description is already decent but needs "Manages" prefix
+				// If it doesn't start with a verb, add "Manages a X resource" prefix
+				if !startsWithVerb(desc) {
+					// Use the description as the capability explanation
+					capability := extractCapabilityFromDescription(desc)
+					if capability != "" {
+						humanDesc = fmt.Sprintf("Manages a %s resource in F5 Distributed Cloud for %s.", humanName, capability)
+					} else {
+						humanDesc = fmt.Sprintf("Manages a %s resource in F5 Distributed Cloud. %s", humanName, desc)
+					}
+				} else {
+					// If description already looks good, just ensure it ends properly
+					if !strings.HasSuffix(desc, ".") {
+						desc = desc + "."
+					}
+					humanDesc = desc
+				}
 			}
 		}
 	}
 
-	// Pattern 4: Description is already decent but needs "Manages" prefix
-	// If it doesn't start with a verb, add "Manages a X resource" prefix
-	if !startsWithVerb(desc) {
-		// Use the description as the capability explanation
-		capability := extractCapabilityFromDescription(desc)
-		if capability != "" {
-			return fmt.Sprintf("Manages a %s resource in F5 Distributed Cloud for %s.", humanName, capability)
-		}
-		return fmt.Sprintf("Manages a %s resource in F5 Distributed Cloud. %s", humanName, desc)
+	// Combine AI metadata prefix with human-readable description
+	if aiMetadata != "" {
+		return fmt.Sprintf("%s %s", aiMetadata, humanDesc)
 	}
-
-	// If description already looks good, just ensure it ends properly
-	if !strings.HasSuffix(desc, ".") {
-		desc = desc + "."
-	}
-	return desc
+	return humanDesc
 }
 
-// generateCapabilityDescription creates a user-friendly description based on resource name
-// and any capability hints from the original description
-func generateCapabilityDescription(resourceName, humanName, rawDesc string) string {
+// generateCapabilityDescriptionOnly is like generateCapabilityDescription but returns only the description
+// without AI metadata (metadata is added by the caller)
+func generateCapabilityDescriptionOnly(resourceName, humanName, rawDesc string) string {
 	// Resource-specific capability mappings for common F5 XC resources
 	capabilities := map[string]string{
 		// Sites
@@ -1362,24 +1537,92 @@ func extractOneOfGroups(spec *OpenAPI3Spec, schemaKey string) map[string][]strin
 	return oneOfGroups
 }
 
-// addOneOfConstraint adds a OneOf constraint hint to the description
+// addOneOfConstraint adds a OneOf constraint hint to the description with recommended default
+// The format is AI-friendly: [OneOf: field1, field2; Default: recommended_field]
 func addOneOfConstraint(desc string, oneOfFields []string) string {
+	return addOneOfConstraintWithGroup(desc, "", oneOfFields)
+}
+
+// addOneOfConstraintWithGroup adds a OneOf constraint with group name for better AI parsing
+func addOneOfConstraintWithGroup(desc string, groupName string, oneOfFields []string) string {
 	if len(oneOfFields) < 2 {
 		return desc
 	}
 
-	// Format fields with quotes
+	// Format fields
 	quotedFields := make([]string, len(oneOfFields))
 	for i, f := range oneOfFields {
 		quotedFields[i] = f
 	}
-	constraint := fmt.Sprintf("[OneOf: %s]", strings.Join(quotedFields, ", "))
+
+	// Determine recommended default choice using AI-friendly heuristics
+	defaultChoice := determineOneOfDefault(groupName, oneOfFields)
+
+	// Build AI-friendly constraint marker
+	var constraint string
+	if defaultChoice != "" {
+		constraint = fmt.Sprintf("[OneOf: %s; Default: %s]", strings.Join(quotedFields, ", "), defaultChoice)
+	} else {
+		constraint = fmt.Sprintf("[OneOf: %s]", strings.Join(quotedFields, ", "))
+	}
 
 	// Add constraint at the beginning of description
 	if desc == "" {
 		return constraint
 	}
 	return constraint + " " + desc
+}
+
+// determineOneOfDefault determines the recommended default for a OneOf group
+// This helps AI agents make informed decisions without trial-and-error
+func determineOneOfDefault(groupName string, fields []string) string {
+	// Common patterns for F5 XC resources - these are the safe, recommended defaults
+	defaultPatterns := map[string]string{
+		"advertise_choice":          "advertise_on_public_default_vip",
+		"loadbalancer_type":         "https_auto_cert",
+		"hash_policy_choice":        "round_robin",
+		"waf_choice":                "disable_waf",
+		"challenge_type":            "no_challenge",
+		"rate_limit_choice":         "disable_rate_limit",
+		"service_policy_choice":     "no_service_policies",
+		"tls_choice":                "no_tls",
+		"bot_defense_choice":        "disable_bot_defense",
+		"api_definition_choice":     "disable_api_definition",
+		"api_discovery_choice":      "disable_api_discovery",
+		"ip_reputation_choice":      "disable_ip_reputation",
+		"malware_protection":        "disable_malware_protection",
+		"client_side_defense_choice": "disable_client_side_defense",
+	}
+
+	// Check if we have a known pattern for this group
+	if groupName != "" {
+		if defaultVal, ok := defaultPatterns[groupName]; ok {
+			// Verify the default is actually in the fields
+			for _, f := range fields {
+				if f == defaultVal {
+					return defaultVal
+				}
+			}
+		}
+	}
+
+	// Heuristics for common patterns
+	for _, f := range fields {
+		// Prefer "default" variants (e.g., advertise_on_public_default_vip)
+		if strings.Contains(f, "default") {
+			return f
+		}
+	}
+
+	for _, f := range fields {
+		// Prefer "no_" or "disable_" for optional security features
+		if strings.HasPrefix(f, "no_") || strings.HasPrefix(f, "disable_") {
+			return f
+		}
+	}
+
+	// No clear default - don't recommend one
+	return ""
 }
 
 // toTitleCase wraps naming.ToResourceTypeName for backward compatibility.

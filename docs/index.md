@@ -33,12 +33,12 @@ Learn more about [how to generate API credentials](https://docs.cloud.f5.com/doc
 ```terraform
 # Configure the F5XC Provider with API Token Authentication
 provider "f5xc" {
-  api_url   = "https://your-tenant.console.ves.volterra.io/api"
+  api_url   = "https://your-tenant.console.ves.volterra.io"
   api_token = var.ves_api_token
 }
 
 # Alternatively, use environment variables:
-# export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
+# export VES_API_URL="https://your-tenant.console.ves.volterra.io"
 # export VES_API_TOKEN="your-api-token"
 
 variable "ves_api_token" {
@@ -49,13 +49,13 @@ variable "ves_api_token" {
 
 # Or use P12 Certificate Authentication:
 # provider "f5xc" {
-#   api_url      = "https://your-tenant.console.ves.volterra.io/api"
+#   api_url      = "https://your-tenant.console.ves.volterra.io"
 #   api_p12_file = "/path/to/certificate.p12"
 #   p12_password = var.ves_p12_password
 # }
 #
 # Environment variables for P12 authentication:
-# export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
+# export VES_API_URL="https://your-tenant.console.ves.volterra.io"
 # export VES_P12_FILE="/path/to/certificate.p12"
 # export VES_P12_PASSWORD="your-p12-password"
 ```
@@ -72,7 +72,7 @@ variable "ves_api_token" {
 
 ### Optional
 
-* `api_url` - F5 Distributed Cloud API URL (`String`). Defaults to `https://console.ves.volterra.io/api`. Can also be set via `VES_API_URL` environment variable.
+* `api_url` - F5 Distributed Cloud API URL (`String`). Base URL **without** `/api` suffix. Defaults to `https://console.ves.volterra.io`. Can also be set via `VES_API_URL` environment variable.
 
 * `p12_password` - Password for PKCS#12 certificate bundle (`String`, Sensitive). Required when using `api_p12_file`. Can also be set via `VES_P12_PASSWORD` environment variable.
 
@@ -88,7 +88,7 @@ The simplest authentication method using a personal API token.
 
 ```hcl
 provider "f5xc" {
-  api_url   = "https://your-tenant.console.ves.volterra.io/api"
+  api_url   = "https://your-tenant.console.ves.volterra.io"
   api_token = var.f5xc_api_token
 }
 ```
@@ -96,7 +96,7 @@ provider "f5xc" {
 **Environment Variables:**
 
 ```bash
-export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
+export VES_API_URL="https://your-tenant.console.ves.volterra.io"
 export VES_API_TOKEN="your-api-token"
 ```
 
@@ -108,7 +108,7 @@ Certificate-based authentication using a PKCS#12 bundle downloaded from F5 Distr
 
 ```hcl
 provider "f5xc" {
-  api_url      = "https://your-tenant.console.ves.volterra.io/api"
+  api_url      = "https://your-tenant.console.ves.volterra.io"
   api_p12_file = "/path/to/certificate.p12"
   p12_password = var.f5xc_p12_password
 }
@@ -117,7 +117,7 @@ provider "f5xc" {
 **Environment Variables:**
 
 ```bash
-export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
+export VES_API_URL="https://your-tenant.console.ves.volterra.io"
 export VES_P12_FILE="/path/to/certificate.p12"
 export VES_P12_PASSWORD="your-p12-password"
 ```
@@ -130,7 +130,7 @@ Certificate-based authentication using separate PEM-encoded certificate and key 
 
 ```hcl
 provider "f5xc" {
-  api_url     = "https://your-tenant.console.ves.volterra.io/api"
+  api_url     = "https://your-tenant.console.ves.volterra.io"
   api_cert    = "/path/to/certificate.crt"
   api_key     = "/path/to/private.key"
   api_ca_cert = "/path/to/ca-certificate.crt"  # Optional
@@ -140,7 +140,7 @@ provider "f5xc" {
 **Environment Variables:**
 
 ```bash
-export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
+export VES_API_URL="https://your-tenant.console.ves.volterra.io"
 export VES_CERT="/path/to/certificate.crt"
 export VES_KEY="/path/to/private.key"
 export VES_CACERT="/path/to/ca-certificate.crt"  # Optional

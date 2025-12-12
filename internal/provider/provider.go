@@ -52,9 +52,9 @@ func (p *F5XCProvider) Schema(ctx context.Context, req provider.SchemaRequest, r
 			"built from public F5 API documentation.",
 		Attributes: map[string]schema.Attribute{
 			"api_url": schema.StringAttribute{
-				MarkdownDescription: "F5 Distributed Cloud API URL (base URL without '/api' suffix). " +
+				MarkdownDescription: "F5 Distributed Cloud API URL. " +
 					"Defaults to https://console.ves.volterra.io. " +
-					"Example: https://tenant.console.ves.volterra.io (NOT https://tenant.console.ves.volterra.io/api). " +
+					"Example: https://tenant.console.ves.volterra.io. " +
 					"Can also be set via VES_API_URL environment variable.",
 				Optional: true,
 			},
@@ -144,8 +144,11 @@ func (p *F5XCProvider) Configure(ctx context.Context, req provider.ConfigureRequ
 
 	// Set default API URL if not provided
 	if apiURL == "" {
-		apiURL = "https://console.ves.volterra.io/api"
+		apiURL = "https://console.ves.volterra.io"
 	}
+
+	// Normalize the API URL (removes /api suffix and trailing slashes)
+	apiURL, _ = normalizeAPIURL(apiURL)
 
 	var c *client.Client
 	var err error

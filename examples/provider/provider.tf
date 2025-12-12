@@ -1,11 +1,11 @@
 # Configure the F5XC Provider with API Token Authentication
 provider "f5xc" {
-  api_url   = "https://your-tenant.console.ves.volterra.io/api"
+  api_url   = "https://your-tenant.console.ves.volterra.io"
   api_token = var.ves_api_token
 }
 
 # Alternatively, use environment variables:
-# export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
+# export VES_API_URL="https://your-tenant.console.ves.volterra.io"
 # export VES_API_TOKEN="your-api-token"
 
 variable "ves_api_token" {
@@ -16,12 +16,12 @@ variable "ves_api_token" {
 
 # Or use P12 Certificate Authentication:
 # provider "f5xc" {
-#   api_url      = "https://your-tenant.console.ves.volterra.io/api"
+#   api_url      = "https://your-tenant.console.ves.volterra.io"
 #   api_p12_file = "/path/to/certificate.p12"
 #   p12_password = var.ves_p12_password
 # }
 #
 # Environment variables for P12 authentication:
-# export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
+# export VES_API_URL="https://your-tenant.console.ves.volterra.io"
 # export VES_P12_FILE="/path/to/certificate.p12"
 # export VES_P12_PASSWORD="your-p12-password"

@@ -66,13 +66,13 @@ Configure one of these authentication methods via environment variables:
 
 **Option 1: API Token (Recommended for development)**
 ```bash
-export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
+export VES_API_URL="https://your-tenant.console.ves.volterra.io"
 export VES_API_TOKEN="your-api-token"
 ```
 
 **Option 2: P12 Certificate (Recommended for production)**
 ```bash
-export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
+export VES_API_URL="https://your-tenant.console.ves.volterra.io"
 export VES_P12_FILE="/path/to/your-credentials.p12"
 export VES_P12_PASSWORD="your-p12-password"  # pragma: allowlist secret
 ```
@@ -411,7 +411,7 @@ echo $VES_API_URL
 echo $VES_API_TOKEN  # or VES_P12_FILE
 
 # Set them if missing
-export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
+export VES_API_URL="https://your-tenant.console.ves.volterra.io"
 export VES_API_TOKEN="your-api-token"
 ```
 

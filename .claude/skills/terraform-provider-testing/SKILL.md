@@ -196,7 +196,7 @@ Every test development follows this iterative pattern:
 vim internal/provider/example_resource_test.go
 
 # Phase 2: Run Test (expect failures)
-VES_API_URL="https://tenant.console.ves.volterra.io/api" \
+VES_API_URL="https://tenant.console.ves.volterra.io" \
 VES_P12_FILE="/path/to/cert.p12" \
 VES_P12_PASSWORD="password" \  # pragma: allowlist secret
 TF_ACC=1 go test -v -timeout 15m \
@@ -766,7 +766,7 @@ func TestAccBotDefenseAdvanced_basic(t *testing.T) {
 # Required for ALL acceptance tests
 export VES_P12_FILE="/path/to/api-certificate.p12"
 export VES_P12_PASSWORD="your-password"  # pragma: allowlist secret
-export VES_API_URL="https://tenant.console.ves.volterra.io/api"
+export VES_API_URL="https://tenant.console.ves.volterra.io"
 export TF_ACC=1
 ```
 

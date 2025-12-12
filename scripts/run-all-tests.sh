@@ -2,7 +2,7 @@
 # Sequential test runner with rate limit protection
 #
 # Required environment variables:
-#   VES_API_URL - F5 XC API URL (e.g., https://console.ves.volterra.io/api)
+#   VES_API_URL - F5 XC API URL (e.g., https://tenant.console.ves.volterra.io)
 #   VES_P12_FILE - Path to P12 certificate file (or VES_API_TOKEN for token auth)
 #   VES_P12_PASSWORD - Password for P12 certificate (required with VES_P12_FILE)
 #   TF_ACC=1 - Enable acceptance tests

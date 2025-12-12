@@ -8,7 +8,7 @@ This example demonstrates the three authentication methods supported by the F5XC
 
 ```bash
 # For API Token authentication
-export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
+export VES_API_URL="https://your-tenant.console.ves.volterra.io"
 export VES_API_TOKEN="your-api-token"
 
 # Initialize and apply

@@ -13,7 +13,7 @@
 //
 // Environment Variables Required:
 //
-//	VES_API_URL - API URL (e.g., https://tenant.console.ves.volterra.io/api)
+//	VES_API_URL - API URL (e.g., https://tenant.console.ves.volterra.io)
 //	VES_P12_FILE + VES_P12_PASSWORD - P12 certificate authentication
 //	or VES_API_TOKEN - Token authentication
 package main

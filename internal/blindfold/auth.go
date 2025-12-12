@@ -71,7 +71,7 @@ const (
 )
 
 // DefaultAPIURL is the default F5XC API URL.
-const DefaultAPIURL = "https://console.ves.volterra.io/api"
+const DefaultAPIURL = "https://console.ves.volterra.io"
 
 // DefaultTimeout is the default HTTP client timeout.
 const DefaultTimeout = 30 * time.Second

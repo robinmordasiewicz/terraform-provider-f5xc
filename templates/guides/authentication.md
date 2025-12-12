@@ -88,7 +88,7 @@ API tokens provide bearer token authentication over TLS. This is the quickest wa
 **Using Environment Variables:**
 
 ```bash
-export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
+export VES_API_URL="https://your-tenant.console.ves.volterra.io"
 export VES_API_TOKEN="your-api-token"
 ```
 
@@ -108,7 +108,7 @@ P12 certificates provide mutual TLS (mTLS) authentication, where both client and
 **Using Environment Variables:**
 
 ```bash
-export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
+export VES_API_URL="https://your-tenant.console.ves.volterra.io"
 export VES_P12_FILE="/path/to/your-credentials.p12"
 export VES_P12_PASSWORD="your-p12-password"  # pragma: allowlist secret
 ```
@@ -151,7 +151,7 @@ openssl pkcs12 -in ~/your-tenant.console.ves.volterra.io.api-creds.p12 \
 **Using Environment Variables:**
 
 ```bash
-export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
+export VES_API_URL="https://your-tenant.console.ves.volterra.io"
 export VES_CERT="/path/to/certs/f5xc.cert"
 export VES_KEY="/path/to/certs/f5xc.key"
 ```
@@ -184,7 +184,7 @@ provider "f5xc" {
 
 ```bash
 # Add to ~/.bashrc or ~/.zshrc
-export VES_API_URL="https://your-tenant.console.ves.volterra.io/api"
+export VES_API_URL="https://your-tenant.console.ves.volterra.io"
 export VES_API_TOKEN="your-api-token"
 ```
 
@@ -243,7 +243,7 @@ jobs:
 
 | Secret Name | Value |
 |-------------|-------|
-| `VES_API_URL` | `https://your-tenant.console.ves.volterra.io/api` |
+| `VES_API_URL` | `https://your-tenant.console.ves.volterra.io` |
 | `VES_API_TOKEN` | Your API token value |
 
 ### GitHub Actions with P12 Certificate
@@ -308,7 +308,7 @@ base64 -w 0 your-credentials.p12
 
 | Secret Name | Value |
 |-------------|-------|
-| `VES_API_URL` | `https://your-tenant.console.ves.volterra.io/api` |
+| `VES_API_URL` | `https://your-tenant.console.ves.volterra.io` |
 | `VES_P12_BASE64` | Base64-encoded P12 file contents |
 | `VES_P12_PASSWORD` | Password for the P12 file |
 
@@ -331,7 +331,7 @@ base64 -w 0 your-credentials.p12
 
 ### Authentication Failed (401 Unauthorized)
 
-1. Verify API URL includes `/api` suffix
+1. Verify API URL does **NOT** include `/api` suffix (e.g., `https://tenant.console.ves.volterra.io`)
 2. Check token hasn't expired
 3. Verify token copied correctly (no whitespace)
 4. Ensure environment variables are exported:

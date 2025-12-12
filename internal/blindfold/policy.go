@@ -24,7 +24,7 @@ const (
 // Parameters:
 //   - ctx: Context for cancellation and timeouts
 //   - httpClient: Configured HTTP client with authentication
-//   - baseURL: F5XC API base URL (e.g., "https://tenant.console.ves.volterra.io/api")
+//   - baseURL: F5XC API base URL (e.g., "https://tenant.console.ves.volterra.io")
 //   - namespace: F5XC namespace containing the policy
 //   - name: Name of the secret policy
 //

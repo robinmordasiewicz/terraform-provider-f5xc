@@ -12,13 +12,13 @@
 # -----------------------------------------------------------------------------
 
 variable "ves_api_url" {
-  description = "F5 Distributed Cloud API URL. Format: https://your-tenant.console.ves.volterra.io/api"
+  description = "F5 Distributed Cloud API URL. Format: https://your-tenant.console.ves.volterra.io"
   type        = string
   default     = ""
 
   validation {
-    condition     = var.ves_api_url == "" || can(regex("^https://.*\\.console\\.ves\\.volterra\\.io/api$", var.ves_api_url))
-    error_message = "API URL must be in format: https://your-tenant.console.ves.volterra.io/api"
+    condition     = var.ves_api_url == "" || can(regex("^https://.*\\.console\\.ves\\.volterra\\.io(/api)?$", var.ves_api_url))
+    error_message = "API URL must be in format: https://your-tenant.console.ves.volterra.io"
   }
 }
 

@@ -17,7 +17,8 @@ type ChildTenant struct {
 // CreateChildTenant creates a new ChildTenant
 func (c *Client) CreateChildTenant(ctx context.Context, resource *ChildTenant) (*ChildTenant, error) {
 	var result ChildTenant
-	path := fmt.Sprintf("/api/web/namespaces/%s/child_tenants", resource.Metadata.Namespace)
+	path := "/api/web/namespaces/system/partner-management/child_tenants"
+	_ = resource.Metadata.Namespace // Namespace not required in API path for this resource
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -25,7 +26,8 @@ func (c *Client) CreateChildTenant(ctx context.Context, resource *ChildTenant) (
 // GetChildTenant retrieves a ChildTenant
 func (c *Client) GetChildTenant(ctx context.Context, namespace, name string) (*ChildTenant, error) {
 	var result ChildTenant
-	path := fmt.Sprintf("/api/web/namespaces/%s/child_tenants/%s", namespace, name)
+	path := fmt.Sprintf("/api/web/namespaces/system/partner-management/child_tenants/%s", name)
+	_ = namespace // Namespace not required in API path for this resource
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -33,13 +35,15 @@ func (c *Client) GetChildTenant(ctx context.Context, namespace, name string) (*C
 // UpdateChildTenant updates a ChildTenant
 func (c *Client) UpdateChildTenant(ctx context.Context, resource *ChildTenant) (*ChildTenant, error) {
 	var result ChildTenant
-	path := fmt.Sprintf("/api/web/namespaces/%s/child_tenants/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/web/namespaces/system/partner-management/child_tenants/%s", resource.Metadata.Name)
+	_ = resource.Metadata.Namespace // Namespace not required in API path for this resource
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteChildTenant deletes a ChildTenant
 func (c *Client) DeleteChildTenant(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/web/namespaces/%s/child_tenants/%s", namespace, name)
+	path := fmt.Sprintf("/api/web/namespaces/system/partner-management/child_tenants/%s", name)
+	_ = namespace // Namespace not required in API path for this resource
 	return c.Delete(ctx, path)
 }

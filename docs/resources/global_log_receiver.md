@@ -67,10 +67,10 @@ resource "f5xc_global_log_receiver" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="audit-logs"></a>[`audit_logs`](#audit-logs) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="dns-logs"></a>[`dns_logs`](#dns-logs) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="request-logs"></a>[`request_logs`](#request-logs) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="security-events"></a>[`security_events`](#security-events) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="audit-logs"></a>[`audit_logs`](#audit-logs) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="dns-logs"></a>[`dns_logs`](#dns-logs) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="request-logs"></a>[`request_logs`](#request-logs) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="security-events"></a>[`security_events`](#security-events) - Optional Block<br>Enable this option
 
 -> **One of the following:**
 &#x2022; <a id="aws-cloud-watch-receiver"></a>[`aws_cloud_watch_receiver`](#aws-cloud-watch-receiver) - Optional Block<br>AWS Cloudwatch Logs Configuration. AWS Cloudwatch Logs Configuration for Global Log Receiver<br>See [AWS Cloud Watch Receiver](#aws-cloud-watch-receiver) below for details.
@@ -87,8 +87,8 @@ resource "f5xc_global_log_receiver" "example" {
 <br><br>&#x2022; <a id="sumo-logic-receiver"></a>[`sumo_logic_receiver`](#sumo-logic-receiver) - Optional Block<br>SumoLogic Configuration. Configuration for SumoLogic endpoint
 
 -> **One of the following:**
-&#x2022; <a id="ns-all"></a>[`ns_all`](#ns-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="ns-current"></a>[`ns_current`](#ns-current) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="ns-all"></a>[`ns_all`](#ns-all) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="ns-current"></a>[`ns_current`](#ns-current) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="ns-list"></a>[`ns_list`](#ns-list) - Optional Block<br>Namespace List. Namespace List
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block
@@ -133,25 +133,25 @@ A [`batch`](#aws-cloud-watch-receiver-batch) block (within [`aws_cloud_watch_rec
 
 <a id="aws-cloud-watch-receiver-batch-max-bytes"></a>&#x2022; [`max_bytes`](#aws-cloud-watch-receiver-batch-max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
-<a id="aws-cloud-watch-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#aws-cloud-watch-receiver-batch-max-bytes-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="aws-cloud-watch-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#aws-cloud-watch-receiver-batch-max-bytes-disabled) - Optional Block<br>Enable this option
 
 <a id="aws-cloud-watch-receiver-batch-max-events"></a>&#x2022; [`max_events`](#aws-cloud-watch-receiver-batch-max-events) - Optional Number<br>Max Events. Send batch to endpoint after this many log messages are in the batch
 
-<a id="aws-cloud-watch-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#aws-cloud-watch-receiver-batch-max-events-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="aws-cloud-watch-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#aws-cloud-watch-receiver-batch-max-events-disabled) - Optional Block<br>Enable this option
 
 <a id="aws-cloud-watch-receiver-batch-timeout-seconds"></a>&#x2022; [`timeout_seconds`](#aws-cloud-watch-receiver-batch-timeout-seconds) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
 
-<a id="aws-cloud-watch-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#aws-cloud-watch-receiver-batch-timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="aws-cloud-watch-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#aws-cloud-watch-receiver-batch-timeout-seconds-default) - Optional Block<br>Enable this option
 
 #### AWS Cloud Watch Receiver Compression
 
 A [`compression`](#aws-cloud-watch-receiver-compression) block (within [`aws_cloud_watch_receiver`](#aws-cloud-watch-receiver)) supports the following:
 
-<a id="aws-cloud-watch-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#aws-cloud-watch-receiver-compression-compression-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="aws-cloud-watch-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#aws-cloud-watch-receiver-compression-compression-default) - Optional Block<br>Enable this option
 
-<a id="aws-cloud-watch-receiver-compression-compression-gzip"></a>&#x2022; [`compression_gzip`](#aws-cloud-watch-receiver-compression-compression-gzip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="aws-cloud-watch-receiver-compression-compression-gzip"></a>&#x2022; [`compression_gzip`](#aws-cloud-watch-receiver-compression-compression-gzip) - Optional Block<br>Enable this option
 
-<a id="aws-cloud-watch-receiver-compression-compression-none"></a>&#x2022; [`compression_none`](#aws-cloud-watch-receiver-compression-compression-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="aws-cloud-watch-receiver-compression-compression-none"></a>&#x2022; [`compression_none`](#aws-cloud-watch-receiver-compression-compression-none) - Optional Block<br>Enable this option
 
 #### Azure Event Hubs Receiver
 
@@ -209,25 +209,25 @@ A [`batch`](#azure-receiver-batch) block (within [`azure_receiver`](#azure-recei
 
 <a id="azure-receiver-batch-max-bytes"></a>&#x2022; [`max_bytes`](#azure-receiver-batch-max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
-<a id="azure-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#azure-receiver-batch-max-bytes-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="azure-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#azure-receiver-batch-max-bytes-disabled) - Optional Block<br>Enable this option
 
 <a id="azure-receiver-batch-max-events"></a>&#x2022; [`max_events`](#azure-receiver-batch-max-events) - Optional Number<br>Max Events. Send batch to endpoint after this many log messages are in the batch
 
-<a id="azure-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#azure-receiver-batch-max-events-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="azure-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#azure-receiver-batch-max-events-disabled) - Optional Block<br>Enable this option
 
 <a id="azure-receiver-batch-timeout-seconds"></a>&#x2022; [`timeout_seconds`](#azure-receiver-batch-timeout-seconds) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
 
-<a id="azure-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#azure-receiver-batch-timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="azure-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#azure-receiver-batch-timeout-seconds-default) - Optional Block<br>Enable this option
 
 #### Azure Receiver Compression
 
 A [`compression`](#azure-receiver-compression) block (within [`azure_receiver`](#azure-receiver)) supports the following:
 
-<a id="azure-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#azure-receiver-compression-compression-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="azure-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#azure-receiver-compression-compression-default) - Optional Block<br>Enable this option
 
-<a id="azure-receiver-compression-compression-gzip"></a>&#x2022; [`compression_gzip`](#azure-receiver-compression-compression-gzip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="azure-receiver-compression-compression-gzip"></a>&#x2022; [`compression_gzip`](#azure-receiver-compression-compression-gzip) - Optional Block<br>Enable this option
 
-<a id="azure-receiver-compression-compression-none"></a>&#x2022; [`compression_none`](#azure-receiver-compression-compression-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="azure-receiver-compression-compression-none"></a>&#x2022; [`compression_none`](#azure-receiver-compression-compression-none) - Optional Block<br>Enable this option
 
 #### Azure Receiver Connection String
 
@@ -261,9 +261,9 @@ A [`filename_options`](#azure-receiver-filename-options) block (within [`azure_r
 
 <a id="azure-receiver-filename-options-custom-folder"></a>&#x2022; [`custom_folder`](#azure-receiver-filename-options-custom-folder) - Optional String<br>Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_]\[a-z0-9\-\._]*$/i`
 
-<a id="azure-receiver-filename-options-log-type-folder"></a>&#x2022; [`log_type_folder`](#azure-receiver-filename-options-log-type-folder) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="azure-receiver-filename-options-log-type-folder"></a>&#x2022; [`log_type_folder`](#azure-receiver-filename-options-log-type-folder) - Optional Block<br>Enable this option
 
-<a id="azure-receiver-filename-options-no-folder"></a>&#x2022; [`no_folder`](#azure-receiver-filename-options-no-folder) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="azure-receiver-filename-options-no-folder"></a>&#x2022; [`no_folder`](#azure-receiver-filename-options-no-folder) - Optional Block<br>Enable this option
 
 #### Datadog Receiver
 
@@ -277,7 +277,7 @@ A [`datadog_receiver`](#datadog-receiver) block supports the following:
 
 <a id="datadog-receiver-endpoint"></a>&#x2022; [`endpoint`](#datadog-receiver-endpoint) - Optional String<br>Datadog Endpoint. Datadog Endpoint, example: `example.com:9000`
 
-<a id="datadog-receiver-no-tls"></a>&#x2022; [`no_tls`](#datadog-receiver-no-tls) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="datadog-receiver-no-tls"></a>&#x2022; [`no_tls`](#datadog-receiver-no-tls) - Optional Block<br>Enable this option
 
 <a id="datadog-receiver-site"></a>&#x2022; [`site`](#datadog-receiver-site) - Optional String<br>Datadog Site. Datadog Site, example: `datadoghq.com`
 
@@ -289,25 +289,25 @@ A [`batch`](#datadog-receiver-batch) block (within [`datadog_receiver`](#datadog
 
 <a id="datadog-receiver-batch-max-bytes"></a>&#x2022; [`max_bytes`](#datadog-receiver-batch-max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
-<a id="datadog-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#datadog-receiver-batch-max-bytes-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="datadog-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#datadog-receiver-batch-max-bytes-disabled) - Optional Block<br>Enable this option
 
 <a id="datadog-receiver-batch-max-events"></a>&#x2022; [`max_events`](#datadog-receiver-batch-max-events) - Optional Number<br>Max Events. Send batch to endpoint after this many log messages are in the batch
 
-<a id="datadog-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#datadog-receiver-batch-max-events-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="datadog-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#datadog-receiver-batch-max-events-disabled) - Optional Block<br>Enable this option
 
 <a id="datadog-receiver-batch-timeout-seconds"></a>&#x2022; [`timeout_seconds`](#datadog-receiver-batch-timeout-seconds) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
 
-<a id="datadog-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#datadog-receiver-batch-timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="datadog-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#datadog-receiver-batch-timeout-seconds-default) - Optional Block<br>Enable this option
 
 #### Datadog Receiver Compression
 
 A [`compression`](#datadog-receiver-compression) block (within [`datadog_receiver`](#datadog-receiver)) supports the following:
 
-<a id="datadog-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#datadog-receiver-compression-compression-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="datadog-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#datadog-receiver-compression-compression-default) - Optional Block<br>Enable this option
 
-<a id="datadog-receiver-compression-compression-gzip"></a>&#x2022; [`compression_gzip`](#datadog-receiver-compression-compression-gzip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="datadog-receiver-compression-compression-gzip"></a>&#x2022; [`compression_gzip`](#datadog-receiver-compression-compression-gzip) - Optional Block<br>Enable this option
 
-<a id="datadog-receiver-compression-compression-none"></a>&#x2022; [`compression_none`](#datadog-receiver-compression-compression-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="datadog-receiver-compression-compression-none"></a>&#x2022; [`compression_none`](#datadog-receiver-compression-compression-none) - Optional Block<br>Enable this option
 
 #### Datadog Receiver Datadog API Key
 
@@ -339,19 +339,19 @@ A [`clear_secret_info`](#datadog-receiver-datadog-api-key-clear-secret-info) blo
 
 An [`use_tls`](#datadog-receiver-use-tls) block (within [`datadog_receiver`](#datadog-receiver)) supports the following:
 
-<a id="datadog-receiver-use-tls-disable-verify-certificate"></a>&#x2022; [`disable_verify_certificate`](#datadog-receiver-use-tls-disable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="datadog-receiver-use-tls-disable-verify-certificate"></a>&#x2022; [`disable_verify_certificate`](#datadog-receiver-use-tls-disable-verify-certificate) - Optional Block<br>Enable this option
 
-<a id="datadog-receiver-use-tls-disable-verify-hostname"></a>&#x2022; [`disable_verify_hostname`](#datadog-receiver-use-tls-disable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="datadog-receiver-use-tls-disable-verify-hostname"></a>&#x2022; [`disable_verify_hostname`](#datadog-receiver-use-tls-disable-verify-hostname) - Optional Block<br>Enable this option
 
-<a id="datadog-receiver-use-tls-enable-verify-certificate"></a>&#x2022; [`enable_verify_certificate`](#datadog-receiver-use-tls-enable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="datadog-receiver-use-tls-enable-verify-certificate"></a>&#x2022; [`enable_verify_certificate`](#datadog-receiver-use-tls-enable-verify-certificate) - Optional Block<br>Enable this option
 
-<a id="datadog-receiver-use-tls-enable-verify-hostname"></a>&#x2022; [`enable_verify_hostname`](#datadog-receiver-use-tls-enable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="datadog-receiver-use-tls-enable-verify-hostname"></a>&#x2022; [`enable_verify_hostname`](#datadog-receiver-use-tls-enable-verify-hostname) - Optional Block<br>Enable this option
 
-<a id="datadog-receiver-use-tls-mtls-disabled"></a>&#x2022; [`mtls_disabled`](#datadog-receiver-use-tls-mtls-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="datadog-receiver-use-tls-mtls-disabled"></a>&#x2022; [`mtls_disabled`](#datadog-receiver-use-tls-mtls-disabled) - Optional Block<br>Enable this option
 
 <a id="datadog-receiver-use-tls-mtls-enable"></a>&#x2022; [`mtls_enable`](#datadog-receiver-use-tls-mtls-enable) - Optional Block<br>mTLS Client Config. mTLS Client config allows configuration of mTLS client options<br>See [mTLS Enable](#datadog-receiver-use-tls-mtls-enable) below.
 
-<a id="datadog-receiver-use-tls-no-ca"></a>&#x2022; [`no_ca`](#datadog-receiver-use-tls-no-ca) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="datadog-receiver-use-tls-no-ca"></a>&#x2022; [`no_ca`](#datadog-receiver-use-tls-no-ca) - Optional Block<br>Enable this option
 
 <a id="datadog-receiver-use-tls-trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#datadog-receiver-use-tls-trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
 
@@ -409,25 +409,25 @@ A [`batch`](#gcp-bucket-receiver-batch) block (within [`gcp_bucket_receiver`](#g
 
 <a id="gcp-bucket-receiver-batch-max-bytes"></a>&#x2022; [`max_bytes`](#gcp-bucket-receiver-batch-max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
-<a id="gcp-bucket-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#gcp-bucket-receiver-batch-max-bytes-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="gcp-bucket-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#gcp-bucket-receiver-batch-max-bytes-disabled) - Optional Block<br>Enable this option
 
 <a id="gcp-bucket-receiver-batch-max-events"></a>&#x2022; [`max_events`](#gcp-bucket-receiver-batch-max-events) - Optional Number<br>Max Events. Send batch to endpoint after this many log messages are in the batch
 
-<a id="gcp-bucket-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#gcp-bucket-receiver-batch-max-events-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="gcp-bucket-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#gcp-bucket-receiver-batch-max-events-disabled) - Optional Block<br>Enable this option
 
 <a id="gcp-bucket-receiver-batch-timeout-seconds"></a>&#x2022; [`timeout_seconds`](#gcp-bucket-receiver-batch-timeout-seconds) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
 
-<a id="gcp-bucket-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#gcp-bucket-receiver-batch-timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="gcp-bucket-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#gcp-bucket-receiver-batch-timeout-seconds-default) - Optional Block<br>Enable this option
 
 #### GCP Bucket Receiver Compression
 
 A [`compression`](#gcp-bucket-receiver-compression) block (within [`gcp_bucket_receiver`](#gcp-bucket-receiver)) supports the following:
 
-<a id="gcp-bucket-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#gcp-bucket-receiver-compression-compression-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="gcp-bucket-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#gcp-bucket-receiver-compression-compression-default) - Optional Block<br>Enable this option
 
-<a id="gcp-bucket-receiver-compression-compression-gzip"></a>&#x2022; [`compression_gzip`](#gcp-bucket-receiver-compression-compression-gzip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="gcp-bucket-receiver-compression-compression-gzip"></a>&#x2022; [`compression_gzip`](#gcp-bucket-receiver-compression-compression-gzip) - Optional Block<br>Enable this option
 
-<a id="gcp-bucket-receiver-compression-compression-none"></a>&#x2022; [`compression_none`](#gcp-bucket-receiver-compression-compression-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="gcp-bucket-receiver-compression-compression-none"></a>&#x2022; [`compression_none`](#gcp-bucket-receiver-compression-compression-none) - Optional Block<br>Enable this option
 
 #### GCP Bucket Receiver Filename Options
 
@@ -435,9 +435,9 @@ A [`filename_options`](#gcp-bucket-receiver-filename-options) block (within [`gc
 
 <a id="gcp-bucket-receiver-filename-options-custom-folder"></a>&#x2022; [`custom_folder`](#gcp-bucket-receiver-filename-options-custom-folder) - Optional String<br>Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_]\[a-z0-9\-\._]*$/i`
 
-<a id="gcp-bucket-receiver-filename-options-log-type-folder"></a>&#x2022; [`log_type_folder`](#gcp-bucket-receiver-filename-options-log-type-folder) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="gcp-bucket-receiver-filename-options-log-type-folder"></a>&#x2022; [`log_type_folder`](#gcp-bucket-receiver-filename-options-log-type-folder) - Optional Block<br>Enable this option
 
-<a id="gcp-bucket-receiver-filename-options-no-folder"></a>&#x2022; [`no_folder`](#gcp-bucket-receiver-filename-options-no-folder) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="gcp-bucket-receiver-filename-options-no-folder"></a>&#x2022; [`no_folder`](#gcp-bucket-receiver-filename-options-no-folder) - Optional Block<br>Enable this option
 
 #### GCP Bucket Receiver GCP Cred
 
@@ -455,7 +455,7 @@ A [`http_receiver`](#http-receiver) block supports the following:
 
 <a id="http-receiver-auth-basic"></a>&#x2022; [`auth_basic`](#http-receiver-auth-basic) - Optional Block<br>Basic Authentication Credentials. Authentication parameters to access HTPP Log Receiver Endpoint<br>See [Auth Basic](#http-receiver-auth-basic) below.
 
-<a id="http-receiver-auth-none"></a>&#x2022; [`auth_none`](#http-receiver-auth-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-receiver-auth-none"></a>&#x2022; [`auth_none`](#http-receiver-auth-none) - Optional Block<br>Enable this option
 
 <a id="http-receiver-auth-token"></a>&#x2022; [`auth_token`](#http-receiver-auth-token) - Optional Block<br>Access Token. Authentication Token for access<br>See [Auth Token](#http-receiver-auth-token) below.
 
@@ -463,7 +463,7 @@ A [`http_receiver`](#http-receiver) block supports the following:
 
 <a id="http-receiver-compression"></a>&#x2022; [`compression`](#http-receiver-compression) - Optional Block<br>Compression Type. Compression Type<br>See [Compression](#http-receiver-compression) below.
 
-<a id="http-receiver-no-tls"></a>&#x2022; [`no_tls`](#http-receiver-no-tls) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-receiver-no-tls"></a>&#x2022; [`no_tls`](#http-receiver-no-tls) - Optional Block<br>Enable this option
 
 <a id="http-receiver-uri"></a>&#x2022; [`uri`](#http-receiver-uri) - Optional String<br>HTTP URI. HTTP URI is the URI of the HTTP endpoint to send logs to, example: `HTTP://example.com:9000/logs`
 
@@ -541,43 +541,43 @@ A [`batch`](#http-receiver-batch) block (within [`http_receiver`](#http-receiver
 
 <a id="http-receiver-batch-max-bytes"></a>&#x2022; [`max_bytes`](#http-receiver-batch-max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
-<a id="http-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#http-receiver-batch-max-bytes-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#http-receiver-batch-max-bytes-disabled) - Optional Block<br>Enable this option
 
 <a id="http-receiver-batch-max-events"></a>&#x2022; [`max_events`](#http-receiver-batch-max-events) - Optional Number<br>Max Events. Send batch to endpoint after this many log messages are in the batch
 
-<a id="http-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#http-receiver-batch-max-events-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#http-receiver-batch-max-events-disabled) - Optional Block<br>Enable this option
 
 <a id="http-receiver-batch-timeout-seconds"></a>&#x2022; [`timeout_seconds`](#http-receiver-batch-timeout-seconds) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
 
-<a id="http-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#http-receiver-batch-timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#http-receiver-batch-timeout-seconds-default) - Optional Block<br>Enable this option
 
 #### HTTP Receiver Compression
 
 A [`compression`](#http-receiver-compression) block (within [`http_receiver`](#http-receiver)) supports the following:
 
-<a id="http-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#http-receiver-compression-compression-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#http-receiver-compression-compression-default) - Optional Block<br>Enable this option
 
-<a id="http-receiver-compression-compression-gzip"></a>&#x2022; [`compression_gzip`](#http-receiver-compression-compression-gzip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-receiver-compression-compression-gzip"></a>&#x2022; [`compression_gzip`](#http-receiver-compression-compression-gzip) - Optional Block<br>Enable this option
 
-<a id="http-receiver-compression-compression-none"></a>&#x2022; [`compression_none`](#http-receiver-compression-compression-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-receiver-compression-compression-none"></a>&#x2022; [`compression_none`](#http-receiver-compression-compression-none) - Optional Block<br>Enable this option
 
 #### HTTP Receiver Use TLS
 
 An [`use_tls`](#http-receiver-use-tls) block (within [`http_receiver`](#http-receiver)) supports the following:
 
-<a id="http-receiver-use-tls-disable-verify-certificate"></a>&#x2022; [`disable_verify_certificate`](#http-receiver-use-tls-disable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-receiver-use-tls-disable-verify-certificate"></a>&#x2022; [`disable_verify_certificate`](#http-receiver-use-tls-disable-verify-certificate) - Optional Block<br>Enable this option
 
-<a id="http-receiver-use-tls-disable-verify-hostname"></a>&#x2022; [`disable_verify_hostname`](#http-receiver-use-tls-disable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-receiver-use-tls-disable-verify-hostname"></a>&#x2022; [`disable_verify_hostname`](#http-receiver-use-tls-disable-verify-hostname) - Optional Block<br>Enable this option
 
-<a id="http-receiver-use-tls-enable-verify-certificate"></a>&#x2022; [`enable_verify_certificate`](#http-receiver-use-tls-enable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-receiver-use-tls-enable-verify-certificate"></a>&#x2022; [`enable_verify_certificate`](#http-receiver-use-tls-enable-verify-certificate) - Optional Block<br>Enable this option
 
-<a id="http-receiver-use-tls-enable-verify-hostname"></a>&#x2022; [`enable_verify_hostname`](#http-receiver-use-tls-enable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-receiver-use-tls-enable-verify-hostname"></a>&#x2022; [`enable_verify_hostname`](#http-receiver-use-tls-enable-verify-hostname) - Optional Block<br>Enable this option
 
-<a id="http-receiver-use-tls-mtls-disabled"></a>&#x2022; [`mtls_disabled`](#http-receiver-use-tls-mtls-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-receiver-use-tls-mtls-disabled"></a>&#x2022; [`mtls_disabled`](#http-receiver-use-tls-mtls-disabled) - Optional Block<br>Enable this option
 
 <a id="http-receiver-use-tls-mtls-enable"></a>&#x2022; [`mtls_enable`](#http-receiver-use-tls-mtls-enable) - Optional Block<br>mTLS Client Config. mTLS Client config allows configuration of mTLS client options<br>See [mTLS Enable](#http-receiver-use-tls-mtls-enable) below.
 
-<a id="http-receiver-use-tls-no-ca"></a>&#x2022; [`no_ca`](#http-receiver-use-tls-no-ca) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-receiver-use-tls-no-ca"></a>&#x2022; [`no_ca`](#http-receiver-use-tls-no-ca) - Optional Block<br>Enable this option
 
 <a id="http-receiver-use-tls-trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#http-receiver-use-tls-trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
 
@@ -627,7 +627,7 @@ A [`kafka_receiver`](#kafka-receiver) block supports the following:
 
 <a id="kafka-receiver-kafka-topic"></a>&#x2022; [`kafka_topic`](#kafka-receiver-kafka-topic) - Optional String<br>Kafka Topic. The Kafka topic name to write events to
 
-<a id="kafka-receiver-no-tls"></a>&#x2022; [`no_tls`](#kafka-receiver-no-tls) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kafka-receiver-no-tls"></a>&#x2022; [`no_tls`](#kafka-receiver-no-tls) - Optional Block<br>Enable this option
 
 <a id="kafka-receiver-use-tls"></a>&#x2022; [`use_tls`](#kafka-receiver-use-tls) - Optional Block<br>TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint<br>See [Use TLS](#kafka-receiver-use-tls) below.
 
@@ -637,43 +637,43 @@ A [`batch`](#kafka-receiver-batch) block (within [`kafka_receiver`](#kafka-recei
 
 <a id="kafka-receiver-batch-max-bytes"></a>&#x2022; [`max_bytes`](#kafka-receiver-batch-max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
-<a id="kafka-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#kafka-receiver-batch-max-bytes-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kafka-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#kafka-receiver-batch-max-bytes-disabled) - Optional Block<br>Enable this option
 
 <a id="kafka-receiver-batch-max-events"></a>&#x2022; [`max_events`](#kafka-receiver-batch-max-events) - Optional Number<br>Max Events. Send batch to endpoint after this many log messages are in the batch
 
-<a id="kafka-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#kafka-receiver-batch-max-events-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kafka-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#kafka-receiver-batch-max-events-disabled) - Optional Block<br>Enable this option
 
 <a id="kafka-receiver-batch-timeout-seconds"></a>&#x2022; [`timeout_seconds`](#kafka-receiver-batch-timeout-seconds) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
 
-<a id="kafka-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#kafka-receiver-batch-timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kafka-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#kafka-receiver-batch-timeout-seconds-default) - Optional Block<br>Enable this option
 
 #### Kafka Receiver Compression
 
 A [`compression`](#kafka-receiver-compression) block (within [`kafka_receiver`](#kafka-receiver)) supports the following:
 
-<a id="kafka-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#kafka-receiver-compression-compression-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kafka-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#kafka-receiver-compression-compression-default) - Optional Block<br>Enable this option
 
-<a id="kafka-receiver-compression-compression-gzip"></a>&#x2022; [`compression_gzip`](#kafka-receiver-compression-compression-gzip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kafka-receiver-compression-compression-gzip"></a>&#x2022; [`compression_gzip`](#kafka-receiver-compression-compression-gzip) - Optional Block<br>Enable this option
 
-<a id="kafka-receiver-compression-compression-none"></a>&#x2022; [`compression_none`](#kafka-receiver-compression-compression-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kafka-receiver-compression-compression-none"></a>&#x2022; [`compression_none`](#kafka-receiver-compression-compression-none) - Optional Block<br>Enable this option
 
 #### Kafka Receiver Use TLS
 
 An [`use_tls`](#kafka-receiver-use-tls) block (within [`kafka_receiver`](#kafka-receiver)) supports the following:
 
-<a id="kafka-receiver-use-tls-disable-verify-certificate"></a>&#x2022; [`disable_verify_certificate`](#kafka-receiver-use-tls-disable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kafka-receiver-use-tls-disable-verify-certificate"></a>&#x2022; [`disable_verify_certificate`](#kafka-receiver-use-tls-disable-verify-certificate) - Optional Block<br>Enable this option
 
-<a id="kafka-receiver-use-tls-disable-verify-hostname"></a>&#x2022; [`disable_verify_hostname`](#kafka-receiver-use-tls-disable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kafka-receiver-use-tls-disable-verify-hostname"></a>&#x2022; [`disable_verify_hostname`](#kafka-receiver-use-tls-disable-verify-hostname) - Optional Block<br>Enable this option
 
-<a id="kafka-receiver-use-tls-enable-verify-certificate"></a>&#x2022; [`enable_verify_certificate`](#kafka-receiver-use-tls-enable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kafka-receiver-use-tls-enable-verify-certificate"></a>&#x2022; [`enable_verify_certificate`](#kafka-receiver-use-tls-enable-verify-certificate) - Optional Block<br>Enable this option
 
-<a id="kafka-receiver-use-tls-enable-verify-hostname"></a>&#x2022; [`enable_verify_hostname`](#kafka-receiver-use-tls-enable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kafka-receiver-use-tls-enable-verify-hostname"></a>&#x2022; [`enable_verify_hostname`](#kafka-receiver-use-tls-enable-verify-hostname) - Optional Block<br>Enable this option
 
-<a id="kafka-receiver-use-tls-mtls-disabled"></a>&#x2022; [`mtls_disabled`](#kafka-receiver-use-tls-mtls-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kafka-receiver-use-tls-mtls-disabled"></a>&#x2022; [`mtls_disabled`](#kafka-receiver-use-tls-mtls-disabled) - Optional Block<br>Enable this option
 
 <a id="kafka-receiver-use-tls-mtls-enable"></a>&#x2022; [`mtls_enable`](#kafka-receiver-use-tls-mtls-enable) - Optional Block<br>mTLS Client Config. mTLS Client config allows configuration of mTLS client options<br>See [mTLS Enable](#kafka-receiver-use-tls-mtls-enable) below.
 
-<a id="kafka-receiver-use-tls-no-ca"></a>&#x2022; [`no_ca`](#kafka-receiver-use-tls-no-ca) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kafka-receiver-use-tls-no-ca"></a>&#x2022; [`no_ca`](#kafka-receiver-use-tls-no-ca) - Optional Block<br>Enable this option
 
 <a id="kafka-receiver-use-tls-trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#kafka-receiver-use-tls-trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
 
@@ -717,9 +717,9 @@ A [`new_relic_receiver`](#new-relic-receiver) block supports the following:
 
 <a id="new-relic-receiver-api-key"></a>&#x2022; [`api_key`](#new-relic-receiver-api-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [API Key](#new-relic-receiver-api-key) below.
 
-<a id="new-relic-receiver-eu"></a>&#x2022; [`eu`](#new-relic-receiver-eu) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="new-relic-receiver-eu"></a>&#x2022; [`eu`](#new-relic-receiver-eu) - Optional Block<br>Enable this option
 
-<a id="new-relic-receiver-us"></a>&#x2022; [`us`](#new-relic-receiver-us) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="new-relic-receiver-us"></a>&#x2022; [`us`](#new-relic-receiver-us) - Optional Block<br>Enable this option
 
 #### New Relic Receiver API Key
 
@@ -761,7 +761,7 @@ A [`qradar_receiver`](#qradar-receiver) block supports the following:
 
 <a id="qradar-receiver-compression"></a>&#x2022; [`compression`](#qradar-receiver-compression) - Optional Block<br>Compression Type. Compression Type<br>See [Compression](#qradar-receiver-compression) below.
 
-<a id="qradar-receiver-no-tls"></a>&#x2022; [`no_tls`](#qradar-receiver-no-tls) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="qradar-receiver-no-tls"></a>&#x2022; [`no_tls`](#qradar-receiver-no-tls) - Optional Block<br>Enable this option
 
 <a id="qradar-receiver-uri"></a>&#x2022; [`uri`](#qradar-receiver-uri) - Optional String<br>Log Source Collector URL. Log Source Collector URL is the URL of the IBM QRadar Log Source Collector to send logs to, example: `HTTP://example.com:9000`
 
@@ -773,43 +773,43 @@ A [`batch`](#qradar-receiver-batch) block (within [`qradar_receiver`](#qradar-re
 
 <a id="qradar-receiver-batch-max-bytes"></a>&#x2022; [`max_bytes`](#qradar-receiver-batch-max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
-<a id="qradar-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#qradar-receiver-batch-max-bytes-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="qradar-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#qradar-receiver-batch-max-bytes-disabled) - Optional Block<br>Enable this option
 
 <a id="qradar-receiver-batch-max-events"></a>&#x2022; [`max_events`](#qradar-receiver-batch-max-events) - Optional Number<br>Max Events. Send batch to endpoint after this many log messages are in the batch
 
-<a id="qradar-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#qradar-receiver-batch-max-events-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="qradar-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#qradar-receiver-batch-max-events-disabled) - Optional Block<br>Enable this option
 
 <a id="qradar-receiver-batch-timeout-seconds"></a>&#x2022; [`timeout_seconds`](#qradar-receiver-batch-timeout-seconds) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
 
-<a id="qradar-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#qradar-receiver-batch-timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="qradar-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#qradar-receiver-batch-timeout-seconds-default) - Optional Block<br>Enable this option
 
 #### Qradar Receiver Compression
 
 A [`compression`](#qradar-receiver-compression) block (within [`qradar_receiver`](#qradar-receiver)) supports the following:
 
-<a id="qradar-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#qradar-receiver-compression-compression-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="qradar-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#qradar-receiver-compression-compression-default) - Optional Block<br>Enable this option
 
-<a id="qradar-receiver-compression-compression-gzip"></a>&#x2022; [`compression_gzip`](#qradar-receiver-compression-compression-gzip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="qradar-receiver-compression-compression-gzip"></a>&#x2022; [`compression_gzip`](#qradar-receiver-compression-compression-gzip) - Optional Block<br>Enable this option
 
-<a id="qradar-receiver-compression-compression-none"></a>&#x2022; [`compression_none`](#qradar-receiver-compression-compression-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="qradar-receiver-compression-compression-none"></a>&#x2022; [`compression_none`](#qradar-receiver-compression-compression-none) - Optional Block<br>Enable this option
 
 #### Qradar Receiver Use TLS
 
 An [`use_tls`](#qradar-receiver-use-tls) block (within [`qradar_receiver`](#qradar-receiver)) supports the following:
 
-<a id="qradar-receiver-use-tls-disable-verify-certificate"></a>&#x2022; [`disable_verify_certificate`](#qradar-receiver-use-tls-disable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="qradar-receiver-use-tls-disable-verify-certificate"></a>&#x2022; [`disable_verify_certificate`](#qradar-receiver-use-tls-disable-verify-certificate) - Optional Block<br>Enable this option
 
-<a id="qradar-receiver-use-tls-disable-verify-hostname"></a>&#x2022; [`disable_verify_hostname`](#qradar-receiver-use-tls-disable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="qradar-receiver-use-tls-disable-verify-hostname"></a>&#x2022; [`disable_verify_hostname`](#qradar-receiver-use-tls-disable-verify-hostname) - Optional Block<br>Enable this option
 
-<a id="qradar-receiver-use-tls-enable-verify-certificate"></a>&#x2022; [`enable_verify_certificate`](#qradar-receiver-use-tls-enable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="qradar-receiver-use-tls-enable-verify-certificate"></a>&#x2022; [`enable_verify_certificate`](#qradar-receiver-use-tls-enable-verify-certificate) - Optional Block<br>Enable this option
 
-<a id="qradar-receiver-use-tls-enable-verify-hostname"></a>&#x2022; [`enable_verify_hostname`](#qradar-receiver-use-tls-enable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="qradar-receiver-use-tls-enable-verify-hostname"></a>&#x2022; [`enable_verify_hostname`](#qradar-receiver-use-tls-enable-verify-hostname) - Optional Block<br>Enable this option
 
-<a id="qradar-receiver-use-tls-mtls-disabled"></a>&#x2022; [`mtls_disabled`](#qradar-receiver-use-tls-mtls-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="qradar-receiver-use-tls-mtls-disabled"></a>&#x2022; [`mtls_disabled`](#qradar-receiver-use-tls-mtls-disabled) - Optional Block<br>Enable this option
 
 <a id="qradar-receiver-use-tls-mtls-enable"></a>&#x2022; [`mtls_enable`](#qradar-receiver-use-tls-mtls-enable) - Optional Block<br>mTLS Client Config. mTLS Client config allows configuration of mTLS client options<br>See [mTLS Enable](#qradar-receiver-use-tls-mtls-enable) below.
 
-<a id="qradar-receiver-use-tls-no-ca"></a>&#x2022; [`no_ca`](#qradar-receiver-use-tls-no-ca) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="qradar-receiver-use-tls-no-ca"></a>&#x2022; [`no_ca`](#qradar-receiver-use-tls-no-ca) - Optional Block<br>Enable this option
 
 <a id="qradar-receiver-use-tls-trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#qradar-receiver-use-tls-trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
 
@@ -879,25 +879,25 @@ A [`batch`](#s3-receiver-batch) block (within [`s3_receiver`](#s3-receiver)) sup
 
 <a id="s3-receiver-batch-max-bytes"></a>&#x2022; [`max_bytes`](#s3-receiver-batch-max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
-<a id="s3-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#s3-receiver-batch-max-bytes-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="s3-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#s3-receiver-batch-max-bytes-disabled) - Optional Block<br>Enable this option
 
 <a id="s3-receiver-batch-max-events"></a>&#x2022; [`max_events`](#s3-receiver-batch-max-events) - Optional Number<br>Max Events. Send batch to endpoint after this many log messages are in the batch
 
-<a id="s3-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#s3-receiver-batch-max-events-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="s3-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#s3-receiver-batch-max-events-disabled) - Optional Block<br>Enable this option
 
 <a id="s3-receiver-batch-timeout-seconds"></a>&#x2022; [`timeout_seconds`](#s3-receiver-batch-timeout-seconds) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
 
-<a id="s3-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#s3-receiver-batch-timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="s3-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#s3-receiver-batch-timeout-seconds-default) - Optional Block<br>Enable this option
 
 #### S3 Receiver Compression
 
 A [`compression`](#s3-receiver-compression) block (within [`s3_receiver`](#s3-receiver)) supports the following:
 
-<a id="s3-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#s3-receiver-compression-compression-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="s3-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#s3-receiver-compression-compression-default) - Optional Block<br>Enable this option
 
-<a id="s3-receiver-compression-compression-gzip"></a>&#x2022; [`compression_gzip`](#s3-receiver-compression-compression-gzip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="s3-receiver-compression-compression-gzip"></a>&#x2022; [`compression_gzip`](#s3-receiver-compression-compression-gzip) - Optional Block<br>Enable this option
 
-<a id="s3-receiver-compression-compression-none"></a>&#x2022; [`compression_none`](#s3-receiver-compression-compression-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="s3-receiver-compression-compression-none"></a>&#x2022; [`compression_none`](#s3-receiver-compression-compression-none) - Optional Block<br>Enable this option
 
 #### S3 Receiver Filename Options
 
@@ -905,9 +905,9 @@ A [`filename_options`](#s3-receiver-filename-options) block (within [`s3_receive
 
 <a id="s3-receiver-filename-options-custom-folder"></a>&#x2022; [`custom_folder`](#s3-receiver-filename-options-custom-folder) - Optional String<br>Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_]\[a-z0-9\-\._]*$/i`
 
-<a id="s3-receiver-filename-options-log-type-folder"></a>&#x2022; [`log_type_folder`](#s3-receiver-filename-options-log-type-folder) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="s3-receiver-filename-options-log-type-folder"></a>&#x2022; [`log_type_folder`](#s3-receiver-filename-options-log-type-folder) - Optional Block<br>Enable this option
 
-<a id="s3-receiver-filename-options-no-folder"></a>&#x2022; [`no_folder`](#s3-receiver-filename-options-no-folder) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="s3-receiver-filename-options-no-folder"></a>&#x2022; [`no_folder`](#s3-receiver-filename-options-no-folder) - Optional Block<br>Enable this option
 
 #### Splunk Receiver
 
@@ -919,7 +919,7 @@ A [`splunk_receiver`](#splunk-receiver) block supports the following:
 
 <a id="splunk-receiver-endpoint"></a>&#x2022; [`endpoint`](#splunk-receiver-endpoint) - Optional String<br>Splunk HEC Logs Endpoint. Splunk HEC Logs Endpoint, example: `HTTPS://HTTP-input-hec.splunkcloud.com` (Note: must not contain `/services/collector`)
 
-<a id="splunk-receiver-no-tls"></a>&#x2022; [`no_tls`](#splunk-receiver-no-tls) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="splunk-receiver-no-tls"></a>&#x2022; [`no_tls`](#splunk-receiver-no-tls) - Optional Block<br>Enable this option
 
 <a id="splunk-receiver-splunk-hec-token"></a>&#x2022; [`splunk_hec_token`](#splunk-receiver-splunk-hec-token) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Splunk Hec Token](#splunk-receiver-splunk-hec-token) below.
 
@@ -931,25 +931,25 @@ A [`batch`](#splunk-receiver-batch) block (within [`splunk_receiver`](#splunk-re
 
 <a id="splunk-receiver-batch-max-bytes"></a>&#x2022; [`max_bytes`](#splunk-receiver-batch-max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
-<a id="splunk-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#splunk-receiver-batch-max-bytes-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="splunk-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#splunk-receiver-batch-max-bytes-disabled) - Optional Block<br>Enable this option
 
 <a id="splunk-receiver-batch-max-events"></a>&#x2022; [`max_events`](#splunk-receiver-batch-max-events) - Optional Number<br>Max Events. Send batch to endpoint after this many log messages are in the batch
 
-<a id="splunk-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#splunk-receiver-batch-max-events-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="splunk-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#splunk-receiver-batch-max-events-disabled) - Optional Block<br>Enable this option
 
 <a id="splunk-receiver-batch-timeout-seconds"></a>&#x2022; [`timeout_seconds`](#splunk-receiver-batch-timeout-seconds) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
 
-<a id="splunk-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#splunk-receiver-batch-timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="splunk-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#splunk-receiver-batch-timeout-seconds-default) - Optional Block<br>Enable this option
 
 #### Splunk Receiver Compression
 
 A [`compression`](#splunk-receiver-compression) block (within [`splunk_receiver`](#splunk-receiver)) supports the following:
 
-<a id="splunk-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#splunk-receiver-compression-compression-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="splunk-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#splunk-receiver-compression-compression-default) - Optional Block<br>Enable this option
 
-<a id="splunk-receiver-compression-compression-gzip"></a>&#x2022; [`compression_gzip`](#splunk-receiver-compression-compression-gzip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="splunk-receiver-compression-compression-gzip"></a>&#x2022; [`compression_gzip`](#splunk-receiver-compression-compression-gzip) - Optional Block<br>Enable this option
 
-<a id="splunk-receiver-compression-compression-none"></a>&#x2022; [`compression_none`](#splunk-receiver-compression-compression-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="splunk-receiver-compression-compression-none"></a>&#x2022; [`compression_none`](#splunk-receiver-compression-compression-none) - Optional Block<br>Enable this option
 
 #### Splunk Receiver Splunk Hec Token
 
@@ -981,19 +981,19 @@ A [`clear_secret_info`](#splunk-receiver-splunk-hec-token-clear-secret-info) blo
 
 An [`use_tls`](#splunk-receiver-use-tls) block (within [`splunk_receiver`](#splunk-receiver)) supports the following:
 
-<a id="splunk-receiver-use-tls-disable-verify-certificate"></a>&#x2022; [`disable_verify_certificate`](#splunk-receiver-use-tls-disable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="splunk-receiver-use-tls-disable-verify-certificate"></a>&#x2022; [`disable_verify_certificate`](#splunk-receiver-use-tls-disable-verify-certificate) - Optional Block<br>Enable this option
 
-<a id="splunk-receiver-use-tls-disable-verify-hostname"></a>&#x2022; [`disable_verify_hostname`](#splunk-receiver-use-tls-disable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="splunk-receiver-use-tls-disable-verify-hostname"></a>&#x2022; [`disable_verify_hostname`](#splunk-receiver-use-tls-disable-verify-hostname) - Optional Block<br>Enable this option
 
-<a id="splunk-receiver-use-tls-enable-verify-certificate"></a>&#x2022; [`enable_verify_certificate`](#splunk-receiver-use-tls-enable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="splunk-receiver-use-tls-enable-verify-certificate"></a>&#x2022; [`enable_verify_certificate`](#splunk-receiver-use-tls-enable-verify-certificate) - Optional Block<br>Enable this option
 
-<a id="splunk-receiver-use-tls-enable-verify-hostname"></a>&#x2022; [`enable_verify_hostname`](#splunk-receiver-use-tls-enable-verify-hostname) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="splunk-receiver-use-tls-enable-verify-hostname"></a>&#x2022; [`enable_verify_hostname`](#splunk-receiver-use-tls-enable-verify-hostname) - Optional Block<br>Enable this option
 
-<a id="splunk-receiver-use-tls-mtls-disabled"></a>&#x2022; [`mtls_disabled`](#splunk-receiver-use-tls-mtls-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="splunk-receiver-use-tls-mtls-disabled"></a>&#x2022; [`mtls_disabled`](#splunk-receiver-use-tls-mtls-disabled) - Optional Block<br>Enable this option
 
 <a id="splunk-receiver-use-tls-mtls-enable"></a>&#x2022; [`mtls_enable`](#splunk-receiver-use-tls-mtls-enable) - Optional Block<br>mTLS Client Config. mTLS Client config allows configuration of mTLS client options<br>See [mTLS Enable](#splunk-receiver-use-tls-mtls-enable) below.
 
-<a id="splunk-receiver-use-tls-no-ca"></a>&#x2022; [`no_ca`](#splunk-receiver-use-tls-no-ca) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="splunk-receiver-use-tls-no-ca"></a>&#x2022; [`no_ca`](#splunk-receiver-use-tls-no-ca) - Optional Block<br>Enable this option
 
 <a id="splunk-receiver-use-tls-trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#splunk-receiver-use-tls-trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
 

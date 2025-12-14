@@ -240,7 +240,7 @@ func (r *DNSLBPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 				},
 				Blocks: map[string]schema.Block{
 					"disable_health_check": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"health_check": schema.SingleNestedBlock{
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
@@ -437,7 +437,7 @@ func (r *DNSLBPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 				},
 			},
 			"use_rrset_ttl": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 		},
 	}

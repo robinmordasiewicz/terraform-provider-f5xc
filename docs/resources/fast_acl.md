@@ -40,7 +40,7 @@ resource "f5xc_fast_acl" "example" {
   re_acl {
     # Configure re_acl settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   all_public_vips {
     # Configure all_public_vips settings
   }
@@ -96,9 +96,9 @@ A [`protocol_policer`](#protocol-policer) block supports the following:
 
 A [`re_acl`](#re-acl) block supports the following:
 
-<a id="re-acl-all-public-vips"></a>&#x2022; [`all_public_vips`](#re-acl-all-public-vips) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="re-acl-all-public-vips"></a>&#x2022; [`all_public_vips`](#re-acl-all-public-vips) - Optional Block<br>Enable this option
 
-<a id="re-acl-default-tenant-vip"></a>&#x2022; [`default_tenant_vip`](#re-acl-default-tenant-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="re-acl-default-tenant-vip"></a>&#x2022; [`default_tenant_vip`](#re-acl-default-tenant-vip) - Optional Block<br>Enable this option
 
 <a id="re-acl-fast-acl-rules"></a>&#x2022; [`fast_acl_rules`](#re-acl-fast-acl-rules) - Optional Block<br>Rules. Fast ACL rules to match<br>See [Fast ACL Rules](#re-acl-fast-acl-rules) below.
 
@@ -200,9 +200,9 @@ A [`metadata`](#re-acl-fast-acl-rules-metadata) block (within [`re_acl.fast_acl_
 
 A [`port`](#re-acl-fast-acl-rules-port) block (within [`re_acl.fast_acl_rules`](#re-acl-fast-acl-rules)) supports the following:
 
-<a id="re-acl-fast-acl-rules-port-all"></a>&#x2022; [`all`](#re-acl-fast-acl-rules-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="re-acl-fast-acl-rules-port-all"></a>&#x2022; [`all`](#re-acl-fast-acl-rules-port-all) - Optional Block<br>Enable this option
 
-<a id="re-acl-fast-acl-rules-port-dns"></a>&#x2022; [`dns`](#re-acl-fast-acl-rules-port-dns) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="re-acl-fast-acl-rules-port-dns"></a>&#x2022; [`dns`](#re-acl-fast-acl-rules-port-dns) - Optional Block<br>Enable this option
 
 <a id="re-acl-fast-acl-rules-port-user-defined"></a>&#x2022; [`user_defined`](#re-acl-fast-acl-rules-port-user-defined) - Optional Number<br>User defined port. Matches the user defined port
 
@@ -234,17 +234,17 @@ A [`public_ip_refs`](#re-acl-selected-tenant-vip-public-ip-refs) block (within [
 
 A [`site_acl`](#site-acl) block supports the following:
 
-<a id="site-acl-all-services"></a>&#x2022; [`all_services`](#site-acl-all-services) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="site-acl-all-services"></a>&#x2022; [`all_services`](#site-acl-all-services) - Optional Block<br>Enable this option
 
 <a id="site-acl-fast-acl-rules"></a>&#x2022; [`fast_acl_rules`](#site-acl-fast-acl-rules) - Optional Block<br>Rules. Fast ACL rules to match<br>See [Fast ACL Rules](#site-acl-fast-acl-rules) below.
 
-<a id="site-acl-inside-network"></a>&#x2022; [`inside_network`](#site-acl-inside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="site-acl-inside-network"></a>&#x2022; [`inside_network`](#site-acl-inside-network) - Optional Block<br>Enable this option
 
-<a id="site-acl-interface-services"></a>&#x2022; [`interface_services`](#site-acl-interface-services) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="site-acl-interface-services"></a>&#x2022; [`interface_services`](#site-acl-interface-services) - Optional Block<br>Enable this option
 
-<a id="site-acl-outside-network"></a>&#x2022; [`outside_network`](#site-acl-outside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="site-acl-outside-network"></a>&#x2022; [`outside_network`](#site-acl-outside-network) - Optional Block<br>Enable this option
 
-<a id="site-acl-vip-services"></a>&#x2022; [`vip_services`](#site-acl-vip-services) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="site-acl-vip-services"></a>&#x2022; [`vip_services`](#site-acl-vip-services) - Optional Block<br>Enable this option
 
 #### Site ACL Fast ACL Rules
 
@@ -342,9 +342,9 @@ A [`metadata`](#site-acl-fast-acl-rules-metadata) block (within [`site_acl.fast_
 
 A [`port`](#site-acl-fast-acl-rules-port) block (within [`site_acl.fast_acl_rules`](#site-acl-fast-acl-rules)) supports the following:
 
-<a id="site-acl-fast-acl-rules-port-all"></a>&#x2022; [`all`](#site-acl-fast-acl-rules-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="site-acl-fast-acl-rules-port-all"></a>&#x2022; [`all`](#site-acl-fast-acl-rules-port-all) - Optional Block<br>Enable this option
 
-<a id="site-acl-fast-acl-rules-port-dns"></a>&#x2022; [`dns`](#site-acl-fast-acl-rules-port-dns) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="site-acl-fast-acl-rules-port-dns"></a>&#x2022; [`dns`](#site-acl-fast-acl-rules-port-dns) - Optional Block<br>Enable this option
 
 <a id="site-acl-fast-acl-rules-port-user-defined"></a>&#x2022; [`user_defined`](#site-acl-fast-acl-rules-port-user-defined) - Optional Number<br>User defined port. Matches the user defined port
 

@@ -290,10 +290,10 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 				},
 				Blocks: map[string]schema.Block{
 					"from_site": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"local_address": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -308,7 +308,7 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 					},
 					Blocks: map[string]schema.Block{
 						"bfd_disabled": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"bfd_enabled": schema.SingleNestedBlock{
 							MarkdownDescription: "BFD. BFD parameters.",
@@ -328,7 +328,7 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 							},
 						},
 						"disable": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"external": schema.SingleNestedBlock{
 							MarkdownDescription: "External BGP Peer. External BGP Peer parameters.",
@@ -372,37 +372,37 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 							},
 							Blocks: map[string]schema.Block{
 								"default_gateway": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"default_gateway_v6": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"disable": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"disable_v6": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"external_connector": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"family_inet": schema.SingleNestedBlock{
 									MarkdownDescription: "BGP Family Inet. Parameters for inet family.",
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"disable": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 										"enable": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
 								"from_site": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"from_site_v6": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"interface": schema.SingleNestedBlock{
 									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
@@ -449,7 +449,7 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 									},
 								},
 								"no_authentication": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 							},
 						},
@@ -467,10 +467,10 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 							},
 						},
 						"passive_mode_disabled": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"passive_mode_enabled": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"routing_policies": schema.SingleNestedBlock{
 							MarkdownDescription: "BGP Routing Policy. List of rules which can be applied on all or particular nodes",
@@ -482,10 +482,10 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										Attributes: map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"all_nodes": schema.SingleNestedBlock{
-												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												MarkdownDescription: "Enable this option",
 											},
 											"inbound": schema.SingleNestedBlock{
-												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												MarkdownDescription: "Enable this option",
 											},
 											"node_name": schema.SingleNestedBlock{
 												MarkdownDescription: "Nodes. List of nodes on which BGP routing policy has to be applied",
@@ -528,7 +528,7 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 												},
 											},
 											"outbound": schema.SingleNestedBlock{
-												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												MarkdownDescription: "Enable this option",
 											},
 										},
 									},
@@ -552,10 +552,10 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 						},
 						Blocks: map[string]schema.Block{
 							"disable_internet_vip": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_internet_vip": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"ref": schema.ListNestedBlock{
 								MarkdownDescription: "Reference. A site direct reference",
@@ -599,10 +599,10 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 						},
 						Blocks: map[string]schema.Block{
 							"disable_internet_vip": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_internet_vip": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"ref": schema.ListNestedBlock{
 								MarkdownDescription: "Reference. A virtual_site direct reference",

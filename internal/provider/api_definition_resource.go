@@ -91,7 +91,7 @@ func (r *APIDefinitionResource) Metadata(ctx context.Context, req resource.Metad
 func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             api_definitionSchemaVersion,
-		MarkdownDescription: "[Category: API Security] [Namespace: required] [DependsOn: namespace] Manages a API Definition resource in F5 Distributed Cloud for x-required create api definition. configuration.",
+		MarkdownDescription: "[Category: API Security] [Namespace: required] [DependsOn: namespace] Manages API Definition. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the API Definition. Must be unique within the namespace.",
@@ -182,7 +182,7 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"mixed_schema_origin": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: mixed_schema_origin, strict_schema_origin] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: mixed_schema_origin, strict_schema_origin] Enable this option",
 			},
 			"non_api_endpoints": schema.ListNestedBlock{
 				MarkdownDescription: "API Discovery Exclusion List. List of Non-API Endpoints.",
@@ -200,7 +200,7 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"strict_schema_origin": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 		},
 	}

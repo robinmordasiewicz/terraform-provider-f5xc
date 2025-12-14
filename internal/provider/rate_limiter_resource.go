@@ -223,7 +223,7 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 							},
 						},
 						"disabled": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"leaky_bucket": schema.SingleNestedBlock{
 							MarkdownDescription: "Leaky Bucket Rate Limiter. Leaky-Bucket is the default rate limiter algorithm for F5",

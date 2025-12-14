@@ -298,22 +298,22 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							MarkdownDescription: "Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction",
 							Attributes: map[string]schema.Attribute{
 								"action": schema.StringAttribute{
-									MarkdownDescription: "[Enum: NOLOG|LOG] Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule. Possible values are `NOLOG`, `LOG`. Defaults to `NOLOG`.",
+									MarkdownDescription: "[Enum: NOLOG|LOG] Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified Don't sample the traffic hitting the rule Sample the traffic hitting the rule. Possible values are `NOLOG`, `LOG`. Defaults to `NOLOG`.",
 									Optional:            true,
 								},
 							},
 						},
 						"all_tcp_traffic": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"all_traffic": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"all_udp_traffic": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"any": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"applications": schema.SingleNestedBlock{
 							MarkdownDescription: "Applications. Application protocols like HTTP, SNMP",
@@ -326,7 +326,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							},
 						},
 						"inside_endpoints": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"ip_prefix_set": schema.SingleNestedBlock{
 							MarkdownDescription: "IP Prefix Set Reference. A list of references to ip_prefix_set objects.",
@@ -398,10 +398,10 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							},
 						},
 						"outside_endpoints": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"prefix_list": schema.SingleNestedBlock{
-							MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
+							MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
 							Attributes: map[string]schema.Attribute{
 								"prefixes": schema.ListAttribute{
 									MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
@@ -432,10 +432,10 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"any": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"inside_endpoints": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"label_selector": schema.SingleNestedBlock{
 						MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE",
@@ -448,10 +448,10 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 					"outside_endpoints": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"prefix_list": schema.SingleNestedBlock{
-						MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
+						MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
 						Attributes: map[string]schema.Attribute{
 							"prefixes": schema.ListAttribute{
 								MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
@@ -476,22 +476,22 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							MarkdownDescription: "Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction",
 							Attributes: map[string]schema.Attribute{
 								"action": schema.StringAttribute{
-									MarkdownDescription: "[Enum: NOLOG|LOG] Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule. Possible values are `NOLOG`, `LOG`. Defaults to `NOLOG`.",
+									MarkdownDescription: "[Enum: NOLOG|LOG] Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified Don't sample the traffic hitting the rule Sample the traffic hitting the rule. Possible values are `NOLOG`, `LOG`. Defaults to `NOLOG`.",
 									Optional:            true,
 								},
 							},
 						},
 						"all_tcp_traffic": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"all_traffic": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"all_udp_traffic": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"any": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"applications": schema.SingleNestedBlock{
 							MarkdownDescription: "Applications. Application protocols like HTTP, SNMP",
@@ -504,7 +504,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							},
 						},
 						"inside_endpoints": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"ip_prefix_set": schema.SingleNestedBlock{
 							MarkdownDescription: "IP Prefix Set Reference. A list of references to ip_prefix_set objects.",
@@ -576,10 +576,10 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							},
 						},
 						"outside_endpoints": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"prefix_list": schema.SingleNestedBlock{
-							MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
+							MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
 							Attributes: map[string]schema.Attribute{
 								"prefixes": schema.ListAttribute{
 									MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",

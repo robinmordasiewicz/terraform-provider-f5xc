@@ -80,7 +80,7 @@ resource "f5xc_dns_load_balancer" "example" {
 
 <a id="record-type"></a>&#x2022; [`record_type`](#record-type) - Optional String  Defaults to `A`<br>Possible values are `A`, `AAAA`, `MX`, `CNAME`, `SRV`<br>[Enum: A|AAAA|MX|CNAME|SRV] Resource Record Type. Resource Record Type - A: A - AAAA: AAAA - MX: MX - CNAME: CNAME - SRV: SRV
 
-<a id="response-cache"></a>&#x2022; [`response_cache`](#response-cache) - Optional Block<br>Response Cache. Response Cache x-required<br>See [Response Cache](#response-cache) below for details.
+<a id="response-cache"></a>&#x2022; [`response_cache`](#response-cache) - Optional Block<br>Response Cache. Response Cache<br>See [Response Cache](#response-cache) below for details.
 
 <a id="rule-list"></a>&#x2022; [`rule_list`](#rule-list) - Optional Block<br>Load Balancing Rule List. List of the Load Balancing Rules<br>See [Rule List](#rule-list) below for details.
 
@@ -108,9 +108,9 @@ A [`fallback_pool`](#fallback-pool) block supports the following:
 
 A [`response_cache`](#response-cache) block supports the following:
 
-<a id="response-cache-default-response-cache-parameters"></a>&#x2022; [`default_response_cache_parameters`](#response-cache-default-response-cache-parameters) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="response-cache-default-response-cache-parameters"></a>&#x2022; [`default_response_cache_parameters`](#response-cache-default-response-cache-parameters) - Optional Block<br>Enable this option
 
-<a id="response-cache-disable"></a>&#x2022; [`disable`](#response-cache-disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="response-cache-disable"></a>&#x2022; [`disable`](#response-cache-disable) - Optional Block<br>Enable this option
 
 <a id="response-cache-response-cache-parameters"></a>&#x2022; [`response_cache_parameters`](#response-cache-response-cache-parameters) - Optional Block<br>Response Cache Parameters<br>See [Response Cache Parameters](#response-cache-response-cache-parameters) below.
 

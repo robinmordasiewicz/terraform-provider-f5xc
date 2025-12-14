@@ -20,11 +20,11 @@ resource "f5xc_app_type" "example" {
   business_logic_markup_setting {
     # Configure business_logic_markup_setting settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   disable {
     # Configure disable settings
   }
-  # Discovered API Settings. x-example: '2' Configure Discove...
+  # Discovered API Settings. Configure Discovered API Settings.
   discovered_api_settings {
     # Configure discovered_api_settings settings
   }

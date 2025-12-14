@@ -330,20 +330,20 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 				Delete: true,
 			}),
 			"allow_all": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: allow_all, allow_list, deny_list, rule_list] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: allow_all, allow_list, deny_list, rule_list] Enable this option",
 			},
 			"allow_list": schema.SingleNestedBlock{
 				MarkdownDescription: "Forward Proxy Rule. URL(s) and domains policy for forward proxy for a connection type (TLS or HTTP)",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"default_action_allow": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"default_action_deny": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"default_action_next_policy": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"dest_list": schema.ListNestedBlock{
 						MarkdownDescription: "L4 Destination List. L4 destinations for non-HTTP and non-TLS connections and TLS connections without SNI",
@@ -397,7 +397,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 							},
 							Blocks: map[string]schema.Block{
 								"any_path": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 							},
 						},
@@ -424,20 +424,20 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 				},
 			},
 			"any_proxy": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: any_proxy, drp_http_connect, network_connector, proxy_label_selector] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: any_proxy, drp_http_connect, network_connector, proxy_label_selector] Enable this option",
 			},
 			"deny_list": schema.SingleNestedBlock{
 				MarkdownDescription: "Forward Proxy Rule. URL(s) and domains policy for forward proxy for a connection type (TLS or HTTP)",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"default_action_allow": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"default_action_deny": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"default_action_next_policy": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"dest_list": schema.ListNestedBlock{
 						MarkdownDescription: "L4 Destination List. L4 destinations for non-HTTP and non-TLS connections and TLS connections without SNI",
@@ -491,7 +491,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 							},
 							Blocks: map[string]schema.Block{
 								"any_path": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 							},
 						},
@@ -518,7 +518,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 				},
 			},
 			"drp_http_connect": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"network_connector": schema.SingleNestedBlock{
 				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
@@ -563,10 +563,10 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 							},
 							Blocks: map[string]schema.Block{
 								"all_destinations": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"all_sources": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"dst_asn_list": schema.SingleNestedBlock{
 									MarkdownDescription: "ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
@@ -625,7 +625,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									},
 								},
 								"dst_prefix_list": schema.SingleNestedBlock{
-									MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
+									MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
 									Attributes: map[string]schema.Attribute{
 										"prefixes": schema.ListAttribute{
 											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
@@ -669,7 +669,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 												},
 												Blocks: map[string]schema.Block{
 													"any_path": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 												},
 											},
@@ -718,7 +718,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									},
 								},
 								"no_http_connect_port": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"port_matcher": schema.SingleNestedBlock{
 									MarkdownDescription: "Port Matcher. A port matcher specifies a list of port ranges as match criteria. The match is considered successful if the input port falls within any of the port ranges. The result of the match is inverted if invert_matcher is true.",
@@ -735,7 +735,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									},
 								},
 								"prefix_list": schema.SingleNestedBlock{
-									MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
+									MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
 									Attributes: map[string]schema.Attribute{
 										"prefixes": schema.ListAttribute{
 											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",

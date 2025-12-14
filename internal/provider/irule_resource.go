@@ -121,7 +121,7 @@ func (r *IruleResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"irule": schema.StringAttribute{
-				MarkdownDescription: "irule. x-example: 'when DNS_REQUEST { if {([string tolower [DNS::question name]] equals 'www.internal.example.f5.com')} DNS::drop} irule content",
+				MarkdownDescription: "irule.www.internal.example.f5.com')} DNS::drop} irule content",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{

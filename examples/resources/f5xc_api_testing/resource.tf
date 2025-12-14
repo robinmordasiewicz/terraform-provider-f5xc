@@ -24,7 +24,7 @@ resource "f5xc_api_testing" "example" {
   credentials {
     # Configure credentials settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   admin {
     # Configure admin settings
   }

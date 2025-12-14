@@ -102,7 +102,7 @@ An [`ipsec`](#ipsec) block supports the following:
 
 An [`ike_parameters`](#ipsec-ike-parameters) block (within [`ipsec`](#ipsec)) supports the following:
 
-<a id="ipsec-ike-parameters-dpd-disabled"></a>&#x2022; [`dpd_disabled`](#ipsec-ike-parameters-dpd-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ipsec-ike-parameters-dpd-disabled"></a>&#x2022; [`dpd_disabled`](#ipsec-ike-parameters-dpd-disabled) - Optional Block<br>Enable this option
 
 <a id="ipsec-ike-parameters-dpd-keep-alive-timer"></a>&#x2022; [`dpd_keep_alive_timer`](#ipsec-ike-parameters-dpd-keep-alive-timer) - Optional Block<br>Keepalive Timer<br>See [Dpd Keep Alive Timer](#ipsec-ike-parameters-dpd-keep-alive-timer) below.
 
@@ -110,17 +110,17 @@ An [`ike_parameters`](#ipsec-ike-parameters) block (within [`ipsec`](#ipsec)) su
 
 <a id="ipsec-ike-parameters-ike-phase2-profile"></a>&#x2022; [`ike_phase2_profile`](#ipsec-ike-parameters-ike-phase2-profile) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [IKE Phase2 Profile](#ipsec-ike-parameters-ike-phase2-profile) below.
 
-<a id="ipsec-ike-parameters-initiator"></a>&#x2022; [`initiator`](#ipsec-ike-parameters-initiator) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ipsec-ike-parameters-initiator"></a>&#x2022; [`initiator`](#ipsec-ike-parameters-initiator) - Optional Block<br>Enable this option
 
-<a id="ipsec-ike-parameters-responder"></a>&#x2022; [`responder`](#ipsec-ike-parameters-responder) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ipsec-ike-parameters-responder"></a>&#x2022; [`responder`](#ipsec-ike-parameters-responder) - Optional Block<br>Enable this option
 
 <a id="ipsec-ike-parameters-rm-hostname"></a>&#x2022; [`rm_hostname`](#ipsec-ike-parameters-rm-hostname) - Optional String<br>Hostname. Configure an hostname Remote IKE ID
 
 <a id="ipsec-ike-parameters-rm-ip-address"></a>&#x2022; [`rm_ip_address`](#ipsec-ike-parameters-rm-ip-address) - Optional Block<br>IP Address. IP Address used to specify an IPv4 or IPv6 address<br>See [Rm IP Address](#ipsec-ike-parameters-rm-ip-address) below.
 
-<a id="ipsec-ike-parameters-use-default-local-ike-id"></a>&#x2022; [`use_default_local_ike_id`](#ipsec-ike-parameters-use-default-local-ike-id) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ipsec-ike-parameters-use-default-local-ike-id"></a>&#x2022; [`use_default_local_ike_id`](#ipsec-ike-parameters-use-default-local-ike-id) - Optional Block<br>Enable this option
 
-<a id="ipsec-ike-parameters-use-default-remote-ike-id"></a>&#x2022; [`use_default_remote_ike_id`](#ipsec-ike-parameters-use-default-remote-ike-id) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ipsec-ike-parameters-use-default-remote-ike-id"></a>&#x2022; [`use_default_remote_ike_id`](#ipsec-ike-parameters-use-default-remote-ike-id) - Optional Block<br>Enable this option
 
 #### Ipsec IKE Parameters Dpd Keep Alive Timer
 
@@ -178,9 +178,9 @@ An [`ipsec_tunnel_parameters`](#ipsec-ipsec-tunnel-parameters) block (within [`i
 
 <a id="ipsec-ipsec-tunnel-parameters-segment"></a>&#x2022; [`segment`](#ipsec-ipsec-tunnel-parameters-segment) - Optional Block<br>Segment Reference Type. Reference to Segment Object<br>See [Segment](#ipsec-ipsec-tunnel-parameters-segment) below.
 
-<a id="ipsec-ipsec-tunnel-parameters-site-local-inside-network"></a>&#x2022; [`site_local_inside_network`](#ipsec-ipsec-tunnel-parameters-site-local-inside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ipsec-ipsec-tunnel-parameters-site-local-inside-network"></a>&#x2022; [`site_local_inside_network`](#ipsec-ipsec-tunnel-parameters-site-local-inside-network) - Optional Block<br>Enable this option
 
-<a id="ipsec-ipsec-tunnel-parameters-site-local-network"></a>&#x2022; [`site_local_network`](#ipsec-ipsec-tunnel-parameters-site-local-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ipsec-ipsec-tunnel-parameters-site-local-network"></a>&#x2022; [`site_local_network`](#ipsec-ipsec-tunnel-parameters-site-local-network) - Optional Block<br>Enable this option
 
 <a id="ipsec-ipsec-tunnel-parameters-tunnel-eps"></a>&#x2022; [`tunnel_eps`](#ipsec-ipsec-tunnel-parameters-tunnel-eps) - Optional Block<br>Tunnel Endpoint. Configure tunnel parameters, local and remote IP addresses<br>See [Tunnel Eps](#ipsec-ipsec-tunnel-parameters-tunnel-eps) below.
 

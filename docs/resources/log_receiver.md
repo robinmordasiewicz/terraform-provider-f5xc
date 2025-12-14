@@ -65,7 +65,7 @@ resource "f5xc_log_receiver" "example" {
 
 ### Spec Argument Reference
 
-<a id="site-local"></a>&#x2022; [`site_local`](#site-local) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="site-local"></a>&#x2022; [`site_local`](#site-local) - Optional Block<br>Enable this option
 
 <a id="syslog"></a>&#x2022; [`syslog`](#syslog) - Optional Block<br>Syslog Server Configuration. Configuration for syslog server<br>See [Syslog](#syslog) below for details.
 
@@ -103,11 +103,11 @@ A [`tcp_server`](#syslog-tcp-server) block (within [`syslog`](#syslog)) supports
 
 A [`tls_server`](#syslog-tls-server) block (within [`syslog`](#syslog)) supports the following:
 
-<a id="syslog-tls-server-default-https-port"></a>&#x2022; [`default_https_port`](#syslog-tls-server-default-https-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="syslog-tls-server-default-https-port"></a>&#x2022; [`default_https_port`](#syslog-tls-server-default-https-port) - Optional Block<br>Enable this option
 
-<a id="syslog-tls-server-default-syslog-tls-port"></a>&#x2022; [`default_syslog_tls_port`](#syslog-tls-server-default-syslog-tls-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="syslog-tls-server-default-syslog-tls-port"></a>&#x2022; [`default_syslog_tls_port`](#syslog-tls-server-default-syslog-tls-port) - Optional Block<br>Enable this option
 
-<a id="syslog-tls-server-mtls-disabled"></a>&#x2022; [`mtls_disabled`](#syslog-tls-server-mtls-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="syslog-tls-server-mtls-disabled"></a>&#x2022; [`mtls_disabled`](#syslog-tls-server-mtls-disabled) - Optional Block<br>Enable this option
 
 <a id="syslog-tls-server-mtls-enable"></a>&#x2022; [`mtls_enable`](#syslog-tls-server-mtls-enable) - Optional Block<br>mTLS Client Config. TLS config for client<br>See [mTLS Enable](#syslog-tls-server-mtls-enable) below.
 
@@ -117,7 +117,7 @@ A [`tls_server`](#syslog-tls-server) block (within [`syslog`](#syslog)) supports
 
 <a id="syslog-tls-server-trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#syslog-tls-server-trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
 
-<a id="syslog-tls-server-volterra-ca"></a>&#x2022; [`volterra_ca`](#syslog-tls-server-volterra-ca) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="syslog-tls-server-volterra-ca"></a>&#x2022; [`volterra_ca`](#syslog-tls-server-volterra-ca) - Optional Block<br>Enable this option
 
 #### Syslog TLS Server mTLS Enable
 

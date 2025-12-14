@@ -32,11 +32,11 @@ resource "f5xc_infraprotect_asn" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: bgp_session_disabled, bgp_session_enabled] Empty....
+  # [OneOf: bgp_session_disabled, bgp_session_enabled] Enable...
   bgp_session_disabled {
     # Configure bgp_session_disabled settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   bgp_session_enabled {
     # Configure bgp_session_enabled settings
   }
@@ -65,8 +65,8 @@ resource "f5xc_infraprotect_asn" "example" {
 <a id="asn"></a>&#x2022; [`asn`](#asn) - Optional Number<br>ASN. 2-byte or 4-byte Autonomous System Number (ASN)
 
 -> **One of the following:**
-&#x2022; <a id="bgp-session-disabled"></a>[`bgp_session_disabled`](#bgp-session-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="bgp-session-enabled"></a>[`bgp_session_enabled`](#bgp-session-enabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="bgp-session-disabled"></a>[`bgp_session_disabled`](#bgp-session-disabled) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="bgp-session-enabled"></a>[`bgp_session_enabled`](#bgp-session-enabled) - Optional Block<br>Enable this option
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

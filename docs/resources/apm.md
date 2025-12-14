@@ -154,11 +154,11 @@ An [`aws_tgw_site`](#aws-site-type-choice-apm-aws-site-aws-tgw-site-aws-tgw-site
 
 An [`endpoint_service`](#aws-site-type-choice-apm-aws-site-endpoint-service) block (within [`aws_site_type_choice.apm_aws_site`](#aws-site-type-choice-apm-aws-site)) supports the following:
 
-<a id="aws-site-type-choice-apm-aws-site-endpoint-service-advertise-on-slo-ip"></a>&#x2022; [`advertise_on_slo_ip`](#aws-site-type-choice-apm-aws-site-endpoint-service-advertise-on-slo-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="aws-site-type-choice-apm-aws-site-endpoint-service-advertise-on-slo-ip"></a>&#x2022; [`advertise_on_slo_ip`](#aws-site-type-choice-apm-aws-site-endpoint-service-advertise-on-slo-ip) - Optional Block<br>Enable this option
 
-<a id="aws-site-type-choice-apm-aws-site-endpoint-service-advertise-on-slo-ip-external"></a>&#x2022; [`advertise_on_slo_ip_external`](#aws-site-type-choice-apm-aws-site-endpoint-service-advertise-on-slo-ip-external) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="aws-site-type-choice-apm-aws-site-endpoint-service-advertise-on-slo-ip-external"></a>&#x2022; [`advertise_on_slo_ip_external`](#aws-site-type-choice-apm-aws-site-endpoint-service-advertise-on-slo-ip-external) - Optional Block<br>Enable this option
 
-<a id="aws-site-type-choice-apm-aws-site-endpoint-service-automatic-vip"></a>&#x2022; [`automatic_vip`](#aws-site-type-choice-apm-aws-site-endpoint-service-automatic-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="aws-site-type-choice-apm-aws-site-endpoint-service-automatic-vip"></a>&#x2022; [`automatic_vip`](#aws-site-type-choice-apm-aws-site-endpoint-service-automatic-vip) - Optional Block<br>Enable this option
 
 <a id="aws-site-type-choice-apm-aws-site-endpoint-service-configured-vip"></a>&#x2022; [`configured_vip`](#aws-site-type-choice-apm-aws-site-endpoint-service-configured-vip) - Optional String<br>Configured VIP. Enter IP address for the default VIP
 
@@ -166,17 +166,17 @@ An [`endpoint_service`](#aws-site-type-choice-apm-aws-site-endpoint-service) blo
 
 <a id="aws-site-type-choice-apm-aws-site-endpoint-service-custom-udp-ports"></a>&#x2022; [`custom_udp_ports`](#aws-site-type-choice-apm-aws-site-endpoint-service-custom-udp-ports) - Optional Block<br>Port Range List. List of port ranges<br>See [Custom UDP Ports](#aws-site-type-choice-apm-aws-site-endpoint-service-custom-udp-ports) below.
 
-<a id="aws-site-type-choice-apm-aws-site-endpoint-service-default-tcp-ports"></a>&#x2022; [`default_tcp_ports`](#aws-site-type-choice-apm-aws-site-endpoint-service-default-tcp-ports) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="aws-site-type-choice-apm-aws-site-endpoint-service-default-tcp-ports"></a>&#x2022; [`default_tcp_ports`](#aws-site-type-choice-apm-aws-site-endpoint-service-default-tcp-ports) - Optional Block<br>Enable this option
 
-<a id="aws-site-type-choice-apm-aws-site-endpoint-service-disable-advertise-on-slo-ip"></a>&#x2022; [`disable_advertise_on_slo_ip`](#aws-site-type-choice-apm-aws-site-endpoint-service-disable-advertise-on-slo-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="aws-site-type-choice-apm-aws-site-endpoint-service-disable-advertise-on-slo-ip"></a>&#x2022; [`disable_advertise_on_slo_ip`](#aws-site-type-choice-apm-aws-site-endpoint-service-disable-advertise-on-slo-ip) - Optional Block<br>Enable this option
 
-<a id="aws-site-type-choice-apm-aws-site-endpoint-service-http-port"></a>&#x2022; [`http_port`](#aws-site-type-choice-apm-aws-site-endpoint-service-http-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="aws-site-type-choice-apm-aws-site-endpoint-service-http-port"></a>&#x2022; [`http_port`](#aws-site-type-choice-apm-aws-site-endpoint-service-http-port) - Optional Block<br>Enable this option
 
-<a id="aws-site-type-choice-apm-aws-site-endpoint-service-https-port"></a>&#x2022; [`https_port`](#aws-site-type-choice-apm-aws-site-endpoint-service-https-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="aws-site-type-choice-apm-aws-site-endpoint-service-https-port"></a>&#x2022; [`https_port`](#aws-site-type-choice-apm-aws-site-endpoint-service-https-port) - Optional Block<br>Enable this option
 
-<a id="aws-site-type-choice-apm-aws-site-endpoint-service-no-tcp-ports"></a>&#x2022; [`no_tcp_ports`](#aws-site-type-choice-apm-aws-site-endpoint-service-no-tcp-ports) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="aws-site-type-choice-apm-aws-site-endpoint-service-no-tcp-ports"></a>&#x2022; [`no_tcp_ports`](#aws-site-type-choice-apm-aws-site-endpoint-service-no-tcp-ports) - Optional Block<br>Enable this option
 
-<a id="aws-site-type-choice-apm-aws-site-endpoint-service-no-udp-ports"></a>&#x2022; [`no_udp_ports`](#aws-site-type-choice-apm-aws-site-endpoint-service-no-udp-ports) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="aws-site-type-choice-apm-aws-site-endpoint-service-no-udp-ports"></a>&#x2022; [`no_udp_ports`](#aws-site-type-choice-apm-aws-site-endpoint-service-no-udp-ports) - Optional Block<br>Enable this option
 
 #### AWS Site Type Choice APM AWS Site Endpoint Service Custom TCP Ports
 
@@ -194,7 +194,7 @@ A [`custom_udp_ports`](#aws-site-type-choice-apm-aws-site-endpoint-service-custo
 
 A [`nodes`](#aws-site-type-choice-apm-aws-site-nodes) block (within [`aws_site_type_choice.apm_aws_site`](#aws-site-type-choice-apm-aws-site)) supports the following:
 
-<a id="aws-site-type-choice-apm-aws-site-nodes-automatic-prefix"></a>&#x2022; [`automatic_prefix`](#aws-site-type-choice-apm-aws-site-nodes-automatic-prefix) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="aws-site-type-choice-apm-aws-site-nodes-automatic-prefix"></a>&#x2022; [`automatic_prefix`](#aws-site-type-choice-apm-aws-site-nodes-automatic-prefix) - Optional Block<br>Enable this option
 
 <a id="aws-site-type-choice-apm-aws-site-nodes-aws-az-name"></a>&#x2022; [`aws_az_name`](#aws-site-type-choice-apm-aws-site-nodes-aws-az-name) - Optional String<br>AWS AZ Name. The AWS Availability Zone must be consistent with the AWS Region chosen. Please select an AZ in the same Region as your TGW Site
 
@@ -202,7 +202,7 @@ A [`nodes`](#aws-site-type-choice-apm-aws-site-nodes) block (within [`aws_site_t
 
 <a id="aws-site-type-choice-apm-aws-site-nodes-node-name"></a>&#x2022; [`node_name`](#aws-site-type-choice-apm-aws-site-nodes-node-name) - Optional String<br>Node Name. Node Name will be used to assign as hostname to the service
 
-<a id="aws-site-type-choice-apm-aws-site-nodes-reserved-mgmt-subnet"></a>&#x2022; [`reserved_mgmt_subnet`](#aws-site-type-choice-apm-aws-site-nodes-reserved-mgmt-subnet) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="aws-site-type-choice-apm-aws-site-nodes-reserved-mgmt-subnet"></a>&#x2022; [`reserved_mgmt_subnet`](#aws-site-type-choice-apm-aws-site-nodes-reserved-mgmt-subnet) - Optional Block<br>Enable this option
 
 <a id="aws-site-type-choice-apm-aws-site-nodes-tunnel-prefix"></a>&#x2022; [`tunnel_prefix`](#aws-site-type-choice-apm-aws-site-nodes-tunnel-prefix) - Optional String<br>Tunnel IP Prefix. Enter IP prefix for the tunnel, it has to be /30
 
@@ -224,9 +224,9 @@ A [`subnet_param`](#aws-site-type-choice-apm-aws-site-nodes-mgmt-subnet-subnet-p
 
 A [`market_place_image`](#aws-site-type-choice-market-place-image) block (within [`aws_site_type_choice`](#aws-site-type-choice)) supports the following:
 
-<a id="aws-site-type-choice-market-place-image-best-plus-pay-g200-mbps"></a>&#x2022; [`best_plus_pay_g200_mbps`](#aws-site-type-choice-market-place-image-best-plus-pay-g200-mbps) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="aws-site-type-choice-market-place-image-best-plus-pay-g200-mbps"></a>&#x2022; [`best_plus_pay_g200_mbps`](#aws-site-type-choice-market-place-image-best-plus-pay-g200-mbps) - Optional Block<br>Enable this option
 
-<a id="aws-site-type-choice-market-place-image-best-plus-payg-1gbps"></a>&#x2022; [`best_plus_payg_1gbps`](#aws-site-type-choice-market-place-image-best-plus-payg-1gbps) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="aws-site-type-choice-market-place-image-best-plus-payg-1gbps"></a>&#x2022; [`best_plus_payg_1gbps`](#aws-site-type-choice-market-place-image-best-plus-payg-1gbps) - Optional Block<br>Enable this option
 
 #### Baremetal Site Type Choice
 
@@ -336,9 +336,9 @@ A [`nodes`](#baremetal-site-type-choice-f5-bare-metal-site-nodes) block (within 
 
 <a id="baremetal-site-type-choice-f5-bare-metal-site-nodes-bm-virtual-cpu-count"></a>&#x2022; [`bm_virtual_cpu_count`](#baremetal-site-type-choice-f5-bare-metal-site-nodes-bm-virtual-cpu-count) - Optional String  Defaults to `BM_4_VCPU`<br>Possible values are `BM_4_VCPU`, `BM_8_VCPU`<br>[Enum: BM_4_VCPU|BM_8_VCPU] Bare Metal ServiceNode Virtual CPU Count. Enum to define number of virtual CPU's to be assigned to the node - BM_4_VCPU: 4 virtual CPUs - BM_8_VCPU: 8 virtual CPUs
 
-<a id="baremetal-site-type-choice-f5-bare-metal-site-nodes-external-interface"></a>&#x2022; [`external_interface`](#baremetal-site-type-choice-f5-bare-metal-site-nodes-external-interface) - Optional Block<br>Interface. x-required BIG-IP interface details<br>See [External Interface](#baremetal-site-type-choice-f5-bare-metal-site-nodes-external-interface) below.
+<a id="baremetal-site-type-choice-f5-bare-metal-site-nodes-external-interface"></a>&#x2022; [`external_interface`](#baremetal-site-type-choice-f5-bare-metal-site-nodes-external-interface) - Optional Block<br>Interface.BIG-IP interface details<br>See [External Interface](#baremetal-site-type-choice-f5-bare-metal-site-nodes-external-interface) below.
 
-<a id="baremetal-site-type-choice-f5-bare-metal-site-nodes-internal-interface"></a>&#x2022; [`internal_interface`](#baremetal-site-type-choice-f5-bare-metal-site-nodes-internal-interface) - Optional Block<br>Interface. x-required BIG-IP interface details<br>See [Internal Interface](#baremetal-site-type-choice-f5-bare-metal-site-nodes-internal-interface) below.
+<a id="baremetal-site-type-choice-f5-bare-metal-site-nodes-internal-interface"></a>&#x2022; [`internal_interface`](#baremetal-site-type-choice-f5-bare-metal-site-nodes-internal-interface) - Optional Block<br>Interface.BIG-IP interface details<br>See [Internal Interface](#baremetal-site-type-choice-f5-bare-metal-site-nodes-internal-interface) below.
 
 <a id="baremetal-site-type-choice-f5-bare-metal-site-nodes-node-name"></a>&#x2022; [`node_name`](#baremetal-site-type-choice-f5-bare-metal-site-nodes-node-name) - Optional String<br>Node Name. Node Name will be used to assign as hostname to the service
 
@@ -388,7 +388,7 @@ A [`https_management`](#https-management) block supports the following:
 
 <a id="https-management-advertise-on-internet"></a>&#x2022; [`advertise_on_internet`](#https-management-advertise-on-internet) - Optional Block<br>Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available<br>See [Advertise On Internet](#https-management-advertise-on-internet) below.
 
-<a id="https-management-advertise-on-internet-default-vip"></a>&#x2022; [`advertise_on_internet_default_vip`](#https-management-advertise-on-internet-default-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-internet-default-vip"></a>&#x2022; [`advertise_on_internet_default_vip`](#https-management-advertise-on-internet-default-vip) - Optional Block<br>Enable this option
 
 <a id="https-management-advertise-on-sli-vip"></a>&#x2022; [`advertise_on_sli_vip`](#https-management-advertise-on-sli-vip) - Optional Block<br>Inline TLS Parameters. Inline TLS parameters<br>See [Advertise On SLI VIP](#https-management-advertise-on-sli-vip) below.
 
@@ -398,7 +398,7 @@ A [`https_management`](#https-management) block supports the following:
 
 <a id="https-management-advertise-on-slo-vip"></a>&#x2022; [`advertise_on_slo_vip`](#https-management-advertise-on-slo-vip) - Optional Block<br>Inline TLS Parameters. Inline TLS parameters<br>See [Advertise On Slo VIP](#https-management-advertise-on-slo-vip) below.
 
-<a id="https-management-default-https-port"></a>&#x2022; [`default_https_port`](#https-management-default-https-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-default-https-port"></a>&#x2022; [`default_https_port`](#https-management-default-https-port) - Optional Block<br>Enable this option
 
 <a id="https-management-domain-suffix"></a>&#x2022; [`domain_suffix`](#https-management-domain-suffix) - Optional String<br>Domain Suffix. Domain suffix will be used along with node name to form URL to access node management
 
@@ -424,7 +424,7 @@ A [`public_ip`](#https-management-advertise-on-internet-public-ip) block (within
 
 An [`advertise_on_sli_vip`](#https-management-advertise-on-sli-vip) block (within [`https_management`](#https-management)) supports the following:
 
-<a id="https-management-advertise-on-sli-vip-no-mtls"></a>&#x2022; [`no_mtls`](#https-management-advertise-on-sli-vip-no-mtls) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-sli-vip-no-mtls"></a>&#x2022; [`no_mtls`](#https-management-advertise-on-sli-vip-no-mtls) - Optional Block<br>Enable this option
 
 <a id="https-management-advertise-on-sli-vip-tls-certificates"></a>&#x2022; [`tls_certificates`](#https-management-advertise-on-sli-vip-tls-certificates) - Optional Block<br>TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#https-management-advertise-on-sli-vip-tls-certificates) below.
 
@@ -442,11 +442,11 @@ A [`tls_certificates`](#https-management-advertise-on-sli-vip-tls-certificates) 
 
 <a id="https-management-advertise-on-sli-vip-tls-certificates-description-spec"></a>&#x2022; [`description_spec`](#https-management-advertise-on-sli-vip-tls-certificates-description-spec) - Optional String<br>Description. Description for the certificate
 
-<a id="https-management-advertise-on-sli-vip-tls-certificates-disable-ocsp-stapling"></a>&#x2022; [`disable_ocsp_stapling`](#https-management-advertise-on-sli-vip-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-sli-vip-tls-certificates-disable-ocsp-stapling"></a>&#x2022; [`disable_ocsp_stapling`](#https-management-advertise-on-sli-vip-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Enable this option
 
 <a id="https-management-advertise-on-sli-vip-tls-certificates-private-key"></a>&#x2022; [`private_key`](#https-management-advertise-on-sli-vip-tls-certificates-private-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#https-management-advertise-on-sli-vip-tls-certificates-private-key) below.
 
-<a id="https-management-advertise-on-sli-vip-tls-certificates-use-system-defaults"></a>&#x2022; [`use_system_defaults`](#https-management-advertise-on-sli-vip-tls-certificates-use-system-defaults) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-sli-vip-tls-certificates-use-system-defaults"></a>&#x2022; [`use_system_defaults`](#https-management-advertise-on-sli-vip-tls-certificates-use-system-defaults) - Optional Block<br>Enable this option
 
 #### HTTPS Management Advertise On SLI VIP TLS Certificates Custom Hash Algorithms
 
@@ -486,11 +486,11 @@ A [`tls_config`](#https-management-advertise-on-sli-vip-tls-config) block (withi
 
 <a id="https-management-advertise-on-sli-vip-tls-config-custom-security"></a>&#x2022; [`custom_security`](#https-management-advertise-on-sli-vip-tls-config-custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#https-management-advertise-on-sli-vip-tls-config-custom-security) below.
 
-<a id="https-management-advertise-on-sli-vip-tls-config-default-security"></a>&#x2022; [`default_security`](#https-management-advertise-on-sli-vip-tls-config-default-security) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-sli-vip-tls-config-default-security"></a>&#x2022; [`default_security`](#https-management-advertise-on-sli-vip-tls-config-default-security) - Optional Block<br>Enable this option
 
-<a id="https-management-advertise-on-sli-vip-tls-config-low-security"></a>&#x2022; [`low_security`](#https-management-advertise-on-sli-vip-tls-config-low-security) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-sli-vip-tls-config-low-security"></a>&#x2022; [`low_security`](#https-management-advertise-on-sli-vip-tls-config-low-security) - Optional Block<br>Enable this option
 
-<a id="https-management-advertise-on-sli-vip-tls-config-medium-security"></a>&#x2022; [`medium_security`](#https-management-advertise-on-sli-vip-tls-config-medium-security) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-sli-vip-tls-config-medium-security"></a>&#x2022; [`medium_security`](#https-management-advertise-on-sli-vip-tls-config-medium-security) - Optional Block<br>Enable this option
 
 #### HTTPS Management Advertise On SLI VIP TLS Config Custom Security
 
@@ -510,13 +510,13 @@ An [`use_mtls`](#https-management-advertise-on-sli-vip-use-mtls) block (within [
 
 <a id="https-management-advertise-on-sli-vip-use-mtls-crl"></a>&#x2022; [`crl`](#https-management-advertise-on-sli-vip-use-mtls-crl) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#https-management-advertise-on-sli-vip-use-mtls-crl) below.
 
-<a id="https-management-advertise-on-sli-vip-use-mtls-no-crl"></a>&#x2022; [`no_crl`](#https-management-advertise-on-sli-vip-use-mtls-no-crl) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-sli-vip-use-mtls-no-crl"></a>&#x2022; [`no_crl`](#https-management-advertise-on-sli-vip-use-mtls-no-crl) - Optional Block<br>Enable this option
 
 <a id="https-management-advertise-on-sli-vip-use-mtls-trusted-ca"></a>&#x2022; [`trusted_ca`](#https-management-advertise-on-sli-vip-use-mtls-trusted-ca) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#https-management-advertise-on-sli-vip-use-mtls-trusted-ca) below.
 
 <a id="https-management-advertise-on-sli-vip-use-mtls-trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#https-management-advertise-on-sli-vip-use-mtls-trusted-ca-url) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
 
-<a id="https-management-advertise-on-sli-vip-use-mtls-xfcc-disabled"></a>&#x2022; [`xfcc_disabled`](#https-management-advertise-on-sli-vip-use-mtls-xfcc-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-sli-vip-use-mtls-xfcc-disabled"></a>&#x2022; [`xfcc_disabled`](#https-management-advertise-on-sli-vip-use-mtls-xfcc-disabled) - Optional Block<br>Enable this option
 
 <a id="https-management-advertise-on-sli-vip-use-mtls-xfcc-options"></a>&#x2022; [`xfcc_options`](#https-management-advertise-on-sli-vip-use-mtls-xfcc-options) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#https-management-advertise-on-sli-vip-use-mtls-xfcc-options) below.
 
@@ -550,7 +550,7 @@ A [`xfcc_options`](#https-management-advertise-on-sli-vip-use-mtls-xfcc-options)
 
 An [`advertise_on_slo_internet_vip`](#https-management-advertise-on-slo-internet-vip) block (within [`https_management`](#https-management)) supports the following:
 
-<a id="https-management-advertise-on-slo-internet-vip-no-mtls"></a>&#x2022; [`no_mtls`](#https-management-advertise-on-slo-internet-vip-no-mtls) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-slo-internet-vip-no-mtls"></a>&#x2022; [`no_mtls`](#https-management-advertise-on-slo-internet-vip-no-mtls) - Optional Block<br>Enable this option
 
 <a id="https-management-advertise-on-slo-internet-vip-tls-certificates"></a>&#x2022; [`tls_certificates`](#https-management-advertise-on-slo-internet-vip-tls-certificates) - Optional Block<br>TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#https-management-advertise-on-slo-internet-vip-tls-certificates) below.
 
@@ -568,11 +568,11 @@ A [`tls_certificates`](#https-management-advertise-on-slo-internet-vip-tls-certi
 
 <a id="https-management-advertise-on-slo-internet-vip-tls-certificates-description-spec"></a>&#x2022; [`description_spec`](#https-management-advertise-on-slo-internet-vip-tls-certificates-description-spec) - Optional String<br>Description. Description for the certificate
 
-<a id="https-management-advertise-on-slo-internet-vip-tls-certificates-disable-ocsp-stapling"></a>&#x2022; [`disable_ocsp_stapling`](#https-management-advertise-on-slo-internet-vip-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-slo-internet-vip-tls-certificates-disable-ocsp-stapling"></a>&#x2022; [`disable_ocsp_stapling`](#https-management-advertise-on-slo-internet-vip-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Enable this option
 
 <a id="https-management-advertise-on-slo-internet-vip-tls-certificates-private-key"></a>&#x2022; [`private_key`](#https-management-advertise-on-slo-internet-vip-tls-certificates-private-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#https-management-advertise-on-slo-internet-vip-tls-certificates-private-key) below.
 
-<a id="https-management-advertise-on-slo-internet-vip-tls-certificates-use-system-defaults"></a>&#x2022; [`use_system_defaults`](#https-management-advertise-on-slo-internet-vip-tls-certificates-use-system-defaults) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-slo-internet-vip-tls-certificates-use-system-defaults"></a>&#x2022; [`use_system_defaults`](#https-management-advertise-on-slo-internet-vip-tls-certificates-use-system-defaults) - Optional Block<br>Enable this option
 
 #### HTTPS Management Advertise On Slo Internet VIP TLS Certificates Custom Hash Algorithms
 
@@ -612,11 +612,11 @@ A [`tls_config`](#https-management-advertise-on-slo-internet-vip-tls-config) blo
 
 <a id="https-management-advertise-on-slo-internet-vip-tls-config-custom-security"></a>&#x2022; [`custom_security`](#https-management-advertise-on-slo-internet-vip-tls-config-custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#https-management-advertise-on-slo-internet-vip-tls-config-custom-security) below.
 
-<a id="https-management-advertise-on-slo-internet-vip-tls-config-default-security"></a>&#x2022; [`default_security`](#https-management-advertise-on-slo-internet-vip-tls-config-default-security) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-slo-internet-vip-tls-config-default-security"></a>&#x2022; [`default_security`](#https-management-advertise-on-slo-internet-vip-tls-config-default-security) - Optional Block<br>Enable this option
 
-<a id="https-management-advertise-on-slo-internet-vip-tls-config-low-security"></a>&#x2022; [`low_security`](#https-management-advertise-on-slo-internet-vip-tls-config-low-security) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-slo-internet-vip-tls-config-low-security"></a>&#x2022; [`low_security`](#https-management-advertise-on-slo-internet-vip-tls-config-low-security) - Optional Block<br>Enable this option
 
-<a id="https-management-advertise-on-slo-internet-vip-tls-config-medium-security"></a>&#x2022; [`medium_security`](#https-management-advertise-on-slo-internet-vip-tls-config-medium-security) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-slo-internet-vip-tls-config-medium-security"></a>&#x2022; [`medium_security`](#https-management-advertise-on-slo-internet-vip-tls-config-medium-security) - Optional Block<br>Enable this option
 
 #### HTTPS Management Advertise On Slo Internet VIP TLS Config Custom Security
 
@@ -636,13 +636,13 @@ An [`use_mtls`](#https-management-advertise-on-slo-internet-vip-use-mtls) block 
 
 <a id="https-management-advertise-on-slo-internet-vip-use-mtls-crl"></a>&#x2022; [`crl`](#https-management-advertise-on-slo-internet-vip-use-mtls-crl) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#https-management-advertise-on-slo-internet-vip-use-mtls-crl) below.
 
-<a id="https-management-advertise-on-slo-internet-vip-use-mtls-no-crl"></a>&#x2022; [`no_crl`](#https-management-advertise-on-slo-internet-vip-use-mtls-no-crl) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-slo-internet-vip-use-mtls-no-crl"></a>&#x2022; [`no_crl`](#https-management-advertise-on-slo-internet-vip-use-mtls-no-crl) - Optional Block<br>Enable this option
 
 <a id="https-management-advertise-on-slo-internet-vip-use-mtls-trusted-ca"></a>&#x2022; [`trusted_ca`](#https-management-advertise-on-slo-internet-vip-use-mtls-trusted-ca) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#https-management-advertise-on-slo-internet-vip-use-mtls-trusted-ca) below.
 
 <a id="https-management-advertise-on-slo-internet-vip-use-mtls-trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#https-management-advertise-on-slo-internet-vip-use-mtls-trusted-ca-url) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
 
-<a id="https-management-advertise-on-slo-internet-vip-use-mtls-xfcc-disabled"></a>&#x2022; [`xfcc_disabled`](#https-management-advertise-on-slo-internet-vip-use-mtls-xfcc-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-slo-internet-vip-use-mtls-xfcc-disabled"></a>&#x2022; [`xfcc_disabled`](#https-management-advertise-on-slo-internet-vip-use-mtls-xfcc-disabled) - Optional Block<br>Enable this option
 
 <a id="https-management-advertise-on-slo-internet-vip-use-mtls-xfcc-options"></a>&#x2022; [`xfcc_options`](#https-management-advertise-on-slo-internet-vip-use-mtls-xfcc-options) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#https-management-advertise-on-slo-internet-vip-use-mtls-xfcc-options) below.
 
@@ -676,7 +676,7 @@ A [`xfcc_options`](#https-management-advertise-on-slo-internet-vip-use-mtls-xfcc
 
 An [`advertise_on_slo_sli`](#https-management-advertise-on-slo-sli) block (within [`https_management`](#https-management)) supports the following:
 
-<a id="https-management-advertise-on-slo-sli-no-mtls"></a>&#x2022; [`no_mtls`](#https-management-advertise-on-slo-sli-no-mtls) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-slo-sli-no-mtls"></a>&#x2022; [`no_mtls`](#https-management-advertise-on-slo-sli-no-mtls) - Optional Block<br>Enable this option
 
 <a id="https-management-advertise-on-slo-sli-tls-certificates"></a>&#x2022; [`tls_certificates`](#https-management-advertise-on-slo-sli-tls-certificates) - Optional Block<br>TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#https-management-advertise-on-slo-sli-tls-certificates) below.
 
@@ -694,11 +694,11 @@ A [`tls_certificates`](#https-management-advertise-on-slo-sli-tls-certificates) 
 
 <a id="https-management-advertise-on-slo-sli-tls-certificates-description-spec"></a>&#x2022; [`description_spec`](#https-management-advertise-on-slo-sli-tls-certificates-description-spec) - Optional String<br>Description. Description for the certificate
 
-<a id="https-management-advertise-on-slo-sli-tls-certificates-disable-ocsp-stapling"></a>&#x2022; [`disable_ocsp_stapling`](#https-management-advertise-on-slo-sli-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-slo-sli-tls-certificates-disable-ocsp-stapling"></a>&#x2022; [`disable_ocsp_stapling`](#https-management-advertise-on-slo-sli-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Enable this option
 
 <a id="https-management-advertise-on-slo-sli-tls-certificates-private-key"></a>&#x2022; [`private_key`](#https-management-advertise-on-slo-sli-tls-certificates-private-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#https-management-advertise-on-slo-sli-tls-certificates-private-key) below.
 
-<a id="https-management-advertise-on-slo-sli-tls-certificates-use-system-defaults"></a>&#x2022; [`use_system_defaults`](#https-management-advertise-on-slo-sli-tls-certificates-use-system-defaults) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-slo-sli-tls-certificates-use-system-defaults"></a>&#x2022; [`use_system_defaults`](#https-management-advertise-on-slo-sli-tls-certificates-use-system-defaults) - Optional Block<br>Enable this option
 
 #### HTTPS Management Advertise On Slo SLI TLS Certificates Custom Hash Algorithms
 
@@ -738,11 +738,11 @@ A [`tls_config`](#https-management-advertise-on-slo-sli-tls-config) block (withi
 
 <a id="https-management-advertise-on-slo-sli-tls-config-custom-security"></a>&#x2022; [`custom_security`](#https-management-advertise-on-slo-sli-tls-config-custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#https-management-advertise-on-slo-sli-tls-config-custom-security) below.
 
-<a id="https-management-advertise-on-slo-sli-tls-config-default-security"></a>&#x2022; [`default_security`](#https-management-advertise-on-slo-sli-tls-config-default-security) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-slo-sli-tls-config-default-security"></a>&#x2022; [`default_security`](#https-management-advertise-on-slo-sli-tls-config-default-security) - Optional Block<br>Enable this option
 
-<a id="https-management-advertise-on-slo-sli-tls-config-low-security"></a>&#x2022; [`low_security`](#https-management-advertise-on-slo-sli-tls-config-low-security) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-slo-sli-tls-config-low-security"></a>&#x2022; [`low_security`](#https-management-advertise-on-slo-sli-tls-config-low-security) - Optional Block<br>Enable this option
 
-<a id="https-management-advertise-on-slo-sli-tls-config-medium-security"></a>&#x2022; [`medium_security`](#https-management-advertise-on-slo-sli-tls-config-medium-security) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-slo-sli-tls-config-medium-security"></a>&#x2022; [`medium_security`](#https-management-advertise-on-slo-sli-tls-config-medium-security) - Optional Block<br>Enable this option
 
 #### HTTPS Management Advertise On Slo SLI TLS Config Custom Security
 
@@ -762,13 +762,13 @@ An [`use_mtls`](#https-management-advertise-on-slo-sli-use-mtls) block (within [
 
 <a id="https-management-advertise-on-slo-sli-use-mtls-crl"></a>&#x2022; [`crl`](#https-management-advertise-on-slo-sli-use-mtls-crl) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#https-management-advertise-on-slo-sli-use-mtls-crl) below.
 
-<a id="https-management-advertise-on-slo-sli-use-mtls-no-crl"></a>&#x2022; [`no_crl`](#https-management-advertise-on-slo-sli-use-mtls-no-crl) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-slo-sli-use-mtls-no-crl"></a>&#x2022; [`no_crl`](#https-management-advertise-on-slo-sli-use-mtls-no-crl) - Optional Block<br>Enable this option
 
 <a id="https-management-advertise-on-slo-sli-use-mtls-trusted-ca"></a>&#x2022; [`trusted_ca`](#https-management-advertise-on-slo-sli-use-mtls-trusted-ca) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#https-management-advertise-on-slo-sli-use-mtls-trusted-ca) below.
 
 <a id="https-management-advertise-on-slo-sli-use-mtls-trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#https-management-advertise-on-slo-sli-use-mtls-trusted-ca-url) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
 
-<a id="https-management-advertise-on-slo-sli-use-mtls-xfcc-disabled"></a>&#x2022; [`xfcc_disabled`](#https-management-advertise-on-slo-sli-use-mtls-xfcc-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-slo-sli-use-mtls-xfcc-disabled"></a>&#x2022; [`xfcc_disabled`](#https-management-advertise-on-slo-sli-use-mtls-xfcc-disabled) - Optional Block<br>Enable this option
 
 <a id="https-management-advertise-on-slo-sli-use-mtls-xfcc-options"></a>&#x2022; [`xfcc_options`](#https-management-advertise-on-slo-sli-use-mtls-xfcc-options) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#https-management-advertise-on-slo-sli-use-mtls-xfcc-options) below.
 
@@ -802,7 +802,7 @@ A [`xfcc_options`](#https-management-advertise-on-slo-sli-use-mtls-xfcc-options)
 
 An [`advertise_on_slo_vip`](#https-management-advertise-on-slo-vip) block (within [`https_management`](#https-management)) supports the following:
 
-<a id="https-management-advertise-on-slo-vip-no-mtls"></a>&#x2022; [`no_mtls`](#https-management-advertise-on-slo-vip-no-mtls) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-slo-vip-no-mtls"></a>&#x2022; [`no_mtls`](#https-management-advertise-on-slo-vip-no-mtls) - Optional Block<br>Enable this option
 
 <a id="https-management-advertise-on-slo-vip-tls-certificates"></a>&#x2022; [`tls_certificates`](#https-management-advertise-on-slo-vip-tls-certificates) - Optional Block<br>TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#https-management-advertise-on-slo-vip-tls-certificates) below.
 
@@ -820,11 +820,11 @@ A [`tls_certificates`](#https-management-advertise-on-slo-vip-tls-certificates) 
 
 <a id="https-management-advertise-on-slo-vip-tls-certificates-description-spec"></a>&#x2022; [`description_spec`](#https-management-advertise-on-slo-vip-tls-certificates-description-spec) - Optional String<br>Description. Description for the certificate
 
-<a id="https-management-advertise-on-slo-vip-tls-certificates-disable-ocsp-stapling"></a>&#x2022; [`disable_ocsp_stapling`](#https-management-advertise-on-slo-vip-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-slo-vip-tls-certificates-disable-ocsp-stapling"></a>&#x2022; [`disable_ocsp_stapling`](#https-management-advertise-on-slo-vip-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Enable this option
 
 <a id="https-management-advertise-on-slo-vip-tls-certificates-private-key"></a>&#x2022; [`private_key`](#https-management-advertise-on-slo-vip-tls-certificates-private-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#https-management-advertise-on-slo-vip-tls-certificates-private-key) below.
 
-<a id="https-management-advertise-on-slo-vip-tls-certificates-use-system-defaults"></a>&#x2022; [`use_system_defaults`](#https-management-advertise-on-slo-vip-tls-certificates-use-system-defaults) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-slo-vip-tls-certificates-use-system-defaults"></a>&#x2022; [`use_system_defaults`](#https-management-advertise-on-slo-vip-tls-certificates-use-system-defaults) - Optional Block<br>Enable this option
 
 #### HTTPS Management Advertise On Slo VIP TLS Certificates Custom Hash Algorithms
 
@@ -864,11 +864,11 @@ A [`tls_config`](#https-management-advertise-on-slo-vip-tls-config) block (withi
 
 <a id="https-management-advertise-on-slo-vip-tls-config-custom-security"></a>&#x2022; [`custom_security`](#https-management-advertise-on-slo-vip-tls-config-custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#https-management-advertise-on-slo-vip-tls-config-custom-security) below.
 
-<a id="https-management-advertise-on-slo-vip-tls-config-default-security"></a>&#x2022; [`default_security`](#https-management-advertise-on-slo-vip-tls-config-default-security) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-slo-vip-tls-config-default-security"></a>&#x2022; [`default_security`](#https-management-advertise-on-slo-vip-tls-config-default-security) - Optional Block<br>Enable this option
 
-<a id="https-management-advertise-on-slo-vip-tls-config-low-security"></a>&#x2022; [`low_security`](#https-management-advertise-on-slo-vip-tls-config-low-security) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-slo-vip-tls-config-low-security"></a>&#x2022; [`low_security`](#https-management-advertise-on-slo-vip-tls-config-low-security) - Optional Block<br>Enable this option
 
-<a id="https-management-advertise-on-slo-vip-tls-config-medium-security"></a>&#x2022; [`medium_security`](#https-management-advertise-on-slo-vip-tls-config-medium-security) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-slo-vip-tls-config-medium-security"></a>&#x2022; [`medium_security`](#https-management-advertise-on-slo-vip-tls-config-medium-security) - Optional Block<br>Enable this option
 
 #### HTTPS Management Advertise On Slo VIP TLS Config Custom Security
 
@@ -888,13 +888,13 @@ An [`use_mtls`](#https-management-advertise-on-slo-vip-use-mtls) block (within [
 
 <a id="https-management-advertise-on-slo-vip-use-mtls-crl"></a>&#x2022; [`crl`](#https-management-advertise-on-slo-vip-use-mtls-crl) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#https-management-advertise-on-slo-vip-use-mtls-crl) below.
 
-<a id="https-management-advertise-on-slo-vip-use-mtls-no-crl"></a>&#x2022; [`no_crl`](#https-management-advertise-on-slo-vip-use-mtls-no-crl) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-slo-vip-use-mtls-no-crl"></a>&#x2022; [`no_crl`](#https-management-advertise-on-slo-vip-use-mtls-no-crl) - Optional Block<br>Enable this option
 
 <a id="https-management-advertise-on-slo-vip-use-mtls-trusted-ca"></a>&#x2022; [`trusted_ca`](#https-management-advertise-on-slo-vip-use-mtls-trusted-ca) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#https-management-advertise-on-slo-vip-use-mtls-trusted-ca) below.
 
 <a id="https-management-advertise-on-slo-vip-use-mtls-trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#https-management-advertise-on-slo-vip-use-mtls-trusted-ca-url) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
 
-<a id="https-management-advertise-on-slo-vip-use-mtls-xfcc-disabled"></a>&#x2022; [`xfcc_disabled`](#https-management-advertise-on-slo-vip-use-mtls-xfcc-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-management-advertise-on-slo-vip-use-mtls-xfcc-disabled"></a>&#x2022; [`xfcc_disabled`](#https-management-advertise-on-slo-vip-use-mtls-xfcc-disabled) - Optional Block<br>Enable this option
 
 <a id="https-management-advertise-on-slo-vip-use-mtls-xfcc-options"></a>&#x2022; [`xfcc_options`](#https-management-advertise-on-slo-vip-use-mtls-xfcc-options) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#https-management-advertise-on-slo-vip-use-mtls-xfcc-options) below.
 

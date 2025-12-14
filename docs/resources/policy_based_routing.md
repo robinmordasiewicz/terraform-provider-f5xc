@@ -40,7 +40,7 @@ resource "f5xc_policy_based_routing" "example" {
   forward_proxy_pbr_rules {
     # Configure forward_proxy_pbr_rules settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   all_destinations {
     # Configure all_destinations settings
   }
@@ -92,9 +92,9 @@ A [`forward_proxy_pbr`](#forward-proxy-pbr) block supports the following:
 
 A [`forward_proxy_pbr_rules`](#forward-proxy-pbr-forward-proxy-pbr-rules) block (within [`forward_proxy_pbr`](#forward-proxy-pbr)) supports the following:
 
-<a id="forward-proxy-pbr-forward-proxy-pbr-rules-all-destinations"></a>&#x2022; [`all_destinations`](#forward-proxy-pbr-forward-proxy-pbr-rules-all-destinations) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="forward-proxy-pbr-forward-proxy-pbr-rules-all-destinations"></a>&#x2022; [`all_destinations`](#forward-proxy-pbr-forward-proxy-pbr-rules-all-destinations) - Optional Block<br>Enable this option
 
-<a id="forward-proxy-pbr-forward-proxy-pbr-rules-all-sources"></a>&#x2022; [`all_sources`](#forward-proxy-pbr-forward-proxy-pbr-rules-all-sources) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="forward-proxy-pbr-forward-proxy-pbr-rules-all-sources"></a>&#x2022; [`all_sources`](#forward-proxy-pbr-forward-proxy-pbr-rules-all-sources) - Optional Block<br>Enable this option
 
 <a id="forward-proxy-pbr-forward-proxy-pbr-rules-forwarding-class-list"></a>&#x2022; [`forwarding_class_list`](#forward-proxy-pbr-forward-proxy-pbr-rules-forwarding-class-list) - Optional Block<br>Forwarding Class. Ordered list of forwarding Class to be used if no rule match<br>See [Forwarding Class List](#forward-proxy-pbr-forward-proxy-pbr-rules-forwarding-class-list) below.
 
@@ -106,7 +106,7 @@ A [`forward_proxy_pbr_rules`](#forward-proxy-pbr-forward-proxy-pbr-rules) block 
 
 <a id="forward-proxy-pbr-forward-proxy-pbr-rules-metadata"></a>&#x2022; [`metadata`](#forward-proxy-pbr-forward-proxy-pbr-rules-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#forward-proxy-pbr-forward-proxy-pbr-rules-metadata) below.
 
-<a id="forward-proxy-pbr-forward-proxy-pbr-rules-prefix-list"></a>&#x2022; [`prefix_list`](#forward-proxy-pbr-forward-proxy-pbr-rules-prefix-list) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#forward-proxy-pbr-forward-proxy-pbr-rules-prefix-list) below.
+<a id="forward-proxy-pbr-forward-proxy-pbr-rules-prefix-list"></a>&#x2022; [`prefix_list`](#forward-proxy-pbr-forward-proxy-pbr-rules-prefix-list) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#forward-proxy-pbr-forward-proxy-pbr-rules-prefix-list) below.
 
 <a id="forward-proxy-pbr-forward-proxy-pbr-rules-tls-list"></a>&#x2022; [`tls_list`](#forward-proxy-pbr-forward-proxy-pbr-rules-tls-list) - Optional Block<br>DomainListType<br>See [TLS List](#forward-proxy-pbr-forward-proxy-pbr-rules-tls-list) below.
 
@@ -130,7 +130,7 @@ A [`http_list`](#forward-proxy-pbr-forward-proxy-pbr-rules-http-list) block (wit
 
 A [`http_list`](#forward-proxy-pbr-forward-proxy-pbr-rules-http-list-http-list) block (within [`forward_proxy_pbr.forward_proxy_pbr_rules.http_list`](#forward-proxy-pbr-forward-proxy-pbr-rules-http-list)) supports the following:
 
-<a id="forward-proxy-pbr-forward-proxy-pbr-rules-http-list-http-list-any-path"></a>&#x2022; [`any_path`](#forward-proxy-pbr-forward-proxy-pbr-rules-http-list-http-list-any-path) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="forward-proxy-pbr-forward-proxy-pbr-rules-http-list-http-list-any-path"></a>&#x2022; [`any_path`](#forward-proxy-pbr-forward-proxy-pbr-rules-http-list-http-list-any-path) - Optional Block<br>Enable this option
 
 <a id="forward-proxy-pbr-forward-proxy-pbr-rules-http-list-http-list-exact-value"></a>&#x2022; [`exact_value`](#forward-proxy-pbr-forward-proxy-pbr-rules-http-list-http-list-exact-value) - Optional String<br>Exact Values. Exact domain name
 
@@ -204,13 +204,13 @@ A [`forwarding_class_list`](#forwarding-class-list) block supports the following
 
 A [`network_pbr`](#network-pbr) block supports the following:
 
-<a id="network-pbr-any"></a>&#x2022; [`any`](#network-pbr-any) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="network-pbr-any"></a>&#x2022; [`any`](#network-pbr-any) - Optional Block<br>Enable this option
 
 <a id="network-pbr-label-selector"></a>&#x2022; [`label_selector`](#network-pbr-label-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Label Selector](#network-pbr-label-selector) below.
 
 <a id="network-pbr-network-pbr-rules"></a>&#x2022; [`network_pbr_rules`](#network-pbr-network-pbr-rules) - Optional Block<br>L3/L4 Destination Routing Rules. Network(L3/L4) routing policy rule<br>See [Network Pbr Rules](#network-pbr-network-pbr-rules) below.
 
-<a id="network-pbr-prefix-list"></a>&#x2022; [`prefix_list`](#network-pbr-prefix-list) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#network-pbr-prefix-list) below.
+<a id="network-pbr-prefix-list"></a>&#x2022; [`prefix_list`](#network-pbr-prefix-list) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#network-pbr-prefix-list) below.
 
 #### Network Pbr Label Selector
 
@@ -222,13 +222,13 @@ A [`label_selector`](#network-pbr-label-selector) block (within [`network_pbr`](
 
 A [`network_pbr_rules`](#network-pbr-network-pbr-rules) block (within [`network_pbr`](#network-pbr)) supports the following:
 
-<a id="network-pbr-network-pbr-rules-all-tcp-traffic"></a>&#x2022; [`all_tcp_traffic`](#network-pbr-network-pbr-rules-all-tcp-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="network-pbr-network-pbr-rules-all-tcp-traffic"></a>&#x2022; [`all_tcp_traffic`](#network-pbr-network-pbr-rules-all-tcp-traffic) - Optional Block<br>Enable this option
 
-<a id="network-pbr-network-pbr-rules-all-traffic"></a>&#x2022; [`all_traffic`](#network-pbr-network-pbr-rules-all-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="network-pbr-network-pbr-rules-all-traffic"></a>&#x2022; [`all_traffic`](#network-pbr-network-pbr-rules-all-traffic) - Optional Block<br>Enable this option
 
-<a id="network-pbr-network-pbr-rules-all-udp-traffic"></a>&#x2022; [`all_udp_traffic`](#network-pbr-network-pbr-rules-all-udp-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="network-pbr-network-pbr-rules-all-udp-traffic"></a>&#x2022; [`all_udp_traffic`](#network-pbr-network-pbr-rules-all-udp-traffic) - Optional Block<br>Enable this option
 
-<a id="network-pbr-network-pbr-rules-any"></a>&#x2022; [`any`](#network-pbr-network-pbr-rules-any) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="network-pbr-network-pbr-rules-any"></a>&#x2022; [`any`](#network-pbr-network-pbr-rules-any) - Optional Block<br>Enable this option
 
 <a id="network-pbr-network-pbr-rules-applications"></a>&#x2022; [`applications`](#network-pbr-network-pbr-rules-applications) - Optional Block<br>Applications. Application protocols like HTTP, SNMP<br>See [Applications](#network-pbr-network-pbr-rules-applications) below.
 
@@ -240,7 +240,7 @@ A [`network_pbr_rules`](#network-pbr-network-pbr-rules) block (within [`network_
 
 <a id="network-pbr-network-pbr-rules-metadata"></a>&#x2022; [`metadata`](#network-pbr-network-pbr-rules-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#network-pbr-network-pbr-rules-metadata) below.
 
-<a id="network-pbr-network-pbr-rules-prefix-list"></a>&#x2022; [`prefix_list`](#network-pbr-network-pbr-rules-prefix-list) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#network-pbr-network-pbr-rules-prefix-list) below.
+<a id="network-pbr-network-pbr-rules-prefix-list"></a>&#x2022; [`prefix_list`](#network-pbr-network-pbr-rules-prefix-list) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#network-pbr-network-pbr-rules-prefix-list) below.
 
 <a id="network-pbr-network-pbr-rules-protocol-port-range"></a>&#x2022; [`protocol_port_range`](#network-pbr-network-pbr-rules-protocol-port-range) - Optional Block<br>Protocol and Port. Protocol and Port ranges<br>See [Protocol Port Range](#network-pbr-network-pbr-rules-protocol-port-range) below.
 

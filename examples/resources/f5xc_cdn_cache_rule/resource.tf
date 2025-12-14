@@ -20,7 +20,7 @@ resource "f5xc_cdn_cache_rule" "example" {
   cache_rules {
     # Configure cache_rules settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   cache_bypass {
     # Configure cache_bypass settings
   }

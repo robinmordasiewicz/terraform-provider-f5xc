@@ -24,7 +24,7 @@ resource "f5xc_fast_acl" "example" {
   re_acl {
     # Configure re_acl settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   all_public_vips {
     # Configure all_public_vips settings
   }

@@ -282,13 +282,13 @@ func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"disable_fast_acl": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"disable_forward_proxy_policy": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"disable_network_policy": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 		},
 	}

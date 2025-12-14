@@ -16,11 +16,11 @@ resource "f5xc_protocol_inspection" "example" {
   }
 
   # Resource-specific configuration
-  # Enable/Disable Compliance Checks. x-required Enable Disab...
+  # Enable/Disable Compliance Checks.Enable Disable Complianc...
   enable_disable_compliance_checks {
     # Configure enable_disable_compliance_checks settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   disable_compliance_checks {
     # Configure disable_compliance_checks settings
   }

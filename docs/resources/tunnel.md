@@ -120,7 +120,7 @@ A [`local_intf`](#local-ip-intf-local-intf) block (within [`local_ip.intf`](#loc
 
 An [`ip_address`](#local-ip-ip-address) block (within [`local_ip`](#local-ip)) supports the following:
 
-<a id="local-ip-ip-address-auto"></a>&#x2022; [`auto`](#local-ip-ip-address-auto) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="local-ip-ip-address-auto"></a>&#x2022; [`auto`](#local-ip-ip-address-auto) - Optional Block<br>Enable this option
 
 <a id="local-ip-ip-address-ip-address"></a>&#x2022; [`ip_address`](#local-ip-ip-address-ip-address) - Optional Block<br>IP Address. IP Address used to specify an IPv4 or IPv6 address<br>See [IP Address](#local-ip-ip-address-ip-address) below.
 
@@ -150,11 +150,11 @@ An [`ipv6`](#local-ip-ip-address-ip-address-ipv6) block (within [`local_ip.ip_ad
 
 A [`virtual_network_type`](#local-ip-ip-address-virtual-network-type) block (within [`local_ip.ip_address`](#local-ip-ip-address)) supports the following:
 
-<a id="local-ip-ip-address-virtual-network-type-public"></a>&#x2022; [`public`](#local-ip-ip-address-virtual-network-type-public) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="local-ip-ip-address-virtual-network-type-public"></a>&#x2022; [`public`](#local-ip-ip-address-virtual-network-type-public) - Optional Block<br>Enable this option
 
-<a id="local-ip-ip-address-virtual-network-type-site-local"></a>&#x2022; [`site_local`](#local-ip-ip-address-virtual-network-type-site-local) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="local-ip-ip-address-virtual-network-type-site-local"></a>&#x2022; [`site_local`](#local-ip-ip-address-virtual-network-type-site-local) - Optional Block<br>Enable this option
 
-<a id="local-ip-ip-address-virtual-network-type-site-local-inside"></a>&#x2022; [`site_local_inside`](#local-ip-ip-address-virtual-network-type-site-local-inside) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="local-ip-ip-address-virtual-network-type-site-local-inside"></a>&#x2022; [`site_local_inside`](#local-ip-ip-address-virtual-network-type-site-local-inside) - Optional Block<br>Enable this option
 
 #### Params
 

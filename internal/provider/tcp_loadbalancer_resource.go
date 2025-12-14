@@ -647,7 +647,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									},
 								},
 								"use_default_port": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"virtual_network": schema.SingleNestedBlock{
 									MarkdownDescription: "Virtual Network. Parameters to advertise on a given virtual network",
@@ -663,10 +663,10 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									},
 									Blocks: map[string]schema.Block{
 										"default_v6_vip": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 										"default_vip": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 										"virtual_network": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
@@ -822,34 +822,34 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"advertise_on_public_default_vip": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"default_lb_with_sni": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: default_lb_with_sni, no_sni, sni; Default: default_lb_with_sni] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: default_lb_with_sni, no_sni, sni; Default: default_lb_with_sni] Enable this option",
 			},
 			"do_not_advertise": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"do_not_retract_cluster": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: do_not_retract_cluster, retract_cluster] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: do_not_retract_cluster, retract_cluster] Enable this option",
 			},
 			"hash_policy_choice_least_active": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: hash_policy_choice_least_active, hash_policy_choice_random, hash_policy_choice_round_robin, hash_policy_choice_source_ip_stickiness] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: hash_policy_choice_least_active, hash_policy_choice_random, hash_policy_choice_round_robin, hash_policy_choice_source_ip_stickiness] Enable this option",
 			},
 			"hash_policy_choice_random": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"hash_policy_choice_round_robin": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"hash_policy_choice_source_ip_stickiness": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"no_service_policies": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"no_sni": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"origin_pools_weights": schema.ListNestedBlock{
 				MarkdownDescription: "Origin Pools. Origin pools and weights used for this load balancer.",
@@ -908,16 +908,16 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"retract_cluster": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"service_policies_from_namespace": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"sni": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"tcp": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: tcp, tls_tcp, tls_tcp_auto_cert] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: tcp, tls_tcp, tls_tcp_auto_cert] Enable this option",
 			},
 			"tls_tcp": schema.SingleNestedBlock{
 				MarkdownDescription: "BYOC TLS over TCP Choice. Choice for selecting TLS over TCP proxy with bring your own certificates",
@@ -948,7 +948,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								},
 							},
 							"no_mtls": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"tls_config": schema.SingleNestedBlock{
 								MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
@@ -973,13 +973,13 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										},
 									},
 									"default_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"low_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"medium_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},
@@ -1015,7 +1015,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										},
 									},
 									"no_crl": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"trusted_ca": schema.SingleNestedBlock{
 										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
@@ -1036,7 +1036,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										},
 									},
 									"xfcc_disabled": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"xfcc_options": schema.SingleNestedBlock{
 										MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
@@ -1057,7 +1057,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"no_mtls": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"tls_certificates": schema.ListNestedBlock{
 								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms",
@@ -1084,7 +1084,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											},
 										},
 										"disable_ocsp_stapling": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 										"private_key": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
@@ -1123,7 +1123,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											},
 										},
 										"use_system_defaults": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -1151,13 +1151,13 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										},
 									},
 									"default_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"low_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"medium_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},
@@ -1193,7 +1193,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										},
 									},
 									"no_crl": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"trusted_ca": schema.SingleNestedBlock{
 										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
@@ -1214,7 +1214,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										},
 									},
 									"xfcc_disabled": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"xfcc_options": schema.SingleNestedBlock{
 										MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
@@ -1237,7 +1237,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"no_mtls": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"tls_config": schema.SingleNestedBlock{
 						MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
@@ -1262,13 +1262,13 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								},
 							},
 							"default_security": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"low_security": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"medium_security": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1304,7 +1304,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								},
 							},
 							"no_crl": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"trusted_ca": schema.SingleNestedBlock{
 								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
@@ -1325,7 +1325,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								},
 							},
 							"xfcc_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"xfcc_options": schema.SingleNestedBlock{
 								MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",

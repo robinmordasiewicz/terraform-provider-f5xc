@@ -250,14 +250,14 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"response_cache": schema.SingleNestedBlock{
-				MarkdownDescription: "Response Cache. Response Cache x-required",
+				MarkdownDescription: "Response Cache. Response Cache",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"default_response_cache_parameters": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"disable": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"response_cache_parameters": schema.SingleNestedBlock{
 						MarkdownDescription: "Response Cache Parameters.",

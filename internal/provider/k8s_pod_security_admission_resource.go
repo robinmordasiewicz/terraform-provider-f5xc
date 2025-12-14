@@ -139,22 +139,22 @@ func (r *K8SPodSecurityAdmissionResource) Schema(ctx context.Context, req resour
 					Attributes: map[string]schema.Attribute{},
 					Blocks: map[string]schema.Block{
 						"audit": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"baseline": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"enforce": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"privileged": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"restricted": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"warn": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 					},
 				},

@@ -1035,7 +1035,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"block_all_services": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: block_all_services, blocked_services, default_blocked_services; Default: default_blocked_services] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: block_all_services, blocked_services, default_blocked_services; Default: default_blocked_services] Enable this option",
 			},
 			"blocked_services": schema.SingleNestedBlock{
 				MarkdownDescription: "Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site.",
@@ -1052,13 +1052,13 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 							},
 							Blocks: map[string]schema.Block{
 								"dns": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"ssh": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"web_user_interface": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 							},
 						},
@@ -1105,10 +1105,10 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"default_blocked_services": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"direct_connect_disabled": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: direct_connect_disabled, direct_connect_enabled, private_connectivity] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: direct_connect_disabled, direct_connect_enabled, private_connectivity] Enable this option",
 			},
 			"direct_connect_enabled": schema.SingleNestedBlock{
 				MarkdownDescription: "Direct Connect Configuration. Direct Connect Configuration",
@@ -1120,10 +1120,10 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 				Blocks: map[string]schema.Block{
 					"auto_asn": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"hosted_vifs": schema.SingleNestedBlock{
-						MarkdownDescription: "AWS Direct Connect Hosted VIF Config. x-example: 'value' AWS Direct Connect Hosted VIF Configuration",
+						MarkdownDescription: "AWS Direct Connect Hosted VIF Config. AWS Direct Connect Hosted VIF Configuration",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"site_registration_over_direct_connect": schema.SingleNestedBlock{
@@ -1136,7 +1136,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 							},
 							"site_registration_over_internet": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"vif_list": schema.ListNestedBlock{
 								MarkdownDescription: "List of Hosted VIF Config. List of Hosted VIF Config",
@@ -1153,7 +1153,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									},
 									Blocks: map[string]schema.Block{
 										"same_as_site_region": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -1161,15 +1161,15 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"standard_vifs": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
 			"disable_internet_vip": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: disable_internet_vip, enable_internet_vip; Default: disable_internet_vip] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: disable_internet_vip, enable_internet_vip; Default: disable_internet_vip] Enable this option",
 			},
 			"egress_gateway_default": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: egress_gateway_default, egress_nat_gw, egress_virtual_private_gateway; Default: egress_gateway_default] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: egress_gateway_default, egress_nat_gw, egress_virtual_private_gateway; Default: egress_gateway_default] Enable this option",
 			},
 			"egress_nat_gw": schema.SingleNestedBlock{
 				MarkdownDescription: "AWS NAT Gateway choice. With this option, egress site traffic will be routed through an Network Address Translation(NAT) Gateway.",
@@ -1190,13 +1190,13 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"enable_internet_vip": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"f5_orchestrated_routing": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: f5_orchestrated_routing, manual_routing] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: f5_orchestrated_routing, manual_routing] Enable this option",
 			},
 			"f5xc_security_group": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"ingress_egress_gw": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: ingress_egress_gw, ingress_gw, voltstack_cluster] AWS Ingress/Egress Gateway. Two interface AWS ingress/egress site",
@@ -1299,16 +1299,16 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 							},
 							"disable_allowed_vip_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"use_http_https_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"use_http_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"use_https_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1326,16 +1326,16 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 							},
 							"disable_allowed_vip_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"use_http_https_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"use_http_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"use_https_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1390,7 +1390,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									},
 								},
 								"reserved_inside_subnet": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"workload_subnet": schema.SingleNestedBlock{
 									MarkdownDescription: "AWS Subnet. Parameters for AWS subnet",
@@ -1452,7 +1452,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"forward_proxy_allow_all": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"global_network_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Global Network Connection List. List of global network connections",
@@ -1650,22 +1650,22 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"no_dc_cluster_group": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_forward_proxy": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_global_network": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_inside_static_routes": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_network_policy": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_outside_static_routes": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"outside_static_routes": schema.SingleNestedBlock{
 						MarkdownDescription: "Static Route List Type. List of static routes",
@@ -1801,31 +1801,31 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"performance_enhancement_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
+						MarkdownDescription: "Performance Enhancement Mode.Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"perf_mode_l3_enhanced": schema.SingleNestedBlock{
-								MarkdownDescription: "L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options",
+								MarkdownDescription: "L3 Mode Enhanced Performance.L3 enhanced performance mode options",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"jumbo": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"no_jumbo": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},
 							"perf_mode_l7_enhanced": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
 					"sm_connection_public_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"sm_connection_pvt_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -1852,16 +1852,16 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 							},
 							"disable_allowed_vip_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"use_http_https_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"use_http_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"use_https_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1899,23 +1899,23 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"performance_enhancement_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
+						MarkdownDescription: "Performance Enhancement Mode.Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"perf_mode_l3_enhanced": schema.SingleNestedBlock{
-								MarkdownDescription: "L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options",
+								MarkdownDescription: "L3 Mode Enhanced Performance.L3 enhanced performance mode options",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"jumbo": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"no_jumbo": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},
 							"perf_mode_l7_enhanced": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1926,7 +1926,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"disable_upgrade_drain": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"enable_upgrade_drain": schema.SingleNestedBlock{
 						MarkdownDescription: "Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site.",
@@ -1942,10 +1942,10 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						Blocks: map[string]schema.Block{
 							"disable_vega_upgrade_mode": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_vega_upgrade_mode": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1970,23 +1970,23 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"logs_streaming_disabled": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"manual_routing": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"no_worker_nodes": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: no_worker_nodes, nodes_per_az, total_nodes; Default: no_worker_nodes] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: no_worker_nodes, nodes_per_az, total_nodes; Default: no_worker_nodes] Enable this option",
 			},
 			"offline_survivability_mode": schema.SingleNestedBlock{
 				MarkdownDescription: "Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"enable_offline_survivability_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_offline_survivability_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -2000,7 +2000,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 				Blocks: map[string]schema.Block{
 					"default_os_version": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -2027,10 +2027,10 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"inside": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"outside": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -2044,7 +2044,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 				Blocks: map[string]schema.Block{
 					"default_sw_version": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -2152,16 +2152,16 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 							},
 							"disable_allowed_vip_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"use_http_https_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"use_http_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"use_https_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -2217,10 +2217,10 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"default_storage": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"forward_proxy_allow_all": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"global_network_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Global Network Connection List. List of global network connections",
@@ -2303,22 +2303,22 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"no_dc_cluster_group": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_forward_proxy": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_global_network": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_k8s_cluster": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_network_policy": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_outside_static_routes": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"outside_static_routes": schema.SingleNestedBlock{
 						MarkdownDescription: "Static Route List Type. List of static routes",
@@ -2454,10 +2454,10 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"sm_connection_public_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"sm_connection_pvt_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"storage_class_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Custom Storage Class List. Add additional custom storage classes in kubernetes for this site",
@@ -2505,7 +2505,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						Blocks: map[string]schema.Block{
 							"autogenerate": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},

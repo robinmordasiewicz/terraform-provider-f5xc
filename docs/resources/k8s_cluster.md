@@ -76,14 +76,14 @@ resource "f5xc_k8s_cluster" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="cluster-scoped-access-deny"></a>[`cluster_scoped_access_deny`](#cluster-scoped-access-deny) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="cluster-scoped-access-permit"></a>[`cluster_scoped_access_permit`](#cluster-scoped-access-permit) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="cluster-scoped-access-deny"></a>[`cluster_scoped_access_deny`](#cluster-scoped-access-deny) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="cluster-scoped-access-permit"></a>[`cluster_scoped_access_permit`](#cluster-scoped-access-permit) - Optional Block<br>Enable this option
 
 -> **One of the following:**
 &#x2022; <a id="cluster-wide-app-list"></a>[`cluster_wide_app_list`](#cluster-wide-app-list) - Optional Block<br>Cluster Wide Application List. List of cluster wide applications<br>See [Cluster Wide App List](#cluster-wide-app-list) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="global-access-enable"></a>[`global_access_enable`](#global-access-enable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="global-access-enable"></a>[`global_access_enable`](#global-access-enable) - Optional Block<br>Enable this option
 
 -> **One of the following:**
 &#x2022; <a id="insecure-registry-list"></a>[`insecure_registry_list`](#insecure-registry-list) - Optional Block<br>Docker Insecure Registry List. List of docker insecure registries<br>See [Insecure Registry List](#insecure-registry-list) below for details.
@@ -91,13 +91,13 @@ resource "f5xc_k8s_cluster" "example" {
 -> **One of the following:**
 &#x2022; <a id="local-access-config"></a>[`local_access_config`](#local-access-config) - Optional Block<br>Local Access Configuration. Parameters required to enable local access<br>See [Local Access Config](#local-access-config) below for details.
 
-<a id="no-cluster-wide-apps"></a>&#x2022; [`no_cluster_wide_apps`](#no-cluster-wide-apps) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="no-cluster-wide-apps"></a>&#x2022; [`no_cluster_wide_apps`](#no-cluster-wide-apps) - Optional Block<br>Enable this option
 
-<a id="no-global-access"></a>&#x2022; [`no_global_access`](#no-global-access) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="no-global-access"></a>&#x2022; [`no_global_access`](#no-global-access) - Optional Block<br>Enable this option
 
-<a id="no-insecure-registries"></a>&#x2022; [`no_insecure_registries`](#no-insecure-registries) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="no-insecure-registries"></a>&#x2022; [`no_insecure_registries`](#no-insecure-registries) - Optional Block<br>Enable this option
 
-<a id="no-local-access"></a>&#x2022; [`no_local_access`](#no-local-access) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="no-local-access"></a>&#x2022; [`no_local_access`](#no-local-access) - Optional Block<br>Enable this option
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -113,17 +113,17 @@ resource "f5xc_k8s_cluster" "example" {
 -> **One of the following:**
 &#x2022; <a id="use-custom-psp-list"></a>[`use_custom_psp_list`](#use-custom-psp-list) - Optional Block<br>Pod Security Policy List. List of active Pod security policies for a K8S cluster<br>See [Use Custom Psp List](#use-custom-psp-list) below for details.
 
-<a id="use-default-cluster-role-bindings"></a>&#x2022; [`use_default_cluster_role_bindings`](#use-default-cluster-role-bindings) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="use-default-cluster-role-bindings"></a>&#x2022; [`use_default_cluster_role_bindings`](#use-default-cluster-role-bindings) - Optional Block<br>Enable this option
 
-<a id="use-default-cluster-roles"></a>&#x2022; [`use_default_cluster_roles`](#use-default-cluster-roles) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="use-default-cluster-roles"></a>&#x2022; [`use_default_cluster_roles`](#use-default-cluster-roles) - Optional Block<br>Enable this option
 
-<a id="use-default-pod-security-admission"></a>&#x2022; [`use_default_pod_security_admission`](#use-default-pod-security-admission) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="use-default-pod-security-admission"></a>&#x2022; [`use_default_pod_security_admission`](#use-default-pod-security-admission) - Optional Block<br>Enable this option
 
-<a id="use-default-psp"></a>&#x2022; [`use_default_psp`](#use-default-psp) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="use-default-psp"></a>&#x2022; [`use_default_psp`](#use-default-psp) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="vk8s-namespace-access-deny"></a>[`vk8s_namespace_access_deny`](#vk8s-namespace-access-deny) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="vk8s-namespace-access-permit"></a>[`vk8s_namespace_access_permit`](#vk8s-namespace-access-permit) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="vk8s-namespace-access-deny"></a>[`vk8s_namespace_access_deny`](#vk8s-namespace-access-deny) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="vk8s-namespace-access-permit"></a>[`vk8s_namespace_access_permit`](#vk8s-namespace-access-permit) - Optional Block<br>Enable this option
 
 ### Attributes Reference
 
@@ -161,7 +161,7 @@ An [`argo_cd`](#cluster-wide-app-list-cluster-wide-apps-argo-cd) block (within [
 
 A [`local_domain`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain) block (within [`cluster_wide_app_list.cluster_wide_apps.argo_cd`](#cluster-wide-app-list-cluster-wide-apps-argo-cd)) supports the following:
 
-<a id="cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-default-port"></a>&#x2022; [`default_port`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-default-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-default-port"></a>&#x2022; [`default_port`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-default-port) - Optional Block<br>Enable this option
 
 <a id="cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-local-domain"></a>&#x2022; [`local_domain`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-local-domain) - Optional String<br>Local Domain. ArgoCD will be accessible at `<site name>`.`<local domain>`
 
@@ -205,7 +205,7 @@ An [`insecure_registry_list`](#insecure-registry-list) block supports the follow
 
 A [`local_access_config`](#local-access-config) block supports the following:
 
-<a id="local-access-config-default-port"></a>&#x2022; [`default_port`](#local-access-config-default-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="local-access-config-default-port"></a>&#x2022; [`default_port`](#local-access-config-default-port) - Optional Block<br>Enable this option
 
 <a id="local-access-config-local-domain"></a>&#x2022; [`local_domain`](#local-access-config-local-domain) - Optional String<br>Local Domain. Local K8S API server will be accessible at `<site name>`.`<local domain>`
 

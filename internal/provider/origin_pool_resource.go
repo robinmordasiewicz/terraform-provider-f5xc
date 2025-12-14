@@ -609,13 +609,13 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						Optional:            true,
 					},
 					"panic_threshold": schema.Int64Attribute{
-						MarkdownDescription: "Panic threshold. x-example:'25' Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for load balancing ignoring its health status.",
+						MarkdownDescription: "Panic threshold. Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for load balancing ignoring its health status.",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"auto_http_config": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"circuit_breaker": schema.SingleNestedBlock{
 						MarkdownDescription: "Circuit Breaker. CircuitBreaker provides a mechanism for watching failures in upstream connections or requests and if the failures reach a certain threshold, automatically fail subsequent requests which allows to apply back pressure on downstream quickly.",
@@ -643,32 +643,32 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"default_circuit_breaker": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"disable_circuit_breaker": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"disable_lb_source_ip_persistance": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"disable_outlier_detection": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"disable_proxy_protocol": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"disable_subsets": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"enable_lb_source_ip_persistance": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"enable_subsets": schema.SingleNestedBlock{
 						MarkdownDescription: "Origin Pool Subset Options. Configure subset options for origin pool",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"any_endpoint": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"default_subset": schema.SingleNestedBlock{
 								MarkdownDescription: "Origin Pool Default Subset. Default Subset definition",
@@ -692,7 +692,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 							},
 							"fail_request": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -705,16 +705,16 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"default_header_transformation": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"legacy_header_transformation": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"preserve_case_header_transformation": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"proper_case_header_transformation": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},
@@ -730,7 +730,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"no_panic_threshold": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"outlier_detection": schema.SingleNestedBlock{
 						MarkdownDescription: "Outlier Detection. Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1. A endpoint is determined to be an outlier (based on configured number of consecutive_5xx or consecutive_gateway_failures) . 2. If no endpoints have been ejected, loadbalancer will eject the host immediately. Otherwise, it checks to make sure the number of ejected hosts is below the allowed threshold (specified via max_ejection_percent setting). If the number of ejected hosts is above the threshold, the host is not ejected. 3. The endpoint is ejected for some number of milliseconds. Ejection means that the endpoint is marked unhealthy and will not be used during load balancing. The number of milliseconds is equal to the base_ejection_time value multiplied by the number of times the host has been ejected. 4. An ejected endpoint will automatically be brought back into service after the ejection time has been satisfied",
@@ -758,15 +758,15 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"proxy_protocol_v1": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"proxy_protocol_v2": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
 			"automatic_port": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: automatic_port, lb_port, port] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: automatic_port, lb_port, port] Enable this option",
 			},
 			"healthcheck": schema.ListNestedBlock{
 				MarkdownDescription: "Health Check object. Reference to healthcheck configuration objects",
@@ -789,10 +789,10 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"lb_port": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"no_tls": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: no_tls, use_tls; Default: no_tls] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: no_tls, use_tls; Default: no_tls] Enable this option",
 			},
 			"origin_servers": schema.ListNestedBlock{
 				MarkdownDescription: "Origin Servers. List of origin servers in this pool",
@@ -818,10 +818,10 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							},
 							Blocks: map[string]schema.Block{
 								"inside_network": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"outside_network": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"site_locator": schema.SingleNestedBlock{
 									MarkdownDescription: "Site or Virtual Site. This message defines a reference to a site or virtual site object",
@@ -870,10 +870,10 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"no_snat_pool": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 										"snat_pool": schema.SingleNestedBlock{
-											MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
+											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
 											Attributes: map[string]schema.Attribute{
 												"prefixes": schema.ListAttribute{
 													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
@@ -924,10 +924,10 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							},
 							Blocks: map[string]schema.Block{
 								"inside_network": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"outside_network": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"site_locator": schema.SingleNestedBlock{
 									MarkdownDescription: "Site or Virtual Site. This message defines a reference to a site or virtual site object",
@@ -976,10 +976,10 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"no_snat_pool": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 										"snat_pool": schema.SingleNestedBlock{
-											MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
+											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
 											Attributes: map[string]schema.Attribute{
 												"prefixes": schema.ListAttribute{
 													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
@@ -991,7 +991,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									},
 								},
 								"vk8s_networks": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 							},
 						},
@@ -1008,10 +1008,10 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							},
 							Blocks: map[string]schema.Block{
 								"inside_network": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"outside_network": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"segment": schema.SingleNestedBlock{
 									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
@@ -1078,10 +1078,10 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"no_snat_pool": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 										"snat_pool": schema.SingleNestedBlock{
-											MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
+											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
 											Attributes: map[string]schema.Attribute{
 												"prefixes": schema.ListAttribute{
 													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
@@ -1108,10 +1108,10 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							},
 							Blocks: map[string]schema.Block{
 								"inside_network": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"outside_network": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"segment": schema.SingleNestedBlock{
 									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
@@ -1178,10 +1178,10 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"no_snat_pool": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 										"snat_pool": schema.SingleNestedBlock{
-											MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
+											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
 											Attributes: map[string]schema.Attribute{
 												"prefixes": schema.ListAttribute{
 													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
@@ -1278,17 +1278,17 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"same_as_endpoint_port": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"upstream_conn_pool_reuse_type": schema.SingleNestedBlock{
 				MarkdownDescription: "Select upstream connection pool reuse state. Select upstream connection pool reuse state for every downstream connection. This configuration choice is for HTTP(S) LB only.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"disable_conn_pool_reuse": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"enable_conn_pool_reuse": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -1296,7 +1296,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "TLS Parameters for Origin Servers. Upstream TLS Parameters",
 				Attributes: map[string]schema.Attribute{
 					"max_session_keys": schema.Int64Attribute{
-						MarkdownDescription: "Max Session Keys Cached. x-example:'25' Number of session keys that are cached.",
+						MarkdownDescription: "Max Session Keys Cached. Number of session keys that are cached.",
 						Optional:            true,
 					},
 					"sni": schema.StringAttribute{
@@ -1306,19 +1306,19 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 				Blocks: map[string]schema.Block{
 					"default_session_key_caching": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"disable_session_key_caching": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"disable_sni": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_mtls": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"skip_server_verification": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"tls_config": schema.SingleNestedBlock{
 						MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
@@ -1343,18 +1343,18 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 							},
 							"default_security": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"low_security": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"medium_security": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
 					"use_host_header_as_sni": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"use_mtls": schema.SingleNestedBlock{
 						MarkdownDescription: "mTLS Certificate. mTLS Client Certificate",
@@ -1385,7 +1385,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 											},
 										},
 										"disable_ocsp_stapling": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 										"private_key": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
@@ -1424,7 +1424,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 											},
 										},
 										"use_system_defaults": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -1479,7 +1479,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"volterra_trusted_ca": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},

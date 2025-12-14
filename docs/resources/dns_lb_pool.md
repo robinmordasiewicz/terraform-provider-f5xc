@@ -36,7 +36,7 @@ resource "f5xc_dns_lb_pool" "example" {
   a_pool {
     # Configure a_pool settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   disable_health_check {
     # Configure disable_health_check settings
   }
@@ -79,7 +79,7 @@ resource "f5xc_dns_lb_pool" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="ttl"></a>[`ttl`](#ttl) - Optional Number<br>TTL. Custom TTL in seconds (default 30) for responses from this pool
-<br><br>&#x2022; <a id="use-rrset-ttl"></a>[`use_rrset_ttl`](#use-rrset-ttl) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="use-rrset-ttl"></a>[`use_rrset_ttl`](#use-rrset-ttl) - Optional Block<br>Enable this option
 
 ### Attributes Reference
 
@@ -93,7 +93,7 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`a_pool`](#a-pool) block supports the following:
 
-<a id="a-pool-disable-health-check"></a>&#x2022; [`disable_health_check`](#a-pool-disable-health-check) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="a-pool-disable-health-check"></a>&#x2022; [`disable_health_check`](#a-pool-disable-health-check) - Optional Block<br>Enable this option
 
 <a id="a-pool-health-check"></a>&#x2022; [`health_check`](#a-pool-health-check) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Health Check](#a-pool-health-check) below.
 

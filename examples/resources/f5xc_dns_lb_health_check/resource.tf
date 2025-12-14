@@ -24,7 +24,7 @@ resource "f5xc_dns_lb_health_check" "example" {
   https_health_check {
     # Configure https_health_check settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   icmp_health_check {
     # Configure icmp_health_check settings
   }

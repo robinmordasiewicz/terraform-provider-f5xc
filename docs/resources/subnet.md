@@ -40,7 +40,7 @@ resource "f5xc_subnet" "example" {
   layer2_intf_ref {
     # Configure layer2_intf_ref settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   connect_to_slo {
     # Configure connect_to_slo settings
   }
@@ -68,8 +68,8 @@ resource "f5xc_subnet" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="connect-to-layer2"></a>[`connect_to_layer2`](#connect-to-layer2) - Optional Block<br>Subnet connection to Layer2 Interface<br>See [Connect To Layer2](#connect-to-layer2) below for details.
-<br><br>&#x2022; <a id="connect-to-slo"></a>[`connect_to_slo`](#connect-to-slo) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="isolated-nw"></a>[`isolated_nw`](#isolated-nw) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="connect-to-slo"></a>[`connect_to_slo`](#connect-to-slo) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="isolated-nw"></a>[`isolated_nw`](#isolated-nw) - Optional Block<br>Enable this option
 
 <a id="site-subnet-params"></a>&#x2022; [`site_subnet_params`](#site-subnet-params) - Optional Block<br>Site Subnet Parameters. Configure subnet parameters per site<br>See [Site Subnet Params](#site-subnet-params) below for details.
 
@@ -103,11 +103,11 @@ A [`layer2_intf_ref`](#connect-to-layer2-layer2-intf-ref) block (within [`connec
 
 A [`site_subnet_params`](#site-subnet-params) block supports the following:
 
-<a id="site-subnet-params-dhcp"></a>&#x2022; [`dhcp`](#site-subnet-params-dhcp) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="site-subnet-params-dhcp"></a>&#x2022; [`dhcp`](#site-subnet-params-dhcp) - Optional Block<br>Enable this option
 
 <a id="site-subnet-params-site"></a>&#x2022; [`site`](#site-subnet-params-site) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#site-subnet-params-site) below.
 
-<a id="site-subnet-params-static-ip"></a>&#x2022; [`static_ip`](#site-subnet-params-static-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="site-subnet-params-static-ip"></a>&#x2022; [`static_ip`](#site-subnet-params-static-ip) - Optional Block<br>Enable this option
 
 <a id="site-subnet-params-subnet-dhcp-server-params"></a>&#x2022; [`subnet_dhcp_server_params`](#site-subnet-params-subnet-dhcp-server-params) - Optional Block<br>Subnet DHCP parameters. Subnet DHCP parameters will be a subset of network_interface.DHCPServerParametersType as all features in network_interface.DHCPServerParametersType may not be supported in a subnet<br>See [Subnet DHCP Server Params](#site-subnet-params-subnet-dhcp-server-params) below.
 

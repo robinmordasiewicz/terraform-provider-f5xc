@@ -20,11 +20,11 @@ resource "f5xc_k8s_pod_security_admission" "example" {
   pod_security_admission_specs {
     # Configure pod_security_admission_specs settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   audit {
     # Configure audit settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   baseline {
     # Configure baseline settings
   }

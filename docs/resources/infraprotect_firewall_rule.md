@@ -32,11 +32,11 @@ resource "f5xc_infraprotect_firewall_rule" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: action_allow, action_deny] Empty. This can be use...
+  # [OneOf: action_allow, action_deny] Enable this option
   action_allow {
     # Configure action_allow settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   action_deny {
     # Configure action_deny settings
   }
@@ -67,41 +67,41 @@ resource "f5xc_infraprotect_firewall_rule" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="action-allow"></a>[`action_allow`](#action-allow) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="action-deny"></a>[`action_deny`](#action-deny) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="action-allow"></a>[`action_allow`](#action-allow) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="action-deny"></a>[`action_deny`](#action-deny) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="destination-prefix-all"></a>[`destination_prefix_all`](#destination-prefix-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="destination-prefix-all"></a>[`destination_prefix_all`](#destination-prefix-all) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="destination-prefix-single"></a>[`destination_prefix_single`](#destination-prefix-single) - Optional String<br>Prefix. Prefix
 
 -> **One of the following:**
-&#x2022; <a id="fragments-allow"></a>[`fragments_allow`](#fragments-allow) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="fragments-deny"></a>[`fragments_deny`](#fragments-deny) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="fragments-allow"></a>[`fragments_allow`](#fragments-allow) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="fragments-deny"></a>[`fragments_deny`](#fragments-deny) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="protocol-ah"></a>[`protocol_ah`](#protocol-ah) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="protocol-all"></a>[`protocol_all`](#protocol-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="protocol-esp"></a>[`protocol_esp`](#protocol-esp) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="protocol-gre"></a>[`protocol_gre`](#protocol-gre) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="protocol-icmp"></a>[`protocol_icmp`](#protocol-icmp) - Optional Block<br>ICMP Protocol. x-required ICMP Protocol<br>See [Protocol ICMP](#protocol-icmp) below for details.
-<br><br>&#x2022; <a id="protocol-icmp6"></a>[`protocol_icmp6`](#protocol-icmp6) - Optional Block<br>ICMP6 Protocol. x-required ICMP6 Protocol<br>See [Protocol Icmp6](#protocol-icmp6) below for details.
-<br><br>&#x2022; <a id="protocol-ipv6"></a>[`protocol_ipv6`](#protocol-ipv6) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="protocol-tcp"></a>[`protocol_tcp`](#protocol-tcp) - Optional Block<br>TCP Protocol. x-required TCP Protocol<br>See [Protocol TCP](#protocol-tcp) below for details.
-<br><br>&#x2022; <a id="protocol-udp"></a>[`protocol_udp`](#protocol-udp) - Optional Block<br>UDP Protocol. x-required UDP Protocol<br>See [Protocol UDP](#protocol-udp) below for details.
+&#x2022; <a id="protocol-ah"></a>[`protocol_ah`](#protocol-ah) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="protocol-all"></a>[`protocol_all`](#protocol-all) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="protocol-esp"></a>[`protocol_esp`](#protocol-esp) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="protocol-gre"></a>[`protocol_gre`](#protocol-gre) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="protocol-icmp"></a>[`protocol_icmp`](#protocol-icmp) - Optional Block<br>ICMP Protocol.ICMP Protocol<br>See [Protocol ICMP](#protocol-icmp) below for details.
+<br><br>&#x2022; <a id="protocol-icmp6"></a>[`protocol_icmp6`](#protocol-icmp6) - Optional Block<br>ICMP6 Protocol.ICMP6 Protocol<br>See [Protocol Icmp6](#protocol-icmp6) below for details.
+<br><br>&#x2022; <a id="protocol-ipv6"></a>[`protocol_ipv6`](#protocol-ipv6) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="protocol-tcp"></a>[`protocol_tcp`](#protocol-tcp) - Optional Block<br>TCP Protocol.TCP Protocol<br>See [Protocol TCP](#protocol-tcp) below for details.
+<br><br>&#x2022; <a id="protocol-udp"></a>[`protocol_udp`](#protocol-udp) - Optional Block<br>UDP Protocol.UDP Protocol<br>See [Protocol UDP](#protocol-udp) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="source-prefix-all"></a>[`source_prefix_all`](#source-prefix-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="source-prefix-all"></a>[`source_prefix_all`](#source-prefix-all) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="source-prefix-single"></a>[`source_prefix_single`](#source-prefix-single) - Optional String<br>Prefix. Prefix
 
 -> **One of the following:**
-&#x2022; <a id="state-off"></a>[`state_off`](#state-off) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="state-on"></a>[`state_on`](#state-on) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="state-off"></a>[`state_off`](#state-off) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="state-on"></a>[`state_on`](#state-on) - Optional Block<br>Enable this option
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="version-ipv4"></a>[`version_ipv4`](#version-ipv4) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="version-ipv6"></a>[`version_ipv6`](#version-ipv6) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="version-ipv4"></a>[`version_ipv4`](#version-ipv4) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="version-ipv6"></a>[`version_ipv6`](#version-ipv6) - Optional Block<br>Enable this option
 
 ### Attributes Reference
 
@@ -161,11 +161,11 @@ A [`protocol_tcp`](#protocol-tcp) block supports the following:
 
 <a id="protocol-tcp-description-spec"></a>&#x2022; [`description_spec`](#protocol-tcp-description-spec) - Optional String<br>Description. Description
 
-<a id="protocol-tcp-destination-port-all"></a>&#x2022; [`destination_port_all`](#protocol-tcp-destination-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="protocol-tcp-destination-port-all"></a>&#x2022; [`destination_port_all`](#protocol-tcp-destination-port-all) - Optional Block<br>Enable this option
 
 <a id="protocol-tcp-destination-port-range"></a>&#x2022; [`destination_port_range`](#protocol-tcp-destination-port-range) - Optional String<br>Port Range. Port Range
 
-<a id="protocol-tcp-source-port-all"></a>&#x2022; [`source_port_all`](#protocol-tcp-source-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="protocol-tcp-source-port-all"></a>&#x2022; [`source_port_all`](#protocol-tcp-source-port-all) - Optional Block<br>Enable this option
 
 <a id="protocol-tcp-source-port-range"></a>&#x2022; [`source_port_range`](#protocol-tcp-source-port-range) - Optional String<br>Port Range. Port Range
 
@@ -175,11 +175,11 @@ A [`protocol_udp`](#protocol-udp) block supports the following:
 
 <a id="protocol-udp-description-spec"></a>&#x2022; [`description_spec`](#protocol-udp-description-spec) - Optional String<br>Description. Description
 
-<a id="protocol-udp-destination-port-all"></a>&#x2022; [`destination_port_all`](#protocol-udp-destination-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="protocol-udp-destination-port-all"></a>&#x2022; [`destination_port_all`](#protocol-udp-destination-port-all) - Optional Block<br>Enable this option
 
 <a id="protocol-udp-destination-port-range"></a>&#x2022; [`destination_port_range`](#protocol-udp-destination-port-range) - Optional String<br>Port Range. Port Range
 
-<a id="protocol-udp-source-port-all"></a>&#x2022; [`source_port_all`](#protocol-udp-source-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="protocol-udp-source-port-all"></a>&#x2022; [`source_port_all`](#protocol-udp-source-port-all) - Optional Block<br>Enable this option
 
 <a id="protocol-udp-source-port-range"></a>&#x2022; [`source_port_range`](#protocol-udp-source-port-range) - Optional String<br>Port Range. Port Range
 

@@ -189,7 +189,7 @@ func (r *TenantProfileResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					Blocks: map[string]schema.Block{
 						"namespace_roles": schema.ListNestedBlock{
-							MarkdownDescription: "Namespace Roles. [x-example: 'monitor, system:monitor-role'] List of namespaces and associated roles to be created in the new Child Tenant.",
+							MarkdownDescription: "Namespace Roles. [] List of namespaces and associated roles to be created in the new Child Tenant.",
 							NestedObject: schema.NestedBlockObject{
 								Attributes: map[string]schema.Attribute{
 									"namespace": schema.StringAttribute{
@@ -220,7 +220,7 @@ func (r *TenantProfileResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 				Blocks: map[string]schema.Block{
 					"aws_s3": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -238,7 +238,7 @@ func (r *TenantProfileResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 				Blocks: map[string]schema.Block{
 					"aws_s3": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},

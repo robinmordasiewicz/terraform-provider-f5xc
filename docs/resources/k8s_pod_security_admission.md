@@ -36,11 +36,11 @@ resource "f5xc_k8s_pod_security_admission" "example" {
   pod_security_admission_specs {
     # Configure pod_security_admission_specs settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   audit {
     # Configure audit settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   baseline {
     # Configure baseline settings
   }
@@ -82,17 +82,17 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`pod_security_admission_specs`](#pod-security-admission-specs) block supports the following:
 
-<a id="pod-security-admission-specs-audit"></a>&#x2022; [`audit`](#pod-security-admission-specs-audit) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="pod-security-admission-specs-audit"></a>&#x2022; [`audit`](#pod-security-admission-specs-audit) - Optional Block<br>Enable this option
 
-<a id="pod-security-admission-specs-baseline"></a>&#x2022; [`baseline`](#pod-security-admission-specs-baseline) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="pod-security-admission-specs-baseline"></a>&#x2022; [`baseline`](#pod-security-admission-specs-baseline) - Optional Block<br>Enable this option
 
-<a id="pod-security-admission-specs-enforce"></a>&#x2022; [`enforce`](#pod-security-admission-specs-enforce) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="pod-security-admission-specs-enforce"></a>&#x2022; [`enforce`](#pod-security-admission-specs-enforce) - Optional Block<br>Enable this option
 
-<a id="pod-security-admission-specs-privileged"></a>&#x2022; [`privileged`](#pod-security-admission-specs-privileged) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="pod-security-admission-specs-privileged"></a>&#x2022; [`privileged`](#pod-security-admission-specs-privileged) - Optional Block<br>Enable this option
 
-<a id="pod-security-admission-specs-restricted"></a>&#x2022; [`restricted`](#pod-security-admission-specs-restricted) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="pod-security-admission-specs-restricted"></a>&#x2022; [`restricted`](#pod-security-admission-specs-restricted) - Optional Block<br>Enable this option
 
-<a id="pod-security-admission-specs-warn"></a>&#x2022; [`warn`](#pod-security-admission-specs-warn) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="pod-security-admission-specs-warn"></a>&#x2022; [`warn`](#pod-security-admission-specs-warn) - Optional Block<br>Enable this option
 
 #### Timeouts
 

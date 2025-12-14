@@ -182,7 +182,7 @@ func (r *LogReceiverResource) Schema(ctx context.Context, req resource.SchemaReq
 				Delete: true,
 			}),
 			"site_local": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"syslog": schema.SingleNestedBlock{
 				MarkdownDescription: "Syslog Server Configuration. Configuration for syslog server",
@@ -224,13 +224,13 @@ func (r *LogReceiverResource) Schema(ctx context.Context, req resource.SchemaReq
 						},
 						Blocks: map[string]schema.Block{
 							"default_https_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"default_syslog_tls_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"mtls_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"mtls_enable": schema.SingleNestedBlock{
 								MarkdownDescription: "mTLS Client Config. TLS config for client",
@@ -280,7 +280,7 @@ func (r *LogReceiverResource) Schema(ctx context.Context, req resource.SchemaReq
 								},
 							},
 							"volterra_ca": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},

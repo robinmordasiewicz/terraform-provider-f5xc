@@ -603,10 +603,10 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							},
 						},
 						"inherited_bot_defense_javascript_injection": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"inherited_waf_exclusion": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"match": schema.ListNestedBlock{
 							MarkdownDescription: "Match. route match condition",
@@ -659,7 +659,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										},
 										Blocks: map[string]schema.Block{
 											"no_port_match": schema.SingleNestedBlock{
-												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												MarkdownDescription: "Enable this option",
 											},
 										},
 									},
@@ -851,49 +851,49 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								},
 								Blocks: map[string]schema.Block{
 									"add_httponly": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"add_partitioned": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"add_secure": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"ignore_domain": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"ignore_expiry": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"ignore_httponly": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"ignore_max_age": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"ignore_partitioned": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"ignore_path": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"ignore_samesite": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"ignore_secure": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"ignore_value": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"samesite_lax": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"samesite_none": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"samesite_strict": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"secret_value": schema.SingleNestedBlock{
 										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
@@ -1073,7 +1073,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"all_load_balancer_domains": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 										"custom_domain_list": schema.SingleNestedBlock{
 											MarkdownDescription: "Domain name list. List of domain names used for Host header matching",
@@ -1086,7 +1086,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											},
 										},
 										"disabled": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -1141,7 +1141,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									},
 								},
 								"do_not_retract_cluster": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"endpoint_subsets": schema.SingleNestedBlock{
 									MarkdownDescription: "Endpoint Subsets. Upstream cluster may be configured to divide its endpoints into subsets based on metadata attached to the endpoints. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer Labels field of endpoint object's metadata is used for subset matching. For endpoint's which are discovered in K8S or Consul cluster, the label of the service is merged with endpoint's labels. In case of Consul, the label is derived from the 'Tag' field. For labels that are common between configured endpoint and discovered service, labels from discovered service takes precedence. List of key-value pairs that will be used as matching metadata. Only those endpoints of upstream cluster which match this metadata will be selected for load balancing",
@@ -1182,28 +1182,28 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												},
 												Blocks: map[string]schema.Block{
 													"add_httponly": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"add_secure": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"ignore_httponly": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"ignore_samesite": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"ignore_secure": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"samesite_lax": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"samesite_none": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"samesite_strict": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 												},
 											},
@@ -1269,10 +1269,10 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									},
 									Blocks: map[string]schema.Block{
 										"remove_all_params": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 										"retain_all_params": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -1290,7 +1290,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									},
 								},
 								"retract_cluster": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"retry_policy": schema.SingleNestedBlock{
 									MarkdownDescription: "Retry Policy. Retry policy configuration for route destination.",
@@ -1393,10 +1393,10 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							},
 							Blocks: map[string]schema.Block{
 								"remove_all_params": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"retain_all_params": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 							},
 						},
@@ -1468,10 +1468,10 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									},
 								},
 								"disable_waf": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"inherit_waf": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 							},
 						},

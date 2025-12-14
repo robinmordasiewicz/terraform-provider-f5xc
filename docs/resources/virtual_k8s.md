@@ -71,8 +71,8 @@ resource "f5xc_virtual_k8s" "example" {
 <a id="default-flavor-ref"></a>&#x2022; [`default_flavor_ref`](#default-flavor-ref) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Default Flavor Ref](#default-flavor-ref) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="disabled"></a>[`disabled`](#disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="isolated"></a>[`isolated`](#isolated) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="disabled"></a>[`disabled`](#disabled) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="isolated"></a>[`isolated`](#isolated) - Optional Block<br>Enable this option
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

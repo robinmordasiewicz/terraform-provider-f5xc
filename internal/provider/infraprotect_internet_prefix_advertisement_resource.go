@@ -144,13 +144,13 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Schema(ctx context.Con
 				Delete: true,
 			}),
 			"activation_announce": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: activation_announce, activation_withdraw] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: activation_announce, activation_withdraw] Enable this option",
 			},
 			"activation_withdraw": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"expiration_never": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: expiration_never, expiration_timestamp] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: expiration_never, expiration_timestamp] Enable this option",
 			},
 		},
 	}

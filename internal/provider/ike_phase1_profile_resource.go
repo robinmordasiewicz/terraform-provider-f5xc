@@ -191,7 +191,7 @@ func (r *IKEPhase1ProfileResource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"reauth_disabled": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: reauth_disabled, reauth_timeout_days, reauth_timeout_hours] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: reauth_disabled, reauth_timeout_days, reauth_timeout_hours] Enable this option",
 			},
 			"reauth_timeout_days": schema.SingleNestedBlock{
 				MarkdownDescription: "Days. Set Duration in days",
@@ -212,7 +212,7 @@ func (r *IKEPhase1ProfileResource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"use_default_keylifetime": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 		},
 	}

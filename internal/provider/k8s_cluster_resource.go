@@ -243,10 +243,10 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 				Delete: true,
 			}),
 			"cluster_scoped_access_deny": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: cluster_scoped_access_deny, cluster_scoped_access_permit] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: cluster_scoped_access_deny, cluster_scoped_access_permit] Enable this option",
 			},
 			"cluster_scoped_access_permit": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"cluster_wide_app_list": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: cluster_wide_app_list, no_cluster_wide_apps; Default: no_cluster_wide_apps] Cluster Wide Application List. List of cluster wide applications",
@@ -275,7 +275,7 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 											},
 											Blocks: map[string]schema.Block{
 												"default_port": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 												"password": schema.SingleNestedBlock{
 													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
@@ -332,7 +332,7 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"global_access_enable": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: global_access_enable, no_global_access; Default: no_global_access] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: global_access_enable, no_global_access; Default: no_global_access] Enable this option",
 			},
 			"insecure_registry_list": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: insecure_registry_list, no_insecure_registries; Default: no_insecure_registries] Docker Insecure Registry List. List of docker insecure registries",
@@ -358,21 +358,21 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 				Blocks: map[string]schema.Block{
 					"default_port": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
 			"no_cluster_wide_apps": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"no_global_access": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"no_insecure_registries": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"no_local_access": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"use_custom_cluster_role_bindings": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: use_custom_cluster_role_bindings, use_default_cluster_role_bindings; Default: use_default_cluster_role_bindings] Cluster Role Binding List. List of active cluster role binding list for a K8s cluster",
@@ -471,22 +471,22 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"use_default_cluster_role_bindings": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"use_default_cluster_roles": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"use_default_pod_security_admission": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"use_default_psp": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"vk8s_namespace_access_deny": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: vk8s_namespace_access_deny, vk8s_namespace_access_permit] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: vk8s_namespace_access_deny, vk8s_namespace_access_permit] Enable this option",
 			},
 			"vk8s_namespace_access_permit": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 		},
 	}

@@ -79,11 +79,11 @@ resource "f5xc_cdn_loadbalancer" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="active-service-policies"></a>[`active_service_policies`](#active-service-policies) - Optional Block<br>Service Policy List. List of service policies<br>See [Active Service Policies](#active-service-policies) below for details.
-<br><br>&#x2022; <a id="no-service-policies"></a>[`no_service_policies`](#no-service-policies) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="no-service-policies"></a>[`no_service_policies`](#no-service-policies) - Optional Block<br>Enable this option
 
 -> **One of the following:**
 &#x2022; <a id="api-rate-limit"></a>[`api_rate_limit`](#api-rate-limit) - Optional Block<br>APIRateLimit<br>See [API Rate Limit](#api-rate-limit) below for details.
-<br><br>&#x2022; <a id="disable-rate-limit"></a>[`disable_rate_limit`](#disable-rate-limit) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="disable-rate-limit"></a>[`disable_rate_limit`](#disable-rate-limit) - Optional Block<br>Enable this option
 
 -> **One of the following:**
 &#x2022; <a id="api-specification"></a>[`api_specification`](#api-specification) - Optional Block<br>API Specification and Validation. Settings for API specification (API definition, OpenAPI validation, etc.)
@@ -99,7 +99,7 @@ resource "f5xc_cdn_loadbalancer" "example" {
 &#x2022; <a id="captcha-challenge"></a>[`captcha_challenge`](#captcha-challenge) - Optional Block<br>Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the captcha challenge is successful. Loadbalancer will tag response header with a cookie to avoid Captcha challenge for subsequent requests. CAPTCHA is mainly used as a security check to ensure only human users can pass through. Generally, computers or bots are not capable of solving a captcha. You can enable either Javascript challenge or Captcha challenge on a virtual host
 <br><br>&#x2022; <a id="enable-challenge"></a>[`enable_challenge`](#enable-challenge) - Optional Block<br>Enable Malicious User Challenge. Configure auto mitigation i.e risk based challenges for malicious users
 <br><br>&#x2022; <a id="js-challenge"></a>[`js_challenge`](#js-challenge) - Optional Block<br>Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set of random numbers for every new client and sends these numbers along with an encrypted answer with the request such that it embed these numbers as input in the Javascript. Javascript will run on the requestor browser and perform a complex Math operation. Script will submit the answer to loadbalancer. Loadbalancer will validate the answer by comparing the calculated answer with the decrypted answer (which was encrypted when it was sent back as reply) and allow the request to the upstream server only if the answer is correct. Loadbalancer will tag response header with a cookie to avoid Javascript challenge for subsequent requests. Javascript challenge serves following purposes \* Validate that the request is coming via a browser that is capable for running Javascript \* Force the browser to run a complex operation, f(X), that requires it to spend a large number of CPU cycles. This is to slow down a potential DOS attacker by making it difficult to launch a large request flood without having to spend even larger CPU cost at their end. You can enable either Javascript challenge or Captcha challenge on a virtual host
-<br><br>&#x2022; <a id="no-challenge"></a>[`no_challenge`](#no-challenge) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="no-challenge"></a>[`no_challenge`](#no-challenge) - Optional Block<br>Enable this option
 
 -> **One of the following:**
 &#x2022; <a id="client-side-defense"></a>[`client_side_defense`](#client-side-defense) - Optional Block<br>Client-Side Defense. This defines various configuration options for Client-Side Defense Policy
@@ -117,25 +117,25 @@ resource "f5xc_cdn_loadbalancer" "example" {
 <a id="default-cache-action"></a>&#x2022; [`default_cache_action`](#default-cache-action) - Optional Block<br>Default Cache Behaviour. This defines a Default Cache Action
 
 -> **One of the following:**
-&#x2022; <a id="default-sensitive-data-policy"></a>[`default_sensitive_data_policy`](#default-sensitive-data-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="default-sensitive-data-policy"></a>[`default_sensitive_data_policy`](#default-sensitive-data-policy) - Optional Block<br>Enable this option
 
-<a id="disable-api-definition"></a>&#x2022; [`disable_api_definition`](#disable-api-definition) - Optional Block<br>Empty. This can be used for messages where no values are needed
-
--> **One of the following:**
-&#x2022; <a id="disable-api-discovery"></a>[`disable_api_discovery`](#disable-api-discovery) - Optional Block<br>Empty. This can be used for messages where no values are needed
-
-<a id="disable-client-side-defense"></a>&#x2022; [`disable_client_side_defense`](#disable-client-side-defense) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="disable-api-definition"></a>&#x2022; [`disable_api_definition`](#disable-api-definition) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="disable-ip-reputation"></a>[`disable_ip_reputation`](#disable-ip-reputation) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="disable-api-discovery"></a>[`disable_api_discovery`](#disable-api-discovery) - Optional Block<br>Enable this option
+
+<a id="disable-client-side-defense"></a>&#x2022; [`disable_client_side_defense`](#disable-client-side-defense) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="disable-malicious-user-detection"></a>[`disable_malicious_user_detection`](#disable-malicious-user-detection) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="disable-ip-reputation"></a>[`disable_ip_reputation`](#disable-ip-reputation) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="disable-threat-mesh"></a>[`disable_threat_mesh`](#disable-threat-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="disable-malicious-user-detection"></a>[`disable_malicious_user_detection`](#disable-malicious-user-detection) - Optional Block<br>Enable this option
 
-<a id="disable-waf"></a>&#x2022; [`disable_waf`](#disable-waf) - Optional Block<br>Empty. This can be used for messages where no values are needed
+-> **One of the following:**
+&#x2022; <a id="disable-threat-mesh"></a>[`disable_threat_mesh`](#disable-threat-mesh) - Optional Block<br>Enable this option
+
+<a id="disable-waf"></a>&#x2022; [`disable_waf`](#disable-waf) - Optional Block<br>Enable this option
 
 <a id="domains"></a>&#x2022; [`domains`](#domains) - Optional List<br>Domains. A list of fully qualified domain names. The CDN Distribution will be setup for these FQDN name(s). [This can be a domain or a sub-domain]
 
@@ -143,9 +143,9 @@ resource "f5xc_cdn_loadbalancer" "example" {
 
 <a id="enable-ip-reputation"></a>&#x2022; [`enable_ip_reputation`](#enable-ip-reputation) - Optional Block<br>IP Threat Category List. List of IP threat categories
 
-<a id="enable-malicious-user-detection"></a>&#x2022; [`enable_malicious_user_detection`](#enable-malicious-user-detection) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="enable-malicious-user-detection"></a>&#x2022; [`enable_malicious_user_detection`](#enable-malicious-user-detection) - Optional Block<br>Enable this option
 
-<a id="enable-threat-mesh"></a>&#x2022; [`enable_threat_mesh`](#enable-threat-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="enable-threat-mesh"></a>&#x2022; [`enable_threat_mesh`](#enable-threat-mesh) - Optional Block<br>Enable this option
 
 <a id="graphql-rules"></a>&#x2022; [`graphql_rules`](#graphql-rules) - Optional Block<br>GraphQL Inspection. GraphQL is a query language and server-side runtime for APIs which provides a complete and understandable description of the data in API. GraphQL gives clients the power to ask for exactly what they need, makes it easier to evolve APIs over time, and enables powerful developer tools. Policy configuration to analyze GraphQL queries and prevent GraphQL tailored attacks
 
@@ -158,8 +158,8 @@ resource "f5xc_cdn_loadbalancer" "example" {
 <a id="jwt-validation"></a>&#x2022; [`jwt_validation`](#jwt-validation) - Optional Block<br>JWT Validation. JWT Validation stops JWT replay attacks and JWT tampering by cryptographically verifying incoming JWTs before they are passed to your API origin. JWT Validation will also stop requests with expired tokens or tokens that are not yet valid
 
 -> **One of the following:**
-&#x2022; <a id="l7-ddos-action-block"></a>[`l7_ddos_action_block`](#l7-ddos-action-block) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="l7-ddos-action-default"></a>[`l7_ddos_action_default`](#l7-ddos-action-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="l7-ddos-action-block"></a>[`l7_ddos_action_block`](#l7-ddos-action-block) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="l7-ddos-action-default"></a>[`l7_ddos_action_default`](#l7-ddos-action-default) - Optional Block<br>Enable this option
 
 <a id="l7-ddos-action-js-challenge"></a>&#x2022; [`l7_ddos_action_js_challenge`](#l7-ddos-action-js-challenge) - Optional Block<br>Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set of random numbers for every new client and sends these numbers along with an encrypted answer with the request such that it embed these numbers as input in the Javascript. Javascript will run on the requestor browser and perform a complex Math operation. Script will submit the answer to loadbalancer. Loadbalancer will validate the answer by comparing the calculated answer with the decrypted answer (which was encrypted when it was sent back as reply) and allow the request to the upstream server only if the answer is correct. Loadbalancer will tag response header with a cookie to avoid Javascript challenge for subsequent requests. Javascript challenge serves following purposes \* Validate that the request is coming via a browser that is capable for running Javascript \* Force the browser to run a complex operation, f(X), that requires it to spend a large number of CPU cycles. This is to slow down a potential DOS attacker by making it difficult to launch a large request flood without having to spend even larger CPU cost at their end. You can enable either Javascript challenge or Captcha challenge on a virtual host
 
@@ -175,19 +175,19 @@ resource "f5xc_cdn_loadbalancer" "example" {
 
 <a id="sensitive-data-policy"></a>&#x2022; [`sensitive_data_policy`](#sensitive-data-policy) - Optional Block<br>Sensitive Data Discovery. Settings for data type policy
 
-<a id="service-policies-from-namespace"></a>&#x2022; [`service_policies_from_namespace`](#service-policies-from-namespace) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="service-policies-from-namespace"></a>&#x2022; [`service_policies_from_namespace`](#service-policies-from-namespace) - Optional Block<br>Enable this option
 
 -> **One of the following:**
 &#x2022; <a id="slow-ddos-mitigation"></a>[`slow_ddos_mitigation`](#slow-ddos-mitigation) - Optional Block<br>Slow DDOS Mitigation. 'Slow and low' attacks tie up server resources, leaving none available for servicing requests from actual users
 
-<a id="system-default-timeouts"></a>&#x2022; [`system_default_timeouts`](#system-default-timeouts) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="system-default-timeouts"></a>&#x2022; [`system_default_timeouts`](#system-default-timeouts) - Optional Block<br>Enable this option
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block
 
 <a id="trusted-clients"></a>&#x2022; [`trusted_clients`](#trusted-clients) - Optional Block<br>Trusted Client Rules. Define rules to skip processing of one or more features such as WAF, Bot Defense etc. for clients
 
 -> **One of the following:**
-&#x2022; <a id="user-id-client-ip"></a>[`user_id_client_ip`](#user-id-client-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="user-id-client-ip"></a>[`user_id_client_ip`](#user-id-client-ip) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="user-identification"></a>[`user_identification`](#user-identification) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
 
 <a id="waf-exclusion"></a>&#x2022; [`waf_exclusion`](#waf-exclusion) - Optional Block<br>WAF Exclusion
@@ -226,9 +226,9 @@ An [`api_rate_limit`](#api-rate-limit) block supports the following:
 
 <a id="api-rate-limit-custom-ip-allowed-list"></a>&#x2022; [`custom_ip_allowed_list`](#api-rate-limit-custom-ip-allowed-list) - Optional Block<br>Custom IP Allowed List. IP Allowed list using existing ip_prefix_set objects<br>See [Custom IP Allowed List](#api-rate-limit-custom-ip-allowed-list) below.
 
-<a id="api-rate-limit-ip-allowed-list"></a>&#x2022; [`ip_allowed_list`](#api-rate-limit-ip-allowed-list) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [IP Allowed List](#api-rate-limit-ip-allowed-list) below.
+<a id="api-rate-limit-ip-allowed-list"></a>&#x2022; [`ip_allowed_list`](#api-rate-limit-ip-allowed-list) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [IP Allowed List](#api-rate-limit-ip-allowed-list) below.
 
-<a id="api-rate-limit-no-ip-allowed-list"></a>&#x2022; [`no_ip_allowed_list`](#api-rate-limit-no-ip-allowed-list) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-no-ip-allowed-list"></a>&#x2022; [`no_ip_allowed_list`](#api-rate-limit-no-ip-allowed-list) - Optional Block<br>Enable this option
 
 <a id="api-rate-limit-server-url-rules"></a>&#x2022; [`server_url_rules`](#api-rate-limit-server-url-rules) - Optional Block<br>Server URLs. Set of rules for entire domain or base path that contain multiple endpoints. Order is matter as it uses first match policy. For matching also specific endpoints you can use the API endpoint rules set bellow<br>See [Server URL Rules](#api-rate-limit-server-url-rules) below.
 
@@ -236,7 +236,7 @@ An [`api_rate_limit`](#api-rate-limit) block supports the following:
 
 An [`api_endpoint_rules`](#api-rate-limit-api-endpoint-rules) block (within [`api_rate_limit`](#api-rate-limit)) supports the following:
 
-<a id="api-rate-limit-api-endpoint-rules-any-domain"></a>&#x2022; [`any_domain`](#api-rate-limit-api-endpoint-rules-any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-api-endpoint-rules-any-domain"></a>&#x2022; [`any_domain`](#api-rate-limit-api-endpoint-rules-any-domain) - Optional Block<br>Enable this option
 
 <a id="api-rate-limit-api-endpoint-rules-api-endpoint-method"></a>&#x2022; [`api_endpoint_method`](#api-rate-limit-api-endpoint-rules-api-endpoint-method) - Optional Block<br>HTTP Method Matcher. A HTTP method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. The result of the match based on the method list is inverted if invert_matcher is true<br>See [API Endpoint Method](#api-rate-limit-api-endpoint-rules-api-endpoint-method) below.
 
@@ -264,9 +264,9 @@ An [`api_endpoint_method`](#api-rate-limit-api-endpoint-rules-api-endpoint-metho
 
 A [`client_matcher`](#api-rate-limit-api-endpoint-rules-client-matcher) block (within [`api_rate_limit.api_endpoint_rules`](#api-rate-limit-api-endpoint-rules)) supports the following:
 
-<a id="api-rate-limit-api-endpoint-rules-client-matcher-any-client"></a>&#x2022; [`any_client`](#api-rate-limit-api-endpoint-rules-client-matcher-any-client) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-api-endpoint-rules-client-matcher-any-client"></a>&#x2022; [`any_client`](#api-rate-limit-api-endpoint-rules-client-matcher-any-client) - Optional Block<br>Enable this option
 
-<a id="api-rate-limit-api-endpoint-rules-client-matcher-any-ip"></a>&#x2022; [`any_ip`](#api-rate-limit-api-endpoint-rules-client-matcher-any-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-api-endpoint-rules-client-matcher-any-ip"></a>&#x2022; [`any_ip`](#api-rate-limit-api-endpoint-rules-client-matcher-any-ip) - Optional Block<br>Enable this option
 
 <a id="api-rate-limit-api-endpoint-rules-client-matcher-asn-list"></a>&#x2022; [`asn_list`](#api-rate-limit-api-endpoint-rules-client-matcher-asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#api-rate-limit-api-endpoint-rules-client-matcher-asn-list) below.
 
@@ -370,7 +370,7 @@ An [`inline_rate_limiter`](#api-rate-limit-api-endpoint-rules-inline-rate-limite
 
 <a id="api-rate-limit-api-endpoint-rules-inline-rate-limiter-unit"></a>&#x2022; [`unit`](#api-rate-limit-api-endpoint-rules-inline-rate-limiter-unit) - Optional String  Defaults to `SECOND`<br>Possible values are `SECOND`, `MINUTE`, `HOUR`<br>[Enum: SECOND|MINUTE|HOUR] Rate Limit Period Unit. Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days
 
-<a id="api-rate-limit-api-endpoint-rules-inline-rate-limiter-use-http-lb-user-id"></a>&#x2022; [`use_http_lb_user_id`](#api-rate-limit-api-endpoint-rules-inline-rate-limiter-use-http-lb-user-id) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-api-endpoint-rules-inline-rate-limiter-use-http-lb-user-id"></a>&#x2022; [`use_http_lb_user_id`](#api-rate-limit-api-endpoint-rules-inline-rate-limiter-use-http-lb-user-id) - Optional Block<br>Enable this option
 
 #### API Rate Limit API Endpoint Rules Inline Rate Limiter Ref User ID
 
@@ -408,9 +408,9 @@ A [`request_matcher`](#api-rate-limit-api-endpoint-rules-request-matcher) block 
 
 A [`cookie_matchers`](#api-rate-limit-api-endpoint-rules-request-matcher-cookie-matchers) block (within [`api_rate_limit.api_endpoint_rules.request_matcher`](#api-rate-limit-api-endpoint-rules-request-matcher)) supports the following:
 
-<a id="api-rate-limit-api-endpoint-rules-request-matcher-cookie-matchers-check-not-present"></a>&#x2022; [`check_not_present`](#api-rate-limit-api-endpoint-rules-request-matcher-cookie-matchers-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-api-endpoint-rules-request-matcher-cookie-matchers-check-not-present"></a>&#x2022; [`check_not_present`](#api-rate-limit-api-endpoint-rules-request-matcher-cookie-matchers-check-not-present) - Optional Block<br>Enable this option
 
-<a id="api-rate-limit-api-endpoint-rules-request-matcher-cookie-matchers-check-present"></a>&#x2022; [`check_present`](#api-rate-limit-api-endpoint-rules-request-matcher-cookie-matchers-check-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-api-endpoint-rules-request-matcher-cookie-matchers-check-present"></a>&#x2022; [`check_present`](#api-rate-limit-api-endpoint-rules-request-matcher-cookie-matchers-check-present) - Optional Block<br>Enable this option
 
 <a id="api-rate-limit-api-endpoint-rules-request-matcher-cookie-matchers-invert-matcher"></a>&#x2022; [`invert_matcher`](#api-rate-limit-api-endpoint-rules-request-matcher-cookie-matchers-invert-matcher) - Optional Bool<br>Invert Matcher. Invert Match of the expression defined
 
@@ -432,9 +432,9 @@ An [`item`](#api-rate-limit-api-endpoint-rules-request-matcher-cookie-matchers-i
 
 A [`headers`](#api-rate-limit-api-endpoint-rules-request-matcher-headers) block (within [`api_rate_limit.api_endpoint_rules.request_matcher`](#api-rate-limit-api-endpoint-rules-request-matcher)) supports the following:
 
-<a id="api-rate-limit-api-endpoint-rules-request-matcher-headers-check-not-present"></a>&#x2022; [`check_not_present`](#api-rate-limit-api-endpoint-rules-request-matcher-headers-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-api-endpoint-rules-request-matcher-headers-check-not-present"></a>&#x2022; [`check_not_present`](#api-rate-limit-api-endpoint-rules-request-matcher-headers-check-not-present) - Optional Block<br>Enable this option
 
-<a id="api-rate-limit-api-endpoint-rules-request-matcher-headers-check-present"></a>&#x2022; [`check_present`](#api-rate-limit-api-endpoint-rules-request-matcher-headers-check-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-api-endpoint-rules-request-matcher-headers-check-present"></a>&#x2022; [`check_present`](#api-rate-limit-api-endpoint-rules-request-matcher-headers-check-present) - Optional Block<br>Enable this option
 
 <a id="api-rate-limit-api-endpoint-rules-request-matcher-headers-invert-matcher"></a>&#x2022; [`invert_matcher`](#api-rate-limit-api-endpoint-rules-request-matcher-headers-invert-matcher) - Optional Bool<br>Invert Header Matcher. Invert the match result
 
@@ -456,9 +456,9 @@ An [`item`](#api-rate-limit-api-endpoint-rules-request-matcher-headers-item) blo
 
 A [`jwt_claims`](#api-rate-limit-api-endpoint-rules-request-matcher-jwt-claims) block (within [`api_rate_limit.api_endpoint_rules.request_matcher`](#api-rate-limit-api-endpoint-rules-request-matcher)) supports the following:
 
-<a id="api-rate-limit-api-endpoint-rules-request-matcher-jwt-claims-check-not-present"></a>&#x2022; [`check_not_present`](#api-rate-limit-api-endpoint-rules-request-matcher-jwt-claims-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-api-endpoint-rules-request-matcher-jwt-claims-check-not-present"></a>&#x2022; [`check_not_present`](#api-rate-limit-api-endpoint-rules-request-matcher-jwt-claims-check-not-present) - Optional Block<br>Enable this option
 
-<a id="api-rate-limit-api-endpoint-rules-request-matcher-jwt-claims-check-present"></a>&#x2022; [`check_present`](#api-rate-limit-api-endpoint-rules-request-matcher-jwt-claims-check-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-api-endpoint-rules-request-matcher-jwt-claims-check-present"></a>&#x2022; [`check_present`](#api-rate-limit-api-endpoint-rules-request-matcher-jwt-claims-check-present) - Optional Block<br>Enable this option
 
 <a id="api-rate-limit-api-endpoint-rules-request-matcher-jwt-claims-invert-matcher"></a>&#x2022; [`invert_matcher`](#api-rate-limit-api-endpoint-rules-request-matcher-jwt-claims-invert-matcher) - Optional Bool<br>Invert Matcher. Invert the match result
 
@@ -480,9 +480,9 @@ An [`item`](#api-rate-limit-api-endpoint-rules-request-matcher-jwt-claims-item) 
 
 A [`query_params`](#api-rate-limit-api-endpoint-rules-request-matcher-query-params) block (within [`api_rate_limit.api_endpoint_rules.request_matcher`](#api-rate-limit-api-endpoint-rules-request-matcher)) supports the following:
 
-<a id="api-rate-limit-api-endpoint-rules-request-matcher-query-params-check-not-present"></a>&#x2022; [`check_not_present`](#api-rate-limit-api-endpoint-rules-request-matcher-query-params-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-api-endpoint-rules-request-matcher-query-params-check-not-present"></a>&#x2022; [`check_not_present`](#api-rate-limit-api-endpoint-rules-request-matcher-query-params-check-not-present) - Optional Block<br>Enable this option
 
-<a id="api-rate-limit-api-endpoint-rules-request-matcher-query-params-check-present"></a>&#x2022; [`check_present`](#api-rate-limit-api-endpoint-rules-request-matcher-query-params-check-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-api-endpoint-rules-request-matcher-query-params-check-present"></a>&#x2022; [`check_present`](#api-rate-limit-api-endpoint-rules-request-matcher-query-params-check-present) - Optional Block<br>Enable this option
 
 <a id="api-rate-limit-api-endpoint-rules-request-matcher-query-params-invert-matcher"></a>&#x2022; [`invert_matcher`](#api-rate-limit-api-endpoint-rules-request-matcher-query-params-invert-matcher) - Optional Bool<br>Invert Query Parameter Matcher. Invert the match result
 
@@ -510,9 +510,9 @@ A [`bypass_rate_limiting_rules`](#api-rate-limit-bypass-rate-limiting-rules) blo
 
 A [`bypass_rate_limiting_rules`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules) block (within [`api_rate_limit.bypass_rate_limiting_rules`](#api-rate-limit-bypass-rate-limiting-rules)) supports the following:
 
-<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-any-domain"></a>&#x2022; [`any_domain`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-any-domain"></a>&#x2022; [`any_domain`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-any-domain) - Optional Block<br>Enable this option
 
-<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-any-url"></a>&#x2022; [`any_url`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-any-url) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-any-url"></a>&#x2022; [`any_url`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-any-url) - Optional Block<br>Enable this option
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-api-endpoint"></a>&#x2022; [`api_endpoint`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-api-endpoint) - Optional Block<br>API Endpoint. This defines API endpoint<br>See [API Endpoint](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-api-endpoint) below.
 
@@ -544,9 +544,9 @@ An [`api_groups`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limitin
 
 A [`client_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules)) supports the following:
 
-<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-any-client"></a>&#x2022; [`any_client`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-any-client) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-any-client"></a>&#x2022; [`any_client`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-any-client) - Optional Block<br>Enable this option
 
-<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-any-ip"></a>&#x2022; [`any_ip`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-any-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-any-ip"></a>&#x2022; [`any_ip`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-any-ip) - Optional Block<br>Enable this option
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-asn-list"></a>&#x2022; [`asn_list`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-asn-list) below.
 
@@ -656,9 +656,9 @@ A [`request_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-lim
 
 A [`cookie_matchers`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-cookie-matchers) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher)) supports the following:
 
-<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-cookie-matchers-check-not-present"></a>&#x2022; [`check_not_present`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-cookie-matchers-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-cookie-matchers-check-not-present"></a>&#x2022; [`check_not_present`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-cookie-matchers-check-not-present) - Optional Block<br>Enable this option
 
-<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-cookie-matchers-check-present"></a>&#x2022; [`check_present`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-cookie-matchers-check-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-cookie-matchers-check-present"></a>&#x2022; [`check_present`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-cookie-matchers-check-present) - Optional Block<br>Enable this option
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-cookie-matchers-invert-matcher"></a>&#x2022; [`invert_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-cookie-matchers-invert-matcher) - Optional Bool<br>Invert Matcher. Invert Match of the expression defined
 
@@ -680,9 +680,9 @@ An [`item`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rule
 
 A [`headers`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-headers) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher)) supports the following:
 
-<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-headers-check-not-present"></a>&#x2022; [`check_not_present`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-headers-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-headers-check-not-present"></a>&#x2022; [`check_not_present`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-headers-check-not-present) - Optional Block<br>Enable this option
 
-<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-headers-check-present"></a>&#x2022; [`check_present`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-headers-check-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-headers-check-present"></a>&#x2022; [`check_present`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-headers-check-present) - Optional Block<br>Enable this option
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-headers-invert-matcher"></a>&#x2022; [`invert_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-headers-invert-matcher) - Optional Bool<br>Invert Header Matcher. Invert the match result
 
@@ -704,9 +704,9 @@ An [`item`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rule
 
 A [`jwt_claims`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-jwt-claims) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher)) supports the following:
 
-<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-jwt-claims-check-not-present"></a>&#x2022; [`check_not_present`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-jwt-claims-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-jwt-claims-check-not-present"></a>&#x2022; [`check_not_present`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-jwt-claims-check-not-present) - Optional Block<br>Enable this option
 
-<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-jwt-claims-check-present"></a>&#x2022; [`check_present`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-jwt-claims-check-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-jwt-claims-check-present"></a>&#x2022; [`check_present`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-jwt-claims-check-present) - Optional Block<br>Enable this option
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-jwt-claims-invert-matcher"></a>&#x2022; [`invert_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-jwt-claims-invert-matcher) - Optional Bool<br>Invert Matcher. Invert the match result
 
@@ -728,9 +728,9 @@ An [`item`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rule
 
 A [`query_params`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-query-params) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher)) supports the following:
 
-<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-query-params-check-not-present"></a>&#x2022; [`check_not_present`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-query-params-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-query-params-check-not-present"></a>&#x2022; [`check_not_present`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-query-params-check-not-present) - Optional Block<br>Enable this option
 
-<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-query-params-check-present"></a>&#x2022; [`check_present`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-query-params-check-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-query-params-check-present"></a>&#x2022; [`check_present`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-query-params-check-present) - Optional Block<br>Enable this option
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-query-params-invert-matcher"></a>&#x2022; [`invert_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-query-params-invert-matcher) - Optional Bool<br>Invert Query Parameter Matcher. Invert the match result
 
@@ -774,7 +774,7 @@ An [`ip_allowed_list`](#api-rate-limit-ip-allowed-list) block (within [`api_rate
 
 A [`server_url_rules`](#api-rate-limit-server-url-rules) block (within [`api_rate_limit`](#api-rate-limit)) supports the following:
 
-<a id="api-rate-limit-server-url-rules-any-domain"></a>&#x2022; [`any_domain`](#api-rate-limit-server-url-rules-any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-server-url-rules-any-domain"></a>&#x2022; [`any_domain`](#api-rate-limit-server-url-rules-any-domain) - Optional Block<br>Enable this option
 
 <a id="api-rate-limit-server-url-rules-api-group"></a>&#x2022; [`api_group`](#api-rate-limit-server-url-rules-api-group) - Optional String<br>API Group. API groups derived from API Definition swaggers. For example oas-all-operations including all paths and methods from the swaggers, oas-base-urls covering all requests under base-paths from the swaggers. Custom groups can be created if user tags paths or operations with 'x-volterra-API-group' extensions inside swaggers
 
@@ -794,9 +794,9 @@ A [`server_url_rules`](#api-rate-limit-server-url-rules) block (within [`api_rat
 
 A [`client_matcher`](#api-rate-limit-server-url-rules-client-matcher) block (within [`api_rate_limit.server_url_rules`](#api-rate-limit-server-url-rules)) supports the following:
 
-<a id="api-rate-limit-server-url-rules-client-matcher-any-client"></a>&#x2022; [`any_client`](#api-rate-limit-server-url-rules-client-matcher-any-client) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-server-url-rules-client-matcher-any-client"></a>&#x2022; [`any_client`](#api-rate-limit-server-url-rules-client-matcher-any-client) - Optional Block<br>Enable this option
 
-<a id="api-rate-limit-server-url-rules-client-matcher-any-ip"></a>&#x2022; [`any_ip`](#api-rate-limit-server-url-rules-client-matcher-any-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-server-url-rules-client-matcher-any-ip"></a>&#x2022; [`any_ip`](#api-rate-limit-server-url-rules-client-matcher-any-ip) - Optional Block<br>Enable this option
 
 <a id="api-rate-limit-server-url-rules-client-matcher-asn-list"></a>&#x2022; [`asn_list`](#api-rate-limit-server-url-rules-client-matcher-asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#api-rate-limit-server-url-rules-client-matcher-asn-list) below.
 
@@ -900,7 +900,7 @@ An [`inline_rate_limiter`](#api-rate-limit-server-url-rules-inline-rate-limiter)
 
 <a id="api-rate-limit-server-url-rules-inline-rate-limiter-unit"></a>&#x2022; [`unit`](#api-rate-limit-server-url-rules-inline-rate-limiter-unit) - Optional String  Defaults to `SECOND`<br>Possible values are `SECOND`, `MINUTE`, `HOUR`<br>[Enum: SECOND|MINUTE|HOUR] Rate Limit Period Unit. Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days
 
-<a id="api-rate-limit-server-url-rules-inline-rate-limiter-use-http-lb-user-id"></a>&#x2022; [`use_http_lb_user_id`](#api-rate-limit-server-url-rules-inline-rate-limiter-use-http-lb-user-id) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-server-url-rules-inline-rate-limiter-use-http-lb-user-id"></a>&#x2022; [`use_http_lb_user_id`](#api-rate-limit-server-url-rules-inline-rate-limiter-use-http-lb-user-id) - Optional Block<br>Enable this option
 
 #### API Rate Limit Server URL Rules Inline Rate Limiter Ref User ID
 
@@ -938,9 +938,9 @@ A [`request_matcher`](#api-rate-limit-server-url-rules-request-matcher) block (w
 
 A [`cookie_matchers`](#api-rate-limit-server-url-rules-request-matcher-cookie-matchers) block (within [`api_rate_limit.server_url_rules.request_matcher`](#api-rate-limit-server-url-rules-request-matcher)) supports the following:
 
-<a id="api-rate-limit-server-url-rules-request-matcher-cookie-matchers-check-not-present"></a>&#x2022; [`check_not_present`](#api-rate-limit-server-url-rules-request-matcher-cookie-matchers-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-server-url-rules-request-matcher-cookie-matchers-check-not-present"></a>&#x2022; [`check_not_present`](#api-rate-limit-server-url-rules-request-matcher-cookie-matchers-check-not-present) - Optional Block<br>Enable this option
 
-<a id="api-rate-limit-server-url-rules-request-matcher-cookie-matchers-check-present"></a>&#x2022; [`check_present`](#api-rate-limit-server-url-rules-request-matcher-cookie-matchers-check-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-server-url-rules-request-matcher-cookie-matchers-check-present"></a>&#x2022; [`check_present`](#api-rate-limit-server-url-rules-request-matcher-cookie-matchers-check-present) - Optional Block<br>Enable this option
 
 <a id="api-rate-limit-server-url-rules-request-matcher-cookie-matchers-invert-matcher"></a>&#x2022; [`invert_matcher`](#api-rate-limit-server-url-rules-request-matcher-cookie-matchers-invert-matcher) - Optional Bool<br>Invert Matcher. Invert Match of the expression defined
 
@@ -962,9 +962,9 @@ An [`item`](#api-rate-limit-server-url-rules-request-matcher-cookie-matchers-ite
 
 A [`headers`](#api-rate-limit-server-url-rules-request-matcher-headers) block (within [`api_rate_limit.server_url_rules.request_matcher`](#api-rate-limit-server-url-rules-request-matcher)) supports the following:
 
-<a id="api-rate-limit-server-url-rules-request-matcher-headers-check-not-present"></a>&#x2022; [`check_not_present`](#api-rate-limit-server-url-rules-request-matcher-headers-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-server-url-rules-request-matcher-headers-check-not-present"></a>&#x2022; [`check_not_present`](#api-rate-limit-server-url-rules-request-matcher-headers-check-not-present) - Optional Block<br>Enable this option
 
-<a id="api-rate-limit-server-url-rules-request-matcher-headers-check-present"></a>&#x2022; [`check_present`](#api-rate-limit-server-url-rules-request-matcher-headers-check-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-server-url-rules-request-matcher-headers-check-present"></a>&#x2022; [`check_present`](#api-rate-limit-server-url-rules-request-matcher-headers-check-present) - Optional Block<br>Enable this option
 
 <a id="api-rate-limit-server-url-rules-request-matcher-headers-invert-matcher"></a>&#x2022; [`invert_matcher`](#api-rate-limit-server-url-rules-request-matcher-headers-invert-matcher) - Optional Bool<br>Invert Header Matcher. Invert the match result
 
@@ -986,9 +986,9 @@ An [`item`](#api-rate-limit-server-url-rules-request-matcher-headers-item) block
 
 A [`jwt_claims`](#api-rate-limit-server-url-rules-request-matcher-jwt-claims) block (within [`api_rate_limit.server_url_rules.request_matcher`](#api-rate-limit-server-url-rules-request-matcher)) supports the following:
 
-<a id="api-rate-limit-server-url-rules-request-matcher-jwt-claims-check-not-present"></a>&#x2022; [`check_not_present`](#api-rate-limit-server-url-rules-request-matcher-jwt-claims-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-server-url-rules-request-matcher-jwt-claims-check-not-present"></a>&#x2022; [`check_not_present`](#api-rate-limit-server-url-rules-request-matcher-jwt-claims-check-not-present) - Optional Block<br>Enable this option
 
-<a id="api-rate-limit-server-url-rules-request-matcher-jwt-claims-check-present"></a>&#x2022; [`check_present`](#api-rate-limit-server-url-rules-request-matcher-jwt-claims-check-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-server-url-rules-request-matcher-jwt-claims-check-present"></a>&#x2022; [`check_present`](#api-rate-limit-server-url-rules-request-matcher-jwt-claims-check-present) - Optional Block<br>Enable this option
 
 <a id="api-rate-limit-server-url-rules-request-matcher-jwt-claims-invert-matcher"></a>&#x2022; [`invert_matcher`](#api-rate-limit-server-url-rules-request-matcher-jwt-claims-invert-matcher) - Optional Bool<br>Invert Matcher. Invert the match result
 
@@ -1010,9 +1010,9 @@ An [`item`](#api-rate-limit-server-url-rules-request-matcher-jwt-claims-item) bl
 
 A [`query_params`](#api-rate-limit-server-url-rules-request-matcher-query-params) block (within [`api_rate_limit.server_url_rules.request_matcher`](#api-rate-limit-server-url-rules-request-matcher)) supports the following:
 
-<a id="api-rate-limit-server-url-rules-request-matcher-query-params-check-not-present"></a>&#x2022; [`check_not_present`](#api-rate-limit-server-url-rules-request-matcher-query-params-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-server-url-rules-request-matcher-query-params-check-not-present"></a>&#x2022; [`check_not_present`](#api-rate-limit-server-url-rules-request-matcher-query-params-check-not-present) - Optional Block<br>Enable this option
 
-<a id="api-rate-limit-server-url-rules-request-matcher-query-params-check-present"></a>&#x2022; [`check_present`](#api-rate-limit-server-url-rules-request-matcher-query-params-check-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-rate-limit-server-url-rules-request-matcher-query-params-check-present"></a>&#x2022; [`check_present`](#api-rate-limit-server-url-rules-request-matcher-query-params-check-present) - Optional Block<br>Enable this option
 
 <a id="api-rate-limit-server-url-rules-request-matcher-query-params-invert-matcher"></a>&#x2022; [`invert_matcher`](#api-rate-limit-server-url-rules-request-matcher-query-params-invert-matcher) - Optional Bool<br>Invert Query Parameter Matcher. Invert the match result
 
@@ -1040,7 +1040,7 @@ An [`api_specification`](#api-specification) block supports the following:
 
 <a id="api-specification-validation-custom-list"></a>&#x2022; [`validation_custom_list`](#api-specification-validation-custom-list) - Optional Block<br>Custom List. Define API groups, base paths, or API endpoints and their OpenAPI validation modes. Any other API-endpoint not listed will act according to 'Fall Through Mode'<br>See [Validation Custom List](#api-specification-validation-custom-list) below.
 
-<a id="api-specification-validation-disabled"></a>&#x2022; [`validation_disabled`](#api-specification-validation-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-disabled"></a>&#x2022; [`validation_disabled`](#api-specification-validation-disabled) - Optional Block<br>Enable this option
 
 #### API Specification API Definition
 
@@ -1056,17 +1056,17 @@ An [`api_definition`](#api-specification-api-definition) block (within [`api_spe
 
 A [`validation_all_spec_endpoints`](#api-specification-validation-all-spec-endpoints) block (within [`api_specification`](#api-specification)) supports the following:
 
-<a id="api-specification-validation-all-spec-endpoints-fall-through-mode"></a>&#x2022; [`fall_through_mode`](#api-specification-validation-all-spec-endpoints-fall-through-mode) - Optional Block<br>Fall Through Mode. x-required Determine what to do with unprotected endpoints (not in the OpenAPI specification file (a.k.a. swagger) or doesn't have a specific rule in custom rules)<br>See [Fall Through Mode](#api-specification-validation-all-spec-endpoints-fall-through-mode) below.
+<a id="api-specification-validation-all-spec-endpoints-fall-through-mode"></a>&#x2022; [`fall_through_mode`](#api-specification-validation-all-spec-endpoints-fall-through-mode) - Optional Block<br>Fall Through Mode.Determine what to do with unprotected endpoints (not in the OpenAPI specification file (a.k.a. swagger) or doesn't have a specific rule in custom rules)<br>See [Fall Through Mode](#api-specification-validation-all-spec-endpoints-fall-through-mode) below.
 
 <a id="api-specification-validation-all-spec-endpoints-settings"></a>&#x2022; [`settings`](#api-specification-validation-all-spec-endpoints-settings) - Optional Block<br>Common Settings. OpenAPI specification validation settings relevant for 'API Inventory' enforcement and for 'Custom list' enforcement<br>See [Settings](#api-specification-validation-all-spec-endpoints-settings) below.
 
-<a id="api-specification-validation-all-spec-endpoints-validation-mode"></a>&#x2022; [`validation_mode`](#api-specification-validation-all-spec-endpoints-validation-mode) - Optional Block<br>Validation Mode. x-required Validation mode of OpenAPI specification. When a validation mismatch occurs on a request to one of the endpoints listed on the OpenAPI specification file (a.k.a. swagger)<br>See [Validation Mode](#api-specification-validation-all-spec-endpoints-validation-mode) below.
+<a id="api-specification-validation-all-spec-endpoints-validation-mode"></a>&#x2022; [`validation_mode`](#api-specification-validation-all-spec-endpoints-validation-mode) - Optional Block<br>Validation Mode.Validation mode of OpenAPI specification. When a validation mismatch occurs on a request to one of the endpoints listed on the OpenAPI specification file (a.k.a. swagger)<br>See [Validation Mode](#api-specification-validation-all-spec-endpoints-validation-mode) below.
 
 #### API Specification Validation All Spec Endpoints Fall Through Mode
 
 A [`fall_through_mode`](#api-specification-validation-all-spec-endpoints-fall-through-mode) block (within [`api_specification.validation_all_spec_endpoints`](#api-specification-validation-all-spec-endpoints)) supports the following:
 
-<a id="api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-allow"></a>&#x2022; [`fall_through_mode_allow`](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-allow) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-allow"></a>&#x2022; [`fall_through_mode_allow`](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-allow) - Optional Block<br>Enable this option
 
 <a id="api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom"></a>&#x2022; [`fall_through_mode_custom`](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom) - Optional Block<br>Custom Fall Through Mode. Define the fall through settings<br>See [Fall Through Mode Custom](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom) below.
 
@@ -1080,11 +1080,11 @@ A [`fall_through_mode_custom`](#api-specification-validation-all-spec-endpoints-
 
 An [`open_api_validation_rules`](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules) block (within [`api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_custom`](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom)) supports the following:
 
-<a id="api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-action-block"></a>&#x2022; [`action_block`](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-action-block) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-action-block"></a>&#x2022; [`action_block`](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-action-block) - Optional Block<br>Enable this option
 
-<a id="api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-action-report"></a>&#x2022; [`action_report`](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-action-report) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-action-report"></a>&#x2022; [`action_report`](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-action-report) - Optional Block<br>Enable this option
 
-<a id="api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-action-skip"></a>&#x2022; [`action_skip`](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-action-skip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-action-skip"></a>&#x2022; [`action_skip`](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-action-skip) - Optional Block<br>Enable this option
 
 <a id="api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-api-endpoint"></a>&#x2022; [`api_endpoint`](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-api-endpoint) - Optional Block<br>API Endpoint. This defines API endpoint<br>See [API Endpoint](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-api-endpoint) below.
 
@@ -1114,13 +1114,13 @@ A [`metadata`](#api-specification-validation-all-spec-endpoints-fall-through-mod
 
 A [`settings`](#api-specification-validation-all-spec-endpoints-settings) block (within [`api_specification.validation_all_spec_endpoints`](#api-specification-validation-all-spec-endpoints)) supports the following:
 
-<a id="api-specification-validation-all-spec-endpoints-settings-oversized-body-fail-validation"></a>&#x2022; [`oversized_body_fail_validation`](#api-specification-validation-all-spec-endpoints-settings-oversized-body-fail-validation) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-all-spec-endpoints-settings-oversized-body-fail-validation"></a>&#x2022; [`oversized_body_fail_validation`](#api-specification-validation-all-spec-endpoints-settings-oversized-body-fail-validation) - Optional Block<br>Enable this option
 
-<a id="api-specification-validation-all-spec-endpoints-settings-oversized-body-skip-validation"></a>&#x2022; [`oversized_body_skip_validation`](#api-specification-validation-all-spec-endpoints-settings-oversized-body-skip-validation) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-all-spec-endpoints-settings-oversized-body-skip-validation"></a>&#x2022; [`oversized_body_skip_validation`](#api-specification-validation-all-spec-endpoints-settings-oversized-body-skip-validation) - Optional Block<br>Enable this option
 
 <a id="api-specification-validation-all-spec-endpoints-settings-property-validation-settings-custom"></a>&#x2022; [`property_validation_settings_custom`](#api-specification-validation-all-spec-endpoints-settings-property-validation-settings-custom) - Optional Block<br>Validation Property Settings. Custom property validation settings<br>See [Property Validation Settings Custom](#api-specification-validation-all-spec-endpoints-settings-property-validation-settings-custom) below.
 
-<a id="api-specification-validation-all-spec-endpoints-settings-property-validation-settings-default"></a>&#x2022; [`property_validation_settings_default`](#api-specification-validation-all-spec-endpoints-settings-property-validation-settings-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-all-spec-endpoints-settings-property-validation-settings-default"></a>&#x2022; [`property_validation_settings_default`](#api-specification-validation-all-spec-endpoints-settings-property-validation-settings-default) - Optional Block<br>Enable this option
 
 #### API Specification Validation All Spec Endpoints Settings Property Validation Settings Custom
 
@@ -1132,9 +1132,9 @@ A [`property_validation_settings_custom`](#api-specification-validation-all-spec
 
 A [`query_parameters`](#api-specification-validation-all-spec-endpoints-settings-property-validation-settings-custom-query-parameters) block (within [`api_specification.validation_all_spec_endpoints.settings.property_validation_settings_custom`](#api-specification-validation-all-spec-endpoints-settings-property-validation-settings-custom)) supports the following:
 
-<a id="api-specification-validation-all-spec-endpoints-settings-property-validation-settings-custom-query-parameters-allow-additional-parameters"></a>&#x2022; [`allow_additional_parameters`](#api-specification-validation-all-spec-endpoints-settings-property-validation-settings-custom-query-parameters-allow-additional-parameters) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-all-spec-endpoints-settings-property-validation-settings-custom-query-parameters-allow-additional-parameters"></a>&#x2022; [`allow_additional_parameters`](#api-specification-validation-all-spec-endpoints-settings-property-validation-settings-custom-query-parameters-allow-additional-parameters) - Optional Block<br>Enable this option
 
-<a id="api-specification-validation-all-spec-endpoints-settings-property-validation-settings-custom-query-parameters-disallow-additional-parameters"></a>&#x2022; [`disallow_additional_parameters`](#api-specification-validation-all-spec-endpoints-settings-property-validation-settings-custom-query-parameters-disallow-additional-parameters) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-all-spec-endpoints-settings-property-validation-settings-custom-query-parameters-disallow-additional-parameters"></a>&#x2022; [`disallow_additional_parameters`](#api-specification-validation-all-spec-endpoints-settings-property-validation-settings-custom-query-parameters-disallow-additional-parameters) - Optional Block<br>Enable this option
 
 #### API Specification Validation All Spec Endpoints Validation Mode
 
@@ -1142,9 +1142,9 @@ A [`validation_mode`](#api-specification-validation-all-spec-endpoints-validatio
 
 <a id="api-specification-validation-all-spec-endpoints-validation-mode-response-validation-mode-active"></a>&#x2022; [`response_validation_mode_active`](#api-specification-validation-all-spec-endpoints-validation-mode-response-validation-mode-active) - Optional Block<br>Open API Validation Mode Active. Validation mode properties of response<br>See [Response Validation Mode Active](#api-specification-validation-all-spec-endpoints-validation-mode-response-validation-mode-active) below.
 
-<a id="api-specification-validation-all-spec-endpoints-validation-mode-skip-response-validation"></a>&#x2022; [`skip_response_validation`](#api-specification-validation-all-spec-endpoints-validation-mode-skip-response-validation) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-all-spec-endpoints-validation-mode-skip-response-validation"></a>&#x2022; [`skip_response_validation`](#api-specification-validation-all-spec-endpoints-validation-mode-skip-response-validation) - Optional Block<br>Enable this option
 
-<a id="api-specification-validation-all-spec-endpoints-validation-mode-skip-validation"></a>&#x2022; [`skip_validation`](#api-specification-validation-all-spec-endpoints-validation-mode-skip-validation) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-all-spec-endpoints-validation-mode-skip-validation"></a>&#x2022; [`skip_validation`](#api-specification-validation-all-spec-endpoints-validation-mode-skip-validation) - Optional Block<br>Enable this option
 
 <a id="api-specification-validation-all-spec-endpoints-validation-mode-validation-mode-active"></a>&#x2022; [`validation_mode_active`](#api-specification-validation-all-spec-endpoints-validation-mode-validation-mode-active) - Optional Block<br>Open API Validation Mode Active. Validation mode properties of request<br>See [Validation Mode Active](#api-specification-validation-all-spec-endpoints-validation-mode-validation-mode-active) below.
 
@@ -1152,9 +1152,9 @@ A [`validation_mode`](#api-specification-validation-all-spec-endpoints-validatio
 
 A [`response_validation_mode_active`](#api-specification-validation-all-spec-endpoints-validation-mode-response-validation-mode-active) block (within [`api_specification.validation_all_spec_endpoints.validation_mode`](#api-specification-validation-all-spec-endpoints-validation-mode)) supports the following:
 
-<a id="api-specification-validation-all-spec-endpoints-validation-mode-response-validation-mode-active-enforcement-block"></a>&#x2022; [`enforcement_block`](#api-specification-validation-all-spec-endpoints-validation-mode-response-validation-mode-active-enforcement-block) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-all-spec-endpoints-validation-mode-response-validation-mode-active-enforcement-block"></a>&#x2022; [`enforcement_block`](#api-specification-validation-all-spec-endpoints-validation-mode-response-validation-mode-active-enforcement-block) - Optional Block<br>Enable this option
 
-<a id="api-specification-validation-all-spec-endpoints-validation-mode-response-validation-mode-active-enforcement-report"></a>&#x2022; [`enforcement_report`](#api-specification-validation-all-spec-endpoints-validation-mode-response-validation-mode-active-enforcement-report) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-all-spec-endpoints-validation-mode-response-validation-mode-active-enforcement-report"></a>&#x2022; [`enforcement_report`](#api-specification-validation-all-spec-endpoints-validation-mode-response-validation-mode-active-enforcement-report) - Optional Block<br>Enable this option
 
 <a id="api-specification-validation-all-spec-endpoints-validation-mode-response-validation-mode-active-response-validation-properties"></a>&#x2022; [`response_validation_properties`](#api-specification-validation-all-spec-endpoints-validation-mode-response-validation-mode-active-response-validation-properties) - Optional List  Defaults to `PROPERTY_QUERY_PARAMETERS`<br>Possible values are `PROPERTY_QUERY_PARAMETERS`, `PROPERTY_PATH_PARAMETERS`, `PROPERTY_CONTENT_TYPE`, `PROPERTY_COOKIE_PARAMETERS`, `PROPERTY_HTTP_HEADERS`, `PROPERTY_HTTP_BODY`, `PROPERTY_SECURITY_SCHEMA`, `PROPERTY_RESPONSE_CODE`<br>[Enum: PROPERTY_QUERY_PARAMETERS|PROPERTY_PATH_PARAMETERS|PROPERTY_CONTENT_TYPE|PROPERTY_COOKIE_PARAMETERS|PROPERTY_HTTP_HEADERS|PROPERTY_HTTP_BODY|PROPERTY_SECURITY_SCHEMA|PROPERTY_RESPONSE_CODE] Response Validation Properties. List of properties of the response to validate according to the OpenAPI specification file (a.k.a. swagger)
 
@@ -1162,9 +1162,9 @@ A [`response_validation_mode_active`](#api-specification-validation-all-spec-end
 
 A [`validation_mode_active`](#api-specification-validation-all-spec-endpoints-validation-mode-validation-mode-active) block (within [`api_specification.validation_all_spec_endpoints.validation_mode`](#api-specification-validation-all-spec-endpoints-validation-mode)) supports the following:
 
-<a id="api-specification-validation-all-spec-endpoints-validation-mode-validation-mode-active-enforcement-block"></a>&#x2022; [`enforcement_block`](#api-specification-validation-all-spec-endpoints-validation-mode-validation-mode-active-enforcement-block) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-all-spec-endpoints-validation-mode-validation-mode-active-enforcement-block"></a>&#x2022; [`enforcement_block`](#api-specification-validation-all-spec-endpoints-validation-mode-validation-mode-active-enforcement-block) - Optional Block<br>Enable this option
 
-<a id="api-specification-validation-all-spec-endpoints-validation-mode-validation-mode-active-enforcement-report"></a>&#x2022; [`enforcement_report`](#api-specification-validation-all-spec-endpoints-validation-mode-validation-mode-active-enforcement-report) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-all-spec-endpoints-validation-mode-validation-mode-active-enforcement-report"></a>&#x2022; [`enforcement_report`](#api-specification-validation-all-spec-endpoints-validation-mode-validation-mode-active-enforcement-report) - Optional Block<br>Enable this option
 
 <a id="api-specification-validation-all-spec-endpoints-validation-mode-validation-mode-active-request-validation-properties"></a>&#x2022; [`request_validation_properties`](#api-specification-validation-all-spec-endpoints-validation-mode-validation-mode-active-request-validation-properties) - Optional List  Defaults to `PROPERTY_QUERY_PARAMETERS`<br>Possible values are `PROPERTY_QUERY_PARAMETERS`, `PROPERTY_PATH_PARAMETERS`, `PROPERTY_CONTENT_TYPE`, `PROPERTY_COOKIE_PARAMETERS`, `PROPERTY_HTTP_HEADERS`, `PROPERTY_HTTP_BODY`, `PROPERTY_SECURITY_SCHEMA`, `PROPERTY_RESPONSE_CODE`<br>[Enum: PROPERTY_QUERY_PARAMETERS|PROPERTY_PATH_PARAMETERS|PROPERTY_CONTENT_TYPE|PROPERTY_COOKIE_PARAMETERS|PROPERTY_HTTP_HEADERS|PROPERTY_HTTP_BODY|PROPERTY_SECURITY_SCHEMA|PROPERTY_RESPONSE_CODE] Request Validation Properties. List of properties of the request to validate according to the OpenAPI specification file (a.k.a. swagger)
 
@@ -1172,7 +1172,7 @@ A [`validation_mode_active`](#api-specification-validation-all-spec-endpoints-va
 
 A [`validation_custom_list`](#api-specification-validation-custom-list) block (within [`api_specification`](#api-specification)) supports the following:
 
-<a id="api-specification-validation-custom-list-fall-through-mode"></a>&#x2022; [`fall_through_mode`](#api-specification-validation-custom-list-fall-through-mode) - Optional Block<br>Fall Through Mode. x-required Determine what to do with unprotected endpoints (not in the OpenAPI specification file (a.k.a. swagger) or doesn't have a specific rule in custom rules)<br>See [Fall Through Mode](#api-specification-validation-custom-list-fall-through-mode) below.
+<a id="api-specification-validation-custom-list-fall-through-mode"></a>&#x2022; [`fall_through_mode`](#api-specification-validation-custom-list-fall-through-mode) - Optional Block<br>Fall Through Mode.Determine what to do with unprotected endpoints (not in the OpenAPI specification file (a.k.a. swagger) or doesn't have a specific rule in custom rules)<br>See [Fall Through Mode](#api-specification-validation-custom-list-fall-through-mode) below.
 
 <a id="api-specification-validation-custom-list-open-api-validation-rules"></a>&#x2022; [`open_api_validation_rules`](#api-specification-validation-custom-list-open-api-validation-rules) - Optional Block<br>Validation List<br>See [Open API Validation Rules](#api-specification-validation-custom-list-open-api-validation-rules) below.
 
@@ -1182,7 +1182,7 @@ A [`validation_custom_list`](#api-specification-validation-custom-list) block (w
 
 A [`fall_through_mode`](#api-specification-validation-custom-list-fall-through-mode) block (within [`api_specification.validation_custom_list`](#api-specification-validation-custom-list)) supports the following:
 
-<a id="api-specification-validation-custom-list-fall-through-mode-fall-through-mode-allow"></a>&#x2022; [`fall_through_mode_allow`](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-allow) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-custom-list-fall-through-mode-fall-through-mode-allow"></a>&#x2022; [`fall_through_mode_allow`](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-allow) - Optional Block<br>Enable this option
 
 <a id="api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom"></a>&#x2022; [`fall_through_mode_custom`](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom) - Optional Block<br>Custom Fall Through Mode. Define the fall through settings<br>See [Fall Through Mode Custom](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom) below.
 
@@ -1196,11 +1196,11 @@ A [`fall_through_mode_custom`](#api-specification-validation-custom-list-fall-th
 
 An [`open_api_validation_rules`](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules) block (within [`api_specification.validation_custom_list.fall_through_mode.fall_through_mode_custom`](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom)) supports the following:
 
-<a id="api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-action-block"></a>&#x2022; [`action_block`](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-action-block) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-action-block"></a>&#x2022; [`action_block`](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-action-block) - Optional Block<br>Enable this option
 
-<a id="api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-action-report"></a>&#x2022; [`action_report`](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-action-report) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-action-report"></a>&#x2022; [`action_report`](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-action-report) - Optional Block<br>Enable this option
 
-<a id="api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-action-skip"></a>&#x2022; [`action_skip`](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-action-skip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-action-skip"></a>&#x2022; [`action_skip`](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-action-skip) - Optional Block<br>Enable this option
 
 <a id="api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-api-endpoint"></a>&#x2022; [`api_endpoint`](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-api-endpoint) - Optional Block<br>API Endpoint. This defines API endpoint<br>See [API Endpoint](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-api-endpoint) below.
 
@@ -1230,7 +1230,7 @@ A [`metadata`](#api-specification-validation-custom-list-fall-through-mode-fall-
 
 An [`open_api_validation_rules`](#api-specification-validation-custom-list-open-api-validation-rules) block (within [`api_specification.validation_custom_list`](#api-specification-validation-custom-list)) supports the following:
 
-<a id="api-specification-validation-custom-list-open-api-validation-rules-any-domain"></a>&#x2022; [`any_domain`](#api-specification-validation-custom-list-open-api-validation-rules-any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-custom-list-open-api-validation-rules-any-domain"></a>&#x2022; [`any_domain`](#api-specification-validation-custom-list-open-api-validation-rules-any-domain) - Optional Block<br>Enable this option
 
 <a id="api-specification-validation-custom-list-open-api-validation-rules-api-endpoint"></a>&#x2022; [`api_endpoint`](#api-specification-validation-custom-list-open-api-validation-rules-api-endpoint) - Optional Block<br>API Endpoint. This defines API endpoint<br>See [API Endpoint](#api-specification-validation-custom-list-open-api-validation-rules-api-endpoint) below.
 
@@ -1242,7 +1242,7 @@ An [`open_api_validation_rules`](#api-specification-validation-custom-list-open-
 
 <a id="api-specification-validation-custom-list-open-api-validation-rules-specific-domain"></a>&#x2022; [`specific_domain`](#api-specification-validation-custom-list-open-api-validation-rules-specific-domain) - Optional String<br>Specific Domain. The rule will apply for a specific domain
 
-<a id="api-specification-validation-custom-list-open-api-validation-rules-validation-mode"></a>&#x2022; [`validation_mode`](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode) - Optional Block<br>Validation Mode. x-required Validation mode of OpenAPI specification. When a validation mismatch occurs on a request to one of the endpoints listed on the OpenAPI specification file (a.k.a. swagger)<br>See [Validation Mode](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode) below.
+<a id="api-specification-validation-custom-list-open-api-validation-rules-validation-mode"></a>&#x2022; [`validation_mode`](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode) - Optional Block<br>Validation Mode.Validation mode of OpenAPI specification. When a validation mismatch occurs on a request to one of the endpoints listed on the OpenAPI specification file (a.k.a. swagger)<br>See [Validation Mode](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode) below.
 
 #### API Specification Validation Custom List Open API Validation Rules API Endpoint
 
@@ -1266,9 +1266,9 @@ A [`validation_mode`](#api-specification-validation-custom-list-open-api-validat
 
 <a id="api-specification-validation-custom-list-open-api-validation-rules-validation-mode-response-validation-mode-active"></a>&#x2022; [`response_validation_mode_active`](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode-response-validation-mode-active) - Optional Block<br>Open API Validation Mode Active. Validation mode properties of response<br>See [Response Validation Mode Active](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode-response-validation-mode-active) below.
 
-<a id="api-specification-validation-custom-list-open-api-validation-rules-validation-mode-skip-response-validation"></a>&#x2022; [`skip_response_validation`](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode-skip-response-validation) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-custom-list-open-api-validation-rules-validation-mode-skip-response-validation"></a>&#x2022; [`skip_response_validation`](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode-skip-response-validation) - Optional Block<br>Enable this option
 
-<a id="api-specification-validation-custom-list-open-api-validation-rules-validation-mode-skip-validation"></a>&#x2022; [`skip_validation`](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode-skip-validation) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-custom-list-open-api-validation-rules-validation-mode-skip-validation"></a>&#x2022; [`skip_validation`](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode-skip-validation) - Optional Block<br>Enable this option
 
 <a id="api-specification-validation-custom-list-open-api-validation-rules-validation-mode-validation-mode-active"></a>&#x2022; [`validation_mode_active`](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode-validation-mode-active) - Optional Block<br>Open API Validation Mode Active. Validation mode properties of request<br>See [Validation Mode Active](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode-validation-mode-active) below.
 
@@ -1276,9 +1276,9 @@ A [`validation_mode`](#api-specification-validation-custom-list-open-api-validat
 
 A [`response_validation_mode_active`](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode-response-validation-mode-active) block (within [`api_specification.validation_custom_list.open_api_validation_rules.validation_mode`](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode)) supports the following:
 
-<a id="api-specification-validation-custom-list-open-api-validation-rules-validation-mode-response-validation-mode-active-enforcement-block"></a>&#x2022; [`enforcement_block`](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode-response-validation-mode-active-enforcement-block) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-custom-list-open-api-validation-rules-validation-mode-response-validation-mode-active-enforcement-block"></a>&#x2022; [`enforcement_block`](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode-response-validation-mode-active-enforcement-block) - Optional Block<br>Enable this option
 
-<a id="api-specification-validation-custom-list-open-api-validation-rules-validation-mode-response-validation-mode-active-enforcement-report"></a>&#x2022; [`enforcement_report`](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode-response-validation-mode-active-enforcement-report) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-custom-list-open-api-validation-rules-validation-mode-response-validation-mode-active-enforcement-report"></a>&#x2022; [`enforcement_report`](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode-response-validation-mode-active-enforcement-report) - Optional Block<br>Enable this option
 
 <a id="api-specification-validation-custom-list-open-api-validation-rules-validation-mode-response-validation-mode-active-response-validation-properties"></a>&#x2022; [`response_validation_properties`](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode-response-validation-mode-active-response-validation-properties) - Optional List  Defaults to `PROPERTY_QUERY_PARAMETERS`<br>Possible values are `PROPERTY_QUERY_PARAMETERS`, `PROPERTY_PATH_PARAMETERS`, `PROPERTY_CONTENT_TYPE`, `PROPERTY_COOKIE_PARAMETERS`, `PROPERTY_HTTP_HEADERS`, `PROPERTY_HTTP_BODY`, `PROPERTY_SECURITY_SCHEMA`, `PROPERTY_RESPONSE_CODE`<br>[Enum: PROPERTY_QUERY_PARAMETERS|PROPERTY_PATH_PARAMETERS|PROPERTY_CONTENT_TYPE|PROPERTY_COOKIE_PARAMETERS|PROPERTY_HTTP_HEADERS|PROPERTY_HTTP_BODY|PROPERTY_SECURITY_SCHEMA|PROPERTY_RESPONSE_CODE] Response Validation Properties. List of properties of the response to validate according to the OpenAPI specification file (a.k.a. swagger)
 
@@ -1286,9 +1286,9 @@ A [`response_validation_mode_active`](#api-specification-validation-custom-list-
 
 A [`validation_mode_active`](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode-validation-mode-active) block (within [`api_specification.validation_custom_list.open_api_validation_rules.validation_mode`](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode)) supports the following:
 
-<a id="api-specification-validation-custom-list-open-api-validation-rules-validation-mode-validation-mode-active-enforcement-block"></a>&#x2022; [`enforcement_block`](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode-validation-mode-active-enforcement-block) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-custom-list-open-api-validation-rules-validation-mode-validation-mode-active-enforcement-block"></a>&#x2022; [`enforcement_block`](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode-validation-mode-active-enforcement-block) - Optional Block<br>Enable this option
 
-<a id="api-specification-validation-custom-list-open-api-validation-rules-validation-mode-validation-mode-active-enforcement-report"></a>&#x2022; [`enforcement_report`](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode-validation-mode-active-enforcement-report) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-custom-list-open-api-validation-rules-validation-mode-validation-mode-active-enforcement-report"></a>&#x2022; [`enforcement_report`](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode-validation-mode-active-enforcement-report) - Optional Block<br>Enable this option
 
 <a id="api-specification-validation-custom-list-open-api-validation-rules-validation-mode-validation-mode-active-request-validation-properties"></a>&#x2022; [`request_validation_properties`](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode-validation-mode-active-request-validation-properties) - Optional List  Defaults to `PROPERTY_QUERY_PARAMETERS`<br>Possible values are `PROPERTY_QUERY_PARAMETERS`, `PROPERTY_PATH_PARAMETERS`, `PROPERTY_CONTENT_TYPE`, `PROPERTY_COOKIE_PARAMETERS`, `PROPERTY_HTTP_HEADERS`, `PROPERTY_HTTP_BODY`, `PROPERTY_SECURITY_SCHEMA`, `PROPERTY_RESPONSE_CODE`<br>[Enum: PROPERTY_QUERY_PARAMETERS|PROPERTY_PATH_PARAMETERS|PROPERTY_CONTENT_TYPE|PROPERTY_COOKIE_PARAMETERS|PROPERTY_HTTP_HEADERS|PROPERTY_HTTP_BODY|PROPERTY_SECURITY_SCHEMA|PROPERTY_RESPONSE_CODE] Request Validation Properties. List of properties of the request to validate according to the OpenAPI specification file (a.k.a. swagger)
 
@@ -1296,13 +1296,13 @@ A [`validation_mode_active`](#api-specification-validation-custom-list-open-api-
 
 A [`settings`](#api-specification-validation-custom-list-settings) block (within [`api_specification.validation_custom_list`](#api-specification-validation-custom-list)) supports the following:
 
-<a id="api-specification-validation-custom-list-settings-oversized-body-fail-validation"></a>&#x2022; [`oversized_body_fail_validation`](#api-specification-validation-custom-list-settings-oversized-body-fail-validation) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-custom-list-settings-oversized-body-fail-validation"></a>&#x2022; [`oversized_body_fail_validation`](#api-specification-validation-custom-list-settings-oversized-body-fail-validation) - Optional Block<br>Enable this option
 
-<a id="api-specification-validation-custom-list-settings-oversized-body-skip-validation"></a>&#x2022; [`oversized_body_skip_validation`](#api-specification-validation-custom-list-settings-oversized-body-skip-validation) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-custom-list-settings-oversized-body-skip-validation"></a>&#x2022; [`oversized_body_skip_validation`](#api-specification-validation-custom-list-settings-oversized-body-skip-validation) - Optional Block<br>Enable this option
 
 <a id="api-specification-validation-custom-list-settings-property-validation-settings-custom"></a>&#x2022; [`property_validation_settings_custom`](#api-specification-validation-custom-list-settings-property-validation-settings-custom) - Optional Block<br>Validation Property Settings. Custom property validation settings<br>See [Property Validation Settings Custom](#api-specification-validation-custom-list-settings-property-validation-settings-custom) below.
 
-<a id="api-specification-validation-custom-list-settings-property-validation-settings-default"></a>&#x2022; [`property_validation_settings_default`](#api-specification-validation-custom-list-settings-property-validation-settings-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-custom-list-settings-property-validation-settings-default"></a>&#x2022; [`property_validation_settings_default`](#api-specification-validation-custom-list-settings-property-validation-settings-default) - Optional Block<br>Enable this option
 
 #### API Specification Validation Custom List Settings Property Validation Settings Custom
 
@@ -1314,9 +1314,9 @@ A [`property_validation_settings_custom`](#api-specification-validation-custom-l
 
 A [`query_parameters`](#api-specification-validation-custom-list-settings-property-validation-settings-custom-query-parameters) block (within [`api_specification.validation_custom_list.settings.property_validation_settings_custom`](#api-specification-validation-custom-list-settings-property-validation-settings-custom)) supports the following:
 
-<a id="api-specification-validation-custom-list-settings-property-validation-settings-custom-query-parameters-allow-additional-parameters"></a>&#x2022; [`allow_additional_parameters`](#api-specification-validation-custom-list-settings-property-validation-settings-custom-query-parameters-allow-additional-parameters) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-custom-list-settings-property-validation-settings-custom-query-parameters-allow-additional-parameters"></a>&#x2022; [`allow_additional_parameters`](#api-specification-validation-custom-list-settings-property-validation-settings-custom-query-parameters-allow-additional-parameters) - Optional Block<br>Enable this option
 
-<a id="api-specification-validation-custom-list-settings-property-validation-settings-custom-query-parameters-disallow-additional-parameters"></a>&#x2022; [`disallow_additional_parameters`](#api-specification-validation-custom-list-settings-property-validation-settings-custom-query-parameters-disallow-additional-parameters) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="api-specification-validation-custom-list-settings-property-validation-settings-custom-query-parameters-disallow-additional-parameters"></a>&#x2022; [`disallow_additional_parameters`](#api-specification-validation-custom-list-settings-property-validation-settings-custom-query-parameters-disallow-additional-parameters) - Optional Block<br>Enable this option
 
 #### App Firewall
 
@@ -1336,7 +1336,7 @@ A [`blocked_clients`](#blocked-clients) block supports the following:
 
 <a id="blocked-clients-as-number"></a>&#x2022; [`as_number`](#blocked-clients-as-number) - Optional Number<br>AS Number. RFC 6793 defined 4-byte AS number
 
-<a id="blocked-clients-bot-skip-processing"></a>&#x2022; [`bot_skip_processing`](#blocked-clients-bot-skip-processing) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="blocked-clients-bot-skip-processing"></a>&#x2022; [`bot_skip_processing`](#blocked-clients-bot-skip-processing) - Optional Block<br>Enable this option
 
 <a id="blocked-clients-expiration-timestamp"></a>&#x2022; [`expiration_timestamp`](#blocked-clients-expiration-timestamp) - Optional String<br>Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore
 
@@ -1348,11 +1348,11 @@ A [`blocked_clients`](#blocked-clients) block supports the following:
 
 <a id="blocked-clients-metadata"></a>&#x2022; [`metadata`](#blocked-clients-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#blocked-clients-metadata) below.
 
-<a id="blocked-clients-skip-processing"></a>&#x2022; [`skip_processing`](#blocked-clients-skip-processing) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="blocked-clients-skip-processing"></a>&#x2022; [`skip_processing`](#blocked-clients-skip-processing) - Optional Block<br>Enable this option
 
 <a id="blocked-clients-user-identifier"></a>&#x2022; [`user_identifier`](#blocked-clients-user-identifier) - Optional String<br>User Identifier. Identify user based on user identifier. User identifier value needs to be copied from security event
 
-<a id="blocked-clients-waf-skip-processing"></a>&#x2022; [`waf_skip_processing`](#blocked-clients-waf-skip-processing) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="blocked-clients-waf-skip-processing"></a>&#x2022; [`waf_skip_processing`](#blocked-clients-waf-skip-processing) - Optional Block<br>Enable this option
 
 #### Blocked Clients HTTP Header
 
@@ -1386,9 +1386,9 @@ A [`metadata`](#blocked-clients-metadata) block (within [`blocked_clients`](#blo
 
 A [`bot_defense`](#bot-defense) block supports the following:
 
-<a id="bot-defense-disable-cors-support"></a>&#x2022; [`disable_cors_support`](#bot-defense-disable-cors-support) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-disable-cors-support"></a>&#x2022; [`disable_cors_support`](#bot-defense-disable-cors-support) - Optional Block<br>Enable this option
 
-<a id="bot-defense-enable-cors-support"></a>&#x2022; [`enable_cors_support`](#bot-defense-enable-cors-support) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-enable-cors-support"></a>&#x2022; [`enable_cors_support`](#bot-defense-enable-cors-support) - Optional Block<br>Enable this option
 
 <a id="bot-defense-policy"></a>&#x2022; [`policy`](#bot-defense-policy) - Optional Block<br>Bot Defense Policy. This defines various configuration options for Bot Defense policy<br>See [Policy](#bot-defense-policy) below.
 
@@ -1400,9 +1400,9 @@ A [`bot_defense`](#bot-defense) block supports the following:
 
 A [`policy`](#bot-defense-policy) block (within [`bot_defense`](#bot-defense)) supports the following:
 
-<a id="bot-defense-policy-disable-js-insert"></a>&#x2022; [`disable_js_insert`](#bot-defense-policy-disable-js-insert) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-disable-js-insert"></a>&#x2022; [`disable_js_insert`](#bot-defense-policy-disable-js-insert) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-disable-mobile-sdk"></a>&#x2022; [`disable_mobile_sdk`](#bot-defense-policy-disable-mobile-sdk) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-disable-mobile-sdk"></a>&#x2022; [`disable_mobile_sdk`](#bot-defense-policy-disable-mobile-sdk) - Optional Block<br>Enable this option
 
 <a id="bot-defense-policy-javascript-mode"></a>&#x2022; [`javascript_mode`](#bot-defense-policy-javascript-mode) - Optional String  Defaults to `ASYNC_JS_NO_CACHING`<br>Possible values are `ASYNC_JS_NO_CACHING`, `ASYNC_JS_CACHING`, `SYNC_JS_NO_CACHING`, `SYNC_JS_CACHING`<br>[Enum: ASYNC_JS_NO_CACHING|ASYNC_JS_CACHING|SYNC_JS_NO_CACHING|SYNC_JS_CACHING] Web Client JavaScript Mode. Web Client JavaScript Mode. Bot Defense JavaScript for telemetry collection is requested asynchronously, and it is non-cacheable Bot Defense JavaScript for telemetry collection is requested asynchronously, and it is cacheable Bot Defense JavaScript for telemetry collection is requested synchronously, and it is non-cacheable Bot Defense JavaScript for telemetry collection is requested synchronously, and it is cacheable
 
@@ -1436,7 +1436,7 @@ A [`js_insert_all_pages_except`](#bot-defense-policy-js-insert-all-pages-except)
 
 An [`exclude_list`](#bot-defense-policy-js-insert-all-pages-except-exclude-list) block (within [`bot_defense.policy.js_insert_all_pages_except`](#bot-defense-policy-js-insert-all-pages-except)) supports the following:
 
-<a id="bot-defense-policy-js-insert-all-pages-except-exclude-list-any-domain"></a>&#x2022; [`any_domain`](#bot-defense-policy-js-insert-all-pages-except-exclude-list-any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-js-insert-all-pages-except-exclude-list-any-domain"></a>&#x2022; [`any_domain`](#bot-defense-policy-js-insert-all-pages-except-exclude-list-any-domain) - Optional Block<br>Enable this option
 
 <a id="bot-defense-policy-js-insert-all-pages-except-exclude-list-domain"></a>&#x2022; [`domain`](#bot-defense-policy-js-insert-all-pages-except-exclude-list-domain) - Optional Block<br>Domains. Domains names<br>See [Domain](#bot-defense-policy-js-insert-all-pages-except-exclude-list-domain) below.
 
@@ -1484,7 +1484,7 @@ A [`js_insertion_rules`](#bot-defense-policy-js-insertion-rules) block (within [
 
 An [`exclude_list`](#bot-defense-policy-js-insertion-rules-exclude-list) block (within [`bot_defense.policy.js_insertion_rules`](#bot-defense-policy-js-insertion-rules)) supports the following:
 
-<a id="bot-defense-policy-js-insertion-rules-exclude-list-any-domain"></a>&#x2022; [`any_domain`](#bot-defense-policy-js-insertion-rules-exclude-list-any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-js-insertion-rules-exclude-list-any-domain"></a>&#x2022; [`any_domain`](#bot-defense-policy-js-insertion-rules-exclude-list-any-domain) - Optional Block<br>Enable this option
 
 <a id="bot-defense-policy-js-insertion-rules-exclude-list-domain"></a>&#x2022; [`domain`](#bot-defense-policy-js-insertion-rules-exclude-list-domain) - Optional Block<br>Domains. Domains names<br>See [Domain](#bot-defense-policy-js-insertion-rules-exclude-list-domain) below.
 
@@ -1524,7 +1524,7 @@ A [`path`](#bot-defense-policy-js-insertion-rules-exclude-list-path) block (with
 
 A [`rules`](#bot-defense-policy-js-insertion-rules-rules) block (within [`bot_defense.policy.js_insertion_rules`](#bot-defense-policy-js-insertion-rules)) supports the following:
 
-<a id="bot-defense-policy-js-insertion-rules-rules-any-domain"></a>&#x2022; [`any_domain`](#bot-defense-policy-js-insertion-rules-rules-any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-js-insertion-rules-rules-any-domain"></a>&#x2022; [`any_domain`](#bot-defense-policy-js-insertion-rules-rules-any-domain) - Optional Block<br>Enable this option
 
 <a id="bot-defense-policy-js-insertion-rules-rules-domain"></a>&#x2022; [`domain`](#bot-defense-policy-js-insertion-rules-rules-domain) - Optional Block<br>Domains. Domains names<br>See [Domain](#bot-defense-policy-js-insertion-rules-rules-domain) below.
 
@@ -1578,9 +1578,9 @@ A [`mobile_identifier`](#bot-defense-policy-mobile-sdk-config-mobile-identifier)
 
 A [`headers`](#bot-defense-policy-mobile-sdk-config-mobile-identifier-headers) block (within [`bot_defense.policy.mobile_sdk_config.mobile_identifier`](#bot-defense-policy-mobile-sdk-config-mobile-identifier)) supports the following:
 
-<a id="bot-defense-policy-mobile-sdk-config-mobile-identifier-headers-check-not-present"></a>&#x2022; [`check_not_present`](#bot-defense-policy-mobile-sdk-config-mobile-identifier-headers-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-mobile-sdk-config-mobile-identifier-headers-check-not-present"></a>&#x2022; [`check_not_present`](#bot-defense-policy-mobile-sdk-config-mobile-identifier-headers-check-not-present) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-mobile-sdk-config-mobile-identifier-headers-check-present"></a>&#x2022; [`check_present`](#bot-defense-policy-mobile-sdk-config-mobile-identifier-headers-check-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-mobile-sdk-config-mobile-identifier-headers-check-present"></a>&#x2022; [`check_present`](#bot-defense-policy-mobile-sdk-config-mobile-identifier-headers-check-present) - Optional Block<br>Enable this option
 
 <a id="bot-defense-policy-mobile-sdk-config-mobile-identifier-headers-item"></a>&#x2022; [`item`](#bot-defense-policy-mobile-sdk-config-mobile-identifier-headers-item) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#bot-defense-policy-mobile-sdk-config-mobile-identifier-headers-item) below.
 
@@ -1600,9 +1600,9 @@ An [`item`](#bot-defense-policy-mobile-sdk-config-mobile-identifier-headers-item
 
 A [`protected_app_endpoints`](#bot-defense-policy-protected-app-endpoints) block (within [`bot_defense.policy`](#bot-defense-policy)) supports the following:
 
-<a id="bot-defense-policy-protected-app-endpoints-allow-good-bots"></a>&#x2022; [`allow_good_bots`](#bot-defense-policy-protected-app-endpoints-allow-good-bots) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-allow-good-bots"></a>&#x2022; [`allow_good_bots`](#bot-defense-policy-protected-app-endpoints-allow-good-bots) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-protected-app-endpoints-any-domain"></a>&#x2022; [`any_domain`](#bot-defense-policy-protected-app-endpoints-any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-any-domain"></a>&#x2022; [`any_domain`](#bot-defense-policy-protected-app-endpoints-any-domain) - Optional Block<br>Enable this option
 
 <a id="bot-defense-policy-protected-app-endpoints-domain"></a>&#x2022; [`domain`](#bot-defense-policy-protected-app-endpoints-domain) - Optional Block<br>Domains. Domains names<br>See [Domain](#bot-defense-policy-protected-app-endpoints-domain) below.
 
@@ -1614,11 +1614,11 @@ A [`protected_app_endpoints`](#bot-defense-policy-protected-app-endpoints) block
 
 <a id="bot-defense-policy-protected-app-endpoints-metadata"></a>&#x2022; [`metadata`](#bot-defense-policy-protected-app-endpoints-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#bot-defense-policy-protected-app-endpoints-metadata) below.
 
-<a id="bot-defense-policy-protected-app-endpoints-mitigate-good-bots"></a>&#x2022; [`mitigate_good_bots`](#bot-defense-policy-protected-app-endpoints-mitigate-good-bots) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-mitigate-good-bots"></a>&#x2022; [`mitigate_good_bots`](#bot-defense-policy-protected-app-endpoints-mitigate-good-bots) - Optional Block<br>Enable this option
 
 <a id="bot-defense-policy-protected-app-endpoints-mitigation"></a>&#x2022; [`mitigation`](#bot-defense-policy-protected-app-endpoints-mitigation) - Optional Block<br>Bot Mitigation Action. Modify Bot Defense behavior for a matching request<br>See [Mitigation](#bot-defense-policy-protected-app-endpoints-mitigation) below.
 
-<a id="bot-defense-policy-protected-app-endpoints-mobile"></a>&#x2022; [`mobile`](#bot-defense-policy-protected-app-endpoints-mobile) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-mobile"></a>&#x2022; [`mobile`](#bot-defense-policy-protected-app-endpoints-mobile) - Optional Block<br>Enable this option
 
 <a id="bot-defense-policy-protected-app-endpoints-path"></a>&#x2022; [`path`](#bot-defense-policy-protected-app-endpoints-path) - Optional Block<br>Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path](#bot-defense-policy-protected-app-endpoints-path) below.
 
@@ -1626,9 +1626,9 @@ A [`protected_app_endpoints`](#bot-defense-policy-protected-app-endpoints) block
 
 <a id="bot-defense-policy-protected-app-endpoints-query-params"></a>&#x2022; [`query_params`](#bot-defense-policy-protected-app-endpoints-query-params) - Optional Block<br>HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true<br>See [Query Params](#bot-defense-policy-protected-app-endpoints-query-params) below.
 
-<a id="bot-defense-policy-protected-app-endpoints-undefined-flow-label"></a>&#x2022; [`undefined_flow_label`](#bot-defense-policy-protected-app-endpoints-undefined-flow-label) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-undefined-flow-label"></a>&#x2022; [`undefined_flow_label`](#bot-defense-policy-protected-app-endpoints-undefined-flow-label) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-protected-app-endpoints-web"></a>&#x2022; [`web`](#bot-defense-policy-protected-app-endpoints-web) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-web"></a>&#x2022; [`web`](#bot-defense-policy-protected-app-endpoints-web) - Optional Block<br>Enable this option
 
 <a id="bot-defense-policy-protected-app-endpoints-web-mobile"></a>&#x2022; [`web_mobile`](#bot-defense-policy-protected-app-endpoints-web-mobile) - Optional Block<br>Web and Mobile traffic type. Web and Mobile traffic type<br>See [Web Mobile](#bot-defense-policy-protected-app-endpoints-web-mobile) below.
 
@@ -1664,9 +1664,9 @@ A [`flow_label`](#bot-defense-policy-protected-app-endpoints-flow-label) block (
 
 An [`account_management`](#bot-defense-policy-protected-app-endpoints-flow-label-account-management) block (within [`bot_defense.policy.protected_app_endpoints.flow_label`](#bot-defense-policy-protected-app-endpoints-flow-label)) supports the following:
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-account-management-create"></a>&#x2022; [`create`](#bot-defense-policy-protected-app-endpoints-flow-label-account-management-create) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-account-management-create"></a>&#x2022; [`create`](#bot-defense-policy-protected-app-endpoints-flow-label-account-management-create) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-account-management-password-reset"></a>&#x2022; [`password_reset`](#bot-defense-policy-protected-app-endpoints-flow-label-account-management-password-reset) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-account-management-password-reset"></a>&#x2022; [`password_reset`](#bot-defense-policy-protected-app-endpoints-flow-label-account-management-password-reset) - Optional Block<br>Enable this option
 
 #### Bot Defense Policy Protected App Endpoints Flow Label Authentication
 
@@ -1674,19 +1674,19 @@ An [`authentication`](#bot-defense-policy-protected-app-endpoints-flow-label-aut
 
 <a id="bot-defense-policy-protected-app-endpoints-flow-label-authentication-login"></a>&#x2022; [`login`](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-login) - Optional Block<br>Bot Defense Transaction Result. Bot Defense Transaction Result<br>See [Login](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-login) below.
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-mfa"></a>&#x2022; [`login_mfa`](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-mfa) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-mfa"></a>&#x2022; [`login_mfa`](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-mfa) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-partner"></a>&#x2022; [`login_partner`](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-partner) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-partner"></a>&#x2022; [`login_partner`](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-partner) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-authentication-logout"></a>&#x2022; [`logout`](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-logout) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-authentication-logout"></a>&#x2022; [`logout`](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-logout) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-authentication-token-refresh"></a>&#x2022; [`token_refresh`](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-token-refresh) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-authentication-token-refresh"></a>&#x2022; [`token_refresh`](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-token-refresh) - Optional Block<br>Enable this option
 
 #### Bot Defense Policy Protected App Endpoints Flow Label Authentication Login
 
 A [`login`](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-login) block (within [`bot_defense.policy.protected_app_endpoints.flow_label.authentication`](#bot-defense-policy-protected-app-endpoints-flow-label-authentication)) supports the following:
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-disable-transaction-result"></a>&#x2022; [`disable_transaction_result`](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-disable-transaction-result) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-disable-transaction-result"></a>&#x2022; [`disable_transaction_result`](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-disable-transaction-result) - Optional Block<br>Enable this option
 
 <a id="bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-transaction-result"></a>&#x2022; [`transaction_result`](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-transaction-result) - Optional Block<br>Bot Defense Transaction Result Type. Bot Defense Transaction ResultType<br>See [Transaction Result](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-transaction-result) below.
 
@@ -1722,73 +1722,73 @@ A [`success_conditions`](#bot-defense-policy-protected-app-endpoints-flow-label-
 
 A [`financial_services`](#bot-defense-policy-protected-app-endpoints-flow-label-financial-services) block (within [`bot_defense.policy.protected_app_endpoints.flow_label`](#bot-defense-policy-protected-app-endpoints-flow-label)) supports the following:
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-financial-services-apply"></a>&#x2022; [`apply`](#bot-defense-policy-protected-app-endpoints-flow-label-financial-services-apply) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-financial-services-apply"></a>&#x2022; [`apply`](#bot-defense-policy-protected-app-endpoints-flow-label-financial-services-apply) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-financial-services-money-transfer"></a>&#x2022; [`money_transfer`](#bot-defense-policy-protected-app-endpoints-flow-label-financial-services-money-transfer) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-financial-services-money-transfer"></a>&#x2022; [`money_transfer`](#bot-defense-policy-protected-app-endpoints-flow-label-financial-services-money-transfer) - Optional Block<br>Enable this option
 
 #### Bot Defense Policy Protected App Endpoints Flow Label Flight
 
 A [`flight`](#bot-defense-policy-protected-app-endpoints-flow-label-flight) block (within [`bot_defense.policy.protected_app_endpoints.flow_label`](#bot-defense-policy-protected-app-endpoints-flow-label)) supports the following:
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-flight-checkin"></a>&#x2022; [`checkin`](#bot-defense-policy-protected-app-endpoints-flow-label-flight-checkin) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-flight-checkin"></a>&#x2022; [`checkin`](#bot-defense-policy-protected-app-endpoints-flow-label-flight-checkin) - Optional Block<br>Enable this option
 
 #### Bot Defense Policy Protected App Endpoints Flow Label Profile Management
 
 A [`profile_management`](#bot-defense-policy-protected-app-endpoints-flow-label-profile-management) block (within [`bot_defense.policy.protected_app_endpoints.flow_label`](#bot-defense-policy-protected-app-endpoints-flow-label)) supports the following:
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-profile-management-create"></a>&#x2022; [`create`](#bot-defense-policy-protected-app-endpoints-flow-label-profile-management-create) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-profile-management-create"></a>&#x2022; [`create`](#bot-defense-policy-protected-app-endpoints-flow-label-profile-management-create) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-profile-management-update"></a>&#x2022; [`update`](#bot-defense-policy-protected-app-endpoints-flow-label-profile-management-update) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-profile-management-update"></a>&#x2022; [`update`](#bot-defense-policy-protected-app-endpoints-flow-label-profile-management-update) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-profile-management-view"></a>&#x2022; [`view`](#bot-defense-policy-protected-app-endpoints-flow-label-profile-management-view) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-profile-management-view"></a>&#x2022; [`view`](#bot-defense-policy-protected-app-endpoints-flow-label-profile-management-view) - Optional Block<br>Enable this option
 
 #### Bot Defense Policy Protected App Endpoints Flow Label Search
 
 A [`search`](#bot-defense-policy-protected-app-endpoints-flow-label-search) block (within [`bot_defense.policy.protected_app_endpoints.flow_label`](#bot-defense-policy-protected-app-endpoints-flow-label)) supports the following:
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-search-flight-search"></a>&#x2022; [`flight_search`](#bot-defense-policy-protected-app-endpoints-flow-label-search-flight-search) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-search-flight-search"></a>&#x2022; [`flight_search`](#bot-defense-policy-protected-app-endpoints-flow-label-search-flight-search) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-search-product-search"></a>&#x2022; [`product_search`](#bot-defense-policy-protected-app-endpoints-flow-label-search-product-search) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-search-product-search"></a>&#x2022; [`product_search`](#bot-defense-policy-protected-app-endpoints-flow-label-search-product-search) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-search-reservation-search"></a>&#x2022; [`reservation_search`](#bot-defense-policy-protected-app-endpoints-flow-label-search-reservation-search) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-search-reservation-search"></a>&#x2022; [`reservation_search`](#bot-defense-policy-protected-app-endpoints-flow-label-search-reservation-search) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-search-room-search"></a>&#x2022; [`room_search`](#bot-defense-policy-protected-app-endpoints-flow-label-search-room-search) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-search-room-search"></a>&#x2022; [`room_search`](#bot-defense-policy-protected-app-endpoints-flow-label-search-room-search) - Optional Block<br>Enable this option
 
 #### Bot Defense Policy Protected App Endpoints Flow Label Shopping Gift Cards
 
 A [`shopping_gift_cards`](#bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards) block (within [`bot_defense.policy.protected_app_endpoints.flow_label`](#bot-defense-policy-protected-app-endpoints-flow-label)) supports the following:
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-gift-card-make-purchase-with-gift-card"></a>&#x2022; [`gift_card_make_purchase_with_gift_card`](#bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-gift-card-make-purchase-with-gift-card) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-gift-card-make-purchase-with-gift-card"></a>&#x2022; [`gift_card_make_purchase_with_gift_card`](#bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-gift-card-make-purchase-with-gift-card) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-gift-card-validation"></a>&#x2022; [`gift_card_validation`](#bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-gift-card-validation) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-gift-card-validation"></a>&#x2022; [`gift_card_validation`](#bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-gift-card-validation) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-add-to-cart"></a>&#x2022; [`shop_add_to_cart`](#bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-add-to-cart) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-add-to-cart"></a>&#x2022; [`shop_add_to_cart`](#bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-add-to-cart) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-checkout"></a>&#x2022; [`shop_checkout`](#bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-checkout) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-checkout"></a>&#x2022; [`shop_checkout`](#bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-checkout) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-choose-seat"></a>&#x2022; [`shop_choose_seat`](#bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-choose-seat) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-choose-seat"></a>&#x2022; [`shop_choose_seat`](#bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-choose-seat) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-enter-drawing-submission"></a>&#x2022; [`shop_enter_drawing_submission`](#bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-enter-drawing-submission) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-enter-drawing-submission"></a>&#x2022; [`shop_enter_drawing_submission`](#bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-enter-drawing-submission) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-make-payment"></a>&#x2022; [`shop_make_payment`](#bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-make-payment) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-make-payment"></a>&#x2022; [`shop_make_payment`](#bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-make-payment) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-order"></a>&#x2022; [`shop_order`](#bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-order) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-order"></a>&#x2022; [`shop_order`](#bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-order) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-price-inquiry"></a>&#x2022; [`shop_price_inquiry`](#bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-price-inquiry) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-price-inquiry"></a>&#x2022; [`shop_price_inquiry`](#bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-price-inquiry) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-promo-code-validation"></a>&#x2022; [`shop_promo_code_validation`](#bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-promo-code-validation) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-promo-code-validation"></a>&#x2022; [`shop_promo_code_validation`](#bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-promo-code-validation) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-purchase-gift-card"></a>&#x2022; [`shop_purchase_gift_card`](#bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-purchase-gift-card) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-purchase-gift-card"></a>&#x2022; [`shop_purchase_gift_card`](#bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-purchase-gift-card) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-update-quantity"></a>&#x2022; [`shop_update_quantity`](#bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-update-quantity) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-update-quantity"></a>&#x2022; [`shop_update_quantity`](#bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards-shop-update-quantity) - Optional Block<br>Enable this option
 
 #### Bot Defense Policy Protected App Endpoints Headers
 
 A [`headers`](#bot-defense-policy-protected-app-endpoints-headers) block (within [`bot_defense.policy.protected_app_endpoints`](#bot-defense-policy-protected-app-endpoints)) supports the following:
 
-<a id="bot-defense-policy-protected-app-endpoints-headers-check-not-present"></a>&#x2022; [`check_not_present`](#bot-defense-policy-protected-app-endpoints-headers-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-headers-check-not-present"></a>&#x2022; [`check_not_present`](#bot-defense-policy-protected-app-endpoints-headers-check-not-present) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-protected-app-endpoints-headers-check-present"></a>&#x2022; [`check_present`](#bot-defense-policy-protected-app-endpoints-headers-check-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-headers-check-present"></a>&#x2022; [`check_present`](#bot-defense-policy-protected-app-endpoints-headers-check-present) - Optional Block<br>Enable this option
 
 <a id="bot-defense-policy-protected-app-endpoints-headers-invert-matcher"></a>&#x2022; [`invert_matcher`](#bot-defense-policy-protected-app-endpoints-headers-invert-matcher) - Optional Bool<br>Invert Header Matcher. Invert the match result
 
@@ -1838,7 +1838,7 @@ A [`flag`](#bot-defense-policy-protected-app-endpoints-mitigation-flag) block (w
 
 <a id="bot-defense-policy-protected-app-endpoints-mitigation-flag-append-headers"></a>&#x2022; [`append_headers`](#bot-defense-policy-protected-app-endpoints-mitigation-flag-append-headers) - Optional Block<br>Append Flag Mitigation Headers. Append flag mitigation headers to forwarded request<br>See [Append Headers](#bot-defense-policy-protected-app-endpoints-mitigation-flag-append-headers) below.
 
-<a id="bot-defense-policy-protected-app-endpoints-mitigation-flag-no-headers"></a>&#x2022; [`no_headers`](#bot-defense-policy-protected-app-endpoints-mitigation-flag-no-headers) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-mitigation-flag-no-headers"></a>&#x2022; [`no_headers`](#bot-defense-policy-protected-app-endpoints-mitigation-flag-no-headers) - Optional Block<br>Enable this option
 
 #### Bot Defense Policy Protected App Endpoints Mitigation Flag Append Headers
 
@@ -1868,9 +1868,9 @@ A [`path`](#bot-defense-policy-protected-app-endpoints-path) block (within [`bot
 
 A [`query_params`](#bot-defense-policy-protected-app-endpoints-query-params) block (within [`bot_defense.policy.protected_app_endpoints`](#bot-defense-policy-protected-app-endpoints)) supports the following:
 
-<a id="bot-defense-policy-protected-app-endpoints-query-params-check-not-present"></a>&#x2022; [`check_not_present`](#bot-defense-policy-protected-app-endpoints-query-params-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-query-params-check-not-present"></a>&#x2022; [`check_not_present`](#bot-defense-policy-protected-app-endpoints-query-params-check-not-present) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-protected-app-endpoints-query-params-check-present"></a>&#x2022; [`check_present`](#bot-defense-policy-protected-app-endpoints-query-params-check-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bot-defense-policy-protected-app-endpoints-query-params-check-present"></a>&#x2022; [`check_present`](#bot-defense-policy-protected-app-endpoints-query-params-check-present) - Optional Block<br>Enable this option
 
 <a id="bot-defense-policy-protected-app-endpoints-query-params-invert-matcher"></a>&#x2022; [`invert_matcher`](#bot-defense-policy-protected-app-endpoints-query-params-invert-matcher) - Optional Bool<br>Invert Query Parameter Matcher. Invert the match result
 
@@ -1912,9 +1912,9 @@ A [`client_side_defense`](#client-side-defense) block supports the following:
 
 A [`policy`](#client-side-defense-policy) block (within [`client_side_defense`](#client-side-defense)) supports the following:
 
-<a id="client-side-defense-policy-disable-js-insert"></a>&#x2022; [`disable_js_insert`](#client-side-defense-policy-disable-js-insert) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="client-side-defense-policy-disable-js-insert"></a>&#x2022; [`disable_js_insert`](#client-side-defense-policy-disable-js-insert) - Optional Block<br>Enable this option
 
-<a id="client-side-defense-policy-js-insert-all-pages"></a>&#x2022; [`js_insert_all_pages`](#client-side-defense-policy-js-insert-all-pages) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="client-side-defense-policy-js-insert-all-pages"></a>&#x2022; [`js_insert_all_pages`](#client-side-defense-policy-js-insert-all-pages) - Optional Block<br>Enable this option
 
 <a id="client-side-defense-policy-js-insert-all-pages-except"></a>&#x2022; [`js_insert_all_pages_except`](#client-side-defense-policy-js-insert-all-pages-except) - Optional Block<br>Insert JavaScript in All Pages with the Exceptions. Insert Client-Side Defense JavaScript in all pages with the exceptions<br>See [Js Insert All Pages Except](#client-side-defense-policy-js-insert-all-pages-except) below.
 
@@ -1930,7 +1930,7 @@ A [`js_insert_all_pages_except`](#client-side-defense-policy-js-insert-all-pages
 
 An [`exclude_list`](#client-side-defense-policy-js-insert-all-pages-except-exclude-list) block (within [`client_side_defense.policy.js_insert_all_pages_except`](#client-side-defense-policy-js-insert-all-pages-except)) supports the following:
 
-<a id="client-side-defense-policy-js-insert-all-pages-except-exclude-list-any-domain"></a>&#x2022; [`any_domain`](#client-side-defense-policy-js-insert-all-pages-except-exclude-list-any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="client-side-defense-policy-js-insert-all-pages-except-exclude-list-any-domain"></a>&#x2022; [`any_domain`](#client-side-defense-policy-js-insert-all-pages-except-exclude-list-any-domain) - Optional Block<br>Enable this option
 
 <a id="client-side-defense-policy-js-insert-all-pages-except-exclude-list-domain"></a>&#x2022; [`domain`](#client-side-defense-policy-js-insert-all-pages-except-exclude-list-domain) - Optional Block<br>Domains. Domains names<br>See [Domain](#client-side-defense-policy-js-insert-all-pages-except-exclude-list-domain) below.
 
@@ -1978,7 +1978,7 @@ A [`js_insertion_rules`](#client-side-defense-policy-js-insertion-rules) block (
 
 An [`exclude_list`](#client-side-defense-policy-js-insertion-rules-exclude-list) block (within [`client_side_defense.policy.js_insertion_rules`](#client-side-defense-policy-js-insertion-rules)) supports the following:
 
-<a id="client-side-defense-policy-js-insertion-rules-exclude-list-any-domain"></a>&#x2022; [`any_domain`](#client-side-defense-policy-js-insertion-rules-exclude-list-any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="client-side-defense-policy-js-insertion-rules-exclude-list-any-domain"></a>&#x2022; [`any_domain`](#client-side-defense-policy-js-insertion-rules-exclude-list-any-domain) - Optional Block<br>Enable this option
 
 <a id="client-side-defense-policy-js-insertion-rules-exclude-list-domain"></a>&#x2022; [`domain`](#client-side-defense-policy-js-insertion-rules-exclude-list-domain) - Optional Block<br>Domains. Domains names<br>See [Domain](#client-side-defense-policy-js-insertion-rules-exclude-list-domain) below.
 
@@ -2018,7 +2018,7 @@ A [`path`](#client-side-defense-policy-js-insertion-rules-exclude-list-path) blo
 
 A [`rules`](#client-side-defense-policy-js-insertion-rules-rules) block (within [`client_side_defense.policy.js_insertion_rules`](#client-side-defense-policy-js-insertion-rules)) supports the following:
 
-<a id="client-side-defense-policy-js-insertion-rules-rules-any-domain"></a>&#x2022; [`any_domain`](#client-side-defense-policy-js-insertion-rules-rules-any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="client-side-defense-policy-js-insertion-rules-rules-any-domain"></a>&#x2022; [`any_domain`](#client-side-defense-policy-js-insertion-rules-rules-any-domain) - Optional Block<br>Enable this option
 
 <a id="client-side-defense-policy-js-insertion-rules-rules-domain"></a>&#x2022; [`domain`](#client-side-defense-policy-js-insertion-rules-rules-domain) - Optional Block<br>Domains. Domains names<br>See [Domain](#client-side-defense-policy-js-insertion-rules-rules-domain) below.
 
@@ -2078,11 +2078,11 @@ A [`cors_policy`](#cors-policy) block supports the following:
 
 A [`csrf_policy`](#csrf-policy) block supports the following:
 
-<a id="csrf-policy-all-load-balancer-domains"></a>&#x2022; [`all_load_balancer_domains`](#csrf-policy-all-load-balancer-domains) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="csrf-policy-all-load-balancer-domains"></a>&#x2022; [`all_load_balancer_domains`](#csrf-policy-all-load-balancer-domains) - Optional Block<br>Enable this option
 
 <a id="csrf-policy-custom-domain-list"></a>&#x2022; [`custom_domain_list`](#csrf-policy-custom-domain-list) - Optional Block<br>Domain name list. List of domain names used for Host header matching<br>See [Custom Domain List](#csrf-policy-custom-domain-list) below.
 
-<a id="csrf-policy-disabled"></a>&#x2022; [`disabled`](#csrf-policy-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="csrf-policy-disabled"></a>&#x2022; [`disabled`](#csrf-policy-disabled) - Optional Block<br>Enable this option
 
 #### CSRF Policy Custom Domain List
 
@@ -2110,9 +2110,9 @@ A [`cdn_cache_rules`](#custom-cache-rule-cdn-cache-rules) block (within [`custom
 
 A [`data_guard_rules`](#data-guard-rules) block supports the following:
 
-<a id="data-guard-rules-any-domain"></a>&#x2022; [`any_domain`](#data-guard-rules-any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="data-guard-rules-any-domain"></a>&#x2022; [`any_domain`](#data-guard-rules-any-domain) - Optional Block<br>Enable this option
 
-<a id="data-guard-rules-apply-data-guard"></a>&#x2022; [`apply_data_guard`](#data-guard-rules-apply-data-guard) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="data-guard-rules-apply-data-guard"></a>&#x2022; [`apply_data_guard`](#data-guard-rules-apply-data-guard) - Optional Block<br>Enable this option
 
 <a id="data-guard-rules-exact-value"></a>&#x2022; [`exact_value`](#data-guard-rules-exact-value) - Optional String<br>Exact Value. Exact domain name
 
@@ -2120,7 +2120,7 @@ A [`data_guard_rules`](#data-guard-rules) block supports the following:
 
 <a id="data-guard-rules-path"></a>&#x2022; [`path`](#data-guard-rules-path) - Optional Block<br>Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path](#data-guard-rules-path) below.
 
-<a id="data-guard-rules-skip-data-guard"></a>&#x2022; [`skip_data_guard`](#data-guard-rules-skip-data-guard) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="data-guard-rules-skip-data-guard"></a>&#x2022; [`skip_data_guard`](#data-guard-rules-skip-data-guard) - Optional Block<br>Enable this option
 
 <a id="data-guard-rules-suffix-value"></a>&#x2022; [`suffix_value`](#data-guard-rules-suffix-value) - Optional String<br>Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
 
@@ -2146,7 +2146,7 @@ A [`path`](#data-guard-rules-path) block (within [`data_guard_rules`](#data-guar
 
 A [`ddos_mitigation_rules`](#ddos-mitigation-rules) block supports the following:
 
-<a id="ddos-mitigation-rules-block"></a>&#x2022; [`block`](#ddos-mitigation-rules-block) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ddos-mitigation-rules-block"></a>&#x2022; [`block`](#ddos-mitigation-rules-block) - Optional Block<br>Enable this option
 
 <a id="ddos-mitigation-rules-ddos-client-source"></a>&#x2022; [`ddos_client_source`](#ddos-mitigation-rules-ddos-client-source) - Optional Block<br>DDOS Client Source Choice. DDOS Mitigation sources to be blocked<br>See [DDOS Client Source](#ddos-mitigation-rules-ddos-client-source) below.
 
@@ -2210,7 +2210,7 @@ A [`metadata`](#ddos-mitigation-rules-metadata) block (within [`ddos_mitigation_
 
 A [`default_cache_action`](#default-cache-action) block supports the following:
 
-<a id="default-cache-action-cache-disabled"></a>&#x2022; [`cache_disabled`](#default-cache-action-cache-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="default-cache-action-cache-disabled"></a>&#x2022; [`cache_disabled`](#default-cache-action-cache-disabled) - Optional Block<br>Enable this option
 
 <a id="default-cache-action-cache-ttl-default"></a>&#x2022; [`cache_ttl_default`](#default-cache-action-cache-ttl-default) - Optional String<br>Fallback Cache TTL (d/ h/ m). Use Cache TTL Provided by Origin, and set a contigency TTL value in case one is not provided
 
@@ -2222,17 +2222,17 @@ An [`enable_api_discovery`](#enable-api-discovery) block supports the following:
 
 <a id="enable-api-discovery-api-crawler"></a>&#x2022; [`api_crawler`](#enable-api-discovery-api-crawler) - Optional Block<br>API Crawling. API Crawler message<br>See [API Crawler](#enable-api-discovery-api-crawler) below.
 
-<a id="enable-api-discovery-api-discovery-from-code-scan"></a>&#x2022; [`api_discovery_from_code_scan`](#enable-api-discovery-api-discovery-from-code-scan) - Optional Block<br>Select Code Base and Repositories. x-required<br>See [API Discovery From Code Scan](#enable-api-discovery-api-discovery-from-code-scan) below.
+<a id="enable-api-discovery-api-discovery-from-code-scan"></a>&#x2022; [`api_discovery_from_code_scan`](#enable-api-discovery-api-discovery-from-code-scan) - Optional Block<br>Select Code Base and Repositories<br>See [API Discovery From Code Scan](#enable-api-discovery-api-discovery-from-code-scan) below.
 
 <a id="enable-api-discovery-custom-api-auth-discovery"></a>&#x2022; [`custom_api_auth_discovery`](#enable-api-discovery-custom-api-auth-discovery) - Optional Block<br>API Discovery Advanced Settings. API Discovery Advanced settings<br>See [Custom API Auth Discovery](#enable-api-discovery-custom-api-auth-discovery) below.
 
-<a id="enable-api-discovery-default-api-auth-discovery"></a>&#x2022; [`default_api_auth_discovery`](#enable-api-discovery-default-api-auth-discovery) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="enable-api-discovery-default-api-auth-discovery"></a>&#x2022; [`default_api_auth_discovery`](#enable-api-discovery-default-api-auth-discovery) - Optional Block<br>Enable this option
 
-<a id="enable-api-discovery-disable-learn-from-redirect-traffic"></a>&#x2022; [`disable_learn_from_redirect_traffic`](#enable-api-discovery-disable-learn-from-redirect-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="enable-api-discovery-disable-learn-from-redirect-traffic"></a>&#x2022; [`disable_learn_from_redirect_traffic`](#enable-api-discovery-disable-learn-from-redirect-traffic) - Optional Block<br>Enable this option
 
-<a id="enable-api-discovery-discovered-api-settings"></a>&#x2022; [`discovered_api_settings`](#enable-api-discovery-discovered-api-settings) - Optional Block<br>Discovered API Settings. x-example: '2' Configure Discovered API Settings<br>See [Discovered API Settings](#enable-api-discovery-discovered-api-settings) below.
+<a id="enable-api-discovery-discovered-api-settings"></a>&#x2022; [`discovered_api_settings`](#enable-api-discovery-discovered-api-settings) - Optional Block<br>Discovered API Settings. Configure Discovered API Settings<br>See [Discovered API Settings](#enable-api-discovery-discovered-api-settings) below.
 
-<a id="enable-api-discovery-enable-learn-from-redirect-traffic"></a>&#x2022; [`enable_learn_from_redirect_traffic`](#enable-api-discovery-enable-learn-from-redirect-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="enable-api-discovery-enable-learn-from-redirect-traffic"></a>&#x2022; [`enable_learn_from_redirect_traffic`](#enable-api-discovery-enable-learn-from-redirect-traffic) - Optional Block<br>Enable this option
 
 #### Enable API Discovery API Crawler
 
@@ -2240,7 +2240,7 @@ An [`api_crawler`](#enable-api-discovery-api-crawler) block (within [`enable_api
 
 <a id="enable-api-discovery-api-crawler-api-crawler-config"></a>&#x2022; [`api_crawler_config`](#enable-api-discovery-api-crawler-api-crawler-config) - Optional Block<br>Crawler Configure<br>See [API Crawler Config](#enable-api-discovery-api-crawler-api-crawler-config) below.
 
-<a id="enable-api-discovery-api-crawler-disable-api-crawler"></a>&#x2022; [`disable_api_crawler`](#enable-api-discovery-api-crawler-disable-api-crawler) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="enable-api-discovery-api-crawler-disable-api-crawler"></a>&#x2022; [`disable_api_crawler`](#enable-api-discovery-api-crawler-disable-api-crawler) - Optional Block<br>Enable this option
 
 #### Enable API Discovery API Crawler API Crawler Config
 
@@ -2300,7 +2300,7 @@ An [`api_discovery_from_code_scan`](#enable-api-discovery-api-discovery-from-cod
 
 A [`code_base_integrations`](#enable-api-discovery-api-discovery-from-code-scan-code-base-integrations) block (within [`enable_api_discovery.api_discovery_from_code_scan`](#enable-api-discovery-api-discovery-from-code-scan)) supports the following:
 
-<a id="enable-api-discovery-api-discovery-from-code-scan-code-base-integrations-all-repos"></a>&#x2022; [`all_repos`](#enable-api-discovery-api-discovery-from-code-scan-code-base-integrations-all-repos) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="enable-api-discovery-api-discovery-from-code-scan-code-base-integrations-all-repos"></a>&#x2022; [`all_repos`](#enable-api-discovery-api-discovery-from-code-scan-code-base-integrations-all-repos) - Optional Block<br>Enable this option
 
 <a id="enable-api-discovery-api-discovery-from-code-scan-code-base-integrations-code-base-integration"></a>&#x2022; [`code_base_integration`](#enable-api-discovery-api-discovery-from-code-scan-code-base-integrations-code-base-integration) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Code Base Integration](#enable-api-discovery-api-discovery-from-code-scan-code-base-integrations-code-base-integration) below.
 
@@ -2350,11 +2350,11 @@ An [`enable_challenge`](#enable-challenge) block supports the following:
 
 <a id="enable-challenge-captcha-challenge-parameters"></a>&#x2022; [`captcha_challenge_parameters`](#enable-challenge-captcha-challenge-parameters) - Optional Block<br>Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the captcha challenge is successful. Loadbalancer will tag response header with a cookie to avoid Captcha challenge for subsequent requests. CAPTCHA is mainly used as a security check to ensure only human users can pass through. Generally, computers or bots are not capable of solving a captcha. You can enable either Javascript challenge or Captcha challenge on a virtual host<br>See [Captcha Challenge Parameters](#enable-challenge-captcha-challenge-parameters) below.
 
-<a id="enable-challenge-default-captcha-challenge-parameters"></a>&#x2022; [`default_captcha_challenge_parameters`](#enable-challenge-default-captcha-challenge-parameters) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="enable-challenge-default-captcha-challenge-parameters"></a>&#x2022; [`default_captcha_challenge_parameters`](#enable-challenge-default-captcha-challenge-parameters) - Optional Block<br>Enable this option
 
-<a id="enable-challenge-default-js-challenge-parameters"></a>&#x2022; [`default_js_challenge_parameters`](#enable-challenge-default-js-challenge-parameters) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="enable-challenge-default-js-challenge-parameters"></a>&#x2022; [`default_js_challenge_parameters`](#enable-challenge-default-js-challenge-parameters) - Optional Block<br>Enable this option
 
-<a id="enable-challenge-default-mitigation-settings"></a>&#x2022; [`default_mitigation_settings`](#enable-challenge-default-mitigation-settings) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="enable-challenge-default-mitigation-settings"></a>&#x2022; [`default_mitigation_settings`](#enable-challenge-default-mitigation-settings) - Optional Block<br>Enable this option
 
 <a id="enable-challenge-js-challenge-parameters"></a>&#x2022; [`js_challenge_parameters`](#enable-challenge-js-challenge-parameters) - Optional Block<br>Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set of random numbers for every new client and sends these numbers along with an encrypted answer with the request such that it embed these numbers as input in the Javascript. Javascript will run on the requestor browser and perform a complex Math operation. Script will submit the answer to loadbalancer. Loadbalancer will validate the answer by comparing the calculated answer with the decrypted answer (which was encrypted when it was sent back as reply) and allow the request to the upstream server only if the answer is correct. Loadbalancer will tag response header with a cookie to avoid Javascript challenge for subsequent requests. Javascript challenge serves following purposes \* Validate that the request is coming via a browser that is capable for running Javascript \* Force the browser to run a complex operation, f(X), that requires it to spend a large number of CPU cycles. This is to slow down a potential DOS attacker by making it difficult to launch a large request flood without having to spend even larger CPU cost at their end. You can enable either Javascript challenge or Captcha challenge on a virtual host<br>See [Js Challenge Parameters](#enable-challenge-js-challenge-parameters) below.
 
@@ -2398,7 +2398,7 @@ An [`enable_ip_reputation`](#enable-ip-reputation) block supports the following:
 
 A [`graphql_rules`](#graphql-rules) block supports the following:
 
-<a id="graphql-rules-any-domain"></a>&#x2022; [`any_domain`](#graphql-rules-any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="graphql-rules-any-domain"></a>&#x2022; [`any_domain`](#graphql-rules-any-domain) - Optional Block<br>Enable this option
 
 <a id="graphql-rules-exact-path"></a>&#x2022; [`exact_path`](#graphql-rules-exact-path) - Optional String  Defaults to `/GraphQL`<br>Path. Specifies the exact path to GraphQL endpoint
 
@@ -2408,9 +2408,9 @@ A [`graphql_rules`](#graphql-rules) block supports the following:
 
 <a id="graphql-rules-metadata"></a>&#x2022; [`metadata`](#graphql-rules-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#graphql-rules-metadata) below.
 
-<a id="graphql-rules-method-get"></a>&#x2022; [`method_get`](#graphql-rules-method-get) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="graphql-rules-method-get"></a>&#x2022; [`method_get`](#graphql-rules-method-get) - Optional Block<br>Enable this option
 
-<a id="graphql-rules-method-post"></a>&#x2022; [`method_post`](#graphql-rules-method-post) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="graphql-rules-method-post"></a>&#x2022; [`method_post`](#graphql-rules-method-post) - Optional Block<br>Enable this option
 
 <a id="graphql-rules-suffix-value"></a>&#x2022; [`suffix_value`](#graphql-rules-suffix-value) - Optional String<br>Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
 
@@ -2418,9 +2418,9 @@ A [`graphql_rules`](#graphql-rules) block supports the following:
 
 A [`graphql_settings`](#graphql-rules-graphql-settings) block (within [`graphql_rules`](#graphql-rules)) supports the following:
 
-<a id="graphql-rules-graphql-settings-disable-introspection"></a>&#x2022; [`disable_introspection`](#graphql-rules-graphql-settings-disable-introspection) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="graphql-rules-graphql-settings-disable-introspection"></a>&#x2022; [`disable_introspection`](#graphql-rules-graphql-settings-disable-introspection) - Optional Block<br>Enable this option
 
-<a id="graphql-rules-graphql-settings-enable-introspection"></a>&#x2022; [`enable_introspection`](#graphql-rules-graphql-settings-enable-introspection) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="graphql-rules-graphql-settings-enable-introspection"></a>&#x2022; [`enable_introspection`](#graphql-rules-graphql-settings-enable-introspection) - Optional Block<br>Enable this option
 
 <a id="graphql-rules-graphql-settings-max-batched-queries"></a>&#x2022; [`max_batched_queries`](#graphql-rules-graphql-settings-max-batched-queries) - Optional Number<br>Maximum Batched Queries. Specify maximum number of queries in a single batched request
 
@@ -2470,7 +2470,7 @@ A [`tls_cert_params`](#https-tls-cert-options-tls-cert-params) block (within [`h
 
 <a id="https-tls-cert-options-tls-cert-params-certificates"></a>&#x2022; [`certificates`](#https-tls-cert-options-tls-cert-params-certificates) - Optional Block<br>Certificates. Select one or more certificates with any domain names<br>See [Certificates](#https-tls-cert-options-tls-cert-params-certificates) below.
 
-<a id="https-tls-cert-options-tls-cert-params-no-mtls"></a>&#x2022; [`no_mtls`](#https-tls-cert-options-tls-cert-params-no-mtls) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-tls-cert-options-tls-cert-params-no-mtls"></a>&#x2022; [`no_mtls`](#https-tls-cert-options-tls-cert-params-no-mtls) - Optional Block<br>Enable this option
 
 <a id="https-tls-cert-options-tls-cert-params-tls-config"></a>&#x2022; [`tls_config`](#https-tls-cert-options-tls-cert-params-tls-config) - Optional Block<br>TLS Config. This defines various options to configure TLS configuration parameters<br>See [TLS Config](#https-tls-cert-options-tls-cert-params-tls-config) below.
 
@@ -2492,11 +2492,11 @@ A [`tls_config`](#https-tls-cert-options-tls-cert-params-tls-config) block (with
 
 <a id="https-tls-cert-options-tls-cert-params-tls-config-custom-security"></a>&#x2022; [`custom_security`](#https-tls-cert-options-tls-cert-params-tls-config-custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#https-tls-cert-options-tls-cert-params-tls-config-custom-security) below.
 
-<a id="https-tls-cert-options-tls-cert-params-tls-config-default-security"></a>&#x2022; [`default_security`](#https-tls-cert-options-tls-cert-params-tls-config-default-security) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-tls-cert-options-tls-cert-params-tls-config-default-security"></a>&#x2022; [`default_security`](#https-tls-cert-options-tls-cert-params-tls-config-default-security) - Optional Block<br>Enable this option
 
-<a id="https-tls-cert-options-tls-cert-params-tls-config-low-security"></a>&#x2022; [`low_security`](#https-tls-cert-options-tls-cert-params-tls-config-low-security) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-tls-cert-options-tls-cert-params-tls-config-low-security"></a>&#x2022; [`low_security`](#https-tls-cert-options-tls-cert-params-tls-config-low-security) - Optional Block<br>Enable this option
 
-<a id="https-tls-cert-options-tls-cert-params-tls-config-medium-security"></a>&#x2022; [`medium_security`](#https-tls-cert-options-tls-cert-params-tls-config-medium-security) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-tls-cert-options-tls-cert-params-tls-config-medium-security"></a>&#x2022; [`medium_security`](#https-tls-cert-options-tls-cert-params-tls-config-medium-security) - Optional Block<br>Enable this option
 
 #### HTTPS TLS Cert Options TLS Cert Params TLS Config Custom Security
 
@@ -2516,13 +2516,13 @@ An [`use_mtls`](#https-tls-cert-options-tls-cert-params-use-mtls) block (within 
 
 <a id="https-tls-cert-options-tls-cert-params-use-mtls-crl"></a>&#x2022; [`crl`](#https-tls-cert-options-tls-cert-params-use-mtls-crl) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#https-tls-cert-options-tls-cert-params-use-mtls-crl) below.
 
-<a id="https-tls-cert-options-tls-cert-params-use-mtls-no-crl"></a>&#x2022; [`no_crl`](#https-tls-cert-options-tls-cert-params-use-mtls-no-crl) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-tls-cert-options-tls-cert-params-use-mtls-no-crl"></a>&#x2022; [`no_crl`](#https-tls-cert-options-tls-cert-params-use-mtls-no-crl) - Optional Block<br>Enable this option
 
 <a id="https-tls-cert-options-tls-cert-params-use-mtls-trusted-ca"></a>&#x2022; [`trusted_ca`](#https-tls-cert-options-tls-cert-params-use-mtls-trusted-ca) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#https-tls-cert-options-tls-cert-params-use-mtls-trusted-ca) below.
 
 <a id="https-tls-cert-options-tls-cert-params-use-mtls-trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#https-tls-cert-options-tls-cert-params-use-mtls-trusted-ca-url) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
 
-<a id="https-tls-cert-options-tls-cert-params-use-mtls-xfcc-disabled"></a>&#x2022; [`xfcc_disabled`](#https-tls-cert-options-tls-cert-params-use-mtls-xfcc-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-tls-cert-options-tls-cert-params-use-mtls-xfcc-disabled"></a>&#x2022; [`xfcc_disabled`](#https-tls-cert-options-tls-cert-params-use-mtls-xfcc-disabled) - Optional Block<br>Enable this option
 
 <a id="https-tls-cert-options-tls-cert-params-use-mtls-xfcc-options"></a>&#x2022; [`xfcc_options`](#https-tls-cert-options-tls-cert-params-use-mtls-xfcc-options) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#https-tls-cert-options-tls-cert-params-use-mtls-xfcc-options) below.
 
@@ -2556,7 +2556,7 @@ A [`xfcc_options`](#https-tls-cert-options-tls-cert-params-use-mtls-xfcc-options
 
 A [`tls_inline_params`](#https-tls-cert-options-tls-inline-params) block (within [`https.tls_cert_options`](#https-tls-cert-options)) supports the following:
 
-<a id="https-tls-cert-options-tls-inline-params-no-mtls"></a>&#x2022; [`no_mtls`](#https-tls-cert-options-tls-inline-params-no-mtls) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-tls-cert-options-tls-inline-params-no-mtls"></a>&#x2022; [`no_mtls`](#https-tls-cert-options-tls-inline-params-no-mtls) - Optional Block<br>Enable this option
 
 <a id="https-tls-cert-options-tls-inline-params-tls-certificates"></a>&#x2022; [`tls_certificates`](#https-tls-cert-options-tls-inline-params-tls-certificates) - Optional Block<br>TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#https-tls-cert-options-tls-inline-params-tls-certificates) below.
 
@@ -2574,11 +2574,11 @@ A [`tls_certificates`](#https-tls-cert-options-tls-inline-params-tls-certificate
 
 <a id="https-tls-cert-options-tls-inline-params-tls-certificates-description-spec"></a>&#x2022; [`description_spec`](#https-tls-cert-options-tls-inline-params-tls-certificates-description-spec) - Optional String<br>Description. Description for the certificate
 
-<a id="https-tls-cert-options-tls-inline-params-tls-certificates-disable-ocsp-stapling"></a>&#x2022; [`disable_ocsp_stapling`](#https-tls-cert-options-tls-inline-params-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-tls-cert-options-tls-inline-params-tls-certificates-disable-ocsp-stapling"></a>&#x2022; [`disable_ocsp_stapling`](#https-tls-cert-options-tls-inline-params-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Enable this option
 
 <a id="https-tls-cert-options-tls-inline-params-tls-certificates-private-key"></a>&#x2022; [`private_key`](#https-tls-cert-options-tls-inline-params-tls-certificates-private-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#https-tls-cert-options-tls-inline-params-tls-certificates-private-key) below.
 
-<a id="https-tls-cert-options-tls-inline-params-tls-certificates-use-system-defaults"></a>&#x2022; [`use_system_defaults`](#https-tls-cert-options-tls-inline-params-tls-certificates-use-system-defaults) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-tls-cert-options-tls-inline-params-tls-certificates-use-system-defaults"></a>&#x2022; [`use_system_defaults`](#https-tls-cert-options-tls-inline-params-tls-certificates-use-system-defaults) - Optional Block<br>Enable this option
 
 #### HTTPS TLS Cert Options TLS Inline Params TLS Certificates Custom Hash Algorithms
 
@@ -2618,11 +2618,11 @@ A [`tls_config`](#https-tls-cert-options-tls-inline-params-tls-config) block (wi
 
 <a id="https-tls-cert-options-tls-inline-params-tls-config-custom-security"></a>&#x2022; [`custom_security`](#https-tls-cert-options-tls-inline-params-tls-config-custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#https-tls-cert-options-tls-inline-params-tls-config-custom-security) below.
 
-<a id="https-tls-cert-options-tls-inline-params-tls-config-default-security"></a>&#x2022; [`default_security`](#https-tls-cert-options-tls-inline-params-tls-config-default-security) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-tls-cert-options-tls-inline-params-tls-config-default-security"></a>&#x2022; [`default_security`](#https-tls-cert-options-tls-inline-params-tls-config-default-security) - Optional Block<br>Enable this option
 
-<a id="https-tls-cert-options-tls-inline-params-tls-config-low-security"></a>&#x2022; [`low_security`](#https-tls-cert-options-tls-inline-params-tls-config-low-security) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-tls-cert-options-tls-inline-params-tls-config-low-security"></a>&#x2022; [`low_security`](#https-tls-cert-options-tls-inline-params-tls-config-low-security) - Optional Block<br>Enable this option
 
-<a id="https-tls-cert-options-tls-inline-params-tls-config-medium-security"></a>&#x2022; [`medium_security`](#https-tls-cert-options-tls-inline-params-tls-config-medium-security) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-tls-cert-options-tls-inline-params-tls-config-medium-security"></a>&#x2022; [`medium_security`](#https-tls-cert-options-tls-inline-params-tls-config-medium-security) - Optional Block<br>Enable this option
 
 #### HTTPS TLS Cert Options TLS Inline Params TLS Config Custom Security
 
@@ -2642,13 +2642,13 @@ An [`use_mtls`](#https-tls-cert-options-tls-inline-params-use-mtls) block (withi
 
 <a id="https-tls-cert-options-tls-inline-params-use-mtls-crl"></a>&#x2022; [`crl`](#https-tls-cert-options-tls-inline-params-use-mtls-crl) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#https-tls-cert-options-tls-inline-params-use-mtls-crl) below.
 
-<a id="https-tls-cert-options-tls-inline-params-use-mtls-no-crl"></a>&#x2022; [`no_crl`](#https-tls-cert-options-tls-inline-params-use-mtls-no-crl) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-tls-cert-options-tls-inline-params-use-mtls-no-crl"></a>&#x2022; [`no_crl`](#https-tls-cert-options-tls-inline-params-use-mtls-no-crl) - Optional Block<br>Enable this option
 
 <a id="https-tls-cert-options-tls-inline-params-use-mtls-trusted-ca"></a>&#x2022; [`trusted_ca`](#https-tls-cert-options-tls-inline-params-use-mtls-trusted-ca) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#https-tls-cert-options-tls-inline-params-use-mtls-trusted-ca) below.
 
 <a id="https-tls-cert-options-tls-inline-params-use-mtls-trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#https-tls-cert-options-tls-inline-params-use-mtls-trusted-ca-url) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
 
-<a id="https-tls-cert-options-tls-inline-params-use-mtls-xfcc-disabled"></a>&#x2022; [`xfcc_disabled`](#https-tls-cert-options-tls-inline-params-use-mtls-xfcc-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-tls-cert-options-tls-inline-params-use-mtls-xfcc-disabled"></a>&#x2022; [`xfcc_disabled`](#https-tls-cert-options-tls-inline-params-use-mtls-xfcc-disabled) - Optional Block<br>Enable this option
 
 <a id="https-tls-cert-options-tls-inline-params-use-mtls-xfcc-options"></a>&#x2022; [`xfcc_options`](#https-tls-cert-options-tls-inline-params-use-mtls-xfcc-options) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#https-tls-cert-options-tls-inline-params-use-mtls-xfcc-options) below.
 
@@ -2692,9 +2692,9 @@ A [`https_auto_cert`](#https-auto-cert) block supports the following:
 
 A [`tls_config`](#https-auto-cert-tls-config) block (within [`https_auto_cert`](#https-auto-cert)) supports the following:
 
-<a id="https-auto-cert-tls-config-tls-11-plus"></a>&#x2022; [`tls_11_plus`](#https-auto-cert-tls-config-tls-11-plus) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-auto-cert-tls-config-tls-11-plus"></a>&#x2022; [`tls_11_plus`](#https-auto-cert-tls-config-tls-11-plus) - Optional Block<br>Enable this option
 
-<a id="https-auto-cert-tls-config-tls-12-plus"></a>&#x2022; [`tls_12_plus`](#https-auto-cert-tls-config-tls-12-plus) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="https-auto-cert-tls-config-tls-12-plus"></a>&#x2022; [`tls_12_plus`](#https-auto-cert-tls-config-tls-12-plus) - Optional Block<br>Enable this option
 
 #### Js Challenge
 
@@ -2726,9 +2726,9 @@ A [`jwt_validation`](#jwt-validation) block supports the following:
 
 An [`action`](#jwt-validation-action) block (within [`jwt_validation`](#jwt-validation)) supports the following:
 
-<a id="jwt-validation-action-block"></a>&#x2022; [`block`](#jwt-validation-action-block) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="jwt-validation-action-block"></a>&#x2022; [`block`](#jwt-validation-action-block) - Optional Block<br>Enable this option
 
-<a id="jwt-validation-action-report"></a>&#x2022; [`report`](#jwt-validation-action-report) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="jwt-validation-action-report"></a>&#x2022; [`report`](#jwt-validation-action-report) - Optional Block<br>Enable this option
 
 #### JWT Validation Jwks Config
 
@@ -2748,15 +2748,15 @@ A [`reserved_claims`](#jwt-validation-reserved-claims) block (within [`jwt_valid
 
 <a id="jwt-validation-reserved-claims-audience"></a>&#x2022; [`audience`](#jwt-validation-reserved-claims-audience) - Optional Block<br>Audiences<br>See [Audience](#jwt-validation-reserved-claims-audience) below.
 
-<a id="jwt-validation-reserved-claims-audience-disable"></a>&#x2022; [`audience_disable`](#jwt-validation-reserved-claims-audience-disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="jwt-validation-reserved-claims-audience-disable"></a>&#x2022; [`audience_disable`](#jwt-validation-reserved-claims-audience-disable) - Optional Block<br>Enable this option
 
 <a id="jwt-validation-reserved-claims-issuer"></a>&#x2022; [`issuer`](#jwt-validation-reserved-claims-issuer) - Optional String<br>Exact Match
 
-<a id="jwt-validation-reserved-claims-issuer-disable"></a>&#x2022; [`issuer_disable`](#jwt-validation-reserved-claims-issuer-disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="jwt-validation-reserved-claims-issuer-disable"></a>&#x2022; [`issuer_disable`](#jwt-validation-reserved-claims-issuer-disable) - Optional Block<br>Enable this option
 
-<a id="jwt-validation-reserved-claims-validate-period-disable"></a>&#x2022; [`validate_period_disable`](#jwt-validation-reserved-claims-validate-period-disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="jwt-validation-reserved-claims-validate-period-disable"></a>&#x2022; [`validate_period_disable`](#jwt-validation-reserved-claims-validate-period-disable) - Optional Block<br>Enable this option
 
-<a id="jwt-validation-reserved-claims-validate-period-enable"></a>&#x2022; [`validate_period_enable`](#jwt-validation-reserved-claims-validate-period-enable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="jwt-validation-reserved-claims-validate-period-enable"></a>&#x2022; [`validate_period_enable`](#jwt-validation-reserved-claims-validate-period-enable) - Optional Block<br>Enable this option
 
 #### JWT Validation Reserved Claims Audience
 
@@ -2768,7 +2768,7 @@ An [`audience`](#jwt-validation-reserved-claims-audience) block (within [`jwt_va
 
 A [`target`](#jwt-validation-target) block (within [`jwt_validation`](#jwt-validation)) supports the following:
 
-<a id="jwt-validation-target-all-endpoint"></a>&#x2022; [`all_endpoint`](#jwt-validation-target-all-endpoint) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="jwt-validation-target-all-endpoint"></a>&#x2022; [`all_endpoint`](#jwt-validation-target-all-endpoint) - Optional Block<br>Enable this option
 
 <a id="jwt-validation-target-api-groups"></a>&#x2022; [`api_groups`](#jwt-validation-target-api-groups) - Optional Block<br>API Groups<br>See [API Groups](#jwt-validation-target-api-groups) below.
 
@@ -2790,7 +2790,7 @@ A [`base_paths`](#jwt-validation-target-base-paths) block (within [`jwt_validati
 
 A [`token_location`](#jwt-validation-token-location) block (within [`jwt_validation`](#jwt-validation)) supports the following:
 
-<a id="jwt-validation-token-location-bearer-token"></a>&#x2022; [`bearer_token`](#jwt-validation-token-location-bearer-token) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="jwt-validation-token-location-bearer-token"></a>&#x2022; [`bearer_token`](#jwt-validation-token-location-bearer-token) - Optional Block<br>Enable this option
 
 #### L7 DDOS Action Js Challenge
 
@@ -2808,7 +2808,7 @@ An [`origin_pool`](#origin-pool) block supports the following:
 
 <a id="origin-pool-more-origin-options"></a>&#x2022; [`more_origin_options`](#origin-pool-more-origin-options) - Optional Block<br>Origin Byte Range Request Config<br>See [More Origin Options](#origin-pool-more-origin-options) below.
 
-<a id="origin-pool-no-tls"></a>&#x2022; [`no_tls`](#origin-pool-no-tls) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="origin-pool-no-tls"></a>&#x2022; [`no_tls`](#origin-pool-no-tls) - Optional Block<br>Enable this option
 
 <a id="origin-pool-origin-request-timeout"></a>&#x2022; [`origin_request_timeout`](#origin-pool-origin-request-timeout) - Optional String<br>Origin Request Timeout Duration. Configures the time after which a request to the origin will time out waiting for a response
 
@@ -2862,23 +2862,23 @@ A [`public_name`](#origin-pool-public-name) block (within [`origin_pool`](#origi
 
 An [`use_tls`](#origin-pool-use-tls) block (within [`origin_pool`](#origin-pool)) supports the following:
 
-<a id="origin-pool-use-tls-default-session-key-caching"></a>&#x2022; [`default_session_key_caching`](#origin-pool-use-tls-default-session-key-caching) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="origin-pool-use-tls-default-session-key-caching"></a>&#x2022; [`default_session_key_caching`](#origin-pool-use-tls-default-session-key-caching) - Optional Block<br>Enable this option
 
-<a id="origin-pool-use-tls-disable-session-key-caching"></a>&#x2022; [`disable_session_key_caching`](#origin-pool-use-tls-disable-session-key-caching) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="origin-pool-use-tls-disable-session-key-caching"></a>&#x2022; [`disable_session_key_caching`](#origin-pool-use-tls-disable-session-key-caching) - Optional Block<br>Enable this option
 
-<a id="origin-pool-use-tls-disable-sni"></a>&#x2022; [`disable_sni`](#origin-pool-use-tls-disable-sni) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="origin-pool-use-tls-disable-sni"></a>&#x2022; [`disable_sni`](#origin-pool-use-tls-disable-sni) - Optional Block<br>Enable this option
 
-<a id="origin-pool-use-tls-max-session-keys"></a>&#x2022; [`max_session_keys`](#origin-pool-use-tls-max-session-keys) - Optional Number<br>Max Session Keys Cached. x-example:'25' Number of session keys that are cached
+<a id="origin-pool-use-tls-max-session-keys"></a>&#x2022; [`max_session_keys`](#origin-pool-use-tls-max-session-keys) - Optional Number<br>Max Session Keys Cached. Number of session keys that are cached
 
-<a id="origin-pool-use-tls-no-mtls"></a>&#x2022; [`no_mtls`](#origin-pool-use-tls-no-mtls) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="origin-pool-use-tls-no-mtls"></a>&#x2022; [`no_mtls`](#origin-pool-use-tls-no-mtls) - Optional Block<br>Enable this option
 
-<a id="origin-pool-use-tls-skip-server-verification"></a>&#x2022; [`skip_server_verification`](#origin-pool-use-tls-skip-server-verification) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="origin-pool-use-tls-skip-server-verification"></a>&#x2022; [`skip_server_verification`](#origin-pool-use-tls-skip-server-verification) - Optional Block<br>Enable this option
 
 <a id="origin-pool-use-tls-sni"></a>&#x2022; [`sni`](#origin-pool-use-tls-sni) - Optional String<br>SNI Value. SNI value to be used
 
 <a id="origin-pool-use-tls-tls-config"></a>&#x2022; [`tls_config`](#origin-pool-use-tls-tls-config) - Optional Block<br>TLS Config. This defines various options to configure TLS configuration parameters<br>See [TLS Config](#origin-pool-use-tls-tls-config) below.
 
-<a id="origin-pool-use-tls-use-host-header-as-sni"></a>&#x2022; [`use_host_header_as_sni`](#origin-pool-use-tls-use-host-header-as-sni) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="origin-pool-use-tls-use-host-header-as-sni"></a>&#x2022; [`use_host_header_as_sni`](#origin-pool-use-tls-use-host-header-as-sni) - Optional Block<br>Enable this option
 
 <a id="origin-pool-use-tls-use-mtls"></a>&#x2022; [`use_mtls`](#origin-pool-use-tls-use-mtls) - Optional Block<br>mTLS Certificate. mTLS Client Certificate<br>See [Use mTLS](#origin-pool-use-tls-use-mtls) below.
 
@@ -2886,7 +2886,7 @@ An [`use_tls`](#origin-pool-use-tls) block (within [`origin_pool`](#origin-pool)
 
 <a id="origin-pool-use-tls-use-server-verification"></a>&#x2022; [`use_server_verification`](#origin-pool-use-tls-use-server-verification) - Optional Block<br>TLS Validation Context for Origin Servers. Upstream TLS Validation Context<br>See [Use Server Verification](#origin-pool-use-tls-use-server-verification) below.
 
-<a id="origin-pool-use-tls-volterra-trusted-ca"></a>&#x2022; [`volterra_trusted_ca`](#origin-pool-use-tls-volterra-trusted-ca) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="origin-pool-use-tls-volterra-trusted-ca"></a>&#x2022; [`volterra_trusted_ca`](#origin-pool-use-tls-volterra-trusted-ca) - Optional Block<br>Enable this option
 
 #### Origin Pool Use TLS TLS Config
 
@@ -2894,11 +2894,11 @@ A [`tls_config`](#origin-pool-use-tls-tls-config) block (within [`origin_pool.us
 
 <a id="origin-pool-use-tls-tls-config-custom-security"></a>&#x2022; [`custom_security`](#origin-pool-use-tls-tls-config-custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#origin-pool-use-tls-tls-config-custom-security) below.
 
-<a id="origin-pool-use-tls-tls-config-default-security"></a>&#x2022; [`default_security`](#origin-pool-use-tls-tls-config-default-security) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="origin-pool-use-tls-tls-config-default-security"></a>&#x2022; [`default_security`](#origin-pool-use-tls-tls-config-default-security) - Optional Block<br>Enable this option
 
-<a id="origin-pool-use-tls-tls-config-low-security"></a>&#x2022; [`low_security`](#origin-pool-use-tls-tls-config-low-security) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="origin-pool-use-tls-tls-config-low-security"></a>&#x2022; [`low_security`](#origin-pool-use-tls-tls-config-low-security) - Optional Block<br>Enable this option
 
-<a id="origin-pool-use-tls-tls-config-medium-security"></a>&#x2022; [`medium_security`](#origin-pool-use-tls-tls-config-medium-security) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="origin-pool-use-tls-tls-config-medium-security"></a>&#x2022; [`medium_security`](#origin-pool-use-tls-tls-config-medium-security) - Optional Block<br>Enable this option
 
 #### Origin Pool Use TLS TLS Config Custom Security
 
@@ -2926,11 +2926,11 @@ A [`tls_certificates`](#origin-pool-use-tls-use-mtls-tls-certificates) block (wi
 
 <a id="origin-pool-use-tls-use-mtls-tls-certificates-description-spec"></a>&#x2022; [`description_spec`](#origin-pool-use-tls-use-mtls-tls-certificates-description-spec) - Optional String<br>Description. Description for the certificate
 
-<a id="origin-pool-use-tls-use-mtls-tls-certificates-disable-ocsp-stapling"></a>&#x2022; [`disable_ocsp_stapling`](#origin-pool-use-tls-use-mtls-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="origin-pool-use-tls-use-mtls-tls-certificates-disable-ocsp-stapling"></a>&#x2022; [`disable_ocsp_stapling`](#origin-pool-use-tls-use-mtls-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Enable this option
 
 <a id="origin-pool-use-tls-use-mtls-tls-certificates-private-key"></a>&#x2022; [`private_key`](#origin-pool-use-tls-use-mtls-tls-certificates-private-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#origin-pool-use-tls-use-mtls-tls-certificates-private-key) below.
 
-<a id="origin-pool-use-tls-use-mtls-tls-certificates-use-system-defaults"></a>&#x2022; [`use_system_defaults`](#origin-pool-use-tls-use-mtls-tls-certificates-use-system-defaults) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="origin-pool-use-tls-use-mtls-tls-certificates-use-system-defaults"></a>&#x2022; [`use_system_defaults`](#origin-pool-use-tls-use-mtls-tls-certificates-use-system-defaults) - Optional Block<br>Enable this option
 
 #### Origin Pool Use TLS Use mTLS TLS Certificates Custom Hash Algorithms
 
@@ -2996,7 +2996,7 @@ A [`trusted_ca`](#origin-pool-use-tls-use-server-verification-trusted-ca) block 
 
 An [`other_settings`](#other-settings) block supports the following:
 
-<a id="other-settings-add-location"></a>&#x2022; [`add_location`](#other-settings-add-location) - Optional Bool<br>Add Location. x-example: true Appends header x-volterra-location = `<RE-site-name>` in responses
+<a id="other-settings-add-location"></a>&#x2022; [`add_location`](#other-settings-add-location) - Optional Bool<br>Add Location. Appends header x-volterra-location = `<RE-site-name>` in responses
 
 <a id="other-settings-header-options"></a>&#x2022; [`header_options`](#other-settings-header-options) - Optional Block<br>Header Control. This defines various options related to request/response headers<br>See [Header Options](#other-settings-header-options) below.
 
@@ -3114,25 +3114,25 @@ An [`origin_log_options`](#other-settings-logging-options-origin-log-options) bl
 
 A [`policy_based_challenge`](#policy-based-challenge) block supports the following:
 
-<a id="policy-based-challenge-always-enable-captcha-challenge"></a>&#x2022; [`always_enable_captcha_challenge`](#policy-based-challenge-always-enable-captcha-challenge) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="policy-based-challenge-always-enable-captcha-challenge"></a>&#x2022; [`always_enable_captcha_challenge`](#policy-based-challenge-always-enable-captcha-challenge) - Optional Block<br>Enable this option
 
-<a id="policy-based-challenge-always-enable-js-challenge"></a>&#x2022; [`always_enable_js_challenge`](#policy-based-challenge-always-enable-js-challenge) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="policy-based-challenge-always-enable-js-challenge"></a>&#x2022; [`always_enable_js_challenge`](#policy-based-challenge-always-enable-js-challenge) - Optional Block<br>Enable this option
 
 <a id="policy-based-challenge-captcha-challenge-parameters"></a>&#x2022; [`captcha_challenge_parameters`](#policy-based-challenge-captcha-challenge-parameters) - Optional Block<br>Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the captcha challenge is successful. Loadbalancer will tag response header with a cookie to avoid Captcha challenge for subsequent requests. CAPTCHA is mainly used as a security check to ensure only human users can pass through. Generally, computers or bots are not capable of solving a captcha. You can enable either Javascript challenge or Captcha challenge on a virtual host<br>See [Captcha Challenge Parameters](#policy-based-challenge-captcha-challenge-parameters) below.
 
-<a id="policy-based-challenge-default-captcha-challenge-parameters"></a>&#x2022; [`default_captcha_challenge_parameters`](#policy-based-challenge-default-captcha-challenge-parameters) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="policy-based-challenge-default-captcha-challenge-parameters"></a>&#x2022; [`default_captcha_challenge_parameters`](#policy-based-challenge-default-captcha-challenge-parameters) - Optional Block<br>Enable this option
 
-<a id="policy-based-challenge-default-js-challenge-parameters"></a>&#x2022; [`default_js_challenge_parameters`](#policy-based-challenge-default-js-challenge-parameters) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="policy-based-challenge-default-js-challenge-parameters"></a>&#x2022; [`default_js_challenge_parameters`](#policy-based-challenge-default-js-challenge-parameters) - Optional Block<br>Enable this option
 
-<a id="policy-based-challenge-default-mitigation-settings"></a>&#x2022; [`default_mitigation_settings`](#policy-based-challenge-default-mitigation-settings) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="policy-based-challenge-default-mitigation-settings"></a>&#x2022; [`default_mitigation_settings`](#policy-based-challenge-default-mitigation-settings) - Optional Block<br>Enable this option
 
-<a id="policy-based-challenge-default-temporary-blocking-parameters"></a>&#x2022; [`default_temporary_blocking_parameters`](#policy-based-challenge-default-temporary-blocking-parameters) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="policy-based-challenge-default-temporary-blocking-parameters"></a>&#x2022; [`default_temporary_blocking_parameters`](#policy-based-challenge-default-temporary-blocking-parameters) - Optional Block<br>Enable this option
 
 <a id="policy-based-challenge-js-challenge-parameters"></a>&#x2022; [`js_challenge_parameters`](#policy-based-challenge-js-challenge-parameters) - Optional Block<br>Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set of random numbers for every new client and sends these numbers along with an encrypted answer with the request such that it embed these numbers as input in the Javascript. Javascript will run on the requestor browser and perform a complex Math operation. Script will submit the answer to loadbalancer. Loadbalancer will validate the answer by comparing the calculated answer with the decrypted answer (which was encrypted when it was sent back as reply) and allow the request to the upstream server only if the answer is correct. Loadbalancer will tag response header with a cookie to avoid Javascript challenge for subsequent requests. Javascript challenge serves following purposes \* Validate that the request is coming via a browser that is capable for running Javascript \* Force the browser to run a complex operation, f(X), that requires it to spend a large number of CPU cycles. This is to slow down a potential DOS attacker by making it difficult to launch a large request flood without having to spend even larger CPU cost at their end. You can enable either Javascript challenge or Captcha challenge on a virtual host<br>See [Js Challenge Parameters](#policy-based-challenge-js-challenge-parameters) below.
 
 <a id="policy-based-challenge-malicious-user-mitigation"></a>&#x2022; [`malicious_user_mitigation`](#policy-based-challenge-malicious-user-mitigation) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Malicious User Mitigation](#policy-based-challenge-malicious-user-mitigation) below.
 
-<a id="policy-based-challenge-no-challenge"></a>&#x2022; [`no_challenge`](#policy-based-challenge-no-challenge) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="policy-based-challenge-no-challenge"></a>&#x2022; [`no_challenge`](#policy-based-challenge-no-challenge) - Optional Block<br>Enable this option
 
 <a id="policy-based-challenge-rule-list"></a>&#x2022; [`rule_list`](#policy-based-challenge-rule-list) - Optional Block<br>Challenge Rule List. List of challenge rules to be used in policy based challenge<br>See [Rule List](#policy-based-challenge-rule-list) below.
 
@@ -3192,11 +3192,11 @@ A [`metadata`](#policy-based-challenge-rule-list-rules-metadata) block (within [
 
 A [`spec`](#policy-based-challenge-rule-list-rules-spec) block (within [`policy_based_challenge.rule_list.rules`](#policy-based-challenge-rule-list-rules)) supports the following:
 
-<a id="policy-based-challenge-rule-list-rules-spec-any-asn"></a>&#x2022; [`any_asn`](#policy-based-challenge-rule-list-rules-spec-any-asn) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="policy-based-challenge-rule-list-rules-spec-any-asn"></a>&#x2022; [`any_asn`](#policy-based-challenge-rule-list-rules-spec-any-asn) - Optional Block<br>Enable this option
 
-<a id="policy-based-challenge-rule-list-rules-spec-any-client"></a>&#x2022; [`any_client`](#policy-based-challenge-rule-list-rules-spec-any-client) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="policy-based-challenge-rule-list-rules-spec-any-client"></a>&#x2022; [`any_client`](#policy-based-challenge-rule-list-rules-spec-any-client) - Optional Block<br>Enable this option
 
-<a id="policy-based-challenge-rule-list-rules-spec-any-ip"></a>&#x2022; [`any_ip`](#policy-based-challenge-rule-list-rules-spec-any-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="policy-based-challenge-rule-list-rules-spec-any-ip"></a>&#x2022; [`any_ip`](#policy-based-challenge-rule-list-rules-spec-any-ip) - Optional Block<br>Enable this option
 
 <a id="policy-based-challenge-rule-list-rules-spec-arg-matchers"></a>&#x2022; [`arg_matchers`](#policy-based-challenge-rule-list-rules-spec-arg-matchers) - Optional Block<br>A list of predicates for all POST args that need to be matched. The criteria for matching each arg are described in individual instances of ArgMatcherType. The actual arg values are extracted from the request API as a list of strings for each arg selector name. Note that all specified arg matcher predicates must evaluate to true<br>See [Arg Matchers](#policy-based-challenge-rule-list-rules-spec-arg-matchers) below.
 
@@ -3210,13 +3210,13 @@ A [`spec`](#policy-based-challenge-rule-list-rules-spec) block (within [`policy_
 
 <a id="policy-based-challenge-rule-list-rules-spec-cookie-matchers"></a>&#x2022; [`cookie_matchers`](#policy-based-challenge-rule-list-rules-spec-cookie-matchers) - Optional Block<br>A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true<br>See [Cookie Matchers](#policy-based-challenge-rule-list-rules-spec-cookie-matchers) below.
 
-<a id="policy-based-challenge-rule-list-rules-spec-disable-challenge"></a>&#x2022; [`disable_challenge`](#policy-based-challenge-rule-list-rules-spec-disable-challenge) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="policy-based-challenge-rule-list-rules-spec-disable-challenge"></a>&#x2022; [`disable_challenge`](#policy-based-challenge-rule-list-rules-spec-disable-challenge) - Optional Block<br>Enable this option
 
 <a id="policy-based-challenge-rule-list-rules-spec-domain-matcher"></a>&#x2022; [`domain_matcher`](#policy-based-challenge-rule-list-rules-spec-domain-matcher) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Domain Matcher](#policy-based-challenge-rule-list-rules-spec-domain-matcher) below.
 
-<a id="policy-based-challenge-rule-list-rules-spec-enable-captcha-challenge"></a>&#x2022; [`enable_captcha_challenge`](#policy-based-challenge-rule-list-rules-spec-enable-captcha-challenge) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="policy-based-challenge-rule-list-rules-spec-enable-captcha-challenge"></a>&#x2022; [`enable_captcha_challenge`](#policy-based-challenge-rule-list-rules-spec-enable-captcha-challenge) - Optional Block<br>Enable this option
 
-<a id="policy-based-challenge-rule-list-rules-spec-enable-javascript-challenge"></a>&#x2022; [`enable_javascript_challenge`](#policy-based-challenge-rule-list-rules-spec-enable-javascript-challenge) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="policy-based-challenge-rule-list-rules-spec-enable-javascript-challenge"></a>&#x2022; [`enable_javascript_challenge`](#policy-based-challenge-rule-list-rules-spec-enable-javascript-challenge) - Optional Block<br>Enable this option
 
 <a id="policy-based-challenge-rule-list-rules-spec-expiration-timestamp"></a>&#x2022; [`expiration_timestamp`](#policy-based-challenge-rule-list-rules-spec-expiration-timestamp) - Optional String<br>The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore
 
@@ -3238,15 +3238,15 @@ A [`spec`](#policy-based-challenge-rule-list-rules-spec) block (within [`policy_
 
 An [`arg_matchers`](#policy-based-challenge-rule-list-rules-spec-arg-matchers) block (within [`policy_based_challenge.rule_list.rules.spec`](#policy-based-challenge-rule-list-rules-spec)) supports the following:
 
-<a id="policy-based-challenge-rule-list-rules-spec-arg-matchers-check-not-present"></a>&#x2022; [`check_not_present`](#policy-based-challenge-rule-list-rules-spec-arg-matchers-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="policy-based-challenge-rule-list-rules-spec-arg-matchers-check-not-present"></a>&#x2022; [`check_not_present`](#policy-based-challenge-rule-list-rules-spec-arg-matchers-check-not-present) - Optional Block<br>Enable this option
 
-<a id="policy-based-challenge-rule-list-rules-spec-arg-matchers-check-present"></a>&#x2022; [`check_present`](#policy-based-challenge-rule-list-rules-spec-arg-matchers-check-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="policy-based-challenge-rule-list-rules-spec-arg-matchers-check-present"></a>&#x2022; [`check_present`](#policy-based-challenge-rule-list-rules-spec-arg-matchers-check-present) - Optional Block<br>Enable this option
 
 <a id="policy-based-challenge-rule-list-rules-spec-arg-matchers-invert-matcher"></a>&#x2022; [`invert_matcher`](#policy-based-challenge-rule-list-rules-spec-arg-matchers-invert-matcher) - Optional Bool<br>Invert Matcher. Invert Match of the expression defined
 
 <a id="policy-based-challenge-rule-list-rules-spec-arg-matchers-item"></a>&#x2022; [`item`](#policy-based-challenge-rule-list-rules-spec-arg-matchers-item) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#policy-based-challenge-rule-list-rules-spec-arg-matchers-item) below.
 
-<a id="policy-based-challenge-rule-list-rules-spec-arg-matchers-name"></a>&#x2022; [`name`](#policy-based-challenge-rule-list-rules-spec-arg-matchers-name) - Optional String<br>Argument Name. x-example: 'phones[\_]' x-example: 'cars.make.toyota.models[1]' x-example: 'cars.make.honda.models[\_]' x-example: 'cars.make[\_].models[\_]' A case-sensitive JSON path in the HTTP request body
+<a id="policy-based-challenge-rule-list-rules-spec-arg-matchers-name"></a>&#x2022; [`name`](#policy-based-challenge-rule-list-rules-spec-arg-matchers-name) - Optional String<br>Argument Name. A case-sensitive JSON path in the HTTP request body
 
 #### Policy Based Challenge Rule List Rules Spec Arg Matchers Item
 
@@ -3304,9 +3304,9 @@ A [`client_selector`](#policy-based-challenge-rule-list-rules-spec-client-select
 
 A [`cookie_matchers`](#policy-based-challenge-rule-list-rules-spec-cookie-matchers) block (within [`policy_based_challenge.rule_list.rules.spec`](#policy-based-challenge-rule-list-rules-spec)) supports the following:
 
-<a id="policy-based-challenge-rule-list-rules-spec-cookie-matchers-check-not-present"></a>&#x2022; [`check_not_present`](#policy-based-challenge-rule-list-rules-spec-cookie-matchers-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="policy-based-challenge-rule-list-rules-spec-cookie-matchers-check-not-present"></a>&#x2022; [`check_not_present`](#policy-based-challenge-rule-list-rules-spec-cookie-matchers-check-not-present) - Optional Block<br>Enable this option
 
-<a id="policy-based-challenge-rule-list-rules-spec-cookie-matchers-check-present"></a>&#x2022; [`check_present`](#policy-based-challenge-rule-list-rules-spec-cookie-matchers-check-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="policy-based-challenge-rule-list-rules-spec-cookie-matchers-check-present"></a>&#x2022; [`check_present`](#policy-based-challenge-rule-list-rules-spec-cookie-matchers-check-present) - Optional Block<br>Enable this option
 
 <a id="policy-based-challenge-rule-list-rules-spec-cookie-matchers-invert-matcher"></a>&#x2022; [`invert_matcher`](#policy-based-challenge-rule-list-rules-spec-cookie-matchers-invert-matcher) - Optional Bool<br>Invert Matcher. Invert Match of the expression defined
 
@@ -3336,9 +3336,9 @@ A [`domain_matcher`](#policy-based-challenge-rule-list-rules-spec-domain-matcher
 
 A [`headers`](#policy-based-challenge-rule-list-rules-spec-headers) block (within [`policy_based_challenge.rule_list.rules.spec`](#policy-based-challenge-rule-list-rules-spec)) supports the following:
 
-<a id="policy-based-challenge-rule-list-rules-spec-headers-check-not-present"></a>&#x2022; [`check_not_present`](#policy-based-challenge-rule-list-rules-spec-headers-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="policy-based-challenge-rule-list-rules-spec-headers-check-not-present"></a>&#x2022; [`check_not_present`](#policy-based-challenge-rule-list-rules-spec-headers-check-not-present) - Optional Block<br>Enable this option
 
-<a id="policy-based-challenge-rule-list-rules-spec-headers-check-present"></a>&#x2022; [`check_present`](#policy-based-challenge-rule-list-rules-spec-headers-check-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="policy-based-challenge-rule-list-rules-spec-headers-check-present"></a>&#x2022; [`check_present`](#policy-based-challenge-rule-list-rules-spec-headers-check-present) - Optional Block<br>Enable this option
 
 <a id="policy-based-challenge-rule-list-rules-spec-headers-invert-matcher"></a>&#x2022; [`invert_matcher`](#policy-based-challenge-rule-list-rules-spec-headers-invert-matcher) - Optional Bool<br>Invert Header Matcher. Invert the match result
 
@@ -3414,9 +3414,9 @@ A [`path`](#policy-based-challenge-rule-list-rules-spec-path) block (within [`po
 
 A [`query_params`](#policy-based-challenge-rule-list-rules-spec-query-params) block (within [`policy_based_challenge.rule_list.rules.spec`](#policy-based-challenge-rule-list-rules-spec)) supports the following:
 
-<a id="policy-based-challenge-rule-list-rules-spec-query-params-check-not-present"></a>&#x2022; [`check_not_present`](#policy-based-challenge-rule-list-rules-spec-query-params-check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="policy-based-challenge-rule-list-rules-spec-query-params-check-not-present"></a>&#x2022; [`check_not_present`](#policy-based-challenge-rule-list-rules-spec-query-params-check-not-present) - Optional Block<br>Enable this option
 
-<a id="policy-based-challenge-rule-list-rules-spec-query-params-check-present"></a>&#x2022; [`check_present`](#policy-based-challenge-rule-list-rules-spec-query-params-check-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="policy-based-challenge-rule-list-rules-spec-query-params-check-present"></a>&#x2022; [`check_present`](#policy-based-challenge-rule-list-rules-spec-query-params-check-present) - Optional Block<br>Enable this option
 
 <a id="policy-based-challenge-rule-list-rules-spec-query-params-invert-matcher"></a>&#x2022; [`invert_matcher`](#policy-based-challenge-rule-list-rules-spec-query-params-invert-matcher) - Optional Bool<br>Invert Query Parameter Matcher. Invert the match result
 
@@ -3454,31 +3454,31 @@ A [`temporary_user_blocking`](#policy-based-challenge-temporary-user-blocking) b
 
 A [`protected_cookies`](#protected-cookies) block supports the following:
 
-<a id="protected-cookies-add-httponly"></a>&#x2022; [`add_httponly`](#protected-cookies-add-httponly) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="protected-cookies-add-httponly"></a>&#x2022; [`add_httponly`](#protected-cookies-add-httponly) - Optional Block<br>Enable this option
 
-<a id="protected-cookies-add-secure"></a>&#x2022; [`add_secure`](#protected-cookies-add-secure) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="protected-cookies-add-secure"></a>&#x2022; [`add_secure`](#protected-cookies-add-secure) - Optional Block<br>Enable this option
 
-<a id="protected-cookies-disable-tampering-protection"></a>&#x2022; [`disable_tampering_protection`](#protected-cookies-disable-tampering-protection) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="protected-cookies-disable-tampering-protection"></a>&#x2022; [`disable_tampering_protection`](#protected-cookies-disable-tampering-protection) - Optional Block<br>Enable this option
 
-<a id="protected-cookies-enable-tampering-protection"></a>&#x2022; [`enable_tampering_protection`](#protected-cookies-enable-tampering-protection) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="protected-cookies-enable-tampering-protection"></a>&#x2022; [`enable_tampering_protection`](#protected-cookies-enable-tampering-protection) - Optional Block<br>Enable this option
 
-<a id="protected-cookies-ignore-httponly"></a>&#x2022; [`ignore_httponly`](#protected-cookies-ignore-httponly) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="protected-cookies-ignore-httponly"></a>&#x2022; [`ignore_httponly`](#protected-cookies-ignore-httponly) - Optional Block<br>Enable this option
 
-<a id="protected-cookies-ignore-max-age"></a>&#x2022; [`ignore_max_age`](#protected-cookies-ignore-max-age) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="protected-cookies-ignore-max-age"></a>&#x2022; [`ignore_max_age`](#protected-cookies-ignore-max-age) - Optional Block<br>Enable this option
 
-<a id="protected-cookies-ignore-samesite"></a>&#x2022; [`ignore_samesite`](#protected-cookies-ignore-samesite) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="protected-cookies-ignore-samesite"></a>&#x2022; [`ignore_samesite`](#protected-cookies-ignore-samesite) - Optional Block<br>Enable this option
 
-<a id="protected-cookies-ignore-secure"></a>&#x2022; [`ignore_secure`](#protected-cookies-ignore-secure) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="protected-cookies-ignore-secure"></a>&#x2022; [`ignore_secure`](#protected-cookies-ignore-secure) - Optional Block<br>Enable this option
 
 <a id="protected-cookies-max-age-value"></a>&#x2022; [`max_age_value`](#protected-cookies-max-age-value) - Optional Number<br>Add Max Age. Add max age attribute
 
 <a id="protected-cookies-name"></a>&#x2022; [`name`](#protected-cookies-name) - Optional String<br>Cookie Name. Name of the Cookie
 
-<a id="protected-cookies-samesite-lax"></a>&#x2022; [`samesite_lax`](#protected-cookies-samesite-lax) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="protected-cookies-samesite-lax"></a>&#x2022; [`samesite_lax`](#protected-cookies-samesite-lax) - Optional Block<br>Enable this option
 
-<a id="protected-cookies-samesite-none"></a>&#x2022; [`samesite_none`](#protected-cookies-samesite-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="protected-cookies-samesite-none"></a>&#x2022; [`samesite_none`](#protected-cookies-samesite-none) - Optional Block<br>Enable this option
 
-<a id="protected-cookies-samesite-strict"></a>&#x2022; [`samesite_strict`](#protected-cookies-samesite-strict) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="protected-cookies-samesite-strict"></a>&#x2022; [`samesite_strict`](#protected-cookies-samesite-strict) - Optional Block<br>Enable this option
 
 #### Rate Limit
 
@@ -3486,11 +3486,11 @@ A [`rate_limit`](#rate-limit) block supports the following:
 
 <a id="rate-limit-custom-ip-allowed-list"></a>&#x2022; [`custom_ip_allowed_list`](#rate-limit-custom-ip-allowed-list) - Optional Block<br>Custom IP Allowed List. IP Allowed list using existing ip_prefix_set objects<br>See [Custom IP Allowed List](#rate-limit-custom-ip-allowed-list) below.
 
-<a id="rate-limit-ip-allowed-list"></a>&#x2022; [`ip_allowed_list`](#rate-limit-ip-allowed-list) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [IP Allowed List](#rate-limit-ip-allowed-list) below.
+<a id="rate-limit-ip-allowed-list"></a>&#x2022; [`ip_allowed_list`](#rate-limit-ip-allowed-list) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [IP Allowed List](#rate-limit-ip-allowed-list) below.
 
-<a id="rate-limit-no-ip-allowed-list"></a>&#x2022; [`no_ip_allowed_list`](#rate-limit-no-ip-allowed-list) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rate-limit-no-ip-allowed-list"></a>&#x2022; [`no_ip_allowed_list`](#rate-limit-no-ip-allowed-list) - Optional Block<br>Enable this option
 
-<a id="rate-limit-no-policies"></a>&#x2022; [`no_policies`](#rate-limit-no-policies) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rate-limit-no-policies"></a>&#x2022; [`no_policies`](#rate-limit-no-policies) - Optional Block<br>Enable this option
 
 <a id="rate-limit-policies"></a>&#x2022; [`policies`](#rate-limit-policies) - Optional Block<br>Rate Limiter Policy List. List of rate limiter policies to be applied<br>See [Policies](#rate-limit-policies) below.
 
@@ -3542,7 +3542,7 @@ A [`rate_limiter`](#rate-limit-rate-limiter) block (within [`rate_limit`](#rate-
 
 <a id="rate-limit-rate-limiter-burst-multiplier"></a>&#x2022; [`burst_multiplier`](#rate-limit-rate-limiter-burst-multiplier) - Optional Number<br>Burst Multiplier. The maximum burst of requests to accommodate, expressed as a multiple of the rate
 
-<a id="rate-limit-rate-limiter-disabled"></a>&#x2022; [`disabled`](#rate-limit-rate-limiter-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rate-limit-rate-limiter-disabled"></a>&#x2022; [`disabled`](#rate-limit-rate-limiter-disabled) - Optional Block<br>Enable this option
 
 <a id="rate-limit-rate-limiter-leaky-bucket"></a>&#x2022; [`leaky_bucket`](#rate-limit-rate-limiter-leaky-bucket) - Optional Block<br>Leaky Bucket Rate Limiter. Leaky-Bucket is the default rate limiter algorithm for F5
 
@@ -3602,7 +3602,7 @@ A [`sensitive_data_policy_ref`](#sensitive-data-policy-sensitive-data-policy-ref
 
 A [`slow_ddos_mitigation`](#slow-ddos-mitigation) block supports the following:
 
-<a id="slow-ddos-mitigation-disable-request-timeout"></a>&#x2022; [`disable_request_timeout`](#slow-ddos-mitigation-disable-request-timeout) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="slow-ddos-mitigation-disable-request-timeout"></a>&#x2022; [`disable_request_timeout`](#slow-ddos-mitigation-disable-request-timeout) - Optional Block<br>Enable this option
 
 <a id="slow-ddos-mitigation-request-headers-timeout"></a>&#x2022; [`request_headers_timeout`](#slow-ddos-mitigation-request-headers-timeout) - Optional Number  Defaults to `10000`<br>Request Headers Timeout. The amount of time the client has to send only the headers on the request stream before the stream is cancelled. The milliseconds. This setting provides protection against Slowloris attacks
 
@@ -3628,7 +3628,7 @@ A [`trusted_clients`](#trusted-clients) block supports the following:
 
 <a id="trusted-clients-as-number"></a>&#x2022; [`as_number`](#trusted-clients-as-number) - Optional Number<br>AS Number. RFC 6793 defined 4-byte AS number
 
-<a id="trusted-clients-bot-skip-processing"></a>&#x2022; [`bot_skip_processing`](#trusted-clients-bot-skip-processing) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="trusted-clients-bot-skip-processing"></a>&#x2022; [`bot_skip_processing`](#trusted-clients-bot-skip-processing) - Optional Block<br>Enable this option
 
 <a id="trusted-clients-expiration-timestamp"></a>&#x2022; [`expiration_timestamp`](#trusted-clients-expiration-timestamp) - Optional String<br>Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore
 
@@ -3640,11 +3640,11 @@ A [`trusted_clients`](#trusted-clients) block supports the following:
 
 <a id="trusted-clients-metadata"></a>&#x2022; [`metadata`](#trusted-clients-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#trusted-clients-metadata) below.
 
-<a id="trusted-clients-skip-processing"></a>&#x2022; [`skip_processing`](#trusted-clients-skip-processing) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="trusted-clients-skip-processing"></a>&#x2022; [`skip_processing`](#trusted-clients-skip-processing) - Optional Block<br>Enable this option
 
 <a id="trusted-clients-user-identifier"></a>&#x2022; [`user_identifier`](#trusted-clients-user-identifier) - Optional String<br>User Identifier. Identify user based on user identifier. User identifier value needs to be copied from security event
 
-<a id="trusted-clients-waf-skip-processing"></a>&#x2022; [`waf_skip_processing`](#trusted-clients-waf-skip-processing) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="trusted-clients-waf-skip-processing"></a>&#x2022; [`waf_skip_processing`](#trusted-clients-waf-skip-processing) - Optional Block<br>Enable this option
 
 #### Trusted Clients HTTP Header
 
@@ -3702,9 +3702,9 @@ A [`waf_exclusion_inline_rules`](#waf-exclusion-waf-exclusion-inline-rules) bloc
 
 A [`rules`](#waf-exclusion-waf-exclusion-inline-rules-rules) block (within [`waf_exclusion.waf_exclusion_inline_rules`](#waf-exclusion-waf-exclusion-inline-rules)) supports the following:
 
-<a id="waf-exclusion-waf-exclusion-inline-rules-rules-any-domain"></a>&#x2022; [`any_domain`](#waf-exclusion-waf-exclusion-inline-rules-rules-any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="waf-exclusion-waf-exclusion-inline-rules-rules-any-domain"></a>&#x2022; [`any_domain`](#waf-exclusion-waf-exclusion-inline-rules-rules-any-domain) - Optional Block<br>Enable this option
 
-<a id="waf-exclusion-waf-exclusion-inline-rules-rules-any-path"></a>&#x2022; [`any_path`](#waf-exclusion-waf-exclusion-inline-rules-rules-any-path) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="waf-exclusion-waf-exclusion-inline-rules-rules-any-path"></a>&#x2022; [`any_path`](#waf-exclusion-waf-exclusion-inline-rules-rules-any-path) - Optional Block<br>Enable this option
 
 <a id="waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control"></a>&#x2022; [`app_firewall_detection_control`](#waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control) - Optional Block<br>App Firewall Detection Control. Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria<br>See [App Firewall Detection Control](#waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control) below.
 
@@ -3722,7 +3722,7 @@ A [`rules`](#waf-exclusion-waf-exclusion-inline-rules-rules) block (within [`waf
 
 <a id="waf-exclusion-waf-exclusion-inline-rules-rules-suffix-value"></a>&#x2022; [`suffix_value`](#waf-exclusion-waf-exclusion-inline-rules-rules-suffix-value) - Optional String<br>Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
 
-<a id="waf-exclusion-waf-exclusion-inline-rules-rules-waf-skip-processing"></a>&#x2022; [`waf_skip_processing`](#waf-exclusion-waf-exclusion-inline-rules-rules-waf-skip-processing) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="waf-exclusion-waf-exclusion-inline-rules-rules-waf-skip-processing"></a>&#x2022; [`waf_skip_processing`](#waf-exclusion-waf-exclusion-inline-rules-rules-waf-skip-processing) - Optional Block<br>Enable this option
 
 #### WAF Exclusion WAF Exclusion Inline Rules Rules App Firewall Detection Control
 

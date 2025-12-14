@@ -73,12 +73,12 @@ resource "f5xc_enhanced_firewall_policy" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="allow-all"></a>[`allow_all`](#allow-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="allow-all"></a>[`allow_all`](#allow-all) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="allowed-destinations"></a>[`allowed_destinations`](#allowed-destinations) - Optional Block<br>IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Allowed Destinations](#allowed-destinations) below for details.
 <br><br>&#x2022; <a id="allowed-sources"></a>[`allowed_sources`](#allowed-sources) - Optional Block<br>IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Allowed Sources](#allowed-sources) below for details.
 <br><br>&#x2022; <a id="denied-destinations"></a>[`denied_destinations`](#denied-destinations) - Optional Block<br>IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Denied Destinations](#denied-destinations) below for details.
 <br><br>&#x2022; <a id="denied-sources"></a>[`denied_sources`](#denied-sources) - Optional Block<br>IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Denied Sources](#denied-sources) below for details.
-<br><br>&#x2022; <a id="deny-all"></a>[`deny_all`](#deny-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="deny-all"></a>[`deny_all`](#deny-all) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="rule-list"></a>[`rule_list`](#rule-list) - Optional Block<br>Custom Enhanced Firewall Policy Rules. Custom Enhanced Firewall Policy Rules<br>See [Rule List](#rule-list) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
@@ -127,25 +127,25 @@ A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports 
 
 <a id="rule-list-rules-advanced-action"></a>&#x2022; [`advanced_action`](#rule-list-rules-advanced-action) - Optional Block<br>Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction<br>See [Advanced Action](#rule-list-rules-advanced-action) below.
 
-<a id="rule-list-rules-all-destinations"></a>&#x2022; [`all_destinations`](#rule-list-rules-all-destinations) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rule-list-rules-all-destinations"></a>&#x2022; [`all_destinations`](#rule-list-rules-all-destinations) - Optional Block<br>Enable this option
 
-<a id="rule-list-rules-all-sli-vips"></a>&#x2022; [`all_sli_vips`](#rule-list-rules-all-sli-vips) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rule-list-rules-all-sli-vips"></a>&#x2022; [`all_sli_vips`](#rule-list-rules-all-sli-vips) - Optional Block<br>Enable this option
 
-<a id="rule-list-rules-all-slo-vips"></a>&#x2022; [`all_slo_vips`](#rule-list-rules-all-slo-vips) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rule-list-rules-all-slo-vips"></a>&#x2022; [`all_slo_vips`](#rule-list-rules-all-slo-vips) - Optional Block<br>Enable this option
 
-<a id="rule-list-rules-all-sources"></a>&#x2022; [`all_sources`](#rule-list-rules-all-sources) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rule-list-rules-all-sources"></a>&#x2022; [`all_sources`](#rule-list-rules-all-sources) - Optional Block<br>Enable this option
 
-<a id="rule-list-rules-all-tcp-traffic"></a>&#x2022; [`all_tcp_traffic`](#rule-list-rules-all-tcp-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rule-list-rules-all-tcp-traffic"></a>&#x2022; [`all_tcp_traffic`](#rule-list-rules-all-tcp-traffic) - Optional Block<br>Enable this option
 
-<a id="rule-list-rules-all-traffic"></a>&#x2022; [`all_traffic`](#rule-list-rules-all-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rule-list-rules-all-traffic"></a>&#x2022; [`all_traffic`](#rule-list-rules-all-traffic) - Optional Block<br>Enable this option
 
-<a id="rule-list-rules-all-udp-traffic"></a>&#x2022; [`all_udp_traffic`](#rule-list-rules-all-udp-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rule-list-rules-all-udp-traffic"></a>&#x2022; [`all_udp_traffic`](#rule-list-rules-all-udp-traffic) - Optional Block<br>Enable this option
 
-<a id="rule-list-rules-allow"></a>&#x2022; [`allow`](#rule-list-rules-allow) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rule-list-rules-allow"></a>&#x2022; [`allow`](#rule-list-rules-allow) - Optional Block<br>Enable this option
 
 <a id="rule-list-rules-applications"></a>&#x2022; [`applications`](#rule-list-rules-applications) - Optional Block<br>Applications. Application protocols like HTTP, SNMP<br>See [Applications](#rule-list-rules-applications) below.
 
-<a id="rule-list-rules-deny"></a>&#x2022; [`deny`](#rule-list-rules-deny) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rule-list-rules-deny"></a>&#x2022; [`deny`](#rule-list-rules-deny) - Optional Block<br>Enable this option
 
 <a id="rule-list-rules-destination-aws-vpc-ids"></a>&#x2022; [`destination_aws_vpc_ids`](#rule-list-rules-destination-aws-vpc-ids) - Optional Block<br>AWS VPC List. List of VPC Identifiers in AWS<br>See [Destination AWS VPC Ids](#rule-list-rules-destination-aws-vpc-ids) below.
 
@@ -153,21 +153,21 @@ A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports 
 
 <a id="rule-list-rules-destination-label-selector"></a>&#x2022; [`destination_label_selector`](#rule-list-rules-destination-label-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Destination Label Selector](#rule-list-rules-destination-label-selector) below.
 
-<a id="rule-list-rules-destination-prefix-list"></a>&#x2022; [`destination_prefix_list`](#rule-list-rules-destination-prefix-list) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Destination Prefix List](#rule-list-rules-destination-prefix-list) below.
+<a id="rule-list-rules-destination-prefix-list"></a>&#x2022; [`destination_prefix_list`](#rule-list-rules-destination-prefix-list) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Destination Prefix List](#rule-list-rules-destination-prefix-list) below.
 
 <a id="rule-list-rules-insert-service"></a>&#x2022; [`insert_service`](#rule-list-rules-insert-service) - Optional Block<br>Policy Action to Forward Traffic to External Service. Action to forward traffic to external service<br>See [Insert Service](#rule-list-rules-insert-service) below.
 
-<a id="rule-list-rules-inside-destinations"></a>&#x2022; [`inside_destinations`](#rule-list-rules-inside-destinations) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rule-list-rules-inside-destinations"></a>&#x2022; [`inside_destinations`](#rule-list-rules-inside-destinations) - Optional Block<br>Enable this option
 
-<a id="rule-list-rules-inside-sources"></a>&#x2022; [`inside_sources`](#rule-list-rules-inside-sources) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rule-list-rules-inside-sources"></a>&#x2022; [`inside_sources`](#rule-list-rules-inside-sources) - Optional Block<br>Enable this option
 
 <a id="rule-list-rules-label-matcher"></a>&#x2022; [`label_matcher`](#rule-list-rules-label-matcher) - Optional Block<br>Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name<br>See [Label Matcher](#rule-list-rules-label-matcher) below.
 
 <a id="rule-list-rules-metadata"></a>&#x2022; [`metadata`](#rule-list-rules-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#rule-list-rules-metadata) below.
 
-<a id="rule-list-rules-outside-destinations"></a>&#x2022; [`outside_destinations`](#rule-list-rules-outside-destinations) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rule-list-rules-outside-destinations"></a>&#x2022; [`outside_destinations`](#rule-list-rules-outside-destinations) - Optional Block<br>Enable this option
 
-<a id="rule-list-rules-outside-sources"></a>&#x2022; [`outside_sources`](#rule-list-rules-outside-sources) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rule-list-rules-outside-sources"></a>&#x2022; [`outside_sources`](#rule-list-rules-outside-sources) - Optional Block<br>Enable this option
 
 <a id="rule-list-rules-protocol-port-range"></a>&#x2022; [`protocol_port_range`](#rule-list-rules-protocol-port-range) - Optional Block<br>Protocol and Port. Protocol and Port ranges<br>See [Protocol Port Range](#rule-list-rules-protocol-port-range) below.
 
@@ -177,13 +177,13 @@ A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports 
 
 <a id="rule-list-rules-source-label-selector"></a>&#x2022; [`source_label_selector`](#rule-list-rules-source-label-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Source Label Selector](#rule-list-rules-source-label-selector) below.
 
-<a id="rule-list-rules-source-prefix-list"></a>&#x2022; [`source_prefix_list`](#rule-list-rules-source-prefix-list) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Source Prefix List](#rule-list-rules-source-prefix-list) below.
+<a id="rule-list-rules-source-prefix-list"></a>&#x2022; [`source_prefix_list`](#rule-list-rules-source-prefix-list) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Source Prefix List](#rule-list-rules-source-prefix-list) below.
 
 #### Rule List Rules Advanced Action
 
 An [`advanced_action`](#rule-list-rules-advanced-action) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
-<a id="rule-list-rules-advanced-action-action"></a>&#x2022; [`action`](#rule-list-rules-advanced-action-action) - Optional String  Defaults to `NOLOG`<br>Possible values are `NOLOG`, `LOG`<br>[Enum: NOLOG|LOG] Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule
+<a id="rule-list-rules-advanced-action-action"></a>&#x2022; [`action`](#rule-list-rules-advanced-action-action) - Optional String  Defaults to `NOLOG`<br>Possible values are `NOLOG`, `LOG`<br>[Enum: NOLOG|LOG] Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified Don't sample the traffic hitting the rule Sample the traffic hitting the rule
 
 #### Rule List Rules Applications
 

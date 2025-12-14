@@ -285,7 +285,7 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"auto": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"ip_address": schema.SingleNestedBlock{
 								MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address",
@@ -316,13 +316,13 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"public": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"site_local": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"site_local_inside": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},

@@ -378,19 +378,19 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 				},
 				Blocks: map[string]schema.Block{
 					"cluster": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"is_primary": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"monitor": schema.SingleNestedBlock{
 						MarkdownDescription: "Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface.",
 					},
 					"monitor_disabled": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"not_primary": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -412,7 +412,7 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 				},
 				Blocks: map[string]schema.Block{
 					"cluster": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -442,20 +442,20 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 				},
 				Blocks: map[string]schema.Block{
 					"cluster": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"dhcp_client": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"dhcp_server": schema.SingleNestedBlock{
 						MarkdownDescription: "DHCPServerParametersType.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"automatic_from_end": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"automatic_from_start": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"dhcp_networks": schema.ListNestedBlock{
 								MarkdownDescription: "DHCP Networks. List of networks from which DHCP Server can allocate IPv4 Addresses",
@@ -480,10 +480,10 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 									},
 									Blocks: map[string]schema.Block{
 										"first_address": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 										"last_address": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 										"pools": schema.ListNestedBlock{
 											MarkdownDescription: "DHCP Pools. List of non overlapping ip address ranges.",
@@ -501,7 +501,7 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 											},
 										},
 										"same_as_dgw": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -525,7 +525,7 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"host": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"router": schema.SingleNestedBlock{
 								MarkdownDescription: "IPV6AutoConfigRouterType.",
@@ -560,10 +560,10 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 												},
 												Blocks: map[string]schema.Block{
 													"first_address": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"last_address": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 												},
 											},
@@ -574,10 +574,10 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"automatic_from_end": schema.SingleNestedBlock{
-												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												MarkdownDescription: "Enable this option",
 											},
 											"automatic_from_start": schema.SingleNestedBlock{
-												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												MarkdownDescription: "Enable this option",
 											},
 											"dhcp_networks": schema.ListNestedBlock{
 												MarkdownDescription: "DHCP IPV6 Networks. List of networks from which DHCP server can allocate ip addresses",
@@ -630,25 +630,25 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 						},
 					},
 					"is_primary": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"monitor": schema.SingleNestedBlock{
 						MarkdownDescription: "Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface.",
 					},
 					"monitor_disabled": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_ipv6_address": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"not_primary": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"site_local_inside_network": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"site_local_network": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"static_ip": schema.SingleNestedBlock{
 						MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
@@ -707,10 +707,10 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 						},
 					},
 					"storage_network": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"untagged": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -732,7 +732,7 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 						},
 						Blocks: map[string]schema.Block{
 							"untagged": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -778,10 +778,10 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 				},
 				Blocks: map[string]schema.Block{
 					"site_local_inside_network": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"site_local_network": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"static_ip": schema.SingleNestedBlock{
 						MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",

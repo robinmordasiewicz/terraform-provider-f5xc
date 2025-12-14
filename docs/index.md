@@ -34,14 +34,14 @@ Learn more about [how to generate API credentials](https://docs.cloud.f5.com/doc
 # Configure the F5XC Provider with API Token Authentication
 provider "f5xc" {
   api_url   = "https://your-tenant.console.ves.volterra.io"
-  api_token = var.ves_api_token
+  api_token = var.f5xc_api_token
 }
 
 # Alternatively, use environment variables:
-# export VES_API_URL="https://your-tenant.console.ves.volterra.io"
-# export VES_API_TOKEN="your-api-token"
+# export F5XC_API_URL="https://your-tenant.console.ves.volterra.io"
+# export F5XC_API_TOKEN="your-api-token"
 
-variable "ves_api_token" {
+variable "f5xc_api_token" {
   description = "F5 Distributed Cloud API Token"
   type        = string
   sensitive   = true
@@ -51,32 +51,32 @@ variable "ves_api_token" {
 # provider "f5xc" {
 #   api_url      = "https://your-tenant.console.ves.volterra.io"
 #   api_p12_file = "/path/to/certificate.p12"
-#   p12_password = var.ves_p12_password
+#   p12_password = var.f5xc_p12_password
 # }
 #
 # Environment variables for P12 authentication:
-# export VES_API_URL="https://your-tenant.console.ves.volterra.io"
-# export VES_P12_FILE="/path/to/certificate.p12"
-# export VES_P12_PASSWORD="your-p12-password"
+# export F5XC_API_URL="https://your-tenant.console.ves.volterra.io"
+# export F5XC_P12_FILE="/path/to/certificate.p12"
+# export F5XC_P12_PASSWORD="your-p12-password"
 ```
 
 ## Argument Reference
 
 ### Required (one of the following authentication methods)
 
-* `api_token` - F5 Distributed Cloud API Token (`String`, Sensitive). Can also be set via `VES_API_TOKEN` environment variable.
+* `api_token` - F5 Distributed Cloud API Token (`String`, Sensitive). Can also be set via `F5XC_API_TOKEN` environment variable.
 
-* `api_p12_file` - Path to PKCS#12 certificate bundle file (`String`). Can also be set via `VES_P12_FILE` environment variable. Requires `p12_password`.
+* `api_p12_file` - Path to PKCS#12 certificate bundle file (`String`). Can also be set via `F5XC_P12_FILE` environment variable. Requires `p12_password`.
 
-* `api_cert` and `api_key` - Paths to PEM-encoded certificate and private key files (`String`). Can also be set via `VES_CERT` and `VES_KEY` environment variables.
+* `api_cert` and `api_key` - Paths to PEM-encoded certificate and private key files (`String`). Can also be set via `F5XC_CERT` and `F5XC_KEY` environment variables.
 
 ### Optional
 
-* `api_url` - F5 Distributed Cloud API URL (`String`). Base URL **without** `/api` suffix. Defaults to `https://console.ves.volterra.io`. Can also be set via `VES_API_URL` environment variable.
+* `api_url` - F5 Distributed Cloud API URL (`String`). Base URL **without** `/api` suffix. Defaults to `https://console.ves.volterra.io`. Can also be set via `F5XC_API_URL` environment variable.
 
-* `p12_password` - Password for PKCS#12 certificate bundle (`String`, Sensitive). Required when using `api_p12_file`. Can also be set via `VES_P12_PASSWORD` environment variable.
+* `p12_password` - Password for PKCS#12 certificate bundle (`String`, Sensitive). Required when using `api_p12_file`. Can also be set via `F5XC_P12_PASSWORD` environment variable.
 
-* `api_ca_cert` - Path to PEM-encoded CA certificate file (`String`). Optional, used for server certificate verification. Can also be set via `VES_CACERT` environment variable.
+* `api_ca_cert` - Path to PEM-encoded CA certificate file (`String`). Optional, used for server certificate verification. Can also be set via `F5XC_CACERT` environment variable.
 
 ## Authentication Options
 
@@ -96,8 +96,8 @@ provider "f5xc" {
 **Environment Variables:**
 
 ```bash
-export VES_API_URL="https://your-tenant.console.ves.volterra.io"
-export VES_API_TOKEN="your-api-token"
+export F5XC_API_URL="https://your-tenant.console.ves.volterra.io"
+export F5XC_API_TOKEN="your-api-token"
 ```
 
 ### Option 2: P12 Certificate Authentication
@@ -117,9 +117,9 @@ provider "f5xc" {
 **Environment Variables:**
 
 ```bash
-export VES_API_URL="https://your-tenant.console.ves.volterra.io"
-export VES_P12_FILE="/path/to/certificate.p12"
-export VES_P12_PASSWORD="your-p12-password"
+export F5XC_API_URL="https://your-tenant.console.ves.volterra.io"
+export F5XC_P12_FILE="/path/to/certificate.p12"
+export F5XC_P12_PASSWORD="your-p12-password"
 ```
 
 ### Option 3: PEM Certificate Authentication
@@ -140,10 +140,10 @@ provider "f5xc" {
 **Environment Variables:**
 
 ```bash
-export VES_API_URL="https://your-tenant.console.ves.volterra.io"
-export VES_CERT="/path/to/certificate.crt"
-export VES_KEY="/path/to/private.key"
-export VES_CACERT="/path/to/ca-certificate.crt"  # Optional
+export F5XC_API_URL="https://your-tenant.console.ves.volterra.io"
+export F5XC_CERT="/path/to/certificate.crt"
+export F5XC_KEY="/path/to/private.key"
+export F5XC_CACERT="/path/to/ca-certificate.crt"  # Optional
 ```
 
 -> **Note:** Environment variables are the recommended approach for CI/CD pipelines and to avoid storing sensitive credentials in version control.

@@ -726,13 +726,13 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 							},
 							Blocks: map[string]schema.Block{
 								"dns": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"ssh": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"web_user_interface": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 							},
 						},
@@ -767,7 +767,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 							},
 							Blocks: map[string]schema.Block{
 								"active_backup": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"lacp": schema.SingleNestedBlock{
 									MarkdownDescription: "LACP parameters. LACP parameters for the bond device",
@@ -888,16 +888,16 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 						},
 					},
 					"default_config": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"default_interface_config": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"default_sli_config": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"forward_proxy_allow_all": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"global_network_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Global Network Connection List. List of global network connections",
@@ -976,10 +976,10 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 									},
 									Blocks: map[string]schema.Block{
 										"dc_cluster_group_connectivity_interface_disabled": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 										"dc_cluster_group_connectivity_interface_enabled": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 										"dedicated_interface": schema.SingleNestedBlock{
 											MarkdownDescription: "Dedicated Interface. Dedicated Interface Configuration",
@@ -1003,19 +1003,19 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 											},
 											Blocks: map[string]schema.Block{
 												"cluster": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 												"is_primary": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 												"monitor": schema.SingleNestedBlock{
 													MarkdownDescription: "Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface.",
 												},
 												"monitor_disabled": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 												"not_primary": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 											},
 										},
@@ -1037,7 +1037,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 											},
 											Blocks: map[string]schema.Block{
 												"cluster": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 											},
 										},
@@ -1067,20 +1067,20 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 											},
 											Blocks: map[string]schema.Block{
 												"cluster": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 												"dhcp_client": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 												"dhcp_server": schema.SingleNestedBlock{
 													MarkdownDescription: "DHCPServerParametersType.",
 													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"automatic_from_end": schema.SingleNestedBlock{
-															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															MarkdownDescription: "Enable this option",
 														},
 														"automatic_from_start": schema.SingleNestedBlock{
-															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															MarkdownDescription: "Enable this option",
 														},
 														"dhcp_networks": schema.ListNestedBlock{
 															MarkdownDescription: "DHCP Networks. List of networks from which DHCP Server can allocate IPv4 Addresses",
@@ -1105,10 +1105,10 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 																},
 																Blocks: map[string]schema.Block{
 																	"first_address": schema.SingleNestedBlock{
-																		MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																		MarkdownDescription: "Enable this option",
 																	},
 																	"last_address": schema.SingleNestedBlock{
-																		MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																		MarkdownDescription: "Enable this option",
 																	},
 																	"pools": schema.ListNestedBlock{
 																		MarkdownDescription: "DHCP Pools. List of non overlapping ip address ranges.",
@@ -1126,7 +1126,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 																		},
 																	},
 																	"same_as_dgw": schema.SingleNestedBlock{
-																		MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																		MarkdownDescription: "Enable this option",
 																	},
 																},
 															},
@@ -1150,7 +1150,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"host": schema.SingleNestedBlock{
-															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															MarkdownDescription: "Enable this option",
 														},
 														"router": schema.SingleNestedBlock{
 															MarkdownDescription: "IPV6AutoConfigRouterType.",
@@ -1185,10 +1185,10 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 																			},
 																			Blocks: map[string]schema.Block{
 																				"first_address": schema.SingleNestedBlock{
-																					MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																					MarkdownDescription: "Enable this option",
 																				},
 																				"last_address": schema.SingleNestedBlock{
-																					MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																					MarkdownDescription: "Enable this option",
 																				},
 																			},
 																		},
@@ -1199,10 +1199,10 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 																	Attributes:          map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
 																		"automatic_from_end": schema.SingleNestedBlock{
-																			MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																			MarkdownDescription: "Enable this option",
 																		},
 																		"automatic_from_start": schema.SingleNestedBlock{
-																			MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																			MarkdownDescription: "Enable this option",
 																		},
 																		"dhcp_networks": schema.ListNestedBlock{
 																			MarkdownDescription: "DHCP IPV6 Networks. List of networks from which DHCP server can allocate ip addresses",
@@ -1255,25 +1255,25 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 													},
 												},
 												"is_primary": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 												"monitor": schema.SingleNestedBlock{
 													MarkdownDescription: "Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface.",
 												},
 												"monitor_disabled": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 												"no_ipv6_address": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 												"not_primary": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 												"site_local_inside_network": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 												"site_local_network": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 												"static_ip": schema.SingleNestedBlock{
 													MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
@@ -1332,10 +1332,10 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 													},
 												},
 												"storage_network": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 												"untagged": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 											},
 										},
@@ -1348,13 +1348,13 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 						},
 					},
 					"no_forward_proxy": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_global_network": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_network_policy": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"sli_config": schema.SingleNestedBlock{
 						MarkdownDescription: "Site Local Network Configuration. Site local network configuration",
@@ -1391,13 +1391,13 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 								MarkdownDescription: "Network Labels. Add Labels for this network, these labels can be used in firewall policy",
 							},
 							"no_dc_cluster_group": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"no_static_routes": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"no_v6_static_routes": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"static_routes": schema.SingleNestedBlock{
 								MarkdownDescription: "Static Routes List. List of static routes",
@@ -1424,7 +1424,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 											},
 											Blocks: map[string]schema.Block{
 												"default_gateway": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 												"node_interface": schema.SingleNestedBlock{
 													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
@@ -1505,7 +1505,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 											},
 											Blocks: map[string]schema.Block{
 												"default_gateway": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 												"node_interface": schema.SingleNestedBlock{
 													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
@@ -1598,13 +1598,13 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 								MarkdownDescription: "Network Labels. Add Labels for this network, these labels can be used in firewall policy",
 							},
 							"no_dc_cluster_group": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"no_static_routes": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"no_v6_static_routes": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"static_routes": schema.SingleNestedBlock{
 								MarkdownDescription: "Static Routes List. List of static routes",
@@ -1631,7 +1631,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 											},
 											Blocks: map[string]schema.Block{
 												"default_gateway": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 												"node_interface": schema.SingleNestedBlock{
 													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
@@ -1712,7 +1712,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 											},
 											Blocks: map[string]schema.Block{
 												"default_gateway": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 												"node_interface": schema.SingleNestedBlock{
 													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
@@ -1771,25 +1771,25 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 						},
 					},
 					"sm_connection_public_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"sm_connection_pvt_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
 			"default_blocked_services": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"default_network_config": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"kubernetes_upgrade_drain": schema.SingleNestedBlock{
 				MarkdownDescription: "Node by Node Upgrade. Specify how worker nodes within a site will be upgraded.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"disable_upgrade_drain": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"enable_upgrade_drain": schema.SingleNestedBlock{
 						MarkdownDescription: "Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site.",
@@ -1805,10 +1805,10 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 						},
 						Blocks: map[string]schema.Block{
 							"disable_vega_upgrade_mode": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_vega_upgrade_mode": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1833,7 +1833,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 				},
 			},
 			"logs_streaming_disabled": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"master_node_configuration": schema.ListNestedBlock{
 				MarkdownDescription: "Master Nodes. Configuration of master nodes",
@@ -1851,17 +1851,17 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 				},
 			},
 			"no_bond_devices": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"offline_survivability_mode": schema.SingleNestedBlock{
 				MarkdownDescription: "Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"enable_offline_survivability_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_offline_survivability_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -1875,28 +1875,28 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 				},
 				Blocks: map[string]schema.Block{
 					"default_os_version": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
 			"performance_enhancement_mode": schema.SingleNestedBlock{
-				MarkdownDescription: "Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
+				MarkdownDescription: "Performance Enhancement Mode.Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"perf_mode_l3_enhanced": schema.SingleNestedBlock{
-						MarkdownDescription: "L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options",
+						MarkdownDescription: "L3 Mode Enhanced Performance.L3 enhanced performance mode options",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"jumbo": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"no_jumbo": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
 					"perf_mode_l7_enhanced": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -1910,7 +1910,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 				},
 				Blocks: map[string]schema.Block{
 					"default_sw_version": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},

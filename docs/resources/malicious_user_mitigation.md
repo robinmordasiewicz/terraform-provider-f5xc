@@ -94,21 +94,21 @@ A [`rules`](#mitigation-type-rules) block (within [`mitigation_type`](#mitigatio
 
 A [`mitigation_action`](#mitigation-type-rules-mitigation-action) block (within [`mitigation_type.rules`](#mitigation-type-rules)) supports the following:
 
-<a id="mitigation-type-rules-mitigation-action-block-temporarily"></a>&#x2022; [`block_temporarily`](#mitigation-type-rules-mitigation-action-block-temporarily) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="mitigation-type-rules-mitigation-action-block-temporarily"></a>&#x2022; [`block_temporarily`](#mitigation-type-rules-mitigation-action-block-temporarily) - Optional Block<br>Enable this option
 
-<a id="mitigation-type-rules-mitigation-action-captcha-challenge"></a>&#x2022; [`captcha_challenge`](#mitigation-type-rules-mitigation-action-captcha-challenge) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="mitigation-type-rules-mitigation-action-captcha-challenge"></a>&#x2022; [`captcha_challenge`](#mitigation-type-rules-mitigation-action-captcha-challenge) - Optional Block<br>Enable this option
 
-<a id="mitigation-type-rules-mitigation-action-javascript-challenge"></a>&#x2022; [`javascript_challenge`](#mitigation-type-rules-mitigation-action-javascript-challenge) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="mitigation-type-rules-mitigation-action-javascript-challenge"></a>&#x2022; [`javascript_challenge`](#mitigation-type-rules-mitigation-action-javascript-challenge) - Optional Block<br>Enable this option
 
 #### Mitigation Type Rules Threat Level
 
 A [`threat_level`](#mitigation-type-rules-threat-level) block (within [`mitigation_type.rules`](#mitigation-type-rules)) supports the following:
 
-<a id="mitigation-type-rules-threat-level-high"></a>&#x2022; [`high`](#mitigation-type-rules-threat-level-high) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="mitigation-type-rules-threat-level-high"></a>&#x2022; [`high`](#mitigation-type-rules-threat-level-high) - Optional Block<br>Enable this option
 
-<a id="mitigation-type-rules-threat-level-low"></a>&#x2022; [`low`](#mitigation-type-rules-threat-level-low) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="mitigation-type-rules-threat-level-low"></a>&#x2022; [`low`](#mitigation-type-rules-threat-level-low) - Optional Block<br>Enable this option
 
-<a id="mitigation-type-rules-threat-level-medium"></a>&#x2022; [`medium`](#mitigation-type-rules-threat-level-medium) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="mitigation-type-rules-threat-level-medium"></a>&#x2022; [`medium`](#mitigation-type-rules-threat-level-medium) - Optional Block<br>Enable this option
 
 #### Timeouts
 

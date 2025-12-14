@@ -198,7 +198,7 @@ func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRe
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"current_namespace": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"daily": schema.SingleNestedBlock{
 						MarkdownDescription: "Report Frequency Daily. create report daily",

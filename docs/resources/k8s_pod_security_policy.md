@@ -116,23 +116,23 @@ A [`psp_spec`](#psp-spec) block supports the following:
 
 <a id="psp-spec-host-port-ranges"></a>&#x2022; [`host_port_ranges`](#psp-spec-host-port-ranges) - Optional String<br>Host Ports Ranges. Host port ranges determines which ports ranges are allowed to be exposed
 
-<a id="psp-spec-no-allowed-capabilities"></a>&#x2022; [`no_allowed_capabilities`](#psp-spec-no-allowed-capabilities) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="psp-spec-no-allowed-capabilities"></a>&#x2022; [`no_allowed_capabilities`](#psp-spec-no-allowed-capabilities) - Optional Block<br>Enable this option
 
-<a id="psp-spec-no-default-capabilities"></a>&#x2022; [`no_default_capabilities`](#psp-spec-no-default-capabilities) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="psp-spec-no-default-capabilities"></a>&#x2022; [`no_default_capabilities`](#psp-spec-no-default-capabilities) - Optional Block<br>Enable this option
 
-<a id="psp-spec-no-drop-capabilities"></a>&#x2022; [`no_drop_capabilities`](#psp-spec-no-drop-capabilities) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="psp-spec-no-drop-capabilities"></a>&#x2022; [`no_drop_capabilities`](#psp-spec-no-drop-capabilities) - Optional Block<br>Enable this option
 
-<a id="psp-spec-no-fs-groups"></a>&#x2022; [`no_fs_groups`](#psp-spec-no-fs-groups) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="psp-spec-no-fs-groups"></a>&#x2022; [`no_fs_groups`](#psp-spec-no-fs-groups) - Optional Block<br>Enable this option
 
-<a id="psp-spec-no-run-as-group"></a>&#x2022; [`no_run_as_group`](#psp-spec-no-run-as-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="psp-spec-no-run-as-group"></a>&#x2022; [`no_run_as_group`](#psp-spec-no-run-as-group) - Optional Block<br>Enable this option
 
-<a id="psp-spec-no-run-as-user"></a>&#x2022; [`no_run_as_user`](#psp-spec-no-run-as-user) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="psp-spec-no-run-as-user"></a>&#x2022; [`no_run_as_user`](#psp-spec-no-run-as-user) - Optional Block<br>Enable this option
 
-<a id="psp-spec-no-runtime-class"></a>&#x2022; [`no_runtime_class`](#psp-spec-no-runtime-class) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="psp-spec-no-runtime-class"></a>&#x2022; [`no_runtime_class`](#psp-spec-no-runtime-class) - Optional Block<br>Enable this option
 
-<a id="psp-spec-no-se-linux-options"></a>&#x2022; [`no_se_linux_options`](#psp-spec-no-se-linux-options) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="psp-spec-no-se-linux-options"></a>&#x2022; [`no_se_linux_options`](#psp-spec-no-se-linux-options) - Optional Block<br>Enable this option
 
-<a id="psp-spec-no-supplemental-groups"></a>&#x2022; [`no_supplemental_groups`](#psp-spec-no-supplemental-groups) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="psp-spec-no-supplemental-groups"></a>&#x2022; [`no_supplemental_groups`](#psp-spec-no-supplemental-groups) - Optional Block<br>Enable this option
 
 <a id="psp-spec-privileged"></a>&#x2022; [`privileged`](#psp-spec-privileged) - Optional Bool<br>Privileged. Privileged determines if a pod can request to be run as privileged
 

@@ -16,11 +16,11 @@ resource "f5xc_infraprotect_firewall_rule" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: action_allow, action_deny] Empty. This can be use...
+  # [OneOf: action_allow, action_deny] Enable this option
   action_allow {
     # Configure action_allow settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   action_deny {
     # Configure action_deny settings
   }

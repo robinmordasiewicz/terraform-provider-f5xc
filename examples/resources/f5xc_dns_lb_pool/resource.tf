@@ -20,7 +20,7 @@ resource "f5xc_dns_lb_pool" "example" {
   a_pool {
     # Configure a_pool settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   disable_health_check {
     # Configure disable_health_check settings
   }

@@ -20,11 +20,11 @@ resource "f5xc_network_interface" "example" {
   dedicated_interface {
     # Configure dedicated_interface settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   cluster {
     # Configure cluster settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   is_primary {
     # Configure is_primary settings
   }

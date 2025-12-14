@@ -71,13 +71,13 @@ resource "f5xc_ike1" "example" {
 <br><br>&#x2022; <a id="ike-keylifetime-minutes"></a>[`ike_keylifetime_minutes`](#ike-keylifetime-minutes) - Optional Block<br>Minutes. Set IKE Key Lifetime in minutes<br>See [IKE Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="reauth-disabled"></a>[`reauth_disabled`](#reauth-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="reauth-disabled"></a>[`reauth_disabled`](#reauth-disabled) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="reauth-timeout-days"></a>[`reauth_timeout_days`](#reauth-timeout-days) - Optional Block<br>Days. Set Duration in days<br>See [Reauth Timeout Days](#reauth-timeout-days) below for details.
 <br><br>&#x2022; <a id="reauth-timeout-hours"></a>[`reauth_timeout_hours`](#reauth-timeout-hours) - Optional Block<br>Hours. Input Hours<br>See [Reauth Timeout Hours](#reauth-timeout-hours) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-<a id="use-default-keylifetime"></a>&#x2022; [`use_default_keylifetime`](#use-default-keylifetime) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="use-default-keylifetime"></a>&#x2022; [`use_default_keylifetime`](#use-default-keylifetime) - Optional Block<br>Enable this option
 
 ### Attributes Reference
 

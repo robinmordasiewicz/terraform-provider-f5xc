@@ -32,7 +32,7 @@ resource "f5xc_cluster" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: auto_http_config, http1_config, http2_options] Em...
+  # [OneOf: auto_http_config, http1_config, http2_options] En...
   auto_http_config {
     # Configure auto_http_config settings
   }
@@ -67,7 +67,7 @@ resource "f5xc_cluster" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="auto-http-config"></a>[`auto_http_config`](#auto-http-config) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="auto-http-config"></a>[`auto_http_config`](#auto-http-config) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="http1-config"></a>[`http1_config`](#http1-config) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for upstream connections<br>See [Http1 Config](#http1-config) below for details.
 <br><br>&#x2022; <a id="http2-options"></a>[`http2_options`](#http2-options) - Optional Block<br>Http2 Protocol Options. Http2 Protocol options for upstream connections<br>See [Http2 Options](#http2-options) below for details.
 
@@ -78,8 +78,8 @@ resource "f5xc_cluster" "example" {
 <a id="default-subset"></a>&#x2022; [`default_subset`](#default-subset) - Optional Block<br>Default Subset. List of key-value pairs that define default subset. This subset can be referred in fallback_policy which gets used when route specifies no metadata or no subset matching the metadata exists
 
 -> **One of the following:**
-&#x2022; <a id="disable-proxy-protocol"></a>[`disable_proxy_protocol`](#disable-proxy-protocol) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="proxy-protocol-v1"></a>[`proxy_protocol_v1`](#proxy-protocol-v1) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="disable-proxy-protocol"></a>[`disable_proxy_protocol`](#disable-proxy-protocol) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="proxy-protocol-v1"></a>[`proxy_protocol_v1`](#proxy-protocol-v1) - Optional Block<br>Enable this option
 
 <a id="endpoint-selection"></a>&#x2022; [`endpoint_selection`](#endpoint-selection) - Optional String  Defaults to `DISTRIBUTED`<br>Possible values are `DISTRIBUTED`, `LOCAL_ONLY`, `LOCAL_PREFERRED`<br>[Enum: DISTRIBUTED|LOCAL_ONLY|LOCAL_PREFERRED] Endpoint Selection Policy. Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints for load balancing Enable this policy to load balance ONLY among locally discovered endpoints Prefer the local endpoints for load balancing. If local endpoints are not present remote endpoints will be considered
 
@@ -96,13 +96,13 @@ resource "f5xc_cluster" "example" {
 <a id="loadbalancer-algorithm"></a>&#x2022; [`loadbalancer_algorithm`](#loadbalancer-algorithm) - Optional String  Defaults to `ROUND_ROBIN`<br>Possible values are `ROUND_ROBIN`, `LEAST_REQUEST`, `RING_HASH`, `RANDOM`, `LB_OVERRIDE`<br>[Enum: ROUND_ROBIN|LEAST_REQUEST|RING_HASH|RANDOM|LB_OVERRIDE] Load Balancer Algorithm. Different load balancing algorithms supported When a connection to a endpoint in an upstream cluster is required, the load balancer uses loadbalancer_algorithm to determine which host is selected. - ROUND_ROBIN: ROUND_ROBIN Policy in which each healthy/available upstream endpoint is selected in round robin order. - LEAST_REQUEST: LEAST_REQUEST Policy in which loadbalancer picks the upstream endpoint which has the fewest active requests - RING_HASH: RING_HASH Policy implements consistent hashing to upstream endpoints using ring hash of endpoint names Hash of the incoming request is calculated using request hash policy. The ring/modulo hash load balancer implements consistent hashing to upstream hosts. The algorithm is based on mapping all hosts onto a circle such that the addition or removal of a host from the host set changes only affect 1/N requests. This technique is also commonly known as “ketama” hashing. A consistent hashing load balancer is only effective when protocol routing is used that specifies a value to hash on. The minimum ring size governs the replication factor for each host in the ring. For example, if the minimum ring size is 1024 and there are 16 hosts, each host will be replicated 64 times. - RANDOM: RANDOM Policy in which each available upstream endpoint is selected in random order. The random load balancer selects a random healthy host. The random load balancer generally performs better than round robin if no health checking policy is configured. Random selection avoids bias towards the host in the set that comes after a failed host. - LB_OVERRIDE: Load Balancer Override Hash policy is taken from from the load balancer which is using this origin pool
 
 -> **One of the following:**
-&#x2022; <a id="no-panic-threshold"></a>[`no_panic_threshold`](#no-panic-threshold) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="no-panic-threshold"></a>[`no_panic_threshold`](#no-panic-threshold) - Optional Block<br>Enable this option
 
 <a id="outlier-detection"></a>&#x2022; [`outlier_detection`](#outlier-detection) - Optional Block<br>Outlier Detection. Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1. A endpoint is determined to be an outlier (based on configured number of consecutive_5xx or consecutive_gateway_failures) . 2. If no endpoints have been ejected, loadbalancer will eject the host immediately. Otherwise, it checks to make sure the number of ejected hosts is below the allowed threshold (specified via max_ejection_percent setting). If the number of ejected hosts is above the threshold, the host is not ejected. 3. The endpoint is ejected for some number of milliseconds. Ejection means that the endpoint is marked unhealthy and will not be used during load balancing. The number of milliseconds is equal to the base_ejection_time value multiplied by the number of times the host has been ejected. 4. An ejected endpoint will automatically be brought back into service after the ejection time has been satisfied<br>See [Outlier Detection](#outlier-detection) below for details.
 
 <a id="panic-threshold"></a>&#x2022; [`panic_threshold`](#panic-threshold) - Optional Number<br>Panic threshold. Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for loadbalancing ignoring its health status
 
-<a id="proxy-protocol-v2"></a>&#x2022; [`proxy_protocol_v2`](#proxy-protocol-v2) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="proxy-protocol-v2"></a>&#x2022; [`proxy_protocol_v2`](#proxy-protocol-v2) - Optional Block<br>Enable this option
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -176,13 +176,13 @@ A [`http1_config`](#http1-config) block supports the following:
 
 A [`header_transformation`](#http1-config-header-transformation) block (within [`http1_config`](#http1-config)) supports the following:
 
-<a id="http1-config-header-transformation-default-header-transformation"></a>&#x2022; [`default_header_transformation`](#http1-config-header-transformation-default-header-transformation) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http1-config-header-transformation-default-header-transformation"></a>&#x2022; [`default_header_transformation`](#http1-config-header-transformation-default-header-transformation) - Optional Block<br>Enable this option
 
-<a id="http1-config-header-transformation-legacy-header-transformation"></a>&#x2022; [`legacy_header_transformation`](#http1-config-header-transformation-legacy-header-transformation) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http1-config-header-transformation-legacy-header-transformation"></a>&#x2022; [`legacy_header_transformation`](#http1-config-header-transformation-legacy-header-transformation) - Optional Block<br>Enable this option
 
-<a id="http1-config-header-transformation-preserve-case-header-transformation"></a>&#x2022; [`preserve_case_header_transformation`](#http1-config-header-transformation-preserve-case-header-transformation) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http1-config-header-transformation-preserve-case-header-transformation"></a>&#x2022; [`preserve_case_header_transformation`](#http1-config-header-transformation-preserve-case-header-transformation) - Optional Block<br>Enable this option
 
-<a id="http1-config-header-transformation-proper-case-header-transformation"></a>&#x2022; [`proper_case_header_transformation`](#http1-config-header-transformation-proper-case-header-transformation) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http1-config-header-transformation-proper-case-header-transformation"></a>&#x2022; [`proper_case_header_transformation`](#http1-config-header-transformation-proper-case-header-transformation) - Optional Block<br>Enable this option
 
 #### Http2 Options
 
@@ -224,17 +224,17 @@ A [`tls_parameters`](#tls-parameters) block supports the following:
 
 <a id="tls-parameters-common-params"></a>&#x2022; [`common_params`](#tls-parameters-common-params) - Optional Block<br>TLS Parameters. Information of different aspects for TLS authentication related to ciphers, certificates and trust store<br>See [Common Params](#tls-parameters-common-params) below.
 
-<a id="tls-parameters-default-session-key-caching"></a>&#x2022; [`default_session_key_caching`](#tls-parameters-default-session-key-caching) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="tls-parameters-default-session-key-caching"></a>&#x2022; [`default_session_key_caching`](#tls-parameters-default-session-key-caching) - Optional Block<br>Enable this option
 
-<a id="tls-parameters-disable-session-key-caching"></a>&#x2022; [`disable_session_key_caching`](#tls-parameters-disable-session-key-caching) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="tls-parameters-disable-session-key-caching"></a>&#x2022; [`disable_session_key_caching`](#tls-parameters-disable-session-key-caching) - Optional Block<br>Enable this option
 
-<a id="tls-parameters-disable-sni"></a>&#x2022; [`disable_sni`](#tls-parameters-disable-sni) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="tls-parameters-disable-sni"></a>&#x2022; [`disable_sni`](#tls-parameters-disable-sni) - Optional Block<br>Enable this option
 
-<a id="tls-parameters-max-session-keys"></a>&#x2022; [`max_session_keys`](#tls-parameters-max-session-keys) - Optional Number<br>Max Session Keys Cached. x-example:'25' Number of session keys that are cached
+<a id="tls-parameters-max-session-keys"></a>&#x2022; [`max_session_keys`](#tls-parameters-max-session-keys) - Optional Number<br>Max Session Keys Cached. Number of session keys that are cached
 
 <a id="tls-parameters-sni"></a>&#x2022; [`sni`](#tls-parameters-sni) - Optional String<br>SNI Value. SNI value to be used
 
-<a id="tls-parameters-use-host-header-as-sni"></a>&#x2022; [`use_host_header_as_sni`](#tls-parameters-use-host-header-as-sni) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="tls-parameters-use-host-header-as-sni"></a>&#x2022; [`use_host_header_as_sni`](#tls-parameters-use-host-header-as-sni) - Optional Block<br>Enable this option
 
 #### TLS Parameters Cert Params
 
@@ -320,11 +320,11 @@ A [`tls_certificates`](#tls-parameters-common-params-tls-certificates) block (wi
 
 <a id="tls-parameters-common-params-tls-certificates-description-spec"></a>&#x2022; [`description_spec`](#tls-parameters-common-params-tls-certificates-description-spec) - Optional String<br>Description. Description for the certificate
 
-<a id="tls-parameters-common-params-tls-certificates-disable-ocsp-stapling"></a>&#x2022; [`disable_ocsp_stapling`](#tls-parameters-common-params-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="tls-parameters-common-params-tls-certificates-disable-ocsp-stapling"></a>&#x2022; [`disable_ocsp_stapling`](#tls-parameters-common-params-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Enable this option
 
 <a id="tls-parameters-common-params-tls-certificates-private-key"></a>&#x2022; [`private_key`](#tls-parameters-common-params-tls-certificates-private-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#tls-parameters-common-params-tls-certificates-private-key) below.
 
-<a id="tls-parameters-common-params-tls-certificates-use-system-defaults"></a>&#x2022; [`use_system_defaults`](#tls-parameters-common-params-tls-certificates-use-system-defaults) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="tls-parameters-common-params-tls-certificates-use-system-defaults"></a>&#x2022; [`use_system_defaults`](#tls-parameters-common-params-tls-certificates-use-system-defaults) - Optional Block<br>Enable this option
 
 #### TLS Parameters Common Params TLS Certificates Custom Hash Algorithms
 
@@ -394,9 +394,9 @@ A [`trusted_ca_list`](#tls-parameters-common-params-validation-params-trusted-ca
 
 An [`upstream_conn_pool_reuse_type`](#upstream-conn-pool-reuse-type) block supports the following:
 
-<a id="upstream-conn-pool-reuse-type-disable-conn-pool-reuse"></a>&#x2022; [`disable_conn_pool_reuse`](#upstream-conn-pool-reuse-type-disable-conn-pool-reuse) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="upstream-conn-pool-reuse-type-disable-conn-pool-reuse"></a>&#x2022; [`disable_conn_pool_reuse`](#upstream-conn-pool-reuse-type-disable-conn-pool-reuse) - Optional Block<br>Enable this option
 
-<a id="upstream-conn-pool-reuse-type-enable-conn-pool-reuse"></a>&#x2022; [`enable_conn_pool_reuse`](#upstream-conn-pool-reuse-type-enable-conn-pool-reuse) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="upstream-conn-pool-reuse-type-enable-conn-pool-reuse"></a>&#x2022; [`enable_conn_pool_reuse`](#upstream-conn-pool-reuse-type-enable-conn-pool-reuse) - Optional Block<br>Enable this option
 
 ## Import
 

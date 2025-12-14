@@ -165,7 +165,7 @@ func (r *IKEPhase2ProfileResource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"disable_pfs": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"ike_keylifetime_hours": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: ike_keylifetime_hours, ike_keylifetime_minutes, use_default_keylifetime; Default: use_default_keylifetime] Hours. Input Hours",
@@ -186,7 +186,7 @@ func (r *IKEPhase2ProfileResource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"use_default_keylifetime": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 		},
 	}

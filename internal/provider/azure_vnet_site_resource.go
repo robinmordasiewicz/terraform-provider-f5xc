@@ -1800,7 +1800,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"block_all_services": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: block_all_services, blocked_services, default_blocked_services; Default: default_blocked_services] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: block_all_services, blocked_services, default_blocked_services; Default: default_blocked_services] Enable this option",
 			},
 			"blocked_services": schema.SingleNestedBlock{
 				MarkdownDescription: "Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site.",
@@ -1817,13 +1817,13 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 							},
 							Blocks: map[string]schema.Block{
 								"dns": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"ssh": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"web_user_interface": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 							},
 						},
@@ -1857,7 +1857,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"default_blocked_services": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"ingress_egress_gw": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: ingress_egress_gw, ingress_egress_gw_ar, ingress_gw, ingress_gw_ar, voltstack_cluster, voltstack_cluster_ar] Azure Ingress/Egress Gateway on Recommended Region. Two interface Azure ingress/egress site",
@@ -1869,14 +1869,14 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 				Blocks: map[string]schema.Block{
 					"accelerated_networking": schema.SingleNestedBlock{
-						MarkdownDescription: "Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen",
+						MarkdownDescription: "Accelerated Networking Type.Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"disable": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1986,7 +1986,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 											Blocks: map[string]schema.Block{
 												"vnet_resource_group": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 											},
 										},
@@ -2019,7 +2019,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 											Blocks: map[string]schema.Block{
 												"vnet_resource_group": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 											},
 										},
@@ -2074,7 +2074,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"forward_proxy_allow_all": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"global_network_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Global Network Connection List. List of global network connections",
@@ -2143,7 +2143,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"express_route_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"express_route_enabled": schema.SingleNestedBlock{
 								MarkdownDescription: "Express Route Configuration. Express Route Configuration",
@@ -2155,10 +2155,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 								},
 								Blocks: map[string]schema.Block{
 									"advertise_to_route_server": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"auto_asn": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"connections": schema.ListNestedBlock{
 										MarkdownDescription: "Connections. Add the ExpressRoute Circuit Connections to this site",
@@ -2238,14 +2238,14 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 									},
 									"do_not_advertise_to_route_server": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"gateway_subnet": schema.SingleNestedBlock{
 										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"auto": schema.SingleNestedBlock{
-												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												MarkdownDescription: "Enable this option",
 											},
 											"subnet": schema.SingleNestedBlock{
 												MarkdownDescription: "Azure Cloud Special Subnet. Parameters for Azure special subnet which name is reserved. (i.e GatewaySubnet or RouteServerSubnet)",
@@ -2257,7 +2257,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 												Blocks: map[string]schema.Block{
 													"vnet_resource_group": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 												},
 											},
@@ -2277,7 +2277,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"auto": schema.SingleNestedBlock{
-												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												MarkdownDescription: "Enable this option",
 											},
 											"subnet": schema.SingleNestedBlock{
 												MarkdownDescription: "Azure Cloud Special Subnet. Parameters for Azure special subnet which name is reserved. (i.e GatewaySubnet or RouteServerSubnet)",
@@ -2289,7 +2289,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 												Blocks: map[string]schema.Block{
 													"vnet_resource_group": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 												},
 											},
@@ -2314,19 +2314,19 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 									},
 									"site_registration_over_internet": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"sku_ergw1az": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"sku_ergw2az": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"sku_high_perf": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"sku_standard": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},
@@ -2336,13 +2336,13 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"auto": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 										"labels": schema.SingleNestedBlock{
 											MarkdownDescription: "Labels For VNets Peering. Add Labels for each of the VNets peered with transit VNet, these labels can be used in firewall policy These labels used must be from known key and label defined in shared namespace",
 										},
 										"manual": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 										"vnet": schema.SingleNestedBlock{
 											MarkdownDescription: "Azure Existing Vnet Type. Resource group and name of existing Azure Vnet",
@@ -2358,10 +2358,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 											Blocks: map[string]schema.Block{
 												"f5_orchestrated_routing": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 												"manual_routing": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 											},
 										},
@@ -2504,25 +2504,25 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"no_dc_cluster_group": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_forward_proxy": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_global_network": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_inside_static_routes": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_network_policy": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_outside_static_routes": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"not_hub": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"outside_static_routes": schema.SingleNestedBlock{
 						MarkdownDescription: "Static Route List Type. List of static routes",
@@ -2658,31 +2658,31 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"performance_enhancement_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
+						MarkdownDescription: "Performance Enhancement Mode.Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"perf_mode_l3_enhanced": schema.SingleNestedBlock{
-								MarkdownDescription: "L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options",
+								MarkdownDescription: "L3 Mode Enhanced Performance.L3 enhanced performance mode options",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"jumbo": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"no_jumbo": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},
 							"perf_mode_l7_enhanced": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
 					"sm_connection_public_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"sm_connection_pvt_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -2696,14 +2696,14 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 				Blocks: map[string]schema.Block{
 					"accelerated_networking": schema.SingleNestedBlock{
-						MarkdownDescription: "Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen",
+						MarkdownDescription: "Accelerated Networking Type.Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"disable": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -2822,7 +2822,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"forward_proxy_allow_all": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"global_network_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Global Network Connection List. List of global network connections",
@@ -2891,7 +2891,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"express_route_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"express_route_enabled": schema.SingleNestedBlock{
 								MarkdownDescription: "Express Route Configuration. Express Route Configuration",
@@ -2903,10 +2903,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 								},
 								Blocks: map[string]schema.Block{
 									"advertise_to_route_server": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"auto_asn": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"connections": schema.ListNestedBlock{
 										MarkdownDescription: "Connections. Add the ExpressRoute Circuit Connections to this site",
@@ -2986,14 +2986,14 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 									},
 									"do_not_advertise_to_route_server": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"gateway_subnet": schema.SingleNestedBlock{
 										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"auto": schema.SingleNestedBlock{
-												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												MarkdownDescription: "Enable this option",
 											},
 											"subnet": schema.SingleNestedBlock{
 												MarkdownDescription: "Azure Cloud Special Subnet. Parameters for Azure special subnet which name is reserved. (i.e GatewaySubnet or RouteServerSubnet)",
@@ -3005,7 +3005,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 												Blocks: map[string]schema.Block{
 													"vnet_resource_group": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 												},
 											},
@@ -3025,7 +3025,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"auto": schema.SingleNestedBlock{
-												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												MarkdownDescription: "Enable this option",
 											},
 											"subnet": schema.SingleNestedBlock{
 												MarkdownDescription: "Azure Cloud Special Subnet. Parameters for Azure special subnet which name is reserved. (i.e GatewaySubnet or RouteServerSubnet)",
@@ -3037,7 +3037,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 												Blocks: map[string]schema.Block{
 													"vnet_resource_group": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 												},
 											},
@@ -3062,19 +3062,19 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 									},
 									"site_registration_over_internet": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"sku_ergw1az": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"sku_ergw2az": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"sku_high_perf": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"sku_standard": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},
@@ -3084,13 +3084,13 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"auto": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 										"labels": schema.SingleNestedBlock{
 											MarkdownDescription: "Labels For VNets Peering. Add Labels for each of the VNets peered with transit VNet, these labels can be used in firewall policy These labels used must be from known key and label defined in shared namespace",
 										},
 										"manual": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 										"vnet": schema.SingleNestedBlock{
 											MarkdownDescription: "Azure Existing Vnet Type. Resource group and name of existing Azure Vnet",
@@ -3106,10 +3106,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 											Blocks: map[string]schema.Block{
 												"f5_orchestrated_routing": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 												"manual_routing": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 											},
 										},
@@ -3252,22 +3252,22 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"no_dc_cluster_group": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_forward_proxy": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_global_network": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_inside_static_routes": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_network_policy": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_outside_static_routes": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"node": schema.SingleNestedBlock{
 						MarkdownDescription: "Two Interface Node. Parameters for creating two interface Node in one AZ",
@@ -3304,7 +3304,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 										Blocks: map[string]schema.Block{
 											"vnet_resource_group": schema.SingleNestedBlock{
-												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												MarkdownDescription: "Enable this option",
 											},
 										},
 									},
@@ -3337,7 +3337,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 										Blocks: map[string]schema.Block{
 											"vnet_resource_group": schema.SingleNestedBlock{
-												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												MarkdownDescription: "Enable this option",
 											},
 										},
 									},
@@ -3355,7 +3355,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"not_hub": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"outside_static_routes": schema.SingleNestedBlock{
 						MarkdownDescription: "Static Route List Type. List of static routes",
@@ -3491,31 +3491,31 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"performance_enhancement_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
+						MarkdownDescription: "Performance Enhancement Mode.Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"perf_mode_l3_enhanced": schema.SingleNestedBlock{
-								MarkdownDescription: "L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options",
+								MarkdownDescription: "L3 Mode Enhanced Performance.L3 enhanced performance mode options",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"jumbo": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"no_jumbo": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},
 							"perf_mode_l7_enhanced": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
 					"sm_connection_public_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"sm_connection_pvt_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -3529,14 +3529,14 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 				Blocks: map[string]schema.Block{
 					"accelerated_networking": schema.SingleNestedBlock{
-						MarkdownDescription: "Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen",
+						MarkdownDescription: "Accelerated Networking Type.Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"disable": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -3568,7 +3568,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 											Blocks: map[string]schema.Block{
 												"vnet_resource_group": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 											},
 										},
@@ -3587,23 +3587,23 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"performance_enhancement_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
+						MarkdownDescription: "Performance Enhancement Mode.Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"perf_mode_l3_enhanced": schema.SingleNestedBlock{
-								MarkdownDescription: "L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options",
+								MarkdownDescription: "L3 Mode Enhanced Performance.L3 enhanced performance mode options",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"jumbo": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"no_jumbo": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},
 							"perf_mode_l7_enhanced": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -3619,14 +3619,14 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 				Blocks: map[string]schema.Block{
 					"accelerated_networking": schema.SingleNestedBlock{
-						MarkdownDescription: "Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen",
+						MarkdownDescription: "Accelerated Networking Type.Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"disable": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -3665,7 +3665,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 										Blocks: map[string]schema.Block{
 											"vnet_resource_group": schema.SingleNestedBlock{
-												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												MarkdownDescription: "Enable this option",
 											},
 										},
 									},
@@ -3683,23 +3683,23 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"performance_enhancement_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
+						MarkdownDescription: "Performance Enhancement Mode.Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"perf_mode_l3_enhanced": schema.SingleNestedBlock{
-								MarkdownDescription: "L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options",
+								MarkdownDescription: "L3 Mode Enhanced Performance.L3 enhanced performance mode options",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"jumbo": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"no_jumbo": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},
 							"perf_mode_l7_enhanced": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -3710,7 +3710,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"disable_upgrade_drain": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"enable_upgrade_drain": schema.SingleNestedBlock{
 						MarkdownDescription: "Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site.",
@@ -3726,10 +3726,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 						Blocks: map[string]schema.Block{
 							"disable_vega_upgrade_mode": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_vega_upgrade_mode": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -3754,20 +3754,20 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"logs_streaming_disabled": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"no_worker_nodes": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: no_worker_nodes, nodes_per_az, total_nodes; Default: no_worker_nodes] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: no_worker_nodes, nodes_per_az, total_nodes; Default: no_worker_nodes] Enable this option",
 			},
 			"offline_survivability_mode": schema.SingleNestedBlock{
 				MarkdownDescription: "Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"enable_offline_survivability_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_offline_survivability_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -3781,7 +3781,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 				Blocks: map[string]schema.Block{
 					"default_os_version": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -3795,7 +3795,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 				Blocks: map[string]schema.Block{
 					"default_sw_version": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -3820,10 +3820,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 						Blocks: map[string]schema.Block{
 							"f5_orchestrated_routing": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"manual_routing": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -3841,7 +3841,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 						Blocks: map[string]schema.Block{
 							"autogenerate": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -3857,14 +3857,14 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 				Blocks: map[string]schema.Block{
 					"accelerated_networking": schema.SingleNestedBlock{
-						MarkdownDescription: "Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen",
+						MarkdownDescription: "Accelerated Networking Type.Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"disable": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -3974,7 +3974,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 											Blocks: map[string]schema.Block{
 												"vnet_resource_group": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 											},
 										},
@@ -4011,10 +4011,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"default_storage": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"forward_proxy_allow_all": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"global_network_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Global Network Connection List. List of global network connections",
@@ -4097,22 +4097,22 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"no_dc_cluster_group": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_forward_proxy": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_global_network": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_k8s_cluster": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_network_policy": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_outside_static_routes": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"outside_static_routes": schema.SingleNestedBlock{
 						MarkdownDescription: "Static Route List Type. List of static routes",
@@ -4248,10 +4248,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"sm_connection_public_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"sm_connection_pvt_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"storage_class_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Custom Storage Class List. Add additional custom storage classes in kubernetes for this site",
@@ -4286,14 +4286,14 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 				Blocks: map[string]schema.Block{
 					"accelerated_networking": schema.SingleNestedBlock{
-						MarkdownDescription: "Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen",
+						MarkdownDescription: "Accelerated Networking Type.Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"disable": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -4394,10 +4394,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"default_storage": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"forward_proxy_allow_all": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"global_network_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Global Network Connection List. List of global network connections",
@@ -4480,22 +4480,22 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"no_dc_cluster_group": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_forward_proxy": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_global_network": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_k8s_cluster": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_network_policy": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_outside_static_routes": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"node": schema.SingleNestedBlock{
 						MarkdownDescription: "Single Interface Node for Alternate Region. Parameters for creating Single interface Node for Alternate Region",
@@ -4532,7 +4532,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 										Blocks: map[string]schema.Block{
 											"vnet_resource_group": schema.SingleNestedBlock{
-												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												MarkdownDescription: "Enable this option",
 											},
 										},
 									},
@@ -4683,10 +4683,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"sm_connection_public_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"sm_connection_pvt_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"storage_class_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Custom Storage Class List. Add additional custom storage classes in kubernetes for this site",

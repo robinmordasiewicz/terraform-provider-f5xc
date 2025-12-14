@@ -36,11 +36,11 @@ resource "f5xc_forwarding_class" "example" {
   dscp {
     # Configure dscp settings
   }
-  # [OneOf: dscp_based_queue, queue_id_to_use] Empty. This ca...
+  # [OneOf: dscp_based_queue, queue_id_to_use] Enable this op...
   dscp_based_queue {
     # Configure dscp_based_queue settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   no_marking {
     # Configure no_marking settings
   }
@@ -68,16 +68,16 @@ resource "f5xc_forwarding_class" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="dscp"></a>[`dscp`](#dscp) - Optional Block<br>DSCP Marking setting. DSCP marking setting as per RFC 2475<br>See [Dscp](#dscp) below for details.
-<br><br>&#x2022; <a id="no-marking"></a>[`no_marking`](#no-marking) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="no-marking"></a>[`no_marking`](#no-marking) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="dscp-based-queue"></a>[`dscp_based_queue`](#dscp-based-queue) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="dscp-based-queue"></a>[`dscp_based_queue`](#dscp-based-queue) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="queue-id-to-use"></a>[`queue_id_to_use`](#queue-id-to-use) - Optional String  Defaults to `DSCP_BEST_EFFORT`<br>Possible values are `DSCP_BEST_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP_EXPRESS_FORWARDING`, `DSCP_CONTROL_L3`, `DSCP_CONTROL_L2`<br>[Enum: DSCP_BEST_EFFORT|DSCP_CLASS1|DSCP_CLASS2|DSCP_CLASS3|DSCP_CLASS4|DSCP_EXPRESS_FORWARDING|DSCP_CONTROL_L3|DSCP_CONTROL_L2] Precedence Level Values. DSCP Precedence Level Values Best Effort service will get any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended
 
 <a id="interface-group"></a>&#x2022; [`interface_group`](#interface-group) - Optional String  Defaults to `ANY_AVAILABLE_INTERFACE`<br>Possible values are `ANY_AVAILABLE_INTERFACE`, `INTERFACE_GROUP1`, `INTERFACE_GROUP2`, `INTERFACE_GROUP3`<br>[Enum: ANY_AVAILABLE_INTERFACE|INTERFACE_GROUP1|INTERFACE_GROUP2|INTERFACE_GROUP3] Interface Group. Interface group, group membership by adding group label to interface Choose any of the available interfaces Choose all interfaces with label group1 Choose all interfaces with label group2 Choose all interfaces with label group3
 
 -> **One of the following:**
-&#x2022; <a id="no-policer"></a>[`no_policer`](#no-policer) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="no-policer"></a>[`no_policer`](#no-policer) - Optional Block<br>Enable this option
 
 <a id="policer"></a>&#x2022; [`policer`](#policer) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Policer](#policer) below for details.
 

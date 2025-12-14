@@ -61,21 +61,21 @@ resource "f5xc_proxy" "example" {
 <a id="connection-timeout"></a>&#x2022; [`connection_timeout`](#connection-timeout) - Optional Number  Defaults to `2000`  Specified in milliseconds<br>Connection Timeout. The timeout for new network connections to upstream server.  The (2 seconds)
 
 -> **One of the following:**
-&#x2022; <a id="do-not-advertise"></a>[`do_not_advertise`](#do-not-advertise) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="do-not-advertise"></a>[`do_not_advertise`](#do-not-advertise) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="site-virtual-sites"></a>[`site_virtual_sites`](#site-virtual-sites) - Optional Block<br>Advertise Site or Virtual Site. This defines a way to advertise a VIP on specific sites
 
 -> **One of the following:**
 &#x2022; <a id="dynamic-proxy"></a>[`dynamic_proxy`](#dynamic-proxy) - Optional Block<br>DynamicProxyType<br>See [Dynamic Proxy](#dynamic-proxy) below for details.
 <br><br>&#x2022; <a id="http-proxy"></a>[`http_proxy`](#http-proxy) - Optional Block<br>HTTP Connect Proxy. Parameters for HTTP Connect Proxy
 
-<a id="no-forward-proxy-policy"></a>&#x2022; [`no_forward_proxy_policy`](#no-forward-proxy-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="no-forward-proxy-policy"></a>&#x2022; [`no_forward_proxy_policy`](#no-forward-proxy-policy) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="no-interception"></a>[`no_interception`](#no-interception) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="no-interception"></a>[`no_interception`](#no-interception) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="site-local-inside-network"></a>[`site_local_inside_network`](#site-local-inside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="site-local-network"></a>[`site_local_network`](#site-local-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="site-local-inside-network"></a>[`site_local_inside_network`](#site-local-inside-network) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="site-local-network"></a>[`site_local_network`](#site-local-network) - Optional Block<br>Enable this option
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block
 
@@ -109,11 +109,11 @@ A [`forward_proxy_policies`](#active-forward-proxy-policies-forward-proxy-polici
 
 A [`dynamic_proxy`](#dynamic-proxy) block supports the following:
 
-<a id="dynamic-proxy-disable-dns-masquerade"></a>&#x2022; [`disable_dns_masquerade`](#dynamic-proxy-disable-dns-masquerade) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-disable-dns-masquerade"></a>&#x2022; [`disable_dns_masquerade`](#dynamic-proxy-disable-dns-masquerade) - Optional Block<br>Enable this option
 
 <a id="dynamic-proxy-domains"></a>&#x2022; [`domains`](#dynamic-proxy-domains) - Optional List<br>Domains. A list of Domains to be proxied. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: \*.foo.com. Not supported Domains: - Just a Wildcard: \* - A Wildcard and TLD with no root Domain: \*.com. - A Wildcard not matching a whole DNS label. e.g. \*.foo.com and \*.bar.foo.com are valid Wildcards however \*bar.foo.com, \*-bar.foo.com, and bar*.foo.com are all invalid. Additional notes: A Wildcard will not match empty string. e.g. \*.foo.com will match bar.foo.com and baz-bar.foo.com but not .foo.com. The longest Wildcards match first. Only a single virtual host in the entire route configuration can match on \*. Also a Domain must be unique across all virtual hosts within an advertise policy
 
-<a id="dynamic-proxy-enable-dns-masquerade"></a>&#x2022; [`enable_dns_masquerade`](#dynamic-proxy-enable-dns-masquerade) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-enable-dns-masquerade"></a>&#x2022; [`enable_dns_masquerade`](#dynamic-proxy-enable-dns-masquerade) - Optional Block<br>Enable this option
 
 <a id="dynamic-proxy-http-proxy"></a>&#x2022; [`http_proxy`](#dynamic-proxy-http-proxy) - Optional Block<br>Dynamic HTTP Proxy Type. Parameters for dynamic HTTP proxy<br>See [HTTP Proxy](#dynamic-proxy-http-proxy) below.
 
@@ -139,9 +139,9 @@ A [`more_option`](#dynamic-proxy-http-proxy-more-option) block (within [`dynamic
 
 <a id="dynamic-proxy-http-proxy-more-option-disable-default-error-pages"></a>&#x2022; [`disable_default_error_pages`](#dynamic-proxy-http-proxy-more-option-disable-default-error-pages) - Optional Bool<br>Disable Default Error Pages. Disable the use of default F5XC error pages
 
-<a id="dynamic-proxy-http-proxy-more-option-disable-path-normalize"></a>&#x2022; [`disable_path_normalize`](#dynamic-proxy-http-proxy-more-option-disable-path-normalize) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-http-proxy-more-option-disable-path-normalize"></a>&#x2022; [`disable_path_normalize`](#dynamic-proxy-http-proxy-more-option-disable-path-normalize) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-http-proxy-more-option-enable-path-normalize"></a>&#x2022; [`enable_path_normalize`](#dynamic-proxy-http-proxy-more-option-enable-path-normalize) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-http-proxy-more-option-enable-path-normalize"></a>&#x2022; [`enable_path_normalize`](#dynamic-proxy-http-proxy-more-option-enable-path-normalize) - Optional Block<br>Enable this option
 
 <a id="dynamic-proxy-http-proxy-more-option-idle-timeout"></a>&#x2022; [`idle_timeout`](#dynamic-proxy-http-proxy-more-option-idle-timeout) - Optional Number<br>Idle Timeout. The amount of time that a stream can exist without upstream or downstream activity, in milliseconds. The stream is terminated with a HTTP 504 (Gateway Timeout) error code if no upstream response header has been received, otherwise the stream is reset
 
@@ -267,31 +267,31 @@ A [`response_cookies_to_add`](#dynamic-proxy-http-proxy-more-option-response-coo
 
 <a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-add-expiry"></a>&#x2022; [`add_expiry`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-add-expiry) - Optional String<br>Add expiry. Add expiry attribute
 
-<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-add-httponly"></a>&#x2022; [`add_httponly`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-add-httponly) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-add-httponly"></a>&#x2022; [`add_httponly`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-add-httponly) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-add-partitioned"></a>&#x2022; [`add_partitioned`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-add-partitioned) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-add-partitioned"></a>&#x2022; [`add_partitioned`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-add-partitioned) - Optional Block<br>Enable this option
 
 <a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-add-path"></a>&#x2022; [`add_path`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-add-path) - Optional String<br>Add path. Add path attribute
 
-<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-add-secure"></a>&#x2022; [`add_secure`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-add-secure) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-add-secure"></a>&#x2022; [`add_secure`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-add-secure) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-domain"></a>&#x2022; [`ignore_domain`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-domain"></a>&#x2022; [`ignore_domain`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-domain) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-expiry"></a>&#x2022; [`ignore_expiry`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-expiry) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-expiry"></a>&#x2022; [`ignore_expiry`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-expiry) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-httponly"></a>&#x2022; [`ignore_httponly`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-httponly) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-httponly"></a>&#x2022; [`ignore_httponly`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-httponly) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-max-age"></a>&#x2022; [`ignore_max_age`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-max-age) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-max-age"></a>&#x2022; [`ignore_max_age`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-max-age) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-partitioned"></a>&#x2022; [`ignore_partitioned`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-partitioned) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-partitioned"></a>&#x2022; [`ignore_partitioned`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-partitioned) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-path"></a>&#x2022; [`ignore_path`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-path) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-path"></a>&#x2022; [`ignore_path`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-path) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-samesite"></a>&#x2022; [`ignore_samesite`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-samesite) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-samesite"></a>&#x2022; [`ignore_samesite`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-samesite) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-secure"></a>&#x2022; [`ignore_secure`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-secure) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-secure"></a>&#x2022; [`ignore_secure`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-secure) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-value"></a>&#x2022; [`ignore_value`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-value) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-value"></a>&#x2022; [`ignore_value`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-ignore-value) - Optional Block<br>Enable this option
 
 <a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-max-age-value"></a>&#x2022; [`max_age_value`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-max-age-value) - Optional Number<br>Add Max Age. Add max age attribute
 
@@ -299,11 +299,11 @@ A [`response_cookies_to_add`](#dynamic-proxy-http-proxy-more-option-response-coo
 
 <a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-overwrite"></a>&#x2022; [`overwrite`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-overwrite) - Optional Bool  Defaults to `do`<br>Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite
 
-<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-samesite-lax"></a>&#x2022; [`samesite_lax`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-samesite-lax) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-samesite-lax"></a>&#x2022; [`samesite_lax`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-samesite-lax) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-samesite-none"></a>&#x2022; [`samesite_none`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-samesite-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-samesite-none"></a>&#x2022; [`samesite_none`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-samesite-none) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-samesite-strict"></a>&#x2022; [`samesite_strict`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-samesite-strict) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-samesite-strict"></a>&#x2022; [`samesite_strict`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-samesite-strict) - Optional Block<br>Enable this option
 
 <a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-secret-value"></a>&#x2022; [`secret_value`](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-secret-value) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Value](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-secret-value) below.
 
@@ -393,9 +393,9 @@ A [`more_option`](#dynamic-proxy-https-proxy-more-option) block (within [`dynami
 
 <a id="dynamic-proxy-https-proxy-more-option-disable-default-error-pages"></a>&#x2022; [`disable_default_error_pages`](#dynamic-proxy-https-proxy-more-option-disable-default-error-pages) - Optional Bool<br>Disable Default Error Pages. Disable the use of default F5XC error pages
 
-<a id="dynamic-proxy-https-proxy-more-option-disable-path-normalize"></a>&#x2022; [`disable_path_normalize`](#dynamic-proxy-https-proxy-more-option-disable-path-normalize) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-https-proxy-more-option-disable-path-normalize"></a>&#x2022; [`disable_path_normalize`](#dynamic-proxy-https-proxy-more-option-disable-path-normalize) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-https-proxy-more-option-enable-path-normalize"></a>&#x2022; [`enable_path_normalize`](#dynamic-proxy-https-proxy-more-option-enable-path-normalize) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-https-proxy-more-option-enable-path-normalize"></a>&#x2022; [`enable_path_normalize`](#dynamic-proxy-https-proxy-more-option-enable-path-normalize) - Optional Block<br>Enable this option
 
 <a id="dynamic-proxy-https-proxy-more-option-idle-timeout"></a>&#x2022; [`idle_timeout`](#dynamic-proxy-https-proxy-more-option-idle-timeout) - Optional Number<br>Idle Timeout. The amount of time that a stream can exist without upstream or downstream activity, in milliseconds. The stream is terminated with a HTTP 504 (Gateway Timeout) error code if no upstream response header has been received, otherwise the stream is reset
 
@@ -521,31 +521,31 @@ A [`response_cookies_to_add`](#dynamic-proxy-https-proxy-more-option-response-co
 
 <a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-add-expiry"></a>&#x2022; [`add_expiry`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-add-expiry) - Optional String<br>Add expiry. Add expiry attribute
 
-<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-add-httponly"></a>&#x2022; [`add_httponly`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-add-httponly) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-add-httponly"></a>&#x2022; [`add_httponly`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-add-httponly) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-add-partitioned"></a>&#x2022; [`add_partitioned`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-add-partitioned) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-add-partitioned"></a>&#x2022; [`add_partitioned`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-add-partitioned) - Optional Block<br>Enable this option
 
 <a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-add-path"></a>&#x2022; [`add_path`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-add-path) - Optional String<br>Add path. Add path attribute
 
-<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-add-secure"></a>&#x2022; [`add_secure`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-add-secure) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-add-secure"></a>&#x2022; [`add_secure`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-add-secure) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-domain"></a>&#x2022; [`ignore_domain`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-domain"></a>&#x2022; [`ignore_domain`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-domain) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-expiry"></a>&#x2022; [`ignore_expiry`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-expiry) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-expiry"></a>&#x2022; [`ignore_expiry`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-expiry) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-httponly"></a>&#x2022; [`ignore_httponly`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-httponly) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-httponly"></a>&#x2022; [`ignore_httponly`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-httponly) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-max-age"></a>&#x2022; [`ignore_max_age`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-max-age) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-max-age"></a>&#x2022; [`ignore_max_age`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-max-age) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-partitioned"></a>&#x2022; [`ignore_partitioned`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-partitioned) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-partitioned"></a>&#x2022; [`ignore_partitioned`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-partitioned) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-path"></a>&#x2022; [`ignore_path`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-path) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-path"></a>&#x2022; [`ignore_path`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-path) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-samesite"></a>&#x2022; [`ignore_samesite`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-samesite) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-samesite"></a>&#x2022; [`ignore_samesite`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-samesite) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-secure"></a>&#x2022; [`ignore_secure`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-secure) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-secure"></a>&#x2022; [`ignore_secure`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-secure) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-value"></a>&#x2022; [`ignore_value`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-value) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-value"></a>&#x2022; [`ignore_value`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-ignore-value) - Optional Block<br>Enable this option
 
 <a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-max-age-value"></a>&#x2022; [`max_age_value`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-max-age-value) - Optional Number<br>Add Max Age. Add max age attribute
 
@@ -553,11 +553,11 @@ A [`response_cookies_to_add`](#dynamic-proxy-https-proxy-more-option-response-co
 
 <a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-overwrite"></a>&#x2022; [`overwrite`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-overwrite) - Optional Bool  Defaults to `do`<br>Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite
 
-<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-samesite-lax"></a>&#x2022; [`samesite_lax`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-samesite-lax) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-samesite-lax"></a>&#x2022; [`samesite_lax`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-samesite-lax) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-samesite-none"></a>&#x2022; [`samesite_none`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-samesite-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-samesite-none"></a>&#x2022; [`samesite_none`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-samesite-none) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-samesite-strict"></a>&#x2022; [`samesite_strict`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-samesite-strict) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-samesite-strict"></a>&#x2022; [`samesite_strict`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-samesite-strict) - Optional Block<br>Enable this option
 
 <a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-secret-value"></a>&#x2022; [`secret_value`](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-secret-value) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Value](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-secret-value) below.
 
@@ -631,7 +631,7 @@ A [`clear_secret_info`](#dynamic-proxy-https-proxy-more-option-response-headers-
 
 A [`tls_params`](#dynamic-proxy-https-proxy-tls-params) block (within [`dynamic_proxy.https_proxy`](#dynamic-proxy-https-proxy)) supports the following:
 
-<a id="dynamic-proxy-https-proxy-tls-params-no-mtls"></a>&#x2022; [`no_mtls`](#dynamic-proxy-https-proxy-tls-params-no-mtls) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-https-proxy-tls-params-no-mtls"></a>&#x2022; [`no_mtls`](#dynamic-proxy-https-proxy-tls-params-no-mtls) - Optional Block<br>Enable this option
 
 <a id="dynamic-proxy-https-proxy-tls-params-tls-certificates"></a>&#x2022; [`tls_certificates`](#dynamic-proxy-https-proxy-tls-params-tls-certificates) - Optional Block<br>TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#dynamic-proxy-https-proxy-tls-params-tls-certificates) below.
 
@@ -649,11 +649,11 @@ A [`tls_certificates`](#dynamic-proxy-https-proxy-tls-params-tls-certificates) b
 
 <a id="dynamic-proxy-https-proxy-tls-params-tls-certificates-description-spec"></a>&#x2022; [`description_spec`](#dynamic-proxy-https-proxy-tls-params-tls-certificates-description-spec) - Optional String<br>Description. Description for the certificate
 
-<a id="dynamic-proxy-https-proxy-tls-params-tls-certificates-disable-ocsp-stapling"></a>&#x2022; [`disable_ocsp_stapling`](#dynamic-proxy-https-proxy-tls-params-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-https-proxy-tls-params-tls-certificates-disable-ocsp-stapling"></a>&#x2022; [`disable_ocsp_stapling`](#dynamic-proxy-https-proxy-tls-params-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Enable this option
 
 <a id="dynamic-proxy-https-proxy-tls-params-tls-certificates-private-key"></a>&#x2022; [`private_key`](#dynamic-proxy-https-proxy-tls-params-tls-certificates-private-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#dynamic-proxy-https-proxy-tls-params-tls-certificates-private-key) below.
 
-<a id="dynamic-proxy-https-proxy-tls-params-tls-certificates-use-system-defaults"></a>&#x2022; [`use_system_defaults`](#dynamic-proxy-https-proxy-tls-params-tls-certificates-use-system-defaults) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-https-proxy-tls-params-tls-certificates-use-system-defaults"></a>&#x2022; [`use_system_defaults`](#dynamic-proxy-https-proxy-tls-params-tls-certificates-use-system-defaults) - Optional Block<br>Enable this option
 
 #### Dynamic Proxy HTTPS Proxy TLS Params TLS Certificates Custom Hash Algorithms
 
@@ -693,11 +693,11 @@ A [`tls_config`](#dynamic-proxy-https-proxy-tls-params-tls-config) block (within
 
 <a id="dynamic-proxy-https-proxy-tls-params-tls-config-custom-security"></a>&#x2022; [`custom_security`](#dynamic-proxy-https-proxy-tls-params-tls-config-custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#dynamic-proxy-https-proxy-tls-params-tls-config-custom-security) below.
 
-<a id="dynamic-proxy-https-proxy-tls-params-tls-config-default-security"></a>&#x2022; [`default_security`](#dynamic-proxy-https-proxy-tls-params-tls-config-default-security) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-https-proxy-tls-params-tls-config-default-security"></a>&#x2022; [`default_security`](#dynamic-proxy-https-proxy-tls-params-tls-config-default-security) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-https-proxy-tls-params-tls-config-low-security"></a>&#x2022; [`low_security`](#dynamic-proxy-https-proxy-tls-params-tls-config-low-security) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-https-proxy-tls-params-tls-config-low-security"></a>&#x2022; [`low_security`](#dynamic-proxy-https-proxy-tls-params-tls-config-low-security) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-https-proxy-tls-params-tls-config-medium-security"></a>&#x2022; [`medium_security`](#dynamic-proxy-https-proxy-tls-params-tls-config-medium-security) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-https-proxy-tls-params-tls-config-medium-security"></a>&#x2022; [`medium_security`](#dynamic-proxy-https-proxy-tls-params-tls-config-medium-security) - Optional Block<br>Enable this option
 
 #### Dynamic Proxy HTTPS Proxy TLS Params TLS Config Custom Security
 
@@ -717,13 +717,13 @@ An [`use_mtls`](#dynamic-proxy-https-proxy-tls-params-use-mtls) block (within [`
 
 <a id="dynamic-proxy-https-proxy-tls-params-use-mtls-crl"></a>&#x2022; [`crl`](#dynamic-proxy-https-proxy-tls-params-use-mtls-crl) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#dynamic-proxy-https-proxy-tls-params-use-mtls-crl) below.
 
-<a id="dynamic-proxy-https-proxy-tls-params-use-mtls-no-crl"></a>&#x2022; [`no_crl`](#dynamic-proxy-https-proxy-tls-params-use-mtls-no-crl) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-https-proxy-tls-params-use-mtls-no-crl"></a>&#x2022; [`no_crl`](#dynamic-proxy-https-proxy-tls-params-use-mtls-no-crl) - Optional Block<br>Enable this option
 
 <a id="dynamic-proxy-https-proxy-tls-params-use-mtls-trusted-ca"></a>&#x2022; [`trusted_ca`](#dynamic-proxy-https-proxy-tls-params-use-mtls-trusted-ca) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#dynamic-proxy-https-proxy-tls-params-use-mtls-trusted-ca) below.
 
 <a id="dynamic-proxy-https-proxy-tls-params-use-mtls-trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#dynamic-proxy-https-proxy-tls-params-use-mtls-trusted-ca-url) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
 
-<a id="dynamic-proxy-https-proxy-tls-params-use-mtls-xfcc-disabled"></a>&#x2022; [`xfcc_disabled`](#dynamic-proxy-https-proxy-tls-params-use-mtls-xfcc-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="dynamic-proxy-https-proxy-tls-params-use-mtls-xfcc-disabled"></a>&#x2022; [`xfcc_disabled`](#dynamic-proxy-https-proxy-tls-params-use-mtls-xfcc-disabled) - Optional Block<br>Enable this option
 
 <a id="dynamic-proxy-https-proxy-tls-params-use-mtls-xfcc-options"></a>&#x2022; [`xfcc_options`](#dynamic-proxy-https-proxy-tls-params-use-mtls-xfcc-options) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#dynamic-proxy-https-proxy-tls-params-use-mtls-xfcc-options) below.
 
@@ -763,7 +763,7 @@ A [`sni_proxy`](#dynamic-proxy-sni-proxy) block (within [`dynamic_proxy`](#dynam
 
 A [`http_proxy`](#http-proxy) block supports the following:
 
-<a id="http-proxy-enable-http"></a>&#x2022; [`enable_http`](#http-proxy-enable-http) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-proxy-enable-http"></a>&#x2022; [`enable_http`](#http-proxy-enable-http) - Optional Block<br>Enable this option
 
 <a id="http-proxy-more-option"></a>&#x2022; [`more_option`](#http-proxy-more-option) - Optional Block<br>Advanced Options. This defines various options to define a route<br>See [More Option](#http-proxy-more-option) below.
 
@@ -779,9 +779,9 @@ A [`more_option`](#http-proxy-more-option) block (within [`http_proxy`](#http-pr
 
 <a id="http-proxy-more-option-disable-default-error-pages"></a>&#x2022; [`disable_default_error_pages`](#http-proxy-more-option-disable-default-error-pages) - Optional Bool<br>Disable Default Error Pages. Disable the use of default F5XC error pages
 
-<a id="http-proxy-more-option-disable-path-normalize"></a>&#x2022; [`disable_path_normalize`](#http-proxy-more-option-disable-path-normalize) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-proxy-more-option-disable-path-normalize"></a>&#x2022; [`disable_path_normalize`](#http-proxy-more-option-disable-path-normalize) - Optional Block<br>Enable this option
 
-<a id="http-proxy-more-option-enable-path-normalize"></a>&#x2022; [`enable_path_normalize`](#http-proxy-more-option-enable-path-normalize) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-proxy-more-option-enable-path-normalize"></a>&#x2022; [`enable_path_normalize`](#http-proxy-more-option-enable-path-normalize) - Optional Block<br>Enable this option
 
 <a id="http-proxy-more-option-idle-timeout"></a>&#x2022; [`idle_timeout`](#http-proxy-more-option-idle-timeout) - Optional Number<br>Idle Timeout. The amount of time that a stream can exist without upstream or downstream activity, in milliseconds. The stream is terminated with a HTTP 504 (Gateway Timeout) error code if no upstream response header has been received, otherwise the stream is reset
 
@@ -907,31 +907,31 @@ A [`response_cookies_to_add`](#http-proxy-more-option-response-cookies-to-add) b
 
 <a id="http-proxy-more-option-response-cookies-to-add-add-expiry"></a>&#x2022; [`add_expiry`](#http-proxy-more-option-response-cookies-to-add-add-expiry) - Optional String<br>Add expiry. Add expiry attribute
 
-<a id="http-proxy-more-option-response-cookies-to-add-add-httponly"></a>&#x2022; [`add_httponly`](#http-proxy-more-option-response-cookies-to-add-add-httponly) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-proxy-more-option-response-cookies-to-add-add-httponly"></a>&#x2022; [`add_httponly`](#http-proxy-more-option-response-cookies-to-add-add-httponly) - Optional Block<br>Enable this option
 
-<a id="http-proxy-more-option-response-cookies-to-add-add-partitioned"></a>&#x2022; [`add_partitioned`](#http-proxy-more-option-response-cookies-to-add-add-partitioned) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-proxy-more-option-response-cookies-to-add-add-partitioned"></a>&#x2022; [`add_partitioned`](#http-proxy-more-option-response-cookies-to-add-add-partitioned) - Optional Block<br>Enable this option
 
 <a id="http-proxy-more-option-response-cookies-to-add-add-path"></a>&#x2022; [`add_path`](#http-proxy-more-option-response-cookies-to-add-add-path) - Optional String<br>Add path. Add path attribute
 
-<a id="http-proxy-more-option-response-cookies-to-add-add-secure"></a>&#x2022; [`add_secure`](#http-proxy-more-option-response-cookies-to-add-add-secure) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-proxy-more-option-response-cookies-to-add-add-secure"></a>&#x2022; [`add_secure`](#http-proxy-more-option-response-cookies-to-add-add-secure) - Optional Block<br>Enable this option
 
-<a id="http-proxy-more-option-response-cookies-to-add-ignore-domain"></a>&#x2022; [`ignore_domain`](#http-proxy-more-option-response-cookies-to-add-ignore-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-proxy-more-option-response-cookies-to-add-ignore-domain"></a>&#x2022; [`ignore_domain`](#http-proxy-more-option-response-cookies-to-add-ignore-domain) - Optional Block<br>Enable this option
 
-<a id="http-proxy-more-option-response-cookies-to-add-ignore-expiry"></a>&#x2022; [`ignore_expiry`](#http-proxy-more-option-response-cookies-to-add-ignore-expiry) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-proxy-more-option-response-cookies-to-add-ignore-expiry"></a>&#x2022; [`ignore_expiry`](#http-proxy-more-option-response-cookies-to-add-ignore-expiry) - Optional Block<br>Enable this option
 
-<a id="http-proxy-more-option-response-cookies-to-add-ignore-httponly"></a>&#x2022; [`ignore_httponly`](#http-proxy-more-option-response-cookies-to-add-ignore-httponly) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-proxy-more-option-response-cookies-to-add-ignore-httponly"></a>&#x2022; [`ignore_httponly`](#http-proxy-more-option-response-cookies-to-add-ignore-httponly) - Optional Block<br>Enable this option
 
-<a id="http-proxy-more-option-response-cookies-to-add-ignore-max-age"></a>&#x2022; [`ignore_max_age`](#http-proxy-more-option-response-cookies-to-add-ignore-max-age) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-proxy-more-option-response-cookies-to-add-ignore-max-age"></a>&#x2022; [`ignore_max_age`](#http-proxy-more-option-response-cookies-to-add-ignore-max-age) - Optional Block<br>Enable this option
 
-<a id="http-proxy-more-option-response-cookies-to-add-ignore-partitioned"></a>&#x2022; [`ignore_partitioned`](#http-proxy-more-option-response-cookies-to-add-ignore-partitioned) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-proxy-more-option-response-cookies-to-add-ignore-partitioned"></a>&#x2022; [`ignore_partitioned`](#http-proxy-more-option-response-cookies-to-add-ignore-partitioned) - Optional Block<br>Enable this option
 
-<a id="http-proxy-more-option-response-cookies-to-add-ignore-path"></a>&#x2022; [`ignore_path`](#http-proxy-more-option-response-cookies-to-add-ignore-path) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-proxy-more-option-response-cookies-to-add-ignore-path"></a>&#x2022; [`ignore_path`](#http-proxy-more-option-response-cookies-to-add-ignore-path) - Optional Block<br>Enable this option
 
-<a id="http-proxy-more-option-response-cookies-to-add-ignore-samesite"></a>&#x2022; [`ignore_samesite`](#http-proxy-more-option-response-cookies-to-add-ignore-samesite) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-proxy-more-option-response-cookies-to-add-ignore-samesite"></a>&#x2022; [`ignore_samesite`](#http-proxy-more-option-response-cookies-to-add-ignore-samesite) - Optional Block<br>Enable this option
 
-<a id="http-proxy-more-option-response-cookies-to-add-ignore-secure"></a>&#x2022; [`ignore_secure`](#http-proxy-more-option-response-cookies-to-add-ignore-secure) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-proxy-more-option-response-cookies-to-add-ignore-secure"></a>&#x2022; [`ignore_secure`](#http-proxy-more-option-response-cookies-to-add-ignore-secure) - Optional Block<br>Enable this option
 
-<a id="http-proxy-more-option-response-cookies-to-add-ignore-value"></a>&#x2022; [`ignore_value`](#http-proxy-more-option-response-cookies-to-add-ignore-value) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-proxy-more-option-response-cookies-to-add-ignore-value"></a>&#x2022; [`ignore_value`](#http-proxy-more-option-response-cookies-to-add-ignore-value) - Optional Block<br>Enable this option
 
 <a id="http-proxy-more-option-response-cookies-to-add-max-age-value"></a>&#x2022; [`max_age_value`](#http-proxy-more-option-response-cookies-to-add-max-age-value) - Optional Number<br>Add Max Age. Add max age attribute
 
@@ -939,11 +939,11 @@ A [`response_cookies_to_add`](#http-proxy-more-option-response-cookies-to-add) b
 
 <a id="http-proxy-more-option-response-cookies-to-add-overwrite"></a>&#x2022; [`overwrite`](#http-proxy-more-option-response-cookies-to-add-overwrite) - Optional Bool  Defaults to `do`<br>Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite
 
-<a id="http-proxy-more-option-response-cookies-to-add-samesite-lax"></a>&#x2022; [`samesite_lax`](#http-proxy-more-option-response-cookies-to-add-samesite-lax) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-proxy-more-option-response-cookies-to-add-samesite-lax"></a>&#x2022; [`samesite_lax`](#http-proxy-more-option-response-cookies-to-add-samesite-lax) - Optional Block<br>Enable this option
 
-<a id="http-proxy-more-option-response-cookies-to-add-samesite-none"></a>&#x2022; [`samesite_none`](#http-proxy-more-option-response-cookies-to-add-samesite-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-proxy-more-option-response-cookies-to-add-samesite-none"></a>&#x2022; [`samesite_none`](#http-proxy-more-option-response-cookies-to-add-samesite-none) - Optional Block<br>Enable this option
 
-<a id="http-proxy-more-option-response-cookies-to-add-samesite-strict"></a>&#x2022; [`samesite_strict`](#http-proxy-more-option-response-cookies-to-add-samesite-strict) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="http-proxy-more-option-response-cookies-to-add-samesite-strict"></a>&#x2022; [`samesite_strict`](#http-proxy-more-option-response-cookies-to-add-samesite-strict) - Optional Block<br>Enable this option
 
 <a id="http-proxy-more-option-response-cookies-to-add-secret-value"></a>&#x2022; [`secret_value`](#http-proxy-more-option-response-cookies-to-add-secret-value) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Value](#http-proxy-more-option-response-cookies-to-add-secret-value) below.
 
@@ -1027,7 +1027,7 @@ An [`advertise_where`](#site-virtual-sites-advertise-where) block (within [`site
 
 <a id="site-virtual-sites-advertise-where-site"></a>&#x2022; [`site`](#site-virtual-sites-advertise-where-site) - Optional Block<br>Site. This defines a reference to a CE site along with network type and an optional IP address where a load balancer could be advertised<br>See [Site](#site-virtual-sites-advertise-where-site) below.
 
-<a id="site-virtual-sites-advertise-where-use-default-port"></a>&#x2022; [`use_default_port`](#site-virtual-sites-advertise-where-use-default-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="site-virtual-sites-advertise-where-use-default-port"></a>&#x2022; [`use_default_port`](#site-virtual-sites-advertise-where-use-default-port) - Optional Block<br>Enable this option
 
 <a id="site-virtual-sites-advertise-where-virtual-site"></a>&#x2022; [`virtual_site`](#site-virtual-sites-advertise-where-virtual-site) - Optional Block<br>Virtual Site. This defines a reference to a customer site virtual site along with network type where a load balancer could be advertised<br>See [Virtual Site](#site-virtual-sites-advertise-where-virtual-site) below.
 
@@ -1087,15 +1087,15 @@ A [`tls_intercept`](#tls-intercept) block supports the following:
 
 <a id="tls-intercept-custom-certificate"></a>&#x2022; [`custom_certificate`](#tls-intercept-custom-certificate) - Optional Block<br>TLS Certificate. Handle to fetch certificate and key<br>See [Custom Certificate](#tls-intercept-custom-certificate) below.
 
-<a id="tls-intercept-enable-for-all-domains"></a>&#x2022; [`enable_for_all_domains`](#tls-intercept-enable-for-all-domains) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="tls-intercept-enable-for-all-domains"></a>&#x2022; [`enable_for_all_domains`](#tls-intercept-enable-for-all-domains) - Optional Block<br>Enable this option
 
 <a id="tls-intercept-policy"></a>&#x2022; [`policy`](#tls-intercept-policy) - Optional Block<br>TLS Interception Policy. Policy to enable or disable TLS interception<br>See [Policy](#tls-intercept-policy) below.
 
 <a id="tls-intercept-trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#tls-intercept-trusted-ca-url) - Optional String<br>Custom Root CA Certificate. Custom Root CA Certificate for validating upstream server certificate
 
-<a id="tls-intercept-volterra-certificate"></a>&#x2022; [`volterra_certificate`](#tls-intercept-volterra-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="tls-intercept-volterra-certificate"></a>&#x2022; [`volterra_certificate`](#tls-intercept-volterra-certificate) - Optional Block<br>Enable this option
 
-<a id="tls-intercept-volterra-trusted-ca"></a>&#x2022; [`volterra_trusted_ca`](#tls-intercept-volterra-trusted-ca) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="tls-intercept-volterra-trusted-ca"></a>&#x2022; [`volterra_trusted_ca`](#tls-intercept-volterra-trusted-ca) - Optional Block<br>Enable this option
 
 #### TLS Intercept Custom Certificate
 
@@ -1107,11 +1107,11 @@ A [`custom_certificate`](#tls-intercept-custom-certificate) block (within [`tls_
 
 <a id="tls-intercept-custom-certificate-description-spec"></a>&#x2022; [`description_spec`](#tls-intercept-custom-certificate-description-spec) - Optional String<br>Description. Description for the certificate
 
-<a id="tls-intercept-custom-certificate-disable-ocsp-stapling"></a>&#x2022; [`disable_ocsp_stapling`](#tls-intercept-custom-certificate-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="tls-intercept-custom-certificate-disable-ocsp-stapling"></a>&#x2022; [`disable_ocsp_stapling`](#tls-intercept-custom-certificate-disable-ocsp-stapling) - Optional Block<br>Enable this option
 
 <a id="tls-intercept-custom-certificate-private-key"></a>&#x2022; [`private_key`](#tls-intercept-custom-certificate-private-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#tls-intercept-custom-certificate-private-key) below.
 
-<a id="tls-intercept-custom-certificate-use-system-defaults"></a>&#x2022; [`use_system_defaults`](#tls-intercept-custom-certificate-use-system-defaults) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="tls-intercept-custom-certificate-use-system-defaults"></a>&#x2022; [`use_system_defaults`](#tls-intercept-custom-certificate-use-system-defaults) - Optional Block<br>Enable this option
 
 #### TLS Intercept Custom Certificate Custom Hash Algorithms
 
@@ -1155,11 +1155,11 @@ A [`policy`](#tls-intercept-policy) block (within [`tls_intercept`](#tls-interce
 
 An [`interception_rules`](#tls-intercept-policy-interception-rules) block (within [`tls_intercept.policy`](#tls-intercept-policy)) supports the following:
 
-<a id="tls-intercept-policy-interception-rules-disable-interception"></a>&#x2022; [`disable_interception`](#tls-intercept-policy-interception-rules-disable-interception) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="tls-intercept-policy-interception-rules-disable-interception"></a>&#x2022; [`disable_interception`](#tls-intercept-policy-interception-rules-disable-interception) - Optional Block<br>Enable this option
 
 <a id="tls-intercept-policy-interception-rules-domain-match"></a>&#x2022; [`domain_match`](#tls-intercept-policy-interception-rules-domain-match) - Optional Block<br>Domains. Domains names<br>See [Domain Match](#tls-intercept-policy-interception-rules-domain-match) below.
 
-<a id="tls-intercept-policy-interception-rules-enable-interception"></a>&#x2022; [`enable_interception`](#tls-intercept-policy-interception-rules-enable-interception) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="tls-intercept-policy-interception-rules-enable-interception"></a>&#x2022; [`enable_interception`](#tls-intercept-policy-interception-rules-enable-interception) - Optional Block<br>Enable this option
 
 #### TLS Intercept Policy Interception Rules Domain Match
 

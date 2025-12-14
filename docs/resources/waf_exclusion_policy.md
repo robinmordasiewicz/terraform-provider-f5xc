@@ -36,11 +36,11 @@ resource "f5xc_waf_exclusion_policy" "example" {
   waf_exclusion_rules {
     # Configure waf_exclusion_rules settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   any_domain {
     # Configure any_domain settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   any_path {
     # Configure any_path settings
   }
@@ -94,9 +94,9 @@ A [`timeouts`](#timeouts) block supports the following:
 
 A [`waf_exclusion_rules`](#waf-exclusion-rules) block supports the following:
 
-<a id="waf-exclusion-rules-any-domain"></a>&#x2022; [`any_domain`](#waf-exclusion-rules-any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="waf-exclusion-rules-any-domain"></a>&#x2022; [`any_domain`](#waf-exclusion-rules-any-domain) - Optional Block<br>Enable this option
 
-<a id="waf-exclusion-rules-any-path"></a>&#x2022; [`any_path`](#waf-exclusion-rules-any-path) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="waf-exclusion-rules-any-path"></a>&#x2022; [`any_path`](#waf-exclusion-rules-any-path) - Optional Block<br>Enable this option
 
 <a id="waf-exclusion-rules-app-firewall-detection-control"></a>&#x2022; [`app_firewall_detection_control`](#waf-exclusion-rules-app-firewall-detection-control) - Optional Block<br>App Firewall Detection Control. Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria<br>See [App Firewall Detection Control](#waf-exclusion-rules-app-firewall-detection-control) below.
 
@@ -114,7 +114,7 @@ A [`waf_exclusion_rules`](#waf-exclusion-rules) block supports the following:
 
 <a id="waf-exclusion-rules-suffix-value"></a>&#x2022; [`suffix_value`](#waf-exclusion-rules-suffix-value) - Optional String<br>Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
 
-<a id="waf-exclusion-rules-waf-skip-processing"></a>&#x2022; [`waf_skip_processing`](#waf-exclusion-rules-waf-skip-processing) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="waf-exclusion-rules-waf-skip-processing"></a>&#x2022; [`waf_skip_processing`](#waf-exclusion-rules-waf-skip-processing) - Optional Block<br>Enable this option
 
 #### WAF Exclusion Rules App Firewall Detection Control
 

@@ -269,7 +269,7 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 				Delete: true,
 			}),
 			"any_server": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: any_server, server_name, server_name_matcher, server_selector] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: any_server, server_name, server_name_matcher, server_selector] Enable this option",
 			},
 			"rules": schema.ListNestedBlock{
 				MarkdownDescription: "Rules. A list of RateLimiterRules that are evaluated sequentially till a matching rule is identified.",
@@ -294,16 +294,16 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"any_asn": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"any_country": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"any_ip": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"apply_rate_limiter": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"asn_list": schema.SingleNestedBlock{
 									MarkdownDescription: "ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
@@ -352,7 +352,7 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 									},
 								},
 								"bypass_rate_limiter": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"country_list": schema.SingleNestedBlock{
 									MarkdownDescription: "Country Codes List. List of Country Codes to match against.",
@@ -416,10 +416,10 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 										},
 										Blocks: map[string]schema.Block{
 											"check_not_present": schema.SingleNestedBlock{
-												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												MarkdownDescription: "Enable this option",
 											},
 											"check_present": schema.SingleNestedBlock{
-												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												MarkdownDescription: "Enable this option",
 											},
 											"item": schema.SingleNestedBlock{
 												MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",

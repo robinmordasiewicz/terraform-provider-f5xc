@@ -264,6 +264,24 @@ jobs:
       npm-token: ${{ secrets.NPM_TOKEN }}
 
   # ===========================================================================
+  # STEP 5b: Sync MCP Server version on bot commits (ensures npm matches release)
+  # ===========================================================================
+  sync-mcp-version:
+    name: Sync MCP Server Version
+    needs: [detect-changes, tag-release]
+    # Only run for bot commits after successful tag/release
+    # This ensures npm version stays in sync with GitHub releases
+    if: |
+      always() &&
+      needs.detect-changes.outputs.is-bot-commit == 'true' &&
+      needs.tag-release.result == 'success'
+    uses: ./.github/workflows/_build-mcp-server.yml
+    with:
+      publish: true
+    secrets:
+      npm-token: ${{ secrets.NPM_TOKEN }}
+
+  # ===========================================================================
   # STEP 6: Create PR for regenerated content (human commits only)
   # ===========================================================================
   # NOTE: We create a PR instead of pushing directly to respect branch protection.
@@ -510,7 +528,7 @@ jobs:
   # ===========================================================================
   summary:
     name: Workflow Summary
-    needs: [detect-changes, build-test, regenerate-provider, regenerate-docs, build-mcp-server, create-regeneration-pr, tag-release]
+    needs: [detect-changes, build-test, regenerate-provider, regenerate-docs, build-mcp-server, sync-mcp-version, create-regeneration-pr, tag-release]
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -533,6 +551,7 @@ jobs:
           echo "| Provider Regenerated | ${{ needs.regenerate-provider.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Docs Regenerated | ${{ needs.regenerate-docs.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "| MCP Server Built | ${{ needs.build-mcp-server.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| MCP Version Synced | ${{ needs.sync-mcp-version.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Regeneration PR Created | ${{ needs.create-regeneration-pr.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Tagged/Released | ${{ needs.tag-release.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
@@ -540,3 +559,7 @@ jobs:
           echo "- Bot commits -> Tag immediately (regeneration complete)" >> $GITHUB_STEP_SUMMARY
           echo "- Human commits without regeneration -> Tag immediately" >> $GITHUB_STEP_SUMMARY
           echo "- Human commits with regeneration PR -> Wait for PR merge to tag" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### MCP Server Version Sync" >> $GITHUB_STEP_SUMMARY
+          echo "- Human commits with MCP/docs changes -> Build and publish to npm" >> $GITHUB_STEP_SUMMARY
+          echo "- Bot commits after successful release -> Sync npm version to match GitHub release" >> $GITHUB_STEP_SUMMARY

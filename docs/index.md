@@ -174,6 +174,30 @@ resource "f5xc_http_loadbalancer" "example" {
 }
 ```
 
+## MCP Configuration
+
+This provider includes a Model Context Protocol (MCP) server that enables AI assistants like Claude to interact with F5 Distributed Cloud resources. The MCP server provides schema information, documentation, and example configurations.
+
+### Quick Setup for Claude Desktop
+
+Add the following to your Claude Desktop configuration file:
+
+**macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
+**Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
+
+```json
+{
+  "mcpServers": {
+    "f5xc-terraform": {
+      "command": "npx",
+      "args": ["@robinmordasiewicz/f5xc-terraform-mcp"]
+    }
+  }
+}
+```
+
+For complete MCP server documentation including all available tools and advanced configuration options, see the [NPM package page](https://www.npmjs.com/package/@robinmordasiewicz/f5xc-terraform-mcp).
+
 ## Resources and Data Sources
 
 Browse the documentation sidebar for the complete list of resources and data sources organized by category.

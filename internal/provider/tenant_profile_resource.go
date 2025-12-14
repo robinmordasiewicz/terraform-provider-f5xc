@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -56,10 +57,22 @@ type TenantProfileCtGroupsModel struct {
 	NamespaceRoles []TenantProfileCtGroupsNamespaceRolesModel `tfsdk:"namespace_roles"`
 }
 
+// TenantProfileCtGroupsModelAttrTypes defines the attribute types for TenantProfileCtGroupsModel
+var TenantProfileCtGroupsModelAttrTypes = map[string]attr.Type{
+	"name":            types.StringType,
+	"namespace_roles": types.ListType{ElemType: types.ObjectType{AttrTypes: TenantProfileCtGroupsNamespaceRolesModelAttrTypes}},
+}
+
 // TenantProfileCtGroupsNamespaceRolesModel represents namespace_roles block
 type TenantProfileCtGroupsNamespaceRolesModel struct {
 	Namespace types.String `tfsdk:"namespace"`
 	Role      types.String `tfsdk:"role"`
+}
+
+// TenantProfileCtGroupsNamespaceRolesModelAttrTypes defines the attribute types for TenantProfileCtGroupsNamespaceRolesModel
+var TenantProfileCtGroupsNamespaceRolesModelAttrTypes = map[string]attr.Type{
+	"namespace": types.StringType,
+	"role":      types.StringType,
 }
 
 // TenantProfileFaviconModel represents favicon block
@@ -69,11 +82,25 @@ type TenantProfileFaviconModel struct {
 	AWSS3       *TenantProfileEmptyModel `tfsdk:"aws_s3"`
 }
 
+// TenantProfileFaviconModelAttrTypes defines the attribute types for TenantProfileFaviconModel
+var TenantProfileFaviconModelAttrTypes = map[string]attr.Type{
+	"content":      types.StringType,
+	"content_type": types.StringType,
+	"aws_s3":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // TenantProfileLogoModel represents logo block
 type TenantProfileLogoModel struct {
 	Content     types.String             `tfsdk:"content"`
 	ContentType types.String             `tfsdk:"content_type"`
 	AWSS3       *TenantProfileEmptyModel `tfsdk:"aws_s3"`
+}
+
+// TenantProfileLogoModelAttrTypes defines the attribute types for TenantProfileLogoModel
+var TenantProfileLogoModelAttrTypes = map[string]attr.Type{
+	"content":      types.StringType,
+	"content_type": types.StringType,
+	"aws_s3":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // TenantProfilePlanModel represents plan block
@@ -83,21 +110,28 @@ type TenantProfilePlanModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// TenantProfilePlanModelAttrTypes defines the attribute types for TenantProfilePlanModel
+var TenantProfilePlanModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 type TenantProfileResourceModel struct {
-	Name                types.String                 `tfsdk:"name"`
-	Namespace           types.String                 `tfsdk:"namespace"`
-	Annotations         types.Map                    `tfsdk:"annotations"`
-	Description         types.String                 `tfsdk:"description"`
-	Disable             types.Bool                   `tfsdk:"disable"`
-	Labels              types.Map                    `tfsdk:"labels"`
-	ID                  types.String                 `tfsdk:"id"`
-	EnableSupportAccess types.Bool                   `tfsdk:"enable_support_access"`
-	SupportEmail        types.String                 `tfsdk:"support_email"`
-	Timeouts            timeouts.Value               `tfsdk:"timeouts"`
-	CtGroups            []TenantProfileCtGroupsModel `tfsdk:"ct_groups"`
-	Favicon             *TenantProfileFaviconModel   `tfsdk:"favicon"`
-	Logo                *TenantProfileLogoModel      `tfsdk:"logo"`
-	Plan                *TenantProfilePlanModel      `tfsdk:"plan"`
+	Name                types.String               `tfsdk:"name"`
+	Namespace           types.String               `tfsdk:"namespace"`
+	Annotations         types.Map                  `tfsdk:"annotations"`
+	Description         types.String               `tfsdk:"description"`
+	Disable             types.Bool                 `tfsdk:"disable"`
+	Labels              types.Map                  `tfsdk:"labels"`
+	ID                  types.String               `tfsdk:"id"`
+	EnableSupportAccess types.Bool                 `tfsdk:"enable_support_access"`
+	SupportEmail        types.String               `tfsdk:"support_email"`
+	Timeouts            timeouts.Value             `tfsdk:"timeouts"`
+	CtGroups            types.List                 `tfsdk:"ct_groups"`
+	Favicon             *TenantProfileFaviconModel `tfsdk:"favicon"`
+	Logo                *TenantProfileLogoModel    `tfsdk:"logo"`
+	Plan                *TenantProfilePlanModel    `tfsdk:"plan"`
 }
 
 func (r *TenantProfileResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -257,6 +291,9 @@ func (r *TenantProfileResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional:            true,
 						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
 					},
 				},
 			},
@@ -408,30 +445,35 @@ func (r *TenantProfileResource) Create(ctx context.Context, req resource.CreateR
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.CtGroups) > 0 {
-		var ct_groupsList []map[string]interface{}
-		for _, item := range data.CtGroups {
-			itemMap := make(map[string]interface{})
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if len(item.NamespaceRoles) > 0 {
-				var namespace_rolesNestedList []map[string]interface{}
-				for _, nestedItem := range item.NamespaceRoles {
-					nestedItemMap := make(map[string]interface{})
-					if !nestedItem.Namespace.IsNull() && !nestedItem.Namespace.IsUnknown() {
-						nestedItemMap["namespace"] = nestedItem.Namespace.ValueString()
-					}
-					if !nestedItem.Role.IsNull() && !nestedItem.Role.IsUnknown() {
-						nestedItemMap["role"] = nestedItem.Role.ValueString()
-					}
-					namespace_rolesNestedList = append(namespace_rolesNestedList, nestedItemMap)
+	if !data.CtGroups.IsNull() && !data.CtGroups.IsUnknown() {
+		var ct_groupsItems []TenantProfileCtGroupsModel
+		diags := data.CtGroups.ElementsAs(ctx, &ct_groupsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(ct_groupsItems) > 0 {
+			var ct_groupsList []map[string]interface{}
+			for _, item := range ct_groupsItems {
+				itemMap := make(map[string]interface{})
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
 				}
-				itemMap["namespace_roles"] = namespace_rolesNestedList
+				if len(item.NamespaceRoles) > 0 {
+					var namespace_rolesNestedList []map[string]interface{}
+					for _, nestedItem := range item.NamespaceRoles {
+						nestedItemMap := make(map[string]interface{})
+						if !nestedItem.Namespace.IsNull() && !nestedItem.Namespace.IsUnknown() {
+							nestedItemMap["namespace"] = nestedItem.Namespace.ValueString()
+						}
+						if !nestedItem.Role.IsNull() && !nestedItem.Role.IsUnknown() {
+							nestedItemMap["role"] = nestedItem.Role.ValueString()
+						}
+						namespace_rolesNestedList = append(namespace_rolesNestedList, nestedItemMap)
+					}
+					itemMap["namespace_roles"] = namespace_rolesNestedList
+				}
+				ct_groupsList = append(ct_groupsList, itemMap)
 			}
-			ct_groupsList = append(ct_groupsList, itemMap)
+			createReq.Spec["ct_groups"] = ct_groupsList
 		}
-		createReq.Spec["ct_groups"] = ct_groupsList
 	}
 	if data.Favicon != nil {
 		faviconMap := make(map[string]interface{})
@@ -493,6 +535,10 @@ func (r *TenantProfileResource) Create(ctx context.Context, req resource.CreateR
 	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["ct_groups"].([]interface{}); ok && len(listData) > 0 {
 		var ct_groupsList []TenantProfileCtGroupsModel
+		var existingCtGroupsItems []TenantProfileCtGroupsModel
+		if !data.CtGroups.IsNull() && !data.CtGroups.IsUnknown() {
+			data.CtGroups.ElementsAs(ctx, &existingCtGroupsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -531,7 +577,14 @@ func (r *TenantProfileResource) Create(ctx context.Context, req resource.CreateR
 				})
 			}
 		}
-		data.CtGroups = ct_groupsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: TenantProfileCtGroupsModelAttrTypes}, ct_groupsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.CtGroups = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.CtGroups = types.ListNull(types.ObjectType{AttrTypes: TenantProfileCtGroupsModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["favicon"].(map[string]interface{}); ok && (isImport || data.Favicon != nil) {
 		data.Favicon = &TenantProfileFaviconModel{
@@ -691,11 +744,17 @@ func (r *TenantProfileResource) Read(ctx context.Context, req resource.ReadReque
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -722,6 +781,10 @@ func (r *TenantProfileResource) Read(ctx context.Context, req resource.ReadReque
 	})
 	if listData, ok := apiResource.Spec["ct_groups"].([]interface{}); ok && len(listData) > 0 {
 		var ct_groupsList []TenantProfileCtGroupsModel
+		var existingCtGroupsItems []TenantProfileCtGroupsModel
+		if !data.CtGroups.IsNull() && !data.CtGroups.IsUnknown() {
+			data.CtGroups.ElementsAs(ctx, &existingCtGroupsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -760,7 +823,14 @@ func (r *TenantProfileResource) Read(ctx context.Context, req resource.ReadReque
 				})
 			}
 		}
-		data.CtGroups = ct_groupsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: TenantProfileCtGroupsModelAttrTypes}, ct_groupsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.CtGroups = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.CtGroups = types.ListNull(types.ObjectType{AttrTypes: TenantProfileCtGroupsModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["favicon"].(map[string]interface{}); ok && (isImport || data.Favicon != nil) {
 		data.Favicon = &TenantProfileFaviconModel{
@@ -916,30 +986,35 @@ func (r *TenantProfileResource) Update(ctx context.Context, req resource.UpdateR
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.CtGroups) > 0 {
-		var ct_groupsList []map[string]interface{}
-		for _, item := range data.CtGroups {
-			itemMap := make(map[string]interface{})
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if len(item.NamespaceRoles) > 0 {
-				var namespace_rolesNestedList []map[string]interface{}
-				for _, nestedItem := range item.NamespaceRoles {
-					nestedItemMap := make(map[string]interface{})
-					if !nestedItem.Namespace.IsNull() && !nestedItem.Namespace.IsUnknown() {
-						nestedItemMap["namespace"] = nestedItem.Namespace.ValueString()
-					}
-					if !nestedItem.Role.IsNull() && !nestedItem.Role.IsUnknown() {
-						nestedItemMap["role"] = nestedItem.Role.ValueString()
-					}
-					namespace_rolesNestedList = append(namespace_rolesNestedList, nestedItemMap)
+	if !data.CtGroups.IsNull() && !data.CtGroups.IsUnknown() {
+		var ct_groupsItems []TenantProfileCtGroupsModel
+		diags := data.CtGroups.ElementsAs(ctx, &ct_groupsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(ct_groupsItems) > 0 {
+			var ct_groupsList []map[string]interface{}
+			for _, item := range ct_groupsItems {
+				itemMap := make(map[string]interface{})
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
 				}
-				itemMap["namespace_roles"] = namespace_rolesNestedList
+				if len(item.NamespaceRoles) > 0 {
+					var namespace_rolesNestedList []map[string]interface{}
+					for _, nestedItem := range item.NamespaceRoles {
+						nestedItemMap := make(map[string]interface{})
+						if !nestedItem.Namespace.IsNull() && !nestedItem.Namespace.IsUnknown() {
+							nestedItemMap["namespace"] = nestedItem.Namespace.ValueString()
+						}
+						if !nestedItem.Role.IsNull() && !nestedItem.Role.IsUnknown() {
+							nestedItemMap["role"] = nestedItem.Role.ValueString()
+						}
+						namespace_rolesNestedList = append(namespace_rolesNestedList, nestedItemMap)
+					}
+					itemMap["namespace_roles"] = namespace_rolesNestedList
+				}
+				ct_groupsList = append(ct_groupsList, itemMap)
 			}
-			ct_groupsList = append(ct_groupsList, itemMap)
+			apiResource.Spec["ct_groups"] = ct_groupsList
 		}
-		apiResource.Spec["ct_groups"] = ct_groupsList
 	}
 	if data.Favicon != nil {
 		faviconMap := make(map[string]interface{})
@@ -1026,6 +1101,10 @@ func (r *TenantProfileResource) Update(ctx context.Context, req resource.UpdateR
 	_ = isImport          // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["ct_groups"].([]interface{}); ok && len(listData) > 0 {
 		var ct_groupsList []TenantProfileCtGroupsModel
+		var existingCtGroupsItems []TenantProfileCtGroupsModel
+		if !data.CtGroups.IsNull() && !data.CtGroups.IsUnknown() {
+			data.CtGroups.ElementsAs(ctx, &existingCtGroupsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -1064,7 +1143,14 @@ func (r *TenantProfileResource) Update(ctx context.Context, req resource.UpdateR
 				})
 			}
 		}
-		data.CtGroups = ct_groupsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: TenantProfileCtGroupsModelAttrTypes}, ct_groupsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.CtGroups = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.CtGroups = types.ListNull(types.ObjectType{AttrTypes: TenantProfileCtGroupsModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["favicon"].(map[string]interface{}); ok && (isImport || data.Favicon != nil) {
 		data.Favicon = &TenantProfileFaviconModel{

@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -56,6 +57,13 @@ type ChildTenantChildTenantManagerModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// ChildTenantChildTenantManagerModelAttrTypes defines the attribute types for ChildTenantChildTenantManagerModel
+var ChildTenantChildTenantManagerModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // ChildTenantContactDetailModel represents contact_detail block
 type ChildTenantContactDetailModel struct {
 	Address1    types.String `tfsdk:"address1"`
@@ -70,6 +78,20 @@ type ChildTenantContactDetailModel struct {
 	ZipCode     types.String `tfsdk:"zip_code"`
 }
 
+// ChildTenantContactDetailModelAttrTypes defines the attribute types for ChildTenantContactDetailModel
+var ChildTenantContactDetailModelAttrTypes = map[string]attr.Type{
+	"address1":     types.StringType,
+	"address2":     types.StringType,
+	"city":         types.StringType,
+	"contact_type": types.StringType,
+	"country":      types.StringType,
+	"county":       types.StringType,
+	"phone_number": types.StringType,
+	"state":        types.StringType,
+	"state_code":   types.StringType,
+	"zip_code":     types.StringType,
+}
+
 // ChildTenantCustomerInfoModel represents customer_info block
 type ChildTenantCustomerInfoModel struct {
 	AdditionalInfo types.String `tfsdk:"additional_info"`
@@ -78,11 +100,26 @@ type ChildTenantCustomerInfoModel struct {
 	LastName       types.String `tfsdk:"last_name"`
 }
 
+// ChildTenantCustomerInfoModelAttrTypes defines the attribute types for ChildTenantCustomerInfoModel
+var ChildTenantCustomerInfoModelAttrTypes = map[string]attr.Type{
+	"additional_info": types.StringType,
+	"email":           types.StringType,
+	"first_name":      types.StringType,
+	"last_name":       types.StringType,
+}
+
 // ChildTenantTenantProfileModel represents tenant_profile block
 type ChildTenantTenantProfileModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// ChildTenantTenantProfileModelAttrTypes defines the attribute types for ChildTenantTenantProfileModel
+var ChildTenantTenantProfileModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 type ChildTenantResourceModel struct {
@@ -122,10 +159,11 @@ func (r *ChildTenantResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the Child Tenant will be created.",
-				Required:            true,
+				MarkdownDescription: "Namespace for the Child Tenant. For this resource type, namespace should be empty or omitted.",
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.UseStateForUnknown(),
 				},
 				Validators: []validator.String{
 					validators.NamespaceValidator(),
@@ -195,6 +233,9 @@ func (r *ChildTenantResource) Schema(ctx context.Context, req resource.SchemaReq
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional:            true,
 						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
 					},
 				},
 			},
@@ -279,6 +320,9 @@ func (r *ChildTenantResource) Schema(ctx context.Context, req resource.SchemaReq
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional:            true,
 						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
 					},
 				},
 			},
@@ -520,6 +564,8 @@ func (r *ChildTenantResource) Create(ctx context.Context, req resource.CreateReq
 	}
 
 	data.ID = types.StringValue(apiResource.Metadata.Name)
+	// For resources without namespace in API path, namespace is computed from API response
+	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
 
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
@@ -735,11 +781,17 @@ func (r *ChildTenantResource) Read(ctx context.Context, req resource.ReadRequest
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -1287,19 +1339,17 @@ func (r *ChildTenantResource) Delete(ctx context.Context, req resource.DeleteReq
 }
 
 func (r *ChildTenantResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	// Import ID format: namespace/name
-	parts := strings.Split(req.ID, "/")
-	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+	// Import ID format: name (no namespace for this resource type)
+	name := req.ID
+	if name == "" {
 		resp.Diagnostics.AddError(
 			"Invalid Import ID",
-			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+			"Expected import ID to be the resource name, got empty string",
 		)
 		return
 	}
-	namespace := parts[0]
-	name := parts[1]
 
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), "")...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

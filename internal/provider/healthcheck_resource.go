@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -61,10 +62,27 @@ type HealthcheckHTTPHealthCheckModel struct {
 	UseOriginServerName    *HealthcheckEmptyModel `tfsdk:"use_origin_server_name"`
 }
 
+// HealthcheckHTTPHealthCheckModelAttrTypes defines the attribute types for HealthcheckHTTPHealthCheckModel
+var HealthcheckHTTPHealthCheckModelAttrTypes = map[string]attr.Type{
+	"expected_status_codes":     types.ListType{ElemType: types.StringType},
+	"host_header":               types.StringType,
+	"path":                      types.StringType,
+	"request_headers_to_remove": types.ListType{ElemType: types.StringType},
+	"use_http2":                 types.BoolType,
+	"headers":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_origin_server_name":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HealthcheckTCPHealthCheckModel represents tcp_health_check block
 type HealthcheckTCPHealthCheckModel struct {
 	ExpectedResponse types.String `tfsdk:"expected_response"`
 	SendPayload      types.String `tfsdk:"send_payload"`
+}
+
+// HealthcheckTCPHealthCheckModelAttrTypes defines the attribute types for HealthcheckTCPHealthCheckModel
+var HealthcheckTCPHealthCheckModelAttrTypes = map[string]attr.Type{
+	"expected_response": types.StringType,
+	"send_payload":      types.StringType,
 }
 
 type HealthcheckResourceModel struct {
@@ -649,11 +667,17 @@ func (r *HealthcheckResource) Read(ctx context.Context, req resource.ReadRequest
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -54,11 +55,23 @@ type ReportConfigReportRecipientsModel struct {
 	UserGroups []ReportConfigReportRecipientsUserGroupsModel `tfsdk:"user_groups"`
 }
 
+// ReportConfigReportRecipientsModelAttrTypes defines the attribute types for ReportConfigReportRecipientsModel
+var ReportConfigReportRecipientsModelAttrTypes = map[string]attr.Type{
+	"user_groups": types.ListType{ElemType: types.ObjectType{AttrTypes: ReportConfigReportRecipientsUserGroupsModelAttrTypes}},
+}
+
 // ReportConfigReportRecipientsUserGroupsModel represents user_groups block
 type ReportConfigReportRecipientsUserGroupsModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// ReportConfigReportRecipientsUserGroupsModelAttrTypes defines the attribute types for ReportConfigReportRecipientsUserGroupsModel
+var ReportConfigReportRecipientsUserGroupsModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // ReportConfigWaapModel represents waap block
@@ -70,9 +83,23 @@ type ReportConfigWaapModel struct {
 	Weekly           *ReportConfigWaapWeeklyModel     `tfsdk:"weekly"`
 }
 
+// ReportConfigWaapModelAttrTypes defines the attribute types for ReportConfigWaapModel
+var ReportConfigWaapModelAttrTypes = map[string]attr.Type{
+	"current_namespace": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"daily":             types.ObjectType{AttrTypes: ReportConfigWaapDailyModelAttrTypes},
+	"monthly":           types.ObjectType{AttrTypes: ReportConfigWaapMonthlyModelAttrTypes},
+	"namespaces":        types.ObjectType{AttrTypes: ReportConfigWaapNamespacesModelAttrTypes},
+	"weekly":            types.ObjectType{AttrTypes: ReportConfigWaapWeeklyModelAttrTypes},
+}
+
 // ReportConfigWaapDailyModel represents daily block
 type ReportConfigWaapDailyModel struct {
 	ReportGenerationTime types.String `tfsdk:"report_generation_time"`
+}
+
+// ReportConfigWaapDailyModelAttrTypes defines the attribute types for ReportConfigWaapDailyModel
+var ReportConfigWaapDailyModelAttrTypes = map[string]attr.Type{
+	"report_generation_time": types.StringType,
 }
 
 // ReportConfigWaapMonthlyModel represents monthly block
@@ -81,15 +108,32 @@ type ReportConfigWaapMonthlyModel struct {
 	ReportGenerationTime types.String `tfsdk:"report_generation_time"`
 }
 
+// ReportConfigWaapMonthlyModelAttrTypes defines the attribute types for ReportConfigWaapMonthlyModel
+var ReportConfigWaapMonthlyModelAttrTypes = map[string]attr.Type{
+	"date":                   types.StringType,
+	"report_generation_time": types.StringType,
+}
+
 // ReportConfigWaapNamespacesModel represents namespaces block
 type ReportConfigWaapNamespacesModel struct {
 	Namespaces types.List `tfsdk:"namespaces"`
+}
+
+// ReportConfigWaapNamespacesModelAttrTypes defines the attribute types for ReportConfigWaapNamespacesModel
+var ReportConfigWaapNamespacesModelAttrTypes = map[string]attr.Type{
+	"namespaces": types.ListType{ElemType: types.StringType},
 }
 
 // ReportConfigWaapWeeklyModel represents weekly block
 type ReportConfigWaapWeeklyModel struct {
 	Day                  types.String `tfsdk:"day"`
 	ReportGenerationTime types.String `tfsdk:"report_generation_time"`
+}
+
+// ReportConfigWaapWeeklyModelAttrTypes defines the attribute types for ReportConfigWaapWeeklyModel
+var ReportConfigWaapWeeklyModelAttrTypes = map[string]attr.Type{
+	"day":                    types.StringType,
+	"report_generation_time": types.StringType,
 }
 
 type ReportConfigResourceModel struct {
@@ -187,6 +231,9 @@ func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRe
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -571,11 +618,17 @@ func (r *ReportConfigResource) Read(ctx context.Context, req resource.ReadReques
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

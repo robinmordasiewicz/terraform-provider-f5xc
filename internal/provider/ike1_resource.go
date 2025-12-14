@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -54,9 +55,19 @@ type Ike1IKEKeylifetimeHoursModel struct {
 	Duration types.Int64 `tfsdk:"duration"`
 }
 
+// Ike1IKEKeylifetimeHoursModelAttrTypes defines the attribute types for Ike1IKEKeylifetimeHoursModel
+var Ike1IKEKeylifetimeHoursModelAttrTypes = map[string]attr.Type{
+	"duration": types.Int64Type,
+}
+
 // Ike1IKEKeylifetimeMinutesModel represents ike_keylifetime_minutes block
 type Ike1IKEKeylifetimeMinutesModel struct {
 	Duration types.Int64 `tfsdk:"duration"`
+}
+
+// Ike1IKEKeylifetimeMinutesModelAttrTypes defines the attribute types for Ike1IKEKeylifetimeMinutesModel
+var Ike1IKEKeylifetimeMinutesModelAttrTypes = map[string]attr.Type{
+	"duration": types.Int64Type,
 }
 
 // Ike1ReauthTimeoutDaysModel represents reauth_timeout_days block
@@ -64,9 +75,19 @@ type Ike1ReauthTimeoutDaysModel struct {
 	Duration types.Int64 `tfsdk:"duration"`
 }
 
+// Ike1ReauthTimeoutDaysModelAttrTypes defines the attribute types for Ike1ReauthTimeoutDaysModel
+var Ike1ReauthTimeoutDaysModelAttrTypes = map[string]attr.Type{
+	"duration": types.Int64Type,
+}
+
 // Ike1ReauthTimeoutHoursModel represents reauth_timeout_hours block
 type Ike1ReauthTimeoutHoursModel struct {
 	Duration types.Int64 `tfsdk:"duration"`
+}
+
+// Ike1ReauthTimeoutHoursModelAttrTypes defines the attribute types for Ike1ReauthTimeoutHoursModel
+var Ike1ReauthTimeoutHoursModelAttrTypes = map[string]attr.Type{
+	"duration": types.Int64Type,
 }
 
 type Ike1ResourceModel struct {
@@ -501,11 +522,17 @@ func (r *Ike1Resource) Read(ctx context.Context, req resource.ReadRequest, resp 
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

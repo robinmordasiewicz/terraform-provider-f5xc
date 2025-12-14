@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -54,6 +55,11 @@ type InfraprotectTunnelBandwidthModel struct {
 	BandwidthMaxMb types.Int64 `tfsdk:"bandwidth_max_mb"`
 }
 
+// InfraprotectTunnelBandwidthModelAttrTypes defines the attribute types for InfraprotectTunnelBandwidthModel
+var InfraprotectTunnelBandwidthModelAttrTypes = map[string]attr.Type{
+	"bandwidth_max_mb": types.Int64Type,
+}
+
 // InfraprotectTunnelBGPInformationModel represents bgp_information block
 type InfraprotectTunnelBGPInformationModel struct {
 	HolddownTimerSeconds types.Int64                                              `tfsdk:"holddown_timer_seconds"`
@@ -63,6 +69,15 @@ type InfraprotectTunnelBGPInformationModel struct {
 	UseDefaultSecret     *InfraprotectTunnelEmptyModel                            `tfsdk:"use_default_secret"`
 }
 
+// InfraprotectTunnelBGPInformationModelAttrTypes defines the attribute types for InfraprotectTunnelBGPInformationModel
+var InfraprotectTunnelBGPInformationModelAttrTypes = map[string]attr.Type{
+	"holddown_timer_seconds": types.Int64Type,
+	"asn":                    types.ObjectType{AttrTypes: InfraprotectTunnelBGPInformationAsnModelAttrTypes},
+	"no_secret":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"peer_secret_override":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_default_secret":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // InfraprotectTunnelBGPInformationAsnModel represents asn block
 type InfraprotectTunnelBGPInformationAsnModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -70,10 +85,23 @@ type InfraprotectTunnelBGPInformationAsnModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// InfraprotectTunnelBGPInformationAsnModelAttrTypes defines the attribute types for InfraprotectTunnelBGPInformationAsnModel
+var InfraprotectTunnelBGPInformationAsnModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // InfraprotectTunnelBGPInformationPeerSecretOverrideModel represents peer_secret_override block
 type InfraprotectTunnelBGPInformationPeerSecretOverrideModel struct {
 	BlindfoldSecretInfo *InfraprotectTunnelBGPInformationPeerSecretOverrideBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *InfraprotectTunnelBGPInformationPeerSecretOverrideClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// InfraprotectTunnelBGPInformationPeerSecretOverrideModelAttrTypes defines the attribute types for InfraprotectTunnelBGPInformationPeerSecretOverrideModel
+var InfraprotectTunnelBGPInformationPeerSecretOverrideModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: InfraprotectTunnelBGPInformationPeerSecretOverrideBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: InfraprotectTunnelBGPInformationPeerSecretOverrideClearSecretInfoModelAttrTypes},
 }
 
 // InfraprotectTunnelBGPInformationPeerSecretOverrideBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -83,10 +111,23 @@ type InfraprotectTunnelBGPInformationPeerSecretOverrideBlindfoldSecretInfoModel 
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// InfraprotectTunnelBGPInformationPeerSecretOverrideBlindfoldSecretInfoModelAttrTypes defines the attribute types for InfraprotectTunnelBGPInformationPeerSecretOverrideBlindfoldSecretInfoModel
+var InfraprotectTunnelBGPInformationPeerSecretOverrideBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // InfraprotectTunnelBGPInformationPeerSecretOverrideClearSecretInfoModel represents clear_secret_info block
 type InfraprotectTunnelBGPInformationPeerSecretOverrideClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// InfraprotectTunnelBGPInformationPeerSecretOverrideClearSecretInfoModelAttrTypes defines the attribute types for InfraprotectTunnelBGPInformationPeerSecretOverrideClearSecretInfoModel
+var InfraprotectTunnelBGPInformationPeerSecretOverrideClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // InfraprotectTunnelFirewallRuleGroupModel represents firewall_rule_group block
@@ -94,6 +135,13 @@ type InfraprotectTunnelFirewallRuleGroupModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// InfraprotectTunnelFirewallRuleGroupModelAttrTypes defines the attribute types for InfraprotectTunnelFirewallRuleGroupModel
+var InfraprotectTunnelFirewallRuleGroupModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // InfraprotectTunnelGreIpv4Model represents gre_ipv4 block
@@ -107,6 +155,17 @@ type InfraprotectTunnelGreIpv4Model struct {
 	KeepaliveEnabled         *InfraprotectTunnelEmptyModel `tfsdk:"keepalive_enabled"`
 }
 
+// InfraprotectTunnelGreIpv4ModelAttrTypes defines the attribute types for InfraprotectTunnelGreIpv4Model
+var InfraprotectTunnelGreIpv4ModelAttrTypes = map[string]attr.Type{
+	"customer_endpoint_ipv4":     types.StringType,
+	"fragmentation_disabled":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"fragmentation_enabled":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ipv6_interconnect_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ipv6_interconnect_enabled":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"keepalive_disabled":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"keepalive_enabled":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // InfraprotectTunnelGreIpv6Model represents gre_ipv6 block
 type InfraprotectTunnelGreIpv6Model struct {
 	CustomerEndpointIpv6     types.String                  `tfsdk:"customer_endpoint_ipv6"`
@@ -114,9 +173,21 @@ type InfraprotectTunnelGreIpv6Model struct {
 	Ipv4InterconnectEnabled  *InfraprotectTunnelEmptyModel `tfsdk:"ipv4_interconnect_enabled"`
 }
 
+// InfraprotectTunnelGreIpv6ModelAttrTypes defines the attribute types for InfraprotectTunnelGreIpv6Model
+var InfraprotectTunnelGreIpv6ModelAttrTypes = map[string]attr.Type{
+	"customer_endpoint_ipv6":     types.StringType,
+	"ipv4_interconnect_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ipv4_interconnect_enabled":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // InfraprotectTunnelIPInIPModel represents ip_in_ip block
 type InfraprotectTunnelIPInIPModel struct {
 	CustomerEndpointIpv4 types.String `tfsdk:"customer_endpoint_ipv4"`
+}
+
+// InfraprotectTunnelIPInIPModelAttrTypes defines the attribute types for InfraprotectTunnelIPInIPModel
+var InfraprotectTunnelIPInIPModelAttrTypes = map[string]attr.Type{
+	"customer_endpoint_ipv4": types.StringType,
 }
 
 // InfraprotectTunnelIpv6ToIpv6Model represents ipv6_to_ipv6 block
@@ -124,11 +195,23 @@ type InfraprotectTunnelIpv6ToIpv6Model struct {
 	CustomerEndpointIpv6 types.String `tfsdk:"customer_endpoint_ipv6"`
 }
 
+// InfraprotectTunnelIpv6ToIpv6ModelAttrTypes defines the attribute types for InfraprotectTunnelIpv6ToIpv6Model
+var InfraprotectTunnelIpv6ToIpv6ModelAttrTypes = map[string]attr.Type{
+	"customer_endpoint_ipv6": types.StringType,
+}
+
 // InfraprotectTunnelTunnelLocationModel represents tunnel_location block
 type InfraprotectTunnelTunnelLocationModel struct {
 	Name  types.String                  `tfsdk:"name"`
 	Zone1 *InfraprotectTunnelEmptyModel `tfsdk:"zone1"`
 	Zone2 *InfraprotectTunnelEmptyModel `tfsdk:"zone2"`
+}
+
+// InfraprotectTunnelTunnelLocationModelAttrTypes defines the attribute types for InfraprotectTunnelTunnelLocationModel
+var InfraprotectTunnelTunnelLocationModelAttrTypes = map[string]attr.Type{
+	"name":  types.StringType,
+	"zone1": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"zone2": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 type InfraprotectTunnelResourceModel struct {
@@ -245,6 +328,9 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -307,6 +393,9 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional:            true,
 						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
 					},
 				},
 			},
@@ -1008,11 +1097,17 @@ func (r *InfraprotectTunnelResource) Read(ctx context.Context, req resource.Read
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

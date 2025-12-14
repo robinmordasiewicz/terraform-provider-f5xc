@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -56,15 +57,33 @@ type CertificateCertificateChainModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// CertificateCertificateChainModelAttrTypes defines the attribute types for CertificateCertificateChainModel
+var CertificateCertificateChainModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // CertificateCustomHashAlgorithmsModel represents custom_hash_algorithms block
 type CertificateCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// CertificateCustomHashAlgorithmsModelAttrTypes defines the attribute types for CertificateCustomHashAlgorithmsModel
+var CertificateCustomHashAlgorithmsModelAttrTypes = map[string]attr.Type{
+	"hash_algorithms": types.ListType{ElemType: types.StringType},
 }
 
 // CertificatePrivateKeyModel represents private_key block
 type CertificatePrivateKeyModel struct {
 	BlindfoldSecretInfo *CertificatePrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *CertificatePrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// CertificatePrivateKeyModelAttrTypes defines the attribute types for CertificatePrivateKeyModel
+var CertificatePrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: CertificatePrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: CertificatePrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // CertificatePrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -74,10 +93,23 @@ type CertificatePrivateKeyBlindfoldSecretInfoModel struct {
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// CertificatePrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for CertificatePrivateKeyBlindfoldSecretInfoModel
+var CertificatePrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // CertificatePrivateKeyClearSecretInfoModel represents clear_secret_info block
 type CertificatePrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// CertificatePrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for CertificatePrivateKeyClearSecretInfoModel
+var CertificatePrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 type CertificateResourceModel struct {
@@ -182,6 +214,9 @@ func (r *CertificateResource) Schema(ctx context.Context, req resource.SchemaReq
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional:            true,
 						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
 					},
 				},
 			},
@@ -583,11 +618,17 @@ func (r *CertificateResource) Read(ctx context.Context, req resource.ReadRequest
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

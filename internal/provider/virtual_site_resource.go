@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -52,6 +53,11 @@ type VirtualSiteEmptyModel struct {
 // VirtualSiteSiteSelectorModel represents site_selector block
 type VirtualSiteSiteSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
+}
+
+// VirtualSiteSiteSelectorModelAttrTypes defines the attribute types for VirtualSiteSiteSelectorModel
+var VirtualSiteSiteSelectorModelAttrTypes = map[string]attr.Type{
+	"expressions": types.ListType{ElemType: types.StringType},
 }
 
 type VirtualSiteResourceModel struct {
@@ -408,11 +414,17 @@ func (r *VirtualSiteResource) Read(ctx context.Context, req resource.ReadRequest
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -59,16 +60,26 @@ type UsbPolicyAllowedDevicesModel struct {
 	IDVendor        types.String `tfsdk:"id_vendor"`
 }
 
+// UsbPolicyAllowedDevicesModelAttrTypes defines the attribute types for UsbPolicyAllowedDevicesModel
+var UsbPolicyAllowedDevicesModelAttrTypes = map[string]attr.Type{
+	"b_device_class":     types.StringType,
+	"b_device_protocol":  types.StringType,
+	"b_device_sub_class": types.StringType,
+	"i_serial":           types.StringType,
+	"id_product":         types.StringType,
+	"id_vendor":          types.StringType,
+}
+
 type UsbPolicyResourceModel struct {
-	Name           types.String                   `tfsdk:"name"`
-	Namespace      types.String                   `tfsdk:"namespace"`
-	Annotations    types.Map                      `tfsdk:"annotations"`
-	Description    types.String                   `tfsdk:"description"`
-	Disable        types.Bool                     `tfsdk:"disable"`
-	Labels         types.Map                      `tfsdk:"labels"`
-	ID             types.String                   `tfsdk:"id"`
-	Timeouts       timeouts.Value                 `tfsdk:"timeouts"`
-	AllowedDevices []UsbPolicyAllowedDevicesModel `tfsdk:"allowed_devices"`
+	Name           types.String   `tfsdk:"name"`
+	Namespace      types.String   `tfsdk:"namespace"`
+	Annotations    types.Map      `tfsdk:"annotations"`
+	Description    types.String   `tfsdk:"description"`
+	Disable        types.Bool     `tfsdk:"disable"`
+	Labels         types.Map      `tfsdk:"labels"`
+	ID             types.String   `tfsdk:"id"`
+	Timeouts       timeouts.Value `tfsdk:"timeouts"`
+	AllowedDevices types.List     `tfsdk:"allowed_devices"`
 }
 
 func (r *UsbPolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -312,31 +323,36 @@ func (r *UsbPolicyResource) Create(ctx context.Context, req resource.CreateReque
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.AllowedDevices) > 0 {
-		var allowed_devicesList []map[string]interface{}
-		for _, item := range data.AllowedDevices {
-			itemMap := make(map[string]interface{})
-			if !item.BDeviceClass.IsNull() && !item.BDeviceClass.IsUnknown() {
-				itemMap["b_device_class"] = item.BDeviceClass.ValueString()
+	if !data.AllowedDevices.IsNull() && !data.AllowedDevices.IsUnknown() {
+		var allowed_devicesItems []UsbPolicyAllowedDevicesModel
+		diags := data.AllowedDevices.ElementsAs(ctx, &allowed_devicesItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(allowed_devicesItems) > 0 {
+			var allowed_devicesList []map[string]interface{}
+			for _, item := range allowed_devicesItems {
+				itemMap := make(map[string]interface{})
+				if !item.BDeviceClass.IsNull() && !item.BDeviceClass.IsUnknown() {
+					itemMap["b_device_class"] = item.BDeviceClass.ValueString()
+				}
+				if !item.BDeviceProtocol.IsNull() && !item.BDeviceProtocol.IsUnknown() {
+					itemMap["b_device_protocol"] = item.BDeviceProtocol.ValueString()
+				}
+				if !item.BDeviceSubClass.IsNull() && !item.BDeviceSubClass.IsUnknown() {
+					itemMap["b_device_sub_class"] = item.BDeviceSubClass.ValueString()
+				}
+				if !item.ISerial.IsNull() && !item.ISerial.IsUnknown() {
+					itemMap["i_serial"] = item.ISerial.ValueString()
+				}
+				if !item.IDProduct.IsNull() && !item.IDProduct.IsUnknown() {
+					itemMap["id_product"] = item.IDProduct.ValueString()
+				}
+				if !item.IDVendor.IsNull() && !item.IDVendor.IsUnknown() {
+					itemMap["id_vendor"] = item.IDVendor.ValueString()
+				}
+				allowed_devicesList = append(allowed_devicesList, itemMap)
 			}
-			if !item.BDeviceProtocol.IsNull() && !item.BDeviceProtocol.IsUnknown() {
-				itemMap["b_device_protocol"] = item.BDeviceProtocol.ValueString()
-			}
-			if !item.BDeviceSubClass.IsNull() && !item.BDeviceSubClass.IsUnknown() {
-				itemMap["b_device_sub_class"] = item.BDeviceSubClass.ValueString()
-			}
-			if !item.ISerial.IsNull() && !item.ISerial.IsUnknown() {
-				itemMap["i_serial"] = item.ISerial.ValueString()
-			}
-			if !item.IDProduct.IsNull() && !item.IDProduct.IsUnknown() {
-				itemMap["id_product"] = item.IDProduct.ValueString()
-			}
-			if !item.IDVendor.IsNull() && !item.IDVendor.IsUnknown() {
-				itemMap["id_vendor"] = item.IDVendor.ValueString()
-			}
-			allowed_devicesList = append(allowed_devicesList, itemMap)
+			createReq.Spec["allowed_devices"] = allowed_devicesList
 		}
-		createReq.Spec["allowed_devices"] = allowed_devicesList
 	}
 
 	apiResource, err := r.client.CreateUsbPolicy(ctx, createReq)
@@ -353,6 +369,10 @@ func (r *UsbPolicyResource) Create(ctx context.Context, req resource.CreateReque
 	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["allowed_devices"].([]interface{}); ok && len(listData) > 0 {
 		var allowed_devicesList []UsbPolicyAllowedDevicesModel
+		var existingAllowedDevicesItems []UsbPolicyAllowedDevicesModel
+		if !data.AllowedDevices.IsNull() && !data.AllowedDevices.IsUnknown() {
+			data.AllowedDevices.ElementsAs(ctx, &existingAllowedDevicesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -396,7 +416,14 @@ func (r *UsbPolicyResource) Create(ctx context.Context, req resource.CreateReque
 				})
 			}
 		}
-		data.AllowedDevices = allowed_devicesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: UsbPolicyAllowedDevicesModelAttrTypes}, allowed_devicesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.AllowedDevices = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.AllowedDevices = types.ListNull(types.ObjectType{AttrTypes: UsbPolicyAllowedDevicesModelAttrTypes})
 	}
 
 	psd := privatestate.NewPrivateStateData()
@@ -462,11 +489,17 @@ func (r *UsbPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -493,6 +526,10 @@ func (r *UsbPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 	})
 	if listData, ok := apiResource.Spec["allowed_devices"].([]interface{}); ok && len(listData) > 0 {
 		var allowed_devicesList []UsbPolicyAllowedDevicesModel
+		var existingAllowedDevicesItems []UsbPolicyAllowedDevicesModel
+		if !data.AllowedDevices.IsNull() && !data.AllowedDevices.IsUnknown() {
+			data.AllowedDevices.ElementsAs(ctx, &existingAllowedDevicesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -536,7 +573,14 @@ func (r *UsbPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 				})
 			}
 		}
-		data.AllowedDevices = allowed_devicesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: UsbPolicyAllowedDevicesModelAttrTypes}, allowed_devicesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.AllowedDevices = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.AllowedDevices = types.ListNull(types.ObjectType{AttrTypes: UsbPolicyAllowedDevicesModelAttrTypes})
 	}
 
 	// Preserve or set the managed marker for future Read operations
@@ -598,31 +642,36 @@ func (r *UsbPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.AllowedDevices) > 0 {
-		var allowed_devicesList []map[string]interface{}
-		for _, item := range data.AllowedDevices {
-			itemMap := make(map[string]interface{})
-			if !item.BDeviceClass.IsNull() && !item.BDeviceClass.IsUnknown() {
-				itemMap["b_device_class"] = item.BDeviceClass.ValueString()
+	if !data.AllowedDevices.IsNull() && !data.AllowedDevices.IsUnknown() {
+		var allowed_devicesItems []UsbPolicyAllowedDevicesModel
+		diags := data.AllowedDevices.ElementsAs(ctx, &allowed_devicesItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(allowed_devicesItems) > 0 {
+			var allowed_devicesList []map[string]interface{}
+			for _, item := range allowed_devicesItems {
+				itemMap := make(map[string]interface{})
+				if !item.BDeviceClass.IsNull() && !item.BDeviceClass.IsUnknown() {
+					itemMap["b_device_class"] = item.BDeviceClass.ValueString()
+				}
+				if !item.BDeviceProtocol.IsNull() && !item.BDeviceProtocol.IsUnknown() {
+					itemMap["b_device_protocol"] = item.BDeviceProtocol.ValueString()
+				}
+				if !item.BDeviceSubClass.IsNull() && !item.BDeviceSubClass.IsUnknown() {
+					itemMap["b_device_sub_class"] = item.BDeviceSubClass.ValueString()
+				}
+				if !item.ISerial.IsNull() && !item.ISerial.IsUnknown() {
+					itemMap["i_serial"] = item.ISerial.ValueString()
+				}
+				if !item.IDProduct.IsNull() && !item.IDProduct.IsUnknown() {
+					itemMap["id_product"] = item.IDProduct.ValueString()
+				}
+				if !item.IDVendor.IsNull() && !item.IDVendor.IsUnknown() {
+					itemMap["id_vendor"] = item.IDVendor.ValueString()
+				}
+				allowed_devicesList = append(allowed_devicesList, itemMap)
 			}
-			if !item.BDeviceProtocol.IsNull() && !item.BDeviceProtocol.IsUnknown() {
-				itemMap["b_device_protocol"] = item.BDeviceProtocol.ValueString()
-			}
-			if !item.BDeviceSubClass.IsNull() && !item.BDeviceSubClass.IsUnknown() {
-				itemMap["b_device_sub_class"] = item.BDeviceSubClass.ValueString()
-			}
-			if !item.ISerial.IsNull() && !item.ISerial.IsUnknown() {
-				itemMap["i_serial"] = item.ISerial.ValueString()
-			}
-			if !item.IDProduct.IsNull() && !item.IDProduct.IsUnknown() {
-				itemMap["id_product"] = item.IDProduct.ValueString()
-			}
-			if !item.IDVendor.IsNull() && !item.IDVendor.IsUnknown() {
-				itemMap["id_vendor"] = item.IDVendor.ValueString()
-			}
-			allowed_devicesList = append(allowed_devicesList, itemMap)
+			apiResource.Spec["allowed_devices"] = allowed_devicesList
 		}
-		apiResource.Spec["allowed_devices"] = allowed_devicesList
 	}
 
 	_, err := r.client.UpdateUsbPolicy(ctx, apiResource)
@@ -650,6 +699,10 @@ func (r *UsbPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 	_ = isImport          // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["allowed_devices"].([]interface{}); ok && len(listData) > 0 {
 		var allowed_devicesList []UsbPolicyAllowedDevicesModel
+		var existingAllowedDevicesItems []UsbPolicyAllowedDevicesModel
+		if !data.AllowedDevices.IsNull() && !data.AllowedDevices.IsUnknown() {
+			data.AllowedDevices.ElementsAs(ctx, &existingAllowedDevicesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -693,7 +746,14 @@ func (r *UsbPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 				})
 			}
 		}
-		data.AllowedDevices = allowed_devicesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: UsbPolicyAllowedDevicesModelAttrTypes}, allowed_devicesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.AllowedDevices = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.AllowedDevices = types.ListNull(types.ObjectType{AttrTypes: UsbPolicyAllowedDevicesModelAttrTypes})
 	}
 
 	psd := privatestate.NewPrivateStateData()

@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -56,6 +57,11 @@ type TCPLoadBalancerActiveServicePoliciesModel struct {
 	Policies []TCPLoadBalancerActiveServicePoliciesPoliciesModel `tfsdk:"policies"`
 }
 
+// TCPLoadBalancerActiveServicePoliciesModelAttrTypes defines the attribute types for TCPLoadBalancerActiveServicePoliciesModel
+var TCPLoadBalancerActiveServicePoliciesModelAttrTypes = map[string]attr.Type{
+	"policies": types.ListType{ElemType: types.ObjectType{AttrTypes: TCPLoadBalancerActiveServicePoliciesPoliciesModelAttrTypes}},
+}
+
 // TCPLoadBalancerActiveServicePoliciesPoliciesModel represents policies block
 type TCPLoadBalancerActiveServicePoliciesPoliciesModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -63,9 +69,21 @@ type TCPLoadBalancerActiveServicePoliciesPoliciesModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// TCPLoadBalancerActiveServicePoliciesPoliciesModelAttrTypes defines the attribute types for TCPLoadBalancerActiveServicePoliciesPoliciesModel
+var TCPLoadBalancerActiveServicePoliciesPoliciesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // TCPLoadBalancerAdvertiseCustomModel represents advertise_custom block
 type TCPLoadBalancerAdvertiseCustomModel struct {
 	AdvertiseWhere []TCPLoadBalancerAdvertiseCustomAdvertiseWhereModel `tfsdk:"advertise_where"`
+}
+
+// TCPLoadBalancerAdvertiseCustomModelAttrTypes defines the attribute types for TCPLoadBalancerAdvertiseCustomModel
+var TCPLoadBalancerAdvertiseCustomModelAttrTypes = map[string]attr.Type{
+	"advertise_where": types.ListType{ElemType: types.ObjectType{AttrTypes: TCPLoadBalancerAdvertiseCustomAdvertiseWhereModelAttrTypes}},
 }
 
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereModel represents advertise_where block
@@ -81,9 +99,27 @@ type TCPLoadBalancerAdvertiseCustomAdvertiseWhereModel struct {
 	Vk8sService        *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel        `tfsdk:"vk8s_service"`
 }
 
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereModelAttrTypes defines the attribute types for TCPLoadBalancerAdvertiseCustomAdvertiseWhereModel
+var TCPLoadBalancerAdvertiseCustomAdvertiseWhereModelAttrTypes = map[string]attr.Type{
+	"port":                  types.Int64Type,
+	"port_ranges":           types.StringType,
+	"advertise_on_public":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site":                  types.ObjectType{AttrTypes: TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModelAttrTypes},
+	"use_default_port":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"virtual_network":       types.ObjectType{AttrTypes: TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModelAttrTypes},
+	"virtual_site":          types.ObjectType{AttrTypes: TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModelAttrTypes},
+	"virtual_site_with_vip": types.ObjectType{AttrTypes: TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModelAttrTypes},
+	"vk8s_service":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel represents advertise_on_public block
 type TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel struct {
 	PublicIP *TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModel `tfsdk:"public_ip"`
+}
+
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModelAttrTypes defines the attribute types for TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel
+var TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModelAttrTypes = map[string]attr.Type{
+	"public_ip": types.ObjectType{AttrTypes: TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModelAttrTypes},
 }
 
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModel represents public_ip block
@@ -93,6 +129,13 @@ type TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModel 
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModelAttrTypes defines the attribute types for TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModel
+var TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel represents site block
 type TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel struct {
 	IP      types.String                                               `tfsdk:"ip"`
@@ -100,11 +143,25 @@ type TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel struct {
 	Site    *TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModel `tfsdk:"site"`
 }
 
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModelAttrTypes defines the attribute types for TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel
+var TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModelAttrTypes = map[string]attr.Type{
+	"ip":      types.StringType,
+	"network": types.StringType,
+	"site":    types.ObjectType{AttrTypes: TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModelAttrTypes},
+}
+
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModel represents site block
 type TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModelAttrTypes defines the attribute types for TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModel
+var TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel represents virtual_network block
@@ -116,6 +173,15 @@ type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel struct {
 	VirtualNetwork *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModel `tfsdk:"virtual_network"`
 }
 
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModelAttrTypes defines the attribute types for TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel
+var TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModelAttrTypes = map[string]attr.Type{
+	"specific_v6_vip": types.StringType,
+	"specific_vip":    types.StringType,
+	"default_v6_vip":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_vip":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"virtual_network": types.ObjectType{AttrTypes: TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModelAttrTypes},
+}
+
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModel represents virtual_network block
 type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -123,10 +189,23 @@ type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkMod
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModelAttrTypes defines the attribute types for TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModel
+var TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel represents virtual_site block
 type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel struct {
 	Network     types.String                                                             `tfsdk:"network"`
 	VirtualSite *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModelAttrTypes defines the attribute types for TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel
+var TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"network":      types.StringType,
+	"virtual_site": types.ObjectType{AttrTypes: TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModelAttrTypes},
 }
 
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel represents virtual_site block
@@ -136,11 +215,25 @@ type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel str
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModelAttrTypes defines the attribute types for TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel
+var TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel represents virtual_site_with_vip block
 type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel struct {
 	IP          types.String                                                                    `tfsdk:"ip"`
 	Network     types.String                                                                    `tfsdk:"network"`
 	VirtualSite *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModelAttrTypes defines the attribute types for TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel
+var TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModelAttrTypes = map[string]attr.Type{
+	"ip":           types.StringType,
+	"network":      types.StringType,
+	"virtual_site": types.ObjectType{AttrTypes: TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteModelAttrTypes},
 }
 
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteModel represents virtual_site block
@@ -150,10 +243,23 @@ type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteMo
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteModelAttrTypes defines the attribute types for TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteModel
+var TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel represents vk8s_service block
 type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel struct {
 	Site        *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel        `tfsdk:"site"`
 	VirtualSite *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModelAttrTypes defines the attribute types for TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel
+var TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModelAttrTypes = map[string]attr.Type{
+	"site":         types.ObjectType{AttrTypes: TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModelAttrTypes},
+	"virtual_site": types.ObjectType{AttrTypes: TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModelAttrTypes},
 }
 
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel represents site block
@@ -163,6 +269,13 @@ type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModelAttrTypes defines the attribute types for TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel
+var TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel represents virtual_site block
 type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -170,9 +283,21 @@ type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel str
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModelAttrTypes defines the attribute types for TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel
+var TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // TCPLoadBalancerAdvertiseOnPublicModel represents advertise_on_public block
 type TCPLoadBalancerAdvertiseOnPublicModel struct {
 	PublicIP *TCPLoadBalancerAdvertiseOnPublicPublicIPModel `tfsdk:"public_ip"`
+}
+
+// TCPLoadBalancerAdvertiseOnPublicModelAttrTypes defines the attribute types for TCPLoadBalancerAdvertiseOnPublicModel
+var TCPLoadBalancerAdvertiseOnPublicModelAttrTypes = map[string]attr.Type{
+	"public_ip": types.ObjectType{AttrTypes: TCPLoadBalancerAdvertiseOnPublicPublicIPModelAttrTypes},
 }
 
 // TCPLoadBalancerAdvertiseOnPublicPublicIPModel represents public_ip block
@@ -180,6 +305,13 @@ type TCPLoadBalancerAdvertiseOnPublicPublicIPModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// TCPLoadBalancerAdvertiseOnPublicPublicIPModelAttrTypes defines the attribute types for TCPLoadBalancerAdvertiseOnPublicPublicIPModel
+var TCPLoadBalancerAdvertiseOnPublicPublicIPModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // TCPLoadBalancerOriginPoolsWeightsModel represents origin_pools_weights block
@@ -191,11 +323,27 @@ type TCPLoadBalancerOriginPoolsWeightsModel struct {
 	Pool            *TCPLoadBalancerOriginPoolsWeightsPoolModel    `tfsdk:"pool"`
 }
 
+// TCPLoadBalancerOriginPoolsWeightsModelAttrTypes defines the attribute types for TCPLoadBalancerOriginPoolsWeightsModel
+var TCPLoadBalancerOriginPoolsWeightsModelAttrTypes = map[string]attr.Type{
+	"priority":         types.Int64Type,
+	"weight":           types.Int64Type,
+	"cluster":          types.ObjectType{AttrTypes: TCPLoadBalancerOriginPoolsWeightsClusterModelAttrTypes},
+	"endpoint_subsets": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"pool":             types.ObjectType{AttrTypes: TCPLoadBalancerOriginPoolsWeightsPoolModelAttrTypes},
+}
+
 // TCPLoadBalancerOriginPoolsWeightsClusterModel represents cluster block
 type TCPLoadBalancerOriginPoolsWeightsClusterModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// TCPLoadBalancerOriginPoolsWeightsClusterModelAttrTypes defines the attribute types for TCPLoadBalancerOriginPoolsWeightsClusterModel
+var TCPLoadBalancerOriginPoolsWeightsClusterModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // TCPLoadBalancerOriginPoolsWeightsPoolModel represents pool block
@@ -205,10 +353,23 @@ type TCPLoadBalancerOriginPoolsWeightsPoolModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// TCPLoadBalancerOriginPoolsWeightsPoolModelAttrTypes defines the attribute types for TCPLoadBalancerOriginPoolsWeightsPoolModel
+var TCPLoadBalancerOriginPoolsWeightsPoolModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // TCPLoadBalancerTLSTCPModel represents tls_tcp block
 type TCPLoadBalancerTLSTCPModel struct {
 	TLSCertParams *TCPLoadBalancerTLSTCPTLSCertParamsModel `tfsdk:"tls_cert_params"`
 	TLSParameters *TCPLoadBalancerTLSTCPTLSParametersModel `tfsdk:"tls_parameters"`
+}
+
+// TCPLoadBalancerTLSTCPModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPModel
+var TCPLoadBalancerTLSTCPModelAttrTypes = map[string]attr.Type{
+	"tls_cert_params": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_parameters":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // TCPLoadBalancerTLSTCPTLSCertParamsModel represents tls_cert_params block
@@ -219,11 +380,26 @@ type TCPLoadBalancerTLSTCPTLSCertParamsModel struct {
 	UseMtls      *TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsModel       `tfsdk:"use_mtls"`
 }
 
+// TCPLoadBalancerTLSTCPTLSCertParamsModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPTLSCertParamsModel
+var TCPLoadBalancerTLSTCPTLSCertParamsModelAttrTypes = map[string]attr.Type{
+	"certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPTLSCertParamsCertificatesModelAttrTypes}},
+	"no_mtls":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":     types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsModelAttrTypes},
+}
+
 // TCPLoadBalancerTLSTCPTLSCertParamsCertificatesModel represents certificates block
 type TCPLoadBalancerTLSTCPTLSCertParamsCertificatesModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// TCPLoadBalancerTLSTCPTLSCertParamsCertificatesModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPTLSCertParamsCertificatesModel
+var TCPLoadBalancerTLSTCPTLSCertParamsCertificatesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // TCPLoadBalancerTLSTCPTLSCertParamsTLSConfigModel represents tls_config block
@@ -234,11 +410,26 @@ type TCPLoadBalancerTLSTCPTLSCertParamsTLSConfigModel struct {
 	MediumSecurity  *TCPLoadBalancerEmptyModel                                      `tfsdk:"medium_security"`
 }
 
+// TCPLoadBalancerTLSTCPTLSCertParamsTLSConfigModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPTLSCertParamsTLSConfigModel
+var TCPLoadBalancerTLSTCPTLSCertParamsTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPTLSCertParamsTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // TCPLoadBalancerTLSTCPTLSCertParamsTLSConfigCustomSecurityModel represents custom_security block
 type TCPLoadBalancerTLSTCPTLSCertParamsTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// TCPLoadBalancerTLSTCPTLSCertParamsTLSConfigCustomSecurityModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPTLSCertParamsTLSConfigCustomSecurityModel
+var TCPLoadBalancerTLSTCPTLSCertParamsTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsModel represents use_mtls block
@@ -252,11 +443,29 @@ type TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsModel struct {
 	XfccOptions               *TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsModel
+var TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsCRLModel represents crl block
 type TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsCRLModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsCRLModel
+var TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsTrustedCAModel represents trusted_ca block
@@ -266,9 +475,21 @@ type TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsTrustedCAModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsTrustedCAModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsTrustedCAModel
+var TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsXfccOptionsModel represents xfcc_options block
 type TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsXfccOptionsModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsXfccOptionsModel
+var TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
 }
 
 // TCPLoadBalancerTLSTCPTLSParametersModel represents tls_parameters block
@@ -277,6 +498,14 @@ type TCPLoadBalancerTLSTCPTLSParametersModel struct {
 	TLSCertificates []TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesModel `tfsdk:"tls_certificates"`
 	TLSConfig       *TCPLoadBalancerTLSTCPTLSParametersTLSConfigModel        `tfsdk:"tls_config"`
 	UseMtls         *TCPLoadBalancerTLSTCPTLSParametersUseMtlsModel          `tfsdk:"use_mtls"`
+}
+
+// TCPLoadBalancerTLSTCPTLSParametersModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPTLSParametersModel
+var TCPLoadBalancerTLSTCPTLSParametersModelAttrTypes = map[string]attr.Type{
+	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesModelAttrTypes}},
+	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":         types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPTLSParametersUseMtlsModelAttrTypes},
 }
 
 // TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesModel represents tls_certificates block
@@ -289,15 +518,36 @@ type TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesModel struct {
 	UseSystemDefaults    *TCPLoadBalancerEmptyModel                                                  `tfsdk:"use_system_defaults"`
 }
 
+// TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesModel
+var TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesModelAttrTypes = map[string]attr.Type{
+	"certificate_url":        types.StringType,
+	"description_spec":       types.StringType,
+	"custom_hash_algorithms": types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
+	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
 type TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesCustomHashAlgorithmsModel
+var TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes = map[string]attr.Type{
+	"hash_algorithms": types.ListType{ElemType: types.StringType},
 }
 
 // TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyModel represents private_key block
 type TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyModel
+var TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -307,10 +557,23 @@ type TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretI
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel
+var TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel
+var TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // TCPLoadBalancerTLSTCPTLSParametersTLSConfigModel represents tls_config block
@@ -321,11 +584,26 @@ type TCPLoadBalancerTLSTCPTLSParametersTLSConfigModel struct {
 	MediumSecurity  *TCPLoadBalancerEmptyModel                                      `tfsdk:"medium_security"`
 }
 
+// TCPLoadBalancerTLSTCPTLSParametersTLSConfigModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPTLSParametersTLSConfigModel
+var TCPLoadBalancerTLSTCPTLSParametersTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPTLSParametersTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // TCPLoadBalancerTLSTCPTLSParametersTLSConfigCustomSecurityModel represents custom_security block
 type TCPLoadBalancerTLSTCPTLSParametersTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// TCPLoadBalancerTLSTCPTLSParametersTLSConfigCustomSecurityModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPTLSParametersTLSConfigCustomSecurityModel
+var TCPLoadBalancerTLSTCPTLSParametersTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // TCPLoadBalancerTLSTCPTLSParametersUseMtlsModel represents use_mtls block
@@ -339,11 +617,29 @@ type TCPLoadBalancerTLSTCPTLSParametersUseMtlsModel struct {
 	XfccOptions               *TCPLoadBalancerTLSTCPTLSParametersUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// TCPLoadBalancerTLSTCPTLSParametersUseMtlsModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPTLSParametersUseMtlsModel
+var TCPLoadBalancerTLSTCPTLSParametersUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPTLSParametersUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPTLSParametersUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPTLSParametersUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // TCPLoadBalancerTLSTCPTLSParametersUseMtlsCRLModel represents crl block
 type TCPLoadBalancerTLSTCPTLSParametersUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// TCPLoadBalancerTLSTCPTLSParametersUseMtlsCRLModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPTLSParametersUseMtlsCRLModel
+var TCPLoadBalancerTLSTCPTLSParametersUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // TCPLoadBalancerTLSTCPTLSParametersUseMtlsTrustedCAModel represents trusted_ca block
@@ -353,9 +649,21 @@ type TCPLoadBalancerTLSTCPTLSParametersUseMtlsTrustedCAModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// TCPLoadBalancerTLSTCPTLSParametersUseMtlsTrustedCAModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPTLSParametersUseMtlsTrustedCAModel
+var TCPLoadBalancerTLSTCPTLSParametersUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // TCPLoadBalancerTLSTCPTLSParametersUseMtlsXfccOptionsModel represents xfcc_options block
 type TCPLoadBalancerTLSTCPTLSParametersUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// TCPLoadBalancerTLSTCPTLSParametersUseMtlsXfccOptionsModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPTLSParametersUseMtlsXfccOptionsModel
+var TCPLoadBalancerTLSTCPTLSParametersUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
 }
 
 // TCPLoadBalancerTLSTCPAutoCertModel represents tls_tcp_auto_cert block
@@ -363,6 +671,13 @@ type TCPLoadBalancerTLSTCPAutoCertModel struct {
 	NoMtls    *TCPLoadBalancerEmptyModel                   `tfsdk:"no_mtls"`
 	TLSConfig *TCPLoadBalancerTLSTCPAutoCertTLSConfigModel `tfsdk:"tls_config"`
 	UseMtls   *TCPLoadBalancerTLSTCPAutoCertUseMtlsModel   `tfsdk:"use_mtls"`
+}
+
+// TCPLoadBalancerTLSTCPAutoCertModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPAutoCertModel
+var TCPLoadBalancerTLSTCPAutoCertModelAttrTypes = map[string]attr.Type{
+	"no_mtls":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":   types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPAutoCertUseMtlsModelAttrTypes},
 }
 
 // TCPLoadBalancerTLSTCPAutoCertTLSConfigModel represents tls_config block
@@ -373,11 +688,26 @@ type TCPLoadBalancerTLSTCPAutoCertTLSConfigModel struct {
 	MediumSecurity  *TCPLoadBalancerEmptyModel                                 `tfsdk:"medium_security"`
 }
 
+// TCPLoadBalancerTLSTCPAutoCertTLSConfigModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPAutoCertTLSConfigModel
+var TCPLoadBalancerTLSTCPAutoCertTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPAutoCertTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // TCPLoadBalancerTLSTCPAutoCertTLSConfigCustomSecurityModel represents custom_security block
 type TCPLoadBalancerTLSTCPAutoCertTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// TCPLoadBalancerTLSTCPAutoCertTLSConfigCustomSecurityModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPAutoCertTLSConfigCustomSecurityModel
+var TCPLoadBalancerTLSTCPAutoCertTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // TCPLoadBalancerTLSTCPAutoCertUseMtlsModel represents use_mtls block
@@ -391,11 +721,29 @@ type TCPLoadBalancerTLSTCPAutoCertUseMtlsModel struct {
 	XfccOptions               *TCPLoadBalancerTLSTCPAutoCertUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// TCPLoadBalancerTLSTCPAutoCertUseMtlsModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPAutoCertUseMtlsModel
+var TCPLoadBalancerTLSTCPAutoCertUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPAutoCertUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPAutoCertUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPAutoCertUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // TCPLoadBalancerTLSTCPAutoCertUseMtlsCRLModel represents crl block
 type TCPLoadBalancerTLSTCPAutoCertUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// TCPLoadBalancerTLSTCPAutoCertUseMtlsCRLModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPAutoCertUseMtlsCRLModel
+var TCPLoadBalancerTLSTCPAutoCertUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // TCPLoadBalancerTLSTCPAutoCertUseMtlsTrustedCAModel represents trusted_ca block
@@ -405,9 +753,21 @@ type TCPLoadBalancerTLSTCPAutoCertUseMtlsTrustedCAModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// TCPLoadBalancerTLSTCPAutoCertUseMtlsTrustedCAModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPAutoCertUseMtlsTrustedCAModel
+var TCPLoadBalancerTLSTCPAutoCertUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // TCPLoadBalancerTLSTCPAutoCertUseMtlsXfccOptionsModel represents xfcc_options block
 type TCPLoadBalancerTLSTCPAutoCertUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// TCPLoadBalancerTLSTCPAutoCertUseMtlsXfccOptionsModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPAutoCertUseMtlsXfccOptionsModel
+var TCPLoadBalancerTLSTCPAutoCertUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
 }
 
 type TCPLoadBalancerResourceModel struct {
@@ -437,7 +797,7 @@ type TCPLoadBalancerResourceModel struct {
 	HashPolicyChoiceSourceIPStickiness *TCPLoadBalancerEmptyModel                 `tfsdk:"hash_policy_choice_source_ip_stickiness"`
 	NoServicePolicies                  *TCPLoadBalancerEmptyModel                 `tfsdk:"no_service_policies"`
 	NoSni                              *TCPLoadBalancerEmptyModel                 `tfsdk:"no_sni"`
-	OriginPoolsWeights                 []TCPLoadBalancerOriginPoolsWeightsModel   `tfsdk:"origin_pools_weights"`
+	OriginPoolsWeights                 types.List                                 `tfsdk:"origin_pools_weights"`
 	RetractCluster                     *TCPLoadBalancerEmptyModel                 `tfsdk:"retract_cluster"`
 	ServicePoliciesFromNamespace       *TCPLoadBalancerEmptyModel                 `tfsdk:"service_policies_from_namespace"`
 	Sni                                *TCPLoadBalancerEmptyModel                 `tfsdk:"sni"`
@@ -565,6 +925,9 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -608,6 +971,9 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -641,6 +1007,9 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -683,6 +1052,9 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -712,6 +1084,9 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -745,6 +1120,9 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -769,6 +1147,9 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -787,6 +1168,9 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -816,6 +1200,9 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -880,6 +1267,9 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -901,6 +1291,9 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -943,6 +1336,9 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -1011,6 +1407,9 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -1032,6 +1431,9 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -1189,6 +1591,9 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -1210,6 +1615,9 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -1300,6 +1708,9 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional:            true,
 										Computed:            true,
+										PlanModifiers: []planmodifier.String{
+											stringplanmodifier.UseStateForUnknown(),
+										},
 									},
 								},
 							},
@@ -1321,6 +1732,9 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional:            true,
 										Computed:            true,
+										PlanModifiers: []planmodifier.String{
+											stringplanmodifier.UseStateForUnknown(),
+										},
 									},
 								},
 							},
@@ -1646,48 +2060,53 @@ func (r *TCPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		no_sniMap := make(map[string]interface{})
 		createReq.Spec["no_sni"] = no_sniMap
 	}
-	if len(data.OriginPoolsWeights) > 0 {
-		var origin_pools_weightsList []map[string]interface{}
-		for _, item := range data.OriginPoolsWeights {
-			itemMap := make(map[string]interface{})
-			if item.Cluster != nil {
-				clusterNestedMap := make(map[string]interface{})
-				if !item.Cluster.Name.IsNull() && !item.Cluster.Name.IsUnknown() {
-					clusterNestedMap["name"] = item.Cluster.Name.ValueString()
+	if !data.OriginPoolsWeights.IsNull() && !data.OriginPoolsWeights.IsUnknown() {
+		var origin_pools_weightsItems []TCPLoadBalancerOriginPoolsWeightsModel
+		diags := data.OriginPoolsWeights.ElementsAs(ctx, &origin_pools_weightsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(origin_pools_weightsItems) > 0 {
+			var origin_pools_weightsList []map[string]interface{}
+			for _, item := range origin_pools_weightsItems {
+				itemMap := make(map[string]interface{})
+				if item.Cluster != nil {
+					clusterNestedMap := make(map[string]interface{})
+					if !item.Cluster.Name.IsNull() && !item.Cluster.Name.IsUnknown() {
+						clusterNestedMap["name"] = item.Cluster.Name.ValueString()
+					}
+					if !item.Cluster.Namespace.IsNull() && !item.Cluster.Namespace.IsUnknown() {
+						clusterNestedMap["namespace"] = item.Cluster.Namespace.ValueString()
+					}
+					if !item.Cluster.Tenant.IsNull() && !item.Cluster.Tenant.IsUnknown() {
+						clusterNestedMap["tenant"] = item.Cluster.Tenant.ValueString()
+					}
+					itemMap["cluster"] = clusterNestedMap
 				}
-				if !item.Cluster.Namespace.IsNull() && !item.Cluster.Namespace.IsUnknown() {
-					clusterNestedMap["namespace"] = item.Cluster.Namespace.ValueString()
+				if item.EndpointSubsets != nil {
+					itemMap["endpoint_subsets"] = map[string]interface{}{}
 				}
-				if !item.Cluster.Tenant.IsNull() && !item.Cluster.Tenant.IsUnknown() {
-					clusterNestedMap["tenant"] = item.Cluster.Tenant.ValueString()
+				if item.Pool != nil {
+					poolNestedMap := make(map[string]interface{})
+					if !item.Pool.Name.IsNull() && !item.Pool.Name.IsUnknown() {
+						poolNestedMap["name"] = item.Pool.Name.ValueString()
+					}
+					if !item.Pool.Namespace.IsNull() && !item.Pool.Namespace.IsUnknown() {
+						poolNestedMap["namespace"] = item.Pool.Namespace.ValueString()
+					}
+					if !item.Pool.Tenant.IsNull() && !item.Pool.Tenant.IsUnknown() {
+						poolNestedMap["tenant"] = item.Pool.Tenant.ValueString()
+					}
+					itemMap["pool"] = poolNestedMap
 				}
-				itemMap["cluster"] = clusterNestedMap
+				if !item.Priority.IsNull() && !item.Priority.IsUnknown() {
+					itemMap["priority"] = item.Priority.ValueInt64()
+				}
+				if !item.Weight.IsNull() && !item.Weight.IsUnknown() {
+					itemMap["weight"] = item.Weight.ValueInt64()
+				}
+				origin_pools_weightsList = append(origin_pools_weightsList, itemMap)
 			}
-			if item.EndpointSubsets != nil {
-				itemMap["endpoint_subsets"] = map[string]interface{}{}
-			}
-			if item.Pool != nil {
-				poolNestedMap := make(map[string]interface{})
-				if !item.Pool.Name.IsNull() && !item.Pool.Name.IsUnknown() {
-					poolNestedMap["name"] = item.Pool.Name.ValueString()
-				}
-				if !item.Pool.Namespace.IsNull() && !item.Pool.Namespace.IsUnknown() {
-					poolNestedMap["namespace"] = item.Pool.Namespace.ValueString()
-				}
-				if !item.Pool.Tenant.IsNull() && !item.Pool.Tenant.IsUnknown() {
-					poolNestedMap["tenant"] = item.Pool.Tenant.ValueString()
-				}
-				itemMap["pool"] = poolNestedMap
-			}
-			if !item.Priority.IsNull() && !item.Priority.IsUnknown() {
-				itemMap["priority"] = item.Priority.ValueInt64()
-			}
-			if !item.Weight.IsNull() && !item.Weight.IsUnknown() {
-				itemMap["weight"] = item.Weight.ValueInt64()
-			}
-			origin_pools_weightsList = append(origin_pools_weightsList, itemMap)
+			createReq.Spec["origin_pools_weights"] = origin_pools_weightsList
 		}
-		createReq.Spec["origin_pools_weights"] = origin_pools_weightsList
 	}
 	if data.RetractCluster != nil {
 		retract_clusterMap := make(map[string]interface{})
@@ -1999,6 +2418,10 @@ func (r *TCPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["origin_pools_weights"].([]interface{}); ok && len(listData) > 0 {
 		var origin_pools_weightsList []TCPLoadBalancerOriginPoolsWeightsModel
+		var existingOriginPoolsWeightsItems []TCPLoadBalancerOriginPoolsWeightsModel
+		if !data.OriginPoolsWeights.IsNull() && !data.OriginPoolsWeights.IsUnknown() {
+			data.OriginPoolsWeights.ElementsAs(ctx, &existingOriginPoolsWeightsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -2029,7 +2452,7 @@ func (r *TCPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 						return nil
 					}(),
 					EndpointSubsets: func() *TCPLoadBalancerEmptyModel {
-						if !isImport && len(data.OriginPoolsWeights) > listIdx && data.OriginPoolsWeights[listIdx].EndpointSubsets != nil {
+						if !isImport && len(existingOriginPoolsWeightsItems) > listIdx && existingOriginPoolsWeightsItems[listIdx].EndpointSubsets != nil {
 							return &TCPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -2074,7 +2497,14 @@ func (r *TCPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 				})
 			}
 		}
-		data.OriginPoolsWeights = origin_pools_weightsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: TCPLoadBalancerOriginPoolsWeightsModelAttrTypes}, origin_pools_weightsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.OriginPoolsWeights = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.OriginPoolsWeights = types.ListNull(types.ObjectType{AttrTypes: TCPLoadBalancerOriginPoolsWeightsModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["retract_cluster"].(map[string]interface{}); ok && isImport && data.RetractCluster == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -2196,11 +2626,17 @@ func (r *TCPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -2461,6 +2897,10 @@ func (r *TCPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["origin_pools_weights"].([]interface{}); ok && len(listData) > 0 {
 		var origin_pools_weightsList []TCPLoadBalancerOriginPoolsWeightsModel
+		var existingOriginPoolsWeightsItems []TCPLoadBalancerOriginPoolsWeightsModel
+		if !data.OriginPoolsWeights.IsNull() && !data.OriginPoolsWeights.IsUnknown() {
+			data.OriginPoolsWeights.ElementsAs(ctx, &existingOriginPoolsWeightsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -2491,7 +2931,7 @@ func (r *TCPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 						return nil
 					}(),
 					EndpointSubsets: func() *TCPLoadBalancerEmptyModel {
-						if !isImport && len(data.OriginPoolsWeights) > listIdx && data.OriginPoolsWeights[listIdx].EndpointSubsets != nil {
+						if !isImport && len(existingOriginPoolsWeightsItems) > listIdx && existingOriginPoolsWeightsItems[listIdx].EndpointSubsets != nil {
 							return &TCPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -2536,7 +2976,14 @@ func (r *TCPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 				})
 			}
 		}
-		data.OriginPoolsWeights = origin_pools_weightsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: TCPLoadBalancerOriginPoolsWeightsModelAttrTypes}, origin_pools_weightsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.OriginPoolsWeights = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.OriginPoolsWeights = types.ListNull(types.ObjectType{AttrTypes: TCPLoadBalancerOriginPoolsWeightsModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["retract_cluster"].(map[string]interface{}); ok && isImport && data.RetractCluster == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -2811,48 +3258,53 @@ func (r *TCPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		no_sniMap := make(map[string]interface{})
 		apiResource.Spec["no_sni"] = no_sniMap
 	}
-	if len(data.OriginPoolsWeights) > 0 {
-		var origin_pools_weightsList []map[string]interface{}
-		for _, item := range data.OriginPoolsWeights {
-			itemMap := make(map[string]interface{})
-			if item.Cluster != nil {
-				clusterNestedMap := make(map[string]interface{})
-				if !item.Cluster.Name.IsNull() && !item.Cluster.Name.IsUnknown() {
-					clusterNestedMap["name"] = item.Cluster.Name.ValueString()
+	if !data.OriginPoolsWeights.IsNull() && !data.OriginPoolsWeights.IsUnknown() {
+		var origin_pools_weightsItems []TCPLoadBalancerOriginPoolsWeightsModel
+		diags := data.OriginPoolsWeights.ElementsAs(ctx, &origin_pools_weightsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(origin_pools_weightsItems) > 0 {
+			var origin_pools_weightsList []map[string]interface{}
+			for _, item := range origin_pools_weightsItems {
+				itemMap := make(map[string]interface{})
+				if item.Cluster != nil {
+					clusterNestedMap := make(map[string]interface{})
+					if !item.Cluster.Name.IsNull() && !item.Cluster.Name.IsUnknown() {
+						clusterNestedMap["name"] = item.Cluster.Name.ValueString()
+					}
+					if !item.Cluster.Namespace.IsNull() && !item.Cluster.Namespace.IsUnknown() {
+						clusterNestedMap["namespace"] = item.Cluster.Namespace.ValueString()
+					}
+					if !item.Cluster.Tenant.IsNull() && !item.Cluster.Tenant.IsUnknown() {
+						clusterNestedMap["tenant"] = item.Cluster.Tenant.ValueString()
+					}
+					itemMap["cluster"] = clusterNestedMap
 				}
-				if !item.Cluster.Namespace.IsNull() && !item.Cluster.Namespace.IsUnknown() {
-					clusterNestedMap["namespace"] = item.Cluster.Namespace.ValueString()
+				if item.EndpointSubsets != nil {
+					itemMap["endpoint_subsets"] = map[string]interface{}{}
 				}
-				if !item.Cluster.Tenant.IsNull() && !item.Cluster.Tenant.IsUnknown() {
-					clusterNestedMap["tenant"] = item.Cluster.Tenant.ValueString()
+				if item.Pool != nil {
+					poolNestedMap := make(map[string]interface{})
+					if !item.Pool.Name.IsNull() && !item.Pool.Name.IsUnknown() {
+						poolNestedMap["name"] = item.Pool.Name.ValueString()
+					}
+					if !item.Pool.Namespace.IsNull() && !item.Pool.Namespace.IsUnknown() {
+						poolNestedMap["namespace"] = item.Pool.Namespace.ValueString()
+					}
+					if !item.Pool.Tenant.IsNull() && !item.Pool.Tenant.IsUnknown() {
+						poolNestedMap["tenant"] = item.Pool.Tenant.ValueString()
+					}
+					itemMap["pool"] = poolNestedMap
 				}
-				itemMap["cluster"] = clusterNestedMap
+				if !item.Priority.IsNull() && !item.Priority.IsUnknown() {
+					itemMap["priority"] = item.Priority.ValueInt64()
+				}
+				if !item.Weight.IsNull() && !item.Weight.IsUnknown() {
+					itemMap["weight"] = item.Weight.ValueInt64()
+				}
+				origin_pools_weightsList = append(origin_pools_weightsList, itemMap)
 			}
-			if item.EndpointSubsets != nil {
-				itemMap["endpoint_subsets"] = map[string]interface{}{}
-			}
-			if item.Pool != nil {
-				poolNestedMap := make(map[string]interface{})
-				if !item.Pool.Name.IsNull() && !item.Pool.Name.IsUnknown() {
-					poolNestedMap["name"] = item.Pool.Name.ValueString()
-				}
-				if !item.Pool.Namespace.IsNull() && !item.Pool.Namespace.IsUnknown() {
-					poolNestedMap["namespace"] = item.Pool.Namespace.ValueString()
-				}
-				if !item.Pool.Tenant.IsNull() && !item.Pool.Tenant.IsUnknown() {
-					poolNestedMap["tenant"] = item.Pool.Tenant.ValueString()
-				}
-				itemMap["pool"] = poolNestedMap
-			}
-			if !item.Priority.IsNull() && !item.Priority.IsUnknown() {
-				itemMap["priority"] = item.Priority.ValueInt64()
-			}
-			if !item.Weight.IsNull() && !item.Weight.IsUnknown() {
-				itemMap["weight"] = item.Weight.ValueInt64()
-			}
-			origin_pools_weightsList = append(origin_pools_weightsList, itemMap)
+			apiResource.Spec["origin_pools_weights"] = origin_pools_weightsList
 		}
-		apiResource.Spec["origin_pools_weights"] = origin_pools_weightsList
 	}
 	if data.RetractCluster != nil {
 		retract_clusterMap := make(map[string]interface{})
@@ -3203,6 +3655,10 @@ func (r *TCPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["origin_pools_weights"].([]interface{}); ok && len(listData) > 0 {
 		var origin_pools_weightsList []TCPLoadBalancerOriginPoolsWeightsModel
+		var existingOriginPoolsWeightsItems []TCPLoadBalancerOriginPoolsWeightsModel
+		if !data.OriginPoolsWeights.IsNull() && !data.OriginPoolsWeights.IsUnknown() {
+			data.OriginPoolsWeights.ElementsAs(ctx, &existingOriginPoolsWeightsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -3233,7 +3689,7 @@ func (r *TCPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 						return nil
 					}(),
 					EndpointSubsets: func() *TCPLoadBalancerEmptyModel {
-						if !isImport && len(data.OriginPoolsWeights) > listIdx && data.OriginPoolsWeights[listIdx].EndpointSubsets != nil {
+						if !isImport && len(existingOriginPoolsWeightsItems) > listIdx && existingOriginPoolsWeightsItems[listIdx].EndpointSubsets != nil {
 							return &TCPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -3278,7 +3734,14 @@ func (r *TCPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 				})
 			}
 		}
-		data.OriginPoolsWeights = origin_pools_weightsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: TCPLoadBalancerOriginPoolsWeightsModelAttrTypes}, origin_pools_weightsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.OriginPoolsWeights = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.OriginPoolsWeights = types.ListNull(types.ObjectType{AttrTypes: TCPLoadBalancerOriginPoolsWeightsModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["retract_cluster"].(map[string]interface{}); ok && isImport && data.RetractCluster == nil {
 		// Import case: populate from API since state is nil and psd is empty

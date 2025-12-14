@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -55,16 +56,34 @@ type DiscoveryDiscoveryConsulModel struct {
 	PublishInfo *DiscoveryDiscoveryConsulPublishInfoModel `tfsdk:"publish_info"`
 }
 
+// DiscoveryDiscoveryConsulModelAttrTypes defines the attribute types for DiscoveryDiscoveryConsulModel
+var DiscoveryDiscoveryConsulModelAttrTypes = map[string]attr.Type{
+	"access_info":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"publish_info": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // DiscoveryDiscoveryConsulAccessInfoModel represents access_info block
 type DiscoveryDiscoveryConsulAccessInfoModel struct {
 	ConnectionInfo    *DiscoveryDiscoveryConsulAccessInfoConnectionInfoModel    `tfsdk:"connection_info"`
 	HTTPBasicAuthInfo *DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoModel `tfsdk:"http_basic_auth_info"`
 }
 
+// DiscoveryDiscoveryConsulAccessInfoModelAttrTypes defines the attribute types for DiscoveryDiscoveryConsulAccessInfoModel
+var DiscoveryDiscoveryConsulAccessInfoModelAttrTypes = map[string]attr.Type{
+	"connection_info":      types.ObjectType{AttrTypes: DiscoveryDiscoveryConsulAccessInfoConnectionInfoModelAttrTypes},
+	"http_basic_auth_info": types.ObjectType{AttrTypes: DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoModelAttrTypes},
+}
+
 // DiscoveryDiscoveryConsulAccessInfoConnectionInfoModel represents connection_info block
 type DiscoveryDiscoveryConsulAccessInfoConnectionInfoModel struct {
 	APIServer types.String                                                  `tfsdk:"api_server"`
 	TLSInfo   *DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoModel `tfsdk:"tls_info"`
+}
+
+// DiscoveryDiscoveryConsulAccessInfoConnectionInfoModelAttrTypes defines the attribute types for DiscoveryDiscoveryConsulAccessInfoConnectionInfoModel
+var DiscoveryDiscoveryConsulAccessInfoConnectionInfoModelAttrTypes = map[string]attr.Type{
+	"api_server": types.StringType,
+	"tls_info":   types.ObjectType{AttrTypes: DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoModelAttrTypes},
 }
 
 // DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoModel represents tls_info block
@@ -75,10 +94,24 @@ type DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoModel struct {
 	KeyURL       *DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLModel `tfsdk:"key_url"`
 }
 
+// DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoModelAttrTypes defines the attribute types for DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoModel
+var DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoModelAttrTypes = map[string]attr.Type{
+	"certificate":    types.StringType,
+	"server_name":    types.StringType,
+	"trusted_ca_url": types.StringType,
+	"key_url":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLModel represents key_url block
 type DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLModel struct {
 	BlindfoldSecretInfo *DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLModelAttrTypes defines the attribute types for DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLModel
+var DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModelAttrTypes},
 }
 
 // DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -88,10 +121,23 @@ type DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLBlindfoldSecre
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLBlindfoldSecretInfoModelAttrTypes defines the attribute types for DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLBlindfoldSecretInfoModel
+var DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModel represents clear_secret_info block
 type DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModelAttrTypes defines the attribute types for DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModel
+var DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoModel represents http_basic_auth_info block
@@ -100,10 +146,22 @@ type DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoModel struct {
 	PasswdURL *DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLModel `tfsdk:"passwd_url"`
 }
 
+// DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoModelAttrTypes defines the attribute types for DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoModel
+var DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoModelAttrTypes = map[string]attr.Type{
+	"user_name":  types.StringType,
+	"passwd_url": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLModel represents passwd_url block
 type DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLModel struct {
 	BlindfoldSecretInfo *DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLModelAttrTypes defines the attribute types for DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLModel
+var DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLClearSecretInfoModelAttrTypes},
 }
 
 // DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -113,16 +171,35 @@ type DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLBlindfoldSecret
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLBlindfoldSecretInfoModelAttrTypes defines the attribute types for DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLBlindfoldSecretInfoModel
+var DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLClearSecretInfoModel represents clear_secret_info block
 type DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
+// DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLClearSecretInfoModelAttrTypes defines the attribute types for DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLClearSecretInfoModel
+var DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 // DiscoveryDiscoveryConsulPublishInfoModel represents publish_info block
 type DiscoveryDiscoveryConsulPublishInfoModel struct {
 	Disable *DiscoveryEmptyModel `tfsdk:"disable"`
 	Publish *DiscoveryEmptyModel `tfsdk:"publish"`
+}
+
+// DiscoveryDiscoveryConsulPublishInfoModelAttrTypes defines the attribute types for DiscoveryDiscoveryConsulPublishInfoModel
+var DiscoveryDiscoveryConsulPublishInfoModelAttrTypes = map[string]attr.Type{
+	"disable": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"publish": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // DiscoveryDiscoveryK8SModel represents discovery_k8s block
@@ -133,6 +210,14 @@ type DiscoveryDiscoveryK8SModel struct {
 	PublishInfo      *DiscoveryDiscoveryK8SPublishInfoModel      `tfsdk:"publish_info"`
 }
 
+// DiscoveryDiscoveryK8SModelAttrTypes defines the attribute types for DiscoveryDiscoveryK8SModel
+var DiscoveryDiscoveryK8SModelAttrTypes = map[string]attr.Type{
+	"access_info":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_all":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"namespace_mapping": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"publish_info":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // DiscoveryDiscoveryK8SAccessInfoModel represents access_info block
 type DiscoveryDiscoveryK8SAccessInfoModel struct {
 	ConnectionInfo *DiscoveryDiscoveryK8SAccessInfoConnectionInfoModel `tfsdk:"connection_info"`
@@ -141,10 +226,24 @@ type DiscoveryDiscoveryK8SAccessInfoModel struct {
 	Reachable      *DiscoveryEmptyModel                                `tfsdk:"reachable"`
 }
 
+// DiscoveryDiscoveryK8SAccessInfoModelAttrTypes defines the attribute types for DiscoveryDiscoveryK8SAccessInfoModel
+var DiscoveryDiscoveryK8SAccessInfoModelAttrTypes = map[string]attr.Type{
+	"connection_info": types.ObjectType{AttrTypes: DiscoveryDiscoveryK8SAccessInfoConnectionInfoModelAttrTypes},
+	"isolated":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"kubeconfig_url":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"reachable":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // DiscoveryDiscoveryK8SAccessInfoConnectionInfoModel represents connection_info block
 type DiscoveryDiscoveryK8SAccessInfoConnectionInfoModel struct {
 	APIServer types.String                                               `tfsdk:"api_server"`
 	TLSInfo   *DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoModel `tfsdk:"tls_info"`
+}
+
+// DiscoveryDiscoveryK8SAccessInfoConnectionInfoModelAttrTypes defines the attribute types for DiscoveryDiscoveryK8SAccessInfoConnectionInfoModel
+var DiscoveryDiscoveryK8SAccessInfoConnectionInfoModelAttrTypes = map[string]attr.Type{
+	"api_server": types.StringType,
+	"tls_info":   types.ObjectType{AttrTypes: DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoModelAttrTypes},
 }
 
 // DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoModel represents tls_info block
@@ -155,10 +254,24 @@ type DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoModel struct {
 	KeyURL       *DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLModel `tfsdk:"key_url"`
 }
 
+// DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoModelAttrTypes defines the attribute types for DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoModel
+var DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoModelAttrTypes = map[string]attr.Type{
+	"certificate":    types.StringType,
+	"server_name":    types.StringType,
+	"trusted_ca_url": types.StringType,
+	"key_url":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLModel represents key_url block
 type DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLModel struct {
 	BlindfoldSecretInfo *DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLModelAttrTypes defines the attribute types for DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLModel
+var DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModelAttrTypes},
 }
 
 // DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -168,16 +281,35 @@ type DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLBlindfoldSecretIn
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLBlindfoldSecretInfoModelAttrTypes defines the attribute types for DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLBlindfoldSecretInfoModel
+var DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModel represents clear_secret_info block
 type DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
+// DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModelAttrTypes defines the attribute types for DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModel
+var DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 // DiscoveryDiscoveryK8SAccessInfoKubeconfigURLModel represents kubeconfig_url block
 type DiscoveryDiscoveryK8SAccessInfoKubeconfigURLModel struct {
 	BlindfoldSecretInfo *DiscoveryDiscoveryK8SAccessInfoKubeconfigURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *DiscoveryDiscoveryK8SAccessInfoKubeconfigURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// DiscoveryDiscoveryK8SAccessInfoKubeconfigURLModelAttrTypes defines the attribute types for DiscoveryDiscoveryK8SAccessInfoKubeconfigURLModel
+var DiscoveryDiscoveryK8SAccessInfoKubeconfigURLModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: DiscoveryDiscoveryK8SAccessInfoKubeconfigURLBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: DiscoveryDiscoveryK8SAccessInfoKubeconfigURLClearSecretInfoModelAttrTypes},
 }
 
 // DiscoveryDiscoveryK8SAccessInfoKubeconfigURLBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -187,10 +319,23 @@ type DiscoveryDiscoveryK8SAccessInfoKubeconfigURLBlindfoldSecretInfoModel struct
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// DiscoveryDiscoveryK8SAccessInfoKubeconfigURLBlindfoldSecretInfoModelAttrTypes defines the attribute types for DiscoveryDiscoveryK8SAccessInfoKubeconfigURLBlindfoldSecretInfoModel
+var DiscoveryDiscoveryK8SAccessInfoKubeconfigURLBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // DiscoveryDiscoveryK8SAccessInfoKubeconfigURLClearSecretInfoModel represents clear_secret_info block
 type DiscoveryDiscoveryK8SAccessInfoKubeconfigURLClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// DiscoveryDiscoveryK8SAccessInfoKubeconfigURLClearSecretInfoModelAttrTypes defines the attribute types for DiscoveryDiscoveryK8SAccessInfoKubeconfigURLClearSecretInfoModel
+var DiscoveryDiscoveryK8SAccessInfoKubeconfigURLClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // DiscoveryDiscoveryK8SNamespaceMappingModel represents namespace_mapping block
@@ -198,10 +343,21 @@ type DiscoveryDiscoveryK8SNamespaceMappingModel struct {
 	Items []DiscoveryDiscoveryK8SNamespaceMappingItemsModel `tfsdk:"items"`
 }
 
+// DiscoveryDiscoveryK8SNamespaceMappingModelAttrTypes defines the attribute types for DiscoveryDiscoveryK8SNamespaceMappingModel
+var DiscoveryDiscoveryK8SNamespaceMappingModelAttrTypes = map[string]attr.Type{
+	"items": types.ListType{ElemType: types.ObjectType{AttrTypes: DiscoveryDiscoveryK8SNamespaceMappingItemsModelAttrTypes}},
+}
+
 // DiscoveryDiscoveryK8SNamespaceMappingItemsModel represents items block
 type DiscoveryDiscoveryK8SNamespaceMappingItemsModel struct {
 	Namespace      types.String `tfsdk:"namespace"`
 	NamespaceRegex types.String `tfsdk:"namespace_regex"`
+}
+
+// DiscoveryDiscoveryK8SNamespaceMappingItemsModelAttrTypes defines the attribute types for DiscoveryDiscoveryK8SNamespaceMappingItemsModel
+var DiscoveryDiscoveryK8SNamespaceMappingItemsModelAttrTypes = map[string]attr.Type{
+	"namespace":       types.StringType,
+	"namespace_regex": types.StringType,
 }
 
 // DiscoveryDiscoveryK8SPublishInfoModel represents publish_info block
@@ -212,15 +368,34 @@ type DiscoveryDiscoveryK8SPublishInfoModel struct {
 	PublishFqdns  *DiscoveryEmptyModel                                `tfsdk:"publish_fqdns"`
 }
 
+// DiscoveryDiscoveryK8SPublishInfoModelAttrTypes defines the attribute types for DiscoveryDiscoveryK8SPublishInfoModel
+var DiscoveryDiscoveryK8SPublishInfoModelAttrTypes = map[string]attr.Type{
+	"disable":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dns_delegation": types.ObjectType{AttrTypes: DiscoveryDiscoveryK8SPublishInfoDNSDelegationModelAttrTypes},
+	"publish":        types.ObjectType{AttrTypes: DiscoveryDiscoveryK8SPublishInfoPublishModelAttrTypes},
+	"publish_fqdns":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // DiscoveryDiscoveryK8SPublishInfoDNSDelegationModel represents dns_delegation block
 type DiscoveryDiscoveryK8SPublishInfoDNSDelegationModel struct {
 	DNSMode   types.String `tfsdk:"dns_mode"`
 	Subdomain types.String `tfsdk:"subdomain"`
 }
 
+// DiscoveryDiscoveryK8SPublishInfoDNSDelegationModelAttrTypes defines the attribute types for DiscoveryDiscoveryK8SPublishInfoDNSDelegationModel
+var DiscoveryDiscoveryK8SPublishInfoDNSDelegationModelAttrTypes = map[string]attr.Type{
+	"dns_mode":  types.StringType,
+	"subdomain": types.StringType,
+}
+
 // DiscoveryDiscoveryK8SPublishInfoPublishModel represents publish block
 type DiscoveryDiscoveryK8SPublishInfoPublishModel struct {
 	Namespace types.String `tfsdk:"namespace"`
+}
+
+// DiscoveryDiscoveryK8SPublishInfoPublishModelAttrTypes defines the attribute types for DiscoveryDiscoveryK8SPublishInfoPublishModel
+var DiscoveryDiscoveryK8SPublishInfoPublishModelAttrTypes = map[string]attr.Type{
+	"namespace": types.StringType,
 }
 
 // DiscoveryWhereModel represents where block
@@ -230,12 +405,27 @@ type DiscoveryWhereModel struct {
 	VirtualSite    *DiscoveryWhereVirtualSiteModel    `tfsdk:"virtual_site"`
 }
 
+// DiscoveryWhereModelAttrTypes defines the attribute types for DiscoveryWhereModel
+var DiscoveryWhereModelAttrTypes = map[string]attr.Type{
+	"site":            types.ObjectType{AttrTypes: DiscoveryWhereSiteModelAttrTypes},
+	"virtual_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"virtual_site":    types.ObjectType{AttrTypes: DiscoveryWhereVirtualSiteModelAttrTypes},
+}
+
 // DiscoveryWhereSiteModel represents site block
 type DiscoveryWhereSiteModel struct {
 	NetworkType        types.String                 `tfsdk:"network_type"`
 	DisableInternetVIP *DiscoveryEmptyModel         `tfsdk:"disable_internet_vip"`
 	EnableInternetVIP  *DiscoveryEmptyModel         `tfsdk:"enable_internet_vip"`
 	Ref                []DiscoveryWhereSiteRefModel `tfsdk:"ref"`
+}
+
+// DiscoveryWhereSiteModelAttrTypes defines the attribute types for DiscoveryWhereSiteModel
+var DiscoveryWhereSiteModelAttrTypes = map[string]attr.Type{
+	"network_type":         types.StringType,
+	"disable_internet_vip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_internet_vip":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ref":                  types.ListType{ElemType: types.ObjectType{AttrTypes: DiscoveryWhereSiteRefModelAttrTypes}},
 }
 
 // DiscoveryWhereSiteRefModel represents ref block
@@ -247,9 +437,23 @@ type DiscoveryWhereSiteRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// DiscoveryWhereSiteRefModelAttrTypes defines the attribute types for DiscoveryWhereSiteRefModel
+var DiscoveryWhereSiteRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // DiscoveryWhereVirtualNetworkModel represents virtual_network block
 type DiscoveryWhereVirtualNetworkModel struct {
 	Ref []DiscoveryWhereVirtualNetworkRefModel `tfsdk:"ref"`
+}
+
+// DiscoveryWhereVirtualNetworkModelAttrTypes defines the attribute types for DiscoveryWhereVirtualNetworkModel
+var DiscoveryWhereVirtualNetworkModelAttrTypes = map[string]attr.Type{
+	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: DiscoveryWhereVirtualNetworkRefModelAttrTypes}},
 }
 
 // DiscoveryWhereVirtualNetworkRefModel represents ref block
@@ -261,12 +465,29 @@ type DiscoveryWhereVirtualNetworkRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// DiscoveryWhereVirtualNetworkRefModelAttrTypes defines the attribute types for DiscoveryWhereVirtualNetworkRefModel
+var DiscoveryWhereVirtualNetworkRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // DiscoveryWhereVirtualSiteModel represents virtual_site block
 type DiscoveryWhereVirtualSiteModel struct {
 	NetworkType        types.String                        `tfsdk:"network_type"`
 	DisableInternetVIP *DiscoveryEmptyModel                `tfsdk:"disable_internet_vip"`
 	EnableInternetVIP  *DiscoveryEmptyModel                `tfsdk:"enable_internet_vip"`
 	Ref                []DiscoveryWhereVirtualSiteRefModel `tfsdk:"ref"`
+}
+
+// DiscoveryWhereVirtualSiteModelAttrTypes defines the attribute types for DiscoveryWhereVirtualSiteModel
+var DiscoveryWhereVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"network_type":         types.StringType,
+	"disable_internet_vip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_internet_vip":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ref":                  types.ListType{ElemType: types.ObjectType{AttrTypes: DiscoveryWhereVirtualSiteRefModelAttrTypes}},
 }
 
 // DiscoveryWhereVirtualSiteRefModel represents ref block
@@ -276,6 +497,15 @@ type DiscoveryWhereVirtualSiteRefModel struct {
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 	Uid       types.String `tfsdk:"uid"`
+}
+
+// DiscoveryWhereVirtualSiteRefModelAttrTypes defines the attribute types for DiscoveryWhereVirtualSiteRefModel
+var DiscoveryWhereVirtualSiteRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
 }
 
 type DiscoveryResourceModel struct {
@@ -709,6 +939,9 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -722,11 +955,17 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -745,6 +984,9 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -758,11 +1000,17 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -792,6 +1040,9 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -805,11 +1056,17 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -1128,11 +1385,17 @@ func (r *DiscoveryResource) Read(ctx context.Context, req resource.ReadRequest, 
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

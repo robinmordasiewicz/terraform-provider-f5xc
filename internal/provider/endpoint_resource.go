@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -56,6 +57,12 @@ type EndpointDNSNameAdvancedModel struct {
 	RefreshInterval types.Int64  `tfsdk:"refresh_interval"`
 }
 
+// EndpointDNSNameAdvancedModelAttrTypes defines the attribute types for EndpointDNSNameAdvancedModel
+var EndpointDNSNameAdvancedModelAttrTypes = map[string]attr.Type{
+	"name":             types.StringType,
+	"refresh_interval": types.Int64Type,
+}
+
 // EndpointServiceInfoModel represents service_info block
 type EndpointServiceInfoModel struct {
 	DiscoveryType   types.String                             `tfsdk:"discovery_type"`
@@ -63,9 +70,21 @@ type EndpointServiceInfoModel struct {
 	ServiceSelector *EndpointServiceInfoServiceSelectorModel `tfsdk:"service_selector"`
 }
 
+// EndpointServiceInfoModelAttrTypes defines the attribute types for EndpointServiceInfoModel
+var EndpointServiceInfoModelAttrTypes = map[string]attr.Type{
+	"discovery_type":   types.StringType,
+	"service_name":     types.StringType,
+	"service_selector": types.ObjectType{AttrTypes: EndpointServiceInfoServiceSelectorModelAttrTypes},
+}
+
 // EndpointServiceInfoServiceSelectorModel represents service_selector block
 type EndpointServiceInfoServiceSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
+}
+
+// EndpointServiceInfoServiceSelectorModelAttrTypes defines the attribute types for EndpointServiceInfoServiceSelectorModel
+var EndpointServiceInfoServiceSelectorModelAttrTypes = map[string]attr.Type{
+	"expressions": types.ListType{ElemType: types.StringType},
 }
 
 // EndpointSnatPoolModel represents snat_pool block
@@ -74,9 +93,20 @@ type EndpointSnatPoolModel struct {
 	SnatPool   *EndpointSnatPoolSnatPoolModel `tfsdk:"snat_pool"`
 }
 
+// EndpointSnatPoolModelAttrTypes defines the attribute types for EndpointSnatPoolModel
+var EndpointSnatPoolModelAttrTypes = map[string]attr.Type{
+	"no_snat_pool": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"snat_pool":    types.ObjectType{AttrTypes: EndpointSnatPoolSnatPoolModelAttrTypes},
+}
+
 // EndpointSnatPoolSnatPoolModel represents snat_pool block
 type EndpointSnatPoolSnatPoolModel struct {
 	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// EndpointSnatPoolSnatPoolModelAttrTypes defines the attribute types for EndpointSnatPoolSnatPoolModel
+var EndpointSnatPoolSnatPoolModelAttrTypes = map[string]attr.Type{
+	"prefixes": types.ListType{ElemType: types.StringType},
 }
 
 // EndpointWhereModel represents where block
@@ -86,12 +116,27 @@ type EndpointWhereModel struct {
 	VirtualSite    *EndpointWhereVirtualSiteModel    `tfsdk:"virtual_site"`
 }
 
+// EndpointWhereModelAttrTypes defines the attribute types for EndpointWhereModel
+var EndpointWhereModelAttrTypes = map[string]attr.Type{
+	"site":            types.ObjectType{AttrTypes: EndpointWhereSiteModelAttrTypes},
+	"virtual_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"virtual_site":    types.ObjectType{AttrTypes: EndpointWhereVirtualSiteModelAttrTypes},
+}
+
 // EndpointWhereSiteModel represents site block
 type EndpointWhereSiteModel struct {
 	NetworkType        types.String                `tfsdk:"network_type"`
 	DisableInternetVIP *EndpointEmptyModel         `tfsdk:"disable_internet_vip"`
 	EnableInternetVIP  *EndpointEmptyModel         `tfsdk:"enable_internet_vip"`
 	Ref                []EndpointWhereSiteRefModel `tfsdk:"ref"`
+}
+
+// EndpointWhereSiteModelAttrTypes defines the attribute types for EndpointWhereSiteModel
+var EndpointWhereSiteModelAttrTypes = map[string]attr.Type{
+	"network_type":         types.StringType,
+	"disable_internet_vip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_internet_vip":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ref":                  types.ListType{ElemType: types.ObjectType{AttrTypes: EndpointWhereSiteRefModelAttrTypes}},
 }
 
 // EndpointWhereSiteRefModel represents ref block
@@ -103,9 +148,23 @@ type EndpointWhereSiteRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// EndpointWhereSiteRefModelAttrTypes defines the attribute types for EndpointWhereSiteRefModel
+var EndpointWhereSiteRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // EndpointWhereVirtualNetworkModel represents virtual_network block
 type EndpointWhereVirtualNetworkModel struct {
 	Ref []EndpointWhereVirtualNetworkRefModel `tfsdk:"ref"`
+}
+
+// EndpointWhereVirtualNetworkModelAttrTypes defines the attribute types for EndpointWhereVirtualNetworkModel
+var EndpointWhereVirtualNetworkModelAttrTypes = map[string]attr.Type{
+	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: EndpointWhereVirtualNetworkRefModelAttrTypes}},
 }
 
 // EndpointWhereVirtualNetworkRefModel represents ref block
@@ -117,12 +176,29 @@ type EndpointWhereVirtualNetworkRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// EndpointWhereVirtualNetworkRefModelAttrTypes defines the attribute types for EndpointWhereVirtualNetworkRefModel
+var EndpointWhereVirtualNetworkRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // EndpointWhereVirtualSiteModel represents virtual_site block
 type EndpointWhereVirtualSiteModel struct {
 	NetworkType        types.String                       `tfsdk:"network_type"`
 	DisableInternetVIP *EndpointEmptyModel                `tfsdk:"disable_internet_vip"`
 	EnableInternetVIP  *EndpointEmptyModel                `tfsdk:"enable_internet_vip"`
 	Ref                []EndpointWhereVirtualSiteRefModel `tfsdk:"ref"`
+}
+
+// EndpointWhereVirtualSiteModelAttrTypes defines the attribute types for EndpointWhereVirtualSiteModel
+var EndpointWhereVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"network_type":         types.StringType,
+	"disable_internet_vip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_internet_vip":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ref":                  types.ListType{ElemType: types.ObjectType{AttrTypes: EndpointWhereVirtualSiteRefModelAttrTypes}},
 }
 
 // EndpointWhereVirtualSiteRefModel represents ref block
@@ -132,6 +208,15 @@ type EndpointWhereVirtualSiteRefModel struct {
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 	Uid       types.String `tfsdk:"uid"`
+}
+
+// EndpointWhereVirtualSiteRefModelAttrTypes defines the attribute types for EndpointWhereVirtualSiteRefModel
+var EndpointWhereVirtualSiteRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
 }
 
 type EndpointResourceModel struct {
@@ -340,6 +425,9 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -353,11 +441,17 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -376,6 +470,9 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -389,11 +486,17 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -423,6 +526,9 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -436,11 +542,17 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -838,11 +950,17 @@ func (r *EndpointResource) Read(ctx context.Context, req resource.ReadRequest, r
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

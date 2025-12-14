@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -58,9 +59,23 @@ type NetworkPolicyEndpointModel struct {
 	PrefixList       *NetworkPolicyEndpointPrefixListModel    `tfsdk:"prefix_list"`
 }
 
+// NetworkPolicyEndpointModelAttrTypes defines the attribute types for NetworkPolicyEndpointModel
+var NetworkPolicyEndpointModelAttrTypes = map[string]attr.Type{
+	"any":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"inside_endpoints":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"label_selector":    types.ObjectType{AttrTypes: NetworkPolicyEndpointLabelSelectorModelAttrTypes},
+	"outside_endpoints": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"prefix_list":       types.ObjectType{AttrTypes: NetworkPolicyEndpointPrefixListModelAttrTypes},
+}
+
 // NetworkPolicyEndpointLabelSelectorModel represents label_selector block
 type NetworkPolicyEndpointLabelSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
+}
+
+// NetworkPolicyEndpointLabelSelectorModelAttrTypes defines the attribute types for NetworkPolicyEndpointLabelSelectorModel
+var NetworkPolicyEndpointLabelSelectorModelAttrTypes = map[string]attr.Type{
+	"expressions": types.ListType{ElemType: types.StringType},
 }
 
 // NetworkPolicyEndpointPrefixListModel represents prefix_list block
@@ -68,10 +83,21 @@ type NetworkPolicyEndpointPrefixListModel struct {
 	Prefixes types.List `tfsdk:"prefixes"`
 }
 
+// NetworkPolicyEndpointPrefixListModelAttrTypes defines the attribute types for NetworkPolicyEndpointPrefixListModel
+var NetworkPolicyEndpointPrefixListModelAttrTypes = map[string]attr.Type{
+	"prefixes": types.ListType{ElemType: types.StringType},
+}
+
 // NetworkPolicyRulesModel represents rules block
 type NetworkPolicyRulesModel struct {
 	EgressRules  []NetworkPolicyRulesEgressRulesModel  `tfsdk:"egress_rules"`
 	IngressRules []NetworkPolicyRulesIngressRulesModel `tfsdk:"ingress_rules"`
+}
+
+// NetworkPolicyRulesModelAttrTypes defines the attribute types for NetworkPolicyRulesModel
+var NetworkPolicyRulesModelAttrTypes = map[string]attr.Type{
+	"egress_rules":  types.ListType{ElemType: types.ObjectType{AttrTypes: NetworkPolicyRulesEgressRulesModelAttrTypes}},
+	"ingress_rules": types.ListType{ElemType: types.ObjectType{AttrTypes: NetworkPolicyRulesIngressRulesModelAttrTypes}},
 }
 
 // NetworkPolicyRulesEgressRulesModel represents egress_rules block
@@ -93,9 +119,33 @@ type NetworkPolicyRulesEgressRulesModel struct {
 	ProtocolPortRange *NetworkPolicyRulesEgressRulesProtocolPortRangeModel `tfsdk:"protocol_port_range"`
 }
 
+// NetworkPolicyRulesEgressRulesModelAttrTypes defines the attribute types for NetworkPolicyRulesEgressRulesModel
+var NetworkPolicyRulesEgressRulesModelAttrTypes = map[string]attr.Type{
+	"action":              types.StringType,
+	"adv_action":          types.ObjectType{AttrTypes: NetworkPolicyRulesEgressRulesAdvActionModelAttrTypes},
+	"all_tcp_traffic":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"all_traffic":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"all_udp_traffic":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"any":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"applications":        types.ObjectType{AttrTypes: NetworkPolicyRulesEgressRulesApplicationsModelAttrTypes},
+	"inside_endpoints":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ip_prefix_set":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"label_matcher":       types.ObjectType{AttrTypes: NetworkPolicyRulesEgressRulesLabelMatcherModelAttrTypes},
+	"label_selector":      types.ObjectType{AttrTypes: NetworkPolicyRulesEgressRulesLabelSelectorModelAttrTypes},
+	"metadata":            types.ObjectType{AttrTypes: NetworkPolicyRulesEgressRulesMetadataModelAttrTypes},
+	"outside_endpoints":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"prefix_list":         types.ObjectType{AttrTypes: NetworkPolicyRulesEgressRulesPrefixListModelAttrTypes},
+	"protocol_port_range": types.ObjectType{AttrTypes: NetworkPolicyRulesEgressRulesProtocolPortRangeModelAttrTypes},
+}
+
 // NetworkPolicyRulesEgressRulesAdvActionModel represents adv_action block
 type NetworkPolicyRulesEgressRulesAdvActionModel struct {
 	Action types.String `tfsdk:"action"`
+}
+
+// NetworkPolicyRulesEgressRulesAdvActionModelAttrTypes defines the attribute types for NetworkPolicyRulesEgressRulesAdvActionModel
+var NetworkPolicyRulesEgressRulesAdvActionModelAttrTypes = map[string]attr.Type{
+	"action": types.StringType,
 }
 
 // NetworkPolicyRulesEgressRulesApplicationsModel represents applications block
@@ -103,9 +153,19 @@ type NetworkPolicyRulesEgressRulesApplicationsModel struct {
 	Applications types.List `tfsdk:"applications"`
 }
 
+// NetworkPolicyRulesEgressRulesApplicationsModelAttrTypes defines the attribute types for NetworkPolicyRulesEgressRulesApplicationsModel
+var NetworkPolicyRulesEgressRulesApplicationsModelAttrTypes = map[string]attr.Type{
+	"applications": types.ListType{ElemType: types.StringType},
+}
+
 // NetworkPolicyRulesEgressRulesIPPrefixSetModel represents ip_prefix_set block
 type NetworkPolicyRulesEgressRulesIPPrefixSetModel struct {
 	Ref []NetworkPolicyRulesEgressRulesIPPrefixSetRefModel `tfsdk:"ref"`
+}
+
+// NetworkPolicyRulesEgressRulesIPPrefixSetModelAttrTypes defines the attribute types for NetworkPolicyRulesEgressRulesIPPrefixSetModel
+var NetworkPolicyRulesEgressRulesIPPrefixSetModelAttrTypes = map[string]attr.Type{
+	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: NetworkPolicyRulesEgressRulesIPPrefixSetRefModelAttrTypes}},
 }
 
 // NetworkPolicyRulesEgressRulesIPPrefixSetRefModel represents ref block
@@ -117,14 +177,33 @@ type NetworkPolicyRulesEgressRulesIPPrefixSetRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// NetworkPolicyRulesEgressRulesIPPrefixSetRefModelAttrTypes defines the attribute types for NetworkPolicyRulesEgressRulesIPPrefixSetRefModel
+var NetworkPolicyRulesEgressRulesIPPrefixSetRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // NetworkPolicyRulesEgressRulesLabelMatcherModel represents label_matcher block
 type NetworkPolicyRulesEgressRulesLabelMatcherModel struct {
 	Keys types.List `tfsdk:"keys"`
 }
 
+// NetworkPolicyRulesEgressRulesLabelMatcherModelAttrTypes defines the attribute types for NetworkPolicyRulesEgressRulesLabelMatcherModel
+var NetworkPolicyRulesEgressRulesLabelMatcherModelAttrTypes = map[string]attr.Type{
+	"keys": types.ListType{ElemType: types.StringType},
+}
+
 // NetworkPolicyRulesEgressRulesLabelSelectorModel represents label_selector block
 type NetworkPolicyRulesEgressRulesLabelSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
+}
+
+// NetworkPolicyRulesEgressRulesLabelSelectorModelAttrTypes defines the attribute types for NetworkPolicyRulesEgressRulesLabelSelectorModel
+var NetworkPolicyRulesEgressRulesLabelSelectorModelAttrTypes = map[string]attr.Type{
+	"expressions": types.ListType{ElemType: types.StringType},
 }
 
 // NetworkPolicyRulesEgressRulesMetadataModel represents metadata block
@@ -133,15 +212,32 @@ type NetworkPolicyRulesEgressRulesMetadataModel struct {
 	Name            types.String `tfsdk:"name"`
 }
 
+// NetworkPolicyRulesEgressRulesMetadataModelAttrTypes defines the attribute types for NetworkPolicyRulesEgressRulesMetadataModel
+var NetworkPolicyRulesEgressRulesMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
+}
+
 // NetworkPolicyRulesEgressRulesPrefixListModel represents prefix_list block
 type NetworkPolicyRulesEgressRulesPrefixListModel struct {
 	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// NetworkPolicyRulesEgressRulesPrefixListModelAttrTypes defines the attribute types for NetworkPolicyRulesEgressRulesPrefixListModel
+var NetworkPolicyRulesEgressRulesPrefixListModelAttrTypes = map[string]attr.Type{
+	"prefixes": types.ListType{ElemType: types.StringType},
 }
 
 // NetworkPolicyRulesEgressRulesProtocolPortRangeModel represents protocol_port_range block
 type NetworkPolicyRulesEgressRulesProtocolPortRangeModel struct {
 	PortRanges types.List   `tfsdk:"port_ranges"`
 	Protocol   types.String `tfsdk:"protocol"`
+}
+
+// NetworkPolicyRulesEgressRulesProtocolPortRangeModelAttrTypes defines the attribute types for NetworkPolicyRulesEgressRulesProtocolPortRangeModel
+var NetworkPolicyRulesEgressRulesProtocolPortRangeModelAttrTypes = map[string]attr.Type{
+	"port_ranges": types.ListType{ElemType: types.StringType},
+	"protocol":    types.StringType,
 }
 
 // NetworkPolicyRulesIngressRulesModel represents ingress_rules block
@@ -163,9 +259,33 @@ type NetworkPolicyRulesIngressRulesModel struct {
 	ProtocolPortRange *NetworkPolicyRulesIngressRulesProtocolPortRangeModel `tfsdk:"protocol_port_range"`
 }
 
+// NetworkPolicyRulesIngressRulesModelAttrTypes defines the attribute types for NetworkPolicyRulesIngressRulesModel
+var NetworkPolicyRulesIngressRulesModelAttrTypes = map[string]attr.Type{
+	"action":              types.StringType,
+	"adv_action":          types.ObjectType{AttrTypes: NetworkPolicyRulesIngressRulesAdvActionModelAttrTypes},
+	"all_tcp_traffic":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"all_traffic":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"all_udp_traffic":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"any":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"applications":        types.ObjectType{AttrTypes: NetworkPolicyRulesIngressRulesApplicationsModelAttrTypes},
+	"inside_endpoints":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ip_prefix_set":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"label_matcher":       types.ObjectType{AttrTypes: NetworkPolicyRulesIngressRulesLabelMatcherModelAttrTypes},
+	"label_selector":      types.ObjectType{AttrTypes: NetworkPolicyRulesIngressRulesLabelSelectorModelAttrTypes},
+	"metadata":            types.ObjectType{AttrTypes: NetworkPolicyRulesIngressRulesMetadataModelAttrTypes},
+	"outside_endpoints":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"prefix_list":         types.ObjectType{AttrTypes: NetworkPolicyRulesIngressRulesPrefixListModelAttrTypes},
+	"protocol_port_range": types.ObjectType{AttrTypes: NetworkPolicyRulesIngressRulesProtocolPortRangeModelAttrTypes},
+}
+
 // NetworkPolicyRulesIngressRulesAdvActionModel represents adv_action block
 type NetworkPolicyRulesIngressRulesAdvActionModel struct {
 	Action types.String `tfsdk:"action"`
+}
+
+// NetworkPolicyRulesIngressRulesAdvActionModelAttrTypes defines the attribute types for NetworkPolicyRulesIngressRulesAdvActionModel
+var NetworkPolicyRulesIngressRulesAdvActionModelAttrTypes = map[string]attr.Type{
+	"action": types.StringType,
 }
 
 // NetworkPolicyRulesIngressRulesApplicationsModel represents applications block
@@ -173,9 +293,19 @@ type NetworkPolicyRulesIngressRulesApplicationsModel struct {
 	Applications types.List `tfsdk:"applications"`
 }
 
+// NetworkPolicyRulesIngressRulesApplicationsModelAttrTypes defines the attribute types for NetworkPolicyRulesIngressRulesApplicationsModel
+var NetworkPolicyRulesIngressRulesApplicationsModelAttrTypes = map[string]attr.Type{
+	"applications": types.ListType{ElemType: types.StringType},
+}
+
 // NetworkPolicyRulesIngressRulesIPPrefixSetModel represents ip_prefix_set block
 type NetworkPolicyRulesIngressRulesIPPrefixSetModel struct {
 	Ref []NetworkPolicyRulesIngressRulesIPPrefixSetRefModel `tfsdk:"ref"`
+}
+
+// NetworkPolicyRulesIngressRulesIPPrefixSetModelAttrTypes defines the attribute types for NetworkPolicyRulesIngressRulesIPPrefixSetModel
+var NetworkPolicyRulesIngressRulesIPPrefixSetModelAttrTypes = map[string]attr.Type{
+	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: NetworkPolicyRulesIngressRulesIPPrefixSetRefModelAttrTypes}},
 }
 
 // NetworkPolicyRulesIngressRulesIPPrefixSetRefModel represents ref block
@@ -187,14 +317,33 @@ type NetworkPolicyRulesIngressRulesIPPrefixSetRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// NetworkPolicyRulesIngressRulesIPPrefixSetRefModelAttrTypes defines the attribute types for NetworkPolicyRulesIngressRulesIPPrefixSetRefModel
+var NetworkPolicyRulesIngressRulesIPPrefixSetRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // NetworkPolicyRulesIngressRulesLabelMatcherModel represents label_matcher block
 type NetworkPolicyRulesIngressRulesLabelMatcherModel struct {
 	Keys types.List `tfsdk:"keys"`
 }
 
+// NetworkPolicyRulesIngressRulesLabelMatcherModelAttrTypes defines the attribute types for NetworkPolicyRulesIngressRulesLabelMatcherModel
+var NetworkPolicyRulesIngressRulesLabelMatcherModelAttrTypes = map[string]attr.Type{
+	"keys": types.ListType{ElemType: types.StringType},
+}
+
 // NetworkPolicyRulesIngressRulesLabelSelectorModel represents label_selector block
 type NetworkPolicyRulesIngressRulesLabelSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
+}
+
+// NetworkPolicyRulesIngressRulesLabelSelectorModelAttrTypes defines the attribute types for NetworkPolicyRulesIngressRulesLabelSelectorModel
+var NetworkPolicyRulesIngressRulesLabelSelectorModelAttrTypes = map[string]attr.Type{
+	"expressions": types.ListType{ElemType: types.StringType},
 }
 
 // NetworkPolicyRulesIngressRulesMetadataModel represents metadata block
@@ -203,15 +352,32 @@ type NetworkPolicyRulesIngressRulesMetadataModel struct {
 	Name            types.String `tfsdk:"name"`
 }
 
+// NetworkPolicyRulesIngressRulesMetadataModelAttrTypes defines the attribute types for NetworkPolicyRulesIngressRulesMetadataModel
+var NetworkPolicyRulesIngressRulesMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
+}
+
 // NetworkPolicyRulesIngressRulesPrefixListModel represents prefix_list block
 type NetworkPolicyRulesIngressRulesPrefixListModel struct {
 	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// NetworkPolicyRulesIngressRulesPrefixListModelAttrTypes defines the attribute types for NetworkPolicyRulesIngressRulesPrefixListModel
+var NetworkPolicyRulesIngressRulesPrefixListModelAttrTypes = map[string]attr.Type{
+	"prefixes": types.ListType{ElemType: types.StringType},
 }
 
 // NetworkPolicyRulesIngressRulesProtocolPortRangeModel represents protocol_port_range block
 type NetworkPolicyRulesIngressRulesProtocolPortRangeModel struct {
 	PortRanges types.List   `tfsdk:"port_ranges"`
 	Protocol   types.String `tfsdk:"protocol"`
+}
+
+// NetworkPolicyRulesIngressRulesProtocolPortRangeModelAttrTypes defines the attribute types for NetworkPolicyRulesIngressRulesProtocolPortRangeModel
+var NetworkPolicyRulesIngressRulesProtocolPortRangeModelAttrTypes = map[string]attr.Type{
+	"port_ranges": types.ListType{ElemType: types.StringType},
+	"protocol":    types.StringType,
 }
 
 type NetworkPolicyResourceModel struct {
@@ -384,6 +550,9 @@ func (r *NetworkPolicyResource) Schema(ctx context.Context, req resource.SchemaR
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -397,11 +566,17 @@ func (r *NetworkPolicyResource) Schema(ctx context.Context, req resource.SchemaR
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 												},
 											},
@@ -527,6 +702,9 @@ func (r *NetworkPolicyResource) Schema(ctx context.Context, req resource.SchemaR
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -540,11 +718,17 @@ func (r *NetworkPolicyResource) Schema(ctx context.Context, req resource.SchemaR
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 												},
 											},
@@ -1281,11 +1465,17 @@ func (r *NetworkPolicyResource) Read(ctx context.Context, req resource.ReadReque
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

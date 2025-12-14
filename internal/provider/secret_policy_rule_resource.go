@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -55,9 +56,20 @@ type SecretPolicyRuleClientNameMatcherModel struct {
 	RegexValues types.List `tfsdk:"regex_values"`
 }
 
+// SecretPolicyRuleClientNameMatcherModelAttrTypes defines the attribute types for SecretPolicyRuleClientNameMatcherModel
+var SecretPolicyRuleClientNameMatcherModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+}
+
 // SecretPolicyRuleClientSelectorModel represents client_selector block
 type SecretPolicyRuleClientSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
+}
+
+// SecretPolicyRuleClientSelectorModelAttrTypes defines the attribute types for SecretPolicyRuleClientSelectorModel
+var SecretPolicyRuleClientSelectorModelAttrTypes = map[string]attr.Type{
+	"expressions": types.ListType{ElemType: types.StringType},
 }
 
 type SecretPolicyRuleResourceModel struct {
@@ -495,11 +507,17 @@ func (r *SecretPolicyRuleResource) Read(ctx context.Context, req resource.ReadRe
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

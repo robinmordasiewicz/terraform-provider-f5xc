@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -55,11 +56,24 @@ type ChildTenantManagerGroupAssignmentsModel struct {
 	Group             *ChildTenantManagerGroupAssignmentsGroupModel `tfsdk:"group"`
 }
 
+// ChildTenantManagerGroupAssignmentsModelAttrTypes defines the attribute types for ChildTenantManagerGroupAssignmentsModel
+var ChildTenantManagerGroupAssignmentsModelAttrTypes = map[string]attr.Type{
+	"child_tenant_groups": types.ListType{ElemType: types.StringType},
+	"group":               types.ObjectType{AttrTypes: ChildTenantManagerGroupAssignmentsGroupModelAttrTypes},
+}
+
 // ChildTenantManagerGroupAssignmentsGroupModel represents group block
 type ChildTenantManagerGroupAssignmentsGroupModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// ChildTenantManagerGroupAssignmentsGroupModelAttrTypes defines the attribute types for ChildTenantManagerGroupAssignmentsGroupModel
+var ChildTenantManagerGroupAssignmentsGroupModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // ChildTenantManagerTenantOwnerGroupModel represents tenant_owner_group block
@@ -69,17 +83,24 @@ type ChildTenantManagerTenantOwnerGroupModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// ChildTenantManagerTenantOwnerGroupModelAttrTypes defines the attribute types for ChildTenantManagerTenantOwnerGroupModel
+var ChildTenantManagerTenantOwnerGroupModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 type ChildTenantManagerResourceModel struct {
-	Name             types.String                              `tfsdk:"name"`
-	Namespace        types.String                              `tfsdk:"namespace"`
-	Annotations      types.Map                                 `tfsdk:"annotations"`
-	Description      types.String                              `tfsdk:"description"`
-	Disable          types.Bool                                `tfsdk:"disable"`
-	Labels           types.Map                                 `tfsdk:"labels"`
-	ID               types.String                              `tfsdk:"id"`
-	Timeouts         timeouts.Value                            `tfsdk:"timeouts"`
-	GroupAssignments []ChildTenantManagerGroupAssignmentsModel `tfsdk:"group_assignments"`
-	TenantOwnerGroup *ChildTenantManagerTenantOwnerGroupModel  `tfsdk:"tenant_owner_group"`
+	Name             types.String                             `tfsdk:"name"`
+	Namespace        types.String                             `tfsdk:"namespace"`
+	Annotations      types.Map                                `tfsdk:"annotations"`
+	Description      types.String                             `tfsdk:"description"`
+	Disable          types.Bool                               `tfsdk:"disable"`
+	Labels           types.Map                                `tfsdk:"labels"`
+	ID               types.String                             `tfsdk:"id"`
+	Timeouts         timeouts.Value                           `tfsdk:"timeouts"`
+	GroupAssignments types.List                               `tfsdk:"group_assignments"`
+	TenantOwnerGroup *ChildTenantManagerTenantOwnerGroupModel `tfsdk:"tenant_owner_group"`
 }
 
 func (r *ChildTenantManagerResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -170,6 +191,9 @@ func (r *ChildTenantManagerResource) Schema(ctx context.Context, req resource.Sc
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -191,6 +215,9 @@ func (r *ChildTenantManagerResource) Schema(ctx context.Context, req resource.Sc
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional:            true,
 						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
 					},
 				},
 			},
@@ -342,26 +369,31 @@ func (r *ChildTenantManagerResource) Create(ctx context.Context, req resource.Cr
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.GroupAssignments) > 0 {
-		var group_assignmentsList []map[string]interface{}
-		for _, item := range data.GroupAssignments {
-			itemMap := make(map[string]interface{})
-			if item.Group != nil {
-				groupNestedMap := make(map[string]interface{})
-				if !item.Group.Name.IsNull() && !item.Group.Name.IsUnknown() {
-					groupNestedMap["name"] = item.Group.Name.ValueString()
+	if !data.GroupAssignments.IsNull() && !data.GroupAssignments.IsUnknown() {
+		var group_assignmentsItems []ChildTenantManagerGroupAssignmentsModel
+		diags := data.GroupAssignments.ElementsAs(ctx, &group_assignmentsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(group_assignmentsItems) > 0 {
+			var group_assignmentsList []map[string]interface{}
+			for _, item := range group_assignmentsItems {
+				itemMap := make(map[string]interface{})
+				if item.Group != nil {
+					groupNestedMap := make(map[string]interface{})
+					if !item.Group.Name.IsNull() && !item.Group.Name.IsUnknown() {
+						groupNestedMap["name"] = item.Group.Name.ValueString()
+					}
+					if !item.Group.Namespace.IsNull() && !item.Group.Namespace.IsUnknown() {
+						groupNestedMap["namespace"] = item.Group.Namespace.ValueString()
+					}
+					if !item.Group.Tenant.IsNull() && !item.Group.Tenant.IsUnknown() {
+						groupNestedMap["tenant"] = item.Group.Tenant.ValueString()
+					}
+					itemMap["group"] = groupNestedMap
 				}
-				if !item.Group.Namespace.IsNull() && !item.Group.Namespace.IsUnknown() {
-					groupNestedMap["namespace"] = item.Group.Namespace.ValueString()
-				}
-				if !item.Group.Tenant.IsNull() && !item.Group.Tenant.IsUnknown() {
-					groupNestedMap["tenant"] = item.Group.Tenant.ValueString()
-				}
-				itemMap["group"] = groupNestedMap
+				group_assignmentsList = append(group_assignmentsList, itemMap)
 			}
-			group_assignmentsList = append(group_assignmentsList, itemMap)
+			createReq.Spec["group_assignments"] = group_assignmentsList
 		}
-		createReq.Spec["group_assignments"] = group_assignmentsList
 	}
 	if data.TenantOwnerGroup != nil {
 		tenant_owner_groupMap := make(map[string]interface{})
@@ -391,6 +423,10 @@ func (r *ChildTenantManagerResource) Create(ctx context.Context, req resource.Cr
 	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["group_assignments"].([]interface{}); ok && len(listData) > 0 {
 		var group_assignmentsList []ChildTenantManagerGroupAssignmentsModel
+		var existingGroupAssignmentsItems []ChildTenantManagerGroupAssignmentsModel
+		if !data.GroupAssignments.IsNull() && !data.GroupAssignments.IsUnknown() {
+			data.GroupAssignments.ElementsAs(ctx, &existingGroupAssignmentsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -436,7 +472,14 @@ func (r *ChildTenantManagerResource) Create(ctx context.Context, req resource.Cr
 				})
 			}
 		}
-		data.GroupAssignments = group_assignmentsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: ChildTenantManagerGroupAssignmentsModelAttrTypes}, group_assignmentsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.GroupAssignments = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.GroupAssignments = types.ListNull(types.ObjectType{AttrTypes: ChildTenantManagerGroupAssignmentsModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["tenant_owner_group"].(map[string]interface{}); ok && (isImport || data.TenantOwnerGroup != nil) {
 		data.TenantOwnerGroup = &ChildTenantManagerTenantOwnerGroupModel{
@@ -524,11 +567,17 @@ func (r *ChildTenantManagerResource) Read(ctx context.Context, req resource.Read
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -555,6 +604,10 @@ func (r *ChildTenantManagerResource) Read(ctx context.Context, req resource.Read
 	})
 	if listData, ok := apiResource.Spec["group_assignments"].([]interface{}); ok && len(listData) > 0 {
 		var group_assignmentsList []ChildTenantManagerGroupAssignmentsModel
+		var existingGroupAssignmentsItems []ChildTenantManagerGroupAssignmentsModel
+		if !data.GroupAssignments.IsNull() && !data.GroupAssignments.IsUnknown() {
+			data.GroupAssignments.ElementsAs(ctx, &existingGroupAssignmentsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -600,7 +653,14 @@ func (r *ChildTenantManagerResource) Read(ctx context.Context, req resource.Read
 				})
 			}
 		}
-		data.GroupAssignments = group_assignmentsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: ChildTenantManagerGroupAssignmentsModelAttrTypes}, group_assignmentsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.GroupAssignments = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.GroupAssignments = types.ListNull(types.ObjectType{AttrTypes: ChildTenantManagerGroupAssignmentsModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["tenant_owner_group"].(map[string]interface{}); ok && (isImport || data.TenantOwnerGroup != nil) {
 		data.TenantOwnerGroup = &ChildTenantManagerTenantOwnerGroupModel{
@@ -684,26 +744,31 @@ func (r *ChildTenantManagerResource) Update(ctx context.Context, req resource.Up
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.GroupAssignments) > 0 {
-		var group_assignmentsList []map[string]interface{}
-		for _, item := range data.GroupAssignments {
-			itemMap := make(map[string]interface{})
-			if item.Group != nil {
-				groupNestedMap := make(map[string]interface{})
-				if !item.Group.Name.IsNull() && !item.Group.Name.IsUnknown() {
-					groupNestedMap["name"] = item.Group.Name.ValueString()
+	if !data.GroupAssignments.IsNull() && !data.GroupAssignments.IsUnknown() {
+		var group_assignmentsItems []ChildTenantManagerGroupAssignmentsModel
+		diags := data.GroupAssignments.ElementsAs(ctx, &group_assignmentsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(group_assignmentsItems) > 0 {
+			var group_assignmentsList []map[string]interface{}
+			for _, item := range group_assignmentsItems {
+				itemMap := make(map[string]interface{})
+				if item.Group != nil {
+					groupNestedMap := make(map[string]interface{})
+					if !item.Group.Name.IsNull() && !item.Group.Name.IsUnknown() {
+						groupNestedMap["name"] = item.Group.Name.ValueString()
+					}
+					if !item.Group.Namespace.IsNull() && !item.Group.Namespace.IsUnknown() {
+						groupNestedMap["namespace"] = item.Group.Namespace.ValueString()
+					}
+					if !item.Group.Tenant.IsNull() && !item.Group.Tenant.IsUnknown() {
+						groupNestedMap["tenant"] = item.Group.Tenant.ValueString()
+					}
+					itemMap["group"] = groupNestedMap
 				}
-				if !item.Group.Namespace.IsNull() && !item.Group.Namespace.IsUnknown() {
-					groupNestedMap["namespace"] = item.Group.Namespace.ValueString()
-				}
-				if !item.Group.Tenant.IsNull() && !item.Group.Tenant.IsUnknown() {
-					groupNestedMap["tenant"] = item.Group.Tenant.ValueString()
-				}
-				itemMap["group"] = groupNestedMap
+				group_assignmentsList = append(group_assignmentsList, itemMap)
 			}
-			group_assignmentsList = append(group_assignmentsList, itemMap)
+			apiResource.Spec["group_assignments"] = group_assignmentsList
 		}
-		apiResource.Spec["group_assignments"] = group_assignmentsList
 	}
 	if data.TenantOwnerGroup != nil {
 		tenant_owner_groupMap := make(map[string]interface{})
@@ -744,6 +809,10 @@ func (r *ChildTenantManagerResource) Update(ctx context.Context, req resource.Up
 	_ = isImport          // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["group_assignments"].([]interface{}); ok && len(listData) > 0 {
 		var group_assignmentsList []ChildTenantManagerGroupAssignmentsModel
+		var existingGroupAssignmentsItems []ChildTenantManagerGroupAssignmentsModel
+		if !data.GroupAssignments.IsNull() && !data.GroupAssignments.IsUnknown() {
+			data.GroupAssignments.ElementsAs(ctx, &existingGroupAssignmentsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -789,7 +858,14 @@ func (r *ChildTenantManagerResource) Update(ctx context.Context, req resource.Up
 				})
 			}
 		}
-		data.GroupAssignments = group_assignmentsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: ChildTenantManagerGroupAssignmentsModelAttrTypes}, group_assignmentsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.GroupAssignments = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.GroupAssignments = types.ListNull(types.ObjectType{AttrTypes: ChildTenantManagerGroupAssignmentsModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["tenant_owner_group"].(map[string]interface{}); ok && (isImport || data.TenantOwnerGroup != nil) {
 		data.TenantOwnerGroup = &ChildTenantManagerTenantOwnerGroupModel{

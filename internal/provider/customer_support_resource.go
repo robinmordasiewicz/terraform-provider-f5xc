@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -61,12 +62,31 @@ type CustomerSupportCommentsModel struct {
 	AttachmentsInfo []CustomerSupportCommentsAttachmentsInfoModel `tfsdk:"attachments_info"`
 }
 
+// CustomerSupportCommentsModelAttrTypes defines the attribute types for CustomerSupportCommentsModel
+var CustomerSupportCommentsModelAttrTypes = map[string]attr.Type{
+	"attachment_ids":   types.ListType{ElemType: types.StringType},
+	"author_email":     types.StringType,
+	"author_name":      types.StringType,
+	"created_at":       types.StringType,
+	"html":             types.StringType,
+	"plain_text":       types.StringType,
+	"attachments_info": types.ListType{ElemType: types.ObjectType{AttrTypes: CustomerSupportCommentsAttachmentsInfoModelAttrTypes}},
+}
+
 // CustomerSupportCommentsAttachmentsInfoModel represents attachments_info block
 type CustomerSupportCommentsAttachmentsInfoModel struct {
 	Attachment  types.String `tfsdk:"attachment"`
 	ContentType types.String `tfsdk:"content_type"`
 	Filename    types.String `tfsdk:"filename"`
 	TpID        types.String `tfsdk:"tp_id"`
+}
+
+// CustomerSupportCommentsAttachmentsInfoModelAttrTypes defines the attribute types for CustomerSupportCommentsAttachmentsInfoModel
+var CustomerSupportCommentsAttachmentsInfoModelAttrTypes = map[string]attr.Type{
+	"attachment":   types.StringType,
+	"content_type": types.StringType,
+	"filename":     types.StringType,
+	"tp_id":        types.StringType,
 }
 
 // CustomerSupportRelatesToModel represents relates_to block
@@ -78,29 +98,38 @@ type CustomerSupportRelatesToModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// CustomerSupportRelatesToModelAttrTypes defines the attribute types for CustomerSupportRelatesToModel
+var CustomerSupportRelatesToModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 type CustomerSupportResourceModel struct {
-	Name            types.String                    `tfsdk:"name"`
-	Namespace       types.String                    `tfsdk:"namespace"`
-	Annotations     types.Map                       `tfsdk:"annotations"`
-	Description     types.String                    `tfsdk:"description"`
-	Disable         types.Bool                      `tfsdk:"disable"`
-	Labels          types.Map                       `tfsdk:"labels"`
-	ID              types.String                    `tfsdk:"id"`
-	Category        types.String                    `tfsdk:"category"`
-	DescriptionSpec types.String                    `tfsdk:"description_spec"`
-	Ongoing         types.Bool                      `tfsdk:"ongoing"`
-	Priority        types.String                    `tfsdk:"priority"`
-	ProductData     types.String                    `tfsdk:"product_data"`
-	Service         types.String                    `tfsdk:"service"`
-	Status          types.String                    `tfsdk:"status"`
-	Subject         types.String                    `tfsdk:"subject"`
-	Timeline        types.String                    `tfsdk:"timeline"`
-	Topic           types.String                    `tfsdk:"topic"`
-	TpID            types.String                    `tfsdk:"tp_id"`
-	Type            types.String                    `tfsdk:"type"`
-	Timeouts        timeouts.Value                  `tfsdk:"timeouts"`
-	Comments        []CustomerSupportCommentsModel  `tfsdk:"comments"`
-	RelatesTo       []CustomerSupportRelatesToModel `tfsdk:"relates_to"`
+	Name            types.String   `tfsdk:"name"`
+	Namespace       types.String   `tfsdk:"namespace"`
+	Annotations     types.Map      `tfsdk:"annotations"`
+	Description     types.String   `tfsdk:"description"`
+	Disable         types.Bool     `tfsdk:"disable"`
+	Labels          types.Map      `tfsdk:"labels"`
+	ID              types.String   `tfsdk:"id"`
+	Category        types.String   `tfsdk:"category"`
+	DescriptionSpec types.String   `tfsdk:"description_spec"`
+	Ongoing         types.Bool     `tfsdk:"ongoing"`
+	Priority        types.String   `tfsdk:"priority"`
+	ProductData     types.String   `tfsdk:"product_data"`
+	Service         types.String   `tfsdk:"service"`
+	Status          types.String   `tfsdk:"status"`
+	Subject         types.String   `tfsdk:"subject"`
+	Timeline        types.String   `tfsdk:"timeline"`
+	Topic           types.String   `tfsdk:"topic"`
+	TpID            types.String   `tfsdk:"tp_id"`
+	Type            types.String   `tfsdk:"type"`
+	Timeouts        timeouts.Value `tfsdk:"timeouts"`
+	Comments        types.List     `tfsdk:"comments"`
+	RelatesTo       types.List     `tfsdk:"relates_to"`
 }
 
 func (r *CustomerSupportResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -326,6 +355,9 @@ func (r *CustomerSupportResource) Schema(ctx context.Context, req resource.Schem
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -339,11 +371,17 @@ func (r *CustomerSupportResource) Schema(ctx context.Context, req resource.Schem
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 					},
 				},
@@ -496,71 +534,81 @@ func (r *CustomerSupportResource) Create(ctx context.Context, req resource.Creat
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.Comments) > 0 {
-		var commentsList []map[string]interface{}
-		for _, item := range data.Comments {
-			itemMap := make(map[string]interface{})
-			if len(item.AttachmentsInfo) > 0 {
-				var attachments_infoNestedList []map[string]interface{}
-				for _, nestedItem := range item.AttachmentsInfo {
-					nestedItemMap := make(map[string]interface{})
-					if !nestedItem.Attachment.IsNull() && !nestedItem.Attachment.IsUnknown() {
-						nestedItemMap["attachment"] = nestedItem.Attachment.ValueString()
+	if !data.Comments.IsNull() && !data.Comments.IsUnknown() {
+		var commentsItems []CustomerSupportCommentsModel
+		diags := data.Comments.ElementsAs(ctx, &commentsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(commentsItems) > 0 {
+			var commentsList []map[string]interface{}
+			for _, item := range commentsItems {
+				itemMap := make(map[string]interface{})
+				if len(item.AttachmentsInfo) > 0 {
+					var attachments_infoNestedList []map[string]interface{}
+					for _, nestedItem := range item.AttachmentsInfo {
+						nestedItemMap := make(map[string]interface{})
+						if !nestedItem.Attachment.IsNull() && !nestedItem.Attachment.IsUnknown() {
+							nestedItemMap["attachment"] = nestedItem.Attachment.ValueString()
+						}
+						if !nestedItem.ContentType.IsNull() && !nestedItem.ContentType.IsUnknown() {
+							nestedItemMap["content_type"] = nestedItem.ContentType.ValueString()
+						}
+						if !nestedItem.Filename.IsNull() && !nestedItem.Filename.IsUnknown() {
+							nestedItemMap["filename"] = nestedItem.Filename.ValueString()
+						}
+						if !nestedItem.TpID.IsNull() && !nestedItem.TpID.IsUnknown() {
+							nestedItemMap["tp_id"] = nestedItem.TpID.ValueString()
+						}
+						attachments_infoNestedList = append(attachments_infoNestedList, nestedItemMap)
 					}
-					if !nestedItem.ContentType.IsNull() && !nestedItem.ContentType.IsUnknown() {
-						nestedItemMap["content_type"] = nestedItem.ContentType.ValueString()
-					}
-					if !nestedItem.Filename.IsNull() && !nestedItem.Filename.IsUnknown() {
-						nestedItemMap["filename"] = nestedItem.Filename.ValueString()
-					}
-					if !nestedItem.TpID.IsNull() && !nestedItem.TpID.IsUnknown() {
-						nestedItemMap["tp_id"] = nestedItem.TpID.ValueString()
-					}
-					attachments_infoNestedList = append(attachments_infoNestedList, nestedItemMap)
+					itemMap["attachments_info"] = attachments_infoNestedList
 				}
-				itemMap["attachments_info"] = attachments_infoNestedList
+				if !item.AuthorEmail.IsNull() && !item.AuthorEmail.IsUnknown() {
+					itemMap["author_email"] = item.AuthorEmail.ValueString()
+				}
+				if !item.AuthorName.IsNull() && !item.AuthorName.IsUnknown() {
+					itemMap["author_name"] = item.AuthorName.ValueString()
+				}
+				if !item.CreatedAt.IsNull() && !item.CreatedAt.IsUnknown() {
+					itemMap["created_at"] = item.CreatedAt.ValueString()
+				}
+				if !item.HTML.IsNull() && !item.HTML.IsUnknown() {
+					itemMap["html"] = item.HTML.ValueString()
+				}
+				if !item.PlainText.IsNull() && !item.PlainText.IsUnknown() {
+					itemMap["plain_text"] = item.PlainText.ValueString()
+				}
+				commentsList = append(commentsList, itemMap)
 			}
-			if !item.AuthorEmail.IsNull() && !item.AuthorEmail.IsUnknown() {
-				itemMap["author_email"] = item.AuthorEmail.ValueString()
-			}
-			if !item.AuthorName.IsNull() && !item.AuthorName.IsUnknown() {
-				itemMap["author_name"] = item.AuthorName.ValueString()
-			}
-			if !item.CreatedAt.IsNull() && !item.CreatedAt.IsUnknown() {
-				itemMap["created_at"] = item.CreatedAt.ValueString()
-			}
-			if !item.HTML.IsNull() && !item.HTML.IsUnknown() {
-				itemMap["html"] = item.HTML.ValueString()
-			}
-			if !item.PlainText.IsNull() && !item.PlainText.IsUnknown() {
-				itemMap["plain_text"] = item.PlainText.ValueString()
-			}
-			commentsList = append(commentsList, itemMap)
+			createReq.Spec["comments"] = commentsList
 		}
-		createReq.Spec["comments"] = commentsList
 	}
-	if len(data.RelatesTo) > 0 {
-		var relates_toList []map[string]interface{}
-		for _, item := range data.RelatesTo {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.RelatesTo.IsNull() && !data.RelatesTo.IsUnknown() {
+		var relates_toItems []CustomerSupportRelatesToModel
+		diags := data.RelatesTo.ElementsAs(ctx, &relates_toItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(relates_toItems) > 0 {
+			var relates_toList []map[string]interface{}
+			for _, item := range relates_toItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				relates_toList = append(relates_toList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			relates_toList = append(relates_toList, itemMap)
+			createReq.Spec["relates_to"] = relates_toList
 		}
-		createReq.Spec["relates_to"] = relates_toList
 	}
 	if !data.Category.IsNull() && !data.Category.IsUnknown() {
 		createReq.Spec["category"] = data.Category.ValueString()
@@ -613,6 +661,10 @@ func (r *CustomerSupportResource) Create(ctx context.Context, req resource.Creat
 	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["comments"].([]interface{}); ok && len(listData) > 0 {
 		var commentsList []CustomerSupportCommentsModel
+		var existingCommentsItems []CustomerSupportCommentsModel
+		if !data.Comments.IsNull() && !data.Comments.IsUnknown() {
+			data.Comments.ElementsAs(ctx, &existingCommentsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -700,10 +752,21 @@ func (r *CustomerSupportResource) Create(ctx context.Context, req resource.Creat
 				})
 			}
 		}
-		data.Comments = commentsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: CustomerSupportCommentsModelAttrTypes}, commentsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Comments = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Comments = types.ListNull(types.ObjectType{AttrTypes: CustomerSupportCommentsModelAttrTypes})
 	}
 	if listData, ok := apiResource.Spec["relates_to"].([]interface{}); ok && len(listData) > 0 {
 		var relates_toList []CustomerSupportRelatesToModel
+		var existingRelatesToItems []CustomerSupportRelatesToModel
+		if !data.RelatesTo.IsNull() && !data.RelatesTo.IsUnknown() {
+			data.RelatesTo.ElementsAs(ctx, &existingRelatesToItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -741,7 +804,14 @@ func (r *CustomerSupportResource) Create(ctx context.Context, req resource.Creat
 				})
 			}
 		}
-		data.RelatesTo = relates_toList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: CustomerSupportRelatesToModelAttrTypes}, relates_toList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.RelatesTo = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.RelatesTo = types.ListNull(types.ObjectType{AttrTypes: CustomerSupportRelatesToModelAttrTypes})
 	}
 	if v, ok := apiResource.Spec["category"].(string); ok && v != "" {
 		data.Category = types.StringValue(v)
@@ -873,11 +943,17 @@ func (r *CustomerSupportResource) Read(ctx context.Context, req resource.ReadReq
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -904,6 +980,10 @@ func (r *CustomerSupportResource) Read(ctx context.Context, req resource.ReadReq
 	})
 	if listData, ok := apiResource.Spec["comments"].([]interface{}); ok && len(listData) > 0 {
 		var commentsList []CustomerSupportCommentsModel
+		var existingCommentsItems []CustomerSupportCommentsModel
+		if !data.Comments.IsNull() && !data.Comments.IsUnknown() {
+			data.Comments.ElementsAs(ctx, &existingCommentsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -991,10 +1071,21 @@ func (r *CustomerSupportResource) Read(ctx context.Context, req resource.ReadReq
 				})
 			}
 		}
-		data.Comments = commentsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: CustomerSupportCommentsModelAttrTypes}, commentsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Comments = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Comments = types.ListNull(types.ObjectType{AttrTypes: CustomerSupportCommentsModelAttrTypes})
 	}
 	if listData, ok := apiResource.Spec["relates_to"].([]interface{}); ok && len(listData) > 0 {
 		var relates_toList []CustomerSupportRelatesToModel
+		var existingRelatesToItems []CustomerSupportRelatesToModel
+		if !data.RelatesTo.IsNull() && !data.RelatesTo.IsUnknown() {
+			data.RelatesTo.ElementsAs(ctx, &existingRelatesToItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -1032,7 +1123,14 @@ func (r *CustomerSupportResource) Read(ctx context.Context, req resource.ReadReq
 				})
 			}
 		}
-		data.RelatesTo = relates_toList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: CustomerSupportRelatesToModelAttrTypes}, relates_toList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.RelatesTo = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.RelatesTo = types.ListNull(types.ObjectType{AttrTypes: CustomerSupportRelatesToModelAttrTypes})
 	}
 	if v, ok := apiResource.Spec["category"].(string); ok && v != "" {
 		data.Category = types.StringValue(v)
@@ -1160,71 +1258,81 @@ func (r *CustomerSupportResource) Update(ctx context.Context, req resource.Updat
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.Comments) > 0 {
-		var commentsList []map[string]interface{}
-		for _, item := range data.Comments {
-			itemMap := make(map[string]interface{})
-			if len(item.AttachmentsInfo) > 0 {
-				var attachments_infoNestedList []map[string]interface{}
-				for _, nestedItem := range item.AttachmentsInfo {
-					nestedItemMap := make(map[string]interface{})
-					if !nestedItem.Attachment.IsNull() && !nestedItem.Attachment.IsUnknown() {
-						nestedItemMap["attachment"] = nestedItem.Attachment.ValueString()
+	if !data.Comments.IsNull() && !data.Comments.IsUnknown() {
+		var commentsItems []CustomerSupportCommentsModel
+		diags := data.Comments.ElementsAs(ctx, &commentsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(commentsItems) > 0 {
+			var commentsList []map[string]interface{}
+			for _, item := range commentsItems {
+				itemMap := make(map[string]interface{})
+				if len(item.AttachmentsInfo) > 0 {
+					var attachments_infoNestedList []map[string]interface{}
+					for _, nestedItem := range item.AttachmentsInfo {
+						nestedItemMap := make(map[string]interface{})
+						if !nestedItem.Attachment.IsNull() && !nestedItem.Attachment.IsUnknown() {
+							nestedItemMap["attachment"] = nestedItem.Attachment.ValueString()
+						}
+						if !nestedItem.ContentType.IsNull() && !nestedItem.ContentType.IsUnknown() {
+							nestedItemMap["content_type"] = nestedItem.ContentType.ValueString()
+						}
+						if !nestedItem.Filename.IsNull() && !nestedItem.Filename.IsUnknown() {
+							nestedItemMap["filename"] = nestedItem.Filename.ValueString()
+						}
+						if !nestedItem.TpID.IsNull() && !nestedItem.TpID.IsUnknown() {
+							nestedItemMap["tp_id"] = nestedItem.TpID.ValueString()
+						}
+						attachments_infoNestedList = append(attachments_infoNestedList, nestedItemMap)
 					}
-					if !nestedItem.ContentType.IsNull() && !nestedItem.ContentType.IsUnknown() {
-						nestedItemMap["content_type"] = nestedItem.ContentType.ValueString()
-					}
-					if !nestedItem.Filename.IsNull() && !nestedItem.Filename.IsUnknown() {
-						nestedItemMap["filename"] = nestedItem.Filename.ValueString()
-					}
-					if !nestedItem.TpID.IsNull() && !nestedItem.TpID.IsUnknown() {
-						nestedItemMap["tp_id"] = nestedItem.TpID.ValueString()
-					}
-					attachments_infoNestedList = append(attachments_infoNestedList, nestedItemMap)
+					itemMap["attachments_info"] = attachments_infoNestedList
 				}
-				itemMap["attachments_info"] = attachments_infoNestedList
+				if !item.AuthorEmail.IsNull() && !item.AuthorEmail.IsUnknown() {
+					itemMap["author_email"] = item.AuthorEmail.ValueString()
+				}
+				if !item.AuthorName.IsNull() && !item.AuthorName.IsUnknown() {
+					itemMap["author_name"] = item.AuthorName.ValueString()
+				}
+				if !item.CreatedAt.IsNull() && !item.CreatedAt.IsUnknown() {
+					itemMap["created_at"] = item.CreatedAt.ValueString()
+				}
+				if !item.HTML.IsNull() && !item.HTML.IsUnknown() {
+					itemMap["html"] = item.HTML.ValueString()
+				}
+				if !item.PlainText.IsNull() && !item.PlainText.IsUnknown() {
+					itemMap["plain_text"] = item.PlainText.ValueString()
+				}
+				commentsList = append(commentsList, itemMap)
 			}
-			if !item.AuthorEmail.IsNull() && !item.AuthorEmail.IsUnknown() {
-				itemMap["author_email"] = item.AuthorEmail.ValueString()
-			}
-			if !item.AuthorName.IsNull() && !item.AuthorName.IsUnknown() {
-				itemMap["author_name"] = item.AuthorName.ValueString()
-			}
-			if !item.CreatedAt.IsNull() && !item.CreatedAt.IsUnknown() {
-				itemMap["created_at"] = item.CreatedAt.ValueString()
-			}
-			if !item.HTML.IsNull() && !item.HTML.IsUnknown() {
-				itemMap["html"] = item.HTML.ValueString()
-			}
-			if !item.PlainText.IsNull() && !item.PlainText.IsUnknown() {
-				itemMap["plain_text"] = item.PlainText.ValueString()
-			}
-			commentsList = append(commentsList, itemMap)
+			apiResource.Spec["comments"] = commentsList
 		}
-		apiResource.Spec["comments"] = commentsList
 	}
-	if len(data.RelatesTo) > 0 {
-		var relates_toList []map[string]interface{}
-		for _, item := range data.RelatesTo {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.RelatesTo.IsNull() && !data.RelatesTo.IsUnknown() {
+		var relates_toItems []CustomerSupportRelatesToModel
+		diags := data.RelatesTo.ElementsAs(ctx, &relates_toItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(relates_toItems) > 0 {
+			var relates_toList []map[string]interface{}
+			for _, item := range relates_toItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				relates_toList = append(relates_toList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			relates_toList = append(relates_toList, itemMap)
+			apiResource.Spec["relates_to"] = relates_toList
 		}
-		apiResource.Spec["relates_to"] = relates_toList
 	}
 	if !data.Category.IsNull() && !data.Category.IsUnknown() {
 		apiResource.Spec["category"] = data.Category.ValueString()
@@ -1372,6 +1480,10 @@ func (r *CustomerSupportResource) Update(ctx context.Context, req resource.Updat
 	_ = isImport          // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["comments"].([]interface{}); ok && len(listData) > 0 {
 		var commentsList []CustomerSupportCommentsModel
+		var existingCommentsItems []CustomerSupportCommentsModel
+		if !data.Comments.IsNull() && !data.Comments.IsUnknown() {
+			data.Comments.ElementsAs(ctx, &existingCommentsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -1459,10 +1571,21 @@ func (r *CustomerSupportResource) Update(ctx context.Context, req resource.Updat
 				})
 			}
 		}
-		data.Comments = commentsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: CustomerSupportCommentsModelAttrTypes}, commentsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Comments = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Comments = types.ListNull(types.ObjectType{AttrTypes: CustomerSupportCommentsModelAttrTypes})
 	}
 	if listData, ok := apiResource.Spec["relates_to"].([]interface{}); ok && len(listData) > 0 {
 		var relates_toList []CustomerSupportRelatesToModel
+		var existingRelatesToItems []CustomerSupportRelatesToModel
+		if !data.RelatesTo.IsNull() && !data.RelatesTo.IsUnknown() {
+			data.RelatesTo.ElementsAs(ctx, &existingRelatesToItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -1500,7 +1623,14 @@ func (r *CustomerSupportResource) Update(ctx context.Context, req resource.Updat
 				})
 			}
 		}
-		data.RelatesTo = relates_toList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: CustomerSupportRelatesToModelAttrTypes}, relates_toList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.RelatesTo = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.RelatesTo = types.ListNull(types.ObjectType{AttrTypes: CustomerSupportRelatesToModelAttrTypes})
 	}
 	if v, ok := apiResource.Spec["category"].(string); ok && v != "" {
 		data.Category = types.StringValue(v)

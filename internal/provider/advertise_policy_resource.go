@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -60,6 +61,15 @@ type AdvertisePolicyPublicIPModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// AdvertisePolicyPublicIPModelAttrTypes defines the attribute types for AdvertisePolicyPublicIPModel
+var AdvertisePolicyPublicIPModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // AdvertisePolicyTLSParametersModel represents tls_parameters block
 type AdvertisePolicyTLSParametersModel struct {
 	XfccHeaderElements        types.List                                     `tfsdk:"xfcc_header_elements"`
@@ -69,6 +79,15 @@ type AdvertisePolicyTLSParametersModel struct {
 	NoClientCertificate       *AdvertisePolicyEmptyModel                     `tfsdk:"no_client_certificate"`
 }
 
+// AdvertisePolicyTLSParametersModelAttrTypes defines the attribute types for AdvertisePolicyTLSParametersModel
+var AdvertisePolicyTLSParametersModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements":        types.ListType{ElemType: types.StringType},
+	"client_certificate_optional": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"client_certificate_required": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"common_params":               types.ObjectType{AttrTypes: AdvertisePolicyTLSParametersCommonParamsModelAttrTypes},
+	"no_client_certificate":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // AdvertisePolicyTLSParametersCommonParamsModel represents common_params block
 type AdvertisePolicyTLSParametersCommonParamsModel struct {
 	CipherSuites           types.List                                                     `tfsdk:"cipher_suites"`
@@ -76,6 +95,15 @@ type AdvertisePolicyTLSParametersCommonParamsModel struct {
 	MinimumProtocolVersion types.String                                                   `tfsdk:"minimum_protocol_version"`
 	TLSCertificates        []AdvertisePolicyTLSParametersCommonParamsTLSCertificatesModel `tfsdk:"tls_certificates"`
 	ValidationParams       *AdvertisePolicyTLSParametersCommonParamsValidationParamsModel `tfsdk:"validation_params"`
+}
+
+// AdvertisePolicyTLSParametersCommonParamsModelAttrTypes defines the attribute types for AdvertisePolicyTLSParametersCommonParamsModel
+var AdvertisePolicyTLSParametersCommonParamsModelAttrTypes = map[string]attr.Type{
+	"cipher_suites":            types.ListType{ElemType: types.StringType},
+	"maximum_protocol_version": types.StringType,
+	"minimum_protocol_version": types.StringType,
+	"tls_certificates":         types.ListType{ElemType: types.ObjectType{AttrTypes: AdvertisePolicyTLSParametersCommonParamsTLSCertificatesModelAttrTypes}},
+	"validation_params":        types.ObjectType{AttrTypes: AdvertisePolicyTLSParametersCommonParamsValidationParamsModelAttrTypes},
 }
 
 // AdvertisePolicyTLSParametersCommonParamsTLSCertificatesModel represents tls_certificates block
@@ -88,15 +116,36 @@ type AdvertisePolicyTLSParametersCommonParamsTLSCertificatesModel struct {
 	UseSystemDefaults    *AdvertisePolicyEmptyModel                                                        `tfsdk:"use_system_defaults"`
 }
 
+// AdvertisePolicyTLSParametersCommonParamsTLSCertificatesModelAttrTypes defines the attribute types for AdvertisePolicyTLSParametersCommonParamsTLSCertificatesModel
+var AdvertisePolicyTLSParametersCommonParamsTLSCertificatesModelAttrTypes = map[string]attr.Type{
+	"certificate_url":        types.StringType,
+	"description_spec":       types.StringType,
+	"custom_hash_algorithms": types.ObjectType{AttrTypes: AdvertisePolicyTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
+	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // AdvertisePolicyTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
 type AdvertisePolicyTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// AdvertisePolicyTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModelAttrTypes defines the attribute types for AdvertisePolicyTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel
+var AdvertisePolicyTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModelAttrTypes = map[string]attr.Type{
+	"hash_algorithms": types.ListType{ElemType: types.StringType},
 }
 
 // AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyModel represents private_key block
 type AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyModelAttrTypes defines the attribute types for AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyModel
+var AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -106,10 +155,23 @@ type AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldS
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel
+var AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel
+var AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // AdvertisePolicyTLSParametersCommonParamsValidationParamsModel represents validation_params block
@@ -120,9 +182,22 @@ type AdvertisePolicyTLSParametersCommonParamsValidationParamsModel struct {
 	TrustedCA                *AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCAModel `tfsdk:"trusted_ca"`
 }
 
+// AdvertisePolicyTLSParametersCommonParamsValidationParamsModelAttrTypes defines the attribute types for AdvertisePolicyTLSParametersCommonParamsValidationParamsModel
+var AdvertisePolicyTLSParametersCommonParamsValidationParamsModelAttrTypes = map[string]attr.Type{
+	"skip_hostname_verification": types.BoolType,
+	"trusted_ca_url":             types.StringType,
+	"verify_subject_alt_names":   types.ListType{ElemType: types.StringType},
+	"trusted_ca":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCAModel represents trusted_ca block
 type AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCAModel struct {
 	TrustedCAList []AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModel `tfsdk:"trusted_ca_list"`
+}
+
+// AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCAModelAttrTypes defines the attribute types for AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCAModel
+var AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"trusted_ca_list": types.ListType{ElemType: types.ObjectType{AttrTypes: AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModelAttrTypes}},
 }
 
 // AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModel represents trusted_ca_list block
@@ -134,11 +209,27 @@ type AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCATrustedCAL
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModelAttrTypes defines the attribute types for AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModel
+var AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // AdvertisePolicyWhereModel represents where block
 type AdvertisePolicyWhereModel struct {
 	Site           *AdvertisePolicyWhereSiteModel           `tfsdk:"site"`
 	VirtualNetwork *AdvertisePolicyWhereVirtualNetworkModel `tfsdk:"virtual_network"`
 	VirtualSite    *AdvertisePolicyWhereVirtualSiteModel    `tfsdk:"virtual_site"`
+}
+
+// AdvertisePolicyWhereModelAttrTypes defines the attribute types for AdvertisePolicyWhereModel
+var AdvertisePolicyWhereModelAttrTypes = map[string]attr.Type{
+	"site":            types.ObjectType{AttrTypes: AdvertisePolicyWhereSiteModelAttrTypes},
+	"virtual_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"virtual_site":    types.ObjectType{AttrTypes: AdvertisePolicyWhereVirtualSiteModelAttrTypes},
 }
 
 // AdvertisePolicyWhereSiteModel represents site block
@@ -147,6 +238,14 @@ type AdvertisePolicyWhereSiteModel struct {
 	DisableInternetVIP *AdvertisePolicyEmptyModel         `tfsdk:"disable_internet_vip"`
 	EnableInternetVIP  *AdvertisePolicyEmptyModel         `tfsdk:"enable_internet_vip"`
 	Ref                []AdvertisePolicyWhereSiteRefModel `tfsdk:"ref"`
+}
+
+// AdvertisePolicyWhereSiteModelAttrTypes defines the attribute types for AdvertisePolicyWhereSiteModel
+var AdvertisePolicyWhereSiteModelAttrTypes = map[string]attr.Type{
+	"network_type":         types.StringType,
+	"disable_internet_vip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_internet_vip":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ref":                  types.ListType{ElemType: types.ObjectType{AttrTypes: AdvertisePolicyWhereSiteRefModelAttrTypes}},
 }
 
 // AdvertisePolicyWhereSiteRefModel represents ref block
@@ -158,9 +257,23 @@ type AdvertisePolicyWhereSiteRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// AdvertisePolicyWhereSiteRefModelAttrTypes defines the attribute types for AdvertisePolicyWhereSiteRefModel
+var AdvertisePolicyWhereSiteRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // AdvertisePolicyWhereVirtualNetworkModel represents virtual_network block
 type AdvertisePolicyWhereVirtualNetworkModel struct {
 	Ref []AdvertisePolicyWhereVirtualNetworkRefModel `tfsdk:"ref"`
+}
+
+// AdvertisePolicyWhereVirtualNetworkModelAttrTypes defines the attribute types for AdvertisePolicyWhereVirtualNetworkModel
+var AdvertisePolicyWhereVirtualNetworkModelAttrTypes = map[string]attr.Type{
+	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: AdvertisePolicyWhereVirtualNetworkRefModelAttrTypes}},
 }
 
 // AdvertisePolicyWhereVirtualNetworkRefModel represents ref block
@@ -172,12 +285,29 @@ type AdvertisePolicyWhereVirtualNetworkRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// AdvertisePolicyWhereVirtualNetworkRefModelAttrTypes defines the attribute types for AdvertisePolicyWhereVirtualNetworkRefModel
+var AdvertisePolicyWhereVirtualNetworkRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // AdvertisePolicyWhereVirtualSiteModel represents virtual_site block
 type AdvertisePolicyWhereVirtualSiteModel struct {
 	NetworkType        types.String                              `tfsdk:"network_type"`
 	DisableInternetVIP *AdvertisePolicyEmptyModel                `tfsdk:"disable_internet_vip"`
 	EnableInternetVIP  *AdvertisePolicyEmptyModel                `tfsdk:"enable_internet_vip"`
 	Ref                []AdvertisePolicyWhereVirtualSiteRefModel `tfsdk:"ref"`
+}
+
+// AdvertisePolicyWhereVirtualSiteModelAttrTypes defines the attribute types for AdvertisePolicyWhereVirtualSiteModel
+var AdvertisePolicyWhereVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"network_type":         types.StringType,
+	"disable_internet_vip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_internet_vip":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ref":                  types.ListType{ElemType: types.ObjectType{AttrTypes: AdvertisePolicyWhereVirtualSiteRefModelAttrTypes}},
 }
 
 // AdvertisePolicyWhereVirtualSiteRefModel represents ref block
@@ -187,6 +317,15 @@ type AdvertisePolicyWhereVirtualSiteRefModel struct {
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 	Uid       types.String `tfsdk:"uid"`
+}
+
+// AdvertisePolicyWhereVirtualSiteRefModelAttrTypes defines the attribute types for AdvertisePolicyWhereVirtualSiteRefModel
+var AdvertisePolicyWhereVirtualSiteRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
 }
 
 type AdvertisePolicyResourceModel struct {
@@ -203,7 +342,7 @@ type AdvertisePolicyResourceModel struct {
 	Protocol      types.String                       `tfsdk:"protocol"`
 	SkipXffAppend types.Bool                         `tfsdk:"skip_xff_append"`
 	Timeouts      timeouts.Value                     `tfsdk:"timeouts"`
-	PublicIP      []AdvertisePolicyPublicIPModel     `tfsdk:"public_ip"`
+	PublicIP      types.List                         `tfsdk:"public_ip"`
 	TLSParameters *AdvertisePolicyTLSParametersModel `tfsdk:"tls_parameters"`
 	Where         *AdvertisePolicyWhereModel         `tfsdk:"where"`
 }
@@ -318,6 +457,9 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -331,11 +473,17 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 					},
 				},
@@ -473,6 +621,9 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 															MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 															Optional:            true,
 															Computed:            true,
+															PlanModifiers: []planmodifier.String{
+																stringplanmodifier.UseStateForUnknown(),
+															},
 														},
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -486,11 +637,17 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional:            true,
 															Computed:            true,
+															PlanModifiers: []planmodifier.String{
+																stringplanmodifier.UseStateForUnknown(),
+															},
 														},
 														"uid": schema.StringAttribute{
 															MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 															Optional:            true,
 															Computed:            true,
+															PlanModifiers: []planmodifier.String{
+																stringplanmodifier.UseStateForUnknown(),
+															},
 														},
 													},
 												},
@@ -533,6 +690,9 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -546,11 +706,17 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -569,6 +735,9 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -582,11 +751,17 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -616,6 +791,9 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -629,11 +807,17 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -790,28 +974,33 @@ func (r *AdvertisePolicyResource) Create(ctx context.Context, req resource.Creat
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.PublicIP) > 0 {
-		var public_ipList []map[string]interface{}
-		for _, item := range data.PublicIP {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.PublicIP.IsNull() && !data.PublicIP.IsUnknown() {
+		var public_ipItems []AdvertisePolicyPublicIPModel
+		diags := data.PublicIP.ElementsAs(ctx, &public_ipItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(public_ipItems) > 0 {
+			var public_ipList []map[string]interface{}
+			for _, item := range public_ipItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				public_ipList = append(public_ipList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			public_ipList = append(public_ipList, itemMap)
+			createReq.Spec["public_ip"] = public_ipList
 		}
-		createReq.Spec["public_ip"] = public_ipList
 	}
 	if data.TLSParameters != nil {
 		tls_parametersMap := make(map[string]interface{})
@@ -895,6 +1084,10 @@ func (r *AdvertisePolicyResource) Create(ctx context.Context, req resource.Creat
 	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["public_ip"].([]interface{}); ok && len(listData) > 0 {
 		var public_ipList []AdvertisePolicyPublicIPModel
+		var existingPublicIPItems []AdvertisePolicyPublicIPModel
+		if !data.PublicIP.IsNull() && !data.PublicIP.IsUnknown() {
+			data.PublicIP.ElementsAs(ctx, &existingPublicIPItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -932,7 +1125,14 @@ func (r *AdvertisePolicyResource) Create(ctx context.Context, req resource.Creat
 				})
 			}
 		}
-		data.PublicIP = public_ipList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: AdvertisePolicyPublicIPModelAttrTypes}, public_ipList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.PublicIP = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.PublicIP = types.ListNull(types.ObjectType{AttrTypes: AdvertisePolicyPublicIPModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["tls_parameters"].(map[string]interface{}); ok && (isImport || data.TLSParameters != nil) {
 		data.TLSParameters = &AdvertisePolicyTLSParametersModel{
@@ -1124,11 +1324,17 @@ func (r *AdvertisePolicyResource) Read(ctx context.Context, req resource.ReadReq
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -1155,6 +1361,10 @@ func (r *AdvertisePolicyResource) Read(ctx context.Context, req resource.ReadReq
 	})
 	if listData, ok := apiResource.Spec["public_ip"].([]interface{}); ok && len(listData) > 0 {
 		var public_ipList []AdvertisePolicyPublicIPModel
+		var existingPublicIPItems []AdvertisePolicyPublicIPModel
+		if !data.PublicIP.IsNull() && !data.PublicIP.IsUnknown() {
+			data.PublicIP.ElementsAs(ctx, &existingPublicIPItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -1192,7 +1402,14 @@ func (r *AdvertisePolicyResource) Read(ctx context.Context, req resource.ReadReq
 				})
 			}
 		}
-		data.PublicIP = public_ipList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: AdvertisePolicyPublicIPModelAttrTypes}, public_ipList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.PublicIP = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.PublicIP = types.ListNull(types.ObjectType{AttrTypes: AdvertisePolicyPublicIPModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["tls_parameters"].(map[string]interface{}); ok && (isImport || data.TLSParameters != nil) {
 		data.TLSParameters = &AdvertisePolicyTLSParametersModel{
@@ -1380,28 +1597,33 @@ func (r *AdvertisePolicyResource) Update(ctx context.Context, req resource.Updat
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.PublicIP) > 0 {
-		var public_ipList []map[string]interface{}
-		for _, item := range data.PublicIP {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.PublicIP.IsNull() && !data.PublicIP.IsUnknown() {
+		var public_ipItems []AdvertisePolicyPublicIPModel
+		diags := data.PublicIP.ElementsAs(ctx, &public_ipItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(public_ipItems) > 0 {
+			var public_ipList []map[string]interface{}
+			for _, item := range public_ipItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				public_ipList = append(public_ipList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			public_ipList = append(public_ipList, itemMap)
+			apiResource.Spec["public_ip"] = public_ipList
 		}
-		apiResource.Spec["public_ip"] = public_ipList
 	}
 	if data.TLSParameters != nil {
 		tls_parametersMap := make(map[string]interface{})
@@ -1531,6 +1753,10 @@ func (r *AdvertisePolicyResource) Update(ctx context.Context, req resource.Updat
 	_ = isImport          // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["public_ip"].([]interface{}); ok && len(listData) > 0 {
 		var public_ipList []AdvertisePolicyPublicIPModel
+		var existingPublicIPItems []AdvertisePolicyPublicIPModel
+		if !data.PublicIP.IsNull() && !data.PublicIP.IsUnknown() {
+			data.PublicIP.ElementsAs(ctx, &existingPublicIPItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -1568,7 +1794,14 @@ func (r *AdvertisePolicyResource) Update(ctx context.Context, req resource.Updat
 				})
 			}
 		}
-		data.PublicIP = public_ipList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: AdvertisePolicyPublicIPModelAttrTypes}, public_ipList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.PublicIP = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.PublicIP = types.ListNull(types.ObjectType{AttrTypes: AdvertisePolicyPublicIPModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["tls_parameters"].(map[string]interface{}); ok && (isImport || data.TLSParameters != nil) {
 		data.TLSParameters = &AdvertisePolicyTLSParametersModel{

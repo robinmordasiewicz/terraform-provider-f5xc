@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -62,10 +63,29 @@ type NATPolicyRulesModel struct {
 	VirtualNetwork   *NATPolicyRulesVirtualNetworkModel   `tfsdk:"virtual_network"`
 }
 
+// NATPolicyRulesModelAttrTypes defines the attribute types for NATPolicyRulesModel
+var NATPolicyRulesModelAttrTypes = map[string]attr.Type{
+	"name":              types.StringType,
+	"action":            types.ObjectType{AttrTypes: NATPolicyRulesActionModelAttrTypes},
+	"cloud_connect":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"criteria":          types.ObjectType{AttrTypes: NATPolicyRulesCriteriaModelAttrTypes},
+	"disable":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"network_interface": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"segment":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"virtual_network":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NATPolicyRulesActionModel represents action block
 type NATPolicyRulesActionModel struct {
 	VirtualCIDR types.String                      `tfsdk:"virtual_cidr"`
 	Dynamic     *NATPolicyRulesActionDynamicModel `tfsdk:"dynamic"`
+}
+
+// NATPolicyRulesActionModelAttrTypes defines the attribute types for NATPolicyRulesActionModel
+var NATPolicyRulesActionModelAttrTypes = map[string]attr.Type{
+	"virtual_cidr": types.StringType,
+	"dynamic":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // NATPolicyRulesActionDynamicModel represents dynamic block
@@ -74,9 +94,20 @@ type NATPolicyRulesActionDynamicModel struct {
 	Pools      *NATPolicyRulesActionDynamicPoolsModel      `tfsdk:"pools"`
 }
 
+// NATPolicyRulesActionDynamicModelAttrTypes defines the attribute types for NATPolicyRulesActionDynamicModel
+var NATPolicyRulesActionDynamicModelAttrTypes = map[string]attr.Type{
+	"elastic_ips": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"pools":       types.ObjectType{AttrTypes: NATPolicyRulesActionDynamicPoolsModelAttrTypes},
+}
+
 // NATPolicyRulesActionDynamicElasticIpsModel represents elastic_ips block
 type NATPolicyRulesActionDynamicElasticIpsModel struct {
 	Refs []NATPolicyRulesActionDynamicElasticIpsRefsModel `tfsdk:"refs"`
+}
+
+// NATPolicyRulesActionDynamicElasticIpsModelAttrTypes defines the attribute types for NATPolicyRulesActionDynamicElasticIpsModel
+var NATPolicyRulesActionDynamicElasticIpsModelAttrTypes = map[string]attr.Type{
+	"refs": types.ListType{ElemType: types.ObjectType{AttrTypes: NATPolicyRulesActionDynamicElasticIpsRefsModelAttrTypes}},
 }
 
 // NATPolicyRulesActionDynamicElasticIpsRefsModel represents refs block
@@ -88,14 +119,33 @@ type NATPolicyRulesActionDynamicElasticIpsRefsModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// NATPolicyRulesActionDynamicElasticIpsRefsModelAttrTypes defines the attribute types for NATPolicyRulesActionDynamicElasticIpsRefsModel
+var NATPolicyRulesActionDynamicElasticIpsRefsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // NATPolicyRulesActionDynamicPoolsModel represents pools block
 type NATPolicyRulesActionDynamicPoolsModel struct {
 	Prefixes types.List `tfsdk:"prefixes"`
 }
 
+// NATPolicyRulesActionDynamicPoolsModelAttrTypes defines the attribute types for NATPolicyRulesActionDynamicPoolsModel
+var NATPolicyRulesActionDynamicPoolsModelAttrTypes = map[string]attr.Type{
+	"prefixes": types.ListType{ElemType: types.StringType},
+}
+
 // NATPolicyRulesCloudConnectModel represents cloud_connect block
 type NATPolicyRulesCloudConnectModel struct {
 	Refs []NATPolicyRulesCloudConnectRefsModel `tfsdk:"refs"`
+}
+
+// NATPolicyRulesCloudConnectModelAttrTypes defines the attribute types for NATPolicyRulesCloudConnectModel
+var NATPolicyRulesCloudConnectModelAttrTypes = map[string]attr.Type{
+	"refs": types.ListType{ElemType: types.ObjectType{AttrTypes: NATPolicyRulesCloudConnectRefsModelAttrTypes}},
 }
 
 // NATPolicyRulesCloudConnectRefsModel represents refs block
@@ -105,6 +155,15 @@ type NATPolicyRulesCloudConnectRefsModel struct {
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 	Uid       types.String `tfsdk:"uid"`
+}
+
+// NATPolicyRulesCloudConnectRefsModelAttrTypes defines the attribute types for NATPolicyRulesCloudConnectRefsModel
+var NATPolicyRulesCloudConnectRefsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
 }
 
 // NATPolicyRulesCriteriaModel represents criteria block
@@ -122,6 +181,21 @@ type NATPolicyRulesCriteriaModel struct {
 	VirtualNetwork  *NATPolicyRulesCriteriaVirtualNetworkModel  `tfsdk:"virtual_network"`
 }
 
+// NATPolicyRulesCriteriaModelAttrTypes defines the attribute types for NATPolicyRulesCriteriaModel
+var NATPolicyRulesCriteriaModelAttrTypes = map[string]attr.Type{
+	"destination_cidr": types.ListType{ElemType: types.StringType},
+	"protocol":         types.StringType,
+	"source_cidr":      types.ListType{ElemType: types.StringType},
+	"any":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"destination_port": types.ObjectType{AttrTypes: NATPolicyRulesCriteriaDestinationPortModelAttrTypes},
+	"icmp":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"segment":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"source_port":      types.ObjectType{AttrTypes: NATPolicyRulesCriteriaSourcePortModelAttrTypes},
+	"tcp":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"udp":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"virtual_network":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NATPolicyRulesCriteriaDestinationPortModel represents destination_port block
 type NATPolicyRulesCriteriaDestinationPortModel struct {
 	Port        types.Int64          `tfsdk:"port"`
@@ -129,9 +203,21 @@ type NATPolicyRulesCriteriaDestinationPortModel struct {
 	NoPortMatch *NATPolicyEmptyModel `tfsdk:"no_port_match"`
 }
 
+// NATPolicyRulesCriteriaDestinationPortModelAttrTypes defines the attribute types for NATPolicyRulesCriteriaDestinationPortModel
+var NATPolicyRulesCriteriaDestinationPortModelAttrTypes = map[string]attr.Type{
+	"port":          types.Int64Type,
+	"port_ranges":   types.StringType,
+	"no_port_match": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NATPolicyRulesCriteriaSegmentModel represents segment block
 type NATPolicyRulesCriteriaSegmentModel struct {
 	Refs []NATPolicyRulesCriteriaSegmentRefsModel `tfsdk:"refs"`
+}
+
+// NATPolicyRulesCriteriaSegmentModelAttrTypes defines the attribute types for NATPolicyRulesCriteriaSegmentModel
+var NATPolicyRulesCriteriaSegmentModelAttrTypes = map[string]attr.Type{
+	"refs": types.ListType{ElemType: types.ObjectType{AttrTypes: NATPolicyRulesCriteriaSegmentRefsModelAttrTypes}},
 }
 
 // NATPolicyRulesCriteriaSegmentRefsModel represents refs block
@@ -143,6 +229,15 @@ type NATPolicyRulesCriteriaSegmentRefsModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// NATPolicyRulesCriteriaSegmentRefsModelAttrTypes defines the attribute types for NATPolicyRulesCriteriaSegmentRefsModel
+var NATPolicyRulesCriteriaSegmentRefsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // NATPolicyRulesCriteriaSourcePortModel represents source_port block
 type NATPolicyRulesCriteriaSourcePortModel struct {
 	Port        types.Int64          `tfsdk:"port"`
@@ -150,10 +245,23 @@ type NATPolicyRulesCriteriaSourcePortModel struct {
 	NoPortMatch *NATPolicyEmptyModel `tfsdk:"no_port_match"`
 }
 
+// NATPolicyRulesCriteriaSourcePortModelAttrTypes defines the attribute types for NATPolicyRulesCriteriaSourcePortModel
+var NATPolicyRulesCriteriaSourcePortModelAttrTypes = map[string]attr.Type{
+	"port":          types.Int64Type,
+	"port_ranges":   types.StringType,
+	"no_port_match": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NATPolicyRulesCriteriaTCPModel represents tcp block
 type NATPolicyRulesCriteriaTCPModel struct {
 	DestinationPort *NATPolicyRulesCriteriaTCPDestinationPortModel `tfsdk:"destination_port"`
 	SourcePort      *NATPolicyRulesCriteriaTCPSourcePortModel      `tfsdk:"source_port"`
+}
+
+// NATPolicyRulesCriteriaTCPModelAttrTypes defines the attribute types for NATPolicyRulesCriteriaTCPModel
+var NATPolicyRulesCriteriaTCPModelAttrTypes = map[string]attr.Type{
+	"destination_port": types.ObjectType{AttrTypes: NATPolicyRulesCriteriaTCPDestinationPortModelAttrTypes},
+	"source_port":      types.ObjectType{AttrTypes: NATPolicyRulesCriteriaTCPSourcePortModelAttrTypes},
 }
 
 // NATPolicyRulesCriteriaTCPDestinationPortModel represents destination_port block
@@ -163,6 +271,13 @@ type NATPolicyRulesCriteriaTCPDestinationPortModel struct {
 	NoPortMatch *NATPolicyEmptyModel `tfsdk:"no_port_match"`
 }
 
+// NATPolicyRulesCriteriaTCPDestinationPortModelAttrTypes defines the attribute types for NATPolicyRulesCriteriaTCPDestinationPortModel
+var NATPolicyRulesCriteriaTCPDestinationPortModelAttrTypes = map[string]attr.Type{
+	"port":          types.Int64Type,
+	"port_ranges":   types.StringType,
+	"no_port_match": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NATPolicyRulesCriteriaTCPSourcePortModel represents source_port block
 type NATPolicyRulesCriteriaTCPSourcePortModel struct {
 	Port        types.Int64          `tfsdk:"port"`
@@ -170,10 +285,23 @@ type NATPolicyRulesCriteriaTCPSourcePortModel struct {
 	NoPortMatch *NATPolicyEmptyModel `tfsdk:"no_port_match"`
 }
 
+// NATPolicyRulesCriteriaTCPSourcePortModelAttrTypes defines the attribute types for NATPolicyRulesCriteriaTCPSourcePortModel
+var NATPolicyRulesCriteriaTCPSourcePortModelAttrTypes = map[string]attr.Type{
+	"port":          types.Int64Type,
+	"port_ranges":   types.StringType,
+	"no_port_match": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NATPolicyRulesCriteriaUDPModel represents udp block
 type NATPolicyRulesCriteriaUDPModel struct {
 	DestinationPort *NATPolicyRulesCriteriaUDPDestinationPortModel `tfsdk:"destination_port"`
 	SourcePort      *NATPolicyRulesCriteriaUDPSourcePortModel      `tfsdk:"source_port"`
+}
+
+// NATPolicyRulesCriteriaUDPModelAttrTypes defines the attribute types for NATPolicyRulesCriteriaUDPModel
+var NATPolicyRulesCriteriaUDPModelAttrTypes = map[string]attr.Type{
+	"destination_port": types.ObjectType{AttrTypes: NATPolicyRulesCriteriaUDPDestinationPortModelAttrTypes},
+	"source_port":      types.ObjectType{AttrTypes: NATPolicyRulesCriteriaUDPSourcePortModelAttrTypes},
 }
 
 // NATPolicyRulesCriteriaUDPDestinationPortModel represents destination_port block
@@ -183,6 +311,13 @@ type NATPolicyRulesCriteriaUDPDestinationPortModel struct {
 	NoPortMatch *NATPolicyEmptyModel `tfsdk:"no_port_match"`
 }
 
+// NATPolicyRulesCriteriaUDPDestinationPortModelAttrTypes defines the attribute types for NATPolicyRulesCriteriaUDPDestinationPortModel
+var NATPolicyRulesCriteriaUDPDestinationPortModelAttrTypes = map[string]attr.Type{
+	"port":          types.Int64Type,
+	"port_ranges":   types.StringType,
+	"no_port_match": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NATPolicyRulesCriteriaUDPSourcePortModel represents source_port block
 type NATPolicyRulesCriteriaUDPSourcePortModel struct {
 	Port        types.Int64          `tfsdk:"port"`
@@ -190,9 +325,21 @@ type NATPolicyRulesCriteriaUDPSourcePortModel struct {
 	NoPortMatch *NATPolicyEmptyModel `tfsdk:"no_port_match"`
 }
 
+// NATPolicyRulesCriteriaUDPSourcePortModelAttrTypes defines the attribute types for NATPolicyRulesCriteriaUDPSourcePortModel
+var NATPolicyRulesCriteriaUDPSourcePortModelAttrTypes = map[string]attr.Type{
+	"port":          types.Int64Type,
+	"port_ranges":   types.StringType,
+	"no_port_match": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NATPolicyRulesCriteriaVirtualNetworkModel represents virtual_network block
 type NATPolicyRulesCriteriaVirtualNetworkModel struct {
 	Refs []NATPolicyRulesCriteriaVirtualNetworkRefsModel `tfsdk:"refs"`
+}
+
+// NATPolicyRulesCriteriaVirtualNetworkModelAttrTypes defines the attribute types for NATPolicyRulesCriteriaVirtualNetworkModel
+var NATPolicyRulesCriteriaVirtualNetworkModelAttrTypes = map[string]attr.Type{
+	"refs": types.ListType{ElemType: types.ObjectType{AttrTypes: NATPolicyRulesCriteriaVirtualNetworkRefsModelAttrTypes}},
 }
 
 // NATPolicyRulesCriteriaVirtualNetworkRefsModel represents refs block
@@ -204,9 +351,23 @@ type NATPolicyRulesCriteriaVirtualNetworkRefsModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// NATPolicyRulesCriteriaVirtualNetworkRefsModelAttrTypes defines the attribute types for NATPolicyRulesCriteriaVirtualNetworkRefsModel
+var NATPolicyRulesCriteriaVirtualNetworkRefsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // NATPolicyRulesNetworkInterfaceModel represents network_interface block
 type NATPolicyRulesNetworkInterfaceModel struct {
 	Refs []NATPolicyRulesNetworkInterfaceRefsModel `tfsdk:"refs"`
+}
+
+// NATPolicyRulesNetworkInterfaceModelAttrTypes defines the attribute types for NATPolicyRulesNetworkInterfaceModel
+var NATPolicyRulesNetworkInterfaceModelAttrTypes = map[string]attr.Type{
+	"refs": types.ListType{ElemType: types.ObjectType{AttrTypes: NATPolicyRulesNetworkInterfaceRefsModelAttrTypes}},
 }
 
 // NATPolicyRulesNetworkInterfaceRefsModel represents refs block
@@ -218,9 +379,23 @@ type NATPolicyRulesNetworkInterfaceRefsModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// NATPolicyRulesNetworkInterfaceRefsModelAttrTypes defines the attribute types for NATPolicyRulesNetworkInterfaceRefsModel
+var NATPolicyRulesNetworkInterfaceRefsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // NATPolicyRulesSegmentModel represents segment block
 type NATPolicyRulesSegmentModel struct {
 	Refs []NATPolicyRulesSegmentRefsModel `tfsdk:"refs"`
+}
+
+// NATPolicyRulesSegmentModelAttrTypes defines the attribute types for NATPolicyRulesSegmentModel
+var NATPolicyRulesSegmentModelAttrTypes = map[string]attr.Type{
+	"refs": types.ListType{ElemType: types.ObjectType{AttrTypes: NATPolicyRulesSegmentRefsModelAttrTypes}},
 }
 
 // NATPolicyRulesSegmentRefsModel represents refs block
@@ -232,9 +407,23 @@ type NATPolicyRulesSegmentRefsModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// NATPolicyRulesSegmentRefsModelAttrTypes defines the attribute types for NATPolicyRulesSegmentRefsModel
+var NATPolicyRulesSegmentRefsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // NATPolicyRulesVirtualNetworkModel represents virtual_network block
 type NATPolicyRulesVirtualNetworkModel struct {
 	Refs []NATPolicyRulesVirtualNetworkRefsModel `tfsdk:"refs"`
+}
+
+// NATPolicyRulesVirtualNetworkModelAttrTypes defines the attribute types for NATPolicyRulesVirtualNetworkModel
+var NATPolicyRulesVirtualNetworkModelAttrTypes = map[string]attr.Type{
+	"refs": types.ListType{ElemType: types.ObjectType{AttrTypes: NATPolicyRulesVirtualNetworkRefsModelAttrTypes}},
 }
 
 // NATPolicyRulesVirtualNetworkRefsModel represents refs block
@@ -246,9 +435,23 @@ type NATPolicyRulesVirtualNetworkRefsModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// NATPolicyRulesVirtualNetworkRefsModelAttrTypes defines the attribute types for NATPolicyRulesVirtualNetworkRefsModel
+var NATPolicyRulesVirtualNetworkRefsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // NATPolicySiteModel represents site block
 type NATPolicySiteModel struct {
 	Refs []NATPolicySiteRefsModel `tfsdk:"refs"`
+}
+
+// NATPolicySiteModelAttrTypes defines the attribute types for NATPolicySiteModel
+var NATPolicySiteModelAttrTypes = map[string]attr.Type{
+	"refs": types.ListType{ElemType: types.ObjectType{AttrTypes: NATPolicySiteRefsModelAttrTypes}},
 }
 
 // NATPolicySiteRefsModel represents refs block
@@ -260,17 +463,26 @@ type NATPolicySiteRefsModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// NATPolicySiteRefsModelAttrTypes defines the attribute types for NATPolicySiteRefsModel
+var NATPolicySiteRefsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 type NATPolicyResourceModel struct {
-	Name        types.String          `tfsdk:"name"`
-	Namespace   types.String          `tfsdk:"namespace"`
-	Annotations types.Map             `tfsdk:"annotations"`
-	Description types.String          `tfsdk:"description"`
-	Disable     types.Bool            `tfsdk:"disable"`
-	Labels      types.Map             `tfsdk:"labels"`
-	ID          types.String          `tfsdk:"id"`
-	Timeouts    timeouts.Value        `tfsdk:"timeouts"`
-	Rules       []NATPolicyRulesModel `tfsdk:"rules"`
-	Site        *NATPolicySiteModel   `tfsdk:"site"`
+	Name        types.String        `tfsdk:"name"`
+	Namespace   types.String        `tfsdk:"namespace"`
+	Annotations types.Map           `tfsdk:"annotations"`
+	Description types.String        `tfsdk:"description"`
+	Disable     types.Bool          `tfsdk:"disable"`
+	Labels      types.Map           `tfsdk:"labels"`
+	ID          types.String        `tfsdk:"id"`
+	Timeouts    timeouts.Value      `tfsdk:"timeouts"`
+	Rules       types.List          `tfsdk:"rules"`
+	Site        *NATPolicySiteModel `tfsdk:"site"`
 }
 
 func (r *NATPolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -370,6 +582,9 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -383,11 +598,17 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 														},
 													},
@@ -420,6 +641,9 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 												MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -433,11 +657,17 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 											"uid": schema.StringAttribute{
 												MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -499,6 +729,9 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -512,11 +745,17 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 												},
 											},
@@ -637,6 +876,9 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -650,11 +892,17 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 												},
 											},
@@ -681,6 +929,9 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 												MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -694,11 +945,17 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 											"uid": schema.StringAttribute{
 												MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -717,6 +974,9 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 												MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -730,11 +990,17 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 											"uid": schema.StringAttribute{
 												MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -753,6 +1019,9 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 												MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -766,11 +1035,17 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 											"uid": schema.StringAttribute{
 												MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -792,6 +1067,9 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 									MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -805,11 +1083,17 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 								"uid": schema.StringAttribute{
 									MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -964,210 +1248,215 @@ func (r *NATPolicyResource) Create(ctx context.Context, req resource.CreateReque
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.Rules) > 0 {
-		var rulesList []map[string]interface{}
-		for _, item := range data.Rules {
-			itemMap := make(map[string]interface{})
-			if item.Action != nil {
-				actionNestedMap := make(map[string]interface{})
-				if item.Action.Dynamic != nil {
-					dynamicDeepMap := make(map[string]interface{})
-					actionNestedMap["dynamic"] = dynamicDeepMap
+	if !data.Rules.IsNull() && !data.Rules.IsUnknown() {
+		var rulesItems []NATPolicyRulesModel
+		diags := data.Rules.ElementsAs(ctx, &rulesItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(rulesItems) > 0 {
+			var rulesList []map[string]interface{}
+			for _, item := range rulesItems {
+				itemMap := make(map[string]interface{})
+				if item.Action != nil {
+					actionNestedMap := make(map[string]interface{})
+					if item.Action.Dynamic != nil {
+						dynamicDeepMap := make(map[string]interface{})
+						actionNestedMap["dynamic"] = dynamicDeepMap
+					}
+					if !item.Action.VirtualCIDR.IsNull() && !item.Action.VirtualCIDR.IsUnknown() {
+						actionNestedMap["virtual_cidr"] = item.Action.VirtualCIDR.ValueString()
+					}
+					itemMap["action"] = actionNestedMap
 				}
-				if !item.Action.VirtualCIDR.IsNull() && !item.Action.VirtualCIDR.IsUnknown() {
-					actionNestedMap["virtual_cidr"] = item.Action.VirtualCIDR.ValueString()
+				if item.CloudConnect != nil {
+					cloud_connectNestedMap := make(map[string]interface{})
+					if len(item.CloudConnect.Refs) > 0 {
+						var refsDeepList []map[string]interface{}
+						for _, deepListItem := range item.CloudConnect.Refs {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Kind.IsNull() && !deepListItem.Kind.IsUnknown() {
+								deepListItemMap["kind"] = deepListItem.Kind.ValueString()
+							}
+							if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+								deepListItemMap["name"] = deepListItem.Name.ValueString()
+							}
+							if !deepListItem.Namespace.IsNull() && !deepListItem.Namespace.IsUnknown() {
+								deepListItemMap["namespace"] = deepListItem.Namespace.ValueString()
+							}
+							if !deepListItem.Tenant.IsNull() && !deepListItem.Tenant.IsUnknown() {
+								deepListItemMap["tenant"] = deepListItem.Tenant.ValueString()
+							}
+							if !deepListItem.Uid.IsNull() && !deepListItem.Uid.IsUnknown() {
+								deepListItemMap["uid"] = deepListItem.Uid.ValueString()
+							}
+							refsDeepList = append(refsDeepList, deepListItemMap)
+						}
+						cloud_connectNestedMap["refs"] = refsDeepList
+					}
+					itemMap["cloud_connect"] = cloud_connectNestedMap
 				}
-				itemMap["action"] = actionNestedMap
+				if item.Criteria != nil {
+					criteriaNestedMap := make(map[string]interface{})
+					if item.Criteria.Any != nil {
+						criteriaNestedMap["any"] = map[string]interface{}{}
+					}
+					if !item.Criteria.DestinationCIDR.IsNull() && !item.Criteria.DestinationCIDR.IsUnknown() {
+						var DestinationCIDRItems []string
+						diags := item.Criteria.DestinationCIDR.ElementsAs(ctx, &DestinationCIDRItems, false)
+						if !diags.HasError() {
+							criteriaNestedMap["destination_cidr"] = DestinationCIDRItems
+						}
+					}
+					if item.Criteria.DestinationPort != nil {
+						destination_portDeepMap := make(map[string]interface{})
+						if item.Criteria.DestinationPort.NoPortMatch != nil {
+							destination_portDeepMap["no_port_match"] = map[string]interface{}{}
+						}
+						if !item.Criteria.DestinationPort.Port.IsNull() && !item.Criteria.DestinationPort.Port.IsUnknown() {
+							destination_portDeepMap["port"] = item.Criteria.DestinationPort.Port.ValueInt64()
+						}
+						if !item.Criteria.DestinationPort.PortRanges.IsNull() && !item.Criteria.DestinationPort.PortRanges.IsUnknown() {
+							destination_portDeepMap["port_ranges"] = item.Criteria.DestinationPort.PortRanges.ValueString()
+						}
+						criteriaNestedMap["destination_port"] = destination_portDeepMap
+					}
+					if item.Criteria.ICMP != nil {
+						criteriaNestedMap["icmp"] = map[string]interface{}{}
+					}
+					if !item.Criteria.Protocol.IsNull() && !item.Criteria.Protocol.IsUnknown() {
+						criteriaNestedMap["protocol"] = item.Criteria.Protocol.ValueString()
+					}
+					if item.Criteria.Segment != nil {
+						segmentDeepMap := make(map[string]interface{})
+						criteriaNestedMap["segment"] = segmentDeepMap
+					}
+					if !item.Criteria.SourceCIDR.IsNull() && !item.Criteria.SourceCIDR.IsUnknown() {
+						var SourceCIDRItems []string
+						diags := item.Criteria.SourceCIDR.ElementsAs(ctx, &SourceCIDRItems, false)
+						if !diags.HasError() {
+							criteriaNestedMap["source_cidr"] = SourceCIDRItems
+						}
+					}
+					if item.Criteria.SourcePort != nil {
+						source_portDeepMap := make(map[string]interface{})
+						if item.Criteria.SourcePort.NoPortMatch != nil {
+							source_portDeepMap["no_port_match"] = map[string]interface{}{}
+						}
+						if !item.Criteria.SourcePort.Port.IsNull() && !item.Criteria.SourcePort.Port.IsUnknown() {
+							source_portDeepMap["port"] = item.Criteria.SourcePort.Port.ValueInt64()
+						}
+						if !item.Criteria.SourcePort.PortRanges.IsNull() && !item.Criteria.SourcePort.PortRanges.IsUnknown() {
+							source_portDeepMap["port_ranges"] = item.Criteria.SourcePort.PortRanges.ValueString()
+						}
+						criteriaNestedMap["source_port"] = source_portDeepMap
+					}
+					if item.Criteria.TCP != nil {
+						tcpDeepMap := make(map[string]interface{})
+						criteriaNestedMap["tcp"] = tcpDeepMap
+					}
+					if item.Criteria.UDP != nil {
+						udpDeepMap := make(map[string]interface{})
+						criteriaNestedMap["udp"] = udpDeepMap
+					}
+					if item.Criteria.VirtualNetwork != nil {
+						virtual_networkDeepMap := make(map[string]interface{})
+						criteriaNestedMap["virtual_network"] = virtual_networkDeepMap
+					}
+					itemMap["criteria"] = criteriaNestedMap
+				}
+				if item.Disable != nil {
+					itemMap["disable"] = map[string]interface{}{}
+				}
+				if item.Enable != nil {
+					itemMap["enable"] = map[string]interface{}{}
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if item.NetworkInterface != nil {
+					network_interfaceNestedMap := make(map[string]interface{})
+					if len(item.NetworkInterface.Refs) > 0 {
+						var refsDeepList []map[string]interface{}
+						for _, deepListItem := range item.NetworkInterface.Refs {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Kind.IsNull() && !deepListItem.Kind.IsUnknown() {
+								deepListItemMap["kind"] = deepListItem.Kind.ValueString()
+							}
+							if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+								deepListItemMap["name"] = deepListItem.Name.ValueString()
+							}
+							if !deepListItem.Namespace.IsNull() && !deepListItem.Namespace.IsUnknown() {
+								deepListItemMap["namespace"] = deepListItem.Namespace.ValueString()
+							}
+							if !deepListItem.Tenant.IsNull() && !deepListItem.Tenant.IsUnknown() {
+								deepListItemMap["tenant"] = deepListItem.Tenant.ValueString()
+							}
+							if !deepListItem.Uid.IsNull() && !deepListItem.Uid.IsUnknown() {
+								deepListItemMap["uid"] = deepListItem.Uid.ValueString()
+							}
+							refsDeepList = append(refsDeepList, deepListItemMap)
+						}
+						network_interfaceNestedMap["refs"] = refsDeepList
+					}
+					itemMap["network_interface"] = network_interfaceNestedMap
+				}
+				if item.Segment != nil {
+					segmentNestedMap := make(map[string]interface{})
+					if len(item.Segment.Refs) > 0 {
+						var refsDeepList []map[string]interface{}
+						for _, deepListItem := range item.Segment.Refs {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Kind.IsNull() && !deepListItem.Kind.IsUnknown() {
+								deepListItemMap["kind"] = deepListItem.Kind.ValueString()
+							}
+							if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+								deepListItemMap["name"] = deepListItem.Name.ValueString()
+							}
+							if !deepListItem.Namespace.IsNull() && !deepListItem.Namespace.IsUnknown() {
+								deepListItemMap["namespace"] = deepListItem.Namespace.ValueString()
+							}
+							if !deepListItem.Tenant.IsNull() && !deepListItem.Tenant.IsUnknown() {
+								deepListItemMap["tenant"] = deepListItem.Tenant.ValueString()
+							}
+							if !deepListItem.Uid.IsNull() && !deepListItem.Uid.IsUnknown() {
+								deepListItemMap["uid"] = deepListItem.Uid.ValueString()
+							}
+							refsDeepList = append(refsDeepList, deepListItemMap)
+						}
+						segmentNestedMap["refs"] = refsDeepList
+					}
+					itemMap["segment"] = segmentNestedMap
+				}
+				if item.VirtualNetwork != nil {
+					virtual_networkNestedMap := make(map[string]interface{})
+					if len(item.VirtualNetwork.Refs) > 0 {
+						var refsDeepList []map[string]interface{}
+						for _, deepListItem := range item.VirtualNetwork.Refs {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Kind.IsNull() && !deepListItem.Kind.IsUnknown() {
+								deepListItemMap["kind"] = deepListItem.Kind.ValueString()
+							}
+							if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+								deepListItemMap["name"] = deepListItem.Name.ValueString()
+							}
+							if !deepListItem.Namespace.IsNull() && !deepListItem.Namespace.IsUnknown() {
+								deepListItemMap["namespace"] = deepListItem.Namespace.ValueString()
+							}
+							if !deepListItem.Tenant.IsNull() && !deepListItem.Tenant.IsUnknown() {
+								deepListItemMap["tenant"] = deepListItem.Tenant.ValueString()
+							}
+							if !deepListItem.Uid.IsNull() && !deepListItem.Uid.IsUnknown() {
+								deepListItemMap["uid"] = deepListItem.Uid.ValueString()
+							}
+							refsDeepList = append(refsDeepList, deepListItemMap)
+						}
+						virtual_networkNestedMap["refs"] = refsDeepList
+					}
+					itemMap["virtual_network"] = virtual_networkNestedMap
+				}
+				rulesList = append(rulesList, itemMap)
 			}
-			if item.CloudConnect != nil {
-				cloud_connectNestedMap := make(map[string]interface{})
-				if len(item.CloudConnect.Refs) > 0 {
-					var refsDeepList []map[string]interface{}
-					for _, deepListItem := range item.CloudConnect.Refs {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Kind.IsNull() && !deepListItem.Kind.IsUnknown() {
-							deepListItemMap["kind"] = deepListItem.Kind.ValueString()
-						}
-						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
-							deepListItemMap["name"] = deepListItem.Name.ValueString()
-						}
-						if !deepListItem.Namespace.IsNull() && !deepListItem.Namespace.IsUnknown() {
-							deepListItemMap["namespace"] = deepListItem.Namespace.ValueString()
-						}
-						if !deepListItem.Tenant.IsNull() && !deepListItem.Tenant.IsUnknown() {
-							deepListItemMap["tenant"] = deepListItem.Tenant.ValueString()
-						}
-						if !deepListItem.Uid.IsNull() && !deepListItem.Uid.IsUnknown() {
-							deepListItemMap["uid"] = deepListItem.Uid.ValueString()
-						}
-						refsDeepList = append(refsDeepList, deepListItemMap)
-					}
-					cloud_connectNestedMap["refs"] = refsDeepList
-				}
-				itemMap["cloud_connect"] = cloud_connectNestedMap
-			}
-			if item.Criteria != nil {
-				criteriaNestedMap := make(map[string]interface{})
-				if item.Criteria.Any != nil {
-					criteriaNestedMap["any"] = map[string]interface{}{}
-				}
-				if !item.Criteria.DestinationCIDR.IsNull() && !item.Criteria.DestinationCIDR.IsUnknown() {
-					var DestinationCIDRItems []string
-					diags := item.Criteria.DestinationCIDR.ElementsAs(ctx, &DestinationCIDRItems, false)
-					if !diags.HasError() {
-						criteriaNestedMap["destination_cidr"] = DestinationCIDRItems
-					}
-				}
-				if item.Criteria.DestinationPort != nil {
-					destination_portDeepMap := make(map[string]interface{})
-					if item.Criteria.DestinationPort.NoPortMatch != nil {
-						destination_portDeepMap["no_port_match"] = map[string]interface{}{}
-					}
-					if !item.Criteria.DestinationPort.Port.IsNull() && !item.Criteria.DestinationPort.Port.IsUnknown() {
-						destination_portDeepMap["port"] = item.Criteria.DestinationPort.Port.ValueInt64()
-					}
-					if !item.Criteria.DestinationPort.PortRanges.IsNull() && !item.Criteria.DestinationPort.PortRanges.IsUnknown() {
-						destination_portDeepMap["port_ranges"] = item.Criteria.DestinationPort.PortRanges.ValueString()
-					}
-					criteriaNestedMap["destination_port"] = destination_portDeepMap
-				}
-				if item.Criteria.ICMP != nil {
-					criteriaNestedMap["icmp"] = map[string]interface{}{}
-				}
-				if !item.Criteria.Protocol.IsNull() && !item.Criteria.Protocol.IsUnknown() {
-					criteriaNestedMap["protocol"] = item.Criteria.Protocol.ValueString()
-				}
-				if item.Criteria.Segment != nil {
-					segmentDeepMap := make(map[string]interface{})
-					criteriaNestedMap["segment"] = segmentDeepMap
-				}
-				if !item.Criteria.SourceCIDR.IsNull() && !item.Criteria.SourceCIDR.IsUnknown() {
-					var SourceCIDRItems []string
-					diags := item.Criteria.SourceCIDR.ElementsAs(ctx, &SourceCIDRItems, false)
-					if !diags.HasError() {
-						criteriaNestedMap["source_cidr"] = SourceCIDRItems
-					}
-				}
-				if item.Criteria.SourcePort != nil {
-					source_portDeepMap := make(map[string]interface{})
-					if item.Criteria.SourcePort.NoPortMatch != nil {
-						source_portDeepMap["no_port_match"] = map[string]interface{}{}
-					}
-					if !item.Criteria.SourcePort.Port.IsNull() && !item.Criteria.SourcePort.Port.IsUnknown() {
-						source_portDeepMap["port"] = item.Criteria.SourcePort.Port.ValueInt64()
-					}
-					if !item.Criteria.SourcePort.PortRanges.IsNull() && !item.Criteria.SourcePort.PortRanges.IsUnknown() {
-						source_portDeepMap["port_ranges"] = item.Criteria.SourcePort.PortRanges.ValueString()
-					}
-					criteriaNestedMap["source_port"] = source_portDeepMap
-				}
-				if item.Criteria.TCP != nil {
-					tcpDeepMap := make(map[string]interface{})
-					criteriaNestedMap["tcp"] = tcpDeepMap
-				}
-				if item.Criteria.UDP != nil {
-					udpDeepMap := make(map[string]interface{})
-					criteriaNestedMap["udp"] = udpDeepMap
-				}
-				if item.Criteria.VirtualNetwork != nil {
-					virtual_networkDeepMap := make(map[string]interface{})
-					criteriaNestedMap["virtual_network"] = virtual_networkDeepMap
-				}
-				itemMap["criteria"] = criteriaNestedMap
-			}
-			if item.Disable != nil {
-				itemMap["disable"] = map[string]interface{}{}
-			}
-			if item.Enable != nil {
-				itemMap["enable"] = map[string]interface{}{}
-			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if item.NetworkInterface != nil {
-				network_interfaceNestedMap := make(map[string]interface{})
-				if len(item.NetworkInterface.Refs) > 0 {
-					var refsDeepList []map[string]interface{}
-					for _, deepListItem := range item.NetworkInterface.Refs {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Kind.IsNull() && !deepListItem.Kind.IsUnknown() {
-							deepListItemMap["kind"] = deepListItem.Kind.ValueString()
-						}
-						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
-							deepListItemMap["name"] = deepListItem.Name.ValueString()
-						}
-						if !deepListItem.Namespace.IsNull() && !deepListItem.Namespace.IsUnknown() {
-							deepListItemMap["namespace"] = deepListItem.Namespace.ValueString()
-						}
-						if !deepListItem.Tenant.IsNull() && !deepListItem.Tenant.IsUnknown() {
-							deepListItemMap["tenant"] = deepListItem.Tenant.ValueString()
-						}
-						if !deepListItem.Uid.IsNull() && !deepListItem.Uid.IsUnknown() {
-							deepListItemMap["uid"] = deepListItem.Uid.ValueString()
-						}
-						refsDeepList = append(refsDeepList, deepListItemMap)
-					}
-					network_interfaceNestedMap["refs"] = refsDeepList
-				}
-				itemMap["network_interface"] = network_interfaceNestedMap
-			}
-			if item.Segment != nil {
-				segmentNestedMap := make(map[string]interface{})
-				if len(item.Segment.Refs) > 0 {
-					var refsDeepList []map[string]interface{}
-					for _, deepListItem := range item.Segment.Refs {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Kind.IsNull() && !deepListItem.Kind.IsUnknown() {
-							deepListItemMap["kind"] = deepListItem.Kind.ValueString()
-						}
-						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
-							deepListItemMap["name"] = deepListItem.Name.ValueString()
-						}
-						if !deepListItem.Namespace.IsNull() && !deepListItem.Namespace.IsUnknown() {
-							deepListItemMap["namespace"] = deepListItem.Namespace.ValueString()
-						}
-						if !deepListItem.Tenant.IsNull() && !deepListItem.Tenant.IsUnknown() {
-							deepListItemMap["tenant"] = deepListItem.Tenant.ValueString()
-						}
-						if !deepListItem.Uid.IsNull() && !deepListItem.Uid.IsUnknown() {
-							deepListItemMap["uid"] = deepListItem.Uid.ValueString()
-						}
-						refsDeepList = append(refsDeepList, deepListItemMap)
-					}
-					segmentNestedMap["refs"] = refsDeepList
-				}
-				itemMap["segment"] = segmentNestedMap
-			}
-			if item.VirtualNetwork != nil {
-				virtual_networkNestedMap := make(map[string]interface{})
-				if len(item.VirtualNetwork.Refs) > 0 {
-					var refsDeepList []map[string]interface{}
-					for _, deepListItem := range item.VirtualNetwork.Refs {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Kind.IsNull() && !deepListItem.Kind.IsUnknown() {
-							deepListItemMap["kind"] = deepListItem.Kind.ValueString()
-						}
-						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
-							deepListItemMap["name"] = deepListItem.Name.ValueString()
-						}
-						if !deepListItem.Namespace.IsNull() && !deepListItem.Namespace.IsUnknown() {
-							deepListItemMap["namespace"] = deepListItem.Namespace.ValueString()
-						}
-						if !deepListItem.Tenant.IsNull() && !deepListItem.Tenant.IsUnknown() {
-							deepListItemMap["tenant"] = deepListItem.Tenant.ValueString()
-						}
-						if !deepListItem.Uid.IsNull() && !deepListItem.Uid.IsUnknown() {
-							deepListItemMap["uid"] = deepListItem.Uid.ValueString()
-						}
-						refsDeepList = append(refsDeepList, deepListItemMap)
-					}
-					virtual_networkNestedMap["refs"] = refsDeepList
-				}
-				itemMap["virtual_network"] = virtual_networkNestedMap
-			}
-			rulesList = append(rulesList, itemMap)
+			createReq.Spec["rules"] = rulesList
 		}
-		createReq.Spec["rules"] = rulesList
 	}
 	if data.Site != nil {
 		siteMap := make(map[string]interface{})
@@ -1211,6 +1500,10 @@ func (r *NATPolicyResource) Create(ctx context.Context, req resource.CreateReque
 	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["rules"].([]interface{}); ok && len(listData) > 0 {
 		var rulesList []NATPolicyRulesModel
+		var existingRulesItems []NATPolicyRulesModel
+		if !data.Rules.IsNull() && !data.Rules.IsUnknown() {
+			data.Rules.ElementsAs(ctx, &existingRulesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -1238,7 +1531,7 @@ func (r *NATPolicyResource) Create(ctx context.Context, req resource.CreateReque
 						if nestedMap, ok := itemMap["criteria"].(map[string]interface{}); ok {
 							return &NATPolicyRulesCriteriaModel{
 								Any: func() *NATPolicyEmptyModel {
-									if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Criteria != nil && data.Rules[listIdx].Criteria.Any != nil {
+									if !isImport && len(existingRulesItems) > listIdx && existingRulesItems[listIdx].Criteria != nil && existingRulesItems[listIdx].Criteria.Any != nil {
 										return &NATPolicyEmptyModel{}
 									}
 									return nil
@@ -1257,7 +1550,7 @@ func (r *NATPolicyResource) Create(ctx context.Context, req resource.CreateReque
 									return types.ListNull(types.StringType)
 								}(),
 								ICMP: func() *NATPolicyEmptyModel {
-									if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Criteria != nil && data.Rules[listIdx].Criteria.ICMP != nil {
+									if !isImport && len(existingRulesItems) > listIdx && existingRulesItems[listIdx].Criteria != nil && existingRulesItems[listIdx].Criteria.ICMP != nil {
 										return &NATPolicyEmptyModel{}
 									}
 									return nil
@@ -1286,13 +1579,13 @@ func (r *NATPolicyResource) Create(ctx context.Context, req resource.CreateReque
 						return nil
 					}(),
 					Disable: func() *NATPolicyEmptyModel {
-						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Disable != nil {
+						if !isImport && len(existingRulesItems) > listIdx && existingRulesItems[listIdx].Disable != nil {
 							return &NATPolicyEmptyModel{}
 						}
 						return nil
 					}(),
 					Enable: func() *NATPolicyEmptyModel {
-						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Enable != nil {
+						if !isImport && len(existingRulesItems) > listIdx && existingRulesItems[listIdx].Enable != nil {
 							return &NATPolicyEmptyModel{}
 						}
 						return nil
@@ -1324,7 +1617,14 @@ func (r *NATPolicyResource) Create(ctx context.Context, req resource.CreateReque
 				})
 			}
 		}
-		data.Rules = rulesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: NATPolicyRulesModelAttrTypes}, rulesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Rules = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Rules = types.ListNull(types.ObjectType{AttrTypes: NATPolicyRulesModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["site"].(map[string]interface{}); ok && (isImport || data.Site != nil) {
 		data.Site = &NATPolicySiteModel{
@@ -1437,11 +1737,17 @@ func (r *NATPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -1468,6 +1774,10 @@ func (r *NATPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 	})
 	if listData, ok := apiResource.Spec["rules"].([]interface{}); ok && len(listData) > 0 {
 		var rulesList []NATPolicyRulesModel
+		var existingRulesItems []NATPolicyRulesModel
+		if !data.Rules.IsNull() && !data.Rules.IsUnknown() {
+			data.Rules.ElementsAs(ctx, &existingRulesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -1495,7 +1805,7 @@ func (r *NATPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 						if nestedMap, ok := itemMap["criteria"].(map[string]interface{}); ok {
 							return &NATPolicyRulesCriteriaModel{
 								Any: func() *NATPolicyEmptyModel {
-									if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Criteria != nil && data.Rules[listIdx].Criteria.Any != nil {
+									if !isImport && len(existingRulesItems) > listIdx && existingRulesItems[listIdx].Criteria != nil && existingRulesItems[listIdx].Criteria.Any != nil {
 										return &NATPolicyEmptyModel{}
 									}
 									return nil
@@ -1514,7 +1824,7 @@ func (r *NATPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 									return types.ListNull(types.StringType)
 								}(),
 								ICMP: func() *NATPolicyEmptyModel {
-									if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Criteria != nil && data.Rules[listIdx].Criteria.ICMP != nil {
+									if !isImport && len(existingRulesItems) > listIdx && existingRulesItems[listIdx].Criteria != nil && existingRulesItems[listIdx].Criteria.ICMP != nil {
 										return &NATPolicyEmptyModel{}
 									}
 									return nil
@@ -1543,13 +1853,13 @@ func (r *NATPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 						return nil
 					}(),
 					Disable: func() *NATPolicyEmptyModel {
-						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Disable != nil {
+						if !isImport && len(existingRulesItems) > listIdx && existingRulesItems[listIdx].Disable != nil {
 							return &NATPolicyEmptyModel{}
 						}
 						return nil
 					}(),
 					Enable: func() *NATPolicyEmptyModel {
-						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Enable != nil {
+						if !isImport && len(existingRulesItems) > listIdx && existingRulesItems[listIdx].Enable != nil {
 							return &NATPolicyEmptyModel{}
 						}
 						return nil
@@ -1581,7 +1891,14 @@ func (r *NATPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 				})
 			}
 		}
-		data.Rules = rulesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: NATPolicyRulesModelAttrTypes}, rulesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Rules = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Rules = types.ListNull(types.ObjectType{AttrTypes: NATPolicyRulesModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["site"].(map[string]interface{}); ok && (isImport || data.Site != nil) {
 		data.Site = &NATPolicySiteModel{
@@ -1690,210 +2007,215 @@ func (r *NATPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.Rules) > 0 {
-		var rulesList []map[string]interface{}
-		for _, item := range data.Rules {
-			itemMap := make(map[string]interface{})
-			if item.Action != nil {
-				actionNestedMap := make(map[string]interface{})
-				if item.Action.Dynamic != nil {
-					dynamicDeepMap := make(map[string]interface{})
-					actionNestedMap["dynamic"] = dynamicDeepMap
+	if !data.Rules.IsNull() && !data.Rules.IsUnknown() {
+		var rulesItems []NATPolicyRulesModel
+		diags := data.Rules.ElementsAs(ctx, &rulesItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(rulesItems) > 0 {
+			var rulesList []map[string]interface{}
+			for _, item := range rulesItems {
+				itemMap := make(map[string]interface{})
+				if item.Action != nil {
+					actionNestedMap := make(map[string]interface{})
+					if item.Action.Dynamic != nil {
+						dynamicDeepMap := make(map[string]interface{})
+						actionNestedMap["dynamic"] = dynamicDeepMap
+					}
+					if !item.Action.VirtualCIDR.IsNull() && !item.Action.VirtualCIDR.IsUnknown() {
+						actionNestedMap["virtual_cidr"] = item.Action.VirtualCIDR.ValueString()
+					}
+					itemMap["action"] = actionNestedMap
 				}
-				if !item.Action.VirtualCIDR.IsNull() && !item.Action.VirtualCIDR.IsUnknown() {
-					actionNestedMap["virtual_cidr"] = item.Action.VirtualCIDR.ValueString()
+				if item.CloudConnect != nil {
+					cloud_connectNestedMap := make(map[string]interface{})
+					if len(item.CloudConnect.Refs) > 0 {
+						var refsDeepList []map[string]interface{}
+						for _, deepListItem := range item.CloudConnect.Refs {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Kind.IsNull() && !deepListItem.Kind.IsUnknown() {
+								deepListItemMap["kind"] = deepListItem.Kind.ValueString()
+							}
+							if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+								deepListItemMap["name"] = deepListItem.Name.ValueString()
+							}
+							if !deepListItem.Namespace.IsNull() && !deepListItem.Namespace.IsUnknown() {
+								deepListItemMap["namespace"] = deepListItem.Namespace.ValueString()
+							}
+							if !deepListItem.Tenant.IsNull() && !deepListItem.Tenant.IsUnknown() {
+								deepListItemMap["tenant"] = deepListItem.Tenant.ValueString()
+							}
+							if !deepListItem.Uid.IsNull() && !deepListItem.Uid.IsUnknown() {
+								deepListItemMap["uid"] = deepListItem.Uid.ValueString()
+							}
+							refsDeepList = append(refsDeepList, deepListItemMap)
+						}
+						cloud_connectNestedMap["refs"] = refsDeepList
+					}
+					itemMap["cloud_connect"] = cloud_connectNestedMap
 				}
-				itemMap["action"] = actionNestedMap
+				if item.Criteria != nil {
+					criteriaNestedMap := make(map[string]interface{})
+					if item.Criteria.Any != nil {
+						criteriaNestedMap["any"] = map[string]interface{}{}
+					}
+					if !item.Criteria.DestinationCIDR.IsNull() && !item.Criteria.DestinationCIDR.IsUnknown() {
+						var DestinationCIDRItems []string
+						diags := item.Criteria.DestinationCIDR.ElementsAs(ctx, &DestinationCIDRItems, false)
+						if !diags.HasError() {
+							criteriaNestedMap["destination_cidr"] = DestinationCIDRItems
+						}
+					}
+					if item.Criteria.DestinationPort != nil {
+						destination_portDeepMap := make(map[string]interface{})
+						if item.Criteria.DestinationPort.NoPortMatch != nil {
+							destination_portDeepMap["no_port_match"] = map[string]interface{}{}
+						}
+						if !item.Criteria.DestinationPort.Port.IsNull() && !item.Criteria.DestinationPort.Port.IsUnknown() {
+							destination_portDeepMap["port"] = item.Criteria.DestinationPort.Port.ValueInt64()
+						}
+						if !item.Criteria.DestinationPort.PortRanges.IsNull() && !item.Criteria.DestinationPort.PortRanges.IsUnknown() {
+							destination_portDeepMap["port_ranges"] = item.Criteria.DestinationPort.PortRanges.ValueString()
+						}
+						criteriaNestedMap["destination_port"] = destination_portDeepMap
+					}
+					if item.Criteria.ICMP != nil {
+						criteriaNestedMap["icmp"] = map[string]interface{}{}
+					}
+					if !item.Criteria.Protocol.IsNull() && !item.Criteria.Protocol.IsUnknown() {
+						criteriaNestedMap["protocol"] = item.Criteria.Protocol.ValueString()
+					}
+					if item.Criteria.Segment != nil {
+						segmentDeepMap := make(map[string]interface{})
+						criteriaNestedMap["segment"] = segmentDeepMap
+					}
+					if !item.Criteria.SourceCIDR.IsNull() && !item.Criteria.SourceCIDR.IsUnknown() {
+						var SourceCIDRItems []string
+						diags := item.Criteria.SourceCIDR.ElementsAs(ctx, &SourceCIDRItems, false)
+						if !diags.HasError() {
+							criteriaNestedMap["source_cidr"] = SourceCIDRItems
+						}
+					}
+					if item.Criteria.SourcePort != nil {
+						source_portDeepMap := make(map[string]interface{})
+						if item.Criteria.SourcePort.NoPortMatch != nil {
+							source_portDeepMap["no_port_match"] = map[string]interface{}{}
+						}
+						if !item.Criteria.SourcePort.Port.IsNull() && !item.Criteria.SourcePort.Port.IsUnknown() {
+							source_portDeepMap["port"] = item.Criteria.SourcePort.Port.ValueInt64()
+						}
+						if !item.Criteria.SourcePort.PortRanges.IsNull() && !item.Criteria.SourcePort.PortRanges.IsUnknown() {
+							source_portDeepMap["port_ranges"] = item.Criteria.SourcePort.PortRanges.ValueString()
+						}
+						criteriaNestedMap["source_port"] = source_portDeepMap
+					}
+					if item.Criteria.TCP != nil {
+						tcpDeepMap := make(map[string]interface{})
+						criteriaNestedMap["tcp"] = tcpDeepMap
+					}
+					if item.Criteria.UDP != nil {
+						udpDeepMap := make(map[string]interface{})
+						criteriaNestedMap["udp"] = udpDeepMap
+					}
+					if item.Criteria.VirtualNetwork != nil {
+						virtual_networkDeepMap := make(map[string]interface{})
+						criteriaNestedMap["virtual_network"] = virtual_networkDeepMap
+					}
+					itemMap["criteria"] = criteriaNestedMap
+				}
+				if item.Disable != nil {
+					itemMap["disable"] = map[string]interface{}{}
+				}
+				if item.Enable != nil {
+					itemMap["enable"] = map[string]interface{}{}
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if item.NetworkInterface != nil {
+					network_interfaceNestedMap := make(map[string]interface{})
+					if len(item.NetworkInterface.Refs) > 0 {
+						var refsDeepList []map[string]interface{}
+						for _, deepListItem := range item.NetworkInterface.Refs {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Kind.IsNull() && !deepListItem.Kind.IsUnknown() {
+								deepListItemMap["kind"] = deepListItem.Kind.ValueString()
+							}
+							if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+								deepListItemMap["name"] = deepListItem.Name.ValueString()
+							}
+							if !deepListItem.Namespace.IsNull() && !deepListItem.Namespace.IsUnknown() {
+								deepListItemMap["namespace"] = deepListItem.Namespace.ValueString()
+							}
+							if !deepListItem.Tenant.IsNull() && !deepListItem.Tenant.IsUnknown() {
+								deepListItemMap["tenant"] = deepListItem.Tenant.ValueString()
+							}
+							if !deepListItem.Uid.IsNull() && !deepListItem.Uid.IsUnknown() {
+								deepListItemMap["uid"] = deepListItem.Uid.ValueString()
+							}
+							refsDeepList = append(refsDeepList, deepListItemMap)
+						}
+						network_interfaceNestedMap["refs"] = refsDeepList
+					}
+					itemMap["network_interface"] = network_interfaceNestedMap
+				}
+				if item.Segment != nil {
+					segmentNestedMap := make(map[string]interface{})
+					if len(item.Segment.Refs) > 0 {
+						var refsDeepList []map[string]interface{}
+						for _, deepListItem := range item.Segment.Refs {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Kind.IsNull() && !deepListItem.Kind.IsUnknown() {
+								deepListItemMap["kind"] = deepListItem.Kind.ValueString()
+							}
+							if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+								deepListItemMap["name"] = deepListItem.Name.ValueString()
+							}
+							if !deepListItem.Namespace.IsNull() && !deepListItem.Namespace.IsUnknown() {
+								deepListItemMap["namespace"] = deepListItem.Namespace.ValueString()
+							}
+							if !deepListItem.Tenant.IsNull() && !deepListItem.Tenant.IsUnknown() {
+								deepListItemMap["tenant"] = deepListItem.Tenant.ValueString()
+							}
+							if !deepListItem.Uid.IsNull() && !deepListItem.Uid.IsUnknown() {
+								deepListItemMap["uid"] = deepListItem.Uid.ValueString()
+							}
+							refsDeepList = append(refsDeepList, deepListItemMap)
+						}
+						segmentNestedMap["refs"] = refsDeepList
+					}
+					itemMap["segment"] = segmentNestedMap
+				}
+				if item.VirtualNetwork != nil {
+					virtual_networkNestedMap := make(map[string]interface{})
+					if len(item.VirtualNetwork.Refs) > 0 {
+						var refsDeepList []map[string]interface{}
+						for _, deepListItem := range item.VirtualNetwork.Refs {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Kind.IsNull() && !deepListItem.Kind.IsUnknown() {
+								deepListItemMap["kind"] = deepListItem.Kind.ValueString()
+							}
+							if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+								deepListItemMap["name"] = deepListItem.Name.ValueString()
+							}
+							if !deepListItem.Namespace.IsNull() && !deepListItem.Namespace.IsUnknown() {
+								deepListItemMap["namespace"] = deepListItem.Namespace.ValueString()
+							}
+							if !deepListItem.Tenant.IsNull() && !deepListItem.Tenant.IsUnknown() {
+								deepListItemMap["tenant"] = deepListItem.Tenant.ValueString()
+							}
+							if !deepListItem.Uid.IsNull() && !deepListItem.Uid.IsUnknown() {
+								deepListItemMap["uid"] = deepListItem.Uid.ValueString()
+							}
+							refsDeepList = append(refsDeepList, deepListItemMap)
+						}
+						virtual_networkNestedMap["refs"] = refsDeepList
+					}
+					itemMap["virtual_network"] = virtual_networkNestedMap
+				}
+				rulesList = append(rulesList, itemMap)
 			}
-			if item.CloudConnect != nil {
-				cloud_connectNestedMap := make(map[string]interface{})
-				if len(item.CloudConnect.Refs) > 0 {
-					var refsDeepList []map[string]interface{}
-					for _, deepListItem := range item.CloudConnect.Refs {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Kind.IsNull() && !deepListItem.Kind.IsUnknown() {
-							deepListItemMap["kind"] = deepListItem.Kind.ValueString()
-						}
-						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
-							deepListItemMap["name"] = deepListItem.Name.ValueString()
-						}
-						if !deepListItem.Namespace.IsNull() && !deepListItem.Namespace.IsUnknown() {
-							deepListItemMap["namespace"] = deepListItem.Namespace.ValueString()
-						}
-						if !deepListItem.Tenant.IsNull() && !deepListItem.Tenant.IsUnknown() {
-							deepListItemMap["tenant"] = deepListItem.Tenant.ValueString()
-						}
-						if !deepListItem.Uid.IsNull() && !deepListItem.Uid.IsUnknown() {
-							deepListItemMap["uid"] = deepListItem.Uid.ValueString()
-						}
-						refsDeepList = append(refsDeepList, deepListItemMap)
-					}
-					cloud_connectNestedMap["refs"] = refsDeepList
-				}
-				itemMap["cloud_connect"] = cloud_connectNestedMap
-			}
-			if item.Criteria != nil {
-				criteriaNestedMap := make(map[string]interface{})
-				if item.Criteria.Any != nil {
-					criteriaNestedMap["any"] = map[string]interface{}{}
-				}
-				if !item.Criteria.DestinationCIDR.IsNull() && !item.Criteria.DestinationCIDR.IsUnknown() {
-					var DestinationCIDRItems []string
-					diags := item.Criteria.DestinationCIDR.ElementsAs(ctx, &DestinationCIDRItems, false)
-					if !diags.HasError() {
-						criteriaNestedMap["destination_cidr"] = DestinationCIDRItems
-					}
-				}
-				if item.Criteria.DestinationPort != nil {
-					destination_portDeepMap := make(map[string]interface{})
-					if item.Criteria.DestinationPort.NoPortMatch != nil {
-						destination_portDeepMap["no_port_match"] = map[string]interface{}{}
-					}
-					if !item.Criteria.DestinationPort.Port.IsNull() && !item.Criteria.DestinationPort.Port.IsUnknown() {
-						destination_portDeepMap["port"] = item.Criteria.DestinationPort.Port.ValueInt64()
-					}
-					if !item.Criteria.DestinationPort.PortRanges.IsNull() && !item.Criteria.DestinationPort.PortRanges.IsUnknown() {
-						destination_portDeepMap["port_ranges"] = item.Criteria.DestinationPort.PortRanges.ValueString()
-					}
-					criteriaNestedMap["destination_port"] = destination_portDeepMap
-				}
-				if item.Criteria.ICMP != nil {
-					criteriaNestedMap["icmp"] = map[string]interface{}{}
-				}
-				if !item.Criteria.Protocol.IsNull() && !item.Criteria.Protocol.IsUnknown() {
-					criteriaNestedMap["protocol"] = item.Criteria.Protocol.ValueString()
-				}
-				if item.Criteria.Segment != nil {
-					segmentDeepMap := make(map[string]interface{})
-					criteriaNestedMap["segment"] = segmentDeepMap
-				}
-				if !item.Criteria.SourceCIDR.IsNull() && !item.Criteria.SourceCIDR.IsUnknown() {
-					var SourceCIDRItems []string
-					diags := item.Criteria.SourceCIDR.ElementsAs(ctx, &SourceCIDRItems, false)
-					if !diags.HasError() {
-						criteriaNestedMap["source_cidr"] = SourceCIDRItems
-					}
-				}
-				if item.Criteria.SourcePort != nil {
-					source_portDeepMap := make(map[string]interface{})
-					if item.Criteria.SourcePort.NoPortMatch != nil {
-						source_portDeepMap["no_port_match"] = map[string]interface{}{}
-					}
-					if !item.Criteria.SourcePort.Port.IsNull() && !item.Criteria.SourcePort.Port.IsUnknown() {
-						source_portDeepMap["port"] = item.Criteria.SourcePort.Port.ValueInt64()
-					}
-					if !item.Criteria.SourcePort.PortRanges.IsNull() && !item.Criteria.SourcePort.PortRanges.IsUnknown() {
-						source_portDeepMap["port_ranges"] = item.Criteria.SourcePort.PortRanges.ValueString()
-					}
-					criteriaNestedMap["source_port"] = source_portDeepMap
-				}
-				if item.Criteria.TCP != nil {
-					tcpDeepMap := make(map[string]interface{})
-					criteriaNestedMap["tcp"] = tcpDeepMap
-				}
-				if item.Criteria.UDP != nil {
-					udpDeepMap := make(map[string]interface{})
-					criteriaNestedMap["udp"] = udpDeepMap
-				}
-				if item.Criteria.VirtualNetwork != nil {
-					virtual_networkDeepMap := make(map[string]interface{})
-					criteriaNestedMap["virtual_network"] = virtual_networkDeepMap
-				}
-				itemMap["criteria"] = criteriaNestedMap
-			}
-			if item.Disable != nil {
-				itemMap["disable"] = map[string]interface{}{}
-			}
-			if item.Enable != nil {
-				itemMap["enable"] = map[string]interface{}{}
-			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if item.NetworkInterface != nil {
-				network_interfaceNestedMap := make(map[string]interface{})
-				if len(item.NetworkInterface.Refs) > 0 {
-					var refsDeepList []map[string]interface{}
-					for _, deepListItem := range item.NetworkInterface.Refs {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Kind.IsNull() && !deepListItem.Kind.IsUnknown() {
-							deepListItemMap["kind"] = deepListItem.Kind.ValueString()
-						}
-						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
-							deepListItemMap["name"] = deepListItem.Name.ValueString()
-						}
-						if !deepListItem.Namespace.IsNull() && !deepListItem.Namespace.IsUnknown() {
-							deepListItemMap["namespace"] = deepListItem.Namespace.ValueString()
-						}
-						if !deepListItem.Tenant.IsNull() && !deepListItem.Tenant.IsUnknown() {
-							deepListItemMap["tenant"] = deepListItem.Tenant.ValueString()
-						}
-						if !deepListItem.Uid.IsNull() && !deepListItem.Uid.IsUnknown() {
-							deepListItemMap["uid"] = deepListItem.Uid.ValueString()
-						}
-						refsDeepList = append(refsDeepList, deepListItemMap)
-					}
-					network_interfaceNestedMap["refs"] = refsDeepList
-				}
-				itemMap["network_interface"] = network_interfaceNestedMap
-			}
-			if item.Segment != nil {
-				segmentNestedMap := make(map[string]interface{})
-				if len(item.Segment.Refs) > 0 {
-					var refsDeepList []map[string]interface{}
-					for _, deepListItem := range item.Segment.Refs {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Kind.IsNull() && !deepListItem.Kind.IsUnknown() {
-							deepListItemMap["kind"] = deepListItem.Kind.ValueString()
-						}
-						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
-							deepListItemMap["name"] = deepListItem.Name.ValueString()
-						}
-						if !deepListItem.Namespace.IsNull() && !deepListItem.Namespace.IsUnknown() {
-							deepListItemMap["namespace"] = deepListItem.Namespace.ValueString()
-						}
-						if !deepListItem.Tenant.IsNull() && !deepListItem.Tenant.IsUnknown() {
-							deepListItemMap["tenant"] = deepListItem.Tenant.ValueString()
-						}
-						if !deepListItem.Uid.IsNull() && !deepListItem.Uid.IsUnknown() {
-							deepListItemMap["uid"] = deepListItem.Uid.ValueString()
-						}
-						refsDeepList = append(refsDeepList, deepListItemMap)
-					}
-					segmentNestedMap["refs"] = refsDeepList
-				}
-				itemMap["segment"] = segmentNestedMap
-			}
-			if item.VirtualNetwork != nil {
-				virtual_networkNestedMap := make(map[string]interface{})
-				if len(item.VirtualNetwork.Refs) > 0 {
-					var refsDeepList []map[string]interface{}
-					for _, deepListItem := range item.VirtualNetwork.Refs {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Kind.IsNull() && !deepListItem.Kind.IsUnknown() {
-							deepListItemMap["kind"] = deepListItem.Kind.ValueString()
-						}
-						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
-							deepListItemMap["name"] = deepListItem.Name.ValueString()
-						}
-						if !deepListItem.Namespace.IsNull() && !deepListItem.Namespace.IsUnknown() {
-							deepListItemMap["namespace"] = deepListItem.Namespace.ValueString()
-						}
-						if !deepListItem.Tenant.IsNull() && !deepListItem.Tenant.IsUnknown() {
-							deepListItemMap["tenant"] = deepListItem.Tenant.ValueString()
-						}
-						if !deepListItem.Uid.IsNull() && !deepListItem.Uid.IsUnknown() {
-							deepListItemMap["uid"] = deepListItem.Uid.ValueString()
-						}
-						refsDeepList = append(refsDeepList, deepListItemMap)
-					}
-					virtual_networkNestedMap["refs"] = refsDeepList
-				}
-				itemMap["virtual_network"] = virtual_networkNestedMap
-			}
-			rulesList = append(rulesList, itemMap)
+			apiResource.Spec["rules"] = rulesList
 		}
-		apiResource.Spec["rules"] = rulesList
 	}
 	if data.Site != nil {
 		siteMap := make(map[string]interface{})
@@ -1948,6 +2270,10 @@ func (r *NATPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 	_ = isImport          // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["rules"].([]interface{}); ok && len(listData) > 0 {
 		var rulesList []NATPolicyRulesModel
+		var existingRulesItems []NATPolicyRulesModel
+		if !data.Rules.IsNull() && !data.Rules.IsUnknown() {
+			data.Rules.ElementsAs(ctx, &existingRulesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -1975,7 +2301,7 @@ func (r *NATPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 						if nestedMap, ok := itemMap["criteria"].(map[string]interface{}); ok {
 							return &NATPolicyRulesCriteriaModel{
 								Any: func() *NATPolicyEmptyModel {
-									if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Criteria != nil && data.Rules[listIdx].Criteria.Any != nil {
+									if !isImport && len(existingRulesItems) > listIdx && existingRulesItems[listIdx].Criteria != nil && existingRulesItems[listIdx].Criteria.Any != nil {
 										return &NATPolicyEmptyModel{}
 									}
 									return nil
@@ -1994,7 +2320,7 @@ func (r *NATPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 									return types.ListNull(types.StringType)
 								}(),
 								ICMP: func() *NATPolicyEmptyModel {
-									if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Criteria != nil && data.Rules[listIdx].Criteria.ICMP != nil {
+									if !isImport && len(existingRulesItems) > listIdx && existingRulesItems[listIdx].Criteria != nil && existingRulesItems[listIdx].Criteria.ICMP != nil {
 										return &NATPolicyEmptyModel{}
 									}
 									return nil
@@ -2023,13 +2349,13 @@ func (r *NATPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 						return nil
 					}(),
 					Disable: func() *NATPolicyEmptyModel {
-						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Disable != nil {
+						if !isImport && len(existingRulesItems) > listIdx && existingRulesItems[listIdx].Disable != nil {
 							return &NATPolicyEmptyModel{}
 						}
 						return nil
 					}(),
 					Enable: func() *NATPolicyEmptyModel {
-						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Enable != nil {
+						if !isImport && len(existingRulesItems) > listIdx && existingRulesItems[listIdx].Enable != nil {
 							return &NATPolicyEmptyModel{}
 						}
 						return nil
@@ -2061,7 +2387,14 @@ func (r *NATPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 				})
 			}
 		}
-		data.Rules = rulesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: NATPolicyRulesModelAttrTypes}, rulesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Rules = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Rules = types.ListNull(types.ObjectType{AttrTypes: NATPolicyRulesModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["site"].(map[string]interface{}); ok && (isImport || data.Site != nil) {
 		data.Site = &NATPolicySiteModel{

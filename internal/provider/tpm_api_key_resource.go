@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -59,17 +60,26 @@ type TpmAPIKeyCategoryRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// TpmAPIKeyCategoryRefModelAttrTypes defines the attribute types for TpmAPIKeyCategoryRefModel
+var TpmAPIKeyCategoryRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 type TpmAPIKeyResourceModel struct {
-	Name        types.String                `tfsdk:"name"`
-	Namespace   types.String                `tfsdk:"namespace"`
-	Annotations types.Map                   `tfsdk:"annotations"`
-	Description types.String                `tfsdk:"description"`
-	Disable     types.Bool                  `tfsdk:"disable"`
-	Labels      types.Map                   `tfsdk:"labels"`
-	ID          types.String                `tfsdk:"id"`
-	NeedMtls    types.Bool                  `tfsdk:"need_mtls"`
-	Timeouts    timeouts.Value              `tfsdk:"timeouts"`
-	CategoryRef []TpmAPIKeyCategoryRefModel `tfsdk:"category_ref"`
+	Name        types.String   `tfsdk:"name"`
+	Namespace   types.String   `tfsdk:"namespace"`
+	Annotations types.Map      `tfsdk:"annotations"`
+	Description types.String   `tfsdk:"description"`
+	Disable     types.Bool     `tfsdk:"disable"`
+	Labels      types.Map      `tfsdk:"labels"`
+	ID          types.String   `tfsdk:"id"`
+	NeedMtls    types.Bool     `tfsdk:"need_mtls"`
+	Timeouts    timeouts.Value `tfsdk:"timeouts"`
+	CategoryRef types.List     `tfsdk:"category_ref"`
 }
 
 func (r *TpmAPIKeyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -150,6 +160,9 @@ func (r *TpmAPIKeyResource) Schema(ctx context.Context, req resource.SchemaReque
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -163,11 +176,17 @@ func (r *TpmAPIKeyResource) Schema(ctx context.Context, req resource.SchemaReque
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 					},
 				},
@@ -320,28 +339,33 @@ func (r *TpmAPIKeyResource) Create(ctx context.Context, req resource.CreateReque
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.CategoryRef) > 0 {
-		var category_refList []map[string]interface{}
-		for _, item := range data.CategoryRef {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.CategoryRef.IsNull() && !data.CategoryRef.IsUnknown() {
+		var category_refItems []TpmAPIKeyCategoryRefModel
+		diags := data.CategoryRef.ElementsAs(ctx, &category_refItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(category_refItems) > 0 {
+			var category_refList []map[string]interface{}
+			for _, item := range category_refItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				category_refList = append(category_refList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			category_refList = append(category_refList, itemMap)
+			createReq.Spec["category_ref"] = category_refList
 		}
-		createReq.Spec["category_ref"] = category_refList
 	}
 	if !data.NeedMtls.IsNull() && !data.NeedMtls.IsUnknown() {
 		createReq.Spec["need_mtls"] = data.NeedMtls.ValueBool()
@@ -361,6 +385,10 @@ func (r *TpmAPIKeyResource) Create(ctx context.Context, req resource.CreateReque
 	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["category_ref"].([]interface{}); ok && len(listData) > 0 {
 		var category_refList []TpmAPIKeyCategoryRefModel
+		var existingCategoryRefItems []TpmAPIKeyCategoryRefModel
+		if !data.CategoryRef.IsNull() && !data.CategoryRef.IsUnknown() {
+			data.CategoryRef.ElementsAs(ctx, &existingCategoryRefItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -398,7 +426,14 @@ func (r *TpmAPIKeyResource) Create(ctx context.Context, req resource.CreateReque
 				})
 			}
 		}
-		data.CategoryRef = category_refList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: TpmAPIKeyCategoryRefModelAttrTypes}, category_refList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.CategoryRef = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.CategoryRef = types.ListNull(types.ObjectType{AttrTypes: TpmAPIKeyCategoryRefModelAttrTypes})
 	}
 	// Top-level Optional bool: preserve prior state to avoid API default drift
 	if !isImport && !data.NeedMtls.IsNull() && !data.NeedMtls.IsUnknown() {
@@ -475,11 +510,17 @@ func (r *TpmAPIKeyResource) Read(ctx context.Context, req resource.ReadRequest, 
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -506,6 +547,10 @@ func (r *TpmAPIKeyResource) Read(ctx context.Context, req resource.ReadRequest, 
 	})
 	if listData, ok := apiResource.Spec["category_ref"].([]interface{}); ok && len(listData) > 0 {
 		var category_refList []TpmAPIKeyCategoryRefModel
+		var existingCategoryRefItems []TpmAPIKeyCategoryRefModel
+		if !data.CategoryRef.IsNull() && !data.CategoryRef.IsUnknown() {
+			data.CategoryRef.ElementsAs(ctx, &existingCategoryRefItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -543,7 +588,14 @@ func (r *TpmAPIKeyResource) Read(ctx context.Context, req resource.ReadRequest, 
 				})
 			}
 		}
-		data.CategoryRef = category_refList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: TpmAPIKeyCategoryRefModelAttrTypes}, category_refList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.CategoryRef = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.CategoryRef = types.ListNull(types.ObjectType{AttrTypes: TpmAPIKeyCategoryRefModelAttrTypes})
 	}
 	// Top-level Optional bool: preserve prior state to avoid API default drift
 	if !isImport && !data.NeedMtls.IsNull() && !data.NeedMtls.IsUnknown() {
@@ -616,28 +668,33 @@ func (r *TpmAPIKeyResource) Update(ctx context.Context, req resource.UpdateReque
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.CategoryRef) > 0 {
-		var category_refList []map[string]interface{}
-		for _, item := range data.CategoryRef {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.CategoryRef.IsNull() && !data.CategoryRef.IsUnknown() {
+		var category_refItems []TpmAPIKeyCategoryRefModel
+		diags := data.CategoryRef.ElementsAs(ctx, &category_refItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(category_refItems) > 0 {
+			var category_refList []map[string]interface{}
+			for _, item := range category_refItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				category_refList = append(category_refList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			category_refList = append(category_refList, itemMap)
+			apiResource.Spec["category_ref"] = category_refList
 		}
-		apiResource.Spec["category_ref"] = category_refList
 	}
 	if !data.NeedMtls.IsNull() && !data.NeedMtls.IsUnknown() {
 		apiResource.Spec["need_mtls"] = data.NeedMtls.ValueBool()
@@ -675,6 +732,10 @@ func (r *TpmAPIKeyResource) Update(ctx context.Context, req resource.UpdateReque
 	_ = isImport          // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["category_ref"].([]interface{}); ok && len(listData) > 0 {
 		var category_refList []TpmAPIKeyCategoryRefModel
+		var existingCategoryRefItems []TpmAPIKeyCategoryRefModel
+		if !data.CategoryRef.IsNull() && !data.CategoryRef.IsUnknown() {
+			data.CategoryRef.ElementsAs(ctx, &existingCategoryRefItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -712,7 +773,14 @@ func (r *TpmAPIKeyResource) Update(ctx context.Context, req resource.UpdateReque
 				})
 			}
 		}
-		data.CategoryRef = category_refList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: TpmAPIKeyCategoryRefModelAttrTypes}, category_refList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.CategoryRef = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.CategoryRef = types.ListNull(types.ObjectType{AttrTypes: TpmAPIKeyCategoryRefModelAttrTypes})
 	}
 	// Top-level Optional bool: preserve prior state to avoid API default drift
 	if !isImport && !data.NeedMtls.IsNull() && !data.NeedMtls.IsUnknown() {

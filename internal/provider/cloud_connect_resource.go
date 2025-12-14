@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -56,11 +57,25 @@ type CloudConnectAWSTGWSiteModel struct {
 	VPCAttachments *CloudConnectAWSTGWSiteVPCAttachmentsModel `tfsdk:"vpc_attachments"`
 }
 
+// CloudConnectAWSTGWSiteModelAttrTypes defines the attribute types for CloudConnectAWSTGWSiteModel
+var CloudConnectAWSTGWSiteModelAttrTypes = map[string]attr.Type{
+	"cred":            types.ObjectType{AttrTypes: CloudConnectAWSTGWSiteCredModelAttrTypes},
+	"site":            types.ObjectType{AttrTypes: CloudConnectAWSTGWSiteSiteModelAttrTypes},
+	"vpc_attachments": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // CloudConnectAWSTGWSiteCredModel represents cred block
 type CloudConnectAWSTGWSiteCredModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// CloudConnectAWSTGWSiteCredModelAttrTypes defines the attribute types for CloudConnectAWSTGWSiteCredModel
+var CloudConnectAWSTGWSiteCredModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // CloudConnectAWSTGWSiteSiteModel represents site block
@@ -70,9 +85,21 @@ type CloudConnectAWSTGWSiteSiteModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// CloudConnectAWSTGWSiteSiteModelAttrTypes defines the attribute types for CloudConnectAWSTGWSiteSiteModel
+var CloudConnectAWSTGWSiteSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // CloudConnectAWSTGWSiteVPCAttachmentsModel represents vpc_attachments block
 type CloudConnectAWSTGWSiteVPCAttachmentsModel struct {
 	VPCList []CloudConnectAWSTGWSiteVPCAttachmentsVPCListModel `tfsdk:"vpc_list"`
+}
+
+// CloudConnectAWSTGWSiteVPCAttachmentsModelAttrTypes defines the attribute types for CloudConnectAWSTGWSiteVPCAttachmentsModel
+var CloudConnectAWSTGWSiteVPCAttachmentsModelAttrTypes = map[string]attr.Type{
+	"vpc_list": types.ListType{ElemType: types.ObjectType{AttrTypes: CloudConnectAWSTGWSiteVPCAttachmentsVPCListModelAttrTypes}},
 }
 
 // CloudConnectAWSTGWSiteVPCAttachmentsVPCListModel represents vpc_list block
@@ -84,9 +111,23 @@ type CloudConnectAWSTGWSiteVPCAttachmentsVPCListModel struct {
 	ManualRouting *CloudConnectEmptyModel                                        `tfsdk:"manual_routing"`
 }
 
+// CloudConnectAWSTGWSiteVPCAttachmentsVPCListModelAttrTypes defines the attribute types for CloudConnectAWSTGWSiteVPCAttachmentsVPCListModel
+var CloudConnectAWSTGWSiteVPCAttachmentsVPCListModelAttrTypes = map[string]attr.Type{
+	"vpc_id":         types.StringType,
+	"custom_routing": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_route":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"labels":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"manual_routing": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // CloudConnectAWSTGWSiteVPCAttachmentsVPCListCustomRoutingModel represents custom_routing block
 type CloudConnectAWSTGWSiteVPCAttachmentsVPCListCustomRoutingModel struct {
 	RouteTables []CloudConnectAWSTGWSiteVPCAttachmentsVPCListCustomRoutingRouteTablesModel `tfsdk:"route_tables"`
+}
+
+// CloudConnectAWSTGWSiteVPCAttachmentsVPCListCustomRoutingModelAttrTypes defines the attribute types for CloudConnectAWSTGWSiteVPCAttachmentsVPCListCustomRoutingModel
+var CloudConnectAWSTGWSiteVPCAttachmentsVPCListCustomRoutingModelAttrTypes = map[string]attr.Type{
+	"route_tables": types.ListType{ElemType: types.ObjectType{AttrTypes: CloudConnectAWSTGWSiteVPCAttachmentsVPCListCustomRoutingRouteTablesModelAttrTypes}},
 }
 
 // CloudConnectAWSTGWSiteVPCAttachmentsVPCListCustomRoutingRouteTablesModel represents route_tables block
@@ -95,10 +136,22 @@ type CloudConnectAWSTGWSiteVPCAttachmentsVPCListCustomRoutingRouteTablesModel st
 	StaticRoutes types.List   `tfsdk:"static_routes"`
 }
 
+// CloudConnectAWSTGWSiteVPCAttachmentsVPCListCustomRoutingRouteTablesModelAttrTypes defines the attribute types for CloudConnectAWSTGWSiteVPCAttachmentsVPCListCustomRoutingRouteTablesModel
+var CloudConnectAWSTGWSiteVPCAttachmentsVPCListCustomRoutingRouteTablesModelAttrTypes = map[string]attr.Type{
+	"route_table_id": types.StringType,
+	"static_routes":  types.ListType{ElemType: types.StringType},
+}
+
 // CloudConnectAWSTGWSiteVPCAttachmentsVPCListDefaultRouteModel represents default_route block
 type CloudConnectAWSTGWSiteVPCAttachmentsVPCListDefaultRouteModel struct {
 	AllRouteTables       *CloudConnectEmptyModel                                                           `tfsdk:"all_route_tables"`
 	SelectiveRouteTables *CloudConnectAWSTGWSiteVPCAttachmentsVPCListDefaultRouteSelectiveRouteTablesModel `tfsdk:"selective_route_tables"`
+}
+
+// CloudConnectAWSTGWSiteVPCAttachmentsVPCListDefaultRouteModelAttrTypes defines the attribute types for CloudConnectAWSTGWSiteVPCAttachmentsVPCListDefaultRouteModel
+var CloudConnectAWSTGWSiteVPCAttachmentsVPCListDefaultRouteModelAttrTypes = map[string]attr.Type{
+	"all_route_tables":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"selective_route_tables": types.ObjectType{AttrTypes: CloudConnectAWSTGWSiteVPCAttachmentsVPCListDefaultRouteSelectiveRouteTablesModelAttrTypes},
 }
 
 // CloudConnectAWSTGWSiteVPCAttachmentsVPCListDefaultRouteSelectiveRouteTablesModel represents selective_route_tables block
@@ -106,10 +159,21 @@ type CloudConnectAWSTGWSiteVPCAttachmentsVPCListDefaultRouteSelectiveRouteTables
 	RouteTableID types.List `tfsdk:"route_table_id"`
 }
 
+// CloudConnectAWSTGWSiteVPCAttachmentsVPCListDefaultRouteSelectiveRouteTablesModelAttrTypes defines the attribute types for CloudConnectAWSTGWSiteVPCAttachmentsVPCListDefaultRouteSelectiveRouteTablesModel
+var CloudConnectAWSTGWSiteVPCAttachmentsVPCListDefaultRouteSelectiveRouteTablesModelAttrTypes = map[string]attr.Type{
+	"route_table_id": types.ListType{ElemType: types.StringType},
+}
+
 // CloudConnectAzureVNETSiteModel represents azure_vnet_site block
 type CloudConnectAzureVNETSiteModel struct {
 	Site            *CloudConnectAzureVNETSiteSiteModel            `tfsdk:"site"`
 	VNETAttachments *CloudConnectAzureVNETSiteVNETAttachmentsModel `tfsdk:"vnet_attachments"`
+}
+
+// CloudConnectAzureVNETSiteModelAttrTypes defines the attribute types for CloudConnectAzureVNETSiteModel
+var CloudConnectAzureVNETSiteModelAttrTypes = map[string]attr.Type{
+	"site":             types.ObjectType{AttrTypes: CloudConnectAzureVNETSiteSiteModelAttrTypes},
+	"vnet_attachments": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // CloudConnectAzureVNETSiteSiteModel represents site block
@@ -119,9 +183,21 @@ type CloudConnectAzureVNETSiteSiteModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// CloudConnectAzureVNETSiteSiteModelAttrTypes defines the attribute types for CloudConnectAzureVNETSiteSiteModel
+var CloudConnectAzureVNETSiteSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // CloudConnectAzureVNETSiteVNETAttachmentsModel represents vnet_attachments block
 type CloudConnectAzureVNETSiteVNETAttachmentsModel struct {
 	VNETList []CloudConnectAzureVNETSiteVNETAttachmentsVNETListModel `tfsdk:"vnet_list"`
+}
+
+// CloudConnectAzureVNETSiteVNETAttachmentsModelAttrTypes defines the attribute types for CloudConnectAzureVNETSiteVNETAttachmentsModel
+var CloudConnectAzureVNETSiteVNETAttachmentsModelAttrTypes = map[string]attr.Type{
+	"vnet_list": types.ListType{ElemType: types.ObjectType{AttrTypes: CloudConnectAzureVNETSiteVNETAttachmentsVNETListModelAttrTypes}},
 }
 
 // CloudConnectAzureVNETSiteVNETAttachmentsVNETListModel represents vnet_list block
@@ -134,9 +210,24 @@ type CloudConnectAzureVNETSiteVNETAttachmentsVNETListModel struct {
 	ManualRouting  *CloudConnectEmptyModel                                             `tfsdk:"manual_routing"`
 }
 
+// CloudConnectAzureVNETSiteVNETAttachmentsVNETListModelAttrTypes defines the attribute types for CloudConnectAzureVNETSiteVNETAttachmentsVNETListModel
+var CloudConnectAzureVNETSiteVNETAttachmentsVNETListModelAttrTypes = map[string]attr.Type{
+	"subscription_id": types.StringType,
+	"vnet_id":         types.StringType,
+	"custom_routing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_route":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"labels":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"manual_routing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // CloudConnectAzureVNETSiteVNETAttachmentsVNETListCustomRoutingModel represents custom_routing block
 type CloudConnectAzureVNETSiteVNETAttachmentsVNETListCustomRoutingModel struct {
 	RouteTables []CloudConnectAzureVNETSiteVNETAttachmentsVNETListCustomRoutingRouteTablesModel `tfsdk:"route_tables"`
+}
+
+// CloudConnectAzureVNETSiteVNETAttachmentsVNETListCustomRoutingModelAttrTypes defines the attribute types for CloudConnectAzureVNETSiteVNETAttachmentsVNETListCustomRoutingModel
+var CloudConnectAzureVNETSiteVNETAttachmentsVNETListCustomRoutingModelAttrTypes = map[string]attr.Type{
+	"route_tables": types.ListType{ElemType: types.ObjectType{AttrTypes: CloudConnectAzureVNETSiteVNETAttachmentsVNETListCustomRoutingRouteTablesModelAttrTypes}},
 }
 
 // CloudConnectAzureVNETSiteVNETAttachmentsVNETListCustomRoutingRouteTablesModel represents route_tables block
@@ -145,10 +236,22 @@ type CloudConnectAzureVNETSiteVNETAttachmentsVNETListCustomRoutingRouteTablesMod
 	StaticRoutes types.List   `tfsdk:"static_routes"`
 }
 
+// CloudConnectAzureVNETSiteVNETAttachmentsVNETListCustomRoutingRouteTablesModelAttrTypes defines the attribute types for CloudConnectAzureVNETSiteVNETAttachmentsVNETListCustomRoutingRouteTablesModel
+var CloudConnectAzureVNETSiteVNETAttachmentsVNETListCustomRoutingRouteTablesModelAttrTypes = map[string]attr.Type{
+	"route_table_id": types.StringType,
+	"static_routes":  types.ListType{ElemType: types.StringType},
+}
+
 // CloudConnectAzureVNETSiteVNETAttachmentsVNETListDefaultRouteModel represents default_route block
 type CloudConnectAzureVNETSiteVNETAttachmentsVNETListDefaultRouteModel struct {
 	AllRouteTables       *CloudConnectEmptyModel                                                                `tfsdk:"all_route_tables"`
 	SelectiveRouteTables *CloudConnectAzureVNETSiteVNETAttachmentsVNETListDefaultRouteSelectiveRouteTablesModel `tfsdk:"selective_route_tables"`
+}
+
+// CloudConnectAzureVNETSiteVNETAttachmentsVNETListDefaultRouteModelAttrTypes defines the attribute types for CloudConnectAzureVNETSiteVNETAttachmentsVNETListDefaultRouteModel
+var CloudConnectAzureVNETSiteVNETAttachmentsVNETListDefaultRouteModelAttrTypes = map[string]attr.Type{
+	"all_route_tables":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"selective_route_tables": types.ObjectType{AttrTypes: CloudConnectAzureVNETSiteVNETAttachmentsVNETListDefaultRouteSelectiveRouteTablesModelAttrTypes},
 }
 
 // CloudConnectAzureVNETSiteVNETAttachmentsVNETListDefaultRouteSelectiveRouteTablesModel represents selective_route_tables block
@@ -156,11 +259,23 @@ type CloudConnectAzureVNETSiteVNETAttachmentsVNETListDefaultRouteSelectiveRouteT
 	RouteTableID types.List `tfsdk:"route_table_id"`
 }
 
+// CloudConnectAzureVNETSiteVNETAttachmentsVNETListDefaultRouteSelectiveRouteTablesModelAttrTypes defines the attribute types for CloudConnectAzureVNETSiteVNETAttachmentsVNETListDefaultRouteSelectiveRouteTablesModel
+var CloudConnectAzureVNETSiteVNETAttachmentsVNETListDefaultRouteSelectiveRouteTablesModelAttrTypes = map[string]attr.Type{
+	"route_table_id": types.ListType{ElemType: types.StringType},
+}
+
 // CloudConnectSegmentModel represents segment block
 type CloudConnectSegmentModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// CloudConnectSegmentModelAttrTypes defines the attribute types for CloudConnectSegmentModel
+var CloudConnectSegmentModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 type CloudConnectResourceModel struct {
@@ -197,10 +312,11 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the Cloud Connect will be created.",
-				Required:            true,
+				MarkdownDescription: "Namespace for the Cloud Connect. For this resource type, namespace should be empty or omitted.",
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.UseStateForUnknown(),
 				},
 				Validators: []validator.String{
 					validators.NamespaceValidator(),
@@ -258,6 +374,9 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -276,6 +395,9 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -366,6 +488,9 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -456,6 +581,9 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional:            true,
 						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
 					},
 				},
 			},
@@ -683,8 +811,6 @@ func (r *CloudConnectResource) Create(ctx context.Context, req resource.CreateRe
 	}
 
 	data.ID = types.StringValue(apiResource.Metadata.Name)
-	// For resources without namespace in API path, namespace is computed from API response
-	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
 
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
@@ -786,11 +912,17 @@ func (r *CloudConnectResource) Read(ctx context.Context, req resource.ReadReques
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -1082,17 +1214,19 @@ func (r *CloudConnectResource) Delete(ctx context.Context, req resource.DeleteRe
 }
 
 func (r *CloudConnectResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	// Import ID format: name (no namespace for this resource type)
-	name := req.ID
-	if name == "" {
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
 		resp.Diagnostics.AddError(
 			"Invalid Import ID",
-			"Expected import ID to be the resource name, got empty string",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
 		)
 		return
 	}
+	namespace := parts[0]
+	name := parts[1]
 
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), "")...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

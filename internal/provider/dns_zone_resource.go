@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -77,10 +78,43 @@ type DNSZoneDefaultRrSetGroupModel struct {
 	TxtRecord       *DNSZoneDefaultRrSetGroupTxtRecordModel   `tfsdk:"txt_record"`
 }
 
+// DNSZoneDefaultRrSetGroupModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupModel
+var DNSZoneDefaultRrSetGroupModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"ttl":              types.Int64Type,
+	"a_record":         types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupARecordModelAttrTypes},
+	"aaaa_record":      types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupAaaaRecordModelAttrTypes},
+	"afsdb_record":     types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupAfsdbRecordModelAttrTypes},
+	"alias_record":     types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupAliasRecordModelAttrTypes},
+	"caa_record":       types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupCaaRecordModelAttrTypes},
+	"cds_record":       types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupCdsRecordModelAttrTypes},
+	"cert_record":      types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupCertRecordModelAttrTypes},
+	"cname_record":     types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupCnameRecordModelAttrTypes},
+	"ds_record":        types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupDsRecordModelAttrTypes},
+	"eui48_record":     types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupEui48RecordModelAttrTypes},
+	"eui64_record":     types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupEui64RecordModelAttrTypes},
+	"lb_record":        types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupLBRecordModelAttrTypes},
+	"loc_record":       types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupLocRecordModelAttrTypes},
+	"mx_record":        types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupMxRecordModelAttrTypes},
+	"naptr_record":     types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupNaptrRecordModelAttrTypes},
+	"ns_record":        types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupNsRecordModelAttrTypes},
+	"ptr_record":       types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupPtrRecordModelAttrTypes},
+	"srv_record":       types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupSrvRecordModelAttrTypes},
+	"sshfp_record":     types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupSshfpRecordModelAttrTypes},
+	"tlsa_record":      types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupTlsaRecordModelAttrTypes},
+	"txt_record":       types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupTxtRecordModelAttrTypes},
+}
+
 // DNSZoneDefaultRrSetGroupARecordModel represents a_record block
 type DNSZoneDefaultRrSetGroupARecordModel struct {
 	Name   types.String `tfsdk:"name"`
 	Values types.List   `tfsdk:"values"`
+}
+
+// DNSZoneDefaultRrSetGroupARecordModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupARecordModel
+var DNSZoneDefaultRrSetGroupARecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.StringType},
 }
 
 // DNSZoneDefaultRrSetGroupAaaaRecordModel represents aaaa_record block
@@ -89,10 +123,22 @@ type DNSZoneDefaultRrSetGroupAaaaRecordModel struct {
 	Values types.List   `tfsdk:"values"`
 }
 
+// DNSZoneDefaultRrSetGroupAaaaRecordModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupAaaaRecordModel
+var DNSZoneDefaultRrSetGroupAaaaRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.StringType},
+}
+
 // DNSZoneDefaultRrSetGroupAfsdbRecordModel represents afsdb_record block
 type DNSZoneDefaultRrSetGroupAfsdbRecordModel struct {
 	Name   types.String                                     `tfsdk:"name"`
 	Values []DNSZoneDefaultRrSetGroupAfsdbRecordValuesModel `tfsdk:"values"`
+}
+
+// DNSZoneDefaultRrSetGroupAfsdbRecordModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupAfsdbRecordModel
+var DNSZoneDefaultRrSetGroupAfsdbRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupAfsdbRecordValuesModelAttrTypes}},
 }
 
 // DNSZoneDefaultRrSetGroupAfsdbRecordValuesModel represents values block
@@ -101,15 +147,32 @@ type DNSZoneDefaultRrSetGroupAfsdbRecordValuesModel struct {
 	Subtype  types.String `tfsdk:"subtype"`
 }
 
+// DNSZoneDefaultRrSetGroupAfsdbRecordValuesModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupAfsdbRecordValuesModel
+var DNSZoneDefaultRrSetGroupAfsdbRecordValuesModelAttrTypes = map[string]attr.Type{
+	"hostname": types.StringType,
+	"subtype":  types.StringType,
+}
+
 // DNSZoneDefaultRrSetGroupAliasRecordModel represents alias_record block
 type DNSZoneDefaultRrSetGroupAliasRecordModel struct {
 	Value types.String `tfsdk:"value"`
+}
+
+// DNSZoneDefaultRrSetGroupAliasRecordModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupAliasRecordModel
+var DNSZoneDefaultRrSetGroupAliasRecordModelAttrTypes = map[string]attr.Type{
+	"value": types.StringType,
 }
 
 // DNSZoneDefaultRrSetGroupCaaRecordModel represents caa_record block
 type DNSZoneDefaultRrSetGroupCaaRecordModel struct {
 	Name   types.String                                   `tfsdk:"name"`
 	Values []DNSZoneDefaultRrSetGroupCaaRecordValuesModel `tfsdk:"values"`
+}
+
+// DNSZoneDefaultRrSetGroupCaaRecordModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupCaaRecordModel
+var DNSZoneDefaultRrSetGroupCaaRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupCaaRecordValuesModelAttrTypes}},
 }
 
 // DNSZoneDefaultRrSetGroupCaaRecordValuesModel represents values block
@@ -119,10 +182,23 @@ type DNSZoneDefaultRrSetGroupCaaRecordValuesModel struct {
 	Value types.String `tfsdk:"value"`
 }
 
+// DNSZoneDefaultRrSetGroupCaaRecordValuesModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupCaaRecordValuesModel
+var DNSZoneDefaultRrSetGroupCaaRecordValuesModelAttrTypes = map[string]attr.Type{
+	"flags": types.Int64Type,
+	"tag":   types.StringType,
+	"value": types.StringType,
+}
+
 // DNSZoneDefaultRrSetGroupCdsRecordModel represents cds_record block
 type DNSZoneDefaultRrSetGroupCdsRecordModel struct {
 	Name   types.String                                   `tfsdk:"name"`
 	Values []DNSZoneDefaultRrSetGroupCdsRecordValuesModel `tfsdk:"values"`
+}
+
+// DNSZoneDefaultRrSetGroupCdsRecordModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupCdsRecordModel
+var DNSZoneDefaultRrSetGroupCdsRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupCdsRecordValuesModelAttrTypes}},
 }
 
 // DNSZoneDefaultRrSetGroupCdsRecordValuesModel represents values block
@@ -134,9 +210,23 @@ type DNSZoneDefaultRrSetGroupCdsRecordValuesModel struct {
 	Sha384Digest   *DNSZoneDefaultRrSetGroupCdsRecordValuesSha384DigestModel `tfsdk:"sha384_digest"`
 }
 
+// DNSZoneDefaultRrSetGroupCdsRecordValuesModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupCdsRecordValuesModel
+var DNSZoneDefaultRrSetGroupCdsRecordValuesModelAttrTypes = map[string]attr.Type{
+	"ds_key_algorithm": types.StringType,
+	"key_tag":          types.Int64Type,
+	"sha1_digest":      types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupCdsRecordValuesSha1DigestModelAttrTypes},
+	"sha256_digest":    types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupCdsRecordValuesSha256DigestModelAttrTypes},
+	"sha384_digest":    types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupCdsRecordValuesSha384DigestModelAttrTypes},
+}
+
 // DNSZoneDefaultRrSetGroupCdsRecordValuesSha1DigestModel represents sha1_digest block
 type DNSZoneDefaultRrSetGroupCdsRecordValuesSha1DigestModel struct {
 	Digest types.String `tfsdk:"digest"`
+}
+
+// DNSZoneDefaultRrSetGroupCdsRecordValuesSha1DigestModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupCdsRecordValuesSha1DigestModel
+var DNSZoneDefaultRrSetGroupCdsRecordValuesSha1DigestModelAttrTypes = map[string]attr.Type{
+	"digest": types.StringType,
 }
 
 // DNSZoneDefaultRrSetGroupCdsRecordValuesSha256DigestModel represents sha256_digest block
@@ -144,15 +234,31 @@ type DNSZoneDefaultRrSetGroupCdsRecordValuesSha256DigestModel struct {
 	Digest types.String `tfsdk:"digest"`
 }
 
+// DNSZoneDefaultRrSetGroupCdsRecordValuesSha256DigestModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupCdsRecordValuesSha256DigestModel
+var DNSZoneDefaultRrSetGroupCdsRecordValuesSha256DigestModelAttrTypes = map[string]attr.Type{
+	"digest": types.StringType,
+}
+
 // DNSZoneDefaultRrSetGroupCdsRecordValuesSha384DigestModel represents sha384_digest block
 type DNSZoneDefaultRrSetGroupCdsRecordValuesSha384DigestModel struct {
 	Digest types.String `tfsdk:"digest"`
+}
+
+// DNSZoneDefaultRrSetGroupCdsRecordValuesSha384DigestModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupCdsRecordValuesSha384DigestModel
+var DNSZoneDefaultRrSetGroupCdsRecordValuesSha384DigestModelAttrTypes = map[string]attr.Type{
+	"digest": types.StringType,
 }
 
 // DNSZoneDefaultRrSetGroupCertRecordModel represents cert_record block
 type DNSZoneDefaultRrSetGroupCertRecordModel struct {
 	Name   types.String                                    `tfsdk:"name"`
 	Values []DNSZoneDefaultRrSetGroupCertRecordValuesModel `tfsdk:"values"`
+}
+
+// DNSZoneDefaultRrSetGroupCertRecordModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupCertRecordModel
+var DNSZoneDefaultRrSetGroupCertRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupCertRecordValuesModelAttrTypes}},
 }
 
 // DNSZoneDefaultRrSetGroupCertRecordValuesModel represents values block
@@ -163,16 +269,36 @@ type DNSZoneDefaultRrSetGroupCertRecordValuesModel struct {
 	Certificate types.String `tfsdk:"certificate"`
 }
 
+// DNSZoneDefaultRrSetGroupCertRecordValuesModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupCertRecordValuesModel
+var DNSZoneDefaultRrSetGroupCertRecordValuesModelAttrTypes = map[string]attr.Type{
+	"algorithm":    types.StringType,
+	"cert_key_tag": types.Int64Type,
+	"cert_type":    types.StringType,
+	"certificate":  types.StringType,
+}
+
 // DNSZoneDefaultRrSetGroupCnameRecordModel represents cname_record block
 type DNSZoneDefaultRrSetGroupCnameRecordModel struct {
 	Name  types.String `tfsdk:"name"`
 	Value types.String `tfsdk:"value"`
 }
 
+// DNSZoneDefaultRrSetGroupCnameRecordModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupCnameRecordModel
+var DNSZoneDefaultRrSetGroupCnameRecordModelAttrTypes = map[string]attr.Type{
+	"name":  types.StringType,
+	"value": types.StringType,
+}
+
 // DNSZoneDefaultRrSetGroupDsRecordModel represents ds_record block
 type DNSZoneDefaultRrSetGroupDsRecordModel struct {
 	Name   types.String                                  `tfsdk:"name"`
 	Values []DNSZoneDefaultRrSetGroupDsRecordValuesModel `tfsdk:"values"`
+}
+
+// DNSZoneDefaultRrSetGroupDsRecordModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupDsRecordModel
+var DNSZoneDefaultRrSetGroupDsRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupDsRecordValuesModelAttrTypes}},
 }
 
 // DNSZoneDefaultRrSetGroupDsRecordValuesModel represents values block
@@ -184,9 +310,23 @@ type DNSZoneDefaultRrSetGroupDsRecordValuesModel struct {
 	Sha384Digest   *DNSZoneDefaultRrSetGroupDsRecordValuesSha384DigestModel `tfsdk:"sha384_digest"`
 }
 
+// DNSZoneDefaultRrSetGroupDsRecordValuesModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupDsRecordValuesModel
+var DNSZoneDefaultRrSetGroupDsRecordValuesModelAttrTypes = map[string]attr.Type{
+	"ds_key_algorithm": types.StringType,
+	"key_tag":          types.Int64Type,
+	"sha1_digest":      types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupDsRecordValuesSha1DigestModelAttrTypes},
+	"sha256_digest":    types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupDsRecordValuesSha256DigestModelAttrTypes},
+	"sha384_digest":    types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupDsRecordValuesSha384DigestModelAttrTypes},
+}
+
 // DNSZoneDefaultRrSetGroupDsRecordValuesSha1DigestModel represents sha1_digest block
 type DNSZoneDefaultRrSetGroupDsRecordValuesSha1DigestModel struct {
 	Digest types.String `tfsdk:"digest"`
+}
+
+// DNSZoneDefaultRrSetGroupDsRecordValuesSha1DigestModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupDsRecordValuesSha1DigestModel
+var DNSZoneDefaultRrSetGroupDsRecordValuesSha1DigestModelAttrTypes = map[string]attr.Type{
+	"digest": types.StringType,
 }
 
 // DNSZoneDefaultRrSetGroupDsRecordValuesSha256DigestModel represents sha256_digest block
@@ -194,9 +334,19 @@ type DNSZoneDefaultRrSetGroupDsRecordValuesSha256DigestModel struct {
 	Digest types.String `tfsdk:"digest"`
 }
 
+// DNSZoneDefaultRrSetGroupDsRecordValuesSha256DigestModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupDsRecordValuesSha256DigestModel
+var DNSZoneDefaultRrSetGroupDsRecordValuesSha256DigestModelAttrTypes = map[string]attr.Type{
+	"digest": types.StringType,
+}
+
 // DNSZoneDefaultRrSetGroupDsRecordValuesSha384DigestModel represents sha384_digest block
 type DNSZoneDefaultRrSetGroupDsRecordValuesSha384DigestModel struct {
 	Digest types.String `tfsdk:"digest"`
+}
+
+// DNSZoneDefaultRrSetGroupDsRecordValuesSha384DigestModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupDsRecordValuesSha384DigestModel
+var DNSZoneDefaultRrSetGroupDsRecordValuesSha384DigestModelAttrTypes = map[string]attr.Type{
+	"digest": types.StringType,
 }
 
 // DNSZoneDefaultRrSetGroupEui48RecordModel represents eui48_record block
@@ -205,16 +355,34 @@ type DNSZoneDefaultRrSetGroupEui48RecordModel struct {
 	Value types.String `tfsdk:"value"`
 }
 
+// DNSZoneDefaultRrSetGroupEui48RecordModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupEui48RecordModel
+var DNSZoneDefaultRrSetGroupEui48RecordModelAttrTypes = map[string]attr.Type{
+	"name":  types.StringType,
+	"value": types.StringType,
+}
+
 // DNSZoneDefaultRrSetGroupEui64RecordModel represents eui64_record block
 type DNSZoneDefaultRrSetGroupEui64RecordModel struct {
 	Name  types.String `tfsdk:"name"`
 	Value types.String `tfsdk:"value"`
 }
 
+// DNSZoneDefaultRrSetGroupEui64RecordModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupEui64RecordModel
+var DNSZoneDefaultRrSetGroupEui64RecordModelAttrTypes = map[string]attr.Type{
+	"name":  types.StringType,
+	"value": types.StringType,
+}
+
 // DNSZoneDefaultRrSetGroupLBRecordModel represents lb_record block
 type DNSZoneDefaultRrSetGroupLBRecordModel struct {
 	Name  types.String                                `tfsdk:"name"`
 	Value *DNSZoneDefaultRrSetGroupLBRecordValueModel `tfsdk:"value"`
+}
+
+// DNSZoneDefaultRrSetGroupLBRecordModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupLBRecordModel
+var DNSZoneDefaultRrSetGroupLBRecordModelAttrTypes = map[string]attr.Type{
+	"name":  types.StringType,
+	"value": types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupLBRecordValueModelAttrTypes},
 }
 
 // DNSZoneDefaultRrSetGroupLBRecordValueModel represents value block
@@ -224,10 +392,23 @@ type DNSZoneDefaultRrSetGroupLBRecordValueModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// DNSZoneDefaultRrSetGroupLBRecordValueModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupLBRecordValueModel
+var DNSZoneDefaultRrSetGroupLBRecordValueModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // DNSZoneDefaultRrSetGroupLocRecordModel represents loc_record block
 type DNSZoneDefaultRrSetGroupLocRecordModel struct {
 	Name   types.String                                   `tfsdk:"name"`
 	Values []DNSZoneDefaultRrSetGroupLocRecordValuesModel `tfsdk:"values"`
+}
+
+// DNSZoneDefaultRrSetGroupLocRecordModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupLocRecordModel
+var DNSZoneDefaultRrSetGroupLocRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupLocRecordValuesModelAttrTypes}},
 }
 
 // DNSZoneDefaultRrSetGroupLocRecordValuesModel represents values block
@@ -246,10 +427,32 @@ type DNSZoneDefaultRrSetGroupLocRecordValuesModel struct {
 	VerticalPrecision   types.Int64  `tfsdk:"vertical_precision"`
 }
 
+// DNSZoneDefaultRrSetGroupLocRecordValuesModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupLocRecordValuesModel
+var DNSZoneDefaultRrSetGroupLocRecordValuesModelAttrTypes = map[string]attr.Type{
+	"altitude":             types.Int64Type,
+	"horizontal_precision": types.Int64Type,
+	"latitude_degree":      types.Int64Type,
+	"latitude_hemisphere":  types.StringType,
+	"latitude_minute":      types.Int64Type,
+	"latitude_second":      types.Int64Type,
+	"location_diameter":    types.Int64Type,
+	"longitude_degree":     types.Int64Type,
+	"longitude_hemisphere": types.StringType,
+	"longitude_minute":     types.Int64Type,
+	"longitude_second":     types.Int64Type,
+	"vertical_precision":   types.Int64Type,
+}
+
 // DNSZoneDefaultRrSetGroupMxRecordModel represents mx_record block
 type DNSZoneDefaultRrSetGroupMxRecordModel struct {
 	Name   types.String                                  `tfsdk:"name"`
 	Values []DNSZoneDefaultRrSetGroupMxRecordValuesModel `tfsdk:"values"`
+}
+
+// DNSZoneDefaultRrSetGroupMxRecordModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupMxRecordModel
+var DNSZoneDefaultRrSetGroupMxRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupMxRecordValuesModelAttrTypes}},
 }
 
 // DNSZoneDefaultRrSetGroupMxRecordValuesModel represents values block
@@ -258,10 +461,22 @@ type DNSZoneDefaultRrSetGroupMxRecordValuesModel struct {
 	Priority types.Int64  `tfsdk:"priority"`
 }
 
+// DNSZoneDefaultRrSetGroupMxRecordValuesModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupMxRecordValuesModel
+var DNSZoneDefaultRrSetGroupMxRecordValuesModelAttrTypes = map[string]attr.Type{
+	"domain":   types.StringType,
+	"priority": types.Int64Type,
+}
+
 // DNSZoneDefaultRrSetGroupNaptrRecordModel represents naptr_record block
 type DNSZoneDefaultRrSetGroupNaptrRecordModel struct {
 	Name   types.String                                     `tfsdk:"name"`
 	Values []DNSZoneDefaultRrSetGroupNaptrRecordValuesModel `tfsdk:"values"`
+}
+
+// DNSZoneDefaultRrSetGroupNaptrRecordModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupNaptrRecordModel
+var DNSZoneDefaultRrSetGroupNaptrRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupNaptrRecordValuesModelAttrTypes}},
 }
 
 // DNSZoneDefaultRrSetGroupNaptrRecordValuesModel represents values block
@@ -274,10 +489,26 @@ type DNSZoneDefaultRrSetGroupNaptrRecordValuesModel struct {
 	Service     types.String `tfsdk:"service"`
 }
 
+// DNSZoneDefaultRrSetGroupNaptrRecordValuesModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupNaptrRecordValuesModel
+var DNSZoneDefaultRrSetGroupNaptrRecordValuesModelAttrTypes = map[string]attr.Type{
+	"flags":       types.StringType,
+	"order":       types.Int64Type,
+	"preference":  types.Int64Type,
+	"regexp":      types.StringType,
+	"replacement": types.StringType,
+	"service":     types.StringType,
+}
+
 // DNSZoneDefaultRrSetGroupNsRecordModel represents ns_record block
 type DNSZoneDefaultRrSetGroupNsRecordModel struct {
 	Name   types.String `tfsdk:"name"`
 	Values types.List   `tfsdk:"values"`
+}
+
+// DNSZoneDefaultRrSetGroupNsRecordModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupNsRecordModel
+var DNSZoneDefaultRrSetGroupNsRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.StringType},
 }
 
 // DNSZoneDefaultRrSetGroupPtrRecordModel represents ptr_record block
@@ -286,10 +517,22 @@ type DNSZoneDefaultRrSetGroupPtrRecordModel struct {
 	Values types.List   `tfsdk:"values"`
 }
 
+// DNSZoneDefaultRrSetGroupPtrRecordModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupPtrRecordModel
+var DNSZoneDefaultRrSetGroupPtrRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.StringType},
+}
+
 // DNSZoneDefaultRrSetGroupSrvRecordModel represents srv_record block
 type DNSZoneDefaultRrSetGroupSrvRecordModel struct {
 	Name   types.String                                   `tfsdk:"name"`
 	Values []DNSZoneDefaultRrSetGroupSrvRecordValuesModel `tfsdk:"values"`
+}
+
+// DNSZoneDefaultRrSetGroupSrvRecordModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupSrvRecordModel
+var DNSZoneDefaultRrSetGroupSrvRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupSrvRecordValuesModelAttrTypes}},
 }
 
 // DNSZoneDefaultRrSetGroupSrvRecordValuesModel represents values block
@@ -300,10 +543,24 @@ type DNSZoneDefaultRrSetGroupSrvRecordValuesModel struct {
 	Weight   types.Int64  `tfsdk:"weight"`
 }
 
+// DNSZoneDefaultRrSetGroupSrvRecordValuesModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupSrvRecordValuesModel
+var DNSZoneDefaultRrSetGroupSrvRecordValuesModelAttrTypes = map[string]attr.Type{
+	"port":     types.Int64Type,
+	"priority": types.Int64Type,
+	"target":   types.StringType,
+	"weight":   types.Int64Type,
+}
+
 // DNSZoneDefaultRrSetGroupSshfpRecordModel represents sshfp_record block
 type DNSZoneDefaultRrSetGroupSshfpRecordModel struct {
 	Name   types.String                                     `tfsdk:"name"`
 	Values []DNSZoneDefaultRrSetGroupSshfpRecordValuesModel `tfsdk:"values"`
+}
+
+// DNSZoneDefaultRrSetGroupSshfpRecordModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupSshfpRecordModel
+var DNSZoneDefaultRrSetGroupSshfpRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupSshfpRecordValuesModelAttrTypes}},
 }
 
 // DNSZoneDefaultRrSetGroupSshfpRecordValuesModel represents values block
@@ -313,9 +570,21 @@ type DNSZoneDefaultRrSetGroupSshfpRecordValuesModel struct {
 	Sha256Fingerprint *DNSZoneDefaultRrSetGroupSshfpRecordValuesSha256FingerprintModel `tfsdk:"sha256_fingerprint"`
 }
 
+// DNSZoneDefaultRrSetGroupSshfpRecordValuesModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupSshfpRecordValuesModel
+var DNSZoneDefaultRrSetGroupSshfpRecordValuesModelAttrTypes = map[string]attr.Type{
+	"algorithm":          types.StringType,
+	"sha1_fingerprint":   types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupSshfpRecordValuesSha1FingerprintModelAttrTypes},
+	"sha256_fingerprint": types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupSshfpRecordValuesSha256FingerprintModelAttrTypes},
+}
+
 // DNSZoneDefaultRrSetGroupSshfpRecordValuesSha1FingerprintModel represents sha1_fingerprint block
 type DNSZoneDefaultRrSetGroupSshfpRecordValuesSha1FingerprintModel struct {
 	Fingerprint types.String `tfsdk:"fingerprint"`
+}
+
+// DNSZoneDefaultRrSetGroupSshfpRecordValuesSha1FingerprintModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupSshfpRecordValuesSha1FingerprintModel
+var DNSZoneDefaultRrSetGroupSshfpRecordValuesSha1FingerprintModelAttrTypes = map[string]attr.Type{
+	"fingerprint": types.StringType,
 }
 
 // DNSZoneDefaultRrSetGroupSshfpRecordValuesSha256FingerprintModel represents sha256_fingerprint block
@@ -323,10 +592,21 @@ type DNSZoneDefaultRrSetGroupSshfpRecordValuesSha256FingerprintModel struct {
 	Fingerprint types.String `tfsdk:"fingerprint"`
 }
 
+// DNSZoneDefaultRrSetGroupSshfpRecordValuesSha256FingerprintModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupSshfpRecordValuesSha256FingerprintModel
+var DNSZoneDefaultRrSetGroupSshfpRecordValuesSha256FingerprintModelAttrTypes = map[string]attr.Type{
+	"fingerprint": types.StringType,
+}
+
 // DNSZoneDefaultRrSetGroupTlsaRecordModel represents tlsa_record block
 type DNSZoneDefaultRrSetGroupTlsaRecordModel struct {
 	Name   types.String                                    `tfsdk:"name"`
 	Values []DNSZoneDefaultRrSetGroupTlsaRecordValuesModel `tfsdk:"values"`
+}
+
+// DNSZoneDefaultRrSetGroupTlsaRecordModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupTlsaRecordModel
+var DNSZoneDefaultRrSetGroupTlsaRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupTlsaRecordValuesModelAttrTypes}},
 }
 
 // DNSZoneDefaultRrSetGroupTlsaRecordValuesModel represents values block
@@ -337,10 +617,24 @@ type DNSZoneDefaultRrSetGroupTlsaRecordValuesModel struct {
 	Selector                   types.String `tfsdk:"selector"`
 }
 
+// DNSZoneDefaultRrSetGroupTlsaRecordValuesModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupTlsaRecordValuesModel
+var DNSZoneDefaultRrSetGroupTlsaRecordValuesModelAttrTypes = map[string]attr.Type{
+	"certificate_association_data": types.StringType,
+	"certificate_usage":            types.StringType,
+	"matching_type":                types.StringType,
+	"selector":                     types.StringType,
+}
+
 // DNSZoneDefaultRrSetGroupTxtRecordModel represents txt_record block
 type DNSZoneDefaultRrSetGroupTxtRecordModel struct {
 	Name   types.String `tfsdk:"name"`
 	Values types.List   `tfsdk:"values"`
+}
+
+// DNSZoneDefaultRrSetGroupTxtRecordModelAttrTypes defines the attribute types for DNSZoneDefaultRrSetGroupTxtRecordModel
+var DNSZoneDefaultRrSetGroupTxtRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.StringType},
 }
 
 // DNSZoneDnssecModeModel represents dnssec_mode block
@@ -349,16 +643,34 @@ type DNSZoneDnssecModeModel struct {
 	Enable  *DNSZoneEmptyModel `tfsdk:"enable"`
 }
 
+// DNSZoneDnssecModeModelAttrTypes defines the attribute types for DNSZoneDnssecModeModel
+var DNSZoneDnssecModeModelAttrTypes = map[string]attr.Type{
+	"disable": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // DNSZoneRrSetGroupModel represents rr_set_group block
 type DNSZoneRrSetGroupModel struct {
 	Metadata *DNSZoneRrSetGroupMetadataModel `tfsdk:"metadata"`
 	RrSet    []DNSZoneRrSetGroupRrSetModel   `tfsdk:"rr_set"`
 }
 
+// DNSZoneRrSetGroupModelAttrTypes defines the attribute types for DNSZoneRrSetGroupModel
+var DNSZoneRrSetGroupModelAttrTypes = map[string]attr.Type{
+	"metadata": types.ObjectType{AttrTypes: DNSZoneRrSetGroupMetadataModelAttrTypes},
+	"rr_set":   types.ListType{ElemType: types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetModelAttrTypes}},
+}
+
 // DNSZoneRrSetGroupMetadataModel represents metadata block
 type DNSZoneRrSetGroupMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
+}
+
+// DNSZoneRrSetGroupMetadataModelAttrTypes defines the attribute types for DNSZoneRrSetGroupMetadataModel
+var DNSZoneRrSetGroupMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
 }
 
 // DNSZoneRrSetGroupRrSetModel represents rr_set block
@@ -388,10 +700,43 @@ type DNSZoneRrSetGroupRrSetModel struct {
 	TxtRecord       *DNSZoneRrSetGroupRrSetTxtRecordModel   `tfsdk:"txt_record"`
 }
 
+// DNSZoneRrSetGroupRrSetModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetModel
+var DNSZoneRrSetGroupRrSetModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"ttl":              types.Int64Type,
+	"a_record":         types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetARecordModelAttrTypes},
+	"aaaa_record":      types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetAaaaRecordModelAttrTypes},
+	"afsdb_record":     types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetAfsdbRecordModelAttrTypes},
+	"alias_record":     types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetAliasRecordModelAttrTypes},
+	"caa_record":       types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetCaaRecordModelAttrTypes},
+	"cds_record":       types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetCdsRecordModelAttrTypes},
+	"cert_record":      types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetCertRecordModelAttrTypes},
+	"cname_record":     types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetCnameRecordModelAttrTypes},
+	"ds_record":        types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetDsRecordModelAttrTypes},
+	"eui48_record":     types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetEui48RecordModelAttrTypes},
+	"eui64_record":     types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetEui64RecordModelAttrTypes},
+	"lb_record":        types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetLBRecordModelAttrTypes},
+	"loc_record":       types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetLocRecordModelAttrTypes},
+	"mx_record":        types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetMxRecordModelAttrTypes},
+	"naptr_record":     types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetNaptrRecordModelAttrTypes},
+	"ns_record":        types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetNsRecordModelAttrTypes},
+	"ptr_record":       types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetPtrRecordModelAttrTypes},
+	"srv_record":       types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetSrvRecordModelAttrTypes},
+	"sshfp_record":     types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetSshfpRecordModelAttrTypes},
+	"tlsa_record":      types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetTlsaRecordModelAttrTypes},
+	"txt_record":       types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetTxtRecordModelAttrTypes},
+}
+
 // DNSZoneRrSetGroupRrSetARecordModel represents a_record block
 type DNSZoneRrSetGroupRrSetARecordModel struct {
 	Name   types.String `tfsdk:"name"`
 	Values types.List   `tfsdk:"values"`
+}
+
+// DNSZoneRrSetGroupRrSetARecordModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetARecordModel
+var DNSZoneRrSetGroupRrSetARecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.StringType},
 }
 
 // DNSZoneRrSetGroupRrSetAaaaRecordModel represents aaaa_record block
@@ -400,10 +745,22 @@ type DNSZoneRrSetGroupRrSetAaaaRecordModel struct {
 	Values types.List   `tfsdk:"values"`
 }
 
+// DNSZoneRrSetGroupRrSetAaaaRecordModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetAaaaRecordModel
+var DNSZoneRrSetGroupRrSetAaaaRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.StringType},
+}
+
 // DNSZoneRrSetGroupRrSetAfsdbRecordModel represents afsdb_record block
 type DNSZoneRrSetGroupRrSetAfsdbRecordModel struct {
 	Name   types.String                                   `tfsdk:"name"`
 	Values []DNSZoneRrSetGroupRrSetAfsdbRecordValuesModel `tfsdk:"values"`
+}
+
+// DNSZoneRrSetGroupRrSetAfsdbRecordModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetAfsdbRecordModel
+var DNSZoneRrSetGroupRrSetAfsdbRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetAfsdbRecordValuesModelAttrTypes}},
 }
 
 // DNSZoneRrSetGroupRrSetAfsdbRecordValuesModel represents values block
@@ -412,15 +769,32 @@ type DNSZoneRrSetGroupRrSetAfsdbRecordValuesModel struct {
 	Subtype  types.String `tfsdk:"subtype"`
 }
 
+// DNSZoneRrSetGroupRrSetAfsdbRecordValuesModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetAfsdbRecordValuesModel
+var DNSZoneRrSetGroupRrSetAfsdbRecordValuesModelAttrTypes = map[string]attr.Type{
+	"hostname": types.StringType,
+	"subtype":  types.StringType,
+}
+
 // DNSZoneRrSetGroupRrSetAliasRecordModel represents alias_record block
 type DNSZoneRrSetGroupRrSetAliasRecordModel struct {
 	Value types.String `tfsdk:"value"`
+}
+
+// DNSZoneRrSetGroupRrSetAliasRecordModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetAliasRecordModel
+var DNSZoneRrSetGroupRrSetAliasRecordModelAttrTypes = map[string]attr.Type{
+	"value": types.StringType,
 }
 
 // DNSZoneRrSetGroupRrSetCaaRecordModel represents caa_record block
 type DNSZoneRrSetGroupRrSetCaaRecordModel struct {
 	Name   types.String                                 `tfsdk:"name"`
 	Values []DNSZoneRrSetGroupRrSetCaaRecordValuesModel `tfsdk:"values"`
+}
+
+// DNSZoneRrSetGroupRrSetCaaRecordModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetCaaRecordModel
+var DNSZoneRrSetGroupRrSetCaaRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetCaaRecordValuesModelAttrTypes}},
 }
 
 // DNSZoneRrSetGroupRrSetCaaRecordValuesModel represents values block
@@ -430,10 +804,23 @@ type DNSZoneRrSetGroupRrSetCaaRecordValuesModel struct {
 	Value types.String `tfsdk:"value"`
 }
 
+// DNSZoneRrSetGroupRrSetCaaRecordValuesModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetCaaRecordValuesModel
+var DNSZoneRrSetGroupRrSetCaaRecordValuesModelAttrTypes = map[string]attr.Type{
+	"flags": types.Int64Type,
+	"tag":   types.StringType,
+	"value": types.StringType,
+}
+
 // DNSZoneRrSetGroupRrSetCdsRecordModel represents cds_record block
 type DNSZoneRrSetGroupRrSetCdsRecordModel struct {
 	Name   types.String                                 `tfsdk:"name"`
 	Values []DNSZoneRrSetGroupRrSetCdsRecordValuesModel `tfsdk:"values"`
+}
+
+// DNSZoneRrSetGroupRrSetCdsRecordModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetCdsRecordModel
+var DNSZoneRrSetGroupRrSetCdsRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetCdsRecordValuesModelAttrTypes}},
 }
 
 // DNSZoneRrSetGroupRrSetCdsRecordValuesModel represents values block
@@ -445,9 +832,23 @@ type DNSZoneRrSetGroupRrSetCdsRecordValuesModel struct {
 	Sha384Digest   *DNSZoneRrSetGroupRrSetCdsRecordValuesSha384DigestModel `tfsdk:"sha384_digest"`
 }
 
+// DNSZoneRrSetGroupRrSetCdsRecordValuesModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetCdsRecordValuesModel
+var DNSZoneRrSetGroupRrSetCdsRecordValuesModelAttrTypes = map[string]attr.Type{
+	"ds_key_algorithm": types.StringType,
+	"key_tag":          types.Int64Type,
+	"sha1_digest":      types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetCdsRecordValuesSha1DigestModelAttrTypes},
+	"sha256_digest":    types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetCdsRecordValuesSha256DigestModelAttrTypes},
+	"sha384_digest":    types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetCdsRecordValuesSha384DigestModelAttrTypes},
+}
+
 // DNSZoneRrSetGroupRrSetCdsRecordValuesSha1DigestModel represents sha1_digest block
 type DNSZoneRrSetGroupRrSetCdsRecordValuesSha1DigestModel struct {
 	Digest types.String `tfsdk:"digest"`
+}
+
+// DNSZoneRrSetGroupRrSetCdsRecordValuesSha1DigestModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetCdsRecordValuesSha1DigestModel
+var DNSZoneRrSetGroupRrSetCdsRecordValuesSha1DigestModelAttrTypes = map[string]attr.Type{
+	"digest": types.StringType,
 }
 
 // DNSZoneRrSetGroupRrSetCdsRecordValuesSha256DigestModel represents sha256_digest block
@@ -455,15 +856,31 @@ type DNSZoneRrSetGroupRrSetCdsRecordValuesSha256DigestModel struct {
 	Digest types.String `tfsdk:"digest"`
 }
 
+// DNSZoneRrSetGroupRrSetCdsRecordValuesSha256DigestModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetCdsRecordValuesSha256DigestModel
+var DNSZoneRrSetGroupRrSetCdsRecordValuesSha256DigestModelAttrTypes = map[string]attr.Type{
+	"digest": types.StringType,
+}
+
 // DNSZoneRrSetGroupRrSetCdsRecordValuesSha384DigestModel represents sha384_digest block
 type DNSZoneRrSetGroupRrSetCdsRecordValuesSha384DigestModel struct {
 	Digest types.String `tfsdk:"digest"`
+}
+
+// DNSZoneRrSetGroupRrSetCdsRecordValuesSha384DigestModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetCdsRecordValuesSha384DigestModel
+var DNSZoneRrSetGroupRrSetCdsRecordValuesSha384DigestModelAttrTypes = map[string]attr.Type{
+	"digest": types.StringType,
 }
 
 // DNSZoneRrSetGroupRrSetCertRecordModel represents cert_record block
 type DNSZoneRrSetGroupRrSetCertRecordModel struct {
 	Name   types.String                                  `tfsdk:"name"`
 	Values []DNSZoneRrSetGroupRrSetCertRecordValuesModel `tfsdk:"values"`
+}
+
+// DNSZoneRrSetGroupRrSetCertRecordModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetCertRecordModel
+var DNSZoneRrSetGroupRrSetCertRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetCertRecordValuesModelAttrTypes}},
 }
 
 // DNSZoneRrSetGroupRrSetCertRecordValuesModel represents values block
@@ -474,16 +891,36 @@ type DNSZoneRrSetGroupRrSetCertRecordValuesModel struct {
 	Certificate types.String `tfsdk:"certificate"`
 }
 
+// DNSZoneRrSetGroupRrSetCertRecordValuesModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetCertRecordValuesModel
+var DNSZoneRrSetGroupRrSetCertRecordValuesModelAttrTypes = map[string]attr.Type{
+	"algorithm":    types.StringType,
+	"cert_key_tag": types.Int64Type,
+	"cert_type":    types.StringType,
+	"certificate":  types.StringType,
+}
+
 // DNSZoneRrSetGroupRrSetCnameRecordModel represents cname_record block
 type DNSZoneRrSetGroupRrSetCnameRecordModel struct {
 	Name  types.String `tfsdk:"name"`
 	Value types.String `tfsdk:"value"`
 }
 
+// DNSZoneRrSetGroupRrSetCnameRecordModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetCnameRecordModel
+var DNSZoneRrSetGroupRrSetCnameRecordModelAttrTypes = map[string]attr.Type{
+	"name":  types.StringType,
+	"value": types.StringType,
+}
+
 // DNSZoneRrSetGroupRrSetDsRecordModel represents ds_record block
 type DNSZoneRrSetGroupRrSetDsRecordModel struct {
 	Name   types.String                                `tfsdk:"name"`
 	Values []DNSZoneRrSetGroupRrSetDsRecordValuesModel `tfsdk:"values"`
+}
+
+// DNSZoneRrSetGroupRrSetDsRecordModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetDsRecordModel
+var DNSZoneRrSetGroupRrSetDsRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetDsRecordValuesModelAttrTypes}},
 }
 
 // DNSZoneRrSetGroupRrSetDsRecordValuesModel represents values block
@@ -495,9 +932,23 @@ type DNSZoneRrSetGroupRrSetDsRecordValuesModel struct {
 	Sha384Digest   *DNSZoneRrSetGroupRrSetDsRecordValuesSha384DigestModel `tfsdk:"sha384_digest"`
 }
 
+// DNSZoneRrSetGroupRrSetDsRecordValuesModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetDsRecordValuesModel
+var DNSZoneRrSetGroupRrSetDsRecordValuesModelAttrTypes = map[string]attr.Type{
+	"ds_key_algorithm": types.StringType,
+	"key_tag":          types.Int64Type,
+	"sha1_digest":      types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetDsRecordValuesSha1DigestModelAttrTypes},
+	"sha256_digest":    types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetDsRecordValuesSha256DigestModelAttrTypes},
+	"sha384_digest":    types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetDsRecordValuesSha384DigestModelAttrTypes},
+}
+
 // DNSZoneRrSetGroupRrSetDsRecordValuesSha1DigestModel represents sha1_digest block
 type DNSZoneRrSetGroupRrSetDsRecordValuesSha1DigestModel struct {
 	Digest types.String `tfsdk:"digest"`
+}
+
+// DNSZoneRrSetGroupRrSetDsRecordValuesSha1DigestModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetDsRecordValuesSha1DigestModel
+var DNSZoneRrSetGroupRrSetDsRecordValuesSha1DigestModelAttrTypes = map[string]attr.Type{
+	"digest": types.StringType,
 }
 
 // DNSZoneRrSetGroupRrSetDsRecordValuesSha256DigestModel represents sha256_digest block
@@ -505,9 +956,19 @@ type DNSZoneRrSetGroupRrSetDsRecordValuesSha256DigestModel struct {
 	Digest types.String `tfsdk:"digest"`
 }
 
+// DNSZoneRrSetGroupRrSetDsRecordValuesSha256DigestModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetDsRecordValuesSha256DigestModel
+var DNSZoneRrSetGroupRrSetDsRecordValuesSha256DigestModelAttrTypes = map[string]attr.Type{
+	"digest": types.StringType,
+}
+
 // DNSZoneRrSetGroupRrSetDsRecordValuesSha384DigestModel represents sha384_digest block
 type DNSZoneRrSetGroupRrSetDsRecordValuesSha384DigestModel struct {
 	Digest types.String `tfsdk:"digest"`
+}
+
+// DNSZoneRrSetGroupRrSetDsRecordValuesSha384DigestModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetDsRecordValuesSha384DigestModel
+var DNSZoneRrSetGroupRrSetDsRecordValuesSha384DigestModelAttrTypes = map[string]attr.Type{
+	"digest": types.StringType,
 }
 
 // DNSZoneRrSetGroupRrSetEui48RecordModel represents eui48_record block
@@ -516,16 +977,34 @@ type DNSZoneRrSetGroupRrSetEui48RecordModel struct {
 	Value types.String `tfsdk:"value"`
 }
 
+// DNSZoneRrSetGroupRrSetEui48RecordModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetEui48RecordModel
+var DNSZoneRrSetGroupRrSetEui48RecordModelAttrTypes = map[string]attr.Type{
+	"name":  types.StringType,
+	"value": types.StringType,
+}
+
 // DNSZoneRrSetGroupRrSetEui64RecordModel represents eui64_record block
 type DNSZoneRrSetGroupRrSetEui64RecordModel struct {
 	Name  types.String `tfsdk:"name"`
 	Value types.String `tfsdk:"value"`
 }
 
+// DNSZoneRrSetGroupRrSetEui64RecordModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetEui64RecordModel
+var DNSZoneRrSetGroupRrSetEui64RecordModelAttrTypes = map[string]attr.Type{
+	"name":  types.StringType,
+	"value": types.StringType,
+}
+
 // DNSZoneRrSetGroupRrSetLBRecordModel represents lb_record block
 type DNSZoneRrSetGroupRrSetLBRecordModel struct {
 	Name  types.String                              `tfsdk:"name"`
 	Value *DNSZoneRrSetGroupRrSetLBRecordValueModel `tfsdk:"value"`
+}
+
+// DNSZoneRrSetGroupRrSetLBRecordModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetLBRecordModel
+var DNSZoneRrSetGroupRrSetLBRecordModelAttrTypes = map[string]attr.Type{
+	"name":  types.StringType,
+	"value": types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetLBRecordValueModelAttrTypes},
 }
 
 // DNSZoneRrSetGroupRrSetLBRecordValueModel represents value block
@@ -535,10 +1014,23 @@ type DNSZoneRrSetGroupRrSetLBRecordValueModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// DNSZoneRrSetGroupRrSetLBRecordValueModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetLBRecordValueModel
+var DNSZoneRrSetGroupRrSetLBRecordValueModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // DNSZoneRrSetGroupRrSetLocRecordModel represents loc_record block
 type DNSZoneRrSetGroupRrSetLocRecordModel struct {
 	Name   types.String                                 `tfsdk:"name"`
 	Values []DNSZoneRrSetGroupRrSetLocRecordValuesModel `tfsdk:"values"`
+}
+
+// DNSZoneRrSetGroupRrSetLocRecordModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetLocRecordModel
+var DNSZoneRrSetGroupRrSetLocRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetLocRecordValuesModelAttrTypes}},
 }
 
 // DNSZoneRrSetGroupRrSetLocRecordValuesModel represents values block
@@ -557,10 +1049,32 @@ type DNSZoneRrSetGroupRrSetLocRecordValuesModel struct {
 	VerticalPrecision   types.Int64  `tfsdk:"vertical_precision"`
 }
 
+// DNSZoneRrSetGroupRrSetLocRecordValuesModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetLocRecordValuesModel
+var DNSZoneRrSetGroupRrSetLocRecordValuesModelAttrTypes = map[string]attr.Type{
+	"altitude":             types.Int64Type,
+	"horizontal_precision": types.Int64Type,
+	"latitude_degree":      types.Int64Type,
+	"latitude_hemisphere":  types.StringType,
+	"latitude_minute":      types.Int64Type,
+	"latitude_second":      types.Int64Type,
+	"location_diameter":    types.Int64Type,
+	"longitude_degree":     types.Int64Type,
+	"longitude_hemisphere": types.StringType,
+	"longitude_minute":     types.Int64Type,
+	"longitude_second":     types.Int64Type,
+	"vertical_precision":   types.Int64Type,
+}
+
 // DNSZoneRrSetGroupRrSetMxRecordModel represents mx_record block
 type DNSZoneRrSetGroupRrSetMxRecordModel struct {
 	Name   types.String                                `tfsdk:"name"`
 	Values []DNSZoneRrSetGroupRrSetMxRecordValuesModel `tfsdk:"values"`
+}
+
+// DNSZoneRrSetGroupRrSetMxRecordModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetMxRecordModel
+var DNSZoneRrSetGroupRrSetMxRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetMxRecordValuesModelAttrTypes}},
 }
 
 // DNSZoneRrSetGroupRrSetMxRecordValuesModel represents values block
@@ -569,10 +1083,22 @@ type DNSZoneRrSetGroupRrSetMxRecordValuesModel struct {
 	Priority types.Int64  `tfsdk:"priority"`
 }
 
+// DNSZoneRrSetGroupRrSetMxRecordValuesModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetMxRecordValuesModel
+var DNSZoneRrSetGroupRrSetMxRecordValuesModelAttrTypes = map[string]attr.Type{
+	"domain":   types.StringType,
+	"priority": types.Int64Type,
+}
+
 // DNSZoneRrSetGroupRrSetNaptrRecordModel represents naptr_record block
 type DNSZoneRrSetGroupRrSetNaptrRecordModel struct {
 	Name   types.String                                   `tfsdk:"name"`
 	Values []DNSZoneRrSetGroupRrSetNaptrRecordValuesModel `tfsdk:"values"`
+}
+
+// DNSZoneRrSetGroupRrSetNaptrRecordModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetNaptrRecordModel
+var DNSZoneRrSetGroupRrSetNaptrRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetNaptrRecordValuesModelAttrTypes}},
 }
 
 // DNSZoneRrSetGroupRrSetNaptrRecordValuesModel represents values block
@@ -585,10 +1111,26 @@ type DNSZoneRrSetGroupRrSetNaptrRecordValuesModel struct {
 	Service     types.String `tfsdk:"service"`
 }
 
+// DNSZoneRrSetGroupRrSetNaptrRecordValuesModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetNaptrRecordValuesModel
+var DNSZoneRrSetGroupRrSetNaptrRecordValuesModelAttrTypes = map[string]attr.Type{
+	"flags":       types.StringType,
+	"order":       types.Int64Type,
+	"preference":  types.Int64Type,
+	"regexp":      types.StringType,
+	"replacement": types.StringType,
+	"service":     types.StringType,
+}
+
 // DNSZoneRrSetGroupRrSetNsRecordModel represents ns_record block
 type DNSZoneRrSetGroupRrSetNsRecordModel struct {
 	Name   types.String `tfsdk:"name"`
 	Values types.List   `tfsdk:"values"`
+}
+
+// DNSZoneRrSetGroupRrSetNsRecordModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetNsRecordModel
+var DNSZoneRrSetGroupRrSetNsRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.StringType},
 }
 
 // DNSZoneRrSetGroupRrSetPtrRecordModel represents ptr_record block
@@ -597,10 +1139,22 @@ type DNSZoneRrSetGroupRrSetPtrRecordModel struct {
 	Values types.List   `tfsdk:"values"`
 }
 
+// DNSZoneRrSetGroupRrSetPtrRecordModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetPtrRecordModel
+var DNSZoneRrSetGroupRrSetPtrRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.StringType},
+}
+
 // DNSZoneRrSetGroupRrSetSrvRecordModel represents srv_record block
 type DNSZoneRrSetGroupRrSetSrvRecordModel struct {
 	Name   types.String                                 `tfsdk:"name"`
 	Values []DNSZoneRrSetGroupRrSetSrvRecordValuesModel `tfsdk:"values"`
+}
+
+// DNSZoneRrSetGroupRrSetSrvRecordModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetSrvRecordModel
+var DNSZoneRrSetGroupRrSetSrvRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetSrvRecordValuesModelAttrTypes}},
 }
 
 // DNSZoneRrSetGroupRrSetSrvRecordValuesModel represents values block
@@ -611,10 +1165,24 @@ type DNSZoneRrSetGroupRrSetSrvRecordValuesModel struct {
 	Weight   types.Int64  `tfsdk:"weight"`
 }
 
+// DNSZoneRrSetGroupRrSetSrvRecordValuesModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetSrvRecordValuesModel
+var DNSZoneRrSetGroupRrSetSrvRecordValuesModelAttrTypes = map[string]attr.Type{
+	"port":     types.Int64Type,
+	"priority": types.Int64Type,
+	"target":   types.StringType,
+	"weight":   types.Int64Type,
+}
+
 // DNSZoneRrSetGroupRrSetSshfpRecordModel represents sshfp_record block
 type DNSZoneRrSetGroupRrSetSshfpRecordModel struct {
 	Name   types.String                                   `tfsdk:"name"`
 	Values []DNSZoneRrSetGroupRrSetSshfpRecordValuesModel `tfsdk:"values"`
+}
+
+// DNSZoneRrSetGroupRrSetSshfpRecordModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetSshfpRecordModel
+var DNSZoneRrSetGroupRrSetSshfpRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetSshfpRecordValuesModelAttrTypes}},
 }
 
 // DNSZoneRrSetGroupRrSetSshfpRecordValuesModel represents values block
@@ -624,9 +1192,21 @@ type DNSZoneRrSetGroupRrSetSshfpRecordValuesModel struct {
 	Sha256Fingerprint *DNSZoneRrSetGroupRrSetSshfpRecordValuesSha256FingerprintModel `tfsdk:"sha256_fingerprint"`
 }
 
+// DNSZoneRrSetGroupRrSetSshfpRecordValuesModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetSshfpRecordValuesModel
+var DNSZoneRrSetGroupRrSetSshfpRecordValuesModelAttrTypes = map[string]attr.Type{
+	"algorithm":          types.StringType,
+	"sha1_fingerprint":   types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetSshfpRecordValuesSha1FingerprintModelAttrTypes},
+	"sha256_fingerprint": types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetSshfpRecordValuesSha256FingerprintModelAttrTypes},
+}
+
 // DNSZoneRrSetGroupRrSetSshfpRecordValuesSha1FingerprintModel represents sha1_fingerprint block
 type DNSZoneRrSetGroupRrSetSshfpRecordValuesSha1FingerprintModel struct {
 	Fingerprint types.String `tfsdk:"fingerprint"`
+}
+
+// DNSZoneRrSetGroupRrSetSshfpRecordValuesSha1FingerprintModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetSshfpRecordValuesSha1FingerprintModel
+var DNSZoneRrSetGroupRrSetSshfpRecordValuesSha1FingerprintModelAttrTypes = map[string]attr.Type{
+	"fingerprint": types.StringType,
 }
 
 // DNSZoneRrSetGroupRrSetSshfpRecordValuesSha256FingerprintModel represents sha256_fingerprint block
@@ -634,10 +1214,21 @@ type DNSZoneRrSetGroupRrSetSshfpRecordValuesSha256FingerprintModel struct {
 	Fingerprint types.String `tfsdk:"fingerprint"`
 }
 
+// DNSZoneRrSetGroupRrSetSshfpRecordValuesSha256FingerprintModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetSshfpRecordValuesSha256FingerprintModel
+var DNSZoneRrSetGroupRrSetSshfpRecordValuesSha256FingerprintModelAttrTypes = map[string]attr.Type{
+	"fingerprint": types.StringType,
+}
+
 // DNSZoneRrSetGroupRrSetTlsaRecordModel represents tlsa_record block
 type DNSZoneRrSetGroupRrSetTlsaRecordModel struct {
 	Name   types.String                                  `tfsdk:"name"`
 	Values []DNSZoneRrSetGroupRrSetTlsaRecordValuesModel `tfsdk:"values"`
+}
+
+// DNSZoneRrSetGroupRrSetTlsaRecordModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetTlsaRecordModel
+var DNSZoneRrSetGroupRrSetTlsaRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.ObjectType{AttrTypes: DNSZoneRrSetGroupRrSetTlsaRecordValuesModelAttrTypes}},
 }
 
 // DNSZoneRrSetGroupRrSetTlsaRecordValuesModel represents values block
@@ -648,10 +1239,24 @@ type DNSZoneRrSetGroupRrSetTlsaRecordValuesModel struct {
 	Selector                   types.String `tfsdk:"selector"`
 }
 
+// DNSZoneRrSetGroupRrSetTlsaRecordValuesModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetTlsaRecordValuesModel
+var DNSZoneRrSetGroupRrSetTlsaRecordValuesModelAttrTypes = map[string]attr.Type{
+	"certificate_association_data": types.StringType,
+	"certificate_usage":            types.StringType,
+	"matching_type":                types.StringType,
+	"selector":                     types.StringType,
+}
+
 // DNSZoneRrSetGroupRrSetTxtRecordModel represents txt_record block
 type DNSZoneRrSetGroupRrSetTxtRecordModel struct {
 	Name   types.String `tfsdk:"name"`
 	Values types.List   `tfsdk:"values"`
+}
+
+// DNSZoneRrSetGroupRrSetTxtRecordModelAttrTypes defines the attribute types for DNSZoneRrSetGroupRrSetTxtRecordModel
+var DNSZoneRrSetGroupRrSetTxtRecordModelAttrTypes = map[string]attr.Type{
+	"name":   types.StringType,
+	"values": types.ListType{ElemType: types.StringType},
 }
 
 // DNSZoneSoaParametersModel represents soa_parameters block
@@ -663,21 +1268,30 @@ type DNSZoneSoaParametersModel struct {
 	TTL         types.Int64 `tfsdk:"ttl"`
 }
 
+// DNSZoneSoaParametersModelAttrTypes defines the attribute types for DNSZoneSoaParametersModel
+var DNSZoneSoaParametersModelAttrTypes = map[string]attr.Type{
+	"expire":       types.Int64Type,
+	"negative_ttl": types.Int64Type,
+	"refresh":      types.Int64Type,
+	"retry":        types.Int64Type,
+	"ttl":          types.Int64Type,
+}
+
 type DNSZoneResourceModel struct {
-	Name                      types.String                    `tfsdk:"name"`
-	Namespace                 types.String                    `tfsdk:"namespace"`
-	Annotations               types.Map                       `tfsdk:"annotations"`
-	Description               types.String                    `tfsdk:"description"`
-	Disable                   types.Bool                      `tfsdk:"disable"`
-	Labels                    types.Map                       `tfsdk:"labels"`
-	ID                        types.String                    `tfsdk:"id"`
-	AllowHTTPLBManagedRecords types.Bool                      `tfsdk:"allow_http_lb_managed_records"`
-	Timeouts                  timeouts.Value                  `tfsdk:"timeouts"`
-	DefaultRrSetGroup         []DNSZoneDefaultRrSetGroupModel `tfsdk:"default_rr_set_group"`
-	DefaultSoaParameters      *DNSZoneEmptyModel              `tfsdk:"default_soa_parameters"`
-	DnssecMode                *DNSZoneDnssecModeModel         `tfsdk:"dnssec_mode"`
-	RrSetGroup                []DNSZoneRrSetGroupModel        `tfsdk:"rr_set_group"`
-	SoaParameters             *DNSZoneSoaParametersModel      `tfsdk:"soa_parameters"`
+	Name                      types.String               `tfsdk:"name"`
+	Namespace                 types.String               `tfsdk:"namespace"`
+	Annotations               types.Map                  `tfsdk:"annotations"`
+	Description               types.String               `tfsdk:"description"`
+	Disable                   types.Bool                 `tfsdk:"disable"`
+	Labels                    types.Map                  `tfsdk:"labels"`
+	ID                        types.String               `tfsdk:"id"`
+	AllowHTTPLBManagedRecords types.Bool                 `tfsdk:"allow_http_lb_managed_records"`
+	Timeouts                  timeouts.Value             `tfsdk:"timeouts"`
+	DefaultRrSetGroup         types.List                 `tfsdk:"default_rr_set_group"`
+	DefaultSoaParameters      *DNSZoneEmptyModel         `tfsdk:"default_soa_parameters"`
+	DnssecMode                *DNSZoneDnssecModeModel    `tfsdk:"dnssec_mode"`
+	RrSetGroup                types.List                 `tfsdk:"rr_set_group"`
+	SoaParameters             *DNSZoneSoaParametersModel `tfsdk:"soa_parameters"`
 }
 
 func (r *DNSZoneResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -1064,6 +1678,9 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -1705,6 +2322,9 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 												},
 											},
@@ -2175,437 +2795,442 @@ func (r *DNSZoneResource) Create(ctx context.Context, req resource.CreateRequest
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.DefaultRrSetGroup) > 0 {
-		var default_rr_set_groupList []map[string]interface{}
-		for _, item := range data.DefaultRrSetGroup {
-			itemMap := make(map[string]interface{})
-			if item.ARecord != nil {
-				a_recordNestedMap := make(map[string]interface{})
-				if !item.ARecord.Name.IsNull() && !item.ARecord.Name.IsUnknown() {
-					a_recordNestedMap["name"] = item.ARecord.Name.ValueString()
-				}
-				if !item.ARecord.Values.IsNull() && !item.ARecord.Values.IsUnknown() {
-					var ValuesItems []string
-					diags := item.ARecord.Values.ElementsAs(ctx, &ValuesItems, false)
-					if !diags.HasError() {
-						a_recordNestedMap["values"] = ValuesItems
+	if !data.DefaultRrSetGroup.IsNull() && !data.DefaultRrSetGroup.IsUnknown() {
+		var default_rr_set_groupItems []DNSZoneDefaultRrSetGroupModel
+		diags := data.DefaultRrSetGroup.ElementsAs(ctx, &default_rr_set_groupItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(default_rr_set_groupItems) > 0 {
+			var default_rr_set_groupList []map[string]interface{}
+			for _, item := range default_rr_set_groupItems {
+				itemMap := make(map[string]interface{})
+				if item.ARecord != nil {
+					a_recordNestedMap := make(map[string]interface{})
+					if !item.ARecord.Name.IsNull() && !item.ARecord.Name.IsUnknown() {
+						a_recordNestedMap["name"] = item.ARecord.Name.ValueString()
 					}
-				}
-				itemMap["a_record"] = a_recordNestedMap
-			}
-			if item.AaaaRecord != nil {
-				aaaa_recordNestedMap := make(map[string]interface{})
-				if !item.AaaaRecord.Name.IsNull() && !item.AaaaRecord.Name.IsUnknown() {
-					aaaa_recordNestedMap["name"] = item.AaaaRecord.Name.ValueString()
-				}
-				if !item.AaaaRecord.Values.IsNull() && !item.AaaaRecord.Values.IsUnknown() {
-					var ValuesItems []string
-					diags := item.AaaaRecord.Values.ElementsAs(ctx, &ValuesItems, false)
-					if !diags.HasError() {
-						aaaa_recordNestedMap["values"] = ValuesItems
+					if !item.ARecord.Values.IsNull() && !item.ARecord.Values.IsUnknown() {
+						var ValuesItems []string
+						diags := item.ARecord.Values.ElementsAs(ctx, &ValuesItems, false)
+						if !diags.HasError() {
+							a_recordNestedMap["values"] = ValuesItems
+						}
 					}
+					itemMap["a_record"] = a_recordNestedMap
 				}
-				itemMap["aaaa_record"] = aaaa_recordNestedMap
-			}
-			if item.AfsdbRecord != nil {
-				afsdb_recordNestedMap := make(map[string]interface{})
-				if !item.AfsdbRecord.Name.IsNull() && !item.AfsdbRecord.Name.IsUnknown() {
-					afsdb_recordNestedMap["name"] = item.AfsdbRecord.Name.ValueString()
-				}
-				if len(item.AfsdbRecord.Values) > 0 {
-					var valuesDeepList []map[string]interface{}
-					for _, deepListItem := range item.AfsdbRecord.Values {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Hostname.IsNull() && !deepListItem.Hostname.IsUnknown() {
-							deepListItemMap["hostname"] = deepListItem.Hostname.ValueString()
-						}
-						if !deepListItem.Subtype.IsNull() && !deepListItem.Subtype.IsUnknown() {
-							deepListItemMap["subtype"] = deepListItem.Subtype.ValueString()
-						}
-						valuesDeepList = append(valuesDeepList, deepListItemMap)
+				if item.AaaaRecord != nil {
+					aaaa_recordNestedMap := make(map[string]interface{})
+					if !item.AaaaRecord.Name.IsNull() && !item.AaaaRecord.Name.IsUnknown() {
+						aaaa_recordNestedMap["name"] = item.AaaaRecord.Name.ValueString()
 					}
-					afsdb_recordNestedMap["values"] = valuesDeepList
-				}
-				itemMap["afsdb_record"] = afsdb_recordNestedMap
-			}
-			if item.AliasRecord != nil {
-				alias_recordNestedMap := make(map[string]interface{})
-				if !item.AliasRecord.Value.IsNull() && !item.AliasRecord.Value.IsUnknown() {
-					alias_recordNestedMap["value"] = item.AliasRecord.Value.ValueString()
-				}
-				itemMap["alias_record"] = alias_recordNestedMap
-			}
-			if item.CaaRecord != nil {
-				caa_recordNestedMap := make(map[string]interface{})
-				if !item.CaaRecord.Name.IsNull() && !item.CaaRecord.Name.IsUnknown() {
-					caa_recordNestedMap["name"] = item.CaaRecord.Name.ValueString()
-				}
-				if len(item.CaaRecord.Values) > 0 {
-					var valuesDeepList []map[string]interface{}
-					for _, deepListItem := range item.CaaRecord.Values {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Flags.IsNull() && !deepListItem.Flags.IsUnknown() {
-							deepListItemMap["flags"] = deepListItem.Flags.ValueInt64()
+					if !item.AaaaRecord.Values.IsNull() && !item.AaaaRecord.Values.IsUnknown() {
+						var ValuesItems []string
+						diags := item.AaaaRecord.Values.ElementsAs(ctx, &ValuesItems, false)
+						if !diags.HasError() {
+							aaaa_recordNestedMap["values"] = ValuesItems
 						}
-						if !deepListItem.Tag.IsNull() && !deepListItem.Tag.IsUnknown() {
-							deepListItemMap["tag"] = deepListItem.Tag.ValueString()
-						}
-						if !deepListItem.Value.IsNull() && !deepListItem.Value.IsUnknown() {
-							deepListItemMap["value"] = deepListItem.Value.ValueString()
-						}
-						valuesDeepList = append(valuesDeepList, deepListItemMap)
 					}
-					caa_recordNestedMap["values"] = valuesDeepList
+					itemMap["aaaa_record"] = aaaa_recordNestedMap
 				}
-				itemMap["caa_record"] = caa_recordNestedMap
-			}
-			if item.CdsRecord != nil {
-				cds_recordNestedMap := make(map[string]interface{})
-				if !item.CdsRecord.Name.IsNull() && !item.CdsRecord.Name.IsUnknown() {
-					cds_recordNestedMap["name"] = item.CdsRecord.Name.ValueString()
-				}
-				if len(item.CdsRecord.Values) > 0 {
-					var valuesDeepList []map[string]interface{}
-					for _, deepListItem := range item.CdsRecord.Values {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.DsKeyAlgorithm.IsNull() && !deepListItem.DsKeyAlgorithm.IsUnknown() {
-							deepListItemMap["ds_key_algorithm"] = deepListItem.DsKeyAlgorithm.ValueString()
-						}
-						if !deepListItem.KeyTag.IsNull() && !deepListItem.KeyTag.IsUnknown() {
-							deepListItemMap["key_tag"] = deepListItem.KeyTag.ValueInt64()
-						}
-						valuesDeepList = append(valuesDeepList, deepListItemMap)
+				if item.AfsdbRecord != nil {
+					afsdb_recordNestedMap := make(map[string]interface{})
+					if !item.AfsdbRecord.Name.IsNull() && !item.AfsdbRecord.Name.IsUnknown() {
+						afsdb_recordNestedMap["name"] = item.AfsdbRecord.Name.ValueString()
 					}
-					cds_recordNestedMap["values"] = valuesDeepList
-				}
-				itemMap["cds_record"] = cds_recordNestedMap
-			}
-			if item.CertRecord != nil {
-				cert_recordNestedMap := make(map[string]interface{})
-				if !item.CertRecord.Name.IsNull() && !item.CertRecord.Name.IsUnknown() {
-					cert_recordNestedMap["name"] = item.CertRecord.Name.ValueString()
-				}
-				if len(item.CertRecord.Values) > 0 {
-					var valuesDeepList []map[string]interface{}
-					for _, deepListItem := range item.CertRecord.Values {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Algorithm.IsNull() && !deepListItem.Algorithm.IsUnknown() {
-							deepListItemMap["algorithm"] = deepListItem.Algorithm.ValueString()
+					if len(item.AfsdbRecord.Values) > 0 {
+						var valuesDeepList []map[string]interface{}
+						for _, deepListItem := range item.AfsdbRecord.Values {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Hostname.IsNull() && !deepListItem.Hostname.IsUnknown() {
+								deepListItemMap["hostname"] = deepListItem.Hostname.ValueString()
+							}
+							if !deepListItem.Subtype.IsNull() && !deepListItem.Subtype.IsUnknown() {
+								deepListItemMap["subtype"] = deepListItem.Subtype.ValueString()
+							}
+							valuesDeepList = append(valuesDeepList, deepListItemMap)
 						}
-						if !deepListItem.CertKeyTag.IsNull() && !deepListItem.CertKeyTag.IsUnknown() {
-							deepListItemMap["cert_key_tag"] = deepListItem.CertKeyTag.ValueInt64()
-						}
-						if !deepListItem.CertType.IsNull() && !deepListItem.CertType.IsUnknown() {
-							deepListItemMap["cert_type"] = deepListItem.CertType.ValueString()
-						}
-						if !deepListItem.Certificate.IsNull() && !deepListItem.Certificate.IsUnknown() {
-							deepListItemMap["certificate"] = deepListItem.Certificate.ValueString()
-						}
-						valuesDeepList = append(valuesDeepList, deepListItemMap)
+						afsdb_recordNestedMap["values"] = valuesDeepList
 					}
-					cert_recordNestedMap["values"] = valuesDeepList
+					itemMap["afsdb_record"] = afsdb_recordNestedMap
 				}
-				itemMap["cert_record"] = cert_recordNestedMap
-			}
-			if item.CnameRecord != nil {
-				cname_recordNestedMap := make(map[string]interface{})
-				if !item.CnameRecord.Name.IsNull() && !item.CnameRecord.Name.IsUnknown() {
-					cname_recordNestedMap["name"] = item.CnameRecord.Name.ValueString()
-				}
-				if !item.CnameRecord.Value.IsNull() && !item.CnameRecord.Value.IsUnknown() {
-					cname_recordNestedMap["value"] = item.CnameRecord.Value.ValueString()
-				}
-				itemMap["cname_record"] = cname_recordNestedMap
-			}
-			if !item.DescriptionSpec.IsNull() && !item.DescriptionSpec.IsUnknown() {
-				itemMap["description"] = item.DescriptionSpec.ValueString()
-			}
-			if item.DsRecord != nil {
-				ds_recordNestedMap := make(map[string]interface{})
-				if !item.DsRecord.Name.IsNull() && !item.DsRecord.Name.IsUnknown() {
-					ds_recordNestedMap["name"] = item.DsRecord.Name.ValueString()
-				}
-				if len(item.DsRecord.Values) > 0 {
-					var valuesDeepList []map[string]interface{}
-					for _, deepListItem := range item.DsRecord.Values {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.DsKeyAlgorithm.IsNull() && !deepListItem.DsKeyAlgorithm.IsUnknown() {
-							deepListItemMap["ds_key_algorithm"] = deepListItem.DsKeyAlgorithm.ValueString()
-						}
-						if !deepListItem.KeyTag.IsNull() && !deepListItem.KeyTag.IsUnknown() {
-							deepListItemMap["key_tag"] = deepListItem.KeyTag.ValueInt64()
-						}
-						valuesDeepList = append(valuesDeepList, deepListItemMap)
+				if item.AliasRecord != nil {
+					alias_recordNestedMap := make(map[string]interface{})
+					if !item.AliasRecord.Value.IsNull() && !item.AliasRecord.Value.IsUnknown() {
+						alias_recordNestedMap["value"] = item.AliasRecord.Value.ValueString()
 					}
-					ds_recordNestedMap["values"] = valuesDeepList
+					itemMap["alias_record"] = alias_recordNestedMap
 				}
-				itemMap["ds_record"] = ds_recordNestedMap
-			}
-			if item.Eui48Record != nil {
-				eui48_recordNestedMap := make(map[string]interface{})
-				if !item.Eui48Record.Name.IsNull() && !item.Eui48Record.Name.IsUnknown() {
-					eui48_recordNestedMap["name"] = item.Eui48Record.Name.ValueString()
-				}
-				if !item.Eui48Record.Value.IsNull() && !item.Eui48Record.Value.IsUnknown() {
-					eui48_recordNestedMap["value"] = item.Eui48Record.Value.ValueString()
-				}
-				itemMap["eui48_record"] = eui48_recordNestedMap
-			}
-			if item.Eui64Record != nil {
-				eui64_recordNestedMap := make(map[string]interface{})
-				if !item.Eui64Record.Name.IsNull() && !item.Eui64Record.Name.IsUnknown() {
-					eui64_recordNestedMap["name"] = item.Eui64Record.Name.ValueString()
-				}
-				if !item.Eui64Record.Value.IsNull() && !item.Eui64Record.Value.IsUnknown() {
-					eui64_recordNestedMap["value"] = item.Eui64Record.Value.ValueString()
-				}
-				itemMap["eui64_record"] = eui64_recordNestedMap
-			}
-			if item.LBRecord != nil {
-				lb_recordNestedMap := make(map[string]interface{})
-				if !item.LBRecord.Name.IsNull() && !item.LBRecord.Name.IsUnknown() {
-					lb_recordNestedMap["name"] = item.LBRecord.Name.ValueString()
-				}
-				if item.LBRecord.Value != nil {
-					valueDeepMap := make(map[string]interface{})
-					if !item.LBRecord.Value.Name.IsNull() && !item.LBRecord.Value.Name.IsUnknown() {
-						valueDeepMap["name"] = item.LBRecord.Value.Name.ValueString()
+				if item.CaaRecord != nil {
+					caa_recordNestedMap := make(map[string]interface{})
+					if !item.CaaRecord.Name.IsNull() && !item.CaaRecord.Name.IsUnknown() {
+						caa_recordNestedMap["name"] = item.CaaRecord.Name.ValueString()
 					}
-					if !item.LBRecord.Value.Namespace.IsNull() && !item.LBRecord.Value.Namespace.IsUnknown() {
-						valueDeepMap["namespace"] = item.LBRecord.Value.Namespace.ValueString()
+					if len(item.CaaRecord.Values) > 0 {
+						var valuesDeepList []map[string]interface{}
+						for _, deepListItem := range item.CaaRecord.Values {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Flags.IsNull() && !deepListItem.Flags.IsUnknown() {
+								deepListItemMap["flags"] = deepListItem.Flags.ValueInt64()
+							}
+							if !deepListItem.Tag.IsNull() && !deepListItem.Tag.IsUnknown() {
+								deepListItemMap["tag"] = deepListItem.Tag.ValueString()
+							}
+							if !deepListItem.Value.IsNull() && !deepListItem.Value.IsUnknown() {
+								deepListItemMap["value"] = deepListItem.Value.ValueString()
+							}
+							valuesDeepList = append(valuesDeepList, deepListItemMap)
+						}
+						caa_recordNestedMap["values"] = valuesDeepList
 					}
-					if !item.LBRecord.Value.Tenant.IsNull() && !item.LBRecord.Value.Tenant.IsUnknown() {
-						valueDeepMap["tenant"] = item.LBRecord.Value.Tenant.ValueString()
+					itemMap["caa_record"] = caa_recordNestedMap
+				}
+				if item.CdsRecord != nil {
+					cds_recordNestedMap := make(map[string]interface{})
+					if !item.CdsRecord.Name.IsNull() && !item.CdsRecord.Name.IsUnknown() {
+						cds_recordNestedMap["name"] = item.CdsRecord.Name.ValueString()
 					}
-					lb_recordNestedMap["value"] = valueDeepMap
-				}
-				itemMap["lb_record"] = lb_recordNestedMap
-			}
-			if item.LocRecord != nil {
-				loc_recordNestedMap := make(map[string]interface{})
-				if !item.LocRecord.Name.IsNull() && !item.LocRecord.Name.IsUnknown() {
-					loc_recordNestedMap["name"] = item.LocRecord.Name.ValueString()
-				}
-				if len(item.LocRecord.Values) > 0 {
-					var valuesDeepList []map[string]interface{}
-					for _, deepListItem := range item.LocRecord.Values {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Altitude.IsNull() && !deepListItem.Altitude.IsUnknown() {
-							deepListItemMap["altitude"] = deepListItem.Altitude.ValueInt64()
+					if len(item.CdsRecord.Values) > 0 {
+						var valuesDeepList []map[string]interface{}
+						for _, deepListItem := range item.CdsRecord.Values {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.DsKeyAlgorithm.IsNull() && !deepListItem.DsKeyAlgorithm.IsUnknown() {
+								deepListItemMap["ds_key_algorithm"] = deepListItem.DsKeyAlgorithm.ValueString()
+							}
+							if !deepListItem.KeyTag.IsNull() && !deepListItem.KeyTag.IsUnknown() {
+								deepListItemMap["key_tag"] = deepListItem.KeyTag.ValueInt64()
+							}
+							valuesDeepList = append(valuesDeepList, deepListItemMap)
 						}
-						if !deepListItem.HorizontalPrecision.IsNull() && !deepListItem.HorizontalPrecision.IsUnknown() {
-							deepListItemMap["horizontal_precision"] = deepListItem.HorizontalPrecision.ValueInt64()
-						}
-						if !deepListItem.LatitudeDegree.IsNull() && !deepListItem.LatitudeDegree.IsUnknown() {
-							deepListItemMap["latitude_degree"] = deepListItem.LatitudeDegree.ValueInt64()
-						}
-						if !deepListItem.LatitudeHemisphere.IsNull() && !deepListItem.LatitudeHemisphere.IsUnknown() {
-							deepListItemMap["latitude_hemisphere"] = deepListItem.LatitudeHemisphere.ValueString()
-						}
-						if !deepListItem.LatitudeMinute.IsNull() && !deepListItem.LatitudeMinute.IsUnknown() {
-							deepListItemMap["latitude_minute"] = deepListItem.LatitudeMinute.ValueInt64()
-						}
-						if !deepListItem.LatitudeSecond.IsNull() && !deepListItem.LatitudeSecond.IsUnknown() {
-							deepListItemMap["latitude_second"] = deepListItem.LatitudeSecond.ValueInt64()
-						}
-						if !deepListItem.LocationDiameter.IsNull() && !deepListItem.LocationDiameter.IsUnknown() {
-							deepListItemMap["location_diameter"] = deepListItem.LocationDiameter.ValueInt64()
-						}
-						if !deepListItem.LongitudeDegree.IsNull() && !deepListItem.LongitudeDegree.IsUnknown() {
-							deepListItemMap["longitude_degree"] = deepListItem.LongitudeDegree.ValueInt64()
-						}
-						if !deepListItem.LongitudeHemisphere.IsNull() && !deepListItem.LongitudeHemisphere.IsUnknown() {
-							deepListItemMap["longitude_hemisphere"] = deepListItem.LongitudeHemisphere.ValueString()
-						}
-						if !deepListItem.LongitudeMinute.IsNull() && !deepListItem.LongitudeMinute.IsUnknown() {
-							deepListItemMap["longitude_minute"] = deepListItem.LongitudeMinute.ValueInt64()
-						}
-						if !deepListItem.LongitudeSecond.IsNull() && !deepListItem.LongitudeSecond.IsUnknown() {
-							deepListItemMap["longitude_second"] = deepListItem.LongitudeSecond.ValueInt64()
-						}
-						if !deepListItem.VerticalPrecision.IsNull() && !deepListItem.VerticalPrecision.IsUnknown() {
-							deepListItemMap["vertical_precision"] = deepListItem.VerticalPrecision.ValueInt64()
-						}
-						valuesDeepList = append(valuesDeepList, deepListItemMap)
+						cds_recordNestedMap["values"] = valuesDeepList
 					}
-					loc_recordNestedMap["values"] = valuesDeepList
+					itemMap["cds_record"] = cds_recordNestedMap
 				}
-				itemMap["loc_record"] = loc_recordNestedMap
-			}
-			if item.MxRecord != nil {
-				mx_recordNestedMap := make(map[string]interface{})
-				if !item.MxRecord.Name.IsNull() && !item.MxRecord.Name.IsUnknown() {
-					mx_recordNestedMap["name"] = item.MxRecord.Name.ValueString()
-				}
-				if len(item.MxRecord.Values) > 0 {
-					var valuesDeepList []map[string]interface{}
-					for _, deepListItem := range item.MxRecord.Values {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Domain.IsNull() && !deepListItem.Domain.IsUnknown() {
-							deepListItemMap["domain"] = deepListItem.Domain.ValueString()
-						}
-						if !deepListItem.Priority.IsNull() && !deepListItem.Priority.IsUnknown() {
-							deepListItemMap["priority"] = deepListItem.Priority.ValueInt64()
-						}
-						valuesDeepList = append(valuesDeepList, deepListItemMap)
+				if item.CertRecord != nil {
+					cert_recordNestedMap := make(map[string]interface{})
+					if !item.CertRecord.Name.IsNull() && !item.CertRecord.Name.IsUnknown() {
+						cert_recordNestedMap["name"] = item.CertRecord.Name.ValueString()
 					}
-					mx_recordNestedMap["values"] = valuesDeepList
-				}
-				itemMap["mx_record"] = mx_recordNestedMap
-			}
-			if item.NaptrRecord != nil {
-				naptr_recordNestedMap := make(map[string]interface{})
-				if !item.NaptrRecord.Name.IsNull() && !item.NaptrRecord.Name.IsUnknown() {
-					naptr_recordNestedMap["name"] = item.NaptrRecord.Name.ValueString()
-				}
-				if len(item.NaptrRecord.Values) > 0 {
-					var valuesDeepList []map[string]interface{}
-					for _, deepListItem := range item.NaptrRecord.Values {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Flags.IsNull() && !deepListItem.Flags.IsUnknown() {
-							deepListItemMap["flags"] = deepListItem.Flags.ValueString()
+					if len(item.CertRecord.Values) > 0 {
+						var valuesDeepList []map[string]interface{}
+						for _, deepListItem := range item.CertRecord.Values {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Algorithm.IsNull() && !deepListItem.Algorithm.IsUnknown() {
+								deepListItemMap["algorithm"] = deepListItem.Algorithm.ValueString()
+							}
+							if !deepListItem.CertKeyTag.IsNull() && !deepListItem.CertKeyTag.IsUnknown() {
+								deepListItemMap["cert_key_tag"] = deepListItem.CertKeyTag.ValueInt64()
+							}
+							if !deepListItem.CertType.IsNull() && !deepListItem.CertType.IsUnknown() {
+								deepListItemMap["cert_type"] = deepListItem.CertType.ValueString()
+							}
+							if !deepListItem.Certificate.IsNull() && !deepListItem.Certificate.IsUnknown() {
+								deepListItemMap["certificate"] = deepListItem.Certificate.ValueString()
+							}
+							valuesDeepList = append(valuesDeepList, deepListItemMap)
 						}
-						if !deepListItem.Order.IsNull() && !deepListItem.Order.IsUnknown() {
-							deepListItemMap["order"] = deepListItem.Order.ValueInt64()
-						}
-						if !deepListItem.Preference.IsNull() && !deepListItem.Preference.IsUnknown() {
-							deepListItemMap["preference"] = deepListItem.Preference.ValueInt64()
-						}
-						if !deepListItem.Regexp.IsNull() && !deepListItem.Regexp.IsUnknown() {
-							deepListItemMap["regexp"] = deepListItem.Regexp.ValueString()
-						}
-						if !deepListItem.Replacement.IsNull() && !deepListItem.Replacement.IsUnknown() {
-							deepListItemMap["replacement"] = deepListItem.Replacement.ValueString()
-						}
-						if !deepListItem.Service.IsNull() && !deepListItem.Service.IsUnknown() {
-							deepListItemMap["service"] = deepListItem.Service.ValueString()
-						}
-						valuesDeepList = append(valuesDeepList, deepListItemMap)
+						cert_recordNestedMap["values"] = valuesDeepList
 					}
-					naptr_recordNestedMap["values"] = valuesDeepList
+					itemMap["cert_record"] = cert_recordNestedMap
 				}
-				itemMap["naptr_record"] = naptr_recordNestedMap
-			}
-			if item.NsRecord != nil {
-				ns_recordNestedMap := make(map[string]interface{})
-				if !item.NsRecord.Name.IsNull() && !item.NsRecord.Name.IsUnknown() {
-					ns_recordNestedMap["name"] = item.NsRecord.Name.ValueString()
-				}
-				if !item.NsRecord.Values.IsNull() && !item.NsRecord.Values.IsUnknown() {
-					var ValuesItems []string
-					diags := item.NsRecord.Values.ElementsAs(ctx, &ValuesItems, false)
-					if !diags.HasError() {
-						ns_recordNestedMap["values"] = ValuesItems
+				if item.CnameRecord != nil {
+					cname_recordNestedMap := make(map[string]interface{})
+					if !item.CnameRecord.Name.IsNull() && !item.CnameRecord.Name.IsUnknown() {
+						cname_recordNestedMap["name"] = item.CnameRecord.Name.ValueString()
 					}
-				}
-				itemMap["ns_record"] = ns_recordNestedMap
-			}
-			if item.PtrRecord != nil {
-				ptr_recordNestedMap := make(map[string]interface{})
-				if !item.PtrRecord.Name.IsNull() && !item.PtrRecord.Name.IsUnknown() {
-					ptr_recordNestedMap["name"] = item.PtrRecord.Name.ValueString()
-				}
-				if !item.PtrRecord.Values.IsNull() && !item.PtrRecord.Values.IsUnknown() {
-					var ValuesItems []string
-					diags := item.PtrRecord.Values.ElementsAs(ctx, &ValuesItems, false)
-					if !diags.HasError() {
-						ptr_recordNestedMap["values"] = ValuesItems
+					if !item.CnameRecord.Value.IsNull() && !item.CnameRecord.Value.IsUnknown() {
+						cname_recordNestedMap["value"] = item.CnameRecord.Value.ValueString()
 					}
+					itemMap["cname_record"] = cname_recordNestedMap
 				}
-				itemMap["ptr_record"] = ptr_recordNestedMap
-			}
-			if item.SrvRecord != nil {
-				srv_recordNestedMap := make(map[string]interface{})
-				if !item.SrvRecord.Name.IsNull() && !item.SrvRecord.Name.IsUnknown() {
-					srv_recordNestedMap["name"] = item.SrvRecord.Name.ValueString()
+				if !item.DescriptionSpec.IsNull() && !item.DescriptionSpec.IsUnknown() {
+					itemMap["description"] = item.DescriptionSpec.ValueString()
 				}
-				if len(item.SrvRecord.Values) > 0 {
-					var valuesDeepList []map[string]interface{}
-					for _, deepListItem := range item.SrvRecord.Values {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Port.IsNull() && !deepListItem.Port.IsUnknown() {
-							deepListItemMap["port"] = deepListItem.Port.ValueInt64()
-						}
-						if !deepListItem.Priority.IsNull() && !deepListItem.Priority.IsUnknown() {
-							deepListItemMap["priority"] = deepListItem.Priority.ValueInt64()
-						}
-						if !deepListItem.Target.IsNull() && !deepListItem.Target.IsUnknown() {
-							deepListItemMap["target"] = deepListItem.Target.ValueString()
-						}
-						if !deepListItem.Weight.IsNull() && !deepListItem.Weight.IsUnknown() {
-							deepListItemMap["weight"] = deepListItem.Weight.ValueInt64()
-						}
-						valuesDeepList = append(valuesDeepList, deepListItemMap)
+				if item.DsRecord != nil {
+					ds_recordNestedMap := make(map[string]interface{})
+					if !item.DsRecord.Name.IsNull() && !item.DsRecord.Name.IsUnknown() {
+						ds_recordNestedMap["name"] = item.DsRecord.Name.ValueString()
 					}
-					srv_recordNestedMap["values"] = valuesDeepList
-				}
-				itemMap["srv_record"] = srv_recordNestedMap
-			}
-			if item.SshfpRecord != nil {
-				sshfp_recordNestedMap := make(map[string]interface{})
-				if !item.SshfpRecord.Name.IsNull() && !item.SshfpRecord.Name.IsUnknown() {
-					sshfp_recordNestedMap["name"] = item.SshfpRecord.Name.ValueString()
-				}
-				if len(item.SshfpRecord.Values) > 0 {
-					var valuesDeepList []map[string]interface{}
-					for _, deepListItem := range item.SshfpRecord.Values {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Algorithm.IsNull() && !deepListItem.Algorithm.IsUnknown() {
-							deepListItemMap["algorithm"] = deepListItem.Algorithm.ValueString()
+					if len(item.DsRecord.Values) > 0 {
+						var valuesDeepList []map[string]interface{}
+						for _, deepListItem := range item.DsRecord.Values {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.DsKeyAlgorithm.IsNull() && !deepListItem.DsKeyAlgorithm.IsUnknown() {
+								deepListItemMap["ds_key_algorithm"] = deepListItem.DsKeyAlgorithm.ValueString()
+							}
+							if !deepListItem.KeyTag.IsNull() && !deepListItem.KeyTag.IsUnknown() {
+								deepListItemMap["key_tag"] = deepListItem.KeyTag.ValueInt64()
+							}
+							valuesDeepList = append(valuesDeepList, deepListItemMap)
 						}
-						valuesDeepList = append(valuesDeepList, deepListItemMap)
+						ds_recordNestedMap["values"] = valuesDeepList
 					}
-					sshfp_recordNestedMap["values"] = valuesDeepList
+					itemMap["ds_record"] = ds_recordNestedMap
 				}
-				itemMap["sshfp_record"] = sshfp_recordNestedMap
-			}
-			if item.TlsaRecord != nil {
-				tlsa_recordNestedMap := make(map[string]interface{})
-				if !item.TlsaRecord.Name.IsNull() && !item.TlsaRecord.Name.IsUnknown() {
-					tlsa_recordNestedMap["name"] = item.TlsaRecord.Name.ValueString()
-				}
-				if len(item.TlsaRecord.Values) > 0 {
-					var valuesDeepList []map[string]interface{}
-					for _, deepListItem := range item.TlsaRecord.Values {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.CertificateAssociationData.IsNull() && !deepListItem.CertificateAssociationData.IsUnknown() {
-							deepListItemMap["certificate_association_data"] = deepListItem.CertificateAssociationData.ValueString()
-						}
-						if !deepListItem.CertificateUsage.IsNull() && !deepListItem.CertificateUsage.IsUnknown() {
-							deepListItemMap["certificate_usage"] = deepListItem.CertificateUsage.ValueString()
-						}
-						if !deepListItem.MatchingType.IsNull() && !deepListItem.MatchingType.IsUnknown() {
-							deepListItemMap["matching_type"] = deepListItem.MatchingType.ValueString()
-						}
-						if !deepListItem.Selector.IsNull() && !deepListItem.Selector.IsUnknown() {
-							deepListItemMap["selector"] = deepListItem.Selector.ValueString()
-						}
-						valuesDeepList = append(valuesDeepList, deepListItemMap)
+				if item.Eui48Record != nil {
+					eui48_recordNestedMap := make(map[string]interface{})
+					if !item.Eui48Record.Name.IsNull() && !item.Eui48Record.Name.IsUnknown() {
+						eui48_recordNestedMap["name"] = item.Eui48Record.Name.ValueString()
 					}
-					tlsa_recordNestedMap["values"] = valuesDeepList
-				}
-				itemMap["tlsa_record"] = tlsa_recordNestedMap
-			}
-			if !item.TTL.IsNull() && !item.TTL.IsUnknown() {
-				itemMap["ttl"] = item.TTL.ValueInt64()
-			}
-			if item.TxtRecord != nil {
-				txt_recordNestedMap := make(map[string]interface{})
-				if !item.TxtRecord.Name.IsNull() && !item.TxtRecord.Name.IsUnknown() {
-					txt_recordNestedMap["name"] = item.TxtRecord.Name.ValueString()
-				}
-				if !item.TxtRecord.Values.IsNull() && !item.TxtRecord.Values.IsUnknown() {
-					var ValuesItems []string
-					diags := item.TxtRecord.Values.ElementsAs(ctx, &ValuesItems, false)
-					if !diags.HasError() {
-						txt_recordNestedMap["values"] = ValuesItems
+					if !item.Eui48Record.Value.IsNull() && !item.Eui48Record.Value.IsUnknown() {
+						eui48_recordNestedMap["value"] = item.Eui48Record.Value.ValueString()
 					}
+					itemMap["eui48_record"] = eui48_recordNestedMap
 				}
-				itemMap["txt_record"] = txt_recordNestedMap
+				if item.Eui64Record != nil {
+					eui64_recordNestedMap := make(map[string]interface{})
+					if !item.Eui64Record.Name.IsNull() && !item.Eui64Record.Name.IsUnknown() {
+						eui64_recordNestedMap["name"] = item.Eui64Record.Name.ValueString()
+					}
+					if !item.Eui64Record.Value.IsNull() && !item.Eui64Record.Value.IsUnknown() {
+						eui64_recordNestedMap["value"] = item.Eui64Record.Value.ValueString()
+					}
+					itemMap["eui64_record"] = eui64_recordNestedMap
+				}
+				if item.LBRecord != nil {
+					lb_recordNestedMap := make(map[string]interface{})
+					if !item.LBRecord.Name.IsNull() && !item.LBRecord.Name.IsUnknown() {
+						lb_recordNestedMap["name"] = item.LBRecord.Name.ValueString()
+					}
+					if item.LBRecord.Value != nil {
+						valueDeepMap := make(map[string]interface{})
+						if !item.LBRecord.Value.Name.IsNull() && !item.LBRecord.Value.Name.IsUnknown() {
+							valueDeepMap["name"] = item.LBRecord.Value.Name.ValueString()
+						}
+						if !item.LBRecord.Value.Namespace.IsNull() && !item.LBRecord.Value.Namespace.IsUnknown() {
+							valueDeepMap["namespace"] = item.LBRecord.Value.Namespace.ValueString()
+						}
+						if !item.LBRecord.Value.Tenant.IsNull() && !item.LBRecord.Value.Tenant.IsUnknown() {
+							valueDeepMap["tenant"] = item.LBRecord.Value.Tenant.ValueString()
+						}
+						lb_recordNestedMap["value"] = valueDeepMap
+					}
+					itemMap["lb_record"] = lb_recordNestedMap
+				}
+				if item.LocRecord != nil {
+					loc_recordNestedMap := make(map[string]interface{})
+					if !item.LocRecord.Name.IsNull() && !item.LocRecord.Name.IsUnknown() {
+						loc_recordNestedMap["name"] = item.LocRecord.Name.ValueString()
+					}
+					if len(item.LocRecord.Values) > 0 {
+						var valuesDeepList []map[string]interface{}
+						for _, deepListItem := range item.LocRecord.Values {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Altitude.IsNull() && !deepListItem.Altitude.IsUnknown() {
+								deepListItemMap["altitude"] = deepListItem.Altitude.ValueInt64()
+							}
+							if !deepListItem.HorizontalPrecision.IsNull() && !deepListItem.HorizontalPrecision.IsUnknown() {
+								deepListItemMap["horizontal_precision"] = deepListItem.HorizontalPrecision.ValueInt64()
+							}
+							if !deepListItem.LatitudeDegree.IsNull() && !deepListItem.LatitudeDegree.IsUnknown() {
+								deepListItemMap["latitude_degree"] = deepListItem.LatitudeDegree.ValueInt64()
+							}
+							if !deepListItem.LatitudeHemisphere.IsNull() && !deepListItem.LatitudeHemisphere.IsUnknown() {
+								deepListItemMap["latitude_hemisphere"] = deepListItem.LatitudeHemisphere.ValueString()
+							}
+							if !deepListItem.LatitudeMinute.IsNull() && !deepListItem.LatitudeMinute.IsUnknown() {
+								deepListItemMap["latitude_minute"] = deepListItem.LatitudeMinute.ValueInt64()
+							}
+							if !deepListItem.LatitudeSecond.IsNull() && !deepListItem.LatitudeSecond.IsUnknown() {
+								deepListItemMap["latitude_second"] = deepListItem.LatitudeSecond.ValueInt64()
+							}
+							if !deepListItem.LocationDiameter.IsNull() && !deepListItem.LocationDiameter.IsUnknown() {
+								deepListItemMap["location_diameter"] = deepListItem.LocationDiameter.ValueInt64()
+							}
+							if !deepListItem.LongitudeDegree.IsNull() && !deepListItem.LongitudeDegree.IsUnknown() {
+								deepListItemMap["longitude_degree"] = deepListItem.LongitudeDegree.ValueInt64()
+							}
+							if !deepListItem.LongitudeHemisphere.IsNull() && !deepListItem.LongitudeHemisphere.IsUnknown() {
+								deepListItemMap["longitude_hemisphere"] = deepListItem.LongitudeHemisphere.ValueString()
+							}
+							if !deepListItem.LongitudeMinute.IsNull() && !deepListItem.LongitudeMinute.IsUnknown() {
+								deepListItemMap["longitude_minute"] = deepListItem.LongitudeMinute.ValueInt64()
+							}
+							if !deepListItem.LongitudeSecond.IsNull() && !deepListItem.LongitudeSecond.IsUnknown() {
+								deepListItemMap["longitude_second"] = deepListItem.LongitudeSecond.ValueInt64()
+							}
+							if !deepListItem.VerticalPrecision.IsNull() && !deepListItem.VerticalPrecision.IsUnknown() {
+								deepListItemMap["vertical_precision"] = deepListItem.VerticalPrecision.ValueInt64()
+							}
+							valuesDeepList = append(valuesDeepList, deepListItemMap)
+						}
+						loc_recordNestedMap["values"] = valuesDeepList
+					}
+					itemMap["loc_record"] = loc_recordNestedMap
+				}
+				if item.MxRecord != nil {
+					mx_recordNestedMap := make(map[string]interface{})
+					if !item.MxRecord.Name.IsNull() && !item.MxRecord.Name.IsUnknown() {
+						mx_recordNestedMap["name"] = item.MxRecord.Name.ValueString()
+					}
+					if len(item.MxRecord.Values) > 0 {
+						var valuesDeepList []map[string]interface{}
+						for _, deepListItem := range item.MxRecord.Values {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Domain.IsNull() && !deepListItem.Domain.IsUnknown() {
+								deepListItemMap["domain"] = deepListItem.Domain.ValueString()
+							}
+							if !deepListItem.Priority.IsNull() && !deepListItem.Priority.IsUnknown() {
+								deepListItemMap["priority"] = deepListItem.Priority.ValueInt64()
+							}
+							valuesDeepList = append(valuesDeepList, deepListItemMap)
+						}
+						mx_recordNestedMap["values"] = valuesDeepList
+					}
+					itemMap["mx_record"] = mx_recordNestedMap
+				}
+				if item.NaptrRecord != nil {
+					naptr_recordNestedMap := make(map[string]interface{})
+					if !item.NaptrRecord.Name.IsNull() && !item.NaptrRecord.Name.IsUnknown() {
+						naptr_recordNestedMap["name"] = item.NaptrRecord.Name.ValueString()
+					}
+					if len(item.NaptrRecord.Values) > 0 {
+						var valuesDeepList []map[string]interface{}
+						for _, deepListItem := range item.NaptrRecord.Values {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Flags.IsNull() && !deepListItem.Flags.IsUnknown() {
+								deepListItemMap["flags"] = deepListItem.Flags.ValueString()
+							}
+							if !deepListItem.Order.IsNull() && !deepListItem.Order.IsUnknown() {
+								deepListItemMap["order"] = deepListItem.Order.ValueInt64()
+							}
+							if !deepListItem.Preference.IsNull() && !deepListItem.Preference.IsUnknown() {
+								deepListItemMap["preference"] = deepListItem.Preference.ValueInt64()
+							}
+							if !deepListItem.Regexp.IsNull() && !deepListItem.Regexp.IsUnknown() {
+								deepListItemMap["regexp"] = deepListItem.Regexp.ValueString()
+							}
+							if !deepListItem.Replacement.IsNull() && !deepListItem.Replacement.IsUnknown() {
+								deepListItemMap["replacement"] = deepListItem.Replacement.ValueString()
+							}
+							if !deepListItem.Service.IsNull() && !deepListItem.Service.IsUnknown() {
+								deepListItemMap["service"] = deepListItem.Service.ValueString()
+							}
+							valuesDeepList = append(valuesDeepList, deepListItemMap)
+						}
+						naptr_recordNestedMap["values"] = valuesDeepList
+					}
+					itemMap["naptr_record"] = naptr_recordNestedMap
+				}
+				if item.NsRecord != nil {
+					ns_recordNestedMap := make(map[string]interface{})
+					if !item.NsRecord.Name.IsNull() && !item.NsRecord.Name.IsUnknown() {
+						ns_recordNestedMap["name"] = item.NsRecord.Name.ValueString()
+					}
+					if !item.NsRecord.Values.IsNull() && !item.NsRecord.Values.IsUnknown() {
+						var ValuesItems []string
+						diags := item.NsRecord.Values.ElementsAs(ctx, &ValuesItems, false)
+						if !diags.HasError() {
+							ns_recordNestedMap["values"] = ValuesItems
+						}
+					}
+					itemMap["ns_record"] = ns_recordNestedMap
+				}
+				if item.PtrRecord != nil {
+					ptr_recordNestedMap := make(map[string]interface{})
+					if !item.PtrRecord.Name.IsNull() && !item.PtrRecord.Name.IsUnknown() {
+						ptr_recordNestedMap["name"] = item.PtrRecord.Name.ValueString()
+					}
+					if !item.PtrRecord.Values.IsNull() && !item.PtrRecord.Values.IsUnknown() {
+						var ValuesItems []string
+						diags := item.PtrRecord.Values.ElementsAs(ctx, &ValuesItems, false)
+						if !diags.HasError() {
+							ptr_recordNestedMap["values"] = ValuesItems
+						}
+					}
+					itemMap["ptr_record"] = ptr_recordNestedMap
+				}
+				if item.SrvRecord != nil {
+					srv_recordNestedMap := make(map[string]interface{})
+					if !item.SrvRecord.Name.IsNull() && !item.SrvRecord.Name.IsUnknown() {
+						srv_recordNestedMap["name"] = item.SrvRecord.Name.ValueString()
+					}
+					if len(item.SrvRecord.Values) > 0 {
+						var valuesDeepList []map[string]interface{}
+						for _, deepListItem := range item.SrvRecord.Values {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Port.IsNull() && !deepListItem.Port.IsUnknown() {
+								deepListItemMap["port"] = deepListItem.Port.ValueInt64()
+							}
+							if !deepListItem.Priority.IsNull() && !deepListItem.Priority.IsUnknown() {
+								deepListItemMap["priority"] = deepListItem.Priority.ValueInt64()
+							}
+							if !deepListItem.Target.IsNull() && !deepListItem.Target.IsUnknown() {
+								deepListItemMap["target"] = deepListItem.Target.ValueString()
+							}
+							if !deepListItem.Weight.IsNull() && !deepListItem.Weight.IsUnknown() {
+								deepListItemMap["weight"] = deepListItem.Weight.ValueInt64()
+							}
+							valuesDeepList = append(valuesDeepList, deepListItemMap)
+						}
+						srv_recordNestedMap["values"] = valuesDeepList
+					}
+					itemMap["srv_record"] = srv_recordNestedMap
+				}
+				if item.SshfpRecord != nil {
+					sshfp_recordNestedMap := make(map[string]interface{})
+					if !item.SshfpRecord.Name.IsNull() && !item.SshfpRecord.Name.IsUnknown() {
+						sshfp_recordNestedMap["name"] = item.SshfpRecord.Name.ValueString()
+					}
+					if len(item.SshfpRecord.Values) > 0 {
+						var valuesDeepList []map[string]interface{}
+						for _, deepListItem := range item.SshfpRecord.Values {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Algorithm.IsNull() && !deepListItem.Algorithm.IsUnknown() {
+								deepListItemMap["algorithm"] = deepListItem.Algorithm.ValueString()
+							}
+							valuesDeepList = append(valuesDeepList, deepListItemMap)
+						}
+						sshfp_recordNestedMap["values"] = valuesDeepList
+					}
+					itemMap["sshfp_record"] = sshfp_recordNestedMap
+				}
+				if item.TlsaRecord != nil {
+					tlsa_recordNestedMap := make(map[string]interface{})
+					if !item.TlsaRecord.Name.IsNull() && !item.TlsaRecord.Name.IsUnknown() {
+						tlsa_recordNestedMap["name"] = item.TlsaRecord.Name.ValueString()
+					}
+					if len(item.TlsaRecord.Values) > 0 {
+						var valuesDeepList []map[string]interface{}
+						for _, deepListItem := range item.TlsaRecord.Values {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.CertificateAssociationData.IsNull() && !deepListItem.CertificateAssociationData.IsUnknown() {
+								deepListItemMap["certificate_association_data"] = deepListItem.CertificateAssociationData.ValueString()
+							}
+							if !deepListItem.CertificateUsage.IsNull() && !deepListItem.CertificateUsage.IsUnknown() {
+								deepListItemMap["certificate_usage"] = deepListItem.CertificateUsage.ValueString()
+							}
+							if !deepListItem.MatchingType.IsNull() && !deepListItem.MatchingType.IsUnknown() {
+								deepListItemMap["matching_type"] = deepListItem.MatchingType.ValueString()
+							}
+							if !deepListItem.Selector.IsNull() && !deepListItem.Selector.IsUnknown() {
+								deepListItemMap["selector"] = deepListItem.Selector.ValueString()
+							}
+							valuesDeepList = append(valuesDeepList, deepListItemMap)
+						}
+						tlsa_recordNestedMap["values"] = valuesDeepList
+					}
+					itemMap["tlsa_record"] = tlsa_recordNestedMap
+				}
+				if !item.TTL.IsNull() && !item.TTL.IsUnknown() {
+					itemMap["ttl"] = item.TTL.ValueInt64()
+				}
+				if item.TxtRecord != nil {
+					txt_recordNestedMap := make(map[string]interface{})
+					if !item.TxtRecord.Name.IsNull() && !item.TxtRecord.Name.IsUnknown() {
+						txt_recordNestedMap["name"] = item.TxtRecord.Name.ValueString()
+					}
+					if !item.TxtRecord.Values.IsNull() && !item.TxtRecord.Values.IsUnknown() {
+						var ValuesItems []string
+						diags := item.TxtRecord.Values.ElementsAs(ctx, &ValuesItems, false)
+						if !diags.HasError() {
+							txt_recordNestedMap["values"] = ValuesItems
+						}
+					}
+					itemMap["txt_record"] = txt_recordNestedMap
+				}
+				default_rr_set_groupList = append(default_rr_set_groupList, itemMap)
 			}
-			default_rr_set_groupList = append(default_rr_set_groupList, itemMap)
+			createReq.Spec["default_rr_set_group"] = default_rr_set_groupList
 		}
-		createReq.Spec["default_rr_set_group"] = default_rr_set_groupList
 	}
 	if data.DefaultSoaParameters != nil {
 		default_soa_parametersMap := make(map[string]interface{})
@@ -2621,37 +3246,42 @@ func (r *DNSZoneResource) Create(ctx context.Context, req resource.CreateRequest
 		}
 		createReq.Spec["dnssec_mode"] = dnssec_modeMap
 	}
-	if len(data.RrSetGroup) > 0 {
-		var rr_set_groupList []map[string]interface{}
-		for _, item := range data.RrSetGroup {
-			itemMap := make(map[string]interface{})
-			if item.Metadata != nil {
-				metadataNestedMap := make(map[string]interface{})
-				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
-					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
-				}
-				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
-					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
-				}
-				itemMap["metadata"] = metadataNestedMap
-			}
-			if len(item.RrSet) > 0 {
-				var rr_setNestedList []map[string]interface{}
-				for _, nestedItem := range item.RrSet {
-					nestedItemMap := make(map[string]interface{})
-					if !nestedItem.DescriptionSpec.IsNull() && !nestedItem.DescriptionSpec.IsUnknown() {
-						nestedItemMap["description"] = nestedItem.DescriptionSpec.ValueString()
+	if !data.RrSetGroup.IsNull() && !data.RrSetGroup.IsUnknown() {
+		var rr_set_groupItems []DNSZoneRrSetGroupModel
+		diags := data.RrSetGroup.ElementsAs(ctx, &rr_set_groupItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(rr_set_groupItems) > 0 {
+			var rr_set_groupList []map[string]interface{}
+			for _, item := range rr_set_groupItems {
+				itemMap := make(map[string]interface{})
+				if item.Metadata != nil {
+					metadataNestedMap := make(map[string]interface{})
+					if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+						metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
 					}
-					if !nestedItem.TTL.IsNull() && !nestedItem.TTL.IsUnknown() {
-						nestedItemMap["ttl"] = nestedItem.TTL.ValueInt64()
+					if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+						metadataNestedMap["name"] = item.Metadata.Name.ValueString()
 					}
-					rr_setNestedList = append(rr_setNestedList, nestedItemMap)
+					itemMap["metadata"] = metadataNestedMap
 				}
-				itemMap["rr_set"] = rr_setNestedList
+				if len(item.RrSet) > 0 {
+					var rr_setNestedList []map[string]interface{}
+					for _, nestedItem := range item.RrSet {
+						nestedItemMap := make(map[string]interface{})
+						if !nestedItem.DescriptionSpec.IsNull() && !nestedItem.DescriptionSpec.IsUnknown() {
+							nestedItemMap["description"] = nestedItem.DescriptionSpec.ValueString()
+						}
+						if !nestedItem.TTL.IsNull() && !nestedItem.TTL.IsUnknown() {
+							nestedItemMap["ttl"] = nestedItem.TTL.ValueInt64()
+						}
+						rr_setNestedList = append(rr_setNestedList, nestedItemMap)
+					}
+					itemMap["rr_set"] = rr_setNestedList
+				}
+				rr_set_groupList = append(rr_set_groupList, itemMap)
 			}
-			rr_set_groupList = append(rr_set_groupList, itemMap)
+			createReq.Spec["rr_set_group"] = rr_set_groupList
 		}
-		createReq.Spec["rr_set_group"] = rr_set_groupList
 	}
 	if data.SoaParameters != nil {
 		soa_parametersMap := make(map[string]interface{})
@@ -2690,6 +3320,10 @@ func (r *DNSZoneResource) Create(ctx context.Context, req resource.CreateRequest
 	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["default_rr_set_group"].([]interface{}); ok && len(listData) > 0 {
 		var default_rr_set_groupList []DNSZoneDefaultRrSetGroupModel
+		var existingDefaultRrSetGroupItems []DNSZoneDefaultRrSetGroupModel
+		if !data.DefaultRrSetGroup.IsNull() && !data.DefaultRrSetGroup.IsUnknown() {
+			data.DefaultRrSetGroup.ElementsAs(ctx, &existingDefaultRrSetGroupItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -3065,7 +3699,14 @@ func (r *DNSZoneResource) Create(ctx context.Context, req resource.CreateRequest
 				})
 			}
 		}
-		data.DefaultRrSetGroup = default_rr_set_groupList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupModelAttrTypes}, default_rr_set_groupList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.DefaultRrSetGroup = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.DefaultRrSetGroup = types.ListNull(types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["default_soa_parameters"].(map[string]interface{}); ok && isImport && data.DefaultSoaParameters == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -3079,6 +3720,10 @@ func (r *DNSZoneResource) Create(ctx context.Context, req resource.CreateRequest
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["rr_set_group"].([]interface{}); ok && len(listData) > 0 {
 		var rr_set_groupList []DNSZoneRrSetGroupModel
+		var existingRrSetGroupItems []DNSZoneRrSetGroupModel
+		if !data.RrSetGroup.IsNull() && !data.RrSetGroup.IsUnknown() {
+			data.RrSetGroup.ElementsAs(ctx, &existingRrSetGroupItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -3130,7 +3775,14 @@ func (r *DNSZoneResource) Create(ctx context.Context, req resource.CreateRequest
 				})
 			}
 		}
-		data.RrSetGroup = rr_set_groupList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: DNSZoneRrSetGroupModelAttrTypes}, rr_set_groupList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.RrSetGroup = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.RrSetGroup = types.ListNull(types.ObjectType{AttrTypes: DNSZoneRrSetGroupModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["soa_parameters"].(map[string]interface{}); ok && (isImport || data.SoaParameters != nil) {
 		data.SoaParameters = &DNSZoneSoaParametersModel{
@@ -3241,11 +3893,17 @@ func (r *DNSZoneResource) Read(ctx context.Context, req resource.ReadRequest, re
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -3272,6 +3930,10 @@ func (r *DNSZoneResource) Read(ctx context.Context, req resource.ReadRequest, re
 	})
 	if listData, ok := apiResource.Spec["default_rr_set_group"].([]interface{}); ok && len(listData) > 0 {
 		var default_rr_set_groupList []DNSZoneDefaultRrSetGroupModel
+		var existingDefaultRrSetGroupItems []DNSZoneDefaultRrSetGroupModel
+		if !data.DefaultRrSetGroup.IsNull() && !data.DefaultRrSetGroup.IsUnknown() {
+			data.DefaultRrSetGroup.ElementsAs(ctx, &existingDefaultRrSetGroupItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -3647,7 +4309,14 @@ func (r *DNSZoneResource) Read(ctx context.Context, req resource.ReadRequest, re
 				})
 			}
 		}
-		data.DefaultRrSetGroup = default_rr_set_groupList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupModelAttrTypes}, default_rr_set_groupList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.DefaultRrSetGroup = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.DefaultRrSetGroup = types.ListNull(types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["default_soa_parameters"].(map[string]interface{}); ok && isImport && data.DefaultSoaParameters == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -3661,6 +4330,10 @@ func (r *DNSZoneResource) Read(ctx context.Context, req resource.ReadRequest, re
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["rr_set_group"].([]interface{}); ok && len(listData) > 0 {
 		var rr_set_groupList []DNSZoneRrSetGroupModel
+		var existingRrSetGroupItems []DNSZoneRrSetGroupModel
+		if !data.RrSetGroup.IsNull() && !data.RrSetGroup.IsUnknown() {
+			data.RrSetGroup.ElementsAs(ctx, &existingRrSetGroupItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -3712,7 +4385,14 @@ func (r *DNSZoneResource) Read(ctx context.Context, req resource.ReadRequest, re
 				})
 			}
 		}
-		data.RrSetGroup = rr_set_groupList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: DNSZoneRrSetGroupModelAttrTypes}, rr_set_groupList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.RrSetGroup = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.RrSetGroup = types.ListNull(types.ObjectType{AttrTypes: DNSZoneRrSetGroupModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["soa_parameters"].(map[string]interface{}); ok && (isImport || data.SoaParameters != nil) {
 		data.SoaParameters = &DNSZoneSoaParametersModel{
@@ -3819,437 +4499,442 @@ func (r *DNSZoneResource) Update(ctx context.Context, req resource.UpdateRequest
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.DefaultRrSetGroup) > 0 {
-		var default_rr_set_groupList []map[string]interface{}
-		for _, item := range data.DefaultRrSetGroup {
-			itemMap := make(map[string]interface{})
-			if item.ARecord != nil {
-				a_recordNestedMap := make(map[string]interface{})
-				if !item.ARecord.Name.IsNull() && !item.ARecord.Name.IsUnknown() {
-					a_recordNestedMap["name"] = item.ARecord.Name.ValueString()
-				}
-				if !item.ARecord.Values.IsNull() && !item.ARecord.Values.IsUnknown() {
-					var ValuesItems []string
-					diags := item.ARecord.Values.ElementsAs(ctx, &ValuesItems, false)
-					if !diags.HasError() {
-						a_recordNestedMap["values"] = ValuesItems
+	if !data.DefaultRrSetGroup.IsNull() && !data.DefaultRrSetGroup.IsUnknown() {
+		var default_rr_set_groupItems []DNSZoneDefaultRrSetGroupModel
+		diags := data.DefaultRrSetGroup.ElementsAs(ctx, &default_rr_set_groupItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(default_rr_set_groupItems) > 0 {
+			var default_rr_set_groupList []map[string]interface{}
+			for _, item := range default_rr_set_groupItems {
+				itemMap := make(map[string]interface{})
+				if item.ARecord != nil {
+					a_recordNestedMap := make(map[string]interface{})
+					if !item.ARecord.Name.IsNull() && !item.ARecord.Name.IsUnknown() {
+						a_recordNestedMap["name"] = item.ARecord.Name.ValueString()
 					}
-				}
-				itemMap["a_record"] = a_recordNestedMap
-			}
-			if item.AaaaRecord != nil {
-				aaaa_recordNestedMap := make(map[string]interface{})
-				if !item.AaaaRecord.Name.IsNull() && !item.AaaaRecord.Name.IsUnknown() {
-					aaaa_recordNestedMap["name"] = item.AaaaRecord.Name.ValueString()
-				}
-				if !item.AaaaRecord.Values.IsNull() && !item.AaaaRecord.Values.IsUnknown() {
-					var ValuesItems []string
-					diags := item.AaaaRecord.Values.ElementsAs(ctx, &ValuesItems, false)
-					if !diags.HasError() {
-						aaaa_recordNestedMap["values"] = ValuesItems
+					if !item.ARecord.Values.IsNull() && !item.ARecord.Values.IsUnknown() {
+						var ValuesItems []string
+						diags := item.ARecord.Values.ElementsAs(ctx, &ValuesItems, false)
+						if !diags.HasError() {
+							a_recordNestedMap["values"] = ValuesItems
+						}
 					}
+					itemMap["a_record"] = a_recordNestedMap
 				}
-				itemMap["aaaa_record"] = aaaa_recordNestedMap
-			}
-			if item.AfsdbRecord != nil {
-				afsdb_recordNestedMap := make(map[string]interface{})
-				if !item.AfsdbRecord.Name.IsNull() && !item.AfsdbRecord.Name.IsUnknown() {
-					afsdb_recordNestedMap["name"] = item.AfsdbRecord.Name.ValueString()
-				}
-				if len(item.AfsdbRecord.Values) > 0 {
-					var valuesDeepList []map[string]interface{}
-					for _, deepListItem := range item.AfsdbRecord.Values {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Hostname.IsNull() && !deepListItem.Hostname.IsUnknown() {
-							deepListItemMap["hostname"] = deepListItem.Hostname.ValueString()
-						}
-						if !deepListItem.Subtype.IsNull() && !deepListItem.Subtype.IsUnknown() {
-							deepListItemMap["subtype"] = deepListItem.Subtype.ValueString()
-						}
-						valuesDeepList = append(valuesDeepList, deepListItemMap)
+				if item.AaaaRecord != nil {
+					aaaa_recordNestedMap := make(map[string]interface{})
+					if !item.AaaaRecord.Name.IsNull() && !item.AaaaRecord.Name.IsUnknown() {
+						aaaa_recordNestedMap["name"] = item.AaaaRecord.Name.ValueString()
 					}
-					afsdb_recordNestedMap["values"] = valuesDeepList
-				}
-				itemMap["afsdb_record"] = afsdb_recordNestedMap
-			}
-			if item.AliasRecord != nil {
-				alias_recordNestedMap := make(map[string]interface{})
-				if !item.AliasRecord.Value.IsNull() && !item.AliasRecord.Value.IsUnknown() {
-					alias_recordNestedMap["value"] = item.AliasRecord.Value.ValueString()
-				}
-				itemMap["alias_record"] = alias_recordNestedMap
-			}
-			if item.CaaRecord != nil {
-				caa_recordNestedMap := make(map[string]interface{})
-				if !item.CaaRecord.Name.IsNull() && !item.CaaRecord.Name.IsUnknown() {
-					caa_recordNestedMap["name"] = item.CaaRecord.Name.ValueString()
-				}
-				if len(item.CaaRecord.Values) > 0 {
-					var valuesDeepList []map[string]interface{}
-					for _, deepListItem := range item.CaaRecord.Values {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Flags.IsNull() && !deepListItem.Flags.IsUnknown() {
-							deepListItemMap["flags"] = deepListItem.Flags.ValueInt64()
+					if !item.AaaaRecord.Values.IsNull() && !item.AaaaRecord.Values.IsUnknown() {
+						var ValuesItems []string
+						diags := item.AaaaRecord.Values.ElementsAs(ctx, &ValuesItems, false)
+						if !diags.HasError() {
+							aaaa_recordNestedMap["values"] = ValuesItems
 						}
-						if !deepListItem.Tag.IsNull() && !deepListItem.Tag.IsUnknown() {
-							deepListItemMap["tag"] = deepListItem.Tag.ValueString()
-						}
-						if !deepListItem.Value.IsNull() && !deepListItem.Value.IsUnknown() {
-							deepListItemMap["value"] = deepListItem.Value.ValueString()
-						}
-						valuesDeepList = append(valuesDeepList, deepListItemMap)
 					}
-					caa_recordNestedMap["values"] = valuesDeepList
+					itemMap["aaaa_record"] = aaaa_recordNestedMap
 				}
-				itemMap["caa_record"] = caa_recordNestedMap
-			}
-			if item.CdsRecord != nil {
-				cds_recordNestedMap := make(map[string]interface{})
-				if !item.CdsRecord.Name.IsNull() && !item.CdsRecord.Name.IsUnknown() {
-					cds_recordNestedMap["name"] = item.CdsRecord.Name.ValueString()
-				}
-				if len(item.CdsRecord.Values) > 0 {
-					var valuesDeepList []map[string]interface{}
-					for _, deepListItem := range item.CdsRecord.Values {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.DsKeyAlgorithm.IsNull() && !deepListItem.DsKeyAlgorithm.IsUnknown() {
-							deepListItemMap["ds_key_algorithm"] = deepListItem.DsKeyAlgorithm.ValueString()
-						}
-						if !deepListItem.KeyTag.IsNull() && !deepListItem.KeyTag.IsUnknown() {
-							deepListItemMap["key_tag"] = deepListItem.KeyTag.ValueInt64()
-						}
-						valuesDeepList = append(valuesDeepList, deepListItemMap)
+				if item.AfsdbRecord != nil {
+					afsdb_recordNestedMap := make(map[string]interface{})
+					if !item.AfsdbRecord.Name.IsNull() && !item.AfsdbRecord.Name.IsUnknown() {
+						afsdb_recordNestedMap["name"] = item.AfsdbRecord.Name.ValueString()
 					}
-					cds_recordNestedMap["values"] = valuesDeepList
-				}
-				itemMap["cds_record"] = cds_recordNestedMap
-			}
-			if item.CertRecord != nil {
-				cert_recordNestedMap := make(map[string]interface{})
-				if !item.CertRecord.Name.IsNull() && !item.CertRecord.Name.IsUnknown() {
-					cert_recordNestedMap["name"] = item.CertRecord.Name.ValueString()
-				}
-				if len(item.CertRecord.Values) > 0 {
-					var valuesDeepList []map[string]interface{}
-					for _, deepListItem := range item.CertRecord.Values {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Algorithm.IsNull() && !deepListItem.Algorithm.IsUnknown() {
-							deepListItemMap["algorithm"] = deepListItem.Algorithm.ValueString()
+					if len(item.AfsdbRecord.Values) > 0 {
+						var valuesDeepList []map[string]interface{}
+						for _, deepListItem := range item.AfsdbRecord.Values {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Hostname.IsNull() && !deepListItem.Hostname.IsUnknown() {
+								deepListItemMap["hostname"] = deepListItem.Hostname.ValueString()
+							}
+							if !deepListItem.Subtype.IsNull() && !deepListItem.Subtype.IsUnknown() {
+								deepListItemMap["subtype"] = deepListItem.Subtype.ValueString()
+							}
+							valuesDeepList = append(valuesDeepList, deepListItemMap)
 						}
-						if !deepListItem.CertKeyTag.IsNull() && !deepListItem.CertKeyTag.IsUnknown() {
-							deepListItemMap["cert_key_tag"] = deepListItem.CertKeyTag.ValueInt64()
-						}
-						if !deepListItem.CertType.IsNull() && !deepListItem.CertType.IsUnknown() {
-							deepListItemMap["cert_type"] = deepListItem.CertType.ValueString()
-						}
-						if !deepListItem.Certificate.IsNull() && !deepListItem.Certificate.IsUnknown() {
-							deepListItemMap["certificate"] = deepListItem.Certificate.ValueString()
-						}
-						valuesDeepList = append(valuesDeepList, deepListItemMap)
+						afsdb_recordNestedMap["values"] = valuesDeepList
 					}
-					cert_recordNestedMap["values"] = valuesDeepList
+					itemMap["afsdb_record"] = afsdb_recordNestedMap
 				}
-				itemMap["cert_record"] = cert_recordNestedMap
-			}
-			if item.CnameRecord != nil {
-				cname_recordNestedMap := make(map[string]interface{})
-				if !item.CnameRecord.Name.IsNull() && !item.CnameRecord.Name.IsUnknown() {
-					cname_recordNestedMap["name"] = item.CnameRecord.Name.ValueString()
-				}
-				if !item.CnameRecord.Value.IsNull() && !item.CnameRecord.Value.IsUnknown() {
-					cname_recordNestedMap["value"] = item.CnameRecord.Value.ValueString()
-				}
-				itemMap["cname_record"] = cname_recordNestedMap
-			}
-			if !item.DescriptionSpec.IsNull() && !item.DescriptionSpec.IsUnknown() {
-				itemMap["description"] = item.DescriptionSpec.ValueString()
-			}
-			if item.DsRecord != nil {
-				ds_recordNestedMap := make(map[string]interface{})
-				if !item.DsRecord.Name.IsNull() && !item.DsRecord.Name.IsUnknown() {
-					ds_recordNestedMap["name"] = item.DsRecord.Name.ValueString()
-				}
-				if len(item.DsRecord.Values) > 0 {
-					var valuesDeepList []map[string]interface{}
-					for _, deepListItem := range item.DsRecord.Values {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.DsKeyAlgorithm.IsNull() && !deepListItem.DsKeyAlgorithm.IsUnknown() {
-							deepListItemMap["ds_key_algorithm"] = deepListItem.DsKeyAlgorithm.ValueString()
-						}
-						if !deepListItem.KeyTag.IsNull() && !deepListItem.KeyTag.IsUnknown() {
-							deepListItemMap["key_tag"] = deepListItem.KeyTag.ValueInt64()
-						}
-						valuesDeepList = append(valuesDeepList, deepListItemMap)
+				if item.AliasRecord != nil {
+					alias_recordNestedMap := make(map[string]interface{})
+					if !item.AliasRecord.Value.IsNull() && !item.AliasRecord.Value.IsUnknown() {
+						alias_recordNestedMap["value"] = item.AliasRecord.Value.ValueString()
 					}
-					ds_recordNestedMap["values"] = valuesDeepList
+					itemMap["alias_record"] = alias_recordNestedMap
 				}
-				itemMap["ds_record"] = ds_recordNestedMap
-			}
-			if item.Eui48Record != nil {
-				eui48_recordNestedMap := make(map[string]interface{})
-				if !item.Eui48Record.Name.IsNull() && !item.Eui48Record.Name.IsUnknown() {
-					eui48_recordNestedMap["name"] = item.Eui48Record.Name.ValueString()
-				}
-				if !item.Eui48Record.Value.IsNull() && !item.Eui48Record.Value.IsUnknown() {
-					eui48_recordNestedMap["value"] = item.Eui48Record.Value.ValueString()
-				}
-				itemMap["eui48_record"] = eui48_recordNestedMap
-			}
-			if item.Eui64Record != nil {
-				eui64_recordNestedMap := make(map[string]interface{})
-				if !item.Eui64Record.Name.IsNull() && !item.Eui64Record.Name.IsUnknown() {
-					eui64_recordNestedMap["name"] = item.Eui64Record.Name.ValueString()
-				}
-				if !item.Eui64Record.Value.IsNull() && !item.Eui64Record.Value.IsUnknown() {
-					eui64_recordNestedMap["value"] = item.Eui64Record.Value.ValueString()
-				}
-				itemMap["eui64_record"] = eui64_recordNestedMap
-			}
-			if item.LBRecord != nil {
-				lb_recordNestedMap := make(map[string]interface{})
-				if !item.LBRecord.Name.IsNull() && !item.LBRecord.Name.IsUnknown() {
-					lb_recordNestedMap["name"] = item.LBRecord.Name.ValueString()
-				}
-				if item.LBRecord.Value != nil {
-					valueDeepMap := make(map[string]interface{})
-					if !item.LBRecord.Value.Name.IsNull() && !item.LBRecord.Value.Name.IsUnknown() {
-						valueDeepMap["name"] = item.LBRecord.Value.Name.ValueString()
+				if item.CaaRecord != nil {
+					caa_recordNestedMap := make(map[string]interface{})
+					if !item.CaaRecord.Name.IsNull() && !item.CaaRecord.Name.IsUnknown() {
+						caa_recordNestedMap["name"] = item.CaaRecord.Name.ValueString()
 					}
-					if !item.LBRecord.Value.Namespace.IsNull() && !item.LBRecord.Value.Namespace.IsUnknown() {
-						valueDeepMap["namespace"] = item.LBRecord.Value.Namespace.ValueString()
+					if len(item.CaaRecord.Values) > 0 {
+						var valuesDeepList []map[string]interface{}
+						for _, deepListItem := range item.CaaRecord.Values {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Flags.IsNull() && !deepListItem.Flags.IsUnknown() {
+								deepListItemMap["flags"] = deepListItem.Flags.ValueInt64()
+							}
+							if !deepListItem.Tag.IsNull() && !deepListItem.Tag.IsUnknown() {
+								deepListItemMap["tag"] = deepListItem.Tag.ValueString()
+							}
+							if !deepListItem.Value.IsNull() && !deepListItem.Value.IsUnknown() {
+								deepListItemMap["value"] = deepListItem.Value.ValueString()
+							}
+							valuesDeepList = append(valuesDeepList, deepListItemMap)
+						}
+						caa_recordNestedMap["values"] = valuesDeepList
 					}
-					if !item.LBRecord.Value.Tenant.IsNull() && !item.LBRecord.Value.Tenant.IsUnknown() {
-						valueDeepMap["tenant"] = item.LBRecord.Value.Tenant.ValueString()
+					itemMap["caa_record"] = caa_recordNestedMap
+				}
+				if item.CdsRecord != nil {
+					cds_recordNestedMap := make(map[string]interface{})
+					if !item.CdsRecord.Name.IsNull() && !item.CdsRecord.Name.IsUnknown() {
+						cds_recordNestedMap["name"] = item.CdsRecord.Name.ValueString()
 					}
-					lb_recordNestedMap["value"] = valueDeepMap
-				}
-				itemMap["lb_record"] = lb_recordNestedMap
-			}
-			if item.LocRecord != nil {
-				loc_recordNestedMap := make(map[string]interface{})
-				if !item.LocRecord.Name.IsNull() && !item.LocRecord.Name.IsUnknown() {
-					loc_recordNestedMap["name"] = item.LocRecord.Name.ValueString()
-				}
-				if len(item.LocRecord.Values) > 0 {
-					var valuesDeepList []map[string]interface{}
-					for _, deepListItem := range item.LocRecord.Values {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Altitude.IsNull() && !deepListItem.Altitude.IsUnknown() {
-							deepListItemMap["altitude"] = deepListItem.Altitude.ValueInt64()
+					if len(item.CdsRecord.Values) > 0 {
+						var valuesDeepList []map[string]interface{}
+						for _, deepListItem := range item.CdsRecord.Values {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.DsKeyAlgorithm.IsNull() && !deepListItem.DsKeyAlgorithm.IsUnknown() {
+								deepListItemMap["ds_key_algorithm"] = deepListItem.DsKeyAlgorithm.ValueString()
+							}
+							if !deepListItem.KeyTag.IsNull() && !deepListItem.KeyTag.IsUnknown() {
+								deepListItemMap["key_tag"] = deepListItem.KeyTag.ValueInt64()
+							}
+							valuesDeepList = append(valuesDeepList, deepListItemMap)
 						}
-						if !deepListItem.HorizontalPrecision.IsNull() && !deepListItem.HorizontalPrecision.IsUnknown() {
-							deepListItemMap["horizontal_precision"] = deepListItem.HorizontalPrecision.ValueInt64()
-						}
-						if !deepListItem.LatitudeDegree.IsNull() && !deepListItem.LatitudeDegree.IsUnknown() {
-							deepListItemMap["latitude_degree"] = deepListItem.LatitudeDegree.ValueInt64()
-						}
-						if !deepListItem.LatitudeHemisphere.IsNull() && !deepListItem.LatitudeHemisphere.IsUnknown() {
-							deepListItemMap["latitude_hemisphere"] = deepListItem.LatitudeHemisphere.ValueString()
-						}
-						if !deepListItem.LatitudeMinute.IsNull() && !deepListItem.LatitudeMinute.IsUnknown() {
-							deepListItemMap["latitude_minute"] = deepListItem.LatitudeMinute.ValueInt64()
-						}
-						if !deepListItem.LatitudeSecond.IsNull() && !deepListItem.LatitudeSecond.IsUnknown() {
-							deepListItemMap["latitude_second"] = deepListItem.LatitudeSecond.ValueInt64()
-						}
-						if !deepListItem.LocationDiameter.IsNull() && !deepListItem.LocationDiameter.IsUnknown() {
-							deepListItemMap["location_diameter"] = deepListItem.LocationDiameter.ValueInt64()
-						}
-						if !deepListItem.LongitudeDegree.IsNull() && !deepListItem.LongitudeDegree.IsUnknown() {
-							deepListItemMap["longitude_degree"] = deepListItem.LongitudeDegree.ValueInt64()
-						}
-						if !deepListItem.LongitudeHemisphere.IsNull() && !deepListItem.LongitudeHemisphere.IsUnknown() {
-							deepListItemMap["longitude_hemisphere"] = deepListItem.LongitudeHemisphere.ValueString()
-						}
-						if !deepListItem.LongitudeMinute.IsNull() && !deepListItem.LongitudeMinute.IsUnknown() {
-							deepListItemMap["longitude_minute"] = deepListItem.LongitudeMinute.ValueInt64()
-						}
-						if !deepListItem.LongitudeSecond.IsNull() && !deepListItem.LongitudeSecond.IsUnknown() {
-							deepListItemMap["longitude_second"] = deepListItem.LongitudeSecond.ValueInt64()
-						}
-						if !deepListItem.VerticalPrecision.IsNull() && !deepListItem.VerticalPrecision.IsUnknown() {
-							deepListItemMap["vertical_precision"] = deepListItem.VerticalPrecision.ValueInt64()
-						}
-						valuesDeepList = append(valuesDeepList, deepListItemMap)
+						cds_recordNestedMap["values"] = valuesDeepList
 					}
-					loc_recordNestedMap["values"] = valuesDeepList
+					itemMap["cds_record"] = cds_recordNestedMap
 				}
-				itemMap["loc_record"] = loc_recordNestedMap
-			}
-			if item.MxRecord != nil {
-				mx_recordNestedMap := make(map[string]interface{})
-				if !item.MxRecord.Name.IsNull() && !item.MxRecord.Name.IsUnknown() {
-					mx_recordNestedMap["name"] = item.MxRecord.Name.ValueString()
-				}
-				if len(item.MxRecord.Values) > 0 {
-					var valuesDeepList []map[string]interface{}
-					for _, deepListItem := range item.MxRecord.Values {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Domain.IsNull() && !deepListItem.Domain.IsUnknown() {
-							deepListItemMap["domain"] = deepListItem.Domain.ValueString()
-						}
-						if !deepListItem.Priority.IsNull() && !deepListItem.Priority.IsUnknown() {
-							deepListItemMap["priority"] = deepListItem.Priority.ValueInt64()
-						}
-						valuesDeepList = append(valuesDeepList, deepListItemMap)
+				if item.CertRecord != nil {
+					cert_recordNestedMap := make(map[string]interface{})
+					if !item.CertRecord.Name.IsNull() && !item.CertRecord.Name.IsUnknown() {
+						cert_recordNestedMap["name"] = item.CertRecord.Name.ValueString()
 					}
-					mx_recordNestedMap["values"] = valuesDeepList
-				}
-				itemMap["mx_record"] = mx_recordNestedMap
-			}
-			if item.NaptrRecord != nil {
-				naptr_recordNestedMap := make(map[string]interface{})
-				if !item.NaptrRecord.Name.IsNull() && !item.NaptrRecord.Name.IsUnknown() {
-					naptr_recordNestedMap["name"] = item.NaptrRecord.Name.ValueString()
-				}
-				if len(item.NaptrRecord.Values) > 0 {
-					var valuesDeepList []map[string]interface{}
-					for _, deepListItem := range item.NaptrRecord.Values {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Flags.IsNull() && !deepListItem.Flags.IsUnknown() {
-							deepListItemMap["flags"] = deepListItem.Flags.ValueString()
+					if len(item.CertRecord.Values) > 0 {
+						var valuesDeepList []map[string]interface{}
+						for _, deepListItem := range item.CertRecord.Values {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Algorithm.IsNull() && !deepListItem.Algorithm.IsUnknown() {
+								deepListItemMap["algorithm"] = deepListItem.Algorithm.ValueString()
+							}
+							if !deepListItem.CertKeyTag.IsNull() && !deepListItem.CertKeyTag.IsUnknown() {
+								deepListItemMap["cert_key_tag"] = deepListItem.CertKeyTag.ValueInt64()
+							}
+							if !deepListItem.CertType.IsNull() && !deepListItem.CertType.IsUnknown() {
+								deepListItemMap["cert_type"] = deepListItem.CertType.ValueString()
+							}
+							if !deepListItem.Certificate.IsNull() && !deepListItem.Certificate.IsUnknown() {
+								deepListItemMap["certificate"] = deepListItem.Certificate.ValueString()
+							}
+							valuesDeepList = append(valuesDeepList, deepListItemMap)
 						}
-						if !deepListItem.Order.IsNull() && !deepListItem.Order.IsUnknown() {
-							deepListItemMap["order"] = deepListItem.Order.ValueInt64()
-						}
-						if !deepListItem.Preference.IsNull() && !deepListItem.Preference.IsUnknown() {
-							deepListItemMap["preference"] = deepListItem.Preference.ValueInt64()
-						}
-						if !deepListItem.Regexp.IsNull() && !deepListItem.Regexp.IsUnknown() {
-							deepListItemMap["regexp"] = deepListItem.Regexp.ValueString()
-						}
-						if !deepListItem.Replacement.IsNull() && !deepListItem.Replacement.IsUnknown() {
-							deepListItemMap["replacement"] = deepListItem.Replacement.ValueString()
-						}
-						if !deepListItem.Service.IsNull() && !deepListItem.Service.IsUnknown() {
-							deepListItemMap["service"] = deepListItem.Service.ValueString()
-						}
-						valuesDeepList = append(valuesDeepList, deepListItemMap)
+						cert_recordNestedMap["values"] = valuesDeepList
 					}
-					naptr_recordNestedMap["values"] = valuesDeepList
+					itemMap["cert_record"] = cert_recordNestedMap
 				}
-				itemMap["naptr_record"] = naptr_recordNestedMap
-			}
-			if item.NsRecord != nil {
-				ns_recordNestedMap := make(map[string]interface{})
-				if !item.NsRecord.Name.IsNull() && !item.NsRecord.Name.IsUnknown() {
-					ns_recordNestedMap["name"] = item.NsRecord.Name.ValueString()
-				}
-				if !item.NsRecord.Values.IsNull() && !item.NsRecord.Values.IsUnknown() {
-					var ValuesItems []string
-					diags := item.NsRecord.Values.ElementsAs(ctx, &ValuesItems, false)
-					if !diags.HasError() {
-						ns_recordNestedMap["values"] = ValuesItems
+				if item.CnameRecord != nil {
+					cname_recordNestedMap := make(map[string]interface{})
+					if !item.CnameRecord.Name.IsNull() && !item.CnameRecord.Name.IsUnknown() {
+						cname_recordNestedMap["name"] = item.CnameRecord.Name.ValueString()
 					}
-				}
-				itemMap["ns_record"] = ns_recordNestedMap
-			}
-			if item.PtrRecord != nil {
-				ptr_recordNestedMap := make(map[string]interface{})
-				if !item.PtrRecord.Name.IsNull() && !item.PtrRecord.Name.IsUnknown() {
-					ptr_recordNestedMap["name"] = item.PtrRecord.Name.ValueString()
-				}
-				if !item.PtrRecord.Values.IsNull() && !item.PtrRecord.Values.IsUnknown() {
-					var ValuesItems []string
-					diags := item.PtrRecord.Values.ElementsAs(ctx, &ValuesItems, false)
-					if !diags.HasError() {
-						ptr_recordNestedMap["values"] = ValuesItems
+					if !item.CnameRecord.Value.IsNull() && !item.CnameRecord.Value.IsUnknown() {
+						cname_recordNestedMap["value"] = item.CnameRecord.Value.ValueString()
 					}
+					itemMap["cname_record"] = cname_recordNestedMap
 				}
-				itemMap["ptr_record"] = ptr_recordNestedMap
-			}
-			if item.SrvRecord != nil {
-				srv_recordNestedMap := make(map[string]interface{})
-				if !item.SrvRecord.Name.IsNull() && !item.SrvRecord.Name.IsUnknown() {
-					srv_recordNestedMap["name"] = item.SrvRecord.Name.ValueString()
+				if !item.DescriptionSpec.IsNull() && !item.DescriptionSpec.IsUnknown() {
+					itemMap["description"] = item.DescriptionSpec.ValueString()
 				}
-				if len(item.SrvRecord.Values) > 0 {
-					var valuesDeepList []map[string]interface{}
-					for _, deepListItem := range item.SrvRecord.Values {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Port.IsNull() && !deepListItem.Port.IsUnknown() {
-							deepListItemMap["port"] = deepListItem.Port.ValueInt64()
-						}
-						if !deepListItem.Priority.IsNull() && !deepListItem.Priority.IsUnknown() {
-							deepListItemMap["priority"] = deepListItem.Priority.ValueInt64()
-						}
-						if !deepListItem.Target.IsNull() && !deepListItem.Target.IsUnknown() {
-							deepListItemMap["target"] = deepListItem.Target.ValueString()
-						}
-						if !deepListItem.Weight.IsNull() && !deepListItem.Weight.IsUnknown() {
-							deepListItemMap["weight"] = deepListItem.Weight.ValueInt64()
-						}
-						valuesDeepList = append(valuesDeepList, deepListItemMap)
+				if item.DsRecord != nil {
+					ds_recordNestedMap := make(map[string]interface{})
+					if !item.DsRecord.Name.IsNull() && !item.DsRecord.Name.IsUnknown() {
+						ds_recordNestedMap["name"] = item.DsRecord.Name.ValueString()
 					}
-					srv_recordNestedMap["values"] = valuesDeepList
-				}
-				itemMap["srv_record"] = srv_recordNestedMap
-			}
-			if item.SshfpRecord != nil {
-				sshfp_recordNestedMap := make(map[string]interface{})
-				if !item.SshfpRecord.Name.IsNull() && !item.SshfpRecord.Name.IsUnknown() {
-					sshfp_recordNestedMap["name"] = item.SshfpRecord.Name.ValueString()
-				}
-				if len(item.SshfpRecord.Values) > 0 {
-					var valuesDeepList []map[string]interface{}
-					for _, deepListItem := range item.SshfpRecord.Values {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Algorithm.IsNull() && !deepListItem.Algorithm.IsUnknown() {
-							deepListItemMap["algorithm"] = deepListItem.Algorithm.ValueString()
+					if len(item.DsRecord.Values) > 0 {
+						var valuesDeepList []map[string]interface{}
+						for _, deepListItem := range item.DsRecord.Values {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.DsKeyAlgorithm.IsNull() && !deepListItem.DsKeyAlgorithm.IsUnknown() {
+								deepListItemMap["ds_key_algorithm"] = deepListItem.DsKeyAlgorithm.ValueString()
+							}
+							if !deepListItem.KeyTag.IsNull() && !deepListItem.KeyTag.IsUnknown() {
+								deepListItemMap["key_tag"] = deepListItem.KeyTag.ValueInt64()
+							}
+							valuesDeepList = append(valuesDeepList, deepListItemMap)
 						}
-						valuesDeepList = append(valuesDeepList, deepListItemMap)
+						ds_recordNestedMap["values"] = valuesDeepList
 					}
-					sshfp_recordNestedMap["values"] = valuesDeepList
+					itemMap["ds_record"] = ds_recordNestedMap
 				}
-				itemMap["sshfp_record"] = sshfp_recordNestedMap
-			}
-			if item.TlsaRecord != nil {
-				tlsa_recordNestedMap := make(map[string]interface{})
-				if !item.TlsaRecord.Name.IsNull() && !item.TlsaRecord.Name.IsUnknown() {
-					tlsa_recordNestedMap["name"] = item.TlsaRecord.Name.ValueString()
-				}
-				if len(item.TlsaRecord.Values) > 0 {
-					var valuesDeepList []map[string]interface{}
-					for _, deepListItem := range item.TlsaRecord.Values {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.CertificateAssociationData.IsNull() && !deepListItem.CertificateAssociationData.IsUnknown() {
-							deepListItemMap["certificate_association_data"] = deepListItem.CertificateAssociationData.ValueString()
-						}
-						if !deepListItem.CertificateUsage.IsNull() && !deepListItem.CertificateUsage.IsUnknown() {
-							deepListItemMap["certificate_usage"] = deepListItem.CertificateUsage.ValueString()
-						}
-						if !deepListItem.MatchingType.IsNull() && !deepListItem.MatchingType.IsUnknown() {
-							deepListItemMap["matching_type"] = deepListItem.MatchingType.ValueString()
-						}
-						if !deepListItem.Selector.IsNull() && !deepListItem.Selector.IsUnknown() {
-							deepListItemMap["selector"] = deepListItem.Selector.ValueString()
-						}
-						valuesDeepList = append(valuesDeepList, deepListItemMap)
+				if item.Eui48Record != nil {
+					eui48_recordNestedMap := make(map[string]interface{})
+					if !item.Eui48Record.Name.IsNull() && !item.Eui48Record.Name.IsUnknown() {
+						eui48_recordNestedMap["name"] = item.Eui48Record.Name.ValueString()
 					}
-					tlsa_recordNestedMap["values"] = valuesDeepList
-				}
-				itemMap["tlsa_record"] = tlsa_recordNestedMap
-			}
-			if !item.TTL.IsNull() && !item.TTL.IsUnknown() {
-				itemMap["ttl"] = item.TTL.ValueInt64()
-			}
-			if item.TxtRecord != nil {
-				txt_recordNestedMap := make(map[string]interface{})
-				if !item.TxtRecord.Name.IsNull() && !item.TxtRecord.Name.IsUnknown() {
-					txt_recordNestedMap["name"] = item.TxtRecord.Name.ValueString()
-				}
-				if !item.TxtRecord.Values.IsNull() && !item.TxtRecord.Values.IsUnknown() {
-					var ValuesItems []string
-					diags := item.TxtRecord.Values.ElementsAs(ctx, &ValuesItems, false)
-					if !diags.HasError() {
-						txt_recordNestedMap["values"] = ValuesItems
+					if !item.Eui48Record.Value.IsNull() && !item.Eui48Record.Value.IsUnknown() {
+						eui48_recordNestedMap["value"] = item.Eui48Record.Value.ValueString()
 					}
+					itemMap["eui48_record"] = eui48_recordNestedMap
 				}
-				itemMap["txt_record"] = txt_recordNestedMap
+				if item.Eui64Record != nil {
+					eui64_recordNestedMap := make(map[string]interface{})
+					if !item.Eui64Record.Name.IsNull() && !item.Eui64Record.Name.IsUnknown() {
+						eui64_recordNestedMap["name"] = item.Eui64Record.Name.ValueString()
+					}
+					if !item.Eui64Record.Value.IsNull() && !item.Eui64Record.Value.IsUnknown() {
+						eui64_recordNestedMap["value"] = item.Eui64Record.Value.ValueString()
+					}
+					itemMap["eui64_record"] = eui64_recordNestedMap
+				}
+				if item.LBRecord != nil {
+					lb_recordNestedMap := make(map[string]interface{})
+					if !item.LBRecord.Name.IsNull() && !item.LBRecord.Name.IsUnknown() {
+						lb_recordNestedMap["name"] = item.LBRecord.Name.ValueString()
+					}
+					if item.LBRecord.Value != nil {
+						valueDeepMap := make(map[string]interface{})
+						if !item.LBRecord.Value.Name.IsNull() && !item.LBRecord.Value.Name.IsUnknown() {
+							valueDeepMap["name"] = item.LBRecord.Value.Name.ValueString()
+						}
+						if !item.LBRecord.Value.Namespace.IsNull() && !item.LBRecord.Value.Namespace.IsUnknown() {
+							valueDeepMap["namespace"] = item.LBRecord.Value.Namespace.ValueString()
+						}
+						if !item.LBRecord.Value.Tenant.IsNull() && !item.LBRecord.Value.Tenant.IsUnknown() {
+							valueDeepMap["tenant"] = item.LBRecord.Value.Tenant.ValueString()
+						}
+						lb_recordNestedMap["value"] = valueDeepMap
+					}
+					itemMap["lb_record"] = lb_recordNestedMap
+				}
+				if item.LocRecord != nil {
+					loc_recordNestedMap := make(map[string]interface{})
+					if !item.LocRecord.Name.IsNull() && !item.LocRecord.Name.IsUnknown() {
+						loc_recordNestedMap["name"] = item.LocRecord.Name.ValueString()
+					}
+					if len(item.LocRecord.Values) > 0 {
+						var valuesDeepList []map[string]interface{}
+						for _, deepListItem := range item.LocRecord.Values {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Altitude.IsNull() && !deepListItem.Altitude.IsUnknown() {
+								deepListItemMap["altitude"] = deepListItem.Altitude.ValueInt64()
+							}
+							if !deepListItem.HorizontalPrecision.IsNull() && !deepListItem.HorizontalPrecision.IsUnknown() {
+								deepListItemMap["horizontal_precision"] = deepListItem.HorizontalPrecision.ValueInt64()
+							}
+							if !deepListItem.LatitudeDegree.IsNull() && !deepListItem.LatitudeDegree.IsUnknown() {
+								deepListItemMap["latitude_degree"] = deepListItem.LatitudeDegree.ValueInt64()
+							}
+							if !deepListItem.LatitudeHemisphere.IsNull() && !deepListItem.LatitudeHemisphere.IsUnknown() {
+								deepListItemMap["latitude_hemisphere"] = deepListItem.LatitudeHemisphere.ValueString()
+							}
+							if !deepListItem.LatitudeMinute.IsNull() && !deepListItem.LatitudeMinute.IsUnknown() {
+								deepListItemMap["latitude_minute"] = deepListItem.LatitudeMinute.ValueInt64()
+							}
+							if !deepListItem.LatitudeSecond.IsNull() && !deepListItem.LatitudeSecond.IsUnknown() {
+								deepListItemMap["latitude_second"] = deepListItem.LatitudeSecond.ValueInt64()
+							}
+							if !deepListItem.LocationDiameter.IsNull() && !deepListItem.LocationDiameter.IsUnknown() {
+								deepListItemMap["location_diameter"] = deepListItem.LocationDiameter.ValueInt64()
+							}
+							if !deepListItem.LongitudeDegree.IsNull() && !deepListItem.LongitudeDegree.IsUnknown() {
+								deepListItemMap["longitude_degree"] = deepListItem.LongitudeDegree.ValueInt64()
+							}
+							if !deepListItem.LongitudeHemisphere.IsNull() && !deepListItem.LongitudeHemisphere.IsUnknown() {
+								deepListItemMap["longitude_hemisphere"] = deepListItem.LongitudeHemisphere.ValueString()
+							}
+							if !deepListItem.LongitudeMinute.IsNull() && !deepListItem.LongitudeMinute.IsUnknown() {
+								deepListItemMap["longitude_minute"] = deepListItem.LongitudeMinute.ValueInt64()
+							}
+							if !deepListItem.LongitudeSecond.IsNull() && !deepListItem.LongitudeSecond.IsUnknown() {
+								deepListItemMap["longitude_second"] = deepListItem.LongitudeSecond.ValueInt64()
+							}
+							if !deepListItem.VerticalPrecision.IsNull() && !deepListItem.VerticalPrecision.IsUnknown() {
+								deepListItemMap["vertical_precision"] = deepListItem.VerticalPrecision.ValueInt64()
+							}
+							valuesDeepList = append(valuesDeepList, deepListItemMap)
+						}
+						loc_recordNestedMap["values"] = valuesDeepList
+					}
+					itemMap["loc_record"] = loc_recordNestedMap
+				}
+				if item.MxRecord != nil {
+					mx_recordNestedMap := make(map[string]interface{})
+					if !item.MxRecord.Name.IsNull() && !item.MxRecord.Name.IsUnknown() {
+						mx_recordNestedMap["name"] = item.MxRecord.Name.ValueString()
+					}
+					if len(item.MxRecord.Values) > 0 {
+						var valuesDeepList []map[string]interface{}
+						for _, deepListItem := range item.MxRecord.Values {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Domain.IsNull() && !deepListItem.Domain.IsUnknown() {
+								deepListItemMap["domain"] = deepListItem.Domain.ValueString()
+							}
+							if !deepListItem.Priority.IsNull() && !deepListItem.Priority.IsUnknown() {
+								deepListItemMap["priority"] = deepListItem.Priority.ValueInt64()
+							}
+							valuesDeepList = append(valuesDeepList, deepListItemMap)
+						}
+						mx_recordNestedMap["values"] = valuesDeepList
+					}
+					itemMap["mx_record"] = mx_recordNestedMap
+				}
+				if item.NaptrRecord != nil {
+					naptr_recordNestedMap := make(map[string]interface{})
+					if !item.NaptrRecord.Name.IsNull() && !item.NaptrRecord.Name.IsUnknown() {
+						naptr_recordNestedMap["name"] = item.NaptrRecord.Name.ValueString()
+					}
+					if len(item.NaptrRecord.Values) > 0 {
+						var valuesDeepList []map[string]interface{}
+						for _, deepListItem := range item.NaptrRecord.Values {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Flags.IsNull() && !deepListItem.Flags.IsUnknown() {
+								deepListItemMap["flags"] = deepListItem.Flags.ValueString()
+							}
+							if !deepListItem.Order.IsNull() && !deepListItem.Order.IsUnknown() {
+								deepListItemMap["order"] = deepListItem.Order.ValueInt64()
+							}
+							if !deepListItem.Preference.IsNull() && !deepListItem.Preference.IsUnknown() {
+								deepListItemMap["preference"] = deepListItem.Preference.ValueInt64()
+							}
+							if !deepListItem.Regexp.IsNull() && !deepListItem.Regexp.IsUnknown() {
+								deepListItemMap["regexp"] = deepListItem.Regexp.ValueString()
+							}
+							if !deepListItem.Replacement.IsNull() && !deepListItem.Replacement.IsUnknown() {
+								deepListItemMap["replacement"] = deepListItem.Replacement.ValueString()
+							}
+							if !deepListItem.Service.IsNull() && !deepListItem.Service.IsUnknown() {
+								deepListItemMap["service"] = deepListItem.Service.ValueString()
+							}
+							valuesDeepList = append(valuesDeepList, deepListItemMap)
+						}
+						naptr_recordNestedMap["values"] = valuesDeepList
+					}
+					itemMap["naptr_record"] = naptr_recordNestedMap
+				}
+				if item.NsRecord != nil {
+					ns_recordNestedMap := make(map[string]interface{})
+					if !item.NsRecord.Name.IsNull() && !item.NsRecord.Name.IsUnknown() {
+						ns_recordNestedMap["name"] = item.NsRecord.Name.ValueString()
+					}
+					if !item.NsRecord.Values.IsNull() && !item.NsRecord.Values.IsUnknown() {
+						var ValuesItems []string
+						diags := item.NsRecord.Values.ElementsAs(ctx, &ValuesItems, false)
+						if !diags.HasError() {
+							ns_recordNestedMap["values"] = ValuesItems
+						}
+					}
+					itemMap["ns_record"] = ns_recordNestedMap
+				}
+				if item.PtrRecord != nil {
+					ptr_recordNestedMap := make(map[string]interface{})
+					if !item.PtrRecord.Name.IsNull() && !item.PtrRecord.Name.IsUnknown() {
+						ptr_recordNestedMap["name"] = item.PtrRecord.Name.ValueString()
+					}
+					if !item.PtrRecord.Values.IsNull() && !item.PtrRecord.Values.IsUnknown() {
+						var ValuesItems []string
+						diags := item.PtrRecord.Values.ElementsAs(ctx, &ValuesItems, false)
+						if !diags.HasError() {
+							ptr_recordNestedMap["values"] = ValuesItems
+						}
+					}
+					itemMap["ptr_record"] = ptr_recordNestedMap
+				}
+				if item.SrvRecord != nil {
+					srv_recordNestedMap := make(map[string]interface{})
+					if !item.SrvRecord.Name.IsNull() && !item.SrvRecord.Name.IsUnknown() {
+						srv_recordNestedMap["name"] = item.SrvRecord.Name.ValueString()
+					}
+					if len(item.SrvRecord.Values) > 0 {
+						var valuesDeepList []map[string]interface{}
+						for _, deepListItem := range item.SrvRecord.Values {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Port.IsNull() && !deepListItem.Port.IsUnknown() {
+								deepListItemMap["port"] = deepListItem.Port.ValueInt64()
+							}
+							if !deepListItem.Priority.IsNull() && !deepListItem.Priority.IsUnknown() {
+								deepListItemMap["priority"] = deepListItem.Priority.ValueInt64()
+							}
+							if !deepListItem.Target.IsNull() && !deepListItem.Target.IsUnknown() {
+								deepListItemMap["target"] = deepListItem.Target.ValueString()
+							}
+							if !deepListItem.Weight.IsNull() && !deepListItem.Weight.IsUnknown() {
+								deepListItemMap["weight"] = deepListItem.Weight.ValueInt64()
+							}
+							valuesDeepList = append(valuesDeepList, deepListItemMap)
+						}
+						srv_recordNestedMap["values"] = valuesDeepList
+					}
+					itemMap["srv_record"] = srv_recordNestedMap
+				}
+				if item.SshfpRecord != nil {
+					sshfp_recordNestedMap := make(map[string]interface{})
+					if !item.SshfpRecord.Name.IsNull() && !item.SshfpRecord.Name.IsUnknown() {
+						sshfp_recordNestedMap["name"] = item.SshfpRecord.Name.ValueString()
+					}
+					if len(item.SshfpRecord.Values) > 0 {
+						var valuesDeepList []map[string]interface{}
+						for _, deepListItem := range item.SshfpRecord.Values {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Algorithm.IsNull() && !deepListItem.Algorithm.IsUnknown() {
+								deepListItemMap["algorithm"] = deepListItem.Algorithm.ValueString()
+							}
+							valuesDeepList = append(valuesDeepList, deepListItemMap)
+						}
+						sshfp_recordNestedMap["values"] = valuesDeepList
+					}
+					itemMap["sshfp_record"] = sshfp_recordNestedMap
+				}
+				if item.TlsaRecord != nil {
+					tlsa_recordNestedMap := make(map[string]interface{})
+					if !item.TlsaRecord.Name.IsNull() && !item.TlsaRecord.Name.IsUnknown() {
+						tlsa_recordNestedMap["name"] = item.TlsaRecord.Name.ValueString()
+					}
+					if len(item.TlsaRecord.Values) > 0 {
+						var valuesDeepList []map[string]interface{}
+						for _, deepListItem := range item.TlsaRecord.Values {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.CertificateAssociationData.IsNull() && !deepListItem.CertificateAssociationData.IsUnknown() {
+								deepListItemMap["certificate_association_data"] = deepListItem.CertificateAssociationData.ValueString()
+							}
+							if !deepListItem.CertificateUsage.IsNull() && !deepListItem.CertificateUsage.IsUnknown() {
+								deepListItemMap["certificate_usage"] = deepListItem.CertificateUsage.ValueString()
+							}
+							if !deepListItem.MatchingType.IsNull() && !deepListItem.MatchingType.IsUnknown() {
+								deepListItemMap["matching_type"] = deepListItem.MatchingType.ValueString()
+							}
+							if !deepListItem.Selector.IsNull() && !deepListItem.Selector.IsUnknown() {
+								deepListItemMap["selector"] = deepListItem.Selector.ValueString()
+							}
+							valuesDeepList = append(valuesDeepList, deepListItemMap)
+						}
+						tlsa_recordNestedMap["values"] = valuesDeepList
+					}
+					itemMap["tlsa_record"] = tlsa_recordNestedMap
+				}
+				if !item.TTL.IsNull() && !item.TTL.IsUnknown() {
+					itemMap["ttl"] = item.TTL.ValueInt64()
+				}
+				if item.TxtRecord != nil {
+					txt_recordNestedMap := make(map[string]interface{})
+					if !item.TxtRecord.Name.IsNull() && !item.TxtRecord.Name.IsUnknown() {
+						txt_recordNestedMap["name"] = item.TxtRecord.Name.ValueString()
+					}
+					if !item.TxtRecord.Values.IsNull() && !item.TxtRecord.Values.IsUnknown() {
+						var ValuesItems []string
+						diags := item.TxtRecord.Values.ElementsAs(ctx, &ValuesItems, false)
+						if !diags.HasError() {
+							txt_recordNestedMap["values"] = ValuesItems
+						}
+					}
+					itemMap["txt_record"] = txt_recordNestedMap
+				}
+				default_rr_set_groupList = append(default_rr_set_groupList, itemMap)
 			}
-			default_rr_set_groupList = append(default_rr_set_groupList, itemMap)
+			apiResource.Spec["default_rr_set_group"] = default_rr_set_groupList
 		}
-		apiResource.Spec["default_rr_set_group"] = default_rr_set_groupList
 	}
 	if data.DefaultSoaParameters != nil {
 		default_soa_parametersMap := make(map[string]interface{})
@@ -4265,37 +4950,42 @@ func (r *DNSZoneResource) Update(ctx context.Context, req resource.UpdateRequest
 		}
 		apiResource.Spec["dnssec_mode"] = dnssec_modeMap
 	}
-	if len(data.RrSetGroup) > 0 {
-		var rr_set_groupList []map[string]interface{}
-		for _, item := range data.RrSetGroup {
-			itemMap := make(map[string]interface{})
-			if item.Metadata != nil {
-				metadataNestedMap := make(map[string]interface{})
-				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
-					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
-				}
-				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
-					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
-				}
-				itemMap["metadata"] = metadataNestedMap
-			}
-			if len(item.RrSet) > 0 {
-				var rr_setNestedList []map[string]interface{}
-				for _, nestedItem := range item.RrSet {
-					nestedItemMap := make(map[string]interface{})
-					if !nestedItem.DescriptionSpec.IsNull() && !nestedItem.DescriptionSpec.IsUnknown() {
-						nestedItemMap["description"] = nestedItem.DescriptionSpec.ValueString()
+	if !data.RrSetGroup.IsNull() && !data.RrSetGroup.IsUnknown() {
+		var rr_set_groupItems []DNSZoneRrSetGroupModel
+		diags := data.RrSetGroup.ElementsAs(ctx, &rr_set_groupItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(rr_set_groupItems) > 0 {
+			var rr_set_groupList []map[string]interface{}
+			for _, item := range rr_set_groupItems {
+				itemMap := make(map[string]interface{})
+				if item.Metadata != nil {
+					metadataNestedMap := make(map[string]interface{})
+					if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+						metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
 					}
-					if !nestedItem.TTL.IsNull() && !nestedItem.TTL.IsUnknown() {
-						nestedItemMap["ttl"] = nestedItem.TTL.ValueInt64()
+					if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+						metadataNestedMap["name"] = item.Metadata.Name.ValueString()
 					}
-					rr_setNestedList = append(rr_setNestedList, nestedItemMap)
+					itemMap["metadata"] = metadataNestedMap
 				}
-				itemMap["rr_set"] = rr_setNestedList
+				if len(item.RrSet) > 0 {
+					var rr_setNestedList []map[string]interface{}
+					for _, nestedItem := range item.RrSet {
+						nestedItemMap := make(map[string]interface{})
+						if !nestedItem.DescriptionSpec.IsNull() && !nestedItem.DescriptionSpec.IsUnknown() {
+							nestedItemMap["description"] = nestedItem.DescriptionSpec.ValueString()
+						}
+						if !nestedItem.TTL.IsNull() && !nestedItem.TTL.IsUnknown() {
+							nestedItemMap["ttl"] = nestedItem.TTL.ValueInt64()
+						}
+						rr_setNestedList = append(rr_setNestedList, nestedItemMap)
+					}
+					itemMap["rr_set"] = rr_setNestedList
+				}
+				rr_set_groupList = append(rr_set_groupList, itemMap)
 			}
-			rr_set_groupList = append(rr_set_groupList, itemMap)
+			apiResource.Spec["rr_set_group"] = rr_set_groupList
 		}
-		apiResource.Spec["rr_set_group"] = rr_set_groupList
 	}
 	if data.SoaParameters != nil {
 		soa_parametersMap := make(map[string]interface{})
@@ -4352,6 +5042,10 @@ func (r *DNSZoneResource) Update(ctx context.Context, req resource.UpdateRequest
 	_ = isImport          // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["default_rr_set_group"].([]interface{}); ok && len(listData) > 0 {
 		var default_rr_set_groupList []DNSZoneDefaultRrSetGroupModel
+		var existingDefaultRrSetGroupItems []DNSZoneDefaultRrSetGroupModel
+		if !data.DefaultRrSetGroup.IsNull() && !data.DefaultRrSetGroup.IsUnknown() {
+			data.DefaultRrSetGroup.ElementsAs(ctx, &existingDefaultRrSetGroupItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -4727,7 +5421,14 @@ func (r *DNSZoneResource) Update(ctx context.Context, req resource.UpdateRequest
 				})
 			}
 		}
-		data.DefaultRrSetGroup = default_rr_set_groupList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupModelAttrTypes}, default_rr_set_groupList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.DefaultRrSetGroup = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.DefaultRrSetGroup = types.ListNull(types.ObjectType{AttrTypes: DNSZoneDefaultRrSetGroupModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["default_soa_parameters"].(map[string]interface{}); ok && isImport && data.DefaultSoaParameters == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -4741,6 +5442,10 @@ func (r *DNSZoneResource) Update(ctx context.Context, req resource.UpdateRequest
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["rr_set_group"].([]interface{}); ok && len(listData) > 0 {
 		var rr_set_groupList []DNSZoneRrSetGroupModel
+		var existingRrSetGroupItems []DNSZoneRrSetGroupModel
+		if !data.RrSetGroup.IsNull() && !data.RrSetGroup.IsUnknown() {
+			data.RrSetGroup.ElementsAs(ctx, &existingRrSetGroupItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -4792,7 +5497,14 @@ func (r *DNSZoneResource) Update(ctx context.Context, req resource.UpdateRequest
 				})
 			}
 		}
-		data.RrSetGroup = rr_set_groupList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: DNSZoneRrSetGroupModelAttrTypes}, rr_set_groupList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.RrSetGroup = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.RrSetGroup = types.ListNull(types.ObjectType{AttrTypes: DNSZoneRrSetGroupModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["soa_parameters"].(map[string]interface{}); ok && (isImport || data.SoaParameters != nil) {
 		data.SoaParameters = &DNSZoneSoaParametersModel{

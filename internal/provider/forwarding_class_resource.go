@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -56,11 +57,24 @@ type ForwardingClassDscpModel struct {
 	DscpClass      types.String `tfsdk:"dscp_class"`
 }
 
+// ForwardingClassDscpModelAttrTypes defines the attribute types for ForwardingClassDscpModel
+var ForwardingClassDscpModelAttrTypes = map[string]attr.Type{
+	"drop_precedence": types.StringType,
+	"dscp_class":      types.StringType,
+}
+
 // ForwardingClassPolicerModel represents policer block
 type ForwardingClassPolicerModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// ForwardingClassPolicerModelAttrTypes defines the attribute types for ForwardingClassPolicerModel
+var ForwardingClassPolicerModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 type ForwardingClassResourceModel struct {
@@ -205,6 +219,9 @@ func (r *ForwardingClassResource) Schema(ctx context.Context, req resource.Schem
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional:            true,
 						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
 					},
 				},
 			},
@@ -545,11 +562,17 @@ func (r *ForwardingClassResource) Read(ctx context.Context, req resource.ReadReq
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

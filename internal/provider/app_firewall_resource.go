@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -56,15 +57,33 @@ type AppFirewallAiRiskBasedBlockingModel struct {
 	MediumRiskAction types.String `tfsdk:"medium_risk_action"`
 }
 
+// AppFirewallAiRiskBasedBlockingModelAttrTypes defines the attribute types for AppFirewallAiRiskBasedBlockingModel
+var AppFirewallAiRiskBasedBlockingModelAttrTypes = map[string]attr.Type{
+	"high_risk_action":   types.StringType,
+	"low_risk_action":    types.StringType,
+	"medium_risk_action": types.StringType,
+}
+
 // AppFirewallAllowedResponseCodesModel represents allowed_response_codes block
 type AppFirewallAllowedResponseCodesModel struct {
 	ResponseCode types.List `tfsdk:"response_code"`
+}
+
+// AppFirewallAllowedResponseCodesModelAttrTypes defines the attribute types for AppFirewallAllowedResponseCodesModel
+var AppFirewallAllowedResponseCodesModelAttrTypes = map[string]attr.Type{
+	"response_code": types.ListType{ElemType: types.Int64Type},
 }
 
 // AppFirewallBlockingPageModel represents blocking_page block
 type AppFirewallBlockingPageModel struct {
 	BlockingPage types.String `tfsdk:"blocking_page"`
 	ResponseCode types.String `tfsdk:"response_code"`
+}
+
+// AppFirewallBlockingPageModelAttrTypes defines the attribute types for AppFirewallBlockingPageModel
+var AppFirewallBlockingPageModelAttrTypes = map[string]attr.Type{
+	"blocking_page": types.StringType,
+	"response_code": types.StringType,
 }
 
 // AppFirewallBotProtectionSettingModel represents bot_protection_setting block
@@ -74,9 +93,21 @@ type AppFirewallBotProtectionSettingModel struct {
 	SuspiciousBotAction types.String `tfsdk:"suspicious_bot_action"`
 }
 
+// AppFirewallBotProtectionSettingModelAttrTypes defines the attribute types for AppFirewallBotProtectionSettingModel
+var AppFirewallBotProtectionSettingModelAttrTypes = map[string]attr.Type{
+	"good_bot_action":       types.StringType,
+	"malicious_bot_action":  types.StringType,
+	"suspicious_bot_action": types.StringType,
+}
+
 // AppFirewallCustomAnonymizationModel represents custom_anonymization block
 type AppFirewallCustomAnonymizationModel struct {
 	AnonymizationConfig []AppFirewallCustomAnonymizationAnonymizationConfigModel `tfsdk:"anonymization_config"`
+}
+
+// AppFirewallCustomAnonymizationModelAttrTypes defines the attribute types for AppFirewallCustomAnonymizationModel
+var AppFirewallCustomAnonymizationModelAttrTypes = map[string]attr.Type{
+	"anonymization_config": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // AppFirewallCustomAnonymizationAnonymizationConfigModel represents anonymization_config block
@@ -86,9 +117,21 @@ type AppFirewallCustomAnonymizationAnonymizationConfigModel struct {
 	QueryParameter *AppFirewallCustomAnonymizationAnonymizationConfigQueryParameterModel `tfsdk:"query_parameter"`
 }
 
+// AppFirewallCustomAnonymizationAnonymizationConfigModelAttrTypes defines the attribute types for AppFirewallCustomAnonymizationAnonymizationConfigModel
+var AppFirewallCustomAnonymizationAnonymizationConfigModelAttrTypes = map[string]attr.Type{
+	"cookie":          types.ObjectType{AttrTypes: AppFirewallCustomAnonymizationAnonymizationConfigCookieModelAttrTypes},
+	"http_header":     types.ObjectType{AttrTypes: AppFirewallCustomAnonymizationAnonymizationConfigHTTPHeaderModelAttrTypes},
+	"query_parameter": types.ObjectType{AttrTypes: AppFirewallCustomAnonymizationAnonymizationConfigQueryParameterModelAttrTypes},
+}
+
 // AppFirewallCustomAnonymizationAnonymizationConfigCookieModel represents cookie block
 type AppFirewallCustomAnonymizationAnonymizationConfigCookieModel struct {
 	CookieName types.String `tfsdk:"cookie_name"`
+}
+
+// AppFirewallCustomAnonymizationAnonymizationConfigCookieModelAttrTypes defines the attribute types for AppFirewallCustomAnonymizationAnonymizationConfigCookieModel
+var AppFirewallCustomAnonymizationAnonymizationConfigCookieModelAttrTypes = map[string]attr.Type{
+	"cookie_name": types.StringType,
 }
 
 // AppFirewallCustomAnonymizationAnonymizationConfigHTTPHeaderModel represents http_header block
@@ -96,9 +139,19 @@ type AppFirewallCustomAnonymizationAnonymizationConfigHTTPHeaderModel struct {
 	HeaderName types.String `tfsdk:"header_name"`
 }
 
+// AppFirewallCustomAnonymizationAnonymizationConfigHTTPHeaderModelAttrTypes defines the attribute types for AppFirewallCustomAnonymizationAnonymizationConfigHTTPHeaderModel
+var AppFirewallCustomAnonymizationAnonymizationConfigHTTPHeaderModelAttrTypes = map[string]attr.Type{
+	"header_name": types.StringType,
+}
+
 // AppFirewallCustomAnonymizationAnonymizationConfigQueryParameterModel represents query_parameter block
 type AppFirewallCustomAnonymizationAnonymizationConfigQueryParameterModel struct {
 	QueryParamName types.String `tfsdk:"query_param_name"`
+}
+
+// AppFirewallCustomAnonymizationAnonymizationConfigQueryParameterModelAttrTypes defines the attribute types for AppFirewallCustomAnonymizationAnonymizationConfigQueryParameterModel
+var AppFirewallCustomAnonymizationAnonymizationConfigQueryParameterModelAttrTypes = map[string]attr.Type{
+	"query_param_name": types.StringType,
 }
 
 // AppFirewallDetectionSettingsModel represents detection_settings block
@@ -117,11 +170,34 @@ type AppFirewallDetectionSettingsModel struct {
 	ViolationSettings            *AppFirewallDetectionSettingsViolationSettingsModel            `tfsdk:"violation_settings"`
 }
 
+// AppFirewallDetectionSettingsModelAttrTypes defines the attribute types for AppFirewallDetectionSettingsModel
+var AppFirewallDetectionSettingsModelAttrTypes = map[string]attr.Type{
+	"bot_protection_setting":           types.ObjectType{AttrTypes: AppFirewallDetectionSettingsBotProtectionSettingModelAttrTypes},
+	"default_bot_setting":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_violation_settings":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_staging":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_suppression":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_threat_campaigns":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_suppression":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_threat_campaigns":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"signature_selection_setting":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"stage_new_and_updated_signatures": types.ObjectType{AttrTypes: AppFirewallDetectionSettingsStageNewAndUpdatedSignaturesModelAttrTypes},
+	"stage_new_signatures":             types.ObjectType{AttrTypes: AppFirewallDetectionSettingsStageNewSignaturesModelAttrTypes},
+	"violation_settings":               types.ObjectType{AttrTypes: AppFirewallDetectionSettingsViolationSettingsModelAttrTypes},
+}
+
 // AppFirewallDetectionSettingsBotProtectionSettingModel represents bot_protection_setting block
 type AppFirewallDetectionSettingsBotProtectionSettingModel struct {
 	GoodBotAction       types.String `tfsdk:"good_bot_action"`
 	MaliciousBotAction  types.String `tfsdk:"malicious_bot_action"`
 	SuspiciousBotAction types.String `tfsdk:"suspicious_bot_action"`
+}
+
+// AppFirewallDetectionSettingsBotProtectionSettingModelAttrTypes defines the attribute types for AppFirewallDetectionSettingsBotProtectionSettingModel
+var AppFirewallDetectionSettingsBotProtectionSettingModelAttrTypes = map[string]attr.Type{
+	"good_bot_action":       types.StringType,
+	"malicious_bot_action":  types.StringType,
+	"suspicious_bot_action": types.StringType,
 }
 
 // AppFirewallDetectionSettingsSignatureSelectionSettingModel represents signature_selection_setting block
@@ -133,9 +209,23 @@ type AppFirewallDetectionSettingsSignatureSelectionSettingModel struct {
 	OnlyHighAccuracySignatures      *AppFirewallEmptyModel                                                        `tfsdk:"only_high_accuracy_signatures"`
 }
 
+// AppFirewallDetectionSettingsSignatureSelectionSettingModelAttrTypes defines the attribute types for AppFirewallDetectionSettingsSignatureSelectionSettingModel
+var AppFirewallDetectionSettingsSignatureSelectionSettingModelAttrTypes = map[string]attr.Type{
+	"attack_type_settings":                types.ObjectType{AttrTypes: AppFirewallDetectionSettingsSignatureSelectionSettingAttackTypeSettingsModelAttrTypes},
+	"default_attack_type_settings":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"high_medium_accuracy_signatures":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"high_medium_low_accuracy_signatures": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"only_high_accuracy_signatures":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // AppFirewallDetectionSettingsSignatureSelectionSettingAttackTypeSettingsModel represents attack_type_settings block
 type AppFirewallDetectionSettingsSignatureSelectionSettingAttackTypeSettingsModel struct {
 	DisabledAttackTypes types.List `tfsdk:"disabled_attack_types"`
+}
+
+// AppFirewallDetectionSettingsSignatureSelectionSettingAttackTypeSettingsModelAttrTypes defines the attribute types for AppFirewallDetectionSettingsSignatureSelectionSettingAttackTypeSettingsModel
+var AppFirewallDetectionSettingsSignatureSelectionSettingAttackTypeSettingsModelAttrTypes = map[string]attr.Type{
+	"disabled_attack_types": types.ListType{ElemType: types.StringType},
 }
 
 // AppFirewallDetectionSettingsStageNewAndUpdatedSignaturesModel represents stage_new_and_updated_signatures block
@@ -143,14 +233,29 @@ type AppFirewallDetectionSettingsStageNewAndUpdatedSignaturesModel struct {
 	StagingPeriod types.Int64 `tfsdk:"staging_period"`
 }
 
+// AppFirewallDetectionSettingsStageNewAndUpdatedSignaturesModelAttrTypes defines the attribute types for AppFirewallDetectionSettingsStageNewAndUpdatedSignaturesModel
+var AppFirewallDetectionSettingsStageNewAndUpdatedSignaturesModelAttrTypes = map[string]attr.Type{
+	"staging_period": types.Int64Type,
+}
+
 // AppFirewallDetectionSettingsStageNewSignaturesModel represents stage_new_signatures block
 type AppFirewallDetectionSettingsStageNewSignaturesModel struct {
 	StagingPeriod types.Int64 `tfsdk:"staging_period"`
 }
 
+// AppFirewallDetectionSettingsStageNewSignaturesModelAttrTypes defines the attribute types for AppFirewallDetectionSettingsStageNewSignaturesModel
+var AppFirewallDetectionSettingsStageNewSignaturesModelAttrTypes = map[string]attr.Type{
+	"staging_period": types.Int64Type,
+}
+
 // AppFirewallDetectionSettingsViolationSettingsModel represents violation_settings block
 type AppFirewallDetectionSettingsViolationSettingsModel struct {
 	DisabledViolationTypes types.List `tfsdk:"disabled_violation_types"`
+}
+
+// AppFirewallDetectionSettingsViolationSettingsModelAttrTypes defines the attribute types for AppFirewallDetectionSettingsViolationSettingsModel
+var AppFirewallDetectionSettingsViolationSettingsModelAttrTypes = map[string]attr.Type{
+	"disabled_violation_types": types.ListType{ElemType: types.StringType},
 }
 
 type AppFirewallResourceModel struct {
@@ -1037,11 +1142,17 @@ func (r *AppFirewallResource) Read(ctx context.Context, req resource.ReadRequest
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -59,6 +60,16 @@ type NetworkConnectorEnableForwardProxyModel struct {
 	TLSIntercept        *NetworkConnectorEnableForwardProxyTLSInterceptModel `tfsdk:"tls_intercept"`
 }
 
+// NetworkConnectorEnableForwardProxyModelAttrTypes defines the attribute types for NetworkConnectorEnableForwardProxyModel
+var NetworkConnectorEnableForwardProxyModelAttrTypes = map[string]attr.Type{
+	"connection_timeout":    types.Int64Type,
+	"max_connect_attempts":  types.Int64Type,
+	"white_listed_ports":    types.ListType{ElemType: types.Int64Type},
+	"white_listed_prefixes": types.ListType{ElemType: types.StringType},
+	"no_interception":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_intercept":         types.ObjectType{AttrTypes: NetworkConnectorEnableForwardProxyTLSInterceptModelAttrTypes},
+}
+
 // NetworkConnectorEnableForwardProxyTLSInterceptModel represents tls_intercept block
 type NetworkConnectorEnableForwardProxyTLSInterceptModel struct {
 	TrustedCAURL        types.String                                                          `tfsdk:"trusted_ca_url"`
@@ -67,6 +78,16 @@ type NetworkConnectorEnableForwardProxyTLSInterceptModel struct {
 	Policy              *NetworkConnectorEnableForwardProxyTLSInterceptPolicyModel            `tfsdk:"policy"`
 	VolterraCertificate *NetworkConnectorEmptyModel                                           `tfsdk:"volterra_certificate"`
 	VolterraTrustedCA   *NetworkConnectorEmptyModel                                           `tfsdk:"volterra_trusted_ca"`
+}
+
+// NetworkConnectorEnableForwardProxyTLSInterceptModelAttrTypes defines the attribute types for NetworkConnectorEnableForwardProxyTLSInterceptModel
+var NetworkConnectorEnableForwardProxyTLSInterceptModelAttrTypes = map[string]attr.Type{
+	"trusted_ca_url":         types.StringType,
+	"custom_certificate":     types.ObjectType{AttrTypes: NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateModelAttrTypes},
+	"enable_for_all_domains": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"policy":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"volterra_certificate":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"volterra_trusted_ca":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateModel represents custom_certificate block
@@ -79,15 +100,36 @@ type NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateModel struct
 	UseSystemDefaults    *NetworkConnectorEmptyModel                                                               `tfsdk:"use_system_defaults"`
 }
 
+// NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateModelAttrTypes defines the attribute types for NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateModel
+var NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateModelAttrTypes = map[string]attr.Type{
+	"certificate_url":        types.StringType,
+	"description_spec":       types.StringType,
+	"custom_hash_algorithms": types.ObjectType{AttrTypes: NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModelAttrTypes},
+	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModel represents custom_hash_algorithms block
 type NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModelAttrTypes defines the attribute types for NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModel
+var NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModelAttrTypes = map[string]attr.Type{
+	"hash_algorithms": types.ListType{ElemType: types.StringType},
 }
 
 // NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyModel represents private_key block
 type NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyModel struct {
 	BlindfoldSecretInfo *NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyModelAttrTypes defines the attribute types for NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyModel
+var NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -97,15 +139,33 @@ type NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyBl
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyBlindfoldSecretInfoModel
+var NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModel represents clear_secret_info block
 type NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
+// NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModel
+var NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 // NetworkConnectorEnableForwardProxyTLSInterceptPolicyModel represents policy block
 type NetworkConnectorEnableForwardProxyTLSInterceptPolicyModel struct {
 	InterceptionRules []NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesModel `tfsdk:"interception_rules"`
+}
+
+// NetworkConnectorEnableForwardProxyTLSInterceptPolicyModelAttrTypes defines the attribute types for NetworkConnectorEnableForwardProxyTLSInterceptPolicyModel
+var NetworkConnectorEnableForwardProxyTLSInterceptPolicyModelAttrTypes = map[string]attr.Type{
+	"interception_rules": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesModel represents interception_rules block
@@ -115,6 +175,13 @@ type NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesModel 
 	EnableInterception  *NetworkConnectorEmptyModel                                                            `tfsdk:"enable_interception"`
 }
 
+// NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesModelAttrTypes defines the attribute types for NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesModel
+var NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesModelAttrTypes = map[string]attr.Type{
+	"disable_interception": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"domain_match":         types.ObjectType{AttrTypes: NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesDomainMatchModelAttrTypes},
+	"enable_interception":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesDomainMatchModel represents domain_match block
 type NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesDomainMatchModel struct {
 	ExactValue  types.String `tfsdk:"exact_value"`
@@ -122,9 +189,21 @@ type NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesDomain
 	SuffixValue types.String `tfsdk:"suffix_value"`
 }
 
+// NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesDomainMatchModelAttrTypes defines the attribute types for NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesDomainMatchModel
+var NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesDomainMatchModelAttrTypes = map[string]attr.Type{
+	"exact_value":  types.StringType,
+	"regex_value":  types.StringType,
+	"suffix_value": types.StringType,
+}
+
 // NetworkConnectorSLIToGlobalDRModel represents sli_to_global_dr block
 type NetworkConnectorSLIToGlobalDRModel struct {
 	GlobalVn *NetworkConnectorSLIToGlobalDRGlobalVnModel `tfsdk:"global_vn"`
+}
+
+// NetworkConnectorSLIToGlobalDRModelAttrTypes defines the attribute types for NetworkConnectorSLIToGlobalDRModel
+var NetworkConnectorSLIToGlobalDRModelAttrTypes = map[string]attr.Type{
+	"global_vn": types.ObjectType{AttrTypes: NetworkConnectorSLIToGlobalDRGlobalVnModelAttrTypes},
 }
 
 // NetworkConnectorSLIToGlobalDRGlobalVnModel represents global_vn block
@@ -134,10 +213,23 @@ type NetworkConnectorSLIToGlobalDRGlobalVnModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// NetworkConnectorSLIToGlobalDRGlobalVnModelAttrTypes defines the attribute types for NetworkConnectorSLIToGlobalDRGlobalVnModel
+var NetworkConnectorSLIToGlobalDRGlobalVnModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // NetworkConnectorSLIToSloSnatModel represents sli_to_slo_snat block
 type NetworkConnectorSLIToSloSnatModel struct {
 	DefaultGwSnat *NetworkConnectorEmptyModel `tfsdk:"default_gw_snat"`
 	InterfaceIP   *NetworkConnectorEmptyModel `tfsdk:"interface_ip"`
+}
+
+// NetworkConnectorSLIToSloSnatModelAttrTypes defines the attribute types for NetworkConnectorSLIToSloSnatModel
+var NetworkConnectorSLIToSloSnatModelAttrTypes = map[string]attr.Type{
+	"default_gw_snat": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // NetworkConnectorSloToGlobalDRModel represents slo_to_global_dr block
@@ -145,11 +237,23 @@ type NetworkConnectorSloToGlobalDRModel struct {
 	GlobalVn *NetworkConnectorSloToGlobalDRGlobalVnModel `tfsdk:"global_vn"`
 }
 
+// NetworkConnectorSloToGlobalDRModelAttrTypes defines the attribute types for NetworkConnectorSloToGlobalDRModel
+var NetworkConnectorSloToGlobalDRModelAttrTypes = map[string]attr.Type{
+	"global_vn": types.ObjectType{AttrTypes: NetworkConnectorSloToGlobalDRGlobalVnModelAttrTypes},
+}
+
 // NetworkConnectorSloToGlobalDRGlobalVnModel represents global_vn block
 type NetworkConnectorSloToGlobalDRGlobalVnModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// NetworkConnectorSloToGlobalDRGlobalVnModelAttrTypes defines the attribute types for NetworkConnectorSloToGlobalDRGlobalVnModel
+var NetworkConnectorSloToGlobalDRGlobalVnModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 type NetworkConnectorResourceModel struct {
@@ -404,6 +508,9 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -440,6 +547,9 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -844,11 +954,17 @@ func (r *NetworkConnectorResource) Read(ctx context.Context, req resource.ReadRe
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

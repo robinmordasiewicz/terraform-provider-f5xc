@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -57,10 +58,24 @@ type CDNCacheRuleCacheRulesModel struct {
 	RuleExpressionList []CDNCacheRuleCacheRulesRuleExpressionListModel `tfsdk:"rule_expression_list"`
 }
 
+// CDNCacheRuleCacheRulesModelAttrTypes defines the attribute types for CDNCacheRuleCacheRulesModel
+var CDNCacheRuleCacheRulesModelAttrTypes = map[string]attr.Type{
+	"rule_name":            types.StringType,
+	"cache_bypass":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"eligible_for_cache":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"rule_expression_list": types.ListType{ElemType: types.ObjectType{AttrTypes: CDNCacheRuleCacheRulesRuleExpressionListModelAttrTypes}},
+}
+
 // CDNCacheRuleCacheRulesEligibleForCacheModel represents eligible_for_cache block
 type CDNCacheRuleCacheRulesEligibleForCacheModel struct {
 	SchemeProxyHostRequestURI *CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostRequestURIModel `tfsdk:"scheme_proxy_host_request_uri"`
 	SchemeProxyHostURI        *CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostURIModel        `tfsdk:"scheme_proxy_host_uri"`
+}
+
+// CDNCacheRuleCacheRulesEligibleForCacheModelAttrTypes defines the attribute types for CDNCacheRuleCacheRulesEligibleForCacheModel
+var CDNCacheRuleCacheRulesEligibleForCacheModelAttrTypes = map[string]attr.Type{
+	"scheme_proxy_host_request_uri": types.ObjectType{AttrTypes: CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostRequestURIModelAttrTypes},
+	"scheme_proxy_host_uri":         types.ObjectType{AttrTypes: CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostURIModelAttrTypes},
 }
 
 // CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostRequestURIModel represents scheme_proxy_host_request_uri block
@@ -70,6 +85,13 @@ type CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostRequestURIModel struct
 	IgnoreResponseCookie types.Bool   `tfsdk:"ignore_response_cookie"`
 }
 
+// CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostRequestURIModelAttrTypes defines the attribute types for CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostRequestURIModel
+var CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostRequestURIModelAttrTypes = map[string]attr.Type{
+	"cache_override":         types.BoolType,
+	"cache_ttl":              types.StringType,
+	"ignore_response_cookie": types.BoolType,
+}
+
 // CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostURIModel represents scheme_proxy_host_uri block
 type CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostURIModel struct {
 	CacheOverride        types.Bool   `tfsdk:"cache_override"`
@@ -77,10 +99,23 @@ type CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostURIModel struct {
 	IgnoreResponseCookie types.Bool   `tfsdk:"ignore_response_cookie"`
 }
 
+// CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostURIModelAttrTypes defines the attribute types for CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostURIModel
+var CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostURIModelAttrTypes = map[string]attr.Type{
+	"cache_override":         types.BoolType,
+	"cache_ttl":              types.StringType,
+	"ignore_response_cookie": types.BoolType,
+}
+
 // CDNCacheRuleCacheRulesRuleExpressionListModel represents rule_expression_list block
 type CDNCacheRuleCacheRulesRuleExpressionListModel struct {
 	ExpressionName      types.String                                                       `tfsdk:"expression_name"`
 	CacheRuleExpression []CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionModel `tfsdk:"cache_rule_expression"`
+}
+
+// CDNCacheRuleCacheRulesRuleExpressionListModelAttrTypes defines the attribute types for CDNCacheRuleCacheRulesRuleExpressionListModel
+var CDNCacheRuleCacheRulesRuleExpressionListModelAttrTypes = map[string]attr.Type{
+	"expression_name":       types.StringType,
+	"cache_rule_expression": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionModel represents cache_rule_expression block
@@ -91,10 +126,24 @@ type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionModel struct {
 	QueryParameters []CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionQueryParametersModel `tfsdk:"query_parameters"`
 }
 
+// CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionModelAttrTypes defines the attribute types for CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionModel
+var CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionModelAttrTypes = map[string]attr.Type{
+	"cache_headers":    types.ListType{ElemType: types.ObjectType{AttrTypes: CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCacheHeadersModelAttrTypes}},
+	"cookie_matcher":   types.ListType{ElemType: types.ObjectType{AttrTypes: CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCookieMatcherModelAttrTypes}},
+	"path_match":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"query_parameters": types.ListType{ElemType: types.ObjectType{AttrTypes: CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionQueryParametersModelAttrTypes}},
+}
+
 // CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCacheHeadersModel represents cache_headers block
 type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCacheHeadersModel struct {
 	Name     types.String                                                                          `tfsdk:"name"`
 	Operator *CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCacheHeadersOperatorModel `tfsdk:"operator"`
+}
+
+// CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCacheHeadersModelAttrTypes defines the attribute types for CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCacheHeadersModel
+var CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCacheHeadersModelAttrTypes = map[string]attr.Type{
+	"name":     types.StringType,
+	"operator": types.ObjectType{AttrTypes: CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCacheHeadersOperatorModelAttrTypes},
 }
 
 // CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCacheHeadersOperatorModel represents operator block
@@ -110,10 +159,29 @@ type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCacheHeadersOper
 	Startswith       types.String `tfsdk:"startswith"`
 }
 
+// CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCacheHeadersOperatorModelAttrTypes defines the attribute types for CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCacheHeadersOperatorModel
+var CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCacheHeadersOperatorModelAttrTypes = map[string]attr.Type{
+	"contains":            types.StringType,
+	"does_not_contain":    types.StringType,
+	"does_not_end_with":   types.StringType,
+	"does_not_equal":      types.StringType,
+	"does_not_start_with": types.StringType,
+	"endswith":            types.StringType,
+	"equals":              types.StringType,
+	"match_regex":         types.StringType,
+	"startswith":          types.StringType,
+}
+
 // CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCookieMatcherModel represents cookie_matcher block
 type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCookieMatcherModel struct {
 	Name     types.String                                                                           `tfsdk:"name"`
 	Operator *CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCookieMatcherOperatorModel `tfsdk:"operator"`
+}
+
+// CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCookieMatcherModelAttrTypes defines the attribute types for CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCookieMatcherModel
+var CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCookieMatcherModelAttrTypes = map[string]attr.Type{
+	"name":     types.StringType,
+	"operator": types.ObjectType{AttrTypes: CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCookieMatcherOperatorModelAttrTypes},
 }
 
 // CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCookieMatcherOperatorModel represents operator block
@@ -129,9 +197,27 @@ type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCookieMatcherOpe
 	Startswith       types.String `tfsdk:"startswith"`
 }
 
+// CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCookieMatcherOperatorModelAttrTypes defines the attribute types for CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCookieMatcherOperatorModel
+var CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCookieMatcherOperatorModelAttrTypes = map[string]attr.Type{
+	"contains":            types.StringType,
+	"does_not_contain":    types.StringType,
+	"does_not_end_with":   types.StringType,
+	"does_not_equal":      types.StringType,
+	"does_not_start_with": types.StringType,
+	"endswith":            types.StringType,
+	"equals":              types.StringType,
+	"match_regex":         types.StringType,
+	"startswith":          types.StringType,
+}
+
 // CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionPathMatchModel represents path_match block
 type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionPathMatchModel struct {
 	Operator *CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionPathMatchOperatorModel `tfsdk:"operator"`
+}
+
+// CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionPathMatchModelAttrTypes defines the attribute types for CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionPathMatchModel
+var CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionPathMatchModelAttrTypes = map[string]attr.Type{
+	"operator": types.ObjectType{AttrTypes: CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionPathMatchOperatorModelAttrTypes},
 }
 
 // CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionPathMatchOperatorModel represents operator block
@@ -147,10 +233,29 @@ type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionPathMatchOperato
 	Startswith       types.String `tfsdk:"startswith"`
 }
 
+// CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionPathMatchOperatorModelAttrTypes defines the attribute types for CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionPathMatchOperatorModel
+var CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionPathMatchOperatorModelAttrTypes = map[string]attr.Type{
+	"contains":            types.StringType,
+	"does_not_contain":    types.StringType,
+	"does_not_end_with":   types.StringType,
+	"does_not_equal":      types.StringType,
+	"does_not_start_with": types.StringType,
+	"endswith":            types.StringType,
+	"equals":              types.StringType,
+	"match_regex":         types.StringType,
+	"startswith":          types.StringType,
+}
+
 // CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionQueryParametersModel represents query_parameters block
 type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionQueryParametersModel struct {
 	Key      types.String                                                                             `tfsdk:"key"`
 	Operator *CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionQueryParametersOperatorModel `tfsdk:"operator"`
+}
+
+// CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionQueryParametersModelAttrTypes defines the attribute types for CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionQueryParametersModel
+var CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionQueryParametersModelAttrTypes = map[string]attr.Type{
+	"key":      types.StringType,
+	"operator": types.ObjectType{AttrTypes: CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionQueryParametersOperatorModelAttrTypes},
 }
 
 // CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionQueryParametersOperatorModel represents operator block
@@ -164,6 +269,19 @@ type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionQueryParametersO
 	Equals           types.String `tfsdk:"equals"`
 	Matchregex       types.String `tfsdk:"match_regex"`
 	Startswith       types.String `tfsdk:"startswith"`
+}
+
+// CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionQueryParametersOperatorModelAttrTypes defines the attribute types for CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionQueryParametersOperatorModel
+var CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionQueryParametersOperatorModelAttrTypes = map[string]attr.Type{
+	"contains":            types.StringType,
+	"does_not_contain":    types.StringType,
+	"does_not_end_with":   types.StringType,
+	"does_not_equal":      types.StringType,
+	"does_not_start_with": types.StringType,
+	"endswith":            types.StringType,
+	"equals":              types.StringType,
+	"match_regex":         types.StringType,
+	"startswith":          types.StringType,
 }
 
 type CDNCacheRuleResourceModel struct {
@@ -826,11 +944,17 @@ func (r *CDNCacheRuleResource) Read(ctx context.Context, req resource.ReadReques
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

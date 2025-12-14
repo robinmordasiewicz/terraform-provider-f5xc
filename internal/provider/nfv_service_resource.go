@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -58,10 +59,25 @@ type NfvServiceEnabledSSHAccessModel struct {
 	NodeSSHPorts      []NfvServiceEnabledSSHAccessNodeSSHPortsModel `tfsdk:"node_ssh_ports"`
 }
 
+// NfvServiceEnabledSSHAccessModelAttrTypes defines the attribute types for NfvServiceEnabledSSHAccessModel
+var NfvServiceEnabledSSHAccessModelAttrTypes = map[string]attr.Type{
+	"domain_suffix":        types.StringType,
+	"advertise_on_sli":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_on_slo":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_on_slo_sli": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_ssh_ports":       types.ListType{ElemType: types.ObjectType{AttrTypes: NfvServiceEnabledSSHAccessNodeSSHPortsModelAttrTypes}},
+}
+
 // NfvServiceEnabledSSHAccessNodeSSHPortsModel represents node_ssh_ports block
 type NfvServiceEnabledSSHAccessNodeSSHPortsModel struct {
 	NodeName types.String `tfsdk:"node_name"`
 	SSHPort  types.Int64  `tfsdk:"ssh_port"`
+}
+
+// NfvServiceEnabledSSHAccessNodeSSHPortsModelAttrTypes defines the attribute types for NfvServiceEnabledSSHAccessNodeSSHPortsModel
+var NfvServiceEnabledSSHAccessNodeSSHPortsModelAttrTypes = map[string]attr.Type{
+	"node_name": types.StringType,
+	"ssh_port":  types.Int64Type,
 }
 
 // NfvServiceF5BigIPAWSServiceModel represents f5_big_ip_aws_service block
@@ -76,10 +92,28 @@ type NfvServiceF5BigIPAWSServiceModel struct {
 	Tags             *NfvServiceEmptyModel                             `tfsdk:"tags"`
 }
 
+// NfvServiceF5BigIPAWSServiceModelAttrTypes defines the attribute types for NfvServiceF5BigIPAWSServiceModel
+var NfvServiceF5BigIPAWSServiceModelAttrTypes = map[string]attr.Type{
+	"admin_username":      types.StringType,
+	"ssh_key":             types.StringType,
+	"admin_password":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"aws_tgw_site_params": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"endpoint_service":    types.ObjectType{AttrTypes: NfvServiceF5BigIPAWSServiceEndpointServiceModelAttrTypes},
+	"market_place_image":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"nodes":               types.ListType{ElemType: types.ObjectType{AttrTypes: NfvServiceF5BigIPAWSServiceNodesModelAttrTypes}},
+	"tags":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NfvServiceF5BigIPAWSServiceAdminPasswordModel represents admin_password block
 type NfvServiceF5BigIPAWSServiceAdminPasswordModel struct {
 	BlindfoldSecretInfo *NfvServiceF5BigIPAWSServiceAdminPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *NfvServiceF5BigIPAWSServiceAdminPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// NfvServiceF5BigIPAWSServiceAdminPasswordModelAttrTypes defines the attribute types for NfvServiceF5BigIPAWSServiceAdminPasswordModel
+var NfvServiceF5BigIPAWSServiceAdminPasswordModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: NfvServiceF5BigIPAWSServiceAdminPasswordBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: NfvServiceF5BigIPAWSServiceAdminPasswordClearSecretInfoModelAttrTypes},
 }
 
 // NfvServiceF5BigIPAWSServiceAdminPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -89,10 +123,23 @@ type NfvServiceF5BigIPAWSServiceAdminPasswordBlindfoldSecretInfoModel struct {
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// NfvServiceF5BigIPAWSServiceAdminPasswordBlindfoldSecretInfoModelAttrTypes defines the attribute types for NfvServiceF5BigIPAWSServiceAdminPasswordBlindfoldSecretInfoModel
+var NfvServiceF5BigIPAWSServiceAdminPasswordBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // NfvServiceF5BigIPAWSServiceAdminPasswordClearSecretInfoModel represents clear_secret_info block
 type NfvServiceF5BigIPAWSServiceAdminPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// NfvServiceF5BigIPAWSServiceAdminPasswordClearSecretInfoModelAttrTypes defines the attribute types for NfvServiceF5BigIPAWSServiceAdminPasswordClearSecretInfoModel
+var NfvServiceF5BigIPAWSServiceAdminPasswordClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // NfvServiceF5BigIPAWSServiceAWSTGWSiteParamsModel represents aws_tgw_site_params block
@@ -100,11 +147,23 @@ type NfvServiceF5BigIPAWSServiceAWSTGWSiteParamsModel struct {
 	AWSTGWSite *NfvServiceF5BigIPAWSServiceAWSTGWSiteParamsAWSTGWSiteModel `tfsdk:"aws_tgw_site"`
 }
 
+// NfvServiceF5BigIPAWSServiceAWSTGWSiteParamsModelAttrTypes defines the attribute types for NfvServiceF5BigIPAWSServiceAWSTGWSiteParamsModel
+var NfvServiceF5BigIPAWSServiceAWSTGWSiteParamsModelAttrTypes = map[string]attr.Type{
+	"aws_tgw_site": types.ObjectType{AttrTypes: NfvServiceF5BigIPAWSServiceAWSTGWSiteParamsAWSTGWSiteModelAttrTypes},
+}
+
 // NfvServiceF5BigIPAWSServiceAWSTGWSiteParamsAWSTGWSiteModel represents aws_tgw_site block
 type NfvServiceF5BigIPAWSServiceAWSTGWSiteParamsAWSTGWSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// NfvServiceF5BigIPAWSServiceAWSTGWSiteParamsAWSTGWSiteModelAttrTypes defines the attribute types for NfvServiceF5BigIPAWSServiceAWSTGWSiteParamsAWSTGWSiteModel
+var NfvServiceF5BigIPAWSServiceAWSTGWSiteParamsAWSTGWSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // NfvServiceF5BigIPAWSServiceEndpointServiceModel represents endpoint_service block
@@ -123,9 +182,30 @@ type NfvServiceF5BigIPAWSServiceEndpointServiceModel struct {
 	NoUDPPorts               *NfvServiceEmptyModel                                          `tfsdk:"no_udp_ports"`
 }
 
+// NfvServiceF5BigIPAWSServiceEndpointServiceModelAttrTypes defines the attribute types for NfvServiceF5BigIPAWSServiceEndpointServiceModel
+var NfvServiceF5BigIPAWSServiceEndpointServiceModelAttrTypes = map[string]attr.Type{
+	"configured_vip":               types.StringType,
+	"advertise_on_slo_ip":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_on_slo_ip_external": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"automatic_vip":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"custom_tcp_ports":             types.ObjectType{AttrTypes: NfvServiceF5BigIPAWSServiceEndpointServiceCustomTCPPortsModelAttrTypes},
+	"custom_udp_ports":             types.ObjectType{AttrTypes: NfvServiceF5BigIPAWSServiceEndpointServiceCustomUDPPortsModelAttrTypes},
+	"default_tcp_ports":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_advertise_on_slo_ip":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_port":                    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"https_port":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_tcp_ports":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_udp_ports":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NfvServiceF5BigIPAWSServiceEndpointServiceCustomTCPPortsModel represents custom_tcp_ports block
 type NfvServiceF5BigIPAWSServiceEndpointServiceCustomTCPPortsModel struct {
 	Ports types.List `tfsdk:"ports"`
+}
+
+// NfvServiceF5BigIPAWSServiceEndpointServiceCustomTCPPortsModelAttrTypes defines the attribute types for NfvServiceF5BigIPAWSServiceEndpointServiceCustomTCPPortsModel
+var NfvServiceF5BigIPAWSServiceEndpointServiceCustomTCPPortsModelAttrTypes = map[string]attr.Type{
+	"ports": types.ListType{ElemType: types.StringType},
 }
 
 // NfvServiceF5BigIPAWSServiceEndpointServiceCustomUDPPortsModel represents custom_udp_ports block
@@ -133,10 +213,21 @@ type NfvServiceF5BigIPAWSServiceEndpointServiceCustomUDPPortsModel struct {
 	Ports types.List `tfsdk:"ports"`
 }
 
+// NfvServiceF5BigIPAWSServiceEndpointServiceCustomUDPPortsModelAttrTypes defines the attribute types for NfvServiceF5BigIPAWSServiceEndpointServiceCustomUDPPortsModel
+var NfvServiceF5BigIPAWSServiceEndpointServiceCustomUDPPortsModelAttrTypes = map[string]attr.Type{
+	"ports": types.ListType{ElemType: types.StringType},
+}
+
 // NfvServiceF5BigIPAWSServiceMarketPlaceImageModel represents market_place_image block
 type NfvServiceF5BigIPAWSServiceMarketPlaceImageModel struct {
 	Awafpayg200mbps *NfvServiceEmptyModel `tfsdk:"awafpay_g200_mbps"`
 	Awafpayg3gbps   *NfvServiceEmptyModel `tfsdk:"awafpay_g3_gbps"`
+}
+
+// NfvServiceF5BigIPAWSServiceMarketPlaceImageModelAttrTypes defines the attribute types for NfvServiceF5BigIPAWSServiceMarketPlaceImageModel
+var NfvServiceF5BigIPAWSServiceMarketPlaceImageModelAttrTypes = map[string]attr.Type{
+	"awafpay_g200_mbps": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"awafpay_g3_gbps":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // NfvServiceF5BigIPAWSServiceNodesModel represents nodes block
@@ -149,15 +240,36 @@ type NfvServiceF5BigIPAWSServiceNodesModel struct {
 	ReservedMgmtSubnet *NfvServiceEmptyModel                            `tfsdk:"reserved_mgmt_subnet"`
 }
 
+// NfvServiceF5BigIPAWSServiceNodesModelAttrTypes defines the attribute types for NfvServiceF5BigIPAWSServiceNodesModel
+var NfvServiceF5BigIPAWSServiceNodesModelAttrTypes = map[string]attr.Type{
+	"aws_az_name":          types.StringType,
+	"node_name":            types.StringType,
+	"tunnel_prefix":        types.StringType,
+	"automatic_prefix":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mgmt_subnet":          types.ObjectType{AttrTypes: NfvServiceF5BigIPAWSServiceNodesMgmtSubnetModelAttrTypes},
+	"reserved_mgmt_subnet": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NfvServiceF5BigIPAWSServiceNodesMgmtSubnetModel represents mgmt_subnet block
 type NfvServiceF5BigIPAWSServiceNodesMgmtSubnetModel struct {
 	ExistingSubnetID types.String                                                `tfsdk:"existing_subnet_id"`
 	SubnetParam      *NfvServiceF5BigIPAWSServiceNodesMgmtSubnetSubnetParamModel `tfsdk:"subnet_param"`
 }
 
+// NfvServiceF5BigIPAWSServiceNodesMgmtSubnetModelAttrTypes defines the attribute types for NfvServiceF5BigIPAWSServiceNodesMgmtSubnetModel
+var NfvServiceF5BigIPAWSServiceNodesMgmtSubnetModelAttrTypes = map[string]attr.Type{
+	"existing_subnet_id": types.StringType,
+	"subnet_param":       types.ObjectType{AttrTypes: NfvServiceF5BigIPAWSServiceNodesMgmtSubnetSubnetParamModelAttrTypes},
+}
+
 // NfvServiceF5BigIPAWSServiceNodesMgmtSubnetSubnetParamModel represents subnet_param block
 type NfvServiceF5BigIPAWSServiceNodesMgmtSubnetSubnetParamModel struct {
 	Ipv4 types.String `tfsdk:"ipv4"`
+}
+
+// NfvServiceF5BigIPAWSServiceNodesMgmtSubnetSubnetParamModelAttrTypes defines the attribute types for NfvServiceF5BigIPAWSServiceNodesMgmtSubnetSubnetParamModel
+var NfvServiceF5BigIPAWSServiceNodesMgmtSubnetSubnetParamModelAttrTypes = map[string]attr.Type{
+	"ipv4": types.StringType,
 }
 
 // NfvServiceHTTPSManagementModel represents https_management block
@@ -173,9 +285,27 @@ type NfvServiceHTTPSManagementModel struct {
 	DefaultHTTPSPort              *NfvServiceEmptyModel                                    `tfsdk:"default_https_port"`
 }
 
+// NfvServiceHTTPSManagementModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementModel
+var NfvServiceHTTPSManagementModelAttrTypes = map[string]attr.Type{
+	"domain_suffix":                     types.StringType,
+	"https_port":                        types.Int64Type,
+	"advertise_on_internet":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_on_internet_default_vip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_on_sli_vip":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_on_slo_internet_vip":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_on_slo_sli":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_on_slo_vip":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_https_port":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NfvServiceHTTPSManagementAdvertiseOnInternetModel represents advertise_on_internet block
 type NfvServiceHTTPSManagementAdvertiseOnInternetModel struct {
 	PublicIP *NfvServiceHTTPSManagementAdvertiseOnInternetPublicIPModel `tfsdk:"public_ip"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnInternetModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnInternetModel
+var NfvServiceHTTPSManagementAdvertiseOnInternetModelAttrTypes = map[string]attr.Type{
+	"public_ip": types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnInternetPublicIPModelAttrTypes},
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnInternetPublicIPModel represents public_ip block
@@ -185,12 +315,27 @@ type NfvServiceHTTPSManagementAdvertiseOnInternetPublicIPModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// NfvServiceHTTPSManagementAdvertiseOnInternetPublicIPModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnInternetPublicIPModel
+var NfvServiceHTTPSManagementAdvertiseOnInternetPublicIPModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // NfvServiceHTTPSManagementAdvertiseOnSLIVIPModel represents advertise_on_sli_vip block
 type NfvServiceHTTPSManagementAdvertiseOnSLIVIPModel struct {
 	NoMtls          *NfvServiceEmptyModel                                            `tfsdk:"no_mtls"`
 	TLSCertificates []NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesModel `tfsdk:"tls_certificates"`
 	TLSConfig       *NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSConfigModel        `tfsdk:"tls_config"`
 	UseMtls         *NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsModel          `tfsdk:"use_mtls"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSLIVIPModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSLIVIPModel
+var NfvServiceHTTPSManagementAdvertiseOnSLIVIPModelAttrTypes = map[string]attr.Type{
+	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesModelAttrTypes}},
+	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":         types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsModelAttrTypes},
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesModel represents tls_certificates block
@@ -203,15 +348,36 @@ type NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesModel struct {
 	UseSystemDefaults    *NfvServiceEmptyModel                                                               `tfsdk:"use_system_defaults"`
 }
 
+// NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesModel
+var NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesModelAttrTypes = map[string]attr.Type{
+	"certificate_url":        types.StringType,
+	"description_spec":       types.StringType,
+	"custom_hash_algorithms": types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
+	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
 type NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesCustomHashAlgorithmsModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesCustomHashAlgorithmsModel
+var NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesCustomHashAlgorithmsModelAttrTypes = map[string]attr.Type{
+	"hash_algorithms": types.ListType{ElemType: types.StringType},
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyModel represents private_key block
 type NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyModel
+var NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -221,10 +387,23 @@ type NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyBlindfol
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModel
+var NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyClearSecretInfoModel
+var NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSConfigModel represents tls_config block
@@ -235,11 +414,26 @@ type NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSConfigModel struct {
 	MediumSecurity  *NfvServiceEmptyModel                                                   `tfsdk:"medium_security"`
 }
 
+// NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSConfigModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSConfigModel
+var NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSConfigCustomSecurityModel represents custom_security block
 type NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSConfigCustomSecurityModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSConfigCustomSecurityModel
+var NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsModel represents use_mtls block
@@ -253,11 +447,29 @@ type NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsModel struct {
 	XfccOptions               *NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsModel
+var NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsCRLModel represents crl block
 type NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsCRLModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsCRLModel
+var NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsTrustedCAModel represents trusted_ca block
@@ -267,9 +479,21 @@ type NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsTrustedCAModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsTrustedCAModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsTrustedCAModel
+var NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsXfccOptionsModel represents xfcc_options block
 type NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsXfccOptionsModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsXfccOptionsModel
+var NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPModel represents advertise_on_slo_internet_vip block
@@ -278,6 +502,14 @@ type NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPModel struct {
 	TLSCertificates []NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesModel `tfsdk:"tls_certificates"`
 	TLSConfig       *NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigModel        `tfsdk:"tls_config"`
 	UseMtls         *NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsModel          `tfsdk:"use_mtls"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPModel
+var NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPModelAttrTypes = map[string]attr.Type{
+	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesModelAttrTypes}},
+	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":         types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsModelAttrTypes},
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesModel represents tls_certificates block
@@ -290,15 +522,36 @@ type NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesModel stru
 	UseSystemDefaults    *NfvServiceEmptyModel                                                                       `tfsdk:"use_system_defaults"`
 }
 
+// NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesModel
+var NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesModelAttrTypes = map[string]attr.Type{
+	"certificate_url":        types.StringType,
+	"description_spec":       types.StringType,
+	"custom_hash_algorithms": types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
+	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
 type NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesCustomHashAlgorithmsModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesCustomHashAlgorithmsModel
+var NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesCustomHashAlgorithmsModelAttrTypes = map[string]attr.Type{
+	"hash_algorithms": types.ListType{ElemType: types.StringType},
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyModel represents private_key block
 type NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyModel
+var NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -308,10 +561,23 @@ type NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKey
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModel
+var NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyClearSecretInfoModel
+var NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigModel represents tls_config block
@@ -322,11 +588,26 @@ type NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigModel struct {
 	MediumSecurity  *NfvServiceEmptyModel                                                           `tfsdk:"medium_security"`
 }
 
+// NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigModel
+var NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigCustomSecurityModel represents custom_security block
 type NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigCustomSecurityModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigCustomSecurityModel
+var NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsModel represents use_mtls block
@@ -340,11 +621,29 @@ type NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsModel struct {
 	XfccOptions               *NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsModel
+var NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsCRLModel represents crl block
 type NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsCRLModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsCRLModel
+var NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsTrustedCAModel represents trusted_ca block
@@ -354,9 +653,21 @@ type NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsTrustedCAModel str
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsTrustedCAModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsTrustedCAModel
+var NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsXfccOptionsModel represents xfcc_options block
 type NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsXfccOptionsModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsXfccOptionsModel
+var NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnSloSLIModel represents advertise_on_slo_sli block
@@ -365,6 +676,14 @@ type NfvServiceHTTPSManagementAdvertiseOnSloSLIModel struct {
 	TLSCertificates []NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesModel `tfsdk:"tls_certificates"`
 	TLSConfig       *NfvServiceHTTPSManagementAdvertiseOnSloSLITLSConfigModel        `tfsdk:"tls_config"`
 	UseMtls         *NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsModel          `tfsdk:"use_mtls"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSloSLIModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloSLIModel
+var NfvServiceHTTPSManagementAdvertiseOnSloSLIModelAttrTypes = map[string]attr.Type{
+	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesModelAttrTypes}},
+	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":         types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsModelAttrTypes},
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesModel represents tls_certificates block
@@ -377,15 +696,36 @@ type NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesModel struct {
 	UseSystemDefaults    *NfvServiceEmptyModel                                                               `tfsdk:"use_system_defaults"`
 }
 
+// NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesModel
+var NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesModelAttrTypes = map[string]attr.Type{
+	"certificate_url":        types.StringType,
+	"description_spec":       types.StringType,
+	"custom_hash_algorithms": types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesCustomHashAlgorithmsModelAttrTypes},
+	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
 type NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesCustomHashAlgorithmsModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesCustomHashAlgorithmsModel
+var NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesCustomHashAlgorithmsModelAttrTypes = map[string]attr.Type{
+	"hash_algorithms": types.ListType{ElemType: types.StringType},
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyModel represents private_key block
 type NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyModel
+var NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -395,10 +735,23 @@ type NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyBlindfol
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModel
+var NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyClearSecretInfoModel
+var NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnSloSLITLSConfigModel represents tls_config block
@@ -409,11 +762,26 @@ type NfvServiceHTTPSManagementAdvertiseOnSloSLITLSConfigModel struct {
 	MediumSecurity  *NfvServiceEmptyModel                                                   `tfsdk:"medium_security"`
 }
 
+// NfvServiceHTTPSManagementAdvertiseOnSloSLITLSConfigModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloSLITLSConfigModel
+var NfvServiceHTTPSManagementAdvertiseOnSloSLITLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloSLITLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NfvServiceHTTPSManagementAdvertiseOnSloSLITLSConfigCustomSecurityModel represents custom_security block
 type NfvServiceHTTPSManagementAdvertiseOnSloSLITLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSloSLITLSConfigCustomSecurityModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloSLITLSConfigCustomSecurityModel
+var NfvServiceHTTPSManagementAdvertiseOnSloSLITLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsModel represents use_mtls block
@@ -427,11 +795,29 @@ type NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsModel struct {
 	XfccOptions               *NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsModel
+var NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsCRLModel represents crl block
 type NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsCRLModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsCRLModel
+var NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsTrustedCAModel represents trusted_ca block
@@ -441,9 +827,21 @@ type NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsTrustedCAModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsTrustedCAModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsTrustedCAModel
+var NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsXfccOptionsModel represents xfcc_options block
 type NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsXfccOptionsModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsXfccOptionsModel
+var NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnSloVIPModel represents advertise_on_slo_vip block
@@ -452,6 +850,14 @@ type NfvServiceHTTPSManagementAdvertiseOnSloVIPModel struct {
 	TLSCertificates []NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesModel `tfsdk:"tls_certificates"`
 	TLSConfig       *NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSConfigModel        `tfsdk:"tls_config"`
 	UseMtls         *NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsModel          `tfsdk:"use_mtls"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSloVIPModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloVIPModel
+var NfvServiceHTTPSManagementAdvertiseOnSloVIPModelAttrTypes = map[string]attr.Type{
+	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesModelAttrTypes}},
+	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":         types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsModelAttrTypes},
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesModel represents tls_certificates block
@@ -464,15 +870,36 @@ type NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesModel struct {
 	UseSystemDefaults    *NfvServiceEmptyModel                                                               `tfsdk:"use_system_defaults"`
 }
 
+// NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesModel
+var NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesModelAttrTypes = map[string]attr.Type{
+	"certificate_url":        types.StringType,
+	"description_spec":       types.StringType,
+	"custom_hash_algorithms": types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
+	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
 type NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesCustomHashAlgorithmsModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesCustomHashAlgorithmsModel
+var NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesCustomHashAlgorithmsModelAttrTypes = map[string]attr.Type{
+	"hash_algorithms": types.ListType{ElemType: types.StringType},
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyModel represents private_key block
 type NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyModel
+var NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -482,10 +909,23 @@ type NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyBlindfol
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModel
+var NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyClearSecretInfoModel
+var NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSConfigModel represents tls_config block
@@ -496,11 +936,26 @@ type NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSConfigModel struct {
 	MediumSecurity  *NfvServiceEmptyModel                                                   `tfsdk:"medium_security"`
 }
 
+// NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSConfigModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSConfigModel
+var NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSConfigCustomSecurityModel represents custom_security block
 type NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSConfigCustomSecurityModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSConfigCustomSecurityModel
+var NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsModel represents use_mtls block
@@ -514,11 +969,29 @@ type NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsModel struct {
 	XfccOptions               *NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsModel
+var NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsCRLModel represents crl block
 type NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsCRLModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsCRLModel
+var NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsTrustedCAModel represents trusted_ca block
@@ -528,9 +1001,21 @@ type NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsTrustedCAModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsTrustedCAModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsTrustedCAModel
+var NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsXfccOptionsModel represents xfcc_options block
 type NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsXfccOptionsModelAttrTypes defines the attribute types for NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsXfccOptionsModel
+var NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
 }
 
 // NfvServicePaloAltoFwServiceModel represents palo_alto_fw_service block
@@ -548,6 +1033,21 @@ type NfvServicePaloAltoFwServiceModel struct {
 	Tags            *NfvServiceEmptyModel                           `tfsdk:"tags"`
 }
 
+// NfvServicePaloAltoFwServiceModelAttrTypes defines the attribute types for NfvServicePaloAltoFwServiceModel
+var NfvServicePaloAltoFwServiceModelAttrTypes = map[string]attr.Type{
+	"instance_type":    types.StringType,
+	"ssh_key":          types.StringType,
+	"version":          types.StringType,
+	"auto_setup":       types.ObjectType{AttrTypes: NfvServicePaloAltoFwServiceAutoSetupModelAttrTypes},
+	"aws_tgw_site":     types.ObjectType{AttrTypes: NfvServicePaloAltoFwServiceAWSTGWSiteModelAttrTypes},
+	"disable_panaroma": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"pan_ami_bundle1":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"pan_ami_bundle2":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"panorama_server":  types.ObjectType{AttrTypes: NfvServicePaloAltoFwServicePanoramaServerModelAttrTypes},
+	"service_nodes":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tags":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NfvServicePaloAltoFwServiceAutoSetupModel represents auto_setup block
 type NfvServicePaloAltoFwServiceAutoSetupModel struct {
 	AdminUsername types.String                                            `tfsdk:"admin_username"`
@@ -555,10 +1055,23 @@ type NfvServicePaloAltoFwServiceAutoSetupModel struct {
 	ManualSSHKeys *NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysModel `tfsdk:"manual_ssh_keys"`
 }
 
+// NfvServicePaloAltoFwServiceAutoSetupModelAttrTypes defines the attribute types for NfvServicePaloAltoFwServiceAutoSetupModel
+var NfvServicePaloAltoFwServiceAutoSetupModelAttrTypes = map[string]attr.Type{
+	"admin_username":  types.StringType,
+	"admin_password":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"manual_ssh_keys": types.ObjectType{AttrTypes: NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysModelAttrTypes},
+}
+
 // NfvServicePaloAltoFwServiceAutoSetupAdminPasswordModel represents admin_password block
 type NfvServicePaloAltoFwServiceAutoSetupAdminPasswordModel struct {
 	BlindfoldSecretInfo *NfvServicePaloAltoFwServiceAutoSetupAdminPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *NfvServicePaloAltoFwServiceAutoSetupAdminPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// NfvServicePaloAltoFwServiceAutoSetupAdminPasswordModelAttrTypes defines the attribute types for NfvServicePaloAltoFwServiceAutoSetupAdminPasswordModel
+var NfvServicePaloAltoFwServiceAutoSetupAdminPasswordModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: NfvServicePaloAltoFwServiceAutoSetupAdminPasswordBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: NfvServicePaloAltoFwServiceAutoSetupAdminPasswordClearSecretInfoModelAttrTypes},
 }
 
 // NfvServicePaloAltoFwServiceAutoSetupAdminPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -568,10 +1081,23 @@ type NfvServicePaloAltoFwServiceAutoSetupAdminPasswordBlindfoldSecretInfoModel s
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// NfvServicePaloAltoFwServiceAutoSetupAdminPasswordBlindfoldSecretInfoModelAttrTypes defines the attribute types for NfvServicePaloAltoFwServiceAutoSetupAdminPasswordBlindfoldSecretInfoModel
+var NfvServicePaloAltoFwServiceAutoSetupAdminPasswordBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // NfvServicePaloAltoFwServiceAutoSetupAdminPasswordClearSecretInfoModel represents clear_secret_info block
 type NfvServicePaloAltoFwServiceAutoSetupAdminPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// NfvServicePaloAltoFwServiceAutoSetupAdminPasswordClearSecretInfoModelAttrTypes defines the attribute types for NfvServicePaloAltoFwServiceAutoSetupAdminPasswordClearSecretInfoModel
+var NfvServicePaloAltoFwServiceAutoSetupAdminPasswordClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysModel represents manual_ssh_keys block
@@ -580,10 +1106,22 @@ type NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysModel struct {
 	PrivateKey *NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyModel `tfsdk:"private_key"`
 }
 
+// NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysModelAttrTypes defines the attribute types for NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysModel
+var NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysModelAttrTypes = map[string]attr.Type{
+	"public_key":  types.StringType,
+	"private_key": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyModel represents private_key block
 type NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyModel struct {
 	BlindfoldSecretInfo *NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyModelAttrTypes defines the attribute types for NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyModel
+var NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -593,10 +1131,23 @@ type NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyBlindfoldSecretI
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyBlindfoldSecretInfoModel
+var NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyClearSecretInfoModel
+var NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // NfvServicePaloAltoFwServiceAWSTGWSiteModel represents aws_tgw_site block
@@ -604,6 +1155,13 @@ type NfvServicePaloAltoFwServiceAWSTGWSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// NfvServicePaloAltoFwServiceAWSTGWSiteModelAttrTypes defines the attribute types for NfvServicePaloAltoFwServiceAWSTGWSiteModel
+var NfvServicePaloAltoFwServiceAWSTGWSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // NfvServicePaloAltoFwServicePanoramaServerModel represents panorama_server block
@@ -614,10 +1172,24 @@ type NfvServicePaloAltoFwServicePanoramaServerModel struct {
 	AuthorizationKey  *NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyModel `tfsdk:"authorization_key"`
 }
 
+// NfvServicePaloAltoFwServicePanoramaServerModelAttrTypes defines the attribute types for NfvServicePaloAltoFwServicePanoramaServerModel
+var NfvServicePaloAltoFwServicePanoramaServerModelAttrTypes = map[string]attr.Type{
+	"device_group_name":   types.StringType,
+	"server":              types.StringType,
+	"template_stack_name": types.StringType,
+	"authorization_key":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyModel represents authorization_key block
 type NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyModel struct {
 	BlindfoldSecretInfo *NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyModelAttrTypes defines the attribute types for NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyModel
+var NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyClearSecretInfoModelAttrTypes},
 }
 
 // NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -627,15 +1199,33 @@ type NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyBlindfoldSecretInf
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyBlindfoldSecretInfoModel
+var NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyClearSecretInfoModel represents clear_secret_info block
 type NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
+// NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyClearSecretInfoModelAttrTypes defines the attribute types for NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyClearSecretInfoModel
+var NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 // NfvServicePaloAltoFwServiceServiceNodesModel represents service_nodes block
 type NfvServicePaloAltoFwServiceServiceNodesModel struct {
 	Nodes []NfvServicePaloAltoFwServiceServiceNodesNodesModel `tfsdk:"nodes"`
+}
+
+// NfvServicePaloAltoFwServiceServiceNodesModelAttrTypes defines the attribute types for NfvServicePaloAltoFwServiceServiceNodesModel
+var NfvServicePaloAltoFwServiceServiceNodesModelAttrTypes = map[string]attr.Type{
+	"nodes": types.ListType{ElemType: types.ObjectType{AttrTypes: NfvServicePaloAltoFwServiceServiceNodesNodesModelAttrTypes}},
 }
 
 // NfvServicePaloAltoFwServiceServiceNodesNodesModel represents nodes block
@@ -646,15 +1236,34 @@ type NfvServicePaloAltoFwServiceServiceNodesNodesModel struct {
 	ReservedMgmtSubnet *NfvServiceEmptyModel                                        `tfsdk:"reserved_mgmt_subnet"`
 }
 
+// NfvServicePaloAltoFwServiceServiceNodesNodesModelAttrTypes defines the attribute types for NfvServicePaloAltoFwServiceServiceNodesNodesModel
+var NfvServicePaloAltoFwServiceServiceNodesNodesModelAttrTypes = map[string]attr.Type{
+	"aws_az_name":          types.StringType,
+	"node_name":            types.StringType,
+	"mgmt_subnet":          types.ObjectType{AttrTypes: NfvServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetModelAttrTypes},
+	"reserved_mgmt_subnet": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NfvServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetModel represents mgmt_subnet block
 type NfvServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetModel struct {
 	ExistingSubnetID types.String                                                            `tfsdk:"existing_subnet_id"`
 	SubnetParam      *NfvServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetSubnetParamModel `tfsdk:"subnet_param"`
 }
 
+// NfvServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetModelAttrTypes defines the attribute types for NfvServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetModel
+var NfvServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetModelAttrTypes = map[string]attr.Type{
+	"existing_subnet_id": types.StringType,
+	"subnet_param":       types.ObjectType{AttrTypes: NfvServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetSubnetParamModelAttrTypes},
+}
+
 // NfvServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetSubnetParamModel represents subnet_param block
 type NfvServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetSubnetParamModel struct {
 	Ipv4 types.String `tfsdk:"ipv4"`
+}
+
+// NfvServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetSubnetParamModelAttrTypes defines the attribute types for NfvServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetSubnetParamModel
+var NfvServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetSubnetParamModelAttrTypes = map[string]attr.Type{
+	"ipv4": types.StringType,
 }
 
 type NfvServiceResourceModel struct {
@@ -845,6 +1454,9 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional:            true,
 										Computed:            true,
+										PlanModifiers: []planmodifier.String{
+											stringplanmodifier.UseStateForUnknown(),
+										},
 									},
 								},
 							},
@@ -1004,6 +1616,9 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional:            true,
 										Computed:            true,
+										PlanModifiers: []planmodifier.String{
+											stringplanmodifier.UseStateForUnknown(),
+										},
 									},
 								},
 							},
@@ -1149,6 +1764,9 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -1170,6 +1788,9 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -1327,6 +1948,9 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -1348,6 +1972,9 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -1505,6 +2132,9 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -1526,6 +2156,9 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -1683,6 +2316,9 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -1704,6 +2340,9 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -1855,6 +2494,9 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -2866,11 +3508,17 @@ func (r *NfvServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

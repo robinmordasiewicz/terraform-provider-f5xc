@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -60,6 +61,17 @@ type InfraprotectFirewallRuleProtocolICMPModel struct {
 	Unreachable      types.Bool `tfsdk:"unreachable"`
 }
 
+// InfraprotectFirewallRuleProtocolICMPModelAttrTypes defines the attribute types for InfraprotectFirewallRuleProtocolICMPModel
+var InfraprotectFirewallRuleProtocolICMPModelAttrTypes = map[string]attr.Type{
+	"echo_reply":        types.BoolType,
+	"echo_request":      types.BoolType,
+	"parameter_problem": types.BoolType,
+	"redirect":          types.BoolType,
+	"source_quench":     types.BoolType,
+	"time_exceeded":     types.BoolType,
+	"unreachable":       types.BoolType,
+}
+
 // InfraprotectFirewallRuleProtocolIcmp6Model represents protocol_icmp6 block
 type InfraprotectFirewallRuleProtocolIcmp6Model struct {
 	DestinationUnreachable types.Bool `tfsdk:"destination_unreachable"`
@@ -75,6 +87,21 @@ type InfraprotectFirewallRuleProtocolIcmp6Model struct {
 	TimeExceeded           types.Bool `tfsdk:"time_exceeded"`
 }
 
+// InfraprotectFirewallRuleProtocolIcmp6ModelAttrTypes defines the attribute types for InfraprotectFirewallRuleProtocolIcmp6Model
+var InfraprotectFirewallRuleProtocolIcmp6ModelAttrTypes = map[string]attr.Type{
+	"destination_unreachable": types.BoolType,
+	"echo_reply":              types.BoolType,
+	"echo_request":            types.BoolType,
+	"neighbor_advertisement":  types.BoolType,
+	"neighbor_solicit":        types.BoolType,
+	"packet_too_big":          types.BoolType,
+	"parameter_problem":       types.BoolType,
+	"redirect":                types.BoolType,
+	"router_advertisement":    types.BoolType,
+	"router_solicit":          types.BoolType,
+	"time_exceeded":           types.BoolType,
+}
+
 // InfraprotectFirewallRuleProtocolTCPModel represents protocol_tcp block
 type InfraprotectFirewallRuleProtocolTCPModel struct {
 	DescriptionSpec      types.String                        `tfsdk:"description_spec"`
@@ -84,6 +111,15 @@ type InfraprotectFirewallRuleProtocolTCPModel struct {
 	SourcePortAll        *InfraprotectFirewallRuleEmptyModel `tfsdk:"source_port_all"`
 }
 
+// InfraprotectFirewallRuleProtocolTCPModelAttrTypes defines the attribute types for InfraprotectFirewallRuleProtocolTCPModel
+var InfraprotectFirewallRuleProtocolTCPModelAttrTypes = map[string]attr.Type{
+	"description_spec":       types.StringType,
+	"destination_port_range": types.StringType,
+	"source_port_range":      types.StringType,
+	"destination_port_all":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"source_port_all":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // InfraprotectFirewallRuleProtocolUDPModel represents protocol_udp block
 type InfraprotectFirewallRuleProtocolUDPModel struct {
 	DescriptionSpec      types.String                        `tfsdk:"description_spec"`
@@ -91,6 +127,15 @@ type InfraprotectFirewallRuleProtocolUDPModel struct {
 	SourcePortRange      types.String                        `tfsdk:"source_port_range"`
 	DestinationPortAll   *InfraprotectFirewallRuleEmptyModel `tfsdk:"destination_port_all"`
 	SourcePortAll        *InfraprotectFirewallRuleEmptyModel `tfsdk:"source_port_all"`
+}
+
+// InfraprotectFirewallRuleProtocolUDPModelAttrTypes defines the attribute types for InfraprotectFirewallRuleProtocolUDPModel
+var InfraprotectFirewallRuleProtocolUDPModelAttrTypes = map[string]attr.Type{
+	"description_spec":       types.StringType,
+	"destination_port_range": types.StringType,
+	"source_port_range":      types.StringType,
+	"destination_port_all":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"source_port_all":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 type InfraprotectFirewallRuleResourceModel struct {
@@ -1154,11 +1199,17 @@ func (r *InfraprotectFirewallRuleResource) Read(ctx context.Context, req resourc
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -55,6 +56,12 @@ type ServicePolicyRuleAPIGroupMatcherModel struct {
 	Match         types.List `tfsdk:"match"`
 }
 
+// ServicePolicyRuleAPIGroupMatcherModelAttrTypes defines the attribute types for ServicePolicyRuleAPIGroupMatcherModel
+var ServicePolicyRuleAPIGroupMatcherModelAttrTypes = map[string]attr.Type{
+	"invert_matcher": types.BoolType,
+	"match":          types.ListType{ElemType: types.StringType},
+}
+
 // ServicePolicyRuleArgMatchersModel represents arg_matchers block
 type ServicePolicyRuleArgMatchersModel struct {
 	InvertMatcher   types.Bool                             `tfsdk:"invert_matcher"`
@@ -64,6 +71,15 @@ type ServicePolicyRuleArgMatchersModel struct {
 	Item            *ServicePolicyRuleArgMatchersItemModel `tfsdk:"item"`
 }
 
+// ServicePolicyRuleArgMatchersModelAttrTypes defines the attribute types for ServicePolicyRuleArgMatchersModel
+var ServicePolicyRuleArgMatchersModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: ServicePolicyRuleArgMatchersItemModelAttrTypes},
+}
+
 // ServicePolicyRuleArgMatchersItemModel represents item block
 type ServicePolicyRuleArgMatchersItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
@@ -71,14 +87,31 @@ type ServicePolicyRuleArgMatchersItemModel struct {
 	Transformers types.List `tfsdk:"transformers"`
 }
 
+// ServicePolicyRuleArgMatchersItemModelAttrTypes defines the attribute types for ServicePolicyRuleArgMatchersItemModel
+var ServicePolicyRuleArgMatchersItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
+}
+
 // ServicePolicyRuleAsnListModel represents asn_list block
 type ServicePolicyRuleAsnListModel struct {
 	AsNumbers types.List `tfsdk:"as_numbers"`
 }
 
+// ServicePolicyRuleAsnListModelAttrTypes defines the attribute types for ServicePolicyRuleAsnListModel
+var ServicePolicyRuleAsnListModelAttrTypes = map[string]attr.Type{
+	"as_numbers": types.ListType{ElemType: types.Int64Type},
+}
+
 // ServicePolicyRuleAsnMatcherModel represents asn_matcher block
 type ServicePolicyRuleAsnMatcherModel struct {
 	AsnSets []ServicePolicyRuleAsnMatcherAsnSetsModel `tfsdk:"asn_sets"`
+}
+
+// ServicePolicyRuleAsnMatcherModelAttrTypes defines the attribute types for ServicePolicyRuleAsnMatcherModel
+var ServicePolicyRuleAsnMatcherModelAttrTypes = map[string]attr.Type{
+	"asn_sets": types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyRuleAsnMatcherAsnSetsModelAttrTypes}},
 }
 
 // ServicePolicyRuleAsnMatcherAsnSetsModel represents asn_sets block
@@ -90,11 +123,27 @@ type ServicePolicyRuleAsnMatcherAsnSetsModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// ServicePolicyRuleAsnMatcherAsnSetsModelAttrTypes defines the attribute types for ServicePolicyRuleAsnMatcherAsnSetsModel
+var ServicePolicyRuleAsnMatcherAsnSetsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // ServicePolicyRuleBodyMatcherModel represents body_matcher block
 type ServicePolicyRuleBodyMatcherModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// ServicePolicyRuleBodyMatcherModelAttrTypes defines the attribute types for ServicePolicyRuleBodyMatcherModel
+var ServicePolicyRuleBodyMatcherModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // ServicePolicyRuleBotActionModel represents bot_action block
@@ -103,15 +152,32 @@ type ServicePolicyRuleBotActionModel struct {
 	None              *ServicePolicyRuleEmptyModel `tfsdk:"none"`
 }
 
+// ServicePolicyRuleBotActionModelAttrTypes defines the attribute types for ServicePolicyRuleBotActionModel
+var ServicePolicyRuleBotActionModelAttrTypes = map[string]attr.Type{
+	"bot_skip_processing": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"none":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ServicePolicyRuleClientNameMatcherModel represents client_name_matcher block
 type ServicePolicyRuleClientNameMatcherModel struct {
 	ExactValues types.List `tfsdk:"exact_values"`
 	RegexValues types.List `tfsdk:"regex_values"`
 }
 
+// ServicePolicyRuleClientNameMatcherModelAttrTypes defines the attribute types for ServicePolicyRuleClientNameMatcherModel
+var ServicePolicyRuleClientNameMatcherModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+}
+
 // ServicePolicyRuleClientSelectorModel represents client_selector block
 type ServicePolicyRuleClientSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
+}
+
+// ServicePolicyRuleClientSelectorModelAttrTypes defines the attribute types for ServicePolicyRuleClientSelectorModel
+var ServicePolicyRuleClientSelectorModelAttrTypes = map[string]attr.Type{
+	"expressions": types.ListType{ElemType: types.StringType},
 }
 
 // ServicePolicyRuleCookieMatchersModel represents cookie_matchers block
@@ -123,6 +189,15 @@ type ServicePolicyRuleCookieMatchersModel struct {
 	Item            *ServicePolicyRuleCookieMatchersItemModel `tfsdk:"item"`
 }
 
+// ServicePolicyRuleCookieMatchersModelAttrTypes defines the attribute types for ServicePolicyRuleCookieMatchersModel
+var ServicePolicyRuleCookieMatchersModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: ServicePolicyRuleCookieMatchersItemModelAttrTypes},
+}
+
 // ServicePolicyRuleCookieMatchersItemModel represents item block
 type ServicePolicyRuleCookieMatchersItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
@@ -130,10 +205,23 @@ type ServicePolicyRuleCookieMatchersItemModel struct {
 	Transformers types.List `tfsdk:"transformers"`
 }
 
+// ServicePolicyRuleCookieMatchersItemModelAttrTypes defines the attribute types for ServicePolicyRuleCookieMatchersItemModel
+var ServicePolicyRuleCookieMatchersItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
+}
+
 // ServicePolicyRuleDomainMatcherModel represents domain_matcher block
 type ServicePolicyRuleDomainMatcherModel struct {
 	ExactValues types.List `tfsdk:"exact_values"`
 	RegexValues types.List `tfsdk:"regex_values"`
+}
+
+// ServicePolicyRuleDomainMatcherModelAttrTypes defines the attribute types for ServicePolicyRuleDomainMatcherModel
+var ServicePolicyRuleDomainMatcherModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
 }
 
 // ServicePolicyRuleHeadersModel represents headers block
@@ -145,11 +233,27 @@ type ServicePolicyRuleHeadersModel struct {
 	Item            *ServicePolicyRuleHeadersItemModel `tfsdk:"item"`
 }
 
+// ServicePolicyRuleHeadersModelAttrTypes defines the attribute types for ServicePolicyRuleHeadersModel
+var ServicePolicyRuleHeadersModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: ServicePolicyRuleHeadersItemModelAttrTypes},
+}
+
 // ServicePolicyRuleHeadersItemModel represents item block
 type ServicePolicyRuleHeadersItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// ServicePolicyRuleHeadersItemModelAttrTypes defines the attribute types for ServicePolicyRuleHeadersItemModel
+var ServicePolicyRuleHeadersItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // ServicePolicyRuleHTTPMethodModel represents http_method block
@@ -158,10 +262,22 @@ type ServicePolicyRuleHTTPMethodModel struct {
 	Methods       types.List `tfsdk:"methods"`
 }
 
+// ServicePolicyRuleHTTPMethodModelAttrTypes defines the attribute types for ServicePolicyRuleHTTPMethodModel
+var ServicePolicyRuleHTTPMethodModelAttrTypes = map[string]attr.Type{
+	"invert_matcher": types.BoolType,
+	"methods":        types.ListType{ElemType: types.StringType},
+}
+
 // ServicePolicyRuleIPMatcherModel represents ip_matcher block
 type ServicePolicyRuleIPMatcherModel struct {
 	InvertMatcher types.Bool                                  `tfsdk:"invert_matcher"`
 	PrefixSets    []ServicePolicyRuleIPMatcherPrefixSetsModel `tfsdk:"prefix_sets"`
+}
+
+// ServicePolicyRuleIPMatcherModelAttrTypes defines the attribute types for ServicePolicyRuleIPMatcherModel
+var ServicePolicyRuleIPMatcherModelAttrTypes = map[string]attr.Type{
+	"invert_matcher": types.BoolType,
+	"prefix_sets":    types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyRuleIPMatcherPrefixSetsModelAttrTypes}},
 }
 
 // ServicePolicyRuleIPMatcherPrefixSetsModel represents prefix_sets block
@@ -173,10 +289,25 @@ type ServicePolicyRuleIPMatcherPrefixSetsModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// ServicePolicyRuleIPMatcherPrefixSetsModelAttrTypes defines the attribute types for ServicePolicyRuleIPMatcherPrefixSetsModel
+var ServicePolicyRuleIPMatcherPrefixSetsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // ServicePolicyRuleIPPrefixListModel represents ip_prefix_list block
 type ServicePolicyRuleIPPrefixListModel struct {
 	InvertMatch types.Bool `tfsdk:"invert_match"`
 	IPPrefixes  types.List `tfsdk:"ip_prefixes"`
+}
+
+// ServicePolicyRuleIPPrefixListModelAttrTypes defines the attribute types for ServicePolicyRuleIPPrefixListModel
+var ServicePolicyRuleIPPrefixListModelAttrTypes = map[string]attr.Type{
+	"invert_match": types.BoolType,
+	"ip_prefixes":  types.ListType{ElemType: types.StringType},
 }
 
 // ServicePolicyRuleIPThreatCategoryListModel represents ip_threat_category_list block
@@ -184,9 +315,19 @@ type ServicePolicyRuleIPThreatCategoryListModel struct {
 	IPThreatCategories types.List `tfsdk:"ip_threat_categories"`
 }
 
+// ServicePolicyRuleIPThreatCategoryListModelAttrTypes defines the attribute types for ServicePolicyRuleIPThreatCategoryListModel
+var ServicePolicyRuleIPThreatCategoryListModelAttrTypes = map[string]attr.Type{
+	"ip_threat_categories": types.ListType{ElemType: types.StringType},
+}
+
 // ServicePolicyRuleJa4TLSFingerprintModel represents ja4_tls_fingerprint block
 type ServicePolicyRuleJa4TLSFingerprintModel struct {
 	ExactValues types.List `tfsdk:"exact_values"`
+}
+
+// ServicePolicyRuleJa4TLSFingerprintModelAttrTypes defines the attribute types for ServicePolicyRuleJa4TLSFingerprintModel
+var ServicePolicyRuleJa4TLSFingerprintModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
 }
 
 // ServicePolicyRuleJWTClaimsModel represents jwt_claims block
@@ -198,6 +339,15 @@ type ServicePolicyRuleJWTClaimsModel struct {
 	Item            *ServicePolicyRuleJWTClaimsItemModel `tfsdk:"item"`
 }
 
+// ServicePolicyRuleJWTClaimsModelAttrTypes defines the attribute types for ServicePolicyRuleJWTClaimsModel
+var ServicePolicyRuleJWTClaimsModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: ServicePolicyRuleJWTClaimsItemModelAttrTypes},
+}
+
 // ServicePolicyRuleJWTClaimsItemModel represents item block
 type ServicePolicyRuleJWTClaimsItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
@@ -205,15 +355,33 @@ type ServicePolicyRuleJWTClaimsItemModel struct {
 	Transformers types.List `tfsdk:"transformers"`
 }
 
+// ServicePolicyRuleJWTClaimsItemModelAttrTypes defines the attribute types for ServicePolicyRuleJWTClaimsItemModel
+var ServicePolicyRuleJWTClaimsItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
+}
+
 // ServicePolicyRuleLabelMatcherModel represents label_matcher block
 type ServicePolicyRuleLabelMatcherModel struct {
 	Keys types.List `tfsdk:"keys"`
+}
+
+// ServicePolicyRuleLabelMatcherModelAttrTypes defines the attribute types for ServicePolicyRuleLabelMatcherModel
+var ServicePolicyRuleLabelMatcherModelAttrTypes = map[string]attr.Type{
+	"keys": types.ListType{ElemType: types.StringType},
 }
 
 // ServicePolicyRuleMumActionModel represents mum_action block
 type ServicePolicyRuleMumActionModel struct {
 	Default        *ServicePolicyRuleEmptyModel `tfsdk:"default"`
 	SkipProcessing *ServicePolicyRuleEmptyModel `tfsdk:"skip_processing"`
+}
+
+// ServicePolicyRuleMumActionModelAttrTypes defines the attribute types for ServicePolicyRuleMumActionModel
+var ServicePolicyRuleMumActionModelAttrTypes = map[string]attr.Type{
+	"default":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"skip_processing": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // ServicePolicyRulePathModel represents path block
@@ -226,10 +394,26 @@ type ServicePolicyRulePathModel struct {
 	Transformers  types.List `tfsdk:"transformers"`
 }
 
+// ServicePolicyRulePathModelAttrTypes defines the attribute types for ServicePolicyRulePathModel
+var ServicePolicyRulePathModelAttrTypes = map[string]attr.Type{
+	"exact_values":   types.ListType{ElemType: types.StringType},
+	"invert_matcher": types.BoolType,
+	"prefix_values":  types.ListType{ElemType: types.StringType},
+	"regex_values":   types.ListType{ElemType: types.StringType},
+	"suffix_values":  types.ListType{ElemType: types.StringType},
+	"transformers":   types.ListType{ElemType: types.StringType},
+}
+
 // ServicePolicyRulePortMatcherModel represents port_matcher block
 type ServicePolicyRulePortMatcherModel struct {
 	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
 	Ports         types.List `tfsdk:"ports"`
+}
+
+// ServicePolicyRulePortMatcherModelAttrTypes defines the attribute types for ServicePolicyRulePortMatcherModel
+var ServicePolicyRulePortMatcherModelAttrTypes = map[string]attr.Type{
+	"invert_matcher": types.BoolType,
+	"ports":          types.ListType{ElemType: types.StringType},
 }
 
 // ServicePolicyRuleQueryParamsModel represents query_params block
@@ -241,11 +425,27 @@ type ServicePolicyRuleQueryParamsModel struct {
 	Item            *ServicePolicyRuleQueryParamsItemModel `tfsdk:"item"`
 }
 
+// ServicePolicyRuleQueryParamsModelAttrTypes defines the attribute types for ServicePolicyRuleQueryParamsModel
+var ServicePolicyRuleQueryParamsModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"key":               types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: ServicePolicyRuleQueryParamsItemModelAttrTypes},
+}
+
 // ServicePolicyRuleQueryParamsItemModel represents item block
 type ServicePolicyRuleQueryParamsItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// ServicePolicyRuleQueryParamsItemModelAttrTypes defines the attribute types for ServicePolicyRuleQueryParamsItemModel
+var ServicePolicyRuleQueryParamsItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // ServicePolicyRuleRequestConstraintsModel represents request_constraints block
@@ -278,6 +478,36 @@ type ServicePolicyRuleRequestConstraintsModel struct {
 	MaxURLSizeNone               *ServicePolicyRuleEmptyModel `tfsdk:"max_url_size_none"`
 }
 
+// ServicePolicyRuleRequestConstraintsModelAttrTypes defines the attribute types for ServicePolicyRuleRequestConstraintsModel
+var ServicePolicyRuleRequestConstraintsModelAttrTypes = map[string]attr.Type{
+	"max_cookie_count_exceeds":         types.Int64Type,
+	"max_cookie_key_size_exceeds":      types.Int64Type,
+	"max_cookie_value_size_exceeds":    types.Int64Type,
+	"max_header_count_exceeds":         types.Int64Type,
+	"max_header_key_size_exceeds":      types.Int64Type,
+	"max_header_value_size_exceeds":    types.Int64Type,
+	"max_parameter_count_exceeds":      types.Int64Type,
+	"max_parameter_name_size_exceeds":  types.Int64Type,
+	"max_parameter_value_size_exceeds": types.Int64Type,
+	"max_query_size_exceeds":           types.Int64Type,
+	"max_request_line_size_exceeds":    types.Int64Type,
+	"max_request_size_exceeds":         types.Int64Type,
+	"max_url_size_exceeds":             types.Int64Type,
+	"max_cookie_count_none":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_cookie_key_size_none":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_cookie_value_size_none":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_header_count_none":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_header_key_size_none":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_header_value_size_none":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_parameter_count_none":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_parameter_name_size_none":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_parameter_value_size_none":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_query_size_none":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_request_line_size_none":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_request_size_none":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_url_size_none":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ServicePolicyRuleSegmentPolicyModel represents segment_policy block
 type ServicePolicyRuleSegmentPolicyModel struct {
 	DstAny       *ServicePolicyRuleEmptyModel                    `tfsdk:"dst_any"`
@@ -287,9 +517,23 @@ type ServicePolicyRuleSegmentPolicyModel struct {
 	SrcSegments  *ServicePolicyRuleSegmentPolicySrcSegmentsModel `tfsdk:"src_segments"`
 }
 
+// ServicePolicyRuleSegmentPolicyModelAttrTypes defines the attribute types for ServicePolicyRuleSegmentPolicyModel
+var ServicePolicyRuleSegmentPolicyModelAttrTypes = map[string]attr.Type{
+	"dst_any":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dst_segments":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"intra_segment": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"src_any":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"src_segments":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ServicePolicyRuleSegmentPolicyDstSegmentsModel represents dst_segments block
 type ServicePolicyRuleSegmentPolicyDstSegmentsModel struct {
 	Segments []ServicePolicyRuleSegmentPolicyDstSegmentsSegmentsModel `tfsdk:"segments"`
+}
+
+// ServicePolicyRuleSegmentPolicyDstSegmentsModelAttrTypes defines the attribute types for ServicePolicyRuleSegmentPolicyDstSegmentsModel
+var ServicePolicyRuleSegmentPolicyDstSegmentsModelAttrTypes = map[string]attr.Type{
+	"segments": types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyRuleSegmentPolicyDstSegmentsSegmentsModelAttrTypes}},
 }
 
 // ServicePolicyRuleSegmentPolicyDstSegmentsSegmentsModel represents segments block
@@ -299,9 +543,21 @@ type ServicePolicyRuleSegmentPolicyDstSegmentsSegmentsModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// ServicePolicyRuleSegmentPolicyDstSegmentsSegmentsModelAttrTypes defines the attribute types for ServicePolicyRuleSegmentPolicyDstSegmentsSegmentsModel
+var ServicePolicyRuleSegmentPolicyDstSegmentsSegmentsModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // ServicePolicyRuleSegmentPolicySrcSegmentsModel represents src_segments block
 type ServicePolicyRuleSegmentPolicySrcSegmentsModel struct {
 	Segments []ServicePolicyRuleSegmentPolicySrcSegmentsSegmentsModel `tfsdk:"segments"`
+}
+
+// ServicePolicyRuleSegmentPolicySrcSegmentsModelAttrTypes defines the attribute types for ServicePolicyRuleSegmentPolicySrcSegmentsModel
+var ServicePolicyRuleSegmentPolicySrcSegmentsModelAttrTypes = map[string]attr.Type{
+	"segments": types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyRuleSegmentPolicySrcSegmentsSegmentsModelAttrTypes}},
 }
 
 // ServicePolicyRuleSegmentPolicySrcSegmentsSegmentsModel represents segments block
@@ -311,6 +567,13 @@ type ServicePolicyRuleSegmentPolicySrcSegmentsSegmentsModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// ServicePolicyRuleSegmentPolicySrcSegmentsSegmentsModelAttrTypes defines the attribute types for ServicePolicyRuleSegmentPolicySrcSegmentsSegmentsModel
+var ServicePolicyRuleSegmentPolicySrcSegmentsSegmentsModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // ServicePolicyRuleTLSFingerprintMatcherModel represents tls_fingerprint_matcher block
 type ServicePolicyRuleTLSFingerprintMatcherModel struct {
 	Classes        types.List `tfsdk:"classes"`
@@ -318,11 +581,25 @@ type ServicePolicyRuleTLSFingerprintMatcherModel struct {
 	ExcludedValues types.List `tfsdk:"excluded_values"`
 }
 
+// ServicePolicyRuleTLSFingerprintMatcherModelAttrTypes defines the attribute types for ServicePolicyRuleTLSFingerprintMatcherModel
+var ServicePolicyRuleTLSFingerprintMatcherModelAttrTypes = map[string]attr.Type{
+	"classes":         types.ListType{ElemType: types.StringType},
+	"exact_values":    types.ListType{ElemType: types.StringType},
+	"excluded_values": types.ListType{ElemType: types.StringType},
+}
+
 // ServicePolicyRuleWAFActionModel represents waf_action block
 type ServicePolicyRuleWAFActionModel struct {
 	AppFirewallDetectionControl *ServicePolicyRuleWAFActionAppFirewallDetectionControlModel `tfsdk:"app_firewall_detection_control"`
 	None                        *ServicePolicyRuleEmptyModel                                `tfsdk:"none"`
 	WAFSkipProcessing           *ServicePolicyRuleEmptyModel                                `tfsdk:"waf_skip_processing"`
+}
+
+// ServicePolicyRuleWAFActionModelAttrTypes defines the attribute types for ServicePolicyRuleWAFActionModel
+var ServicePolicyRuleWAFActionModelAttrTypes = map[string]attr.Type{
+	"app_firewall_detection_control": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"none":                           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"waf_skip_processing":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // ServicePolicyRuleWAFActionAppFirewallDetectionControlModel represents app_firewall_detection_control block
@@ -333,6 +610,14 @@ type ServicePolicyRuleWAFActionAppFirewallDetectionControlModel struct {
 	ExcludeViolationContexts  []ServicePolicyRuleWAFActionAppFirewallDetectionControlExcludeViolationContextsModel  `tfsdk:"exclude_violation_contexts"`
 }
 
+// ServicePolicyRuleWAFActionAppFirewallDetectionControlModelAttrTypes defines the attribute types for ServicePolicyRuleWAFActionAppFirewallDetectionControlModel
+var ServicePolicyRuleWAFActionAppFirewallDetectionControlModelAttrTypes = map[string]attr.Type{
+	"exclude_attack_type_contexts": types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyRuleWAFActionAppFirewallDetectionControlExcludeAttackTypeContextsModelAttrTypes}},
+	"exclude_bot_name_contexts":    types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyRuleWAFActionAppFirewallDetectionControlExcludeBotNameContextsModelAttrTypes}},
+	"exclude_signature_contexts":   types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyRuleWAFActionAppFirewallDetectionControlExcludeSignatureContextsModelAttrTypes}},
+	"exclude_violation_contexts":   types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyRuleWAFActionAppFirewallDetectionControlExcludeViolationContextsModelAttrTypes}},
+}
+
 // ServicePolicyRuleWAFActionAppFirewallDetectionControlExcludeAttackTypeContextsModel represents exclude_attack_type_contexts block
 type ServicePolicyRuleWAFActionAppFirewallDetectionControlExcludeAttackTypeContextsModel struct {
 	Context           types.String `tfsdk:"context"`
@@ -340,9 +625,21 @@ type ServicePolicyRuleWAFActionAppFirewallDetectionControlExcludeAttackTypeConte
 	ExcludeAttackType types.String `tfsdk:"exclude_attack_type"`
 }
 
+// ServicePolicyRuleWAFActionAppFirewallDetectionControlExcludeAttackTypeContextsModelAttrTypes defines the attribute types for ServicePolicyRuleWAFActionAppFirewallDetectionControlExcludeAttackTypeContextsModel
+var ServicePolicyRuleWAFActionAppFirewallDetectionControlExcludeAttackTypeContextsModelAttrTypes = map[string]attr.Type{
+	"context":             types.StringType,
+	"context_name":        types.StringType,
+	"exclude_attack_type": types.StringType,
+}
+
 // ServicePolicyRuleWAFActionAppFirewallDetectionControlExcludeBotNameContextsModel represents exclude_bot_name_contexts block
 type ServicePolicyRuleWAFActionAppFirewallDetectionControlExcludeBotNameContextsModel struct {
 	BotName types.String `tfsdk:"bot_name"`
+}
+
+// ServicePolicyRuleWAFActionAppFirewallDetectionControlExcludeBotNameContextsModelAttrTypes defines the attribute types for ServicePolicyRuleWAFActionAppFirewallDetectionControlExcludeBotNameContextsModel
+var ServicePolicyRuleWAFActionAppFirewallDetectionControlExcludeBotNameContextsModelAttrTypes = map[string]attr.Type{
+	"bot_name": types.StringType,
 }
 
 // ServicePolicyRuleWAFActionAppFirewallDetectionControlExcludeSignatureContextsModel represents exclude_signature_contexts block
@@ -352,11 +649,25 @@ type ServicePolicyRuleWAFActionAppFirewallDetectionControlExcludeSignatureContex
 	SignatureID types.Int64  `tfsdk:"signature_id"`
 }
 
+// ServicePolicyRuleWAFActionAppFirewallDetectionControlExcludeSignatureContextsModelAttrTypes defines the attribute types for ServicePolicyRuleWAFActionAppFirewallDetectionControlExcludeSignatureContextsModel
+var ServicePolicyRuleWAFActionAppFirewallDetectionControlExcludeSignatureContextsModelAttrTypes = map[string]attr.Type{
+	"context":      types.StringType,
+	"context_name": types.StringType,
+	"signature_id": types.Int64Type,
+}
+
 // ServicePolicyRuleWAFActionAppFirewallDetectionControlExcludeViolationContextsModel represents exclude_violation_contexts block
 type ServicePolicyRuleWAFActionAppFirewallDetectionControlExcludeViolationContextsModel struct {
 	Context          types.String `tfsdk:"context"`
 	ContextName      types.String `tfsdk:"context_name"`
 	ExcludeViolation types.String `tfsdk:"exclude_violation"`
+}
+
+// ServicePolicyRuleWAFActionAppFirewallDetectionControlExcludeViolationContextsModelAttrTypes defines the attribute types for ServicePolicyRuleWAFActionAppFirewallDetectionControlExcludeViolationContextsModel
+var ServicePolicyRuleWAFActionAppFirewallDetectionControlExcludeViolationContextsModelAttrTypes = map[string]attr.Type{
+	"context":           types.StringType,
+	"context_name":      types.StringType,
+	"exclude_violation": types.StringType,
 }
 
 type ServicePolicyRuleResourceModel struct {
@@ -375,27 +686,27 @@ type ServicePolicyRuleResourceModel struct {
 	AnyClient             *ServicePolicyRuleEmptyModel                 `tfsdk:"any_client"`
 	AnyIP                 *ServicePolicyRuleEmptyModel                 `tfsdk:"any_ip"`
 	APIGroupMatcher       *ServicePolicyRuleAPIGroupMatcherModel       `tfsdk:"api_group_matcher"`
-	ArgMatchers           []ServicePolicyRuleArgMatchersModel          `tfsdk:"arg_matchers"`
+	ArgMatchers           types.List                                   `tfsdk:"arg_matchers"`
 	AsnList               *ServicePolicyRuleAsnListModel               `tfsdk:"asn_list"`
 	AsnMatcher            *ServicePolicyRuleAsnMatcherModel            `tfsdk:"asn_matcher"`
 	BodyMatcher           *ServicePolicyRuleBodyMatcherModel           `tfsdk:"body_matcher"`
 	BotAction             *ServicePolicyRuleBotActionModel             `tfsdk:"bot_action"`
 	ClientNameMatcher     *ServicePolicyRuleClientNameMatcherModel     `tfsdk:"client_name_matcher"`
 	ClientSelector        *ServicePolicyRuleClientSelectorModel        `tfsdk:"client_selector"`
-	CookieMatchers        []ServicePolicyRuleCookieMatchersModel       `tfsdk:"cookie_matchers"`
+	CookieMatchers        types.List                                   `tfsdk:"cookie_matchers"`
 	DomainMatcher         *ServicePolicyRuleDomainMatcherModel         `tfsdk:"domain_matcher"`
-	Headers               []ServicePolicyRuleHeadersModel              `tfsdk:"headers"`
+	Headers               types.List                                   `tfsdk:"headers"`
 	HTTPMethod            *ServicePolicyRuleHTTPMethodModel            `tfsdk:"http_method"`
 	IPMatcher             *ServicePolicyRuleIPMatcherModel             `tfsdk:"ip_matcher"`
 	IPPrefixList          *ServicePolicyRuleIPPrefixListModel          `tfsdk:"ip_prefix_list"`
 	IPThreatCategoryList  *ServicePolicyRuleIPThreatCategoryListModel  `tfsdk:"ip_threat_category_list"`
 	Ja4TLSFingerprint     *ServicePolicyRuleJa4TLSFingerprintModel     `tfsdk:"ja4_tls_fingerprint"`
-	JWTClaims             []ServicePolicyRuleJWTClaimsModel            `tfsdk:"jwt_claims"`
+	JWTClaims             types.List                                   `tfsdk:"jwt_claims"`
 	LabelMatcher          *ServicePolicyRuleLabelMatcherModel          `tfsdk:"label_matcher"`
 	MumAction             *ServicePolicyRuleMumActionModel             `tfsdk:"mum_action"`
 	Path                  *ServicePolicyRulePathModel                  `tfsdk:"path"`
 	PortMatcher           *ServicePolicyRulePortMatcherModel           `tfsdk:"port_matcher"`
-	QueryParams           []ServicePolicyRuleQueryParamsModel          `tfsdk:"query_params"`
+	QueryParams           types.List                                   `tfsdk:"query_params"`
 	RequestConstraints    *ServicePolicyRuleRequestConstraintsModel    `tfsdk:"request_constraints"`
 	SegmentPolicy         *ServicePolicyRuleSegmentPolicyModel         `tfsdk:"segment_policy"`
 	TLSFingerprintMatcher *ServicePolicyRuleTLSFingerprintMatcherModel `tfsdk:"tls_fingerprint_matcher"`
@@ -576,6 +887,9 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 									MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -589,11 +903,17 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 								"uid": schema.StringAttribute{
 									MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -789,6 +1109,9 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 									MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -802,11 +1125,17 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 								"uid": schema.StringAttribute{
 									MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -1128,6 +1457,9 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -1160,6 +1492,9 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -1448,50 +1783,55 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 		}
 		createReq.Spec["api_group_matcher"] = api_group_matcherMap
 	}
-	if len(data.ArgMatchers) > 0 {
-		var arg_matchersList []map[string]interface{}
-		for _, item := range data.ArgMatchers {
-			itemMap := make(map[string]interface{})
-			if item.CheckNotPresent != nil {
-				itemMap["check_not_present"] = map[string]interface{}{}
-			}
-			if item.CheckPresent != nil {
-				itemMap["check_present"] = map[string]interface{}{}
-			}
-			if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
-				itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
-			}
-			if item.Item != nil {
-				itemNestedMap := make(map[string]interface{})
-				if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
-					var ExactValuesItems []string
-					diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
-					if !diags.HasError() {
-						itemNestedMap["exact_values"] = ExactValuesItems
-					}
+	if !data.ArgMatchers.IsNull() && !data.ArgMatchers.IsUnknown() {
+		var arg_matchersItems []ServicePolicyRuleArgMatchersModel
+		diags := data.ArgMatchers.ElementsAs(ctx, &arg_matchersItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(arg_matchersItems) > 0 {
+			var arg_matchersList []map[string]interface{}
+			for _, item := range arg_matchersItems {
+				itemMap := make(map[string]interface{})
+				if item.CheckNotPresent != nil {
+					itemMap["check_not_present"] = map[string]interface{}{}
 				}
-				if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
-					var RegexValuesItems []string
-					diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
-					if !diags.HasError() {
-						itemNestedMap["regex_values"] = RegexValuesItems
-					}
+				if item.CheckPresent != nil {
+					itemMap["check_present"] = map[string]interface{}{}
 				}
-				if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
-					var TransformersItems []string
-					diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
-					if !diags.HasError() {
-						itemNestedMap["transformers"] = TransformersItems
-					}
+				if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
+					itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
 				}
-				itemMap["item"] = itemNestedMap
+				if item.Item != nil {
+					itemNestedMap := make(map[string]interface{})
+					if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
+						var ExactValuesItems []string
+						diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						if !diags.HasError() {
+							itemNestedMap["exact_values"] = ExactValuesItems
+						}
+					}
+					if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
+						var RegexValuesItems []string
+						diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
+						if !diags.HasError() {
+							itemNestedMap["regex_values"] = RegexValuesItems
+						}
+					}
+					if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
+						var TransformersItems []string
+						diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
+						if !diags.HasError() {
+							itemNestedMap["transformers"] = TransformersItems
+						}
+					}
+					itemMap["item"] = itemNestedMap
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				arg_matchersList = append(arg_matchersList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			arg_matchersList = append(arg_matchersList, itemMap)
+			createReq.Spec["arg_matchers"] = arg_matchersList
 		}
-		createReq.Spec["arg_matchers"] = arg_matchersList
 	}
 	if data.AsnList != nil {
 		asn_listMap := make(map[string]interface{})
@@ -1595,50 +1935,55 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 		}
 		createReq.Spec["client_selector"] = client_selectorMap
 	}
-	if len(data.CookieMatchers) > 0 {
-		var cookie_matchersList []map[string]interface{}
-		for _, item := range data.CookieMatchers {
-			itemMap := make(map[string]interface{})
-			if item.CheckNotPresent != nil {
-				itemMap["check_not_present"] = map[string]interface{}{}
-			}
-			if item.CheckPresent != nil {
-				itemMap["check_present"] = map[string]interface{}{}
-			}
-			if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
-				itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
-			}
-			if item.Item != nil {
-				itemNestedMap := make(map[string]interface{})
-				if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
-					var ExactValuesItems []string
-					diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
-					if !diags.HasError() {
-						itemNestedMap["exact_values"] = ExactValuesItems
-					}
+	if !data.CookieMatchers.IsNull() && !data.CookieMatchers.IsUnknown() {
+		var cookie_matchersItems []ServicePolicyRuleCookieMatchersModel
+		diags := data.CookieMatchers.ElementsAs(ctx, &cookie_matchersItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(cookie_matchersItems) > 0 {
+			var cookie_matchersList []map[string]interface{}
+			for _, item := range cookie_matchersItems {
+				itemMap := make(map[string]interface{})
+				if item.CheckNotPresent != nil {
+					itemMap["check_not_present"] = map[string]interface{}{}
 				}
-				if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
-					var RegexValuesItems []string
-					diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
-					if !diags.HasError() {
-						itemNestedMap["regex_values"] = RegexValuesItems
-					}
+				if item.CheckPresent != nil {
+					itemMap["check_present"] = map[string]interface{}{}
 				}
-				if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
-					var TransformersItems []string
-					diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
-					if !diags.HasError() {
-						itemNestedMap["transformers"] = TransformersItems
-					}
+				if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
+					itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
 				}
-				itemMap["item"] = itemNestedMap
+				if item.Item != nil {
+					itemNestedMap := make(map[string]interface{})
+					if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
+						var ExactValuesItems []string
+						diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						if !diags.HasError() {
+							itemNestedMap["exact_values"] = ExactValuesItems
+						}
+					}
+					if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
+						var RegexValuesItems []string
+						diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
+						if !diags.HasError() {
+							itemNestedMap["regex_values"] = RegexValuesItems
+						}
+					}
+					if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
+						var TransformersItems []string
+						diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
+						if !diags.HasError() {
+							itemNestedMap["transformers"] = TransformersItems
+						}
+					}
+					itemMap["item"] = itemNestedMap
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				cookie_matchersList = append(cookie_matchersList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			cookie_matchersList = append(cookie_matchersList, itemMap)
+			createReq.Spec["cookie_matchers"] = cookie_matchersList
 		}
-		createReq.Spec["cookie_matchers"] = cookie_matchersList
 	}
 	if data.DomainMatcher != nil {
 		domain_matcherMap := make(map[string]interface{})
@@ -1658,50 +2003,55 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 		}
 		createReq.Spec["domain_matcher"] = domain_matcherMap
 	}
-	if len(data.Headers) > 0 {
-		var headersList []map[string]interface{}
-		for _, item := range data.Headers {
-			itemMap := make(map[string]interface{})
-			if item.CheckNotPresent != nil {
-				itemMap["check_not_present"] = map[string]interface{}{}
-			}
-			if item.CheckPresent != nil {
-				itemMap["check_present"] = map[string]interface{}{}
-			}
-			if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
-				itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
-			}
-			if item.Item != nil {
-				itemNestedMap := make(map[string]interface{})
-				if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
-					var ExactValuesItems []string
-					diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
-					if !diags.HasError() {
-						itemNestedMap["exact_values"] = ExactValuesItems
-					}
+	if !data.Headers.IsNull() && !data.Headers.IsUnknown() {
+		var headersItems []ServicePolicyRuleHeadersModel
+		diags := data.Headers.ElementsAs(ctx, &headersItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(headersItems) > 0 {
+			var headersList []map[string]interface{}
+			for _, item := range headersItems {
+				itemMap := make(map[string]interface{})
+				if item.CheckNotPresent != nil {
+					itemMap["check_not_present"] = map[string]interface{}{}
 				}
-				if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
-					var RegexValuesItems []string
-					diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
-					if !diags.HasError() {
-						itemNestedMap["regex_values"] = RegexValuesItems
-					}
+				if item.CheckPresent != nil {
+					itemMap["check_present"] = map[string]interface{}{}
 				}
-				if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
-					var TransformersItems []string
-					diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
-					if !diags.HasError() {
-						itemNestedMap["transformers"] = TransformersItems
-					}
+				if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
+					itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
 				}
-				itemMap["item"] = itemNestedMap
+				if item.Item != nil {
+					itemNestedMap := make(map[string]interface{})
+					if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
+						var ExactValuesItems []string
+						diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						if !diags.HasError() {
+							itemNestedMap["exact_values"] = ExactValuesItems
+						}
+					}
+					if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
+						var RegexValuesItems []string
+						diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
+						if !diags.HasError() {
+							itemNestedMap["regex_values"] = RegexValuesItems
+						}
+					}
+					if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
+						var TransformersItems []string
+						diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
+						if !diags.HasError() {
+							itemNestedMap["transformers"] = TransformersItems
+						}
+					}
+					itemMap["item"] = itemNestedMap
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				headersList = append(headersList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			headersList = append(headersList, itemMap)
+			createReq.Spec["headers"] = headersList
 		}
-		createReq.Spec["headers"] = headersList
 	}
 	if data.HTTPMethod != nil {
 		http_methodMap := make(map[string]interface{})
@@ -1783,50 +2133,55 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 		}
 		createReq.Spec["ja4_tls_fingerprint"] = ja4_tls_fingerprintMap
 	}
-	if len(data.JWTClaims) > 0 {
-		var jwt_claimsList []map[string]interface{}
-		for _, item := range data.JWTClaims {
-			itemMap := make(map[string]interface{})
-			if item.CheckNotPresent != nil {
-				itemMap["check_not_present"] = map[string]interface{}{}
-			}
-			if item.CheckPresent != nil {
-				itemMap["check_present"] = map[string]interface{}{}
-			}
-			if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
-				itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
-			}
-			if item.Item != nil {
-				itemNestedMap := make(map[string]interface{})
-				if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
-					var ExactValuesItems []string
-					diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
-					if !diags.HasError() {
-						itemNestedMap["exact_values"] = ExactValuesItems
-					}
+	if !data.JWTClaims.IsNull() && !data.JWTClaims.IsUnknown() {
+		var jwt_claimsItems []ServicePolicyRuleJWTClaimsModel
+		diags := data.JWTClaims.ElementsAs(ctx, &jwt_claimsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(jwt_claimsItems) > 0 {
+			var jwt_claimsList []map[string]interface{}
+			for _, item := range jwt_claimsItems {
+				itemMap := make(map[string]interface{})
+				if item.CheckNotPresent != nil {
+					itemMap["check_not_present"] = map[string]interface{}{}
 				}
-				if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
-					var RegexValuesItems []string
-					diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
-					if !diags.HasError() {
-						itemNestedMap["regex_values"] = RegexValuesItems
-					}
+				if item.CheckPresent != nil {
+					itemMap["check_present"] = map[string]interface{}{}
 				}
-				if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
-					var TransformersItems []string
-					diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
-					if !diags.HasError() {
-						itemNestedMap["transformers"] = TransformersItems
-					}
+				if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
+					itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
 				}
-				itemMap["item"] = itemNestedMap
+				if item.Item != nil {
+					itemNestedMap := make(map[string]interface{})
+					if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
+						var ExactValuesItems []string
+						diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						if !diags.HasError() {
+							itemNestedMap["exact_values"] = ExactValuesItems
+						}
+					}
+					if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
+						var RegexValuesItems []string
+						diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
+						if !diags.HasError() {
+							itemNestedMap["regex_values"] = RegexValuesItems
+						}
+					}
+					if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
+						var TransformersItems []string
+						diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
+						if !diags.HasError() {
+							itemNestedMap["transformers"] = TransformersItems
+						}
+					}
+					itemMap["item"] = itemNestedMap
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				jwt_claimsList = append(jwt_claimsList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			jwt_claimsList = append(jwt_claimsList, itemMap)
+			createReq.Spec["jwt_claims"] = jwt_claimsList
 		}
-		createReq.Spec["jwt_claims"] = jwt_claimsList
 	}
 	if data.LabelMatcher != nil {
 		label_matcherMap := make(map[string]interface{})
@@ -1905,50 +2260,55 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 		}
 		createReq.Spec["port_matcher"] = port_matcherMap
 	}
-	if len(data.QueryParams) > 0 {
-		var query_paramsList []map[string]interface{}
-		for _, item := range data.QueryParams {
-			itemMap := make(map[string]interface{})
-			if item.CheckNotPresent != nil {
-				itemMap["check_not_present"] = map[string]interface{}{}
-			}
-			if item.CheckPresent != nil {
-				itemMap["check_present"] = map[string]interface{}{}
-			}
-			if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
-				itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
-			}
-			if item.Item != nil {
-				itemNestedMap := make(map[string]interface{})
-				if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
-					var ExactValuesItems []string
-					diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
-					if !diags.HasError() {
-						itemNestedMap["exact_values"] = ExactValuesItems
-					}
+	if !data.QueryParams.IsNull() && !data.QueryParams.IsUnknown() {
+		var query_paramsItems []ServicePolicyRuleQueryParamsModel
+		diags := data.QueryParams.ElementsAs(ctx, &query_paramsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(query_paramsItems) > 0 {
+			var query_paramsList []map[string]interface{}
+			for _, item := range query_paramsItems {
+				itemMap := make(map[string]interface{})
+				if item.CheckNotPresent != nil {
+					itemMap["check_not_present"] = map[string]interface{}{}
 				}
-				if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
-					var RegexValuesItems []string
-					diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
-					if !diags.HasError() {
-						itemNestedMap["regex_values"] = RegexValuesItems
-					}
+				if item.CheckPresent != nil {
+					itemMap["check_present"] = map[string]interface{}{}
 				}
-				if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
-					var TransformersItems []string
-					diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
-					if !diags.HasError() {
-						itemNestedMap["transformers"] = TransformersItems
-					}
+				if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
+					itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
 				}
-				itemMap["item"] = itemNestedMap
+				if item.Item != nil {
+					itemNestedMap := make(map[string]interface{})
+					if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
+						var ExactValuesItems []string
+						diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						if !diags.HasError() {
+							itemNestedMap["exact_values"] = ExactValuesItems
+						}
+					}
+					if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
+						var RegexValuesItems []string
+						diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
+						if !diags.HasError() {
+							itemNestedMap["regex_values"] = RegexValuesItems
+						}
+					}
+					if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
+						var TransformersItems []string
+						diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
+						if !diags.HasError() {
+							itemNestedMap["transformers"] = TransformersItems
+						}
+					}
+					itemMap["item"] = itemNestedMap
+				}
+				if !item.Key.IsNull() && !item.Key.IsUnknown() {
+					itemMap["key"] = item.Key.ValueString()
+				}
+				query_paramsList = append(query_paramsList, itemMap)
 			}
-			if !item.Key.IsNull() && !item.Key.IsUnknown() {
-				itemMap["key"] = item.Key.ValueString()
-			}
-			query_paramsList = append(query_paramsList, itemMap)
+			createReq.Spec["query_params"] = query_paramsList
 		}
-		createReq.Spec["query_params"] = query_paramsList
 	}
 	if data.RequestConstraints != nil {
 		request_constraintsMap := make(map[string]interface{})
@@ -2159,18 +2519,22 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 	}
 	if listData, ok := apiResource.Spec["arg_matchers"].([]interface{}); ok && len(listData) > 0 {
 		var arg_matchersList []ServicePolicyRuleArgMatchersModel
+		var existingArgMatchersItems []ServicePolicyRuleArgMatchersModel
+		if !data.ArgMatchers.IsNull() && !data.ArgMatchers.IsUnknown() {
+			data.ArgMatchers.ElementsAs(ctx, &existingArgMatchersItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				arg_matchersList = append(arg_matchersList, ServicePolicyRuleArgMatchersModel{
 					CheckNotPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.ArgMatchers) > listIdx && data.ArgMatchers[listIdx].CheckNotPresent != nil {
+						if !isImport && len(existingArgMatchersItems) > listIdx && existingArgMatchersItems[listIdx].CheckNotPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
 					}(),
 					CheckPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.ArgMatchers) > listIdx && data.ArgMatchers[listIdx].CheckPresent != nil {
+						if !isImport && len(existingArgMatchersItems) > listIdx && existingArgMatchersItems[listIdx].CheckPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
@@ -2236,7 +2600,14 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 				})
 			}
 		}
-		data.ArgMatchers = arg_matchersList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: ServicePolicyRuleArgMatchersModelAttrTypes}, arg_matchersList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.ArgMatchers = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.ArgMatchers = types.ListNull(types.ObjectType{AttrTypes: ServicePolicyRuleArgMatchersModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["asn_list"].(map[string]interface{}); ok && (isImport || data.AsnList != nil) {
 		data.AsnList = &ServicePolicyRuleAsnListModel{
@@ -2399,18 +2770,22 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 	}
 	if listData, ok := apiResource.Spec["cookie_matchers"].([]interface{}); ok && len(listData) > 0 {
 		var cookie_matchersList []ServicePolicyRuleCookieMatchersModel
+		var existingCookieMatchersItems []ServicePolicyRuleCookieMatchersModel
+		if !data.CookieMatchers.IsNull() && !data.CookieMatchers.IsUnknown() {
+			data.CookieMatchers.ElementsAs(ctx, &existingCookieMatchersItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				cookie_matchersList = append(cookie_matchersList, ServicePolicyRuleCookieMatchersModel{
 					CheckNotPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.CookieMatchers) > listIdx && data.CookieMatchers[listIdx].CheckNotPresent != nil {
+						if !isImport && len(existingCookieMatchersItems) > listIdx && existingCookieMatchersItems[listIdx].CheckNotPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
 					}(),
 					CheckPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.CookieMatchers) > listIdx && data.CookieMatchers[listIdx].CheckPresent != nil {
+						if !isImport && len(existingCookieMatchersItems) > listIdx && existingCookieMatchersItems[listIdx].CheckPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
@@ -2476,7 +2851,14 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 				})
 			}
 		}
-		data.CookieMatchers = cookie_matchersList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: ServicePolicyRuleCookieMatchersModelAttrTypes}, cookie_matchersList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.CookieMatchers = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.CookieMatchers = types.ListNull(types.ObjectType{AttrTypes: ServicePolicyRuleCookieMatchersModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["domain_matcher"].(map[string]interface{}); ok && (isImport || data.DomainMatcher != nil) {
 		data.DomainMatcher = &ServicePolicyRuleDomainMatcherModel{
@@ -2510,18 +2892,22 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 	}
 	if listData, ok := apiResource.Spec["headers"].([]interface{}); ok && len(listData) > 0 {
 		var headersList []ServicePolicyRuleHeadersModel
+		var existingHeadersItems []ServicePolicyRuleHeadersModel
+		if !data.Headers.IsNull() && !data.Headers.IsUnknown() {
+			data.Headers.ElementsAs(ctx, &existingHeadersItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				headersList = append(headersList, ServicePolicyRuleHeadersModel{
 					CheckNotPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.Headers) > listIdx && data.Headers[listIdx].CheckNotPresent != nil {
+						if !isImport && len(existingHeadersItems) > listIdx && existingHeadersItems[listIdx].CheckNotPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
 					}(),
 					CheckPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.Headers) > listIdx && data.Headers[listIdx].CheckPresent != nil {
+						if !isImport && len(existingHeadersItems) > listIdx && existingHeadersItems[listIdx].CheckPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
@@ -2587,7 +2973,14 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 				})
 			}
 		}
-		data.Headers = headersList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: ServicePolicyRuleHeadersModelAttrTypes}, headersList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Headers = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Headers = types.ListNull(types.ObjectType{AttrTypes: ServicePolicyRuleHeadersModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["http_method"].(map[string]interface{}); ok && (isImport || data.HTTPMethod != nil) {
 		data.HTTPMethod = &ServicePolicyRuleHTTPMethodModel{
@@ -2739,18 +3132,22 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 	}
 	if listData, ok := apiResource.Spec["jwt_claims"].([]interface{}); ok && len(listData) > 0 {
 		var jwt_claimsList []ServicePolicyRuleJWTClaimsModel
+		var existingJWTClaimsItems []ServicePolicyRuleJWTClaimsModel
+		if !data.JWTClaims.IsNull() && !data.JWTClaims.IsUnknown() {
+			data.JWTClaims.ElementsAs(ctx, &existingJWTClaimsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				jwt_claimsList = append(jwt_claimsList, ServicePolicyRuleJWTClaimsModel{
 					CheckNotPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.JWTClaims) > listIdx && data.JWTClaims[listIdx].CheckNotPresent != nil {
+						if !isImport && len(existingJWTClaimsItems) > listIdx && existingJWTClaimsItems[listIdx].CheckNotPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
 					}(),
 					CheckPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.JWTClaims) > listIdx && data.JWTClaims[listIdx].CheckPresent != nil {
+						if !isImport && len(existingJWTClaimsItems) > listIdx && existingJWTClaimsItems[listIdx].CheckPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
@@ -2816,7 +3213,14 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 				})
 			}
 		}
-		data.JWTClaims = jwt_claimsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: ServicePolicyRuleJWTClaimsModelAttrTypes}, jwt_claimsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.JWTClaims = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.JWTClaims = types.ListNull(types.ObjectType{AttrTypes: ServicePolicyRuleJWTClaimsModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["label_matcher"].(map[string]interface{}); ok && (isImport || data.LabelMatcher != nil) {
 		data.LabelMatcher = &ServicePolicyRuleLabelMatcherModel{
@@ -2950,18 +3354,22 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 	}
 	if listData, ok := apiResource.Spec["query_params"].([]interface{}); ok && len(listData) > 0 {
 		var query_paramsList []ServicePolicyRuleQueryParamsModel
+		var existingQueryParamsItems []ServicePolicyRuleQueryParamsModel
+		if !data.QueryParams.IsNull() && !data.QueryParams.IsUnknown() {
+			data.QueryParams.ElementsAs(ctx, &existingQueryParamsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				query_paramsList = append(query_paramsList, ServicePolicyRuleQueryParamsModel{
 					CheckNotPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.QueryParams) > listIdx && data.QueryParams[listIdx].CheckNotPresent != nil {
+						if !isImport && len(existingQueryParamsItems) > listIdx && existingQueryParamsItems[listIdx].CheckNotPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
 					}(),
 					CheckPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.QueryParams) > listIdx && data.QueryParams[listIdx].CheckPresent != nil {
+						if !isImport && len(existingQueryParamsItems) > listIdx && existingQueryParamsItems[listIdx].CheckPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
@@ -3027,7 +3435,14 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 				})
 			}
 		}
-		data.QueryParams = query_paramsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: ServicePolicyRuleQueryParamsModelAttrTypes}, query_paramsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.QueryParams = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.QueryParams = types.ListNull(types.ObjectType{AttrTypes: ServicePolicyRuleQueryParamsModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["request_constraints"].(map[string]interface{}); ok && (isImport || data.RequestConstraints != nil) {
 		data.RequestConstraints = &ServicePolicyRuleRequestConstraintsModel{
@@ -3399,11 +3814,17 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -3473,18 +3894,22 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 	}
 	if listData, ok := apiResource.Spec["arg_matchers"].([]interface{}); ok && len(listData) > 0 {
 		var arg_matchersList []ServicePolicyRuleArgMatchersModel
+		var existingArgMatchersItems []ServicePolicyRuleArgMatchersModel
+		if !data.ArgMatchers.IsNull() && !data.ArgMatchers.IsUnknown() {
+			data.ArgMatchers.ElementsAs(ctx, &existingArgMatchersItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				arg_matchersList = append(arg_matchersList, ServicePolicyRuleArgMatchersModel{
 					CheckNotPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.ArgMatchers) > listIdx && data.ArgMatchers[listIdx].CheckNotPresent != nil {
+						if !isImport && len(existingArgMatchersItems) > listIdx && existingArgMatchersItems[listIdx].CheckNotPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
 					}(),
 					CheckPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.ArgMatchers) > listIdx && data.ArgMatchers[listIdx].CheckPresent != nil {
+						if !isImport && len(existingArgMatchersItems) > listIdx && existingArgMatchersItems[listIdx].CheckPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
@@ -3550,7 +3975,14 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 				})
 			}
 		}
-		data.ArgMatchers = arg_matchersList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: ServicePolicyRuleArgMatchersModelAttrTypes}, arg_matchersList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.ArgMatchers = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.ArgMatchers = types.ListNull(types.ObjectType{AttrTypes: ServicePolicyRuleArgMatchersModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["asn_list"].(map[string]interface{}); ok && (isImport || data.AsnList != nil) {
 		data.AsnList = &ServicePolicyRuleAsnListModel{
@@ -3713,18 +4145,22 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 	}
 	if listData, ok := apiResource.Spec["cookie_matchers"].([]interface{}); ok && len(listData) > 0 {
 		var cookie_matchersList []ServicePolicyRuleCookieMatchersModel
+		var existingCookieMatchersItems []ServicePolicyRuleCookieMatchersModel
+		if !data.CookieMatchers.IsNull() && !data.CookieMatchers.IsUnknown() {
+			data.CookieMatchers.ElementsAs(ctx, &existingCookieMatchersItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				cookie_matchersList = append(cookie_matchersList, ServicePolicyRuleCookieMatchersModel{
 					CheckNotPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.CookieMatchers) > listIdx && data.CookieMatchers[listIdx].CheckNotPresent != nil {
+						if !isImport && len(existingCookieMatchersItems) > listIdx && existingCookieMatchersItems[listIdx].CheckNotPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
 					}(),
 					CheckPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.CookieMatchers) > listIdx && data.CookieMatchers[listIdx].CheckPresent != nil {
+						if !isImport && len(existingCookieMatchersItems) > listIdx && existingCookieMatchersItems[listIdx].CheckPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
@@ -3790,7 +4226,14 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 				})
 			}
 		}
-		data.CookieMatchers = cookie_matchersList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: ServicePolicyRuleCookieMatchersModelAttrTypes}, cookie_matchersList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.CookieMatchers = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.CookieMatchers = types.ListNull(types.ObjectType{AttrTypes: ServicePolicyRuleCookieMatchersModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["domain_matcher"].(map[string]interface{}); ok && (isImport || data.DomainMatcher != nil) {
 		data.DomainMatcher = &ServicePolicyRuleDomainMatcherModel{
@@ -3824,18 +4267,22 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 	}
 	if listData, ok := apiResource.Spec["headers"].([]interface{}); ok && len(listData) > 0 {
 		var headersList []ServicePolicyRuleHeadersModel
+		var existingHeadersItems []ServicePolicyRuleHeadersModel
+		if !data.Headers.IsNull() && !data.Headers.IsUnknown() {
+			data.Headers.ElementsAs(ctx, &existingHeadersItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				headersList = append(headersList, ServicePolicyRuleHeadersModel{
 					CheckNotPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.Headers) > listIdx && data.Headers[listIdx].CheckNotPresent != nil {
+						if !isImport && len(existingHeadersItems) > listIdx && existingHeadersItems[listIdx].CheckNotPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
 					}(),
 					CheckPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.Headers) > listIdx && data.Headers[listIdx].CheckPresent != nil {
+						if !isImport && len(existingHeadersItems) > listIdx && existingHeadersItems[listIdx].CheckPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
@@ -3901,7 +4348,14 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 				})
 			}
 		}
-		data.Headers = headersList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: ServicePolicyRuleHeadersModelAttrTypes}, headersList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Headers = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Headers = types.ListNull(types.ObjectType{AttrTypes: ServicePolicyRuleHeadersModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["http_method"].(map[string]interface{}); ok && (isImport || data.HTTPMethod != nil) {
 		data.HTTPMethod = &ServicePolicyRuleHTTPMethodModel{
@@ -4053,18 +4507,22 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 	}
 	if listData, ok := apiResource.Spec["jwt_claims"].([]interface{}); ok && len(listData) > 0 {
 		var jwt_claimsList []ServicePolicyRuleJWTClaimsModel
+		var existingJWTClaimsItems []ServicePolicyRuleJWTClaimsModel
+		if !data.JWTClaims.IsNull() && !data.JWTClaims.IsUnknown() {
+			data.JWTClaims.ElementsAs(ctx, &existingJWTClaimsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				jwt_claimsList = append(jwt_claimsList, ServicePolicyRuleJWTClaimsModel{
 					CheckNotPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.JWTClaims) > listIdx && data.JWTClaims[listIdx].CheckNotPresent != nil {
+						if !isImport && len(existingJWTClaimsItems) > listIdx && existingJWTClaimsItems[listIdx].CheckNotPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
 					}(),
 					CheckPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.JWTClaims) > listIdx && data.JWTClaims[listIdx].CheckPresent != nil {
+						if !isImport && len(existingJWTClaimsItems) > listIdx && existingJWTClaimsItems[listIdx].CheckPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
@@ -4130,7 +4588,14 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 				})
 			}
 		}
-		data.JWTClaims = jwt_claimsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: ServicePolicyRuleJWTClaimsModelAttrTypes}, jwt_claimsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.JWTClaims = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.JWTClaims = types.ListNull(types.ObjectType{AttrTypes: ServicePolicyRuleJWTClaimsModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["label_matcher"].(map[string]interface{}); ok && (isImport || data.LabelMatcher != nil) {
 		data.LabelMatcher = &ServicePolicyRuleLabelMatcherModel{
@@ -4264,18 +4729,22 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 	}
 	if listData, ok := apiResource.Spec["query_params"].([]interface{}); ok && len(listData) > 0 {
 		var query_paramsList []ServicePolicyRuleQueryParamsModel
+		var existingQueryParamsItems []ServicePolicyRuleQueryParamsModel
+		if !data.QueryParams.IsNull() && !data.QueryParams.IsUnknown() {
+			data.QueryParams.ElementsAs(ctx, &existingQueryParamsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				query_paramsList = append(query_paramsList, ServicePolicyRuleQueryParamsModel{
 					CheckNotPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.QueryParams) > listIdx && data.QueryParams[listIdx].CheckNotPresent != nil {
+						if !isImport && len(existingQueryParamsItems) > listIdx && existingQueryParamsItems[listIdx].CheckNotPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
 					}(),
 					CheckPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.QueryParams) > listIdx && data.QueryParams[listIdx].CheckPresent != nil {
+						if !isImport && len(existingQueryParamsItems) > listIdx && existingQueryParamsItems[listIdx].CheckPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
@@ -4341,7 +4810,14 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 				})
 			}
 		}
-		data.QueryParams = query_paramsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: ServicePolicyRuleQueryParamsModelAttrTypes}, query_paramsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.QueryParams = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.QueryParams = types.ListNull(types.ObjectType{AttrTypes: ServicePolicyRuleQueryParamsModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["request_constraints"].(map[string]interface{}); ok && (isImport || data.RequestConstraints != nil) {
 		data.RequestConstraints = &ServicePolicyRuleRequestConstraintsModel{
@@ -4735,50 +5211,55 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 		}
 		apiResource.Spec["api_group_matcher"] = api_group_matcherMap
 	}
-	if len(data.ArgMatchers) > 0 {
-		var arg_matchersList []map[string]interface{}
-		for _, item := range data.ArgMatchers {
-			itemMap := make(map[string]interface{})
-			if item.CheckNotPresent != nil {
-				itemMap["check_not_present"] = map[string]interface{}{}
-			}
-			if item.CheckPresent != nil {
-				itemMap["check_present"] = map[string]interface{}{}
-			}
-			if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
-				itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
-			}
-			if item.Item != nil {
-				itemNestedMap := make(map[string]interface{})
-				if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
-					var ExactValuesItems []string
-					diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
-					if !diags.HasError() {
-						itemNestedMap["exact_values"] = ExactValuesItems
-					}
+	if !data.ArgMatchers.IsNull() && !data.ArgMatchers.IsUnknown() {
+		var arg_matchersItems []ServicePolicyRuleArgMatchersModel
+		diags := data.ArgMatchers.ElementsAs(ctx, &arg_matchersItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(arg_matchersItems) > 0 {
+			var arg_matchersList []map[string]interface{}
+			for _, item := range arg_matchersItems {
+				itemMap := make(map[string]interface{})
+				if item.CheckNotPresent != nil {
+					itemMap["check_not_present"] = map[string]interface{}{}
 				}
-				if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
-					var RegexValuesItems []string
-					diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
-					if !diags.HasError() {
-						itemNestedMap["regex_values"] = RegexValuesItems
-					}
+				if item.CheckPresent != nil {
+					itemMap["check_present"] = map[string]interface{}{}
 				}
-				if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
-					var TransformersItems []string
-					diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
-					if !diags.HasError() {
-						itemNestedMap["transformers"] = TransformersItems
-					}
+				if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
+					itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
 				}
-				itemMap["item"] = itemNestedMap
+				if item.Item != nil {
+					itemNestedMap := make(map[string]interface{})
+					if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
+						var ExactValuesItems []string
+						diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						if !diags.HasError() {
+							itemNestedMap["exact_values"] = ExactValuesItems
+						}
+					}
+					if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
+						var RegexValuesItems []string
+						diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
+						if !diags.HasError() {
+							itemNestedMap["regex_values"] = RegexValuesItems
+						}
+					}
+					if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
+						var TransformersItems []string
+						diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
+						if !diags.HasError() {
+							itemNestedMap["transformers"] = TransformersItems
+						}
+					}
+					itemMap["item"] = itemNestedMap
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				arg_matchersList = append(arg_matchersList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			arg_matchersList = append(arg_matchersList, itemMap)
+			apiResource.Spec["arg_matchers"] = arg_matchersList
 		}
-		apiResource.Spec["arg_matchers"] = arg_matchersList
 	}
 	if data.AsnList != nil {
 		asn_listMap := make(map[string]interface{})
@@ -4882,50 +5363,55 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 		}
 		apiResource.Spec["client_selector"] = client_selectorMap
 	}
-	if len(data.CookieMatchers) > 0 {
-		var cookie_matchersList []map[string]interface{}
-		for _, item := range data.CookieMatchers {
-			itemMap := make(map[string]interface{})
-			if item.CheckNotPresent != nil {
-				itemMap["check_not_present"] = map[string]interface{}{}
-			}
-			if item.CheckPresent != nil {
-				itemMap["check_present"] = map[string]interface{}{}
-			}
-			if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
-				itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
-			}
-			if item.Item != nil {
-				itemNestedMap := make(map[string]interface{})
-				if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
-					var ExactValuesItems []string
-					diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
-					if !diags.HasError() {
-						itemNestedMap["exact_values"] = ExactValuesItems
-					}
+	if !data.CookieMatchers.IsNull() && !data.CookieMatchers.IsUnknown() {
+		var cookie_matchersItems []ServicePolicyRuleCookieMatchersModel
+		diags := data.CookieMatchers.ElementsAs(ctx, &cookie_matchersItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(cookie_matchersItems) > 0 {
+			var cookie_matchersList []map[string]interface{}
+			for _, item := range cookie_matchersItems {
+				itemMap := make(map[string]interface{})
+				if item.CheckNotPresent != nil {
+					itemMap["check_not_present"] = map[string]interface{}{}
 				}
-				if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
-					var RegexValuesItems []string
-					diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
-					if !diags.HasError() {
-						itemNestedMap["regex_values"] = RegexValuesItems
-					}
+				if item.CheckPresent != nil {
+					itemMap["check_present"] = map[string]interface{}{}
 				}
-				if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
-					var TransformersItems []string
-					diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
-					if !diags.HasError() {
-						itemNestedMap["transformers"] = TransformersItems
-					}
+				if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
+					itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
 				}
-				itemMap["item"] = itemNestedMap
+				if item.Item != nil {
+					itemNestedMap := make(map[string]interface{})
+					if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
+						var ExactValuesItems []string
+						diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						if !diags.HasError() {
+							itemNestedMap["exact_values"] = ExactValuesItems
+						}
+					}
+					if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
+						var RegexValuesItems []string
+						diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
+						if !diags.HasError() {
+							itemNestedMap["regex_values"] = RegexValuesItems
+						}
+					}
+					if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
+						var TransformersItems []string
+						diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
+						if !diags.HasError() {
+							itemNestedMap["transformers"] = TransformersItems
+						}
+					}
+					itemMap["item"] = itemNestedMap
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				cookie_matchersList = append(cookie_matchersList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			cookie_matchersList = append(cookie_matchersList, itemMap)
+			apiResource.Spec["cookie_matchers"] = cookie_matchersList
 		}
-		apiResource.Spec["cookie_matchers"] = cookie_matchersList
 	}
 	if data.DomainMatcher != nil {
 		domain_matcherMap := make(map[string]interface{})
@@ -4945,50 +5431,55 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 		}
 		apiResource.Spec["domain_matcher"] = domain_matcherMap
 	}
-	if len(data.Headers) > 0 {
-		var headersList []map[string]interface{}
-		for _, item := range data.Headers {
-			itemMap := make(map[string]interface{})
-			if item.CheckNotPresent != nil {
-				itemMap["check_not_present"] = map[string]interface{}{}
-			}
-			if item.CheckPresent != nil {
-				itemMap["check_present"] = map[string]interface{}{}
-			}
-			if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
-				itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
-			}
-			if item.Item != nil {
-				itemNestedMap := make(map[string]interface{})
-				if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
-					var ExactValuesItems []string
-					diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
-					if !diags.HasError() {
-						itemNestedMap["exact_values"] = ExactValuesItems
-					}
+	if !data.Headers.IsNull() && !data.Headers.IsUnknown() {
+		var headersItems []ServicePolicyRuleHeadersModel
+		diags := data.Headers.ElementsAs(ctx, &headersItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(headersItems) > 0 {
+			var headersList []map[string]interface{}
+			for _, item := range headersItems {
+				itemMap := make(map[string]interface{})
+				if item.CheckNotPresent != nil {
+					itemMap["check_not_present"] = map[string]interface{}{}
 				}
-				if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
-					var RegexValuesItems []string
-					diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
-					if !diags.HasError() {
-						itemNestedMap["regex_values"] = RegexValuesItems
-					}
+				if item.CheckPresent != nil {
+					itemMap["check_present"] = map[string]interface{}{}
 				}
-				if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
-					var TransformersItems []string
-					diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
-					if !diags.HasError() {
-						itemNestedMap["transformers"] = TransformersItems
-					}
+				if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
+					itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
 				}
-				itemMap["item"] = itemNestedMap
+				if item.Item != nil {
+					itemNestedMap := make(map[string]interface{})
+					if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
+						var ExactValuesItems []string
+						diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						if !diags.HasError() {
+							itemNestedMap["exact_values"] = ExactValuesItems
+						}
+					}
+					if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
+						var RegexValuesItems []string
+						diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
+						if !diags.HasError() {
+							itemNestedMap["regex_values"] = RegexValuesItems
+						}
+					}
+					if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
+						var TransformersItems []string
+						diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
+						if !diags.HasError() {
+							itemNestedMap["transformers"] = TransformersItems
+						}
+					}
+					itemMap["item"] = itemNestedMap
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				headersList = append(headersList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			headersList = append(headersList, itemMap)
+			apiResource.Spec["headers"] = headersList
 		}
-		apiResource.Spec["headers"] = headersList
 	}
 	if data.HTTPMethod != nil {
 		http_methodMap := make(map[string]interface{})
@@ -5070,50 +5561,55 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 		}
 		apiResource.Spec["ja4_tls_fingerprint"] = ja4_tls_fingerprintMap
 	}
-	if len(data.JWTClaims) > 0 {
-		var jwt_claimsList []map[string]interface{}
-		for _, item := range data.JWTClaims {
-			itemMap := make(map[string]interface{})
-			if item.CheckNotPresent != nil {
-				itemMap["check_not_present"] = map[string]interface{}{}
-			}
-			if item.CheckPresent != nil {
-				itemMap["check_present"] = map[string]interface{}{}
-			}
-			if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
-				itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
-			}
-			if item.Item != nil {
-				itemNestedMap := make(map[string]interface{})
-				if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
-					var ExactValuesItems []string
-					diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
-					if !diags.HasError() {
-						itemNestedMap["exact_values"] = ExactValuesItems
-					}
+	if !data.JWTClaims.IsNull() && !data.JWTClaims.IsUnknown() {
+		var jwt_claimsItems []ServicePolicyRuleJWTClaimsModel
+		diags := data.JWTClaims.ElementsAs(ctx, &jwt_claimsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(jwt_claimsItems) > 0 {
+			var jwt_claimsList []map[string]interface{}
+			for _, item := range jwt_claimsItems {
+				itemMap := make(map[string]interface{})
+				if item.CheckNotPresent != nil {
+					itemMap["check_not_present"] = map[string]interface{}{}
 				}
-				if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
-					var RegexValuesItems []string
-					diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
-					if !diags.HasError() {
-						itemNestedMap["regex_values"] = RegexValuesItems
-					}
+				if item.CheckPresent != nil {
+					itemMap["check_present"] = map[string]interface{}{}
 				}
-				if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
-					var TransformersItems []string
-					diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
-					if !diags.HasError() {
-						itemNestedMap["transformers"] = TransformersItems
-					}
+				if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
+					itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
 				}
-				itemMap["item"] = itemNestedMap
+				if item.Item != nil {
+					itemNestedMap := make(map[string]interface{})
+					if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
+						var ExactValuesItems []string
+						diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						if !diags.HasError() {
+							itemNestedMap["exact_values"] = ExactValuesItems
+						}
+					}
+					if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
+						var RegexValuesItems []string
+						diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
+						if !diags.HasError() {
+							itemNestedMap["regex_values"] = RegexValuesItems
+						}
+					}
+					if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
+						var TransformersItems []string
+						diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
+						if !diags.HasError() {
+							itemNestedMap["transformers"] = TransformersItems
+						}
+					}
+					itemMap["item"] = itemNestedMap
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				jwt_claimsList = append(jwt_claimsList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			jwt_claimsList = append(jwt_claimsList, itemMap)
+			apiResource.Spec["jwt_claims"] = jwt_claimsList
 		}
-		apiResource.Spec["jwt_claims"] = jwt_claimsList
 	}
 	if data.LabelMatcher != nil {
 		label_matcherMap := make(map[string]interface{})
@@ -5192,50 +5688,55 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 		}
 		apiResource.Spec["port_matcher"] = port_matcherMap
 	}
-	if len(data.QueryParams) > 0 {
-		var query_paramsList []map[string]interface{}
-		for _, item := range data.QueryParams {
-			itemMap := make(map[string]interface{})
-			if item.CheckNotPresent != nil {
-				itemMap["check_not_present"] = map[string]interface{}{}
-			}
-			if item.CheckPresent != nil {
-				itemMap["check_present"] = map[string]interface{}{}
-			}
-			if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
-				itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
-			}
-			if item.Item != nil {
-				itemNestedMap := make(map[string]interface{})
-				if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
-					var ExactValuesItems []string
-					diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
-					if !diags.HasError() {
-						itemNestedMap["exact_values"] = ExactValuesItems
-					}
+	if !data.QueryParams.IsNull() && !data.QueryParams.IsUnknown() {
+		var query_paramsItems []ServicePolicyRuleQueryParamsModel
+		diags := data.QueryParams.ElementsAs(ctx, &query_paramsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(query_paramsItems) > 0 {
+			var query_paramsList []map[string]interface{}
+			for _, item := range query_paramsItems {
+				itemMap := make(map[string]interface{})
+				if item.CheckNotPresent != nil {
+					itemMap["check_not_present"] = map[string]interface{}{}
 				}
-				if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
-					var RegexValuesItems []string
-					diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
-					if !diags.HasError() {
-						itemNestedMap["regex_values"] = RegexValuesItems
-					}
+				if item.CheckPresent != nil {
+					itemMap["check_present"] = map[string]interface{}{}
 				}
-				if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
-					var TransformersItems []string
-					diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
-					if !diags.HasError() {
-						itemNestedMap["transformers"] = TransformersItems
-					}
+				if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
+					itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
 				}
-				itemMap["item"] = itemNestedMap
+				if item.Item != nil {
+					itemNestedMap := make(map[string]interface{})
+					if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
+						var ExactValuesItems []string
+						diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						if !diags.HasError() {
+							itemNestedMap["exact_values"] = ExactValuesItems
+						}
+					}
+					if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
+						var RegexValuesItems []string
+						diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
+						if !diags.HasError() {
+							itemNestedMap["regex_values"] = RegexValuesItems
+						}
+					}
+					if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
+						var TransformersItems []string
+						diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
+						if !diags.HasError() {
+							itemNestedMap["transformers"] = TransformersItems
+						}
+					}
+					itemMap["item"] = itemNestedMap
+				}
+				if !item.Key.IsNull() && !item.Key.IsUnknown() {
+					itemMap["key"] = item.Key.ValueString()
+				}
+				query_paramsList = append(query_paramsList, itemMap)
 			}
-			if !item.Key.IsNull() && !item.Key.IsUnknown() {
-				itemMap["key"] = item.Key.ValueString()
-			}
-			query_paramsList = append(query_paramsList, itemMap)
+			apiResource.Spec["query_params"] = query_paramsList
 		}
-		apiResource.Spec["query_params"] = query_paramsList
 	}
 	if data.RequestConstraints != nil {
 		request_constraintsMap := make(map[string]interface{})
@@ -5478,18 +5979,22 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 	}
 	if listData, ok := apiResource.Spec["arg_matchers"].([]interface{}); ok && len(listData) > 0 {
 		var arg_matchersList []ServicePolicyRuleArgMatchersModel
+		var existingArgMatchersItems []ServicePolicyRuleArgMatchersModel
+		if !data.ArgMatchers.IsNull() && !data.ArgMatchers.IsUnknown() {
+			data.ArgMatchers.ElementsAs(ctx, &existingArgMatchersItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				arg_matchersList = append(arg_matchersList, ServicePolicyRuleArgMatchersModel{
 					CheckNotPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.ArgMatchers) > listIdx && data.ArgMatchers[listIdx].CheckNotPresent != nil {
+						if !isImport && len(existingArgMatchersItems) > listIdx && existingArgMatchersItems[listIdx].CheckNotPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
 					}(),
 					CheckPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.ArgMatchers) > listIdx && data.ArgMatchers[listIdx].CheckPresent != nil {
+						if !isImport && len(existingArgMatchersItems) > listIdx && existingArgMatchersItems[listIdx].CheckPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
@@ -5555,7 +6060,14 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 				})
 			}
 		}
-		data.ArgMatchers = arg_matchersList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: ServicePolicyRuleArgMatchersModelAttrTypes}, arg_matchersList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.ArgMatchers = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.ArgMatchers = types.ListNull(types.ObjectType{AttrTypes: ServicePolicyRuleArgMatchersModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["asn_list"].(map[string]interface{}); ok && (isImport || data.AsnList != nil) {
 		data.AsnList = &ServicePolicyRuleAsnListModel{
@@ -5718,18 +6230,22 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 	}
 	if listData, ok := apiResource.Spec["cookie_matchers"].([]interface{}); ok && len(listData) > 0 {
 		var cookie_matchersList []ServicePolicyRuleCookieMatchersModel
+		var existingCookieMatchersItems []ServicePolicyRuleCookieMatchersModel
+		if !data.CookieMatchers.IsNull() && !data.CookieMatchers.IsUnknown() {
+			data.CookieMatchers.ElementsAs(ctx, &existingCookieMatchersItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				cookie_matchersList = append(cookie_matchersList, ServicePolicyRuleCookieMatchersModel{
 					CheckNotPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.CookieMatchers) > listIdx && data.CookieMatchers[listIdx].CheckNotPresent != nil {
+						if !isImport && len(existingCookieMatchersItems) > listIdx && existingCookieMatchersItems[listIdx].CheckNotPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
 					}(),
 					CheckPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.CookieMatchers) > listIdx && data.CookieMatchers[listIdx].CheckPresent != nil {
+						if !isImport && len(existingCookieMatchersItems) > listIdx && existingCookieMatchersItems[listIdx].CheckPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
@@ -5795,7 +6311,14 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 				})
 			}
 		}
-		data.CookieMatchers = cookie_matchersList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: ServicePolicyRuleCookieMatchersModelAttrTypes}, cookie_matchersList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.CookieMatchers = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.CookieMatchers = types.ListNull(types.ObjectType{AttrTypes: ServicePolicyRuleCookieMatchersModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["domain_matcher"].(map[string]interface{}); ok && (isImport || data.DomainMatcher != nil) {
 		data.DomainMatcher = &ServicePolicyRuleDomainMatcherModel{
@@ -5829,18 +6352,22 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 	}
 	if listData, ok := apiResource.Spec["headers"].([]interface{}); ok && len(listData) > 0 {
 		var headersList []ServicePolicyRuleHeadersModel
+		var existingHeadersItems []ServicePolicyRuleHeadersModel
+		if !data.Headers.IsNull() && !data.Headers.IsUnknown() {
+			data.Headers.ElementsAs(ctx, &existingHeadersItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				headersList = append(headersList, ServicePolicyRuleHeadersModel{
 					CheckNotPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.Headers) > listIdx && data.Headers[listIdx].CheckNotPresent != nil {
+						if !isImport && len(existingHeadersItems) > listIdx && existingHeadersItems[listIdx].CheckNotPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
 					}(),
 					CheckPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.Headers) > listIdx && data.Headers[listIdx].CheckPresent != nil {
+						if !isImport && len(existingHeadersItems) > listIdx && existingHeadersItems[listIdx].CheckPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
@@ -5906,7 +6433,14 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 				})
 			}
 		}
-		data.Headers = headersList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: ServicePolicyRuleHeadersModelAttrTypes}, headersList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Headers = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Headers = types.ListNull(types.ObjectType{AttrTypes: ServicePolicyRuleHeadersModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["http_method"].(map[string]interface{}); ok && (isImport || data.HTTPMethod != nil) {
 		data.HTTPMethod = &ServicePolicyRuleHTTPMethodModel{
@@ -6058,18 +6592,22 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 	}
 	if listData, ok := apiResource.Spec["jwt_claims"].([]interface{}); ok && len(listData) > 0 {
 		var jwt_claimsList []ServicePolicyRuleJWTClaimsModel
+		var existingJWTClaimsItems []ServicePolicyRuleJWTClaimsModel
+		if !data.JWTClaims.IsNull() && !data.JWTClaims.IsUnknown() {
+			data.JWTClaims.ElementsAs(ctx, &existingJWTClaimsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				jwt_claimsList = append(jwt_claimsList, ServicePolicyRuleJWTClaimsModel{
 					CheckNotPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.JWTClaims) > listIdx && data.JWTClaims[listIdx].CheckNotPresent != nil {
+						if !isImport && len(existingJWTClaimsItems) > listIdx && existingJWTClaimsItems[listIdx].CheckNotPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
 					}(),
 					CheckPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.JWTClaims) > listIdx && data.JWTClaims[listIdx].CheckPresent != nil {
+						if !isImport && len(existingJWTClaimsItems) > listIdx && existingJWTClaimsItems[listIdx].CheckPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
@@ -6135,7 +6673,14 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 				})
 			}
 		}
-		data.JWTClaims = jwt_claimsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: ServicePolicyRuleJWTClaimsModelAttrTypes}, jwt_claimsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.JWTClaims = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.JWTClaims = types.ListNull(types.ObjectType{AttrTypes: ServicePolicyRuleJWTClaimsModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["label_matcher"].(map[string]interface{}); ok && (isImport || data.LabelMatcher != nil) {
 		data.LabelMatcher = &ServicePolicyRuleLabelMatcherModel{
@@ -6269,18 +6814,22 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 	}
 	if listData, ok := apiResource.Spec["query_params"].([]interface{}); ok && len(listData) > 0 {
 		var query_paramsList []ServicePolicyRuleQueryParamsModel
+		var existingQueryParamsItems []ServicePolicyRuleQueryParamsModel
+		if !data.QueryParams.IsNull() && !data.QueryParams.IsUnknown() {
+			data.QueryParams.ElementsAs(ctx, &existingQueryParamsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				query_paramsList = append(query_paramsList, ServicePolicyRuleQueryParamsModel{
 					CheckNotPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.QueryParams) > listIdx && data.QueryParams[listIdx].CheckNotPresent != nil {
+						if !isImport && len(existingQueryParamsItems) > listIdx && existingQueryParamsItems[listIdx].CheckNotPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
 					}(),
 					CheckPresent: func() *ServicePolicyRuleEmptyModel {
-						if !isImport && len(data.QueryParams) > listIdx && data.QueryParams[listIdx].CheckPresent != nil {
+						if !isImport && len(existingQueryParamsItems) > listIdx && existingQueryParamsItems[listIdx].CheckPresent != nil {
 							return &ServicePolicyRuleEmptyModel{}
 						}
 						return nil
@@ -6346,7 +6895,14 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 				})
 			}
 		}
-		data.QueryParams = query_paramsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: ServicePolicyRuleQueryParamsModelAttrTypes}, query_paramsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.QueryParams = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.QueryParams = types.ListNull(types.ObjectType{AttrTypes: ServicePolicyRuleQueryParamsModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["request_constraints"].(map[string]interface{}); ok && (isImport || data.RequestConstraints != nil) {
 		data.RequestConstraints = &ServicePolicyRuleRequestConstraintsModel{

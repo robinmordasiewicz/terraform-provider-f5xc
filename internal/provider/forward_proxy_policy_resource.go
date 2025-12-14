@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -59,11 +60,28 @@ type ForwardProxyPolicyAllowListModel struct {
 	TLSList                 []ForwardProxyPolicyAllowListTLSListModel  `tfsdk:"tls_list"`
 }
 
+// ForwardProxyPolicyAllowListModelAttrTypes defines the attribute types for ForwardProxyPolicyAllowListModel
+var ForwardProxyPolicyAllowListModelAttrTypes = map[string]attr.Type{
+	"default_action_allow":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_action_deny":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_action_next_policy": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dest_list":                  types.ListType{ElemType: types.ObjectType{AttrTypes: ForwardProxyPolicyAllowListDestListModelAttrTypes}},
+	"http_list":                  types.ListType{ElemType: types.ObjectType{AttrTypes: ForwardProxyPolicyAllowListHTTPListModelAttrTypes}},
+	"tls_list":                   types.ListType{ElemType: types.ObjectType{AttrTypes: ForwardProxyPolicyAllowListTLSListModelAttrTypes}},
+}
+
 // ForwardProxyPolicyAllowListDestListModel represents dest_list block
 type ForwardProxyPolicyAllowListDestListModel struct {
 	Ipv6Prefixes types.List   `tfsdk:"ipv6_prefixes"`
 	PortRanges   types.String `tfsdk:"port_ranges"`
 	Prefixes     types.List   `tfsdk:"prefixes"`
+}
+
+// ForwardProxyPolicyAllowListDestListModelAttrTypes defines the attribute types for ForwardProxyPolicyAllowListDestListModel
+var ForwardProxyPolicyAllowListDestListModelAttrTypes = map[string]attr.Type{
+	"ipv6_prefixes": types.ListType{ElemType: types.StringType},
+	"port_ranges":   types.StringType,
+	"prefixes":      types.ListType{ElemType: types.StringType},
 }
 
 // ForwardProxyPolicyAllowListHTTPListModel represents http_list block
@@ -77,11 +95,29 @@ type ForwardProxyPolicyAllowListHTTPListModel struct {
 	AnyPath         *ForwardProxyPolicyEmptyModel `tfsdk:"any_path"`
 }
 
+// ForwardProxyPolicyAllowListHTTPListModelAttrTypes defines the attribute types for ForwardProxyPolicyAllowListHTTPListModel
+var ForwardProxyPolicyAllowListHTTPListModelAttrTypes = map[string]attr.Type{
+	"exact_value":       types.StringType,
+	"path_exact_value":  types.StringType,
+	"path_prefix_value": types.StringType,
+	"path_regex_value":  types.StringType,
+	"regex_value":       types.StringType,
+	"suffix_value":      types.StringType,
+	"any_path":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ForwardProxyPolicyAllowListTLSListModel represents tls_list block
 type ForwardProxyPolicyAllowListTLSListModel struct {
 	ExactValue  types.String `tfsdk:"exact_value"`
 	RegexValue  types.String `tfsdk:"regex_value"`
 	SuffixValue types.String `tfsdk:"suffix_value"`
+}
+
+// ForwardProxyPolicyAllowListTLSListModelAttrTypes defines the attribute types for ForwardProxyPolicyAllowListTLSListModel
+var ForwardProxyPolicyAllowListTLSListModelAttrTypes = map[string]attr.Type{
+	"exact_value":  types.StringType,
+	"regex_value":  types.StringType,
+	"suffix_value": types.StringType,
 }
 
 // ForwardProxyPolicyDenyListModel represents deny_list block
@@ -94,11 +130,28 @@ type ForwardProxyPolicyDenyListModel struct {
 	TLSList                 []ForwardProxyPolicyDenyListTLSListModel  `tfsdk:"tls_list"`
 }
 
+// ForwardProxyPolicyDenyListModelAttrTypes defines the attribute types for ForwardProxyPolicyDenyListModel
+var ForwardProxyPolicyDenyListModelAttrTypes = map[string]attr.Type{
+	"default_action_allow":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_action_deny":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_action_next_policy": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dest_list":                  types.ListType{ElemType: types.ObjectType{AttrTypes: ForwardProxyPolicyDenyListDestListModelAttrTypes}},
+	"http_list":                  types.ListType{ElemType: types.ObjectType{AttrTypes: ForwardProxyPolicyDenyListHTTPListModelAttrTypes}},
+	"tls_list":                   types.ListType{ElemType: types.ObjectType{AttrTypes: ForwardProxyPolicyDenyListTLSListModelAttrTypes}},
+}
+
 // ForwardProxyPolicyDenyListDestListModel represents dest_list block
 type ForwardProxyPolicyDenyListDestListModel struct {
 	Ipv6Prefixes types.List   `tfsdk:"ipv6_prefixes"`
 	PortRanges   types.String `tfsdk:"port_ranges"`
 	Prefixes     types.List   `tfsdk:"prefixes"`
+}
+
+// ForwardProxyPolicyDenyListDestListModelAttrTypes defines the attribute types for ForwardProxyPolicyDenyListDestListModel
+var ForwardProxyPolicyDenyListDestListModelAttrTypes = map[string]attr.Type{
+	"ipv6_prefixes": types.ListType{ElemType: types.StringType},
+	"port_ranges":   types.StringType,
+	"prefixes":      types.ListType{ElemType: types.StringType},
 }
 
 // ForwardProxyPolicyDenyListHTTPListModel represents http_list block
@@ -112,11 +165,29 @@ type ForwardProxyPolicyDenyListHTTPListModel struct {
 	AnyPath         *ForwardProxyPolicyEmptyModel `tfsdk:"any_path"`
 }
 
+// ForwardProxyPolicyDenyListHTTPListModelAttrTypes defines the attribute types for ForwardProxyPolicyDenyListHTTPListModel
+var ForwardProxyPolicyDenyListHTTPListModelAttrTypes = map[string]attr.Type{
+	"exact_value":       types.StringType,
+	"path_exact_value":  types.StringType,
+	"path_prefix_value": types.StringType,
+	"path_regex_value":  types.StringType,
+	"regex_value":       types.StringType,
+	"suffix_value":      types.StringType,
+	"any_path":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ForwardProxyPolicyDenyListTLSListModel represents tls_list block
 type ForwardProxyPolicyDenyListTLSListModel struct {
 	ExactValue  types.String `tfsdk:"exact_value"`
 	RegexValue  types.String `tfsdk:"regex_value"`
 	SuffixValue types.String `tfsdk:"suffix_value"`
+}
+
+// ForwardProxyPolicyDenyListTLSListModelAttrTypes defines the attribute types for ForwardProxyPolicyDenyListTLSListModel
+var ForwardProxyPolicyDenyListTLSListModelAttrTypes = map[string]attr.Type{
+	"exact_value":  types.StringType,
+	"regex_value":  types.StringType,
+	"suffix_value": types.StringType,
 }
 
 // ForwardProxyPolicyNetworkConnectorModel represents network_connector block
@@ -126,14 +197,31 @@ type ForwardProxyPolicyNetworkConnectorModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// ForwardProxyPolicyNetworkConnectorModelAttrTypes defines the attribute types for ForwardProxyPolicyNetworkConnectorModel
+var ForwardProxyPolicyNetworkConnectorModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // ForwardProxyPolicyProxyLabelSelectorModel represents proxy_label_selector block
 type ForwardProxyPolicyProxyLabelSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
 }
 
+// ForwardProxyPolicyProxyLabelSelectorModelAttrTypes defines the attribute types for ForwardProxyPolicyProxyLabelSelectorModel
+var ForwardProxyPolicyProxyLabelSelectorModelAttrTypes = map[string]attr.Type{
+	"expressions": types.ListType{ElemType: types.StringType},
+}
+
 // ForwardProxyPolicyRuleListModel represents rule_list block
 type ForwardProxyPolicyRuleListModel struct {
 	Rules []ForwardProxyPolicyRuleListRulesModel `tfsdk:"rules"`
+}
+
+// ForwardProxyPolicyRuleListModelAttrTypes defines the attribute types for ForwardProxyPolicyRuleListModel
+var ForwardProxyPolicyRuleListModelAttrTypes = map[string]attr.Type{
+	"rules": types.ListType{ElemType: types.ObjectType{AttrTypes: ForwardProxyPolicyRuleListRulesModelAttrTypes}},
 }
 
 // ForwardProxyPolicyRuleListRulesModel represents rules block
@@ -157,9 +245,35 @@ type ForwardProxyPolicyRuleListRulesModel struct {
 	URLCategoryList   *ForwardProxyPolicyRuleListRulesURLCategoryListModel  `tfsdk:"url_category_list"`
 }
 
+// ForwardProxyPolicyRuleListRulesModelAttrTypes defines the attribute types for ForwardProxyPolicyRuleListRulesModel
+var ForwardProxyPolicyRuleListRulesModelAttrTypes = map[string]attr.Type{
+	"action":               types.StringType,
+	"all_destinations":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"all_sources":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dst_asn_list":         types.ObjectType{AttrTypes: ForwardProxyPolicyRuleListRulesDstAsnListModelAttrTypes},
+	"dst_asn_set":          types.ObjectType{AttrTypes: ForwardProxyPolicyRuleListRulesDstAsnSetModelAttrTypes},
+	"dst_ip_prefix_set":    types.ObjectType{AttrTypes: ForwardProxyPolicyRuleListRulesDstIPPrefixSetModelAttrTypes},
+	"dst_label_selector":   types.ObjectType{AttrTypes: ForwardProxyPolicyRuleListRulesDstLabelSelectorModelAttrTypes},
+	"dst_prefix_list":      types.ObjectType{AttrTypes: ForwardProxyPolicyRuleListRulesDstPrefixListModelAttrTypes},
+	"http_list":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ip_prefix_set":        types.ObjectType{AttrTypes: ForwardProxyPolicyRuleListRulesIPPrefixSetModelAttrTypes},
+	"label_selector":       types.ObjectType{AttrTypes: ForwardProxyPolicyRuleListRulesLabelSelectorModelAttrTypes},
+	"metadata":             types.ObjectType{AttrTypes: ForwardProxyPolicyRuleListRulesMetadataModelAttrTypes},
+	"no_http_connect_port": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"port_matcher":         types.ObjectType{AttrTypes: ForwardProxyPolicyRuleListRulesPortMatcherModelAttrTypes},
+	"prefix_list":          types.ObjectType{AttrTypes: ForwardProxyPolicyRuleListRulesPrefixListModelAttrTypes},
+	"tls_list":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"url_category_list":    types.ObjectType{AttrTypes: ForwardProxyPolicyRuleListRulesURLCategoryListModelAttrTypes},
+}
+
 // ForwardProxyPolicyRuleListRulesDstAsnListModel represents dst_asn_list block
 type ForwardProxyPolicyRuleListRulesDstAsnListModel struct {
 	AsNumbers types.List `tfsdk:"as_numbers"`
+}
+
+// ForwardProxyPolicyRuleListRulesDstAsnListModelAttrTypes defines the attribute types for ForwardProxyPolicyRuleListRulesDstAsnListModel
+var ForwardProxyPolicyRuleListRulesDstAsnListModelAttrTypes = map[string]attr.Type{
+	"as_numbers": types.ListType{ElemType: types.Int64Type},
 }
 
 // ForwardProxyPolicyRuleListRulesDstAsnSetModel represents dst_asn_set block
@@ -169,6 +283,13 @@ type ForwardProxyPolicyRuleListRulesDstAsnSetModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// ForwardProxyPolicyRuleListRulesDstAsnSetModelAttrTypes defines the attribute types for ForwardProxyPolicyRuleListRulesDstAsnSetModel
+var ForwardProxyPolicyRuleListRulesDstAsnSetModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // ForwardProxyPolicyRuleListRulesDstIPPrefixSetModel represents dst_ip_prefix_set block
 type ForwardProxyPolicyRuleListRulesDstIPPrefixSetModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -176,9 +297,21 @@ type ForwardProxyPolicyRuleListRulesDstIPPrefixSetModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// ForwardProxyPolicyRuleListRulesDstIPPrefixSetModelAttrTypes defines the attribute types for ForwardProxyPolicyRuleListRulesDstIPPrefixSetModel
+var ForwardProxyPolicyRuleListRulesDstIPPrefixSetModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // ForwardProxyPolicyRuleListRulesDstLabelSelectorModel represents dst_label_selector block
 type ForwardProxyPolicyRuleListRulesDstLabelSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
+}
+
+// ForwardProxyPolicyRuleListRulesDstLabelSelectorModelAttrTypes defines the attribute types for ForwardProxyPolicyRuleListRulesDstLabelSelectorModel
+var ForwardProxyPolicyRuleListRulesDstLabelSelectorModelAttrTypes = map[string]attr.Type{
+	"expressions": types.ListType{ElemType: types.StringType},
 }
 
 // ForwardProxyPolicyRuleListRulesDstPrefixListModel represents dst_prefix_list block
@@ -186,9 +319,19 @@ type ForwardProxyPolicyRuleListRulesDstPrefixListModel struct {
 	Prefixes types.List `tfsdk:"prefixes"`
 }
 
+// ForwardProxyPolicyRuleListRulesDstPrefixListModelAttrTypes defines the attribute types for ForwardProxyPolicyRuleListRulesDstPrefixListModel
+var ForwardProxyPolicyRuleListRulesDstPrefixListModelAttrTypes = map[string]attr.Type{
+	"prefixes": types.ListType{ElemType: types.StringType},
+}
+
 // ForwardProxyPolicyRuleListRulesHTTPListModel represents http_list block
 type ForwardProxyPolicyRuleListRulesHTTPListModel struct {
 	HTTPList []ForwardProxyPolicyRuleListRulesHTTPListHTTPListModel `tfsdk:"http_list"`
+}
+
+// ForwardProxyPolicyRuleListRulesHTTPListModelAttrTypes defines the attribute types for ForwardProxyPolicyRuleListRulesHTTPListModel
+var ForwardProxyPolicyRuleListRulesHTTPListModelAttrTypes = map[string]attr.Type{
+	"http_list": types.ListType{ElemType: types.ObjectType{AttrTypes: ForwardProxyPolicyRuleListRulesHTTPListHTTPListModelAttrTypes}},
 }
 
 // ForwardProxyPolicyRuleListRulesHTTPListHTTPListModel represents http_list block
@@ -202,6 +345,17 @@ type ForwardProxyPolicyRuleListRulesHTTPListHTTPListModel struct {
 	AnyPath         *ForwardProxyPolicyEmptyModel `tfsdk:"any_path"`
 }
 
+// ForwardProxyPolicyRuleListRulesHTTPListHTTPListModelAttrTypes defines the attribute types for ForwardProxyPolicyRuleListRulesHTTPListHTTPListModel
+var ForwardProxyPolicyRuleListRulesHTTPListHTTPListModelAttrTypes = map[string]attr.Type{
+	"exact_value":       types.StringType,
+	"path_exact_value":  types.StringType,
+	"path_prefix_value": types.StringType,
+	"path_regex_value":  types.StringType,
+	"regex_value":       types.StringType,
+	"suffix_value":      types.StringType,
+	"any_path":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ForwardProxyPolicyRuleListRulesIPPrefixSetModel represents ip_prefix_set block
 type ForwardProxyPolicyRuleListRulesIPPrefixSetModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -209,9 +363,21 @@ type ForwardProxyPolicyRuleListRulesIPPrefixSetModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// ForwardProxyPolicyRuleListRulesIPPrefixSetModelAttrTypes defines the attribute types for ForwardProxyPolicyRuleListRulesIPPrefixSetModel
+var ForwardProxyPolicyRuleListRulesIPPrefixSetModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // ForwardProxyPolicyRuleListRulesLabelSelectorModel represents label_selector block
 type ForwardProxyPolicyRuleListRulesLabelSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
+}
+
+// ForwardProxyPolicyRuleListRulesLabelSelectorModelAttrTypes defines the attribute types for ForwardProxyPolicyRuleListRulesLabelSelectorModel
+var ForwardProxyPolicyRuleListRulesLabelSelectorModelAttrTypes = map[string]attr.Type{
+	"expressions": types.ListType{ElemType: types.StringType},
 }
 
 // ForwardProxyPolicyRuleListRulesMetadataModel represents metadata block
@@ -220,10 +386,22 @@ type ForwardProxyPolicyRuleListRulesMetadataModel struct {
 	Name            types.String `tfsdk:"name"`
 }
 
+// ForwardProxyPolicyRuleListRulesMetadataModelAttrTypes defines the attribute types for ForwardProxyPolicyRuleListRulesMetadataModel
+var ForwardProxyPolicyRuleListRulesMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
+}
+
 // ForwardProxyPolicyRuleListRulesPortMatcherModel represents port_matcher block
 type ForwardProxyPolicyRuleListRulesPortMatcherModel struct {
 	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
 	Ports         types.List `tfsdk:"ports"`
+}
+
+// ForwardProxyPolicyRuleListRulesPortMatcherModelAttrTypes defines the attribute types for ForwardProxyPolicyRuleListRulesPortMatcherModel
+var ForwardProxyPolicyRuleListRulesPortMatcherModelAttrTypes = map[string]attr.Type{
+	"invert_matcher": types.BoolType,
+	"ports":          types.ListType{ElemType: types.StringType},
 }
 
 // ForwardProxyPolicyRuleListRulesPrefixListModel represents prefix_list block
@@ -231,9 +409,19 @@ type ForwardProxyPolicyRuleListRulesPrefixListModel struct {
 	Prefixes types.List `tfsdk:"prefixes"`
 }
 
+// ForwardProxyPolicyRuleListRulesPrefixListModelAttrTypes defines the attribute types for ForwardProxyPolicyRuleListRulesPrefixListModel
+var ForwardProxyPolicyRuleListRulesPrefixListModelAttrTypes = map[string]attr.Type{
+	"prefixes": types.ListType{ElemType: types.StringType},
+}
+
 // ForwardProxyPolicyRuleListRulesTLSListModel represents tls_list block
 type ForwardProxyPolicyRuleListRulesTLSListModel struct {
 	TLSList []ForwardProxyPolicyRuleListRulesTLSListTLSListModel `tfsdk:"tls_list"`
+}
+
+// ForwardProxyPolicyRuleListRulesTLSListModelAttrTypes defines the attribute types for ForwardProxyPolicyRuleListRulesTLSListModel
+var ForwardProxyPolicyRuleListRulesTLSListModelAttrTypes = map[string]attr.Type{
+	"tls_list": types.ListType{ElemType: types.ObjectType{AttrTypes: ForwardProxyPolicyRuleListRulesTLSListTLSListModelAttrTypes}},
 }
 
 // ForwardProxyPolicyRuleListRulesTLSListTLSListModel represents tls_list block
@@ -243,9 +431,21 @@ type ForwardProxyPolicyRuleListRulesTLSListTLSListModel struct {
 	SuffixValue types.String `tfsdk:"suffix_value"`
 }
 
+// ForwardProxyPolicyRuleListRulesTLSListTLSListModelAttrTypes defines the attribute types for ForwardProxyPolicyRuleListRulesTLSListTLSListModel
+var ForwardProxyPolicyRuleListRulesTLSListTLSListModelAttrTypes = map[string]attr.Type{
+	"exact_value":  types.StringType,
+	"regex_value":  types.StringType,
+	"suffix_value": types.StringType,
+}
+
 // ForwardProxyPolicyRuleListRulesURLCategoryListModel represents url_category_list block
 type ForwardProxyPolicyRuleListRulesURLCategoryListModel struct {
 	URLCategories types.List `tfsdk:"url_categories"`
+}
+
+// ForwardProxyPolicyRuleListRulesURLCategoryListModelAttrTypes defines the attribute types for ForwardProxyPolicyRuleListRulesURLCategoryListModel
+var ForwardProxyPolicyRuleListRulesURLCategoryListModelAttrTypes = map[string]attr.Type{
+	"url_categories": types.ListType{ElemType: types.StringType},
 }
 
 type ForwardProxyPolicyResourceModel struct {
@@ -535,6 +735,9 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional:            true,
 						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
 					},
 				},
 			},
@@ -593,6 +796,9 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -611,6 +817,9 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -691,6 +900,9 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -1837,11 +2049,17 @@ func (r *ForwardProxyPolicyResource) Read(ctx context.Context, req resource.Read
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

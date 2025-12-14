@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -55,16 +56,22 @@ type IPPrefixSetIpv4PrefixesModel struct {
 	Ipv4Prefix      types.String `tfsdk:"ipv4_prefix"`
 }
 
+// IPPrefixSetIpv4PrefixesModelAttrTypes defines the attribute types for IPPrefixSetIpv4PrefixesModel
+var IPPrefixSetIpv4PrefixesModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"ipv4_prefix":      types.StringType,
+}
+
 type IPPrefixSetResourceModel struct {
-	Name         types.String                   `tfsdk:"name"`
-	Namespace    types.String                   `tfsdk:"namespace"`
-	Annotations  types.Map                      `tfsdk:"annotations"`
-	Description  types.String                   `tfsdk:"description"`
-	Disable      types.Bool                     `tfsdk:"disable"`
-	Labels       types.Map                      `tfsdk:"labels"`
-	ID           types.String                   `tfsdk:"id"`
-	Timeouts     timeouts.Value                 `tfsdk:"timeouts"`
-	Ipv4Prefixes []IPPrefixSetIpv4PrefixesModel `tfsdk:"ipv4_prefixes"`
+	Name         types.String   `tfsdk:"name"`
+	Namespace    types.String   `tfsdk:"namespace"`
+	Annotations  types.Map      `tfsdk:"annotations"`
+	Description  types.String   `tfsdk:"description"`
+	Disable      types.Bool     `tfsdk:"disable"`
+	Labels       types.Map      `tfsdk:"labels"`
+	ID           types.String   `tfsdk:"id"`
+	Timeouts     timeouts.Value `tfsdk:"timeouts"`
+	Ipv4Prefixes types.List     `tfsdk:"ipv4_prefixes"`
 }
 
 func (r *IPPrefixSetResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -292,19 +299,24 @@ func (r *IPPrefixSetResource) Create(ctx context.Context, req resource.CreateReq
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.Ipv4Prefixes) > 0 {
-		var ipv4_prefixesList []map[string]interface{}
-		for _, item := range data.Ipv4Prefixes {
-			itemMap := make(map[string]interface{})
-			if !item.DescriptionSpec.IsNull() && !item.DescriptionSpec.IsUnknown() {
-				itemMap["description"] = item.DescriptionSpec.ValueString()
+	if !data.Ipv4Prefixes.IsNull() && !data.Ipv4Prefixes.IsUnknown() {
+		var ipv4_prefixesItems []IPPrefixSetIpv4PrefixesModel
+		diags := data.Ipv4Prefixes.ElementsAs(ctx, &ipv4_prefixesItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(ipv4_prefixesItems) > 0 {
+			var ipv4_prefixesList []map[string]interface{}
+			for _, item := range ipv4_prefixesItems {
+				itemMap := make(map[string]interface{})
+				if !item.DescriptionSpec.IsNull() && !item.DescriptionSpec.IsUnknown() {
+					itemMap["description"] = item.DescriptionSpec.ValueString()
+				}
+				if !item.Ipv4Prefix.IsNull() && !item.Ipv4Prefix.IsUnknown() {
+					itemMap["ipv4_prefix"] = item.Ipv4Prefix.ValueString()
+				}
+				ipv4_prefixesList = append(ipv4_prefixesList, itemMap)
 			}
-			if !item.Ipv4Prefix.IsNull() && !item.Ipv4Prefix.IsUnknown() {
-				itemMap["ipv4_prefix"] = item.Ipv4Prefix.ValueString()
-			}
-			ipv4_prefixesList = append(ipv4_prefixesList, itemMap)
+			createReq.Spec["ipv4_prefixes"] = ipv4_prefixesList
 		}
-		createReq.Spec["ipv4_prefixes"] = ipv4_prefixesList
 	}
 
 	apiResource, err := r.client.CreateIPPrefixSet(ctx, createReq)
@@ -321,6 +333,10 @@ func (r *IPPrefixSetResource) Create(ctx context.Context, req resource.CreateReq
 	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["ipv4_prefixes"].([]interface{}); ok && len(listData) > 0 {
 		var ipv4_prefixesList []IPPrefixSetIpv4PrefixesModel
+		var existingIpv4PrefixesItems []IPPrefixSetIpv4PrefixesModel
+		if !data.Ipv4Prefixes.IsNull() && !data.Ipv4Prefixes.IsUnknown() {
+			data.Ipv4Prefixes.ElementsAs(ctx, &existingIpv4PrefixesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -340,7 +356,14 @@ func (r *IPPrefixSetResource) Create(ctx context.Context, req resource.CreateReq
 				})
 			}
 		}
-		data.Ipv4Prefixes = ipv4_prefixesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: IPPrefixSetIpv4PrefixesModelAttrTypes}, ipv4_prefixesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Ipv4Prefixes = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Ipv4Prefixes = types.ListNull(types.ObjectType{AttrTypes: IPPrefixSetIpv4PrefixesModelAttrTypes})
 	}
 
 	psd := privatestate.NewPrivateStateData()
@@ -406,11 +429,17 @@ func (r *IPPrefixSetResource) Read(ctx context.Context, req resource.ReadRequest
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -437,6 +466,10 @@ func (r *IPPrefixSetResource) Read(ctx context.Context, req resource.ReadRequest
 	})
 	if listData, ok := apiResource.Spec["ipv4_prefixes"].([]interface{}); ok && len(listData) > 0 {
 		var ipv4_prefixesList []IPPrefixSetIpv4PrefixesModel
+		var existingIpv4PrefixesItems []IPPrefixSetIpv4PrefixesModel
+		if !data.Ipv4Prefixes.IsNull() && !data.Ipv4Prefixes.IsUnknown() {
+			data.Ipv4Prefixes.ElementsAs(ctx, &existingIpv4PrefixesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -456,7 +489,14 @@ func (r *IPPrefixSetResource) Read(ctx context.Context, req resource.ReadRequest
 				})
 			}
 		}
-		data.Ipv4Prefixes = ipv4_prefixesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: IPPrefixSetIpv4PrefixesModelAttrTypes}, ipv4_prefixesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Ipv4Prefixes = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Ipv4Prefixes = types.ListNull(types.ObjectType{AttrTypes: IPPrefixSetIpv4PrefixesModelAttrTypes})
 	}
 
 	// Preserve or set the managed marker for future Read operations
@@ -518,19 +558,24 @@ func (r *IPPrefixSetResource) Update(ctx context.Context, req resource.UpdateReq
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.Ipv4Prefixes) > 0 {
-		var ipv4_prefixesList []map[string]interface{}
-		for _, item := range data.Ipv4Prefixes {
-			itemMap := make(map[string]interface{})
-			if !item.DescriptionSpec.IsNull() && !item.DescriptionSpec.IsUnknown() {
-				itemMap["description"] = item.DescriptionSpec.ValueString()
+	if !data.Ipv4Prefixes.IsNull() && !data.Ipv4Prefixes.IsUnknown() {
+		var ipv4_prefixesItems []IPPrefixSetIpv4PrefixesModel
+		diags := data.Ipv4Prefixes.ElementsAs(ctx, &ipv4_prefixesItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(ipv4_prefixesItems) > 0 {
+			var ipv4_prefixesList []map[string]interface{}
+			for _, item := range ipv4_prefixesItems {
+				itemMap := make(map[string]interface{})
+				if !item.DescriptionSpec.IsNull() && !item.DescriptionSpec.IsUnknown() {
+					itemMap["description"] = item.DescriptionSpec.ValueString()
+				}
+				if !item.Ipv4Prefix.IsNull() && !item.Ipv4Prefix.IsUnknown() {
+					itemMap["ipv4_prefix"] = item.Ipv4Prefix.ValueString()
+				}
+				ipv4_prefixesList = append(ipv4_prefixesList, itemMap)
 			}
-			if !item.Ipv4Prefix.IsNull() && !item.Ipv4Prefix.IsUnknown() {
-				itemMap["ipv4_prefix"] = item.Ipv4Prefix.ValueString()
-			}
-			ipv4_prefixesList = append(ipv4_prefixesList, itemMap)
+			apiResource.Spec["ipv4_prefixes"] = ipv4_prefixesList
 		}
-		apiResource.Spec["ipv4_prefixes"] = ipv4_prefixesList
 	}
 
 	_, err := r.client.UpdateIPPrefixSet(ctx, apiResource)
@@ -558,6 +603,10 @@ func (r *IPPrefixSetResource) Update(ctx context.Context, req resource.UpdateReq
 	_ = isImport          // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["ipv4_prefixes"].([]interface{}); ok && len(listData) > 0 {
 		var ipv4_prefixesList []IPPrefixSetIpv4PrefixesModel
+		var existingIpv4PrefixesItems []IPPrefixSetIpv4PrefixesModel
+		if !data.Ipv4Prefixes.IsNull() && !data.Ipv4Prefixes.IsUnknown() {
+			data.Ipv4Prefixes.ElementsAs(ctx, &existingIpv4PrefixesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -577,7 +626,14 @@ func (r *IPPrefixSetResource) Update(ctx context.Context, req resource.UpdateReq
 				})
 			}
 		}
-		data.Ipv4Prefixes = ipv4_prefixesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: IPPrefixSetIpv4PrefixesModelAttrTypes}, ipv4_prefixesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Ipv4Prefixes = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Ipv4Prefixes = types.ListNull(types.ObjectType{AttrTypes: IPPrefixSetIpv4PrefixesModelAttrTypes})
 	}
 
 	psd := privatestate.NewPrivateStateData()

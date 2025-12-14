@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -54,9 +55,19 @@ type TenantConfigurationBasicConfigurationModel struct {
 	DisplayName types.String `tfsdk:"display_name"`
 }
 
+// TenantConfigurationBasicConfigurationModelAttrTypes defines the attribute types for TenantConfigurationBasicConfigurationModel
+var TenantConfigurationBasicConfigurationModelAttrTypes = map[string]attr.Type{
+	"display_name": types.StringType,
+}
+
 // TenantConfigurationBruteForceDetectionSettingsModel represents brute_force_detection_settings block
 type TenantConfigurationBruteForceDetectionSettingsModel struct {
 	MaxLoginFailures types.Int64 `tfsdk:"max_login_failures"`
+}
+
+// TenantConfigurationBruteForceDetectionSettingsModelAttrTypes defines the attribute types for TenantConfigurationBruteForceDetectionSettingsModel
+var TenantConfigurationBruteForceDetectionSettingsModelAttrTypes = map[string]attr.Type{
+	"max_login_failures": types.Int64Type,
 }
 
 // TenantConfigurationPasswordPolicyModel represents password_policy block
@@ -69,6 +80,18 @@ type TenantConfigurationPasswordPolicyModel struct {
 	NotUsername         types.Bool  `tfsdk:"not_username"`
 	SpecialCharacters   types.Int64 `tfsdk:"special_characters"`
 	UppercaseCharacters types.Int64 `tfsdk:"uppercase_characters"`
+}
+
+// TenantConfigurationPasswordPolicyModelAttrTypes defines the attribute types for TenantConfigurationPasswordPolicyModel
+var TenantConfigurationPasswordPolicyModelAttrTypes = map[string]attr.Type{
+	"digits":               types.Int64Type,
+	"expire_password":      types.Int64Type,
+	"lowercase_characters": types.Int64Type,
+	"minimum_length":       types.Int64Type,
+	"not_recently_used":    types.Int64Type,
+	"not_username":         types.BoolType,
+	"special_characters":   types.Int64Type,
+	"uppercase_characters": types.Int64Type,
 }
 
 type TenantConfigurationResourceModel struct {
@@ -546,11 +569,17 @@ func (r *TenantConfigurationResource) Read(ctx context.Context, req resource.Rea
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -54,6 +55,11 @@ type K8SClusterClusterWideAppListModel struct {
 	ClusterWideApps []K8SClusterClusterWideAppListClusterWideAppsModel `tfsdk:"cluster_wide_apps"`
 }
 
+// K8SClusterClusterWideAppListModelAttrTypes defines the attribute types for K8SClusterClusterWideAppListModel
+var K8SClusterClusterWideAppListModelAttrTypes = map[string]attr.Type{
+	"cluster_wide_apps": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+}
+
 // K8SClusterClusterWideAppListClusterWideAppsModel represents cluster_wide_apps block
 type K8SClusterClusterWideAppListClusterWideAppsModel struct {
 	ArgoCd        *K8SClusterClusterWideAppListClusterWideAppsArgoCdModel `tfsdk:"argo_cd"`
@@ -62,9 +68,22 @@ type K8SClusterClusterWideAppListClusterWideAppsModel struct {
 	Prometheus    *K8SClusterEmptyModel                                   `tfsdk:"prometheus"`
 }
 
+// K8SClusterClusterWideAppListClusterWideAppsModelAttrTypes defines the attribute types for K8SClusterClusterWideAppListClusterWideAppsModel
+var K8SClusterClusterWideAppListClusterWideAppsModelAttrTypes = map[string]attr.Type{
+	"argo_cd":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dashboard":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"metrics_server": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"prometheus":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // K8SClusterClusterWideAppListClusterWideAppsArgoCdModel represents argo_cd block
 type K8SClusterClusterWideAppListClusterWideAppsArgoCdModel struct {
 	LocalDomain *K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainModel `tfsdk:"local_domain"`
+}
+
+// K8SClusterClusterWideAppListClusterWideAppsArgoCdModelAttrTypes defines the attribute types for K8SClusterClusterWideAppListClusterWideAppsArgoCdModel
+var K8SClusterClusterWideAppListClusterWideAppsArgoCdModelAttrTypes = map[string]attr.Type{
+	"local_domain": types.ObjectType{AttrTypes: K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainModelAttrTypes},
 }
 
 // K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainModel represents local_domain block
@@ -75,10 +94,24 @@ type K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainModel struct {
 	Password    *K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordModel `tfsdk:"password"`
 }
 
+// K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainModelAttrTypes defines the attribute types for K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainModel
+var K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainModelAttrTypes = map[string]attr.Type{
+	"local_domain": types.StringType,
+	"port":         types.Int64Type,
+	"default_port": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"password":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordModel represents password block
 type K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordModel struct {
 	BlindfoldSecretInfo *K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordModelAttrTypes defines the attribute types for K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordModel
+var K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordClearSecretInfoModelAttrTypes},
 }
 
 // K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -88,15 +121,33 @@ type K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordBlindfo
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordBlindfoldSecretInfoModelAttrTypes defines the attribute types for K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordBlindfoldSecretInfoModel
+var K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordClearSecretInfoModel represents clear_secret_info block
 type K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
+// K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordClearSecretInfoModelAttrTypes defines the attribute types for K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordClearSecretInfoModel
+var K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 // K8SClusterInsecureRegistryListModel represents insecure_registry_list block
 type K8SClusterInsecureRegistryListModel struct {
 	InsecureRegistries types.List `tfsdk:"insecure_registries"`
+}
+
+// K8SClusterInsecureRegistryListModelAttrTypes defines the attribute types for K8SClusterInsecureRegistryListModel
+var K8SClusterInsecureRegistryListModelAttrTypes = map[string]attr.Type{
+	"insecure_registries": types.ListType{ElemType: types.StringType},
 }
 
 // K8SClusterLocalAccessConfigModel represents local_access_config block
@@ -106,9 +157,21 @@ type K8SClusterLocalAccessConfigModel struct {
 	DefaultPort *K8SClusterEmptyModel `tfsdk:"default_port"`
 }
 
+// K8SClusterLocalAccessConfigModelAttrTypes defines the attribute types for K8SClusterLocalAccessConfigModel
+var K8SClusterLocalAccessConfigModelAttrTypes = map[string]attr.Type{
+	"local_domain": types.StringType,
+	"port":         types.Int64Type,
+	"default_port": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // K8SClusterUseCustomClusterRoleBindingsModel represents use_custom_cluster_role_bindings block
 type K8SClusterUseCustomClusterRoleBindingsModel struct {
 	ClusterRoleBindings []K8SClusterUseCustomClusterRoleBindingsClusterRoleBindingsModel `tfsdk:"cluster_role_bindings"`
+}
+
+// K8SClusterUseCustomClusterRoleBindingsModelAttrTypes defines the attribute types for K8SClusterUseCustomClusterRoleBindingsModel
+var K8SClusterUseCustomClusterRoleBindingsModelAttrTypes = map[string]attr.Type{
+	"cluster_role_bindings": types.ListType{ElemType: types.ObjectType{AttrTypes: K8SClusterUseCustomClusterRoleBindingsClusterRoleBindingsModelAttrTypes}},
 }
 
 // K8SClusterUseCustomClusterRoleBindingsClusterRoleBindingsModel represents cluster_role_bindings block
@@ -118,9 +181,21 @@ type K8SClusterUseCustomClusterRoleBindingsClusterRoleBindingsModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// K8SClusterUseCustomClusterRoleBindingsClusterRoleBindingsModelAttrTypes defines the attribute types for K8SClusterUseCustomClusterRoleBindingsClusterRoleBindingsModel
+var K8SClusterUseCustomClusterRoleBindingsClusterRoleBindingsModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // K8SClusterUseCustomClusterRoleListModel represents use_custom_cluster_role_list block
 type K8SClusterUseCustomClusterRoleListModel struct {
 	ClusterRoles []K8SClusterUseCustomClusterRoleListClusterRolesModel `tfsdk:"cluster_roles"`
+}
+
+// K8SClusterUseCustomClusterRoleListModelAttrTypes defines the attribute types for K8SClusterUseCustomClusterRoleListModel
+var K8SClusterUseCustomClusterRoleListModelAttrTypes = map[string]attr.Type{
+	"cluster_roles": types.ListType{ElemType: types.ObjectType{AttrTypes: K8SClusterUseCustomClusterRoleListClusterRolesModelAttrTypes}},
 }
 
 // K8SClusterUseCustomClusterRoleListClusterRolesModel represents cluster_roles block
@@ -130,6 +205,13 @@ type K8SClusterUseCustomClusterRoleListClusterRolesModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// K8SClusterUseCustomClusterRoleListClusterRolesModelAttrTypes defines the attribute types for K8SClusterUseCustomClusterRoleListClusterRolesModel
+var K8SClusterUseCustomClusterRoleListClusterRolesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // K8SClusterUseCustomPodSecurityAdmissionModel represents use_custom_pod_security_admission block
 type K8SClusterUseCustomPodSecurityAdmissionModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -137,9 +219,21 @@ type K8SClusterUseCustomPodSecurityAdmissionModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// K8SClusterUseCustomPodSecurityAdmissionModelAttrTypes defines the attribute types for K8SClusterUseCustomPodSecurityAdmissionModel
+var K8SClusterUseCustomPodSecurityAdmissionModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // K8SClusterUseCustomPspListModel represents use_custom_psp_list block
 type K8SClusterUseCustomPspListModel struct {
 	PodSecurityPolicies []K8SClusterUseCustomPspListPodSecurityPoliciesModel `tfsdk:"pod_security_policies"`
+}
+
+// K8SClusterUseCustomPspListModelAttrTypes defines the attribute types for K8SClusterUseCustomPspListModel
+var K8SClusterUseCustomPspListModelAttrTypes = map[string]attr.Type{
+	"pod_security_policies": types.ListType{ElemType: types.ObjectType{AttrTypes: K8SClusterUseCustomPspListPodSecurityPoliciesModelAttrTypes}},
 }
 
 // K8SClusterUseCustomPspListPodSecurityPoliciesModel represents pod_security_policies block
@@ -147,6 +241,13 @@ type K8SClusterUseCustomPspListPodSecurityPoliciesModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// K8SClusterUseCustomPspListPodSecurityPoliciesModelAttrTypes defines the attribute types for K8SClusterUseCustomPspListPodSecurityPoliciesModel
+var K8SClusterUseCustomPspListPodSecurityPoliciesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 type K8SClusterResourceModel struct {
@@ -394,6 +495,9 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -420,6 +524,9 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -441,6 +548,9 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional:            true,
 						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
 					},
 				},
 			},
@@ -464,6 +574,9 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -1168,11 +1281,17 @@ func (r *K8SClusterResource) Read(ctx context.Context, req resource.ReadRequest,
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -58,9 +59,22 @@ type FleetBlockedServicesModel struct {
 	WebUserInterface *FleetEmptyModel `tfsdk:"web_user_interface"`
 }
 
+// FleetBlockedServicesModelAttrTypes defines the attribute types for FleetBlockedServicesModel
+var FleetBlockedServicesModelAttrTypes = map[string]attr.Type{
+	"network_type":       types.StringType,
+	"dns":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ssh":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"web_user_interface": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // FleetBondDeviceListModel represents bond_device_list block
 type FleetBondDeviceListModel struct {
 	BondDevices []FleetBondDeviceListBondDevicesModel `tfsdk:"bond_devices"`
+}
+
+// FleetBondDeviceListModelAttrTypes defines the attribute types for FleetBondDeviceListModel
+var FleetBondDeviceListModelAttrTypes = map[string]attr.Type{
+	"bond_devices": types.ListType{ElemType: types.ObjectType{AttrTypes: FleetBondDeviceListBondDevicesModelAttrTypes}},
 }
 
 // FleetBondDeviceListBondDevicesModel represents bond_devices block
@@ -73,9 +87,24 @@ type FleetBondDeviceListBondDevicesModel struct {
 	Lacp                *FleetBondDeviceListBondDevicesLacpModel `tfsdk:"lacp"`
 }
 
+// FleetBondDeviceListBondDevicesModelAttrTypes defines the attribute types for FleetBondDeviceListBondDevicesModel
+var FleetBondDeviceListBondDevicesModelAttrTypes = map[string]attr.Type{
+	"devices":               types.ListType{ElemType: types.StringType},
+	"link_polling_interval": types.Int64Type,
+	"link_up_delay":         types.Int64Type,
+	"name":                  types.StringType,
+	"active_backup":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"lacp":                  types.ObjectType{AttrTypes: FleetBondDeviceListBondDevicesLacpModelAttrTypes},
+}
+
 // FleetBondDeviceListBondDevicesLacpModel represents lacp block
 type FleetBondDeviceListBondDevicesLacpModel struct {
 	Rate types.Int64 `tfsdk:"rate"`
+}
+
+// FleetBondDeviceListBondDevicesLacpModelAttrTypes defines the attribute types for FleetBondDeviceListBondDevicesLacpModel
+var FleetBondDeviceListBondDevicesLacpModelAttrTypes = map[string]attr.Type{
+	"rate": types.Int64Type,
 }
 
 // FleetDcClusterGroupModel represents dc_cluster_group block
@@ -85,6 +114,13 @@ type FleetDcClusterGroupModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// FleetDcClusterGroupModelAttrTypes defines the attribute types for FleetDcClusterGroupModel
+var FleetDcClusterGroupModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // FleetDcClusterGroupInsideModel represents dc_cluster_group_inside block
 type FleetDcClusterGroupInsideModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -92,9 +128,21 @@ type FleetDcClusterGroupInsideModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// FleetDcClusterGroupInsideModelAttrTypes defines the attribute types for FleetDcClusterGroupInsideModel
+var FleetDcClusterGroupInsideModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // FleetDeviceListModel represents device_list block
 type FleetDeviceListModel struct {
 	Devices []FleetDeviceListDevicesModel `tfsdk:"devices"`
+}
+
+// FleetDeviceListModelAttrTypes defines the attribute types for FleetDeviceListModel
+var FleetDeviceListModelAttrTypes = map[string]attr.Type{
+	"devices": types.ListType{ElemType: types.ObjectType{AttrTypes: FleetDeviceListDevicesModelAttrTypes}},
 }
 
 // FleetDeviceListDevicesModel represents devices block
@@ -104,10 +152,23 @@ type FleetDeviceListDevicesModel struct {
 	NetworkDevice *FleetDeviceListDevicesNetworkDeviceModel `tfsdk:"network_device"`
 }
 
+// FleetDeviceListDevicesModelAttrTypes defines the attribute types for FleetDeviceListDevicesModel
+var FleetDeviceListDevicesModelAttrTypes = map[string]attr.Type{
+	"name":           types.StringType,
+	"owner":          types.StringType,
+	"network_device": types.ObjectType{AttrTypes: FleetDeviceListDevicesNetworkDeviceModelAttrTypes},
+}
+
 // FleetDeviceListDevicesNetworkDeviceModel represents network_device block
 type FleetDeviceListDevicesNetworkDeviceModel struct {
 	Use       types.String                                        `tfsdk:"use"`
 	Interface []FleetDeviceListDevicesNetworkDeviceInterfaceModel `tfsdk:"interface"`
+}
+
+// FleetDeviceListDevicesNetworkDeviceModelAttrTypes defines the attribute types for FleetDeviceListDevicesNetworkDeviceModel
+var FleetDeviceListDevicesNetworkDeviceModelAttrTypes = map[string]attr.Type{
+	"use":       types.StringType,
+	"interface": types.ListType{ElemType: types.ObjectType{AttrTypes: FleetDeviceListDevicesNetworkDeviceInterfaceModelAttrTypes}},
 }
 
 // FleetDeviceListDevicesNetworkDeviceInterfaceModel represents interface block
@@ -119,11 +180,27 @@ type FleetDeviceListDevicesNetworkDeviceInterfaceModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// FleetDeviceListDevicesNetworkDeviceInterfaceModelAttrTypes defines the attribute types for FleetDeviceListDevicesNetworkDeviceInterfaceModel
+var FleetDeviceListDevicesNetworkDeviceInterfaceModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // FleetEnableVgpuModel represents enable_vgpu block
 type FleetEnableVgpuModel struct {
 	FeatureType   types.String `tfsdk:"feature_type"`
 	ServerAddress types.String `tfsdk:"server_address"`
 	ServerPort    types.Int64  `tfsdk:"server_port"`
+}
+
+// FleetEnableVgpuModelAttrTypes defines the attribute types for FleetEnableVgpuModel
+var FleetEnableVgpuModelAttrTypes = map[string]attr.Type{
+	"feature_type":   types.StringType,
+	"server_address": types.StringType,
+	"server_port":    types.Int64Type,
 }
 
 // FleetInsideVirtualNetworkModel represents inside_virtual_network block
@@ -135,9 +212,23 @@ type FleetInsideVirtualNetworkModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// FleetInsideVirtualNetworkModelAttrTypes defines the attribute types for FleetInsideVirtualNetworkModel
+var FleetInsideVirtualNetworkModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // FleetInterfaceListModel represents interface_list block
 type FleetInterfaceListModel struct {
 	Interfaces []FleetInterfaceListInterfacesModel `tfsdk:"interfaces"`
+}
+
+// FleetInterfaceListModelAttrTypes defines the attribute types for FleetInterfaceListModel
+var FleetInterfaceListModelAttrTypes = map[string]attr.Type{
+	"interfaces": types.ListType{ElemType: types.ObjectType{AttrTypes: FleetInterfaceListInterfacesModelAttrTypes}},
 }
 
 // FleetInterfaceListInterfacesModel represents interfaces block
@@ -147,10 +238,23 @@ type FleetInterfaceListInterfacesModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// FleetInterfaceListInterfacesModelAttrTypes defines the attribute types for FleetInterfaceListInterfacesModel
+var FleetInterfaceListInterfacesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // FleetKubernetesUpgradeDrainModel represents kubernetes_upgrade_drain block
 type FleetKubernetesUpgradeDrainModel struct {
 	DisableUpgradeDrain *FleetEmptyModel                                    `tfsdk:"disable_upgrade_drain"`
 	EnableUpgradeDrain  *FleetKubernetesUpgradeDrainEnableUpgradeDrainModel `tfsdk:"enable_upgrade_drain"`
+}
+
+// FleetKubernetesUpgradeDrainModelAttrTypes defines the attribute types for FleetKubernetesUpgradeDrainModel
+var FleetKubernetesUpgradeDrainModelAttrTypes = map[string]attr.Type{
+	"disable_upgrade_drain": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_upgrade_drain":  types.ObjectType{AttrTypes: FleetKubernetesUpgradeDrainEnableUpgradeDrainModelAttrTypes},
 }
 
 // FleetKubernetesUpgradeDrainEnableUpgradeDrainModel represents enable_upgrade_drain block
@@ -161,11 +265,26 @@ type FleetKubernetesUpgradeDrainEnableUpgradeDrainModel struct {
 	EnableVegaUpgradeMode        *FleetEmptyModel `tfsdk:"enable_vega_upgrade_mode"`
 }
 
+// FleetKubernetesUpgradeDrainEnableUpgradeDrainModelAttrTypes defines the attribute types for FleetKubernetesUpgradeDrainEnableUpgradeDrainModel
+var FleetKubernetesUpgradeDrainEnableUpgradeDrainModelAttrTypes = map[string]attr.Type{
+	"drain_max_unavailable_node_count": types.Int64Type,
+	"drain_node_timeout":               types.Int64Type,
+	"disable_vega_upgrade_mode":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_vega_upgrade_mode":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // FleetLogReceiverModel represents log_receiver block
 type FleetLogReceiverModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// FleetLogReceiverModelAttrTypes defines the attribute types for FleetLogReceiverModel
+var FleetLogReceiverModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // FleetNetworkConnectorsModel represents network_connectors block
@@ -177,6 +296,15 @@ type FleetNetworkConnectorsModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// FleetNetworkConnectorsModelAttrTypes defines the attribute types for FleetNetworkConnectorsModel
+var FleetNetworkConnectorsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // FleetNetworkFirewallModel represents network_firewall block
 type FleetNetworkFirewallModel struct {
 	Kind      types.String `tfsdk:"kind"`
@@ -184,6 +312,15 @@ type FleetNetworkFirewallModel struct {
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 	Uid       types.String `tfsdk:"uid"`
+}
+
+// FleetNetworkFirewallModelAttrTypes defines the attribute types for FleetNetworkFirewallModel
+var FleetNetworkFirewallModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
 }
 
 // FleetOutsideVirtualNetworkModel represents outside_virtual_network block
@@ -195,10 +332,25 @@ type FleetOutsideVirtualNetworkModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// FleetOutsideVirtualNetworkModelAttrTypes defines the attribute types for FleetOutsideVirtualNetworkModel
+var FleetOutsideVirtualNetworkModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // FleetPerformanceEnhancementModeModel represents performance_enhancement_mode block
 type FleetPerformanceEnhancementModeModel struct {
 	PerfModeL3Enhanced *FleetPerformanceEnhancementModePerfModeL3EnhancedModel `tfsdk:"perf_mode_l3_enhanced"`
 	PerfModeL7Enhanced *FleetEmptyModel                                        `tfsdk:"perf_mode_l7_enhanced"`
+}
+
+// FleetPerformanceEnhancementModeModelAttrTypes defines the attribute types for FleetPerformanceEnhancementModeModel
+var FleetPerformanceEnhancementModeModelAttrTypes = map[string]attr.Type{
+	"perf_mode_l3_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"perf_mode_l7_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // FleetPerformanceEnhancementModePerfModeL3EnhancedModel represents perf_mode_l3_enhanced block
@@ -207,9 +359,20 @@ type FleetPerformanceEnhancementModePerfModeL3EnhancedModel struct {
 	NoJumbo *FleetEmptyModel `tfsdk:"no_jumbo"`
 }
 
+// FleetPerformanceEnhancementModePerfModeL3EnhancedModelAttrTypes defines the attribute types for FleetPerformanceEnhancementModePerfModeL3EnhancedModel
+var FleetPerformanceEnhancementModePerfModeL3EnhancedModelAttrTypes = map[string]attr.Type{
+	"jumbo":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_jumbo": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // FleetSriovInterfacesModel represents sriov_interfaces block
 type FleetSriovInterfacesModel struct {
 	SriovInterface []FleetSriovInterfacesSriovInterfaceModel `tfsdk:"sriov_interface"`
+}
+
+// FleetSriovInterfacesModelAttrTypes defines the attribute types for FleetSriovInterfacesModel
+var FleetSriovInterfacesModelAttrTypes = map[string]attr.Type{
+	"sriov_interface": types.ListType{ElemType: types.ObjectType{AttrTypes: FleetSriovInterfacesSriovInterfaceModelAttrTypes}},
 }
 
 // FleetSriovInterfacesSriovInterfaceModel represents sriov_interface block
@@ -219,9 +382,21 @@ type FleetSriovInterfacesSriovInterfaceModel struct {
 	NumberOfVfs     types.Int64  `tfsdk:"number_of_vfs"`
 }
 
+// FleetSriovInterfacesSriovInterfaceModelAttrTypes defines the attribute types for FleetSriovInterfacesSriovInterfaceModel
+var FleetSriovInterfacesSriovInterfaceModelAttrTypes = map[string]attr.Type{
+	"interface_name":     types.StringType,
+	"number_of_vfio_vfs": types.Int64Type,
+	"number_of_vfs":      types.Int64Type,
+}
+
 // FleetStorageClassListModel represents storage_class_list block
 type FleetStorageClassListModel struct {
 	StorageClasses []FleetStorageClassListStorageClassesModel `tfsdk:"storage_classes"`
+}
+
+// FleetStorageClassListModelAttrTypes defines the attribute types for FleetStorageClassListModel
+var FleetStorageClassListModelAttrTypes = map[string]attr.Type{
+	"storage_classes": types.ListType{ElemType: types.ObjectType{AttrTypes: FleetStorageClassListStorageClassesModelAttrTypes}},
 }
 
 // FleetStorageClassListStorageClassesModel represents storage_classes block
@@ -239,9 +414,29 @@ type FleetStorageClassListStorageClassesModel struct {
 	PureServiceOrchestrator   *FleetStorageClassListStorageClassesPureServiceOrchestratorModel `tfsdk:"pure_service_orchestrator"`
 }
 
+// FleetStorageClassListStorageClassesModelAttrTypes defines the attribute types for FleetStorageClassListStorageClassesModel
+var FleetStorageClassListStorageClassesModelAttrTypes = map[string]attr.Type{
+	"allow_volume_expansion":      types.BoolType,
+	"default_storage_class":       types.BoolType,
+	"description_spec":            types.StringType,
+	"reclaim_policy":              types.StringType,
+	"storage_class_name":          types.StringType,
+	"storage_device":              types.StringType,
+	"advanced_storage_parameters": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"custom_storage":              types.ObjectType{AttrTypes: FleetStorageClassListStorageClassesCustomStorageModelAttrTypes},
+	"hpe_storage":                 types.ObjectType{AttrTypes: FleetStorageClassListStorageClassesHpeStorageModelAttrTypes},
+	"netapp_trident":              types.ObjectType{AttrTypes: FleetStorageClassListStorageClassesNetappTridentModelAttrTypes},
+	"pure_service_orchestrator":   types.ObjectType{AttrTypes: FleetStorageClassListStorageClassesPureServiceOrchestratorModelAttrTypes},
+}
+
 // FleetStorageClassListStorageClassesCustomStorageModel represents custom_storage block
 type FleetStorageClassListStorageClassesCustomStorageModel struct {
 	Yaml types.String `tfsdk:"yaml"`
+}
+
+// FleetStorageClassListStorageClassesCustomStorageModelAttrTypes defines the attribute types for FleetStorageClassListStorageClassesCustomStorageModel
+var FleetStorageClassListStorageClassesCustomStorageModelAttrTypes = map[string]attr.Type{
+	"yaml": types.StringType,
 }
 
 // FleetStorageClassListStorageClassesHpeStorageModel represents hpe_storage block
@@ -264,10 +459,36 @@ type FleetStorageClassListStorageClassesHpeStorageModel struct {
 	Thick              types.Bool   `tfsdk:"thick"`
 }
 
+// FleetStorageClassListStorageClassesHpeStorageModelAttrTypes defines the attribute types for FleetStorageClassListStorageClassesHpeStorageModel
+var FleetStorageClassListStorageClassesHpeStorageModelAttrTypes = map[string]attr.Type{
+	"allow_mutations":     types.StringType,
+	"allow_overrides":     types.StringType,
+	"dedupe_enabled":      types.BoolType,
+	"description_spec":    types.StringType,
+	"destroy_on_delete":   types.BoolType,
+	"encrypted":           types.BoolType,
+	"folder":              types.StringType,
+	"limit_iops":          types.StringType,
+	"limit_mbps":          types.StringType,
+	"performance_policy":  types.StringType,
+	"pool":                types.StringType,
+	"protection_template": types.StringType,
+	"secret_name":         types.StringType,
+	"secret_namespace":    types.StringType,
+	"sync_on_detach":      types.BoolType,
+	"thick":               types.BoolType,
+}
+
 // FleetStorageClassListStorageClassesNetappTridentModel represents netapp_trident block
 type FleetStorageClassListStorageClassesNetappTridentModel struct {
 	StoragePools types.String     `tfsdk:"storage_pools"`
 	Selector     *FleetEmptyModel `tfsdk:"selector"`
+}
+
+// FleetStorageClassListStorageClassesNetappTridentModelAttrTypes defines the attribute types for FleetStorageClassListStorageClassesNetappTridentModel
+var FleetStorageClassListStorageClassesNetappTridentModelAttrTypes = map[string]attr.Type{
+	"storage_pools": types.StringType,
+	"selector":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // FleetStorageClassListStorageClassesPureServiceOrchestratorModel represents pure_service_orchestrator block
@@ -277,9 +498,21 @@ type FleetStorageClassListStorageClassesPureServiceOrchestratorModel struct {
 	IopsLimit      types.Int64  `tfsdk:"iops_limit"`
 }
 
+// FleetStorageClassListStorageClassesPureServiceOrchestratorModelAttrTypes defines the attribute types for FleetStorageClassListStorageClassesPureServiceOrchestratorModel
+var FleetStorageClassListStorageClassesPureServiceOrchestratorModelAttrTypes = map[string]attr.Type{
+	"backend":         types.StringType,
+	"bandwidth_limit": types.StringType,
+	"iops_limit":      types.Int64Type,
+}
+
 // FleetStorageDeviceListModel represents storage_device_list block
 type FleetStorageDeviceListModel struct {
 	StorageDevices []FleetStorageDeviceListStorageDevicesModel `tfsdk:"storage_devices"`
+}
+
+// FleetStorageDeviceListModelAttrTypes defines the attribute types for FleetStorageDeviceListModel
+var FleetStorageDeviceListModelAttrTypes = map[string]attr.Type{
+	"storage_devices": types.ListType{ElemType: types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesModelAttrTypes}},
 }
 
 // FleetStorageDeviceListStorageDevicesModel represents storage_devices block
@@ -290,6 +523,16 @@ type FleetStorageDeviceListStorageDevicesModel struct {
 	HpeStorage                 *FleetStorageDeviceListStorageDevicesHpeStorageModel              `tfsdk:"hpe_storage"`
 	NetappTrident              *FleetStorageDeviceListStorageDevicesNetappTridentModel           `tfsdk:"netapp_trident"`
 	PureServiceOrchestrator    *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorModel `tfsdk:"pure_service_orchestrator"`
+}
+
+// FleetStorageDeviceListStorageDevicesModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesModel
+var FleetStorageDeviceListStorageDevicesModelAttrTypes = map[string]attr.Type{
+	"storage_device":               types.StringType,
+	"advanced_advanced_parameters": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"custom_storage":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"hpe_storage":                  types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesHpeStorageModelAttrTypes},
+	"netapp_trident":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"pure_service_orchestrator":    types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesPureServiceOrchestratorModelAttrTypes},
 }
 
 // FleetStorageDeviceListStorageDevicesHpeStorageModel represents hpe_storage block
@@ -303,10 +546,27 @@ type FleetStorageDeviceListStorageDevicesHpeStorageModel struct {
 	Password               *FleetStorageDeviceListStorageDevicesHpeStoragePasswordModel          `tfsdk:"password"`
 }
 
+// FleetStorageDeviceListStorageDevicesHpeStorageModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesHpeStorageModel
+var FleetStorageDeviceListStorageDevicesHpeStorageModelAttrTypes = map[string]attr.Type{
+	"api_server_port":           types.Int64Type,
+	"iscsi_chap_user":           types.StringType,
+	"storage_server_ip_address": types.StringType,
+	"storage_server_name":       types.StringType,
+	"username":                  types.StringType,
+	"iscsi_chap_password":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"password":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordModel represents iscsi_chap_password block
 type FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordModel struct {
 	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordModel
+var FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordClearSecretInfoModelAttrTypes},
 }
 
 // FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -316,16 +576,35 @@ type FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordBlindfoldSec
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordBlindfoldSecretInfoModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordBlindfoldSecretInfoModel
+var FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordClearSecretInfoModel represents clear_secret_info block
 type FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
+// FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordClearSecretInfoModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordClearSecretInfoModel
+var FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 // FleetStorageDeviceListStorageDevicesHpeStoragePasswordModel represents password block
 type FleetStorageDeviceListStorageDevicesHpeStoragePasswordModel struct {
 	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesHpeStoragePasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *FleetStorageDeviceListStorageDevicesHpeStoragePasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// FleetStorageDeviceListStorageDevicesHpeStoragePasswordModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesHpeStoragePasswordModel
+var FleetStorageDeviceListStorageDevicesHpeStoragePasswordModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesHpeStoragePasswordBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesHpeStoragePasswordClearSecretInfoModelAttrTypes},
 }
 
 // FleetStorageDeviceListStorageDevicesHpeStoragePasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -335,16 +614,35 @@ type FleetStorageDeviceListStorageDevicesHpeStoragePasswordBlindfoldSecretInfoMo
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// FleetStorageDeviceListStorageDevicesHpeStoragePasswordBlindfoldSecretInfoModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesHpeStoragePasswordBlindfoldSecretInfoModel
+var FleetStorageDeviceListStorageDevicesHpeStoragePasswordBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // FleetStorageDeviceListStorageDevicesHpeStoragePasswordClearSecretInfoModel represents clear_secret_info block
 type FleetStorageDeviceListStorageDevicesHpeStoragePasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
+// FleetStorageDeviceListStorageDevicesHpeStoragePasswordClearSecretInfoModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesHpeStoragePasswordClearSecretInfoModel
+var FleetStorageDeviceListStorageDevicesHpeStoragePasswordClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 // FleetStorageDeviceListStorageDevicesNetappTridentModel represents netapp_trident block
 type FleetStorageDeviceListStorageDevicesNetappTridentModel struct {
 	NetappBackendOntapNas *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasModel `tfsdk:"netapp_backend_ontap_nas"`
 	NetappBackendOntapSan *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanModel `tfsdk:"netapp_backend_ontap_san"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentModel
+var FleetStorageDeviceListStorageDevicesNetappTridentModelAttrTypes = map[string]attr.Type{
+	"netapp_backend_ontap_nas": types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasModelAttrTypes},
+	"netapp_backend_ontap_san": types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanModelAttrTypes},
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasModel represents netapp_backend_ontap_nas block
@@ -373,15 +671,52 @@ type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasModel
 	VolumeDefaults       *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasVolumeDefaultsModel   `tfsdk:"volume_defaults"`
 }
 
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasModelAttrTypes = map[string]attr.Type{
+	"auto_export_policy":      types.BoolType,
+	"backend_name":            types.StringType,
+	"client_certificate":      types.StringType,
+	"data_lif_dns_name":       types.StringType,
+	"data_lif_ip":             types.StringType,
+	"limit_aggregate_usage":   types.StringType,
+	"limit_volume_size":       types.StringType,
+	"management_lif_dns_name": types.StringType,
+	"management_lif_ip":       types.StringType,
+	"nfs_mount_options":       types.StringType,
+	"region":                  types.StringType,
+	"storage_driver_name":     types.StringType,
+	"storage_prefix":          types.StringType,
+	"svm":                     types.StringType,
+	"trusted_ca_certificate":  types.StringType,
+	"username":                types.StringType,
+	"auto_export_cidrs":       types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasAutoExportCidrsModelAttrTypes},
+	"client_private_key":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"labels":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"password":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"storage":                 types.ListType{ElemType: types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageModelAttrTypes}},
+	"volume_defaults":         types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasVolumeDefaultsModelAttrTypes},
+}
+
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasAutoExportCidrsModel represents auto_export_cidrs block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasAutoExportCidrsModel struct {
 	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasAutoExportCidrsModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasAutoExportCidrsModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasAutoExportCidrsModelAttrTypes = map[string]attr.Type{
+	"prefixes": types.ListType{ElemType: types.StringType},
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyModel represents client_private_key block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyModel struct {
 	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -391,16 +726,35 @@ type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClien
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyBlindfoldSecretInfoModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyClearSecretInfoModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordModel represents password block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordModel struct {
 	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordClearSecretInfoModelAttrTypes},
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -410,10 +764,23 @@ type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPassw
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordBlindfoldSecretInfoModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordBlindfoldSecretInfoModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordClearSecretInfoModel represents clear_secret_info block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordClearSecretInfoModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordClearSecretInfoModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageModel represents storage block
@@ -421,6 +788,13 @@ type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStora
 	Zone           types.String                                                                                      `tfsdk:"zone"`
 	Labels         *FleetEmptyModel                                                                                  `tfsdk:"labels"`
 	VolumeDefaults *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageVolumeDefaultsModel `tfsdk:"volume_defaults"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageModelAttrTypes = map[string]attr.Type{
+	"zone":            types.StringType,
+	"labels":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"volume_defaults": types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageVolumeDefaultsModelAttrTypes},
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageVolumeDefaultsModel represents volume_defaults block
@@ -440,6 +814,23 @@ type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStora
 	NoQOS             *FleetEmptyModel `tfsdk:"no_qos"`
 }
 
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageVolumeDefaultsModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageVolumeDefaultsModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageVolumeDefaultsModelAttrTypes = map[string]attr.Type{
+	"adaptive_qos_policy": types.StringType,
+	"encryption":          types.BoolType,
+	"export_policy":       types.StringType,
+	"qos_policy":          types.StringType,
+	"security_style":      types.StringType,
+	"snapshot_dir":        types.BoolType,
+	"snapshot_policy":     types.StringType,
+	"snapshot_reserve":    types.StringType,
+	"space_reserve":       types.StringType,
+	"split_on_clone":      types.BoolType,
+	"tiering_policy":      types.StringType,
+	"unix_permissions":    types.Int64Type,
+	"no_qos":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasVolumeDefaultsModel represents volume_defaults block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasVolumeDefaultsModel struct {
 	AdaptiveQOSPolicy types.String     `tfsdk:"adaptive_qos_policy"`
@@ -455,6 +846,23 @@ type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasVolum
 	TieringPolicy     types.String     `tfsdk:"tiering_policy"`
 	UnixPermissions   types.Int64      `tfsdk:"unix_permissions"`
 	NoQOS             *FleetEmptyModel `tfsdk:"no_qos"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasVolumeDefaultsModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasVolumeDefaultsModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasVolumeDefaultsModelAttrTypes = map[string]attr.Type{
+	"adaptive_qos_policy": types.StringType,
+	"encryption":          types.BoolType,
+	"export_policy":       types.StringType,
+	"qos_policy":          types.StringType,
+	"security_style":      types.StringType,
+	"snapshot_dir":        types.BoolType,
+	"snapshot_policy":     types.StringType,
+	"snapshot_reserve":    types.StringType,
+	"space_reserve":       types.StringType,
+	"split_on_clone":      types.BoolType,
+	"tiering_policy":      types.StringType,
+	"unix_permissions":    types.Int64Type,
+	"no_qos":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanModel represents netapp_backend_ontap_san block
@@ -482,10 +890,41 @@ type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanModel
 	VolumeDefaults       *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanVolumeDefaultsModel   `tfsdk:"volume_defaults"`
 }
 
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanModelAttrTypes = map[string]attr.Type{
+	"client_certificate":      types.StringType,
+	"data_lif_dns_name":       types.StringType,
+	"data_lif_ip":             types.StringType,
+	"igroup_name":             types.StringType,
+	"limit_aggregate_usage":   types.Int64Type,
+	"limit_volume_size":       types.Int64Type,
+	"management_lif_dns_name": types.StringType,
+	"management_lif_ip":       types.StringType,
+	"region":                  types.StringType,
+	"storage_driver_name":     types.StringType,
+	"storage_prefix":          types.StringType,
+	"svm":                     types.StringType,
+	"trusted_ca_certificate":  types.StringType,
+	"username":                types.StringType,
+	"client_private_key":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"labels":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_chap":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"password":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"storage":                 types.ListType{ElemType: types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageModelAttrTypes}},
+	"use_chap":                types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapModelAttrTypes},
+	"volume_defaults":         types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanVolumeDefaultsModelAttrTypes},
+}
+
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyModel represents client_private_key block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyModel struct {
 	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -495,16 +934,35 @@ type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClien
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyBlindfoldSecretInfoModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyClearSecretInfoModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordModel represents password block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordModel struct {
 	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordClearSecretInfoModelAttrTypes},
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -514,10 +972,23 @@ type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPassw
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordBlindfoldSecretInfoModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordBlindfoldSecretInfoModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordClearSecretInfoModel represents clear_secret_info block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordClearSecretInfoModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordClearSecretInfoModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageModel represents storage block
@@ -525,6 +996,13 @@ type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStora
 	Zone           types.String                                                                                      `tfsdk:"zone"`
 	Labels         *FleetEmptyModel                                                                                  `tfsdk:"labels"`
 	VolumeDefaults *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageVolumeDefaultsModel `tfsdk:"volume_defaults"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageModelAttrTypes = map[string]attr.Type{
+	"zone":            types.StringType,
+	"labels":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"volume_defaults": types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageVolumeDefaultsModelAttrTypes},
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageVolumeDefaultsModel represents volume_defaults block
@@ -544,6 +1022,23 @@ type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStora
 	NoQOS             *FleetEmptyModel `tfsdk:"no_qos"`
 }
 
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageVolumeDefaultsModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageVolumeDefaultsModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageVolumeDefaultsModelAttrTypes = map[string]attr.Type{
+	"adaptive_qos_policy": types.StringType,
+	"encryption":          types.BoolType,
+	"export_policy":       types.StringType,
+	"qos_policy":          types.StringType,
+	"security_style":      types.StringType,
+	"snapshot_dir":        types.BoolType,
+	"snapshot_policy":     types.StringType,
+	"snapshot_reserve":    types.StringType,
+	"space_reserve":       types.StringType,
+	"split_on_clone":      types.BoolType,
+	"tiering_policy":      types.StringType,
+	"unix_permissions":    types.Int64Type,
+	"no_qos":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapModel represents use_chap block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapModel struct {
 	ChapTargetUsername        types.String                                                                                                 `tfsdk:"chap_target_username"`
@@ -552,10 +1047,24 @@ type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseCh
 	ChapTargetInitiatorSecret *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretModel `tfsdk:"chap_target_initiator_secret"`
 }
 
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapModelAttrTypes = map[string]attr.Type{
+	"chap_target_username":         types.StringType,
+	"chap_username":                types.StringType,
+	"chap_initiator_secret":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"chap_target_initiator_secret": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretModel represents chap_initiator_secret block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretModel struct {
 	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretClearSecretInfoModelAttrTypes},
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -565,16 +1074,35 @@ type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseCh
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretBlindfoldSecretInfoModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretBlindfoldSecretInfoModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretClearSecretInfoModel represents clear_secret_info block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretClearSecretInfoModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretClearSecretInfoModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretModel represents chap_target_initiator_secret block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretModel struct {
 	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretClearSecretInfoModelAttrTypes},
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -584,10 +1112,23 @@ type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseCh
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretBlindfoldSecretInfoModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretBlindfoldSecretInfoModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretClearSecretInfoModel represents clear_secret_info block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretClearSecretInfoModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretClearSecretInfoModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanVolumeDefaultsModel represents volume_defaults block
@@ -607,6 +1148,23 @@ type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanVolum
 	NoQOS             *FleetEmptyModel `tfsdk:"no_qos"`
 }
 
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanVolumeDefaultsModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanVolumeDefaultsModel
+var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanVolumeDefaultsModelAttrTypes = map[string]attr.Type{
+	"adaptive_qos_policy": types.StringType,
+	"encryption":          types.BoolType,
+	"export_policy":       types.StringType,
+	"qos_policy":          types.StringType,
+	"security_style":      types.StringType,
+	"snapshot_dir":        types.BoolType,
+	"snapshot_policy":     types.StringType,
+	"snapshot_reserve":    types.StringType,
+	"space_reserve":       types.StringType,
+	"split_on_clone":      types.BoolType,
+	"tiering_policy":      types.StringType,
+	"unix_permissions":    types.Int64Type,
+	"no_qos":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // FleetStorageDeviceListStorageDevicesPureServiceOrchestratorModel represents pure_service_orchestrator block
 type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorModel struct {
 	ClusterID             types.String                                                            `tfsdk:"cluster_id"`
@@ -615,10 +1173,24 @@ type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorModel struct {
 	Arrays                *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysModel `tfsdk:"arrays"`
 }
 
+// FleetStorageDeviceListStorageDevicesPureServiceOrchestratorModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesPureServiceOrchestratorModel
+var FleetStorageDeviceListStorageDevicesPureServiceOrchestratorModelAttrTypes = map[string]attr.Type{
+	"cluster_id":              types.StringType,
+	"enable_storage_topology": types.BoolType,
+	"enable_strict_topology":  types.BoolType,
+	"arrays":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysModel represents arrays block
 type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysModel struct {
 	FlashArray *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayModel `tfsdk:"flash_array"`
 	FlashBlade *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeModel `tfsdk:"flash_blade"`
+}
+
+// FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysModel
+var FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysModelAttrTypes = map[string]attr.Type{
+	"flash_array": types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayModelAttrTypes},
+	"flash_blade": types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeModelAttrTypes},
 }
 
 // FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayModel represents flash_array block
@@ -632,6 +1204,17 @@ type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArray
 	FlashArrays               []FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysModel `tfsdk:"flash_arrays"`
 }
 
+// FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayModel
+var FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayModelAttrTypes = map[string]attr.Type{
+	"default_fs_opt":              types.StringType,
+	"default_fs_type":             types.StringType,
+	"default_mount_opts":          types.ListType{ElemType: types.StringType},
+	"disable_preempt_attachments": types.BoolType,
+	"iscsi_login_timeout":         types.Int64Type,
+	"san_type":                    types.StringType,
+	"flash_arrays":                types.ListType{ElemType: types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysModelAttrTypes}},
+}
+
 // FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysModel represents flash_arrays block
 type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysModel struct {
 	MgmtDNSName types.String                                                                                         `tfsdk:"mgmt_dns_name"`
@@ -640,10 +1223,24 @@ type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArray
 	Labels      *FleetEmptyModel                                                                                     `tfsdk:"labels"`
 }
 
+// FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysModel
+var FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysModelAttrTypes = map[string]attr.Type{
+	"mgmt_dns_name": types.StringType,
+	"mgmt_ip":       types.StringType,
+	"api_token":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"labels":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenModel represents api_token block
 type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenModel struct {
 	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenModel
+var FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenClearSecretInfoModelAttrTypes},
 }
 
 // FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -653,10 +1250,23 @@ type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArray
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenBlindfoldSecretInfoModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenBlindfoldSecretInfoModel
+var FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenClearSecretInfoModel represents clear_secret_info block
 type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenClearSecretInfoModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenClearSecretInfoModel
+var FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeModel represents flash_blade block
@@ -664,6 +1274,13 @@ type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBlade
 	EnableSnapshotDirectory types.Bool                                                                                    `tfsdk:"enable_snapshot_directory"`
 	ExportRules             types.String                                                                                  `tfsdk:"export_rules"`
 	FlashBlades             []FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesModel `tfsdk:"flash_blades"`
+}
+
+// FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeModel
+var FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeModelAttrTypes = map[string]attr.Type{
+	"enable_snapshot_directory": types.BoolType,
+	"export_rules":              types.StringType,
+	"flash_blades":              types.ListType{ElemType: types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesModelAttrTypes}},
 }
 
 // FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesModel represents flash_blades block
@@ -676,10 +1293,26 @@ type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBlade
 	Lables             *FleetEmptyModel                                                                                     `tfsdk:"lables"`
 }
 
+// FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesModel
+var FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesModelAttrTypes = map[string]attr.Type{
+	"mgmt_dns_name":         types.StringType,
+	"mgmt_ip":               types.StringType,
+	"nfs_endpoint_dns_name": types.StringType,
+	"nfs_endpoint_ip":       types.StringType,
+	"api_token":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"lables":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenModel represents api_token block
 type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenModel struct {
 	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenModel
+var FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenClearSecretInfoModelAttrTypes},
 }
 
 // FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -689,15 +1322,33 @@ type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBlade
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenBlindfoldSecretInfoModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenBlindfoldSecretInfoModel
+var FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenClearSecretInfoModel represents clear_secret_info block
 type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
+// FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenClearSecretInfoModelAttrTypes defines the attribute types for FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenClearSecretInfoModel
+var FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 // FleetStorageInterfaceListModel represents storage_interface_list block
 type FleetStorageInterfaceListModel struct {
 	Interfaces []FleetStorageInterfaceListInterfacesModel `tfsdk:"interfaces"`
+}
+
+// FleetStorageInterfaceListModelAttrTypes defines the attribute types for FleetStorageInterfaceListModel
+var FleetStorageInterfaceListModelAttrTypes = map[string]attr.Type{
+	"interfaces": types.ListType{ElemType: types.ObjectType{AttrTypes: FleetStorageInterfaceListInterfacesModelAttrTypes}},
 }
 
 // FleetStorageInterfaceListInterfacesModel represents interfaces block
@@ -707,9 +1358,21 @@ type FleetStorageInterfaceListInterfacesModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// FleetStorageInterfaceListInterfacesModelAttrTypes defines the attribute types for FleetStorageInterfaceListInterfacesModel
+var FleetStorageInterfaceListInterfacesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // FleetStorageStaticRoutesModel represents storage_static_routes block
 type FleetStorageStaticRoutesModel struct {
 	StorageRoutes []FleetStorageStaticRoutesStorageRoutesModel `tfsdk:"storage_routes"`
+}
+
+// FleetStorageStaticRoutesModelAttrTypes defines the attribute types for FleetStorageStaticRoutesModel
+var FleetStorageStaticRoutesModelAttrTypes = map[string]attr.Type{
+	"storage_routes": types.ListType{ElemType: types.ObjectType{AttrTypes: FleetStorageStaticRoutesStorageRoutesModelAttrTypes}},
 }
 
 // FleetStorageStaticRoutesStorageRoutesModel represents storage_routes block
@@ -720,11 +1383,26 @@ type FleetStorageStaticRoutesStorageRoutesModel struct {
 	Subnets []FleetStorageStaticRoutesStorageRoutesSubnetsModel `tfsdk:"subnets"`
 }
 
+// FleetStorageStaticRoutesStorageRoutesModelAttrTypes defines the attribute types for FleetStorageStaticRoutesStorageRoutesModel
+var FleetStorageStaticRoutesStorageRoutesModelAttrTypes = map[string]attr.Type{
+	"attrs":   types.ListType{ElemType: types.StringType},
+	"labels":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"nexthop": types.ObjectType{AttrTypes: FleetStorageStaticRoutesStorageRoutesNexthopModelAttrTypes},
+	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+}
+
 // FleetStorageStaticRoutesStorageRoutesNexthopModel represents nexthop block
 type FleetStorageStaticRoutesStorageRoutesNexthopModel struct {
 	Type           types.String                                                     `tfsdk:"type"`
 	Interface      []FleetStorageStaticRoutesStorageRoutesNexthopInterfaceModel     `tfsdk:"interface"`
 	NexthopAddress *FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
+}
+
+// FleetStorageStaticRoutesStorageRoutesNexthopModelAttrTypes defines the attribute types for FleetStorageStaticRoutesStorageRoutesNexthopModel
+var FleetStorageStaticRoutesStorageRoutesNexthopModelAttrTypes = map[string]attr.Type{
+	"type":            types.StringType,
+	"interface":       types.ListType{ElemType: types.ObjectType{AttrTypes: FleetStorageStaticRoutesStorageRoutesNexthopInterfaceModelAttrTypes}},
+	"nexthop_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // FleetStorageStaticRoutesStorageRoutesNexthopInterfaceModel represents interface block
@@ -736,10 +1414,25 @@ type FleetStorageStaticRoutesStorageRoutesNexthopInterfaceModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// FleetStorageStaticRoutesStorageRoutesNexthopInterfaceModelAttrTypes defines the attribute types for FleetStorageStaticRoutesStorageRoutesNexthopInterfaceModel
+var FleetStorageStaticRoutesStorageRoutesNexthopInterfaceModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressModel represents nexthop_address block
 type FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressModel struct {
 	Ipv4 *FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIpv4Model `tfsdk:"ipv4"`
 	Ipv6 *FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIpv6Model `tfsdk:"ipv6"`
+}
+
+// FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressModelAttrTypes defines the attribute types for FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressModel
+var FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressModelAttrTypes = map[string]attr.Type{
+	"ipv4": types.ObjectType{AttrTypes: FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIpv4ModelAttrTypes},
+	"ipv6": types.ObjectType{AttrTypes: FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIpv6ModelAttrTypes},
 }
 
 // FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIpv4Model represents ipv4 block
@@ -747,9 +1440,19 @@ type FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIpv4Model struct 
 	Addr types.String `tfsdk:"addr"`
 }
 
+// FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIpv4ModelAttrTypes defines the attribute types for FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIpv4Model
+var FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIpv4ModelAttrTypes = map[string]attr.Type{
+	"addr": types.StringType,
+}
+
 // FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIpv6Model represents ipv6 block
 type FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIpv6Model struct {
 	Addr types.String `tfsdk:"addr"`
+}
+
+// FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIpv6ModelAttrTypes defines the attribute types for FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIpv6Model
+var FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIpv6ModelAttrTypes = map[string]attr.Type{
+	"addr": types.StringType,
 }
 
 // FleetStorageStaticRoutesStorageRoutesSubnetsModel represents subnets block
@@ -758,10 +1461,22 @@ type FleetStorageStaticRoutesStorageRoutesSubnetsModel struct {
 	Ipv6 *FleetStorageStaticRoutesStorageRoutesSubnetsIpv6Model `tfsdk:"ipv6"`
 }
 
+// FleetStorageStaticRoutesStorageRoutesSubnetsModelAttrTypes defines the attribute types for FleetStorageStaticRoutesStorageRoutesSubnetsModel
+var FleetStorageStaticRoutesStorageRoutesSubnetsModelAttrTypes = map[string]attr.Type{
+	"ipv4": types.ObjectType{AttrTypes: FleetStorageStaticRoutesStorageRoutesSubnetsIpv4ModelAttrTypes},
+	"ipv6": types.ObjectType{AttrTypes: FleetStorageStaticRoutesStorageRoutesSubnetsIpv6ModelAttrTypes},
+}
+
 // FleetStorageStaticRoutesStorageRoutesSubnetsIpv4Model represents ipv4 block
 type FleetStorageStaticRoutesStorageRoutesSubnetsIpv4Model struct {
 	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
+}
+
+// FleetStorageStaticRoutesStorageRoutesSubnetsIpv4ModelAttrTypes defines the attribute types for FleetStorageStaticRoutesStorageRoutesSubnetsIpv4Model
+var FleetStorageStaticRoutesStorageRoutesSubnetsIpv4ModelAttrTypes = map[string]attr.Type{
+	"plen":   types.Int64Type,
+	"prefix": types.StringType,
 }
 
 // FleetStorageStaticRoutesStorageRoutesSubnetsIpv6Model represents ipv6 block
@@ -770,11 +1485,24 @@ type FleetStorageStaticRoutesStorageRoutesSubnetsIpv6Model struct {
 	Prefix types.String `tfsdk:"prefix"`
 }
 
+// FleetStorageStaticRoutesStorageRoutesSubnetsIpv6ModelAttrTypes defines the attribute types for FleetStorageStaticRoutesStorageRoutesSubnetsIpv6Model
+var FleetStorageStaticRoutesStorageRoutesSubnetsIpv6ModelAttrTypes = map[string]attr.Type{
+	"plen":   types.Int64Type,
+	"prefix": types.StringType,
+}
+
 // FleetUsbPolicyModel represents usb_policy block
 type FleetUsbPolicyModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// FleetUsbPolicyModelAttrTypes defines the attribute types for FleetUsbPolicyModel
+var FleetUsbPolicyModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 type FleetResourceModel struct {
@@ -791,7 +1519,7 @@ type FleetResourceModel struct {
 	VolterraSoftwareVersion          types.String                          `tfsdk:"volterra_software_version"`
 	Timeouts                         timeouts.Value                        `tfsdk:"timeouts"`
 	AllowAllUsb                      *FleetEmptyModel                      `tfsdk:"allow_all_usb"`
-	BlockedServices                  []FleetBlockedServicesModel           `tfsdk:"blocked_services"`
+	BlockedServices                  types.List                            `tfsdk:"blocked_services"`
 	BondDeviceList                   *FleetBondDeviceListModel             `tfsdk:"bond_device_list"`
 	DcClusterGroup                   *FleetDcClusterGroupModel             `tfsdk:"dc_cluster_group"`
 	DcClusterGroupInside             *FleetDcClusterGroupInsideModel       `tfsdk:"dc_cluster_group_inside"`
@@ -805,19 +1533,19 @@ type FleetResourceModel struct {
 	EnableGPU                        *FleetEmptyModel                      `tfsdk:"enable_gpu"`
 	EnableVgpu                       *FleetEnableVgpuModel                 `tfsdk:"enable_vgpu"`
 	EnableVM                         *FleetEmptyModel                      `tfsdk:"enable_vm"`
-	InsideVirtualNetwork             []FleetInsideVirtualNetworkModel      `tfsdk:"inside_virtual_network"`
+	InsideVirtualNetwork             types.List                            `tfsdk:"inside_virtual_network"`
 	InterfaceList                    *FleetInterfaceListModel              `tfsdk:"interface_list"`
 	KubernetesUpgradeDrain           *FleetKubernetesUpgradeDrainModel     `tfsdk:"kubernetes_upgrade_drain"`
 	LogReceiver                      *FleetLogReceiverModel                `tfsdk:"log_receiver"`
 	LogsStreamingDisabled            *FleetEmptyModel                      `tfsdk:"logs_streaming_disabled"`
-	NetworkConnectors                []FleetNetworkConnectorsModel         `tfsdk:"network_connectors"`
-	NetworkFirewall                  []FleetNetworkFirewallModel           `tfsdk:"network_firewall"`
+	NetworkConnectors                types.List                            `tfsdk:"network_connectors"`
+	NetworkFirewall                  types.List                            `tfsdk:"network_firewall"`
 	NoBondDevices                    *FleetEmptyModel                      `tfsdk:"no_bond_devices"`
 	NoDcClusterGroup                 *FleetEmptyModel                      `tfsdk:"no_dc_cluster_group"`
 	NoStorageDevice                  *FleetEmptyModel                      `tfsdk:"no_storage_device"`
 	NoStorageInterfaces              *FleetEmptyModel                      `tfsdk:"no_storage_interfaces"`
 	NoStorageStaticRoutes            *FleetEmptyModel                      `tfsdk:"no_storage_static_routes"`
-	OutsideVirtualNetwork            []FleetOutsideVirtualNetworkModel     `tfsdk:"outside_virtual_network"`
+	OutsideVirtualNetwork            types.List                            `tfsdk:"outside_virtual_network"`
 	PerformanceEnhancementMode       *FleetPerformanceEnhancementModeModel `tfsdk:"performance_enhancement_mode"`
 	SriovInterfaces                  *FleetSriovInterfacesModel            `tfsdk:"sriov_interfaces"`
 	StorageClassList                 *FleetStorageClassListModel           `tfsdk:"storage_class_list"`
@@ -1005,6 +1733,9 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional:            true,
 						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
 					},
 				},
 			},
@@ -1023,6 +1754,9 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional:            true,
 						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
 					},
 				},
 			},
@@ -1073,6 +1807,9 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1086,11 +1823,17 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 												},
 											},
@@ -1139,6 +1882,9 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1152,11 +1898,17 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 					},
 				},
@@ -1181,6 +1933,9 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -1232,6 +1987,9 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional:            true,
 						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
 					},
 				},
 			},
@@ -1246,6 +2004,9 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1259,11 +2020,17 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 					},
 				},
@@ -1276,6 +2043,9 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1289,11 +2059,17 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 					},
 				},
@@ -1321,6 +2097,9 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1334,11 +2113,17 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 					},
 				},
@@ -2530,6 +3315,9 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -2571,6 +3359,9 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -2584,11 +3375,17 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 												},
 											},
@@ -2673,6 +3470,9 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional:            true,
 						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
 					},
 				},
 			},
@@ -2828,25 +3628,30 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 		allow_all_usbMap := make(map[string]interface{})
 		createReq.Spec["allow_all_usb"] = allow_all_usbMap
 	}
-	if len(data.BlockedServices) > 0 {
-		var blocked_servicesList []map[string]interface{}
-		for _, item := range data.BlockedServices {
-			itemMap := make(map[string]interface{})
-			if item.DNS != nil {
-				itemMap["dns"] = map[string]interface{}{}
+	if !data.BlockedServices.IsNull() && !data.BlockedServices.IsUnknown() {
+		var blocked_servicesItems []FleetBlockedServicesModel
+		diags := data.BlockedServices.ElementsAs(ctx, &blocked_servicesItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(blocked_servicesItems) > 0 {
+			var blocked_servicesList []map[string]interface{}
+			for _, item := range blocked_servicesItems {
+				itemMap := make(map[string]interface{})
+				if item.DNS != nil {
+					itemMap["dns"] = map[string]interface{}{}
+				}
+				if !item.NetworkType.IsNull() && !item.NetworkType.IsUnknown() {
+					itemMap["network_type"] = item.NetworkType.ValueString()
+				}
+				if item.SSH != nil {
+					itemMap["ssh"] = map[string]interface{}{}
+				}
+				if item.WebUserInterface != nil {
+					itemMap["web_user_interface"] = map[string]interface{}{}
+				}
+				blocked_servicesList = append(blocked_servicesList, itemMap)
 			}
-			if !item.NetworkType.IsNull() && !item.NetworkType.IsUnknown() {
-				itemMap["network_type"] = item.NetworkType.ValueString()
-			}
-			if item.SSH != nil {
-				itemMap["ssh"] = map[string]interface{}{}
-			}
-			if item.WebUserInterface != nil {
-				itemMap["web_user_interface"] = map[string]interface{}{}
-			}
-			blocked_servicesList = append(blocked_servicesList, itemMap)
+			createReq.Spec["blocked_services"] = blocked_servicesList
 		}
-		createReq.Spec["blocked_services"] = blocked_servicesList
 	}
 	if data.BondDeviceList != nil {
 		bond_device_listMap := make(map[string]interface{})
@@ -2975,28 +3780,33 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 		enable_vmMap := make(map[string]interface{})
 		createReq.Spec["enable_vm"] = enable_vmMap
 	}
-	if len(data.InsideVirtualNetwork) > 0 {
-		var inside_virtual_networkList []map[string]interface{}
-		for _, item := range data.InsideVirtualNetwork {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.InsideVirtualNetwork.IsNull() && !data.InsideVirtualNetwork.IsUnknown() {
+		var inside_virtual_networkItems []FleetInsideVirtualNetworkModel
+		diags := data.InsideVirtualNetwork.ElementsAs(ctx, &inside_virtual_networkItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(inside_virtual_networkItems) > 0 {
+			var inside_virtual_networkList []map[string]interface{}
+			for _, item := range inside_virtual_networkItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				inside_virtual_networkList = append(inside_virtual_networkList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			inside_virtual_networkList = append(inside_virtual_networkList, itemMap)
+			createReq.Spec["inside_virtual_network"] = inside_virtual_networkList
 		}
-		createReq.Spec["inside_virtual_network"] = inside_virtual_networkList
 	}
 	if data.InterfaceList != nil {
 		interface_listMap := make(map[string]interface{})
@@ -3053,51 +3863,61 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 		logs_streaming_disabledMap := make(map[string]interface{})
 		createReq.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
 	}
-	if len(data.NetworkConnectors) > 0 {
-		var network_connectorsList []map[string]interface{}
-		for _, item := range data.NetworkConnectors {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.NetworkConnectors.IsNull() && !data.NetworkConnectors.IsUnknown() {
+		var network_connectorsItems []FleetNetworkConnectorsModel
+		diags := data.NetworkConnectors.ElementsAs(ctx, &network_connectorsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(network_connectorsItems) > 0 {
+			var network_connectorsList []map[string]interface{}
+			for _, item := range network_connectorsItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				network_connectorsList = append(network_connectorsList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			network_connectorsList = append(network_connectorsList, itemMap)
+			createReq.Spec["network_connectors"] = network_connectorsList
 		}
-		createReq.Spec["network_connectors"] = network_connectorsList
 	}
-	if len(data.NetworkFirewall) > 0 {
-		var network_firewallList []map[string]interface{}
-		for _, item := range data.NetworkFirewall {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.NetworkFirewall.IsNull() && !data.NetworkFirewall.IsUnknown() {
+		var network_firewallItems []FleetNetworkFirewallModel
+		diags := data.NetworkFirewall.ElementsAs(ctx, &network_firewallItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(network_firewallItems) > 0 {
+			var network_firewallList []map[string]interface{}
+			for _, item := range network_firewallItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				network_firewallList = append(network_firewallList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			network_firewallList = append(network_firewallList, itemMap)
+			createReq.Spec["network_firewall"] = network_firewallList
 		}
-		createReq.Spec["network_firewall"] = network_firewallList
 	}
 	if data.NoBondDevices != nil {
 		no_bond_devicesMap := make(map[string]interface{})
@@ -3119,28 +3939,33 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 		no_storage_static_routesMap := make(map[string]interface{})
 		createReq.Spec["no_storage_static_routes"] = no_storage_static_routesMap
 	}
-	if len(data.OutsideVirtualNetwork) > 0 {
-		var outside_virtual_networkList []map[string]interface{}
-		for _, item := range data.OutsideVirtualNetwork {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.OutsideVirtualNetwork.IsNull() && !data.OutsideVirtualNetwork.IsUnknown() {
+		var outside_virtual_networkItems []FleetOutsideVirtualNetworkModel
+		diags := data.OutsideVirtualNetwork.ElementsAs(ctx, &outside_virtual_networkItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(outside_virtual_networkItems) > 0 {
+			var outside_virtual_networkList []map[string]interface{}
+			for _, item := range outside_virtual_networkItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				outside_virtual_networkList = append(outside_virtual_networkList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			outside_virtual_networkList = append(outside_virtual_networkList, itemMap)
+			createReq.Spec["outside_virtual_network"] = outside_virtual_networkList
 		}
-		createReq.Spec["outside_virtual_network"] = outside_virtual_networkList
 	}
 	if data.PerformanceEnhancementMode != nil {
 		performance_enhancement_modeMap := make(map[string]interface{})
@@ -3434,12 +4259,16 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["blocked_services"].([]interface{}); ok && len(listData) > 0 {
 		var blocked_servicesList []FleetBlockedServicesModel
+		var existingBlockedServicesItems []FleetBlockedServicesModel
+		if !data.BlockedServices.IsNull() && !data.BlockedServices.IsUnknown() {
+			data.BlockedServices.ElementsAs(ctx, &existingBlockedServicesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				blocked_servicesList = append(blocked_servicesList, FleetBlockedServicesModel{
 					DNS: func() *FleetEmptyModel {
-						if !isImport && len(data.BlockedServices) > listIdx && data.BlockedServices[listIdx].DNS != nil {
+						if !isImport && len(existingBlockedServicesItems) > listIdx && existingBlockedServicesItems[listIdx].DNS != nil {
 							return &FleetEmptyModel{}
 						}
 						return nil
@@ -3451,13 +4280,13 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 						return types.StringNull()
 					}(),
 					SSH: func() *FleetEmptyModel {
-						if !isImport && len(data.BlockedServices) > listIdx && data.BlockedServices[listIdx].SSH != nil {
+						if !isImport && len(existingBlockedServicesItems) > listIdx && existingBlockedServicesItems[listIdx].SSH != nil {
 							return &FleetEmptyModel{}
 						}
 						return nil
 					}(),
 					WebUserInterface: func() *FleetEmptyModel {
-						if !isImport && len(data.BlockedServices) > listIdx && data.BlockedServices[listIdx].WebUserInterface != nil {
+						if !isImport && len(existingBlockedServicesItems) > listIdx && existingBlockedServicesItems[listIdx].WebUserInterface != nil {
 							return &FleetEmptyModel{}
 						}
 						return nil
@@ -3465,7 +4294,14 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 				})
 			}
 		}
-		data.BlockedServices = blocked_servicesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: FleetBlockedServicesModelAttrTypes}, blocked_servicesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.BlockedServices = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.BlockedServices = types.ListNull(types.ObjectType{AttrTypes: FleetBlockedServicesModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["bond_device_list"].(map[string]interface{}); ok && (isImport || data.BondDeviceList != nil) {
 		data.BondDeviceList = &FleetBondDeviceListModel{
@@ -3671,6 +4507,10 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["inside_virtual_network"].([]interface{}); ok && len(listData) > 0 {
 		var inside_virtual_networkList []FleetInsideVirtualNetworkModel
+		var existingInsideVirtualNetworkItems []FleetInsideVirtualNetworkModel
+		if !data.InsideVirtualNetwork.IsNull() && !data.InsideVirtualNetwork.IsUnknown() {
+			data.InsideVirtualNetwork.ElementsAs(ctx, &existingInsideVirtualNetworkItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -3708,7 +4548,14 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 				})
 			}
 		}
-		data.InsideVirtualNetwork = inside_virtual_networkList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: FleetInsideVirtualNetworkModelAttrTypes}, inside_virtual_networkList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.InsideVirtualNetwork = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.InsideVirtualNetwork = types.ListNull(types.ObjectType{AttrTypes: FleetInsideVirtualNetworkModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["interface_list"].(map[string]interface{}); ok && (isImport || data.InterfaceList != nil) {
 		data.InterfaceList = &FleetInterfaceListModel{
@@ -3779,6 +4626,10 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["network_connectors"].([]interface{}); ok && len(listData) > 0 {
 		var network_connectorsList []FleetNetworkConnectorsModel
+		var existingNetworkConnectorsItems []FleetNetworkConnectorsModel
+		if !data.NetworkConnectors.IsNull() && !data.NetworkConnectors.IsUnknown() {
+			data.NetworkConnectors.ElementsAs(ctx, &existingNetworkConnectorsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -3816,10 +4667,21 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 				})
 			}
 		}
-		data.NetworkConnectors = network_connectorsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: FleetNetworkConnectorsModelAttrTypes}, network_connectorsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.NetworkConnectors = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.NetworkConnectors = types.ListNull(types.ObjectType{AttrTypes: FleetNetworkConnectorsModelAttrTypes})
 	}
 	if listData, ok := apiResource.Spec["network_firewall"].([]interface{}); ok && len(listData) > 0 {
 		var network_firewallList []FleetNetworkFirewallModel
+		var existingNetworkFirewallItems []FleetNetworkFirewallModel
+		if !data.NetworkFirewall.IsNull() && !data.NetworkFirewall.IsUnknown() {
+			data.NetworkFirewall.ElementsAs(ctx, &existingNetworkFirewallItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -3857,7 +4719,14 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 				})
 			}
 		}
-		data.NetworkFirewall = network_firewallList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: FleetNetworkFirewallModelAttrTypes}, network_firewallList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.NetworkFirewall = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.NetworkFirewall = types.ListNull(types.ObjectType{AttrTypes: FleetNetworkFirewallModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["no_bond_devices"].(map[string]interface{}); ok && isImport && data.NoBondDevices == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -3886,6 +4755,10 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["outside_virtual_network"].([]interface{}); ok && len(listData) > 0 {
 		var outside_virtual_networkList []FleetOutsideVirtualNetworkModel
+		var existingOutsideVirtualNetworkItems []FleetOutsideVirtualNetworkModel
+		if !data.OutsideVirtualNetwork.IsNull() && !data.OutsideVirtualNetwork.IsUnknown() {
+			data.OutsideVirtualNetwork.ElementsAs(ctx, &existingOutsideVirtualNetworkItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -3923,7 +4796,14 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 				})
 			}
 		}
-		data.OutsideVirtualNetwork = outside_virtual_networkList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: FleetOutsideVirtualNetworkModelAttrTypes}, outside_virtual_networkList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.OutsideVirtualNetwork = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.OutsideVirtualNetwork = types.ListNull(types.ObjectType{AttrTypes: FleetOutsideVirtualNetworkModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["performance_enhancement_mode"].(map[string]interface{}); ok && isImport && data.PerformanceEnhancementMode == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -4470,11 +5350,17 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -4506,12 +5392,16 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["blocked_services"].([]interface{}); ok && len(listData) > 0 {
 		var blocked_servicesList []FleetBlockedServicesModel
+		var existingBlockedServicesItems []FleetBlockedServicesModel
+		if !data.BlockedServices.IsNull() && !data.BlockedServices.IsUnknown() {
+			data.BlockedServices.ElementsAs(ctx, &existingBlockedServicesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				blocked_servicesList = append(blocked_servicesList, FleetBlockedServicesModel{
 					DNS: func() *FleetEmptyModel {
-						if !isImport && len(data.BlockedServices) > listIdx && data.BlockedServices[listIdx].DNS != nil {
+						if !isImport && len(existingBlockedServicesItems) > listIdx && existingBlockedServicesItems[listIdx].DNS != nil {
 							return &FleetEmptyModel{}
 						}
 						return nil
@@ -4523,13 +5413,13 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 						return types.StringNull()
 					}(),
 					SSH: func() *FleetEmptyModel {
-						if !isImport && len(data.BlockedServices) > listIdx && data.BlockedServices[listIdx].SSH != nil {
+						if !isImport && len(existingBlockedServicesItems) > listIdx && existingBlockedServicesItems[listIdx].SSH != nil {
 							return &FleetEmptyModel{}
 						}
 						return nil
 					}(),
 					WebUserInterface: func() *FleetEmptyModel {
-						if !isImport && len(data.BlockedServices) > listIdx && data.BlockedServices[listIdx].WebUserInterface != nil {
+						if !isImport && len(existingBlockedServicesItems) > listIdx && existingBlockedServicesItems[listIdx].WebUserInterface != nil {
 							return &FleetEmptyModel{}
 						}
 						return nil
@@ -4537,7 +5427,14 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 				})
 			}
 		}
-		data.BlockedServices = blocked_servicesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: FleetBlockedServicesModelAttrTypes}, blocked_servicesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.BlockedServices = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.BlockedServices = types.ListNull(types.ObjectType{AttrTypes: FleetBlockedServicesModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["bond_device_list"].(map[string]interface{}); ok && (isImport || data.BondDeviceList != nil) {
 		data.BondDeviceList = &FleetBondDeviceListModel{
@@ -4743,6 +5640,10 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["inside_virtual_network"].([]interface{}); ok && len(listData) > 0 {
 		var inside_virtual_networkList []FleetInsideVirtualNetworkModel
+		var existingInsideVirtualNetworkItems []FleetInsideVirtualNetworkModel
+		if !data.InsideVirtualNetwork.IsNull() && !data.InsideVirtualNetwork.IsUnknown() {
+			data.InsideVirtualNetwork.ElementsAs(ctx, &existingInsideVirtualNetworkItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -4780,7 +5681,14 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 				})
 			}
 		}
-		data.InsideVirtualNetwork = inside_virtual_networkList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: FleetInsideVirtualNetworkModelAttrTypes}, inside_virtual_networkList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.InsideVirtualNetwork = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.InsideVirtualNetwork = types.ListNull(types.ObjectType{AttrTypes: FleetInsideVirtualNetworkModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["interface_list"].(map[string]interface{}); ok && (isImport || data.InterfaceList != nil) {
 		data.InterfaceList = &FleetInterfaceListModel{
@@ -4851,6 +5759,10 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["network_connectors"].([]interface{}); ok && len(listData) > 0 {
 		var network_connectorsList []FleetNetworkConnectorsModel
+		var existingNetworkConnectorsItems []FleetNetworkConnectorsModel
+		if !data.NetworkConnectors.IsNull() && !data.NetworkConnectors.IsUnknown() {
+			data.NetworkConnectors.ElementsAs(ctx, &existingNetworkConnectorsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -4888,10 +5800,21 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 				})
 			}
 		}
-		data.NetworkConnectors = network_connectorsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: FleetNetworkConnectorsModelAttrTypes}, network_connectorsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.NetworkConnectors = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.NetworkConnectors = types.ListNull(types.ObjectType{AttrTypes: FleetNetworkConnectorsModelAttrTypes})
 	}
 	if listData, ok := apiResource.Spec["network_firewall"].([]interface{}); ok && len(listData) > 0 {
 		var network_firewallList []FleetNetworkFirewallModel
+		var existingNetworkFirewallItems []FleetNetworkFirewallModel
+		if !data.NetworkFirewall.IsNull() && !data.NetworkFirewall.IsUnknown() {
+			data.NetworkFirewall.ElementsAs(ctx, &existingNetworkFirewallItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -4929,7 +5852,14 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 				})
 			}
 		}
-		data.NetworkFirewall = network_firewallList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: FleetNetworkFirewallModelAttrTypes}, network_firewallList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.NetworkFirewall = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.NetworkFirewall = types.ListNull(types.ObjectType{AttrTypes: FleetNetworkFirewallModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["no_bond_devices"].(map[string]interface{}); ok && isImport && data.NoBondDevices == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -4958,6 +5888,10 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["outside_virtual_network"].([]interface{}); ok && len(listData) > 0 {
 		var outside_virtual_networkList []FleetOutsideVirtualNetworkModel
+		var existingOutsideVirtualNetworkItems []FleetOutsideVirtualNetworkModel
+		if !data.OutsideVirtualNetwork.IsNull() && !data.OutsideVirtualNetwork.IsUnknown() {
+			data.OutsideVirtualNetwork.ElementsAs(ctx, &existingOutsideVirtualNetworkItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -4995,7 +5929,14 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 				})
 			}
 		}
-		data.OutsideVirtualNetwork = outside_virtual_networkList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: FleetOutsideVirtualNetworkModelAttrTypes}, outside_virtual_networkList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.OutsideVirtualNetwork = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.OutsideVirtualNetwork = types.ListNull(types.ObjectType{AttrTypes: FleetOutsideVirtualNetworkModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["performance_enhancement_mode"].(map[string]interface{}); ok && isImport && data.PerformanceEnhancementMode == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -5542,25 +6483,30 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		allow_all_usbMap := make(map[string]interface{})
 		apiResource.Spec["allow_all_usb"] = allow_all_usbMap
 	}
-	if len(data.BlockedServices) > 0 {
-		var blocked_servicesList []map[string]interface{}
-		for _, item := range data.BlockedServices {
-			itemMap := make(map[string]interface{})
-			if item.DNS != nil {
-				itemMap["dns"] = map[string]interface{}{}
+	if !data.BlockedServices.IsNull() && !data.BlockedServices.IsUnknown() {
+		var blocked_servicesItems []FleetBlockedServicesModel
+		diags := data.BlockedServices.ElementsAs(ctx, &blocked_servicesItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(blocked_servicesItems) > 0 {
+			var blocked_servicesList []map[string]interface{}
+			for _, item := range blocked_servicesItems {
+				itemMap := make(map[string]interface{})
+				if item.DNS != nil {
+					itemMap["dns"] = map[string]interface{}{}
+				}
+				if !item.NetworkType.IsNull() && !item.NetworkType.IsUnknown() {
+					itemMap["network_type"] = item.NetworkType.ValueString()
+				}
+				if item.SSH != nil {
+					itemMap["ssh"] = map[string]interface{}{}
+				}
+				if item.WebUserInterface != nil {
+					itemMap["web_user_interface"] = map[string]interface{}{}
+				}
+				blocked_servicesList = append(blocked_servicesList, itemMap)
 			}
-			if !item.NetworkType.IsNull() && !item.NetworkType.IsUnknown() {
-				itemMap["network_type"] = item.NetworkType.ValueString()
-			}
-			if item.SSH != nil {
-				itemMap["ssh"] = map[string]interface{}{}
-			}
-			if item.WebUserInterface != nil {
-				itemMap["web_user_interface"] = map[string]interface{}{}
-			}
-			blocked_servicesList = append(blocked_servicesList, itemMap)
+			apiResource.Spec["blocked_services"] = blocked_servicesList
 		}
-		apiResource.Spec["blocked_services"] = blocked_servicesList
 	}
 	if data.BondDeviceList != nil {
 		bond_device_listMap := make(map[string]interface{})
@@ -5689,28 +6635,33 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		enable_vmMap := make(map[string]interface{})
 		apiResource.Spec["enable_vm"] = enable_vmMap
 	}
-	if len(data.InsideVirtualNetwork) > 0 {
-		var inside_virtual_networkList []map[string]interface{}
-		for _, item := range data.InsideVirtualNetwork {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.InsideVirtualNetwork.IsNull() && !data.InsideVirtualNetwork.IsUnknown() {
+		var inside_virtual_networkItems []FleetInsideVirtualNetworkModel
+		diags := data.InsideVirtualNetwork.ElementsAs(ctx, &inside_virtual_networkItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(inside_virtual_networkItems) > 0 {
+			var inside_virtual_networkList []map[string]interface{}
+			for _, item := range inside_virtual_networkItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				inside_virtual_networkList = append(inside_virtual_networkList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			inside_virtual_networkList = append(inside_virtual_networkList, itemMap)
+			apiResource.Spec["inside_virtual_network"] = inside_virtual_networkList
 		}
-		apiResource.Spec["inside_virtual_network"] = inside_virtual_networkList
 	}
 	if data.InterfaceList != nil {
 		interface_listMap := make(map[string]interface{})
@@ -5767,51 +6718,61 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		logs_streaming_disabledMap := make(map[string]interface{})
 		apiResource.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
 	}
-	if len(data.NetworkConnectors) > 0 {
-		var network_connectorsList []map[string]interface{}
-		for _, item := range data.NetworkConnectors {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.NetworkConnectors.IsNull() && !data.NetworkConnectors.IsUnknown() {
+		var network_connectorsItems []FleetNetworkConnectorsModel
+		diags := data.NetworkConnectors.ElementsAs(ctx, &network_connectorsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(network_connectorsItems) > 0 {
+			var network_connectorsList []map[string]interface{}
+			for _, item := range network_connectorsItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				network_connectorsList = append(network_connectorsList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			network_connectorsList = append(network_connectorsList, itemMap)
+			apiResource.Spec["network_connectors"] = network_connectorsList
 		}
-		apiResource.Spec["network_connectors"] = network_connectorsList
 	}
-	if len(data.NetworkFirewall) > 0 {
-		var network_firewallList []map[string]interface{}
-		for _, item := range data.NetworkFirewall {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.NetworkFirewall.IsNull() && !data.NetworkFirewall.IsUnknown() {
+		var network_firewallItems []FleetNetworkFirewallModel
+		diags := data.NetworkFirewall.ElementsAs(ctx, &network_firewallItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(network_firewallItems) > 0 {
+			var network_firewallList []map[string]interface{}
+			for _, item := range network_firewallItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				network_firewallList = append(network_firewallList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			network_firewallList = append(network_firewallList, itemMap)
+			apiResource.Spec["network_firewall"] = network_firewallList
 		}
-		apiResource.Spec["network_firewall"] = network_firewallList
 	}
 	if data.NoBondDevices != nil {
 		no_bond_devicesMap := make(map[string]interface{})
@@ -5833,28 +6794,33 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		no_storage_static_routesMap := make(map[string]interface{})
 		apiResource.Spec["no_storage_static_routes"] = no_storage_static_routesMap
 	}
-	if len(data.OutsideVirtualNetwork) > 0 {
-		var outside_virtual_networkList []map[string]interface{}
-		for _, item := range data.OutsideVirtualNetwork {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.OutsideVirtualNetwork.IsNull() && !data.OutsideVirtualNetwork.IsUnknown() {
+		var outside_virtual_networkItems []FleetOutsideVirtualNetworkModel
+		diags := data.OutsideVirtualNetwork.ElementsAs(ctx, &outside_virtual_networkItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(outside_virtual_networkItems) > 0 {
+			var outside_virtual_networkList []map[string]interface{}
+			for _, item := range outside_virtual_networkItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				outside_virtual_networkList = append(outside_virtual_networkList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			outside_virtual_networkList = append(outside_virtual_networkList, itemMap)
+			apiResource.Spec["outside_virtual_network"] = outside_virtual_networkList
 		}
-		apiResource.Spec["outside_virtual_network"] = outside_virtual_networkList
 	}
 	if data.PerformanceEnhancementMode != nil {
 		performance_enhancement_modeMap := make(map[string]interface{})
@@ -6187,12 +7153,16 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["blocked_services"].([]interface{}); ok && len(listData) > 0 {
 		var blocked_servicesList []FleetBlockedServicesModel
+		var existingBlockedServicesItems []FleetBlockedServicesModel
+		if !data.BlockedServices.IsNull() && !data.BlockedServices.IsUnknown() {
+			data.BlockedServices.ElementsAs(ctx, &existingBlockedServicesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				blocked_servicesList = append(blocked_servicesList, FleetBlockedServicesModel{
 					DNS: func() *FleetEmptyModel {
-						if !isImport && len(data.BlockedServices) > listIdx && data.BlockedServices[listIdx].DNS != nil {
+						if !isImport && len(existingBlockedServicesItems) > listIdx && existingBlockedServicesItems[listIdx].DNS != nil {
 							return &FleetEmptyModel{}
 						}
 						return nil
@@ -6204,13 +7174,13 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 						return types.StringNull()
 					}(),
 					SSH: func() *FleetEmptyModel {
-						if !isImport && len(data.BlockedServices) > listIdx && data.BlockedServices[listIdx].SSH != nil {
+						if !isImport && len(existingBlockedServicesItems) > listIdx && existingBlockedServicesItems[listIdx].SSH != nil {
 							return &FleetEmptyModel{}
 						}
 						return nil
 					}(),
 					WebUserInterface: func() *FleetEmptyModel {
-						if !isImport && len(data.BlockedServices) > listIdx && data.BlockedServices[listIdx].WebUserInterface != nil {
+						if !isImport && len(existingBlockedServicesItems) > listIdx && existingBlockedServicesItems[listIdx].WebUserInterface != nil {
 							return &FleetEmptyModel{}
 						}
 						return nil
@@ -6218,7 +7188,14 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 				})
 			}
 		}
-		data.BlockedServices = blocked_servicesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: FleetBlockedServicesModelAttrTypes}, blocked_servicesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.BlockedServices = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.BlockedServices = types.ListNull(types.ObjectType{AttrTypes: FleetBlockedServicesModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["bond_device_list"].(map[string]interface{}); ok && (isImport || data.BondDeviceList != nil) {
 		data.BondDeviceList = &FleetBondDeviceListModel{
@@ -6424,6 +7401,10 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["inside_virtual_network"].([]interface{}); ok && len(listData) > 0 {
 		var inside_virtual_networkList []FleetInsideVirtualNetworkModel
+		var existingInsideVirtualNetworkItems []FleetInsideVirtualNetworkModel
+		if !data.InsideVirtualNetwork.IsNull() && !data.InsideVirtualNetwork.IsUnknown() {
+			data.InsideVirtualNetwork.ElementsAs(ctx, &existingInsideVirtualNetworkItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -6461,7 +7442,14 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 				})
 			}
 		}
-		data.InsideVirtualNetwork = inside_virtual_networkList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: FleetInsideVirtualNetworkModelAttrTypes}, inside_virtual_networkList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.InsideVirtualNetwork = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.InsideVirtualNetwork = types.ListNull(types.ObjectType{AttrTypes: FleetInsideVirtualNetworkModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["interface_list"].(map[string]interface{}); ok && (isImport || data.InterfaceList != nil) {
 		data.InterfaceList = &FleetInterfaceListModel{
@@ -6532,6 +7520,10 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["network_connectors"].([]interface{}); ok && len(listData) > 0 {
 		var network_connectorsList []FleetNetworkConnectorsModel
+		var existingNetworkConnectorsItems []FleetNetworkConnectorsModel
+		if !data.NetworkConnectors.IsNull() && !data.NetworkConnectors.IsUnknown() {
+			data.NetworkConnectors.ElementsAs(ctx, &existingNetworkConnectorsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -6569,10 +7561,21 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 				})
 			}
 		}
-		data.NetworkConnectors = network_connectorsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: FleetNetworkConnectorsModelAttrTypes}, network_connectorsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.NetworkConnectors = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.NetworkConnectors = types.ListNull(types.ObjectType{AttrTypes: FleetNetworkConnectorsModelAttrTypes})
 	}
 	if listData, ok := apiResource.Spec["network_firewall"].([]interface{}); ok && len(listData) > 0 {
 		var network_firewallList []FleetNetworkFirewallModel
+		var existingNetworkFirewallItems []FleetNetworkFirewallModel
+		if !data.NetworkFirewall.IsNull() && !data.NetworkFirewall.IsUnknown() {
+			data.NetworkFirewall.ElementsAs(ctx, &existingNetworkFirewallItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -6610,7 +7613,14 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 				})
 			}
 		}
-		data.NetworkFirewall = network_firewallList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: FleetNetworkFirewallModelAttrTypes}, network_firewallList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.NetworkFirewall = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.NetworkFirewall = types.ListNull(types.ObjectType{AttrTypes: FleetNetworkFirewallModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["no_bond_devices"].(map[string]interface{}); ok && isImport && data.NoBondDevices == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -6639,6 +7649,10 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["outside_virtual_network"].([]interface{}); ok && len(listData) > 0 {
 		var outside_virtual_networkList []FleetOutsideVirtualNetworkModel
+		var existingOutsideVirtualNetworkItems []FleetOutsideVirtualNetworkModel
+		if !data.OutsideVirtualNetwork.IsNull() && !data.OutsideVirtualNetwork.IsUnknown() {
+			data.OutsideVirtualNetwork.ElementsAs(ctx, &existingOutsideVirtualNetworkItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -6676,7 +7690,14 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 				})
 			}
 		}
-		data.OutsideVirtualNetwork = outside_virtual_networkList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: FleetOutsideVirtualNetworkModelAttrTypes}, outside_virtual_networkList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.OutsideVirtualNetwork = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.OutsideVirtualNetwork = types.ListNull(types.ObjectType{AttrTypes: FleetOutsideVirtualNetworkModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["performance_enhancement_mode"].(map[string]interface{}); ok && isImport && data.PerformanceEnhancementMode == nil {
 		// Import case: populate from API since state is nil and psd is empty

@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -56,10 +57,23 @@ type ExternalConnectorCESiteReferenceModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// ExternalConnectorCESiteReferenceModelAttrTypes defines the attribute types for ExternalConnectorCESiteReferenceModel
+var ExternalConnectorCESiteReferenceModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // ExternalConnectorIpsecModel represents ipsec block
 type ExternalConnectorIpsecModel struct {
 	IKEParameters         *ExternalConnectorIpsecIKEParametersModel         `tfsdk:"ike_parameters"`
 	IpsecTunnelParameters *ExternalConnectorIpsecIpsecTunnelParametersModel `tfsdk:"ipsec_tunnel_parameters"`
+}
+
+// ExternalConnectorIpsecModelAttrTypes defines the attribute types for ExternalConnectorIpsecModel
+var ExternalConnectorIpsecModelAttrTypes = map[string]attr.Type{
+	"ike_parameters":          types.ObjectType{AttrTypes: ExternalConnectorIpsecIKEParametersModelAttrTypes},
+	"ipsec_tunnel_parameters": types.ObjectType{AttrTypes: ExternalConnectorIpsecIpsecTunnelParametersModelAttrTypes},
 }
 
 // ExternalConnectorIpsecIKEParametersModel represents ike_parameters block
@@ -76,9 +90,28 @@ type ExternalConnectorIpsecIKEParametersModel struct {
 	UseDefaultRemoteIKEID *ExternalConnectorEmptyModel                               `tfsdk:"use_default_remote_ike_id"`
 }
 
+// ExternalConnectorIpsecIKEParametersModelAttrTypes defines the attribute types for ExternalConnectorIpsecIKEParametersModel
+var ExternalConnectorIpsecIKEParametersModelAttrTypes = map[string]attr.Type{
+	"rm_hostname":               types.StringType,
+	"dpd_disabled":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dpd_keep_alive_timer":      types.ObjectType{AttrTypes: ExternalConnectorIpsecIKEParametersDpdKeepAliveTimerModelAttrTypes},
+	"ike_phase1_profile":        types.ObjectType{AttrTypes: ExternalConnectorIpsecIKEParametersIKEPhase1ProfileModelAttrTypes},
+	"ike_phase2_profile":        types.ObjectType{AttrTypes: ExternalConnectorIpsecIKEParametersIKEPhase2ProfileModelAttrTypes},
+	"initiator":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"responder":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"rm_ip_address":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_default_local_ike_id":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_default_remote_ike_id": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ExternalConnectorIpsecIKEParametersDpdKeepAliveTimerModel represents dpd_keep_alive_timer block
 type ExternalConnectorIpsecIKEParametersDpdKeepAliveTimerModel struct {
 	Timeout types.Int64 `tfsdk:"timeout"`
+}
+
+// ExternalConnectorIpsecIKEParametersDpdKeepAliveTimerModelAttrTypes defines the attribute types for ExternalConnectorIpsecIKEParametersDpdKeepAliveTimerModel
+var ExternalConnectorIpsecIKEParametersDpdKeepAliveTimerModelAttrTypes = map[string]attr.Type{
+	"timeout": types.Int64Type,
 }
 
 // ExternalConnectorIpsecIKEParametersIKEPhase1ProfileModel represents ike_phase1_profile block
@@ -88,11 +121,25 @@ type ExternalConnectorIpsecIKEParametersIKEPhase1ProfileModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// ExternalConnectorIpsecIKEParametersIKEPhase1ProfileModelAttrTypes defines the attribute types for ExternalConnectorIpsecIKEParametersIKEPhase1ProfileModel
+var ExternalConnectorIpsecIKEParametersIKEPhase1ProfileModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // ExternalConnectorIpsecIKEParametersIKEPhase2ProfileModel represents ike_phase2_profile block
 type ExternalConnectorIpsecIKEParametersIKEPhase2ProfileModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// ExternalConnectorIpsecIKEParametersIKEPhase2ProfileModelAttrTypes defines the attribute types for ExternalConnectorIpsecIKEParametersIKEPhase2ProfileModel
+var ExternalConnectorIpsecIKEParametersIKEPhase2ProfileModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // ExternalConnectorIpsecIKEParametersRmIPAddressModel represents rm_ip_address block
@@ -101,14 +148,30 @@ type ExternalConnectorIpsecIKEParametersRmIPAddressModel struct {
 	Ipv6 *ExternalConnectorIpsecIKEParametersRmIPAddressIpv6Model `tfsdk:"ipv6"`
 }
 
+// ExternalConnectorIpsecIKEParametersRmIPAddressModelAttrTypes defines the attribute types for ExternalConnectorIpsecIKEParametersRmIPAddressModel
+var ExternalConnectorIpsecIKEParametersRmIPAddressModelAttrTypes = map[string]attr.Type{
+	"ipv4": types.ObjectType{AttrTypes: ExternalConnectorIpsecIKEParametersRmIPAddressIpv4ModelAttrTypes},
+	"ipv6": types.ObjectType{AttrTypes: ExternalConnectorIpsecIKEParametersRmIPAddressIpv6ModelAttrTypes},
+}
+
 // ExternalConnectorIpsecIKEParametersRmIPAddressIpv4Model represents ipv4 block
 type ExternalConnectorIpsecIKEParametersRmIPAddressIpv4Model struct {
 	Addr types.String `tfsdk:"addr"`
 }
 
+// ExternalConnectorIpsecIKEParametersRmIPAddressIpv4ModelAttrTypes defines the attribute types for ExternalConnectorIpsecIKEParametersRmIPAddressIpv4Model
+var ExternalConnectorIpsecIKEParametersRmIPAddressIpv4ModelAttrTypes = map[string]attr.Type{
+	"addr": types.StringType,
+}
+
 // ExternalConnectorIpsecIKEParametersRmIPAddressIpv6Model represents ipv6 block
 type ExternalConnectorIpsecIKEParametersRmIPAddressIpv6Model struct {
 	Addr types.String `tfsdk:"addr"`
+}
+
+// ExternalConnectorIpsecIKEParametersRmIPAddressIpv6ModelAttrTypes defines the attribute types for ExternalConnectorIpsecIKEParametersRmIPAddressIpv6Model
+var ExternalConnectorIpsecIKEParametersRmIPAddressIpv6ModelAttrTypes = map[string]attr.Type{
+	"addr": types.StringType,
 }
 
 // ExternalConnectorIpsecIpsecTunnelParametersModel represents ipsec_tunnel_parameters block
@@ -122,14 +185,35 @@ type ExternalConnectorIpsecIpsecTunnelParametersModel struct {
 	TunnelEps              []ExternalConnectorIpsecIpsecTunnelParametersTunnelEpsModel    `tfsdk:"tunnel_eps"`
 }
 
+// ExternalConnectorIpsecIpsecTunnelParametersModelAttrTypes defines the attribute types for ExternalConnectorIpsecIpsecTunnelParametersModel
+var ExternalConnectorIpsecIpsecTunnelParametersModelAttrTypes = map[string]attr.Type{
+	"psk":                       types.StringType,
+	"tunnel_mtu":                types.Int64Type,
+	"peer_ip_address":           types.ObjectType{AttrTypes: ExternalConnectorIpsecIpsecTunnelParametersPeerIPAddressModelAttrTypes},
+	"segment":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_local_inside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_local_network":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tunnel_eps":                types.ListType{ElemType: types.ObjectType{AttrTypes: ExternalConnectorIpsecIpsecTunnelParametersTunnelEpsModelAttrTypes}},
+}
+
 // ExternalConnectorIpsecIpsecTunnelParametersPeerIPAddressModel represents peer_ip_address block
 type ExternalConnectorIpsecIpsecTunnelParametersPeerIPAddressModel struct {
 	Addr types.String `tfsdk:"addr"`
 }
 
+// ExternalConnectorIpsecIpsecTunnelParametersPeerIPAddressModelAttrTypes defines the attribute types for ExternalConnectorIpsecIpsecTunnelParametersPeerIPAddressModel
+var ExternalConnectorIpsecIpsecTunnelParametersPeerIPAddressModelAttrTypes = map[string]attr.Type{
+	"addr": types.StringType,
+}
+
 // ExternalConnectorIpsecIpsecTunnelParametersSegmentModel represents segment block
 type ExternalConnectorIpsecIpsecTunnelParametersSegmentModel struct {
 	Refs []ExternalConnectorIpsecIpsecTunnelParametersSegmentRefsModel `tfsdk:"refs"`
+}
+
+// ExternalConnectorIpsecIpsecTunnelParametersSegmentModelAttrTypes defines the attribute types for ExternalConnectorIpsecIpsecTunnelParametersSegmentModel
+var ExternalConnectorIpsecIpsecTunnelParametersSegmentModelAttrTypes = map[string]attr.Type{
+	"refs": types.ListType{ElemType: types.ObjectType{AttrTypes: ExternalConnectorIpsecIpsecTunnelParametersSegmentRefsModelAttrTypes}},
 }
 
 // ExternalConnectorIpsecIpsecTunnelParametersSegmentRefsModel represents refs block
@@ -141,12 +225,29 @@ type ExternalConnectorIpsecIpsecTunnelParametersSegmentRefsModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// ExternalConnectorIpsecIpsecTunnelParametersSegmentRefsModelAttrTypes defines the attribute types for ExternalConnectorIpsecIpsecTunnelParametersSegmentRefsModel
+var ExternalConnectorIpsecIpsecTunnelParametersSegmentRefsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // ExternalConnectorIpsecIpsecTunnelParametersTunnelEpsModel represents tunnel_eps block
 type ExternalConnectorIpsecIpsecTunnelParametersTunnelEpsModel struct {
 	Interface      types.String `tfsdk:"interface"`
 	LocalTunnelIP  types.String `tfsdk:"local_tunnel_ip"`
 	Node           types.String `tfsdk:"node"`
 	RemoteTunnelIP types.String `tfsdk:"remote_tunnel_ip"`
+}
+
+// ExternalConnectorIpsecIpsecTunnelParametersTunnelEpsModelAttrTypes defines the attribute types for ExternalConnectorIpsecIpsecTunnelParametersTunnelEpsModel
+var ExternalConnectorIpsecIpsecTunnelParametersTunnelEpsModelAttrTypes = map[string]attr.Type{
+	"interface":        types.StringType,
+	"local_tunnel_ip":  types.StringType,
+	"node":             types.StringType,
+	"remote_tunnel_ip": types.StringType,
 }
 
 type ExternalConnectorResourceModel struct {
@@ -239,6 +340,9 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional:            true,
 						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
 					},
 				},
 			},
@@ -282,6 +386,9 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional:            true,
 										Computed:            true,
+										PlanModifiers: []planmodifier.String{
+											stringplanmodifier.UseStateForUnknown(),
+										},
 									},
 								},
 							},
@@ -300,6 +407,9 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional:            true,
 										Computed:            true,
+										PlanModifiers: []planmodifier.String{
+											stringplanmodifier.UseStateForUnknown(),
+										},
 									},
 								},
 							},
@@ -375,6 +485,9 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 													MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -388,11 +501,17 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 												"uid": schema.StringAttribute{
 													MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -718,11 +837,17 @@ func (r *ExternalConnectorResource) Read(ctx context.Context, req resource.ReadR
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

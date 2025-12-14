@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -55,11 +56,23 @@ type ProxyActiveForwardProxyPoliciesModel struct {
 	ForwardProxyPolicies []ProxyActiveForwardProxyPoliciesForwardProxyPoliciesModel `tfsdk:"forward_proxy_policies"`
 }
 
+// ProxyActiveForwardProxyPoliciesModelAttrTypes defines the attribute types for ProxyActiveForwardProxyPoliciesModel
+var ProxyActiveForwardProxyPoliciesModelAttrTypes = map[string]attr.Type{
+	"forward_proxy_policies": types.ListType{ElemType: types.ObjectType{AttrTypes: ProxyActiveForwardProxyPoliciesForwardProxyPoliciesModelAttrTypes}},
+}
+
 // ProxyActiveForwardProxyPoliciesForwardProxyPoliciesModel represents forward_proxy_policies block
 type ProxyActiveForwardProxyPoliciesForwardProxyPoliciesModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// ProxyActiveForwardProxyPoliciesForwardProxyPoliciesModelAttrTypes defines the attribute types for ProxyActiveForwardProxyPoliciesForwardProxyPoliciesModel
+var ProxyActiveForwardProxyPoliciesForwardProxyPoliciesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // ProxyDynamicProxyModel represents dynamic_proxy block
@@ -72,9 +85,24 @@ type ProxyDynamicProxyModel struct {
 	SniProxy             *ProxyDynamicProxySniProxyModel   `tfsdk:"sni_proxy"`
 }
 
+// ProxyDynamicProxyModelAttrTypes defines the attribute types for ProxyDynamicProxyModel
+var ProxyDynamicProxyModelAttrTypes = map[string]attr.Type{
+	"domains":                types.ListType{ElemType: types.StringType},
+	"disable_dns_masquerade": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_dns_masquerade":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_proxy":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"https_proxy":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"sni_proxy":              types.ObjectType{AttrTypes: ProxyDynamicProxySniProxyModelAttrTypes},
+}
+
 // ProxyDynamicProxyHTTPProxyModel represents http_proxy block
 type ProxyDynamicProxyHTTPProxyModel struct {
 	MoreOption *ProxyDynamicProxyHTTPProxyMoreOptionModel `tfsdk:"more_option"`
+}
+
+// ProxyDynamicProxyHTTPProxyModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPProxyModel
+var ProxyDynamicProxyHTTPProxyModelAttrTypes = map[string]attr.Type{
+	"more_option": types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPProxyMoreOptionModelAttrTypes},
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionModel represents more_option block
@@ -97,10 +125,36 @@ type ProxyDynamicProxyHTTPProxyMoreOptionModel struct {
 	ResponseHeadersToAdd     []ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddModel `tfsdk:"response_headers_to_add"`
 }
 
+// ProxyDynamicProxyHTTPProxyMoreOptionModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPProxyMoreOptionModel
+var ProxyDynamicProxyHTTPProxyMoreOptionModelAttrTypes = map[string]attr.Type{
+	"disable_default_error_pages": types.BoolType,
+	"idle_timeout":                types.Int64Type,
+	"max_request_header_size":     types.Int64Type,
+	"request_cookies_to_remove":   types.ListType{ElemType: types.StringType},
+	"request_headers_to_remove":   types.ListType{ElemType: types.StringType},
+	"response_cookies_to_remove":  types.ListType{ElemType: types.StringType},
+	"response_headers_to_remove":  types.ListType{ElemType: types.StringType},
+	"buffer_policy":               types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPProxyMoreOptionBufferPolicyModelAttrTypes},
+	"compression_params":          types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPProxyMoreOptionCompressionParamsModelAttrTypes},
+	"custom_errors":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_path_normalize":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_path_normalize":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"request_cookies_to_add":      types.ListType{ElemType: types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddModelAttrTypes}},
+	"request_headers_to_add":      types.ListType{ElemType: types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddModelAttrTypes}},
+	"response_cookies_to_add":     types.ListType{ElemType: types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddModelAttrTypes}},
+	"response_headers_to_add":     types.ListType{ElemType: types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddModelAttrTypes}},
+}
+
 // ProxyDynamicProxyHTTPProxyMoreOptionBufferPolicyModel represents buffer_policy block
 type ProxyDynamicProxyHTTPProxyMoreOptionBufferPolicyModel struct {
 	Disabled        types.Bool  `tfsdk:"disabled"`
 	MaxRequestBytes types.Int64 `tfsdk:"max_request_bytes"`
+}
+
+// ProxyDynamicProxyHTTPProxyMoreOptionBufferPolicyModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPProxyMoreOptionBufferPolicyModel
+var ProxyDynamicProxyHTTPProxyMoreOptionBufferPolicyModelAttrTypes = map[string]attr.Type{
+	"disabled":          types.BoolType,
+	"max_request_bytes": types.Int64Type,
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionCompressionParamsModel represents compression_params block
@@ -111,6 +165,14 @@ type ProxyDynamicProxyHTTPProxyMoreOptionCompressionParamsModel struct {
 	RemoveAcceptEncodingHeader types.Bool  `tfsdk:"remove_accept_encoding_header"`
 }
 
+// ProxyDynamicProxyHTTPProxyMoreOptionCompressionParamsModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPProxyMoreOptionCompressionParamsModel
+var ProxyDynamicProxyHTTPProxyMoreOptionCompressionParamsModelAttrTypes = map[string]attr.Type{
+	"content_length":                types.Int64Type,
+	"content_type":                  types.ListType{ElemType: types.StringType},
+	"disable_on_etag_header":        types.BoolType,
+	"remove_accept_encoding_header": types.BoolType,
+}
+
 // ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddModel represents request_cookies_to_add block
 type ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddModel struct {
 	Name        types.String                                                             `tfsdk:"name"`
@@ -119,10 +181,24 @@ type ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddModel struct {
 	SecretValue *ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
+// ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddModel
+var ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddModelAttrTypes = map[string]attr.Type{
+	"name":         types.StringType,
+	"overwrite":    types.BoolType,
+	"value":        types.StringType,
+	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModel represents secret_value block
 type ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModel struct {
 	BlindfoldSecretInfo *ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModel
+var ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModelAttrTypes},
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -132,10 +208,23 @@ type ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueBlindfold
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel
+var ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel
+var ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddModel represents request_headers_to_add block
@@ -146,10 +235,24 @@ type ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddModel struct {
 	SecretValue *ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
+// ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddModel
+var ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddModelAttrTypes = map[string]attr.Type{
+	"append":       types.BoolType,
+	"name":         types.StringType,
+	"value":        types.StringType,
+	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModel represents secret_value block
 type ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModel struct {
 	BlindfoldSecretInfo *ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModel
+var ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModelAttrTypes},
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -159,10 +262,23 @@ type ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueBlindfold
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel
+var ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel
+var ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddModel represents response_cookies_to_add block
@@ -192,10 +308,43 @@ type ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddModel struct {
 	SecretValue       *ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
+// ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddModel
+var ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddModelAttrTypes = map[string]attr.Type{
+	"add_domain":         types.StringType,
+	"add_expiry":         types.StringType,
+	"add_path":           types.StringType,
+	"max_age_value":      types.Int64Type,
+	"name":               types.StringType,
+	"overwrite":          types.BoolType,
+	"value":              types.StringType,
+	"add_httponly":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"add_partitioned":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"add_secure":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_domain":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_expiry":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_httponly":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_max_age":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_partitioned": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_path":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_samesite":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_secure":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_value":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_lax":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_none":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_strict":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModel represents secret_value block
 type ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModel struct {
 	BlindfoldSecretInfo *ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModel
+var ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModelAttrTypes},
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -205,10 +354,23 @@ type ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueBlindfol
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel
+var ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel
+var ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddModel represents response_headers_to_add block
@@ -219,10 +381,24 @@ type ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddModel struct {
 	SecretValue *ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
+// ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddModel
+var ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddModelAttrTypes = map[string]attr.Type{
+	"append":       types.BoolType,
+	"name":         types.StringType,
+	"value":        types.StringType,
+	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModel represents secret_value block
 type ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModel struct {
 	BlindfoldSecretInfo *ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModel
+var ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModelAttrTypes},
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -232,16 +408,35 @@ type ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueBlindfol
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel
+var ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
+// ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel
+var ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 // ProxyDynamicProxyHTTPSProxyModel represents https_proxy block
 type ProxyDynamicProxyHTTPSProxyModel struct {
 	MoreOption *ProxyDynamicProxyHTTPSProxyMoreOptionModel `tfsdk:"more_option"`
 	TLSParams  *ProxyDynamicProxyHTTPSProxyTLSParamsModel  `tfsdk:"tls_params"`
+}
+
+// ProxyDynamicProxyHTTPSProxyModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyModel
+var ProxyDynamicProxyHTTPSProxyModelAttrTypes = map[string]attr.Type{
+	"more_option": types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyMoreOptionModelAttrTypes},
+	"tls_params":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionModel represents more_option block
@@ -264,10 +459,36 @@ type ProxyDynamicProxyHTTPSProxyMoreOptionModel struct {
 	ResponseHeadersToAdd     []ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddModel `tfsdk:"response_headers_to_add"`
 }
 
+// ProxyDynamicProxyHTTPSProxyMoreOptionModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyMoreOptionModel
+var ProxyDynamicProxyHTTPSProxyMoreOptionModelAttrTypes = map[string]attr.Type{
+	"disable_default_error_pages": types.BoolType,
+	"idle_timeout":                types.Int64Type,
+	"max_request_header_size":     types.Int64Type,
+	"request_cookies_to_remove":   types.ListType{ElemType: types.StringType},
+	"request_headers_to_remove":   types.ListType{ElemType: types.StringType},
+	"response_cookies_to_remove":  types.ListType{ElemType: types.StringType},
+	"response_headers_to_remove":  types.ListType{ElemType: types.StringType},
+	"buffer_policy":               types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyMoreOptionBufferPolicyModelAttrTypes},
+	"compression_params":          types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyMoreOptionCompressionParamsModelAttrTypes},
+	"custom_errors":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_path_normalize":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_path_normalize":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"request_cookies_to_add":      types.ListType{ElemType: types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddModelAttrTypes}},
+	"request_headers_to_add":      types.ListType{ElemType: types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddModelAttrTypes}},
+	"response_cookies_to_add":     types.ListType{ElemType: types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddModelAttrTypes}},
+	"response_headers_to_add":     types.ListType{ElemType: types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddModelAttrTypes}},
+}
+
 // ProxyDynamicProxyHTTPSProxyMoreOptionBufferPolicyModel represents buffer_policy block
 type ProxyDynamicProxyHTTPSProxyMoreOptionBufferPolicyModel struct {
 	Disabled        types.Bool  `tfsdk:"disabled"`
 	MaxRequestBytes types.Int64 `tfsdk:"max_request_bytes"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionBufferPolicyModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyMoreOptionBufferPolicyModel
+var ProxyDynamicProxyHTTPSProxyMoreOptionBufferPolicyModelAttrTypes = map[string]attr.Type{
+	"disabled":          types.BoolType,
+	"max_request_bytes": types.Int64Type,
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionCompressionParamsModel represents compression_params block
@@ -278,6 +499,14 @@ type ProxyDynamicProxyHTTPSProxyMoreOptionCompressionParamsModel struct {
 	RemoveAcceptEncodingHeader types.Bool  `tfsdk:"remove_accept_encoding_header"`
 }
 
+// ProxyDynamicProxyHTTPSProxyMoreOptionCompressionParamsModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyMoreOptionCompressionParamsModel
+var ProxyDynamicProxyHTTPSProxyMoreOptionCompressionParamsModelAttrTypes = map[string]attr.Type{
+	"content_length":                types.Int64Type,
+	"content_type":                  types.ListType{ElemType: types.StringType},
+	"disable_on_etag_header":        types.BoolType,
+	"remove_accept_encoding_header": types.BoolType,
+}
+
 // ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddModel represents request_cookies_to_add block
 type ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddModel struct {
 	Name        types.String                                                              `tfsdk:"name"`
@@ -286,10 +515,24 @@ type ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddModel struct {
 	SecretValue *ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
+// ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddModel
+var ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddModelAttrTypes = map[string]attr.Type{
+	"name":         types.StringType,
+	"overwrite":    types.BoolType,
+	"value":        types.StringType,
+	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueModel represents secret_value block
 type ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueModel struct {
 	BlindfoldSecretInfo *ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueModel
+var ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModelAttrTypes},
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -299,10 +542,23 @@ type ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueBlindfol
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel
+var ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel
+var ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddModel represents request_headers_to_add block
@@ -313,10 +569,24 @@ type ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddModel struct {
 	SecretValue *ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
+// ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddModel
+var ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddModelAttrTypes = map[string]attr.Type{
+	"append":       types.BoolType,
+	"name":         types.StringType,
+	"value":        types.StringType,
+	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueModel represents secret_value block
 type ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueModel struct {
 	BlindfoldSecretInfo *ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueModel
+var ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModelAttrTypes},
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -326,10 +596,23 @@ type ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueBlindfol
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel
+var ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel
+var ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddModel represents response_cookies_to_add block
@@ -359,10 +642,43 @@ type ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddModel struct {
 	SecretValue       *ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
+// ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddModel
+var ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddModelAttrTypes = map[string]attr.Type{
+	"add_domain":         types.StringType,
+	"add_expiry":         types.StringType,
+	"add_path":           types.StringType,
+	"max_age_value":      types.Int64Type,
+	"name":               types.StringType,
+	"overwrite":          types.BoolType,
+	"value":              types.StringType,
+	"add_httponly":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"add_partitioned":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"add_secure":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_domain":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_expiry":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_httponly":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_max_age":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_partitioned": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_path":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_samesite":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_secure":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_value":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_lax":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_none":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_strict":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueModel represents secret_value block
 type ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueModel struct {
 	BlindfoldSecretInfo *ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueModel
+var ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModelAttrTypes},
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -372,10 +688,23 @@ type ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueBlindfo
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel
+var ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel
+var ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddModel represents response_headers_to_add block
@@ -386,10 +715,24 @@ type ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddModel struct {
 	SecretValue *ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
+// ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddModel
+var ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddModelAttrTypes = map[string]attr.Type{
+	"append":       types.BoolType,
+	"name":         types.StringType,
+	"value":        types.StringType,
+	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueModel represents secret_value block
 type ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueModel struct {
 	BlindfoldSecretInfo *ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueModel
+var ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModelAttrTypes},
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -399,10 +742,23 @@ type ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueBlindfo
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel
+var ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel
+var ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // ProxyDynamicProxyHTTPSProxyTLSParamsModel represents tls_params block
@@ -411,6 +767,14 @@ type ProxyDynamicProxyHTTPSProxyTLSParamsModel struct {
 	TLSCertificates []ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesModel `tfsdk:"tls_certificates"`
 	TLSConfig       *ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigModel        `tfsdk:"tls_config"`
 	UseMtls         *ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsModel          `tfsdk:"use_mtls"`
+}
+
+// ProxyDynamicProxyHTTPSProxyTLSParamsModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyTLSParamsModel
+var ProxyDynamicProxyHTTPSProxyTLSParamsModelAttrTypes = map[string]attr.Type{
+	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesModelAttrTypes}},
+	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":         types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsModelAttrTypes},
 }
 
 // ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesModel represents tls_certificates block
@@ -423,15 +787,36 @@ type ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesModel struct {
 	UseSystemDefaults    *ProxyEmptyModel                                                              `tfsdk:"use_system_defaults"`
 }
 
+// ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesModel
+var ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesModelAttrTypes = map[string]attr.Type{
+	"certificate_url":        types.StringType,
+	"description_spec":       types.StringType,
+	"custom_hash_algorithms": types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
+	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
 type ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesCustomHashAlgorithmsModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesCustomHashAlgorithmsModel
+var ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesCustomHashAlgorithmsModelAttrTypes = map[string]attr.Type{
+	"hash_algorithms": types.ListType{ElemType: types.StringType},
 }
 
 // ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyModel represents private_key block
 type ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyModel
+var ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -441,10 +826,23 @@ type ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyBlindfoldSecre
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel
+var ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyClearSecretInfoModel
+var ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigModel represents tls_config block
@@ -455,11 +853,26 @@ type ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigModel struct {
 	MediumSecurity  *ProxyEmptyModel                                                  `tfsdk:"medium_security"`
 }
 
+// ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigModel
+var ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigCustomSecurityModel represents custom_security block
 type ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigCustomSecurityModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigCustomSecurityModel
+var ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsModel represents use_mtls block
@@ -473,11 +886,29 @@ type ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsModel struct {
 	XfccOptions               *ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsModel
+var ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsCRLModel represents crl block
 type ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsCRLModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsCRLModel
+var ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsTrustedCAModel represents trusted_ca block
@@ -487,9 +918,21 @@ type ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsTrustedCAModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsTrustedCAModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsTrustedCAModel
+var ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsXfccOptionsModel represents xfcc_options block
 type ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsXfccOptionsModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsXfccOptionsModel
+var ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
 }
 
 // ProxyDynamicProxySniProxyModel represents sni_proxy block
@@ -497,10 +940,21 @@ type ProxyDynamicProxySniProxyModel struct {
 	IdleTimeout types.Int64 `tfsdk:"idle_timeout"`
 }
 
+// ProxyDynamicProxySniProxyModelAttrTypes defines the attribute types for ProxyDynamicProxySniProxyModel
+var ProxyDynamicProxySniProxyModelAttrTypes = map[string]attr.Type{
+	"idle_timeout": types.Int64Type,
+}
+
 // ProxyHTTPProxyModel represents http_proxy block
 type ProxyHTTPProxyModel struct {
 	EnableHTTP *ProxyEmptyModel               `tfsdk:"enable_http"`
 	MoreOption *ProxyHTTPProxyMoreOptionModel `tfsdk:"more_option"`
+}
+
+// ProxyHTTPProxyModelAttrTypes defines the attribute types for ProxyHTTPProxyModel
+var ProxyHTTPProxyModelAttrTypes = map[string]attr.Type{
+	"enable_http": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"more_option": types.ObjectType{AttrTypes: ProxyHTTPProxyMoreOptionModelAttrTypes},
 }
 
 // ProxyHTTPProxyMoreOptionModel represents more_option block
@@ -523,10 +977,36 @@ type ProxyHTTPProxyMoreOptionModel struct {
 	ResponseHeadersToAdd     []ProxyHTTPProxyMoreOptionResponseHeadersToAddModel `tfsdk:"response_headers_to_add"`
 }
 
+// ProxyHTTPProxyMoreOptionModelAttrTypes defines the attribute types for ProxyHTTPProxyMoreOptionModel
+var ProxyHTTPProxyMoreOptionModelAttrTypes = map[string]attr.Type{
+	"disable_default_error_pages": types.BoolType,
+	"idle_timeout":                types.Int64Type,
+	"max_request_header_size":     types.Int64Type,
+	"request_cookies_to_remove":   types.ListType{ElemType: types.StringType},
+	"request_headers_to_remove":   types.ListType{ElemType: types.StringType},
+	"response_cookies_to_remove":  types.ListType{ElemType: types.StringType},
+	"response_headers_to_remove":  types.ListType{ElemType: types.StringType},
+	"buffer_policy":               types.ObjectType{AttrTypes: ProxyHTTPProxyMoreOptionBufferPolicyModelAttrTypes},
+	"compression_params":          types.ObjectType{AttrTypes: ProxyHTTPProxyMoreOptionCompressionParamsModelAttrTypes},
+	"custom_errors":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_path_normalize":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_path_normalize":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"request_cookies_to_add":      types.ListType{ElemType: types.ObjectType{AttrTypes: ProxyHTTPProxyMoreOptionRequestCookiesToAddModelAttrTypes}},
+	"request_headers_to_add":      types.ListType{ElemType: types.ObjectType{AttrTypes: ProxyHTTPProxyMoreOptionRequestHeadersToAddModelAttrTypes}},
+	"response_cookies_to_add":     types.ListType{ElemType: types.ObjectType{AttrTypes: ProxyHTTPProxyMoreOptionResponseCookiesToAddModelAttrTypes}},
+	"response_headers_to_add":     types.ListType{ElemType: types.ObjectType{AttrTypes: ProxyHTTPProxyMoreOptionResponseHeadersToAddModelAttrTypes}},
+}
+
 // ProxyHTTPProxyMoreOptionBufferPolicyModel represents buffer_policy block
 type ProxyHTTPProxyMoreOptionBufferPolicyModel struct {
 	Disabled        types.Bool  `tfsdk:"disabled"`
 	MaxRequestBytes types.Int64 `tfsdk:"max_request_bytes"`
+}
+
+// ProxyHTTPProxyMoreOptionBufferPolicyModelAttrTypes defines the attribute types for ProxyHTTPProxyMoreOptionBufferPolicyModel
+var ProxyHTTPProxyMoreOptionBufferPolicyModelAttrTypes = map[string]attr.Type{
+	"disabled":          types.BoolType,
+	"max_request_bytes": types.Int64Type,
 }
 
 // ProxyHTTPProxyMoreOptionCompressionParamsModel represents compression_params block
@@ -537,6 +1017,14 @@ type ProxyHTTPProxyMoreOptionCompressionParamsModel struct {
 	RemoveAcceptEncodingHeader types.Bool  `tfsdk:"remove_accept_encoding_header"`
 }
 
+// ProxyHTTPProxyMoreOptionCompressionParamsModelAttrTypes defines the attribute types for ProxyHTTPProxyMoreOptionCompressionParamsModel
+var ProxyHTTPProxyMoreOptionCompressionParamsModelAttrTypes = map[string]attr.Type{
+	"content_length":                types.Int64Type,
+	"content_type":                  types.ListType{ElemType: types.StringType},
+	"disable_on_etag_header":        types.BoolType,
+	"remove_accept_encoding_header": types.BoolType,
+}
+
 // ProxyHTTPProxyMoreOptionRequestCookiesToAddModel represents request_cookies_to_add block
 type ProxyHTTPProxyMoreOptionRequestCookiesToAddModel struct {
 	Name        types.String                                                 `tfsdk:"name"`
@@ -545,10 +1033,24 @@ type ProxyHTTPProxyMoreOptionRequestCookiesToAddModel struct {
 	SecretValue *ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
+// ProxyHTTPProxyMoreOptionRequestCookiesToAddModelAttrTypes defines the attribute types for ProxyHTTPProxyMoreOptionRequestCookiesToAddModel
+var ProxyHTTPProxyMoreOptionRequestCookiesToAddModelAttrTypes = map[string]attr.Type{
+	"name":         types.StringType,
+	"overwrite":    types.BoolType,
+	"value":        types.StringType,
+	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModel represents secret_value block
 type ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModel struct {
 	BlindfoldSecretInfo *ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModelAttrTypes defines the attribute types for ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModel
+var ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModelAttrTypes},
 }
 
 // ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -558,10 +1060,23 @@ type ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoMo
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes defines the attribute types for ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel
+var ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModelAttrTypes defines the attribute types for ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel
+var ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // ProxyHTTPProxyMoreOptionRequestHeadersToAddModel represents request_headers_to_add block
@@ -572,10 +1087,24 @@ type ProxyHTTPProxyMoreOptionRequestHeadersToAddModel struct {
 	SecretValue *ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
+// ProxyHTTPProxyMoreOptionRequestHeadersToAddModelAttrTypes defines the attribute types for ProxyHTTPProxyMoreOptionRequestHeadersToAddModel
+var ProxyHTTPProxyMoreOptionRequestHeadersToAddModelAttrTypes = map[string]attr.Type{
+	"append":       types.BoolType,
+	"name":         types.StringType,
+	"value":        types.StringType,
+	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModel represents secret_value block
 type ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModel struct {
 	BlindfoldSecretInfo *ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModelAttrTypes defines the attribute types for ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModel
+var ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModelAttrTypes},
 }
 
 // ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -585,10 +1114,23 @@ type ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoMo
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes defines the attribute types for ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel
+var ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModelAttrTypes defines the attribute types for ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel
+var ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // ProxyHTTPProxyMoreOptionResponseCookiesToAddModel represents response_cookies_to_add block
@@ -618,10 +1160,43 @@ type ProxyHTTPProxyMoreOptionResponseCookiesToAddModel struct {
 	SecretValue       *ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
+// ProxyHTTPProxyMoreOptionResponseCookiesToAddModelAttrTypes defines the attribute types for ProxyHTTPProxyMoreOptionResponseCookiesToAddModel
+var ProxyHTTPProxyMoreOptionResponseCookiesToAddModelAttrTypes = map[string]attr.Type{
+	"add_domain":         types.StringType,
+	"add_expiry":         types.StringType,
+	"add_path":           types.StringType,
+	"max_age_value":      types.Int64Type,
+	"name":               types.StringType,
+	"overwrite":          types.BoolType,
+	"value":              types.StringType,
+	"add_httponly":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"add_partitioned":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"add_secure":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_domain":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_expiry":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_httponly":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_max_age":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_partitioned": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_path":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_samesite":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_secure":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_value":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_lax":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_none":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_strict":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModel represents secret_value block
 type ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModel struct {
 	BlindfoldSecretInfo *ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModelAttrTypes defines the attribute types for ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModel
+var ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModelAttrTypes},
 }
 
 // ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -631,10 +1206,23 @@ type ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoM
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes defines the attribute types for ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel
+var ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModelAttrTypes defines the attribute types for ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel
+var ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // ProxyHTTPProxyMoreOptionResponseHeadersToAddModel represents response_headers_to_add block
@@ -645,10 +1233,24 @@ type ProxyHTTPProxyMoreOptionResponseHeadersToAddModel struct {
 	SecretValue *ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
+// ProxyHTTPProxyMoreOptionResponseHeadersToAddModelAttrTypes defines the attribute types for ProxyHTTPProxyMoreOptionResponseHeadersToAddModel
+var ProxyHTTPProxyMoreOptionResponseHeadersToAddModelAttrTypes = map[string]attr.Type{
+	"append":       types.BoolType,
+	"name":         types.StringType,
+	"value":        types.StringType,
+	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModel represents secret_value block
 type ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModel struct {
 	BlindfoldSecretInfo *ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModelAttrTypes defines the attribute types for ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModel
+var ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModelAttrTypes},
 }
 
 // ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -658,15 +1260,33 @@ type ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoM
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes defines the attribute types for ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel
+var ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
+// ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModelAttrTypes defines the attribute types for ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel
+var ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 // ProxySiteVirtualSitesModel represents site_virtual_sites block
 type ProxySiteVirtualSitesModel struct {
 	AdvertiseWhere []ProxySiteVirtualSitesAdvertiseWhereModel `tfsdk:"advertise_where"`
+}
+
+// ProxySiteVirtualSitesModelAttrTypes defines the attribute types for ProxySiteVirtualSitesModel
+var ProxySiteVirtualSitesModelAttrTypes = map[string]attr.Type{
+	"advertise_where": types.ListType{ElemType: types.ObjectType{AttrTypes: ProxySiteVirtualSitesAdvertiseWhereModelAttrTypes}},
 }
 
 // ProxySiteVirtualSitesAdvertiseWhereModel represents advertise_where block
@@ -677,11 +1297,26 @@ type ProxySiteVirtualSitesAdvertiseWhereModel struct {
 	VirtualSite    *ProxySiteVirtualSitesAdvertiseWhereVirtualSiteModel `tfsdk:"virtual_site"`
 }
 
+// ProxySiteVirtualSitesAdvertiseWhereModelAttrTypes defines the attribute types for ProxySiteVirtualSitesAdvertiseWhereModel
+var ProxySiteVirtualSitesAdvertiseWhereModelAttrTypes = map[string]attr.Type{
+	"port":             types.Int64Type,
+	"site":             types.ObjectType{AttrTypes: ProxySiteVirtualSitesAdvertiseWhereSiteModelAttrTypes},
+	"use_default_port": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"virtual_site":     types.ObjectType{AttrTypes: ProxySiteVirtualSitesAdvertiseWhereVirtualSiteModelAttrTypes},
+}
+
 // ProxySiteVirtualSitesAdvertiseWhereSiteModel represents site block
 type ProxySiteVirtualSitesAdvertiseWhereSiteModel struct {
 	IP      types.String                                      `tfsdk:"ip"`
 	Network types.String                                      `tfsdk:"network"`
 	Site    *ProxySiteVirtualSitesAdvertiseWhereSiteSiteModel `tfsdk:"site"`
+}
+
+// ProxySiteVirtualSitesAdvertiseWhereSiteModelAttrTypes defines the attribute types for ProxySiteVirtualSitesAdvertiseWhereSiteModel
+var ProxySiteVirtualSitesAdvertiseWhereSiteModelAttrTypes = map[string]attr.Type{
+	"ip":      types.StringType,
+	"network": types.StringType,
+	"site":    types.ObjectType{AttrTypes: ProxySiteVirtualSitesAdvertiseWhereSiteSiteModelAttrTypes},
 }
 
 // ProxySiteVirtualSitesAdvertiseWhereSiteSiteModel represents site block
@@ -691,10 +1326,23 @@ type ProxySiteVirtualSitesAdvertiseWhereSiteSiteModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// ProxySiteVirtualSitesAdvertiseWhereSiteSiteModelAttrTypes defines the attribute types for ProxySiteVirtualSitesAdvertiseWhereSiteSiteModel
+var ProxySiteVirtualSitesAdvertiseWhereSiteSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // ProxySiteVirtualSitesAdvertiseWhereVirtualSiteModel represents virtual_site block
 type ProxySiteVirtualSitesAdvertiseWhereVirtualSiteModel struct {
 	Network     types.String                                                    `tfsdk:"network"`
 	VirtualSite *ProxySiteVirtualSitesAdvertiseWhereVirtualSiteVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// ProxySiteVirtualSitesAdvertiseWhereVirtualSiteModelAttrTypes defines the attribute types for ProxySiteVirtualSitesAdvertiseWhereVirtualSiteModel
+var ProxySiteVirtualSitesAdvertiseWhereVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"network":      types.StringType,
+	"virtual_site": types.ObjectType{AttrTypes: ProxySiteVirtualSitesAdvertiseWhereVirtualSiteVirtualSiteModelAttrTypes},
 }
 
 // ProxySiteVirtualSitesAdvertiseWhereVirtualSiteVirtualSiteModel represents virtual_site block
@@ -702,6 +1350,13 @@ type ProxySiteVirtualSitesAdvertiseWhereVirtualSiteVirtualSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// ProxySiteVirtualSitesAdvertiseWhereVirtualSiteVirtualSiteModelAttrTypes defines the attribute types for ProxySiteVirtualSitesAdvertiseWhereVirtualSiteVirtualSiteModel
+var ProxySiteVirtualSitesAdvertiseWhereVirtualSiteVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // ProxyTLSInterceptModel represents tls_intercept block
@@ -714,6 +1369,16 @@ type ProxyTLSInterceptModel struct {
 	VolterraTrustedCA   *ProxyEmptyModel                         `tfsdk:"volterra_trusted_ca"`
 }
 
+// ProxyTLSInterceptModelAttrTypes defines the attribute types for ProxyTLSInterceptModel
+var ProxyTLSInterceptModelAttrTypes = map[string]attr.Type{
+	"trusted_ca_url":         types.StringType,
+	"custom_certificate":     types.ObjectType{AttrTypes: ProxyTLSInterceptCustomCertificateModelAttrTypes},
+	"enable_for_all_domains": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"policy":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"volterra_certificate":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"volterra_trusted_ca":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ProxyTLSInterceptCustomCertificateModel represents custom_certificate block
 type ProxyTLSInterceptCustomCertificateModel struct {
 	CertificateURL       types.String                                                 `tfsdk:"certificate_url"`
@@ -724,15 +1389,36 @@ type ProxyTLSInterceptCustomCertificateModel struct {
 	UseSystemDefaults    *ProxyEmptyModel                                             `tfsdk:"use_system_defaults"`
 }
 
+// ProxyTLSInterceptCustomCertificateModelAttrTypes defines the attribute types for ProxyTLSInterceptCustomCertificateModel
+var ProxyTLSInterceptCustomCertificateModelAttrTypes = map[string]attr.Type{
+	"certificate_url":        types.StringType,
+	"description_spec":       types.StringType,
+	"custom_hash_algorithms": types.ObjectType{AttrTypes: ProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModelAttrTypes},
+	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModel represents custom_hash_algorithms block
 type ProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// ProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModelAttrTypes defines the attribute types for ProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModel
+var ProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModelAttrTypes = map[string]attr.Type{
+	"hash_algorithms": types.ListType{ElemType: types.StringType},
 }
 
 // ProxyTLSInterceptCustomCertificatePrivateKeyModel represents private_key block
 type ProxyTLSInterceptCustomCertificatePrivateKeyModel struct {
 	BlindfoldSecretInfo *ProxyTLSInterceptCustomCertificatePrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *ProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// ProxyTLSInterceptCustomCertificatePrivateKeyModelAttrTypes defines the attribute types for ProxyTLSInterceptCustomCertificatePrivateKeyModel
+var ProxyTLSInterceptCustomCertificatePrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: ProxyTLSInterceptCustomCertificatePrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: ProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // ProxyTLSInterceptCustomCertificatePrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -742,15 +1428,33 @@ type ProxyTLSInterceptCustomCertificatePrivateKeyBlindfoldSecretInfoModel struct
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// ProxyTLSInterceptCustomCertificatePrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for ProxyTLSInterceptCustomCertificatePrivateKeyBlindfoldSecretInfoModel
+var ProxyTLSInterceptCustomCertificatePrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // ProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModel represents clear_secret_info block
 type ProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
+// ProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for ProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModel
+var ProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 // ProxyTLSInterceptPolicyModel represents policy block
 type ProxyTLSInterceptPolicyModel struct {
 	InterceptionRules []ProxyTLSInterceptPolicyInterceptionRulesModel `tfsdk:"interception_rules"`
+}
+
+// ProxyTLSInterceptPolicyModelAttrTypes defines the attribute types for ProxyTLSInterceptPolicyModel
+var ProxyTLSInterceptPolicyModelAttrTypes = map[string]attr.Type{
+	"interception_rules": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // ProxyTLSInterceptPolicyInterceptionRulesModel represents interception_rules block
@@ -760,11 +1464,25 @@ type ProxyTLSInterceptPolicyInterceptionRulesModel struct {
 	EnableInterception  *ProxyEmptyModel                                          `tfsdk:"enable_interception"`
 }
 
+// ProxyTLSInterceptPolicyInterceptionRulesModelAttrTypes defines the attribute types for ProxyTLSInterceptPolicyInterceptionRulesModel
+var ProxyTLSInterceptPolicyInterceptionRulesModelAttrTypes = map[string]attr.Type{
+	"disable_interception": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"domain_match":         types.ObjectType{AttrTypes: ProxyTLSInterceptPolicyInterceptionRulesDomainMatchModelAttrTypes},
+	"enable_interception":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ProxyTLSInterceptPolicyInterceptionRulesDomainMatchModel represents domain_match block
 type ProxyTLSInterceptPolicyInterceptionRulesDomainMatchModel struct {
 	ExactValue  types.String `tfsdk:"exact_value"`
 	RegexValue  types.String `tfsdk:"regex_value"`
 	SuffixValue types.String `tfsdk:"suffix_value"`
+}
+
+// ProxyTLSInterceptPolicyInterceptionRulesDomainMatchModelAttrTypes defines the attribute types for ProxyTLSInterceptPolicyInterceptionRulesDomainMatchModel
+var ProxyTLSInterceptPolicyInterceptionRulesDomainMatchModelAttrTypes = map[string]attr.Type{
+	"exact_value":  types.StringType,
+	"regex_value":  types.StringType,
+	"suffix_value": types.StringType,
 }
 
 type ProxyResourceModel struct {
@@ -879,6 +1597,9 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -1795,6 +2516,9 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 												},
 											},
@@ -1816,6 +2540,9 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 												},
 											},
@@ -2284,6 +3011,9 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -2316,6 +3046,9 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -3129,11 +3862,17 @@ func (r *ProxyResource) Read(ctx context.Context, req resource.ReadRequest, resp
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -55,10 +56,22 @@ type APIDefinitionAPIInventoryExclusionListModel struct {
 	Path   types.String `tfsdk:"path"`
 }
 
+// APIDefinitionAPIInventoryExclusionListModelAttrTypes defines the attribute types for APIDefinitionAPIInventoryExclusionListModel
+var APIDefinitionAPIInventoryExclusionListModelAttrTypes = map[string]attr.Type{
+	"method": types.StringType,
+	"path":   types.StringType,
+}
+
 // APIDefinitionAPIInventoryInclusionListModel represents api_inventory_inclusion_list block
 type APIDefinitionAPIInventoryInclusionListModel struct {
 	Method types.String `tfsdk:"method"`
 	Path   types.String `tfsdk:"path"`
+}
+
+// APIDefinitionAPIInventoryInclusionListModelAttrTypes defines the attribute types for APIDefinitionAPIInventoryInclusionListModel
+var APIDefinitionAPIInventoryInclusionListModelAttrTypes = map[string]attr.Type{
+	"method": types.StringType,
+	"path":   types.StringType,
 }
 
 // APIDefinitionNonAPIEndpointsModel represents non_api_endpoints block
@@ -67,21 +80,27 @@ type APIDefinitionNonAPIEndpointsModel struct {
 	Path   types.String `tfsdk:"path"`
 }
 
+// APIDefinitionNonAPIEndpointsModelAttrTypes defines the attribute types for APIDefinitionNonAPIEndpointsModel
+var APIDefinitionNonAPIEndpointsModelAttrTypes = map[string]attr.Type{
+	"method": types.StringType,
+	"path":   types.StringType,
+}
+
 type APIDefinitionResourceModel struct {
-	Name                      types.String                                  `tfsdk:"name"`
-	Namespace                 types.String                                  `tfsdk:"namespace"`
-	Annotations               types.Map                                     `tfsdk:"annotations"`
-	Description               types.String                                  `tfsdk:"description"`
-	Disable                   types.Bool                                    `tfsdk:"disable"`
-	Labels                    types.Map                                     `tfsdk:"labels"`
-	SwaggerSpecs              types.List                                    `tfsdk:"swagger_specs"`
-	ID                        types.String                                  `tfsdk:"id"`
-	Timeouts                  timeouts.Value                                `tfsdk:"timeouts"`
-	APIInventoryExclusionList []APIDefinitionAPIInventoryExclusionListModel `tfsdk:"api_inventory_exclusion_list"`
-	APIInventoryInclusionList []APIDefinitionAPIInventoryInclusionListModel `tfsdk:"api_inventory_inclusion_list"`
-	MixedSchemaOrigin         *APIDefinitionEmptyModel                      `tfsdk:"mixed_schema_origin"`
-	NonAPIEndpoints           []APIDefinitionNonAPIEndpointsModel           `tfsdk:"non_api_endpoints"`
-	StrictSchemaOrigin        *APIDefinitionEmptyModel                      `tfsdk:"strict_schema_origin"`
+	Name                      types.String             `tfsdk:"name"`
+	Namespace                 types.String             `tfsdk:"namespace"`
+	Annotations               types.Map                `tfsdk:"annotations"`
+	Description               types.String             `tfsdk:"description"`
+	Disable                   types.Bool               `tfsdk:"disable"`
+	Labels                    types.Map                `tfsdk:"labels"`
+	SwaggerSpecs              types.List               `tfsdk:"swagger_specs"`
+	ID                        types.String             `tfsdk:"id"`
+	Timeouts                  timeouts.Value           `tfsdk:"timeouts"`
+	APIInventoryExclusionList types.List               `tfsdk:"api_inventory_exclusion_list"`
+	APIInventoryInclusionList types.List               `tfsdk:"api_inventory_inclusion_list"`
+	MixedSchemaOrigin         *APIDefinitionEmptyModel `tfsdk:"mixed_schema_origin"`
+	NonAPIEndpoints           types.List               `tfsdk:"non_api_endpoints"`
+	StrictSchemaOrigin        *APIDefinitionEmptyModel `tfsdk:"strict_schema_origin"`
 }
 
 func (r *APIDefinitionResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -350,51 +369,66 @@ func (r *APIDefinitionResource) Create(ctx context.Context, req resource.CreateR
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.APIInventoryExclusionList) > 0 {
-		var api_inventory_exclusion_listList []map[string]interface{}
-		for _, item := range data.APIInventoryExclusionList {
-			itemMap := make(map[string]interface{})
-			if !item.Method.IsNull() && !item.Method.IsUnknown() {
-				itemMap["method"] = item.Method.ValueString()
+	if !data.APIInventoryExclusionList.IsNull() && !data.APIInventoryExclusionList.IsUnknown() {
+		var api_inventory_exclusion_listItems []APIDefinitionAPIInventoryExclusionListModel
+		diags := data.APIInventoryExclusionList.ElementsAs(ctx, &api_inventory_exclusion_listItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(api_inventory_exclusion_listItems) > 0 {
+			var api_inventory_exclusion_listList []map[string]interface{}
+			for _, item := range api_inventory_exclusion_listItems {
+				itemMap := make(map[string]interface{})
+				if !item.Method.IsNull() && !item.Method.IsUnknown() {
+					itemMap["method"] = item.Method.ValueString()
+				}
+				if !item.Path.IsNull() && !item.Path.IsUnknown() {
+					itemMap["path"] = item.Path.ValueString()
+				}
+				api_inventory_exclusion_listList = append(api_inventory_exclusion_listList, itemMap)
 			}
-			if !item.Path.IsNull() && !item.Path.IsUnknown() {
-				itemMap["path"] = item.Path.ValueString()
-			}
-			api_inventory_exclusion_listList = append(api_inventory_exclusion_listList, itemMap)
+			createReq.Spec["api_inventory_exclusion_list"] = api_inventory_exclusion_listList
 		}
-		createReq.Spec["api_inventory_exclusion_list"] = api_inventory_exclusion_listList
 	}
-	if len(data.APIInventoryInclusionList) > 0 {
-		var api_inventory_inclusion_listList []map[string]interface{}
-		for _, item := range data.APIInventoryInclusionList {
-			itemMap := make(map[string]interface{})
-			if !item.Method.IsNull() && !item.Method.IsUnknown() {
-				itemMap["method"] = item.Method.ValueString()
+	if !data.APIInventoryInclusionList.IsNull() && !data.APIInventoryInclusionList.IsUnknown() {
+		var api_inventory_inclusion_listItems []APIDefinitionAPIInventoryInclusionListModel
+		diags := data.APIInventoryInclusionList.ElementsAs(ctx, &api_inventory_inclusion_listItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(api_inventory_inclusion_listItems) > 0 {
+			var api_inventory_inclusion_listList []map[string]interface{}
+			for _, item := range api_inventory_inclusion_listItems {
+				itemMap := make(map[string]interface{})
+				if !item.Method.IsNull() && !item.Method.IsUnknown() {
+					itemMap["method"] = item.Method.ValueString()
+				}
+				if !item.Path.IsNull() && !item.Path.IsUnknown() {
+					itemMap["path"] = item.Path.ValueString()
+				}
+				api_inventory_inclusion_listList = append(api_inventory_inclusion_listList, itemMap)
 			}
-			if !item.Path.IsNull() && !item.Path.IsUnknown() {
-				itemMap["path"] = item.Path.ValueString()
-			}
-			api_inventory_inclusion_listList = append(api_inventory_inclusion_listList, itemMap)
+			createReq.Spec["api_inventory_inclusion_list"] = api_inventory_inclusion_listList
 		}
-		createReq.Spec["api_inventory_inclusion_list"] = api_inventory_inclusion_listList
 	}
 	if data.MixedSchemaOrigin != nil {
 		mixed_schema_originMap := make(map[string]interface{})
 		createReq.Spec["mixed_schema_origin"] = mixed_schema_originMap
 	}
-	if len(data.NonAPIEndpoints) > 0 {
-		var non_api_endpointsList []map[string]interface{}
-		for _, item := range data.NonAPIEndpoints {
-			itemMap := make(map[string]interface{})
-			if !item.Method.IsNull() && !item.Method.IsUnknown() {
-				itemMap["method"] = item.Method.ValueString()
+	if !data.NonAPIEndpoints.IsNull() && !data.NonAPIEndpoints.IsUnknown() {
+		var non_api_endpointsItems []APIDefinitionNonAPIEndpointsModel
+		diags := data.NonAPIEndpoints.ElementsAs(ctx, &non_api_endpointsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(non_api_endpointsItems) > 0 {
+			var non_api_endpointsList []map[string]interface{}
+			for _, item := range non_api_endpointsItems {
+				itemMap := make(map[string]interface{})
+				if !item.Method.IsNull() && !item.Method.IsUnknown() {
+					itemMap["method"] = item.Method.ValueString()
+				}
+				if !item.Path.IsNull() && !item.Path.IsUnknown() {
+					itemMap["path"] = item.Path.ValueString()
+				}
+				non_api_endpointsList = append(non_api_endpointsList, itemMap)
 			}
-			if !item.Path.IsNull() && !item.Path.IsUnknown() {
-				itemMap["path"] = item.Path.ValueString()
-			}
-			non_api_endpointsList = append(non_api_endpointsList, itemMap)
+			createReq.Spec["non_api_endpoints"] = non_api_endpointsList
 		}
-		createReq.Spec["non_api_endpoints"] = non_api_endpointsList
 	}
 	if data.StrictSchemaOrigin != nil {
 		strict_schema_originMap := make(map[string]interface{})
@@ -422,6 +456,10 @@ func (r *APIDefinitionResource) Create(ctx context.Context, req resource.CreateR
 	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["api_inventory_exclusion_list"].([]interface{}); ok && len(listData) > 0 {
 		var api_inventory_exclusion_listList []APIDefinitionAPIInventoryExclusionListModel
+		var existingAPIInventoryExclusionListItems []APIDefinitionAPIInventoryExclusionListModel
+		if !data.APIInventoryExclusionList.IsNull() && !data.APIInventoryExclusionList.IsUnknown() {
+			data.APIInventoryExclusionList.ElementsAs(ctx, &existingAPIInventoryExclusionListItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -441,10 +479,21 @@ func (r *APIDefinitionResource) Create(ctx context.Context, req resource.CreateR
 				})
 			}
 		}
-		data.APIInventoryExclusionList = api_inventory_exclusion_listList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: APIDefinitionAPIInventoryExclusionListModelAttrTypes}, api_inventory_exclusion_listList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.APIInventoryExclusionList = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.APIInventoryExclusionList = types.ListNull(types.ObjectType{AttrTypes: APIDefinitionAPIInventoryExclusionListModelAttrTypes})
 	}
 	if listData, ok := apiResource.Spec["api_inventory_inclusion_list"].([]interface{}); ok && len(listData) > 0 {
 		var api_inventory_inclusion_listList []APIDefinitionAPIInventoryInclusionListModel
+		var existingAPIInventoryInclusionListItems []APIDefinitionAPIInventoryInclusionListModel
+		if !data.APIInventoryInclusionList.IsNull() && !data.APIInventoryInclusionList.IsUnknown() {
+			data.APIInventoryInclusionList.ElementsAs(ctx, &existingAPIInventoryInclusionListItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -464,7 +513,14 @@ func (r *APIDefinitionResource) Create(ctx context.Context, req resource.CreateR
 				})
 			}
 		}
-		data.APIInventoryInclusionList = api_inventory_inclusion_listList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: APIDefinitionAPIInventoryInclusionListModelAttrTypes}, api_inventory_inclusion_listList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.APIInventoryInclusionList = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.APIInventoryInclusionList = types.ListNull(types.ObjectType{AttrTypes: APIDefinitionAPIInventoryInclusionListModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["mixed_schema_origin"].(map[string]interface{}); ok && isImport && data.MixedSchemaOrigin == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -473,6 +529,10 @@ func (r *APIDefinitionResource) Create(ctx context.Context, req resource.CreateR
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["non_api_endpoints"].([]interface{}); ok && len(listData) > 0 {
 		var non_api_endpointsList []APIDefinitionNonAPIEndpointsModel
+		var existingNonAPIEndpointsItems []APIDefinitionNonAPIEndpointsModel
+		if !data.NonAPIEndpoints.IsNull() && !data.NonAPIEndpoints.IsUnknown() {
+			data.NonAPIEndpoints.ElementsAs(ctx, &existingNonAPIEndpointsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -492,7 +552,14 @@ func (r *APIDefinitionResource) Create(ctx context.Context, req resource.CreateR
 				})
 			}
 		}
-		data.NonAPIEndpoints = non_api_endpointsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: APIDefinitionNonAPIEndpointsModelAttrTypes}, non_api_endpointsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.NonAPIEndpoints = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.NonAPIEndpoints = types.ListNull(types.ObjectType{AttrTypes: APIDefinitionNonAPIEndpointsModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["strict_schema_origin"].(map[string]interface{}); ok && isImport && data.StrictSchemaOrigin == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -578,11 +645,17 @@ func (r *APIDefinitionResource) Read(ctx context.Context, req resource.ReadReque
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -609,6 +682,10 @@ func (r *APIDefinitionResource) Read(ctx context.Context, req resource.ReadReque
 	})
 	if listData, ok := apiResource.Spec["api_inventory_exclusion_list"].([]interface{}); ok && len(listData) > 0 {
 		var api_inventory_exclusion_listList []APIDefinitionAPIInventoryExclusionListModel
+		var existingAPIInventoryExclusionListItems []APIDefinitionAPIInventoryExclusionListModel
+		if !data.APIInventoryExclusionList.IsNull() && !data.APIInventoryExclusionList.IsUnknown() {
+			data.APIInventoryExclusionList.ElementsAs(ctx, &existingAPIInventoryExclusionListItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -628,10 +705,21 @@ func (r *APIDefinitionResource) Read(ctx context.Context, req resource.ReadReque
 				})
 			}
 		}
-		data.APIInventoryExclusionList = api_inventory_exclusion_listList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: APIDefinitionAPIInventoryExclusionListModelAttrTypes}, api_inventory_exclusion_listList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.APIInventoryExclusionList = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.APIInventoryExclusionList = types.ListNull(types.ObjectType{AttrTypes: APIDefinitionAPIInventoryExclusionListModelAttrTypes})
 	}
 	if listData, ok := apiResource.Spec["api_inventory_inclusion_list"].([]interface{}); ok && len(listData) > 0 {
 		var api_inventory_inclusion_listList []APIDefinitionAPIInventoryInclusionListModel
+		var existingAPIInventoryInclusionListItems []APIDefinitionAPIInventoryInclusionListModel
+		if !data.APIInventoryInclusionList.IsNull() && !data.APIInventoryInclusionList.IsUnknown() {
+			data.APIInventoryInclusionList.ElementsAs(ctx, &existingAPIInventoryInclusionListItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -651,7 +739,14 @@ func (r *APIDefinitionResource) Read(ctx context.Context, req resource.ReadReque
 				})
 			}
 		}
-		data.APIInventoryInclusionList = api_inventory_inclusion_listList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: APIDefinitionAPIInventoryInclusionListModelAttrTypes}, api_inventory_inclusion_listList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.APIInventoryInclusionList = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.APIInventoryInclusionList = types.ListNull(types.ObjectType{AttrTypes: APIDefinitionAPIInventoryInclusionListModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["mixed_schema_origin"].(map[string]interface{}); ok && isImport && data.MixedSchemaOrigin == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -660,6 +755,10 @@ func (r *APIDefinitionResource) Read(ctx context.Context, req resource.ReadReque
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["non_api_endpoints"].([]interface{}); ok && len(listData) > 0 {
 		var non_api_endpointsList []APIDefinitionNonAPIEndpointsModel
+		var existingNonAPIEndpointsItems []APIDefinitionNonAPIEndpointsModel
+		if !data.NonAPIEndpoints.IsNull() && !data.NonAPIEndpoints.IsUnknown() {
+			data.NonAPIEndpoints.ElementsAs(ctx, &existingNonAPIEndpointsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -679,7 +778,14 @@ func (r *APIDefinitionResource) Read(ctx context.Context, req resource.ReadReque
 				})
 			}
 		}
-		data.NonAPIEndpoints = non_api_endpointsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: APIDefinitionNonAPIEndpointsModelAttrTypes}, non_api_endpointsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.NonAPIEndpoints = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.NonAPIEndpoints = types.ListNull(types.ObjectType{AttrTypes: APIDefinitionNonAPIEndpointsModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["strict_schema_origin"].(map[string]interface{}); ok && isImport && data.StrictSchemaOrigin == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -761,51 +867,66 @@ func (r *APIDefinitionResource) Update(ctx context.Context, req resource.UpdateR
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.APIInventoryExclusionList) > 0 {
-		var api_inventory_exclusion_listList []map[string]interface{}
-		for _, item := range data.APIInventoryExclusionList {
-			itemMap := make(map[string]interface{})
-			if !item.Method.IsNull() && !item.Method.IsUnknown() {
-				itemMap["method"] = item.Method.ValueString()
+	if !data.APIInventoryExclusionList.IsNull() && !data.APIInventoryExclusionList.IsUnknown() {
+		var api_inventory_exclusion_listItems []APIDefinitionAPIInventoryExclusionListModel
+		diags := data.APIInventoryExclusionList.ElementsAs(ctx, &api_inventory_exclusion_listItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(api_inventory_exclusion_listItems) > 0 {
+			var api_inventory_exclusion_listList []map[string]interface{}
+			for _, item := range api_inventory_exclusion_listItems {
+				itemMap := make(map[string]interface{})
+				if !item.Method.IsNull() && !item.Method.IsUnknown() {
+					itemMap["method"] = item.Method.ValueString()
+				}
+				if !item.Path.IsNull() && !item.Path.IsUnknown() {
+					itemMap["path"] = item.Path.ValueString()
+				}
+				api_inventory_exclusion_listList = append(api_inventory_exclusion_listList, itemMap)
 			}
-			if !item.Path.IsNull() && !item.Path.IsUnknown() {
-				itemMap["path"] = item.Path.ValueString()
-			}
-			api_inventory_exclusion_listList = append(api_inventory_exclusion_listList, itemMap)
+			apiResource.Spec["api_inventory_exclusion_list"] = api_inventory_exclusion_listList
 		}
-		apiResource.Spec["api_inventory_exclusion_list"] = api_inventory_exclusion_listList
 	}
-	if len(data.APIInventoryInclusionList) > 0 {
-		var api_inventory_inclusion_listList []map[string]interface{}
-		for _, item := range data.APIInventoryInclusionList {
-			itemMap := make(map[string]interface{})
-			if !item.Method.IsNull() && !item.Method.IsUnknown() {
-				itemMap["method"] = item.Method.ValueString()
+	if !data.APIInventoryInclusionList.IsNull() && !data.APIInventoryInclusionList.IsUnknown() {
+		var api_inventory_inclusion_listItems []APIDefinitionAPIInventoryInclusionListModel
+		diags := data.APIInventoryInclusionList.ElementsAs(ctx, &api_inventory_inclusion_listItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(api_inventory_inclusion_listItems) > 0 {
+			var api_inventory_inclusion_listList []map[string]interface{}
+			for _, item := range api_inventory_inclusion_listItems {
+				itemMap := make(map[string]interface{})
+				if !item.Method.IsNull() && !item.Method.IsUnknown() {
+					itemMap["method"] = item.Method.ValueString()
+				}
+				if !item.Path.IsNull() && !item.Path.IsUnknown() {
+					itemMap["path"] = item.Path.ValueString()
+				}
+				api_inventory_inclusion_listList = append(api_inventory_inclusion_listList, itemMap)
 			}
-			if !item.Path.IsNull() && !item.Path.IsUnknown() {
-				itemMap["path"] = item.Path.ValueString()
-			}
-			api_inventory_inclusion_listList = append(api_inventory_inclusion_listList, itemMap)
+			apiResource.Spec["api_inventory_inclusion_list"] = api_inventory_inclusion_listList
 		}
-		apiResource.Spec["api_inventory_inclusion_list"] = api_inventory_inclusion_listList
 	}
 	if data.MixedSchemaOrigin != nil {
 		mixed_schema_originMap := make(map[string]interface{})
 		apiResource.Spec["mixed_schema_origin"] = mixed_schema_originMap
 	}
-	if len(data.NonAPIEndpoints) > 0 {
-		var non_api_endpointsList []map[string]interface{}
-		for _, item := range data.NonAPIEndpoints {
-			itemMap := make(map[string]interface{})
-			if !item.Method.IsNull() && !item.Method.IsUnknown() {
-				itemMap["method"] = item.Method.ValueString()
+	if !data.NonAPIEndpoints.IsNull() && !data.NonAPIEndpoints.IsUnknown() {
+		var non_api_endpointsItems []APIDefinitionNonAPIEndpointsModel
+		diags := data.NonAPIEndpoints.ElementsAs(ctx, &non_api_endpointsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(non_api_endpointsItems) > 0 {
+			var non_api_endpointsList []map[string]interface{}
+			for _, item := range non_api_endpointsItems {
+				itemMap := make(map[string]interface{})
+				if !item.Method.IsNull() && !item.Method.IsUnknown() {
+					itemMap["method"] = item.Method.ValueString()
+				}
+				if !item.Path.IsNull() && !item.Path.IsUnknown() {
+					itemMap["path"] = item.Path.ValueString()
+				}
+				non_api_endpointsList = append(non_api_endpointsList, itemMap)
 			}
-			if !item.Path.IsNull() && !item.Path.IsUnknown() {
-				itemMap["path"] = item.Path.ValueString()
-			}
-			non_api_endpointsList = append(non_api_endpointsList, itemMap)
+			apiResource.Spec["non_api_endpoints"] = non_api_endpointsList
 		}
-		apiResource.Spec["non_api_endpoints"] = non_api_endpointsList
 	}
 	if data.StrictSchemaOrigin != nil {
 		strict_schema_originMap := make(map[string]interface{})
@@ -844,6 +965,10 @@ func (r *APIDefinitionResource) Update(ctx context.Context, req resource.UpdateR
 	_ = isImport          // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["api_inventory_exclusion_list"].([]interface{}); ok && len(listData) > 0 {
 		var api_inventory_exclusion_listList []APIDefinitionAPIInventoryExclusionListModel
+		var existingAPIInventoryExclusionListItems []APIDefinitionAPIInventoryExclusionListModel
+		if !data.APIInventoryExclusionList.IsNull() && !data.APIInventoryExclusionList.IsUnknown() {
+			data.APIInventoryExclusionList.ElementsAs(ctx, &existingAPIInventoryExclusionListItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -863,10 +988,21 @@ func (r *APIDefinitionResource) Update(ctx context.Context, req resource.UpdateR
 				})
 			}
 		}
-		data.APIInventoryExclusionList = api_inventory_exclusion_listList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: APIDefinitionAPIInventoryExclusionListModelAttrTypes}, api_inventory_exclusion_listList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.APIInventoryExclusionList = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.APIInventoryExclusionList = types.ListNull(types.ObjectType{AttrTypes: APIDefinitionAPIInventoryExclusionListModelAttrTypes})
 	}
 	if listData, ok := apiResource.Spec["api_inventory_inclusion_list"].([]interface{}); ok && len(listData) > 0 {
 		var api_inventory_inclusion_listList []APIDefinitionAPIInventoryInclusionListModel
+		var existingAPIInventoryInclusionListItems []APIDefinitionAPIInventoryInclusionListModel
+		if !data.APIInventoryInclusionList.IsNull() && !data.APIInventoryInclusionList.IsUnknown() {
+			data.APIInventoryInclusionList.ElementsAs(ctx, &existingAPIInventoryInclusionListItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -886,7 +1022,14 @@ func (r *APIDefinitionResource) Update(ctx context.Context, req resource.UpdateR
 				})
 			}
 		}
-		data.APIInventoryInclusionList = api_inventory_inclusion_listList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: APIDefinitionAPIInventoryInclusionListModelAttrTypes}, api_inventory_inclusion_listList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.APIInventoryInclusionList = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.APIInventoryInclusionList = types.ListNull(types.ObjectType{AttrTypes: APIDefinitionAPIInventoryInclusionListModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["mixed_schema_origin"].(map[string]interface{}); ok && isImport && data.MixedSchemaOrigin == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -895,6 +1038,10 @@ func (r *APIDefinitionResource) Update(ctx context.Context, req resource.UpdateR
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["non_api_endpoints"].([]interface{}); ok && len(listData) > 0 {
 		var non_api_endpointsList []APIDefinitionNonAPIEndpointsModel
+		var existingNonAPIEndpointsItems []APIDefinitionNonAPIEndpointsModel
+		if !data.NonAPIEndpoints.IsNull() && !data.NonAPIEndpoints.IsUnknown() {
+			data.NonAPIEndpoints.ElementsAs(ctx, &existingNonAPIEndpointsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -914,7 +1061,14 @@ func (r *APIDefinitionResource) Update(ctx context.Context, req resource.UpdateR
 				})
 			}
 		}
-		data.NonAPIEndpoints = non_api_endpointsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: APIDefinitionNonAPIEndpointsModelAttrTypes}, non_api_endpointsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.NonAPIEndpoints = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.NonAPIEndpoints = types.ListNull(types.ObjectType{AttrTypes: APIDefinitionNonAPIEndpointsModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["strict_schema_origin"].(map[string]interface{}); ok && isImport && data.StrictSchemaOrigin == nil {
 		// Import case: populate from API since state is nil and psd is empty

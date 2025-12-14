@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -57,10 +58,24 @@ type BotDefenseAppInfrastructureCloudHostedModel struct {
 	Ingress       []BotDefenseAppInfrastructureCloudHostedIngressModel `tfsdk:"ingress"`
 }
 
+// BotDefenseAppInfrastructureCloudHostedModelAttrTypes defines the attribute types for BotDefenseAppInfrastructureCloudHostedModel
+var BotDefenseAppInfrastructureCloudHostedModelAttrTypes = map[string]attr.Type{
+	"infra_host_name": types.StringType,
+	"region":          types.StringType,
+	"egress":          types.ListType{ElemType: types.ObjectType{AttrTypes: BotDefenseAppInfrastructureCloudHostedEgressModelAttrTypes}},
+	"ingress":         types.ListType{ElemType: types.ObjectType{AttrTypes: BotDefenseAppInfrastructureCloudHostedIngressModelAttrTypes}},
+}
+
 // BotDefenseAppInfrastructureCloudHostedEgressModel represents egress block
 type BotDefenseAppInfrastructureCloudHostedEgressModel struct {
 	IPAddress types.String `tfsdk:"ip_address"`
 	Location  types.String `tfsdk:"location"`
+}
+
+// BotDefenseAppInfrastructureCloudHostedEgressModelAttrTypes defines the attribute types for BotDefenseAppInfrastructureCloudHostedEgressModel
+var BotDefenseAppInfrastructureCloudHostedEgressModelAttrTypes = map[string]attr.Type{
+	"ip_address": types.StringType,
+	"location":   types.StringType,
 }
 
 // BotDefenseAppInfrastructureCloudHostedIngressModel represents ingress block
@@ -68,6 +83,13 @@ type BotDefenseAppInfrastructureCloudHostedIngressModel struct {
 	HostName  types.String `tfsdk:"host_name"`
 	IPAddress types.String `tfsdk:"ip_address"`
 	Location  types.String `tfsdk:"location"`
+}
+
+// BotDefenseAppInfrastructureCloudHostedIngressModelAttrTypes defines the attribute types for BotDefenseAppInfrastructureCloudHostedIngressModel
+var BotDefenseAppInfrastructureCloudHostedIngressModelAttrTypes = map[string]attr.Type{
+	"host_name":  types.StringType,
+	"ip_address": types.StringType,
+	"location":   types.StringType,
 }
 
 // BotDefenseAppInfrastructureDataCenterHostedModel represents data_center_hosted block
@@ -78,10 +100,24 @@ type BotDefenseAppInfrastructureDataCenterHostedModel struct {
 	Ingress       []BotDefenseAppInfrastructureDataCenterHostedIngressModel `tfsdk:"ingress"`
 }
 
+// BotDefenseAppInfrastructureDataCenterHostedModelAttrTypes defines the attribute types for BotDefenseAppInfrastructureDataCenterHostedModel
+var BotDefenseAppInfrastructureDataCenterHostedModelAttrTypes = map[string]attr.Type{
+	"infra_host_name": types.StringType,
+	"region":          types.StringType,
+	"egress":          types.ListType{ElemType: types.ObjectType{AttrTypes: BotDefenseAppInfrastructureDataCenterHostedEgressModelAttrTypes}},
+	"ingress":         types.ListType{ElemType: types.ObjectType{AttrTypes: BotDefenseAppInfrastructureDataCenterHostedIngressModelAttrTypes}},
+}
+
 // BotDefenseAppInfrastructureDataCenterHostedEgressModel represents egress block
 type BotDefenseAppInfrastructureDataCenterHostedEgressModel struct {
 	IPAddress types.String `tfsdk:"ip_address"`
 	Location  types.String `tfsdk:"location"`
+}
+
+// BotDefenseAppInfrastructureDataCenterHostedEgressModelAttrTypes defines the attribute types for BotDefenseAppInfrastructureDataCenterHostedEgressModel
+var BotDefenseAppInfrastructureDataCenterHostedEgressModelAttrTypes = map[string]attr.Type{
+	"ip_address": types.StringType,
+	"location":   types.StringType,
 }
 
 // BotDefenseAppInfrastructureDataCenterHostedIngressModel represents ingress block
@@ -89,6 +125,13 @@ type BotDefenseAppInfrastructureDataCenterHostedIngressModel struct {
 	HostName  types.String `tfsdk:"host_name"`
 	IPAddress types.String `tfsdk:"ip_address"`
 	Location  types.String `tfsdk:"location"`
+}
+
+// BotDefenseAppInfrastructureDataCenterHostedIngressModelAttrTypes defines the attribute types for BotDefenseAppInfrastructureDataCenterHostedIngressModel
+var BotDefenseAppInfrastructureDataCenterHostedIngressModelAttrTypes = map[string]attr.Type{
+	"host_name":  types.StringType,
+	"ip_address": types.StringType,
+	"location":   types.StringType,
 }
 
 type BotDefenseAppInfrastructureResourceModel struct {
@@ -749,11 +792,17 @@ func (r *BotDefenseAppInfrastructureResource) Read(ctx context.Context, req reso
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

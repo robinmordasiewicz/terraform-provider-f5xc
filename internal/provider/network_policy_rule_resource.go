@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -54,9 +55,19 @@ type NetworkPolicyRuleAdvancedActionModel struct {
 	Action types.String `tfsdk:"action"`
 }
 
+// NetworkPolicyRuleAdvancedActionModelAttrTypes defines the attribute types for NetworkPolicyRuleAdvancedActionModel
+var NetworkPolicyRuleAdvancedActionModelAttrTypes = map[string]attr.Type{
+	"action": types.StringType,
+}
+
 // NetworkPolicyRuleIPPrefixSetModel represents ip_prefix_set block
 type NetworkPolicyRuleIPPrefixSetModel struct {
 	Ref []NetworkPolicyRuleIPPrefixSetRefModel `tfsdk:"ref"`
+}
+
+// NetworkPolicyRuleIPPrefixSetModelAttrTypes defines the attribute types for NetworkPolicyRuleIPPrefixSetModel
+var NetworkPolicyRuleIPPrefixSetModelAttrTypes = map[string]attr.Type{
+	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: NetworkPolicyRuleIPPrefixSetRefModelAttrTypes}},
 }
 
 // NetworkPolicyRuleIPPrefixSetRefModel represents ref block
@@ -68,9 +79,23 @@ type NetworkPolicyRuleIPPrefixSetRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// NetworkPolicyRuleIPPrefixSetRefModelAttrTypes defines the attribute types for NetworkPolicyRuleIPPrefixSetRefModel
+var NetworkPolicyRuleIPPrefixSetRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // NetworkPolicyRuleLabelMatcherModel represents label_matcher block
 type NetworkPolicyRuleLabelMatcherModel struct {
 	Keys types.List `tfsdk:"keys"`
+}
+
+// NetworkPolicyRuleLabelMatcherModelAttrTypes defines the attribute types for NetworkPolicyRuleLabelMatcherModel
+var NetworkPolicyRuleLabelMatcherModelAttrTypes = map[string]attr.Type{
+	"keys": types.ListType{ElemType: types.StringType},
 }
 
 // NetworkPolicyRulePrefixModel represents prefix block
@@ -78,9 +103,19 @@ type NetworkPolicyRulePrefixModel struct {
 	Prefix types.List `tfsdk:"prefix"`
 }
 
+// NetworkPolicyRulePrefixModelAttrTypes defines the attribute types for NetworkPolicyRulePrefixModel
+var NetworkPolicyRulePrefixModelAttrTypes = map[string]attr.Type{
+	"prefix": types.ListType{ElemType: types.StringType},
+}
+
 // NetworkPolicyRulePrefixSelectorModel represents prefix_selector block
 type NetworkPolicyRulePrefixSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
+}
+
+// NetworkPolicyRulePrefixSelectorModelAttrTypes defines the attribute types for NetworkPolicyRulePrefixSelectorModel
+var NetworkPolicyRulePrefixSelectorModelAttrTypes = map[string]attr.Type{
+	"expressions": types.ListType{ElemType: types.StringType},
 }
 
 type NetworkPolicyRuleResourceModel struct {
@@ -206,6 +241,9 @@ func (r *NetworkPolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 									MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -219,11 +257,17 @@ func (r *NetworkPolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 								"uid": schema.StringAttribute{
 									MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -698,11 +742,17 @@ func (r *NetworkPolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

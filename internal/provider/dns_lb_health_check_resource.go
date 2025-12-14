@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -57,12 +58,28 @@ type DNSLBHealthCheckHTTPHealthCheckModel struct {
 	Send                     types.String `tfsdk:"send"`
 }
 
+// DNSLBHealthCheckHTTPHealthCheckModelAttrTypes defines the attribute types for DNSLBHealthCheckHTTPHealthCheckModel
+var DNSLBHealthCheckHTTPHealthCheckModelAttrTypes = map[string]attr.Type{
+	"health_check_port":           types.Int64Type,
+	"health_check_secondary_port": types.Int64Type,
+	"receive":                     types.StringType,
+	"send":                        types.StringType,
+}
+
 // DNSLBHealthCheckHTTPSHealthCheckModel represents https_health_check block
 type DNSLBHealthCheckHTTPSHealthCheckModel struct {
 	HealthCheckPort          types.Int64  `tfsdk:"health_check_port"`
 	HealthCheckSecondaryPort types.Int64  `tfsdk:"health_check_secondary_port"`
 	Receive                  types.String `tfsdk:"receive"`
 	Send                     types.String `tfsdk:"send"`
+}
+
+// DNSLBHealthCheckHTTPSHealthCheckModelAttrTypes defines the attribute types for DNSLBHealthCheckHTTPSHealthCheckModel
+var DNSLBHealthCheckHTTPSHealthCheckModelAttrTypes = map[string]attr.Type{
+	"health_check_port":           types.Int64Type,
+	"health_check_secondary_port": types.Int64Type,
+	"receive":                     types.StringType,
+	"send":                        types.StringType,
 }
 
 // DNSLBHealthCheckTCPHealthCheckModel represents tcp_health_check block
@@ -73,6 +90,14 @@ type DNSLBHealthCheckTCPHealthCheckModel struct {
 	Send                     types.String `tfsdk:"send"`
 }
 
+// DNSLBHealthCheckTCPHealthCheckModelAttrTypes defines the attribute types for DNSLBHealthCheckTCPHealthCheckModel
+var DNSLBHealthCheckTCPHealthCheckModelAttrTypes = map[string]attr.Type{
+	"health_check_port":           types.Int64Type,
+	"health_check_secondary_port": types.Int64Type,
+	"receive":                     types.StringType,
+	"send":                        types.StringType,
+}
+
 // DNSLBHealthCheckTCPHexHealthCheckModel represents tcp_hex_health_check block
 type DNSLBHealthCheckTCPHexHealthCheckModel struct {
 	HealthCheckPort          types.Int64  `tfsdk:"health_check_port"`
@@ -81,12 +106,28 @@ type DNSLBHealthCheckTCPHexHealthCheckModel struct {
 	Send                     types.String `tfsdk:"send"`
 }
 
+// DNSLBHealthCheckTCPHexHealthCheckModelAttrTypes defines the attribute types for DNSLBHealthCheckTCPHexHealthCheckModel
+var DNSLBHealthCheckTCPHexHealthCheckModelAttrTypes = map[string]attr.Type{
+	"health_check_port":           types.Int64Type,
+	"health_check_secondary_port": types.Int64Type,
+	"receive":                     types.StringType,
+	"send":                        types.StringType,
+}
+
 // DNSLBHealthCheckUDPHealthCheckModel represents udp_health_check block
 type DNSLBHealthCheckUDPHealthCheckModel struct {
 	HealthCheckPort          types.Int64  `tfsdk:"health_check_port"`
 	HealthCheckSecondaryPort types.Int64  `tfsdk:"health_check_secondary_port"`
 	Receive                  types.String `tfsdk:"receive"`
 	Send                     types.String `tfsdk:"send"`
+}
+
+// DNSLBHealthCheckUDPHealthCheckModelAttrTypes defines the attribute types for DNSLBHealthCheckUDPHealthCheckModel
+var DNSLBHealthCheckUDPHealthCheckModelAttrTypes = map[string]attr.Type{
+	"health_check_port":           types.Int64Type,
+	"health_check_secondary_port": types.Int64Type,
+	"receive":                     types.StringType,
+	"send":                        types.StringType,
 }
 
 type DNSLBHealthCheckResourceModel struct {
@@ -730,11 +771,17 @@ func (r *DNSLBHealthCheckResource) Read(ctx context.Context, req resource.ReadRe
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

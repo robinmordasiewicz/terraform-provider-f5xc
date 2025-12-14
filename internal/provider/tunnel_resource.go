@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -55,9 +56,20 @@ type TunnelLocalIPModel struct {
 	IPAddress *TunnelLocalIPIPAddressModel `tfsdk:"ip_address"`
 }
 
+// TunnelLocalIPModelAttrTypes defines the attribute types for TunnelLocalIPModel
+var TunnelLocalIPModelAttrTypes = map[string]attr.Type{
+	"intf":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ip_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // TunnelLocalIPIntfModel represents intf block
 type TunnelLocalIPIntfModel struct {
 	LocalIntf []TunnelLocalIPIntfLocalIntfModel `tfsdk:"local_intf"`
+}
+
+// TunnelLocalIPIntfModelAttrTypes defines the attribute types for TunnelLocalIPIntfModel
+var TunnelLocalIPIntfModelAttrTypes = map[string]attr.Type{
+	"local_intf": types.ListType{ElemType: types.ObjectType{AttrTypes: TunnelLocalIPIntfLocalIntfModelAttrTypes}},
 }
 
 // TunnelLocalIPIntfLocalIntfModel represents local_intf block
@@ -69,11 +81,27 @@ type TunnelLocalIPIntfLocalIntfModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// TunnelLocalIPIntfLocalIntfModelAttrTypes defines the attribute types for TunnelLocalIPIntfLocalIntfModel
+var TunnelLocalIPIntfLocalIntfModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // TunnelLocalIPIPAddressModel represents ip_address block
 type TunnelLocalIPIPAddressModel struct {
 	Auto               *TunnelEmptyModel                              `tfsdk:"auto"`
 	IPAddress          *TunnelLocalIPIPAddressIPAddressModel          `tfsdk:"ip_address"`
 	VirtualNetworkType *TunnelLocalIPIPAddressVirtualNetworkTypeModel `tfsdk:"virtual_network_type"`
+}
+
+// TunnelLocalIPIPAddressModelAttrTypes defines the attribute types for TunnelLocalIPIPAddressModel
+var TunnelLocalIPIPAddressModelAttrTypes = map[string]attr.Type{
+	"auto":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ip_address":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"virtual_network_type": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // TunnelLocalIPIPAddressIPAddressModel represents ip_address block
@@ -82,14 +110,30 @@ type TunnelLocalIPIPAddressIPAddressModel struct {
 	Ipv6 *TunnelLocalIPIPAddressIPAddressIpv6Model `tfsdk:"ipv6"`
 }
 
+// TunnelLocalIPIPAddressIPAddressModelAttrTypes defines the attribute types for TunnelLocalIPIPAddressIPAddressModel
+var TunnelLocalIPIPAddressIPAddressModelAttrTypes = map[string]attr.Type{
+	"ipv4": types.ObjectType{AttrTypes: TunnelLocalIPIPAddressIPAddressIpv4ModelAttrTypes},
+	"ipv6": types.ObjectType{AttrTypes: TunnelLocalIPIPAddressIPAddressIpv6ModelAttrTypes},
+}
+
 // TunnelLocalIPIPAddressIPAddressIpv4Model represents ipv4 block
 type TunnelLocalIPIPAddressIPAddressIpv4Model struct {
 	Addr types.String `tfsdk:"addr"`
 }
 
+// TunnelLocalIPIPAddressIPAddressIpv4ModelAttrTypes defines the attribute types for TunnelLocalIPIPAddressIPAddressIpv4Model
+var TunnelLocalIPIPAddressIPAddressIpv4ModelAttrTypes = map[string]attr.Type{
+	"addr": types.StringType,
+}
+
 // TunnelLocalIPIPAddressIPAddressIpv6Model represents ipv6 block
 type TunnelLocalIPIPAddressIPAddressIpv6Model struct {
 	Addr types.String `tfsdk:"addr"`
+}
+
+// TunnelLocalIPIPAddressIPAddressIpv6ModelAttrTypes defines the attribute types for TunnelLocalIPIPAddressIPAddressIpv6Model
+var TunnelLocalIPIPAddressIPAddressIpv6ModelAttrTypes = map[string]attr.Type{
+	"addr": types.StringType,
 }
 
 // TunnelLocalIPIPAddressVirtualNetworkTypeModel represents virtual_network_type block
@@ -99,9 +143,21 @@ type TunnelLocalIPIPAddressVirtualNetworkTypeModel struct {
 	SiteLocalInside *TunnelEmptyModel `tfsdk:"site_local_inside"`
 }
 
+// TunnelLocalIPIPAddressVirtualNetworkTypeModelAttrTypes defines the attribute types for TunnelLocalIPIPAddressVirtualNetworkTypeModel
+var TunnelLocalIPIPAddressVirtualNetworkTypeModelAttrTypes = map[string]attr.Type{
+	"public":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_local":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_local_inside": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // TunnelParamsModel represents params block
 type TunnelParamsModel struct {
 	Ipsec *TunnelParamsIpsecModel `tfsdk:"ipsec"`
+}
+
+// TunnelParamsModelAttrTypes defines the attribute types for TunnelParamsModel
+var TunnelParamsModelAttrTypes = map[string]attr.Type{
+	"ipsec": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // TunnelParamsIpsecModel represents ipsec block
@@ -109,10 +165,21 @@ type TunnelParamsIpsecModel struct {
 	IpsecPsk *TunnelParamsIpsecIpsecPskModel `tfsdk:"ipsec_psk"`
 }
 
+// TunnelParamsIpsecModelAttrTypes defines the attribute types for TunnelParamsIpsecModel
+var TunnelParamsIpsecModelAttrTypes = map[string]attr.Type{
+	"ipsec_psk": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // TunnelParamsIpsecIpsecPskModel represents ipsec_psk block
 type TunnelParamsIpsecIpsecPskModel struct {
 	BlindfoldSecretInfo *TunnelParamsIpsecIpsecPskBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *TunnelParamsIpsecIpsecPskClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// TunnelParamsIpsecIpsecPskModelAttrTypes defines the attribute types for TunnelParamsIpsecIpsecPskModel
+var TunnelParamsIpsecIpsecPskModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: TunnelParamsIpsecIpsecPskBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: TunnelParamsIpsecIpsecPskClearSecretInfoModelAttrTypes},
 }
 
 // TunnelParamsIpsecIpsecPskBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -122,10 +189,23 @@ type TunnelParamsIpsecIpsecPskBlindfoldSecretInfoModel struct {
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// TunnelParamsIpsecIpsecPskBlindfoldSecretInfoModelAttrTypes defines the attribute types for TunnelParamsIpsecIpsecPskBlindfoldSecretInfoModel
+var TunnelParamsIpsecIpsecPskBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // TunnelParamsIpsecIpsecPskClearSecretInfoModel represents clear_secret_info block
 type TunnelParamsIpsecIpsecPskClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// TunnelParamsIpsecIpsecPskClearSecretInfoModelAttrTypes defines the attribute types for TunnelParamsIpsecIpsecPskClearSecretInfoModel
+var TunnelParamsIpsecIpsecPskClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // TunnelRemoteIPModel represents remote_ip block
@@ -134,9 +214,20 @@ type TunnelRemoteIPModel struct {
 	IP        *TunnelRemoteIPIPModel        `tfsdk:"ip"`
 }
 
+// TunnelRemoteIPModelAttrTypes defines the attribute types for TunnelRemoteIPModel
+var TunnelRemoteIPModelAttrTypes = map[string]attr.Type{
+	"endpoints": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ip":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // TunnelRemoteIPEndpointsModel represents endpoints block
 type TunnelRemoteIPEndpointsModel struct {
 	Endpoints *TunnelEmptyModel `tfsdk:"endpoints"`
+}
+
+// TunnelRemoteIPEndpointsModelAttrTypes defines the attribute types for TunnelRemoteIPEndpointsModel
+var TunnelRemoteIPEndpointsModelAttrTypes = map[string]attr.Type{
+	"endpoints": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // TunnelRemoteIPIPModel represents ip block
@@ -145,14 +236,30 @@ type TunnelRemoteIPIPModel struct {
 	Ipv6 *TunnelRemoteIPIPIpv6Model `tfsdk:"ipv6"`
 }
 
+// TunnelRemoteIPIPModelAttrTypes defines the attribute types for TunnelRemoteIPIPModel
+var TunnelRemoteIPIPModelAttrTypes = map[string]attr.Type{
+	"ipv4": types.ObjectType{AttrTypes: TunnelRemoteIPIPIpv4ModelAttrTypes},
+	"ipv6": types.ObjectType{AttrTypes: TunnelRemoteIPIPIpv6ModelAttrTypes},
+}
+
 // TunnelRemoteIPIPIpv4Model represents ipv4 block
 type TunnelRemoteIPIPIpv4Model struct {
 	Addr types.String `tfsdk:"addr"`
 }
 
+// TunnelRemoteIPIPIpv4ModelAttrTypes defines the attribute types for TunnelRemoteIPIPIpv4Model
+var TunnelRemoteIPIPIpv4ModelAttrTypes = map[string]attr.Type{
+	"addr": types.StringType,
+}
+
 // TunnelRemoteIPIPIpv6Model represents ipv6 block
 type TunnelRemoteIPIPIpv6Model struct {
 	Addr types.String `tfsdk:"addr"`
+}
+
+// TunnelRemoteIPIPIpv6ModelAttrTypes defines the attribute types for TunnelRemoteIPIPIpv6Model
+var TunnelRemoteIPIPIpv6ModelAttrTypes = map[string]attr.Type{
+	"addr": types.StringType,
 }
 
 type TunnelResourceModel struct {
@@ -256,6 +363,9 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -269,11 +379,17 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -697,11 +813,17 @@ func (r *TunnelResource) Read(ctx context.Context, req resource.ReadRequest, res
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

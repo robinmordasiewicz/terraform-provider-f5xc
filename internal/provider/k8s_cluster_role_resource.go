@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -54,9 +55,19 @@ type K8SClusterRoleK8SClusterRoleSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
 }
 
+// K8SClusterRoleK8SClusterRoleSelectorModelAttrTypes defines the attribute types for K8SClusterRoleK8SClusterRoleSelectorModel
+var K8SClusterRoleK8SClusterRoleSelectorModelAttrTypes = map[string]attr.Type{
+	"expressions": types.ListType{ElemType: types.StringType},
+}
+
 // K8SClusterRolePolicyRuleListModel represents policy_rule_list block
 type K8SClusterRolePolicyRuleListModel struct {
 	PolicyRule []K8SClusterRolePolicyRuleListPolicyRuleModel `tfsdk:"policy_rule"`
+}
+
+// K8SClusterRolePolicyRuleListModelAttrTypes defines the attribute types for K8SClusterRolePolicyRuleListModel
+var K8SClusterRolePolicyRuleListModelAttrTypes = map[string]attr.Type{
+	"policy_rule": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // K8SClusterRolePolicyRuleListPolicyRuleModel represents policy_rule block
@@ -65,10 +76,22 @@ type K8SClusterRolePolicyRuleListPolicyRuleModel struct {
 	ResourceList       *K8SClusterRolePolicyRuleListPolicyRuleResourceListModel       `tfsdk:"resource_list"`
 }
 
+// K8SClusterRolePolicyRuleListPolicyRuleModelAttrTypes defines the attribute types for K8SClusterRolePolicyRuleListPolicyRuleModel
+var K8SClusterRolePolicyRuleListPolicyRuleModelAttrTypes = map[string]attr.Type{
+	"non_resource_url_list": types.ObjectType{AttrTypes: K8SClusterRolePolicyRuleListPolicyRuleNonResourceURLListModelAttrTypes},
+	"resource_list":         types.ObjectType{AttrTypes: K8SClusterRolePolicyRuleListPolicyRuleResourceListModelAttrTypes},
+}
+
 // K8SClusterRolePolicyRuleListPolicyRuleNonResourceURLListModel represents non_resource_url_list block
 type K8SClusterRolePolicyRuleListPolicyRuleNonResourceURLListModel struct {
 	Urls  types.List `tfsdk:"urls"`
 	Verbs types.List `tfsdk:"verbs"`
+}
+
+// K8SClusterRolePolicyRuleListPolicyRuleNonResourceURLListModelAttrTypes defines the attribute types for K8SClusterRolePolicyRuleListPolicyRuleNonResourceURLListModel
+var K8SClusterRolePolicyRuleListPolicyRuleNonResourceURLListModelAttrTypes = map[string]attr.Type{
+	"urls":  types.ListType{ElemType: types.StringType},
+	"verbs": types.ListType{ElemType: types.StringType},
 }
 
 // K8SClusterRolePolicyRuleListPolicyRuleResourceListModel represents resource_list block
@@ -77,6 +100,14 @@ type K8SClusterRolePolicyRuleListPolicyRuleResourceListModel struct {
 	ResourceInstances types.List `tfsdk:"resource_instances"`
 	ResourceTypes     types.List `tfsdk:"resource_types"`
 	Verbs             types.List `tfsdk:"verbs"`
+}
+
+// K8SClusterRolePolicyRuleListPolicyRuleResourceListModelAttrTypes defines the attribute types for K8SClusterRolePolicyRuleListPolicyRuleResourceListModel
+var K8SClusterRolePolicyRuleListPolicyRuleResourceListModelAttrTypes = map[string]attr.Type{
+	"api_groups":         types.ListType{ElemType: types.StringType},
+	"resource_instances": types.ListType{ElemType: types.StringType},
+	"resource_types":     types.ListType{ElemType: types.StringType},
+	"verbs":              types.ListType{ElemType: types.StringType},
 }
 
 type K8SClusterRoleResourceModel struct {
@@ -537,11 +568,17 @@ func (r *K8SClusterRoleResource) Read(ctx context.Context, req resource.ReadRequ
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

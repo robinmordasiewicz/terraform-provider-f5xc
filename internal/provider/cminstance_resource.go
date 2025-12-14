@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -56,11 +57,24 @@ type CminstanceAPITokenModel struct {
 	ClearSecretInfo     *CminstanceAPITokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
+// CminstanceAPITokenModelAttrTypes defines the attribute types for CminstanceAPITokenModel
+var CminstanceAPITokenModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: CminstanceAPITokenBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: CminstanceAPITokenClearSecretInfoModelAttrTypes},
+}
+
 // CminstanceAPITokenBlindfoldSecretInfoModel represents blindfold_secret_info block
 type CminstanceAPITokenBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
 	Location           types.String `tfsdk:"location"`
 	StoreProvider      types.String `tfsdk:"store_provider"`
+}
+
+// CminstanceAPITokenBlindfoldSecretInfoModelAttrTypes defines the attribute types for CminstanceAPITokenBlindfoldSecretInfoModel
+var CminstanceAPITokenBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
 }
 
 // CminstanceAPITokenClearSecretInfoModel represents clear_secret_info block
@@ -69,15 +83,32 @@ type CminstanceAPITokenClearSecretInfoModel struct {
 	URL      types.String `tfsdk:"url"`
 }
 
+// CminstanceAPITokenClearSecretInfoModelAttrTypes defines the attribute types for CminstanceAPITokenClearSecretInfoModel
+var CminstanceAPITokenClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 // CminstanceIPModel represents ip block
 type CminstanceIPModel struct {
 	Addr types.String `tfsdk:"addr"`
+}
+
+// CminstanceIPModelAttrTypes defines the attribute types for CminstanceIPModel
+var CminstanceIPModelAttrTypes = map[string]attr.Type{
+	"addr": types.StringType,
 }
 
 // CminstancePasswordModel represents password block
 type CminstancePasswordModel struct {
 	BlindfoldSecretInfo *CminstancePasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *CminstancePasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// CminstancePasswordModelAttrTypes defines the attribute types for CminstancePasswordModel
+var CminstancePasswordModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: CminstancePasswordBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: CminstancePasswordClearSecretInfoModelAttrTypes},
 }
 
 // CminstancePasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -87,10 +118,23 @@ type CminstancePasswordBlindfoldSecretInfoModel struct {
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// CminstancePasswordBlindfoldSecretInfoModelAttrTypes defines the attribute types for CminstancePasswordBlindfoldSecretInfoModel
+var CminstancePasswordBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // CminstancePasswordClearSecretInfoModel represents clear_secret_info block
 type CminstancePasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// CminstancePasswordClearSecretInfoModelAttrTypes defines the attribute types for CminstancePasswordClearSecretInfoModel
+var CminstancePasswordClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 type CminstanceResourceModel struct {
@@ -590,11 +634,17 @@ func (r *CminstanceResource) Read(ctx context.Context, req resource.ReadRequest,
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

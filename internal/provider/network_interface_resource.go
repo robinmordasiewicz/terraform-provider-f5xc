@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -62,12 +63,33 @@ type NetworkInterfaceDedicatedInterfaceModel struct {
 	NotPrimary      *NetworkInterfaceEmptyModel `tfsdk:"not_primary"`
 }
 
+// NetworkInterfaceDedicatedInterfaceModelAttrTypes defines the attribute types for NetworkInterfaceDedicatedInterfaceModel
+var NetworkInterfaceDedicatedInterfaceModelAttrTypes = map[string]attr.Type{
+	"device":           types.StringType,
+	"mtu":              types.Int64Type,
+	"node":             types.StringType,
+	"priority":         types.Int64Type,
+	"cluster":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"is_primary":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"monitor":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"monitor_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"not_primary":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NetworkInterfaceDedicatedManagementInterfaceModel represents dedicated_management_interface block
 type NetworkInterfaceDedicatedManagementInterfaceModel struct {
 	Device  types.String                `tfsdk:"device"`
 	MTU     types.Int64                 `tfsdk:"mtu"`
 	Node    types.String                `tfsdk:"node"`
 	Cluster *NetworkInterfaceEmptyModel `tfsdk:"cluster"`
+}
+
+// NetworkInterfaceDedicatedManagementInterfaceModelAttrTypes defines the attribute types for NetworkInterfaceDedicatedManagementInterfaceModel
+var NetworkInterfaceDedicatedManagementInterfaceModelAttrTypes = map[string]attr.Type{
+	"device":  types.StringType,
+	"mtu":     types.Int64Type,
+	"node":    types.StringType,
+	"cluster": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // NetworkInterfaceEthernetInterfaceModel represents ethernet_interface block
@@ -94,6 +116,30 @@ type NetworkInterfaceEthernetInterfaceModel struct {
 	Untagged               *NetworkInterfaceEmptyModel                              `tfsdk:"untagged"`
 }
 
+// NetworkInterfaceEthernetInterfaceModelAttrTypes defines the attribute types for NetworkInterfaceEthernetInterfaceModel
+var NetworkInterfaceEthernetInterfaceModelAttrTypes = map[string]attr.Type{
+	"device":                    types.StringType,
+	"mtu":                       types.Int64Type,
+	"node":                      types.StringType,
+	"priority":                  types.Int64Type,
+	"vlan_id":                   types.Int64Type,
+	"cluster":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dhcp_client":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dhcp_server":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ipv6_auto_config":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"is_primary":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"monitor":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"monitor_disabled":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_ipv6_address":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"not_primary":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_local_inside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_local_network":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ip":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ipv6_address":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"storage_network":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"untagged":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NetworkInterfaceEthernetInterfaceDHCPServerModel represents dhcp_server block
 type NetworkInterfaceEthernetInterfaceDHCPServerModel struct {
 	AutomaticFromEnd   *NetworkInterfaceEmptyModel                                     `tfsdk:"automatic_from_end"`
@@ -101,6 +147,15 @@ type NetworkInterfaceEthernetInterfaceDHCPServerModel struct {
 	DHCPNetworks       []NetworkInterfaceEthernetInterfaceDHCPServerDHCPNetworksModel  `tfsdk:"dhcp_networks"`
 	FixedIPMap         *NetworkInterfaceEmptyModel                                     `tfsdk:"fixed_ip_map"`
 	InterfaceIPMap     *NetworkInterfaceEthernetInterfaceDHCPServerInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+}
+
+// NetworkInterfaceEthernetInterfaceDHCPServerModelAttrTypes defines the attribute types for NetworkInterfaceEthernetInterfaceDHCPServerModel
+var NetworkInterfaceEthernetInterfaceDHCPServerModelAttrTypes = map[string]attr.Type{
+	"automatic_from_end":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: NetworkInterfaceEthernetInterfaceDHCPServerDHCPNetworksModelAttrTypes}},
+	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // NetworkInterfaceEthernetInterfaceDHCPServerDHCPNetworksModel represents dhcp_networks block
@@ -115,10 +170,28 @@ type NetworkInterfaceEthernetInterfaceDHCPServerDHCPNetworksModel struct {
 	SameAsDgw     *NetworkInterfaceEmptyModel                                         `tfsdk:"same_as_dgw"`
 }
 
+// NetworkInterfaceEthernetInterfaceDHCPServerDHCPNetworksModelAttrTypes defines the attribute types for NetworkInterfaceEthernetInterfaceDHCPServerDHCPNetworksModel
+var NetworkInterfaceEthernetInterfaceDHCPServerDHCPNetworksModelAttrTypes = map[string]attr.Type{
+	"dgw_address":    types.StringType,
+	"dns_address":    types.StringType,
+	"network_prefix": types.StringType,
+	"pool_settings":  types.StringType,
+	"first_address":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"last_address":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"pools":          types.ListType{ElemType: types.ObjectType{AttrTypes: NetworkInterfaceEthernetInterfaceDHCPServerDHCPNetworksPoolsModelAttrTypes}},
+	"same_as_dgw":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NetworkInterfaceEthernetInterfaceDHCPServerDHCPNetworksPoolsModel represents pools block
 type NetworkInterfaceEthernetInterfaceDHCPServerDHCPNetworksPoolsModel struct {
 	EndIP   types.String `tfsdk:"end_ip"`
 	StartIP types.String `tfsdk:"start_ip"`
+}
+
+// NetworkInterfaceEthernetInterfaceDHCPServerDHCPNetworksPoolsModelAttrTypes defines the attribute types for NetworkInterfaceEthernetInterfaceDHCPServerDHCPNetworksPoolsModel
+var NetworkInterfaceEthernetInterfaceDHCPServerDHCPNetworksPoolsModelAttrTypes = map[string]attr.Type{
+	"end_ip":   types.StringType,
+	"start_ip": types.StringType,
 }
 
 // NetworkInterfaceEthernetInterfaceDHCPServerInterfaceIPMapModel represents interface_ip_map block
@@ -126,10 +199,21 @@ type NetworkInterfaceEthernetInterfaceDHCPServerInterfaceIPMapModel struct {
 	InterfaceIPMap *NetworkInterfaceEmptyModel `tfsdk:"interface_ip_map"`
 }
 
+// NetworkInterfaceEthernetInterfaceDHCPServerInterfaceIPMapModelAttrTypes defines the attribute types for NetworkInterfaceEthernetInterfaceDHCPServerInterfaceIPMapModel
+var NetworkInterfaceEthernetInterfaceDHCPServerInterfaceIPMapModelAttrTypes = map[string]attr.Type{
+	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NetworkInterfaceEthernetInterfaceIpv6AutoConfigModel represents ipv6_auto_config block
 type NetworkInterfaceEthernetInterfaceIpv6AutoConfigModel struct {
 	Host   *NetworkInterfaceEmptyModel                                 `tfsdk:"host"`
 	Router *NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterModel `tfsdk:"router"`
+}
+
+// NetworkInterfaceEthernetInterfaceIpv6AutoConfigModelAttrTypes defines the attribute types for NetworkInterfaceEthernetInterfaceIpv6AutoConfigModel
+var NetworkInterfaceEthernetInterfaceIpv6AutoConfigModelAttrTypes = map[string]attr.Type{
+	"host":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"router": types.ObjectType{AttrTypes: NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterModelAttrTypes},
 }
 
 // NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterModel represents router block
@@ -139,10 +223,23 @@ type NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterModel struct {
 	Stateful      *NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
 }
 
+// NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterModelAttrTypes defines the attribute types for NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterModel
+var NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterModelAttrTypes = map[string]attr.Type{
+	"network_prefix": types.StringType,
+	"dns_config":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"stateful":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterDNSConfigModel represents dns_config block
 type NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterDNSConfigModel struct {
 	ConfiguredList *NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
 	LocalDNS       *NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
+}
+
+// NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterDNSConfigModelAttrTypes defines the attribute types for NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterDNSConfigModel
+var NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterDNSConfigModelAttrTypes = map[string]attr.Type{
+	"configured_list": types.ObjectType{AttrTypes: NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes},
+	"local_dns":       types.ObjectType{AttrTypes: NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes},
 }
 
 // NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
@@ -150,11 +247,23 @@ type NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterDNSConfigConfiguredLis
 	DNSList types.List `tfsdk:"dns_list"`
 }
 
+// NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes defines the attribute types for NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterDNSConfigConfiguredListModel
+var NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes = map[string]attr.Type{
+	"dns_list": types.ListType{ElemType: types.StringType},
+}
+
 // NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
 type NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterDNSConfigLocalDNSModel struct {
 	ConfiguredAddress types.String                `tfsdk:"configured_address"`
 	FirstAddress      *NetworkInterfaceEmptyModel `tfsdk:"first_address"`
 	LastAddress       *NetworkInterfaceEmptyModel `tfsdk:"last_address"`
+}
+
+// NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes defines the attribute types for NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterDNSConfigLocalDNSModel
+var NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes = map[string]attr.Type{
+	"configured_address": types.StringType,
+	"first_address":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"last_address":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulModel represents stateful block
@@ -166,11 +275,27 @@ type NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulModel struct {
 	InterfaceIPMap     *NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
+// NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulModelAttrTypes defines the attribute types for NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulModel
+var NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulModelAttrTypes = map[string]attr.Type{
+	"automatic_from_end":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes}},
+	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
 type NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksModel struct {
 	NetworkPrefix types.String                                                                          `tfsdk:"network_prefix"`
 	PoolSettings  types.String                                                                          `tfsdk:"pool_settings"`
 	Pools         []NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel `tfsdk:"pools"`
+}
+
+// NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes defines the attribute types for NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksModel
+var NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes = map[string]attr.Type{
+	"network_prefix": types.StringType,
+	"pool_settings":  types.StringType,
+	"pools":          types.ListType{ElemType: types.ObjectType{AttrTypes: NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes}},
 }
 
 // NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel represents pools block
@@ -179,9 +304,20 @@ type NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksPo
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
+// NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes defines the attribute types for NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel
+var NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes = map[string]attr.Type{
+	"end_ip":   types.StringType,
+	"start_ip": types.StringType,
+}
+
 // NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulInterfaceIPMapModel represents interface_ip_map block
 type NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulInterfaceIPMapModel struct {
 	InterfaceIPMap *NetworkInterfaceEmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes defines the attribute types for NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulInterfaceIPMapModel
+var NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes = map[string]attr.Type{
+	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // NetworkInterfaceEthernetInterfaceStaticIPModel represents static_ip block
@@ -190,9 +326,20 @@ type NetworkInterfaceEthernetInterfaceStaticIPModel struct {
 	NodeStaticIP    *NetworkInterfaceEthernetInterfaceStaticIPNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
+// NetworkInterfaceEthernetInterfaceStaticIPModelAttrTypes defines the attribute types for NetworkInterfaceEthernetInterfaceStaticIPModel
+var NetworkInterfaceEthernetInterfaceStaticIPModelAttrTypes = map[string]attr.Type{
+	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_static_ip":    types.ObjectType{AttrTypes: NetworkInterfaceEthernetInterfaceStaticIPNodeStaticIPModelAttrTypes},
+}
+
 // NetworkInterfaceEthernetInterfaceStaticIPClusterStaticIPModel represents cluster_static_ip block
 type NetworkInterfaceEthernetInterfaceStaticIPClusterStaticIPModel struct {
 	InterfaceIPMap *NetworkInterfaceEmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// NetworkInterfaceEthernetInterfaceStaticIPClusterStaticIPModelAttrTypes defines the attribute types for NetworkInterfaceEthernetInterfaceStaticIPClusterStaticIPModel
+var NetworkInterfaceEthernetInterfaceStaticIPClusterStaticIPModelAttrTypes = map[string]attr.Type{
+	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // NetworkInterfaceEthernetInterfaceStaticIPNodeStaticIPModel represents node_static_ip block
@@ -201,10 +348,22 @@ type NetworkInterfaceEthernetInterfaceStaticIPNodeStaticIPModel struct {
 	IPAddress types.String `tfsdk:"ip_address"`
 }
 
+// NetworkInterfaceEthernetInterfaceStaticIPNodeStaticIPModelAttrTypes defines the attribute types for NetworkInterfaceEthernetInterfaceStaticIPNodeStaticIPModel
+var NetworkInterfaceEthernetInterfaceStaticIPNodeStaticIPModelAttrTypes = map[string]attr.Type{
+	"default_gw": types.StringType,
+	"ip_address": types.StringType,
+}
+
 // NetworkInterfaceEthernetInterfaceStaticIpv6AddressModel represents static_ipv6_address block
 type NetworkInterfaceEthernetInterfaceStaticIpv6AddressModel struct {
 	ClusterStaticIP *NetworkInterfaceEthernetInterfaceStaticIpv6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
 	NodeStaticIP    *NetworkInterfaceEthernetInterfaceStaticIpv6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
+}
+
+// NetworkInterfaceEthernetInterfaceStaticIpv6AddressModelAttrTypes defines the attribute types for NetworkInterfaceEthernetInterfaceStaticIpv6AddressModel
+var NetworkInterfaceEthernetInterfaceStaticIpv6AddressModelAttrTypes = map[string]attr.Type{
+	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_static_ip":    types.ObjectType{AttrTypes: NetworkInterfaceEthernetInterfaceStaticIpv6AddressNodeStaticIPModelAttrTypes},
 }
 
 // NetworkInterfaceEthernetInterfaceStaticIpv6AddressClusterStaticIPModel represents cluster_static_ip block
@@ -212,10 +371,21 @@ type NetworkInterfaceEthernetInterfaceStaticIpv6AddressClusterStaticIPModel stru
 	InterfaceIPMap *NetworkInterfaceEmptyModel `tfsdk:"interface_ip_map"`
 }
 
+// NetworkInterfaceEthernetInterfaceStaticIpv6AddressClusterStaticIPModelAttrTypes defines the attribute types for NetworkInterfaceEthernetInterfaceStaticIpv6AddressClusterStaticIPModel
+var NetworkInterfaceEthernetInterfaceStaticIpv6AddressClusterStaticIPModelAttrTypes = map[string]attr.Type{
+	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // NetworkInterfaceEthernetInterfaceStaticIpv6AddressNodeStaticIPModel represents node_static_ip block
 type NetworkInterfaceEthernetInterfaceStaticIpv6AddressNodeStaticIPModel struct {
 	DefaultGw types.String `tfsdk:"default_gw"`
 	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// NetworkInterfaceEthernetInterfaceStaticIpv6AddressNodeStaticIPModelAttrTypes defines the attribute types for NetworkInterfaceEthernetInterfaceStaticIpv6AddressNodeStaticIPModel
+var NetworkInterfaceEthernetInterfaceStaticIpv6AddressNodeStaticIPModelAttrTypes = map[string]attr.Type{
+	"default_gw": types.StringType,
+	"ip_address": types.StringType,
 }
 
 // NetworkInterfaceLayer2InterfaceModel represents layer2_interface block
@@ -225,11 +395,25 @@ type NetworkInterfaceLayer2InterfaceModel struct {
 	L2vlanSloInterface *NetworkInterfaceLayer2InterfaceL2vlanSloInterfaceModel `tfsdk:"l2vlan_slo_interface"`
 }
 
+// NetworkInterfaceLayer2InterfaceModelAttrTypes defines the attribute types for NetworkInterfaceLayer2InterfaceModel
+var NetworkInterfaceLayer2InterfaceModelAttrTypes = map[string]attr.Type{
+	"l2sriov_interface":    types.ObjectType{AttrTypes: NetworkInterfaceLayer2InterfaceL2sriovInterfaceModelAttrTypes},
+	"l2vlan_interface":     types.ObjectType{AttrTypes: NetworkInterfaceLayer2InterfaceL2vlanInterfaceModelAttrTypes},
+	"l2vlan_slo_interface": types.ObjectType{AttrTypes: NetworkInterfaceLayer2InterfaceL2vlanSloInterfaceModelAttrTypes},
+}
+
 // NetworkInterfaceLayer2InterfaceL2sriovInterfaceModel represents l2sriov_interface block
 type NetworkInterfaceLayer2InterfaceL2sriovInterfaceModel struct {
 	Device   types.String                `tfsdk:"device"`
 	VLANID   types.Int64                 `tfsdk:"vlan_id"`
 	Untagged *NetworkInterfaceEmptyModel `tfsdk:"untagged"`
+}
+
+// NetworkInterfaceLayer2InterfaceL2sriovInterfaceModelAttrTypes defines the attribute types for NetworkInterfaceLayer2InterfaceL2sriovInterfaceModel
+var NetworkInterfaceLayer2InterfaceL2sriovInterfaceModelAttrTypes = map[string]attr.Type{
+	"device":   types.StringType,
+	"vlan_id":  types.Int64Type,
+	"untagged": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // NetworkInterfaceLayer2InterfaceL2vlanInterfaceModel represents l2vlan_interface block
@@ -238,9 +422,20 @@ type NetworkInterfaceLayer2InterfaceL2vlanInterfaceModel struct {
 	VLANID types.Int64  `tfsdk:"vlan_id"`
 }
 
+// NetworkInterfaceLayer2InterfaceL2vlanInterfaceModelAttrTypes defines the attribute types for NetworkInterfaceLayer2InterfaceL2vlanInterfaceModel
+var NetworkInterfaceLayer2InterfaceL2vlanInterfaceModelAttrTypes = map[string]attr.Type{
+	"device":  types.StringType,
+	"vlan_id": types.Int64Type,
+}
+
 // NetworkInterfaceLayer2InterfaceL2vlanSloInterfaceModel represents l2vlan_slo_interface block
 type NetworkInterfaceLayer2InterfaceL2vlanSloInterfaceModel struct {
 	VLANID types.Int64 `tfsdk:"vlan_id"`
+}
+
+// NetworkInterfaceLayer2InterfaceL2vlanSloInterfaceModelAttrTypes defines the attribute types for NetworkInterfaceLayer2InterfaceL2vlanSloInterfaceModel
+var NetworkInterfaceLayer2InterfaceL2vlanSloInterfaceModelAttrTypes = map[string]attr.Type{
+	"vlan_id": types.Int64Type,
 }
 
 // NetworkInterfaceTunnelInterfaceModel represents tunnel_interface block
@@ -254,15 +449,37 @@ type NetworkInterfaceTunnelInterfaceModel struct {
 	Tunnel                 *NetworkInterfaceTunnelInterfaceTunnelModel   `tfsdk:"tunnel"`
 }
 
+// NetworkInterfaceTunnelInterfaceModelAttrTypes defines the attribute types for NetworkInterfaceTunnelInterfaceModel
+var NetworkInterfaceTunnelInterfaceModelAttrTypes = map[string]attr.Type{
+	"mtu":                       types.Int64Type,
+	"node":                      types.StringType,
+	"priority":                  types.Int64Type,
+	"site_local_inside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_local_network":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ip":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tunnel":                    types.ObjectType{AttrTypes: NetworkInterfaceTunnelInterfaceTunnelModelAttrTypes},
+}
+
 // NetworkInterfaceTunnelInterfaceStaticIPModel represents static_ip block
 type NetworkInterfaceTunnelInterfaceStaticIPModel struct {
 	ClusterStaticIP *NetworkInterfaceTunnelInterfaceStaticIPClusterStaticIPModel `tfsdk:"cluster_static_ip"`
 	NodeStaticIP    *NetworkInterfaceTunnelInterfaceStaticIPNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
+// NetworkInterfaceTunnelInterfaceStaticIPModelAttrTypes defines the attribute types for NetworkInterfaceTunnelInterfaceStaticIPModel
+var NetworkInterfaceTunnelInterfaceStaticIPModelAttrTypes = map[string]attr.Type{
+	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_static_ip":    types.ObjectType{AttrTypes: NetworkInterfaceTunnelInterfaceStaticIPNodeStaticIPModelAttrTypes},
+}
+
 // NetworkInterfaceTunnelInterfaceStaticIPClusterStaticIPModel represents cluster_static_ip block
 type NetworkInterfaceTunnelInterfaceStaticIPClusterStaticIPModel struct {
 	InterfaceIPMap *NetworkInterfaceEmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// NetworkInterfaceTunnelInterfaceStaticIPClusterStaticIPModelAttrTypes defines the attribute types for NetworkInterfaceTunnelInterfaceStaticIPClusterStaticIPModel
+var NetworkInterfaceTunnelInterfaceStaticIPClusterStaticIPModelAttrTypes = map[string]attr.Type{
+	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // NetworkInterfaceTunnelInterfaceStaticIPNodeStaticIPModel represents node_static_ip block
@@ -271,11 +488,24 @@ type NetworkInterfaceTunnelInterfaceStaticIPNodeStaticIPModel struct {
 	IPAddress types.String `tfsdk:"ip_address"`
 }
 
+// NetworkInterfaceTunnelInterfaceStaticIPNodeStaticIPModelAttrTypes defines the attribute types for NetworkInterfaceTunnelInterfaceStaticIPNodeStaticIPModel
+var NetworkInterfaceTunnelInterfaceStaticIPNodeStaticIPModelAttrTypes = map[string]attr.Type{
+	"default_gw": types.StringType,
+	"ip_address": types.StringType,
+}
+
 // NetworkInterfaceTunnelInterfaceTunnelModel represents tunnel block
 type NetworkInterfaceTunnelInterfaceTunnelModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// NetworkInterfaceTunnelInterfaceTunnelModelAttrTypes defines the attribute types for NetworkInterfaceTunnelInterfaceTunnelModel
+var NetworkInterfaceTunnelInterfaceTunnelModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 type NetworkInterfaceResourceModel struct {
@@ -826,6 +1056,9 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -1662,11 +1895,17 @@ func (r *NetworkInterfaceResource) Read(ctx context.Context, req resource.ReadRe
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

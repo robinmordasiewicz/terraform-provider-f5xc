@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -55,10 +56,22 @@ type SiteMeshGroupFullMeshModel struct {
 	DataPlaneMesh           *SiteMeshGroupEmptyModel `tfsdk:"data_plane_mesh"`
 }
 
+// SiteMeshGroupFullMeshModelAttrTypes defines the attribute types for SiteMeshGroupFullMeshModel
+var SiteMeshGroupFullMeshModelAttrTypes = map[string]attr.Type{
+	"control_and_data_plane_mesh": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"data_plane_mesh":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SiteMeshGroupHubMeshModel represents hub_mesh block
 type SiteMeshGroupHubMeshModel struct {
 	ControlAndDataPlaneMesh *SiteMeshGroupEmptyModel `tfsdk:"control_and_data_plane_mesh"`
 	DataPlaneMesh           *SiteMeshGroupEmptyModel `tfsdk:"data_plane_mesh"`
+}
+
+// SiteMeshGroupHubMeshModelAttrTypes defines the attribute types for SiteMeshGroupHubMeshModel
+var SiteMeshGroupHubMeshModelAttrTypes = map[string]attr.Type{
+	"control_and_data_plane_mesh": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"data_plane_mesh":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SiteMeshGroupSpokeMeshModel represents spoke_mesh block
@@ -68,11 +81,25 @@ type SiteMeshGroupSpokeMeshModel struct {
 	HubMeshGroup            *SiteMeshGroupSpokeMeshHubMeshGroupModel `tfsdk:"hub_mesh_group"`
 }
 
+// SiteMeshGroupSpokeMeshModelAttrTypes defines the attribute types for SiteMeshGroupSpokeMeshModel
+var SiteMeshGroupSpokeMeshModelAttrTypes = map[string]attr.Type{
+	"control_and_data_plane_mesh": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"data_plane_mesh":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"hub_mesh_group":              types.ObjectType{AttrTypes: SiteMeshGroupSpokeMeshHubMeshGroupModelAttrTypes},
+}
+
 // SiteMeshGroupSpokeMeshHubMeshGroupModel represents hub_mesh_group block
 type SiteMeshGroupSpokeMeshHubMeshGroupModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// SiteMeshGroupSpokeMeshHubMeshGroupModelAttrTypes defines the attribute types for SiteMeshGroupSpokeMeshHubMeshGroupModel
+var SiteMeshGroupSpokeMeshHubMeshGroupModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // SiteMeshGroupVirtualSiteModel represents virtual_site block
@@ -84,21 +111,30 @@ type SiteMeshGroupVirtualSiteModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// SiteMeshGroupVirtualSiteModelAttrTypes defines the attribute types for SiteMeshGroupVirtualSiteModel
+var SiteMeshGroupVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 type SiteMeshGroupResourceModel struct {
-	Name              types.String                    `tfsdk:"name"`
-	Namespace         types.String                    `tfsdk:"namespace"`
-	Annotations       types.Map                       `tfsdk:"annotations"`
-	Description       types.String                    `tfsdk:"description"`
-	Disable           types.Bool                      `tfsdk:"disable"`
-	Labels            types.Map                       `tfsdk:"labels"`
-	ID                types.String                    `tfsdk:"id"`
-	Timeouts          timeouts.Value                  `tfsdk:"timeouts"`
-	DisableREFallback *SiteMeshGroupEmptyModel        `tfsdk:"disable_re_fallback"`
-	EnableREFallback  *SiteMeshGroupEmptyModel        `tfsdk:"enable_re_fallback"`
-	FullMesh          *SiteMeshGroupFullMeshModel     `tfsdk:"full_mesh"`
-	HubMesh           *SiteMeshGroupHubMeshModel      `tfsdk:"hub_mesh"`
-	SpokeMesh         *SiteMeshGroupSpokeMeshModel    `tfsdk:"spoke_mesh"`
-	VirtualSite       []SiteMeshGroupVirtualSiteModel `tfsdk:"virtual_site"`
+	Name              types.String                 `tfsdk:"name"`
+	Namespace         types.String                 `tfsdk:"namespace"`
+	Annotations       types.Map                    `tfsdk:"annotations"`
+	Description       types.String                 `tfsdk:"description"`
+	Disable           types.Bool                   `tfsdk:"disable"`
+	Labels            types.Map                    `tfsdk:"labels"`
+	ID                types.String                 `tfsdk:"id"`
+	Timeouts          timeouts.Value               `tfsdk:"timeouts"`
+	DisableREFallback *SiteMeshGroupEmptyModel     `tfsdk:"disable_re_fallback"`
+	EnableREFallback  *SiteMeshGroupEmptyModel     `tfsdk:"enable_re_fallback"`
+	FullMesh          *SiteMeshGroupFullMeshModel  `tfsdk:"full_mesh"`
+	HubMesh           *SiteMeshGroupHubMeshModel   `tfsdk:"hub_mesh"`
+	SpokeMesh         *SiteMeshGroupSpokeMeshModel `tfsdk:"spoke_mesh"`
+	VirtualSite       types.List                   `tfsdk:"virtual_site"`
 }
 
 func (r *SiteMeshGroupResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -218,6 +254,9 @@ func (r *SiteMeshGroupResource) Schema(ctx context.Context, req resource.SchemaR
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -231,6 +270,9 @@ func (r *SiteMeshGroupResource) Schema(ctx context.Context, req resource.SchemaR
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -244,11 +286,17 @@ func (r *SiteMeshGroupResource) Schema(ctx context.Context, req resource.SchemaR
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 					},
 				},
@@ -452,28 +500,33 @@ func (r *SiteMeshGroupResource) Create(ctx context.Context, req resource.CreateR
 		}
 		createReq.Spec["spoke_mesh"] = spoke_meshMap
 	}
-	if len(data.VirtualSite) > 0 {
-		var virtual_siteList []map[string]interface{}
-		for _, item := range data.VirtualSite {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.VirtualSite.IsNull() && !data.VirtualSite.IsUnknown() {
+		var virtual_siteItems []SiteMeshGroupVirtualSiteModel
+		diags := data.VirtualSite.ElementsAs(ctx, &virtual_siteItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(virtual_siteItems) > 0 {
+			var virtual_siteList []map[string]interface{}
+			for _, item := range virtual_siteItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				virtual_siteList = append(virtual_siteList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			virtual_siteList = append(virtual_siteList, itemMap)
+			createReq.Spec["virtual_site"] = virtual_siteList
 		}
-		createReq.Spec["virtual_site"] = virtual_siteList
 	}
 
 	apiResource, err := r.client.CreateSiteMeshGroup(ctx, createReq)
@@ -515,6 +568,10 @@ func (r *SiteMeshGroupResource) Create(ctx context.Context, req resource.CreateR
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["virtual_site"].([]interface{}); ok && len(listData) > 0 {
 		var virtual_siteList []SiteMeshGroupVirtualSiteModel
+		var existingVirtualSiteItems []SiteMeshGroupVirtualSiteModel
+		if !data.VirtualSite.IsNull() && !data.VirtualSite.IsUnknown() {
+			data.VirtualSite.ElementsAs(ctx, &existingVirtualSiteItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -552,7 +609,14 @@ func (r *SiteMeshGroupResource) Create(ctx context.Context, req resource.CreateR
 				})
 			}
 		}
-		data.VirtualSite = virtual_siteList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: SiteMeshGroupVirtualSiteModelAttrTypes}, virtual_siteList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.VirtualSite = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.VirtualSite = types.ListNull(types.ObjectType{AttrTypes: SiteMeshGroupVirtualSiteModelAttrTypes})
 	}
 
 	psd := privatestate.NewPrivateStateData()
@@ -618,11 +682,17 @@ func (r *SiteMeshGroupResource) Read(ctx context.Context, req resource.ReadReque
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -674,6 +744,10 @@ func (r *SiteMeshGroupResource) Read(ctx context.Context, req resource.ReadReque
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["virtual_site"].([]interface{}); ok && len(listData) > 0 {
 		var virtual_siteList []SiteMeshGroupVirtualSiteModel
+		var existingVirtualSiteItems []SiteMeshGroupVirtualSiteModel
+		if !data.VirtualSite.IsNull() && !data.VirtualSite.IsUnknown() {
+			data.VirtualSite.ElementsAs(ctx, &existingVirtualSiteItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -711,7 +785,14 @@ func (r *SiteMeshGroupResource) Read(ctx context.Context, req resource.ReadReque
 				})
 			}
 		}
-		data.VirtualSite = virtual_siteList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: SiteMeshGroupVirtualSiteModelAttrTypes}, virtual_siteList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.VirtualSite = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.VirtualSite = types.ListNull(types.ObjectType{AttrTypes: SiteMeshGroupVirtualSiteModelAttrTypes})
 	}
 
 	// Preserve or set the managed marker for future Read operations
@@ -824,28 +905,33 @@ func (r *SiteMeshGroupResource) Update(ctx context.Context, req resource.UpdateR
 		}
 		apiResource.Spec["spoke_mesh"] = spoke_meshMap
 	}
-	if len(data.VirtualSite) > 0 {
-		var virtual_siteList []map[string]interface{}
-		for _, item := range data.VirtualSite {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.VirtualSite.IsNull() && !data.VirtualSite.IsUnknown() {
+		var virtual_siteItems []SiteMeshGroupVirtualSiteModel
+		diags := data.VirtualSite.ElementsAs(ctx, &virtual_siteItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(virtual_siteItems) > 0 {
+			var virtual_siteList []map[string]interface{}
+			for _, item := range virtual_siteItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				virtual_siteList = append(virtual_siteList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			virtual_siteList = append(virtual_siteList, itemMap)
+			apiResource.Spec["virtual_site"] = virtual_siteList
 		}
-		apiResource.Spec["virtual_site"] = virtual_siteList
 	}
 
 	_, err := r.client.UpdateSiteMeshGroup(ctx, apiResource)
@@ -898,6 +984,10 @@ func (r *SiteMeshGroupResource) Update(ctx context.Context, req resource.UpdateR
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["virtual_site"].([]interface{}); ok && len(listData) > 0 {
 		var virtual_siteList []SiteMeshGroupVirtualSiteModel
+		var existingVirtualSiteItems []SiteMeshGroupVirtualSiteModel
+		if !data.VirtualSite.IsNull() && !data.VirtualSite.IsUnknown() {
+			data.VirtualSite.ElementsAs(ctx, &existingVirtualSiteItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -935,7 +1025,14 @@ func (r *SiteMeshGroupResource) Update(ctx context.Context, req resource.UpdateR
 				})
 			}
 		}
-		data.VirtualSite = virtual_siteList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: SiteMeshGroupVirtualSiteModelAttrTypes}, virtual_siteList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.VirtualSite = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.VirtualSite = types.ListNull(types.ObjectType{AttrTypes: SiteMeshGroupVirtualSiteModelAttrTypes})
 	}
 
 	psd := privatestate.NewPrivateStateData()

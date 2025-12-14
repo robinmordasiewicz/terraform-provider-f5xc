@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -54,6 +55,13 @@ type AddressAllocatorAddressAllocationSchemeModel struct {
 	AllocationUnit              types.Int64  `tfsdk:"allocation_unit"`
 	LocalInterfaceAddressOffset types.Int64  `tfsdk:"local_interface_address_offset"`
 	LocalInterfaceAddressType   types.String `tfsdk:"local_interface_address_type"`
+}
+
+// AddressAllocatorAddressAllocationSchemeModelAttrTypes defines the attribute types for AddressAllocatorAddressAllocationSchemeModel
+var AddressAllocatorAddressAllocationSchemeModelAttrTypes = map[string]attr.Type{
+	"allocation_unit":                types.Int64Type,
+	"local_interface_address_offset": types.Int64Type,
+	"local_interface_address_type":   types.StringType,
 }
 
 type AddressAllocatorResourceModel struct {
@@ -452,11 +460,17 @@ func (r *AddressAllocatorResource) Read(ctx context.Context, req resource.ReadRe
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

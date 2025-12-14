@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -53,6 +54,12 @@ type DcClusterGroupEmptyModel struct {
 type DcClusterGroupTypeModel struct {
 	ControlAndDataPlaneMesh *DcClusterGroupEmptyModel `tfsdk:"control_and_data_plane_mesh"`
 	DataPlaneMesh           *DcClusterGroupEmptyModel `tfsdk:"data_plane_mesh"`
+}
+
+// DcClusterGroupTypeModelAttrTypes defines the attribute types for DcClusterGroupTypeModel
+var DcClusterGroupTypeModelAttrTypes = map[string]attr.Type{
+	"control_and_data_plane_mesh": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"data_plane_mesh":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 type DcClusterGroupResourceModel struct {
@@ -381,11 +388,17 @@ func (r *DcClusterGroupResource) Read(ctx context.Context, req resource.ReadRequ
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

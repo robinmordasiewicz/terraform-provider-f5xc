@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -54,11 +55,23 @@ type SubnetConnectToLayer2Model struct {
 	Layer2IntfRef *SubnetConnectToLayer2Layer2IntfRefModel `tfsdk:"layer2_intf_ref"`
 }
 
+// SubnetConnectToLayer2ModelAttrTypes defines the attribute types for SubnetConnectToLayer2Model
+var SubnetConnectToLayer2ModelAttrTypes = map[string]attr.Type{
+	"layer2_intf_ref": types.ObjectType{AttrTypes: SubnetConnectToLayer2Layer2IntfRefModelAttrTypes},
+}
+
 // SubnetConnectToLayer2Layer2IntfRefModel represents layer2_intf_ref block
 type SubnetConnectToLayer2Layer2IntfRefModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// SubnetConnectToLayer2Layer2IntfRefModelAttrTypes defines the attribute types for SubnetConnectToLayer2Layer2IntfRefModel
+var SubnetConnectToLayer2Layer2IntfRefModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // SubnetSiteSubnetParamsModel represents site_subnet_params block
@@ -69,6 +82,14 @@ type SubnetSiteSubnetParamsModel struct {
 	SubnetDHCPServerParams *SubnetSiteSubnetParamsSubnetDHCPServerParamsModel `tfsdk:"subnet_dhcp_server_params"`
 }
 
+// SubnetSiteSubnetParamsModelAttrTypes defines the attribute types for SubnetSiteSubnetParamsModel
+var SubnetSiteSubnetParamsModelAttrTypes = map[string]attr.Type{
+	"dhcp":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site":                      types.ObjectType{AttrTypes: SubnetSiteSubnetParamsSiteModelAttrTypes},
+	"static_ip":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"subnet_dhcp_server_params": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SubnetSiteSubnetParamsSiteModel represents site block
 type SubnetSiteSubnetParamsSiteModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -76,9 +97,21 @@ type SubnetSiteSubnetParamsSiteModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// SubnetSiteSubnetParamsSiteModelAttrTypes defines the attribute types for SubnetSiteSubnetParamsSiteModel
+var SubnetSiteSubnetParamsSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // SubnetSiteSubnetParamsSubnetDHCPServerParamsModel represents subnet_dhcp_server_params block
 type SubnetSiteSubnetParamsSubnetDHCPServerParamsModel struct {
 	DHCPNetworks []SubnetSiteSubnetParamsSubnetDHCPServerParamsDHCPNetworksModel `tfsdk:"dhcp_networks"`
+}
+
+// SubnetSiteSubnetParamsSubnetDHCPServerParamsModelAttrTypes defines the attribute types for SubnetSiteSubnetParamsSubnetDHCPServerParamsModel
+var SubnetSiteSubnetParamsSubnetDHCPServerParamsModelAttrTypes = map[string]attr.Type{
+	"dhcp_networks": types.ListType{ElemType: types.ObjectType{AttrTypes: SubnetSiteSubnetParamsSubnetDHCPServerParamsDHCPNetworksModelAttrTypes}},
 }
 
 // SubnetSiteSubnetParamsSubnetDHCPServerParamsDHCPNetworksModel represents dhcp_networks block
@@ -86,19 +119,24 @@ type SubnetSiteSubnetParamsSubnetDHCPServerParamsDHCPNetworksModel struct {
 	NetworkPrefix types.String `tfsdk:"network_prefix"`
 }
 
+// SubnetSiteSubnetParamsSubnetDHCPServerParamsDHCPNetworksModelAttrTypes defines the attribute types for SubnetSiteSubnetParamsSubnetDHCPServerParamsDHCPNetworksModel
+var SubnetSiteSubnetParamsSubnetDHCPServerParamsDHCPNetworksModelAttrTypes = map[string]attr.Type{
+	"network_prefix": types.StringType,
+}
+
 type SubnetResourceModel struct {
-	Name             types.String                  `tfsdk:"name"`
-	Namespace        types.String                  `tfsdk:"namespace"`
-	Annotations      types.Map                     `tfsdk:"annotations"`
-	Description      types.String                  `tfsdk:"description"`
-	Disable          types.Bool                    `tfsdk:"disable"`
-	Labels           types.Map                     `tfsdk:"labels"`
-	ID               types.String                  `tfsdk:"id"`
-	Timeouts         timeouts.Value                `tfsdk:"timeouts"`
-	ConnectToLayer2  *SubnetConnectToLayer2Model   `tfsdk:"connect_to_layer2"`
-	ConnectToSlo     *SubnetEmptyModel             `tfsdk:"connect_to_slo"`
-	IsolatedNw       *SubnetEmptyModel             `tfsdk:"isolated_nw"`
-	SiteSubnetParams []SubnetSiteSubnetParamsModel `tfsdk:"site_subnet_params"`
+	Name             types.String                `tfsdk:"name"`
+	Namespace        types.String                `tfsdk:"namespace"`
+	Annotations      types.Map                   `tfsdk:"annotations"`
+	Description      types.String                `tfsdk:"description"`
+	Disable          types.Bool                  `tfsdk:"disable"`
+	Labels           types.Map                   `tfsdk:"labels"`
+	ID               types.String                `tfsdk:"id"`
+	Timeouts         timeouts.Value              `tfsdk:"timeouts"`
+	ConnectToLayer2  *SubnetConnectToLayer2Model `tfsdk:"connect_to_layer2"`
+	ConnectToSlo     *SubnetEmptyModel           `tfsdk:"connect_to_slo"`
+	IsolatedNw       *SubnetEmptyModel           `tfsdk:"isolated_nw"`
+	SiteSubnetParams types.List                  `tfsdk:"site_subnet_params"`
 }
 
 func (r *SubnetResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -182,6 +220,9 @@ func (r *SubnetResource) Schema(ctx context.Context, req resource.SchemaRequest,
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -216,6 +257,9 @@ func (r *SubnetResource) Schema(ctx context.Context, req resource.SchemaRequest,
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -415,47 +459,52 @@ func (r *SubnetResource) Create(ctx context.Context, req resource.CreateRequest,
 		isolated_nwMap := make(map[string]interface{})
 		createReq.Spec["isolated_nw"] = isolated_nwMap
 	}
-	if len(data.SiteSubnetParams) > 0 {
-		var site_subnet_paramsList []map[string]interface{}
-		for _, item := range data.SiteSubnetParams {
-			itemMap := make(map[string]interface{})
-			if item.DHCP != nil {
-				itemMap["dhcp"] = map[string]interface{}{}
-			}
-			if item.Site != nil {
-				siteNestedMap := make(map[string]interface{})
-				if !item.Site.Name.IsNull() && !item.Site.Name.IsUnknown() {
-					siteNestedMap["name"] = item.Site.Name.ValueString()
+	if !data.SiteSubnetParams.IsNull() && !data.SiteSubnetParams.IsUnknown() {
+		var site_subnet_paramsItems []SubnetSiteSubnetParamsModel
+		diags := data.SiteSubnetParams.ElementsAs(ctx, &site_subnet_paramsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(site_subnet_paramsItems) > 0 {
+			var site_subnet_paramsList []map[string]interface{}
+			for _, item := range site_subnet_paramsItems {
+				itemMap := make(map[string]interface{})
+				if item.DHCP != nil {
+					itemMap["dhcp"] = map[string]interface{}{}
 				}
-				if !item.Site.Namespace.IsNull() && !item.Site.Namespace.IsUnknown() {
-					siteNestedMap["namespace"] = item.Site.Namespace.ValueString()
-				}
-				if !item.Site.Tenant.IsNull() && !item.Site.Tenant.IsUnknown() {
-					siteNestedMap["tenant"] = item.Site.Tenant.ValueString()
-				}
-				itemMap["site"] = siteNestedMap
-			}
-			if item.StaticIP != nil {
-				itemMap["static_ip"] = map[string]interface{}{}
-			}
-			if item.SubnetDHCPServerParams != nil {
-				subnet_dhcp_server_paramsNestedMap := make(map[string]interface{})
-				if len(item.SubnetDHCPServerParams.DHCPNetworks) > 0 {
-					var dhcp_networksDeepList []map[string]interface{}
-					for _, deepListItem := range item.SubnetDHCPServerParams.DHCPNetworks {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.NetworkPrefix.IsNull() && !deepListItem.NetworkPrefix.IsUnknown() {
-							deepListItemMap["network_prefix"] = deepListItem.NetworkPrefix.ValueString()
-						}
-						dhcp_networksDeepList = append(dhcp_networksDeepList, deepListItemMap)
+				if item.Site != nil {
+					siteNestedMap := make(map[string]interface{})
+					if !item.Site.Name.IsNull() && !item.Site.Name.IsUnknown() {
+						siteNestedMap["name"] = item.Site.Name.ValueString()
 					}
-					subnet_dhcp_server_paramsNestedMap["dhcp_networks"] = dhcp_networksDeepList
+					if !item.Site.Namespace.IsNull() && !item.Site.Namespace.IsUnknown() {
+						siteNestedMap["namespace"] = item.Site.Namespace.ValueString()
+					}
+					if !item.Site.Tenant.IsNull() && !item.Site.Tenant.IsUnknown() {
+						siteNestedMap["tenant"] = item.Site.Tenant.ValueString()
+					}
+					itemMap["site"] = siteNestedMap
 				}
-				itemMap["subnet_dhcp_server_params"] = subnet_dhcp_server_paramsNestedMap
+				if item.StaticIP != nil {
+					itemMap["static_ip"] = map[string]interface{}{}
+				}
+				if item.SubnetDHCPServerParams != nil {
+					subnet_dhcp_server_paramsNestedMap := make(map[string]interface{})
+					if len(item.SubnetDHCPServerParams.DHCPNetworks) > 0 {
+						var dhcp_networksDeepList []map[string]interface{}
+						for _, deepListItem := range item.SubnetDHCPServerParams.DHCPNetworks {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.NetworkPrefix.IsNull() && !deepListItem.NetworkPrefix.IsUnknown() {
+								deepListItemMap["network_prefix"] = deepListItem.NetworkPrefix.ValueString()
+							}
+							dhcp_networksDeepList = append(dhcp_networksDeepList, deepListItemMap)
+						}
+						subnet_dhcp_server_paramsNestedMap["dhcp_networks"] = dhcp_networksDeepList
+					}
+					itemMap["subnet_dhcp_server_params"] = subnet_dhcp_server_paramsNestedMap
+				}
+				site_subnet_paramsList = append(site_subnet_paramsList, itemMap)
 			}
-			site_subnet_paramsList = append(site_subnet_paramsList, itemMap)
+			createReq.Spec["site_subnet_params"] = site_subnet_paramsList
 		}
-		createReq.Spec["site_subnet_params"] = site_subnet_paramsList
 	}
 
 	apiResource, err := r.client.CreateSubnet(ctx, createReq)
@@ -487,12 +536,16 @@ func (r *SubnetResource) Create(ctx context.Context, req resource.CreateRequest,
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["site_subnet_params"].([]interface{}); ok && len(listData) > 0 {
 		var site_subnet_paramsList []SubnetSiteSubnetParamsModel
+		var existingSiteSubnetParamsItems []SubnetSiteSubnetParamsModel
+		if !data.SiteSubnetParams.IsNull() && !data.SiteSubnetParams.IsUnknown() {
+			data.SiteSubnetParams.ElementsAs(ctx, &existingSiteSubnetParamsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				site_subnet_paramsList = append(site_subnet_paramsList, SubnetSiteSubnetParamsModel{
 					DHCP: func() *SubnetEmptyModel {
-						if !isImport && len(data.SiteSubnetParams) > listIdx && data.SiteSubnetParams[listIdx].DHCP != nil {
+						if !isImport && len(existingSiteSubnetParamsItems) > listIdx && existingSiteSubnetParamsItems[listIdx].DHCP != nil {
 							return &SubnetEmptyModel{}
 						}
 						return nil
@@ -523,7 +576,7 @@ func (r *SubnetResource) Create(ctx context.Context, req resource.CreateRequest,
 						return nil
 					}(),
 					StaticIP: func() *SubnetEmptyModel {
-						if !isImport && len(data.SiteSubnetParams) > listIdx && data.SiteSubnetParams[listIdx].StaticIP != nil {
+						if !isImport && len(existingSiteSubnetParamsItems) > listIdx && existingSiteSubnetParamsItems[listIdx].StaticIP != nil {
 							return &SubnetEmptyModel{}
 						}
 						return nil
@@ -537,7 +590,14 @@ func (r *SubnetResource) Create(ctx context.Context, req resource.CreateRequest,
 				})
 			}
 		}
-		data.SiteSubnetParams = site_subnet_paramsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: SubnetSiteSubnetParamsModelAttrTypes}, site_subnet_paramsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.SiteSubnetParams = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.SiteSubnetParams = types.ListNull(types.ObjectType{AttrTypes: SubnetSiteSubnetParamsModelAttrTypes})
 	}
 
 	psd := privatestate.NewPrivateStateData()
@@ -603,11 +663,17 @@ func (r *SubnetResource) Read(ctx context.Context, req resource.ReadRequest, res
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -649,12 +715,16 @@ func (r *SubnetResource) Read(ctx context.Context, req resource.ReadRequest, res
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["site_subnet_params"].([]interface{}); ok && len(listData) > 0 {
 		var site_subnet_paramsList []SubnetSiteSubnetParamsModel
+		var existingSiteSubnetParamsItems []SubnetSiteSubnetParamsModel
+		if !data.SiteSubnetParams.IsNull() && !data.SiteSubnetParams.IsUnknown() {
+			data.SiteSubnetParams.ElementsAs(ctx, &existingSiteSubnetParamsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				site_subnet_paramsList = append(site_subnet_paramsList, SubnetSiteSubnetParamsModel{
 					DHCP: func() *SubnetEmptyModel {
-						if !isImport && len(data.SiteSubnetParams) > listIdx && data.SiteSubnetParams[listIdx].DHCP != nil {
+						if !isImport && len(existingSiteSubnetParamsItems) > listIdx && existingSiteSubnetParamsItems[listIdx].DHCP != nil {
 							return &SubnetEmptyModel{}
 						}
 						return nil
@@ -685,7 +755,7 @@ func (r *SubnetResource) Read(ctx context.Context, req resource.ReadRequest, res
 						return nil
 					}(),
 					StaticIP: func() *SubnetEmptyModel {
-						if !isImport && len(data.SiteSubnetParams) > listIdx && data.SiteSubnetParams[listIdx].StaticIP != nil {
+						if !isImport && len(existingSiteSubnetParamsItems) > listIdx && existingSiteSubnetParamsItems[listIdx].StaticIP != nil {
 							return &SubnetEmptyModel{}
 						}
 						return nil
@@ -699,7 +769,14 @@ func (r *SubnetResource) Read(ctx context.Context, req resource.ReadRequest, res
 				})
 			}
 		}
-		data.SiteSubnetParams = site_subnet_paramsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: SubnetSiteSubnetParamsModelAttrTypes}, site_subnet_paramsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.SiteSubnetParams = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.SiteSubnetParams = types.ListNull(types.ObjectType{AttrTypes: SubnetSiteSubnetParamsModelAttrTypes})
 	}
 
 	// Preserve or set the managed marker for future Read operations
@@ -786,47 +863,52 @@ func (r *SubnetResource) Update(ctx context.Context, req resource.UpdateRequest,
 		isolated_nwMap := make(map[string]interface{})
 		apiResource.Spec["isolated_nw"] = isolated_nwMap
 	}
-	if len(data.SiteSubnetParams) > 0 {
-		var site_subnet_paramsList []map[string]interface{}
-		for _, item := range data.SiteSubnetParams {
-			itemMap := make(map[string]interface{})
-			if item.DHCP != nil {
-				itemMap["dhcp"] = map[string]interface{}{}
-			}
-			if item.Site != nil {
-				siteNestedMap := make(map[string]interface{})
-				if !item.Site.Name.IsNull() && !item.Site.Name.IsUnknown() {
-					siteNestedMap["name"] = item.Site.Name.ValueString()
+	if !data.SiteSubnetParams.IsNull() && !data.SiteSubnetParams.IsUnknown() {
+		var site_subnet_paramsItems []SubnetSiteSubnetParamsModel
+		diags := data.SiteSubnetParams.ElementsAs(ctx, &site_subnet_paramsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(site_subnet_paramsItems) > 0 {
+			var site_subnet_paramsList []map[string]interface{}
+			for _, item := range site_subnet_paramsItems {
+				itemMap := make(map[string]interface{})
+				if item.DHCP != nil {
+					itemMap["dhcp"] = map[string]interface{}{}
 				}
-				if !item.Site.Namespace.IsNull() && !item.Site.Namespace.IsUnknown() {
-					siteNestedMap["namespace"] = item.Site.Namespace.ValueString()
-				}
-				if !item.Site.Tenant.IsNull() && !item.Site.Tenant.IsUnknown() {
-					siteNestedMap["tenant"] = item.Site.Tenant.ValueString()
-				}
-				itemMap["site"] = siteNestedMap
-			}
-			if item.StaticIP != nil {
-				itemMap["static_ip"] = map[string]interface{}{}
-			}
-			if item.SubnetDHCPServerParams != nil {
-				subnet_dhcp_server_paramsNestedMap := make(map[string]interface{})
-				if len(item.SubnetDHCPServerParams.DHCPNetworks) > 0 {
-					var dhcp_networksDeepList []map[string]interface{}
-					for _, deepListItem := range item.SubnetDHCPServerParams.DHCPNetworks {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.NetworkPrefix.IsNull() && !deepListItem.NetworkPrefix.IsUnknown() {
-							deepListItemMap["network_prefix"] = deepListItem.NetworkPrefix.ValueString()
-						}
-						dhcp_networksDeepList = append(dhcp_networksDeepList, deepListItemMap)
+				if item.Site != nil {
+					siteNestedMap := make(map[string]interface{})
+					if !item.Site.Name.IsNull() && !item.Site.Name.IsUnknown() {
+						siteNestedMap["name"] = item.Site.Name.ValueString()
 					}
-					subnet_dhcp_server_paramsNestedMap["dhcp_networks"] = dhcp_networksDeepList
+					if !item.Site.Namespace.IsNull() && !item.Site.Namespace.IsUnknown() {
+						siteNestedMap["namespace"] = item.Site.Namespace.ValueString()
+					}
+					if !item.Site.Tenant.IsNull() && !item.Site.Tenant.IsUnknown() {
+						siteNestedMap["tenant"] = item.Site.Tenant.ValueString()
+					}
+					itemMap["site"] = siteNestedMap
 				}
-				itemMap["subnet_dhcp_server_params"] = subnet_dhcp_server_paramsNestedMap
+				if item.StaticIP != nil {
+					itemMap["static_ip"] = map[string]interface{}{}
+				}
+				if item.SubnetDHCPServerParams != nil {
+					subnet_dhcp_server_paramsNestedMap := make(map[string]interface{})
+					if len(item.SubnetDHCPServerParams.DHCPNetworks) > 0 {
+						var dhcp_networksDeepList []map[string]interface{}
+						for _, deepListItem := range item.SubnetDHCPServerParams.DHCPNetworks {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.NetworkPrefix.IsNull() && !deepListItem.NetworkPrefix.IsUnknown() {
+								deepListItemMap["network_prefix"] = deepListItem.NetworkPrefix.ValueString()
+							}
+							dhcp_networksDeepList = append(dhcp_networksDeepList, deepListItemMap)
+						}
+						subnet_dhcp_server_paramsNestedMap["dhcp_networks"] = dhcp_networksDeepList
+					}
+					itemMap["subnet_dhcp_server_params"] = subnet_dhcp_server_paramsNestedMap
+				}
+				site_subnet_paramsList = append(site_subnet_paramsList, itemMap)
 			}
-			site_subnet_paramsList = append(site_subnet_paramsList, itemMap)
+			apiResource.Spec["site_subnet_params"] = site_subnet_paramsList
 		}
-		apiResource.Spec["site_subnet_params"] = site_subnet_paramsList
 	}
 
 	_, err := r.client.UpdateSubnet(ctx, apiResource)
@@ -869,12 +951,16 @@ func (r *SubnetResource) Update(ctx context.Context, req resource.UpdateRequest,
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["site_subnet_params"].([]interface{}); ok && len(listData) > 0 {
 		var site_subnet_paramsList []SubnetSiteSubnetParamsModel
+		var existingSiteSubnetParamsItems []SubnetSiteSubnetParamsModel
+		if !data.SiteSubnetParams.IsNull() && !data.SiteSubnetParams.IsUnknown() {
+			data.SiteSubnetParams.ElementsAs(ctx, &existingSiteSubnetParamsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				site_subnet_paramsList = append(site_subnet_paramsList, SubnetSiteSubnetParamsModel{
 					DHCP: func() *SubnetEmptyModel {
-						if !isImport && len(data.SiteSubnetParams) > listIdx && data.SiteSubnetParams[listIdx].DHCP != nil {
+						if !isImport && len(existingSiteSubnetParamsItems) > listIdx && existingSiteSubnetParamsItems[listIdx].DHCP != nil {
 							return &SubnetEmptyModel{}
 						}
 						return nil
@@ -905,7 +991,7 @@ func (r *SubnetResource) Update(ctx context.Context, req resource.UpdateRequest,
 						return nil
 					}(),
 					StaticIP: func() *SubnetEmptyModel {
-						if !isImport && len(data.SiteSubnetParams) > listIdx && data.SiteSubnetParams[listIdx].StaticIP != nil {
+						if !isImport && len(existingSiteSubnetParamsItems) > listIdx && existingSiteSubnetParamsItems[listIdx].StaticIP != nil {
 							return &SubnetEmptyModel{}
 						}
 						return nil
@@ -919,7 +1005,14 @@ func (r *SubnetResource) Update(ctx context.Context, req resource.UpdateRequest,
 				})
 			}
 		}
-		data.SiteSubnetParams = site_subnet_paramsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: SubnetSiteSubnetParamsModelAttrTypes}, site_subnet_paramsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.SiteSubnetParams = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.SiteSubnetParams = types.ListNull(types.ObjectType{AttrTypes: SubnetSiteSubnetParamsModelAttrTypes})
 	}
 
 	psd := privatestate.NewPrivateStateData()

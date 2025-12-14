@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -54,14 +55,29 @@ type Ike2DhGroupSetModel struct {
 	DhGroups types.List `tfsdk:"dh_groups"`
 }
 
+// Ike2DhGroupSetModelAttrTypes defines the attribute types for Ike2DhGroupSetModel
+var Ike2DhGroupSetModelAttrTypes = map[string]attr.Type{
+	"dh_groups": types.ListType{ElemType: types.StringType},
+}
+
 // Ike2IKEKeylifetimeHoursModel represents ike_keylifetime_hours block
 type Ike2IKEKeylifetimeHoursModel struct {
 	Duration types.Int64 `tfsdk:"duration"`
 }
 
+// Ike2IKEKeylifetimeHoursModelAttrTypes defines the attribute types for Ike2IKEKeylifetimeHoursModel
+var Ike2IKEKeylifetimeHoursModelAttrTypes = map[string]attr.Type{
+	"duration": types.Int64Type,
+}
+
 // Ike2IKEKeylifetimeMinutesModel represents ike_keylifetime_minutes block
 type Ike2IKEKeylifetimeMinutesModel struct {
 	Duration types.Int64 `tfsdk:"duration"`
+}
+
+// Ike2IKEKeylifetimeMinutesModelAttrTypes defines the attribute types for Ike2IKEKeylifetimeMinutesModel
+var Ike2IKEKeylifetimeMinutesModelAttrTypes = map[string]attr.Type{
+	"duration": types.Int64Type,
 }
 
 type Ike2ResourceModel struct {
@@ -481,11 +497,17 @@ func (r *Ike2Resource) Read(ctx context.Context, req resource.ReadRequest, resp 
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

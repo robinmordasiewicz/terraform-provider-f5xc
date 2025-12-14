@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -56,6 +57,13 @@ type K8SClusterRoleBindingK8SClusterRoleModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// K8SClusterRoleBindingK8SClusterRoleModelAttrTypes defines the attribute types for K8SClusterRoleBindingK8SClusterRoleModel
+var K8SClusterRoleBindingK8SClusterRoleModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // K8SClusterRoleBindingSubjectsModel represents subjects block
 type K8SClusterRoleBindingSubjectsModel struct {
 	Group          types.String                                      `tfsdk:"group"`
@@ -63,10 +71,23 @@ type K8SClusterRoleBindingSubjectsModel struct {
 	ServiceAccount *K8SClusterRoleBindingSubjectsServiceAccountModel `tfsdk:"service_account"`
 }
 
+// K8SClusterRoleBindingSubjectsModelAttrTypes defines the attribute types for K8SClusterRoleBindingSubjectsModel
+var K8SClusterRoleBindingSubjectsModelAttrTypes = map[string]attr.Type{
+	"group":           types.StringType,
+	"user":            types.StringType,
+	"service_account": types.ObjectType{AttrTypes: K8SClusterRoleBindingSubjectsServiceAccountModelAttrTypes},
+}
+
 // K8SClusterRoleBindingSubjectsServiceAccountModel represents service_account block
 type K8SClusterRoleBindingSubjectsServiceAccountModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
+}
+
+// K8SClusterRoleBindingSubjectsServiceAccountModelAttrTypes defines the attribute types for K8SClusterRoleBindingSubjectsServiceAccountModel
+var K8SClusterRoleBindingSubjectsServiceAccountModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
 }
 
 type K8SClusterRoleBindingResourceModel struct {
@@ -79,7 +100,7 @@ type K8SClusterRoleBindingResourceModel struct {
 	ID             types.String                              `tfsdk:"id"`
 	Timeouts       timeouts.Value                            `tfsdk:"timeouts"`
 	K8SClusterRole *K8SClusterRoleBindingK8SClusterRoleModel `tfsdk:"k8s_cluster_role"`
-	Subjects       []K8SClusterRoleBindingSubjectsModel      `tfsdk:"subjects"`
+	Subjects       types.List                                `tfsdk:"subjects"`
 }
 
 func (r *K8SClusterRoleBindingResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -159,6 +180,9 @@ func (r *K8SClusterRoleBindingResource) Schema(ctx context.Context, req resource
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional:            true,
 						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
 					},
 				},
 			},
@@ -353,29 +377,34 @@ func (r *K8SClusterRoleBindingResource) Create(ctx context.Context, req resource
 		}
 		createReq.Spec["k8s_cluster_role"] = k8s_cluster_roleMap
 	}
-	if len(data.Subjects) > 0 {
-		var subjectsList []map[string]interface{}
-		for _, item := range data.Subjects {
-			itemMap := make(map[string]interface{})
-			if !item.Group.IsNull() && !item.Group.IsUnknown() {
-				itemMap["group"] = item.Group.ValueString()
-			}
-			if item.ServiceAccount != nil {
-				service_accountNestedMap := make(map[string]interface{})
-				if !item.ServiceAccount.Name.IsNull() && !item.ServiceAccount.Name.IsUnknown() {
-					service_accountNestedMap["name"] = item.ServiceAccount.Name.ValueString()
+	if !data.Subjects.IsNull() && !data.Subjects.IsUnknown() {
+		var subjectsItems []K8SClusterRoleBindingSubjectsModel
+		diags := data.Subjects.ElementsAs(ctx, &subjectsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(subjectsItems) > 0 {
+			var subjectsList []map[string]interface{}
+			for _, item := range subjectsItems {
+				itemMap := make(map[string]interface{})
+				if !item.Group.IsNull() && !item.Group.IsUnknown() {
+					itemMap["group"] = item.Group.ValueString()
 				}
-				if !item.ServiceAccount.Namespace.IsNull() && !item.ServiceAccount.Namespace.IsUnknown() {
-					service_accountNestedMap["namespace"] = item.ServiceAccount.Namespace.ValueString()
+				if item.ServiceAccount != nil {
+					service_accountNestedMap := make(map[string]interface{})
+					if !item.ServiceAccount.Name.IsNull() && !item.ServiceAccount.Name.IsUnknown() {
+						service_accountNestedMap["name"] = item.ServiceAccount.Name.ValueString()
+					}
+					if !item.ServiceAccount.Namespace.IsNull() && !item.ServiceAccount.Namespace.IsUnknown() {
+						service_accountNestedMap["namespace"] = item.ServiceAccount.Namespace.ValueString()
+					}
+					itemMap["service_account"] = service_accountNestedMap
 				}
-				itemMap["service_account"] = service_accountNestedMap
+				if !item.User.IsNull() && !item.User.IsUnknown() {
+					itemMap["user"] = item.User.ValueString()
+				}
+				subjectsList = append(subjectsList, itemMap)
 			}
-			if !item.User.IsNull() && !item.User.IsUnknown() {
-				itemMap["user"] = item.User.ValueString()
-			}
-			subjectsList = append(subjectsList, itemMap)
+			createReq.Spec["subjects"] = subjectsList
 		}
-		createReq.Spec["subjects"] = subjectsList
 	}
 
 	apiResource, err := r.client.CreateK8SClusterRoleBinding(ctx, createReq)
@@ -414,6 +443,10 @@ func (r *K8SClusterRoleBindingResource) Create(ctx context.Context, req resource
 	}
 	if listData, ok := apiResource.Spec["subjects"].([]interface{}); ok && len(listData) > 0 {
 		var subjectsList []K8SClusterRoleBindingSubjectsModel
+		var existingSubjectsItems []K8SClusterRoleBindingSubjectsModel
+		if !data.Subjects.IsNull() && !data.Subjects.IsUnknown() {
+			data.Subjects.ElementsAs(ctx, &existingSubjectsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -452,7 +485,14 @@ func (r *K8SClusterRoleBindingResource) Create(ctx context.Context, req resource
 				})
 			}
 		}
-		data.Subjects = subjectsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: K8SClusterRoleBindingSubjectsModelAttrTypes}, subjectsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Subjects = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Subjects = types.ListNull(types.ObjectType{AttrTypes: K8SClusterRoleBindingSubjectsModelAttrTypes})
 	}
 
 	psd := privatestate.NewPrivateStateData()
@@ -518,11 +558,17 @@ func (r *K8SClusterRoleBindingResource) Read(ctx context.Context, req resource.R
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -571,6 +617,10 @@ func (r *K8SClusterRoleBindingResource) Read(ctx context.Context, req resource.R
 	}
 	if listData, ok := apiResource.Spec["subjects"].([]interface{}); ok && len(listData) > 0 {
 		var subjectsList []K8SClusterRoleBindingSubjectsModel
+		var existingSubjectsItems []K8SClusterRoleBindingSubjectsModel
+		if !data.Subjects.IsNull() && !data.Subjects.IsUnknown() {
+			data.Subjects.ElementsAs(ctx, &existingSubjectsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -609,7 +659,14 @@ func (r *K8SClusterRoleBindingResource) Read(ctx context.Context, req resource.R
 				})
 			}
 		}
-		data.Subjects = subjectsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: K8SClusterRoleBindingSubjectsModelAttrTypes}, subjectsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Subjects = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Subjects = types.ListNull(types.ObjectType{AttrTypes: K8SClusterRoleBindingSubjectsModelAttrTypes})
 	}
 
 	// Preserve or set the managed marker for future Read operations
@@ -684,29 +741,34 @@ func (r *K8SClusterRoleBindingResource) Update(ctx context.Context, req resource
 		}
 		apiResource.Spec["k8s_cluster_role"] = k8s_cluster_roleMap
 	}
-	if len(data.Subjects) > 0 {
-		var subjectsList []map[string]interface{}
-		for _, item := range data.Subjects {
-			itemMap := make(map[string]interface{})
-			if !item.Group.IsNull() && !item.Group.IsUnknown() {
-				itemMap["group"] = item.Group.ValueString()
-			}
-			if item.ServiceAccount != nil {
-				service_accountNestedMap := make(map[string]interface{})
-				if !item.ServiceAccount.Name.IsNull() && !item.ServiceAccount.Name.IsUnknown() {
-					service_accountNestedMap["name"] = item.ServiceAccount.Name.ValueString()
+	if !data.Subjects.IsNull() && !data.Subjects.IsUnknown() {
+		var subjectsItems []K8SClusterRoleBindingSubjectsModel
+		diags := data.Subjects.ElementsAs(ctx, &subjectsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(subjectsItems) > 0 {
+			var subjectsList []map[string]interface{}
+			for _, item := range subjectsItems {
+				itemMap := make(map[string]interface{})
+				if !item.Group.IsNull() && !item.Group.IsUnknown() {
+					itemMap["group"] = item.Group.ValueString()
 				}
-				if !item.ServiceAccount.Namespace.IsNull() && !item.ServiceAccount.Namespace.IsUnknown() {
-					service_accountNestedMap["namespace"] = item.ServiceAccount.Namespace.ValueString()
+				if item.ServiceAccount != nil {
+					service_accountNestedMap := make(map[string]interface{})
+					if !item.ServiceAccount.Name.IsNull() && !item.ServiceAccount.Name.IsUnknown() {
+						service_accountNestedMap["name"] = item.ServiceAccount.Name.ValueString()
+					}
+					if !item.ServiceAccount.Namespace.IsNull() && !item.ServiceAccount.Namespace.IsUnknown() {
+						service_accountNestedMap["namespace"] = item.ServiceAccount.Namespace.ValueString()
+					}
+					itemMap["service_account"] = service_accountNestedMap
 				}
-				itemMap["service_account"] = service_accountNestedMap
+				if !item.User.IsNull() && !item.User.IsUnknown() {
+					itemMap["user"] = item.User.ValueString()
+				}
+				subjectsList = append(subjectsList, itemMap)
 			}
-			if !item.User.IsNull() && !item.User.IsUnknown() {
-				itemMap["user"] = item.User.ValueString()
-			}
-			subjectsList = append(subjectsList, itemMap)
+			apiResource.Spec["subjects"] = subjectsList
 		}
-		apiResource.Spec["subjects"] = subjectsList
 	}
 
 	_, err := r.client.UpdateK8SClusterRoleBinding(ctx, apiResource)
@@ -756,6 +818,10 @@ func (r *K8SClusterRoleBindingResource) Update(ctx context.Context, req resource
 	}
 	if listData, ok := apiResource.Spec["subjects"].([]interface{}); ok && len(listData) > 0 {
 		var subjectsList []K8SClusterRoleBindingSubjectsModel
+		var existingSubjectsItems []K8SClusterRoleBindingSubjectsModel
+		if !data.Subjects.IsNull() && !data.Subjects.IsUnknown() {
+			data.Subjects.ElementsAs(ctx, &existingSubjectsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -794,7 +860,14 @@ func (r *K8SClusterRoleBindingResource) Update(ctx context.Context, req resource
 				})
 			}
 		}
-		data.Subjects = subjectsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: K8SClusterRoleBindingSubjectsModelAttrTypes}, subjectsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Subjects = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Subjects = types.ListNull(types.ObjectType{AttrTypes: K8SClusterRoleBindingSubjectsModelAttrTypes})
 	}
 
 	psd := privatestate.NewPrivateStateData()

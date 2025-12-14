@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -60,16 +61,39 @@ type CloudCredentialsAWSAssumeRoleModel struct {
 	SessionTags          *CloudCredentialsEmptyModel `tfsdk:"session_tags"`
 }
 
+// CloudCredentialsAWSAssumeRoleModelAttrTypes defines the attribute types for CloudCredentialsAWSAssumeRoleModel
+var CloudCredentialsAWSAssumeRoleModelAttrTypes = map[string]attr.Type{
+	"custom_external_id":       types.StringType,
+	"duration_seconds":         types.Int64Type,
+	"role_arn":                 types.StringType,
+	"session_name":             types.StringType,
+	"external_id_is_optional":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"external_id_is_tenant_id": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"session_tags":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // CloudCredentialsAWSSecretKeyModel represents aws_secret_key block
 type CloudCredentialsAWSSecretKeyModel struct {
 	AccessKey types.String                                `tfsdk:"access_key"`
 	SecretKey *CloudCredentialsAWSSecretKeySecretKeyModel `tfsdk:"secret_key"`
 }
 
+// CloudCredentialsAWSSecretKeyModelAttrTypes defines the attribute types for CloudCredentialsAWSSecretKeyModel
+var CloudCredentialsAWSSecretKeyModelAttrTypes = map[string]attr.Type{
+	"access_key": types.StringType,
+	"secret_key": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // CloudCredentialsAWSSecretKeySecretKeyModel represents secret_key block
 type CloudCredentialsAWSSecretKeySecretKeyModel struct {
 	BlindfoldSecretInfo *CloudCredentialsAWSSecretKeySecretKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *CloudCredentialsAWSSecretKeySecretKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// CloudCredentialsAWSSecretKeySecretKeyModelAttrTypes defines the attribute types for CloudCredentialsAWSSecretKeySecretKeyModel
+var CloudCredentialsAWSSecretKeySecretKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: CloudCredentialsAWSSecretKeySecretKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: CloudCredentialsAWSSecretKeySecretKeyClearSecretInfoModelAttrTypes},
 }
 
 // CloudCredentialsAWSSecretKeySecretKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -79,10 +103,23 @@ type CloudCredentialsAWSSecretKeySecretKeyBlindfoldSecretInfoModel struct {
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// CloudCredentialsAWSSecretKeySecretKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for CloudCredentialsAWSSecretKeySecretKeyBlindfoldSecretInfoModel
+var CloudCredentialsAWSSecretKeySecretKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // CloudCredentialsAWSSecretKeySecretKeyClearSecretInfoModel represents clear_secret_info block
 type CloudCredentialsAWSSecretKeySecretKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// CloudCredentialsAWSSecretKeySecretKeyClearSecretInfoModelAttrTypes defines the attribute types for CloudCredentialsAWSSecretKeySecretKeyClearSecretInfoModel
+var CloudCredentialsAWSSecretKeySecretKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // CloudCredentialsAzureClientSecretModel represents azure_client_secret block
@@ -93,10 +130,24 @@ type CloudCredentialsAzureClientSecretModel struct {
 	ClientSecret   *CloudCredentialsAzureClientSecretClientSecretModel `tfsdk:"client_secret"`
 }
 
+// CloudCredentialsAzureClientSecretModelAttrTypes defines the attribute types for CloudCredentialsAzureClientSecretModel
+var CloudCredentialsAzureClientSecretModelAttrTypes = map[string]attr.Type{
+	"client_id":       types.StringType,
+	"subscription_id": types.StringType,
+	"tenant_id":       types.StringType,
+	"client_secret":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // CloudCredentialsAzureClientSecretClientSecretModel represents client_secret block
 type CloudCredentialsAzureClientSecretClientSecretModel struct {
 	BlindfoldSecretInfo *CloudCredentialsAzureClientSecretClientSecretBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *CloudCredentialsAzureClientSecretClientSecretClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// CloudCredentialsAzureClientSecretClientSecretModelAttrTypes defines the attribute types for CloudCredentialsAzureClientSecretClientSecretModel
+var CloudCredentialsAzureClientSecretClientSecretModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: CloudCredentialsAzureClientSecretClientSecretBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: CloudCredentialsAzureClientSecretClientSecretClearSecretInfoModelAttrTypes},
 }
 
 // CloudCredentialsAzureClientSecretClientSecretBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -106,10 +157,23 @@ type CloudCredentialsAzureClientSecretClientSecretBlindfoldSecretInfoModel struc
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// CloudCredentialsAzureClientSecretClientSecretBlindfoldSecretInfoModelAttrTypes defines the attribute types for CloudCredentialsAzureClientSecretClientSecretBlindfoldSecretInfoModel
+var CloudCredentialsAzureClientSecretClientSecretBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // CloudCredentialsAzureClientSecretClientSecretClearSecretInfoModel represents clear_secret_info block
 type CloudCredentialsAzureClientSecretClientSecretClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// CloudCredentialsAzureClientSecretClientSecretClearSecretInfoModelAttrTypes defines the attribute types for CloudCredentialsAzureClientSecretClientSecretClearSecretInfoModel
+var CloudCredentialsAzureClientSecretClientSecretClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // CloudCredentialsAzurePfxCertificateModel represents azure_pfx_certificate block
@@ -121,10 +185,25 @@ type CloudCredentialsAzurePfxCertificateModel struct {
 	Password       *CloudCredentialsAzurePfxCertificatePasswordModel `tfsdk:"password"`
 }
 
+// CloudCredentialsAzurePfxCertificateModelAttrTypes defines the attribute types for CloudCredentialsAzurePfxCertificateModel
+var CloudCredentialsAzurePfxCertificateModelAttrTypes = map[string]attr.Type{
+	"certificate_url": types.StringType,
+	"client_id":       types.StringType,
+	"subscription_id": types.StringType,
+	"tenant_id":       types.StringType,
+	"password":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // CloudCredentialsAzurePfxCertificatePasswordModel represents password block
 type CloudCredentialsAzurePfxCertificatePasswordModel struct {
 	BlindfoldSecretInfo *CloudCredentialsAzurePfxCertificatePasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *CloudCredentialsAzurePfxCertificatePasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// CloudCredentialsAzurePfxCertificatePasswordModelAttrTypes defines the attribute types for CloudCredentialsAzurePfxCertificatePasswordModel
+var CloudCredentialsAzurePfxCertificatePasswordModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: CloudCredentialsAzurePfxCertificatePasswordBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: CloudCredentialsAzurePfxCertificatePasswordClearSecretInfoModelAttrTypes},
 }
 
 // CloudCredentialsAzurePfxCertificatePasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -134,10 +213,23 @@ type CloudCredentialsAzurePfxCertificatePasswordBlindfoldSecretInfoModel struct 
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// CloudCredentialsAzurePfxCertificatePasswordBlindfoldSecretInfoModelAttrTypes defines the attribute types for CloudCredentialsAzurePfxCertificatePasswordBlindfoldSecretInfoModel
+var CloudCredentialsAzurePfxCertificatePasswordBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // CloudCredentialsAzurePfxCertificatePasswordClearSecretInfoModel represents clear_secret_info block
 type CloudCredentialsAzurePfxCertificatePasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// CloudCredentialsAzurePfxCertificatePasswordClearSecretInfoModelAttrTypes defines the attribute types for CloudCredentialsAzurePfxCertificatePasswordClearSecretInfoModel
+var CloudCredentialsAzurePfxCertificatePasswordClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // CloudCredentialsGCPCredFileModel represents gcp_cred_file block
@@ -145,10 +237,21 @@ type CloudCredentialsGCPCredFileModel struct {
 	CredentialFile *CloudCredentialsGCPCredFileCredentialFileModel `tfsdk:"credential_file"`
 }
 
+// CloudCredentialsGCPCredFileModelAttrTypes defines the attribute types for CloudCredentialsGCPCredFileModel
+var CloudCredentialsGCPCredFileModelAttrTypes = map[string]attr.Type{
+	"credential_file": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // CloudCredentialsGCPCredFileCredentialFileModel represents credential_file block
 type CloudCredentialsGCPCredFileCredentialFileModel struct {
 	BlindfoldSecretInfo *CloudCredentialsGCPCredFileCredentialFileBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *CloudCredentialsGCPCredFileCredentialFileClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// CloudCredentialsGCPCredFileCredentialFileModelAttrTypes defines the attribute types for CloudCredentialsGCPCredFileCredentialFileModel
+var CloudCredentialsGCPCredFileCredentialFileModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: CloudCredentialsGCPCredFileCredentialFileBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: CloudCredentialsGCPCredFileCredentialFileClearSecretInfoModelAttrTypes},
 }
 
 // CloudCredentialsGCPCredFileCredentialFileBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -158,10 +261,23 @@ type CloudCredentialsGCPCredFileCredentialFileBlindfoldSecretInfoModel struct {
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// CloudCredentialsGCPCredFileCredentialFileBlindfoldSecretInfoModelAttrTypes defines the attribute types for CloudCredentialsGCPCredFileCredentialFileBlindfoldSecretInfoModel
+var CloudCredentialsGCPCredFileCredentialFileBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // CloudCredentialsGCPCredFileCredentialFileClearSecretInfoModel represents clear_secret_info block
 type CloudCredentialsGCPCredFileCredentialFileClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// CloudCredentialsGCPCredFileCredentialFileClearSecretInfoModelAttrTypes defines the attribute types for CloudCredentialsGCPCredFileCredentialFileClearSecretInfoModel
+var CloudCredentialsGCPCredFileCredentialFileClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 type CloudCredentialsResourceModel struct {
@@ -945,11 +1061,17 @@ func (r *CloudCredentialsResource) Read(ctx context.Context, req resource.ReadRe
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

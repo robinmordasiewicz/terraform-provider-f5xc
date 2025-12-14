@@ -140,8 +140,11 @@ jobs:
           go-version-file: ${{ inputs.go-version-file }}
           cache: true
 
+      - name: Install golangci-lint
+        run: |
+          # Install golangci-lint binary directly (no Node.js dependencies)
+          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/HEAD/install.sh | sh -s -- -b $(go env GOPATH)/bin
+          echo "$(go env GOPATH)/bin" >> $GITHUB_PATH
+
       - name: Run golangci-lint
-        uses: golangci/golangci-lint-action@v9
-        with:
-          version: latest
-          args: --timeout=5m ./internal/... .
+        run: golangci-lint run --timeout=5m ./internal/... .

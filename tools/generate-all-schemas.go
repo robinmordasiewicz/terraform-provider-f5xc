@@ -115,6 +115,7 @@ type ResourceTemplate struct {
 	UsesBoolPlanModifier   bool   // True if any bool attribute uses a plan modifier
 	UsesInt64PlanModifier  bool   // True if any int64 attribute uses a plan modifier
 	UsesStringPlanModifier bool   // True if any string attribute uses a plan modifier
+	HasBlocks              bool   // True if the resource has any nested blocks
 }
 
 type GenerationResult struct {
@@ -589,6 +590,10 @@ func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTe
 	// Scan attributes to determine which plan modifier imports are needed
 	usesBool, usesInt64, usesString := scanPlanModifierUsage(attributes)
 
+	// Check if the resource has any nested models that would generate AttrTypes
+	// AttrTypes (which use attr.Type) are generated for any block with nested attributes
+	hasBlocks := hasNestedModelsWithAttrTypes(attributes)
+
 	return &ResourceTemplate{
 		Name:                   resourceName,
 		TitleCase:              toTitleCase(resourceName),
@@ -604,7 +609,25 @@ func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTe
 		UsesBoolPlanModifier:   usesBool,
 		UsesInt64PlanModifier:  usesInt64,
 		UsesStringPlanModifier: usesString,
+		HasBlocks:              hasBlocks,
 	}, nil
+}
+
+// hasNestedModelsWithAttrTypes checks recursively if any nested blocks would generate AttrTypes
+// This is needed to determine if the attr import is required
+// AttrTypes are generated for any nested model that has ANY nested attributes (block or non-block)
+func hasNestedModelsWithAttrTypes(attributes []TerraformAttribute) bool {
+	for _, attr := range attributes {
+		if attr.IsBlock {
+			// If this block has ANY nested attributes, AttrTypes will be generated for it
+			if len(attr.NestedAttributes) > 0 {
+				return true
+			}
+			// Note: Even if NestedAttributes is empty, we don't need to recurse
+			// because empty blocks use EmptyModel which doesn't have AttrTypes
+		}
+	}
+	return false
 }
 
 // scanPlanModifierUsage recursively scans attributes to determine which plan modifier imports are needed
@@ -869,10 +892,12 @@ func extractNestedAttributes(schema SchemaDefinition, spec *OpenAPI3Spec, depth 
 		// The API always returns these values even when not specified in config,
 		// which causes state drift if not marked as Computed.
 		// Object Reference types have pattern: kind, name, namespace, tenant, uid
+		// Using UseStateForUnknown plan modifier prevents perpetual drift.
 		propNameLower := strings.ToLower(propName)
 		if (propNameLower == "tenant" || propNameLower == "uid" || propNameLower == "kind") && !attr.Required {
 			attr.Computed = true
 			attr.Optional = true
+			attr.PlanModifier = "UseStateForUnknown"
 		}
 
 		attrs = append(attrs, attr)
@@ -1781,17 +1806,17 @@ func getGoClientType(attr TerraformAttribute) string {
 }
 
 // renderSpecMarshalCodeForCreate generates Go code for Create (uses "createReq" variable)
-func renderSpecMarshalCodeForCreate(attrs []TerraformAttribute, indent string) string {
-	return renderSpecMarshalCodeWithVar(attrs, indent, "createReq")
+func renderSpecMarshalCodeForCreate(attrs []TerraformAttribute, indent string, resourceTitleCase string) string {
+	return renderSpecMarshalCodeWithVar(attrs, indent, "createReq", resourceTitleCase)
 }
 
 // renderSpecMarshalCode generates Go code to marshal spec fields from Terraform state to API struct (uses "apiResource" variable)
-func renderSpecMarshalCode(attrs []TerraformAttribute, indent string) string {
-	return renderSpecMarshalCodeWithVar(attrs, indent, "apiResource")
+func renderSpecMarshalCode(attrs []TerraformAttribute, indent string, resourceTitleCase string) string {
+	return renderSpecMarshalCodeWithVar(attrs, indent, "apiResource", resourceTitleCase)
 }
 
 // renderSpecMarshalCodeWithVar generates Go code to marshal spec fields with configurable variable name
-func renderSpecMarshalCodeWithVar(attrs []TerraformAttribute, indent string, varName string) string {
+func renderSpecMarshalCodeWithVar(attrs []TerraformAttribute, indent string, varName string, resourceTitleCase string) string {
 	specFields := filterSpecFields(attrs)
 	if len(specFields) == 0 {
 		return ""
@@ -1823,14 +1848,19 @@ func renderSpecMarshalCodeWithVar(attrs []TerraformAttribute, indent string, var
 					}
 				}
 
-				sb.WriteString(fmt.Sprintf("%sif len(data.%s) > 0 {\n", indent, fieldName))
-				sb.WriteString(fmt.Sprintf("%s\tvar %sList []map[string]interface{}\n", indent, tfsdkName))
+				// Extract types.List to Go slice for iteration
+				sb.WriteString(fmt.Sprintf("%sif !data.%s.IsNull() && !data.%s.IsUnknown() {\n", indent, fieldName, fieldName))
+				sb.WriteString(fmt.Sprintf("%s\tvar %sItems []%s%sModel\n", indent, tfsdkName, resourceTitleCase, attr.GoName))
+				sb.WriteString(fmt.Sprintf("%s\tdiags := data.%s.ElementsAs(ctx, &%sItems, false)\n", indent, fieldName, tfsdkName))
+				sb.WriteString(fmt.Sprintf("%s\tresp.Diagnostics.Append(diags...)\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\tif !resp.Diagnostics.HasError() && len(%sItems) > 0 {\n", indent, tfsdkName))
+				sb.WriteString(fmt.Sprintf("%s\t\tvar %sList []map[string]interface{}\n", indent, tfsdkName))
 				if needsItemVar {
-					sb.WriteString(fmt.Sprintf("%s\tfor _, item := range data.%s {\n", indent, fieldName))
+					sb.WriteString(fmt.Sprintf("%s\t\tfor _, item := range %sItems {\n", indent, tfsdkName))
 				} else {
-					sb.WriteString(fmt.Sprintf("%s\tfor range data.%s {\n", indent, fieldName))
+					sb.WriteString(fmt.Sprintf("%s\t\tfor range %sItems {\n", indent, tfsdkName))
 				}
-				sb.WriteString(fmt.Sprintf("%s\t\titemMap := make(map[string]interface{})\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\t\t\titemMap := make(map[string]interface{})\n", indent))
 				// Marshal nested block fields
 				for _, nestedAttr := range attr.NestedAttributes {
 					nestedFieldName := nestedAttr.GoName
@@ -2040,9 +2070,10 @@ func renderSpecMarshalCodeWithVar(attrs []TerraformAttribute, indent string, var
 						sb.WriteString(fmt.Sprintf("%s\t\t}\n", indent))
 					}
 				}
-				sb.WriteString(fmt.Sprintf("%s\t\t%sList = append(%sList, itemMap)\n", indent, tfsdkName, tfsdkName))
+				sb.WriteString(fmt.Sprintf("%s\t\t\t%sList = append(%sList, itemMap)\n", indent, tfsdkName, tfsdkName))
+				sb.WriteString(fmt.Sprintf("%s\t\t}\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\t\t%s.Spec[\"%s\"] = %sList\n", indent, varName, jsonName, tfsdkName))
 				sb.WriteString(fmt.Sprintf("%s\t}\n", indent))
-				sb.WriteString(fmt.Sprintf("%s\t%s.Spec[\"%s\"] = %sList\n", indent, varName, jsonName, tfsdkName))
 				sb.WriteString(fmt.Sprintf("%s}\n", indent))
 				continue
 			}
@@ -2370,6 +2401,11 @@ func renderSpecUnmarshalCode(attrs []TerraformAttribute, indent string, resource
 
 				sb.WriteString(fmt.Sprintf("%sif listData, ok := apiResource.Spec[\"%s\"].([]interface{}); ok && len(listData) > 0 {\n", indent, jsonName))
 				sb.WriteString(fmt.Sprintf("%s\tvar %sList []%s%sModel\n", indent, tfsdkName, resourceTitleCase, attr.GoName))
+				// Extract current state's types.List to Go slice for preserving empty blocks
+				sb.WriteString(fmt.Sprintf("%s\tvar existing%sItems []%s%sModel\n", indent, attr.GoName, resourceTitleCase, attr.GoName))
+				sb.WriteString(fmt.Sprintf("%s\tif !data.%s.IsNull() && !data.%s.IsUnknown() {\n", indent, attr.GoName, attr.GoName))
+				sb.WriteString(fmt.Sprintf("%s\t\tdata.%s.ElementsAs(ctx, &existing%sItems, false)\n", indent, attr.GoName, attr.GoName))
+				sb.WriteString(fmt.Sprintf("%s\t}\n", indent))
 				if needsItemMap {
 					sb.WriteString(fmt.Sprintf("%s\tfor listIdx, item := range listData {\n", indent))
 					sb.WriteString(fmt.Sprintf("%s\t\t_ = listIdx // May be unused if no empty marker blocks in list item\n", indent))
@@ -2395,8 +2431,9 @@ func renderSpecUnmarshalCode(attrs []TerraformAttribute, indent string, resource
 							// These "marker" blocks (like labels, endpoint_subsets, sni, tcp, etc.) should only
 							// be in state if explicitly configured. We don't read from API as it doesn't return them.
 							// Instead, we check if the user configured this block in the original state and preserve it.
+							// Use extracted existingXxxItems slice instead of data.Xxx (which is now types.List)
 							sb.WriteString(fmt.Sprintf("%s\t\t\t\t%s: func() *%sEmptyModel {\n", indent, nestedFieldName, resourceTitleCase))
-							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\tif !isImport && len(data.%s) > listIdx && data.%s[listIdx].%s != nil {\n", indent, attr.GoName, attr.GoName, nestedFieldName))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\tif !isImport && len(existing%sItems) > listIdx && existing%sItems[listIdx].%s != nil {\n", indent, attr.GoName, attr.GoName, nestedFieldName))
 							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\treturn &%sEmptyModel{}\n", indent, resourceTitleCase))
 							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t}\n", indent))
 							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\treturn nil\n", indent))
@@ -2435,9 +2472,10 @@ func renderSpecUnmarshalCode(attrs []TerraformAttribute, indent string, resource
 								}
 								// Handle deeply nested empty blocks (e.g., allow{}, deny{} within action{} within rules[])
 								// These are marker blocks that don't come back from API, so preserve from existing state
+								// Use extracted existingXxxItems slice instead of data.Xxx (which is now types.List)
 								if deepAttr.IsBlock && len(deepAttr.NestedAttributes) == 0 {
 									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t%s: func() *%sEmptyModel {\n", indent, deepFieldName, resourceTitleCase))
-									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\tif !isImport && len(data.%s) > listIdx && data.%s[listIdx].%s != nil && data.%s[listIdx].%s.%s != nil {\n", indent, attr.GoName, attr.GoName, nestedAttr.GoName, attr.GoName, nestedAttr.GoName, deepFieldName))
+									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\tif !isImport && len(existing%sItems) > listIdx && existing%sItems[listIdx].%s != nil && existing%sItems[listIdx].%s.%s != nil {\n", indent, attr.GoName, attr.GoName, nestedAttr.GoName, attr.GoName, nestedAttr.GoName, deepFieldName))
 									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\treturn &%sEmptyModel{}\n", indent, resourceTitleCase))
 									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t}\n", indent))
 									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\treturn nil\n", indent))
@@ -2620,7 +2658,15 @@ func renderSpecUnmarshalCode(attrs []TerraformAttribute, indent string, resource
 				sb.WriteString(fmt.Sprintf("%s\t\t\t})\n", indent))
 				sb.WriteString(fmt.Sprintf("%s\t\t}\n", indent))
 				sb.WriteString(fmt.Sprintf("%s\t}\n", indent))
-				sb.WriteString(fmt.Sprintf("%s\tdata.%s = %sList\n", indent, fieldName, tfsdkName))
+				// Convert Go slice to types.List for proper unknown value handling
+				sb.WriteString(fmt.Sprintf("%s\tlistVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: %s%sModelAttrTypes}, %sList)\n", indent, resourceTitleCase, attr.GoName, tfsdkName))
+				sb.WriteString(fmt.Sprintf("%s\tresp.Diagnostics.Append(diags...)\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\tif !resp.Diagnostics.HasError() {\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\t\tdata.%s = listVal\n", indent, fieldName))
+				sb.WriteString(fmt.Sprintf("%s\t}\n", indent))
+				sb.WriteString(fmt.Sprintf("%s} else {\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\t// No data from API - set to null list\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\tdata.%s = types.ListNull(types.ObjectType{AttrTypes: %s%sModelAttrTypes})\n", indent, fieldName, resourceTitleCase, attr.GoName))
 				sb.WriteString(fmt.Sprintf("%s}\n", indent))
 				continue
 			}
@@ -3170,6 +3216,13 @@ func renderNestedAttributes(attrs []TerraformAttribute, indent string) string {
 			}
 		}
 
+		// Add PlanModifiers for attributes that need UseStateForUnknown (e.g., tenant, uid, kind in nested blocks)
+		if attr.PlanModifier != "" && attr.Type == "string" {
+			sb.WriteString(fmt.Sprintf("%s\t\tPlanModifiers: []planmodifier.String{\n", indent))
+			sb.WriteString(fmt.Sprintf("%s\t\t\tstringplanmodifier.UseStateForUnknown(),\n", indent))
+			sb.WriteString(fmt.Sprintf("%s\t\t},\n", indent))
+		}
+
 		if attr.Type == "map" || attr.Type == "list" {
 			// Map ElementType to Terraform attr type
 			elementTfType := "types.StringType"
@@ -3326,11 +3379,91 @@ func renderNestedModelTypes(resourceTitleCase string, attrs []TerraformAttribute
 				nestedTypeName = resourceTitleCase + "EmptyModel"
 			}
 
-			// For list nested blocks, use slice type; for single, use pointer
+			// For nested blocks within other models, use Go slices/pointers (not types.List)
+			// The types.List migration only applies to TOP-LEVEL blocks on the ResourceModel
+			// because those are the ones that can be dynamically set to unknown during planning.
+			// Nested blocks inside other blocks are already within a known structure.
 			if attr.NestedBlockType == "list" {
 				sb.WriteString(fmt.Sprintf("\t%s []%s `tfsdk:\"%s\"`\n", attr.GoName, nestedTypeName, attr.TfsdkTag))
 			} else {
 				sb.WriteString(fmt.Sprintf("\t%s *%s `tfsdk:\"%s\"`\n", attr.GoName, nestedTypeName, attr.TfsdkTag))
+			}
+		}
+
+		sb.WriteString("}\n\n")
+
+		// Generate AttrTypes map for this model (needed for types.List conversion)
+		sb.WriteString(fmt.Sprintf("// %sAttrTypes defines the attribute types for %s\n", model.TypeName, model.TypeName))
+		sb.WriteString(fmt.Sprintf("var %sAttrTypes = map[string]attr.Type{\n", model.TypeName))
+
+		// Generate attr.Type for non-block attributes
+		for _, attr := range model.Attributes {
+			if attr.IsBlock {
+				continue
+			}
+			var attrType string
+			switch attr.Type {
+			case "string":
+				attrType = "types.StringType"
+			case "int64":
+				attrType = "types.Int64Type"
+			case "bool":
+				attrType = "types.BoolType"
+			case "map":
+				attrType = "types.MapType{ElemType: types.StringType}"
+			case "list":
+				elemType := "types.StringType"
+				switch attr.ElementType {
+				case "int64":
+					elemType = "types.Int64Type"
+				case "bool":
+					elemType = "types.BoolType"
+				}
+				attrType = fmt.Sprintf("types.ListType{ElemType: %s}", elemType)
+			default:
+				attrType = "types.StringType"
+			}
+			sb.WriteString(fmt.Sprintf("\t\"%s\": %s,\n", attr.TfsdkTag, attrType))
+		}
+
+		// Generate attr.Type for block attributes
+		for _, attr := range model.Attributes {
+			if !attr.IsBlock {
+				continue
+			}
+
+			// Check if this nested block is empty (has no non-block attributes)
+			// A block is considered "empty" if it has no nested attributes OR all nested attributes are blocks themselves
+			isNestedEmpty := len(attr.NestedAttributes) == 0
+			if !isNestedEmpty {
+				hasNonBlockAttrs := false
+				for _, nested := range attr.NestedAttributes {
+					if !nested.IsBlock {
+						hasNonBlockAttrs = true
+						break
+					}
+				}
+				// If there are no non-block attributes, treat as empty (uses EmptyModel)
+				isNestedEmpty = !hasNonBlockAttrs
+			}
+
+			if isNestedEmpty {
+				// Empty nested block - use inline empty map
+				if attr.NestedBlockType == "list" {
+					sb.WriteString(fmt.Sprintf("\t\"%s\": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},\n", attr.TfsdkTag))
+				} else {
+					sb.WriteString(fmt.Sprintf("\t\"%s\": types.ObjectType{AttrTypes: map[string]attr.Type{}},\n", attr.TfsdkTag))
+				}
+			} else {
+				// Non-empty nested block - reference its AttrTypes variable
+				nestedAttrTypesName := resourceTitleCase + model.Prefix + toTitleCase(attr.TfsdkTag) + "ModelAttrTypes"
+				if attr.NestedBlockType == "list" {
+					// ListNestedBlock → types.ListType{ElemType: types.ObjectType{AttrTypes: ...}}
+					sb.WriteString(fmt.Sprintf("\t\"%s\": types.ListType{ElemType: types.ObjectType{AttrTypes: %s}},\n", attr.TfsdkTag, nestedAttrTypesName))
+				} else {
+					// SingleNestedBlock → types.ObjectType{AttrTypes: ...}
+					sb.WriteString(fmt.Sprintf("\t\"%s\": types.ObjectType{AttrTypes: %s},\n", attr.TfsdkTag, nestedAttrTypesName))
+				}
 			}
 		}
 
@@ -3377,9 +3510,11 @@ func renderBlockFields(resourceTitleCase string, attrs []TerraformAttribute) str
 			typeName = resourceTitleCase + "EmptyModel"
 		}
 
-		// For list nested blocks, use slice type; for single, use pointer
+		// For list nested blocks, use types.List to properly handle unknown values during planning.
+		// Go slices cannot represent "unknown" state, causing errors with dynamic blocks.
+		// For single nested blocks, use pointer type.
 		if attr.NestedBlockType == "list" {
-			sb.WriteString(fmt.Sprintf("\t%s []%s `tfsdk:\"%s\"`\n", attr.GoName, typeName, attr.TfsdkTag))
+			sb.WriteString(fmt.Sprintf("\t%s types.List `tfsdk:\"%s\"`\n", attr.GoName, attr.TfsdkTag))
 		} else {
 			sb.WriteString(fmt.Sprintf("\t%s *%s `tfsdk:\"%s\"`\n", attr.GoName, typeName, attr.TfsdkTag))
 		}
@@ -3796,6 +3931,9 @@ import (
 {{- end}}
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+{{- if .HasBlocks}}
+	"github.com/hashicorp/terraform-plugin-framework/attr"
+{{- end}}
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
@@ -4063,7 +4201,7 @@ func (r *{{.TitleCase}}Resource) Create(ctx context.Context, req resource.Create
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-{{renderSpecMarshalCodeForCreate .Attributes "\t"}}
+{{renderSpecMarshalCodeForCreate .Attributes "\t" .TitleCase}}
 
 	apiResource, err := r.client.Create{{.TitleCase}}(ctx, createReq)
 	if err != nil {
@@ -4146,11 +4284,17 @@ func (r *{{.TitleCase}}Resource) Read(ctx context.Context, req resource.ReadRequ
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -4236,7 +4380,7 @@ func (r *{{.TitleCase}}Resource) Update(ctx context.Context, req resource.Update
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-{{renderSpecMarshalCode .Attributes "\t"}}
+{{renderSpecMarshalCode .Attributes "\t" .TitleCase}}
 
 	_, err := r.client.Update{{.TitleCase}}(ctx, apiResource)
 	if err != nil {
@@ -4530,11 +4674,17 @@ func (d *{{.TitleCase}}DataSource) Read(ctx context.Context, req datasource.Read
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(resource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, resource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(resource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

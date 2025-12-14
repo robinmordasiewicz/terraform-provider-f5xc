@@ -8,6 +8,8 @@
 package main
 
 import (
+	"crypto/md5"
+	"encoding/hex"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -524,13 +526,19 @@ func transformAnchorsOnly(filePath string, content string) error {
 	// Match both formats:
 	// - Old format: `name` - (Required/Optional) ...
 	// - New format: &#x2022; [`name`](#anchor) - Required/Optional ...
-	attrLineRegex := regexp.MustCompile("^(&#x2022; )?\\[?`[^`]+`\\]?.* - (Required|Optional)")
+	// - Combined format: <a id="..."></a>&#x2022; [`name`](#anchor) - Required/Optional ... (anchor + attr on same line)
+	attrLineRegex := regexp.MustCompile("(&#x2022;|\\[\\`)[^`]+`\\]?.* - (Required|Optional)")
 	var currentAnchor string
 
 	for _, line := range lines {
 		if m := anchorRegex.FindStringSubmatch(line); m != nil {
 			currentAnchor = m[1]
 			allAnchors[currentAnchor] = true
+			// Also check if attribute content is on the SAME line as the anchor
+			// This handles the combined format: <a id="name"></a>&#x2022; [`name`](#name) - Required String...
+			if attrLineRegex.MatchString(line) {
+				anchorsWithContent[currentAnchor] = true
+			}
 		} else if m := h4HeaderRegex.FindStringSubmatch(line); m != nil {
 			// H4 header found - derive anchor from header text
 			// "#### CORS Policy" → "cors-policy"
@@ -567,50 +575,23 @@ func transformAnchorsOnly(filePath string, content string) error {
 				line = fmt.Sprintf(`<a id="%s"></a>`, anchorName)
 			}
 
-			// Skip empty anchors and their headers
-			if !anchorsWithContent[anchorName] {
-				skipUntilNextAnchor = true
-				// Also skip the next line if it's a header
-				if i+1 < len(lines) && strings.HasPrefix(lines[i+1], "###") {
-					i++ // Skip the header line
-				}
-				// Also skip following blank lines
-				for i+1 < len(lines) && strings.TrimSpace(lines[i+1]) == "" {
-					i++
-				}
-				continue
-			}
-
-			skipUntilNextAnchor = false
-			// Skip writing raw HTML anchor tags - they don't work on Terraform Registry
-			// The H4 headers generated in processNestedBlocks will create proper anchors
-			continue
+			// NOTE: Empty anchor filtering disabled (Issue #287 fix)
+			// The previous logic incorrectly identified most anchors as "empty" due to
+			// format changes where anchor tags and attribute descriptions are on the same line.
+			// This caused catastrophic content loss (99%+ of documentation removed).
+			// All content is now preserved. Future optimization should use a more robust
+			// detection method that properly handles:
+			// - Combined format: <a id="..."></a>&#x2022; [`attr`](#...) - Required/Optional...
+			// - H4 headers: #### Block Name
+			// - Context lines: An [`block`](#anchor) block supports the following:
+			_ = anchorsWithContent // suppress unused warning - kept for future optimization
+			_ = skipUntilNextAnchor
 		}
 
-		// Skip content of empty blocks
-		if skipUntilNextAnchor {
-			continue
-		}
-
-		// Process attribute lines to update or remove anchor links
-		// Single-page mode: all anchors are in same file, remove links to empty anchors
-		if attrLineRegex.MatchString(line) {
-			if m := seeRefRegex.FindStringSubmatch(line); m != nil {
-				anchorRef := m[2]
-
-				if anchorsWithContent[anchorRef] {
-					// Anchor exists in this file with content - keep link as is
-				} else {
-					// Anchor doesn't exist or is empty - remove the link
-					line = seeRefRegex.ReplaceAllString(line, "")
-					line = strings.TrimSpace(line)
-					// Ensure proper ending punctuation
-					if !strings.HasSuffix(line, ".") && !strings.HasSuffix(line, ")") {
-						line = line + "."
-					}
-				}
-			}
-		}
+		// NOTE: Link removal for "empty" anchors disabled (Issue #287 fix)
+		// All "See ... below" links are now preserved since the anchorsWithContent
+		// detection was unreliable. This ensures no navigation links are incorrectly removed.
+		_ = seeRefRegex // suppress unused warning
 
 		output.WriteString(line)
 		output.WriteString("\n")
@@ -636,8 +617,12 @@ func transformAnchorsOnly(filePath string, content string) error {
 	// Enhance Timeouts section with default values (Azure RM gold standard)
 	result = enhanceTimeoutsSection(result, resourceName)
 
-	// Normalize blank lines and write
+	// Normalize blank lines
 	result = normalizeBlankLines(result)
+
+	// Compress long anchor IDs to reduce document size (Issue #287)
+	result = compressAnchors(result)
+
 	return os.WriteFile(filePath, []byte(result), 0644)
 }
 
@@ -1541,6 +1526,9 @@ func transformDoc(filePath string) error {
 	// Normalize multiple consecutive blank lines to single blank lines
 	result := normalizeBlankLines(output.String())
 
+	// Compress long anchor IDs to reduce document size (Issue #287)
+	result = compressAnchors(result)
+
 	// Convert plain backticked context lines to clickable links
 	result = convertContextLinesToLinks(result)
 
@@ -1589,6 +1577,82 @@ func normalizeBlankLines(content string) string {
 	content = strings.TrimRight(content, "\n") + "\n"
 
 	return content
+}
+
+// anchorCompressionThreshold is the minimum length for an anchor to be compressed.
+// Anchors shorter than this are left as-is to avoid unnecessary complexity.
+const anchorCompressionThreshold = 40
+
+// compressAnchors shortens long anchor IDs to reduce document size.
+// Long nested block anchors like "api-specification-validation-all-spec-endpoints-..."
+// are compressed to "last-segment-hash" format (e.g., "context-a3f2e1").
+//
+// This preserves the last path segment for human readability while adding
+// a 6-character hash of the full path for uniqueness.
+func compressAnchors(content string) string {
+	// Find all anchor IDs in the document
+	anchorRegex := regexp.MustCompile(`<a id="([^"]+)"></a>`)
+	linkRegex := regexp.MustCompile(`\(#([^)]+)\)`)
+
+	// Build a map of long anchors to their compressed versions
+	anchorMap := make(map[string]string)
+
+	// First pass: identify long anchors and create compressed versions
+	matches := anchorRegex.FindAllStringSubmatch(content, -1)
+	for _, match := range matches {
+		anchor := match[1]
+		if len(anchor) >= anchorCompressionThreshold {
+			compressed := compressAnchorID(anchor)
+			anchorMap[anchor] = compressed
+		}
+	}
+
+	// If no anchors need compression, return unchanged
+	if len(anchorMap) == 0 {
+		return content
+	}
+
+	// Second pass: replace all occurrences of long anchors
+	// Replace in anchor definitions
+	for original, compressed := range anchorMap {
+		// Replace <a id="original"></a> with <a id="compressed"></a>
+		oldDef := fmt.Sprintf(`<a id="%s"></a>`, original)
+		newDef := fmt.Sprintf(`<a id="%s"></a>`, compressed)
+		content = strings.ReplaceAll(content, oldDef, newDef)
+
+		// Replace (#original) links with (#compressed)
+		oldLink := fmt.Sprintf(`(#%s)`, original)
+		newLink := fmt.Sprintf(`(#%s)`, compressed)
+		content = strings.ReplaceAll(content, oldLink, newLink)
+	}
+
+	// Suppress unused variable warnings for regex patterns used in documentation
+	_ = linkRegex
+
+	return content
+}
+
+// compressAnchorID creates a compressed anchor ID from a long path.
+// Format: last-segment-HASH where HASH is 6 characters of MD5.
+// Example: "api-specification-validation-...-context" -> "context-a3f2e1"
+func compressAnchorID(anchor string) string {
+	// Split by hyphens to get path segments
+	segments := strings.Split(anchor, "-")
+
+	// Get the last segment (attribute name)
+	lastSegment := segments[len(segments)-1]
+
+	// For very short last segments (like single letters), include more context
+	if len(lastSegment) < 3 && len(segments) > 1 {
+		// Include last two segments
+		lastSegment = segments[len(segments)-2] + "-" + segments[len(segments)-1]
+	}
+
+	// Generate MD5 hash of full anchor for uniqueness
+	hash := md5.Sum([]byte(anchor))
+	hashStr := hex.EncodeToString(hash[:])[:6] // First 6 chars
+
+	return fmt.Sprintf("%s-%s", lastSegment, hashStr)
 }
 
 // escapeHTMLTagsInContent applies HTML tag escaping to full document content.

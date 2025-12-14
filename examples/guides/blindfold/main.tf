@@ -15,9 +15,9 @@ terraform {
 
 provider "f5xc" {
   # Authentication configured via environment variables:
-  # - VES_API_URL (required)
-  # - VES_API_TOKEN (token auth) OR
-  # - VES_P12_FILE + VES_P12_PASSWORD (P12 cert auth)
+  # - F5XC_API_URL (required)
+  # - F5XC_API_TOKEN (token auth) OR
+  # - F5XC_P12_FILE + F5XC_P12_PASSWORD (P12 cert auth)
 }
 
 # -----------------------------------------------------------------------------

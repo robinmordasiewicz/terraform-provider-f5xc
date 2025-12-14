@@ -20,7 +20,7 @@ import (
 )
 
 var (
-	// globalMockServer is a shared mock server for all tests when VES_MOCK_MODE is set
+	// globalMockServer is a shared mock server for all tests when F5XC_MOCK_MODE is set
 	globalMockServer     *mocks.Server
 	globalMockServerOnce sync.Once
 	globalMockServerMu   sync.Mutex
@@ -69,12 +69,12 @@ func SetupMockTest(t *testing.T) *MockTestConfig {
 	server := mocks.NewServer()
 
 	// Save original environment
-	originalURL := os.Getenv("VES_API_URL")
-	originalToken := os.Getenv("VES_API_TOKEN")
+	originalURL := os.Getenv("F5XC_API_URL")
+	originalToken := os.Getenv("F5XC_API_TOKEN")
 
 	// Configure environment to point to mock server
-	_ = os.Setenv("VES_API_URL", server.URL())
-	_ = os.Setenv("VES_API_TOKEN", "mock-token")
+	_ = os.Setenv("F5XC_API_URL", server.URL())
+	_ = os.Setenv("F5XC_API_TOKEN", "mock-token")
 
 	return &MockTestConfig{
 		Server:        server,
@@ -87,15 +87,15 @@ func SetupMockTest(t *testing.T) *MockTestConfig {
 func (m *MockTestConfig) Cleanup() {
 	// Restore original environment
 	if m.OriginalURL != "" {
-		_ = os.Setenv("VES_API_URL", m.OriginalURL)
+		_ = os.Setenv("F5XC_API_URL", m.OriginalURL)
 	} else {
-		_ = os.Unsetenv("VES_API_URL")
+		_ = os.Unsetenv("F5XC_API_URL")
 	}
 
 	if m.OriginalToken != "" {
-		_ = os.Setenv("VES_API_TOKEN", m.OriginalToken)
+		_ = os.Setenv("F5XC_API_TOKEN", m.OriginalToken)
 	} else {
-		_ = os.Unsetenv("VES_API_TOKEN")
+		_ = os.Unsetenv("F5XC_API_TOKEN")
 	}
 
 	// Close mock server
@@ -161,62 +161,62 @@ func MockParallelTest(t *testing.T, testCase resource.TestCase) {
 	resource.ParallelTest(t, testCase)
 }
 
-// SkipIfNoMockMode skips the test if VES_MOCK_MODE is not set.
+// SkipIfNoMockMode skips the test if F5XC_MOCK_MODE is not set.
 // This allows running mock tests only when explicitly requested.
 func SkipIfNoMockMode(t *testing.T) {
 	t.Helper()
 
-	if os.Getenv("VES_MOCK_MODE") == "" {
-		t.Skip("Skipping mock test: VES_MOCK_MODE not set")
+	if os.Getenv("F5XC_MOCK_MODE") == "" {
+		t.Skip("Skipping mock test: F5XC_MOCK_MODE not set")
 	}
 }
 
-// SkipIfRealAPI skips the test if running against the real API (VES_MOCK_MODE is not set).
+// SkipIfRealAPI skips the test if running against the real API (F5XC_MOCK_MODE is not set).
 // Use this for tests that have known API behavioral constraints that don't affect mock testing,
 // such as ephemeral resource lifecycles, infrastructure dependencies, or staging environment limitations.
 // The message should explain why this test cannot run against the real API.
 func SkipIfRealAPI(t *testing.T, message string) {
 	t.Helper()
 
-	if os.Getenv("VES_MOCK_MODE") == "" {
+	if os.Getenv("F5XC_MOCK_MODE") == "" {
 		t.Skipf("Skipping on real API: %s", message)
 	}
 }
 
 // IsMockMode returns true if mock mode is enabled
 func IsMockMode() bool {
-	return os.Getenv("VES_MOCK_MODE") != ""
+	return os.Getenv("F5XC_MOCK_MODE") != ""
 }
 
 // GetGlobalMockServer returns the global mock server, creating it if necessary.
-// This ensures all tests share the same mock server when VES_MOCK_MODE is set.
+// This ensures all tests share the same mock server when F5XC_MOCK_MODE is set.
 func GetGlobalMockServer() *mocks.Server {
 	globalMockServerOnce.Do(func() {
 		globalMockServer = mocks.NewServer()
 
 		// Store original environment variables
 		globalMockServerMu.Lock()
-		originalEnvVars["VES_API_URL"] = os.Getenv("VES_API_URL")
-		originalEnvVars["VES_API_TOKEN"] = os.Getenv("VES_API_TOKEN")
-		originalEnvVars["VES_P12_FILE"] = os.Getenv("VES_P12_FILE")
-		originalEnvVars["VES_P12_PASSWORD"] = os.Getenv("VES_P12_PASSWORD")
-		originalEnvVars["VES_CERT"] = os.Getenv("VES_CERT")
-		originalEnvVars["VES_KEY"] = os.Getenv("VES_KEY")
+		originalEnvVars["F5XC_API_URL"] = os.Getenv("F5XC_API_URL")
+		originalEnvVars["F5XC_API_TOKEN"] = os.Getenv("F5XC_API_TOKEN")
+		originalEnvVars["F5XC_P12_FILE"] = os.Getenv("F5XC_P12_FILE")
+		originalEnvVars["F5XC_P12_PASSWORD"] = os.Getenv("F5XC_P12_PASSWORD")
+		originalEnvVars["F5XC_CERT"] = os.Getenv("F5XC_CERT")
+		originalEnvVars["F5XC_KEY"] = os.Getenv("F5XC_KEY")
 		globalMockServerMu.Unlock()
 
 		// Override environment to use mock server
-		_ = os.Setenv("VES_API_URL", globalMockServer.URL())
-		_ = os.Setenv("VES_API_TOKEN", "mock-token")
+		_ = os.Setenv("F5XC_API_URL", globalMockServer.URL())
+		_ = os.Setenv("F5XC_API_TOKEN", "mock-token")
 		// Clear P12/PEM credentials so the provider uses token auth
-		_ = os.Unsetenv("VES_P12_FILE")
-		_ = os.Unsetenv("VES_P12_PASSWORD")
-		_ = os.Unsetenv("VES_CERT")
-		_ = os.Unsetenv("VES_KEY")
+		_ = os.Unsetenv("F5XC_P12_FILE")
+		_ = os.Unsetenv("F5XC_P12_PASSWORD")
+		_ = os.Unsetenv("F5XC_CERT")
+		_ = os.Unsetenv("F5XC_KEY")
 	})
 	return globalMockServer
 }
 
-// EnsureMockModeConfigured ensures that if VES_MOCK_MODE is set,
+// EnsureMockModeConfigured ensures that if F5XC_MOCK_MODE is set,
 // the environment is configured to use the mock server.
 // This should be called early in test setup.
 func EnsureMockModeConfigured() {
@@ -227,7 +227,7 @@ func EnsureMockModeConfigured() {
 
 // RunWithMockOrReal runs a test with either mock or real API depending on environment.
 // If TF_ACC and real credentials are set, uses real API.
-// If VES_MOCK_MODE is set, uses mock server.
+// If F5XC_MOCK_MODE is set, uses mock server.
 // Otherwise skips the test.
 func RunWithMockOrReal(t *testing.T, testCase resource.TestCase, mockSetup func(*MockTestConfig)) {
 	t.Helper()
@@ -244,7 +244,7 @@ func RunWithMockOrReal(t *testing.T, testCase resource.TestCase, mockSetup func(
 	}
 
 	// Check if mock mode is enabled
-	if os.Getenv("VES_MOCK_MODE") != "" {
+	if os.Getenv("F5XC_MOCK_MODE") != "" {
 		mockCfg := SetupMockTest(t)
 		defer mockCfg.Cleanup()
 
@@ -258,7 +258,7 @@ func RunWithMockOrReal(t *testing.T, testCase resource.TestCase, mockSetup func(
 		return
 	}
 
-	t.Skip("Skipping: neither TF_ACC with credentials nor VES_MOCK_MODE is set")
+	t.Skip("Skipping: neither TF_ACC with credentials nor F5XC_MOCK_MODE is set")
 }
 
 // MockResourceTestCase creates a test case configured for mock testing

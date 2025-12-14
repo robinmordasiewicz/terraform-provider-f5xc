@@ -20,7 +20,7 @@ import (
 // They validate provider logic without requiring cloud credentials.
 //
 // Run with:
-//   VES_MOCK_MODE=1 go test -v ./internal/provider/ -run TestMockAWSVPCSite -timeout 5m
+//   F5XC_MOCK_MODE=1 go test -v ./internal/provider/ -run TestMockAWSVPCSite -timeout 5m
 //
 // These tests complement the real acceptance tests by:
 // 1. Testing provider CRUD logic without cloud dependencies

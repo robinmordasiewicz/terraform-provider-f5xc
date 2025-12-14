@@ -29,18 +29,18 @@ terraform {
 # variables and the provider block remains empty.
 #
 # For API Token:
-#   export VES_API_URL="https://your-tenant.console.ves.volterra.io"
-#   export VES_API_TOKEN="your-api-token"
+#   export F5XC_API_URL="https://your-tenant.console.ves.volterra.io"
+#   export F5XC_API_TOKEN="your-api-token"
 #
 # For P12 Certificate:
-#   export VES_API_URL="https://your-tenant.console.ves.volterra.io"
-#   export VES_P12_FILE="/path/to/credentials.p12"
-#   export VES_P12_PASSWORD="your-p12-password"  # pragma: allowlist secret
+#   export F5XC_API_URL="https://your-tenant.console.ves.volterra.io"
+#   export F5XC_P12_FILE="/path/to/credentials.p12"
+#   export F5XC_P12_PASSWORD="your-p12-password"  # pragma: allowlist secret
 #
 # For PEM Certificate:
-#   export VES_API_URL="https://your-tenant.console.ves.volterra.io"
-#   export VES_CERT="/path/to/certificate.pem"
-#   export VES_KEY="/path/to/private-key.pem"
+#   export F5XC_API_URL="https://your-tenant.console.ves.volterra.io"
+#   export F5XC_CERT="/path/to/certificate.pem"
+#   export F5XC_KEY="/path/to/private-key.pem"
 
 provider "f5xc" {
   # Authentication via environment variables

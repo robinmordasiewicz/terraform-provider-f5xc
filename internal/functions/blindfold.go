@@ -120,8 +120,8 @@ func (f *BlindfoldFunction) Run(ctx context.Context, req function.RunRequest, re
 		resp.Error = function.NewFuncError(
 			fmt.Sprintf("Authentication configuration error: %s\n\n"+
 				"Configure one of:\n"+
-				"  - VES_API_TOKEN for API token authentication\n"+
-				"  - VES_P12_FILE and VES_P12_PASSWORD for P12 certificate authentication",
+				"  - F5XC_API_TOKEN for API token authentication\n"+
+				"  - F5XC_P12_FILE and F5XC_P12_PASSWORD for P12 certificate authentication",
 				err),
 		)
 		return

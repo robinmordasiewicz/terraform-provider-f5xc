@@ -1,6 +1,6 @@
 # Acceptance Tests Workflow
 #
-# This workflow runs comprehensive acceptance tests for the F5 XC Terraform Provider.
+# Comprehensive acceptance tests for the F5 XC Terraform Provider.
 # It supports both mock tests (fast, parallel) and real API tests, plus behavioral
 # consistency comparison between mock and real API results.
 #

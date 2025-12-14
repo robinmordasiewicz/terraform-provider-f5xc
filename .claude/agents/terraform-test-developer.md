@@ -96,7 +96,7 @@ func TestAccResourceName_basic(t *testing.T) {
 
 When working with this F5XC Terraform provider:
 - Resources require `namespace` for most operations
-- API authentication uses `VES_API_TOKEN` environment variable
+- API authentication uses `F5XC_API_TOKEN` environment variable
 - Import IDs typically follow `namespace/name` format
 - Many resources have complex nested structures from OpenAPI specs
 

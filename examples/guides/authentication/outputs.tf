@@ -6,12 +6,12 @@
 
 output "api_url" {
   description = "The F5XC API URL used for authentication (from environment or configuration)"
-  value       = var.ves_api_url != "" ? var.ves_api_url : "Set via VES_API_URL environment variable"
+  value       = var.f5xc_api_url != "" ? var.f5xc_api_url : "Set via F5XC_API_URL environment variable"
 }
 
 output "authentication_method" {
   description = "The authentication method being used based on configuration"
-  value       = var.ves_api_token != "" ? "API Token" : (var.ves_p12_file != "" ? "P12 Certificate" : (var.ves_cert != "" ? "PEM Certificate" : "Environment Variables"))
+  value       = var.f5xc_api_token != "" ? "API Token" : (var.f5xc_p12_file != "" ? "P12 Certificate" : (var.f5xc_cert != "" ? "PEM Certificate" : "Environment Variables"))
 }
 
 output "system_namespace" {

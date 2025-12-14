@@ -682,7 +682,7 @@ go build -o terraform-provider-f5xc
 # Run all tests
 go test ./...
 
-# Run acceptance tests (requires VES_API_TOKEN or VES_P12_FILE)
+# Run acceptance tests (requires F5XC_API_TOKEN or F5XC_P12_FILE)
 TF_ACC=1 go test ./... -v -timeout 120m
 
 # Generate documentation (requires terraform CLI)
@@ -735,10 +735,10 @@ The `tools/` directory contains generators for scaffolding resources from F5 Ope
 
 ## Environment Variables
 
-- `VES_API_TOKEN` - API token for F5 Distributed Cloud (one of token or P12 required)
-- `VES_API_URL` - Optional API URL (defaults to `https://console.ves.volterra.io`)
-- `VES_P12_FILE` - Path to P12 certificate file (alternative to token auth)
-- `VES_P12_PASSWORD` - Password for P12 file (required with VES_P12_FILE)
+- `F5XC_API_TOKEN` - API token for F5 Distributed Cloud (one of token or P12 required)
+- `F5XC_API_URL` - Optional API URL (defaults to `https://console.ves.volterra.io`)
+- `F5XC_P12_FILE` - Path to P12 certificate file (alternative to token auth)
+- `F5XC_P12_PASSWORD` - Password for P12 file (required with F5XC_P12_FILE)
 - `TF_ACC=1` - Enable acceptance tests
 
 ## Key Dependencies

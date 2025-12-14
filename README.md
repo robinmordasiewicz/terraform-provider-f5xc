@@ -21,7 +21,7 @@ provider "f5xc" {}
 Set your API token as an environment variable:
 
 ```bash
-export VES_API_TOKEN="your-api-token"
+export F5XC_API_TOKEN="your-api-token"
 ```
 
 ## Documentation

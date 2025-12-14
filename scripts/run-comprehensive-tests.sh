@@ -20,10 +20,10 @@
 #   --help             Show this help message
 #
 # Environment Variables (required for real-only or full mode):
-#   VES_API_URL         - F5 XC API URL
-#   VES_P12_FILE        - Path to P12 certificate file
-#   VES_P12_PASSWORD    - Password for P12 certificate
-#   VES_API_TOKEN       - API token (alternative to P12 auth)
+#   F5XC_API_URL        - F5 XC API URL
+#   F5XC_P12_FILE       - Path to P12 certificate file
+#   F5XC_P12_PASSWORD   - Password for P12 certificate
+#   F5XC_API_TOKEN      - API token (alternative to P12 auth)
 #
 # Exit Codes:
 #   0 - All tests passed
@@ -136,14 +136,14 @@ log_verbose() {
 validate_real_api_env() {
     local missing=()
 
-    if [[ -z "${VES_API_URL:-}" ]]; then
-        missing+=("VES_API_URL")
+    if [[ -z "${F5XC_API_URL:-}" ]]; then
+        missing+=("F5XC_API_URL")
     fi
-    if [[ -z "${VES_P12_FILE:-}" ]] && [[ -z "${VES_API_TOKEN:-}" ]]; then
-        missing+=("VES_P12_FILE or VES_API_TOKEN")
+    if [[ -z "${F5XC_P12_FILE:-}" ]] && [[ -z "${F5XC_API_TOKEN:-}" ]]; then
+        missing+=("F5XC_P12_FILE or F5XC_API_TOKEN")
     fi
-    if [[ -n "${VES_P12_FILE:-}" ]] && [[ -z "${VES_P12_PASSWORD:-}" ]]; then
-        missing+=("VES_P12_PASSWORD (required with VES_P12_FILE)")
+    if [[ -n "${F5XC_P12_FILE:-}" ]] && [[ -z "${F5XC_P12_PASSWORD:-}" ]]; then
+        missing+=("F5XC_P12_PASSWORD (required with F5XC_P12_FILE)")
     fi
 
     if [[ ${#missing[@]} -gt 0 ]]; then
@@ -155,8 +155,8 @@ validate_real_api_env() {
     fi
 
     # Verify P12 file exists if using P12 auth
-    if [[ -n "${VES_P12_FILE:-}" ]] && [[ ! -f "$VES_P12_FILE" ]]; then
-        log_error "P12 file not found: $VES_P12_FILE"
+    if [[ -n "${F5XC_P12_FILE:-}" ]] && [[ ! -f "$F5XC_P12_FILE" ]]; then
+        log_error "P12 file not found: $F5XC_P12_FILE"
         return 1
     fi
 
@@ -176,12 +176,12 @@ run_mock_tests() {
     local output_file="$OUTPUT_DIR/test-output-mock.json"
 
     if [[ "$DRY_RUN" == "true" ]]; then
-        log_info "[DRY-RUN] Would run: VES_MOCK_MODE=1 go test -json -parallel $PARALLEL -timeout ${TIMEOUT}m -run 'TestMock.*' ./internal/provider/..."
+        log_info "[DRY-RUN] Would run: F5XC_MOCK_MODE=1 go test -json -parallel $PARALLEL -timeout ${TIMEOUT}m -run 'TestMock.*' ./internal/provider/..."
         return 0
     fi
 
     # Mock tests run in parallel - no rate limiting needed for local tests
-    VES_MOCK_MODE=1 go test -json \
+    F5XC_MOCK_MODE=1 go test -json \
         -parallel "$PARALLEL" \
         -timeout "${TIMEOUT}m" \
         -run 'TestMock.*' \

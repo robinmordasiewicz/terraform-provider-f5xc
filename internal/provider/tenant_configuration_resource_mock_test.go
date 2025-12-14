@@ -23,7 +23,7 @@ import (
 // 4. Run tests in CI/CD without special permissions
 //
 // Run with:
-//   VES_MOCK_MODE=1 go test -v ./internal/provider/ -run TestMockTenantConfiguration -timeout 5m
+//   F5XC_MOCK_MODE=1 go test -v ./internal/provider/ -run TestMockTenantConfiguration -timeout 5m
 // =============================================================================
 
 // TestMockTenantConfigurationResource_basic tests basic tenant configuration operations

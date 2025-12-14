@@ -22,8 +22,8 @@ cp .env.example .env
 Edit `.env` with your values:
 - `GITHUB_REPOSITORY` - Your repo (e.g., `owner/repo`)
 - `GITHUB_TOKEN` - Personal Access Token with `repo` scope
-- `VES_API_URL` - F5 XC API URL
-- `VES_API_TOKEN` - F5 XC API Token
+- `F5XC_API_URL` - F5 XC API URL
+- `F5XC_API_TOKEN` - F5 XC API Token
 
 ### 2. Build and Start
 

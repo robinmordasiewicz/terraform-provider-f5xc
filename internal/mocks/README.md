@@ -17,10 +17,10 @@ The mock testing infrastructure enables:
 
 ```bash
 # Run all mock tests
-VES_MOCK_MODE=1 go test -v ./internal/provider/ -run TestMock -timeout 5m
+F5XC_MOCK_MODE=1 go test -v ./internal/provider/ -run TestMock -timeout 5m
 
 # Run specific mock test
-VES_MOCK_MODE=1 go test -v ./internal/provider/ -run TestMockAWSVPCSiteResource_basic -timeout 5m
+F5XC_MOCK_MODE=1 go test -v ./internal/provider/ -run TestMockAWSVPCSiteResource_basic -timeout 5m
 ```
 
 ### Writing a Mock Test
@@ -288,7 +288,7 @@ func TestResource_hybridMode(t *testing.T) {
     }
 
     // Runs with real API if TF_ACC + credentials set
-    // Runs with mock if VES_MOCK_MODE=1 set
+    // Runs with mock if F5XC_MOCK_MODE=1 set
     // Skips if neither available
     acctest.RunWithMockOrReal(t, testCase, func(mockCfg *acctest.MockTestConfig) {
         // Optional: customize mock setup
@@ -338,10 +338,10 @@ mockCfg.SetupMyResourceMock("system", "test-resource")
 
 | Variable | Purpose |
 |----------|---------|
-| `VES_MOCK_MODE=1` | Enable mock testing mode |
+| `F5XC_MOCK_MODE=1` | Enable mock testing mode |
 | `TF_ACC=1` | Enable real acceptance tests |
-| `VES_API_URL` | Real API URL (for non-mock tests) |
-| `VES_API_TOKEN` | Real API token (for non-mock tests) |
+| `F5XC_API_URL` | Real API URL (for non-mock tests) |
+| `F5XC_API_TOKEN` | Real API token (for non-mock tests) |
 
 ## Test Categories and Reporting
 
@@ -431,9 +431,9 @@ mockCfg.PrePopulateResource(path, response)
 ```
 
 ### Tests not running
-Check that `VES_MOCK_MODE=1` is set:
+Check that `F5XC_MOCK_MODE=1` is set:
 ```bash
-VES_MOCK_MODE=1 go test -v ./internal/provider/ -run TestMock
+F5XC_MOCK_MODE=1 go test -v ./internal/provider/ -run TestMock
 ```
 
 ### Cascade delete not working

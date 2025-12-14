@@ -21,8 +21,8 @@ Deploy a production-ready HTTP Load Balancer on F5 Distributed Cloud with:
 ### 1. Set Environment Variables
 
 ```bash
-export VES_API_URL="https://your-tenant.console.ves.volterra.io"
-export VES_API_TOKEN="your-api-token"
+export F5XC_API_URL="https://your-tenant.console.ves.volterra.io"
+export F5XC_API_TOKEN="your-api-token"
 ```
 
 ### 2. Configure Your Deployment

@@ -511,6 +511,10 @@ func convertNestedBlockAnchor(nestedPath string) string {
 // 3. Removing "See...below" links that point to truly empty sections
 // Note: Single-page rendering mode - no external nested_blocks files
 func transformAnchorsOnly(filePath string, content string) error {
+	// Strip AI metadata prefixes from descriptions (Issue #287 regression fix)
+	// These prefixes should not appear in user-facing Registry documentation
+	content = stripAIMetadataFromDescriptions(content)
+
 	lines := strings.Split(content, "\n")
 
 	// Get resource name for API documentation link
@@ -622,6 +626,9 @@ func transformAnchorsOnly(filePath string, content string) error {
 
 	// Compress long anchor IDs to reduce document size (Issue #287)
 	result = compressAnchors(result)
+
+	// Phase 2: Apply description deduplication to collapse ObjectRef blocks (Issue #287)
+	result = applyDescriptionDeduplication(result)
 
 	return os.WriteFile(filePath, []byte(result), 0644)
 }
@@ -1655,6 +1662,459 @@ func compressAnchorID(anchor string) string {
 	return fmt.Sprintf("%s-%s", lastSegment, hashStr)
 }
 
+// ============================================================================
+// Phase 2: Description Deduplication (Issue #287)
+// ============================================================================
+//
+// These functions detect and collapse repeated ObjectRef patterns to reduce
+// documentation size. ObjectRef blocks contain name/namespace/tenant fields
+// with identical descriptions that appear 80+ times in large resources.
+
+// objectRefDescPattern matches the canonical ObjectRef field description
+var objectRefDescPattern = regexp.MustCompile(
+	`When a configuration object\(e\.g\. virtual_host\) refers to another\(e\.g route\) then (name|namespace|tenant|kind|uid) will hold the referred object's`)
+
+// pureObjectRefBlockPattern matches a complete pure ObjectRef section:
+// H4 header + context line + exactly 3 ObjectRef fields (name, namespace, tenant)
+// This uses a multiline approach to detect the block structure
+var pureObjectRefSectionStartPattern = regexp.MustCompile(
+	`(?m)^#### ([^\n]+)\n\n(?:An? \[` + "`" + `[^` + "`" + `]+` + "`" + `\]\(#[^)]+\) block[^\n]*supports the following:\n\n)?` +
+		`<a id="([^"]+)-name"></a>`)
+
+// collapsePureObjectRefSections replaces pure ObjectRef sections (containing only
+// name, namespace, tenant fields) with a compact single-line reference.
+//
+// Before (1200+ bytes):
+//
+//	#### Block Name
+//	A [`block`](#anchor) block supports the following:
+//	<a id="anchor-name"></a>• [`name`](#anchor-name) - Optional String<br>Name. When a configuration...
+//	<a id="anchor-namespace"></a>• [`namespace`](#anchor-namespace) - Optional String<br>Namespace. When...
+//	<a id="anchor-tenant"></a>• [`tenant`](#anchor-tenant) - Optional String<br>Tenant. When...
+//
+// After (~150 bytes):
+//
+//	#### Block Name
+//	<a id="anchor-objref"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+func collapsePureObjectRefSections(content string) string {
+	lines := strings.Split(content, "\n")
+	var result []string
+	i := 0
+
+	for i < len(lines) {
+		line := lines[i]
+
+		// Check for H4 header that might start a pure ObjectRef block
+		if strings.HasPrefix(line, "#### ") {
+			// Look ahead to see if this is a pure ObjectRef block
+			blockEnd, anchorBase, isPureObjectRef := detectPureObjectRefBlock(lines, i)
+
+			if isPureObjectRef {
+				// Generate collapsed replacement
+				headerText := strings.TrimPrefix(line, "#### ")
+				hash := md5.Sum([]byte(anchorBase))
+				hashStr := hex.EncodeToString(hash[:])[:6]
+				compressedAnchor := fmt.Sprintf("objref-%s", hashStr)
+
+				// Keep the header, replace content with single line
+				result = append(result, line)
+				result = append(result, "")
+				result = append(result, fmt.Sprintf(`<a id="%s"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).`, compressedAnchor))
+				result = append(result, "")
+
+				// Skip the original block content
+				i = blockEnd + 1
+				_ = headerText // suppress unused warning
+				continue
+			}
+		}
+
+		result = append(result, line)
+		i++
+	}
+
+	return strings.Join(result, "\n")
+}
+
+// detectPureObjectRefBlock checks if the section starting at lineIdx is a pure ObjectRef block.
+// Returns (endLine, anchorBase, isPure) where:
+// - endLine is the last line of the ObjectRef block
+// - anchorBase is the common anchor prefix (e.g., "active-service-policies-policies")
+// - isPure is true if this block contains ONLY name, namespace, tenant fields
+func detectPureObjectRefBlock(lines []string, lineIdx int) (int, string, bool) {
+	// Skip the H4 header line
+	i := lineIdx + 1
+
+	// Skip empty lines
+	for i < len(lines) && strings.TrimSpace(lines[i]) == "" {
+		i++
+	}
+
+	// Check for optional context line ("A [`block`](#anchor) block supports the following:")
+	if i < len(lines) && (strings.HasPrefix(lines[i], "A [`") || strings.HasPrefix(lines[i], "An [`")) {
+		i++
+		// Skip empty lines after context
+		for i < len(lines) && strings.TrimSpace(lines[i]) == "" {
+			i++
+		}
+	}
+
+	// Now we should see exactly 3 ObjectRef fields: name, namespace, tenant
+	// Each field is on its own line with the pattern:
+	// <a id="anchor-name"></a>&#x2022; [`name`](#anchor-name) - Optional String<br>Name. When...
+
+	foundFields := make(map[string]bool)
+	var anchorBase string
+	startFieldLine := i
+	endLine := i
+
+	for i < len(lines) {
+		line := lines[i]
+
+		// Stop if we hit the next section (H4 header or end of content)
+		if strings.HasPrefix(line, "#### ") || strings.HasPrefix(line, "## ") || strings.HasPrefix(line, "---") {
+			break
+		}
+
+		// Skip empty lines between fields
+		if strings.TrimSpace(line) == "" {
+			i++
+			continue
+		}
+
+		// Check if this is an ObjectRef field line
+		if strings.Contains(line, `<a id="`) && strings.Contains(line, "&#x2022;") {
+			// Extract field name and check if it's an ObjectRef field
+			fieldName := extractFieldName(line)
+			if fieldName == "name" || fieldName == "namespace" || fieldName == "tenant" {
+				// Verify it has the ObjectRef description
+				if objectRefDescPattern.MatchString(line) {
+					foundFields[fieldName] = true
+					endLine = i
+					// Extract anchor base from the first field
+					if anchorBase == "" {
+						anchorBase = extractAnchorBase(line, fieldName)
+					}
+				} else {
+					// Has the field name but not the ObjectRef description - not pure
+					return 0, "", false
+				}
+			} else {
+				// Contains a non-ObjectRef field - not pure
+				return 0, "", false
+			}
+		}
+
+		i++
+	}
+
+	// Must have exactly 3 fields: name, namespace, tenant
+	isPure := foundFields["name"] && foundFields["namespace"] && foundFields["tenant"] && len(foundFields) == 3
+
+	// Verify no other content between start and end
+	if isPure {
+		for j := startFieldLine; j <= endLine; j++ {
+			line := lines[j]
+			if strings.TrimSpace(line) != "" && !strings.Contains(line, `<a id="`) {
+				// Non-empty line that's not an anchor line - might be additional content
+				isPure = false
+				break
+			}
+		}
+	}
+
+	return endLine, anchorBase, isPure
+}
+
+// extractFieldName extracts the field name from an attribute line
+// Input: <a id="anchor-name"></a>&#x2022; [`name`](#anchor-name) - Optional String...
+// Output: "name"
+func extractFieldName(line string) string {
+	// Pattern: [`fieldname`]
+	fieldRegex := regexp.MustCompile("\\[`([^`]+)`\\]")
+	if m := fieldRegex.FindStringSubmatch(line); m != nil {
+		return m[1]
+	}
+	return ""
+}
+
+// extractAnchorBase extracts the anchor base (without the field suffix) from an attribute line
+// Input: <a id="active-service-policies-policies-name"></a>...
+// Field: "name"
+// Output: "active-service-policies-policies"
+func extractAnchorBase(line, fieldName string) string {
+	anchorRegex := regexp.MustCompile(`<a id="([^"]+)"></a>`)
+	if m := anchorRegex.FindStringSubmatch(line); m != nil {
+		anchor := m[1]
+		// Remove the field suffix
+		suffix := "-" + fieldName
+		if strings.HasSuffix(anchor, suffix) {
+			return strings.TrimSuffix(anchor, suffix)
+		}
+	}
+	return ""
+}
+
+// deduplicateInlineDescriptions replaces verbose ObjectRef field descriptions
+// with a compact reference in mixed blocks (where ObjectRef fields appear
+// alongside other fields).
+//
+// Before: Name. When a configuration object(e.g. virtual_host) refers to another...
+// After: See [Object Reference](#common-object-reference)
+func deduplicateInlineDescriptions(content string) string {
+	// Pattern: matches ObjectRef descriptions for name, namespace, tenant, kind, uid
+	// Replaces the description but keeps the field structure intact
+
+	// Match: Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+	nameDescRegex := regexp.MustCompile(
+		`Name\. When a configuration object\(e\.g\. virtual_host\) refers to another\(e\.g route\) then name will hold the referred object's\(e\.g\. route's\) name`)
+	content = nameDescRegex.ReplaceAllString(content, "Object reference name")
+
+	// Match namespace description
+	namespaceDescRegex := regexp.MustCompile(
+		`Namespace\. When a configuration object\(e\.g\. virtual_host\) refers to another\(e\.g route\) then namespace will hold the referred object's\(e\.g\. route's\) namespace`)
+	content = namespaceDescRegex.ReplaceAllString(content, "Object reference namespace")
+
+	// Match tenant description
+	tenantDescRegex := regexp.MustCompile(
+		`Tenant\. When a configuration object\(e\.g\. virtual_host\) refers to another\(e\.g route\) then tenant will hold the referred object's\(e\.g\. route's\) tenant`)
+	content = tenantDescRegex.ReplaceAllString(content, "Object reference tenant")
+
+	// Match kind description
+	kindDescRegex := regexp.MustCompile(
+		`Kind\. When a configuration object\(e\.g\. virtual_host\) refers to another\(e\.g route\) then kind will hold the referred object's kind \(e\.g\. 'route'\)`)
+	content = kindDescRegex.ReplaceAllString(content, "Object reference kind")
+
+	// Match uid description
+	uidDescRegex := regexp.MustCompile(
+		`UID\. When a configuration object\(e\.g\. virtual_host\) refers to another\(e\.g route\) then uid will hold the referred object's\(e\.g\. route's\) uid`)
+	content = uidDescRegex.ReplaceAllString(content, "Object reference UID")
+
+	return content
+}
+
+// compressVerboseEnums compresses repetitive enum descriptions to save space.
+// This replaces long lists of enum values with shorter references.
+func compressVerboseEnums(content string) string {
+	// Transformers enum - appears 30+ times, ~160 chars each
+	// Pattern: Possible values are `LOWER_CASE`, `UPPER_CASE`, ... `TRIM`
+	transformersEnum := regexp.MustCompile(
+		`Possible values are ` + "`LOWER_CASE`" + `, ` + "`UPPER_CASE`" + `, ` + "`BASE64_DECODE`" + `, ` + "`NORMALIZE_PATH`" + `, ` + "`REMOVE_WHITESPACE`" + `, ` + "`URL_DECODE`" + `, ` + "`TRIM_LEFT`" + `, ` + "`TRIM_RIGHT`" + `, ` + "`TRIM`")
+	content = transformersEnum.ReplaceAllString(content, "See [Transformers](#common-transformers)")
+
+	// Also handle the [Enum: ...] format for transformers
+	transformersEnumBracket := regexp.MustCompile(
+		`\[Enum: LOWER_CASE\|UPPER_CASE\|BASE64_DECODE\|NORMALIZE_PATH\|REMOVE_WHITESPACE\|URL_DECODE\|TRIM_LEFT\|TRIM_RIGHT\|TRIM\]`)
+	content = transformersEnumBracket.ReplaceAllString(content, "")
+
+	// HTTP Methods enum - appears 14+ times, ~100 chars each
+	// Pattern: Possible values are `ANY`, `GET`, ... `COPY`
+	httpMethodsEnum := regexp.MustCompile(
+		`Possible values are ` + "`ANY`" + `, ` + "`GET`" + `, ` + "`HEAD`" + `, ` + "`POST`" + `, ` + "`PUT`" + `, ` + "`DELETE`" + `, ` + "`CONNECT`" + `, ` + "`OPTIONS`" + `, ` + "`TRACE`" + `, ` + "`PATCH`" + `, ` + "`COPY`")
+	content = httpMethodsEnum.ReplaceAllString(content, "See [HTTP Methods](#common-http-methods)")
+
+	// Also handle the [Enum: ...] format for HTTP methods
+	httpMethodsEnumBracket := regexp.MustCompile(
+		`\[Enum: ANY\|GET\|HEAD\|POST\|PUT\|DELETE\|CONNECT\|OPTIONS\|TRACE\|PATCH\|COPY\]`)
+	content = httpMethodsEnumBracket.ReplaceAllString(content, "")
+
+	// TLS Fingerprint enum - appears 7+ times, very long
+	tlsFingerprintEnum := regexp.MustCompile(
+		`Possible values are ` + "`TLS_FINGERPRINT_NONE`" + `, ` + "`ANY_MALICIOUS_FINGERPRINT`" + `, ` + "`ADWARE`" + `, ` + "`ADWIND`" + `, ` + "`DRIDEX`" + `, ` + "`GOOTKIT`" + `, ` + "`GOZI`" + `, ` + "`JBIFROST`" + `, ` + "`QUAKBOT`" + `, ` + "`RANSOMWARE`" + `, ` + "`TROLDESH`" + `, ` + "`TOFSEE`" + `, ` + "`TORRENTLOCKER`" + `, ` + "`TRICKBOT`")
+	content = tlsFingerprintEnum.ReplaceAllString(content, "See [TLS Fingerprints](#common-tls-fingerprints)")
+
+	// IP Threat Categories enum - appears 6+ times, ~200 chars
+	ipThreatEnum := regexp.MustCompile(
+		`Possible values are ` + "`SPAM_SOURCES`" + `, ` + "`WINDOWS_EXPLOITS`" + `, ` + "`WEB_ATTACKS`" + `, ` + "`BOTNETS`" + `, ` + "`SCANNERS`" + `, ` + "`REPUTATION`" + `, ` + "`PHISHING`" + `, ` + "`PROXY`" + `, ` + "`MOBILE_THREATS`" + `, ` + "`TOR_PROXY`" + `, ` + "`DENIAL_OF_SERVICE`" + `, ` + "`NETWORK`")
+	content = ipThreatEnum.ReplaceAllString(content, "See [IP Threat Categories](#common-ip-threat-categories)")
+
+	return content
+}
+
+// collapseDeepNestedBlocks collapses sections at nesting depth >= 8 to summary lines.
+// This reduces file size while preserving navigation anchors for deeply nested blocks.
+func collapseDeepNestedBlocks(content string) string {
+	lines := strings.Split(content, "\n")
+	var result []string
+	i := 0
+
+	for i < len(lines) {
+		line := lines[i]
+
+		// Check for H4 header
+		if strings.HasPrefix(line, "#### ") {
+			headerText := strings.TrimPrefix(line, "#### ")
+			words := strings.Fields(headerText)
+			depth := len(words)
+
+			// Only collapse sections at depth 8 or deeper
+			if depth >= 8 {
+				// Find the end of this block (next H4 header or end of file)
+				blockEnd := i + 1
+				for blockEnd < len(lines) {
+					if strings.HasPrefix(lines[blockEnd], "#### ") ||
+						strings.HasPrefix(lines[blockEnd], "### ") ||
+						strings.HasPrefix(lines[blockEnd], "## ") {
+						break
+					}
+					blockEnd++
+				}
+
+				// Create a summary reference to parent block
+				parentPath := strings.Join(words[:len(words)-1], " ")
+				lastWord := words[len(words)-1]
+
+				// Generate anchor from header
+				hash := md5.Sum([]byte(headerText))
+				hashStr := hex.EncodeToString(hash[:])[:6]
+				anchor := fmt.Sprintf("deep-%s", hashStr)
+
+				// Keep header for navigation, collapse content
+				result = append(result, line)
+				result = append(result, "")
+				result = append(result, fmt.Sprintf(`<a id="%s"></a>Nested **%s** block. See parent [%s](#%s) for context.`,
+					anchor,
+					lastWord,
+					parentPath,
+					strings.ToLower(strings.ReplaceAll(strings.ReplaceAll(parentPath, " ", "-"), "_", "-"))))
+				result = append(result, "")
+
+				i = blockEnd
+				continue
+			}
+		}
+
+		result = append(result, line)
+		i++
+	}
+
+	return strings.Join(result, "\n")
+}
+
+// generateCommonTypesSection creates the Common Types reference section
+// that contains the full definitions of deduplicated types.
+func generateCommonTypesSection() string {
+	return `---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format ` + "`tenant/namespace/name`" + `.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| ` + "`name`" + ` | String | Name of the referenced object |
+| ` + "`namespace`" + ` | String | Namespace containing the referenced object |
+| ` + "`tenant`" + ` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+|-------|-------------|
+| ` + "`LOWER_CASE`" + ` | Convert to lowercase |
+| ` + "`UPPER_CASE`" + ` | Convert to uppercase |
+| ` + "`BASE64_DECODE`" + ` | Decode base64 content |
+| ` + "`NORMALIZE_PATH`" + ` | Normalize URL path |
+| ` + "`REMOVE_WHITESPACE`" + ` | Remove whitespace characters |
+| ` + "`URL_DECODE`" + ` | Decode URL-encoded characters |
+| ` + "`TRIM_LEFT`" + ` | Trim leading whitespace |
+| ` + "`TRIM_RIGHT`" + ` | Trim trailing whitespace |
+| ` + "`TRIM`" + ` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+|-------|-------------|
+| ` + "`ANY`" + ` | Match any HTTP method |
+| ` + "`GET`" + ` | HTTP GET request |
+| ` + "`HEAD`" + ` | HTTP HEAD request |
+| ` + "`POST`" + ` | HTTP POST request |
+| ` + "`PUT`" + ` | HTTP PUT request |
+| ` + "`DELETE`" + ` | HTTP DELETE request |
+| ` + "`CONNECT`" + ` | HTTP CONNECT request |
+| ` + "`OPTIONS`" + ` | HTTP OPTIONS request |
+| ` + "`TRACE`" + ` | HTTP TRACE request |
+| ` + "`PATCH`" + ` | HTTP PATCH request |
+| ` + "`COPY`" + ` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+|-------|-------------|
+| ` + "`TLS_FINGERPRINT_NONE`" + ` | No fingerprint matching |
+| ` + "`ANY_MALICIOUS_FINGERPRINT`" + ` | Match any known malicious fingerprint |
+| ` + "`ADWARE`" + ` | Adware-associated fingerprints |
+| ` + "`DRIDEX`" + ` | Dridex malware fingerprints |
+| ` + "`GOOTKIT`" + ` | Gootkit malware fingerprints |
+| ` + "`RANSOMWARE`" + ` | Ransomware-associated fingerprints |
+| ` + "`TRICKBOT`" + ` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+|-------|-------------|
+| ` + "`SPAM_SOURCES`" + ` | Known spam sources |
+| ` + "`WINDOWS_EXPLOITS`" + ` | Windows exploit sources |
+| ` + "`WEB_ATTACKS`" + ` | Web attack sources |
+| ` + "`BOTNETS`" + ` | Known botnet IPs |
+| ` + "`SCANNERS`" + ` | Network scanner IPs |
+| ` + "`REPUTATION`" + ` | Poor reputation IPs |
+| ` + "`PHISHING`" + ` | Phishing-related IPs |
+| ` + "`PROXY`" + ` | Anonymous proxy IPs |
+| ` + "`MOBILE_THREATS`" + ` | Mobile threat sources |
+| ` + "`TOR_PROXY`" + ` | Tor exit nodes |
+| ` + "`DENIAL_OF_SERVICE`" + ` | DoS attack sources |
+| ` + "`NETWORK`" + ` | Known bad network ranges |
+
+`
+}
+
+// insertCommonTypesSection inserts the Common Types section before the Import section.
+func insertCommonTypesSection(content, commonTypes string) string {
+	// Find the Import section
+	importMarker := "\n## Import\n"
+	if idx := strings.Index(content, importMarker); idx != -1 {
+		// Insert Common Types before Import
+		return content[:idx] + "\n" + commonTypes + content[idx:]
+	}
+
+	// If no Import section, append at the end
+	return content + "\n" + commonTypes
+}
+
+// applyDescriptionDeduplication orchestrates Phase 2+3 deduplication.
+// Called from transformAnchorsOnly after anchor compression.
+func applyDescriptionDeduplication(content string) string {
+	// Step 1: Collapse pure ObjectRef sections (Phase 2)
+	content = collapsePureObjectRefSections(content)
+
+	// Step 2: Deduplicate inline descriptions in mixed blocks (Phase 2)
+	content = deduplicateInlineDescriptions(content)
+
+	// Step 3: Compress verbose enum descriptions (Phase 3a)
+	content = compressVerboseEnums(content)
+
+	// Step 4: Collapse deep nested blocks (Phase 3b) - depth >= 8
+	content = collapseDeepNestedBlocks(content)
+
+	// Step 5: Add Common Types section
+	commonTypes := generateCommonTypesSection()
+	content = insertCommonTypesSection(content, commonTypes)
+
+	return content
+}
+
 // escapeHTMLTagsInContent applies HTML tag escaping to full document content.
 // Unlike escapeHTMLTags (for single descriptions), this function is designed to
 // process entire markdown files while preserving intentional HTML constructs.
@@ -2183,4 +2643,16 @@ func enhanceTimeoutsSection(content, resourceName string) string {
 	}
 
 	return strings.Join(result, "\n")
+}
+
+// stripAIMetadataFromDescriptions removes AI-generated metadata prefixes from documentation.
+// These prefixes were added during code generation for AI assistance but should not appear
+// in user-facing Terraform Registry documentation.
+// Pattern: [Category: X] [Namespace: required|optional] [DependsOn: res1, res2]
+func stripAIMetadataFromDescriptions(content string) string {
+	// Match the full metadata prefix pattern:
+	// [Category: Load Balancing] [Namespace: required] [DependsOn: namespace, origin_pool]
+	// The DependsOn part is optional (not all resources have dependencies)
+	metadataPattern := regexp.MustCompile(`\[Category: [^\]]+\] \[Namespace: [^\]]+\]( \[DependsOn: [^\]]+\])? ?`)
+	return metadataPattern.ReplaceAllString(content, "")
 }

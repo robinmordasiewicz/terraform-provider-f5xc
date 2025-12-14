@@ -3432,20 +3432,13 @@ func renderNestedModelTypes(resourceTitleCase string, attrs []TerraformAttribute
 				continue
 			}
 
-			// Check if this nested block is empty (has no non-block attributes)
-			// A block is considered "empty" if it has no nested attributes OR all nested attributes are blocks themselves
+			// Check if this nested block is empty (has no nested content)
+			// If NestedAttributes has any content (blocks or attributes), a model with
+			// AttrTypes is generated and should be referenced. Only truly empty blocks
+			// should use inline empty maps.
+			// Fix for Issue #452: Blocks containing only sub-blocks are NOT empty -
+			// they need to reference their model's AttrTypes to avoid Value Conversion Errors.
 			isNestedEmpty := len(attr.NestedAttributes) == 0
-			if !isNestedEmpty {
-				hasNonBlockAttrs := false
-				for _, nested := range attr.NestedAttributes {
-					if !nested.IsBlock {
-						hasNonBlockAttrs = true
-						break
-					}
-				}
-				// If there are no non-block attributes, treat as empty (uses EmptyModel)
-				isNestedEmpty = !hasNonBlockAttrs
-			}
 
 			if isNestedEmpty {
 				// Empty nested block - use inline empty map

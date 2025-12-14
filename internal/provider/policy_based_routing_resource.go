@@ -294,10 +294,10 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 							Attributes: map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"all_destinations": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"all_sources": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"forwarding_class_list": schema.ListNestedBlock{
 									MarkdownDescription: "Forwarding Class. Ordered list of forwarding Class to be used if no rule match.",
@@ -354,7 +354,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 												},
 												Blocks: map[string]schema.Block{
 													"any_path": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 												},
 											},
@@ -403,7 +403,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									},
 								},
 								"prefix_list": schema.SingleNestedBlock{
-									MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
+									MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
 									Attributes: map[string]schema.Attribute{
 										"prefixes": schema.ListAttribute{
 											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
@@ -467,7 +467,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"any": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"label_selector": schema.SingleNestedBlock{
 						MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE",
@@ -490,16 +490,16 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 							},
 							Blocks: map[string]schema.Block{
 								"all_tcp_traffic": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"all_traffic": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"all_udp_traffic": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"any": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"applications": schema.SingleNestedBlock{
 									MarkdownDescription: "Applications. Application protocols like HTTP, SNMP",
@@ -581,7 +581,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									},
 								},
 								"prefix_list": schema.SingleNestedBlock{
-									MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
+									MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
 									Attributes: map[string]schema.Attribute{
 										"prefixes": schema.ListAttribute{
 											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
@@ -608,7 +608,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 						},
 					},
 					"prefix_list": schema.SingleNestedBlock{
-						MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
+						MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
 						Attributes: map[string]schema.Attribute{
 							"prefixes": schema.ListAttribute{
 								MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",

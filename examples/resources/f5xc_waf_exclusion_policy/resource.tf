@@ -20,11 +20,11 @@ resource "f5xc_waf_exclusion_policy" "example" {
   waf_exclusion_rules {
     # Configure waf_exclusion_rules settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   any_domain {
     # Configure any_domain settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   any_path {
     # Configure any_path settings
   }

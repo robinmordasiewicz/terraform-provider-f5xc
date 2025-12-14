@@ -112,7 +112,7 @@ A [`timeouts`](#timeouts) block supports the following:
 
 A [`waap`](#waap) block supports the following:
 
-<a id="waap-current-namespace"></a>&#x2022; [`current_namespace`](#waap-current-namespace) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="waap-current-namespace"></a>&#x2022; [`current_namespace`](#waap-current-namespace) - Optional Block<br>Enable this option
 
 <a id="waap-daily"></a>&#x2022; [`daily`](#waap-daily) - Optional Block<br>Report Frequency Daily. create report daily<br>See [Daily](#waap-daily) below.
 

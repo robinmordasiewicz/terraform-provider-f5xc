@@ -146,10 +146,10 @@ func (r *AppTypeResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"disable": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"discovered_api_settings": schema.SingleNestedBlock{
-						MarkdownDescription: "Discovered API Settings. x-example: '2' Configure Discovered API Settings.",
+						MarkdownDescription: "Discovered API Settings. Configure Discovered API Settings.",
 						Attributes: map[string]schema.Attribute{
 							"purge_duration_for_inactive_discovered_apis": schema.Int64Attribute{
 								MarkdownDescription: "Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration.",
@@ -158,7 +158,7 @@ func (r *AppTypeResource) Schema(ctx context.Context, req resource.SchemaRequest
 						},
 					},
 					"enable": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},

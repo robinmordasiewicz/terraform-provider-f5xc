@@ -492,10 +492,10 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"disable": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"publish": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -576,7 +576,7 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 								},
 							},
 							"isolated": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"kubeconfig_url": schema.SingleNestedBlock{
 								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
@@ -615,12 +615,12 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 								},
 							},
 							"reachable": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
 					"default_all": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"namespace_mapping": schema.SingleNestedBlock{
 						MarkdownDescription: "K8S Namespace Mapping. Select the mapping between K8s namespaces from which services will be discovered and App Namespace to which the discovered services will be shared.",
@@ -648,7 +648,7 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"disable": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"dns_delegation": schema.SingleNestedBlock{
 								MarkdownDescription: "K8SDelegationType.",
@@ -673,14 +673,14 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 								},
 							},
 							"publish_fqdns": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
 				},
 			},
 			"no_cluster_id": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"where": schema.SingleNestedBlock{
 				MarkdownDescription: "Network or Site Reference. NetworkSiteRefSelector defines a union of reference to site or reference to virtual_network or reference to virtual_site It is used to determine virtual network using following rules * Direct reference to virtual_network object * Site local network when refering to site object * All site local networks for sites selected by refering to virtual_site object",
@@ -696,10 +696,10 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 						},
 						Blocks: map[string]schema.Block{
 							"disable_internet_vip": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_internet_vip": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"ref": schema.ListNestedBlock{
 								MarkdownDescription: "Reference. A site direct reference",
@@ -779,10 +779,10 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 						},
 						Blocks: map[string]schema.Block{
 							"disable_internet_vip": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_internet_vip": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"ref": schema.ListNestedBlock{
 								MarkdownDescription: "Reference. A virtual_site direct reference",

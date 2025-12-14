@@ -36,11 +36,11 @@ resource "f5xc_infraprotect_deny_list_rule" "example" {
   expiration_never {
     # Configure expiration_never settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   one_day {
     # Configure one_day settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   one_hour {
     # Configure one_hour settings
   }
@@ -67,12 +67,12 @@ resource "f5xc_infraprotect_deny_list_rule" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="expiration-never"></a>[`expiration_never`](#expiration-never) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="expiration-never"></a>[`expiration_never`](#expiration-never) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="expiration-timestamp"></a>[`expiration_timestamp`](#expiration-timestamp) - Optional String<br>Expiration Time (UTC). This deny list rule will expire at the given timestamp and will be removed from the system afterwards
-<br><br>&#x2022; <a id="one-day"></a>[`one_day`](#one-day) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="one-hour"></a>[`one_hour`](#one-hour) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="one-month"></a>[`one_month`](#one-month) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="one-year"></a>[`one_year`](#one-year) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="one-day"></a>[`one_day`](#one-day) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="one-hour"></a>[`one_hour`](#one-hour) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="one-month"></a>[`one_month`](#one-month) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="one-year"></a>[`one_year`](#one-year) - Optional Block<br>Enable this option
 
 <a id="prefix"></a>&#x2022; [`prefix`](#prefix) - Optional String<br>Prefix. Prefix
 

@@ -20,11 +20,11 @@ resource "f5xc_forwarding_class" "example" {
   dscp {
     # Configure dscp settings
   }
-  # [OneOf: dscp_based_queue, queue_id_to_use] Empty. This ca...
+  # [OneOf: dscp_based_queue, queue_id_to_use] Enable this op...
   dscp_based_queue {
     # Configure dscp_based_queue settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   no_marking {
     # Configure no_marking settings
   }

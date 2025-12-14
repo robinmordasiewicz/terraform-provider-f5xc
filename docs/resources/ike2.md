@@ -36,7 +36,7 @@ resource "f5xc_ike2" "example" {
   dh_group_set {
     # Configure dh_group_set settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   disable_pfs {
     # Configure disable_pfs settings
   }
@@ -69,7 +69,7 @@ resource "f5xc_ike2" "example" {
 -> **One of the following:**
 &#x2022; <a id="dh-group-set"></a>[`dh_group_set`](#dh-group-set) - Optional Block<br>Diffie Hellman Groups. Choose the acceptable Diffie Hellman(DH) Group or Groups that you are willing to accept as part of this profile<br>See [Dh Group Set](#dh-group-set) below for details.
 
-<a id="disable-pfs"></a>&#x2022; [`disable_pfs`](#disable-pfs) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="disable-pfs"></a>&#x2022; [`disable_pfs`](#disable-pfs) - Optional Block<br>Enable this option
 
 -> **One of the following:**
 &#x2022; <a id="ike-keylifetime-hours"></a>[`ike_keylifetime_hours`](#ike-keylifetime-hours) - Optional Block<br>Hours. Input Hours<br>See [IKE Keylifetime Hours](#ike-keylifetime-hours) below for details.
@@ -77,7 +77,7 @@ resource "f5xc_ike2" "example" {
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-<a id="use-default-keylifetime"></a>&#x2022; [`use_default_keylifetime`](#use-default-keylifetime) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="use-default-keylifetime"></a>&#x2022; [`use_default_keylifetime`](#use-default-keylifetime) - Optional Block<br>Enable this option
 
 ### Attributes Reference
 

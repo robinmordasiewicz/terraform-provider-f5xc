@@ -36,7 +36,7 @@ resource "f5xc_cdn_cache_rule" "example" {
   cache_rules {
     # Configure cache_rules settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   cache_bypass {
     # Configure cache_bypass settings
   }
@@ -82,7 +82,7 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`cache_rules`](#cache-rules) block supports the following:
 
-<a id="cache-rules-cache-bypass"></a>&#x2022; [`cache_bypass`](#cache-rules-cache-bypass) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="cache-rules-cache-bypass"></a>&#x2022; [`cache_bypass`](#cache-rules-cache-bypass) - Optional Block<br>Enable this option
 
 <a id="cache-rules-eligible-for-cache"></a>&#x2022; [`eligible_for_cache`](#cache-rules-eligible-for-cache) - Optional Block<br>Cache Action Options. List of options for Cache Action<br>See [Eligible For Cache](#cache-rules-eligible-for-cache) below.
 

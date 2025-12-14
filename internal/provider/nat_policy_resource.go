@@ -395,7 +395,7 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 											},
 										},
 										"pools": schema.SingleNestedBlock{
-											MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
+											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
 											Attributes: map[string]schema.Attribute{
 												"prefixes": schema.ListAttribute{
 													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
@@ -464,7 +464,7 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 							},
 							Blocks: map[string]schema.Block{
 								"any": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"destination_port": schema.SingleNestedBlock{
 									MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port",
@@ -480,12 +480,12 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 									},
 									Blocks: map[string]schema.Block{
 										"no_port_match": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
 								"icmp": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"segment": schema.SingleNestedBlock{
 									MarkdownDescription: "Segment Reference Type. Reference to Segment Object",
@@ -537,7 +537,7 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 									},
 									Blocks: map[string]schema.Block{
 										"no_port_match": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -559,7 +559,7 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 											},
 											Blocks: map[string]schema.Block{
 												"no_port_match": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 											},
 										},
@@ -577,7 +577,7 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 											},
 											Blocks: map[string]schema.Block{
 												"no_port_match": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 											},
 										},
@@ -601,7 +601,7 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 											},
 											Blocks: map[string]schema.Block{
 												"no_port_match": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 											},
 										},
@@ -619,7 +619,7 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 											},
 											Blocks: map[string]schema.Block{
 												"no_port_match": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 											},
 										},
@@ -664,10 +664,10 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 							},
 						},
 						"disable": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"enable": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"network_interface": schema.SingleNestedBlock{
 							MarkdownDescription: "NetworkInterface Reference Type. Reference to Network Interface Object",

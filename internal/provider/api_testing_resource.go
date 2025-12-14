@@ -279,7 +279,7 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 								Blocks: map[string]schema.Block{
 									"admin": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"api_key": schema.SingleNestedBlock{
 										MarkdownDescription: "Api Key.",
@@ -473,7 +473,7 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 									},
 									"standard": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},
@@ -482,13 +482,13 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"every_day": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: every_day, every_month, every_week] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: every_day, every_month, every_week] Enable this option",
 			},
 			"every_month": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"every_week": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 		},
 	}

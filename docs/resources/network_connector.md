@@ -65,13 +65,13 @@ resource "f5xc_network_connector" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="disable-forward-proxy"></a>[`disable_forward_proxy`](#disable-forward-proxy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="disable-forward-proxy"></a>[`disable_forward_proxy`](#disable-forward-proxy) - Optional Block<br>Enable this option
 
 <a id="enable-forward-proxy"></a>&#x2022; [`enable_forward_proxy`](#enable-forward-proxy) - Optional Block<br>Forward Proxy Configuration. Fine tune forward proxy behavior Few configurations allowed are White listed ports and IP prefixes: Forward proxy does application protocol detection and server name(SNI) detection by peeking into the traffic on the incoming downstream connection. Few protocols doesn't have client sending the first data. In such cases, protocol and SNI detection fails. This configuration allows, skipping protocol and SNI detection for whitelisted IP-prefix-list and ports connection_timeout: The timeout for new network connections to upstream server. max_connect_attempts: Maximum number of attempts made to make new network connection to upstream server<br>See [Enable Forward Proxy](#enable-forward-proxy) below for details.
 
 -> **One of the following:**
 &#x2022; <a id="sli-to-global-dr"></a>[`sli_to_global_dr`](#sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#sli-to-global-dr) below for details.
-<br><br>&#x2022; <a id="sli-to-slo-snat"></a>[`sli_to_slo_snat`](#sli-to-slo-snat) - Optional Block<br>SNAT Configuration. x-example: '' description<br>See [SLI To Slo Snat](#sli-to-slo-snat) below for details.
+<br><br>&#x2022; <a id="sli-to-slo-snat"></a>[`sli_to_slo_snat`](#sli-to-slo-snat) - Optional Block<br>SNAT Configuration. description<br>See [SLI To Slo Snat](#sli-to-slo-snat) below for details.
 <br><br>&#x2022; <a id="slo-to-global-dr"></a>[`slo_to_global_dr`](#slo-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#slo-to-global-dr) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
@@ -92,7 +92,7 @@ An [`enable_forward_proxy`](#enable-forward-proxy) block supports the following:
 
 <a id="enable-forward-proxy-max-connect-attempts"></a>&#x2022; [`max_connect_attempts`](#enable-forward-proxy-max-connect-attempts) - Optional Number  Defaults to `1`<br>Number of connect attempts. Specifies the allowed number of retries on connect failure to upstream server
 
-<a id="enable-forward-proxy-no-interception"></a>&#x2022; [`no_interception`](#enable-forward-proxy-no-interception) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="enable-forward-proxy-no-interception"></a>&#x2022; [`no_interception`](#enable-forward-proxy-no-interception) - Optional Block<br>Enable this option
 
 <a id="enable-forward-proxy-tls-intercept"></a>&#x2022; [`tls_intercept`](#enable-forward-proxy-tls-intercept) - Optional Block<br>Configuration for TLS interception. Configuration to enable TLS interception<br>See [TLS Intercept](#enable-forward-proxy-tls-intercept) below.
 
@@ -106,15 +106,15 @@ A [`tls_intercept`](#enable-forward-proxy-tls-intercept) block (within [`enable_
 
 <a id="enable-forward-proxy-tls-intercept-custom-certificate"></a>&#x2022; [`custom_certificate`](#enable-forward-proxy-tls-intercept-custom-certificate) - Optional Block<br>TLS Certificate. Handle to fetch certificate and key<br>See [Custom Certificate](#enable-forward-proxy-tls-intercept-custom-certificate) below.
 
-<a id="enable-forward-proxy-tls-intercept-enable-for-all-domains"></a>&#x2022; [`enable_for_all_domains`](#enable-forward-proxy-tls-intercept-enable-for-all-domains) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="enable-forward-proxy-tls-intercept-enable-for-all-domains"></a>&#x2022; [`enable_for_all_domains`](#enable-forward-proxy-tls-intercept-enable-for-all-domains) - Optional Block<br>Enable this option
 
 <a id="enable-forward-proxy-tls-intercept-policy"></a>&#x2022; [`policy`](#enable-forward-proxy-tls-intercept-policy) - Optional Block<br>TLS Interception Policy. Policy to enable or disable TLS interception<br>See [Policy](#enable-forward-proxy-tls-intercept-policy) below.
 
 <a id="enable-forward-proxy-tls-intercept-trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#enable-forward-proxy-tls-intercept-trusted-ca-url) - Optional String<br>Custom Root CA Certificate. Custom Root CA Certificate for validating upstream server certificate
 
-<a id="enable-forward-proxy-tls-intercept-volterra-certificate"></a>&#x2022; [`volterra_certificate`](#enable-forward-proxy-tls-intercept-volterra-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="enable-forward-proxy-tls-intercept-volterra-certificate"></a>&#x2022; [`volterra_certificate`](#enable-forward-proxy-tls-intercept-volterra-certificate) - Optional Block<br>Enable this option
 
-<a id="enable-forward-proxy-tls-intercept-volterra-trusted-ca"></a>&#x2022; [`volterra_trusted_ca`](#enable-forward-proxy-tls-intercept-volterra-trusted-ca) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="enable-forward-proxy-tls-intercept-volterra-trusted-ca"></a>&#x2022; [`volterra_trusted_ca`](#enable-forward-proxy-tls-intercept-volterra-trusted-ca) - Optional Block<br>Enable this option
 
 #### Enable Forward Proxy TLS Intercept Custom Certificate
 
@@ -126,11 +126,11 @@ A [`custom_certificate`](#enable-forward-proxy-tls-intercept-custom-certificate)
 
 <a id="enable-forward-proxy-tls-intercept-custom-certificate-description-spec"></a>&#x2022; [`description_spec`](#enable-forward-proxy-tls-intercept-custom-certificate-description-spec) - Optional String<br>Description. Description for the certificate
 
-<a id="enable-forward-proxy-tls-intercept-custom-certificate-disable-ocsp-stapling"></a>&#x2022; [`disable_ocsp_stapling`](#enable-forward-proxy-tls-intercept-custom-certificate-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="enable-forward-proxy-tls-intercept-custom-certificate-disable-ocsp-stapling"></a>&#x2022; [`disable_ocsp_stapling`](#enable-forward-proxy-tls-intercept-custom-certificate-disable-ocsp-stapling) - Optional Block<br>Enable this option
 
 <a id="enable-forward-proxy-tls-intercept-custom-certificate-private-key"></a>&#x2022; [`private_key`](#enable-forward-proxy-tls-intercept-custom-certificate-private-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#enable-forward-proxy-tls-intercept-custom-certificate-private-key) below.
 
-<a id="enable-forward-proxy-tls-intercept-custom-certificate-use-system-defaults"></a>&#x2022; [`use_system_defaults`](#enable-forward-proxy-tls-intercept-custom-certificate-use-system-defaults) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="enable-forward-proxy-tls-intercept-custom-certificate-use-system-defaults"></a>&#x2022; [`use_system_defaults`](#enable-forward-proxy-tls-intercept-custom-certificate-use-system-defaults) - Optional Block<br>Enable this option
 
 #### Enable Forward Proxy TLS Intercept Custom Certificate Custom Hash Algorithms
 
@@ -174,11 +174,11 @@ A [`policy`](#enable-forward-proxy-tls-intercept-policy) block (within [`enable_
 
 An [`interception_rules`](#enable-forward-proxy-tls-intercept-policy-interception-rules) block (within [`enable_forward_proxy.tls_intercept.policy`](#enable-forward-proxy-tls-intercept-policy)) supports the following:
 
-<a id="enable-forward-proxy-tls-intercept-policy-interception-rules-disable-interception"></a>&#x2022; [`disable_interception`](#enable-forward-proxy-tls-intercept-policy-interception-rules-disable-interception) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="enable-forward-proxy-tls-intercept-policy-interception-rules-disable-interception"></a>&#x2022; [`disable_interception`](#enable-forward-proxy-tls-intercept-policy-interception-rules-disable-interception) - Optional Block<br>Enable this option
 
 <a id="enable-forward-proxy-tls-intercept-policy-interception-rules-domain-match"></a>&#x2022; [`domain_match`](#enable-forward-proxy-tls-intercept-policy-interception-rules-domain-match) - Optional Block<br>Domains. Domains names<br>See [Domain Match](#enable-forward-proxy-tls-intercept-policy-interception-rules-domain-match) below.
 
-<a id="enable-forward-proxy-tls-intercept-policy-interception-rules-enable-interception"></a>&#x2022; [`enable_interception`](#enable-forward-proxy-tls-intercept-policy-interception-rules-enable-interception) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="enable-forward-proxy-tls-intercept-policy-interception-rules-enable-interception"></a>&#x2022; [`enable_interception`](#enable-forward-proxy-tls-intercept-policy-interception-rules-enable-interception) - Optional Block<br>Enable this option
 
 #### Enable Forward Proxy TLS Intercept Policy Interception Rules Domain Match
 
@@ -210,9 +210,9 @@ A [`global_vn`](#sli-to-global-dr-global-vn) block (within [`sli_to_global_dr`](
 
 A [`sli_to_slo_snat`](#sli-to-slo-snat) block supports the following:
 
-<a id="sli-to-slo-snat-default-gw-snat"></a>&#x2022; [`default_gw_snat`](#sli-to-slo-snat-default-gw-snat) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="sli-to-slo-snat-default-gw-snat"></a>&#x2022; [`default_gw_snat`](#sli-to-slo-snat-default-gw-snat) - Optional Block<br>Enable this option
 
-<a id="sli-to-slo-snat-interface-ip"></a>&#x2022; [`interface_ip`](#sli-to-slo-snat-interface-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="sli-to-slo-snat-interface-ip"></a>&#x2022; [`interface_ip`](#sli-to-slo-snat-interface-ip) - Optional Block<br>Enable this option
 
 #### Slo To Global DR
 

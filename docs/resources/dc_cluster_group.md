@@ -36,11 +36,11 @@ resource "f5xc_dc_cluster_group" "example" {
   type {
     # Configure type settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   control_and_data_plane_mesh {
     # Configure control_and_data_plane_mesh settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   data_plane_mesh {
     # Configure data_plane_mesh settings
   }
@@ -94,9 +94,9 @@ A [`timeouts`](#timeouts) block supports the following:
 
 A [`type`](#type) block supports the following:
 
-<a id="type-control-and-data-plane-mesh"></a>&#x2022; [`control_and_data_plane_mesh`](#type-control-and-data-plane-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="type-control-and-data-plane-mesh"></a>&#x2022; [`control_and_data_plane_mesh`](#type-control-and-data-plane-mesh) - Optional Block<br>Enable this option
 
-<a id="type-data-plane-mesh"></a>&#x2022; [`data_plane_mesh`](#type-data-plane-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="type-data-plane-mesh"></a>&#x2022; [`data_plane_mesh`](#type-data-plane-mesh) - Optional Block<br>Enable this option
 
 ## Import
 

@@ -70,8 +70,8 @@ resource "f5xc_fleet" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="allow-all-usb"></a>[`allow_all_usb`](#allow-all-usb) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="deny-all-usb"></a>[`deny_all_usb`](#deny-all-usb) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="allow-all-usb"></a>[`allow_all_usb`](#allow-all-usb) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="deny-all-usb"></a>[`deny_all_usb`](#deny-all-usb) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="usb-policy"></a>[`usb_policy`](#usb-policy) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
 
 <a id="blocked-services"></a>&#x2022; [`blocked_services`](#blocked-services) - Optional Block<br>Disable Node Local Services. Disable node local services on this site<br>See [Blocked Services](#blocked-services) below for details.
@@ -84,21 +84,21 @@ resource "f5xc_fleet" "example" {
 <br><br>&#x2022; <a id="dc-cluster-group-inside"></a>[`dc_cluster_group_inside`](#dc-cluster-group-inside) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group Inside](#dc-cluster-group-inside) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="default-config"></a>[`default_config`](#default-config) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="default-config"></a>[`default_config`](#default-config) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="device-list"></a>[`device_list`](#device-list) - Optional Block<br>List of Devices. Add device for all interfaces belonging to this fleet<br>See [Device List](#device-list) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="default-sriov-interface"></a>[`default_sriov_interface`](#default-sriov-interface) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="default-sriov-interface"></a>[`default_sriov_interface`](#default-sriov-interface) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="default-storage-class"></a>[`default_storage_class`](#default-storage-class) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="default-storage-class"></a>[`default_storage_class`](#default-storage-class) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="disable-gpu"></a>[`disable_gpu`](#disable-gpu) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="enable-gpu"></a>[`enable_gpu`](#enable-gpu) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="disable-gpu"></a>[`disable_gpu`](#disable-gpu) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="enable-gpu"></a>[`enable_gpu`](#enable-gpu) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="disable-vm"></a>[`disable_vm`](#disable-vm) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="disable-vm"></a>[`disable_vm`](#disable-vm) - Optional Block<br>Enable this option
 
 <a id="enable-default-fleet-config-download"></a>&#x2022; [`enable_default_fleet_config_download`](#enable-default-fleet-config-download) - Optional Bool<br>Enable Default Fleet Config Download. Enable default fleet config, It must be set for storage config and GPU config
 
@@ -116,30 +116,30 @@ resource "f5xc_fleet" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="log-receiver"></a>[`log_receiver`](#log-receiver) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Log Receiver](#log-receiver) below for details.
-<br><br>&#x2022; <a id="logs-streaming-disabled"></a>[`logs_streaming_disabled`](#logs-streaming-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="logs-streaming-disabled"></a>[`logs_streaming_disabled`](#logs-streaming-disabled) - Optional Block<br>Enable this option
 
 <a id="network-connectors"></a>&#x2022; [`network_connectors`](#network-connectors) - Optional Block<br>Network Connectors. Network Connector defines connection between two virtual networks in a given site. Fleet defines one or more such network connectors. The network connectors configuration is applied on all sites that are member of the fleet<br>See [Network Connectors](#network-connectors) below for details.
 
 <a id="network-firewall"></a>&#x2022; [`network_firewall`](#network-firewall) - Optional Block<br>Network Firewall. Network Firewall defines firewall to be applied for the virtual networks in the fleet. The network firewall configuration is applied on all sites that are member of the fleet. Constraints The Network Firewall is applied on Virtual Networks of type site local network and site local inside network<br>See [Network Firewall](#network-firewall) below for details.
 
-<a id="no-bond-devices"></a>&#x2022; [`no_bond_devices`](#no-bond-devices) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="no-bond-devices"></a>&#x2022; [`no_bond_devices`](#no-bond-devices) - Optional Block<br>Enable this option
 
-<a id="no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#no-dc-cluster-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
-
--> **One of the following:**
-&#x2022; <a id="no-storage-device"></a>[`no_storage_device`](#no-storage-device) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#no-dc-cluster-group) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="no-storage-interfaces"></a>[`no_storage_interfaces`](#no-storage-interfaces) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="no-storage-device"></a>[`no_storage_device`](#no-storage-device) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="no-storage-static-routes"></a>[`no_storage_static_routes`](#no-storage-static-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="no-storage-interfaces"></a>[`no_storage_interfaces`](#no-storage-interfaces) - Optional Block<br>Enable this option
+
+-> **One of the following:**
+&#x2022; <a id="no-storage-static-routes"></a>[`no_storage_static_routes`](#no-storage-static-routes) - Optional Block<br>Enable this option
 
 <a id="operating-system-version"></a>&#x2022; [`operating_system_version`](#operating-system-version) - Optional String<br>Operating System Version. Desired Operating System version that is applied to all sites that are member of the fleet. Current Operating System version can be overridden via site config
 
 <a id="outside-virtual-network"></a>&#x2022; [`outside_virtual_network`](#outside-virtual-network) - Optional Block<br>Outside (Site Local) Virtual Network. Default outside (site local) virtual network for the fleet<br>See [Outside Virtual Network](#outside-virtual-network) below for details.
 
-<a id="performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#performance-enhancement-mode) below for details.
+<a id="performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode.Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#performance-enhancement-mode) below for details.
 
 <a id="sriov-interfaces"></a>&#x2022; [`sriov_interfaces`](#sriov-interfaces) - Optional Block<br>Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration<br>See [Sriov Interfaces](#sriov-interfaces) below for details.
 
@@ -167,13 +167,13 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`blocked_services`](#blocked-services) block supports the following:
 
-<a id="blocked-services-dns"></a>&#x2022; [`dns`](#blocked-services-dns) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="blocked-services-dns"></a>&#x2022; [`dns`](#blocked-services-dns) - Optional Block<br>Enable this option
 
 <a id="blocked-services-network-type"></a>&#x2022; [`network_type`](#blocked-services-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
-<a id="blocked-services-ssh"></a>&#x2022; [`ssh`](#blocked-services-ssh) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="blocked-services-ssh"></a>&#x2022; [`ssh`](#blocked-services-ssh) - Optional Block<br>Enable this option
 
-<a id="blocked-services-web-user-interface"></a>&#x2022; [`web_user_interface`](#blocked-services-web-user-interface) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="blocked-services-web-user-interface"></a>&#x2022; [`web_user_interface`](#blocked-services-web-user-interface) - Optional Block<br>Enable this option
 
 #### Bond Device List
 
@@ -185,7 +185,7 @@ A [`bond_device_list`](#bond-device-list) block supports the following:
 
 A [`bond_devices`](#bond-device-list-bond-devices) block (within [`bond_device_list`](#bond-device-list)) supports the following:
 
-<a id="bond-device-list-bond-devices-active-backup"></a>&#x2022; [`active_backup`](#bond-device-list-bond-devices-active-backup) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bond-device-list-bond-devices-active-backup"></a>&#x2022; [`active_backup`](#bond-device-list-bond-devices-active-backup) - Optional Block<br>Enable this option
 
 <a id="bond-device-list-bond-devices-devices"></a>&#x2022; [`devices`](#bond-device-list-bond-devices-devices) - Optional List<br>Member Ethernet Devices. Ethernet devices that will make up this bond
 
@@ -305,7 +305,7 @@ An [`interfaces`](#interface-list-interfaces) block (within [`interface_list`](#
 
 A [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain) block supports the following:
 
-<a id="kubernetes-upgrade-drain-disable-upgrade-drain"></a>&#x2022; [`disable_upgrade_drain`](#kubernetes-upgrade-drain-disable-upgrade-drain) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kubernetes-upgrade-drain-disable-upgrade-drain"></a>&#x2022; [`disable_upgrade_drain`](#kubernetes-upgrade-drain-disable-upgrade-drain) - Optional Block<br>Enable this option
 
 <a id="kubernetes-upgrade-drain-enable-upgrade-drain"></a>&#x2022; [`enable_upgrade_drain`](#kubernetes-upgrade-drain-enable-upgrade-drain) - Optional Block<br>Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site<br>See [Enable Upgrade Drain](#kubernetes-upgrade-drain-enable-upgrade-drain) below.
 
@@ -313,13 +313,13 @@ A [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain) block supports the fol
 
 An [`enable_upgrade_drain`](#kubernetes-upgrade-drain-enable-upgrade-drain) block (within [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain)) supports the following:
 
-<a id="kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode"></a>&#x2022; [`disable_vega_upgrade_mode`](#kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode"></a>&#x2022; [`disable_vega_upgrade_mode`](#kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode) - Optional Block<br>Enable this option
 
 <a id="kubernetes-upgrade-drain-enable-upgrade-drain-drain-max-unavailable-node-count"></a>&#x2022; [`drain_max_unavailable_node_count`](#kubernetes-upgrade-drain-enable-upgrade-drain-drain-max-unavailable-node-count) - Optional Number<br>Node Batch Size Count
 
 <a id="kubernetes-upgrade-drain-enable-upgrade-drain-drain-node-timeout"></a>&#x2022; [`drain_node_timeout`](#kubernetes-upgrade-drain-enable-upgrade-drain-drain-node-timeout) - Optional Number<br>Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value)
 
-<a id="kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode"></a>&#x2022; [`enable_vega_upgrade_mode`](#kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode"></a>&#x2022; [`enable_vega_upgrade_mode`](#kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode) - Optional Block<br>Enable this option
 
 #### Log Receiver
 
@@ -377,17 +377,17 @@ An [`outside_virtual_network`](#outside-virtual-network) block supports the foll
 
 A [`performance_enhancement_mode`](#performance-enhancement-mode) block supports the following:
 
-<a id="performance-enhancement-mode-perf-mode-l3-enhanced"></a>&#x2022; [`perf_mode_l3_enhanced`](#performance-enhancement-mode-perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#performance-enhancement-mode-perf-mode-l3-enhanced) below.
+<a id="performance-enhancement-mode-perf-mode-l3-enhanced"></a>&#x2022; [`perf_mode_l3_enhanced`](#performance-enhancement-mode-perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance.L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
-<a id="performance-enhancement-mode-perf-mode-l7-enhanced"></a>&#x2022; [`perf_mode_l7_enhanced`](#performance-enhancement-mode-perf-mode-l7-enhanced) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="performance-enhancement-mode-perf-mode-l7-enhanced"></a>&#x2022; [`perf_mode_l7_enhanced`](#performance-enhancement-mode-perf-mode-l7-enhanced) - Optional Block<br>Enable this option
 
 #### Performance Enhancement Mode Perf Mode L3 Enhanced
 
 A [`perf_mode_l3_enhanced`](#performance-enhancement-mode-perf-mode-l3-enhanced) block (within [`performance_enhancement_mode`](#performance-enhancement-mode)) supports the following:
 
-<a id="performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>&#x2022; [`jumbo`](#performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>&#x2022; [`jumbo`](#performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) - Optional Block<br>Enable this option
 
-<a id="performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo"></a>&#x2022; [`no_jumbo`](#performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo"></a>&#x2022; [`no_jumbo`](#performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo) - Optional Block<br>Enable this option
 
 #### Sriov Interfaces
 
@@ -509,7 +509,7 @@ A [`storage_devices`](#storage-device-list-storage-devices) block (within [`stor
 
 <a id="storage-device-list-storage-devices-advanced-advanced-parameters"></a>&#x2022; [`advanced_advanced_parameters`](#storage-device-list-storage-devices-advanced-advanced-parameters) - Optional Block<br>Advanced Parameters. Map of parameter name and string value
 
-<a id="storage-device-list-storage-devices-custom-storage"></a>&#x2022; [`custom_storage`](#storage-device-list-storage-devices-custom-storage) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="storage-device-list-storage-devices-custom-storage"></a>&#x2022; [`custom_storage`](#storage-device-list-storage-devices-custom-storage) - Optional Block<br>Enable this option
 
 <a id="storage-device-list-storage-devices-hpe-storage"></a>&#x2022; [`hpe_storage`](#storage-device-list-storage-devices-hpe-storage) - Optional Block<br>HPE Storage. Device configuration for HPE Storage<br>See [Hpe Storage](#storage-device-list-storage-devices-hpe-storage) below.
 
@@ -601,7 +601,7 @@ A [`netapp_trident`](#storage-device-list-storage-devices-netapp-trident) block 
 
 A [`netapp_backend_ontap_nas`](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas) block (within [`storage_device_list.storage_devices.netapp_trident`](#storage-device-list-storage-devices-netapp-trident)) supports the following:
 
-<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-auto-export-cidrs"></a>&#x2022; [`auto_export_cidrs`](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-auto-export-cidrs) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Auto Export Cidrs](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-auto-export-cidrs) below.
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-auto-export-cidrs"></a>&#x2022; [`auto_export_cidrs`](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-auto-export-cidrs) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Auto Export Cidrs](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-auto-export-cidrs) below.
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-auto-export-policy"></a>&#x2022; [`auto_export_policy`](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-auto-export-policy) - Optional Bool<br>Auto Export Policy. Enable automatic export policy creation and updating
 
@@ -723,7 +723,7 @@ A [`volume_defaults`](#storage-device-list-storage-devices-netapp-trident-netapp
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-storage-volume-defaults-export-policy"></a>&#x2022; [`export_policy`](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-storage-volume-defaults-export-policy) - Optional String<br>Export Policy. Export policy to use
 
-<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-storage-volume-defaults-no-qos"></a>&#x2022; [`no_qos`](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-storage-volume-defaults-no-qos) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-storage-volume-defaults-no-qos"></a>&#x2022; [`no_qos`](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-storage-volume-defaults-no-qos) - Optional Block<br>Enable this option
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-storage-volume-defaults-qos-policy"></a>&#x2022; [`qos_policy`](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-storage-volume-defaults-qos-policy) - Optional String<br>QOS Policy Name. Enter QOS Policy Name
 
@@ -753,7 +753,7 @@ A [`volume_defaults`](#storage-device-list-storage-devices-netapp-trident-netapp
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-volume-defaults-export-policy"></a>&#x2022; [`export_policy`](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-volume-defaults-export-policy) - Optional String<br>Export Policy. Export policy to use
 
-<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-volume-defaults-no-qos"></a>&#x2022; [`no_qos`](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-volume-defaults-no-qos) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-volume-defaults-no-qos"></a>&#x2022; [`no_qos`](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-volume-defaults-no-qos) - Optional Block<br>Enable this option
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-volume-defaults-qos-policy"></a>&#x2022; [`qos_policy`](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-volume-defaults-qos-policy) - Optional String<br>QOS Policy Name. Enter QOS Policy Name
 
@@ -797,7 +797,7 @@ A [`netapp_backend_ontap_san`](#storage-device-list-storage-devices-netapp-tride
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-management-lif-ip"></a>&#x2022; [`management_lif_ip`](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-management-lif-ip) - Optional String<br>Backend Management LIF IP Address. Backend Management LIF IP Address is reachable at the given IP address
 
-<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-no-chap"></a>&#x2022; [`no_chap`](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-no-chap) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-no-chap"></a>&#x2022; [`no_chap`](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-no-chap) - Optional Block<br>Enable this option
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-password"></a>&#x2022; [`password`](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-password) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-password) below.
 
@@ -891,7 +891,7 @@ A [`volume_defaults`](#storage-device-list-storage-devices-netapp-trident-netapp
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-storage-volume-defaults-export-policy"></a>&#x2022; [`export_policy`](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-storage-volume-defaults-export-policy) - Optional String<br>Export Policy. Export policy to use
 
-<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-storage-volume-defaults-no-qos"></a>&#x2022; [`no_qos`](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-storage-volume-defaults-no-qos) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-storage-volume-defaults-no-qos"></a>&#x2022; [`no_qos`](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-storage-volume-defaults-no-qos) - Optional Block<br>Enable this option
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-storage-volume-defaults-qos-policy"></a>&#x2022; [`qos_policy`](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-storage-volume-defaults-qos-policy) - Optional String<br>QOS Policy Name. Enter QOS Policy Name
 
@@ -985,7 +985,7 @@ A [`volume_defaults`](#storage-device-list-storage-devices-netapp-trident-netapp
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-volume-defaults-export-policy"></a>&#x2022; [`export_policy`](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-volume-defaults-export-policy) - Optional String<br>Export Policy. Export policy to use
 
-<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-volume-defaults-no-qos"></a>&#x2022; [`no_qos`](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-volume-defaults-no-qos) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-volume-defaults-no-qos"></a>&#x2022; [`no_qos`](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-volume-defaults-no-qos) - Optional Block<br>Enable this option
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-volume-defaults-qos-policy"></a>&#x2022; [`qos_policy`](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-volume-defaults-qos-policy) - Optional String<br>QOS Policy Name. Enter QOS Policy Name
 

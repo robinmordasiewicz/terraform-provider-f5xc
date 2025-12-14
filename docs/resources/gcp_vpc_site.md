@@ -100,7 +100,7 @@ resource "f5xc_gcp_vpc_site" "example" {
 <a id="admin-password"></a>&#x2022; [`admin_password`](#admin-password) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Admin Password](#admin-password) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="block-all-services"></a>[`block_all_services`](#block-all-services) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="block-all-services"></a>[`block_all_services`](#block-all-services) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="blocked-services"></a>[`blocked_services`](#blocked-services) - Optional Block<br>Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site<br>See [Blocked Services](#blocked-services) below for details.
 
 <a id="cloud-credentials"></a>&#x2022; [`cloud_credentials`](#cloud-credentials) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Cloud Credentials](#cloud-credentials) below for details.
@@ -109,7 +109,7 @@ resource "f5xc_gcp_vpc_site" "example" {
 
 <a id="custom-dns"></a>&#x2022; [`custom_dns`](#custom-dns) - Optional Block<br>Custom DNS. Custom DNS is the configured for specify CE site<br>See [Custom DNS](#custom-dns) below for details.
 
-<a id="default-blocked-services"></a>&#x2022; [`default_blocked_services`](#default-blocked-services) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="default-blocked-services"></a>&#x2022; [`default_blocked_services`](#default-blocked-services) - Optional Block<br>Enable this option
 
 <a id="disk-size"></a>&#x2022; [`disk_size`](#disk-size) - Optional Number<br>Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB
 
@@ -128,14 +128,14 @@ resource "f5xc_gcp_vpc_site" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="log-receiver"></a>[`log_receiver`](#log-receiver) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
-<br><br>&#x2022; <a id="logs-streaming-disabled"></a>[`logs_streaming_disabled`](#logs-streaming-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="logs-streaming-disabled"></a>[`logs_streaming_disabled`](#logs-streaming-disabled) - Optional Block<br>Enable this option
 
 <a id="offline-survivability-mode"></a>&#x2022; [`offline_survivability_mode`](#offline-survivability-mode) - Optional Block<br>Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen
 
 <a id="os"></a>&#x2022; [`os`](#os) - Optional Block<br>Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions
 
 -> **One of the following:**
-&#x2022; <a id="private-connect-disabled"></a>[`private_connect_disabled`](#private-connect-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="private-connect-disabled"></a>[`private_connect_disabled`](#private-connect-disabled) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="private-connectivity"></a>[`private_connectivity`](#private-connectivity) - Optional Block<br>Private Connect Configuration. Private Connect Configuration
 
 <a id="ssh-key"></a>&#x2022; [`ssh_key`](#ssh-key) - Optional String<br>Public SSH key. Public SSH key for accessing the site
@@ -188,13 +188,13 @@ A [`blocked_services`](#blocked-services) block supports the following:
 
 A [`blocked_sevice`](#blocked-services-blocked-sevice) block (within [`blocked_services`](#blocked-services)) supports the following:
 
-<a id="blocked-services-blocked-sevice-dns"></a>&#x2022; [`dns`](#blocked-services-blocked-sevice-dns) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="blocked-services-blocked-sevice-dns"></a>&#x2022; [`dns`](#blocked-services-blocked-sevice-dns) - Optional Block<br>Enable this option
 
 <a id="blocked-services-blocked-sevice-network-type"></a>&#x2022; [`network_type`](#blocked-services-blocked-sevice-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
-<a id="blocked-services-blocked-sevice-ssh"></a>&#x2022; [`ssh`](#blocked-services-blocked-sevice-ssh) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="blocked-services-blocked-sevice-ssh"></a>&#x2022; [`ssh`](#blocked-services-blocked-sevice-ssh) - Optional Block<br>Enable this option
 
-<a id="blocked-services-blocked-sevice-web-user-interface"></a>&#x2022; [`web_user_interface`](#blocked-services-blocked-sevice-web-user-interface) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="blocked-services-blocked-sevice-web-user-interface"></a>&#x2022; [`web_user_interface`](#blocked-services-blocked-sevice-web-user-interface) - Optional Block<br>Enable this option
 
 #### Cloud Credentials
 
@@ -236,11 +236,11 @@ An [`ingress_egress_gw`](#ingress-egress-gw) block supports the following:
 
 <a id="ingress-egress-gw-dc-cluster-group-outside-vn"></a>&#x2022; [`dc_cluster_group_outside_vn`](#ingress-egress-gw-dc-cluster-group-outside-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group Outside Vn](#ingress-egress-gw-dc-cluster-group-outside-vn) below.
 
-<a id="ingress-egress-gw-forward-proxy-allow-all"></a>&#x2022; [`forward_proxy_allow_all`](#ingress-egress-gw-forward-proxy-allow-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-forward-proxy-allow-all"></a>&#x2022; [`forward_proxy_allow_all`](#ingress-egress-gw-forward-proxy-allow-all) - Optional Block<br>Enable this option
 
 <a id="ingress-egress-gw-gcp-certified-hw"></a>&#x2022; [`gcp_certified_hw`](#ingress-egress-gw-gcp-certified-hw) - Optional String<br>GCP Certified Hardware. Name for GCP certified hardware
 
-<a id="ingress-egress-gw-gcp-zone-names"></a>&#x2022; [`gcp_zone_names`](#ingress-egress-gw-gcp-zone-names) - Optional List<br>GCP zone names. x-required List of zones when instances will be created, needs to match with region selected
+<a id="ingress-egress-gw-gcp-zone-names"></a>&#x2022; [`gcp_zone_names`](#ingress-egress-gw-gcp-zone-names) - Optional List<br>GCP zone names.List of zones when instances will be created, needs to match with region selected
 
 <a id="ingress-egress-gw-global-network-list"></a>&#x2022; [`global_network_list`](#ingress-egress-gw-global-network-list) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#ingress-egress-gw-global-network-list) below.
 
@@ -250,17 +250,17 @@ An [`ingress_egress_gw`](#ingress-egress-gw) block supports the following:
 
 <a id="ingress-egress-gw-inside-subnet"></a>&#x2022; [`inside_subnet`](#ingress-egress-gw-inside-subnet) - Optional Block<br>GCP VPC network choice. This defines choice about GCP VPC network for a view<br>See [Inside Subnet](#ingress-egress-gw-inside-subnet) below.
 
-<a id="ingress-egress-gw-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#ingress-egress-gw-no-dc-cluster-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#ingress-egress-gw-no-dc-cluster-group) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#ingress-egress-gw-no-forward-proxy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#ingress-egress-gw-no-forward-proxy) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-no-global-network"></a>&#x2022; [`no_global_network`](#ingress-egress-gw-no-global-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-no-global-network"></a>&#x2022; [`no_global_network`](#ingress-egress-gw-no-global-network) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-no-inside-static-routes"></a>&#x2022; [`no_inside_static_routes`](#ingress-egress-gw-no-inside-static-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-no-inside-static-routes"></a>&#x2022; [`no_inside_static_routes`](#ingress-egress-gw-no-inside-static-routes) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-no-network-policy"></a>&#x2022; [`no_network_policy`](#ingress-egress-gw-no-network-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-no-network-policy"></a>&#x2022; [`no_network_policy`](#ingress-egress-gw-no-network-policy) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-no-outside-static-routes"></a>&#x2022; [`no_outside_static_routes`](#ingress-egress-gw-no-outside-static-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-no-outside-static-routes"></a>&#x2022; [`no_outside_static_routes`](#ingress-egress-gw-no-outside-static-routes) - Optional Block<br>Enable this option
 
 <a id="ingress-egress-gw-node-number"></a>&#x2022; [`node_number`](#ingress-egress-gw-node-number) - Optional Number<br>Number of main nodes. Number of main nodes to create, either 1 or 3
 
@@ -270,11 +270,11 @@ An [`ingress_egress_gw`](#ingress-egress-gw) block supports the following:
 
 <a id="ingress-egress-gw-outside-subnet"></a>&#x2022; [`outside_subnet`](#ingress-egress-gw-outside-subnet) - Optional Block<br>GCP VPC network choice. This defines choice about GCP VPC network for a view<br>See [Outside Subnet](#ingress-egress-gw-outside-subnet) below.
 
-<a id="ingress-egress-gw-performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#ingress-egress-gw-performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#ingress-egress-gw-performance-enhancement-mode) below.
+<a id="ingress-egress-gw-performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#ingress-egress-gw-performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode.Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#ingress-egress-gw-performance-enhancement-mode) below.
 
-<a id="ingress-egress-gw-sm-connection-public-ip"></a>&#x2022; [`sm_connection_public_ip`](#ingress-egress-gw-sm-connection-public-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-sm-connection-public-ip"></a>&#x2022; [`sm_connection_public_ip`](#ingress-egress-gw-sm-connection-public-ip) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-sm-connection-pvt-ip"></a>&#x2022; [`sm_connection_pvt_ip`](#ingress-egress-gw-sm-connection-pvt-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-sm-connection-pvt-ip"></a>&#x2022; [`sm_connection_pvt_ip`](#ingress-egress-gw-sm-connection-pvt-ip) - Optional Block<br>Enable this option
 
 #### Ingress Egress Gw Active Enhanced Firewall Policies
 
@@ -670,17 +670,17 @@ A [`new_subnet`](#ingress-egress-gw-outside-subnet-new-subnet) block (within [`i
 
 A [`performance_enhancement_mode`](#ingress-egress-gw-performance-enhancement-mode) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
 
-<a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced"></a>&#x2022; [`perf_mode_l3_enhanced`](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) below.
+<a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced"></a>&#x2022; [`perf_mode_l3_enhanced`](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance.L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
-<a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l7-enhanced"></a>&#x2022; [`perf_mode_l7_enhanced`](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l7-enhanced) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l7-enhanced"></a>&#x2022; [`perf_mode_l7_enhanced`](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l7-enhanced) - Optional Block<br>Enable this option
 
 #### Ingress Egress Gw Performance Enhancement Mode Perf Mode L3 Enhanced
 
 A [`perf_mode_l3_enhanced`](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) block (within [`ingress_egress_gw.performance_enhancement_mode`](#ingress-egress-gw-performance-enhancement-mode)) supports the following:
 
-<a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>&#x2022; [`jumbo`](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>&#x2022; [`jumbo`](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo"></a>&#x2022; [`no_jumbo`](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo"></a>&#x2022; [`no_jumbo`](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo) - Optional Block<br>Enable this option
 
 #### Ingress Gw
 
@@ -688,7 +688,7 @@ An [`ingress_gw`](#ingress-gw) block supports the following:
 
 <a id="ingress-gw-gcp-certified-hw"></a>&#x2022; [`gcp_certified_hw`](#ingress-gw-gcp-certified-hw) - Optional String<br>GCP Certified Hardware. Name for GCP certified hardware
 
-<a id="ingress-gw-gcp-zone-names"></a>&#x2022; [`gcp_zone_names`](#ingress-gw-gcp-zone-names) - Optional List<br>GCP zone names. x-required List of zones when instances will be created, needs to match with region selected
+<a id="ingress-gw-gcp-zone-names"></a>&#x2022; [`gcp_zone_names`](#ingress-gw-gcp-zone-names) - Optional List<br>GCP zone names.List of zones when instances will be created, needs to match with region selected
 
 <a id="ingress-gw-local-network"></a>&#x2022; [`local_network`](#ingress-gw-local-network) - Optional Block<br>GCP VPC network choice. This defines choice about GCP VPC network for a view<br>See [Local Network](#ingress-gw-local-network) below.
 
@@ -696,7 +696,7 @@ An [`ingress_gw`](#ingress-gw) block supports the following:
 
 <a id="ingress-gw-node-number"></a>&#x2022; [`node_number`](#ingress-gw-node-number) - Optional Number<br>Number of main nodes. Number of main nodes to create, either 1 or 3
 
-<a id="ingress-gw-performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#ingress-gw-performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#ingress-gw-performance-enhancement-mode) below.
+<a id="ingress-gw-performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#ingress-gw-performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode.Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#ingress-gw-performance-enhancement-mode) below.
 
 #### Ingress Gw Local Network
 
@@ -746,23 +746,23 @@ A [`new_subnet`](#ingress-gw-local-subnet-new-subnet) block (within [`ingress_gw
 
 A [`performance_enhancement_mode`](#ingress-gw-performance-enhancement-mode) block (within [`ingress_gw`](#ingress-gw)) supports the following:
 
-<a id="ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced"></a>&#x2022; [`perf_mode_l3_enhanced`](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) below.
+<a id="ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced"></a>&#x2022; [`perf_mode_l3_enhanced`](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance.L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
-<a id="ingress-gw-performance-enhancement-mode-perf-mode-l7-enhanced"></a>&#x2022; [`perf_mode_l7_enhanced`](#ingress-gw-performance-enhancement-mode-perf-mode-l7-enhanced) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-gw-performance-enhancement-mode-perf-mode-l7-enhanced"></a>&#x2022; [`perf_mode_l7_enhanced`](#ingress-gw-performance-enhancement-mode-perf-mode-l7-enhanced) - Optional Block<br>Enable this option
 
 #### Ingress Gw Performance Enhancement Mode Perf Mode L3 Enhanced
 
 A [`perf_mode_l3_enhanced`](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) block (within [`ingress_gw.performance_enhancement_mode`](#ingress-gw-performance-enhancement-mode)) supports the following:
 
-<a id="ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>&#x2022; [`jumbo`](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>&#x2022; [`jumbo`](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) - Optional Block<br>Enable this option
 
-<a id="ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo"></a>&#x2022; [`no_jumbo`](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo"></a>&#x2022; [`no_jumbo`](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo) - Optional Block<br>Enable this option
 
 #### Kubernetes Upgrade Drain
 
 A [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain) block supports the following:
 
-<a id="kubernetes-upgrade-drain-disable-upgrade-drain"></a>&#x2022; [`disable_upgrade_drain`](#kubernetes-upgrade-drain-disable-upgrade-drain) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kubernetes-upgrade-drain-disable-upgrade-drain"></a>&#x2022; [`disable_upgrade_drain`](#kubernetes-upgrade-drain-disable-upgrade-drain) - Optional Block<br>Enable this option
 
 <a id="kubernetes-upgrade-drain-enable-upgrade-drain"></a>&#x2022; [`enable_upgrade_drain`](#kubernetes-upgrade-drain-enable-upgrade-drain) - Optional Block<br>Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site<br>See [Enable Upgrade Drain](#kubernetes-upgrade-drain-enable-upgrade-drain) below.
 
@@ -770,13 +770,13 @@ A [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain) block supports the fol
 
 An [`enable_upgrade_drain`](#kubernetes-upgrade-drain-enable-upgrade-drain) block (within [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain)) supports the following:
 
-<a id="kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode"></a>&#x2022; [`disable_vega_upgrade_mode`](#kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode"></a>&#x2022; [`disable_vega_upgrade_mode`](#kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode) - Optional Block<br>Enable this option
 
 <a id="kubernetes-upgrade-drain-enable-upgrade-drain-drain-max-unavailable-node-count"></a>&#x2022; [`drain_max_unavailable_node_count`](#kubernetes-upgrade-drain-enable-upgrade-drain-drain-max-unavailable-node-count) - Optional Number<br>Node Batch Size Count
 
 <a id="kubernetes-upgrade-drain-enable-upgrade-drain-drain-node-timeout"></a>&#x2022; [`drain_node_timeout`](#kubernetes-upgrade-drain-enable-upgrade-drain-drain-node-timeout) - Optional Number<br>Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value)
 
-<a id="kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode"></a>&#x2022; [`enable_vega_upgrade_mode`](#kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode"></a>&#x2022; [`enable_vega_upgrade_mode`](#kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode) - Optional Block<br>Enable this option
 
 #### Log Receiver
 
@@ -792,15 +792,15 @@ A [`log_receiver`](#log-receiver) block supports the following:
 
 An [`offline_survivability_mode`](#offline-survivability-mode) block supports the following:
 
-<a id="offline-survivability-mode-enable-offline-survivability-mode"></a>&#x2022; [`enable_offline_survivability_mode`](#offline-survivability-mode-enable-offline-survivability-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="offline-survivability-mode-enable-offline-survivability-mode"></a>&#x2022; [`enable_offline_survivability_mode`](#offline-survivability-mode-enable-offline-survivability-mode) - Optional Block<br>Enable this option
 
-<a id="offline-survivability-mode-no-offline-survivability-mode"></a>&#x2022; [`no_offline_survivability_mode`](#offline-survivability-mode-no-offline-survivability-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="offline-survivability-mode-no-offline-survivability-mode"></a>&#x2022; [`no_offline_survivability_mode`](#offline-survivability-mode-no-offline-survivability-mode) - Optional Block<br>Enable this option
 
 #### OS
 
 An [`os`](#os) block supports the following:
 
-<a id="os-default-os-version"></a>&#x2022; [`default_os_version`](#os-default-os-version) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="os-default-os-version"></a>&#x2022; [`default_os_version`](#os-default-os-version) - Optional Block<br>Enable this option
 
 <a id="os-operating-system-version"></a>&#x2022; [`operating_system_version`](#os-operating-system-version) - Optional String<br>Operating System Version. Specify a OS version to be used e.g. 9.2024.6
 
@@ -810,9 +810,9 @@ A [`private_connectivity`](#private-connectivity) block supports the following:
 
 <a id="private-connectivity-cloud-link"></a>&#x2022; [`cloud_link`](#private-connectivity-cloud-link) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Cloud Link](#private-connectivity-cloud-link) below.
 
-<a id="private-connectivity-inside"></a>&#x2022; [`inside`](#private-connectivity-inside) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="private-connectivity-inside"></a>&#x2022; [`inside`](#private-connectivity-inside) - Optional Block<br>Enable this option
 
-<a id="private-connectivity-outside"></a>&#x2022; [`outside`](#private-connectivity-outside) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="private-connectivity-outside"></a>&#x2022; [`outside`](#private-connectivity-outside) - Optional Block<br>Enable this option
 
 #### Private Connectivity Cloud Link
 
@@ -828,7 +828,7 @@ A [`cloud_link`](#private-connectivity-cloud-link) block (within [`private_conne
 
 A [`sw`](#sw) block supports the following:
 
-<a id="sw-default-sw-version"></a>&#x2022; [`default_sw_version`](#sw-default-sw-version) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="sw-default-sw-version"></a>&#x2022; [`default_sw_version`](#sw-default-sw-version) - Optional Block<br>Enable this option
 
 <a id="sw-volterra-software-version"></a>&#x2022; [`volterra_software_version`](#sw-volterra-software-version) - Optional String<br>F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002
 
@@ -856,29 +856,29 @@ A [`voltstack_cluster`](#voltstack-cluster) block supports the following:
 
 <a id="voltstack-cluster-dc-cluster-group"></a>&#x2022; [`dc_cluster_group`](#voltstack-cluster-dc-cluster-group) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group](#voltstack-cluster-dc-cluster-group) below.
 
-<a id="voltstack-cluster-default-storage"></a>&#x2022; [`default_storage`](#voltstack-cluster-default-storage) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-default-storage"></a>&#x2022; [`default_storage`](#voltstack-cluster-default-storage) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-forward-proxy-allow-all"></a>&#x2022; [`forward_proxy_allow_all`](#voltstack-cluster-forward-proxy-allow-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-forward-proxy-allow-all"></a>&#x2022; [`forward_proxy_allow_all`](#voltstack-cluster-forward-proxy-allow-all) - Optional Block<br>Enable this option
 
 <a id="voltstack-cluster-gcp-certified-hw"></a>&#x2022; [`gcp_certified_hw`](#voltstack-cluster-gcp-certified-hw) - Optional String<br>GCP Certified Hardware. Name for GCP certified hardware
 
-<a id="voltstack-cluster-gcp-zone-names"></a>&#x2022; [`gcp_zone_names`](#voltstack-cluster-gcp-zone-names) - Optional List<br>GCP zone names. x-required List of zones when instances will be created, needs to match with region selected
+<a id="voltstack-cluster-gcp-zone-names"></a>&#x2022; [`gcp_zone_names`](#voltstack-cluster-gcp-zone-names) - Optional List<br>GCP zone names.List of zones when instances will be created, needs to match with region selected
 
 <a id="voltstack-cluster-global-network-list"></a>&#x2022; [`global_network_list`](#voltstack-cluster-global-network-list) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#voltstack-cluster-global-network-list) below.
 
 <a id="voltstack-cluster-k8s-cluster"></a>&#x2022; [`k8s_cluster`](#voltstack-cluster-k8s-cluster) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [K8S Cluster](#voltstack-cluster-k8s-cluster) below.
 
-<a id="voltstack-cluster-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#voltstack-cluster-no-dc-cluster-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#voltstack-cluster-no-dc-cluster-group) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#voltstack-cluster-no-forward-proxy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#voltstack-cluster-no-forward-proxy) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-no-global-network"></a>&#x2022; [`no_global_network`](#voltstack-cluster-no-global-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-no-global-network"></a>&#x2022; [`no_global_network`](#voltstack-cluster-no-global-network) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-no-k8s-cluster"></a>&#x2022; [`no_k8s_cluster`](#voltstack-cluster-no-k8s-cluster) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-no-k8s-cluster"></a>&#x2022; [`no_k8s_cluster`](#voltstack-cluster-no-k8s-cluster) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-no-network-policy"></a>&#x2022; [`no_network_policy`](#voltstack-cluster-no-network-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-no-network-policy"></a>&#x2022; [`no_network_policy`](#voltstack-cluster-no-network-policy) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-no-outside-static-routes"></a>&#x2022; [`no_outside_static_routes`](#voltstack-cluster-no-outside-static-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-no-outside-static-routes"></a>&#x2022; [`no_outside_static_routes`](#voltstack-cluster-no-outside-static-routes) - Optional Block<br>Enable this option
 
 <a id="voltstack-cluster-node-number"></a>&#x2022; [`node_number`](#voltstack-cluster-node-number) - Optional Number<br>Number of main Nodes. Number of main nodes to create, either 1 or 3
 
@@ -888,9 +888,9 @@ A [`voltstack_cluster`](#voltstack-cluster) block supports the following:
 
 <a id="voltstack-cluster-site-local-subnet"></a>&#x2022; [`site_local_subnet`](#voltstack-cluster-site-local-subnet) - Optional Block<br>GCP VPC network choice. This defines choice about GCP VPC network for a view<br>See [Site Local Subnet](#voltstack-cluster-site-local-subnet) below.
 
-<a id="voltstack-cluster-sm-connection-public-ip"></a>&#x2022; [`sm_connection_public_ip`](#voltstack-cluster-sm-connection-public-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-sm-connection-public-ip"></a>&#x2022; [`sm_connection_public_ip`](#voltstack-cluster-sm-connection-public-ip) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-sm-connection-pvt-ip"></a>&#x2022; [`sm_connection_pvt_ip`](#voltstack-cluster-sm-connection-pvt-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-sm-connection-pvt-ip"></a>&#x2022; [`sm_connection_pvt_ip`](#voltstack-cluster-sm-connection-pvt-ip) - Optional Block<br>Enable this option
 
 <a id="voltstack-cluster-storage-class-list"></a>&#x2022; [`storage_class_list`](#voltstack-cluster-storage-class-list) - Optional Block<br>Custom Storage Class List. Add additional custom storage classes in kubernetes for this site<br>See [Storage Class List](#voltstack-cluster-storage-class-list) below.
 

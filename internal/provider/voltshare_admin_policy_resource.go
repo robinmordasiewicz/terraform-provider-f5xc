@@ -206,7 +206,7 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"allow_all": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"allow_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Custom List. Custom List contains user customized list of matcher values",
@@ -230,7 +230,7 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 						},
 					},
 					"deny_all": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"deny_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Custom List. Custom List contains user customized list of matcher values",
@@ -267,17 +267,17 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 					},
 					Blocks: map[string]schema.Block{
 						"all_tenants": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"individual_users": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"user_restrictions": schema.SingleNestedBlock{
 							MarkdownDescription: "User Matcher. user_matcher contains contains the allow/deny list of users/authors.",
 							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"allow_all": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"allow_list": schema.SingleNestedBlock{
 									MarkdownDescription: "Custom List. Custom List contains user customized list of matcher values",
@@ -301,7 +301,7 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 									},
 								},
 								"deny_all": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"deny_list": schema.SingleNestedBlock{
 									MarkdownDescription: "Custom List. Custom List contains user customized list of matcher values",

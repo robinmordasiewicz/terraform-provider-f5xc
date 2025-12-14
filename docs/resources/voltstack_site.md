@@ -79,8 +79,8 @@ resource "f5xc_voltstack_site" "example" {
 <a id="address"></a>&#x2022; [`address`](#address) - Optional String<br>Geographical Address. Site's geographical address that can be used to determine its latitude and longitude
 
 -> **One of the following:**
-&#x2022; <a id="allow-all-usb"></a>[`allow_all_usb`](#allow-all-usb) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="deny-all-usb"></a>[`deny_all_usb`](#deny-all-usb) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="allow-all-usb"></a>[`allow_all_usb`](#allow-all-usb) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="deny-all-usb"></a>[`deny_all_usb`](#deny-all-usb) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="usb-policy"></a>[`usb_policy`](#usb-policy) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
 
 -> **One of the following:**
@@ -99,21 +99,21 @@ resource "f5xc_voltstack_site" "example" {
 -> **One of the following:**
 &#x2022; <a id="custom-storage-config"></a>[`custom_storage_config`](#custom-storage-config) - Optional Block<br>VssStorageConfiguration
 
-<a id="default-blocked-services"></a>&#x2022; [`default_blocked_services`](#default-blocked-services) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="default-blocked-services"></a>&#x2022; [`default_blocked_services`](#default-blocked-services) - Optional Block<br>Enable this option
 
-<a id="default-network-config"></a>&#x2022; [`default_network_config`](#default-network-config) - Optional Block<br>Empty. This can be used for messages where no values are needed
-
--> **One of the following:**
-&#x2022; <a id="default-sriov-interface"></a>[`default_sriov_interface`](#default-sriov-interface) - Optional Block<br>Empty. This can be used for messages where no values are needed
-
-<a id="default-storage-config"></a>&#x2022; [`default_storage_config`](#default-storage-config) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="default-network-config"></a>&#x2022; [`default_network_config`](#default-network-config) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="disable-gpu"></a>[`disable_gpu`](#disable-gpu) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="enable-gpu"></a>[`enable_gpu`](#enable-gpu) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="default-sriov-interface"></a>[`default_sriov_interface`](#default-sriov-interface) - Optional Block<br>Enable this option
+
+<a id="default-storage-config"></a>&#x2022; [`default_storage_config`](#default-storage-config) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="disable-vm"></a>[`disable_vm`](#disable-vm) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="disable-gpu"></a>[`disable_gpu`](#disable-gpu) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="enable-gpu"></a>[`enable_gpu`](#enable-gpu) - Optional Block<br>Enable this option
+
+-> **One of the following:**
+&#x2022; <a id="disable-vm"></a>[`disable_vm`](#disable-vm) - Optional Block<br>Enable this option
 
 <a id="enable-vgpu"></a>&#x2022; [`enable_vgpu`](#enable-vgpu) - Optional Block<br>vGPU Configuration. Licensing configuration for NVIDIA vGPU
 
@@ -129,15 +129,15 @@ resource "f5xc_voltstack_site" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="log-receiver"></a>[`log_receiver`](#log-receiver) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
-<br><br>&#x2022; <a id="logs-streaming-disabled"></a>[`logs_streaming_disabled`](#logs-streaming-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="logs-streaming-disabled"></a>[`logs_streaming_disabled`](#logs-streaming-disabled) - Optional Block<br>Enable this option
 
 <a id="master-node-configuration"></a>&#x2022; [`master_node_configuration`](#master-node-configuration) - Optional Block<br>Master Nodes. Configuration of master nodes
 
-<a id="no-bond-devices"></a>&#x2022; [`no_bond_devices`](#no-bond-devices) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="no-bond-devices"></a>&#x2022; [`no_bond_devices`](#no-bond-devices) - Optional Block<br>Enable this option
 
-<a id="no-k8s-cluster"></a>&#x2022; [`no_k8s_cluster`](#no-k8s-cluster) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="no-k8s-cluster"></a>&#x2022; [`no_k8s_cluster`](#no-k8s-cluster) - Optional Block<br>Enable this option
 
-<a id="no-local-control-plane"></a>&#x2022; [`no_local_control_plane`](#no-local-control-plane) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="no-local-control-plane"></a>&#x2022; [`no_local_control_plane`](#no-local-control-plane) - Optional Block<br>Enable this option
 
 <a id="offline-survivability-mode"></a>&#x2022; [`offline_survivability_mode`](#offline-survivability-mode) - Optional Block<br>Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen
 
@@ -171,13 +171,13 @@ A [`blocked_services`](#blocked-services) block supports the following:
 
 A [`blocked_sevice`](#blocked-services-blocked-sevice) block (within [`blocked_services`](#blocked-services)) supports the following:
 
-<a id="blocked-services-blocked-sevice-dns"></a>&#x2022; [`dns`](#blocked-services-blocked-sevice-dns) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="blocked-services-blocked-sevice-dns"></a>&#x2022; [`dns`](#blocked-services-blocked-sevice-dns) - Optional Block<br>Enable this option
 
 <a id="blocked-services-blocked-sevice-network-type"></a>&#x2022; [`network_type`](#blocked-services-blocked-sevice-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
-<a id="blocked-services-blocked-sevice-ssh"></a>&#x2022; [`ssh`](#blocked-services-blocked-sevice-ssh) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="blocked-services-blocked-sevice-ssh"></a>&#x2022; [`ssh`](#blocked-services-blocked-sevice-ssh) - Optional Block<br>Enable this option
 
-<a id="blocked-services-blocked-sevice-web-user-interface"></a>&#x2022; [`web_user_interface`](#blocked-services-blocked-sevice-web-user-interface) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="blocked-services-blocked-sevice-web-user-interface"></a>&#x2022; [`web_user_interface`](#blocked-services-blocked-sevice-web-user-interface) - Optional Block<br>Enable this option
 
 #### Bond Device List
 
@@ -189,7 +189,7 @@ A [`bond_device_list`](#bond-device-list) block supports the following:
 
 A [`bond_devices`](#bond-device-list-bond-devices) block (within [`bond_device_list`](#bond-device-list)) supports the following:
 
-<a id="bond-device-list-bond-devices-active-backup"></a>&#x2022; [`active_backup`](#bond-device-list-bond-devices-active-backup) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bond-device-list-bond-devices-active-backup"></a>&#x2022; [`active_backup`](#bond-device-list-bond-devices-active-backup) - Optional Block<br>Enable this option
 
 <a id="bond-device-list-bond-devices-devices"></a>&#x2022; [`devices`](#bond-device-list-bond-devices-devices) - Optional List<br>Member Ethernet Devices. Ethernet devices that will make up this bond
 
@@ -237,23 +237,23 @@ A [`custom_network_config`](#custom-network-config) block supports the following
 
 <a id="custom-network-config-bgp-router-id"></a>&#x2022; [`bgp_router_id`](#custom-network-config-bgp-router-id) - Optional String<br>BGP Router ID. Optional BGP router ID that can be used as parameter for BGP configuration when BGP is configured to fetch BGP router ID from site object
 
-<a id="custom-network-config-default-config"></a>&#x2022; [`default_config`](#custom-network-config-default-config) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-default-config"></a>&#x2022; [`default_config`](#custom-network-config-default-config) - Optional Block<br>Enable this option
 
-<a id="custom-network-config-default-interface-config"></a>&#x2022; [`default_interface_config`](#custom-network-config-default-interface-config) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-default-interface-config"></a>&#x2022; [`default_interface_config`](#custom-network-config-default-interface-config) - Optional Block<br>Enable this option
 
-<a id="custom-network-config-default-sli-config"></a>&#x2022; [`default_sli_config`](#custom-network-config-default-sli-config) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-default-sli-config"></a>&#x2022; [`default_sli_config`](#custom-network-config-default-sli-config) - Optional Block<br>Enable this option
 
-<a id="custom-network-config-forward-proxy-allow-all"></a>&#x2022; [`forward_proxy_allow_all`](#custom-network-config-forward-proxy-allow-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-forward-proxy-allow-all"></a>&#x2022; [`forward_proxy_allow_all`](#custom-network-config-forward-proxy-allow-all) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-global-network-list"></a>&#x2022; [`global_network_list`](#custom-network-config-global-network-list) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#custom-network-config-global-network-list) below.
 
 <a id="custom-network-config-interface-list"></a>&#x2022; [`interface_list`](#custom-network-config-interface-list) - Optional Block<br>List of Interface. Configure network interfaces for this App Stack site<br>See [Interface List](#custom-network-config-interface-list) below.
 
-<a id="custom-network-config-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#custom-network-config-no-forward-proxy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#custom-network-config-no-forward-proxy) - Optional Block<br>Enable this option
 
-<a id="custom-network-config-no-global-network"></a>&#x2022; [`no_global_network`](#custom-network-config-no-global-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-no-global-network"></a>&#x2022; [`no_global_network`](#custom-network-config-no-global-network) - Optional Block<br>Enable this option
 
-<a id="custom-network-config-no-network-policy"></a>&#x2022; [`no_network_policy`](#custom-network-config-no-network-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-no-network-policy"></a>&#x2022; [`no_network_policy`](#custom-network-config-no-network-policy) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-outside-nameserver"></a>&#x2022; [`outside_nameserver`](#custom-network-config-outside-nameserver) - Optional String<br>DNS V4 Server for Local Network. Optional DNS server V4 IP to be used for name resolution in local network
 
@@ -265,9 +265,9 @@ A [`custom_network_config`](#custom-network-config) block supports the following
 
 <a id="custom-network-config-slo-config"></a>&#x2022; [`slo_config`](#custom-network-config-slo-config) - Optional Block<br>Site Local Network Configuration. Site local network configuration<br>See [Slo Config](#custom-network-config-slo-config) below.
 
-<a id="custom-network-config-sm-connection-public-ip"></a>&#x2022; [`sm_connection_public_ip`](#custom-network-config-sm-connection-public-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-sm-connection-public-ip"></a>&#x2022; [`sm_connection_public_ip`](#custom-network-config-sm-connection-public-ip) - Optional Block<br>Enable this option
 
-<a id="custom-network-config-sm-connection-pvt-ip"></a>&#x2022; [`sm_connection_pvt_ip`](#custom-network-config-sm-connection-pvt-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-sm-connection-pvt-ip"></a>&#x2022; [`sm_connection_pvt_ip`](#custom-network-config-sm-connection-pvt-ip) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-tunnel-dead-timeout"></a>&#x2022; [`tunnel_dead_timeout`](#custom-network-config-tunnel-dead-timeout) - Optional Number<br>Tunnel Dead Timeout (msec). Time interval, in millisec, within which any ipsec / SSL connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used
 
@@ -377,9 +377,9 @@ An [`interface_list`](#custom-network-config-interface-list) block (within [`cus
 
 An [`interfaces`](#custom-network-config-interface-list-interfaces) block (within [`custom_network_config.interface_list`](#custom-network-config-interface-list)) supports the following:
 
-<a id="custom-network-config-interface-list-interfaces-dc-cluster-group-connectivity-interface-disabled"></a>&#x2022; [`dc_cluster_group_connectivity_interface_disabled`](#custom-network-config-interface-list-interfaces-dc-cluster-group-connectivity-interface-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-dc-cluster-group-connectivity-interface-disabled"></a>&#x2022; [`dc_cluster_group_connectivity_interface_disabled`](#custom-network-config-interface-list-interfaces-dc-cluster-group-connectivity-interface-disabled) - Optional Block<br>Enable this option
 
-<a id="custom-network-config-interface-list-interfaces-dc-cluster-group-connectivity-interface-enabled"></a>&#x2022; [`dc_cluster_group_connectivity_interface_enabled`](#custom-network-config-interface-list-interfaces-dc-cluster-group-connectivity-interface-enabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-dc-cluster-group-connectivity-interface-enabled"></a>&#x2022; [`dc_cluster_group_connectivity_interface_enabled`](#custom-network-config-interface-list-interfaces-dc-cluster-group-connectivity-interface-enabled) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-interface-list-interfaces-dedicated-interface"></a>&#x2022; [`dedicated_interface`](#custom-network-config-interface-list-interfaces-dedicated-interface) - Optional Block<br>Dedicated Interface. Dedicated Interface Configuration<br>See [Dedicated Interface](#custom-network-config-interface-list-interfaces-dedicated-interface) below.
 
@@ -397,21 +397,21 @@ An [`interfaces`](#custom-network-config-interface-list-interfaces) block (withi
 
 A [`dedicated_interface`](#custom-network-config-interface-list-interfaces-dedicated-interface) block (within [`custom_network_config.interface_list.interfaces`](#custom-network-config-interface-list-interfaces)) supports the following:
 
-<a id="custom-network-config-interface-list-interfaces-dedicated-interface-cluster"></a>&#x2022; [`cluster`](#custom-network-config-interface-list-interfaces-dedicated-interface-cluster) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-dedicated-interface-cluster"></a>&#x2022; [`cluster`](#custom-network-config-interface-list-interfaces-dedicated-interface-cluster) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-interface-list-interfaces-dedicated-interface-device"></a>&#x2022; [`device`](#custom-network-config-interface-list-interfaces-dedicated-interface-device) - Optional String<br>Interface Device. Name of the device for which interface is configured. Use wwan0 for 4G/LTE
 
-<a id="custom-network-config-interface-list-interfaces-dedicated-interface-is-primary"></a>&#x2022; [`is_primary`](#custom-network-config-interface-list-interfaces-dedicated-interface-is-primary) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-dedicated-interface-is-primary"></a>&#x2022; [`is_primary`](#custom-network-config-interface-list-interfaces-dedicated-interface-is-primary) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-interface-list-interfaces-dedicated-interface-monitor"></a>&#x2022; [`monitor`](#custom-network-config-interface-list-interfaces-dedicated-interface-monitor) - Optional Block<br>Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface
 
-<a id="custom-network-config-interface-list-interfaces-dedicated-interface-monitor-disabled"></a>&#x2022; [`monitor_disabled`](#custom-network-config-interface-list-interfaces-dedicated-interface-monitor-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-dedicated-interface-monitor-disabled"></a>&#x2022; [`monitor_disabled`](#custom-network-config-interface-list-interfaces-dedicated-interface-monitor-disabled) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-interface-list-interfaces-dedicated-interface-mtu"></a>&#x2022; [`mtu`](#custom-network-config-interface-list-interfaces-dedicated-interface-mtu) - Optional Number<br>Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
 
 <a id="custom-network-config-interface-list-interfaces-dedicated-interface-node"></a>&#x2022; [`node`](#custom-network-config-interface-list-interfaces-dedicated-interface-node) - Optional String<br>Specific Node. Configuration will apply to a device on the given node of the site
 
-<a id="custom-network-config-interface-list-interfaces-dedicated-interface-not-primary"></a>&#x2022; [`not_primary`](#custom-network-config-interface-list-interfaces-dedicated-interface-not-primary) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-dedicated-interface-not-primary"></a>&#x2022; [`not_primary`](#custom-network-config-interface-list-interfaces-dedicated-interface-not-primary) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-interface-list-interfaces-dedicated-interface-priority"></a>&#x2022; [`priority`](#custom-network-config-interface-list-interfaces-dedicated-interface-priority) - Optional Number<br>Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority
 
@@ -419,7 +419,7 @@ A [`dedicated_interface`](#custom-network-config-interface-list-interfaces-dedic
 
 A [`dedicated_management_interface`](#custom-network-config-interface-list-interfaces-dedicated-management-interface) block (within [`custom_network_config.interface_list.interfaces`](#custom-network-config-interface-list-interfaces)) supports the following:
 
-<a id="custom-network-config-interface-list-interfaces-dedicated-management-interface-cluster"></a>&#x2022; [`cluster`](#custom-network-config-interface-list-interfaces-dedicated-management-interface-cluster) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-dedicated-management-interface-cluster"></a>&#x2022; [`cluster`](#custom-network-config-interface-list-interfaces-dedicated-management-interface-cluster) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-interface-list-interfaces-dedicated-management-interface-device"></a>&#x2022; [`device`](#custom-network-config-interface-list-interfaces-dedicated-management-interface-device) - Optional String<br>Interface Device. Name of the device for which interface is configured
 
@@ -431,43 +431,43 @@ A [`dedicated_management_interface`](#custom-network-config-interface-list-inter
 
 An [`ethernet_interface`](#custom-network-config-interface-list-interfaces-ethernet-interface) block (within [`custom_network_config.interface_list.interfaces`](#custom-network-config-interface-list-interfaces)) supports the following:
 
-<a id="custom-network-config-interface-list-interfaces-ethernet-interface-cluster"></a>&#x2022; [`cluster`](#custom-network-config-interface-list-interfaces-ethernet-interface-cluster) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-cluster"></a>&#x2022; [`cluster`](#custom-network-config-interface-list-interfaces-ethernet-interface-cluster) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-device"></a>&#x2022; [`device`](#custom-network-config-interface-list-interfaces-ethernet-interface-device) - Optional String<br>Ethernet Device. Interface configuration for the ethernet device
 
-<a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-client"></a>&#x2022; [`dhcp_client`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-client) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-client"></a>&#x2022; [`dhcp_client`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-client) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server"></a>&#x2022; [`dhcp_server`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server) - Optional Block<br>DHCPServerParametersType<br>See [DHCP Server](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server) below.
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config"></a>&#x2022; [`ipv6_auto_config`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config) - Optional Block<br>IPV6AutoConfigType<br>See [IPv6 Auto Config](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config) below.
 
-<a id="custom-network-config-interface-list-interfaces-ethernet-interface-is-primary"></a>&#x2022; [`is_primary`](#custom-network-config-interface-list-interfaces-ethernet-interface-is-primary) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-is-primary"></a>&#x2022; [`is_primary`](#custom-network-config-interface-list-interfaces-ethernet-interface-is-primary) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-monitor"></a>&#x2022; [`monitor`](#custom-network-config-interface-list-interfaces-ethernet-interface-monitor) - Optional Block<br>Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface
 
-<a id="custom-network-config-interface-list-interfaces-ethernet-interface-monitor-disabled"></a>&#x2022; [`monitor_disabled`](#custom-network-config-interface-list-interfaces-ethernet-interface-monitor-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-monitor-disabled"></a>&#x2022; [`monitor_disabled`](#custom-network-config-interface-list-interfaces-ethernet-interface-monitor-disabled) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-mtu"></a>&#x2022; [`mtu`](#custom-network-config-interface-list-interfaces-ethernet-interface-mtu) - Optional Number<br>Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
 
-<a id="custom-network-config-interface-list-interfaces-ethernet-interface-no-ipv6-address"></a>&#x2022; [`no_ipv6_address`](#custom-network-config-interface-list-interfaces-ethernet-interface-no-ipv6-address) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-no-ipv6-address"></a>&#x2022; [`no_ipv6_address`](#custom-network-config-interface-list-interfaces-ethernet-interface-no-ipv6-address) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-node"></a>&#x2022; [`node`](#custom-network-config-interface-list-interfaces-ethernet-interface-node) - Optional String<br>Specific Node. Configuration will apply to a device on the given node
 
-<a id="custom-network-config-interface-list-interfaces-ethernet-interface-not-primary"></a>&#x2022; [`not_primary`](#custom-network-config-interface-list-interfaces-ethernet-interface-not-primary) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-not-primary"></a>&#x2022; [`not_primary`](#custom-network-config-interface-list-interfaces-ethernet-interface-not-primary) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-priority"></a>&#x2022; [`priority`](#custom-network-config-interface-list-interfaces-ethernet-interface-priority) - Optional Number<br>Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority
 
-<a id="custom-network-config-interface-list-interfaces-ethernet-interface-site-local-inside-network"></a>&#x2022; [`site_local_inside_network`](#custom-network-config-interface-list-interfaces-ethernet-interface-site-local-inside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-site-local-inside-network"></a>&#x2022; [`site_local_inside_network`](#custom-network-config-interface-list-interfaces-ethernet-interface-site-local-inside-network) - Optional Block<br>Enable this option
 
-<a id="custom-network-config-interface-list-interfaces-ethernet-interface-site-local-network"></a>&#x2022; [`site_local_network`](#custom-network-config-interface-list-interfaces-ethernet-interface-site-local-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-site-local-network"></a>&#x2022; [`site_local_network`](#custom-network-config-interface-list-interfaces-ethernet-interface-site-local-network) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-static-ip"></a>&#x2022; [`static_ip`](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ip) - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IP](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ip) below.
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-static-ipv6-address"></a>&#x2022; [`static_ipv6_address`](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ipv6-address) - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IPv6 Address](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ipv6-address) below.
 
-<a id="custom-network-config-interface-list-interfaces-ethernet-interface-storage-network"></a>&#x2022; [`storage_network`](#custom-network-config-interface-list-interfaces-ethernet-interface-storage-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-storage-network"></a>&#x2022; [`storage_network`](#custom-network-config-interface-list-interfaces-ethernet-interface-storage-network) - Optional Block<br>Enable this option
 
-<a id="custom-network-config-interface-list-interfaces-ethernet-interface-untagged"></a>&#x2022; [`untagged`](#custom-network-config-interface-list-interfaces-ethernet-interface-untagged) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-untagged"></a>&#x2022; [`untagged`](#custom-network-config-interface-list-interfaces-ethernet-interface-untagged) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-vlan-id"></a>&#x2022; [`vlan_id`](#custom-network-config-interface-list-interfaces-ethernet-interface-vlan-id) - Optional Number<br>VLAN ID. Configure a VLAN tagged ethernet interface
 
@@ -475,9 +475,9 @@ An [`ethernet_interface`](#custom-network-config-interface-list-interfaces-ether
 
 A [`dhcp_server`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface`](#custom-network-config-interface-list-interfaces-ethernet-interface)) supports the following:
 
-<a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-automatic-from-end"></a>&#x2022; [`automatic_from_end`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-automatic-from-end) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-automatic-from-end"></a>&#x2022; [`automatic_from_end`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-automatic-from-end) - Optional Block<br>Enable this option
 
-<a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-automatic-from-start"></a>&#x2022; [`automatic_from_start`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-automatic-from-start) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-automatic-from-start"></a>&#x2022; [`automatic_from_start`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-automatic-from-start) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks"></a>&#x2022; [`dhcp_networks`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks) - Optional Block<br>DHCP Networks. List of networks from which DHCP Server can allocate IPv4 Addresses<br>See [DHCP Networks](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks) below.
 
@@ -493,9 +493,9 @@ A [`dhcp_networks`](#custom-network-config-interface-list-interfaces-ethernet-in
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-dns-address"></a>&#x2022; [`dns_address`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-dns-address) - Optional String<br>Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the DNS server
 
-<a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-first-address"></a>&#x2022; [`first_address`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-first-address) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-first-address"></a>&#x2022; [`first_address`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-first-address) - Optional Block<br>Enable this option
 
-<a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-last-address"></a>&#x2022; [`last_address`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-last-address) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-last-address"></a>&#x2022; [`last_address`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-last-address) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-network-prefix"></a>&#x2022; [`network_prefix`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-network-prefix) - Optional String<br>Network Prefix. Set the network prefix for the site. ex: 10.1.1.0/24
 
@@ -503,7 +503,7 @@ A [`dhcp_networks`](#custom-network-config-interface-list-interfaces-ethernet-in
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-pools"></a>&#x2022; [`pools`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-pools) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-pools) below.
 
-<a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-same-as-dgw"></a>&#x2022; [`same_as_dgw`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-same-as-dgw) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-same-as-dgw"></a>&#x2022; [`same_as_dgw`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-same-as-dgw) - Optional Block<br>Enable this option
 
 #### Custom Network Config Interface List Interfaces Ethernet Interface DHCP Server DHCP Networks Pools
 
@@ -523,7 +523,7 @@ An [`interface_ip_map`](#custom-network-config-interface-list-interfaces-etherne
 
 An [`ipv6_auto_config`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface`](#custom-network-config-interface-list-interfaces-ethernet-interface)) supports the following:
 
-<a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-host"></a>&#x2022; [`host`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-host) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-host"></a>&#x2022; [`host`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-host) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router"></a>&#x2022; [`router`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router) - Optional Block<br>IPV6AutoConfigRouterType<br>See [Router](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router) below.
 
@@ -557,17 +557,17 @@ A [`local_dns`](#custom-network-config-interface-list-interfaces-ethernet-interf
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config-local-dns-configured-address"></a>&#x2022; [`configured_address`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config-local-dns-configured-address) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
 
-<a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config-local-dns-first-address"></a>&#x2022; [`first_address`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config-local-dns-first-address) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config-local-dns-first-address"></a>&#x2022; [`first_address`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config-local-dns-first-address) - Optional Block<br>Enable this option
 
-<a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config-local-dns-last-address"></a>&#x2022; [`last_address`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config-local-dns-last-address) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config-local-dns-last-address"></a>&#x2022; [`last_address`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config-local-dns-last-address) - Optional Block<br>Enable this option
 
 #### Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router Stateful
 
 A [`stateful`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.ipv6_auto_config.router`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router)) supports the following:
 
-<a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-automatic-from-end"></a>&#x2022; [`automatic_from_end`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-automatic-from-end) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-automatic-from-end"></a>&#x2022; [`automatic_from_end`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-automatic-from-end) - Optional Block<br>Enable this option
 
-<a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-automatic-from-start"></a>&#x2022; [`automatic_from_start`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-automatic-from-start) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-automatic-from-start"></a>&#x2022; [`automatic_from_start`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-automatic-from-start) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks"></a>&#x2022; [`dhcp_networks`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks) - Optional Block<br>DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses<br>See [DHCP Networks](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks) below.
 
@@ -653,9 +653,9 @@ A [`tunnel_interface`](#custom-network-config-interface-list-interfaces-tunnel-i
 
 <a id="custom-network-config-interface-list-interfaces-tunnel-interface-priority"></a>&#x2022; [`priority`](#custom-network-config-interface-list-interfaces-tunnel-interface-priority) - Optional Number<br>Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority
 
-<a id="custom-network-config-interface-list-interfaces-tunnel-interface-site-local-inside-network"></a>&#x2022; [`site_local_inside_network`](#custom-network-config-interface-list-interfaces-tunnel-interface-site-local-inside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-tunnel-interface-site-local-inside-network"></a>&#x2022; [`site_local_inside_network`](#custom-network-config-interface-list-interfaces-tunnel-interface-site-local-inside-network) - Optional Block<br>Enable this option
 
-<a id="custom-network-config-interface-list-interfaces-tunnel-interface-site-local-network"></a>&#x2022; [`site_local_network`](#custom-network-config-interface-list-interfaces-tunnel-interface-site-local-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-interface-list-interfaces-tunnel-interface-site-local-network"></a>&#x2022; [`site_local_network`](#custom-network-config-interface-list-interfaces-tunnel-interface-site-local-network) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-interface-list-interfaces-tunnel-interface-static-ip"></a>&#x2022; [`static_ip`](#custom-network-config-interface-list-interfaces-tunnel-interface-static-ip) - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IP](#custom-network-config-interface-list-interfaces-tunnel-interface-static-ip) below.
 
@@ -697,9 +697,9 @@ A [`tunnel`](#custom-network-config-interface-list-interfaces-tunnel-interface-t
 
 A [`sli_config`](#custom-network-config-sli-config) block (within [`custom_network_config`](#custom-network-config)) supports the following:
 
-<a id="custom-network-config-sli-config-no-static-routes"></a>&#x2022; [`no_static_routes`](#custom-network-config-sli-config-no-static-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-sli-config-no-static-routes"></a>&#x2022; [`no_static_routes`](#custom-network-config-sli-config-no-static-routes) - Optional Block<br>Enable this option
 
-<a id="custom-network-config-sli-config-no-v6-static-routes"></a>&#x2022; [`no_v6_static_routes`](#custom-network-config-sli-config-no-v6-static-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-sli-config-no-v6-static-routes"></a>&#x2022; [`no_v6_static_routes`](#custom-network-config-sli-config-no-v6-static-routes) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-sli-config-static-routes"></a>&#x2022; [`static_routes`](#custom-network-config-sli-config-static-routes) - Optional Block<br>Static Routes List. List of static routes<br>See [Static Routes](#custom-network-config-sli-config-static-routes) below.
 
@@ -717,7 +717,7 @@ A [`static_routes`](#custom-network-config-sli-config-static-routes-static-route
 
 <a id="custom-network-config-sli-config-static-routes-static-routes-attrs"></a>&#x2022; [`attrs`](#custom-network-config-sli-config-static-routes-static-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
-<a id="custom-network-config-sli-config-static-routes-static-routes-default-gateway"></a>&#x2022; [`default_gateway`](#custom-network-config-sli-config-static-routes-static-routes-default-gateway) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-sli-config-static-routes-static-routes-default-gateway"></a>&#x2022; [`default_gateway`](#custom-network-config-sli-config-static-routes-static-routes-default-gateway) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-sli-config-static-routes-static-routes-ip-address"></a>&#x2022; [`ip_address`](#custom-network-config-sli-config-static-routes-static-routes-ip-address) - Optional String<br>IP Address. Traffic matching the IP prefixes is sent to this IP Address
 
@@ -765,7 +765,7 @@ A [`static_routes`](#custom-network-config-sli-config-static-v6-routes-static-ro
 
 <a id="custom-network-config-sli-config-static-v6-routes-static-routes-attrs"></a>&#x2022; [`attrs`](#custom-network-config-sli-config-static-v6-routes-static-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
-<a id="custom-network-config-sli-config-static-v6-routes-static-routes-default-gateway"></a>&#x2022; [`default_gateway`](#custom-network-config-sli-config-static-v6-routes-static-routes-default-gateway) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-sli-config-static-v6-routes-static-routes-default-gateway"></a>&#x2022; [`default_gateway`](#custom-network-config-sli-config-static-v6-routes-static-routes-default-gateway) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-sli-config-static-v6-routes-static-routes-ip-address"></a>&#x2022; [`ip_address`](#custom-network-config-sli-config-static-v6-routes-static-routes-ip-address) - Optional String<br>IP Address. Traffic matching the IP prefixes is sent to this IP Address
 
@@ -809,11 +809,11 @@ A [`slo_config`](#custom-network-config-slo-config) block (within [`custom_netwo
 
 <a id="custom-network-config-slo-config-labels"></a>&#x2022; [`labels`](#custom-network-config-slo-config-labels) - Optional Block<br>Network Labels. Add Labels for this network, these labels can be used in firewall policy
 
-<a id="custom-network-config-slo-config-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#custom-network-config-slo-config-no-dc-cluster-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-slo-config-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#custom-network-config-slo-config-no-dc-cluster-group) - Optional Block<br>Enable this option
 
-<a id="custom-network-config-slo-config-no-static-routes"></a>&#x2022; [`no_static_routes`](#custom-network-config-slo-config-no-static-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-slo-config-no-static-routes"></a>&#x2022; [`no_static_routes`](#custom-network-config-slo-config-no-static-routes) - Optional Block<br>Enable this option
 
-<a id="custom-network-config-slo-config-no-static-v6-routes"></a>&#x2022; [`no_static_v6_routes`](#custom-network-config-slo-config-no-static-v6-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-slo-config-no-static-v6-routes"></a>&#x2022; [`no_static_v6_routes`](#custom-network-config-slo-config-no-static-v6-routes) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-slo-config-static-routes"></a>&#x2022; [`static_routes`](#custom-network-config-slo-config-static-routes) - Optional Block<br>Static Routes List. List of static routes<br>See [Static Routes](#custom-network-config-slo-config-static-routes) below.
 
@@ -841,7 +841,7 @@ A [`static_routes`](#custom-network-config-slo-config-static-routes-static-route
 
 <a id="custom-network-config-slo-config-static-routes-static-routes-attrs"></a>&#x2022; [`attrs`](#custom-network-config-slo-config-static-routes-static-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
-<a id="custom-network-config-slo-config-static-routes-static-routes-default-gateway"></a>&#x2022; [`default_gateway`](#custom-network-config-slo-config-static-routes-static-routes-default-gateway) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-slo-config-static-routes-static-routes-default-gateway"></a>&#x2022; [`default_gateway`](#custom-network-config-slo-config-static-routes-static-routes-default-gateway) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-slo-config-static-routes-static-routes-ip-address"></a>&#x2022; [`ip_address`](#custom-network-config-slo-config-static-routes-static-routes-ip-address) - Optional String<br>IP Address. Traffic matching the IP prefixes is sent to this IP Address
 
@@ -889,7 +889,7 @@ A [`static_routes`](#custom-network-config-slo-config-static-v6-routes-static-ro
 
 <a id="custom-network-config-slo-config-static-v6-routes-static-routes-attrs"></a>&#x2022; [`attrs`](#custom-network-config-slo-config-static-v6-routes-static-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
-<a id="custom-network-config-slo-config-static-v6-routes-static-routes-default-gateway"></a>&#x2022; [`default_gateway`](#custom-network-config-slo-config-static-v6-routes-static-routes-default-gateway) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-network-config-slo-config-static-v6-routes-static-routes-default-gateway"></a>&#x2022; [`default_gateway`](#custom-network-config-slo-config-static-v6-routes-static-routes-default-gateway) - Optional Block<br>Enable this option
 
 <a id="custom-network-config-slo-config-static-v6-routes-static-routes-ip-address"></a>&#x2022; [`ip_address`](#custom-network-config-slo-config-static-v6-routes-static-routes-ip-address) - Optional String<br>IP Address. Traffic matching the IP prefixes is sent to this IP Address
 
@@ -929,13 +929,13 @@ An [`interface`](#custom-network-config-slo-config-static-v6-routes-static-route
 
 A [`custom_storage_config`](#custom-storage-config) block supports the following:
 
-<a id="custom-storage-config-default-storage-class"></a>&#x2022; [`default_storage_class`](#custom-storage-config-default-storage-class) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-default-storage-class"></a>&#x2022; [`default_storage_class`](#custom-storage-config-default-storage-class) - Optional Block<br>Enable this option
 
-<a id="custom-storage-config-no-static-routes"></a>&#x2022; [`no_static_routes`](#custom-storage-config-no-static-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-no-static-routes"></a>&#x2022; [`no_static_routes`](#custom-storage-config-no-static-routes) - Optional Block<br>Enable this option
 
-<a id="custom-storage-config-no-storage-device"></a>&#x2022; [`no_storage_device`](#custom-storage-config-no-storage-device) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-no-storage-device"></a>&#x2022; [`no_storage_device`](#custom-storage-config-no-storage-device) - Optional Block<br>Enable this option
 
-<a id="custom-storage-config-no-storage-interfaces"></a>&#x2022; [`no_storage_interfaces`](#custom-storage-config-no-storage-interfaces) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-no-storage-interfaces"></a>&#x2022; [`no_storage_interfaces`](#custom-storage-config-no-storage-interfaces) - Optional Block<br>Enable this option
 
 <a id="custom-storage-config-static-routes"></a>&#x2022; [`static_routes`](#custom-storage-config-static-routes) - Optional Block<br>Static Routes List. List of static routes<br>See [Static Routes](#custom-storage-config-static-routes) below.
 
@@ -957,7 +957,7 @@ A [`static_routes`](#custom-storage-config-static-routes-static-routes) block (w
 
 <a id="custom-storage-config-static-routes-static-routes-attrs"></a>&#x2022; [`attrs`](#custom-storage-config-static-routes-static-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
-<a id="custom-storage-config-static-routes-static-routes-default-gateway"></a>&#x2022; [`default_gateway`](#custom-storage-config-static-routes-static-routes-default-gateway) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-static-routes-static-routes-default-gateway"></a>&#x2022; [`default_gateway`](#custom-storage-config-static-routes-static-routes-default-gateway) - Optional Block<br>Enable this option
 
 <a id="custom-storage-config-static-routes-static-routes-ip-address"></a>&#x2022; [`ip_address`](#custom-storage-config-static-routes-static-routes-ip-address) - Optional String<br>IP Address. Traffic matching the IP prefixes is sent to this IP Address
 
@@ -1097,7 +1097,7 @@ A [`storage_devices`](#custom-storage-config-storage-device-list-storage-devices
 
 <a id="custom-storage-config-storage-device-list-storage-devices-advanced-advanced-parameters"></a>&#x2022; [`advanced_advanced_parameters`](#custom-storage-config-storage-device-list-storage-devices-advanced-advanced-parameters) - Optional Block<br>Advanced Parameters. Map of parameter name and string value
 
-<a id="custom-storage-config-storage-device-list-storage-devices-custom-storage"></a>&#x2022; [`custom_storage`](#custom-storage-config-storage-device-list-storage-devices-custom-storage) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-storage-device-list-storage-devices-custom-storage"></a>&#x2022; [`custom_storage`](#custom-storage-config-storage-device-list-storage-devices-custom-storage) - Optional Block<br>Enable this option
 
 <a id="custom-storage-config-storage-device-list-storage-devices-hpe-storage"></a>&#x2022; [`hpe_storage`](#custom-storage-config-storage-device-list-storage-devices-hpe-storage) - Optional Block<br>HPE Storage. Device configuration for HPE Storage<br>See [Hpe Storage](#custom-storage-config-storage-device-list-storage-devices-hpe-storage) below.
 
@@ -1189,7 +1189,7 @@ A [`netapp_trident`](#custom-storage-config-storage-device-list-storage-devices-
 
 A [`netapp_backend_ontap_nas`](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident`](#custom-storage-config-storage-device-list-storage-devices-netapp-trident)) supports the following:
 
-<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-auto-export-cidrs"></a>&#x2022; [`auto_export_cidrs`](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-auto-export-cidrs) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Auto Export Cidrs](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-auto-export-cidrs) below.
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-auto-export-cidrs"></a>&#x2022; [`auto_export_cidrs`](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-auto-export-cidrs) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Auto Export Cidrs](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-auto-export-cidrs) below.
 
 <a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-auto-export-policy"></a>&#x2022; [`auto_export_policy`](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-auto-export-policy) - Optional Bool<br>Auto Export Policy. Enable automatic export policy creation and updating
 
@@ -1311,7 +1311,7 @@ A [`volume_defaults`](#custom-storage-config-storage-device-list-storage-devices
 
 <a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-storage-volume-defaults-export-policy"></a>&#x2022; [`export_policy`](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-storage-volume-defaults-export-policy) - Optional String<br>Export Policy. Export policy to use
 
-<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-storage-volume-defaults-no-qos"></a>&#x2022; [`no_qos`](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-storage-volume-defaults-no-qos) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-storage-volume-defaults-no-qos"></a>&#x2022; [`no_qos`](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-storage-volume-defaults-no-qos) - Optional Block<br>Enable this option
 
 <a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-storage-volume-defaults-qos-policy"></a>&#x2022; [`qos_policy`](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-storage-volume-defaults-qos-policy) - Optional String<br>QOS Policy Name. Enter QOS Policy Name
 
@@ -1341,7 +1341,7 @@ A [`volume_defaults`](#custom-storage-config-storage-device-list-storage-devices
 
 <a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-volume-defaults-export-policy"></a>&#x2022; [`export_policy`](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-volume-defaults-export-policy) - Optional String<br>Export Policy. Export policy to use
 
-<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-volume-defaults-no-qos"></a>&#x2022; [`no_qos`](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-volume-defaults-no-qos) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-volume-defaults-no-qos"></a>&#x2022; [`no_qos`](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-volume-defaults-no-qos) - Optional Block<br>Enable this option
 
 <a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-volume-defaults-qos-policy"></a>&#x2022; [`qos_policy`](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-volume-defaults-qos-policy) - Optional String<br>QOS Policy Name. Enter QOS Policy Name
 
@@ -1385,7 +1385,7 @@ A [`netapp_backend_ontap_san`](#custom-storage-config-storage-device-list-storag
 
 <a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-management-lif-ip"></a>&#x2022; [`management_lif_ip`](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-management-lif-ip) - Optional String<br>Backend Management LIF IP Address. Backend Management LIF IP Address is reachable at the given IP address
 
-<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-no-chap"></a>&#x2022; [`no_chap`](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-no-chap) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-no-chap"></a>&#x2022; [`no_chap`](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-no-chap) - Optional Block<br>Enable this option
 
 <a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-password"></a>&#x2022; [`password`](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-password) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-password) below.
 
@@ -1479,7 +1479,7 @@ A [`volume_defaults`](#custom-storage-config-storage-device-list-storage-devices
 
 <a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-storage-volume-defaults-export-policy"></a>&#x2022; [`export_policy`](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-storage-volume-defaults-export-policy) - Optional String<br>Export Policy. Export policy to use
 
-<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-storage-volume-defaults-no-qos"></a>&#x2022; [`no_qos`](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-storage-volume-defaults-no-qos) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-storage-volume-defaults-no-qos"></a>&#x2022; [`no_qos`](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-storage-volume-defaults-no-qos) - Optional Block<br>Enable this option
 
 <a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-storage-volume-defaults-qos-policy"></a>&#x2022; [`qos_policy`](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-storage-volume-defaults-qos-policy) - Optional String<br>QOS Policy Name. Enter QOS Policy Name
 
@@ -1573,7 +1573,7 @@ A [`volume_defaults`](#custom-storage-config-storage-device-list-storage-devices
 
 <a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-volume-defaults-export-policy"></a>&#x2022; [`export_policy`](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-volume-defaults-export-policy) - Optional String<br>Export Policy. Export policy to use
 
-<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-volume-defaults-no-qos"></a>&#x2022; [`no_qos`](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-volume-defaults-no-qos) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-volume-defaults-no-qos"></a>&#x2022; [`no_qos`](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-volume-defaults-no-qos) - Optional Block<br>Enable this option
 
 <a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-volume-defaults-qos-policy"></a>&#x2022; [`qos_policy`](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-volume-defaults-qos-policy) - Optional String<br>QOS Policy Name. Enter QOS Policy Name
 
@@ -1741,43 +1741,43 @@ A [`storage_interfaces`](#custom-storage-config-storage-interface-list-storage-i
 
 A [`storage_interface`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface) block (within [`custom_storage_config.storage_interface_list.storage_interfaces`](#custom-storage-config-storage-interface-list-storage-interfaces)) supports the following:
 
-<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-cluster"></a>&#x2022; [`cluster`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-cluster) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-cluster"></a>&#x2022; [`cluster`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-cluster) - Optional Block<br>Enable this option
 
 <a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-device"></a>&#x2022; [`device`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-device) - Optional String<br>Ethernet Device. Interface configuration for the ethernet device
 
-<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-client"></a>&#x2022; [`dhcp_client`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-client) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-client"></a>&#x2022; [`dhcp_client`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-client) - Optional Block<br>Enable this option
 
 <a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server"></a>&#x2022; [`dhcp_server`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server) - Optional Block<br>DHCPServerParametersType<br>See [DHCP Server](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server) below.
 
 <a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config"></a>&#x2022; [`ipv6_auto_config`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config) - Optional Block<br>IPV6AutoConfigType<br>See [IPv6 Auto Config](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config) below.
 
-<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-is-primary"></a>&#x2022; [`is_primary`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-is-primary) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-is-primary"></a>&#x2022; [`is_primary`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-is-primary) - Optional Block<br>Enable this option
 
 <a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-monitor"></a>&#x2022; [`monitor`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-monitor) - Optional Block<br>Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface
 
-<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-monitor-disabled"></a>&#x2022; [`monitor_disabled`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-monitor-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-monitor-disabled"></a>&#x2022; [`monitor_disabled`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-monitor-disabled) - Optional Block<br>Enable this option
 
 <a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-mtu"></a>&#x2022; [`mtu`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-mtu) - Optional Number<br>Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
 
-<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-no-ipv6-address"></a>&#x2022; [`no_ipv6_address`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-no-ipv6-address) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-no-ipv6-address"></a>&#x2022; [`no_ipv6_address`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-no-ipv6-address) - Optional Block<br>Enable this option
 
 <a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-node"></a>&#x2022; [`node`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-node) - Optional String<br>Specific Node. Configuration will apply to a device on the given node
 
-<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-not-primary"></a>&#x2022; [`not_primary`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-not-primary) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-not-primary"></a>&#x2022; [`not_primary`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-not-primary) - Optional Block<br>Enable this option
 
 <a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-priority"></a>&#x2022; [`priority`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-priority) - Optional Number<br>Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority
 
-<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-site-local-inside-network"></a>&#x2022; [`site_local_inside_network`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-site-local-inside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-site-local-inside-network"></a>&#x2022; [`site_local_inside_network`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-site-local-inside-network) - Optional Block<br>Enable this option
 
-<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-site-local-network"></a>&#x2022; [`site_local_network`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-site-local-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-site-local-network"></a>&#x2022; [`site_local_network`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-site-local-network) - Optional Block<br>Enable this option
 
 <a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-static-ip"></a>&#x2022; [`static_ip`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-static-ip) - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IP](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-static-ip) below.
 
 <a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-static-ipv6-address"></a>&#x2022; [`static_ipv6_address`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-static-ipv6-address) - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IPv6 Address](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-static-ipv6-address) below.
 
-<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-storage-network"></a>&#x2022; [`storage_network`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-storage-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-storage-network"></a>&#x2022; [`storage_network`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-storage-network) - Optional Block<br>Enable this option
 
-<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-untagged"></a>&#x2022; [`untagged`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-untagged) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-untagged"></a>&#x2022; [`untagged`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-untagged) - Optional Block<br>Enable this option
 
 <a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-vlan-id"></a>&#x2022; [`vlan_id`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-vlan-id) - Optional Number<br>VLAN ID. Configure a VLAN tagged ethernet interface
 
@@ -1785,9 +1785,9 @@ A [`storage_interface`](#custom-storage-config-storage-interface-list-storage-in
 
 A [`dhcp_server`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server) block (within [`custom_storage_config.storage_interface_list.storage_interfaces.storage_interface`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface)) supports the following:
 
-<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-automatic-from-end"></a>&#x2022; [`automatic_from_end`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-automatic-from-end) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-automatic-from-end"></a>&#x2022; [`automatic_from_end`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-automatic-from-end) - Optional Block<br>Enable this option
 
-<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-automatic-from-start"></a>&#x2022; [`automatic_from_start`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-automatic-from-start) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-automatic-from-start"></a>&#x2022; [`automatic_from_start`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-automatic-from-start) - Optional Block<br>Enable this option
 
 <a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks"></a>&#x2022; [`dhcp_networks`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks) - Optional Block<br>DHCP Networks. List of networks from which DHCP Server can allocate IPv4 Addresses<br>See [DHCP Networks](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks) below.
 
@@ -1803,9 +1803,9 @@ A [`dhcp_networks`](#custom-storage-config-storage-interface-list-storage-interf
 
 <a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-dns-address"></a>&#x2022; [`dns_address`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-dns-address) - Optional String<br>Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the DNS server
 
-<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-first-address"></a>&#x2022; [`first_address`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-first-address) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-first-address"></a>&#x2022; [`first_address`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-first-address) - Optional Block<br>Enable this option
 
-<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-last-address"></a>&#x2022; [`last_address`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-last-address) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-last-address"></a>&#x2022; [`last_address`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-last-address) - Optional Block<br>Enable this option
 
 <a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-network-prefix"></a>&#x2022; [`network_prefix`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-network-prefix) - Optional String<br>Network Prefix. Set the network prefix for the site. ex: 10.1.1.0/24
 
@@ -1813,7 +1813,7 @@ A [`dhcp_networks`](#custom-storage-config-storage-interface-list-storage-interf
 
 <a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-pools"></a>&#x2022; [`pools`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-pools) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-pools) below.
 
-<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-same-as-dgw"></a>&#x2022; [`same_as_dgw`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-same-as-dgw) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-same-as-dgw"></a>&#x2022; [`same_as_dgw`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-same-as-dgw) - Optional Block<br>Enable this option
 
 #### Custom Storage Config Storage Interface List Storage Interfaces Storage Interface DHCP Server DHCP Networks Pools
 
@@ -1833,7 +1833,7 @@ An [`interface_ip_map`](#custom-storage-config-storage-interface-list-storage-in
 
 An [`ipv6_auto_config`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config) block (within [`custom_storage_config.storage_interface_list.storage_interfaces.storage_interface`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface)) supports the following:
 
-<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-host"></a>&#x2022; [`host`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-host) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-host"></a>&#x2022; [`host`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-host) - Optional Block<br>Enable this option
 
 <a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router"></a>&#x2022; [`router`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router) - Optional Block<br>IPV6AutoConfigRouterType<br>See [Router](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router) below.
 
@@ -1867,17 +1867,17 @@ A [`local_dns`](#custom-storage-config-storage-interface-list-storage-interfaces
 
 <a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-dns-config-local-dns-configured-address"></a>&#x2022; [`configured_address`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-dns-config-local-dns-configured-address) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
 
-<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-dns-config-local-dns-first-address"></a>&#x2022; [`first_address`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-dns-config-local-dns-first-address) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-dns-config-local-dns-first-address"></a>&#x2022; [`first_address`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-dns-config-local-dns-first-address) - Optional Block<br>Enable this option
 
-<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-dns-config-local-dns-last-address"></a>&#x2022; [`last_address`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-dns-config-local-dns-last-address) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-dns-config-local-dns-last-address"></a>&#x2022; [`last_address`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-dns-config-local-dns-last-address) - Optional Block<br>Enable this option
 
 #### Custom Storage Config Storage Interface List Storage Interfaces Storage Interface IPv6 Auto Config Router Stateful
 
 A [`stateful`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful) block (within [`custom_storage_config.storage_interface_list.storage_interfaces.storage_interface.ipv6_auto_config.router`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router)) supports the following:
 
-<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful-automatic-from-end"></a>&#x2022; [`automatic_from_end`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful-automatic-from-end) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful-automatic-from-end"></a>&#x2022; [`automatic_from_end`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful-automatic-from-end) - Optional Block<br>Enable this option
 
-<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful-automatic-from-start"></a>&#x2022; [`automatic_from_start`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful-automatic-from-start) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful-automatic-from-start"></a>&#x2022; [`automatic_from_start`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful-automatic-from-start) - Optional Block<br>Enable this option
 
 <a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful-dhcp-networks"></a>&#x2022; [`dhcp_networks`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful-dhcp-networks) - Optional Block<br>DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses<br>See [DHCP Networks](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful-dhcp-networks) below.
 
@@ -1977,7 +1977,7 @@ A [`k8s_cluster`](#k8s-cluster) block supports the following:
 
 A [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain) block supports the following:
 
-<a id="kubernetes-upgrade-drain-disable-upgrade-drain"></a>&#x2022; [`disable_upgrade_drain`](#kubernetes-upgrade-drain-disable-upgrade-drain) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kubernetes-upgrade-drain-disable-upgrade-drain"></a>&#x2022; [`disable_upgrade_drain`](#kubernetes-upgrade-drain-disable-upgrade-drain) - Optional Block<br>Enable this option
 
 <a id="kubernetes-upgrade-drain-enable-upgrade-drain"></a>&#x2022; [`enable_upgrade_drain`](#kubernetes-upgrade-drain-enable-upgrade-drain) - Optional Block<br>Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site<br>See [Enable Upgrade Drain](#kubernetes-upgrade-drain-enable-upgrade-drain) below.
 
@@ -1985,13 +1985,13 @@ A [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain) block supports the fol
 
 An [`enable_upgrade_drain`](#kubernetes-upgrade-drain-enable-upgrade-drain) block (within [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain)) supports the following:
 
-<a id="kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode"></a>&#x2022; [`disable_vega_upgrade_mode`](#kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode"></a>&#x2022; [`disable_vega_upgrade_mode`](#kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode) - Optional Block<br>Enable this option
 
 <a id="kubernetes-upgrade-drain-enable-upgrade-drain-drain-max-unavailable-node-count"></a>&#x2022; [`drain_max_unavailable_node_count`](#kubernetes-upgrade-drain-enable-upgrade-drain-drain-max-unavailable-node-count) - Optional Number<br>Node Batch Size Count
 
 <a id="kubernetes-upgrade-drain-enable-upgrade-drain-drain-node-timeout"></a>&#x2022; [`drain_node_timeout`](#kubernetes-upgrade-drain-enable-upgrade-drain-drain-node-timeout) - Optional Number<br>Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value)
 
-<a id="kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode"></a>&#x2022; [`enable_vega_upgrade_mode`](#kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode"></a>&#x2022; [`enable_vega_upgrade_mode`](#kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode) - Optional Block<br>Enable this option
 
 #### Local Control Plane
 
@@ -1999,9 +1999,9 @@ A [`local_control_plane`](#local-control-plane) block supports the following:
 
 <a id="local-control-plane-bgp-config"></a>&#x2022; [`bgp_config`](#local-control-plane-bgp-config) - Optional Block<br>BGP Configuration. BGP configuration parameters<br>See [BGP Config](#local-control-plane-bgp-config) below.
 
-<a id="local-control-plane-inside-vn"></a>&#x2022; [`inside_vn`](#local-control-plane-inside-vn) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="local-control-plane-inside-vn"></a>&#x2022; [`inside_vn`](#local-control-plane-inside-vn) - Optional Block<br>Enable this option
 
-<a id="local-control-plane-outside-vn"></a>&#x2022; [`outside_vn`](#local-control-plane-outside-vn) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="local-control-plane-outside-vn"></a>&#x2022; [`outside_vn`](#local-control-plane-outside-vn) - Optional Block<br>Enable this option
 
 #### Local Control Plane BGP Config
 
@@ -2015,11 +2015,11 @@ A [`bgp_config`](#local-control-plane-bgp-config) block (within [`local_control_
 
 A [`peers`](#local-control-plane-bgp-config-peers) block (within [`local_control_plane.bgp_config`](#local-control-plane-bgp-config)) supports the following:
 
-<a id="local-control-plane-bgp-config-peers-bfd-disabled"></a>&#x2022; [`bfd_disabled`](#local-control-plane-bgp-config-peers-bfd-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="local-control-plane-bgp-config-peers-bfd-disabled"></a>&#x2022; [`bfd_disabled`](#local-control-plane-bgp-config-peers-bfd-disabled) - Optional Block<br>Enable this option
 
 <a id="local-control-plane-bgp-config-peers-bfd-enabled"></a>&#x2022; [`bfd_enabled`](#local-control-plane-bgp-config-peers-bfd-enabled) - Optional Block<br>BFD. BFD parameters<br>See [Bfd Enabled](#local-control-plane-bgp-config-peers-bfd-enabled) below.
 
-<a id="local-control-plane-bgp-config-peers-disable"></a>&#x2022; [`disable`](#local-control-plane-bgp-config-peers-disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="local-control-plane-bgp-config-peers-disable"></a>&#x2022; [`disable`](#local-control-plane-bgp-config-peers-disable) - Optional Block<br>Enable this option
 
 <a id="local-control-plane-bgp-config-peers-external"></a>&#x2022; [`external`](#local-control-plane-bgp-config-peers-external) - Optional Block<br>External BGP Peer. External BGP Peer parameters<br>See [External](#local-control-plane-bgp-config-peers-external) below.
 
@@ -2027,9 +2027,9 @@ A [`peers`](#local-control-plane-bgp-config-peers) block (within [`local_control
 
 <a id="local-control-plane-bgp-config-peers-metadata"></a>&#x2022; [`metadata`](#local-control-plane-bgp-config-peers-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#local-control-plane-bgp-config-peers-metadata) below.
 
-<a id="local-control-plane-bgp-config-peers-passive-mode-disabled"></a>&#x2022; [`passive_mode_disabled`](#local-control-plane-bgp-config-peers-passive-mode-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="local-control-plane-bgp-config-peers-passive-mode-disabled"></a>&#x2022; [`passive_mode_disabled`](#local-control-plane-bgp-config-peers-passive-mode-disabled) - Optional Block<br>Enable this option
 
-<a id="local-control-plane-bgp-config-peers-passive-mode-enabled"></a>&#x2022; [`passive_mode_enabled`](#local-control-plane-bgp-config-peers-passive-mode-enabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="local-control-plane-bgp-config-peers-passive-mode-enabled"></a>&#x2022; [`passive_mode_enabled`](#local-control-plane-bgp-config-peers-passive-mode-enabled) - Optional Block<br>Enable this option
 
 <a id="local-control-plane-bgp-config-peers-routing-policies"></a>&#x2022; [`routing_policies`](#local-control-plane-bgp-config-peers-routing-policies) - Optional Block<br>BGP Routing Policy. List of rules which can be applied on all or particular nodes<br>See [Routing Policies](#local-control-plane-bgp-config-peers-routing-policies) below.
 
@@ -2053,21 +2053,21 @@ An [`external`](#local-control-plane-bgp-config-peers-external) block (within [`
 
 <a id="local-control-plane-bgp-config-peers-external-asn"></a>&#x2022; [`asn`](#local-control-plane-bgp-config-peers-external-asn) - Optional Number<br>ASN. Autonomous System Number for BGP peer
 
-<a id="local-control-plane-bgp-config-peers-external-default-gateway"></a>&#x2022; [`default_gateway`](#local-control-plane-bgp-config-peers-external-default-gateway) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="local-control-plane-bgp-config-peers-external-default-gateway"></a>&#x2022; [`default_gateway`](#local-control-plane-bgp-config-peers-external-default-gateway) - Optional Block<br>Enable this option
 
-<a id="local-control-plane-bgp-config-peers-external-default-gateway-v6"></a>&#x2022; [`default_gateway_v6`](#local-control-plane-bgp-config-peers-external-default-gateway-v6) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="local-control-plane-bgp-config-peers-external-default-gateway-v6"></a>&#x2022; [`default_gateway_v6`](#local-control-plane-bgp-config-peers-external-default-gateway-v6) - Optional Block<br>Enable this option
 
-<a id="local-control-plane-bgp-config-peers-external-disable"></a>&#x2022; [`disable`](#local-control-plane-bgp-config-peers-external-disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="local-control-plane-bgp-config-peers-external-disable"></a>&#x2022; [`disable`](#local-control-plane-bgp-config-peers-external-disable) - Optional Block<br>Enable this option
 
-<a id="local-control-plane-bgp-config-peers-external-disable-v6"></a>&#x2022; [`disable_v6`](#local-control-plane-bgp-config-peers-external-disable-v6) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="local-control-plane-bgp-config-peers-external-disable-v6"></a>&#x2022; [`disable_v6`](#local-control-plane-bgp-config-peers-external-disable-v6) - Optional Block<br>Enable this option
 
-<a id="local-control-plane-bgp-config-peers-external-external-connector"></a>&#x2022; [`external_connector`](#local-control-plane-bgp-config-peers-external-external-connector) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="local-control-plane-bgp-config-peers-external-external-connector"></a>&#x2022; [`external_connector`](#local-control-plane-bgp-config-peers-external-external-connector) - Optional Block<br>Enable this option
 
 <a id="local-control-plane-bgp-config-peers-external-family-inet"></a>&#x2022; [`family_inet`](#local-control-plane-bgp-config-peers-external-family-inet) - Optional Block<br>BGP Family Inet. Parameters for inet family<br>See [Family Inet](#local-control-plane-bgp-config-peers-external-family-inet) below.
 
-<a id="local-control-plane-bgp-config-peers-external-from-site"></a>&#x2022; [`from_site`](#local-control-plane-bgp-config-peers-external-from-site) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="local-control-plane-bgp-config-peers-external-from-site"></a>&#x2022; [`from_site`](#local-control-plane-bgp-config-peers-external-from-site) - Optional Block<br>Enable this option
 
-<a id="local-control-plane-bgp-config-peers-external-from-site-v6"></a>&#x2022; [`from_site_v6`](#local-control-plane-bgp-config-peers-external-from-site-v6) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="local-control-plane-bgp-config-peers-external-from-site-v6"></a>&#x2022; [`from_site_v6`](#local-control-plane-bgp-config-peers-external-from-site-v6) - Optional Block<br>Enable this option
 
 <a id="local-control-plane-bgp-config-peers-external-interface"></a>&#x2022; [`interface`](#local-control-plane-bgp-config-peers-external-interface) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Interface](#local-control-plane-bgp-config-peers-external-interface) below.
 
@@ -2075,7 +2075,7 @@ An [`external`](#local-control-plane-bgp-config-peers-external) block (within [`
 
 <a id="local-control-plane-bgp-config-peers-external-md5-auth-key"></a>&#x2022; [`md5_auth_key`](#local-control-plane-bgp-config-peers-external-md5-auth-key) - Optional String<br>MD5 Authentication Key. MD5 key for protecting BGP Sessions (RFC 2385)
 
-<a id="local-control-plane-bgp-config-peers-external-no-authentication"></a>&#x2022; [`no_authentication`](#local-control-plane-bgp-config-peers-external-no-authentication) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="local-control-plane-bgp-config-peers-external-no-authentication"></a>&#x2022; [`no_authentication`](#local-control-plane-bgp-config-peers-external-no-authentication) - Optional Block<br>Enable this option
 
 <a id="local-control-plane-bgp-config-peers-external-port"></a>&#x2022; [`port`](#local-control-plane-bgp-config-peers-external-port) - Optional Number<br>Peer Port. Peer TCP port number
 
@@ -2091,9 +2091,9 @@ An [`external`](#local-control-plane-bgp-config-peers-external) block (within [`
 
 A [`family_inet`](#local-control-plane-bgp-config-peers-external-family-inet) block (within [`local_control_plane.bgp_config.peers.external`](#local-control-plane-bgp-config-peers-external)) supports the following:
 
-<a id="local-control-plane-bgp-config-peers-external-family-inet-disable"></a>&#x2022; [`disable`](#local-control-plane-bgp-config-peers-external-family-inet-disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="local-control-plane-bgp-config-peers-external-family-inet-disable"></a>&#x2022; [`disable`](#local-control-plane-bgp-config-peers-external-family-inet-disable) - Optional Block<br>Enable this option
 
-<a id="local-control-plane-bgp-config-peers-external-family-inet-enable"></a>&#x2022; [`enable`](#local-control-plane-bgp-config-peers-external-family-inet-enable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="local-control-plane-bgp-config-peers-external-family-inet-enable"></a>&#x2022; [`enable`](#local-control-plane-bgp-config-peers-external-family-inet-enable) - Optional Block<br>Enable this option
 
 #### Local Control Plane BGP Config Peers External Interface
 
@@ -2139,15 +2139,15 @@ A [`routing_policies`](#local-control-plane-bgp-config-peers-routing-policies) b
 
 A [`route_policy`](#local-control-plane-bgp-config-peers-routing-policies-route-policy) block (within [`local_control_plane.bgp_config.peers.routing_policies`](#local-control-plane-bgp-config-peers-routing-policies)) supports the following:
 
-<a id="local-control-plane-bgp-config-peers-routing-policies-route-policy-all-nodes"></a>&#x2022; [`all_nodes`](#local-control-plane-bgp-config-peers-routing-policies-route-policy-all-nodes) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="local-control-plane-bgp-config-peers-routing-policies-route-policy-all-nodes"></a>&#x2022; [`all_nodes`](#local-control-plane-bgp-config-peers-routing-policies-route-policy-all-nodes) - Optional Block<br>Enable this option
 
-<a id="local-control-plane-bgp-config-peers-routing-policies-route-policy-inbound"></a>&#x2022; [`inbound`](#local-control-plane-bgp-config-peers-routing-policies-route-policy-inbound) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="local-control-plane-bgp-config-peers-routing-policies-route-policy-inbound"></a>&#x2022; [`inbound`](#local-control-plane-bgp-config-peers-routing-policies-route-policy-inbound) - Optional Block<br>Enable this option
 
 <a id="local-control-plane-bgp-config-peers-routing-policies-route-policy-node-name"></a>&#x2022; [`node_name`](#local-control-plane-bgp-config-peers-routing-policies-route-policy-node-name) - Optional Block<br>Nodes. List of nodes on which BGP routing policy has to be applied<br>See [Node Name](#local-control-plane-bgp-config-peers-routing-policies-route-policy-node-name) below.
 
 <a id="local-control-plane-bgp-config-peers-routing-policies-route-policy-object-refs"></a>&#x2022; [`object_refs`](#local-control-plane-bgp-config-peers-routing-policies-route-policy-object-refs) - Optional Block<br>BGP routing policy. Select route policy to apply<br>See [Object Refs](#local-control-plane-bgp-config-peers-routing-policies-route-policy-object-refs) below.
 
-<a id="local-control-plane-bgp-config-peers-routing-policies-route-policy-outbound"></a>&#x2022; [`outbound`](#local-control-plane-bgp-config-peers-routing-policies-route-policy-outbound) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="local-control-plane-bgp-config-peers-routing-policies-route-policy-outbound"></a>&#x2022; [`outbound`](#local-control-plane-bgp-config-peers-routing-policies-route-policy-outbound) - Optional Block<br>Enable this option
 
 #### Local Control Plane BGP Config Peers Routing Policies Route Policy Node Name
 
@@ -2191,15 +2191,15 @@ A [`master_node_configuration`](#master-node-configuration) block supports the f
 
 An [`offline_survivability_mode`](#offline-survivability-mode) block supports the following:
 
-<a id="offline-survivability-mode-enable-offline-survivability-mode"></a>&#x2022; [`enable_offline_survivability_mode`](#offline-survivability-mode-enable-offline-survivability-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="offline-survivability-mode-enable-offline-survivability-mode"></a>&#x2022; [`enable_offline_survivability_mode`](#offline-survivability-mode-enable-offline-survivability-mode) - Optional Block<br>Enable this option
 
-<a id="offline-survivability-mode-no-offline-survivability-mode"></a>&#x2022; [`no_offline_survivability_mode`](#offline-survivability-mode-no-offline-survivability-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="offline-survivability-mode-no-offline-survivability-mode"></a>&#x2022; [`no_offline_survivability_mode`](#offline-survivability-mode-no-offline-survivability-mode) - Optional Block<br>Enable this option
 
 #### OS
 
 An [`os`](#os) block supports the following:
 
-<a id="os-default-os-version"></a>&#x2022; [`default_os_version`](#os-default-os-version) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="os-default-os-version"></a>&#x2022; [`default_os_version`](#os-default-os-version) - Optional Block<br>Enable this option
 
 <a id="os-operating-system-version"></a>&#x2022; [`operating_system_version`](#os-operating-system-version) - Optional String<br>Operating System Version. Specify a OS version to be used e.g. 9.2024.6
 
@@ -2223,7 +2223,7 @@ A [`sriov_interface`](#sriov-interfaces-sriov-interface) block (within [`sriov_i
 
 A [`sw`](#sw) block supports the following:
 
-<a id="sw-default-sw-version"></a>&#x2022; [`default_sw_version`](#sw-default-sw-version) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="sw-default-sw-version"></a>&#x2022; [`default_sw_version`](#sw-default-sw-version) - Optional Block<br>Enable this option
 
 <a id="sw-volterra-software-version"></a>&#x2022; [`volterra_software_version`](#sw-volterra-software-version) - Optional String<br>F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002
 

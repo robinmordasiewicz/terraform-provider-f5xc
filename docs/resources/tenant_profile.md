@@ -36,7 +36,7 @@ resource "f5xc_tenant_profile" "example" {
   ct_groups {
     # Configure ct_groups settings
   }
-  # Namespace Roles. [x-example: 'monitor, system:monitor-rol...
+  # Namespace Roles. [] List of namespaces and associated rol...
   namespace_roles {
     # Configure namespace_roles settings
   }
@@ -94,7 +94,7 @@ A [`ct_groups`](#ct-groups) block supports the following:
 
 <a id="ct-groups-name"></a>&#x2022; [`name`](#ct-groups-name) - Optional String<br>Name. Name of the child tenant user group
 
-<a id="ct-groups-namespace-roles"></a>&#x2022; [`namespace_roles`](#ct-groups-namespace-roles) - Optional Block<br>Namespace Roles. [x-example: 'monitor, system:monitor-role'] List of namespaces and associated roles to be created in the new Child Tenant<br>See [Namespace Roles](#ct-groups-namespace-roles) below.
+<a id="ct-groups-namespace-roles"></a>&#x2022; [`namespace_roles`](#ct-groups-namespace-roles) - Optional Block<br>Namespace Roles. [] List of namespaces and associated roles to be created in the new Child Tenant<br>See [Namespace Roles](#ct-groups-namespace-roles) below.
 
 #### Ct Groups Namespace Roles
 
@@ -108,7 +108,7 @@ A [`namespace_roles`](#ct-groups-namespace-roles) block (within [`ct_groups`](#c
 
 A [`favicon`](#favicon) block supports the following:
 
-<a id="favicon-aws-s3"></a>&#x2022; [`aws_s3`](#favicon-aws-s3) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="favicon-aws-s3"></a>&#x2022; [`aws_s3`](#favicon-aws-s3) - Optional Block<br>Enable this option
 
 <a id="favicon-content"></a>&#x2022; [`content`](#favicon-content) - Optional String<br>Content. Content of the file
 
@@ -118,7 +118,7 @@ A [`favicon`](#favicon) block supports the following:
 
 A [`logo`](#logo) block supports the following:
 
-<a id="logo-aws-s3"></a>&#x2022; [`aws_s3`](#logo-aws-s3) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="logo-aws-s3"></a>&#x2022; [`aws_s3`](#logo-aws-s3) - Optional Block<br>Enable this option
 
 <a id="logo-content"></a>&#x2022; [`content`](#logo-content) - Optional String<br>Content. Content of the file
 

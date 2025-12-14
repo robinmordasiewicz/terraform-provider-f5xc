@@ -20,11 +20,11 @@ resource "f5xc_dc_cluster_group" "example" {
   type {
     # Configure type settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   control_and_data_plane_mesh {
     # Configure control_and_data_plane_mesh settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   data_plane_mesh {
     # Configure data_plane_mesh settings
   }

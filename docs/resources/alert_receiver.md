@@ -224,9 +224,9 @@ A [`http_config`](#webhook-http-config) block (within [`webhook`](#webhook)) sup
 
 <a id="webhook-http-config-follow-redirects"></a>&#x2022; [`follow_redirects`](#webhook-http-config-follow-redirects) - Optional Bool<br>Follow Redirects. Configure whether HTTP requests follow HTTP 3xx redirects
 
-<a id="webhook-http-config-no-authorization"></a>&#x2022; [`no_authorization`](#webhook-http-config-no-authorization) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="webhook-http-config-no-authorization"></a>&#x2022; [`no_authorization`](#webhook-http-config-no-authorization) - Optional Block<br>Enable this option
 
-<a id="webhook-http-config-no-tls"></a>&#x2022; [`no_tls`](#webhook-http-config-no-tls) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="webhook-http-config-no-tls"></a>&#x2022; [`no_tls`](#webhook-http-config-no-tls) - Optional Block<br>Enable this option
 
 <a id="webhook-http-config-use-tls"></a>&#x2022; [`use_tls`](#webhook-http-config-use-tls) - Optional Block<br>TLS Config. Configures the token request's TLS settings<br>See [Use TLS](#webhook-http-config-use-tls) below.
 
@@ -320,7 +320,7 @@ An [`use_tls_obj`](#webhook-http-config-client-cert-obj-use-tls-obj) block (with
 
 An [`use_tls`](#webhook-http-config-use-tls) block (within [`webhook.http_config`](#webhook-http-config)) supports the following:
 
-<a id="webhook-http-config-use-tls-disable-sni"></a>&#x2022; [`disable_sni`](#webhook-http-config-use-tls-disable-sni) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="webhook-http-config-use-tls-disable-sni"></a>&#x2022; [`disable_sni`](#webhook-http-config-use-tls-disable-sni) - Optional Block<br>Enable this option
 
 <a id="webhook-http-config-use-tls-max-version"></a>&#x2022; [`max_version`](#webhook-http-config-use-tls-max-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
@@ -330,7 +330,7 @@ An [`use_tls`](#webhook-http-config-use-tls) block (within [`webhook.http_config
 
 <a id="webhook-http-config-use-tls-use-server-verification"></a>&#x2022; [`use_server_verification`](#webhook-http-config-use-tls-use-server-verification) - Optional Block<br>TLS Validation Context for Servers. Upstream TLS Validation Context<br>See [Use Server Verification](#webhook-http-config-use-tls-use-server-verification) below.
 
-<a id="webhook-http-config-use-tls-volterra-trusted-ca"></a>&#x2022; [`volterra_trusted_ca`](#webhook-http-config-use-tls-volterra-trusted-ca) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="webhook-http-config-use-tls-volterra-trusted-ca"></a>&#x2022; [`volterra_trusted_ca`](#webhook-http-config-use-tls-volterra-trusted-ca) - Optional Block<br>Enable this option
 
 #### Webhook HTTP Config Use TLS Use Server Verification
 

@@ -79,7 +79,7 @@ A [`limits`](#limits) block supports the following:
 
 <a id="limits-burst-multiplier"></a>&#x2022; [`burst_multiplier`](#limits-burst-multiplier) - Optional Number<br>Burst Multiplier. The maximum burst of requests to accommodate, expressed as a multiple of the rate
 
-<a id="limits-disabled"></a>&#x2022; [`disabled`](#limits-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="limits-disabled"></a>&#x2022; [`disabled`](#limits-disabled) - Optional Block<br>Enable this option
 
 <a id="limits-leaky-bucket"></a>&#x2022; [`leaky_bucket`](#limits-leaky-bucket) - Optional Block<br>Leaky Bucket Rate Limiter. Leaky-Bucket is the default rate limiter algorithm for F5
 

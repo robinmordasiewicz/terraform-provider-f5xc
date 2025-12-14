@@ -32,11 +32,11 @@ resource "f5xc_protocol_inspection" "example" {
   }
 
   # Resource-specific configuration
-  # Enable/Disable Compliance Checks. x-required Enable Disab...
+  # Enable/Disable Compliance Checks.Enable Disable Complianc...
   enable_disable_compliance_checks {
     # Configure enable_disable_compliance_checks settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   disable_compliance_checks {
     # Configure disable_compliance_checks settings
   }
@@ -68,9 +68,9 @@ resource "f5xc_protocol_inspection" "example" {
 
 <a id="action"></a>&#x2022; [`action`](#action) - Optional String  Defaults to `ALLOW`<br>Possible values are `ALLOW`, `DENY`, `DROP`<br>[Enum: ALLOW|DENY|DROP] Action. Action after inspection - ALLOW: Allow Allow traffic - DENY: Deny Throw RST error for TCP and ICMP error for UDP - DROP: DROP Silently drop traffic
 
-<a id="enable-disable-compliance-checks"></a>&#x2022; [`enable_disable_compliance_checks`](#enable-disable-compliance-checks) - Optional Block<br>Enable/Disable Compliance Checks. x-required Enable Disable Compliance Checks Choice<br>See [Enable Disable Compliance Checks](#enable-disable-compliance-checks) below for details.
+<a id="enable-disable-compliance-checks"></a>&#x2022; [`enable_disable_compliance_checks`](#enable-disable-compliance-checks) - Optional Block<br>Enable/Disable Compliance Checks.Enable Disable Compliance Checks Choice<br>See [Enable Disable Compliance Checks](#enable-disable-compliance-checks) below for details.
 
-<a id="enable-disable-signatures"></a>&#x2022; [`enable_disable_signatures`](#enable-disable-signatures) - Optional Block<br>Enable/Disable Signatures Choice. x-required Enable Disable Signature Choice<br>See [Enable Disable Signatures](#enable-disable-signatures) below for details.
+<a id="enable-disable-signatures"></a>&#x2022; [`enable_disable_signatures`](#enable-disable-signatures) - Optional Block<br>Enable/Disable Signatures Choice.Enable Disable Signature Choice<br>See [Enable Disable Signatures](#enable-disable-signatures) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -86,7 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`enable_disable_compliance_checks`](#enable-disable-compliance-checks) block supports the following:
 
-<a id="enable-disable-compliance-checks-disable-compliance-checks"></a>&#x2022; [`disable_compliance_checks`](#enable-disable-compliance-checks-disable-compliance-checks) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="enable-disable-compliance-checks-disable-compliance-checks"></a>&#x2022; [`disable_compliance_checks`](#enable-disable-compliance-checks-disable-compliance-checks) - Optional Block<br>Enable this option
 
 <a id="enable-disable-compliance-checks-enable-compliance-checks"></a>&#x2022; [`enable_compliance_checks`](#enable-disable-compliance-checks-enable-compliance-checks) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Enable Compliance Checks](#enable-disable-compliance-checks-enable-compliance-checks) below.
 
@@ -104,9 +104,9 @@ An [`enable_compliance_checks`](#enable-disable-compliance-checks-enable-complia
 
 An [`enable_disable_signatures`](#enable-disable-signatures) block supports the following:
 
-<a id="enable-disable-signatures-disable-signature"></a>&#x2022; [`disable_signature`](#enable-disable-signatures-disable-signature) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="enable-disable-signatures-disable-signature"></a>&#x2022; [`disable_signature`](#enable-disable-signatures-disable-signature) - Optional Block<br>Enable this option
 
-<a id="enable-disable-signatures-enable-signature"></a>&#x2022; [`enable_signature`](#enable-disable-signatures-enable-signature) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="enable-disable-signatures-enable-signature"></a>&#x2022; [`enable_signature`](#enable-disable-signatures-enable-signature) - Optional Block<br>Enable this option
 
 #### Timeouts
 

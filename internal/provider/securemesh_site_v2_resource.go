@@ -2288,7 +2288,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														},
 														Blocks: map[string]schema.Block{
 															"active_backup": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"lacp": schema.SingleNestedBlock{
 																MarkdownDescription: "LACP parameters. LACP parameters for the bond device",
@@ -2302,7 +2302,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														},
 													},
 													"dhcp_client": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"ethernet_interface": schema.SingleNestedBlock{
 														MarkdownDescription: "Ethernet Interface.",
@@ -2322,7 +2322,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"host": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"router": schema.SingleNestedBlock{
 																MarkdownDescription: "IPV6AutoConfigRouterType.",
@@ -2357,10 +2357,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				},
 																				Blocks: map[string]schema.Block{
 																					"first_address": schema.SingleNestedBlock{
-																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																						MarkdownDescription: "Enable this option",
 																					},
 																					"last_address": schema.SingleNestedBlock{
-																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																						MarkdownDescription: "Enable this option",
 																					},
 																				},
 																			},
@@ -2371,10 +2371,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"automatic_from_end": schema.SingleNestedBlock{
-																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																				MarkdownDescription: "Enable this option",
 																			},
 																			"automatic_from_start": schema.SingleNestedBlock{
-																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																				MarkdownDescription: "Enable this option",
 																			},
 																			"dhcp_networks": schema.ListNestedBlock{
 																				MarkdownDescription: "DHCP IPV6 Networks. List of networks from which DHCP server can allocate ip addresses",
@@ -2433,31 +2433,31 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														MarkdownDescription: "Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface.",
 													},
 													"monitor_disabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"network_option": schema.SingleNestedBlock{
-														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
+														MarkdownDescription: "Network Select.Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
 														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"site_local_inside_network": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"site_local_network": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 														},
 													},
 													"no_ipv4_address": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"no_ipv6_address": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"site_to_site_connectivity_interface_disabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"site_to_site_connectivity_interface_enabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"static_ip": schema.SingleNestedBlock{
 														MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
@@ -2594,7 +2594,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														},
 														Blocks: map[string]schema.Block{
 															"active_backup": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"lacp": schema.SingleNestedBlock{
 																MarkdownDescription: "LACP parameters. LACP parameters for the bond device",
@@ -2608,7 +2608,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														},
 													},
 													"dhcp_client": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"ethernet_interface": schema.SingleNestedBlock{
 														MarkdownDescription: "Ethernet Interface.",
@@ -2628,7 +2628,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"host": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"router": schema.SingleNestedBlock{
 																MarkdownDescription: "IPV6AutoConfigRouterType.",
@@ -2663,10 +2663,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				},
 																				Blocks: map[string]schema.Block{
 																					"first_address": schema.SingleNestedBlock{
-																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																						MarkdownDescription: "Enable this option",
 																					},
 																					"last_address": schema.SingleNestedBlock{
-																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																						MarkdownDescription: "Enable this option",
 																					},
 																				},
 																			},
@@ -2677,10 +2677,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"automatic_from_end": schema.SingleNestedBlock{
-																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																				MarkdownDescription: "Enable this option",
 																			},
 																			"automatic_from_start": schema.SingleNestedBlock{
-																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																				MarkdownDescription: "Enable this option",
 																			},
 																			"dhcp_networks": schema.ListNestedBlock{
 																				MarkdownDescription: "DHCP IPV6 Networks. List of networks from which DHCP server can allocate ip addresses",
@@ -2739,31 +2739,31 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														MarkdownDescription: "Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface.",
 													},
 													"monitor_disabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"network_option": schema.SingleNestedBlock{
-														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
+														MarkdownDescription: "Network Select.Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
 														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"site_local_inside_network": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"site_local_network": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 														},
 													},
 													"no_ipv4_address": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"no_ipv6_address": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"site_to_site_connectivity_interface_disabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"site_to_site_connectivity_interface_enabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"static_ip": schema.SingleNestedBlock{
 														MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
@@ -2900,7 +2900,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														},
 														Blocks: map[string]schema.Block{
 															"active_backup": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"lacp": schema.SingleNestedBlock{
 																MarkdownDescription: "LACP parameters. LACP parameters for the bond device",
@@ -2914,7 +2914,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														},
 													},
 													"dhcp_client": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"ethernet_interface": schema.SingleNestedBlock{
 														MarkdownDescription: "Ethernet Interface.",
@@ -2934,7 +2934,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"host": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"router": schema.SingleNestedBlock{
 																MarkdownDescription: "IPV6AutoConfigRouterType.",
@@ -2969,10 +2969,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				},
 																				Blocks: map[string]schema.Block{
 																					"first_address": schema.SingleNestedBlock{
-																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																						MarkdownDescription: "Enable this option",
 																					},
 																					"last_address": schema.SingleNestedBlock{
-																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																						MarkdownDescription: "Enable this option",
 																					},
 																				},
 																			},
@@ -2983,10 +2983,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"automatic_from_end": schema.SingleNestedBlock{
-																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																				MarkdownDescription: "Enable this option",
 																			},
 																			"automatic_from_start": schema.SingleNestedBlock{
-																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																				MarkdownDescription: "Enable this option",
 																			},
 																			"dhcp_networks": schema.ListNestedBlock{
 																				MarkdownDescription: "DHCP IPV6 Networks. List of networks from which DHCP server can allocate ip addresses",
@@ -3045,31 +3045,31 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														MarkdownDescription: "Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface.",
 													},
 													"monitor_disabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"network_option": schema.SingleNestedBlock{
-														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
+														MarkdownDescription: "Network Select.Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
 														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"site_local_inside_network": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"site_local_network": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 														},
 													},
 													"no_ipv4_address": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"no_ipv6_address": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"site_to_site_connectivity_interface_disabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"site_to_site_connectivity_interface_enabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"static_ip": schema.SingleNestedBlock{
 														MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
@@ -3136,7 +3136,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"block_all_services": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: block_all_services, blocked_services] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: block_all_services, blocked_services] Enable this option",
 			},
 			"blocked_services": schema.SingleNestedBlock{
 				MarkdownDescription: "Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site.",
@@ -3153,13 +3153,13 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 							},
 							Blocks: map[string]schema.Block{
 								"dns": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"ssh": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 								"web_user_interface": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+									MarkdownDescription: "Enable this option",
 								},
 							},
 						},
@@ -3184,10 +3184,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 				},
 				Blocks: map[string]schema.Block{
 					"disable_re_tunnel": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"enable_re_tunnel": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"password": schema.SingleNestedBlock{
 						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
@@ -3274,10 +3274,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"disable_ha": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: disable_ha, enable_ha; Default: disable_ha] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: disable_ha, enable_ha; Default: disable_ha] Enable this option",
 			},
 			"disable_url_categorization": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: disable_url_categorization, enable_url_categorization; Default: disable_url_categorization] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: disable_url_categorization, enable_url_categorization; Default: disable_url_categorization] Enable this option",
 			},
 			"dns_ntp_config": schema.SingleNestedBlock{
 				MarkdownDescription: "DNS & NTP Servers Settings. Specify DNS and NTP servers that will be used by the nodes in this Customer Edge site.",
@@ -3304,18 +3304,18 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 					},
 					"f5_dns_default": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"f5_ntp_default": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
 			"enable_ha": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"enable_url_categorization": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"equinix": schema.SingleNestedBlock{
 				MarkdownDescription: "Equinix Provider Type. Equinix Provider Type",
@@ -3388,7 +3388,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														},
 														Blocks: map[string]schema.Block{
 															"active_backup": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"lacp": schema.SingleNestedBlock{
 																MarkdownDescription: "LACP parameters. LACP parameters for the bond device",
@@ -3402,7 +3402,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														},
 													},
 													"dhcp_client": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"ethernet_interface": schema.SingleNestedBlock{
 														MarkdownDescription: "Ethernet Interface.",
@@ -3422,7 +3422,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"host": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"router": schema.SingleNestedBlock{
 																MarkdownDescription: "IPV6AutoConfigRouterType.",
@@ -3457,10 +3457,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				},
 																				Blocks: map[string]schema.Block{
 																					"first_address": schema.SingleNestedBlock{
-																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																						MarkdownDescription: "Enable this option",
 																					},
 																					"last_address": schema.SingleNestedBlock{
-																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																						MarkdownDescription: "Enable this option",
 																					},
 																				},
 																			},
@@ -3471,10 +3471,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"automatic_from_end": schema.SingleNestedBlock{
-																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																				MarkdownDescription: "Enable this option",
 																			},
 																			"automatic_from_start": schema.SingleNestedBlock{
-																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																				MarkdownDescription: "Enable this option",
 																			},
 																			"dhcp_networks": schema.ListNestedBlock{
 																				MarkdownDescription: "DHCP IPV6 Networks. List of networks from which DHCP server can allocate ip addresses",
@@ -3533,31 +3533,31 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														MarkdownDescription: "Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface.",
 													},
 													"monitor_disabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"network_option": schema.SingleNestedBlock{
-														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
+														MarkdownDescription: "Network Select.Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
 														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"site_local_inside_network": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"site_local_network": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 														},
 													},
 													"no_ipv4_address": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"no_ipv6_address": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"site_to_site_connectivity_interface_disabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"site_to_site_connectivity_interface_enabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"static_ip": schema.SingleNestedBlock{
 														MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
@@ -3624,7 +3624,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"f5_proxy": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"gcp": schema.SingleNestedBlock{
 				MarkdownDescription: "GCP Provider Type. GCP Provider Type",
@@ -3697,7 +3697,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														},
 														Blocks: map[string]schema.Block{
 															"active_backup": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"lacp": schema.SingleNestedBlock{
 																MarkdownDescription: "LACP parameters. LACP parameters for the bond device",
@@ -3711,7 +3711,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														},
 													},
 													"dhcp_client": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"ethernet_interface": schema.SingleNestedBlock{
 														MarkdownDescription: "Ethernet Interface.",
@@ -3731,7 +3731,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"host": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"router": schema.SingleNestedBlock{
 																MarkdownDescription: "IPV6AutoConfigRouterType.",
@@ -3766,10 +3766,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				},
 																				Blocks: map[string]schema.Block{
 																					"first_address": schema.SingleNestedBlock{
-																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																						MarkdownDescription: "Enable this option",
 																					},
 																					"last_address": schema.SingleNestedBlock{
-																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																						MarkdownDescription: "Enable this option",
 																					},
 																				},
 																			},
@@ -3780,10 +3780,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"automatic_from_end": schema.SingleNestedBlock{
-																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																				MarkdownDescription: "Enable this option",
 																			},
 																			"automatic_from_start": schema.SingleNestedBlock{
-																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																				MarkdownDescription: "Enable this option",
 																			},
 																			"dhcp_networks": schema.ListNestedBlock{
 																				MarkdownDescription: "DHCP IPV6 Networks. List of networks from which DHCP server can allocate ip addresses",
@@ -3842,31 +3842,31 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														MarkdownDescription: "Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface.",
 													},
 													"monitor_disabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"network_option": schema.SingleNestedBlock{
-														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
+														MarkdownDescription: "Network Select.Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
 														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"site_local_inside_network": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"site_local_network": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 														},
 													},
 													"no_ipv4_address": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"no_ipv6_address": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"site_to_site_connectivity_interface_disabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"site_to_site_connectivity_interface_enabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"static_ip": schema.SingleNestedBlock{
 														MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
@@ -4003,7 +4003,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														},
 														Blocks: map[string]schema.Block{
 															"active_backup": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"lacp": schema.SingleNestedBlock{
 																MarkdownDescription: "LACP parameters. LACP parameters for the bond device",
@@ -4017,7 +4017,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														},
 													},
 													"dhcp_client": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"ethernet_interface": schema.SingleNestedBlock{
 														MarkdownDescription: "Ethernet Interface.",
@@ -4037,7 +4037,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"host": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"router": schema.SingleNestedBlock{
 																MarkdownDescription: "IPV6AutoConfigRouterType.",
@@ -4072,10 +4072,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				},
 																				Blocks: map[string]schema.Block{
 																					"first_address": schema.SingleNestedBlock{
-																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																						MarkdownDescription: "Enable this option",
 																					},
 																					"last_address": schema.SingleNestedBlock{
-																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																						MarkdownDescription: "Enable this option",
 																					},
 																				},
 																			},
@@ -4086,10 +4086,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"automatic_from_end": schema.SingleNestedBlock{
-																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																				MarkdownDescription: "Enable this option",
 																			},
 																			"automatic_from_start": schema.SingleNestedBlock{
-																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																				MarkdownDescription: "Enable this option",
 																			},
 																			"dhcp_networks": schema.ListNestedBlock{
 																				MarkdownDescription: "DHCP IPV6 Networks. List of networks from which DHCP server can allocate ip addresses",
@@ -4148,31 +4148,31 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														MarkdownDescription: "Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface.",
 													},
 													"monitor_disabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"network_option": schema.SingleNestedBlock{
-														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
+														MarkdownDescription: "Network Select.Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
 														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"site_local_inside_network": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"site_local_network": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 														},
 													},
 													"no_ipv4_address": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"no_ipv6_address": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"site_to_site_connectivity_interface_disabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"site_to_site_connectivity_interface_enabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"static_ip": schema.SingleNestedBlock{
 														MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
@@ -4252,10 +4252,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"default_config": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"default_sli_config": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"sli_config": schema.SingleNestedBlock{
 						MarkdownDescription: "Site Local Network Configuration. Site local network configuration",
@@ -4274,10 +4274,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Network Labels. Add Labels for this network, these labels can be used in firewall policy",
 							},
 							"no_static_routes": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"no_v6_static_routes": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"static_routes": schema.SingleNestedBlock{
 								MarkdownDescription: "Static Routes List.",
@@ -4304,7 +4304,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 											},
 											Blocks: map[string]schema.Block{
 												"default_gateway": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 												"node_interface": schema.SingleNestedBlock{
 													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
@@ -4385,7 +4385,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 											},
 											Blocks: map[string]schema.Block{
 												"default_gateway": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 												"node_interface": schema.SingleNestedBlock{
 													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
@@ -4460,10 +4460,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Network Labels. Add Labels for this network, these labels can be used in firewall policy",
 							},
 							"no_static_routes": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"no_v6_static_routes": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"static_routes": schema.SingleNestedBlock{
 								MarkdownDescription: "Static Routes List.",
@@ -4490,7 +4490,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 											},
 											Blocks: map[string]schema.Block{
 												"default_gateway": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 												"node_interface": schema.SingleNestedBlock{
 													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
@@ -4571,7 +4571,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 											},
 											Blocks: map[string]schema.Block{
 												"default_gateway": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 												"node_interface": schema.SingleNestedBlock{
 													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
@@ -4650,22 +4650,22 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"logs_streaming_disabled": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"no_forward_proxy": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"no_network_policy": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"no_proxy_bypass": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"no_s2s_connectivity_sli": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"no_s2s_connectivity_slo": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"nutanix": schema.SingleNestedBlock{
 				MarkdownDescription: "Nutanix Provider Type. Nutanix Provider Type",
@@ -4738,7 +4738,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														},
 														Blocks: map[string]schema.Block{
 															"active_backup": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"lacp": schema.SingleNestedBlock{
 																MarkdownDescription: "LACP parameters. LACP parameters for the bond device",
@@ -4752,7 +4752,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														},
 													},
 													"dhcp_client": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"ethernet_interface": schema.SingleNestedBlock{
 														MarkdownDescription: "Ethernet Interface.",
@@ -4772,7 +4772,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"host": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"router": schema.SingleNestedBlock{
 																MarkdownDescription: "IPV6AutoConfigRouterType.",
@@ -4807,10 +4807,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				},
 																				Blocks: map[string]schema.Block{
 																					"first_address": schema.SingleNestedBlock{
-																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																						MarkdownDescription: "Enable this option",
 																					},
 																					"last_address": schema.SingleNestedBlock{
-																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																						MarkdownDescription: "Enable this option",
 																					},
 																				},
 																			},
@@ -4821,10 +4821,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"automatic_from_end": schema.SingleNestedBlock{
-																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																				MarkdownDescription: "Enable this option",
 																			},
 																			"automatic_from_start": schema.SingleNestedBlock{
-																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																				MarkdownDescription: "Enable this option",
 																			},
 																			"dhcp_networks": schema.ListNestedBlock{
 																				MarkdownDescription: "DHCP IPV6 Networks. List of networks from which DHCP server can allocate ip addresses",
@@ -4883,31 +4883,31 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														MarkdownDescription: "Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface.",
 													},
 													"monitor_disabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"network_option": schema.SingleNestedBlock{
-														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
+														MarkdownDescription: "Network Select.Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
 														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"site_local_inside_network": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"site_local_network": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 														},
 													},
 													"no_ipv4_address": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"no_ipv6_address": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"site_to_site_connectivity_interface_disabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"site_to_site_connectivity_interface_enabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"static_ip": schema.SingleNestedBlock{
 														MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
@@ -5044,7 +5044,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														},
 														Blocks: map[string]schema.Block{
 															"active_backup": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"lacp": schema.SingleNestedBlock{
 																MarkdownDescription: "LACP parameters. LACP parameters for the bond device",
@@ -5058,7 +5058,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														},
 													},
 													"dhcp_client": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"ethernet_interface": schema.SingleNestedBlock{
 														MarkdownDescription: "Ethernet Interface.",
@@ -5078,7 +5078,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"host": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"router": schema.SingleNestedBlock{
 																MarkdownDescription: "IPV6AutoConfigRouterType.",
@@ -5113,10 +5113,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				},
 																				Blocks: map[string]schema.Block{
 																					"first_address": schema.SingleNestedBlock{
-																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																						MarkdownDescription: "Enable this option",
 																					},
 																					"last_address": schema.SingleNestedBlock{
-																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																						MarkdownDescription: "Enable this option",
 																					},
 																				},
 																			},
@@ -5127,10 +5127,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"automatic_from_end": schema.SingleNestedBlock{
-																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																				MarkdownDescription: "Enable this option",
 																			},
 																			"automatic_from_start": schema.SingleNestedBlock{
-																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																				MarkdownDescription: "Enable this option",
 																			},
 																			"dhcp_networks": schema.ListNestedBlock{
 																				MarkdownDescription: "DHCP IPV6 Networks. List of networks from which DHCP server can allocate ip addresses",
@@ -5189,31 +5189,31 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														MarkdownDescription: "Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface.",
 													},
 													"monitor_disabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"network_option": schema.SingleNestedBlock{
-														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
+														MarkdownDescription: "Network Select.Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
 														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"site_local_inside_network": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"site_local_network": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 														},
 													},
 													"no_ipv4_address": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"no_ipv6_address": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"site_to_site_connectivity_interface_disabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"site_to_site_connectivity_interface_enabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"static_ip": schema.SingleNestedBlock{
 														MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
@@ -5284,10 +5284,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"enable_offline_survivability_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_offline_survivability_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -5362,7 +5362,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														},
 														Blocks: map[string]schema.Block{
 															"active_backup": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"lacp": schema.SingleNestedBlock{
 																MarkdownDescription: "LACP parameters. LACP parameters for the bond device",
@@ -5376,7 +5376,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														},
 													},
 													"dhcp_client": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"ethernet_interface": schema.SingleNestedBlock{
 														MarkdownDescription: "Ethernet Interface.",
@@ -5396,7 +5396,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"host": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"router": schema.SingleNestedBlock{
 																MarkdownDescription: "IPV6AutoConfigRouterType.",
@@ -5431,10 +5431,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				},
 																				Blocks: map[string]schema.Block{
 																					"first_address": schema.SingleNestedBlock{
-																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																						MarkdownDescription: "Enable this option",
 																					},
 																					"last_address": schema.SingleNestedBlock{
-																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																						MarkdownDescription: "Enable this option",
 																					},
 																				},
 																			},
@@ -5445,10 +5445,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"automatic_from_end": schema.SingleNestedBlock{
-																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																				MarkdownDescription: "Enable this option",
 																			},
 																			"automatic_from_start": schema.SingleNestedBlock{
-																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																				MarkdownDescription: "Enable this option",
 																			},
 																			"dhcp_networks": schema.ListNestedBlock{
 																				MarkdownDescription: "DHCP IPV6 Networks. List of networks from which DHCP server can allocate ip addresses",
@@ -5507,31 +5507,31 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														MarkdownDescription: "Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface.",
 													},
 													"monitor_disabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"network_option": schema.SingleNestedBlock{
-														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
+														MarkdownDescription: "Network Select.Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
 														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"site_local_inside_network": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"site_local_network": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 														},
 													},
 													"no_ipv4_address": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"no_ipv6_address": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"site_to_site_connectivity_interface_disabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"site_to_site_connectivity_interface_enabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"static_ip": schema.SingleNestedBlock{
 														MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
@@ -5598,23 +5598,23 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"performance_enhancement_mode": schema.SingleNestedBlock{
-				MarkdownDescription: "Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
+				MarkdownDescription: "Performance Enhancement Mode.Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"perf_mode_l3_enhanced": schema.SingleNestedBlock{
-						MarkdownDescription: "L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options",
+						MarkdownDescription: "L3 Mode Enhanced Performance.L3 enhanced performance mode options",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"jumbo": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"no_jumbo": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
 					"perf_mode_l7_enhanced": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -5623,7 +5623,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"geo_proximity": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"specific_re": schema.SingleNestedBlock{
 						MarkdownDescription: "Specific RE. Select specific REs. This is useful when a site needs to deterministically connect to a set of REs. A site will always be connected to 2 REs.",
@@ -5641,7 +5641,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"no_site_mesh_group": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"site_mesh_group": schema.SingleNestedBlock{
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
@@ -5662,10 +5662,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 					},
 					"sm_connection_public_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"sm_connection_pvt_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -5683,7 +5683,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 						Blocks: map[string]schema.Block{
 							"default_os_version": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -5697,7 +5697,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 						Blocks: map[string]schema.Block{
 							"default_sw_version": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -5712,7 +5712,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"disable_upgrade_drain": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_upgrade_drain": schema.SingleNestedBlock{
 								MarkdownDescription: "Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site.",
@@ -5728,10 +5728,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 								},
 								Blocks: map[string]schema.Block{
 									"disable_vega_upgrade_mode": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 									"enable_vega_upgrade_mode": schema.SingleNestedBlock{
-										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},
@@ -5810,7 +5810,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														},
 														Blocks: map[string]schema.Block{
 															"active_backup": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"lacp": schema.SingleNestedBlock{
 																MarkdownDescription: "LACP parameters. LACP parameters for the bond device",
@@ -5824,7 +5824,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														},
 													},
 													"dhcp_client": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"ethernet_interface": schema.SingleNestedBlock{
 														MarkdownDescription: "Ethernet Interface.",
@@ -5844,7 +5844,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"host": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"router": schema.SingleNestedBlock{
 																MarkdownDescription: "IPV6AutoConfigRouterType.",
@@ -5879,10 +5879,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				},
 																				Blocks: map[string]schema.Block{
 																					"first_address": schema.SingleNestedBlock{
-																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																						MarkdownDescription: "Enable this option",
 																					},
 																					"last_address": schema.SingleNestedBlock{
-																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																						MarkdownDescription: "Enable this option",
 																					},
 																				},
 																			},
@@ -5893,10 +5893,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"automatic_from_end": schema.SingleNestedBlock{
-																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																				MarkdownDescription: "Enable this option",
 																			},
 																			"automatic_from_start": schema.SingleNestedBlock{
-																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																				MarkdownDescription: "Enable this option",
 																			},
 																			"dhcp_networks": schema.ListNestedBlock{
 																				MarkdownDescription: "DHCP IPV6 Networks. List of networks from which DHCP server can allocate ip addresses",
@@ -5955,31 +5955,31 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														MarkdownDescription: "Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface.",
 													},
 													"monitor_disabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"network_option": schema.SingleNestedBlock{
-														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
+														MarkdownDescription: "Network Select.Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
 														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"site_local_inside_network": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 															"site_local_network": schema.SingleNestedBlock{
-																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																MarkdownDescription: "Enable this option",
 															},
 														},
 													},
 													"no_ipv4_address": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"no_ipv6_address": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"site_to_site_connectivity_interface_disabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"site_to_site_connectivity_interface_enabled": schema.SingleNestedBlock{
-														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														MarkdownDescription: "Enable this option",
 													},
 													"static_ip": schema.SingleNestedBlock{
 														MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",

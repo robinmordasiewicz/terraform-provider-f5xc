@@ -188,10 +188,10 @@ func (r *SubnetResource) Schema(ctx context.Context, req resource.SchemaRequest,
 				},
 			},
 			"connect_to_slo": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"isolated_nw": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"site_subnet_params": schema.ListNestedBlock{
 				MarkdownDescription: "Site Subnet Parameters. Configure subnet parameters per site",
@@ -199,7 +199,7 @@ func (r *SubnetResource) Schema(ctx context.Context, req resource.SchemaRequest,
 					Attributes: map[string]schema.Attribute{},
 					Blocks: map[string]schema.Block{
 						"dhcp": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"site": schema.SingleNestedBlock{
 							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
@@ -220,7 +220,7 @@ func (r *SubnetResource) Schema(ctx context.Context, req resource.SchemaRequest,
 							},
 						},
 						"static_ip": schema.SingleNestedBlock{
-							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							MarkdownDescription: "Enable this option",
 						},
 						"subnet_dhcp_server_params": schema.SingleNestedBlock{
 							MarkdownDescription: "Subnet DHCP parameters. Subnet DHCP parameters will be a subset of network_interface.DHCPServerParametersType as all features in network_interface.DHCPServerParametersType may not be supported in a subnet.",

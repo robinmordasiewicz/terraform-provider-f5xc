@@ -146,19 +146,19 @@ func (r *InfraprotectDenyListRuleResource) Schema(ctx context.Context, req resou
 				Delete: true,
 			}),
 			"expiration_never": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: expiration_never, expiration_timestamp, one_day, one_hour, one_month, one_year] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: expiration_never, expiration_timestamp, one_day, one_hour, one_month, one_year] Enable this option",
 			},
 			"one_day": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"one_hour": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"one_month": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"one_year": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 		},
 	}

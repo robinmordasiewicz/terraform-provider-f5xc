@@ -128,7 +128,7 @@ A [`vpc_list`](#aws-tgw-site-vpc-attachments-vpc-list) block (within [`aws_tgw_s
 
 <a id="aws-tgw-site-vpc-attachments-vpc-list-labels"></a>&#x2022; [`labels`](#aws-tgw-site-vpc-attachments-vpc-list-labels) - Optional Block<br>Labels. Add labels for the VPC attachment. These labels can then be used in policies such as enhanced firewall
 
-<a id="aws-tgw-site-vpc-attachments-vpc-list-manual-routing"></a>&#x2022; [`manual_routing`](#aws-tgw-site-vpc-attachments-vpc-list-manual-routing) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="aws-tgw-site-vpc-attachments-vpc-list-manual-routing"></a>&#x2022; [`manual_routing`](#aws-tgw-site-vpc-attachments-vpc-list-manual-routing) - Optional Block<br>Enable this option
 
 <a id="aws-tgw-site-vpc-attachments-vpc-list-vpc-id"></a>&#x2022; [`vpc_id`](#aws-tgw-site-vpc-attachments-vpc-list-vpc-id) - Optional String<br>VPC ID. Enter the VPC ID of the VPC to be attached
 
@@ -150,7 +150,7 @@ A [`route_tables`](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing-route-t
 
 A [`default_route`](#aws-tgw-site-vpc-attachments-vpc-list-default-route) block (within [`aws_tgw_site.vpc_attachments.vpc_list`](#aws-tgw-site-vpc-attachments-vpc-list)) supports the following:
 
-<a id="aws-tgw-site-vpc-attachments-vpc-list-default-route-all-route-tables"></a>&#x2022; [`all_route_tables`](#aws-tgw-site-vpc-attachments-vpc-list-default-route-all-route-tables) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="aws-tgw-site-vpc-attachments-vpc-list-default-route-all-route-tables"></a>&#x2022; [`all_route_tables`](#aws-tgw-site-vpc-attachments-vpc-list-default-route-all-route-tables) - Optional Block<br>Enable this option
 
 <a id="aws-tgw-site-vpc-attachments-vpc-list-default-route-selective-route-tables"></a>&#x2022; [`selective_route_tables`](#aws-tgw-site-vpc-attachments-vpc-list-default-route-selective-route-tables) - Optional Block<br>AWS Route Table. AWS Route Table<br>See [Selective Route Tables](#aws-tgw-site-vpc-attachments-vpc-list-default-route-selective-route-tables) below.
 
@@ -194,7 +194,7 @@ A [`vnet_list`](#azure-vnet-site-vnet-attachments-vnet-list) block (within [`azu
 
 <a id="azure-vnet-site-vnet-attachments-vnet-list-labels"></a>&#x2022; [`labels`](#azure-vnet-site-vnet-attachments-vnet-list-labels) - Optional Block<br>Labels. Add labels for the VNET attachments. These labels can then be used in policies such as enhanced firewall policies
 
-<a id="azure-vnet-site-vnet-attachments-vnet-list-manual-routing"></a>&#x2022; [`manual_routing`](#azure-vnet-site-vnet-attachments-vnet-list-manual-routing) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="azure-vnet-site-vnet-attachments-vnet-list-manual-routing"></a>&#x2022; [`manual_routing`](#azure-vnet-site-vnet-attachments-vnet-list-manual-routing) - Optional Block<br>Enable this option
 
 <a id="azure-vnet-site-vnet-attachments-vnet-list-subscription-id"></a>&#x2022; [`subscription_id`](#azure-vnet-site-vnet-attachments-vnet-list-subscription-id) - Optional String<br>Subscription ID. Enter the Subscription ID of the VNET to be attached
 
@@ -218,7 +218,7 @@ A [`route_tables`](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing-ro
 
 A [`default_route`](#azure-vnet-site-vnet-attachments-vnet-list-default-route) block (within [`azure_vnet_site.vnet_attachments.vnet_list`](#azure-vnet-site-vnet-attachments-vnet-list)) supports the following:
 
-<a id="azure-vnet-site-vnet-attachments-vnet-list-default-route-all-route-tables"></a>&#x2022; [`all_route_tables`](#azure-vnet-site-vnet-attachments-vnet-list-default-route-all-route-tables) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="azure-vnet-site-vnet-attachments-vnet-list-default-route-all-route-tables"></a>&#x2022; [`all_route_tables`](#azure-vnet-site-vnet-attachments-vnet-list-default-route-all-route-tables) - Optional Block<br>Enable this option
 
 <a id="azure-vnet-site-vnet-attachments-vnet-list-default-route-selective-route-tables"></a>&#x2022; [`selective_route_tables`](#azure-vnet-site-vnet-attachments-vnet-list-default-route-selective-route-tables) - Optional Block<br>Azure Route Table. Azure Route Table<br>See [Selective Route Tables](#azure-vnet-site-vnet-attachments-vnet-list-default-route-selective-route-tables) below.
 

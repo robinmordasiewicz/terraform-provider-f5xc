@@ -85,7 +85,7 @@ resource "f5xc_discovery" "example" {
 &#x2022; <a id="discovery-consul"></a>[`discovery_consul`](#discovery-consul) - Optional Block<br>Consul Discovery Configuration. Discovery configuration for Hashicorp Consul<br>See [Discovery Consul](#discovery-consul) below for details.
 <br><br>&#x2022; <a id="discovery-k8s"></a>[`discovery_k8s`](#discovery-k8s) - Optional Block<br>K8S Discovery Configuration. Discovery configuration for K8S<br>See [Discovery K8S](#discovery-k8s) below for details.
 
-<a id="no-cluster-id"></a>&#x2022; [`no_cluster_id`](#no-cluster-id) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="no-cluster-id"></a>&#x2022; [`no_cluster_id`](#no-cluster-id) - Optional Block<br>Enable this option
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -199,9 +199,9 @@ A [`clear_secret_info`](#discovery-consul-access-info-http-basic-auth-info-passw
 
 A [`publish_info`](#discovery-consul-publish-info) block (within [`discovery_consul`](#discovery-consul)) supports the following:
 
-<a id="discovery-consul-publish-info-disable"></a>&#x2022; [`disable`](#discovery-consul-publish-info-disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="discovery-consul-publish-info-disable"></a>&#x2022; [`disable`](#discovery-consul-publish-info-disable) - Optional Block<br>Enable this option
 
-<a id="discovery-consul-publish-info-publish"></a>&#x2022; [`publish`](#discovery-consul-publish-info-publish) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="discovery-consul-publish-info-publish"></a>&#x2022; [`publish`](#discovery-consul-publish-info-publish) - Optional Block<br>Enable this option
 
 #### Discovery K8S
 
@@ -209,7 +209,7 @@ A [`discovery_k8s`](#discovery-k8s) block supports the following:
 
 <a id="discovery-k8s-access-info"></a>&#x2022; [`access_info`](#discovery-k8s-access-info) - Optional Block<br>K8S API Server. K8S API server access<br>See [Access Info](#discovery-k8s-access-info) below.
 
-<a id="discovery-k8s-default-all"></a>&#x2022; [`default_all`](#discovery-k8s-default-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="discovery-k8s-default-all"></a>&#x2022; [`default_all`](#discovery-k8s-default-all) - Optional Block<br>Enable this option
 
 <a id="discovery-k8s-namespace-mapping"></a>&#x2022; [`namespace_mapping`](#discovery-k8s-namespace-mapping) - Optional Block<br>K8S Namespace Mapping. Select the mapping between K8S namespaces from which services will be discovered and App Namespace to which the discovered services will be shared<br>See [Namespace Mapping](#discovery-k8s-namespace-mapping) below.
 
@@ -221,11 +221,11 @@ An [`access_info`](#discovery-k8s-access-info) block (within [`discovery_k8s`](#
 
 <a id="discovery-k8s-access-info-connection-info"></a>&#x2022; [`connection_info`](#discovery-k8s-access-info-connection-info) - Optional Block<br>REST API Config. Configuration details to access discovery service REST API<br>See [Connection Info](#discovery-k8s-access-info-connection-info) below.
 
-<a id="discovery-k8s-access-info-isolated"></a>&#x2022; [`isolated`](#discovery-k8s-access-info-isolated) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="discovery-k8s-access-info-isolated"></a>&#x2022; [`isolated`](#discovery-k8s-access-info-isolated) - Optional Block<br>Enable this option
 
 <a id="discovery-k8s-access-info-kubeconfig-url"></a>&#x2022; [`kubeconfig_url`](#discovery-k8s-access-info-kubeconfig-url) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Kubeconfig URL](#discovery-k8s-access-info-kubeconfig-url) below.
 
-<a id="discovery-k8s-access-info-reachable"></a>&#x2022; [`reachable`](#discovery-k8s-access-info-reachable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="discovery-k8s-access-info-reachable"></a>&#x2022; [`reachable`](#discovery-k8s-access-info-reachable) - Optional Block<br>Enable this option
 
 #### Discovery K8S Access Info Connection Info
 
@@ -317,13 +317,13 @@ An [`items`](#discovery-k8s-namespace-mapping-items) block (within [`discovery_k
 
 A [`publish_info`](#discovery-k8s-publish-info) block (within [`discovery_k8s`](#discovery-k8s)) supports the following:
 
-<a id="discovery-k8s-publish-info-disable"></a>&#x2022; [`disable`](#discovery-k8s-publish-info-disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="discovery-k8s-publish-info-disable"></a>&#x2022; [`disable`](#discovery-k8s-publish-info-disable) - Optional Block<br>Enable this option
 
 <a id="discovery-k8s-publish-info-dns-delegation"></a>&#x2022; [`dns_delegation`](#discovery-k8s-publish-info-dns-delegation) - Optional Block<br>K8SDelegationType<br>See [DNS Delegation](#discovery-k8s-publish-info-dns-delegation) below.
 
 <a id="discovery-k8s-publish-info-publish"></a>&#x2022; [`publish`](#discovery-k8s-publish-info-publish) - Optional Block<br>K8SPublishType<br>See [Publish](#discovery-k8s-publish-info-publish) below.
 
-<a id="discovery-k8s-publish-info-publish-fqdns"></a>&#x2022; [`publish_fqdns`](#discovery-k8s-publish-info-publish-fqdns) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="discovery-k8s-publish-info-publish-fqdns"></a>&#x2022; [`publish_fqdns`](#discovery-k8s-publish-info-publish-fqdns) - Optional Block<br>Enable this option
 
 #### Discovery K8S Publish Info DNS Delegation
 
@@ -365,9 +365,9 @@ A [`where`](#where) block supports the following:
 
 A [`site`](#where-site) block (within [`where`](#where)) supports the following:
 
-<a id="where-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-site-disable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="where-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-site-disable-internet-vip) - Optional Block<br>Enable this option
 
-<a id="where-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-site-enable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="where-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-site-enable-internet-vip) - Optional Block<br>Enable this option
 
 <a id="where-site-network-type"></a>&#x2022; [`network_type`](#where-site-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
@@ -411,9 +411,9 @@ A [`ref`](#where-virtual-network-ref) block (within [`where.virtual_network`](#w
 
 A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) supports the following:
 
-<a id="where-virtual-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-virtual-site-disable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="where-virtual-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-virtual-site-disable-internet-vip) - Optional Block<br>Enable this option
 
-<a id="where-virtual-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-virtual-site-enable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="where-virtual-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-virtual-site-enable-internet-vip) - Optional Block<br>Enable this option
 
 <a id="where-virtual-site-network-type"></a>&#x2022; [`network_type`](#where-virtual-site-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 

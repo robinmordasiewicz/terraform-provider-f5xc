@@ -353,7 +353,7 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 											},
 										},
 										"system_generated_name": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 										"tags": schema.SingleNestedBlock{
 											MarkdownDescription: "AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. Specified tags will be added to Virtual interface along with any F5XC specific tags",
@@ -366,7 +366,7 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 				},
 			},
 			"disabled": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: disabled, enabled] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: disabled, enabled] Enable this option",
 			},
 			"enabled": schema.SingleNestedBlock{
 				MarkdownDescription: "CloudLink ADN Network Config.",
@@ -417,7 +417,7 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 											},
 										},
 										"same_as_credential": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},

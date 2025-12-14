@@ -32,7 +32,7 @@ resource "f5xc_dns_domain" "example" {
   }
 
   # Resource-specific configuration
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   volterra_managed {
     # Configure volterra_managed settings
   }
@@ -62,7 +62,7 @@ resource "f5xc_dns_domain" "example" {
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-<a id="volterra-managed"></a>&#x2022; [`volterra_managed`](#volterra-managed) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="volterra-managed"></a>&#x2022; [`volterra_managed`](#volterra-managed) - Optional Block<br>Enable this option
 
 ### Attributes Reference
 

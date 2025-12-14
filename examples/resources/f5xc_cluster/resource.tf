@@ -16,7 +16,7 @@ resource "f5xc_cluster" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: auto_http_config, http1_config, http2_options] Em...
+  # [OneOf: auto_http_config, http1_config, http2_options] En...
   auto_http_config {
     # Configure auto_http_config settings
   }

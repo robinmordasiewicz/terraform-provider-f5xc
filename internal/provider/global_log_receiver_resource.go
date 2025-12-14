@@ -799,7 +799,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				Delete: true,
 			}),
 			"audit_logs": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: audit_logs, dns_logs, request_logs, security_events] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: audit_logs, dns_logs, request_logs, security_events] Enable this option",
 			},
 			"aws_cloud_watch_receiver": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: aws_cloud_watch_receiver, azure_event_hubs_receiver, azure_receiver, datadog_receiver, gcp_bucket_receiver, http_receiver, kafka_receiver, new_relic_receiver, qradar_receiver, s3_receiver, splunk_receiver, sumo_logic_receiver] AWS Cloudwatch Logs Configuration. AWS Cloudwatch Logs Configuration for Global Log Receiver",
@@ -854,13 +854,13 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 						Blocks: map[string]schema.Block{
 							"max_bytes_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"max_events_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"timeout_seconds_default": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -869,13 +869,13 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"compression_default": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"compression_gzip": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"compression_none": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -959,13 +959,13 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 						Blocks: map[string]schema.Block{
 							"max_bytes_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"max_events_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"timeout_seconds_default": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -974,13 +974,13 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"compression_default": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"compression_gzip": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"compression_none": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1030,10 +1030,10 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 						Blocks: map[string]schema.Block{
 							"log_type_folder": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"no_folder": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1070,13 +1070,13 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 						Blocks: map[string]schema.Block{
 							"max_bytes_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"max_events_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"timeout_seconds_default": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1085,13 +1085,13 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"compression_default": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"compression_gzip": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"compression_none": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1132,7 +1132,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 					"no_tls": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"use_tls": schema.SingleNestedBlock{
 						MarkdownDescription: "TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint",
@@ -1144,19 +1144,19 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 						Blocks: map[string]schema.Block{
 							"disable_verify_certificate": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"disable_verify_hostname": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_verify_certificate": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_verify_hostname": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"mtls_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"mtls_enable": schema.SingleNestedBlock{
 								MarkdownDescription: "mTLS Client Config. mTLS Client config allows configuration of mtls client options",
@@ -1206,14 +1206,14 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								},
 							},
 							"no_ca": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
 				},
 			},
 			"dns_logs": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"gcp_bucket_receiver": schema.SingleNestedBlock{
 				MarkdownDescription: "GCP BucketConfiguration. GCP Bucket Configuration for Global Log Receiver",
@@ -1242,13 +1242,13 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 						Blocks: map[string]schema.Block{
 							"max_bytes_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"max_events_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"timeout_seconds_default": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1257,13 +1257,13 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"compression_default": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"compression_gzip": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"compression_none": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1277,10 +1277,10 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 						Blocks: map[string]schema.Block{
 							"log_type_folder": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"no_folder": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1361,7 +1361,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 					"auth_none": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"auth_token": schema.SingleNestedBlock{
 						MarkdownDescription: "Access Token. Authentication Token for access",
@@ -1423,13 +1423,13 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 						Blocks: map[string]schema.Block{
 							"max_bytes_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"max_events_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"timeout_seconds_default": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1438,18 +1438,18 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"compression_default": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"compression_gzip": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"compression_none": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
 					"no_tls": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"use_tls": schema.SingleNestedBlock{
 						MarkdownDescription: "TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint",
@@ -1461,19 +1461,19 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 						Blocks: map[string]schema.Block{
 							"disable_verify_certificate": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"disable_verify_hostname": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_verify_certificate": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_verify_hostname": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"mtls_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"mtls_enable": schema.SingleNestedBlock{
 								MarkdownDescription: "mTLS Client Config. mTLS Client config allows configuration of mtls client options",
@@ -1523,7 +1523,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								},
 							},
 							"no_ca": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1561,13 +1561,13 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 						Blocks: map[string]schema.Block{
 							"max_bytes_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"max_events_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"timeout_seconds_default": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1576,18 +1576,18 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"compression_default": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"compression_gzip": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"compression_none": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
 					"no_tls": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"use_tls": schema.SingleNestedBlock{
 						MarkdownDescription: "TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint",
@@ -1599,19 +1599,19 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 						Blocks: map[string]schema.Block{
 							"disable_verify_certificate": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"disable_verify_hostname": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_verify_certificate": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_verify_hostname": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"mtls_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"mtls_enable": schema.SingleNestedBlock{
 								MarkdownDescription: "mTLS Client Config. mTLS Client config allows configuration of mtls client options",
@@ -1661,7 +1661,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								},
 							},
 							"no_ca": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1708,18 +1708,18 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 					"eu": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"us": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
 			"ns_all": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: ns_all, ns_current, ns_list] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: ns_all, ns_current, ns_list] Enable this option",
 			},
 			"ns_current": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"ns_list": schema.SingleNestedBlock{
 				MarkdownDescription: "Namespace List. Namespace List",
@@ -1758,13 +1758,13 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 						Blocks: map[string]schema.Block{
 							"max_bytes_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"max_events_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"timeout_seconds_default": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1773,18 +1773,18 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"compression_default": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"compression_gzip": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"compression_none": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
 					"no_tls": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"use_tls": schema.SingleNestedBlock{
 						MarkdownDescription: "TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint",
@@ -1796,19 +1796,19 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 						Blocks: map[string]schema.Block{
 							"disable_verify_certificate": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"disable_verify_hostname": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_verify_certificate": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_verify_hostname": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"mtls_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"mtls_enable": schema.SingleNestedBlock{
 								MarkdownDescription: "mTLS Client Config. mTLS Client config allows configuration of mtls client options",
@@ -1858,14 +1858,14 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								},
 							},
 							"no_ca": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
 				},
 			},
 			"request_logs": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"s3_receiver": schema.SingleNestedBlock{
 				MarkdownDescription: "S3 Configuration. S3 Configuration for Global Log Receiver",
@@ -1916,13 +1916,13 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 						Blocks: map[string]schema.Block{
 							"max_bytes_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"max_events_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"timeout_seconds_default": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1931,13 +1931,13 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"compression_default": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"compression_gzip": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"compression_none": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1951,17 +1951,17 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 						Blocks: map[string]schema.Block{
 							"log_type_folder": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"no_folder": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
 				},
 			},
 			"security_events": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"splunk_receiver": schema.SingleNestedBlock{
 				MarkdownDescription: "Splunk HEC Logs Configuration. Configuration for Splunk HEC Logs endpoint",
@@ -1990,13 +1990,13 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 						Blocks: map[string]schema.Block{
 							"max_bytes_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"max_events_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"timeout_seconds_default": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -2005,18 +2005,18 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"compression_default": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"compression_gzip": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"compression_none": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
 					"no_tls": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"splunk_hec_token": schema.SingleNestedBlock{
 						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
@@ -2064,19 +2064,19 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 						Blocks: map[string]schema.Block{
 							"disable_verify_certificate": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"disable_verify_hostname": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_verify_certificate": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_verify_hostname": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"mtls_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 							"mtls_enable": schema.SingleNestedBlock{
 								MarkdownDescription: "mTLS Client Config. mTLS Client config allows configuration of mtls client options",
@@ -2126,7 +2126,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								},
 							},
 							"no_ca": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},

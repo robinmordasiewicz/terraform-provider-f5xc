@@ -211,7 +211,7 @@ func (r *DNSLBHealthCheckResource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"icmp_health_check": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"tcp_health_check": schema.SingleNestedBlock{
 				MarkdownDescription: "TCP Health Check.",

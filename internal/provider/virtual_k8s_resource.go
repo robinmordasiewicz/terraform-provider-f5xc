@@ -161,10 +161,10 @@ func (r *VirtualK8SResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"disabled": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: disabled, isolated] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: disabled, isolated] Enable this option",
 			},
 			"isolated": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"vsite_refs": schema.ListNestedBlock{
 				MarkdownDescription: "Virtual Sites. Reference to virtual-sites Default virtual-site of the Virtual K8s object. If no virtual-site is specified in the Kubernetes API resource object annotations via ves.io/virtual-sites, then this virtual-site is used select sites on which to instantiate the Kubernetes API resource object",

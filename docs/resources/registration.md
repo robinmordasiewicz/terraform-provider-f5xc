@@ -370,9 +370,9 @@ A [`passport`](#passport) block supports the following:
 
 <a id="passport-cluster-type"></a>&#x2022; [`cluster_type`](#passport-cluster-type) - Optional String<br>Cluster Type
 
-<a id="passport-default-os-version"></a>&#x2022; [`default_os_version`](#passport-default-os-version) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="passport-default-os-version"></a>&#x2022; [`default_os_version`](#passport-default-os-version) - Optional Block<br>Enable this option
 
-<a id="passport-default-sw-version"></a>&#x2022; [`default_sw_version`](#passport-default-sw-version) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="passport-default-sw-version"></a>&#x2022; [`default_sw_version`](#passport-default-sw-version) - Optional Block<br>Enable this option
 
 <a id="passport-latitude"></a>&#x2022; [`latitude`](#passport-latitude) - Optional Number<br>Latitude. Geographic location of this site
 

@@ -107,14 +107,14 @@ resource "f5xc_azure_vnet_site" "example" {
 <a id="azure-cred"></a>&#x2022; [`azure_cred`](#azure-cred) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Azure Cred](#azure-cred) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="block-all-services"></a>[`block_all_services`](#block-all-services) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="block-all-services"></a>[`block_all_services`](#block-all-services) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="blocked-services"></a>[`blocked_services`](#blocked-services) - Optional Block<br>Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site<br>See [Blocked Services](#blocked-services) below for details.
 
 <a id="coordinates"></a>&#x2022; [`coordinates`](#coordinates) - Optional Block<br>Site Coordinates. Coordinates of the site which provides the site physical location<br>See [Coordinates](#coordinates) below for details.
 
 <a id="custom-dns"></a>&#x2022; [`custom_dns`](#custom-dns) - Optional Block<br>Custom DNS. Custom DNS is the configured for specify CE site<br>See [Custom DNS](#custom-dns) below for details.
 
-<a id="default-blocked-services"></a>&#x2022; [`default_blocked_services`](#default-blocked-services) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="default-blocked-services"></a>&#x2022; [`default_blocked_services`](#default-blocked-services) - Optional Block<br>Enable this option
 
 <a id="disk-size"></a>&#x2022; [`disk_size`](#disk-size) - Optional Number<br>Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB
 
@@ -130,12 +130,12 @@ resource "f5xc_azure_vnet_site" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="log-receiver"></a>[`log_receiver`](#log-receiver) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
-<br><br>&#x2022; <a id="logs-streaming-disabled"></a>[`logs_streaming_disabled`](#logs-streaming-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="logs-streaming-disabled"></a>[`logs_streaming_disabled`](#logs-streaming-disabled) - Optional Block<br>Enable this option
 
 <a id="machine-type"></a>&#x2022; [`machine_type`](#machine-type) - Optional String<br>Azure Machine Type for Node. Select Instance size based on performance needed. The default setting for Accelerated Networking is enabled, thus make sure you select a Virtual Machine that supports accelerated networking or disable the setting under, Select Ingress Gateway or Ingress/Egress Gateway > advanced options
 
 -> **One of the following:**
-&#x2022; <a id="no-worker-nodes"></a>[`no_worker_nodes`](#no-worker-nodes) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="no-worker-nodes"></a>[`no_worker_nodes`](#no-worker-nodes) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="nodes-per-az"></a>[`nodes_per_az`](#nodes-per-az) - Optional Number<br>Desired Worker Nodes Per AZ. Desired Worker Nodes Per AZ. Max limit is up to 21
 
 <a id="offline-survivability-mode"></a>&#x2022; [`offline_survivability_mode`](#offline-survivability-mode) - Optional Block<br>Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen
@@ -210,13 +210,13 @@ A [`blocked_services`](#blocked-services) block supports the following:
 
 A [`blocked_sevice`](#blocked-services-blocked-sevice) block (within [`blocked_services`](#blocked-services)) supports the following:
 
-<a id="blocked-services-blocked-sevice-dns"></a>&#x2022; [`dns`](#blocked-services-blocked-sevice-dns) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="blocked-services-blocked-sevice-dns"></a>&#x2022; [`dns`](#blocked-services-blocked-sevice-dns) - Optional Block<br>Enable this option
 
 <a id="blocked-services-blocked-sevice-network-type"></a>&#x2022; [`network_type`](#blocked-services-blocked-sevice-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
-<a id="blocked-services-blocked-sevice-ssh"></a>&#x2022; [`ssh`](#blocked-services-blocked-sevice-ssh) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="blocked-services-blocked-sevice-ssh"></a>&#x2022; [`ssh`](#blocked-services-blocked-sevice-ssh) - Optional Block<br>Enable this option
 
-<a id="blocked-services-blocked-sevice-web-user-interface"></a>&#x2022; [`web_user_interface`](#blocked-services-blocked-sevice-web-user-interface) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="blocked-services-blocked-sevice-web-user-interface"></a>&#x2022; [`web_user_interface`](#blocked-services-blocked-sevice-web-user-interface) - Optional Block<br>Enable this option
 
 #### Coordinates
 
@@ -238,7 +238,7 @@ A [`custom_dns`](#custom-dns) block supports the following:
 
 An [`ingress_egress_gw`](#ingress-egress-gw) block supports the following:
 
-<a id="ingress-egress-gw-accelerated-networking"></a>&#x2022; [`accelerated_networking`](#ingress-egress-gw-accelerated-networking) - Optional Block<br>Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen<br>See [Accelerated Networking](#ingress-egress-gw-accelerated-networking) below.
+<a id="ingress-egress-gw-accelerated-networking"></a>&#x2022; [`accelerated_networking`](#ingress-egress-gw-accelerated-networking) - Optional Block<br>Accelerated Networking Type.Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen<br>See [Accelerated Networking](#ingress-egress-gw-accelerated-networking) below.
 
 <a id="ingress-egress-gw-active-enhanced-firewall-policies"></a>&#x2022; [`active_enhanced_firewall_policies`](#ingress-egress-gw-active-enhanced-firewall-policies) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#ingress-egress-gw-active-enhanced-firewall-policies) below.
 
@@ -254,7 +254,7 @@ An [`ingress_egress_gw`](#ingress-egress-gw) block supports the following:
 
 <a id="ingress-egress-gw-dc-cluster-group-outside-vn"></a>&#x2022; [`dc_cluster_group_outside_vn`](#ingress-egress-gw-dc-cluster-group-outside-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group Outside Vn](#ingress-egress-gw-dc-cluster-group-outside-vn) below.
 
-<a id="ingress-egress-gw-forward-proxy-allow-all"></a>&#x2022; [`forward_proxy_allow_all`](#ingress-egress-gw-forward-proxy-allow-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-forward-proxy-allow-all"></a>&#x2022; [`forward_proxy_allow_all`](#ingress-egress-gw-forward-proxy-allow-all) - Optional Block<br>Enable this option
 
 <a id="ingress-egress-gw-global-network-list"></a>&#x2022; [`global_network_list`](#ingress-egress-gw-global-network-list) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#ingress-egress-gw-global-network-list) below.
 
@@ -262,35 +262,35 @@ An [`ingress_egress_gw`](#ingress-egress-gw) block supports the following:
 
 <a id="ingress-egress-gw-inside-static-routes"></a>&#x2022; [`inside_static_routes`](#ingress-egress-gw-inside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Inside Static Routes](#ingress-egress-gw-inside-static-routes) below.
 
-<a id="ingress-egress-gw-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#ingress-egress-gw-no-dc-cluster-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#ingress-egress-gw-no-dc-cluster-group) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#ingress-egress-gw-no-forward-proxy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#ingress-egress-gw-no-forward-proxy) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-no-global-network"></a>&#x2022; [`no_global_network`](#ingress-egress-gw-no-global-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-no-global-network"></a>&#x2022; [`no_global_network`](#ingress-egress-gw-no-global-network) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-no-inside-static-routes"></a>&#x2022; [`no_inside_static_routes`](#ingress-egress-gw-no-inside-static-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-no-inside-static-routes"></a>&#x2022; [`no_inside_static_routes`](#ingress-egress-gw-no-inside-static-routes) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-no-network-policy"></a>&#x2022; [`no_network_policy`](#ingress-egress-gw-no-network-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-no-network-policy"></a>&#x2022; [`no_network_policy`](#ingress-egress-gw-no-network-policy) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-no-outside-static-routes"></a>&#x2022; [`no_outside_static_routes`](#ingress-egress-gw-no-outside-static-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-no-outside-static-routes"></a>&#x2022; [`no_outside_static_routes`](#ingress-egress-gw-no-outside-static-routes) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-not-hub"></a>&#x2022; [`not_hub`](#ingress-egress-gw-not-hub) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-not-hub"></a>&#x2022; [`not_hub`](#ingress-egress-gw-not-hub) - Optional Block<br>Enable this option
 
 <a id="ingress-egress-gw-outside-static-routes"></a>&#x2022; [`outside_static_routes`](#ingress-egress-gw-outside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Outside Static Routes](#ingress-egress-gw-outside-static-routes) below.
 
-<a id="ingress-egress-gw-performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#ingress-egress-gw-performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#ingress-egress-gw-performance-enhancement-mode) below.
+<a id="ingress-egress-gw-performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#ingress-egress-gw-performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode.Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#ingress-egress-gw-performance-enhancement-mode) below.
 
-<a id="ingress-egress-gw-sm-connection-public-ip"></a>&#x2022; [`sm_connection_public_ip`](#ingress-egress-gw-sm-connection-public-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-sm-connection-public-ip"></a>&#x2022; [`sm_connection_public_ip`](#ingress-egress-gw-sm-connection-public-ip) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-sm-connection-pvt-ip"></a>&#x2022; [`sm_connection_pvt_ip`](#ingress-egress-gw-sm-connection-pvt-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-sm-connection-pvt-ip"></a>&#x2022; [`sm_connection_pvt_ip`](#ingress-egress-gw-sm-connection-pvt-ip) - Optional Block<br>Enable this option
 
 #### Ingress Egress Gw Accelerated Networking
 
 An [`accelerated_networking`](#ingress-egress-gw-accelerated-networking) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
 
-<a id="ingress-egress-gw-accelerated-networking-disable"></a>&#x2022; [`disable`](#ingress-egress-gw-accelerated-networking-disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-accelerated-networking-disable"></a>&#x2022; [`disable`](#ingress-egress-gw-accelerated-networking-disable) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-accelerated-networking-enable"></a>&#x2022; [`enable`](#ingress-egress-gw-accelerated-networking-enable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-accelerated-networking-enable"></a>&#x2022; [`enable`](#ingress-egress-gw-accelerated-networking-enable) - Optional Block<br>Enable this option
 
 #### Ingress Egress Gw Active Enhanced Firewall Policies
 
@@ -366,7 +366,7 @@ A [`subnet`](#ingress-egress-gw-az-nodes-inside-subnet-subnet) block (within [`i
 
 <a id="ingress-egress-gw-az-nodes-inside-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet_resource_grp`](#ingress-egress-gw-az-nodes-inside-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
 
-<a id="ingress-egress-gw-az-nodes-inside-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-egress-gw-az-nodes-inside-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-az-nodes-inside-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-egress-gw-az-nodes-inside-subnet-subnet-vnet-resource-group) - Optional Block<br>Enable this option
 
 #### Ingress Egress Gw Az Nodes Inside Subnet Subnet Param
 
@@ -390,7 +390,7 @@ A [`subnet`](#ingress-egress-gw-az-nodes-outside-subnet-subnet) block (within [`
 
 <a id="ingress-egress-gw-az-nodes-outside-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet_resource_grp`](#ingress-egress-gw-az-nodes-outside-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
 
-<a id="ingress-egress-gw-az-nodes-outside-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-egress-gw-az-nodes-outside-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-az-nodes-outside-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-egress-gw-az-nodes-outside-subnet-subnet-vnet-resource-group) - Optional Block<br>Enable this option
 
 #### Ingress Egress Gw Az Nodes Outside Subnet Subnet Param
 
@@ -468,7 +468,7 @@ A [`global_vn`](#ingress-egress-gw-global-network-list-global-network-connection
 
 A [`hub`](#ingress-egress-gw-hub) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
 
-<a id="ingress-egress-gw-hub-express-route-disabled"></a>&#x2022; [`express_route_disabled`](#ingress-egress-gw-hub-express-route-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-hub-express-route-disabled"></a>&#x2022; [`express_route_disabled`](#ingress-egress-gw-hub-express-route-disabled) - Optional Block<br>Enable this option
 
 <a id="ingress-egress-gw-hub-express-route-enabled"></a>&#x2022; [`express_route_enabled`](#ingress-egress-gw-hub-express-route-enabled) - Optional Block<br>Express Route Configuration. Express Route Configuration<br>See [Express Route Enabled](#ingress-egress-gw-hub-express-route-enabled) below.
 
@@ -478,15 +478,15 @@ A [`hub`](#ingress-egress-gw-hub) block (within [`ingress_egress_gw`](#ingress-e
 
 An [`express_route_enabled`](#ingress-egress-gw-hub-express-route-enabled) block (within [`ingress_egress_gw.hub`](#ingress-egress-gw-hub)) supports the following:
 
-<a id="ingress-egress-gw-hub-express-route-enabled-advertise-to-route-server"></a>&#x2022; [`advertise_to_route_server`](#ingress-egress-gw-hub-express-route-enabled-advertise-to-route-server) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-hub-express-route-enabled-advertise-to-route-server"></a>&#x2022; [`advertise_to_route_server`](#ingress-egress-gw-hub-express-route-enabled-advertise-to-route-server) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-hub-express-route-enabled-auto-asn"></a>&#x2022; [`auto_asn`](#ingress-egress-gw-hub-express-route-enabled-auto-asn) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-hub-express-route-enabled-auto-asn"></a>&#x2022; [`auto_asn`](#ingress-egress-gw-hub-express-route-enabled-auto-asn) - Optional Block<br>Enable this option
 
 <a id="ingress-egress-gw-hub-express-route-enabled-connections"></a>&#x2022; [`connections`](#ingress-egress-gw-hub-express-route-enabled-connections) - Optional Block<br>Connections. Add the ExpressRoute Circuit Connections to this site<br>See [Connections](#ingress-egress-gw-hub-express-route-enabled-connections) below.
 
 <a id="ingress-egress-gw-hub-express-route-enabled-custom-asn"></a>&#x2022; [`custom_asn`](#ingress-egress-gw-hub-express-route-enabled-custom-asn) - Optional Number<br>Custom ASN. Set custom ASN for F5XC Site
 
-<a id="ingress-egress-gw-hub-express-route-enabled-do-not-advertise-to-route-server"></a>&#x2022; [`do_not_advertise_to_route_server`](#ingress-egress-gw-hub-express-route-enabled-do-not-advertise-to-route-server) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-hub-express-route-enabled-do-not-advertise-to-route-server"></a>&#x2022; [`do_not_advertise_to_route_server`](#ingress-egress-gw-hub-express-route-enabled-do-not-advertise-to-route-server) - Optional Block<br>Enable this option
 
 <a id="ingress-egress-gw-hub-express-route-enabled-gateway-subnet"></a>&#x2022; [`gateway_subnet`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Gateway Subnet](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet) below.
 
@@ -494,15 +494,15 @@ An [`express_route_enabled`](#ingress-egress-gw-hub-express-route-enabled) block
 
 <a id="ingress-egress-gw-hub-express-route-enabled-site-registration-over-express-route"></a>&#x2022; [`site_registration_over_express_route`](#ingress-egress-gw-hub-express-route-enabled-site-registration-over-express-route) - Optional Block<br>CloudLink ADN Network Config<br>See [Site Registration Over Express Route](#ingress-egress-gw-hub-express-route-enabled-site-registration-over-express-route) below.
 
-<a id="ingress-egress-gw-hub-express-route-enabled-site-registration-over-internet"></a>&#x2022; [`site_registration_over_internet`](#ingress-egress-gw-hub-express-route-enabled-site-registration-over-internet) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-hub-express-route-enabled-site-registration-over-internet"></a>&#x2022; [`site_registration_over_internet`](#ingress-egress-gw-hub-express-route-enabled-site-registration-over-internet) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-hub-express-route-enabled-sku-ergw1az"></a>&#x2022; [`sku_ergw1az`](#ingress-egress-gw-hub-express-route-enabled-sku-ergw1az) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-hub-express-route-enabled-sku-ergw1az"></a>&#x2022; [`sku_ergw1az`](#ingress-egress-gw-hub-express-route-enabled-sku-ergw1az) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-hub-express-route-enabled-sku-ergw2az"></a>&#x2022; [`sku_ergw2az`](#ingress-egress-gw-hub-express-route-enabled-sku-ergw2az) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-hub-express-route-enabled-sku-ergw2az"></a>&#x2022; [`sku_ergw2az`](#ingress-egress-gw-hub-express-route-enabled-sku-ergw2az) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-hub-express-route-enabled-sku-high-perf"></a>&#x2022; [`sku_high_perf`](#ingress-egress-gw-hub-express-route-enabled-sku-high-perf) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-hub-express-route-enabled-sku-high-perf"></a>&#x2022; [`sku_high_perf`](#ingress-egress-gw-hub-express-route-enabled-sku-high-perf) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-hub-express-route-enabled-sku-standard"></a>&#x2022; [`sku_standard`](#ingress-egress-gw-hub-express-route-enabled-sku-standard) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-hub-express-route-enabled-sku-standard"></a>&#x2022; [`sku_standard`](#ingress-egress-gw-hub-express-route-enabled-sku-standard) - Optional Block<br>Enable this option
 
 #### Ingress Egress Gw Hub Express Route Enabled Connections
 
@@ -562,7 +562,7 @@ A [`clear_secret_info`](#ingress-egress-gw-hub-express-route-enabled-connections
 
 A [`gateway_subnet`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet) block (within [`ingress_egress_gw.hub.express_route_enabled`](#ingress-egress-gw-hub-express-route-enabled)) supports the following:
 
-<a id="ingress-egress-gw-hub-express-route-enabled-gateway-subnet-auto"></a>&#x2022; [`auto`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet-auto) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-hub-express-route-enabled-gateway-subnet-auto"></a>&#x2022; [`auto`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet-auto) - Optional Block<br>Enable this option
 
 <a id="ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet"></a>&#x2022; [`subnet`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet) - Optional Block<br>Azure Cloud Special Subnet. Parameters for Azure special subnet which name is reserved. (i.e GatewaySubnet or RouteServerSubnet)<br>See [Subnet](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet) below.
 
@@ -574,7 +574,7 @@ A [`subnet`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet)
 
 <a id="ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet_resource_grp`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
 
-<a id="ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet-vnet-resource-group) - Optional Block<br>Enable this option
 
 #### Ingress Egress Gw Hub Express Route Enabled Gateway Subnet Subnet Param
 
@@ -586,7 +586,7 @@ A [`subnet_param`](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet-s
 
 A [`route_server_subnet`](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet) block (within [`ingress_egress_gw.hub.express_route_enabled`](#ingress-egress-gw-hub-express-route-enabled)) supports the following:
 
-<a id="ingress-egress-gw-hub-express-route-enabled-route-server-subnet-auto"></a>&#x2022; [`auto`](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet-auto) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-hub-express-route-enabled-route-server-subnet-auto"></a>&#x2022; [`auto`](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet-auto) - Optional Block<br>Enable this option
 
 <a id="ingress-egress-gw-hub-express-route-enabled-route-server-subnet-subnet"></a>&#x2022; [`subnet`](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet-subnet) - Optional Block<br>Azure Cloud Special Subnet. Parameters for Azure special subnet which name is reserved. (i.e GatewaySubnet or RouteServerSubnet)<br>See [Subnet](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet-subnet) below.
 
@@ -598,7 +598,7 @@ A [`subnet`](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet-su
 
 <a id="ingress-egress-gw-hub-express-route-enabled-route-server-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet_resource_grp`](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
 
-<a id="ingress-egress-gw-hub-express-route-enabled-route-server-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-hub-express-route-enabled-route-server-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet-subnet-vnet-resource-group) - Optional Block<br>Enable this option
 
 #### Ingress Egress Gw Hub Express Route Enabled Route Server Subnet Subnet Param
 
@@ -616,11 +616,11 @@ A [`site_registration_over_express_route`](#ingress-egress-gw-hub-express-route-
 
 A [`spoke_vnets`](#ingress-egress-gw-hub-spoke-vnets) block (within [`ingress_egress_gw.hub`](#ingress-egress-gw-hub)) supports the following:
 
-<a id="ingress-egress-gw-hub-spoke-vnets-auto"></a>&#x2022; [`auto`](#ingress-egress-gw-hub-spoke-vnets-auto) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-hub-spoke-vnets-auto"></a>&#x2022; [`auto`](#ingress-egress-gw-hub-spoke-vnets-auto) - Optional Block<br>Enable this option
 
 <a id="ingress-egress-gw-hub-spoke-vnets-labels"></a>&#x2022; [`labels`](#ingress-egress-gw-hub-spoke-vnets-labels) - Optional Block<br>Labels For VNets Peering. Add Labels for each of the VNets peered with transit VNET, these labels can be used in firewall policy These labels used must be from known key and label defined in shared namespace
 
-<a id="ingress-egress-gw-hub-spoke-vnets-manual"></a>&#x2022; [`manual`](#ingress-egress-gw-hub-spoke-vnets-manual) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-hub-spoke-vnets-manual"></a>&#x2022; [`manual`](#ingress-egress-gw-hub-spoke-vnets-manual) - Optional Block<br>Enable this option
 
 <a id="ingress-egress-gw-hub-spoke-vnets-vnet"></a>&#x2022; [`vnet`](#ingress-egress-gw-hub-spoke-vnets-vnet) - Optional Block<br>Azure Existing VNET Type. Resource group and name of existing Azure VNET<br>See [VNET](#ingress-egress-gw-hub-spoke-vnets-vnet) below.
 
@@ -628,9 +628,9 @@ A [`spoke_vnets`](#ingress-egress-gw-hub-spoke-vnets) block (within [`ingress_eg
 
 A [`vnet`](#ingress-egress-gw-hub-spoke-vnets-vnet) block (within [`ingress_egress_gw.hub.spoke_vnets`](#ingress-egress-gw-hub-spoke-vnets)) supports the following:
 
-<a id="ingress-egress-gw-hub-spoke-vnets-vnet-f5-orchestrated-routing"></a>&#x2022; [`f5_orchestrated_routing`](#ingress-egress-gw-hub-spoke-vnets-vnet-f5-orchestrated-routing) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-hub-spoke-vnets-vnet-f5-orchestrated-routing"></a>&#x2022; [`f5_orchestrated_routing`](#ingress-egress-gw-hub-spoke-vnets-vnet-f5-orchestrated-routing) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-hub-spoke-vnets-vnet-manual-routing"></a>&#x2022; [`manual_routing`](#ingress-egress-gw-hub-spoke-vnets-vnet-manual-routing) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-hub-spoke-vnets-vnet-manual-routing"></a>&#x2022; [`manual_routing`](#ingress-egress-gw-hub-spoke-vnets-vnet-manual-routing) - Optional Block<br>Enable this option
 
 <a id="ingress-egress-gw-hub-spoke-vnets-vnet-resource-group"></a>&#x2022; [`resource_group`](#ingress-egress-gw-hub-spoke-vnets-vnet-resource-group) - Optional String<br>Existing VNET Resource Group. Resource group of existing VNET
 
@@ -828,23 +828,23 @@ An [`ipv6`](#ingress-egress-gw-outside-static-routes-static-route-list-custom-st
 
 A [`performance_enhancement_mode`](#ingress-egress-gw-performance-enhancement-mode) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
 
-<a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced"></a>&#x2022; [`perf_mode_l3_enhanced`](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) below.
+<a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced"></a>&#x2022; [`perf_mode_l3_enhanced`](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance.L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
-<a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l7-enhanced"></a>&#x2022; [`perf_mode_l7_enhanced`](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l7-enhanced) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l7-enhanced"></a>&#x2022; [`perf_mode_l7_enhanced`](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l7-enhanced) - Optional Block<br>Enable this option
 
 #### Ingress Egress Gw Performance Enhancement Mode Perf Mode L3 Enhanced
 
 A [`perf_mode_l3_enhanced`](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) block (within [`ingress_egress_gw.performance_enhancement_mode`](#ingress-egress-gw-performance-enhancement-mode)) supports the following:
 
-<a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>&#x2022; [`jumbo`](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>&#x2022; [`jumbo`](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo"></a>&#x2022; [`no_jumbo`](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo"></a>&#x2022; [`no_jumbo`](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo) - Optional Block<br>Enable this option
 
 #### Ingress Egress Gw Ar
 
 An [`ingress_egress_gw_ar`](#ingress-egress-gw-ar) block supports the following:
 
-<a id="ingress-egress-gw-ar-accelerated-networking"></a>&#x2022; [`accelerated_networking`](#ingress-egress-gw-ar-accelerated-networking) - Optional Block<br>Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen<br>See [Accelerated Networking](#ingress-egress-gw-ar-accelerated-networking) below.
+<a id="ingress-egress-gw-ar-accelerated-networking"></a>&#x2022; [`accelerated_networking`](#ingress-egress-gw-ar-accelerated-networking) - Optional Block<br>Accelerated Networking Type.Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen<br>See [Accelerated Networking](#ingress-egress-gw-ar-accelerated-networking) below.
 
 <a id="ingress-egress-gw-ar-active-enhanced-firewall-policies"></a>&#x2022; [`active_enhanced_firewall_policies`](#ingress-egress-gw-ar-active-enhanced-firewall-policies) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#ingress-egress-gw-ar-active-enhanced-firewall-policies) below.
 
@@ -858,7 +858,7 @@ An [`ingress_egress_gw_ar`](#ingress-egress-gw-ar) block supports the following:
 
 <a id="ingress-egress-gw-ar-dc-cluster-group-outside-vn"></a>&#x2022; [`dc_cluster_group_outside_vn`](#ingress-egress-gw-ar-dc-cluster-group-outside-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group Outside Vn](#ingress-egress-gw-ar-dc-cluster-group-outside-vn) below.
 
-<a id="ingress-egress-gw-ar-forward-proxy-allow-all"></a>&#x2022; [`forward_proxy_allow_all`](#ingress-egress-gw-ar-forward-proxy-allow-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-forward-proxy-allow-all"></a>&#x2022; [`forward_proxy_allow_all`](#ingress-egress-gw-ar-forward-proxy-allow-all) - Optional Block<br>Enable this option
 
 <a id="ingress-egress-gw-ar-global-network-list"></a>&#x2022; [`global_network_list`](#ingress-egress-gw-ar-global-network-list) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#ingress-egress-gw-ar-global-network-list) below.
 
@@ -866,37 +866,37 @@ An [`ingress_egress_gw_ar`](#ingress-egress-gw-ar) block supports the following:
 
 <a id="ingress-egress-gw-ar-inside-static-routes"></a>&#x2022; [`inside_static_routes`](#ingress-egress-gw-ar-inside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Inside Static Routes](#ingress-egress-gw-ar-inside-static-routes) below.
 
-<a id="ingress-egress-gw-ar-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#ingress-egress-gw-ar-no-dc-cluster-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#ingress-egress-gw-ar-no-dc-cluster-group) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-ar-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#ingress-egress-gw-ar-no-forward-proxy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#ingress-egress-gw-ar-no-forward-proxy) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-ar-no-global-network"></a>&#x2022; [`no_global_network`](#ingress-egress-gw-ar-no-global-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-no-global-network"></a>&#x2022; [`no_global_network`](#ingress-egress-gw-ar-no-global-network) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-ar-no-inside-static-routes"></a>&#x2022; [`no_inside_static_routes`](#ingress-egress-gw-ar-no-inside-static-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-no-inside-static-routes"></a>&#x2022; [`no_inside_static_routes`](#ingress-egress-gw-ar-no-inside-static-routes) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-ar-no-network-policy"></a>&#x2022; [`no_network_policy`](#ingress-egress-gw-ar-no-network-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-no-network-policy"></a>&#x2022; [`no_network_policy`](#ingress-egress-gw-ar-no-network-policy) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-ar-no-outside-static-routes"></a>&#x2022; [`no_outside_static_routes`](#ingress-egress-gw-ar-no-outside-static-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-no-outside-static-routes"></a>&#x2022; [`no_outside_static_routes`](#ingress-egress-gw-ar-no-outside-static-routes) - Optional Block<br>Enable this option
 
 <a id="ingress-egress-gw-ar-node"></a>&#x2022; [`node`](#ingress-egress-gw-ar-node) - Optional Block<br>Two Interface Node. Parameters for creating two interface Node in one AZ<br>See [Node](#ingress-egress-gw-ar-node) below.
 
-<a id="ingress-egress-gw-ar-not-hub"></a>&#x2022; [`not_hub`](#ingress-egress-gw-ar-not-hub) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-not-hub"></a>&#x2022; [`not_hub`](#ingress-egress-gw-ar-not-hub) - Optional Block<br>Enable this option
 
 <a id="ingress-egress-gw-ar-outside-static-routes"></a>&#x2022; [`outside_static_routes`](#ingress-egress-gw-ar-outside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Outside Static Routes](#ingress-egress-gw-ar-outside-static-routes) below.
 
-<a id="ingress-egress-gw-ar-performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#ingress-egress-gw-ar-performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#ingress-egress-gw-ar-performance-enhancement-mode) below.
+<a id="ingress-egress-gw-ar-performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#ingress-egress-gw-ar-performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode.Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#ingress-egress-gw-ar-performance-enhancement-mode) below.
 
-<a id="ingress-egress-gw-ar-sm-connection-public-ip"></a>&#x2022; [`sm_connection_public_ip`](#ingress-egress-gw-ar-sm-connection-public-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-sm-connection-public-ip"></a>&#x2022; [`sm_connection_public_ip`](#ingress-egress-gw-ar-sm-connection-public-ip) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-ar-sm-connection-pvt-ip"></a>&#x2022; [`sm_connection_pvt_ip`](#ingress-egress-gw-ar-sm-connection-pvt-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-sm-connection-pvt-ip"></a>&#x2022; [`sm_connection_pvt_ip`](#ingress-egress-gw-ar-sm-connection-pvt-ip) - Optional Block<br>Enable this option
 
 #### Ingress Egress Gw Ar Accelerated Networking
 
 An [`accelerated_networking`](#ingress-egress-gw-ar-accelerated-networking) block (within [`ingress_egress_gw_ar`](#ingress-egress-gw-ar)) supports the following:
 
-<a id="ingress-egress-gw-ar-accelerated-networking-disable"></a>&#x2022; [`disable`](#ingress-egress-gw-ar-accelerated-networking-disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-accelerated-networking-disable"></a>&#x2022; [`disable`](#ingress-egress-gw-ar-accelerated-networking-disable) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-ar-accelerated-networking-enable"></a>&#x2022; [`enable`](#ingress-egress-gw-ar-accelerated-networking-enable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-accelerated-networking-enable"></a>&#x2022; [`enable`](#ingress-egress-gw-ar-accelerated-networking-enable) - Optional Block<br>Enable this option
 
 #### Ingress Egress Gw Ar Active Enhanced Firewall Policies
 
@@ -1016,7 +1016,7 @@ A [`global_vn`](#ingress-egress-gw-ar-global-network-list-global-network-connect
 
 A [`hub`](#ingress-egress-gw-ar-hub) block (within [`ingress_egress_gw_ar`](#ingress-egress-gw-ar)) supports the following:
 
-<a id="ingress-egress-gw-ar-hub-express-route-disabled"></a>&#x2022; [`express_route_disabled`](#ingress-egress-gw-ar-hub-express-route-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-hub-express-route-disabled"></a>&#x2022; [`express_route_disabled`](#ingress-egress-gw-ar-hub-express-route-disabled) - Optional Block<br>Enable this option
 
 <a id="ingress-egress-gw-ar-hub-express-route-enabled"></a>&#x2022; [`express_route_enabled`](#ingress-egress-gw-ar-hub-express-route-enabled) - Optional Block<br>Express Route Configuration. Express Route Configuration<br>See [Express Route Enabled](#ingress-egress-gw-ar-hub-express-route-enabled) below.
 
@@ -1026,15 +1026,15 @@ A [`hub`](#ingress-egress-gw-ar-hub) block (within [`ingress_egress_gw_ar`](#ing
 
 An [`express_route_enabled`](#ingress-egress-gw-ar-hub-express-route-enabled) block (within [`ingress_egress_gw_ar.hub`](#ingress-egress-gw-ar-hub)) supports the following:
 
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-advertise-to-route-server"></a>&#x2022; [`advertise_to_route_server`](#ingress-egress-gw-ar-hub-express-route-enabled-advertise-to-route-server) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-advertise-to-route-server"></a>&#x2022; [`advertise_to_route_server`](#ingress-egress-gw-ar-hub-express-route-enabled-advertise-to-route-server) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-auto-asn"></a>&#x2022; [`auto_asn`](#ingress-egress-gw-ar-hub-express-route-enabled-auto-asn) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-auto-asn"></a>&#x2022; [`auto_asn`](#ingress-egress-gw-ar-hub-express-route-enabled-auto-asn) - Optional Block<br>Enable this option
 
 <a id="ingress-egress-gw-ar-hub-express-route-enabled-connections"></a>&#x2022; [`connections`](#ingress-egress-gw-ar-hub-express-route-enabled-connections) - Optional Block<br>Connections. Add the ExpressRoute Circuit Connections to this site<br>See [Connections](#ingress-egress-gw-ar-hub-express-route-enabled-connections) below.
 
 <a id="ingress-egress-gw-ar-hub-express-route-enabled-custom-asn"></a>&#x2022; [`custom_asn`](#ingress-egress-gw-ar-hub-express-route-enabled-custom-asn) - Optional Number<br>Custom ASN. Set custom ASN for F5XC Site
 
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-do-not-advertise-to-route-server"></a>&#x2022; [`do_not_advertise_to_route_server`](#ingress-egress-gw-ar-hub-express-route-enabled-do-not-advertise-to-route-server) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-do-not-advertise-to-route-server"></a>&#x2022; [`do_not_advertise_to_route_server`](#ingress-egress-gw-ar-hub-express-route-enabled-do-not-advertise-to-route-server) - Optional Block<br>Enable this option
 
 <a id="ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet"></a>&#x2022; [`gateway_subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Gateway Subnet](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet) below.
 
@@ -1042,15 +1042,15 @@ An [`express_route_enabled`](#ingress-egress-gw-ar-hub-express-route-enabled) bl
 
 <a id="ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-express-route"></a>&#x2022; [`site_registration_over_express_route`](#ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-express-route) - Optional Block<br>CloudLink ADN Network Config<br>See [Site Registration Over Express Route](#ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-express-route) below.
 
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-internet"></a>&#x2022; [`site_registration_over_internet`](#ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-internet) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-internet"></a>&#x2022; [`site_registration_over_internet`](#ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-internet) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-sku-ergw1az"></a>&#x2022; [`sku_ergw1az`](#ingress-egress-gw-ar-hub-express-route-enabled-sku-ergw1az) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-sku-ergw1az"></a>&#x2022; [`sku_ergw1az`](#ingress-egress-gw-ar-hub-express-route-enabled-sku-ergw1az) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-sku-ergw2az"></a>&#x2022; [`sku_ergw2az`](#ingress-egress-gw-ar-hub-express-route-enabled-sku-ergw2az) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-sku-ergw2az"></a>&#x2022; [`sku_ergw2az`](#ingress-egress-gw-ar-hub-express-route-enabled-sku-ergw2az) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-sku-high-perf"></a>&#x2022; [`sku_high_perf`](#ingress-egress-gw-ar-hub-express-route-enabled-sku-high-perf) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-sku-high-perf"></a>&#x2022; [`sku_high_perf`](#ingress-egress-gw-ar-hub-express-route-enabled-sku-high-perf) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-sku-standard"></a>&#x2022; [`sku_standard`](#ingress-egress-gw-ar-hub-express-route-enabled-sku-standard) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-sku-standard"></a>&#x2022; [`sku_standard`](#ingress-egress-gw-ar-hub-express-route-enabled-sku-standard) - Optional Block<br>Enable this option
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Connections
 
@@ -1110,7 +1110,7 @@ A [`clear_secret_info`](#ingress-egress-gw-ar-hub-express-route-enabled-connecti
 
 A [`gateway_subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet) block (within [`ingress_egress_gw_ar.hub.express_route_enabled`](#ingress-egress-gw-ar-hub-express-route-enabled)) supports the following:
 
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-auto"></a>&#x2022; [`auto`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-auto) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-auto"></a>&#x2022; [`auto`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-auto) - Optional Block<br>Enable this option
 
 <a id="ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subnet"></a>&#x2022; [`subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subnet) - Optional Block<br>Azure Cloud Special Subnet. Parameters for Azure special subnet which name is reserved. (i.e GatewaySubnet or RouteServerSubnet)<br>See [Subnet](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subnet) below.
 
@@ -1122,7 +1122,7 @@ A [`subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subn
 
 <a id="ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet_resource_grp`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
 
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subnet-vnet-resource-group) - Optional Block<br>Enable this option
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Gateway Subnet Subnet Param
 
@@ -1134,7 +1134,7 @@ A [`subnet_param`](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subne
 
 A [`route_server_subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet) block (within [`ingress_egress_gw_ar.hub.express_route_enabled`](#ingress-egress-gw-ar-hub-express-route-enabled)) supports the following:
 
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-auto"></a>&#x2022; [`auto`](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-auto) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-auto"></a>&#x2022; [`auto`](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-auto) - Optional Block<br>Enable this option
 
 <a id="ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-subnet"></a>&#x2022; [`subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-subnet) - Optional Block<br>Azure Cloud Special Subnet. Parameters for Azure special subnet which name is reserved. (i.e GatewaySubnet or RouteServerSubnet)<br>See [Subnet](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-subnet) below.
 
@@ -1146,7 +1146,7 @@ A [`subnet`](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet
 
 <a id="ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet_resource_grp`](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
 
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-subnet-vnet-resource-group) - Optional Block<br>Enable this option
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Route Server Subnet Subnet Param
 
@@ -1164,11 +1164,11 @@ A [`site_registration_over_express_route`](#ingress-egress-gw-ar-hub-express-rou
 
 A [`spoke_vnets`](#ingress-egress-gw-ar-hub-spoke-vnets) block (within [`ingress_egress_gw_ar.hub`](#ingress-egress-gw-ar-hub)) supports the following:
 
-<a id="ingress-egress-gw-ar-hub-spoke-vnets-auto"></a>&#x2022; [`auto`](#ingress-egress-gw-ar-hub-spoke-vnets-auto) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-hub-spoke-vnets-auto"></a>&#x2022; [`auto`](#ingress-egress-gw-ar-hub-spoke-vnets-auto) - Optional Block<br>Enable this option
 
 <a id="ingress-egress-gw-ar-hub-spoke-vnets-labels"></a>&#x2022; [`labels`](#ingress-egress-gw-ar-hub-spoke-vnets-labels) - Optional Block<br>Labels For VNets Peering. Add Labels for each of the VNets peered with transit VNET, these labels can be used in firewall policy These labels used must be from known key and label defined in shared namespace
 
-<a id="ingress-egress-gw-ar-hub-spoke-vnets-manual"></a>&#x2022; [`manual`](#ingress-egress-gw-ar-hub-spoke-vnets-manual) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-hub-spoke-vnets-manual"></a>&#x2022; [`manual`](#ingress-egress-gw-ar-hub-spoke-vnets-manual) - Optional Block<br>Enable this option
 
 <a id="ingress-egress-gw-ar-hub-spoke-vnets-vnet"></a>&#x2022; [`vnet`](#ingress-egress-gw-ar-hub-spoke-vnets-vnet) - Optional Block<br>Azure Existing VNET Type. Resource group and name of existing Azure VNET<br>See [VNET](#ingress-egress-gw-ar-hub-spoke-vnets-vnet) below.
 
@@ -1176,9 +1176,9 @@ A [`spoke_vnets`](#ingress-egress-gw-ar-hub-spoke-vnets) block (within [`ingress
 
 A [`vnet`](#ingress-egress-gw-ar-hub-spoke-vnets-vnet) block (within [`ingress_egress_gw_ar.hub.spoke_vnets`](#ingress-egress-gw-ar-hub-spoke-vnets)) supports the following:
 
-<a id="ingress-egress-gw-ar-hub-spoke-vnets-vnet-f5-orchestrated-routing"></a>&#x2022; [`f5_orchestrated_routing`](#ingress-egress-gw-ar-hub-spoke-vnets-vnet-f5-orchestrated-routing) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-hub-spoke-vnets-vnet-f5-orchestrated-routing"></a>&#x2022; [`f5_orchestrated_routing`](#ingress-egress-gw-ar-hub-spoke-vnets-vnet-f5-orchestrated-routing) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-ar-hub-spoke-vnets-vnet-manual-routing"></a>&#x2022; [`manual_routing`](#ingress-egress-gw-ar-hub-spoke-vnets-vnet-manual-routing) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-hub-spoke-vnets-vnet-manual-routing"></a>&#x2022; [`manual_routing`](#ingress-egress-gw-ar-hub-spoke-vnets-vnet-manual-routing) - Optional Block<br>Enable this option
 
 <a id="ingress-egress-gw-ar-hub-spoke-vnets-vnet-resource-group"></a>&#x2022; [`resource_group`](#ingress-egress-gw-ar-hub-spoke-vnets-vnet-resource-group) - Optional String<br>Existing VNET Resource Group. Resource group of existing VNET
 
@@ -1308,7 +1308,7 @@ A [`subnet`](#ingress-egress-gw-ar-node-inside-subnet-subnet) block (within [`in
 
 <a id="ingress-egress-gw-ar-node-inside-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet_resource_grp`](#ingress-egress-gw-ar-node-inside-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
 
-<a id="ingress-egress-gw-ar-node-inside-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-egress-gw-ar-node-inside-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-node-inside-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-egress-gw-ar-node-inside-subnet-subnet-vnet-resource-group) - Optional Block<br>Enable this option
 
 #### Ingress Egress Gw Ar Node Inside Subnet Subnet Param
 
@@ -1332,7 +1332,7 @@ A [`subnet`](#ingress-egress-gw-ar-node-outside-subnet-subnet) block (within [`i
 
 <a id="ingress-egress-gw-ar-node-outside-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet_resource_grp`](#ingress-egress-gw-ar-node-outside-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
 
-<a id="ingress-egress-gw-ar-node-outside-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-egress-gw-ar-node-outside-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-node-outside-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-egress-gw-ar-node-outside-subnet-subnet-vnet-resource-group) - Optional Block<br>Enable this option
 
 #### Ingress Egress Gw Ar Node Outside Subnet Subnet Param
 
@@ -1438,37 +1438,37 @@ An [`ipv6`](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom
 
 A [`performance_enhancement_mode`](#ingress-egress-gw-ar-performance-enhancement-mode) block (within [`ingress_egress_gw_ar`](#ingress-egress-gw-ar)) supports the following:
 
-<a id="ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced"></a>&#x2022; [`perf_mode_l3_enhanced`](#ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced) below.
+<a id="ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced"></a>&#x2022; [`perf_mode_l3_enhanced`](#ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance.L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
-<a id="ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l7-enhanced"></a>&#x2022; [`perf_mode_l7_enhanced`](#ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l7-enhanced) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l7-enhanced"></a>&#x2022; [`perf_mode_l7_enhanced`](#ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l7-enhanced) - Optional Block<br>Enable this option
 
 #### Ingress Egress Gw Ar Performance Enhancement Mode Perf Mode L3 Enhanced
 
 A [`perf_mode_l3_enhanced`](#ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced) block (within [`ingress_egress_gw_ar.performance_enhancement_mode`](#ingress-egress-gw-ar-performance-enhancement-mode)) supports the following:
 
-<a id="ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>&#x2022; [`jumbo`](#ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>&#x2022; [`jumbo`](#ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo"></a>&#x2022; [`no_jumbo`](#ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo"></a>&#x2022; [`no_jumbo`](#ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo) - Optional Block<br>Enable this option
 
 #### Ingress Gw
 
 An [`ingress_gw`](#ingress-gw) block supports the following:
 
-<a id="ingress-gw-accelerated-networking"></a>&#x2022; [`accelerated_networking`](#ingress-gw-accelerated-networking) - Optional Block<br>Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen<br>See [Accelerated Networking](#ingress-gw-accelerated-networking) below.
+<a id="ingress-gw-accelerated-networking"></a>&#x2022; [`accelerated_networking`](#ingress-gw-accelerated-networking) - Optional Block<br>Accelerated Networking Type.Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen<br>See [Accelerated Networking](#ingress-gw-accelerated-networking) below.
 
 <a id="ingress-gw-az-nodes"></a>&#x2022; [`az_nodes`](#ingress-gw-az-nodes) - Optional Block<br>Ingress Gateway (One Interface) Nodes in AZ. Only Single AZ or Three AZ(s) nodes are supported currently<br>See [Az Nodes](#ingress-gw-az-nodes) below.
 
 <a id="ingress-gw-azure-certified-hw"></a>&#x2022; [`azure_certified_hw`](#ingress-gw-azure-certified-hw) - Optional String<br>Azure Certified Hardware. Name for Azure certified hardware
 
-<a id="ingress-gw-performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#ingress-gw-performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#ingress-gw-performance-enhancement-mode) below.
+<a id="ingress-gw-performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#ingress-gw-performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode.Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#ingress-gw-performance-enhancement-mode) below.
 
 #### Ingress Gw Accelerated Networking
 
 An [`accelerated_networking`](#ingress-gw-accelerated-networking) block (within [`ingress_gw`](#ingress-gw)) supports the following:
 
-<a id="ingress-gw-accelerated-networking-disable"></a>&#x2022; [`disable`](#ingress-gw-accelerated-networking-disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-gw-accelerated-networking-disable"></a>&#x2022; [`disable`](#ingress-gw-accelerated-networking-disable) - Optional Block<br>Enable this option
 
-<a id="ingress-gw-accelerated-networking-enable"></a>&#x2022; [`enable`](#ingress-gw-accelerated-networking-enable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-gw-accelerated-networking-enable"></a>&#x2022; [`enable`](#ingress-gw-accelerated-networking-enable) - Optional Block<br>Enable this option
 
 #### Ingress Gw Az Nodes
 
@@ -1494,7 +1494,7 @@ A [`subnet`](#ingress-gw-az-nodes-local-subnet-subnet) block (within [`ingress_g
 
 <a id="ingress-gw-az-nodes-local-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet_resource_grp`](#ingress-gw-az-nodes-local-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
 
-<a id="ingress-gw-az-nodes-local-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-gw-az-nodes-local-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-gw-az-nodes-local-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-gw-az-nodes-local-subnet-subnet-vnet-resource-group) - Optional Block<br>Enable this option
 
 #### Ingress Gw Az Nodes Local Subnet Subnet Param
 
@@ -1506,37 +1506,37 @@ A [`subnet_param`](#ingress-gw-az-nodes-local-subnet-subnet-param) block (within
 
 A [`performance_enhancement_mode`](#ingress-gw-performance-enhancement-mode) block (within [`ingress_gw`](#ingress-gw)) supports the following:
 
-<a id="ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced"></a>&#x2022; [`perf_mode_l3_enhanced`](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) below.
+<a id="ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced"></a>&#x2022; [`perf_mode_l3_enhanced`](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance.L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
-<a id="ingress-gw-performance-enhancement-mode-perf-mode-l7-enhanced"></a>&#x2022; [`perf_mode_l7_enhanced`](#ingress-gw-performance-enhancement-mode-perf-mode-l7-enhanced) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-gw-performance-enhancement-mode-perf-mode-l7-enhanced"></a>&#x2022; [`perf_mode_l7_enhanced`](#ingress-gw-performance-enhancement-mode-perf-mode-l7-enhanced) - Optional Block<br>Enable this option
 
 #### Ingress Gw Performance Enhancement Mode Perf Mode L3 Enhanced
 
 A [`perf_mode_l3_enhanced`](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) block (within [`ingress_gw.performance_enhancement_mode`](#ingress-gw-performance-enhancement-mode)) supports the following:
 
-<a id="ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>&#x2022; [`jumbo`](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>&#x2022; [`jumbo`](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) - Optional Block<br>Enable this option
 
-<a id="ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo"></a>&#x2022; [`no_jumbo`](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo"></a>&#x2022; [`no_jumbo`](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo) - Optional Block<br>Enable this option
 
 #### Ingress Gw Ar
 
 An [`ingress_gw_ar`](#ingress-gw-ar) block supports the following:
 
-<a id="ingress-gw-ar-accelerated-networking"></a>&#x2022; [`accelerated_networking`](#ingress-gw-ar-accelerated-networking) - Optional Block<br>Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen<br>See [Accelerated Networking](#ingress-gw-ar-accelerated-networking) below.
+<a id="ingress-gw-ar-accelerated-networking"></a>&#x2022; [`accelerated_networking`](#ingress-gw-ar-accelerated-networking) - Optional Block<br>Accelerated Networking Type.Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen<br>See [Accelerated Networking](#ingress-gw-ar-accelerated-networking) below.
 
 <a id="ingress-gw-ar-azure-certified-hw"></a>&#x2022; [`azure_certified_hw`](#ingress-gw-ar-azure-certified-hw) - Optional String<br>Azure Certified Hardware. Name for Azure certified hardware
 
 <a id="ingress-gw-ar-node"></a>&#x2022; [`node`](#ingress-gw-ar-node) - Optional Block<br>Single Interface Node for Alternate Region. Parameters for creating Single interface Node for Alternate Region<br>See [Node](#ingress-gw-ar-node) below.
 
-<a id="ingress-gw-ar-performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#ingress-gw-ar-performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#ingress-gw-ar-performance-enhancement-mode) below.
+<a id="ingress-gw-ar-performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#ingress-gw-ar-performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode.Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#ingress-gw-ar-performance-enhancement-mode) below.
 
 #### Ingress Gw Ar Accelerated Networking
 
 An [`accelerated_networking`](#ingress-gw-ar-accelerated-networking) block (within [`ingress_gw_ar`](#ingress-gw-ar)) supports the following:
 
-<a id="ingress-gw-ar-accelerated-networking-disable"></a>&#x2022; [`disable`](#ingress-gw-ar-accelerated-networking-disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-gw-ar-accelerated-networking-disable"></a>&#x2022; [`disable`](#ingress-gw-ar-accelerated-networking-disable) - Optional Block<br>Enable this option
 
-<a id="ingress-gw-ar-accelerated-networking-enable"></a>&#x2022; [`enable`](#ingress-gw-ar-accelerated-networking-enable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-gw-ar-accelerated-networking-enable"></a>&#x2022; [`enable`](#ingress-gw-ar-accelerated-networking-enable) - Optional Block<br>Enable this option
 
 #### Ingress Gw Ar Node
 
@@ -1566,7 +1566,7 @@ A [`subnet`](#ingress-gw-ar-node-local-subnet-subnet) block (within [`ingress_gw
 
 <a id="ingress-gw-ar-node-local-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet_resource_grp`](#ingress-gw-ar-node-local-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
 
-<a id="ingress-gw-ar-node-local-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-gw-ar-node-local-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-gw-ar-node-local-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#ingress-gw-ar-node-local-subnet-subnet-vnet-resource-group) - Optional Block<br>Enable this option
 
 #### Ingress Gw Ar Node Local Subnet Subnet Param
 
@@ -1578,23 +1578,23 @@ A [`subnet_param`](#ingress-gw-ar-node-local-subnet-subnet-param) block (within 
 
 A [`performance_enhancement_mode`](#ingress-gw-ar-performance-enhancement-mode) block (within [`ingress_gw_ar`](#ingress-gw-ar)) supports the following:
 
-<a id="ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced"></a>&#x2022; [`perf_mode_l3_enhanced`](#ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced) below.
+<a id="ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced"></a>&#x2022; [`perf_mode_l3_enhanced`](#ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance.L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
-<a id="ingress-gw-ar-performance-enhancement-mode-perf-mode-l7-enhanced"></a>&#x2022; [`perf_mode_l7_enhanced`](#ingress-gw-ar-performance-enhancement-mode-perf-mode-l7-enhanced) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-gw-ar-performance-enhancement-mode-perf-mode-l7-enhanced"></a>&#x2022; [`perf_mode_l7_enhanced`](#ingress-gw-ar-performance-enhancement-mode-perf-mode-l7-enhanced) - Optional Block<br>Enable this option
 
 #### Ingress Gw Ar Performance Enhancement Mode Perf Mode L3 Enhanced
 
 A [`perf_mode_l3_enhanced`](#ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced) block (within [`ingress_gw_ar.performance_enhancement_mode`](#ingress-gw-ar-performance-enhancement-mode)) supports the following:
 
-<a id="ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>&#x2022; [`jumbo`](#ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>&#x2022; [`jumbo`](#ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) - Optional Block<br>Enable this option
 
-<a id="ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo"></a>&#x2022; [`no_jumbo`](#ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo"></a>&#x2022; [`no_jumbo`](#ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo) - Optional Block<br>Enable this option
 
 #### Kubernetes Upgrade Drain
 
 A [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain) block supports the following:
 
-<a id="kubernetes-upgrade-drain-disable-upgrade-drain"></a>&#x2022; [`disable_upgrade_drain`](#kubernetes-upgrade-drain-disable-upgrade-drain) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kubernetes-upgrade-drain-disable-upgrade-drain"></a>&#x2022; [`disable_upgrade_drain`](#kubernetes-upgrade-drain-disable-upgrade-drain) - Optional Block<br>Enable this option
 
 <a id="kubernetes-upgrade-drain-enable-upgrade-drain"></a>&#x2022; [`enable_upgrade_drain`](#kubernetes-upgrade-drain-enable-upgrade-drain) - Optional Block<br>Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site<br>See [Enable Upgrade Drain](#kubernetes-upgrade-drain-enable-upgrade-drain) below.
 
@@ -1602,13 +1602,13 @@ A [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain) block supports the fol
 
 An [`enable_upgrade_drain`](#kubernetes-upgrade-drain-enable-upgrade-drain) block (within [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain)) supports the following:
 
-<a id="kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode"></a>&#x2022; [`disable_vega_upgrade_mode`](#kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode"></a>&#x2022; [`disable_vega_upgrade_mode`](#kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode) - Optional Block<br>Enable this option
 
 <a id="kubernetes-upgrade-drain-enable-upgrade-drain-drain-max-unavailable-node-count"></a>&#x2022; [`drain_max_unavailable_node_count`](#kubernetes-upgrade-drain-enable-upgrade-drain-drain-max-unavailable-node-count) - Optional Number<br>Node Batch Size Count
 
 <a id="kubernetes-upgrade-drain-enable-upgrade-drain-drain-node-timeout"></a>&#x2022; [`drain_node_timeout`](#kubernetes-upgrade-drain-enable-upgrade-drain-drain-node-timeout) - Optional Number<br>Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value)
 
-<a id="kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode"></a>&#x2022; [`enable_vega_upgrade_mode`](#kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode"></a>&#x2022; [`enable_vega_upgrade_mode`](#kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode) - Optional Block<br>Enable this option
 
 #### Log Receiver
 
@@ -1624,15 +1624,15 @@ A [`log_receiver`](#log-receiver) block supports the following:
 
 An [`offline_survivability_mode`](#offline-survivability-mode) block supports the following:
 
-<a id="offline-survivability-mode-enable-offline-survivability-mode"></a>&#x2022; [`enable_offline_survivability_mode`](#offline-survivability-mode-enable-offline-survivability-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="offline-survivability-mode-enable-offline-survivability-mode"></a>&#x2022; [`enable_offline_survivability_mode`](#offline-survivability-mode-enable-offline-survivability-mode) - Optional Block<br>Enable this option
 
-<a id="offline-survivability-mode-no-offline-survivability-mode"></a>&#x2022; [`no_offline_survivability_mode`](#offline-survivability-mode-no-offline-survivability-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="offline-survivability-mode-no-offline-survivability-mode"></a>&#x2022; [`no_offline_survivability_mode`](#offline-survivability-mode-no-offline-survivability-mode) - Optional Block<br>Enable this option
 
 #### OS
 
 An [`os`](#os) block supports the following:
 
-<a id="os-default-os-version"></a>&#x2022; [`default_os_version`](#os-default-os-version) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="os-default-os-version"></a>&#x2022; [`default_os_version`](#os-default-os-version) - Optional Block<br>Enable this option
 
 <a id="os-operating-system-version"></a>&#x2022; [`operating_system_version`](#os-operating-system-version) - Optional String<br>Operating System Version. Specify a OS version to be used e.g. 9.2024.6
 
@@ -1640,7 +1640,7 @@ An [`os`](#os) block supports the following:
 
 A [`sw`](#sw) block supports the following:
 
-<a id="sw-default-sw-version"></a>&#x2022; [`default_sw_version`](#sw-default-sw-version) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="sw-default-sw-version"></a>&#x2022; [`default_sw_version`](#sw-default-sw-version) - Optional Block<br>Enable this option
 
 <a id="sw-volterra-software-version"></a>&#x2022; [`volterra_software_version`](#sw-volterra-software-version) - Optional String<br>F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002
 
@@ -1668,9 +1668,9 @@ A [`vnet`](#vnet) block supports the following:
 
 An [`existing_vnet`](#vnet-existing-vnet) block (within [`vnet`](#vnet)) supports the following:
 
-<a id="vnet-existing-vnet-f5-orchestrated-routing"></a>&#x2022; [`f5_orchestrated_routing`](#vnet-existing-vnet-f5-orchestrated-routing) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="vnet-existing-vnet-f5-orchestrated-routing"></a>&#x2022; [`f5_orchestrated_routing`](#vnet-existing-vnet-f5-orchestrated-routing) - Optional Block<br>Enable this option
 
-<a id="vnet-existing-vnet-manual-routing"></a>&#x2022; [`manual_routing`](#vnet-existing-vnet-manual-routing) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="vnet-existing-vnet-manual-routing"></a>&#x2022; [`manual_routing`](#vnet-existing-vnet-manual-routing) - Optional Block<br>Enable this option
 
 <a id="vnet-existing-vnet-resource-group"></a>&#x2022; [`resource_group`](#vnet-existing-vnet-resource-group) - Optional String<br>Existing VNET Resource Group. Resource group of existing VNET
 
@@ -1680,7 +1680,7 @@ An [`existing_vnet`](#vnet-existing-vnet) block (within [`vnet`](#vnet)) support
 
 A [`new_vnet`](#vnet-new-vnet) block (within [`vnet`](#vnet)) supports the following:
 
-<a id="vnet-new-vnet-autogenerate"></a>&#x2022; [`autogenerate`](#vnet-new-vnet-autogenerate) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="vnet-new-vnet-autogenerate"></a>&#x2022; [`autogenerate`](#vnet-new-vnet-autogenerate) - Optional Block<br>Enable this option
 
 <a id="vnet-new-vnet-name"></a>&#x2022; [`name`](#vnet-new-vnet-name) - Optional String<br>Choose VNET Name. Specify the VNET Name
 
@@ -1690,7 +1690,7 @@ A [`new_vnet`](#vnet-new-vnet) block (within [`vnet`](#vnet)) supports the follo
 
 A [`voltstack_cluster`](#voltstack-cluster) block supports the following:
 
-<a id="voltstack-cluster-accelerated-networking"></a>&#x2022; [`accelerated_networking`](#voltstack-cluster-accelerated-networking) - Optional Block<br>Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen<br>See [Accelerated Networking](#voltstack-cluster-accelerated-networking) below.
+<a id="voltstack-cluster-accelerated-networking"></a>&#x2022; [`accelerated_networking`](#voltstack-cluster-accelerated-networking) - Optional Block<br>Accelerated Networking Type.Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen<br>See [Accelerated Networking](#voltstack-cluster-accelerated-networking) below.
 
 <a id="voltstack-cluster-active-enhanced-firewall-policies"></a>&#x2022; [`active_enhanced_firewall_policies`](#voltstack-cluster-active-enhanced-firewall-policies) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#voltstack-cluster-active-enhanced-firewall-policies) below.
 
@@ -1704,31 +1704,31 @@ A [`voltstack_cluster`](#voltstack-cluster) block supports the following:
 
 <a id="voltstack-cluster-dc-cluster-group"></a>&#x2022; [`dc_cluster_group`](#voltstack-cluster-dc-cluster-group) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group](#voltstack-cluster-dc-cluster-group) below.
 
-<a id="voltstack-cluster-default-storage"></a>&#x2022; [`default_storage`](#voltstack-cluster-default-storage) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-default-storage"></a>&#x2022; [`default_storage`](#voltstack-cluster-default-storage) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-forward-proxy-allow-all"></a>&#x2022; [`forward_proxy_allow_all`](#voltstack-cluster-forward-proxy-allow-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-forward-proxy-allow-all"></a>&#x2022; [`forward_proxy_allow_all`](#voltstack-cluster-forward-proxy-allow-all) - Optional Block<br>Enable this option
 
 <a id="voltstack-cluster-global-network-list"></a>&#x2022; [`global_network_list`](#voltstack-cluster-global-network-list) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#voltstack-cluster-global-network-list) below.
 
 <a id="voltstack-cluster-k8s-cluster"></a>&#x2022; [`k8s_cluster`](#voltstack-cluster-k8s-cluster) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [K8S Cluster](#voltstack-cluster-k8s-cluster) below.
 
-<a id="voltstack-cluster-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#voltstack-cluster-no-dc-cluster-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#voltstack-cluster-no-dc-cluster-group) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#voltstack-cluster-no-forward-proxy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#voltstack-cluster-no-forward-proxy) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-no-global-network"></a>&#x2022; [`no_global_network`](#voltstack-cluster-no-global-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-no-global-network"></a>&#x2022; [`no_global_network`](#voltstack-cluster-no-global-network) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-no-k8s-cluster"></a>&#x2022; [`no_k8s_cluster`](#voltstack-cluster-no-k8s-cluster) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-no-k8s-cluster"></a>&#x2022; [`no_k8s_cluster`](#voltstack-cluster-no-k8s-cluster) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-no-network-policy"></a>&#x2022; [`no_network_policy`](#voltstack-cluster-no-network-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-no-network-policy"></a>&#x2022; [`no_network_policy`](#voltstack-cluster-no-network-policy) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-no-outside-static-routes"></a>&#x2022; [`no_outside_static_routes`](#voltstack-cluster-no-outside-static-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-no-outside-static-routes"></a>&#x2022; [`no_outside_static_routes`](#voltstack-cluster-no-outside-static-routes) - Optional Block<br>Enable this option
 
 <a id="voltstack-cluster-outside-static-routes"></a>&#x2022; [`outside_static_routes`](#voltstack-cluster-outside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Outside Static Routes](#voltstack-cluster-outside-static-routes) below.
 
-<a id="voltstack-cluster-sm-connection-public-ip"></a>&#x2022; [`sm_connection_public_ip`](#voltstack-cluster-sm-connection-public-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-sm-connection-public-ip"></a>&#x2022; [`sm_connection_public_ip`](#voltstack-cluster-sm-connection-public-ip) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-sm-connection-pvt-ip"></a>&#x2022; [`sm_connection_pvt_ip`](#voltstack-cluster-sm-connection-pvt-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-sm-connection-pvt-ip"></a>&#x2022; [`sm_connection_pvt_ip`](#voltstack-cluster-sm-connection-pvt-ip) - Optional Block<br>Enable this option
 
 <a id="voltstack-cluster-storage-class-list"></a>&#x2022; [`storage_class_list`](#voltstack-cluster-storage-class-list) - Optional Block<br>Custom Storage Class List. Add additional custom storage classes in kubernetes for this site<br>See [Storage Class List](#voltstack-cluster-storage-class-list) below.
 
@@ -1736,9 +1736,9 @@ A [`voltstack_cluster`](#voltstack-cluster) block supports the following:
 
 An [`accelerated_networking`](#voltstack-cluster-accelerated-networking) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
 
-<a id="voltstack-cluster-accelerated-networking-disable"></a>&#x2022; [`disable`](#voltstack-cluster-accelerated-networking-disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-accelerated-networking-disable"></a>&#x2022; [`disable`](#voltstack-cluster-accelerated-networking-disable) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-accelerated-networking-enable"></a>&#x2022; [`enable`](#voltstack-cluster-accelerated-networking-enable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-accelerated-networking-enable"></a>&#x2022; [`enable`](#voltstack-cluster-accelerated-networking-enable) - Optional Block<br>Enable this option
 
 #### Voltstack Cluster Active Enhanced Firewall Policies
 
@@ -1812,7 +1812,7 @@ A [`subnet`](#voltstack-cluster-az-nodes-local-subnet-subnet) block (within [`vo
 
 <a id="voltstack-cluster-az-nodes-local-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet_resource_grp`](#voltstack-cluster-az-nodes-local-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
 
-<a id="voltstack-cluster-az-nodes-local-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#voltstack-cluster-az-nodes-local-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-az-nodes-local-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#voltstack-cluster-az-nodes-local-subnet-subnet-vnet-resource-group) - Optional Block<br>Enable this option
 
 #### Voltstack Cluster Az Nodes Local Subnet Subnet Param
 
@@ -1998,7 +1998,7 @@ A [`storage_classes`](#voltstack-cluster-storage-class-list-storage-classes) blo
 
 A [`voltstack_cluster_ar`](#voltstack-cluster-ar) block supports the following:
 
-<a id="voltstack-cluster-ar-accelerated-networking"></a>&#x2022; [`accelerated_networking`](#voltstack-cluster-ar-accelerated-networking) - Optional Block<br>Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen<br>See [Accelerated Networking](#voltstack-cluster-ar-accelerated-networking) below.
+<a id="voltstack-cluster-ar-accelerated-networking"></a>&#x2022; [`accelerated_networking`](#voltstack-cluster-ar-accelerated-networking) - Optional Block<br>Accelerated Networking Type.Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen<br>See [Accelerated Networking](#voltstack-cluster-ar-accelerated-networking) below.
 
 <a id="voltstack-cluster-ar-active-enhanced-firewall-policies"></a>&#x2022; [`active_enhanced_firewall_policies`](#voltstack-cluster-ar-active-enhanced-firewall-policies) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#voltstack-cluster-ar-active-enhanced-firewall-policies) below.
 
@@ -2010,33 +2010,33 @@ A [`voltstack_cluster_ar`](#voltstack-cluster-ar) block supports the following:
 
 <a id="voltstack-cluster-ar-dc-cluster-group"></a>&#x2022; [`dc_cluster_group`](#voltstack-cluster-ar-dc-cluster-group) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group](#voltstack-cluster-ar-dc-cluster-group) below.
 
-<a id="voltstack-cluster-ar-default-storage"></a>&#x2022; [`default_storage`](#voltstack-cluster-ar-default-storage) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-ar-default-storage"></a>&#x2022; [`default_storage`](#voltstack-cluster-ar-default-storage) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-ar-forward-proxy-allow-all"></a>&#x2022; [`forward_proxy_allow_all`](#voltstack-cluster-ar-forward-proxy-allow-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-ar-forward-proxy-allow-all"></a>&#x2022; [`forward_proxy_allow_all`](#voltstack-cluster-ar-forward-proxy-allow-all) - Optional Block<br>Enable this option
 
 <a id="voltstack-cluster-ar-global-network-list"></a>&#x2022; [`global_network_list`](#voltstack-cluster-ar-global-network-list) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#voltstack-cluster-ar-global-network-list) below.
 
 <a id="voltstack-cluster-ar-k8s-cluster"></a>&#x2022; [`k8s_cluster`](#voltstack-cluster-ar-k8s-cluster) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [K8S Cluster](#voltstack-cluster-ar-k8s-cluster) below.
 
-<a id="voltstack-cluster-ar-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#voltstack-cluster-ar-no-dc-cluster-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-ar-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#voltstack-cluster-ar-no-dc-cluster-group) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-ar-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#voltstack-cluster-ar-no-forward-proxy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-ar-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#voltstack-cluster-ar-no-forward-proxy) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-ar-no-global-network"></a>&#x2022; [`no_global_network`](#voltstack-cluster-ar-no-global-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-ar-no-global-network"></a>&#x2022; [`no_global_network`](#voltstack-cluster-ar-no-global-network) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-ar-no-k8s-cluster"></a>&#x2022; [`no_k8s_cluster`](#voltstack-cluster-ar-no-k8s-cluster) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-ar-no-k8s-cluster"></a>&#x2022; [`no_k8s_cluster`](#voltstack-cluster-ar-no-k8s-cluster) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-ar-no-network-policy"></a>&#x2022; [`no_network_policy`](#voltstack-cluster-ar-no-network-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-ar-no-network-policy"></a>&#x2022; [`no_network_policy`](#voltstack-cluster-ar-no-network-policy) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-ar-no-outside-static-routes"></a>&#x2022; [`no_outside_static_routes`](#voltstack-cluster-ar-no-outside-static-routes) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-ar-no-outside-static-routes"></a>&#x2022; [`no_outside_static_routes`](#voltstack-cluster-ar-no-outside-static-routes) - Optional Block<br>Enable this option
 
 <a id="voltstack-cluster-ar-node"></a>&#x2022; [`node`](#voltstack-cluster-ar-node) - Optional Block<br>Single Interface Node for Alternate Region. Parameters for creating Single interface Node for Alternate Region<br>See [Node](#voltstack-cluster-ar-node) below.
 
 <a id="voltstack-cluster-ar-outside-static-routes"></a>&#x2022; [`outside_static_routes`](#voltstack-cluster-ar-outside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Outside Static Routes](#voltstack-cluster-ar-outside-static-routes) below.
 
-<a id="voltstack-cluster-ar-sm-connection-public-ip"></a>&#x2022; [`sm_connection_public_ip`](#voltstack-cluster-ar-sm-connection-public-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-ar-sm-connection-public-ip"></a>&#x2022; [`sm_connection_public_ip`](#voltstack-cluster-ar-sm-connection-public-ip) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-ar-sm-connection-pvt-ip"></a>&#x2022; [`sm_connection_pvt_ip`](#voltstack-cluster-ar-sm-connection-pvt-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-ar-sm-connection-pvt-ip"></a>&#x2022; [`sm_connection_pvt_ip`](#voltstack-cluster-ar-sm-connection-pvt-ip) - Optional Block<br>Enable this option
 
 <a id="voltstack-cluster-ar-storage-class-list"></a>&#x2022; [`storage_class_list`](#voltstack-cluster-ar-storage-class-list) - Optional Block<br>Custom Storage Class List. Add additional custom storage classes in kubernetes for this site<br>See [Storage Class List](#voltstack-cluster-ar-storage-class-list) below.
 
@@ -2044,9 +2044,9 @@ A [`voltstack_cluster_ar`](#voltstack-cluster-ar) block supports the following:
 
 An [`accelerated_networking`](#voltstack-cluster-ar-accelerated-networking) block (within [`voltstack_cluster_ar`](#voltstack-cluster-ar)) supports the following:
 
-<a id="voltstack-cluster-ar-accelerated-networking-disable"></a>&#x2022; [`disable`](#voltstack-cluster-ar-accelerated-networking-disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-ar-accelerated-networking-disable"></a>&#x2022; [`disable`](#voltstack-cluster-ar-accelerated-networking-disable) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-ar-accelerated-networking-enable"></a>&#x2022; [`enable`](#voltstack-cluster-ar-accelerated-networking-enable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-ar-accelerated-networking-enable"></a>&#x2022; [`enable`](#voltstack-cluster-ar-accelerated-networking-enable) - Optional Block<br>Enable this option
 
 #### Voltstack Cluster Ar Active Enhanced Firewall Policies
 
@@ -2190,7 +2190,7 @@ A [`subnet`](#voltstack-cluster-ar-node-local-subnet-subnet) block (within [`vol
 
 <a id="voltstack-cluster-ar-node-local-subnet-subnet-subnet-resource-grp"></a>&#x2022; [`subnet_resource_grp`](#voltstack-cluster-ar-node-local-subnet-subnet-subnet-resource-grp) - Optional String<br>Resource Group Name. Specify name of Resource Group
 
-<a id="voltstack-cluster-ar-node-local-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#voltstack-cluster-ar-node-local-subnet-subnet-vnet-resource-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="voltstack-cluster-ar-node-local-subnet-subnet-vnet-resource-group"></a>&#x2022; [`vnet_resource_group`](#voltstack-cluster-ar-node-local-subnet-subnet-vnet-resource-group) - Optional Block<br>Enable this option
 
 #### Voltstack Cluster Ar Node Local Subnet Subnet Param
 

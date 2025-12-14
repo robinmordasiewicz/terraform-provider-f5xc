@@ -104,11 +104,11 @@ A [`bgp_information`](#bgp-information) block supports the following:
 
 <a id="bgp-information-holddown-timer-seconds"></a>&#x2022; [`holddown_timer_seconds`](#bgp-information-holddown-timer-seconds) - Optional Number<br>Hold down Timer. BGP hold down timer, in seconds
 
-<a id="bgp-information-no-secret"></a>&#x2022; [`no_secret`](#bgp-information-no-secret) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bgp-information-no-secret"></a>&#x2022; [`no_secret`](#bgp-information-no-secret) - Optional Block<br>Enable this option
 
 <a id="bgp-information-peer-secret-override"></a>&#x2022; [`peer_secret_override`](#bgp-information-peer-secret-override) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Peer Secret Override](#bgp-information-peer-secret-override) below.
 
-<a id="bgp-information-use-default-secret"></a>&#x2022; [`use_default_secret`](#bgp-information-use-default-secret) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bgp-information-use-default-secret"></a>&#x2022; [`use_default_secret`](#bgp-information-use-default-secret) - Optional Block<br>Enable this option
 
 #### BGP Information Asn
 
@@ -162,17 +162,17 @@ A [`gre_ipv4`](#gre-ipv4) block supports the following:
 
 <a id="gre-ipv4-customer-endpoint-ipv4"></a>&#x2022; [`customer_endpoint_ipv4`](#gre-ipv4-customer-endpoint-ipv4) - Optional String<br>Customer Endpoint IP. IPv4 address for the customer endpoint of the tunnel
 
-<a id="gre-ipv4-fragmentation-disabled"></a>&#x2022; [`fragmentation_disabled`](#gre-ipv4-fragmentation-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="gre-ipv4-fragmentation-disabled"></a>&#x2022; [`fragmentation_disabled`](#gre-ipv4-fragmentation-disabled) - Optional Block<br>Enable this option
 
-<a id="gre-ipv4-fragmentation-enabled"></a>&#x2022; [`fragmentation_enabled`](#gre-ipv4-fragmentation-enabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="gre-ipv4-fragmentation-enabled"></a>&#x2022; [`fragmentation_enabled`](#gre-ipv4-fragmentation-enabled) - Optional Block<br>Enable this option
 
-<a id="gre-ipv4-ipv6-interconnect-disabled"></a>&#x2022; [`ipv6_interconnect_disabled`](#gre-ipv4-ipv6-interconnect-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="gre-ipv4-ipv6-interconnect-disabled"></a>&#x2022; [`ipv6_interconnect_disabled`](#gre-ipv4-ipv6-interconnect-disabled) - Optional Block<br>Enable this option
 
-<a id="gre-ipv4-ipv6-interconnect-enabled"></a>&#x2022; [`ipv6_interconnect_enabled`](#gre-ipv4-ipv6-interconnect-enabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="gre-ipv4-ipv6-interconnect-enabled"></a>&#x2022; [`ipv6_interconnect_enabled`](#gre-ipv4-ipv6-interconnect-enabled) - Optional Block<br>Enable this option
 
-<a id="gre-ipv4-keepalive-disabled"></a>&#x2022; [`keepalive_disabled`](#gre-ipv4-keepalive-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="gre-ipv4-keepalive-disabled"></a>&#x2022; [`keepalive_disabled`](#gre-ipv4-keepalive-disabled) - Optional Block<br>Enable this option
 
-<a id="gre-ipv4-keepalive-enabled"></a>&#x2022; [`keepalive_enabled`](#gre-ipv4-keepalive-enabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="gre-ipv4-keepalive-enabled"></a>&#x2022; [`keepalive_enabled`](#gre-ipv4-keepalive-enabled) - Optional Block<br>Enable this option
 
 #### Gre IPv6
 
@@ -180,9 +180,9 @@ A [`gre_ipv6`](#gre-ipv6) block supports the following:
 
 <a id="gre-ipv6-customer-endpoint-ipv6"></a>&#x2022; [`customer_endpoint_ipv6`](#gre-ipv6-customer-endpoint-ipv6) - Optional String<br>Customer Endpoint IP. IPv6 address for the customer endpoint of the tunnel
 
-<a id="gre-ipv6-ipv4-interconnect-disabled"></a>&#x2022; [`ipv4_interconnect_disabled`](#gre-ipv6-ipv4-interconnect-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="gre-ipv6-ipv4-interconnect-disabled"></a>&#x2022; [`ipv4_interconnect_disabled`](#gre-ipv6-ipv4-interconnect-disabled) - Optional Block<br>Enable this option
 
-<a id="gre-ipv6-ipv4-interconnect-enabled"></a>&#x2022; [`ipv4_interconnect_enabled`](#gre-ipv6-ipv4-interconnect-enabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="gre-ipv6-ipv4-interconnect-enabled"></a>&#x2022; [`ipv4_interconnect_enabled`](#gre-ipv6-ipv4-interconnect-enabled) - Optional Block<br>Enable this option
 
 #### IP In IP
 
@@ -214,9 +214,9 @@ A [`tunnel_location`](#tunnel-location) block supports the following:
 
 <a id="tunnel-location-name"></a>&#x2022; [`name`](#tunnel-location-name) - Optional String<br>Location Name. Destination tunnel Location
 
-<a id="tunnel-location-zone1"></a>&#x2022; [`zone1`](#tunnel-location-zone1) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="tunnel-location-zone1"></a>&#x2022; [`zone1`](#tunnel-location-zone1) - Optional Block<br>Enable this option
 
-<a id="tunnel-location-zone2"></a>&#x2022; [`zone2`](#tunnel-location-zone2) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="tunnel-location-zone2"></a>&#x2022; [`zone2`](#tunnel-location-zone2) - Optional Block<br>Enable this option
 
 ## Import
 

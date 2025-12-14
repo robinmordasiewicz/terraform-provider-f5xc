@@ -95,21 +95,21 @@ A [`bgp_parameters`](#bgp-parameters) block supports the following:
 
 <a id="bgp-parameters-asn"></a>&#x2022; [`asn`](#bgp-parameters-asn) - Optional Number<br>ASN. Autonomous System Number
 
-<a id="bgp-parameters-from-site"></a>&#x2022; [`from_site`](#bgp-parameters-from-site) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bgp-parameters-from-site"></a>&#x2022; [`from_site`](#bgp-parameters-from-site) - Optional Block<br>Enable this option
 
 <a id="bgp-parameters-ip-address"></a>&#x2022; [`ip_address`](#bgp-parameters-ip-address) - Optional String<br>IP Address. Use the configured IPv4 Address as Router ID
 
-<a id="bgp-parameters-local-address"></a>&#x2022; [`local_address`](#bgp-parameters-local-address) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="bgp-parameters-local-address"></a>&#x2022; [`local_address`](#bgp-parameters-local-address) - Optional Block<br>Enable this option
 
 #### Peers
 
 A [`peers`](#peers) block supports the following:
 
-<a id="peers-bfd-disabled"></a>&#x2022; [`bfd_disabled`](#peers-bfd-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="peers-bfd-disabled"></a>&#x2022; [`bfd_disabled`](#peers-bfd-disabled) - Optional Block<br>Enable this option
 
 <a id="peers-bfd-enabled"></a>&#x2022; [`bfd_enabled`](#peers-bfd-enabled) - Optional Block<br>BFD. BFD parameters<br>See [Bfd Enabled](#peers-bfd-enabled) below.
 
-<a id="peers-disable"></a>&#x2022; [`disable`](#peers-disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="peers-disable"></a>&#x2022; [`disable`](#peers-disable) - Optional Block<br>Enable this option
 
 <a id="peers-external"></a>&#x2022; [`external`](#peers-external) - Optional Block<br>External BGP Peer. External BGP Peer parameters<br>See [External](#peers-external) below.
 
@@ -117,9 +117,9 @@ A [`peers`](#peers) block supports the following:
 
 <a id="peers-metadata"></a>&#x2022; [`metadata`](#peers-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#peers-metadata) below.
 
-<a id="peers-passive-mode-disabled"></a>&#x2022; [`passive_mode_disabled`](#peers-passive-mode-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="peers-passive-mode-disabled"></a>&#x2022; [`passive_mode_disabled`](#peers-passive-mode-disabled) - Optional Block<br>Enable this option
 
-<a id="peers-passive-mode-enabled"></a>&#x2022; [`passive_mode_enabled`](#peers-passive-mode-enabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="peers-passive-mode-enabled"></a>&#x2022; [`passive_mode_enabled`](#peers-passive-mode-enabled) - Optional Block<br>Enable this option
 
 <a id="peers-routing-policies"></a>&#x2022; [`routing_policies`](#peers-routing-policies) - Optional Block<br>BGP Routing Policy. List of rules which can be applied on all or particular nodes<br>See [Routing Policies](#peers-routing-policies) below.
 
@@ -143,21 +143,21 @@ An [`external`](#peers-external) block (within [`peers`](#peers)) supports the f
 
 <a id="peers-external-asn"></a>&#x2022; [`asn`](#peers-external-asn) - Optional Number<br>ASN. Autonomous System Number for BGP peer
 
-<a id="peers-external-default-gateway"></a>&#x2022; [`default_gateway`](#peers-external-default-gateway) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="peers-external-default-gateway"></a>&#x2022; [`default_gateway`](#peers-external-default-gateway) - Optional Block<br>Enable this option
 
-<a id="peers-external-default-gateway-v6"></a>&#x2022; [`default_gateway_v6`](#peers-external-default-gateway-v6) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="peers-external-default-gateway-v6"></a>&#x2022; [`default_gateway_v6`](#peers-external-default-gateway-v6) - Optional Block<br>Enable this option
 
-<a id="peers-external-disable"></a>&#x2022; [`disable`](#peers-external-disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="peers-external-disable"></a>&#x2022; [`disable`](#peers-external-disable) - Optional Block<br>Enable this option
 
-<a id="peers-external-disable-v6"></a>&#x2022; [`disable_v6`](#peers-external-disable-v6) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="peers-external-disable-v6"></a>&#x2022; [`disable_v6`](#peers-external-disable-v6) - Optional Block<br>Enable this option
 
-<a id="peers-external-external-connector"></a>&#x2022; [`external_connector`](#peers-external-external-connector) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="peers-external-external-connector"></a>&#x2022; [`external_connector`](#peers-external-external-connector) - Optional Block<br>Enable this option
 
 <a id="peers-external-family-inet"></a>&#x2022; [`family_inet`](#peers-external-family-inet) - Optional Block<br>BGP Family Inet. Parameters for inet family<br>See [Family Inet](#peers-external-family-inet) below.
 
-<a id="peers-external-from-site"></a>&#x2022; [`from_site`](#peers-external-from-site) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="peers-external-from-site"></a>&#x2022; [`from_site`](#peers-external-from-site) - Optional Block<br>Enable this option
 
-<a id="peers-external-from-site-v6"></a>&#x2022; [`from_site_v6`](#peers-external-from-site-v6) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="peers-external-from-site-v6"></a>&#x2022; [`from_site_v6`](#peers-external-from-site-v6) - Optional Block<br>Enable this option
 
 <a id="peers-external-interface"></a>&#x2022; [`interface`](#peers-external-interface) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Interface](#peers-external-interface) below.
 
@@ -165,7 +165,7 @@ An [`external`](#peers-external) block (within [`peers`](#peers)) supports the f
 
 <a id="peers-external-md5-auth-key"></a>&#x2022; [`md5_auth_key`](#peers-external-md5-auth-key) - Optional String<br>MD5 Authentication Key. MD5 key for protecting BGP Sessions (RFC 2385)
 
-<a id="peers-external-no-authentication"></a>&#x2022; [`no_authentication`](#peers-external-no-authentication) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="peers-external-no-authentication"></a>&#x2022; [`no_authentication`](#peers-external-no-authentication) - Optional Block<br>Enable this option
 
 <a id="peers-external-port"></a>&#x2022; [`port`](#peers-external-port) - Optional Number<br>Peer Port. Peer TCP port number
 
@@ -181,9 +181,9 @@ An [`external`](#peers-external) block (within [`peers`](#peers)) supports the f
 
 A [`family_inet`](#peers-external-family-inet) block (within [`peers.external`](#peers-external)) supports the following:
 
-<a id="peers-external-family-inet-disable"></a>&#x2022; [`disable`](#peers-external-family-inet-disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="peers-external-family-inet-disable"></a>&#x2022; [`disable`](#peers-external-family-inet-disable) - Optional Block<br>Enable this option
 
-<a id="peers-external-family-inet-enable"></a>&#x2022; [`enable`](#peers-external-family-inet-enable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="peers-external-family-inet-enable"></a>&#x2022; [`enable`](#peers-external-family-inet-enable) - Optional Block<br>Enable this option
 
 #### Peers External Interface
 
@@ -229,15 +229,15 @@ A [`routing_policies`](#peers-routing-policies) block (within [`peers`](#peers))
 
 A [`route_policy`](#peers-routing-policies-route-policy) block (within [`peers.routing_policies`](#peers-routing-policies)) supports the following:
 
-<a id="peers-routing-policies-route-policy-all-nodes"></a>&#x2022; [`all_nodes`](#peers-routing-policies-route-policy-all-nodes) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="peers-routing-policies-route-policy-all-nodes"></a>&#x2022; [`all_nodes`](#peers-routing-policies-route-policy-all-nodes) - Optional Block<br>Enable this option
 
-<a id="peers-routing-policies-route-policy-inbound"></a>&#x2022; [`inbound`](#peers-routing-policies-route-policy-inbound) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="peers-routing-policies-route-policy-inbound"></a>&#x2022; [`inbound`](#peers-routing-policies-route-policy-inbound) - Optional Block<br>Enable this option
 
 <a id="peers-routing-policies-route-policy-node-name"></a>&#x2022; [`node_name`](#peers-routing-policies-route-policy-node-name) - Optional Block<br>Nodes. List of nodes on which BGP routing policy has to be applied<br>See [Node Name](#peers-routing-policies-route-policy-node-name) below.
 
 <a id="peers-routing-policies-route-policy-object-refs"></a>&#x2022; [`object_refs`](#peers-routing-policies-route-policy-object-refs) - Optional Block<br>BGP routing policy. Select route policy to apply<br>See [Object Refs](#peers-routing-policies-route-policy-object-refs) below.
 
-<a id="peers-routing-policies-route-policy-outbound"></a>&#x2022; [`outbound`](#peers-routing-policies-route-policy-outbound) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="peers-routing-policies-route-policy-outbound"></a>&#x2022; [`outbound`](#peers-routing-policies-route-policy-outbound) - Optional Block<br>Enable this option
 
 #### Peers Routing Policies Route Policy Node Name
 
@@ -283,9 +283,9 @@ A [`where`](#where) block supports the following:
 
 A [`site`](#where-site) block (within [`where`](#where)) supports the following:
 
-<a id="where-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-site-disable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="where-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-site-disable-internet-vip) - Optional Block<br>Enable this option
 
-<a id="where-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-site-enable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="where-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-site-enable-internet-vip) - Optional Block<br>Enable this option
 
 <a id="where-site-network-type"></a>&#x2022; [`network_type`](#where-site-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
@@ -309,9 +309,9 @@ A [`ref`](#where-site-ref) block (within [`where.site`](#where-site)) supports t
 
 A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) supports the following:
 
-<a id="where-virtual-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-virtual-site-disable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="where-virtual-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-virtual-site-disable-internet-vip) - Optional Block<br>Enable this option
 
-<a id="where-virtual-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-virtual-site-enable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="where-virtual-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-virtual-site-enable-internet-vip) - Optional Block<br>Enable this option
 
 <a id="where-virtual-site-network-type"></a>&#x2022; [`network_type`](#where-virtual-site-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 

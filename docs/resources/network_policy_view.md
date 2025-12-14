@@ -40,7 +40,7 @@ resource "f5xc_network_policy_view" "example" {
   adv_action {
     # Configure adv_action settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   all_tcp_traffic {
     # Configure all_tcp_traffic settings
   }
@@ -90,17 +90,17 @@ An [`egress_rules`](#egress-rules) block supports the following:
 
 <a id="egress-rules-adv-action"></a>&#x2022; [`adv_action`](#egress-rules-adv-action) - Optional Block<br>Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction<br>See [Adv Action](#egress-rules-adv-action) below.
 
-<a id="egress-rules-all-tcp-traffic"></a>&#x2022; [`all_tcp_traffic`](#egress-rules-all-tcp-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="egress-rules-all-tcp-traffic"></a>&#x2022; [`all_tcp_traffic`](#egress-rules-all-tcp-traffic) - Optional Block<br>Enable this option
 
-<a id="egress-rules-all-traffic"></a>&#x2022; [`all_traffic`](#egress-rules-all-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="egress-rules-all-traffic"></a>&#x2022; [`all_traffic`](#egress-rules-all-traffic) - Optional Block<br>Enable this option
 
-<a id="egress-rules-all-udp-traffic"></a>&#x2022; [`all_udp_traffic`](#egress-rules-all-udp-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="egress-rules-all-udp-traffic"></a>&#x2022; [`all_udp_traffic`](#egress-rules-all-udp-traffic) - Optional Block<br>Enable this option
 
-<a id="egress-rules-any"></a>&#x2022; [`any`](#egress-rules-any) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="egress-rules-any"></a>&#x2022; [`any`](#egress-rules-any) - Optional Block<br>Enable this option
 
 <a id="egress-rules-applications"></a>&#x2022; [`applications`](#egress-rules-applications) - Optional Block<br>Applications. Application protocols like HTTP, SNMP<br>See [Applications](#egress-rules-applications) below.
 
-<a id="egress-rules-inside-endpoints"></a>&#x2022; [`inside_endpoints`](#egress-rules-inside-endpoints) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="egress-rules-inside-endpoints"></a>&#x2022; [`inside_endpoints`](#egress-rules-inside-endpoints) - Optional Block<br>Enable this option
 
 <a id="egress-rules-ip-prefix-set"></a>&#x2022; [`ip_prefix_set`](#egress-rules-ip-prefix-set) - Optional Block<br>IP Prefix Set Reference. A list of references to ip_prefix_set objects<br>See [IP Prefix Set](#egress-rules-ip-prefix-set) below.
 
@@ -110,9 +110,9 @@ An [`egress_rules`](#egress-rules) block supports the following:
 
 <a id="egress-rules-metadata"></a>&#x2022; [`metadata`](#egress-rules-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#egress-rules-metadata) below.
 
-<a id="egress-rules-outside-endpoints"></a>&#x2022; [`outside_endpoints`](#egress-rules-outside-endpoints) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="egress-rules-outside-endpoints"></a>&#x2022; [`outside_endpoints`](#egress-rules-outside-endpoints) - Optional Block<br>Enable this option
 
-<a id="egress-rules-prefix-list"></a>&#x2022; [`prefix_list`](#egress-rules-prefix-list) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#egress-rules-prefix-list) below.
+<a id="egress-rules-prefix-list"></a>&#x2022; [`prefix_list`](#egress-rules-prefix-list) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#egress-rules-prefix-list) below.
 
 <a id="egress-rules-protocol-port-range"></a>&#x2022; [`protocol_port_range`](#egress-rules-protocol-port-range) - Optional Block<br>Protocol and Port. Protocol and Port ranges<br>See [Protocol Port Range](#egress-rules-protocol-port-range) below.
 
@@ -120,7 +120,7 @@ An [`egress_rules`](#egress-rules) block supports the following:
 
 An [`adv_action`](#egress-rules-adv-action) block (within [`egress_rules`](#egress-rules)) supports the following:
 
-<a id="egress-rules-adv-action-action"></a>&#x2022; [`action`](#egress-rules-adv-action-action) - Optional String  Defaults to `NOLOG`<br>Possible values are `NOLOG`, `LOG`<br>[Enum: NOLOG|LOG] Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule
+<a id="egress-rules-adv-action-action"></a>&#x2022; [`action`](#egress-rules-adv-action-action) - Optional String  Defaults to `NOLOG`<br>Possible values are `NOLOG`, `LOG`<br>[Enum: NOLOG|LOG] Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified Don't sample the traffic hitting the rule Sample the traffic hitting the rule
 
 #### Egress Rules Applications
 
@@ -186,15 +186,15 @@ A [`protocol_port_range`](#egress-rules-protocol-port-range) block (within [`egr
 
 An [`endpoint`](#endpoint) block supports the following:
 
-<a id="endpoint-any"></a>&#x2022; [`any`](#endpoint-any) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="endpoint-any"></a>&#x2022; [`any`](#endpoint-any) - Optional Block<br>Enable this option
 
-<a id="endpoint-inside-endpoints"></a>&#x2022; [`inside_endpoints`](#endpoint-inside-endpoints) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="endpoint-inside-endpoints"></a>&#x2022; [`inside_endpoints`](#endpoint-inside-endpoints) - Optional Block<br>Enable this option
 
 <a id="endpoint-label-selector"></a>&#x2022; [`label_selector`](#endpoint-label-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Label Selector](#endpoint-label-selector) below.
 
-<a id="endpoint-outside-endpoints"></a>&#x2022; [`outside_endpoints`](#endpoint-outside-endpoints) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="endpoint-outside-endpoints"></a>&#x2022; [`outside_endpoints`](#endpoint-outside-endpoints) - Optional Block<br>Enable this option
 
-<a id="endpoint-prefix-list"></a>&#x2022; [`prefix_list`](#endpoint-prefix-list) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#endpoint-prefix-list) below.
+<a id="endpoint-prefix-list"></a>&#x2022; [`prefix_list`](#endpoint-prefix-list) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#endpoint-prefix-list) below.
 
 #### Endpoint Label Selector
 
@@ -216,17 +216,17 @@ An [`ingress_rules`](#ingress-rules) block supports the following:
 
 <a id="ingress-rules-adv-action"></a>&#x2022; [`adv_action`](#ingress-rules-adv-action) - Optional Block<br>Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction<br>See [Adv Action](#ingress-rules-adv-action) below.
 
-<a id="ingress-rules-all-tcp-traffic"></a>&#x2022; [`all_tcp_traffic`](#ingress-rules-all-tcp-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-rules-all-tcp-traffic"></a>&#x2022; [`all_tcp_traffic`](#ingress-rules-all-tcp-traffic) - Optional Block<br>Enable this option
 
-<a id="ingress-rules-all-traffic"></a>&#x2022; [`all_traffic`](#ingress-rules-all-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-rules-all-traffic"></a>&#x2022; [`all_traffic`](#ingress-rules-all-traffic) - Optional Block<br>Enable this option
 
-<a id="ingress-rules-all-udp-traffic"></a>&#x2022; [`all_udp_traffic`](#ingress-rules-all-udp-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-rules-all-udp-traffic"></a>&#x2022; [`all_udp_traffic`](#ingress-rules-all-udp-traffic) - Optional Block<br>Enable this option
 
-<a id="ingress-rules-any"></a>&#x2022; [`any`](#ingress-rules-any) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-rules-any"></a>&#x2022; [`any`](#ingress-rules-any) - Optional Block<br>Enable this option
 
 <a id="ingress-rules-applications"></a>&#x2022; [`applications`](#ingress-rules-applications) - Optional Block<br>Applications. Application protocols like HTTP, SNMP<br>See [Applications](#ingress-rules-applications) below.
 
-<a id="ingress-rules-inside-endpoints"></a>&#x2022; [`inside_endpoints`](#ingress-rules-inside-endpoints) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-rules-inside-endpoints"></a>&#x2022; [`inside_endpoints`](#ingress-rules-inside-endpoints) - Optional Block<br>Enable this option
 
 <a id="ingress-rules-ip-prefix-set"></a>&#x2022; [`ip_prefix_set`](#ingress-rules-ip-prefix-set) - Optional Block<br>IP Prefix Set Reference. A list of references to ip_prefix_set objects<br>See [IP Prefix Set](#ingress-rules-ip-prefix-set) below.
 
@@ -236,9 +236,9 @@ An [`ingress_rules`](#ingress-rules) block supports the following:
 
 <a id="ingress-rules-metadata"></a>&#x2022; [`metadata`](#ingress-rules-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#ingress-rules-metadata) below.
 
-<a id="ingress-rules-outside-endpoints"></a>&#x2022; [`outside_endpoints`](#ingress-rules-outside-endpoints) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="ingress-rules-outside-endpoints"></a>&#x2022; [`outside_endpoints`](#ingress-rules-outside-endpoints) - Optional Block<br>Enable this option
 
-<a id="ingress-rules-prefix-list"></a>&#x2022; [`prefix_list`](#ingress-rules-prefix-list) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#ingress-rules-prefix-list) below.
+<a id="ingress-rules-prefix-list"></a>&#x2022; [`prefix_list`](#ingress-rules-prefix-list) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#ingress-rules-prefix-list) below.
 
 <a id="ingress-rules-protocol-port-range"></a>&#x2022; [`protocol_port_range`](#ingress-rules-protocol-port-range) - Optional Block<br>Protocol and Port. Protocol and Port ranges<br>See [Protocol Port Range](#ingress-rules-protocol-port-range) below.
 
@@ -246,7 +246,7 @@ An [`ingress_rules`](#ingress-rules) block supports the following:
 
 An [`adv_action`](#ingress-rules-adv-action) block (within [`ingress_rules`](#ingress-rules)) supports the following:
 
-<a id="ingress-rules-adv-action-action"></a>&#x2022; [`action`](#ingress-rules-adv-action-action) - Optional String  Defaults to `NOLOG`<br>Possible values are `NOLOG`, `LOG`<br>[Enum: NOLOG|LOG] Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule
+<a id="ingress-rules-adv-action-action"></a>&#x2022; [`action`](#ingress-rules-adv-action-action) - Optional String  Defaults to `NOLOG`<br>Possible values are `NOLOG`, `LOG`<br>[Enum: NOLOG|LOG] Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified Don't sample the traffic hitting the rule Sample the traffic hitting the rule
 
 #### Ingress Rules Applications
 

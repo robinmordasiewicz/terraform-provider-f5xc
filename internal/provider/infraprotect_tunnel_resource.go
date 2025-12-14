@@ -249,7 +249,7 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 						},
 					},
 					"no_secret": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"peer_secret_override": schema.SingleNestedBlock{
 						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
@@ -288,7 +288,7 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 						},
 					},
 					"use_default_secret": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -320,22 +320,22 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 				},
 				Blocks: map[string]schema.Block{
 					"fragmentation_disabled": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"fragmentation_enabled": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"ipv6_interconnect_disabled": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"ipv6_interconnect_enabled": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"keepalive_disabled": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"keepalive_enabled": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -349,10 +349,10 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 				},
 				Blocks: map[string]schema.Block{
 					"ipv4_interconnect_disabled": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"ipv4_interconnect_enabled": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -384,10 +384,10 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 				},
 				Blocks: map[string]schema.Block{
 					"zone1": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"zone2": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},

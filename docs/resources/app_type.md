@@ -36,11 +36,11 @@ resource "f5xc_app_type" "example" {
   business_logic_markup_setting {
     # Configure business_logic_markup_setting settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   disable {
     # Configure disable settings
   }
-  # Discovered API Settings. x-example: '2' Configure Discove...
+  # Discovered API Settings. Configure Discovered API Settings.
   discovered_api_settings {
     # Configure discovered_api_settings settings
   }
@@ -84,11 +84,11 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`business_logic_markup_setting`](#business-logic-markup-setting) block supports the following:
 
-<a id="business-logic-markup-setting-disable"></a>&#x2022; [`disable`](#business-logic-markup-setting-disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="business-logic-markup-setting-disable"></a>&#x2022; [`disable`](#business-logic-markup-setting-disable) - Optional Block<br>Enable this option
 
-<a id="business-logic-markup-setting-discovered-api-settings"></a>&#x2022; [`discovered_api_settings`](#business-logic-markup-setting-discovered-api-settings) - Optional Block<br>Discovered API Settings. x-example: '2' Configure Discovered API Settings<br>See [Discovered API Settings](#business-logic-markup-setting-discovered-api-settings) below.
+<a id="business-logic-markup-setting-discovered-api-settings"></a>&#x2022; [`discovered_api_settings`](#business-logic-markup-setting-discovered-api-settings) - Optional Block<br>Discovered API Settings. Configure Discovered API Settings<br>See [Discovered API Settings](#business-logic-markup-setting-discovered-api-settings) below.
 
-<a id="business-logic-markup-setting-enable"></a>&#x2022; [`enable`](#business-logic-markup-setting-enable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="business-logic-markup-setting-enable"></a>&#x2022; [`enable`](#business-logic-markup-setting-enable) - Optional Block<br>Enable this option
 
 #### Business Logic Markup Setting Discovered API Settings
 

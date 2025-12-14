@@ -20,7 +20,7 @@ resource "f5xc_voltshare_admin_policy" "example" {
   author_restrictions {
     # Configure author_restrictions settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   allow_all {
     # Configure allow_all settings
   }

@@ -40,7 +40,7 @@ resource "f5xc_dns_lb_health_check" "example" {
   https_health_check {
     # Configure https_health_check settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   icmp_health_check {
     # Configure icmp_health_check settings
   }
@@ -69,7 +69,7 @@ resource "f5xc_dns_lb_health_check" "example" {
 -> **One of the following:**
 &#x2022; <a id="http-health-check"></a>[`http_health_check`](#http-health-check) - Optional Block<br>HTTP Health Check<br>See [HTTP Health Check](#http-health-check) below for details.
 <br><br>&#x2022; <a id="https-health-check"></a>[`https_health_check`](#https-health-check) - Optional Block<br>HTTP Health Check<br>See [HTTPS Health Check](#https-health-check) below for details.
-<br><br>&#x2022; <a id="icmp-health-check"></a>[`icmp_health_check`](#icmp-health-check) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="icmp-health-check"></a>[`icmp_health_check`](#icmp-health-check) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="tcp-health-check"></a>[`tcp_health_check`](#tcp-health-check) - Optional Block<br>TCP Health Check<br>See [TCP Health Check](#tcp-health-check) below for details.
 <br><br>&#x2022; <a id="tcp-hex-health-check"></a>[`tcp_hex_health_check`](#tcp-hex-health-check) - Optional Block<br>TCP Hex Health Check<br>See [TCP Hex Health Check](#tcp-hex-health-check) below for details.
 <br><br>&#x2022; <a id="udp-health-check"></a>[`udp_health_check`](#udp-health-check) - Optional Block<br>UDP Health Check<br>See [UDP Health Check](#udp-health-check) below for details.

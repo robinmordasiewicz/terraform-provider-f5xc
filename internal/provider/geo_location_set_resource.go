@@ -140,7 +140,7 @@ func (r *GeoLocationSetResource) Schema(ctx context.Context, req resource.Schema
 				},
 			},
 			"global": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 		},
 	}

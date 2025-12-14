@@ -182,13 +182,13 @@ func (r *ForwardingClassResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"dscp_based_queue": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: dscp_based_queue, queue_id_to_use] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: dscp_based_queue, queue_id_to_use] Enable this option",
 			},
 			"no_marking": schema.SingleNestedBlock{
-				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "Enable this option",
 			},
 			"no_policer": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: no_policer, policer; Default: no_policer] Empty. This can be used for messages where no values are needed",
+				MarkdownDescription: "[OneOf: no_policer, policer; Default: no_policer] Enable this option",
 			},
 			"policer": schema.SingleNestedBlock{
 				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",

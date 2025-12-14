@@ -20,7 +20,7 @@ resource "f5xc_tenant_profile" "example" {
   ct_groups {
     # Configure ct_groups settings
   }
-  # Namespace Roles. [x-example: 'monitor, system:monitor-rol...
+  # Namespace Roles. [] List of namespaces and associated rol...
   namespace_roles {
     # Configure namespace_roles settings
   }

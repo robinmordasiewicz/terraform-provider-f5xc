@@ -16,7 +16,7 @@ resource "f5xc_service_policy_rule" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: any_asn, asn_list, asn_matcher] Empty. This can b...
+  # [OneOf: any_asn, asn_list, asn_matcher] Enable this option
   any_asn {
     # Configure any_asn settings
   }
@@ -24,7 +24,7 @@ resource "f5xc_service_policy_rule" "example" {
   any_client {
     # Configure any_client settings
   }
-  # [OneOf: any_ip, ip_matcher, ip_prefix_list] Empty. This c...
+  # [OneOf: any_ip, ip_matcher, ip_prefix_list] Enable this o...
   any_ip {
     # Configure any_ip settings
   }

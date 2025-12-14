@@ -20,7 +20,7 @@ resource "f5xc_ike_phase2_profile" "example" {
   dh_group_set {
     # Configure dh_group_set settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   disable_pfs {
     # Configure disable_pfs settings
   }

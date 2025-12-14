@@ -32,15 +32,15 @@ resource "f5xc_infraprotect_internet_prefix_advertisement" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: activation_announce, activation_withdraw] Empty. ...
+  # [OneOf: activation_announce, activation_withdraw] Enable ...
   activation_announce {
     # Configure activation_announce settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   activation_withdraw {
     # Configure activation_withdraw settings
   }
-  # [OneOf: expiration_never, expiration_timestamp] Empty. Th...
+  # [OneOf: expiration_never, expiration_timestamp] Enable th...
   expiration_never {
     # Configure expiration_never settings
   }
@@ -67,11 +67,11 @@ resource "f5xc_infraprotect_internet_prefix_advertisement" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="activation-announce"></a>[`activation_announce`](#activation-announce) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="activation-withdraw"></a>[`activation_withdraw`](#activation-withdraw) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="activation-announce"></a>[`activation_announce`](#activation-announce) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="activation-withdraw"></a>[`activation_withdraw`](#activation-withdraw) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="expiration-never"></a>[`expiration_never`](#expiration-never) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="expiration-never"></a>[`expiration_never`](#expiration-never) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="expiration-timestamp"></a>[`expiration_timestamp`](#expiration-timestamp) - Optional String<br>Expiration Time (UTC). This advertisement will expire at the given timestamp and will be removed from the system afterwards
 
 <a id="prefix"></a>&#x2022; [`prefix`](#prefix) - Optional String<br>Prefix. Advertisement Prefix Advertisement prefix lookup depending on type

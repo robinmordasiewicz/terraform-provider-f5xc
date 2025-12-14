@@ -2,12 +2,12 @@
 page_title: "f5xc_certificate Resource - terraform-provider-f5xc"
 subcategory: "Certificates"
 description: |-
-  [Category: Certificates] [Namespace: not_required] [DependsOn: namespace] Manages a Certificate resource in F5 Distributed Cloud for TLS/SSL certificate management.
+  [Category: Certificates] [Namespace: not_required] [DependsOn: namespace] Manages a Certificate resource in F5 Distributed Cloud for certificate configuration.
 ---
 
 # f5xc_certificate (Resource)
 
-[Category: Certificates] [Namespace: not_required] [DependsOn: namespace] Manages a Certificate resource in F5 Distributed Cloud for TLS/SSL certificate management.
+[Category: Certificates] [Namespace: not_required] [DependsOn: namespace] Manages a Certificate resource in F5 Distributed Cloud for certificate configuration.
 
 ~> **Note** Please refer to [Certificate API docs](https://docs.cloud.f5.com/docs-v2/api/certificate) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Certificate Resource Example
-# [Category: Certificates] [Namespace: not_required] [DependsOn: namespace] Manages a Certificate resource in F5 Distributed Cloud for TLS/SSL certificate management.
+# [Category: Certificates] [Namespace: not_required] [DependsOn: namespace] Manages a Certificate resource in F5 Distributed Cloud for certificate configuration.
 
 # Basic Certificate configuration
 resource "f5xc_certificate" "example" {
@@ -66,13 +66,13 @@ resource "f5xc_certificate" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="custom-hash-algorithms"></a>[`custom_hash_algorithms`](#custom-hash-algorithms) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#custom-hash-algorithms) below for details.
-<br><br>&#x2022; <a id="disable-ocsp-stapling"></a>[`disable_ocsp_stapling`](#disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="disable-ocsp-stapling"></a>[`disable_ocsp_stapling`](#disable-ocsp-stapling) - Optional Block<br>Enable this option
 
 <a id="private-key"></a>&#x2022; [`private_key`](#private-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#private-key) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-<a id="use-system-defaults"></a>&#x2022; [`use_system_defaults`](#use-system-defaults) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="use-system-defaults"></a>&#x2022; [`use_system_defaults`](#use-system-defaults) - Optional Block<br>Enable this option
 
 ### Attributes Reference
 

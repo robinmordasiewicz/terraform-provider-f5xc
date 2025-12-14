@@ -42,8 +42,8 @@ cd terraform-provider-f5xc/examples/guides/http-loadbalancer
 Configure authentication using environment variables. **Never commit credentials to version control.**
 
 ```bash
-export VES_API_URL="https://your-tenant.console.ves.volterra.io"
-export VES_API_TOKEN="your-api-token"
+export F5XC_API_URL="https://your-tenant.console.ves.volterra.io"
+export F5XC_API_TOKEN="your-api-token"
 ```
 
 -> **Tip:** Add these to your shell profile (`~/.bashrc` or `~/.zshrc`) for persistence across terminal sessions.

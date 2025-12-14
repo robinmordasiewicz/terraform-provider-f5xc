@@ -36,7 +36,7 @@ resource "f5xc_voltshare_admin_policy" "example" {
   author_restrictions {
     # Configure author_restrictions settings
   }
-  # Empty. This can be used for messages where no values are ...
+  # Enable this option
   allow_all {
     # Configure allow_all settings
   }
@@ -86,11 +86,11 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`author_restrictions`](#author-restrictions) block supports the following:
 
-<a id="author-restrictions-allow-all"></a>&#x2022; [`allow_all`](#author-restrictions-allow-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="author-restrictions-allow-all"></a>&#x2022; [`allow_all`](#author-restrictions-allow-all) - Optional Block<br>Enable this option
 
 <a id="author-restrictions-allow-list"></a>&#x2022; [`allow_list`](#author-restrictions-allow-list) - Optional Block<br>Custom List. Custom List contains user customized list of matcher values<br>See [Allow List](#author-restrictions-allow-list) below.
 
-<a id="author-restrictions-deny-all"></a>&#x2022; [`deny_all`](#author-restrictions-deny-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="author-restrictions-deny-all"></a>&#x2022; [`deny_all`](#author-restrictions-deny-all) - Optional Block<br>Enable this option
 
 <a id="author-restrictions-deny-list"></a>&#x2022; [`deny_list`](#author-restrictions-deny-list) - Optional Block<br>Custom List. Custom List contains user customized list of matcher values<br>See [Deny List](#author-restrictions-deny-list) below.
 
@@ -138,9 +138,9 @@ A [`timeouts`](#timeouts) block supports the following:
 
 An [`user_restrictions`](#user-restrictions) block supports the following:
 
-<a id="user-restrictions-all-tenants"></a>&#x2022; [`all_tenants`](#user-restrictions-all-tenants) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="user-restrictions-all-tenants"></a>&#x2022; [`all_tenants`](#user-restrictions-all-tenants) - Optional Block<br>Enable this option
 
-<a id="user-restrictions-individual-users"></a>&#x2022; [`individual_users`](#user-restrictions-individual-users) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="user-restrictions-individual-users"></a>&#x2022; [`individual_users`](#user-restrictions-individual-users) - Optional Block<br>Enable this option
 
 <a id="user-restrictions-tenant"></a>&#x2022; [`tenant`](#user-restrictions-tenant) - Optional String<br>Team/Tenant. Team/Tenant for which this rule is valid
 
@@ -150,11 +150,11 @@ An [`user_restrictions`](#user-restrictions) block supports the following:
 
 An [`user_restrictions`](#user-restrictions-user-restrictions) block (within [`user_restrictions`](#user-restrictions)) supports the following:
 
-<a id="user-restrictions-user-restrictions-allow-all"></a>&#x2022; [`allow_all`](#user-restrictions-user-restrictions-allow-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="user-restrictions-user-restrictions-allow-all"></a>&#x2022; [`allow_all`](#user-restrictions-user-restrictions-allow-all) - Optional Block<br>Enable this option
 
 <a id="user-restrictions-user-restrictions-allow-list"></a>&#x2022; [`allow_list`](#user-restrictions-user-restrictions-allow-list) - Optional Block<br>Custom List. Custom List contains user customized list of matcher values<br>See [Allow List](#user-restrictions-user-restrictions-allow-list) below.
 
-<a id="user-restrictions-user-restrictions-deny-all"></a>&#x2022; [`deny_all`](#user-restrictions-user-restrictions-deny-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="user-restrictions-user-restrictions-deny-all"></a>&#x2022; [`deny_all`](#user-restrictions-user-restrictions-deny-all) - Optional Block<br>Enable this option
 
 <a id="user-restrictions-user-restrictions-deny-list"></a>&#x2022; [`deny_list`](#user-restrictions-user-restrictions-deny-list) - Optional Block<br>Custom List. Custom List contains user customized list of matcher values<br>See [Deny List](#user-restrictions-user-restrictions-deny-list) below.
 

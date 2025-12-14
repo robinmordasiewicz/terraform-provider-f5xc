@@ -321,7 +321,7 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"all_route_tables": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 												"selective_route_tables": schema.SingleNestedBlock{
 													MarkdownDescription: "AWS Route Table. AWS Route Table",
@@ -339,7 +339,7 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 											MarkdownDescription: "Labels. Add labels for the VPC attachment. These labels can then be used in policies such as enhanced firewall.",
 										},
 										"manual_routing": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -415,7 +415,7 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"all_route_tables": schema.SingleNestedBlock{
-													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													MarkdownDescription: "Enable this option",
 												},
 												"selective_route_tables": schema.SingleNestedBlock{
 													MarkdownDescription: "Azure Route Table. Azure Route Table",
@@ -433,7 +433,7 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 											MarkdownDescription: "Labels. Add labels for the VNET attachments. These labels can then be used in policies such as enhanced firewall policies.",
 										},
 										"manual_routing": schema.SingleNestedBlock{
-											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},

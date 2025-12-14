@@ -338,10 +338,10 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"all_public_vips": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"default_tenant_vip": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"fast_acl_rules": schema.ListNestedBlock{
 						MarkdownDescription: "Rules. Fast ACL rules to match",
@@ -491,10 +491,10 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 										},
 										Blocks: map[string]schema.Block{
 											"all": schema.SingleNestedBlock{
-												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												MarkdownDescription: "Enable this option",
 											},
 											"dns": schema.SingleNestedBlock{
-												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												MarkdownDescription: "Enable this option",
 											},
 										},
 									},
@@ -550,7 +550,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"all_services": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"fast_acl_rules": schema.ListNestedBlock{
 						MarkdownDescription: "Rules. Fast ACL rules to match",
@@ -700,10 +700,10 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 										},
 										Blocks: map[string]schema.Block{
 											"all": schema.SingleNestedBlock{
-												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												MarkdownDescription: "Enable this option",
 											},
 											"dns": schema.SingleNestedBlock{
-												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												MarkdownDescription: "Enable this option",
 											},
 										},
 									},
@@ -722,16 +722,16 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 						},
 					},
 					"inside_network": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"interface_services": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"outside_network": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 					"vip_services": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},

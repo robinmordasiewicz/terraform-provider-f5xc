@@ -75,14 +75,14 @@ resource "f5xc_forward_proxy_policy" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="allow-all"></a>[`allow_all`](#allow-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="allow-all"></a>[`allow_all`](#allow-all) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="allow-list"></a>[`allow_list`](#allow-list) - Optional Block<br>Forward Proxy Rule. URL(s) and domains policy for forward proxy for a connection type (TLS or HTTP)<br>See [Allow List](#allow-list) below for details.
 <br><br>&#x2022; <a id="deny-list"></a>[`deny_list`](#deny-list) - Optional Block<br>Forward Proxy Rule. URL(s) and domains policy for forward proxy for a connection type (TLS or HTTP)<br>See [Deny List](#deny-list) below for details.
 <br><br>&#x2022; <a id="rule-list"></a>[`rule_list`](#rule-list) - Optional Block<br>Custom Rule List. List of custom rules<br>See [Rule List](#rule-list) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="any-proxy"></a>[`any_proxy`](#any-proxy) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="drp-http-connect"></a>[`drp_http_connect`](#drp-http-connect) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="any-proxy"></a>[`any_proxy`](#any-proxy) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="drp-http-connect"></a>[`drp_http_connect`](#drp-http-connect) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="network-connector"></a>[`network_connector`](#network-connector) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Network Connector](#network-connector) below for details.
 <br><br>&#x2022; <a id="proxy-label-selector"></a>[`proxy_label_selector`](#proxy-label-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Proxy Label Selector](#proxy-label-selector) below for details.
 
@@ -100,11 +100,11 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`allow_list`](#allow-list) block supports the following:
 
-<a id="allow-list-default-action-allow"></a>&#x2022; [`default_action_allow`](#allow-list-default-action-allow) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="allow-list-default-action-allow"></a>&#x2022; [`default_action_allow`](#allow-list-default-action-allow) - Optional Block<br>Enable this option
 
-<a id="allow-list-default-action-deny"></a>&#x2022; [`default_action_deny`](#allow-list-default-action-deny) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="allow-list-default-action-deny"></a>&#x2022; [`default_action_deny`](#allow-list-default-action-deny) - Optional Block<br>Enable this option
 
-<a id="allow-list-default-action-next-policy"></a>&#x2022; [`default_action_next_policy`](#allow-list-default-action-next-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="allow-list-default-action-next-policy"></a>&#x2022; [`default_action_next_policy`](#allow-list-default-action-next-policy) - Optional Block<br>Enable this option
 
 <a id="allow-list-dest-list"></a>&#x2022; [`dest_list`](#allow-list-dest-list) - Optional Block<br>L4 Destination List. L4 destinations for non-HTTP and non-TLS connections and TLS connections without SNI<br>See [Dest List](#allow-list-dest-list) below.
 
@@ -126,7 +126,7 @@ A [`dest_list`](#allow-list-dest-list) block (within [`allow_list`](#allow-list)
 
 A [`http_list`](#allow-list-http-list) block (within [`allow_list`](#allow-list)) supports the following:
 
-<a id="allow-list-http-list-any-path"></a>&#x2022; [`any_path`](#allow-list-http-list-any-path) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="allow-list-http-list-any-path"></a>&#x2022; [`any_path`](#allow-list-http-list-any-path) - Optional Block<br>Enable this option
 
 <a id="allow-list-http-list-exact-value"></a>&#x2022; [`exact_value`](#allow-list-http-list-exact-value) - Optional String<br>Exact Values. Exact domain name
 
@@ -154,11 +154,11 @@ A [`tls_list`](#allow-list-tls-list) block (within [`allow_list`](#allow-list)) 
 
 A [`deny_list`](#deny-list) block supports the following:
 
-<a id="deny-list-default-action-allow"></a>&#x2022; [`default_action_allow`](#deny-list-default-action-allow) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="deny-list-default-action-allow"></a>&#x2022; [`default_action_allow`](#deny-list-default-action-allow) - Optional Block<br>Enable this option
 
-<a id="deny-list-default-action-deny"></a>&#x2022; [`default_action_deny`](#deny-list-default-action-deny) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="deny-list-default-action-deny"></a>&#x2022; [`default_action_deny`](#deny-list-default-action-deny) - Optional Block<br>Enable this option
 
-<a id="deny-list-default-action-next-policy"></a>&#x2022; [`default_action_next_policy`](#deny-list-default-action-next-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="deny-list-default-action-next-policy"></a>&#x2022; [`default_action_next_policy`](#deny-list-default-action-next-policy) - Optional Block<br>Enable this option
 
 <a id="deny-list-dest-list"></a>&#x2022; [`dest_list`](#deny-list-dest-list) - Optional Block<br>L4 Destination List. L4 destinations for non-HTTP and non-TLS connections and TLS connections without SNI<br>See [Dest List](#deny-list-dest-list) below.
 
@@ -180,7 +180,7 @@ A [`dest_list`](#deny-list-dest-list) block (within [`deny_list`](#deny-list)) s
 
 A [`http_list`](#deny-list-http-list) block (within [`deny_list`](#deny-list)) supports the following:
 
-<a id="deny-list-http-list-any-path"></a>&#x2022; [`any_path`](#deny-list-http-list-any-path) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="deny-list-http-list-any-path"></a>&#x2022; [`any_path`](#deny-list-http-list-any-path) - Optional Block<br>Enable this option
 
 <a id="deny-list-http-list-exact-value"></a>&#x2022; [`exact_value`](#deny-list-http-list-exact-value) - Optional String<br>Exact Values. Exact domain name
 
@@ -232,9 +232,9 @@ A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports 
 
 <a id="rule-list-rules-action"></a>&#x2022; [`action`](#rule-list-rules-action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`<br>[Enum: DENY|ALLOW|NEXT_POLICY] Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY Deny the request. - ALLOW: ALLOW Allow the request to proceed. - NEXT_POLICY_SET: NEXT_POLICY_SET Terminate evaluation of the current policy set and begin evaluating the next policy set in the chain. Note that the evaluation of any remaining policies in the current policy set is skipped. - NEXT_POLICY: NEXT_POLICY Terminate evaluation of the current policy and begin evaluating the next policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - LAST_POLICY: LAST_POLICY Terminate evaluation of the current policy and begin evaluating the last policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - GOTO_POLICY: GOTO_POLICY Terminate evaluation of the current policy and begin evaluating a specific policy in the policy set. The policy is specified using the goto_policy field in the rule and must be after the current policy in the policy set
 
-<a id="rule-list-rules-all-destinations"></a>&#x2022; [`all_destinations`](#rule-list-rules-all-destinations) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rule-list-rules-all-destinations"></a>&#x2022; [`all_destinations`](#rule-list-rules-all-destinations) - Optional Block<br>Enable this option
 
-<a id="rule-list-rules-all-sources"></a>&#x2022; [`all_sources`](#rule-list-rules-all-sources) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rule-list-rules-all-sources"></a>&#x2022; [`all_sources`](#rule-list-rules-all-sources) - Optional Block<br>Enable this option
 
 <a id="rule-list-rules-dst-asn-list"></a>&#x2022; [`dst_asn_list`](#rule-list-rules-dst-asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Dst Asn List](#rule-list-rules-dst-asn-list) below.
 
@@ -244,7 +244,7 @@ A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports 
 
 <a id="rule-list-rules-dst-label-selector"></a>&#x2022; [`dst_label_selector`](#rule-list-rules-dst-label-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Dst Label Selector](#rule-list-rules-dst-label-selector) below.
 
-<a id="rule-list-rules-dst-prefix-list"></a>&#x2022; [`dst_prefix_list`](#rule-list-rules-dst-prefix-list) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Dst Prefix List](#rule-list-rules-dst-prefix-list) below.
+<a id="rule-list-rules-dst-prefix-list"></a>&#x2022; [`dst_prefix_list`](#rule-list-rules-dst-prefix-list) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Dst Prefix List](#rule-list-rules-dst-prefix-list) below.
 
 <a id="rule-list-rules-http-list"></a>&#x2022; [`http_list`](#rule-list-rules-http-list) - Optional Block<br>URLListType<br>See [HTTP List](#rule-list-rules-http-list) below.
 
@@ -254,11 +254,11 @@ A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports 
 
 <a id="rule-list-rules-metadata"></a>&#x2022; [`metadata`](#rule-list-rules-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#rule-list-rules-metadata) below.
 
-<a id="rule-list-rules-no-http-connect-port"></a>&#x2022; [`no_http_connect_port`](#rule-list-rules-no-http-connect-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rule-list-rules-no-http-connect-port"></a>&#x2022; [`no_http_connect_port`](#rule-list-rules-no-http-connect-port) - Optional Block<br>Enable this option
 
 <a id="rule-list-rules-port-matcher"></a>&#x2022; [`port_matcher`](#rule-list-rules-port-matcher) - Optional Block<br>Port Matcher. A port matcher specifies a list of port ranges as match criteria. The match is considered successful if the input port falls within any of the port ranges. The result of the match is inverted if invert_matcher is true<br>See [Port Matcher](#rule-list-rules-port-matcher) below.
 
-<a id="rule-list-rules-prefix-list"></a>&#x2022; [`prefix_list`](#rule-list-rules-prefix-list) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#rule-list-rules-prefix-list) below.
+<a id="rule-list-rules-prefix-list"></a>&#x2022; [`prefix_list`](#rule-list-rules-prefix-list) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#rule-list-rules-prefix-list) below.
 
 <a id="rule-list-rules-tls-list"></a>&#x2022; [`tls_list`](#rule-list-rules-tls-list) - Optional Block<br>DomainListType<br>See [TLS List](#rule-list-rules-tls-list) below.
 
@@ -312,7 +312,7 @@ A [`http_list`](#rule-list-rules-http-list) block (within [`rule_list.rules`](#r
 
 A [`http_list`](#rule-list-rules-http-list-http-list) block (within [`rule_list.rules.http_list`](#rule-list-rules-http-list)) supports the following:
 
-<a id="rule-list-rules-http-list-http-list-any-path"></a>&#x2022; [`any_path`](#rule-list-rules-http-list-http-list-any-path) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rule-list-rules-http-list-http-list-any-path"></a>&#x2022; [`any_path`](#rule-list-rules-http-list-http-list-any-path) - Optional Block<br>Enable this option
 
 <a id="rule-list-rules-http-list-http-list-exact-value"></a>&#x2022; [`exact_value`](#rule-list-rules-http-list-http-list-exact-value) - Optional String<br>Exact Values. Exact domain name
 

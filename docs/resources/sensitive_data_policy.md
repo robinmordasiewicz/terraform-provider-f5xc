@@ -88,11 +88,11 @@ A [`custom_data_types`](#custom-data-types) block supports the following:
 
 A [`custom_data_type_ref`](#custom-data-types-custom-data-type-ref) block (within [`custom_data_types`](#custom-data-types)) supports the following:
 
-<a id="custom-data-types-custom-data-type-ref-name"></a>&#x2022; [`name`](#custom-data-types-custom-data-type-ref-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="name-20e921"></a>&#x2022; [`name`](#name-20e921) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-<a id="custom-data-types-custom-data-type-ref-namespace"></a>&#x2022; [`namespace`](#custom-data-types-custom-data-type-ref-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="namespace-9d0119"></a>&#x2022; [`namespace`](#namespace-9d0119) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-<a id="custom-data-types-custom-data-type-ref-tenant"></a>&#x2022; [`tenant`](#custom-data-types-custom-data-type-ref-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="tenant-60fc77"></a>&#x2022; [`tenant`](#tenant-60fc77) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 #### Timeouts
 

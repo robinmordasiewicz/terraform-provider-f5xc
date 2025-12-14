@@ -98,21 +98,21 @@ A [`notification_preference`](#notification-preference) block supports the follo
 
 <a id="notification-preference-emails"></a>&#x2022; [`emails`](#notification-preference-emails) - Optional Block<br>Addon Subscription Associated Emails. Addon Subscription Emails associated with the Addon Subscription<br>See [Emails](#notification-preference-emails) below.
 
-<a id="notification-preference-support-ticket-id"></a>&#x2022; [`support_ticket_id`](#notification-preference-support-ticket-id) - Optional Block<br>Support Ticket ID. SupportTicketId gives the information about ticket created for managed addon subscription<br>See [Support Ticket ID](#notification-preference-support-ticket-id) below.
+<a id="ticket-id-f447b3"></a>&#x2022; [`support_ticket_id`](#ticket-id-f447b3) - Optional Block<br>Support Ticket ID. SupportTicketId gives the information about ticket created for managed addon subscription<br>See [Support Ticket ID](#ticket-id-f447b3) below.
 
 #### Notification Preference Emails
 
 An [`emails`](#notification-preference-emails) block (within [`notification_preference`](#notification-preference)) supports the following:
 
-<a id="notification-preference-emails-email-ids"></a>&#x2022; [`email_ids`](#notification-preference-emails-email-ids) - Optional List<br>Emails. Email ids associated with the Addon Subscription
+<a id="ids-319c7d"></a>&#x2022; [`email_ids`](#ids-319c7d) - Optional List<br>Emails. Email ids associated with the Addon Subscription
 
 #### Notification Preference Support Ticket ID
 
-A [`support_ticket_id`](#notification-preference-support-ticket-id) block (within [`notification_preference`](#notification-preference)) supports the following:
+A [`support_ticket_id`](#ticket-id-f447b3) block (within [`notification_preference`](#notification-preference)) supports the following:
 
-<a id="notification-preference-support-ticket-id-subscription-ticket-id"></a>&#x2022; [`subscription_ticket_id`](#notification-preference-support-ticket-id-subscription-ticket-id) - Optional String<br>Subscription Ticket ID. subscription_ticket_id associated with the Addon Subscription subscription
+<a id="ticket-id-a60719"></a>&#x2022; [`subscription_ticket_id`](#ticket-id-a60719) - Optional String<br>Subscription Ticket ID. subscription_ticket_id associated with the Addon Subscription subscription
 
-<a id="notification-preference-support-ticket-id-unsubscription-ticket-id"></a>&#x2022; [`unsubscription_ticket_id`](#notification-preference-support-ticket-id-unsubscription-ticket-id) - Optional String<br>Unsubscription Ticket ID. unsubscription_ticket_id associated with the Addon Subscription unsubscription
+<a id="ticket-id-a3f70e"></a>&#x2022; [`unsubscription_ticket_id`](#ticket-id-a3f70e) - Optional String<br>Unsubscription Ticket ID. unsubscription_ticket_id associated with the Addon Subscription unsubscription
 
 #### Timeouts
 

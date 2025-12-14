@@ -84,11 +84,11 @@ A [`jira_config`](#jira-config) block supports the following:
 
 An [`adhoc_rest_api`](#jira-config-adhoc-rest-api) block (within [`jira_config`](#jira-config)) supports the following:
 
-<a id="jira-config-adhoc-rest-api-account-email"></a>&#x2022; [`account_email`](#jira-config-adhoc-rest-api-account-email) - Optional String<br>Account Email. Username (email) for the Atlassian account
+<a id="email-52fbe5"></a>&#x2022; [`account_email`](#email-52fbe5) - Optional String<br>Account Email. Username (email) for the Atlassian account
 
 <a id="jira-config-adhoc-rest-api-api-token"></a>&#x2022; [`api_token`](#jira-config-adhoc-rest-api-api-token) - Optional String<br>API Token. API Token (password) specified by the customer in plaintext to be used for Basic Auth. This value is purely used for user input and is not persisted in the database. It will be converted to a blindfolded and encrypted form before saving. For editing/replacing the existing JIRA configuration, and to use the already stored value of the encrypted API Token, this field should be sent as an empty string. Since this field is confidential, the Get/List public APIs will return this value as an empty string
 
-<a id="jira-config-adhoc-rest-api-organization-domain"></a>&#x2022; [`organization_domain`](#jira-config-adhoc-rest-api-organization-domain) - Optional String<br>Organization Domain. A valid hostname for the Atlassian organization, as defined by RFC 1034
+<a id="domain-eae2e3"></a>&#x2022; [`organization_domain`](#domain-eae2e3) - Optional String<br>Organization Domain. A valid hostname for the Atlassian organization, as defined by RFC 1034
 
 #### Timeouts
 

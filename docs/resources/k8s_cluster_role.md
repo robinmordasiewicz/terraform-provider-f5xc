@@ -97,29 +97,29 @@ A [`policy_rule_list`](#policy-rule-list) block supports the following:
 
 A [`policy_rule`](#policy-rule-list-policy-rule) block (within [`policy_rule_list`](#policy-rule-list)) supports the following:
 
-<a id="policy-rule-list-policy-rule-non-resource-url-list"></a>&#x2022; [`non_resource_url_list`](#policy-rule-list-policy-rule-non-resource-url-list) - Optional Block<br>List of Non Resource URL(s). permissions for URL(s) that do not represent K8S resource<br>See [Non Resource URL List](#policy-rule-list-policy-rule-non-resource-url-list) below.
+<a id="list-d430d1"></a>&#x2022; [`non_resource_url_list`](#list-d430d1) - Optional Block<br>List of Non Resource URL(s). permissions for URL(s) that do not represent K8S resource<br>See [Non Resource URL List](#list-d430d1) below.
 
-<a id="policy-rule-list-policy-rule-resource-list"></a>&#x2022; [`resource_list`](#policy-rule-list-policy-rule-resource-list) - Optional Block<br>Resource List. List of resources in terms of API groups/resource types/resource instances and verbs allowed<br>See [Resource List](#policy-rule-list-policy-rule-resource-list) below.
+<a id="list-0add02"></a>&#x2022; [`resource_list`](#list-0add02) - Optional Block<br>Resource List. List of resources in terms of API groups/resource types/resource instances and verbs allowed<br>See [Resource List](#list-0add02) below.
 
 #### Policy Rule List Policy Rule Non Resource URL List
 
-A [`non_resource_url_list`](#policy-rule-list-policy-rule-non-resource-url-list) block (within [`policy_rule_list.policy_rule`](#policy-rule-list-policy-rule)) supports the following:
+A [`non_resource_url_list`](#list-d430d1) block (within [`policy_rule_list.policy_rule`](#policy-rule-list-policy-rule)) supports the following:
 
-<a id="policy-rule-list-policy-rule-non-resource-url-list-urls"></a>&#x2022; [`urls`](#policy-rule-list-policy-rule-non-resource-url-list-urls) - Optional List<br>Non Resource URL(s). allowed URL(s) that do not represent any K8S resource. URL can be suffix or regex
+<a id="urls-eb1439"></a>&#x2022; [`urls`](#urls-eb1439) - Optional List<br>Non Resource URL(s). allowed URL(s) that do not represent any K8S resource. URL can be suffix or regex
 
-<a id="policy-rule-list-policy-rule-non-resource-url-list-verbs"></a>&#x2022; [`verbs`](#policy-rule-list-policy-rule-non-resource-url-list-verbs) - Optional List<br>Allowed Verbs. Allowed list of verbs(operations) on resources. Use VerbAll for all operations
+<a id="verbs-c79bf5"></a>&#x2022; [`verbs`](#verbs-c79bf5) - Optional List<br>Allowed Verbs. Allowed list of verbs(operations) on resources. Use VerbAll for all operations
 
 #### Policy Rule List Policy Rule Resource List
 
-A [`resource_list`](#policy-rule-list-policy-rule-resource-list) block (within [`policy_rule_list.policy_rule`](#policy-rule-list-policy-rule)) supports the following:
+A [`resource_list`](#list-0add02) block (within [`policy_rule_list.policy_rule`](#policy-rule-list-policy-rule)) supports the following:
 
-<a id="policy-rule-list-policy-rule-resource-list-api-groups"></a>&#x2022; [`api_groups`](#policy-rule-list-policy-rule-resource-list-api-groups) - Optional List<br>API Groups. Allowed list of API group that contains resources, all resources of a given API group
+<a id="groups-8a629b"></a>&#x2022; [`api_groups`](#groups-8a629b) - Optional List<br>API Groups. Allowed list of API group that contains resources, all resources of a given API group
 
-<a id="policy-rule-list-policy-rule-resource-list-resource-instances"></a>&#x2022; [`resource_instances`](#policy-rule-list-policy-rule-resource-list-resource-instances) - Optional List<br>Resource Instances. Allowed list of resource instances within the resource types
+<a id="instances-311644"></a>&#x2022; [`resource_instances`](#instances-311644) - Optional List<br>Resource Instances. Allowed list of resource instances within the resource types
 
-<a id="policy-rule-list-policy-rule-resource-list-resource-types"></a>&#x2022; [`resource_types`](#policy-rule-list-policy-rule-resource-list-resource-types) - Optional List<br>Resource Types. Allowed list of resource types within the API groups
+<a id="types-062a5a"></a>&#x2022; [`resource_types`](#types-062a5a) - Optional List<br>Resource Types. Allowed list of resource types within the API groups
 
-<a id="policy-rule-list-policy-rule-resource-list-verbs"></a>&#x2022; [`verbs`](#policy-rule-list-policy-rule-resource-list-verbs) - Optional List<br>Allowed Verbs. Allowed list of verbs(operations) on resources. Use \* for all operations
+<a id="verbs-d805f1"></a>&#x2022; [`verbs`](#verbs-d805f1) - Optional List<br>Allowed Verbs. Allowed list of verbs(operations) on resources. Use \* for all operations
 
 #### Timeouts
 

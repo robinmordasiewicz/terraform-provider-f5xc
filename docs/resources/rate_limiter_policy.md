@@ -150,7 +150,7 @@ An [`asn_sets`](#rules-spec-asn-matcher-asn-sets) block (within [`rules.spec.asn
 
 <a id="rules-spec-asn-matcher-asn-sets-name"></a>&#x2022; [`name`](#rules-spec-asn-matcher-asn-sets-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-<a id="rules-spec-asn-matcher-asn-sets-namespace"></a>&#x2022; [`namespace`](#rules-spec-asn-matcher-asn-sets-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="namespace-3ce633"></a>&#x2022; [`namespace`](#namespace-3ce633) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
 <a id="rules-spec-asn-matcher-asn-sets-tenant"></a>&#x2022; [`tenant`](#rules-spec-asn-matcher-asn-sets-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
@@ -170,7 +170,7 @@ A [`custom_rate_limiter`](#rules-spec-custom-rate-limiter) block (within [`rules
 
 <a id="rules-spec-custom-rate-limiter-name"></a>&#x2022; [`name`](#rules-spec-custom-rate-limiter-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-<a id="rules-spec-custom-rate-limiter-namespace"></a>&#x2022; [`namespace`](#rules-spec-custom-rate-limiter-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="namespace-339376"></a>&#x2022; [`namespace`](#namespace-339376) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
 <a id="rules-spec-custom-rate-limiter-tenant"></a>&#x2022; [`tenant`](#rules-spec-custom-rate-limiter-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
@@ -230,9 +230,9 @@ A [`prefix_sets`](#rules-spec-ip-matcher-prefix-sets) block (within [`rules.spec
 
 <a id="rules-spec-ip-matcher-prefix-sets-name"></a>&#x2022; [`name`](#rules-spec-ip-matcher-prefix-sets-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-<a id="rules-spec-ip-matcher-prefix-sets-namespace"></a>&#x2022; [`namespace`](#rules-spec-ip-matcher-prefix-sets-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="namespace-5d9a15"></a>&#x2022; [`namespace`](#namespace-5d9a15) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-<a id="rules-spec-ip-matcher-prefix-sets-tenant"></a>&#x2022; [`tenant`](#rules-spec-ip-matcher-prefix-sets-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="tenant-68e36f"></a>&#x2022; [`tenant`](#tenant-68e36f) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="rules-spec-ip-matcher-prefix-sets-uid"></a>&#x2022; [`uid`](#rules-spec-ip-matcher-prefix-sets-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 

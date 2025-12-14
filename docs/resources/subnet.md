@@ -95,9 +95,9 @@ A [`layer2_intf_ref`](#connect-to-layer2-layer2-intf-ref) block (within [`connec
 
 <a id="connect-to-layer2-layer2-intf-ref-name"></a>&#x2022; [`name`](#connect-to-layer2-layer2-intf-ref-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-<a id="connect-to-layer2-layer2-intf-ref-namespace"></a>&#x2022; [`namespace`](#connect-to-layer2-layer2-intf-ref-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="namespace-afda4a"></a>&#x2022; [`namespace`](#namespace-afda4a) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-<a id="connect-to-layer2-layer2-intf-ref-tenant"></a>&#x2022; [`tenant`](#connect-to-layer2-layer2-intf-ref-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="tenant-0fab0d"></a>&#x2022; [`tenant`](#tenant-0fab0d) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 #### Site Subnet Params
 
@@ -109,7 +109,7 @@ A [`site_subnet_params`](#site-subnet-params) block supports the following:
 
 <a id="site-subnet-params-static-ip"></a>&#x2022; [`static_ip`](#site-subnet-params-static-ip) - Optional Block<br>Enable this option
 
-<a id="site-subnet-params-subnet-dhcp-server-params"></a>&#x2022; [`subnet_dhcp_server_params`](#site-subnet-params-subnet-dhcp-server-params) - Optional Block<br>Subnet DHCP parameters. Subnet DHCP parameters will be a subset of network_interface.DHCPServerParametersType as all features in network_interface.DHCPServerParametersType may not be supported in a subnet<br>See [Subnet DHCP Server Params](#site-subnet-params-subnet-dhcp-server-params) below.
+<a id="params-2a5102"></a>&#x2022; [`subnet_dhcp_server_params`](#params-2a5102) - Optional Block<br>Subnet DHCP parameters. Subnet DHCP parameters will be a subset of network_interface.DHCPServerParametersType as all features in network_interface.DHCPServerParametersType may not be supported in a subnet<br>See [Subnet DHCP Server Params](#params-2a5102) below.
 
 #### Site Subnet Params Site
 
@@ -123,15 +123,15 @@ A [`site`](#site-subnet-params-site) block (within [`site_subnet_params`](#site-
 
 #### Site Subnet Params Subnet DHCP Server Params
 
-A [`subnet_dhcp_server_params`](#site-subnet-params-subnet-dhcp-server-params) block (within [`site_subnet_params`](#site-subnet-params)) supports the following:
+A [`subnet_dhcp_server_params`](#params-2a5102) block (within [`site_subnet_params`](#site-subnet-params)) supports the following:
 
-<a id="site-subnet-params-subnet-dhcp-server-params-dhcp-networks"></a>&#x2022; [`dhcp_networks`](#site-subnet-params-subnet-dhcp-server-params-dhcp-networks) - Optional Block<br>Subnet DHCP Networks. List of networks from which DHCP server can allocate IP addresses<br>See [DHCP Networks](#site-subnet-params-subnet-dhcp-server-params-dhcp-networks) below.
+<a id="networks-b234bf"></a>&#x2022; [`dhcp_networks`](#networks-b234bf) - Optional Block<br>Subnet DHCP Networks. List of networks from which DHCP server can allocate IP addresses<br>See [DHCP Networks](#networks-b234bf) below.
 
 #### Site Subnet Params Subnet DHCP Server Params DHCP Networks
 
-A [`dhcp_networks`](#site-subnet-params-subnet-dhcp-server-params-dhcp-networks) block (within [`site_subnet_params.subnet_dhcp_server_params`](#site-subnet-params-subnet-dhcp-server-params)) supports the following:
+A [`dhcp_networks`](#networks-b234bf) block (within [`site_subnet_params.subnet_dhcp_server_params`](#params-2a5102)) supports the following:
 
-<a id="site-subnet-params-subnet-dhcp-server-params-dhcp-networks-network-prefix"></a>&#x2022; [`network_prefix`](#site-subnet-params-subnet-dhcp-server-params-dhcp-networks-network-prefix) - Optional String<br>Network Prefix. Network prefix for subnet
+<a id="prefix-1fa00d"></a>&#x2022; [`network_prefix`](#prefix-1fa00d) - Optional String<br>Network Prefix. Network prefix for subnet
 
 #### Timeouts
 

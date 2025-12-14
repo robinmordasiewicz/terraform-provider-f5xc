@@ -98,17 +98,17 @@ An [`api_token`](#api-token) block supports the following:
 
 A [`blindfold_secret_info`](#api-token-blindfold-secret-info) block (within [`api_token`](#api-token)) supports the following:
 
-<a id="api-token-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#api-token-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+<a id="provider-9e1a18"></a>&#x2022; [`decryption_provider`](#provider-9e1a18) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-<a id="api-token-blindfold-secret-info-location"></a>&#x2022; [`location`](#api-token-blindfold-secret-info-location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+<a id="location-ae079d"></a>&#x2022; [`location`](#location-ae079d) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="api-token-blindfold-secret-info-store-provider"></a>&#x2022; [`store_provider`](#api-token-blindfold-secret-info-store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-924a2a"></a>&#x2022; [`store_provider`](#provider-924a2a) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### API Token Clear Secret Info
 
 A [`clear_secret_info`](#api-token-clear-secret-info) block (within [`api_token`](#api-token)) supports the following:
 
-<a id="api-token-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#api-token-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-c39fa7"></a>&#x2022; [`provider_ref`](#ref-c39fa7) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="api-token-clear-secret-info-url"></a>&#x2022; [`url`](#api-token-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
@@ -130,11 +130,11 @@ A [`password`](#password) block supports the following:
 
 A [`blindfold_secret_info`](#password-blindfold-secret-info) block (within [`password`](#password)) supports the following:
 
-<a id="password-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#password-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+<a id="provider-f3d5d2"></a>&#x2022; [`decryption_provider`](#provider-f3d5d2) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
 <a id="password-blindfold-secret-info-location"></a>&#x2022; [`location`](#password-blindfold-secret-info-location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="password-blindfold-secret-info-store-provider"></a>&#x2022; [`store_provider`](#password-blindfold-secret-info-store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-0e4651"></a>&#x2022; [`store_provider`](#provider-0e4651) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### Password Clear Secret Info
 

@@ -136,13 +136,13 @@ An [`ip_prefixes`](#rules-match-ip-prefixes) block (within [`rules.match`](#rule
 
 A [`prefixes`](#rules-match-ip-prefixes-prefixes) block (within [`rules.match.ip_prefixes`](#rules-match-ip-prefixes)) supports the following:
 
-<a id="rules-match-ip-prefixes-prefixes-equal-or-longer-than"></a>&#x2022; [`equal_or_longer_than`](#rules-match-ip-prefixes-prefixes-equal-or-longer-than) - Optional Block<br>Enable this option
+<a id="than-cdaaa6"></a>&#x2022; [`equal_or_longer_than`](#than-cdaaa6) - Optional Block<br>Enable this option
 
-<a id="rules-match-ip-prefixes-prefixes-exact-match"></a>&#x2022; [`exact_match`](#rules-match-ip-prefixes-prefixes-exact-match) - Optional Block<br>Enable this option
+<a id="match-0a0108"></a>&#x2022; [`exact_match`](#match-0a0108) - Optional Block<br>Enable this option
 
-<a id="rules-match-ip-prefixes-prefixes-ip-prefixes"></a>&#x2022; [`ip_prefixes`](#rules-match-ip-prefixes-prefixes-ip-prefixes) - Optional String<br>IP Prefix. IP prefix to match on BGP route
+<a id="prefixes-e82cab"></a>&#x2022; [`ip_prefixes`](#prefixes-e82cab) - Optional String<br>IP Prefix. IP prefix to match on BGP route
 
-<a id="rules-match-ip-prefixes-prefixes-longer-than"></a>&#x2022; [`longer_than`](#rules-match-ip-prefixes-prefixes-longer-than) - Optional Block<br>Enable this option
+<a id="than-7e2ba6"></a>&#x2022; [`longer_than`](#than-7e2ba6) - Optional Block<br>Enable this option
 
 #### Timeouts
 

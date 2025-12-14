@@ -128,9 +128,9 @@ A [`ref`](#action-protocol-policer-action-ref) block (within [`action.protocol_p
 
 <a id="action-protocol-policer-action-ref-name"></a>&#x2022; [`name`](#action-protocol-policer-action-ref-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-<a id="action-protocol-policer-action-ref-namespace"></a>&#x2022; [`namespace`](#action-protocol-policer-action-ref-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="namespace-b31006"></a>&#x2022; [`namespace`](#namespace-b31006) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-<a id="action-protocol-policer-action-ref-tenant"></a>&#x2022; [`tenant`](#action-protocol-policer-action-ref-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="tenant-2622a3"></a>&#x2022; [`tenant`](#tenant-2622a3) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="action-protocol-policer-action-ref-uid"></a>&#x2022; [`uid`](#action-protocol-policer-action-ref-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 

@@ -104,15 +104,15 @@ A [`date_field`](#filter-fields-date-field) block (within [`filter_fields`](#fil
 
 An [`absolute`](#filter-fields-date-field-absolute) block (within [`filter_fields.date_field`](#filter-fields-date-field)) supports the following:
 
-<a id="filter-fields-date-field-absolute-end-date"></a>&#x2022; [`end_date`](#filter-fields-date-field-absolute-end-date) - Optional String<br>End Date. Contains end date
+<a id="date-8cd3d3"></a>&#x2022; [`end_date`](#date-8cd3d3) - Optional String<br>End Date. Contains end date
 
-<a id="filter-fields-date-field-absolute-start-date"></a>&#x2022; [`start_date`](#filter-fields-date-field-absolute-start-date) - Optional String<br>Start Date. Contains start date
+<a id="date-b5704a"></a>&#x2022; [`start_date`](#date-b5704a) - Optional String<br>Start Date. Contains start date
 
 #### Filter Fields Filter Expression Field
 
 A [`filter_expression_field`](#filter-fields-filter-expression-field) block (within [`filter_fields`](#filter-fields)) supports the following:
 
-<a id="filter-fields-filter-expression-field-expression"></a>&#x2022; [`expression`](#filter-fields-filter-expression-field-expression) - Optional String<br>Expression Value. expression is a kubernetes style label expression for selections, but differs in that it allows special characters in the keys and values
+<a id="expression-7b0f3e"></a>&#x2022; [`expression`](#expression-7b0f3e) - Optional String<br>Expression Value. expression is a kubernetes style label expression for selections, but differs in that it allows special characters in the keys and values
 
 #### Filter Fields String Field
 

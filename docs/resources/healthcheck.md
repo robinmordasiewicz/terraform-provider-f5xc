@@ -112,11 +112,11 @@ A [`http_health_check`](#http-health-check) block supports the following:
 
 <a id="http-health-check-path"></a>&#x2022; [`path`](#http-health-check-path) - Optional String<br>Path. Specifies the HTTP path that will be requested during health checking
 
-<a id="http-health-check-request-headers-to-remove"></a>&#x2022; [`request_headers_to_remove`](#http-health-check-request-headers-to-remove) - Optional List<br>Request Headers to Remove. Specifies a list of HTTP headers that should be removed from each request that is sent to the health checked cluster. This is a list of keys of headers
+<a id="remove-35d538"></a>&#x2022; [`request_headers_to_remove`](#remove-35d538) - Optional List<br>Request Headers to Remove. Specifies a list of HTTP headers that should be removed from each request that is sent to the health checked cluster. This is a list of keys of headers
 
 <a id="http-health-check-use-http2"></a>&#x2022; [`use_http2`](#http-health-check-use-http2) - Optional Bool  Defaults to `false`<br>Use HTTP2. If set, health checks will be made using HTTP/2
 
-<a id="http-health-check-use-origin-server-name"></a>&#x2022; [`use_origin_server_name`](#http-health-check-use-origin-server-name) - Optional Block<br>Enable this option
+<a id="name-c19d47"></a>&#x2022; [`use_origin_server_name`](#name-c19d47) - Optional Block<br>Enable this option
 
 #### TCP Health Check
 

@@ -110,17 +110,17 @@ A [`private_key`](#private-key) block supports the following:
 
 A [`blindfold_secret_info`](#private-key-blindfold-secret-info) block (within [`private_key`](#private-key)) supports the following:
 
-<a id="private-key-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#private-key-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+<a id="provider-2cb137"></a>&#x2022; [`decryption_provider`](#provider-2cb137) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-<a id="private-key-blindfold-secret-info-location"></a>&#x2022; [`location`](#private-key-blindfold-secret-info-location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+<a id="location-208dea"></a>&#x2022; [`location`](#location-208dea) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="private-key-blindfold-secret-info-store-provider"></a>&#x2022; [`store_provider`](#private-key-blindfold-secret-info-store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-1e06e0"></a>&#x2022; [`store_provider`](#provider-1e06e0) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### Private Key Clear Secret Info
 
 A [`clear_secret_info`](#private-key-clear-secret-info) block (within [`private_key`](#private-key)) supports the following:
 
-<a id="private-key-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#private-key-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-e799a7"></a>&#x2022; [`provider_ref`](#ref-e799a7) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="private-key-clear-secret-info-url"></a>&#x2022; [`url`](#private-key-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 

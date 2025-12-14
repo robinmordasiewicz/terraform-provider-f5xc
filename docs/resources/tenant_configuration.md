@@ -92,7 +92,7 @@ A [`basic_configuration`](#basic-configuration) block supports the following:
 
 A [`brute_force_detection_settings`](#brute-force-detection-settings) block supports the following:
 
-<a id="brute-force-detection-settings-max-login-failures"></a>&#x2022; [`max_login_failures`](#brute-force-detection-settings-max-login-failures) - Optional Number<br>Max Login Failures. How many failures before wait is triggered. When login failure count is hit, user will be temporarily locked for a max duration of 15 minutes
+<a id="failures-2f4305"></a>&#x2022; [`max_login_failures`](#failures-2f4305) - Optional Number<br>Max Login Failures. How many failures before wait is triggered. When login failure count is hit, user will be temporarily locked for a max duration of 15 minutes
 
 #### Password Policy
 

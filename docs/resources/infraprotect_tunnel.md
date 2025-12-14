@@ -124,27 +124,27 @@ An [`asn`](#bgp-information-asn) block (within [`bgp_information`](#bgp-informat
 
 A [`peer_secret_override`](#bgp-information-peer-secret-override) block (within [`bgp_information`](#bgp-information)) supports the following:
 
-<a id="bgp-information-peer-secret-override-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#bgp-information-peer-secret-override-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#bgp-information-peer-secret-override-blindfold-secret-info) below.
+<a id="info-6d3a2a"></a>&#x2022; [`blindfold_secret_info`](#info-6d3a2a) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-6d3a2a) below.
 
-<a id="bgp-information-peer-secret-override-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#bgp-information-peer-secret-override-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#bgp-information-peer-secret-override-clear-secret-info) below.
+<a id="info-586fa4"></a>&#x2022; [`clear_secret_info`](#info-586fa4) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-586fa4) below.
 
 #### BGP Information Peer Secret Override Blindfold Secret Info
 
-A [`blindfold_secret_info`](#bgp-information-peer-secret-override-blindfold-secret-info) block (within [`bgp_information.peer_secret_override`](#bgp-information-peer-secret-override)) supports the following:
+A [`blindfold_secret_info`](#info-6d3a2a) block (within [`bgp_information.peer_secret_override`](#bgp-information-peer-secret-override)) supports the following:
 
-<a id="bgp-information-peer-secret-override-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#bgp-information-peer-secret-override-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+<a id="provider-b2f46b"></a>&#x2022; [`decryption_provider`](#provider-b2f46b) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-<a id="bgp-information-peer-secret-override-blindfold-secret-info-location"></a>&#x2022; [`location`](#bgp-information-peer-secret-override-blindfold-secret-info-location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+<a id="location-f9c053"></a>&#x2022; [`location`](#location-f9c053) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="bgp-information-peer-secret-override-blindfold-secret-info-store-provider"></a>&#x2022; [`store_provider`](#bgp-information-peer-secret-override-blindfold-secret-info-store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-2b3f27"></a>&#x2022; [`store_provider`](#provider-2b3f27) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### BGP Information Peer Secret Override Clear Secret Info
 
-A [`clear_secret_info`](#bgp-information-peer-secret-override-clear-secret-info) block (within [`bgp_information.peer_secret_override`](#bgp-information-peer-secret-override)) supports the following:
+A [`clear_secret_info`](#info-586fa4) block (within [`bgp_information.peer_secret_override`](#bgp-information-peer-secret-override)) supports the following:
 
-<a id="bgp-information-peer-secret-override-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#bgp-information-peer-secret-override-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-f0de71"></a>&#x2022; [`provider_ref`](#ref-f0de71) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="bgp-information-peer-secret-override-clear-secret-info-url"></a>&#x2022; [`url`](#bgp-information-peer-secret-override-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="url-4c3b0f"></a>&#x2022; [`url`](#url-4c3b0f) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 #### Firewall Rule Group
 

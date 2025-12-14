@@ -94,11 +94,11 @@ A [`rules`](#mitigation-type-rules) block (within [`mitigation_type`](#mitigatio
 
 A [`mitigation_action`](#mitigation-type-rules-mitigation-action) block (within [`mitigation_type.rules`](#mitigation-type-rules)) supports the following:
 
-<a id="mitigation-type-rules-mitigation-action-block-temporarily"></a>&#x2022; [`block_temporarily`](#mitigation-type-rules-mitigation-action-block-temporarily) - Optional Block<br>Enable this option
+<a id="temporarily-ae6df1"></a>&#x2022; [`block_temporarily`](#temporarily-ae6df1) - Optional Block<br>Enable this option
 
-<a id="mitigation-type-rules-mitigation-action-captcha-challenge"></a>&#x2022; [`captcha_challenge`](#mitigation-type-rules-mitigation-action-captcha-challenge) - Optional Block<br>Enable this option
+<a id="challenge-783e81"></a>&#x2022; [`captcha_challenge`](#challenge-783e81) - Optional Block<br>Enable this option
 
-<a id="mitigation-type-rules-mitigation-action-javascript-challenge"></a>&#x2022; [`javascript_challenge`](#mitigation-type-rules-mitigation-action-javascript-challenge) - Optional Block<br>Enable this option
+<a id="challenge-784169"></a>&#x2022; [`javascript_challenge`](#challenge-784169) - Optional Block<br>Enable this option
 
 #### Mitigation Type Rules Threat Level
 
@@ -108,7 +108,7 @@ A [`threat_level`](#mitigation-type-rules-threat-level) block (within [`mitigati
 
 <a id="mitigation-type-rules-threat-level-low"></a>&#x2022; [`low`](#mitigation-type-rules-threat-level-low) - Optional Block<br>Enable this option
 
-<a id="mitigation-type-rules-threat-level-medium"></a>&#x2022; [`medium`](#mitigation-type-rules-threat-level-medium) - Optional Block<br>Enable this option
+<a id="medium-bfd9e9"></a>&#x2022; [`medium`](#medium-bfd9e9) - Optional Block<br>Enable this option
 
 #### Timeouts
 

@@ -124,7 +124,7 @@ An [`ai_risk_based_blocking`](#ai-risk-based-blocking) block supports the follow
 
 <a id="ai-risk-based-blocking-low-risk-action"></a>&#x2022; [`low_risk_action`](#ai-risk-based-blocking-low-risk-action) - Optional String  Defaults to `AI_BLOCK`<br>Possible values are `AI_BLOCK`, `AI_REPORT`<br>[Enum: AI_BLOCK|AI_REPORT] Risk Based Blocking Action. Action to be performed on the request Log and block Log only
 
-<a id="ai-risk-based-blocking-medium-risk-action"></a>&#x2022; [`medium_risk_action`](#ai-risk-based-blocking-medium-risk-action) - Optional String  Defaults to `AI_BLOCK`<br>Possible values are `AI_BLOCK`, `AI_REPORT`<br>[Enum: AI_BLOCK|AI_REPORT] Risk Based Blocking Action. Action to be performed on the request Log and block Log only
+<a id="action-da1a5e"></a>&#x2022; [`medium_risk_action`](#action-da1a5e) - Optional String  Defaults to `AI_BLOCK`<br>Possible values are `AI_BLOCK`, `AI_REPORT`<br>[Enum: AI_BLOCK|AI_REPORT] Risk Based Blocking Action. Action to be performed on the request Log and block Log only
 
 #### Allowed Response Codes
 
@@ -146,67 +146,67 @@ A [`bot_protection_setting`](#bot-protection-setting) block supports the followi
 
 <a id="bot-protection-setting-good-bot-action"></a>&#x2022; [`good_bot_action`](#bot-protection-setting-good-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>[Enum: BLOCK|REPORT|IGNORE] Bot Action. Action to be performed on the request Log and block Log only Disable detection
 
-<a id="bot-protection-setting-malicious-bot-action"></a>&#x2022; [`malicious_bot_action`](#bot-protection-setting-malicious-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>[Enum: BLOCK|REPORT|IGNORE] Bot Action. Action to be performed on the request Log and block Log only Disable detection
+<a id="action-a39578"></a>&#x2022; [`malicious_bot_action`](#action-a39578) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>[Enum: BLOCK|REPORT|IGNORE] Bot Action. Action to be performed on the request Log and block Log only Disable detection
 
-<a id="bot-protection-setting-suspicious-bot-action"></a>&#x2022; [`suspicious_bot_action`](#bot-protection-setting-suspicious-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>[Enum: BLOCK|REPORT|IGNORE] Bot Action. Action to be performed on the request Log and block Log only Disable detection
+<a id="action-7e372f"></a>&#x2022; [`suspicious_bot_action`](#action-7e372f) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>[Enum: BLOCK|REPORT|IGNORE] Bot Action. Action to be performed on the request Log and block Log only Disable detection
 
 #### Custom Anonymization
 
 A [`custom_anonymization`](#custom-anonymization) block supports the following:
 
-<a id="custom-anonymization-anonymization-config"></a>&#x2022; [`anonymization_config`](#custom-anonymization-anonymization-config) - Optional Block<br>Configuration. List of HTTP headers, cookies and query parameters whose values will be masked<br>See [Anonymization Config](#custom-anonymization-anonymization-config) below.
+<a id="config-0b4528"></a>&#x2022; [`anonymization_config`](#config-0b4528) - Optional Block<br>Configuration. List of HTTP headers, cookies and query parameters whose values will be masked<br>See [Anonymization Config](#config-0b4528) below.
 
 #### Custom Anonymization Anonymization Config
 
-An [`anonymization_config`](#custom-anonymization-anonymization-config) block (within [`custom_anonymization`](#custom-anonymization)) supports the following:
+An [`anonymization_config`](#config-0b4528) block (within [`custom_anonymization`](#custom-anonymization)) supports the following:
 
-<a id="custom-anonymization-anonymization-config-cookie"></a>&#x2022; [`cookie`](#custom-anonymization-anonymization-config-cookie) - Optional Block<br>Anonymize HTTP Cookie. Configure anonymization for HTTP Cookies<br>See [Cookie](#custom-anonymization-anonymization-config-cookie) below.
+<a id="cookie-df02b1"></a>&#x2022; [`cookie`](#cookie-df02b1) - Optional Block<br>Anonymize HTTP Cookie. Configure anonymization for HTTP Cookies<br>See [Cookie](#cookie-df02b1) below.
 
-<a id="custom-anonymization-anonymization-config-http-header"></a>&#x2022; [`http_header`](#custom-anonymization-anonymization-config-http-header) - Optional Block<br>Anonymize HTTP Header. Configure anonymization for HTTP Headers<br>See [HTTP Header](#custom-anonymization-anonymization-config-http-header) below.
+<a id="header-65f784"></a>&#x2022; [`http_header`](#header-65f784) - Optional Block<br>Anonymize HTTP Header. Configure anonymization for HTTP Headers<br>See [HTTP Header](#header-65f784) below.
 
-<a id="custom-anonymization-anonymization-config-query-parameter"></a>&#x2022; [`query_parameter`](#custom-anonymization-anonymization-config-query-parameter) - Optional Block<br>Anonymize HTTP Query Parameter. Configure anonymization for HTTP Parameters<br>See [Query Parameter](#custom-anonymization-anonymization-config-query-parameter) below.
+<a id="parameter-dd1b2a"></a>&#x2022; [`query_parameter`](#parameter-dd1b2a) - Optional Block<br>Anonymize HTTP Query Parameter. Configure anonymization for HTTP Parameters<br>See [Query Parameter](#parameter-dd1b2a) below.
 
 #### Custom Anonymization Anonymization Config Cookie
 
-A [`cookie`](#custom-anonymization-anonymization-config-cookie) block (within [`custom_anonymization.anonymization_config`](#custom-anonymization-anonymization-config)) supports the following:
+A [`cookie`](#cookie-df02b1) block (within [`custom_anonymization.anonymization_config`](#config-0b4528)) supports the following:
 
-<a id="custom-anonymization-anonymization-config-cookie-cookie-name"></a>&#x2022; [`cookie_name`](#custom-anonymization-anonymization-config-cookie-cookie-name) - Optional String<br>Cookie Name. Masks the cookie value. The setting does not mask the cookie name
+<a id="name-856338"></a>&#x2022; [`cookie_name`](#name-856338) - Optional String<br>Cookie Name. Masks the cookie value. The setting does not mask the cookie name
 
 #### Custom Anonymization Anonymization Config HTTP Header
 
-A [`http_header`](#custom-anonymization-anonymization-config-http-header) block (within [`custom_anonymization.anonymization_config`](#custom-anonymization-anonymization-config)) supports the following:
+A [`http_header`](#header-65f784) block (within [`custom_anonymization.anonymization_config`](#config-0b4528)) supports the following:
 
-<a id="custom-anonymization-anonymization-config-http-header-header-name"></a>&#x2022; [`header_name`](#custom-anonymization-anonymization-config-http-header-header-name) - Optional String<br>Header Name. Masks the HTTP header value. The setting does not mask the HTTP header name
+<a id="name-ace46c"></a>&#x2022; [`header_name`](#name-ace46c) - Optional String<br>Header Name. Masks the HTTP header value. The setting does not mask the HTTP header name
 
 #### Custom Anonymization Anonymization Config Query Parameter
 
-A [`query_parameter`](#custom-anonymization-anonymization-config-query-parameter) block (within [`custom_anonymization.anonymization_config`](#custom-anonymization-anonymization-config)) supports the following:
+A [`query_parameter`](#parameter-dd1b2a) block (within [`custom_anonymization.anonymization_config`](#config-0b4528)) supports the following:
 
-<a id="custom-anonymization-anonymization-config-query-parameter-query-param-name"></a>&#x2022; [`query_param_name`](#custom-anonymization-anonymization-config-query-parameter-query-param-name) - Optional String<br>Query Parameter Name. Masks the query parameter value. The setting does not mask the query parameter name
+<a id="name-043171"></a>&#x2022; [`query_param_name`](#name-043171) - Optional String<br>Query Parameter Name. Masks the query parameter value. The setting does not mask the query parameter name
 
 #### Detection Settings
 
 A [`detection_settings`](#detection-settings) block supports the following:
 
-<a id="detection-settings-bot-protection-setting"></a>&#x2022; [`bot_protection_setting`](#detection-settings-bot-protection-setting) - Optional Block<br>Bot Protection. Configuration of WAF Bot Protection<br>See [Bot Protection Setting](#detection-settings-bot-protection-setting) below.
+<a id="setting-37e8d9"></a>&#x2022; [`bot_protection_setting`](#setting-37e8d9) - Optional Block<br>Bot Protection. Configuration of WAF Bot Protection<br>See [Bot Protection Setting](#setting-37e8d9) below.
 
 <a id="detection-settings-default-bot-setting"></a>&#x2022; [`default_bot_setting`](#detection-settings-default-bot-setting) - Optional Block<br>Enable this option
 
-<a id="detection-settings-default-violation-settings"></a>&#x2022; [`default_violation_settings`](#detection-settings-default-violation-settings) - Optional Block<br>Enable this option
+<a id="settings-da3fa7"></a>&#x2022; [`default_violation_settings`](#settings-da3fa7) - Optional Block<br>Enable this option
 
 <a id="detection-settings-disable-staging"></a>&#x2022; [`disable_staging`](#detection-settings-disable-staging) - Optional Block<br>Enable this option
 
 <a id="detection-settings-disable-suppression"></a>&#x2022; [`disable_suppression`](#detection-settings-disable-suppression) - Optional Block<br>Enable this option
 
-<a id="detection-settings-disable-threat-campaigns"></a>&#x2022; [`disable_threat_campaigns`](#detection-settings-disable-threat-campaigns) - Optional Block<br>Enable this option
+<a id="campaigns-7bf1af"></a>&#x2022; [`disable_threat_campaigns`](#campaigns-7bf1af) - Optional Block<br>Enable this option
 
 <a id="detection-settings-enable-suppression"></a>&#x2022; [`enable_suppression`](#detection-settings-enable-suppression) - Optional Block<br>Enable this option
 
-<a id="detection-settings-enable-threat-campaigns"></a>&#x2022; [`enable_threat_campaigns`](#detection-settings-enable-threat-campaigns) - Optional Block<br>Enable this option
+<a id="campaigns-16aa5e"></a>&#x2022; [`enable_threat_campaigns`](#campaigns-16aa5e) - Optional Block<br>Enable this option
 
-<a id="detection-settings-signature-selection-setting"></a>&#x2022; [`signature_selection_setting`](#detection-settings-signature-selection-setting) - Optional Block<br>Attack Signatures. Attack Signatures are patterns that identify attacks on a web application and its components<br>See [Signature Selection Setting](#detection-settings-signature-selection-setting) below.
+<a id="setting-306450"></a>&#x2022; [`signature_selection_setting`](#setting-306450) - Optional Block<br>Attack Signatures. Attack Signatures are patterns that identify attacks on a web application and its components<br>See [Signature Selection Setting](#setting-306450) below.
 
-<a id="detection-settings-stage-new-and-updated-signatures"></a>&#x2022; [`stage_new_and_updated_signatures`](#detection-settings-stage-new-and-updated-signatures) - Optional Block<br>Attack Signatures Staging Settings. Attack Signatures staging configuration<br>See [Stage New And Updated Signatures](#detection-settings-stage-new-and-updated-signatures) below.
+<a id="signatures-2278ab"></a>&#x2022; [`stage_new_and_updated_signatures`](#signatures-2278ab) - Optional Block<br>Attack Signatures Staging Settings. Attack Signatures staging configuration<br>See [Stage New And Updated Signatures](#signatures-2278ab) below.
 
 <a id="detection-settings-stage-new-signatures"></a>&#x2022; [`stage_new_signatures`](#detection-settings-stage-new-signatures) - Optional Block<br>Attack Signatures Staging Settings. Attack Signatures staging configuration<br>See [Stage New Signatures](#detection-settings-stage-new-signatures) below.
 
@@ -214,51 +214,51 @@ A [`detection_settings`](#detection-settings) block supports the following:
 
 #### Detection Settings Bot Protection Setting
 
-A [`bot_protection_setting`](#detection-settings-bot-protection-setting) block (within [`detection_settings`](#detection-settings)) supports the following:
+A [`bot_protection_setting`](#setting-37e8d9) block (within [`detection_settings`](#detection-settings)) supports the following:
 
-<a id="detection-settings-bot-protection-setting-good-bot-action"></a>&#x2022; [`good_bot_action`](#detection-settings-bot-protection-setting-good-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>[Enum: BLOCK|REPORT|IGNORE] Bot Action. Action to be performed on the request Log and block Log only Disable detection
+<a id="action-1a1e0b"></a>&#x2022; [`good_bot_action`](#action-1a1e0b) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>[Enum: BLOCK|REPORT|IGNORE] Bot Action. Action to be performed on the request Log and block Log only Disable detection
 
-<a id="detection-settings-bot-protection-setting-malicious-bot-action"></a>&#x2022; [`malicious_bot_action`](#detection-settings-bot-protection-setting-malicious-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>[Enum: BLOCK|REPORT|IGNORE] Bot Action. Action to be performed on the request Log and block Log only Disable detection
+<a id="action-321642"></a>&#x2022; [`malicious_bot_action`](#action-321642) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>[Enum: BLOCK|REPORT|IGNORE] Bot Action. Action to be performed on the request Log and block Log only Disable detection
 
-<a id="detection-settings-bot-protection-setting-suspicious-bot-action"></a>&#x2022; [`suspicious_bot_action`](#detection-settings-bot-protection-setting-suspicious-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>[Enum: BLOCK|REPORT|IGNORE] Bot Action. Action to be performed on the request Log and block Log only Disable detection
+<a id="action-223ae0"></a>&#x2022; [`suspicious_bot_action`](#action-223ae0) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>[Enum: BLOCK|REPORT|IGNORE] Bot Action. Action to be performed on the request Log and block Log only Disable detection
 
 #### Detection Settings Signature Selection Setting
 
-A [`signature_selection_setting`](#detection-settings-signature-selection-setting) block (within [`detection_settings`](#detection-settings)) supports the following:
+A [`signature_selection_setting`](#setting-306450) block (within [`detection_settings`](#detection-settings)) supports the following:
 
-<a id="detection-settings-signature-selection-setting-attack-type-settings"></a>&#x2022; [`attack_type_settings`](#detection-settings-signature-selection-setting-attack-type-settings) - Optional Block<br>Attack Type Settings. Specifies attack-type settings to be used by WAF<br>See [Attack Type Settings](#detection-settings-signature-selection-setting-attack-type-settings) below.
+<a id="settings-72f64b"></a>&#x2022; [`attack_type_settings`](#settings-72f64b) - Optional Block<br>Attack Type Settings. Specifies attack-type settings to be used by WAF<br>See [Attack Type Settings](#settings-72f64b) below.
 
-<a id="detection-settings-signature-selection-setting-default-attack-type-settings"></a>&#x2022; [`default_attack_type_settings`](#detection-settings-signature-selection-setting-default-attack-type-settings) - Optional Block<br>Enable this option
+<a id="settings-067018"></a>&#x2022; [`default_attack_type_settings`](#settings-067018) - Optional Block<br>Enable this option
 
-<a id="detection-settings-signature-selection-setting-high-medium-accuracy-signatures"></a>&#x2022; [`high_medium_accuracy_signatures`](#detection-settings-signature-selection-setting-high-medium-accuracy-signatures) - Optional Block<br>Enable this option
+<a id="signatures-38e545"></a>&#x2022; [`high_medium_accuracy_signatures`](#signatures-38e545) - Optional Block<br>Enable this option
 
-<a id="detection-settings-signature-selection-setting-high-medium-low-accuracy-signatures"></a>&#x2022; [`high_medium_low_accuracy_signatures`](#detection-settings-signature-selection-setting-high-medium-low-accuracy-signatures) - Optional Block<br>Enable this option
+<a id="signatures-b902f3"></a>&#x2022; [`high_medium_low_accuracy_signatures`](#signatures-b902f3) - Optional Block<br>Enable this option
 
-<a id="detection-settings-signature-selection-setting-only-high-accuracy-signatures"></a>&#x2022; [`only_high_accuracy_signatures`](#detection-settings-signature-selection-setting-only-high-accuracy-signatures) - Optional Block<br>Enable this option
+<a id="signatures-a0c47d"></a>&#x2022; [`only_high_accuracy_signatures`](#signatures-a0c47d) - Optional Block<br>Enable this option
 
 #### Detection Settings Signature Selection Setting Attack Type Settings
 
-An [`attack_type_settings`](#detection-settings-signature-selection-setting-attack-type-settings) block (within [`detection_settings.signature_selection_setting`](#detection-settings-signature-selection-setting)) supports the following:
+An [`attack_type_settings`](#settings-72f64b) block (within [`detection_settings.signature_selection_setting`](#setting-306450)) supports the following:
 
-<a id="detection-settings-signature-selection-setting-attack-type-settings-disabled-attack-types"></a>&#x2022; [`disabled_attack_types`](#detection-settings-signature-selection-setting-attack-type-settings-disabled-attack-types) - Optional List  Defaults to `ATTACK_TYPE_NONE`<br>Possible values are `ATTACK_TYPE_NONE`, `ATTACK_TYPE_NON_BROWSER_CLIENT`, `ATTACK_TYPE_OTHER_APPLICATION_ATTACKS`, `ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE`, `ATTACK_TYPE_DETECTION_EVASION`, `ATTACK_TYPE_VULNERABILITY_SCAN`, `ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY`, `ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS`, `ATTACK_TYPE_BUFFER_OVERFLOW`, `ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION`, `ATTACK_TYPE_INFORMATION_LEAKAGE`, `ATTACK_TYPE_DIRECTORY_INDEXING`, `ATTACK_TYPE_PATH_TRAVERSAL`, `ATTACK_TYPE_XPATH_INJECTION`, `ATTACK_TYPE_LDAP_INJECTION`, `ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION`, `ATTACK_TYPE_COMMAND_EXECUTION`, `ATTACK_TYPE_SQL_INJECTION`, `ATTACK_TYPE_CROSS_SITE_SCRIPTING`, `ATTACK_TYPE_DENIAL_OF_SERVICE`, `ATTACK_TYPE_HTTP_PARSER_ATTACK`, `ATTACK_TYPE_SESSION_HIJACKING`, `ATTACK_TYPE_HTTP_RESPONSE_SPLITTING`, `ATTACK_TYPE_FORCEFUL_BROWSING`, `ATTACK_TYPE_REMOTE_FILE_INCLUDE`, `ATTACK_TYPE_MALICIOUS_FILE_UPLOAD`, `ATTACK_TYPE_GRAPHQL_PARSER_ATTACK`<br>[Enum: ATTACK_TYPE_NONE|ATTACK_TYPE_NON_BROWSER_CLIENT|ATTACK_TYPE_OTHER_APPLICATION_ATTACKS|ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE|ATTACK_TYPE_DETECTION_EVASION|ATTACK_TYPE_VULNERABILITY_SCAN|ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY|ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS|ATTACK_TYPE_BUFFER_OVERFLOW|ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION|ATTACK_TYPE_INFORMATION_LEAKAGE|ATTACK_TYPE_DIRECTORY_INDEXING|ATTACK_TYPE_PATH_TRAVERSAL|ATTACK_TYPE_XPATH_INJECTION|ATTACK_TYPE_LDAP_INJECTION|ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION|ATTACK_TYPE_COMMAND_EXECUTION|ATTACK_TYPE_SQL_INJECTION|ATTACK_TYPE_CROSS_SITE_SCRIPTING|ATTACK_TYPE_DENIAL_OF_SERVICE|ATTACK_TYPE_HTTP_PARSER_ATTACK|ATTACK_TYPE_SESSION_HIJACKING|ATTACK_TYPE_HTTP_RESPONSE_SPLITTING|ATTACK_TYPE_FORCEFUL_BROWSING|ATTACK_TYPE_REMOTE_FILE_INCLUDE|ATTACK_TYPE_MALICIOUS_FILE_UPLOAD|ATTACK_TYPE_GRAPHQL_PARSER_ATTACK] Disabled Attack Types. List of Attack Types that will be ignored and not trigger a detection
+<a id="types-46774e"></a>&#x2022; [`disabled_attack_types`](#types-46774e) - Optional List  Defaults to `ATTACK_TYPE_NONE`<br>Possible values are `ATTACK_TYPE_NONE`, `ATTACK_TYPE_NON_BROWSER_CLIENT`, `ATTACK_TYPE_OTHER_APPLICATION_ATTACKS`, `ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE`, `ATTACK_TYPE_DETECTION_EVASION`, `ATTACK_TYPE_VULNERABILITY_SCAN`, `ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY`, `ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS`, `ATTACK_TYPE_BUFFER_OVERFLOW`, `ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION`, `ATTACK_TYPE_INFORMATION_LEAKAGE`, `ATTACK_TYPE_DIRECTORY_INDEXING`, `ATTACK_TYPE_PATH_TRAVERSAL`, `ATTACK_TYPE_XPATH_INJECTION`, `ATTACK_TYPE_LDAP_INJECTION`, `ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION`, `ATTACK_TYPE_COMMAND_EXECUTION`, `ATTACK_TYPE_SQL_INJECTION`, `ATTACK_TYPE_CROSS_SITE_SCRIPTING`, `ATTACK_TYPE_DENIAL_OF_SERVICE`, `ATTACK_TYPE_HTTP_PARSER_ATTACK`, `ATTACK_TYPE_SESSION_HIJACKING`, `ATTACK_TYPE_HTTP_RESPONSE_SPLITTING`, `ATTACK_TYPE_FORCEFUL_BROWSING`, `ATTACK_TYPE_REMOTE_FILE_INCLUDE`, `ATTACK_TYPE_MALICIOUS_FILE_UPLOAD`, `ATTACK_TYPE_GRAPHQL_PARSER_ATTACK`<br>[Enum: ATTACK_TYPE_NONE|ATTACK_TYPE_NON_BROWSER_CLIENT|ATTACK_TYPE_OTHER_APPLICATION_ATTACKS|ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE|ATTACK_TYPE_DETECTION_EVASION|ATTACK_TYPE_VULNERABILITY_SCAN|ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY|ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS|ATTACK_TYPE_BUFFER_OVERFLOW|ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION|ATTACK_TYPE_INFORMATION_LEAKAGE|ATTACK_TYPE_DIRECTORY_INDEXING|ATTACK_TYPE_PATH_TRAVERSAL|ATTACK_TYPE_XPATH_INJECTION|ATTACK_TYPE_LDAP_INJECTION|ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION|ATTACK_TYPE_COMMAND_EXECUTION|ATTACK_TYPE_SQL_INJECTION|ATTACK_TYPE_CROSS_SITE_SCRIPTING|ATTACK_TYPE_DENIAL_OF_SERVICE|ATTACK_TYPE_HTTP_PARSER_ATTACK|ATTACK_TYPE_SESSION_HIJACKING|ATTACK_TYPE_HTTP_RESPONSE_SPLITTING|ATTACK_TYPE_FORCEFUL_BROWSING|ATTACK_TYPE_REMOTE_FILE_INCLUDE|ATTACK_TYPE_MALICIOUS_FILE_UPLOAD|ATTACK_TYPE_GRAPHQL_PARSER_ATTACK] Disabled Attack Types. List of Attack Types that will be ignored and not trigger a detection
 
 #### Detection Settings Stage New And Updated Signatures
 
-A [`stage_new_and_updated_signatures`](#detection-settings-stage-new-and-updated-signatures) block (within [`detection_settings`](#detection-settings)) supports the following:
+A [`stage_new_and_updated_signatures`](#signatures-2278ab) block (within [`detection_settings`](#detection-settings)) supports the following:
 
-<a id="detection-settings-stage-new-and-updated-signatures-staging-period"></a>&#x2022; [`staging_period`](#detection-settings-stage-new-and-updated-signatures-staging-period) - Optional Number<br>Staging Period. Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days
+<a id="period-dbffd2"></a>&#x2022; [`staging_period`](#period-dbffd2) - Optional Number<br>Staging Period. Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days
 
 #### Detection Settings Stage New Signatures
 
 A [`stage_new_signatures`](#detection-settings-stage-new-signatures) block (within [`detection_settings`](#detection-settings)) supports the following:
 
-<a id="detection-settings-stage-new-signatures-staging-period"></a>&#x2022; [`staging_period`](#detection-settings-stage-new-signatures-staging-period) - Optional Number<br>Staging Period. Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days
+<a id="period-627ff7"></a>&#x2022; [`staging_period`](#period-627ff7) - Optional Number<br>Staging Period. Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days
 
 #### Detection Settings Violation Settings
 
 A [`violation_settings`](#detection-settings-violation-settings) block (within [`detection_settings`](#detection-settings)) supports the following:
 
-<a id="detection-settings-violation-settings-disabled-violation-types"></a>&#x2022; [`disabled_violation_types`](#detection-settings-violation-settings-disabled-violation-types) - Optional List  Defaults to `VIOL_NONE`<br>Possible values are `VIOL_NONE`, `VIOL_FILETYPE`, `VIOL_METHOD`, `VIOL_MANDATORY_HEADER`, `VIOL_HTTP_RESPONSE_STATUS`, `VIOL_REQUEST_MAX_LENGTH`, `VIOL_FILE_UPLOAD`, `VIOL_FILE_UPLOAD_IN_BODY`, `VIOL_XML_MALFORMED`, `VIOL_JSON_MALFORMED`, `VIOL_ASM_COOKIE_MODIFIED`, `VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS`, `VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE`, `VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT`, `VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST`, `VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION`, `VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS`, `VIOL_EVASION_DIRECTORY_TRAVERSALS`, `VIOL_MALFORMED_REQUEST`, `VIOL_EVASION_MULTIPLE_DECODING`, `VIOL_DATA_GUARD`, `VIOL_EVASION_APACHE_WHITESPACE`, `VIOL_COOKIE_MODIFIED`, `VIOL_EVASION_IIS_UNICODE_CODEPOINTS`, `VIOL_EVASION_IIS_BACKSLASHES`, `VIOL_EVASION_PERCENT_U_DECODING`, `VIOL_EVASION_BARE_BYTE_DECODING`, `VIOL_EVASION_BAD_UNESCAPE`, `VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST`, `VIOL_ENCODING`, `VIOL_COOKIE_MALFORMED`, `VIOL_GRAPHQL_FORMAT`, `VIOL_GRAPHQL_MALFORMED`, `VIOL_GRAPHQL_INTROSPECTION_QUERY`<br>[Enum: VIOL_NONE|VIOL_FILETYPE|VIOL_METHOD|VIOL_MANDATORY_HEADER|VIOL_HTTP_RESPONSE_STATUS|VIOL_REQUEST_MAX_LENGTH|VIOL_FILE_UPLOAD|VIOL_FILE_UPLOAD_IN_BODY|VIOL_XML_MALFORMED|VIOL_JSON_MALFORMED|VIOL_ASM_COOKIE_MODIFIED|VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS|VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE|VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT|VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST|VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION|VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS|VIOL_EVASION_DIRECTORY_TRAVERSALS|VIOL_MALFORMED_REQUEST|VIOL_EVASION_MULTIPLE_DECODING|VIOL_DATA_GUARD|VIOL_EVASION_APACHE_WHITESPACE|VIOL_COOKIE_MODIFIED|VIOL_EVASION_IIS_UNICODE_CODEPOINTS|VIOL_EVASION_IIS_BACKSLASHES|VIOL_EVASION_PERCENT_U_DECODING|VIOL_EVASION_BARE_BYTE_DECODING|VIOL_EVASION_BAD_UNESCAPE|VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST|VIOL_ENCODING|VIOL_COOKIE_MALFORMED|VIOL_GRAPHQL_FORMAT|VIOL_GRAPHQL_MALFORMED|VIOL_GRAPHQL_INTROSPECTION_QUERY] Disabled Violations. List of violations to be excluded
+<a id="types-5a07a0"></a>&#x2022; [`disabled_violation_types`](#types-5a07a0) - Optional List  Defaults to `VIOL_NONE`<br>Possible values are `VIOL_NONE`, `VIOL_FILETYPE`, `VIOL_METHOD`, `VIOL_MANDATORY_HEADER`, `VIOL_HTTP_RESPONSE_STATUS`, `VIOL_REQUEST_MAX_LENGTH`, `VIOL_FILE_UPLOAD`, `VIOL_FILE_UPLOAD_IN_BODY`, `VIOL_XML_MALFORMED`, `VIOL_JSON_MALFORMED`, `VIOL_ASM_COOKIE_MODIFIED`, `VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS`, `VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE`, `VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT`, `VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST`, `VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION`, `VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS`, `VIOL_EVASION_DIRECTORY_TRAVERSALS`, `VIOL_MALFORMED_REQUEST`, `VIOL_EVASION_MULTIPLE_DECODING`, `VIOL_DATA_GUARD`, `VIOL_EVASION_APACHE_WHITESPACE`, `VIOL_COOKIE_MODIFIED`, `VIOL_EVASION_IIS_UNICODE_CODEPOINTS`, `VIOL_EVASION_IIS_BACKSLASHES`, `VIOL_EVASION_PERCENT_U_DECODING`, `VIOL_EVASION_BARE_BYTE_DECODING`, `VIOL_EVASION_BAD_UNESCAPE`, `VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST`, `VIOL_ENCODING`, `VIOL_COOKIE_MALFORMED`, `VIOL_GRAPHQL_FORMAT`, `VIOL_GRAPHQL_MALFORMED`, `VIOL_GRAPHQL_INTROSPECTION_QUERY`<br>[Enum: VIOL_NONE|VIOL_FILETYPE|VIOL_METHOD|VIOL_MANDATORY_HEADER|VIOL_HTTP_RESPONSE_STATUS|VIOL_REQUEST_MAX_LENGTH|VIOL_FILE_UPLOAD|VIOL_FILE_UPLOAD_IN_BODY|VIOL_XML_MALFORMED|VIOL_JSON_MALFORMED|VIOL_ASM_COOKIE_MODIFIED|VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS|VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE|VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT|VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST|VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION|VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS|VIOL_EVASION_DIRECTORY_TRAVERSALS|VIOL_MALFORMED_REQUEST|VIOL_EVASION_MULTIPLE_DECODING|VIOL_DATA_GUARD|VIOL_EVASION_APACHE_WHITESPACE|VIOL_COOKIE_MODIFIED|VIOL_EVASION_IIS_UNICODE_CODEPOINTS|VIOL_EVASION_IIS_BACKSLASHES|VIOL_EVASION_PERCENT_U_DECODING|VIOL_EVASION_BARE_BYTE_DECODING|VIOL_EVASION_BAD_UNESCAPE|VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST|VIOL_ENCODING|VIOL_COOKIE_MALFORMED|VIOL_GRAPHQL_FORMAT|VIOL_GRAPHQL_MALFORMED|VIOL_GRAPHQL_INTROSPECTION_QUERY] Disabled Violations. List of violations to be excluded
 
 #### Timeouts
 

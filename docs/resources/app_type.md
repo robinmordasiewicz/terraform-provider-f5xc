@@ -86,15 +86,15 @@ A [`business_logic_markup_setting`](#business-logic-markup-setting) block suppor
 
 <a id="business-logic-markup-setting-disable"></a>&#x2022; [`disable`](#business-logic-markup-setting-disable) - Optional Block<br>Enable this option
 
-<a id="business-logic-markup-setting-discovered-api-settings"></a>&#x2022; [`discovered_api_settings`](#business-logic-markup-setting-discovered-api-settings) - Optional Block<br>Discovered API Settings. Configure Discovered API Settings<br>See [Discovered API Settings](#business-logic-markup-setting-discovered-api-settings) below.
+<a id="settings-c32a65"></a>&#x2022; [`discovered_api_settings`](#settings-c32a65) - Optional Block<br>Discovered API Settings. Configure Discovered API Settings<br>See [Discovered API Settings](#settings-c32a65) below.
 
 <a id="business-logic-markup-setting-enable"></a>&#x2022; [`enable`](#business-logic-markup-setting-enable) - Optional Block<br>Enable this option
 
 #### Business Logic Markup Setting Discovered API Settings
 
-A [`discovered_api_settings`](#business-logic-markup-setting-discovered-api-settings) block (within [`business_logic_markup_setting`](#business-logic-markup-setting)) supports the following:
+A [`discovered_api_settings`](#settings-c32a65) block (within [`business_logic_markup_setting`](#business-logic-markup-setting)) supports the following:
 
-<a id="business-logic-markup-setting-discovered-api-settings-purge-duration-for-inactive-discovered-apis"></a>&#x2022; [`purge_duration_for_inactive_discovered_apis`](#business-logic-markup-setting-discovered-api-settings-purge-duration-for-inactive-discovered-apis) - Optional Number<br>Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration
+<a id="apis-85d7fa"></a>&#x2022; [`purge_duration_for_inactive_discovered_apis`](#apis-85d7fa) - Optional Number<br>Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration
 
 #### Features
 

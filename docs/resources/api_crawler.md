@@ -98,27 +98,27 @@ A [`simple_login`](#domains-simple-login) block (within [`domains`](#domains)) s
 
 A [`password`](#domains-simple-login-password) block (within [`domains.simple_login`](#domains-simple-login)) supports the following:
 
-<a id="domains-simple-login-password-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#domains-simple-login-password-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#domains-simple-login-password-blindfold-secret-info) below.
+<a id="info-e14daf"></a>&#x2022; [`blindfold_secret_info`](#info-e14daf) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-e14daf) below.
 
-<a id="domains-simple-login-password-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#domains-simple-login-password-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#domains-simple-login-password-clear-secret-info) below.
+<a id="info-ec3463"></a>&#x2022; [`clear_secret_info`](#info-ec3463) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-ec3463) below.
 
 #### Domains Simple Login Password Blindfold Secret Info
 
-A [`blindfold_secret_info`](#domains-simple-login-password-blindfold-secret-info) block (within [`domains.simple_login.password`](#domains-simple-login-password)) supports the following:
+A [`blindfold_secret_info`](#info-e14daf) block (within [`domains.simple_login.password`](#domains-simple-login-password)) supports the following:
 
-<a id="domains-simple-login-password-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#domains-simple-login-password-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+<a id="provider-bdecf7"></a>&#x2022; [`decryption_provider`](#provider-bdecf7) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-<a id="domains-simple-login-password-blindfold-secret-info-location"></a>&#x2022; [`location`](#domains-simple-login-password-blindfold-secret-info-location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+<a id="location-cdab6e"></a>&#x2022; [`location`](#location-cdab6e) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="domains-simple-login-password-blindfold-secret-info-store-provider"></a>&#x2022; [`store_provider`](#domains-simple-login-password-blindfold-secret-info-store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-8d2611"></a>&#x2022; [`store_provider`](#provider-8d2611) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### Domains Simple Login Password Clear Secret Info
 
-A [`clear_secret_info`](#domains-simple-login-password-clear-secret-info) block (within [`domains.simple_login.password`](#domains-simple-login-password)) supports the following:
+A [`clear_secret_info`](#info-ec3463) block (within [`domains.simple_login.password`](#domains-simple-login-password)) supports the following:
 
-<a id="domains-simple-login-password-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#domains-simple-login-password-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-32ac85"></a>&#x2022; [`provider_ref`](#ref-32ac85) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="domains-simple-login-password-clear-secret-info-url"></a>&#x2022; [`url`](#domains-simple-login-password-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="url-e5dfac"></a>&#x2022; [`url`](#url-e5dfac) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 #### Timeouts
 

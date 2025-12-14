@@ -114,7 +114,7 @@ A [`service_info`](#service-info) block supports the following:
 
 A [`service_selector`](#service-info-service-selector) block (within [`service_info`](#service-info)) supports the following:
 
-<a id="service-info-service-selector-expressions"></a>&#x2022; [`expressions`](#service-info-service-selector-expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
+<a id="expressions-954c46"></a>&#x2022; [`expressions`](#expressions-954c46) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
 #### Snat Pool
 

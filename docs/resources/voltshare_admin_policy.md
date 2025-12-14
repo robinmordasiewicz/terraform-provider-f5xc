@@ -98,29 +98,29 @@ An [`author_restrictions`](#author-restrictions) block supports the following:
 
 An [`allow_list`](#author-restrictions-allow-list) block (within [`author_restrictions`](#author-restrictions)) supports the following:
 
-<a id="author-restrictions-allow-list-custom-list"></a>&#x2022; [`custom_list`](#author-restrictions-allow-list-custom-list) - Optional Block<br>List of User ID(s). List of user ID(s)<br>See [Custom List](#author-restrictions-allow-list-custom-list) below.
+<a id="list-666236"></a>&#x2022; [`custom_list`](#list-666236) - Optional Block<br>List of User ID(s). List of user ID(s)<br>See [Custom List](#list-666236) below.
 
 #### Author Restrictions Allow List Custom List
 
-A [`custom_list`](#author-restrictions-allow-list-custom-list) block (within [`author_restrictions.allow_list`](#author-restrictions-allow-list)) supports the following:
+A [`custom_list`](#list-666236) block (within [`author_restrictions.allow_list`](#author-restrictions-allow-list)) supports the following:
 
-<a id="author-restrictions-allow-list-custom-list-exact-value"></a>&#x2022; [`exact_value`](#author-restrictions-allow-list-custom-list-exact-value) - Optional String<br>Exact User ID. exact_match contains user_id to match against
+<a id="value-cc6b5b"></a>&#x2022; [`exact_value`](#value-cc6b5b) - Optional String<br>Exact User ID. exact_match contains user_id to match against
 
-<a id="author-restrictions-allow-list-custom-list-regex-pattern"></a>&#x2022; [`regex_pattern`](#author-restrictions-allow-list-custom-list-regex-pattern) - Optional String<br>Regex For User ID. regex_values contains a regex pattern to match against
+<a id="pattern-657c24"></a>&#x2022; [`regex_pattern`](#pattern-657c24) - Optional String<br>Regex For User ID. regex_values contains a regex pattern to match against
 
 #### Author Restrictions Deny List
 
 A [`deny_list`](#author-restrictions-deny-list) block (within [`author_restrictions`](#author-restrictions)) supports the following:
 
-<a id="author-restrictions-deny-list-custom-list"></a>&#x2022; [`custom_list`](#author-restrictions-deny-list-custom-list) - Optional Block<br>List of User ID(s). List of user ID(s)<br>See [Custom List](#author-restrictions-deny-list-custom-list) below.
+<a id="list-b82333"></a>&#x2022; [`custom_list`](#list-b82333) - Optional Block<br>List of User ID(s). List of user ID(s)<br>See [Custom List](#list-b82333) below.
 
 #### Author Restrictions Deny List Custom List
 
-A [`custom_list`](#author-restrictions-deny-list-custom-list) block (within [`author_restrictions.deny_list`](#author-restrictions-deny-list)) supports the following:
+A [`custom_list`](#list-b82333) block (within [`author_restrictions.deny_list`](#author-restrictions-deny-list)) supports the following:
 
-<a id="author-restrictions-deny-list-custom-list-exact-value"></a>&#x2022; [`exact_value`](#author-restrictions-deny-list-custom-list-exact-value) - Optional String<br>Exact User ID. exact_match contains user_id to match against
+<a id="value-403381"></a>&#x2022; [`exact_value`](#value-403381) - Optional String<br>Exact User ID. exact_match contains user_id to match against
 
-<a id="author-restrictions-deny-list-custom-list-regex-pattern"></a>&#x2022; [`regex_pattern`](#author-restrictions-deny-list-custom-list-regex-pattern) - Optional String<br>Regex For User ID. regex_values contains a regex pattern to match against
+<a id="pattern-ccdbe4"></a>&#x2022; [`regex_pattern`](#pattern-ccdbe4) - Optional String<br>Regex For User ID. regex_values contains a regex pattern to match against
 
 #### Timeouts
 
@@ -150,41 +150,41 @@ An [`user_restrictions`](#user-restrictions) block supports the following:
 
 An [`user_restrictions`](#user-restrictions-user-restrictions) block (within [`user_restrictions`](#user-restrictions)) supports the following:
 
-<a id="user-restrictions-user-restrictions-allow-all"></a>&#x2022; [`allow_all`](#user-restrictions-user-restrictions-allow-all) - Optional Block<br>Enable this option
+<a id="all-f17b7a"></a>&#x2022; [`allow_all`](#all-f17b7a) - Optional Block<br>Enable this option
 
-<a id="user-restrictions-user-restrictions-allow-list"></a>&#x2022; [`allow_list`](#user-restrictions-user-restrictions-allow-list) - Optional Block<br>Custom List. Custom List contains user customized list of matcher values<br>See [Allow List](#user-restrictions-user-restrictions-allow-list) below.
+<a id="list-2c1ff3"></a>&#x2022; [`allow_list`](#list-2c1ff3) - Optional Block<br>Custom List. Custom List contains user customized list of matcher values<br>See [Allow List](#list-2c1ff3) below.
 
-<a id="user-restrictions-user-restrictions-deny-all"></a>&#x2022; [`deny_all`](#user-restrictions-user-restrictions-deny-all) - Optional Block<br>Enable this option
+<a id="all-51bcc9"></a>&#x2022; [`deny_all`](#all-51bcc9) - Optional Block<br>Enable this option
 
-<a id="user-restrictions-user-restrictions-deny-list"></a>&#x2022; [`deny_list`](#user-restrictions-user-restrictions-deny-list) - Optional Block<br>Custom List. Custom List contains user customized list of matcher values<br>See [Deny List](#user-restrictions-user-restrictions-deny-list) below.
+<a id="list-fc497b"></a>&#x2022; [`deny_list`](#list-fc497b) - Optional Block<br>Custom List. Custom List contains user customized list of matcher values<br>See [Deny List](#list-fc497b) below.
 
 #### User Restrictions User Restrictions Allow List
 
-An [`allow_list`](#user-restrictions-user-restrictions-allow-list) block (within [`user_restrictions.user_restrictions`](#user-restrictions-user-restrictions)) supports the following:
+An [`allow_list`](#list-2c1ff3) block (within [`user_restrictions.user_restrictions`](#user-restrictions-user-restrictions)) supports the following:
 
-<a id="user-restrictions-user-restrictions-allow-list-custom-list"></a>&#x2022; [`custom_list`](#user-restrictions-user-restrictions-allow-list-custom-list) - Optional Block<br>List of User ID(s). List of user ID(s)<br>See [Custom List](#user-restrictions-user-restrictions-allow-list-custom-list) below.
+<a id="list-bd1704"></a>&#x2022; [`custom_list`](#list-bd1704) - Optional Block<br>List of User ID(s). List of user ID(s)<br>See [Custom List](#list-bd1704) below.
 
 #### User Restrictions User Restrictions Allow List Custom List
 
-A [`custom_list`](#user-restrictions-user-restrictions-allow-list-custom-list) block (within [`user_restrictions.user_restrictions.allow_list`](#user-restrictions-user-restrictions-allow-list)) supports the following:
+A [`custom_list`](#list-bd1704) block (within [`user_restrictions.user_restrictions.allow_list`](#list-2c1ff3)) supports the following:
 
-<a id="user-restrictions-user-restrictions-allow-list-custom-list-exact-value"></a>&#x2022; [`exact_value`](#user-restrictions-user-restrictions-allow-list-custom-list-exact-value) - Optional String<br>Exact User ID. exact_match contains user_id to match against
+<a id="value-31e535"></a>&#x2022; [`exact_value`](#value-31e535) - Optional String<br>Exact User ID. exact_match contains user_id to match against
 
-<a id="user-restrictions-user-restrictions-allow-list-custom-list-regex-pattern"></a>&#x2022; [`regex_pattern`](#user-restrictions-user-restrictions-allow-list-custom-list-regex-pattern) - Optional String<br>Regex For User ID. regex_values contains a regex pattern to match against
+<a id="pattern-e4f8d4"></a>&#x2022; [`regex_pattern`](#pattern-e4f8d4) - Optional String<br>Regex For User ID. regex_values contains a regex pattern to match against
 
 #### User Restrictions User Restrictions Deny List
 
-A [`deny_list`](#user-restrictions-user-restrictions-deny-list) block (within [`user_restrictions.user_restrictions`](#user-restrictions-user-restrictions)) supports the following:
+A [`deny_list`](#list-fc497b) block (within [`user_restrictions.user_restrictions`](#user-restrictions-user-restrictions)) supports the following:
 
-<a id="user-restrictions-user-restrictions-deny-list-custom-list"></a>&#x2022; [`custom_list`](#user-restrictions-user-restrictions-deny-list-custom-list) - Optional Block<br>List of User ID(s). List of user ID(s)<br>See [Custom List](#user-restrictions-user-restrictions-deny-list-custom-list) below.
+<a id="list-8cc74e"></a>&#x2022; [`custom_list`](#list-8cc74e) - Optional Block<br>List of User ID(s). List of user ID(s)<br>See [Custom List](#list-8cc74e) below.
 
 #### User Restrictions User Restrictions Deny List Custom List
 
-A [`custom_list`](#user-restrictions-user-restrictions-deny-list-custom-list) block (within [`user_restrictions.user_restrictions.deny_list`](#user-restrictions-user-restrictions-deny-list)) supports the following:
+A [`custom_list`](#list-8cc74e) block (within [`user_restrictions.user_restrictions.deny_list`](#list-fc497b)) supports the following:
 
-<a id="user-restrictions-user-restrictions-deny-list-custom-list-exact-value"></a>&#x2022; [`exact_value`](#user-restrictions-user-restrictions-deny-list-custom-list-exact-value) - Optional String<br>Exact User ID. exact_match contains user_id to match against
+<a id="value-2775f1"></a>&#x2022; [`exact_value`](#value-2775f1) - Optional String<br>Exact User ID. exact_match contains user_id to match against
 
-<a id="user-restrictions-user-restrictions-deny-list-custom-list-regex-pattern"></a>&#x2022; [`regex_pattern`](#user-restrictions-user-restrictions-deny-list-custom-list-regex-pattern) - Optional String<br>Regex For User ID. regex_values contains a regex pattern to match against
+<a id="pattern-c4594d"></a>&#x2022; [`regex_pattern`](#pattern-c4594d) - Optional String<br>Regex For User ID. regex_values contains a regex pattern to match against
 
 ## Import
 

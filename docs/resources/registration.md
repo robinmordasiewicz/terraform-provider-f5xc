@@ -216,7 +216,7 @@ A [`gpu_device`](#infra-hw-info-gpu-gpu-device) block (within [`infra.hw_info.gp
 
 <a id="infra-hw-info-gpu-gpu-device-processes"></a>&#x2022; [`processes`](#infra-hw-info-gpu-gpu-device-processes) - Optional String<br>Processes. GPU Processes
 
-<a id="infra-hw-info-gpu-gpu-device-product-name"></a>&#x2022; [`product_name`](#infra-hw-info-gpu-gpu-device-product-name) - Optional String<br>Product Name. GPU Product Name
+<a id="name-78f7cd"></a>&#x2022; [`product_name`](#name-78f7cd) - Optional String<br>Product Name. GPU Product Name
 
 #### Infra Hw Info Kernel
 

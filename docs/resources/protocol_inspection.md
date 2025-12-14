@@ -86,27 +86,27 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`enable_disable_compliance_checks`](#enable-disable-compliance-checks) block supports the following:
 
-<a id="enable-disable-compliance-checks-disable-compliance-checks"></a>&#x2022; [`disable_compliance_checks`](#enable-disable-compliance-checks-disable-compliance-checks) - Optional Block<br>Enable this option
+<a id="checks-6c8eaa"></a>&#x2022; [`disable_compliance_checks`](#checks-6c8eaa) - Optional Block<br>Enable this option
 
-<a id="enable-disable-compliance-checks-enable-compliance-checks"></a>&#x2022; [`enable_compliance_checks`](#enable-disable-compliance-checks-enable-compliance-checks) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Enable Compliance Checks](#enable-disable-compliance-checks-enable-compliance-checks) below.
+<a id="checks-68d3e1"></a>&#x2022; [`enable_compliance_checks`](#checks-68d3e1) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Enable Compliance Checks](#checks-68d3e1) below.
 
 #### Enable Disable Compliance Checks Enable Compliance Checks
 
-An [`enable_compliance_checks`](#enable-disable-compliance-checks-enable-compliance-checks) block (within [`enable_disable_compliance_checks`](#enable-disable-compliance-checks)) supports the following:
+An [`enable_compliance_checks`](#checks-68d3e1) block (within [`enable_disable_compliance_checks`](#enable-disable-compliance-checks)) supports the following:
 
-<a id="enable-disable-compliance-checks-enable-compliance-checks-name"></a>&#x2022; [`name`](#enable-disable-compliance-checks-enable-compliance-checks-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="name-8e6d21"></a>&#x2022; [`name`](#name-8e6d21) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-<a id="enable-disable-compliance-checks-enable-compliance-checks-namespace"></a>&#x2022; [`namespace`](#enable-disable-compliance-checks-enable-compliance-checks-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="namespace-93e0ee"></a>&#x2022; [`namespace`](#namespace-93e0ee) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-<a id="enable-disable-compliance-checks-enable-compliance-checks-tenant"></a>&#x2022; [`tenant`](#enable-disable-compliance-checks-enable-compliance-checks-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="tenant-67ac8b"></a>&#x2022; [`tenant`](#tenant-67ac8b) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 #### Enable Disable Signatures
 
 An [`enable_disable_signatures`](#enable-disable-signatures) block supports the following:
 
-<a id="enable-disable-signatures-disable-signature"></a>&#x2022; [`disable_signature`](#enable-disable-signatures-disable-signature) - Optional Block<br>Enable this option
+<a id="signature-dd5a1e"></a>&#x2022; [`disable_signature`](#signature-dd5a1e) - Optional Block<br>Enable this option
 
-<a id="enable-disable-signatures-enable-signature"></a>&#x2022; [`enable_signature`](#enable-disable-signatures-enable-signature) - Optional Block<br>Enable this option
+<a id="signature-359b96"></a>&#x2022; [`enable_signature`](#signature-359b96) - Optional Block<br>Enable this option
 
 #### Timeouts
 

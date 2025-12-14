@@ -108,7 +108,7 @@ A [`key_pattern`](#rules-key-pattern) block (within [`rules`](#rules)) supports 
 
 An [`exact_values`](#rules-key-pattern-exact-values) block (within [`rules.key_pattern`](#rules-key-pattern)) supports the following:
 
-<a id="rules-key-pattern-exact-values-exact-values"></a>&#x2022; [`exact_values`](#rules-key-pattern-exact-values-exact-values) - Optional List<br>Exact Values. List of exact values to match
+<a id="values-4303de"></a>&#x2022; [`exact_values`](#values-4303de) - Optional List<br>Exact Values. List of exact values to match
 
 #### Rules Key Value Pattern
 
@@ -122,33 +122,33 @@ A [`key_value_pattern`](#rules-key-value-pattern) block (within [`rules`](#rules
 
 A [`key_pattern`](#rules-key-value-pattern-key-pattern) block (within [`rules.key_value_pattern`](#rules-key-value-pattern)) supports the following:
 
-<a id="rules-key-value-pattern-key-pattern-exact-values"></a>&#x2022; [`exact_values`](#rules-key-value-pattern-key-pattern-exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-key-value-pattern-key-pattern-exact-values) below.
+<a id="values-5868e6"></a>&#x2022; [`exact_values`](#values-5868e6) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#values-5868e6) below.
 
-<a id="rules-key-value-pattern-key-pattern-regex-value"></a>&#x2022; [`regex_value`](#rules-key-value-pattern-key-pattern-regex-value) - Optional String<br>Regex Value. Search for values matching this regular expression
+<a id="value-cf8180"></a>&#x2022; [`regex_value`](#value-cf8180) - Optional String<br>Regex Value. Search for values matching this regular expression
 
-<a id="rules-key-value-pattern-key-pattern-substring-value"></a>&#x2022; [`substring_value`](#rules-key-value-pattern-key-pattern-substring-value) - Optional String<br>Substring Search. Search for values that include this substring
+<a id="value-597ab2"></a>&#x2022; [`substring_value`](#value-597ab2) - Optional String<br>Substring Search. Search for values that include this substring
 
 #### Rules Key Value Pattern Key Pattern Exact Values
 
-An [`exact_values`](#rules-key-value-pattern-key-pattern-exact-values) block (within [`rules.key_value_pattern.key_pattern`](#rules-key-value-pattern-key-pattern)) supports the following:
+An [`exact_values`](#values-5868e6) block (within [`rules.key_value_pattern.key_pattern`](#rules-key-value-pattern-key-pattern)) supports the following:
 
-<a id="rules-key-value-pattern-key-pattern-exact-values-exact-values"></a>&#x2022; [`exact_values`](#rules-key-value-pattern-key-pattern-exact-values-exact-values) - Optional List<br>Exact Values. List of exact values to match
+<a id="values-dd8bdf"></a>&#x2022; [`exact_values`](#values-dd8bdf) - Optional List<br>Exact Values. List of exact values to match
 
 #### Rules Key Value Pattern Value Pattern
 
 A [`value_pattern`](#rules-key-value-pattern-value-pattern) block (within [`rules.key_value_pattern`](#rules-key-value-pattern)) supports the following:
 
-<a id="rules-key-value-pattern-value-pattern-exact-values"></a>&#x2022; [`exact_values`](#rules-key-value-pattern-value-pattern-exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-key-value-pattern-value-pattern-exact-values) below.
+<a id="values-82342a"></a>&#x2022; [`exact_values`](#values-82342a) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#values-82342a) below.
 
-<a id="rules-key-value-pattern-value-pattern-regex-value"></a>&#x2022; [`regex_value`](#rules-key-value-pattern-value-pattern-regex-value) - Optional String<br>Regex Value. Search for values matching this regular expression
+<a id="value-d5fdfc"></a>&#x2022; [`regex_value`](#value-d5fdfc) - Optional String<br>Regex Value. Search for values matching this regular expression
 
-<a id="rules-key-value-pattern-value-pattern-substring-value"></a>&#x2022; [`substring_value`](#rules-key-value-pattern-value-pattern-substring-value) - Optional String<br>Substring Search. Search for values that include this substring
+<a id="value-9d96a5"></a>&#x2022; [`substring_value`](#value-9d96a5) - Optional String<br>Substring Search. Search for values that include this substring
 
 #### Rules Key Value Pattern Value Pattern Exact Values
 
-An [`exact_values`](#rules-key-value-pattern-value-pattern-exact-values) block (within [`rules.key_value_pattern.value_pattern`](#rules-key-value-pattern-value-pattern)) supports the following:
+An [`exact_values`](#values-82342a) block (within [`rules.key_value_pattern.value_pattern`](#rules-key-value-pattern-value-pattern)) supports the following:
 
-<a id="rules-key-value-pattern-value-pattern-exact-values-exact-values"></a>&#x2022; [`exact_values`](#rules-key-value-pattern-value-pattern-exact-values-exact-values) - Optional List<br>Exact Values. List of exact values to match
+<a id="values-061ece"></a>&#x2022; [`exact_values`](#values-061ece) - Optional List<br>Exact Values. List of exact values to match
 
 #### Rules Value Pattern
 
@@ -164,7 +164,7 @@ A [`value_pattern`](#rules-value-pattern) block (within [`rules`](#rules)) suppo
 
 An [`exact_values`](#rules-value-pattern-exact-values) block (within [`rules.value_pattern`](#rules-value-pattern)) supports the following:
 
-<a id="rules-value-pattern-exact-values-exact-values"></a>&#x2022; [`exact_values`](#rules-value-pattern-exact-values-exact-values) - Optional List<br>Exact Values. List of exact values to match
+<a id="values-cd8e66"></a>&#x2022; [`exact_values`](#values-cd8e66) - Optional List<br>Exact Values. List of exact values to match
 
 #### Timeouts
 

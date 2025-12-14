@@ -122,43 +122,43 @@ A [`vpc_attachments`](#aws-tgw-site-vpc-attachments) block (within [`aws_tgw_sit
 
 A [`vpc_list`](#aws-tgw-site-vpc-attachments-vpc-list) block (within [`aws_tgw_site.vpc_attachments`](#aws-tgw-site-vpc-attachments)) supports the following:
 
-<a id="aws-tgw-site-vpc-attachments-vpc-list-custom-routing"></a>&#x2022; [`custom_routing`](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing) - Optional Block<br>AWS Route Table List. AWS Route Table List<br>See [Custom Routing](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing) below.
+<a id="routing-287a5f"></a>&#x2022; [`custom_routing`](#routing-287a5f) - Optional Block<br>AWS Route Table List. AWS Route Table List<br>See [Custom Routing](#routing-287a5f) below.
 
-<a id="aws-tgw-site-vpc-attachments-vpc-list-default-route"></a>&#x2022; [`default_route`](#aws-tgw-site-vpc-attachments-vpc-list-default-route) - Optional Block<br>Override Default Route Choice. Select Override Default Route Choice<br>See [Default Route](#aws-tgw-site-vpc-attachments-vpc-list-default-route) below.
+<a id="route-44d7f5"></a>&#x2022; [`default_route`](#route-44d7f5) - Optional Block<br>Override Default Route Choice. Select Override Default Route Choice<br>See [Default Route](#route-44d7f5) below.
 
-<a id="aws-tgw-site-vpc-attachments-vpc-list-labels"></a>&#x2022; [`labels`](#aws-tgw-site-vpc-attachments-vpc-list-labels) - Optional Block<br>Labels. Add labels for the VPC attachment. These labels can then be used in policies such as enhanced firewall
+<a id="labels-3555f3"></a>&#x2022; [`labels`](#labels-3555f3) - Optional Block<br>Labels. Add labels for the VPC attachment. These labels can then be used in policies such as enhanced firewall
 
-<a id="aws-tgw-site-vpc-attachments-vpc-list-manual-routing"></a>&#x2022; [`manual_routing`](#aws-tgw-site-vpc-attachments-vpc-list-manual-routing) - Optional Block<br>Enable this option
+<a id="routing-97ae2a"></a>&#x2022; [`manual_routing`](#routing-97ae2a) - Optional Block<br>Enable this option
 
-<a id="aws-tgw-site-vpc-attachments-vpc-list-vpc-id"></a>&#x2022; [`vpc_id`](#aws-tgw-site-vpc-attachments-vpc-list-vpc-id) - Optional String<br>VPC ID. Enter the VPC ID of the VPC to be attached
+<a id="vpc-id-318c59"></a>&#x2022; [`vpc_id`](#vpc-id-318c59) - Optional String<br>VPC ID. Enter the VPC ID of the VPC to be attached
 
 #### AWS TGW Site VPC Attachments VPC List Custom Routing
 
-A [`custom_routing`](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing) block (within [`aws_tgw_site.vpc_attachments.vpc_list`](#aws-tgw-site-vpc-attachments-vpc-list)) supports the following:
+A [`custom_routing`](#routing-287a5f) block (within [`aws_tgw_site.vpc_attachments.vpc_list`](#aws-tgw-site-vpc-attachments-vpc-list)) supports the following:
 
-<a id="aws-tgw-site-vpc-attachments-vpc-list-custom-routing-route-tables"></a>&#x2022; [`route_tables`](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing-route-tables) - Optional Block<br>List of route tables. Route Tables<br>See [Route Tables](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing-route-tables) below.
+<a id="tables-ad622a"></a>&#x2022; [`route_tables`](#tables-ad622a) - Optional Block<br>List of route tables. Route Tables<br>See [Route Tables](#tables-ad622a) below.
 
 #### AWS TGW Site VPC Attachments VPC List Custom Routing Route Tables
 
-A [`route_tables`](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing-route-tables) block (within [`aws_tgw_site.vpc_attachments.vpc_list.custom_routing`](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing)) supports the following:
+A [`route_tables`](#tables-ad622a) block (within [`aws_tgw_site.vpc_attachments.vpc_list.custom_routing`](#routing-287a5f)) supports the following:
 
-<a id="aws-tgw-site-vpc-attachments-vpc-list-custom-routing-route-tables-route-table-id"></a>&#x2022; [`route_table_id`](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing-route-tables-route-table-id) - Optional String<br>Route table ID. Route table ID
+<a id="table-id-73e5e3"></a>&#x2022; [`route_table_id`](#table-id-73e5e3) - Optional String<br>Route table ID. Route table ID
 
-<a id="aws-tgw-site-vpc-attachments-vpc-list-custom-routing-route-tables-static-routes"></a>&#x2022; [`static_routes`](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing-route-tables-static-routes) - Optional List<br>Static Routes. List of Static Routes
+<a id="routes-3f9b25"></a>&#x2022; [`static_routes`](#routes-3f9b25) - Optional List<br>Static Routes. List of Static Routes
 
 #### AWS TGW Site VPC Attachments VPC List Default Route
 
-A [`default_route`](#aws-tgw-site-vpc-attachments-vpc-list-default-route) block (within [`aws_tgw_site.vpc_attachments.vpc_list`](#aws-tgw-site-vpc-attachments-vpc-list)) supports the following:
+A [`default_route`](#route-44d7f5) block (within [`aws_tgw_site.vpc_attachments.vpc_list`](#aws-tgw-site-vpc-attachments-vpc-list)) supports the following:
 
-<a id="aws-tgw-site-vpc-attachments-vpc-list-default-route-all-route-tables"></a>&#x2022; [`all_route_tables`](#aws-tgw-site-vpc-attachments-vpc-list-default-route-all-route-tables) - Optional Block<br>Enable this option
+<a id="tables-cc89f6"></a>&#x2022; [`all_route_tables`](#tables-cc89f6) - Optional Block<br>Enable this option
 
-<a id="aws-tgw-site-vpc-attachments-vpc-list-default-route-selective-route-tables"></a>&#x2022; [`selective_route_tables`](#aws-tgw-site-vpc-attachments-vpc-list-default-route-selective-route-tables) - Optional Block<br>AWS Route Table. AWS Route Table<br>See [Selective Route Tables](#aws-tgw-site-vpc-attachments-vpc-list-default-route-selective-route-tables) below.
+<a id="tables-6ffd1a"></a>&#x2022; [`selective_route_tables`](#tables-6ffd1a) - Optional Block<br>AWS Route Table. AWS Route Table<br>See [Selective Route Tables](#tables-6ffd1a) below.
 
 #### AWS TGW Site VPC Attachments VPC List Default Route Selective Route Tables
 
-A [`selective_route_tables`](#aws-tgw-site-vpc-attachments-vpc-list-default-route-selective-route-tables) block (within [`aws_tgw_site.vpc_attachments.vpc_list.default_route`](#aws-tgw-site-vpc-attachments-vpc-list-default-route)) supports the following:
+A [`selective_route_tables`](#tables-6ffd1a) block (within [`aws_tgw_site.vpc_attachments.vpc_list.default_route`](#route-44d7f5)) supports the following:
 
-<a id="aws-tgw-site-vpc-attachments-vpc-list-default-route-selective-route-tables-route-table-id"></a>&#x2022; [`route_table_id`](#aws-tgw-site-vpc-attachments-vpc-list-default-route-selective-route-tables-route-table-id) - Optional List<br>Route table ID. Route table ID
+<a id="table-id-4ea496"></a>&#x2022; [`route_table_id`](#table-id-4ea496) - Optional List<br>Route table ID. Route table ID
 
 #### Azure VNET Site
 
@@ -182,51 +182,51 @@ A [`site`](#azure-vnet-site-site) block (within [`azure_vnet_site`](#azure-vnet-
 
 A [`vnet_attachments`](#azure-vnet-site-vnet-attachments) block (within [`azure_vnet_site`](#azure-vnet-site)) supports the following:
 
-<a id="azure-vnet-site-vnet-attachments-vnet-list"></a>&#x2022; [`vnet_list`](#azure-vnet-site-vnet-attachments-vnet-list) - Optional Block<br>VNET List<br>See [VNET List](#azure-vnet-site-vnet-attachments-vnet-list) below.
+<a id="list-5826e3"></a>&#x2022; [`vnet_list`](#list-5826e3) - Optional Block<br>VNET List<br>See [VNET List](#list-5826e3) below.
 
 #### Azure VNET Site VNET Attachments VNET List
 
-A [`vnet_list`](#azure-vnet-site-vnet-attachments-vnet-list) block (within [`azure_vnet_site.vnet_attachments`](#azure-vnet-site-vnet-attachments)) supports the following:
+A [`vnet_list`](#list-5826e3) block (within [`azure_vnet_site.vnet_attachments`](#azure-vnet-site-vnet-attachments)) supports the following:
 
-<a id="azure-vnet-site-vnet-attachments-vnet-list-custom-routing"></a>&#x2022; [`custom_routing`](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing) - Optional Block<br>List Azure Route Table with Static Route. List Azure Route Table with Static Route<br>See [Custom Routing](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing) below.
+<a id="routing-724341"></a>&#x2022; [`custom_routing`](#routing-724341) - Optional Block<br>List Azure Route Table with Static Route. List Azure Route Table with Static Route<br>See [Custom Routing](#routing-724341) below.
 
-<a id="azure-vnet-site-vnet-attachments-vnet-list-default-route"></a>&#x2022; [`default_route`](#azure-vnet-site-vnet-attachments-vnet-list-default-route) - Optional Block<br>Override Default Route Choice. Select Override Default Route Choice<br>See [Default Route](#azure-vnet-site-vnet-attachments-vnet-list-default-route) below.
+<a id="route-fd5eea"></a>&#x2022; [`default_route`](#route-fd5eea) - Optional Block<br>Override Default Route Choice. Select Override Default Route Choice<br>See [Default Route](#route-fd5eea) below.
 
-<a id="azure-vnet-site-vnet-attachments-vnet-list-labels"></a>&#x2022; [`labels`](#azure-vnet-site-vnet-attachments-vnet-list-labels) - Optional Block<br>Labels. Add labels for the VNET attachments. These labels can then be used in policies such as enhanced firewall policies
+<a id="labels-e777f2"></a>&#x2022; [`labels`](#labels-e777f2) - Optional Block<br>Labels. Add labels for the VNET attachments. These labels can then be used in policies such as enhanced firewall policies
 
-<a id="azure-vnet-site-vnet-attachments-vnet-list-manual-routing"></a>&#x2022; [`manual_routing`](#azure-vnet-site-vnet-attachments-vnet-list-manual-routing) - Optional Block<br>Enable this option
+<a id="routing-e423fa"></a>&#x2022; [`manual_routing`](#routing-e423fa) - Optional Block<br>Enable this option
 
-<a id="azure-vnet-site-vnet-attachments-vnet-list-subscription-id"></a>&#x2022; [`subscription_id`](#azure-vnet-site-vnet-attachments-vnet-list-subscription-id) - Optional String<br>Subscription ID. Enter the Subscription ID of the VNET to be attached
+<a id="subscription-id-9a0b4f"></a>&#x2022; [`subscription_id`](#subscription-id-9a0b4f) - Optional String<br>Subscription ID. Enter the Subscription ID of the VNET to be attached
 
-<a id="azure-vnet-site-vnet-attachments-vnet-list-vnet-id"></a>&#x2022; [`vnet_id`](#azure-vnet-site-vnet-attachments-vnet-list-vnet-id) - Optional String<br>VNET ID. Enter the VNET ID of the VNET to be attached in format /`<resource-group-name>`/`<VNET-name>`
+<a id="vnet-id-6eb10e"></a>&#x2022; [`vnet_id`](#vnet-id-6eb10e) - Optional String<br>VNET ID. Enter the VNET ID of the VNET to be attached in format /`<resource-group-name>`/`<VNET-name>`
 
 #### Azure VNET Site VNET Attachments VNET List Custom Routing
 
-A [`custom_routing`](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing) block (within [`azure_vnet_site.vnet_attachments.vnet_list`](#azure-vnet-site-vnet-attachments-vnet-list)) supports the following:
+A [`custom_routing`](#routing-724341) block (within [`azure_vnet_site.vnet_attachments.vnet_list`](#list-5826e3)) supports the following:
 
-<a id="azure-vnet-site-vnet-attachments-vnet-list-custom-routing-route-tables"></a>&#x2022; [`route_tables`](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing-route-tables) - Optional Block<br>List of route tables with static routes. Route Tables with static routes<br>See [Route Tables](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing-route-tables) below.
+<a id="tables-722439"></a>&#x2022; [`route_tables`](#tables-722439) - Optional Block<br>List of route tables with static routes. Route Tables with static routes<br>See [Route Tables](#tables-722439) below.
 
 #### Azure VNET Site VNET Attachments VNET List Custom Routing Route Tables
 
-A [`route_tables`](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing-route-tables) block (within [`azure_vnet_site.vnet_attachments.vnet_list.custom_routing`](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing)) supports the following:
+A [`route_tables`](#tables-722439) block (within [`azure_vnet_site.vnet_attachments.vnet_list.custom_routing`](#routing-724341)) supports the following:
 
-<a id="azure-vnet-site-vnet-attachments-vnet-list-custom-routing-route-tables-route-table-id"></a>&#x2022; [`route_table_id`](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing-route-tables-route-table-id) - Optional String<br>Route table ID. Route table ID in the format /`<resource-group-name>`/`<route-table-name>`
+<a id="table-id-64761a"></a>&#x2022; [`route_table_id`](#table-id-64761a) - Optional String<br>Route table ID. Route table ID in the format /`<resource-group-name>`/`<route-table-name>`
 
-<a id="azure-vnet-site-vnet-attachments-vnet-list-custom-routing-route-tables-static-routes"></a>&#x2022; [`static_routes`](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing-route-tables-static-routes) - Optional List<br>Static Routes. List of Static Routes
+<a id="routes-18e053"></a>&#x2022; [`static_routes`](#routes-18e053) - Optional List<br>Static Routes. List of Static Routes
 
 #### Azure VNET Site VNET Attachments VNET List Default Route
 
-A [`default_route`](#azure-vnet-site-vnet-attachments-vnet-list-default-route) block (within [`azure_vnet_site.vnet_attachments.vnet_list`](#azure-vnet-site-vnet-attachments-vnet-list)) supports the following:
+A [`default_route`](#route-fd5eea) block (within [`azure_vnet_site.vnet_attachments.vnet_list`](#list-5826e3)) supports the following:
 
-<a id="azure-vnet-site-vnet-attachments-vnet-list-default-route-all-route-tables"></a>&#x2022; [`all_route_tables`](#azure-vnet-site-vnet-attachments-vnet-list-default-route-all-route-tables) - Optional Block<br>Enable this option
+<a id="tables-19f37b"></a>&#x2022; [`all_route_tables`](#tables-19f37b) - Optional Block<br>Enable this option
 
-<a id="azure-vnet-site-vnet-attachments-vnet-list-default-route-selective-route-tables"></a>&#x2022; [`selective_route_tables`](#azure-vnet-site-vnet-attachments-vnet-list-default-route-selective-route-tables) - Optional Block<br>Azure Route Table. Azure Route Table<br>See [Selective Route Tables](#azure-vnet-site-vnet-attachments-vnet-list-default-route-selective-route-tables) below.
+<a id="tables-97cee7"></a>&#x2022; [`selective_route_tables`](#tables-97cee7) - Optional Block<br>Azure Route Table. Azure Route Table<br>See [Selective Route Tables](#tables-97cee7) below.
 
 #### Azure VNET Site VNET Attachments VNET List Default Route Selective Route Tables
 
-A [`selective_route_tables`](#azure-vnet-site-vnet-attachments-vnet-list-default-route-selective-route-tables) block (within [`azure_vnet_site.vnet_attachments.vnet_list.default_route`](#azure-vnet-site-vnet-attachments-vnet-list-default-route)) supports the following:
+A [`selective_route_tables`](#tables-97cee7) block (within [`azure_vnet_site.vnet_attachments.vnet_list.default_route`](#route-fd5eea)) supports the following:
 
-<a id="azure-vnet-site-vnet-attachments-vnet-list-default-route-selective-route-tables-route-table-id"></a>&#x2022; [`route_table_id`](#azure-vnet-site-vnet-attachments-vnet-list-default-route-selective-route-tables-route-table-id) - Optional List<br>Route table ID. Route table ID in the format /`<resource-group-name>`/`<route-table-name>`
+<a id="table-id-062f6e"></a>&#x2022; [`route_table_id`](#table-id-062f6e) - Optional List<br>Route table ID. Route table ID in the format /`<resource-group-name>`/`<route-table-name>`
 
 #### Segment
 

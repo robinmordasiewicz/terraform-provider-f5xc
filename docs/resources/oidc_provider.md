@@ -140,7 +140,7 @@ An [`oidc_v10_spec_type`](#oidc-v10-spec-type) block supports the following:
 
 <a id="oidc-v10-spec-type-display-name"></a>&#x2022; [`display_name`](#oidc-v10-spec-type-display-name) - Optional String<br>Display Name. Friendly name for identity provider
 
-<a id="oidc-v10-spec-type-forwarded-query-parameters"></a>&#x2022; [`forwarded_query_parameters`](#oidc-v10-spec-type-forwarded-query-parameters) - Optional String<br>Forwarded Query Parameters. Non OpenID Connect/OAuth standard query parameters to be forwarded to external IDP from the initial application request to Authorization Endpoint. Multiple parameters can be entered, separated by comma (,)
+<a id="parameters-902350"></a>&#x2022; [`forwarded_query_parameters`](#parameters-902350) - Optional String<br>Forwarded Query Parameters. Non OpenID Connect/OAuth standard query parameters to be forwarded to external IDP from the initial application request to Authorization Endpoint. Multiple parameters can be entered, separated by comma (,)
 
 <a id="oidc-v10-spec-type-issuer"></a>&#x2022; [`issuer`](#oidc-v10-spec-type-issuer) - Optional String<br>Issuer. The issuer identifier for the issuer of the response. If not provided, no validation will be performed
 

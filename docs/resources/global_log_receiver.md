@@ -123,41 +123,41 @@ An [`aws_cred`](#aws-cloud-watch-receiver-aws-cred) block (within [`aws_cloud_wa
 
 <a id="aws-cloud-watch-receiver-aws-cred-name"></a>&#x2022; [`name`](#aws-cloud-watch-receiver-aws-cred-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-<a id="aws-cloud-watch-receiver-aws-cred-namespace"></a>&#x2022; [`namespace`](#aws-cloud-watch-receiver-aws-cred-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="namespace-b9cb40"></a>&#x2022; [`namespace`](#namespace-b9cb40) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-<a id="aws-cloud-watch-receiver-aws-cred-tenant"></a>&#x2022; [`tenant`](#aws-cloud-watch-receiver-aws-cred-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="tenant-fc3ba9"></a>&#x2022; [`tenant`](#tenant-fc3ba9) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 #### AWS Cloud Watch Receiver Batch
 
 A [`batch`](#aws-cloud-watch-receiver-batch) block (within [`aws_cloud_watch_receiver`](#aws-cloud-watch-receiver)) supports the following:
 
-<a id="aws-cloud-watch-receiver-batch-max-bytes"></a>&#x2022; [`max_bytes`](#aws-cloud-watch-receiver-batch-max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
+<a id="bytes-fb8782"></a>&#x2022; [`max_bytes`](#bytes-fb8782) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
-<a id="aws-cloud-watch-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#aws-cloud-watch-receiver-batch-max-bytes-disabled) - Optional Block<br>Enable this option
+<a id="disabled-e2ec6b"></a>&#x2022; [`max_bytes_disabled`](#disabled-e2ec6b) - Optional Block<br>Enable this option
 
-<a id="aws-cloud-watch-receiver-batch-max-events"></a>&#x2022; [`max_events`](#aws-cloud-watch-receiver-batch-max-events) - Optional Number<br>Max Events. Send batch to endpoint after this many log messages are in the batch
+<a id="events-0606a7"></a>&#x2022; [`max_events`](#events-0606a7) - Optional Number<br>Max Events. Send batch to endpoint after this many log messages are in the batch
 
-<a id="aws-cloud-watch-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#aws-cloud-watch-receiver-batch-max-events-disabled) - Optional Block<br>Enable this option
+<a id="disabled-3c3dcd"></a>&#x2022; [`max_events_disabled`](#disabled-3c3dcd) - Optional Block<br>Enable this option
 
-<a id="aws-cloud-watch-receiver-batch-timeout-seconds"></a>&#x2022; [`timeout_seconds`](#aws-cloud-watch-receiver-batch-timeout-seconds) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
+<a id="seconds-d5b12a"></a>&#x2022; [`timeout_seconds`](#seconds-d5b12a) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
 
-<a id="aws-cloud-watch-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#aws-cloud-watch-receiver-batch-timeout-seconds-default) - Optional Block<br>Enable this option
+<a id="default-697810"></a>&#x2022; [`timeout_seconds_default`](#default-697810) - Optional Block<br>Enable this option
 
 #### AWS Cloud Watch Receiver Compression
 
 A [`compression`](#aws-cloud-watch-receiver-compression) block (within [`aws_cloud_watch_receiver`](#aws-cloud-watch-receiver)) supports the following:
 
-<a id="aws-cloud-watch-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#aws-cloud-watch-receiver-compression-compression-default) - Optional Block<br>Enable this option
+<a id="default-963843"></a>&#x2022; [`compression_default`](#default-963843) - Optional Block<br>Enable this option
 
-<a id="aws-cloud-watch-receiver-compression-compression-gzip"></a>&#x2022; [`compression_gzip`](#aws-cloud-watch-receiver-compression-compression-gzip) - Optional Block<br>Enable this option
+<a id="gzip-2ccbff"></a>&#x2022; [`compression_gzip`](#gzip-2ccbff) - Optional Block<br>Enable this option
 
-<a id="aws-cloud-watch-receiver-compression-compression-none"></a>&#x2022; [`compression_none`](#aws-cloud-watch-receiver-compression-compression-none) - Optional Block<br>Enable this option
+<a id="none-640cb2"></a>&#x2022; [`compression_none`](#none-640cb2) - Optional Block<br>Enable this option
 
 #### Azure Event Hubs Receiver
 
 An [`azure_event_hubs_receiver`](#azure-event-hubs-receiver) block supports the following:
 
-<a id="azure-event-hubs-receiver-connection-string"></a>&#x2022; [`connection_string`](#azure-event-hubs-receiver-connection-string) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Connection String](#azure-event-hubs-receiver-connection-string) below.
+<a id="string-b729f9"></a>&#x2022; [`connection_string`](#string-b729f9) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Connection String](#string-b729f9) below.
 
 <a id="azure-event-hubs-receiver-instance"></a>&#x2022; [`instance`](#azure-event-hubs-receiver-instance) - Optional String<br>Event Hubs Instance. Event Hubs Instance name into which logs should be stored
 
@@ -165,29 +165,29 @@ An [`azure_event_hubs_receiver`](#azure-event-hubs-receiver) block supports the 
 
 #### Azure Event Hubs Receiver Connection String
 
-A [`connection_string`](#azure-event-hubs-receiver-connection-string) block (within [`azure_event_hubs_receiver`](#azure-event-hubs-receiver)) supports the following:
+A [`connection_string`](#string-b729f9) block (within [`azure_event_hubs_receiver`](#azure-event-hubs-receiver)) supports the following:
 
-<a id="azure-event-hubs-receiver-connection-string-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#azure-event-hubs-receiver-connection-string-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#azure-event-hubs-receiver-connection-string-blindfold-secret-info) below.
+<a id="info-0b01ca"></a>&#x2022; [`blindfold_secret_info`](#info-0b01ca) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-0b01ca) below.
 
-<a id="azure-event-hubs-receiver-connection-string-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#azure-event-hubs-receiver-connection-string-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#azure-event-hubs-receiver-connection-string-clear-secret-info) below.
+<a id="info-a586ad"></a>&#x2022; [`clear_secret_info`](#info-a586ad) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-a586ad) below.
 
 #### Azure Event Hubs Receiver Connection String Blindfold Secret Info
 
-A [`blindfold_secret_info`](#azure-event-hubs-receiver-connection-string-blindfold-secret-info) block (within [`azure_event_hubs_receiver.connection_string`](#azure-event-hubs-receiver-connection-string)) supports the following:
+A [`blindfold_secret_info`](#info-0b01ca) block (within [`azure_event_hubs_receiver.connection_string`](#string-b729f9)) supports the following:
 
-<a id="azure-event-hubs-receiver-connection-string-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#azure-event-hubs-receiver-connection-string-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+<a id="provider-9b65ec"></a>&#x2022; [`decryption_provider`](#provider-9b65ec) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-<a id="azure-event-hubs-receiver-connection-string-blindfold-secret-info-location"></a>&#x2022; [`location`](#azure-event-hubs-receiver-connection-string-blindfold-secret-info-location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+<a id="location-44aff0"></a>&#x2022; [`location`](#location-44aff0) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="azure-event-hubs-receiver-connection-string-blindfold-secret-info-store-provider"></a>&#x2022; [`store_provider`](#azure-event-hubs-receiver-connection-string-blindfold-secret-info-store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-5ab1d8"></a>&#x2022; [`store_provider`](#provider-5ab1d8) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### Azure Event Hubs Receiver Connection String Clear Secret Info
 
-A [`clear_secret_info`](#azure-event-hubs-receiver-connection-string-clear-secret-info) block (within [`azure_event_hubs_receiver.connection_string`](#azure-event-hubs-receiver-connection-string)) supports the following:
+A [`clear_secret_info`](#info-a586ad) block (within [`azure_event_hubs_receiver.connection_string`](#string-b729f9)) supports the following:
 
-<a id="azure-event-hubs-receiver-connection-string-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#azure-event-hubs-receiver-connection-string-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-8b7732"></a>&#x2022; [`provider_ref`](#ref-8b7732) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="azure-event-hubs-receiver-connection-string-clear-secret-info-url"></a>&#x2022; [`url`](#azure-event-hubs-receiver-connection-string-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="url-70e945"></a>&#x2022; [`url`](#url-70e945) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 #### Azure Receiver
 
@@ -213,57 +213,57 @@ A [`batch`](#azure-receiver-batch) block (within [`azure_receiver`](#azure-recei
 
 <a id="azure-receiver-batch-max-events"></a>&#x2022; [`max_events`](#azure-receiver-batch-max-events) - Optional Number<br>Max Events. Send batch to endpoint after this many log messages are in the batch
 
-<a id="azure-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#azure-receiver-batch-max-events-disabled) - Optional Block<br>Enable this option
+<a id="disabled-754236"></a>&#x2022; [`max_events_disabled`](#disabled-754236) - Optional Block<br>Enable this option
 
 <a id="azure-receiver-batch-timeout-seconds"></a>&#x2022; [`timeout_seconds`](#azure-receiver-batch-timeout-seconds) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
 
-<a id="azure-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#azure-receiver-batch-timeout-seconds-default) - Optional Block<br>Enable this option
+<a id="default-19a14b"></a>&#x2022; [`timeout_seconds_default`](#default-19a14b) - Optional Block<br>Enable this option
 
 #### Azure Receiver Compression
 
 A [`compression`](#azure-receiver-compression) block (within [`azure_receiver`](#azure-receiver)) supports the following:
 
-<a id="azure-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#azure-receiver-compression-compression-default) - Optional Block<br>Enable this option
+<a id="default-02273a"></a>&#x2022; [`compression_default`](#default-02273a) - Optional Block<br>Enable this option
 
-<a id="azure-receiver-compression-compression-gzip"></a>&#x2022; [`compression_gzip`](#azure-receiver-compression-compression-gzip) - Optional Block<br>Enable this option
+<a id="gzip-156cfe"></a>&#x2022; [`compression_gzip`](#gzip-156cfe) - Optional Block<br>Enable this option
 
-<a id="azure-receiver-compression-compression-none"></a>&#x2022; [`compression_none`](#azure-receiver-compression-compression-none) - Optional Block<br>Enable this option
+<a id="none-aaef5b"></a>&#x2022; [`compression_none`](#none-aaef5b) - Optional Block<br>Enable this option
 
 #### Azure Receiver Connection String
 
 A [`connection_string`](#azure-receiver-connection-string) block (within [`azure_receiver`](#azure-receiver)) supports the following:
 
-<a id="azure-receiver-connection-string-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#azure-receiver-connection-string-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#azure-receiver-connection-string-blindfold-secret-info) below.
+<a id="info-e8810f"></a>&#x2022; [`blindfold_secret_info`](#info-e8810f) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-e8810f) below.
 
-<a id="azure-receiver-connection-string-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#azure-receiver-connection-string-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#azure-receiver-connection-string-clear-secret-info) below.
+<a id="info-e37fa5"></a>&#x2022; [`clear_secret_info`](#info-e37fa5) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-e37fa5) below.
 
 #### Azure Receiver Connection String Blindfold Secret Info
 
-A [`blindfold_secret_info`](#azure-receiver-connection-string-blindfold-secret-info) block (within [`azure_receiver.connection_string`](#azure-receiver-connection-string)) supports the following:
+A [`blindfold_secret_info`](#info-e8810f) block (within [`azure_receiver.connection_string`](#azure-receiver-connection-string)) supports the following:
 
-<a id="azure-receiver-connection-string-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#azure-receiver-connection-string-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+<a id="provider-89bfbb"></a>&#x2022; [`decryption_provider`](#provider-89bfbb) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-<a id="azure-receiver-connection-string-blindfold-secret-info-location"></a>&#x2022; [`location`](#azure-receiver-connection-string-blindfold-secret-info-location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+<a id="location-15db90"></a>&#x2022; [`location`](#location-15db90) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="azure-receiver-connection-string-blindfold-secret-info-store-provider"></a>&#x2022; [`store_provider`](#azure-receiver-connection-string-blindfold-secret-info-store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-b18b33"></a>&#x2022; [`store_provider`](#provider-b18b33) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### Azure Receiver Connection String Clear Secret Info
 
-A [`clear_secret_info`](#azure-receiver-connection-string-clear-secret-info) block (within [`azure_receiver.connection_string`](#azure-receiver-connection-string)) supports the following:
+A [`clear_secret_info`](#info-e37fa5) block (within [`azure_receiver.connection_string`](#azure-receiver-connection-string)) supports the following:
 
-<a id="azure-receiver-connection-string-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#azure-receiver-connection-string-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-29f26d"></a>&#x2022; [`provider_ref`](#ref-29f26d) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="azure-receiver-connection-string-clear-secret-info-url"></a>&#x2022; [`url`](#azure-receiver-connection-string-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="url-06a3b0"></a>&#x2022; [`url`](#url-06a3b0) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 #### Azure Receiver Filename Options
 
 A [`filename_options`](#azure-receiver-filename-options) block (within [`azure_receiver`](#azure-receiver)) supports the following:
 
-<a id="azure-receiver-filename-options-custom-folder"></a>&#x2022; [`custom_folder`](#azure-receiver-filename-options-custom-folder) - Optional String<br>Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_]\[a-z0-9\-\._]*$/i`
+<a id="folder-153221"></a>&#x2022; [`custom_folder`](#folder-153221) - Optional String<br>Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_]\[a-z0-9\-\._]*$/i`
 
-<a id="azure-receiver-filename-options-log-type-folder"></a>&#x2022; [`log_type_folder`](#azure-receiver-filename-options-log-type-folder) - Optional Block<br>Enable this option
+<a id="folder-1cd085"></a>&#x2022; [`log_type_folder`](#folder-1cd085) - Optional Block<br>Enable this option
 
-<a id="azure-receiver-filename-options-no-folder"></a>&#x2022; [`no_folder`](#azure-receiver-filename-options-no-folder) - Optional Block<br>Enable this option
+<a id="folder-569968"></a>&#x2022; [`no_folder`](#folder-569968) - Optional Block<br>Enable this option
 
 #### Datadog Receiver
 
@@ -289,63 +289,63 @@ A [`batch`](#datadog-receiver-batch) block (within [`datadog_receiver`](#datadog
 
 <a id="datadog-receiver-batch-max-bytes"></a>&#x2022; [`max_bytes`](#datadog-receiver-batch-max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
-<a id="datadog-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#datadog-receiver-batch-max-bytes-disabled) - Optional Block<br>Enable this option
+<a id="disabled-96f32b"></a>&#x2022; [`max_bytes_disabled`](#disabled-96f32b) - Optional Block<br>Enable this option
 
 <a id="datadog-receiver-batch-max-events"></a>&#x2022; [`max_events`](#datadog-receiver-batch-max-events) - Optional Number<br>Max Events. Send batch to endpoint after this many log messages are in the batch
 
-<a id="datadog-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#datadog-receiver-batch-max-events-disabled) - Optional Block<br>Enable this option
+<a id="disabled-a9dbc9"></a>&#x2022; [`max_events_disabled`](#disabled-a9dbc9) - Optional Block<br>Enable this option
 
 <a id="datadog-receiver-batch-timeout-seconds"></a>&#x2022; [`timeout_seconds`](#datadog-receiver-batch-timeout-seconds) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
 
-<a id="datadog-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#datadog-receiver-batch-timeout-seconds-default) - Optional Block<br>Enable this option
+<a id="default-f00e06"></a>&#x2022; [`timeout_seconds_default`](#default-f00e06) - Optional Block<br>Enable this option
 
 #### Datadog Receiver Compression
 
 A [`compression`](#datadog-receiver-compression) block (within [`datadog_receiver`](#datadog-receiver)) supports the following:
 
-<a id="datadog-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#datadog-receiver-compression-compression-default) - Optional Block<br>Enable this option
+<a id="default-888579"></a>&#x2022; [`compression_default`](#default-888579) - Optional Block<br>Enable this option
 
-<a id="datadog-receiver-compression-compression-gzip"></a>&#x2022; [`compression_gzip`](#datadog-receiver-compression-compression-gzip) - Optional Block<br>Enable this option
+<a id="gzip-004135"></a>&#x2022; [`compression_gzip`](#gzip-004135) - Optional Block<br>Enable this option
 
-<a id="datadog-receiver-compression-compression-none"></a>&#x2022; [`compression_none`](#datadog-receiver-compression-compression-none) - Optional Block<br>Enable this option
+<a id="none-4e31f2"></a>&#x2022; [`compression_none`](#none-4e31f2) - Optional Block<br>Enable this option
 
 #### Datadog Receiver Datadog API Key
 
 A [`datadog_api_key`](#datadog-receiver-datadog-api-key) block (within [`datadog_receiver`](#datadog-receiver)) supports the following:
 
-<a id="datadog-receiver-datadog-api-key-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#datadog-receiver-datadog-api-key-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#datadog-receiver-datadog-api-key-blindfold-secret-info) below.
+<a id="info-c8197d"></a>&#x2022; [`blindfold_secret_info`](#info-c8197d) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-c8197d) below.
 
-<a id="datadog-receiver-datadog-api-key-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#datadog-receiver-datadog-api-key-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#datadog-receiver-datadog-api-key-clear-secret-info) below.
+<a id="info-400d24"></a>&#x2022; [`clear_secret_info`](#info-400d24) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-400d24) below.
 
 #### Datadog Receiver Datadog API Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#datadog-receiver-datadog-api-key-blindfold-secret-info) block (within [`datadog_receiver.datadog_api_key`](#datadog-receiver-datadog-api-key)) supports the following:
+A [`blindfold_secret_info`](#info-c8197d) block (within [`datadog_receiver.datadog_api_key`](#datadog-receiver-datadog-api-key)) supports the following:
 
-<a id="datadog-receiver-datadog-api-key-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#datadog-receiver-datadog-api-key-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+<a id="provider-476ad5"></a>&#x2022; [`decryption_provider`](#provider-476ad5) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-<a id="datadog-receiver-datadog-api-key-blindfold-secret-info-location"></a>&#x2022; [`location`](#datadog-receiver-datadog-api-key-blindfold-secret-info-location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+<a id="location-e0276e"></a>&#x2022; [`location`](#location-e0276e) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="datadog-receiver-datadog-api-key-blindfold-secret-info-store-provider"></a>&#x2022; [`store_provider`](#datadog-receiver-datadog-api-key-blindfold-secret-info-store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-41aa89"></a>&#x2022; [`store_provider`](#provider-41aa89) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### Datadog Receiver Datadog API Key Clear Secret Info
 
-A [`clear_secret_info`](#datadog-receiver-datadog-api-key-clear-secret-info) block (within [`datadog_receiver.datadog_api_key`](#datadog-receiver-datadog-api-key)) supports the following:
+A [`clear_secret_info`](#info-400d24) block (within [`datadog_receiver.datadog_api_key`](#datadog-receiver-datadog-api-key)) supports the following:
 
-<a id="datadog-receiver-datadog-api-key-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#datadog-receiver-datadog-api-key-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-6ec775"></a>&#x2022; [`provider_ref`](#ref-6ec775) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="datadog-receiver-datadog-api-key-clear-secret-info-url"></a>&#x2022; [`url`](#datadog-receiver-datadog-api-key-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="url-744ac8"></a>&#x2022; [`url`](#url-744ac8) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 #### Datadog Receiver Use TLS
 
 An [`use_tls`](#datadog-receiver-use-tls) block (within [`datadog_receiver`](#datadog-receiver)) supports the following:
 
-<a id="datadog-receiver-use-tls-disable-verify-certificate"></a>&#x2022; [`disable_verify_certificate`](#datadog-receiver-use-tls-disable-verify-certificate) - Optional Block<br>Enable this option
+<a id="certificate-fc103e"></a>&#x2022; [`disable_verify_certificate`](#certificate-fc103e) - Optional Block<br>Enable this option
 
-<a id="datadog-receiver-use-tls-disable-verify-hostname"></a>&#x2022; [`disable_verify_hostname`](#datadog-receiver-use-tls-disable-verify-hostname) - Optional Block<br>Enable this option
+<a id="hostname-e3faa0"></a>&#x2022; [`disable_verify_hostname`](#hostname-e3faa0) - Optional Block<br>Enable this option
 
-<a id="datadog-receiver-use-tls-enable-verify-certificate"></a>&#x2022; [`enable_verify_certificate`](#datadog-receiver-use-tls-enable-verify-certificate) - Optional Block<br>Enable this option
+<a id="certificate-37d53f"></a>&#x2022; [`enable_verify_certificate`](#certificate-37d53f) - Optional Block<br>Enable this option
 
-<a id="datadog-receiver-use-tls-enable-verify-hostname"></a>&#x2022; [`enable_verify_hostname`](#datadog-receiver-use-tls-enable-verify-hostname) - Optional Block<br>Enable this option
+<a id="hostname-5c7a30"></a>&#x2022; [`enable_verify_hostname`](#hostname-5c7a30) - Optional Block<br>Enable this option
 
 <a id="datadog-receiver-use-tls-mtls-disabled"></a>&#x2022; [`mtls_disabled`](#datadog-receiver-use-tls-mtls-disabled) - Optional Block<br>Enable this option
 
@@ -359,35 +359,35 @@ An [`use_tls`](#datadog-receiver-use-tls) block (within [`datadog_receiver`](#da
 
 A [`mtls_enable`](#datadog-receiver-use-tls-mtls-enable) block (within [`datadog_receiver.use_tls`](#datadog-receiver-use-tls)) supports the following:
 
-<a id="datadog-receiver-use-tls-mtls-enable-certificate"></a>&#x2022; [`certificate`](#datadog-receiver-use-tls-mtls-enable-certificate) - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
+<a id="certificate-a6bd6b"></a>&#x2022; [`certificate`](#certificate-a6bd6b) - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
 
-<a id="datadog-receiver-use-tls-mtls-enable-key-url"></a>&#x2022; [`key_url`](#datadog-receiver-use-tls-mtls-enable-key-url) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Key URL](#datadog-receiver-use-tls-mtls-enable-key-url) below.
+<a id="url-266095"></a>&#x2022; [`key_url`](#url-266095) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Key URL](#url-266095) below.
 
 #### Datadog Receiver Use TLS mTLS Enable Key URL
 
-A [`key_url`](#datadog-receiver-use-tls-mtls-enable-key-url) block (within [`datadog_receiver.use_tls.mtls_enable`](#datadog-receiver-use-tls-mtls-enable)) supports the following:
+A [`key_url`](#url-266095) block (within [`datadog_receiver.use_tls.mtls_enable`](#datadog-receiver-use-tls-mtls-enable)) supports the following:
 
-<a id="datadog-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#datadog-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#datadog-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) below.
+<a id="info-c88ca3"></a>&#x2022; [`blindfold_secret_info`](#info-c88ca3) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-c88ca3) below.
 
-<a id="datadog-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#datadog-receiver-use-tls-mtls-enable-key-url-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#datadog-receiver-use-tls-mtls-enable-key-url-clear-secret-info) below.
+<a id="info-dca784"></a>&#x2022; [`clear_secret_info`](#info-dca784) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-dca784) below.
 
 #### Datadog Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info
 
-A [`blindfold_secret_info`](#datadog-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) block (within [`datadog_receiver.use_tls.mtls_enable.key_url`](#datadog-receiver-use-tls-mtls-enable-key-url)) supports the following:
+A [`blindfold_secret_info`](#info-c88ca3) block (within [`datadog_receiver.use_tls.mtls_enable.key_url`](#url-266095)) supports the following:
 
-<a id="datadog-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#datadog-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+<a id="provider-ef2180"></a>&#x2022; [`decryption_provider`](#provider-ef2180) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-<a id="datadog-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-location"></a>&#x2022; [`location`](#datadog-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+<a id="location-f6ec2e"></a>&#x2022; [`location`](#location-f6ec2e) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="datadog-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-store-provider"></a>&#x2022; [`store_provider`](#datadog-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-ee5a93"></a>&#x2022; [`store_provider`](#provider-ee5a93) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### Datadog Receiver Use TLS mTLS Enable Key URL Clear Secret Info
 
-A [`clear_secret_info`](#datadog-receiver-use-tls-mtls-enable-key-url-clear-secret-info) block (within [`datadog_receiver.use_tls.mtls_enable.key_url`](#datadog-receiver-use-tls-mtls-enable-key-url)) supports the following:
+A [`clear_secret_info`](#info-dca784) block (within [`datadog_receiver.use_tls.mtls_enable.key_url`](#url-266095)) supports the following:
 
-<a id="datadog-receiver-use-tls-mtls-enable-key-url-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#datadog-receiver-use-tls-mtls-enable-key-url-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-88b7a5"></a>&#x2022; [`provider_ref`](#ref-88b7a5) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="datadog-receiver-use-tls-mtls-enable-key-url-clear-secret-info-url"></a>&#x2022; [`url`](#datadog-receiver-use-tls-mtls-enable-key-url-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="url-b8d364"></a>&#x2022; [`url`](#url-b8d364) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 #### GCP Bucket Receiver
 
@@ -409,35 +409,35 @@ A [`batch`](#gcp-bucket-receiver-batch) block (within [`gcp_bucket_receiver`](#g
 
 <a id="gcp-bucket-receiver-batch-max-bytes"></a>&#x2022; [`max_bytes`](#gcp-bucket-receiver-batch-max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
-<a id="gcp-bucket-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#gcp-bucket-receiver-batch-max-bytes-disabled) - Optional Block<br>Enable this option
+<a id="disabled-2aebe7"></a>&#x2022; [`max_bytes_disabled`](#disabled-2aebe7) - Optional Block<br>Enable this option
 
 <a id="gcp-bucket-receiver-batch-max-events"></a>&#x2022; [`max_events`](#gcp-bucket-receiver-batch-max-events) - Optional Number<br>Max Events. Send batch to endpoint after this many log messages are in the batch
 
-<a id="gcp-bucket-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#gcp-bucket-receiver-batch-max-events-disabled) - Optional Block<br>Enable this option
+<a id="disabled-6b6d30"></a>&#x2022; [`max_events_disabled`](#disabled-6b6d30) - Optional Block<br>Enable this option
 
-<a id="gcp-bucket-receiver-batch-timeout-seconds"></a>&#x2022; [`timeout_seconds`](#gcp-bucket-receiver-batch-timeout-seconds) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
+<a id="seconds-a39e0f"></a>&#x2022; [`timeout_seconds`](#seconds-a39e0f) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
 
-<a id="gcp-bucket-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#gcp-bucket-receiver-batch-timeout-seconds-default) - Optional Block<br>Enable this option
+<a id="default-2db988"></a>&#x2022; [`timeout_seconds_default`](#default-2db988) - Optional Block<br>Enable this option
 
 #### GCP Bucket Receiver Compression
 
 A [`compression`](#gcp-bucket-receiver-compression) block (within [`gcp_bucket_receiver`](#gcp-bucket-receiver)) supports the following:
 
-<a id="gcp-bucket-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#gcp-bucket-receiver-compression-compression-default) - Optional Block<br>Enable this option
+<a id="default-db78dc"></a>&#x2022; [`compression_default`](#default-db78dc) - Optional Block<br>Enable this option
 
-<a id="gcp-bucket-receiver-compression-compression-gzip"></a>&#x2022; [`compression_gzip`](#gcp-bucket-receiver-compression-compression-gzip) - Optional Block<br>Enable this option
+<a id="gzip-c72b3f"></a>&#x2022; [`compression_gzip`](#gzip-c72b3f) - Optional Block<br>Enable this option
 
-<a id="gcp-bucket-receiver-compression-compression-none"></a>&#x2022; [`compression_none`](#gcp-bucket-receiver-compression-compression-none) - Optional Block<br>Enable this option
+<a id="none-8916e9"></a>&#x2022; [`compression_none`](#none-8916e9) - Optional Block<br>Enable this option
 
 #### GCP Bucket Receiver Filename Options
 
 A [`filename_options`](#gcp-bucket-receiver-filename-options) block (within [`gcp_bucket_receiver`](#gcp-bucket-receiver)) supports the following:
 
-<a id="gcp-bucket-receiver-filename-options-custom-folder"></a>&#x2022; [`custom_folder`](#gcp-bucket-receiver-filename-options-custom-folder) - Optional String<br>Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_]\[a-z0-9\-\._]*$/i`
+<a id="folder-ab0859"></a>&#x2022; [`custom_folder`](#folder-ab0859) - Optional String<br>Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_]\[a-z0-9\-\._]*$/i`
 
-<a id="gcp-bucket-receiver-filename-options-log-type-folder"></a>&#x2022; [`log_type_folder`](#gcp-bucket-receiver-filename-options-log-type-folder) - Optional Block<br>Enable this option
+<a id="folder-3d88ea"></a>&#x2022; [`log_type_folder`](#folder-3d88ea) - Optional Block<br>Enable this option
 
-<a id="gcp-bucket-receiver-filename-options-no-folder"></a>&#x2022; [`no_folder`](#gcp-bucket-receiver-filename-options-no-folder) - Optional Block<br>Enable this option
+<a id="folder-0b7426"></a>&#x2022; [`no_folder`](#folder-0b7426) - Optional Block<br>Enable this option
 
 #### GCP Bucket Receiver GCP Cred
 
@@ -481,27 +481,27 @@ An [`auth_basic`](#http-receiver-auth-basic) block (within [`http_receiver`](#ht
 
 A [`password`](#http-receiver-auth-basic-password) block (within [`http_receiver.auth_basic`](#http-receiver-auth-basic)) supports the following:
 
-<a id="http-receiver-auth-basic-password-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#http-receiver-auth-basic-password-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#http-receiver-auth-basic-password-blindfold-secret-info) below.
+<a id="info-265ff8"></a>&#x2022; [`blindfold_secret_info`](#info-265ff8) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-265ff8) below.
 
-<a id="http-receiver-auth-basic-password-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#http-receiver-auth-basic-password-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#http-receiver-auth-basic-password-clear-secret-info) below.
+<a id="info-b23662"></a>&#x2022; [`clear_secret_info`](#info-b23662) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-b23662) below.
 
 #### HTTP Receiver Auth Basic Password Blindfold Secret Info
 
-A [`blindfold_secret_info`](#http-receiver-auth-basic-password-blindfold-secret-info) block (within [`http_receiver.auth_basic.password`](#http-receiver-auth-basic-password)) supports the following:
+A [`blindfold_secret_info`](#info-265ff8) block (within [`http_receiver.auth_basic.password`](#http-receiver-auth-basic-password)) supports the following:
 
-<a id="http-receiver-auth-basic-password-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#http-receiver-auth-basic-password-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+<a id="provider-fdc07f"></a>&#x2022; [`decryption_provider`](#provider-fdc07f) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-<a id="http-receiver-auth-basic-password-blindfold-secret-info-location"></a>&#x2022; [`location`](#http-receiver-auth-basic-password-blindfold-secret-info-location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+<a id="location-6186b7"></a>&#x2022; [`location`](#location-6186b7) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="http-receiver-auth-basic-password-blindfold-secret-info-store-provider"></a>&#x2022; [`store_provider`](#http-receiver-auth-basic-password-blindfold-secret-info-store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-0b42a0"></a>&#x2022; [`store_provider`](#provider-0b42a0) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### HTTP Receiver Auth Basic Password Clear Secret Info
 
-A [`clear_secret_info`](#http-receiver-auth-basic-password-clear-secret-info) block (within [`http_receiver.auth_basic.password`](#http-receiver-auth-basic-password)) supports the following:
+A [`clear_secret_info`](#info-b23662) block (within [`http_receiver.auth_basic.password`](#http-receiver-auth-basic-password)) supports the following:
 
-<a id="http-receiver-auth-basic-password-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#http-receiver-auth-basic-password-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-9763da"></a>&#x2022; [`provider_ref`](#ref-9763da) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="http-receiver-auth-basic-password-clear-secret-info-url"></a>&#x2022; [`url`](#http-receiver-auth-basic-password-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="url-579bb2"></a>&#x2022; [`url`](#url-579bb2) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 #### HTTP Receiver Auth Token
 
@@ -513,27 +513,27 @@ An [`auth_token`](#http-receiver-auth-token) block (within [`http_receiver`](#ht
 
 A [`token`](#http-receiver-auth-token-token) block (within [`http_receiver.auth_token`](#http-receiver-auth-token)) supports the following:
 
-<a id="http-receiver-auth-token-token-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#http-receiver-auth-token-token-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#http-receiver-auth-token-token-blindfold-secret-info) below.
+<a id="info-5dfb53"></a>&#x2022; [`blindfold_secret_info`](#info-5dfb53) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-5dfb53) below.
 
-<a id="http-receiver-auth-token-token-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#http-receiver-auth-token-token-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#http-receiver-auth-token-token-clear-secret-info) below.
+<a id="info-f68d67"></a>&#x2022; [`clear_secret_info`](#info-f68d67) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-f68d67) below.
 
 #### HTTP Receiver Auth Token Token Blindfold Secret Info
 
-A [`blindfold_secret_info`](#http-receiver-auth-token-token-blindfold-secret-info) block (within [`http_receiver.auth_token.token`](#http-receiver-auth-token-token)) supports the following:
+A [`blindfold_secret_info`](#info-5dfb53) block (within [`http_receiver.auth_token.token`](#http-receiver-auth-token-token)) supports the following:
 
-<a id="http-receiver-auth-token-token-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#http-receiver-auth-token-token-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+<a id="provider-81048b"></a>&#x2022; [`decryption_provider`](#provider-81048b) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-<a id="http-receiver-auth-token-token-blindfold-secret-info-location"></a>&#x2022; [`location`](#http-receiver-auth-token-token-blindfold-secret-info-location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+<a id="location-5f4c4b"></a>&#x2022; [`location`](#location-5f4c4b) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="http-receiver-auth-token-token-blindfold-secret-info-store-provider"></a>&#x2022; [`store_provider`](#http-receiver-auth-token-token-blindfold-secret-info-store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-efd8bc"></a>&#x2022; [`store_provider`](#provider-efd8bc) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### HTTP Receiver Auth Token Token Clear Secret Info
 
-A [`clear_secret_info`](#http-receiver-auth-token-token-clear-secret-info) block (within [`http_receiver.auth_token.token`](#http-receiver-auth-token-token)) supports the following:
+A [`clear_secret_info`](#info-f68d67) block (within [`http_receiver.auth_token.token`](#http-receiver-auth-token-token)) supports the following:
 
-<a id="http-receiver-auth-token-token-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#http-receiver-auth-token-token-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-3278a3"></a>&#x2022; [`provider_ref`](#ref-3278a3) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="http-receiver-auth-token-token-clear-secret-info-url"></a>&#x2022; [`url`](#http-receiver-auth-token-token-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="url-72879f"></a>&#x2022; [`url`](#url-72879f) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 #### HTTP Receiver Batch
 
@@ -549,29 +549,29 @@ A [`batch`](#http-receiver-batch) block (within [`http_receiver`](#http-receiver
 
 <a id="http-receiver-batch-timeout-seconds"></a>&#x2022; [`timeout_seconds`](#http-receiver-batch-timeout-seconds) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
 
-<a id="http-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#http-receiver-batch-timeout-seconds-default) - Optional Block<br>Enable this option
+<a id="default-07fa28"></a>&#x2022; [`timeout_seconds_default`](#default-07fa28) - Optional Block<br>Enable this option
 
 #### HTTP Receiver Compression
 
 A [`compression`](#http-receiver-compression) block (within [`http_receiver`](#http-receiver)) supports the following:
 
-<a id="http-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#http-receiver-compression-compression-default) - Optional Block<br>Enable this option
+<a id="default-acdb2d"></a>&#x2022; [`compression_default`](#default-acdb2d) - Optional Block<br>Enable this option
 
-<a id="http-receiver-compression-compression-gzip"></a>&#x2022; [`compression_gzip`](#http-receiver-compression-compression-gzip) - Optional Block<br>Enable this option
+<a id="gzip-aa097d"></a>&#x2022; [`compression_gzip`](#gzip-aa097d) - Optional Block<br>Enable this option
 
-<a id="http-receiver-compression-compression-none"></a>&#x2022; [`compression_none`](#http-receiver-compression-compression-none) - Optional Block<br>Enable this option
+<a id="none-64622e"></a>&#x2022; [`compression_none`](#none-64622e) - Optional Block<br>Enable this option
 
 #### HTTP Receiver Use TLS
 
 An [`use_tls`](#http-receiver-use-tls) block (within [`http_receiver`](#http-receiver)) supports the following:
 
-<a id="http-receiver-use-tls-disable-verify-certificate"></a>&#x2022; [`disable_verify_certificate`](#http-receiver-use-tls-disable-verify-certificate) - Optional Block<br>Enable this option
+<a id="certificate-44f578"></a>&#x2022; [`disable_verify_certificate`](#certificate-44f578) - Optional Block<br>Enable this option
 
-<a id="http-receiver-use-tls-disable-verify-hostname"></a>&#x2022; [`disable_verify_hostname`](#http-receiver-use-tls-disable-verify-hostname) - Optional Block<br>Enable this option
+<a id="hostname-b557e6"></a>&#x2022; [`disable_verify_hostname`](#hostname-b557e6) - Optional Block<br>Enable this option
 
-<a id="http-receiver-use-tls-enable-verify-certificate"></a>&#x2022; [`enable_verify_certificate`](#http-receiver-use-tls-enable-verify-certificate) - Optional Block<br>Enable this option
+<a id="certificate-2245f4"></a>&#x2022; [`enable_verify_certificate`](#certificate-2245f4) - Optional Block<br>Enable this option
 
-<a id="http-receiver-use-tls-enable-verify-hostname"></a>&#x2022; [`enable_verify_hostname`](#http-receiver-use-tls-enable-verify-hostname) - Optional Block<br>Enable this option
+<a id="hostname-080fc4"></a>&#x2022; [`enable_verify_hostname`](#hostname-080fc4) - Optional Block<br>Enable this option
 
 <a id="http-receiver-use-tls-mtls-disabled"></a>&#x2022; [`mtls_disabled`](#http-receiver-use-tls-mtls-disabled) - Optional Block<br>Enable this option
 
@@ -585,35 +585,35 @@ An [`use_tls`](#http-receiver-use-tls) block (within [`http_receiver`](#http-rec
 
 A [`mtls_enable`](#http-receiver-use-tls-mtls-enable) block (within [`http_receiver.use_tls`](#http-receiver-use-tls)) supports the following:
 
-<a id="http-receiver-use-tls-mtls-enable-certificate"></a>&#x2022; [`certificate`](#http-receiver-use-tls-mtls-enable-certificate) - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
+<a id="certificate-c3cc99"></a>&#x2022; [`certificate`](#certificate-c3cc99) - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
 
-<a id="http-receiver-use-tls-mtls-enable-key-url"></a>&#x2022; [`key_url`](#http-receiver-use-tls-mtls-enable-key-url) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Key URL](#http-receiver-use-tls-mtls-enable-key-url) below.
+<a id="url-12d8b8"></a>&#x2022; [`key_url`](#url-12d8b8) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Key URL](#url-12d8b8) below.
 
 #### HTTP Receiver Use TLS mTLS Enable Key URL
 
-A [`key_url`](#http-receiver-use-tls-mtls-enable-key-url) block (within [`http_receiver.use_tls.mtls_enable`](#http-receiver-use-tls-mtls-enable)) supports the following:
+A [`key_url`](#url-12d8b8) block (within [`http_receiver.use_tls.mtls_enable`](#http-receiver-use-tls-mtls-enable)) supports the following:
 
-<a id="http-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#http-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#http-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) below.
+<a id="info-e6a85d"></a>&#x2022; [`blindfold_secret_info`](#info-e6a85d) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-e6a85d) below.
 
-<a id="http-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#http-receiver-use-tls-mtls-enable-key-url-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#http-receiver-use-tls-mtls-enable-key-url-clear-secret-info) below.
+<a id="info-45b078"></a>&#x2022; [`clear_secret_info`](#info-45b078) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-45b078) below.
 
 #### HTTP Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info
 
-A [`blindfold_secret_info`](#http-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) block (within [`http_receiver.use_tls.mtls_enable.key_url`](#http-receiver-use-tls-mtls-enable-key-url)) supports the following:
+A [`blindfold_secret_info`](#info-e6a85d) block (within [`http_receiver.use_tls.mtls_enable.key_url`](#url-12d8b8)) supports the following:
 
-<a id="http-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#http-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+<a id="provider-aacbf7"></a>&#x2022; [`decryption_provider`](#provider-aacbf7) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-<a id="http-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-location"></a>&#x2022; [`location`](#http-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+<a id="location-54b8ed"></a>&#x2022; [`location`](#location-54b8ed) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="http-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-store-provider"></a>&#x2022; [`store_provider`](#http-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-573c3b"></a>&#x2022; [`store_provider`](#provider-573c3b) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### HTTP Receiver Use TLS mTLS Enable Key URL Clear Secret Info
 
-A [`clear_secret_info`](#http-receiver-use-tls-mtls-enable-key-url-clear-secret-info) block (within [`http_receiver.use_tls.mtls_enable.key_url`](#http-receiver-use-tls-mtls-enable-key-url)) supports the following:
+A [`clear_secret_info`](#info-45b078) block (within [`http_receiver.use_tls.mtls_enable.key_url`](#url-12d8b8)) supports the following:
 
-<a id="http-receiver-use-tls-mtls-enable-key-url-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#http-receiver-use-tls-mtls-enable-key-url-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-00a2ea"></a>&#x2022; [`provider_ref`](#ref-00a2ea) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="http-receiver-use-tls-mtls-enable-key-url-clear-secret-info-url"></a>&#x2022; [`url`](#http-receiver-use-tls-mtls-enable-key-url-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="url-47a3bc"></a>&#x2022; [`url`](#url-47a3bc) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 #### Kafka Receiver
 
@@ -641,33 +641,33 @@ A [`batch`](#kafka-receiver-batch) block (within [`kafka_receiver`](#kafka-recei
 
 <a id="kafka-receiver-batch-max-events"></a>&#x2022; [`max_events`](#kafka-receiver-batch-max-events) - Optional Number<br>Max Events. Send batch to endpoint after this many log messages are in the batch
 
-<a id="kafka-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#kafka-receiver-batch-max-events-disabled) - Optional Block<br>Enable this option
+<a id="disabled-103987"></a>&#x2022; [`max_events_disabled`](#disabled-103987) - Optional Block<br>Enable this option
 
 <a id="kafka-receiver-batch-timeout-seconds"></a>&#x2022; [`timeout_seconds`](#kafka-receiver-batch-timeout-seconds) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
 
-<a id="kafka-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#kafka-receiver-batch-timeout-seconds-default) - Optional Block<br>Enable this option
+<a id="default-f70ae5"></a>&#x2022; [`timeout_seconds_default`](#default-f70ae5) - Optional Block<br>Enable this option
 
 #### Kafka Receiver Compression
 
 A [`compression`](#kafka-receiver-compression) block (within [`kafka_receiver`](#kafka-receiver)) supports the following:
 
-<a id="kafka-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#kafka-receiver-compression-compression-default) - Optional Block<br>Enable this option
+<a id="default-c0d204"></a>&#x2022; [`compression_default`](#default-c0d204) - Optional Block<br>Enable this option
 
-<a id="kafka-receiver-compression-compression-gzip"></a>&#x2022; [`compression_gzip`](#kafka-receiver-compression-compression-gzip) - Optional Block<br>Enable this option
+<a id="gzip-6f882e"></a>&#x2022; [`compression_gzip`](#gzip-6f882e) - Optional Block<br>Enable this option
 
-<a id="kafka-receiver-compression-compression-none"></a>&#x2022; [`compression_none`](#kafka-receiver-compression-compression-none) - Optional Block<br>Enable this option
+<a id="none-c368ff"></a>&#x2022; [`compression_none`](#none-c368ff) - Optional Block<br>Enable this option
 
 #### Kafka Receiver Use TLS
 
 An [`use_tls`](#kafka-receiver-use-tls) block (within [`kafka_receiver`](#kafka-receiver)) supports the following:
 
-<a id="kafka-receiver-use-tls-disable-verify-certificate"></a>&#x2022; [`disable_verify_certificate`](#kafka-receiver-use-tls-disable-verify-certificate) - Optional Block<br>Enable this option
+<a id="certificate-7c4499"></a>&#x2022; [`disable_verify_certificate`](#certificate-7c4499) - Optional Block<br>Enable this option
 
-<a id="kafka-receiver-use-tls-disable-verify-hostname"></a>&#x2022; [`disable_verify_hostname`](#kafka-receiver-use-tls-disable-verify-hostname) - Optional Block<br>Enable this option
+<a id="hostname-1988d1"></a>&#x2022; [`disable_verify_hostname`](#hostname-1988d1) - Optional Block<br>Enable this option
 
-<a id="kafka-receiver-use-tls-enable-verify-certificate"></a>&#x2022; [`enable_verify_certificate`](#kafka-receiver-use-tls-enable-verify-certificate) - Optional Block<br>Enable this option
+<a id="certificate-d5b68f"></a>&#x2022; [`enable_verify_certificate`](#certificate-d5b68f) - Optional Block<br>Enable this option
 
-<a id="kafka-receiver-use-tls-enable-verify-hostname"></a>&#x2022; [`enable_verify_hostname`](#kafka-receiver-use-tls-enable-verify-hostname) - Optional Block<br>Enable this option
+<a id="hostname-d84dcb"></a>&#x2022; [`enable_verify_hostname`](#hostname-d84dcb) - Optional Block<br>Enable this option
 
 <a id="kafka-receiver-use-tls-mtls-disabled"></a>&#x2022; [`mtls_disabled`](#kafka-receiver-use-tls-mtls-disabled) - Optional Block<br>Enable this option
 
@@ -681,35 +681,35 @@ An [`use_tls`](#kafka-receiver-use-tls) block (within [`kafka_receiver`](#kafka-
 
 A [`mtls_enable`](#kafka-receiver-use-tls-mtls-enable) block (within [`kafka_receiver.use_tls`](#kafka-receiver-use-tls)) supports the following:
 
-<a id="kafka-receiver-use-tls-mtls-enable-certificate"></a>&#x2022; [`certificate`](#kafka-receiver-use-tls-mtls-enable-certificate) - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
+<a id="certificate-3abf3c"></a>&#x2022; [`certificate`](#certificate-3abf3c) - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
 
-<a id="kafka-receiver-use-tls-mtls-enable-key-url"></a>&#x2022; [`key_url`](#kafka-receiver-use-tls-mtls-enable-key-url) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Key URL](#kafka-receiver-use-tls-mtls-enable-key-url) below.
+<a id="url-27a26d"></a>&#x2022; [`key_url`](#url-27a26d) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Key URL](#url-27a26d) below.
 
 #### Kafka Receiver Use TLS mTLS Enable Key URL
 
-A [`key_url`](#kafka-receiver-use-tls-mtls-enable-key-url) block (within [`kafka_receiver.use_tls.mtls_enable`](#kafka-receiver-use-tls-mtls-enable)) supports the following:
+A [`key_url`](#url-27a26d) block (within [`kafka_receiver.use_tls.mtls_enable`](#kafka-receiver-use-tls-mtls-enable)) supports the following:
 
-<a id="kafka-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#kafka-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#kafka-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) below.
+<a id="info-883e9f"></a>&#x2022; [`blindfold_secret_info`](#info-883e9f) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-883e9f) below.
 
-<a id="kafka-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#kafka-receiver-use-tls-mtls-enable-key-url-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#kafka-receiver-use-tls-mtls-enable-key-url-clear-secret-info) below.
+<a id="info-6fa295"></a>&#x2022; [`clear_secret_info`](#info-6fa295) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-6fa295) below.
 
 #### Kafka Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info
 
-A [`blindfold_secret_info`](#kafka-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) block (within [`kafka_receiver.use_tls.mtls_enable.key_url`](#kafka-receiver-use-tls-mtls-enable-key-url)) supports the following:
+A [`blindfold_secret_info`](#info-883e9f) block (within [`kafka_receiver.use_tls.mtls_enable.key_url`](#url-27a26d)) supports the following:
 
-<a id="kafka-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#kafka-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+<a id="provider-e30698"></a>&#x2022; [`decryption_provider`](#provider-e30698) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-<a id="kafka-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-location"></a>&#x2022; [`location`](#kafka-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+<a id="location-9e7b8a"></a>&#x2022; [`location`](#location-9e7b8a) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="kafka-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-store-provider"></a>&#x2022; [`store_provider`](#kafka-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-4c39fb"></a>&#x2022; [`store_provider`](#provider-4c39fb) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### Kafka Receiver Use TLS mTLS Enable Key URL Clear Secret Info
 
-A [`clear_secret_info`](#kafka-receiver-use-tls-mtls-enable-key-url-clear-secret-info) block (within [`kafka_receiver.use_tls.mtls_enable.key_url`](#kafka-receiver-use-tls-mtls-enable-key-url)) supports the following:
+A [`clear_secret_info`](#info-6fa295) block (within [`kafka_receiver.use_tls.mtls_enable.key_url`](#url-27a26d)) supports the following:
 
-<a id="kafka-receiver-use-tls-mtls-enable-key-url-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#kafka-receiver-use-tls-mtls-enable-key-url-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-a5f55b"></a>&#x2022; [`provider_ref`](#ref-a5f55b) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="kafka-receiver-use-tls-mtls-enable-key-url-clear-secret-info-url"></a>&#x2022; [`url`](#kafka-receiver-use-tls-mtls-enable-key-url-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="url-2a65ad"></a>&#x2022; [`url`](#url-2a65ad) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 #### New Relic Receiver
 
@@ -725,27 +725,27 @@ A [`new_relic_receiver`](#new-relic-receiver) block supports the following:
 
 An [`api_key`](#new-relic-receiver-api-key) block (within [`new_relic_receiver`](#new-relic-receiver)) supports the following:
 
-<a id="new-relic-receiver-api-key-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#new-relic-receiver-api-key-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#new-relic-receiver-api-key-blindfold-secret-info) below.
+<a id="info-262674"></a>&#x2022; [`blindfold_secret_info`](#info-262674) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-262674) below.
 
-<a id="new-relic-receiver-api-key-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#new-relic-receiver-api-key-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#new-relic-receiver-api-key-clear-secret-info) below.
+<a id="info-6a5234"></a>&#x2022; [`clear_secret_info`](#info-6a5234) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-6a5234) below.
 
 #### New Relic Receiver API Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#new-relic-receiver-api-key-blindfold-secret-info) block (within [`new_relic_receiver.api_key`](#new-relic-receiver-api-key)) supports the following:
+A [`blindfold_secret_info`](#info-262674) block (within [`new_relic_receiver.api_key`](#new-relic-receiver-api-key)) supports the following:
 
-<a id="new-relic-receiver-api-key-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#new-relic-receiver-api-key-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+<a id="provider-5ff769"></a>&#x2022; [`decryption_provider`](#provider-5ff769) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-<a id="new-relic-receiver-api-key-blindfold-secret-info-location"></a>&#x2022; [`location`](#new-relic-receiver-api-key-blindfold-secret-info-location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+<a id="location-1de208"></a>&#x2022; [`location`](#location-1de208) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="new-relic-receiver-api-key-blindfold-secret-info-store-provider"></a>&#x2022; [`store_provider`](#new-relic-receiver-api-key-blindfold-secret-info-store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-e1f9b6"></a>&#x2022; [`store_provider`](#provider-e1f9b6) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### New Relic Receiver API Key Clear Secret Info
 
-A [`clear_secret_info`](#new-relic-receiver-api-key-clear-secret-info) block (within [`new_relic_receiver.api_key`](#new-relic-receiver-api-key)) supports the following:
+A [`clear_secret_info`](#info-6a5234) block (within [`new_relic_receiver.api_key`](#new-relic-receiver-api-key)) supports the following:
 
-<a id="new-relic-receiver-api-key-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#new-relic-receiver-api-key-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-7c2f92"></a>&#x2022; [`provider_ref`](#ref-7c2f92) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="new-relic-receiver-api-key-clear-secret-info-url"></a>&#x2022; [`url`](#new-relic-receiver-api-key-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="url-370d40"></a>&#x2022; [`url`](#url-370d40) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 #### Ns List
 
@@ -773,37 +773,37 @@ A [`batch`](#qradar-receiver-batch) block (within [`qradar_receiver`](#qradar-re
 
 <a id="qradar-receiver-batch-max-bytes"></a>&#x2022; [`max_bytes`](#qradar-receiver-batch-max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
-<a id="qradar-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#qradar-receiver-batch-max-bytes-disabled) - Optional Block<br>Enable this option
+<a id="disabled-d39134"></a>&#x2022; [`max_bytes_disabled`](#disabled-d39134) - Optional Block<br>Enable this option
 
 <a id="qradar-receiver-batch-max-events"></a>&#x2022; [`max_events`](#qradar-receiver-batch-max-events) - Optional Number<br>Max Events. Send batch to endpoint after this many log messages are in the batch
 
-<a id="qradar-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#qradar-receiver-batch-max-events-disabled) - Optional Block<br>Enable this option
+<a id="disabled-2a2589"></a>&#x2022; [`max_events_disabled`](#disabled-2a2589) - Optional Block<br>Enable this option
 
 <a id="qradar-receiver-batch-timeout-seconds"></a>&#x2022; [`timeout_seconds`](#qradar-receiver-batch-timeout-seconds) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
 
-<a id="qradar-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#qradar-receiver-batch-timeout-seconds-default) - Optional Block<br>Enable this option
+<a id="default-300883"></a>&#x2022; [`timeout_seconds_default`](#default-300883) - Optional Block<br>Enable this option
 
 #### Qradar Receiver Compression
 
 A [`compression`](#qradar-receiver-compression) block (within [`qradar_receiver`](#qradar-receiver)) supports the following:
 
-<a id="qradar-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#qradar-receiver-compression-compression-default) - Optional Block<br>Enable this option
+<a id="default-997ec4"></a>&#x2022; [`compression_default`](#default-997ec4) - Optional Block<br>Enable this option
 
-<a id="qradar-receiver-compression-compression-gzip"></a>&#x2022; [`compression_gzip`](#qradar-receiver-compression-compression-gzip) - Optional Block<br>Enable this option
+<a id="gzip-ab6766"></a>&#x2022; [`compression_gzip`](#gzip-ab6766) - Optional Block<br>Enable this option
 
-<a id="qradar-receiver-compression-compression-none"></a>&#x2022; [`compression_none`](#qradar-receiver-compression-compression-none) - Optional Block<br>Enable this option
+<a id="none-06fddb"></a>&#x2022; [`compression_none`](#none-06fddb) - Optional Block<br>Enable this option
 
 #### Qradar Receiver Use TLS
 
 An [`use_tls`](#qradar-receiver-use-tls) block (within [`qradar_receiver`](#qradar-receiver)) supports the following:
 
-<a id="qradar-receiver-use-tls-disable-verify-certificate"></a>&#x2022; [`disable_verify_certificate`](#qradar-receiver-use-tls-disable-verify-certificate) - Optional Block<br>Enable this option
+<a id="certificate-ebfded"></a>&#x2022; [`disable_verify_certificate`](#certificate-ebfded) - Optional Block<br>Enable this option
 
-<a id="qradar-receiver-use-tls-disable-verify-hostname"></a>&#x2022; [`disable_verify_hostname`](#qradar-receiver-use-tls-disable-verify-hostname) - Optional Block<br>Enable this option
+<a id="hostname-9850c1"></a>&#x2022; [`disable_verify_hostname`](#hostname-9850c1) - Optional Block<br>Enable this option
 
-<a id="qradar-receiver-use-tls-enable-verify-certificate"></a>&#x2022; [`enable_verify_certificate`](#qradar-receiver-use-tls-enable-verify-certificate) - Optional Block<br>Enable this option
+<a id="certificate-0c5d39"></a>&#x2022; [`enable_verify_certificate`](#certificate-0c5d39) - Optional Block<br>Enable this option
 
-<a id="qradar-receiver-use-tls-enable-verify-hostname"></a>&#x2022; [`enable_verify_hostname`](#qradar-receiver-use-tls-enable-verify-hostname) - Optional Block<br>Enable this option
+<a id="hostname-726508"></a>&#x2022; [`enable_verify_hostname`](#hostname-726508) - Optional Block<br>Enable this option
 
 <a id="qradar-receiver-use-tls-mtls-disabled"></a>&#x2022; [`mtls_disabled`](#qradar-receiver-use-tls-mtls-disabled) - Optional Block<br>Enable this option
 
@@ -817,35 +817,35 @@ An [`use_tls`](#qradar-receiver-use-tls) block (within [`qradar_receiver`](#qrad
 
 A [`mtls_enable`](#qradar-receiver-use-tls-mtls-enable) block (within [`qradar_receiver.use_tls`](#qradar-receiver-use-tls)) supports the following:
 
-<a id="qradar-receiver-use-tls-mtls-enable-certificate"></a>&#x2022; [`certificate`](#qradar-receiver-use-tls-mtls-enable-certificate) - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
+<a id="certificate-018262"></a>&#x2022; [`certificate`](#certificate-018262) - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
 
-<a id="qradar-receiver-use-tls-mtls-enable-key-url"></a>&#x2022; [`key_url`](#qradar-receiver-use-tls-mtls-enable-key-url) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Key URL](#qradar-receiver-use-tls-mtls-enable-key-url) below.
+<a id="url-b85773"></a>&#x2022; [`key_url`](#url-b85773) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Key URL](#url-b85773) below.
 
 #### Qradar Receiver Use TLS mTLS Enable Key URL
 
-A [`key_url`](#qradar-receiver-use-tls-mtls-enable-key-url) block (within [`qradar_receiver.use_tls.mtls_enable`](#qradar-receiver-use-tls-mtls-enable)) supports the following:
+A [`key_url`](#url-b85773) block (within [`qradar_receiver.use_tls.mtls_enable`](#qradar-receiver-use-tls-mtls-enable)) supports the following:
 
-<a id="qradar-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#qradar-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#qradar-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) below.
+<a id="info-851e2b"></a>&#x2022; [`blindfold_secret_info`](#info-851e2b) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-851e2b) below.
 
-<a id="qradar-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#qradar-receiver-use-tls-mtls-enable-key-url-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#qradar-receiver-use-tls-mtls-enable-key-url-clear-secret-info) below.
+<a id="info-885da4"></a>&#x2022; [`clear_secret_info`](#info-885da4) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-885da4) below.
 
 #### Qradar Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info
 
-A [`blindfold_secret_info`](#qradar-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) block (within [`qradar_receiver.use_tls.mtls_enable.key_url`](#qradar-receiver-use-tls-mtls-enable-key-url)) supports the following:
+A [`blindfold_secret_info`](#info-851e2b) block (within [`qradar_receiver.use_tls.mtls_enable.key_url`](#url-b85773)) supports the following:
 
-<a id="qradar-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#qradar-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+<a id="provider-b7b9fd"></a>&#x2022; [`decryption_provider`](#provider-b7b9fd) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-<a id="qradar-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-location"></a>&#x2022; [`location`](#qradar-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+<a id="location-b94fb0"></a>&#x2022; [`location`](#location-b94fb0) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="qradar-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-store-provider"></a>&#x2022; [`store_provider`](#qradar-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-893bbf"></a>&#x2022; [`store_provider`](#provider-893bbf) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### Qradar Receiver Use TLS mTLS Enable Key URL Clear Secret Info
 
-A [`clear_secret_info`](#qradar-receiver-use-tls-mtls-enable-key-url-clear-secret-info) block (within [`qradar_receiver.use_tls.mtls_enable.key_url`](#qradar-receiver-use-tls-mtls-enable-key-url)) supports the following:
+A [`clear_secret_info`](#info-885da4) block (within [`qradar_receiver.use_tls.mtls_enable.key_url`](#url-b85773)) supports the following:
 
-<a id="qradar-receiver-use-tls-mtls-enable-key-url-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#qradar-receiver-use-tls-mtls-enable-key-url-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-abbb53"></a>&#x2022; [`provider_ref`](#ref-abbb53) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="qradar-receiver-use-tls-mtls-enable-key-url-clear-secret-info-url"></a>&#x2022; [`url`](#qradar-receiver-use-tls-mtls-enable-key-url-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="url-f261a8"></a>&#x2022; [`url`](#url-f261a8) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 #### S3 Receiver
 
@@ -887,25 +887,25 @@ A [`batch`](#s3-receiver-batch) block (within [`s3_receiver`](#s3-receiver)) sup
 
 <a id="s3-receiver-batch-timeout-seconds"></a>&#x2022; [`timeout_seconds`](#s3-receiver-batch-timeout-seconds) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
 
-<a id="s3-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#s3-receiver-batch-timeout-seconds-default) - Optional Block<br>Enable this option
+<a id="default-cab3a5"></a>&#x2022; [`timeout_seconds_default`](#default-cab3a5) - Optional Block<br>Enable this option
 
 #### S3 Receiver Compression
 
 A [`compression`](#s3-receiver-compression) block (within [`s3_receiver`](#s3-receiver)) supports the following:
 
-<a id="s3-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#s3-receiver-compression-compression-default) - Optional Block<br>Enable this option
+<a id="default-3ba737"></a>&#x2022; [`compression_default`](#default-3ba737) - Optional Block<br>Enable this option
 
-<a id="s3-receiver-compression-compression-gzip"></a>&#x2022; [`compression_gzip`](#s3-receiver-compression-compression-gzip) - Optional Block<br>Enable this option
+<a id="gzip-5b8271"></a>&#x2022; [`compression_gzip`](#gzip-5b8271) - Optional Block<br>Enable this option
 
-<a id="s3-receiver-compression-compression-none"></a>&#x2022; [`compression_none`](#s3-receiver-compression-compression-none) - Optional Block<br>Enable this option
+<a id="none-d52f11"></a>&#x2022; [`compression_none`](#none-d52f11) - Optional Block<br>Enable this option
 
 #### S3 Receiver Filename Options
 
 A [`filename_options`](#s3-receiver-filename-options) block (within [`s3_receiver`](#s3-receiver)) supports the following:
 
-<a id="s3-receiver-filename-options-custom-folder"></a>&#x2022; [`custom_folder`](#s3-receiver-filename-options-custom-folder) - Optional String<br>Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_]\[a-z0-9\-\._]*$/i`
+<a id="folder-b580e4"></a>&#x2022; [`custom_folder`](#folder-b580e4) - Optional String<br>Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_]\[a-z0-9\-\._]*$/i`
 
-<a id="s3-receiver-filename-options-log-type-folder"></a>&#x2022; [`log_type_folder`](#s3-receiver-filename-options-log-type-folder) - Optional Block<br>Enable this option
+<a id="folder-07aa29"></a>&#x2022; [`log_type_folder`](#folder-07aa29) - Optional Block<br>Enable this option
 
 <a id="s3-receiver-filename-options-no-folder"></a>&#x2022; [`no_folder`](#s3-receiver-filename-options-no-folder) - Optional Block<br>Enable this option
 
@@ -931,63 +931,63 @@ A [`batch`](#splunk-receiver-batch) block (within [`splunk_receiver`](#splunk-re
 
 <a id="splunk-receiver-batch-max-bytes"></a>&#x2022; [`max_bytes`](#splunk-receiver-batch-max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
-<a id="splunk-receiver-batch-max-bytes-disabled"></a>&#x2022; [`max_bytes_disabled`](#splunk-receiver-batch-max-bytes-disabled) - Optional Block<br>Enable this option
+<a id="disabled-ee4057"></a>&#x2022; [`max_bytes_disabled`](#disabled-ee4057) - Optional Block<br>Enable this option
 
 <a id="splunk-receiver-batch-max-events"></a>&#x2022; [`max_events`](#splunk-receiver-batch-max-events) - Optional Number<br>Max Events. Send batch to endpoint after this many log messages are in the batch
 
-<a id="splunk-receiver-batch-max-events-disabled"></a>&#x2022; [`max_events_disabled`](#splunk-receiver-batch-max-events-disabled) - Optional Block<br>Enable this option
+<a id="disabled-36f259"></a>&#x2022; [`max_events_disabled`](#disabled-36f259) - Optional Block<br>Enable this option
 
 <a id="splunk-receiver-batch-timeout-seconds"></a>&#x2022; [`timeout_seconds`](#splunk-receiver-batch-timeout-seconds) - Optional String<br>Timeout Seconds. Send batch to the endpoint after this many seconds
 
-<a id="splunk-receiver-batch-timeout-seconds-default"></a>&#x2022; [`timeout_seconds_default`](#splunk-receiver-batch-timeout-seconds-default) - Optional Block<br>Enable this option
+<a id="default-2d39cb"></a>&#x2022; [`timeout_seconds_default`](#default-2d39cb) - Optional Block<br>Enable this option
 
 #### Splunk Receiver Compression
 
 A [`compression`](#splunk-receiver-compression) block (within [`splunk_receiver`](#splunk-receiver)) supports the following:
 
-<a id="splunk-receiver-compression-compression-default"></a>&#x2022; [`compression_default`](#splunk-receiver-compression-compression-default) - Optional Block<br>Enable this option
+<a id="default-a97e9d"></a>&#x2022; [`compression_default`](#default-a97e9d) - Optional Block<br>Enable this option
 
-<a id="splunk-receiver-compression-compression-gzip"></a>&#x2022; [`compression_gzip`](#splunk-receiver-compression-compression-gzip) - Optional Block<br>Enable this option
+<a id="gzip-27c06f"></a>&#x2022; [`compression_gzip`](#gzip-27c06f) - Optional Block<br>Enable this option
 
-<a id="splunk-receiver-compression-compression-none"></a>&#x2022; [`compression_none`](#splunk-receiver-compression-compression-none) - Optional Block<br>Enable this option
+<a id="none-d4e3e3"></a>&#x2022; [`compression_none`](#none-d4e3e3) - Optional Block<br>Enable this option
 
 #### Splunk Receiver Splunk Hec Token
 
 A [`splunk_hec_token`](#splunk-receiver-splunk-hec-token) block (within [`splunk_receiver`](#splunk-receiver)) supports the following:
 
-<a id="splunk-receiver-splunk-hec-token-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#splunk-receiver-splunk-hec-token-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#splunk-receiver-splunk-hec-token-blindfold-secret-info) below.
+<a id="info-2c09a2"></a>&#x2022; [`blindfold_secret_info`](#info-2c09a2) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-2c09a2) below.
 
-<a id="splunk-receiver-splunk-hec-token-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#splunk-receiver-splunk-hec-token-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#splunk-receiver-splunk-hec-token-clear-secret-info) below.
+<a id="info-08aaec"></a>&#x2022; [`clear_secret_info`](#info-08aaec) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-08aaec) below.
 
 #### Splunk Receiver Splunk Hec Token Blindfold Secret Info
 
-A [`blindfold_secret_info`](#splunk-receiver-splunk-hec-token-blindfold-secret-info) block (within [`splunk_receiver.splunk_hec_token`](#splunk-receiver-splunk-hec-token)) supports the following:
+A [`blindfold_secret_info`](#info-2c09a2) block (within [`splunk_receiver.splunk_hec_token`](#splunk-receiver-splunk-hec-token)) supports the following:
 
-<a id="splunk-receiver-splunk-hec-token-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#splunk-receiver-splunk-hec-token-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+<a id="provider-2db5ec"></a>&#x2022; [`decryption_provider`](#provider-2db5ec) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-<a id="splunk-receiver-splunk-hec-token-blindfold-secret-info-location"></a>&#x2022; [`location`](#splunk-receiver-splunk-hec-token-blindfold-secret-info-location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+<a id="location-c834c3"></a>&#x2022; [`location`](#location-c834c3) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="splunk-receiver-splunk-hec-token-blindfold-secret-info-store-provider"></a>&#x2022; [`store_provider`](#splunk-receiver-splunk-hec-token-blindfold-secret-info-store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-54f419"></a>&#x2022; [`store_provider`](#provider-54f419) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### Splunk Receiver Splunk Hec Token Clear Secret Info
 
-A [`clear_secret_info`](#splunk-receiver-splunk-hec-token-clear-secret-info) block (within [`splunk_receiver.splunk_hec_token`](#splunk-receiver-splunk-hec-token)) supports the following:
+A [`clear_secret_info`](#info-08aaec) block (within [`splunk_receiver.splunk_hec_token`](#splunk-receiver-splunk-hec-token)) supports the following:
 
-<a id="splunk-receiver-splunk-hec-token-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#splunk-receiver-splunk-hec-token-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-a5a9ad"></a>&#x2022; [`provider_ref`](#ref-a5a9ad) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="splunk-receiver-splunk-hec-token-clear-secret-info-url"></a>&#x2022; [`url`](#splunk-receiver-splunk-hec-token-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="url-79ea29"></a>&#x2022; [`url`](#url-79ea29) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 #### Splunk Receiver Use TLS
 
 An [`use_tls`](#splunk-receiver-use-tls) block (within [`splunk_receiver`](#splunk-receiver)) supports the following:
 
-<a id="splunk-receiver-use-tls-disable-verify-certificate"></a>&#x2022; [`disable_verify_certificate`](#splunk-receiver-use-tls-disable-verify-certificate) - Optional Block<br>Enable this option
+<a id="certificate-783baa"></a>&#x2022; [`disable_verify_certificate`](#certificate-783baa) - Optional Block<br>Enable this option
 
-<a id="splunk-receiver-use-tls-disable-verify-hostname"></a>&#x2022; [`disable_verify_hostname`](#splunk-receiver-use-tls-disable-verify-hostname) - Optional Block<br>Enable this option
+<a id="hostname-b46b8f"></a>&#x2022; [`disable_verify_hostname`](#hostname-b46b8f) - Optional Block<br>Enable this option
 
-<a id="splunk-receiver-use-tls-enable-verify-certificate"></a>&#x2022; [`enable_verify_certificate`](#splunk-receiver-use-tls-enable-verify-certificate) - Optional Block<br>Enable this option
+<a id="certificate-d562ed"></a>&#x2022; [`enable_verify_certificate`](#certificate-d562ed) - Optional Block<br>Enable this option
 
-<a id="splunk-receiver-use-tls-enable-verify-hostname"></a>&#x2022; [`enable_verify_hostname`](#splunk-receiver-use-tls-enable-verify-hostname) - Optional Block<br>Enable this option
+<a id="hostname-0d03e5"></a>&#x2022; [`enable_verify_hostname`](#hostname-0d03e5) - Optional Block<br>Enable this option
 
 <a id="splunk-receiver-use-tls-mtls-disabled"></a>&#x2022; [`mtls_disabled`](#splunk-receiver-use-tls-mtls-disabled) - Optional Block<br>Enable this option
 
@@ -1001,35 +1001,35 @@ An [`use_tls`](#splunk-receiver-use-tls) block (within [`splunk_receiver`](#splu
 
 A [`mtls_enable`](#splunk-receiver-use-tls-mtls-enable) block (within [`splunk_receiver.use_tls`](#splunk-receiver-use-tls)) supports the following:
 
-<a id="splunk-receiver-use-tls-mtls-enable-certificate"></a>&#x2022; [`certificate`](#splunk-receiver-use-tls-mtls-enable-certificate) - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
+<a id="certificate-5de4bc"></a>&#x2022; [`certificate`](#certificate-5de4bc) - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
 
-<a id="splunk-receiver-use-tls-mtls-enable-key-url"></a>&#x2022; [`key_url`](#splunk-receiver-use-tls-mtls-enable-key-url) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Key URL](#splunk-receiver-use-tls-mtls-enable-key-url) below.
+<a id="url-04f122"></a>&#x2022; [`key_url`](#url-04f122) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Key URL](#url-04f122) below.
 
 #### Splunk Receiver Use TLS mTLS Enable Key URL
 
-A [`key_url`](#splunk-receiver-use-tls-mtls-enable-key-url) block (within [`splunk_receiver.use_tls.mtls_enable`](#splunk-receiver-use-tls-mtls-enable)) supports the following:
+A [`key_url`](#url-04f122) block (within [`splunk_receiver.use_tls.mtls_enable`](#splunk-receiver-use-tls-mtls-enable)) supports the following:
 
-<a id="splunk-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#splunk-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#splunk-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) below.
+<a id="info-e6bdf7"></a>&#x2022; [`blindfold_secret_info`](#info-e6bdf7) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-e6bdf7) below.
 
-<a id="splunk-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#splunk-receiver-use-tls-mtls-enable-key-url-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#splunk-receiver-use-tls-mtls-enable-key-url-clear-secret-info) below.
+<a id="info-72a8f2"></a>&#x2022; [`clear_secret_info`](#info-72a8f2) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-72a8f2) below.
 
 #### Splunk Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info
 
-A [`blindfold_secret_info`](#splunk-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) block (within [`splunk_receiver.use_tls.mtls_enable.key_url`](#splunk-receiver-use-tls-mtls-enable-key-url)) supports the following:
+A [`blindfold_secret_info`](#info-e6bdf7) block (within [`splunk_receiver.use_tls.mtls_enable.key_url`](#url-04f122)) supports the following:
 
-<a id="splunk-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#splunk-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+<a id="provider-12370d"></a>&#x2022; [`decryption_provider`](#provider-12370d) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-<a id="splunk-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-location"></a>&#x2022; [`location`](#splunk-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+<a id="location-8e22e7"></a>&#x2022; [`location`](#location-8e22e7) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="splunk-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-store-provider"></a>&#x2022; [`store_provider`](#splunk-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info-store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-3723d8"></a>&#x2022; [`store_provider`](#provider-3723d8) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### Splunk Receiver Use TLS mTLS Enable Key URL Clear Secret Info
 
-A [`clear_secret_info`](#splunk-receiver-use-tls-mtls-enable-key-url-clear-secret-info) block (within [`splunk_receiver.use_tls.mtls_enable.key_url`](#splunk-receiver-use-tls-mtls-enable-key-url)) supports the following:
+A [`clear_secret_info`](#info-72a8f2) block (within [`splunk_receiver.use_tls.mtls_enable.key_url`](#url-04f122)) supports the following:
 
-<a id="splunk-receiver-use-tls-mtls-enable-key-url-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#splunk-receiver-use-tls-mtls-enable-key-url-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-895ddc"></a>&#x2022; [`provider_ref`](#ref-895ddc) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="splunk-receiver-use-tls-mtls-enable-key-url-clear-secret-info-url"></a>&#x2022; [`url`](#splunk-receiver-use-tls-mtls-enable-key-url-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="url-aff9f7"></a>&#x2022; [`url`](#url-aff9f7) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 #### Sumo Logic Receiver
 
@@ -1041,27 +1041,27 @@ A [`sumo_logic_receiver`](#sumo-logic-receiver) block supports the following:
 
 An [`url`](#sumo-logic-receiver-url) block (within [`sumo_logic_receiver`](#sumo-logic-receiver)) supports the following:
 
-<a id="sumo-logic-receiver-url-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#sumo-logic-receiver-url-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#sumo-logic-receiver-url-blindfold-secret-info) below.
+<a id="info-2b8030"></a>&#x2022; [`blindfold_secret_info`](#info-2b8030) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-2b8030) below.
 
-<a id="sumo-logic-receiver-url-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#sumo-logic-receiver-url-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#sumo-logic-receiver-url-clear-secret-info) below.
+<a id="info-b7253b"></a>&#x2022; [`clear_secret_info`](#info-b7253b) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-b7253b) below.
 
 #### Sumo Logic Receiver URL Blindfold Secret Info
 
-A [`blindfold_secret_info`](#sumo-logic-receiver-url-blindfold-secret-info) block (within [`sumo_logic_receiver.url`](#sumo-logic-receiver-url)) supports the following:
+A [`blindfold_secret_info`](#info-2b8030) block (within [`sumo_logic_receiver.url`](#sumo-logic-receiver-url)) supports the following:
 
-<a id="sumo-logic-receiver-url-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#sumo-logic-receiver-url-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+<a id="provider-23f264"></a>&#x2022; [`decryption_provider`](#provider-23f264) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-<a id="sumo-logic-receiver-url-blindfold-secret-info-location"></a>&#x2022; [`location`](#sumo-logic-receiver-url-blindfold-secret-info-location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+<a id="location-879077"></a>&#x2022; [`location`](#location-879077) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="sumo-logic-receiver-url-blindfold-secret-info-store-provider"></a>&#x2022; [`store_provider`](#sumo-logic-receiver-url-blindfold-secret-info-store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-24daf3"></a>&#x2022; [`store_provider`](#provider-24daf3) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### Sumo Logic Receiver URL Clear Secret Info
 
-A [`clear_secret_info`](#sumo-logic-receiver-url-clear-secret-info) block (within [`sumo_logic_receiver.url`](#sumo-logic-receiver-url)) supports the following:
+A [`clear_secret_info`](#info-b7253b) block (within [`sumo_logic_receiver.url`](#sumo-logic-receiver-url)) supports the following:
 
-<a id="sumo-logic-receiver-url-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#sumo-logic-receiver-url-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-fe2383"></a>&#x2022; [`provider_ref`](#ref-fe2383) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="sumo-logic-receiver-url-clear-secret-info-url"></a>&#x2022; [`url`](#sumo-logic-receiver-url-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="url-03a06e"></a>&#x2022; [`url`](#url-03a06e) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 #### Timeouts
 

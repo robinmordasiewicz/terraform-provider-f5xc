@@ -90,7 +90,7 @@ A [`http_health_check`](#http-health-check) block supports the following:
 
 <a id="http-health-check-health-check-port"></a>&#x2022; [`health_check_port`](#http-health-check-health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
 
-<a id="http-health-check-health-check-secondary-port"></a>&#x2022; [`health_check_secondary_port`](#http-health-check-health-check-secondary-port) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
+<a id="port-d66aae"></a>&#x2022; [`health_check_secondary_port`](#port-d66aae) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
 
 <a id="http-health-check-receive"></a>&#x2022; [`receive`](#http-health-check-receive) - Optional String<br>Receive String. Regular expression used to match against the response to the health check's request. Mark node up upon receipt of a successful regular expression match. Uses re2 regular expression syntax
 
@@ -102,7 +102,7 @@ A [`https_health_check`](#https-health-check) block supports the following:
 
 <a id="https-health-check-health-check-port"></a>&#x2022; [`health_check_port`](#https-health-check-health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
 
-<a id="https-health-check-health-check-secondary-port"></a>&#x2022; [`health_check_secondary_port`](#https-health-check-health-check-secondary-port) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
+<a id="port-4b56cd"></a>&#x2022; [`health_check_secondary_port`](#port-4b56cd) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
 
 <a id="https-health-check-receive"></a>&#x2022; [`receive`](#https-health-check-receive) - Optional String<br>Receive String. Regular expression used to match against the response to the health check's request. Mark node up upon receipt of a successful regular expression match. Uses re2 regular expression syntax
 
@@ -114,7 +114,7 @@ A [`tcp_health_check`](#tcp-health-check) block supports the following:
 
 <a id="tcp-health-check-health-check-port"></a>&#x2022; [`health_check_port`](#tcp-health-check-health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
 
-<a id="tcp-health-check-health-check-secondary-port"></a>&#x2022; [`health_check_secondary_port`](#tcp-health-check-health-check-secondary-port) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
+<a id="port-719c9f"></a>&#x2022; [`health_check_secondary_port`](#port-719c9f) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
 
 <a id="tcp-health-check-receive"></a>&#x2022; [`receive`](#tcp-health-check-receive) - Optional String<br>Receive String. Regular expression used to match against the response to the monitor's request. Mark node up upon receipt of a successful regular expression match. Uses re2 regular expression syntax
 
@@ -126,7 +126,7 @@ A [`tcp_hex_health_check`](#tcp-hex-health-check) block supports the following:
 
 <a id="tcp-hex-health-check-health-check-port"></a>&#x2022; [`health_check_port`](#tcp-hex-health-check-health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
 
-<a id="tcp-hex-health-check-health-check-secondary-port"></a>&#x2022; [`health_check_secondary_port`](#tcp-hex-health-check-health-check-secondary-port) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
+<a id="port-1599fa"></a>&#x2022; [`health_check_secondary_port`](#port-1599fa) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
 
 <a id="tcp-hex-health-check-receive"></a>&#x2022; [`receive`](#tcp-hex-health-check-receive) - Optional String<br>Receive Payload. Hex encoded raw bytes expected in the response
 
@@ -150,7 +150,7 @@ An [`udp_health_check`](#udp-health-check) block supports the following:
 
 <a id="udp-health-check-health-check-port"></a>&#x2022; [`health_check_port`](#udp-health-check-health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
 
-<a id="udp-health-check-health-check-secondary-port"></a>&#x2022; [`health_check_secondary_port`](#udp-health-check-health-check-secondary-port) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
+<a id="port-71a6d7"></a>&#x2022; [`health_check_secondary_port`](#port-71a6d7) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
 
 <a id="udp-health-check-receive"></a>&#x2022; [`receive`](#udp-health-check-receive) - Optional String<br>Receive String. UDP response to be matched. It can be a regex
 

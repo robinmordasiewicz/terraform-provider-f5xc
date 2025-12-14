@@ -105,7 +105,7 @@ A [`tls_server`](#syslog-tls-server) block (within [`syslog`](#syslog)) supports
 
 <a id="syslog-tls-server-default-https-port"></a>&#x2022; [`default_https_port`](#syslog-tls-server-default-https-port) - Optional Block<br>Enable this option
 
-<a id="syslog-tls-server-default-syslog-tls-port"></a>&#x2022; [`default_syslog_tls_port`](#syslog-tls-server-default-syslog-tls-port) - Optional Block<br>Enable this option
+<a id="port-c39d1c"></a>&#x2022; [`default_syslog_tls_port`](#port-c39d1c) - Optional Block<br>Enable this option
 
 <a id="syslog-tls-server-mtls-disabled"></a>&#x2022; [`mtls_disabled`](#syslog-tls-server-mtls-disabled) - Optional Block<br>Enable this option
 
@@ -123,7 +123,7 @@ A [`tls_server`](#syslog-tls-server) block (within [`syslog`](#syslog)) supports
 
 A [`mtls_enable`](#syslog-tls-server-mtls-enable) block (within [`syslog.tls_server`](#syslog-tls-server)) supports the following:
 
-<a id="syslog-tls-server-mtls-enable-certificate"></a>&#x2022; [`certificate`](#syslog-tls-server-mtls-enable-certificate) - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
+<a id="certificate-bd035f"></a>&#x2022; [`certificate`](#certificate-bd035f) - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
 
 <a id="syslog-tls-server-mtls-enable-key-url"></a>&#x2022; [`key_url`](#syslog-tls-server-mtls-enable-key-url) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Key URL](#syslog-tls-server-mtls-enable-key-url) below.
 
@@ -131,27 +131,27 @@ A [`mtls_enable`](#syslog-tls-server-mtls-enable) block (within [`syslog.tls_ser
 
 A [`key_url`](#syslog-tls-server-mtls-enable-key-url) block (within [`syslog.tls_server.mtls_enable`](#syslog-tls-server-mtls-enable)) supports the following:
 
-<a id="syslog-tls-server-mtls-enable-key-url-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#syslog-tls-server-mtls-enable-key-url-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#syslog-tls-server-mtls-enable-key-url-blindfold-secret-info) below.
+<a id="info-306978"></a>&#x2022; [`blindfold_secret_info`](#info-306978) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-306978) below.
 
-<a id="syslog-tls-server-mtls-enable-key-url-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#syslog-tls-server-mtls-enable-key-url-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#syslog-tls-server-mtls-enable-key-url-clear-secret-info) below.
+<a id="info-2b11e1"></a>&#x2022; [`clear_secret_info`](#info-2b11e1) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-2b11e1) below.
 
 #### Syslog TLS Server mTLS Enable Key URL Blindfold Secret Info
 
-A [`blindfold_secret_info`](#syslog-tls-server-mtls-enable-key-url-blindfold-secret-info) block (within [`syslog.tls_server.mtls_enable.key_url`](#syslog-tls-server-mtls-enable-key-url)) supports the following:
+A [`blindfold_secret_info`](#info-306978) block (within [`syslog.tls_server.mtls_enable.key_url`](#syslog-tls-server-mtls-enable-key-url)) supports the following:
 
-<a id="syslog-tls-server-mtls-enable-key-url-blindfold-secret-info-decryption-provider"></a>&#x2022; [`decryption_provider`](#syslog-tls-server-mtls-enable-key-url-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+<a id="provider-d7f008"></a>&#x2022; [`decryption_provider`](#provider-d7f008) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-<a id="syslog-tls-server-mtls-enable-key-url-blindfold-secret-info-location"></a>&#x2022; [`location`](#syslog-tls-server-mtls-enable-key-url-blindfold-secret-info-location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+<a id="location-9754ae"></a>&#x2022; [`location`](#location-9754ae) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="syslog-tls-server-mtls-enable-key-url-blindfold-secret-info-store-provider"></a>&#x2022; [`store_provider`](#syslog-tls-server-mtls-enable-key-url-blindfold-secret-info-store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-891a61"></a>&#x2022; [`store_provider`](#provider-891a61) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### Syslog TLS Server mTLS Enable Key URL Clear Secret Info
 
-A [`clear_secret_info`](#syslog-tls-server-mtls-enable-key-url-clear-secret-info) block (within [`syslog.tls_server.mtls_enable.key_url`](#syslog-tls-server-mtls-enable-key-url)) supports the following:
+A [`clear_secret_info`](#info-2b11e1) block (within [`syslog.tls_server.mtls_enable.key_url`](#syslog-tls-server-mtls-enable-key-url)) supports the following:
 
-<a id="syslog-tls-server-mtls-enable-key-url-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#syslog-tls-server-mtls-enable-key-url-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-d658d3"></a>&#x2022; [`provider_ref`](#ref-d658d3) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="syslog-tls-server-mtls-enable-key-url-clear-secret-info-url"></a>&#x2022; [`url`](#syslog-tls-server-mtls-enable-key-url-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="url-0a4c15"></a>&#x2022; [`url`](#url-0a4c15) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 #### Syslog UDP Server
 

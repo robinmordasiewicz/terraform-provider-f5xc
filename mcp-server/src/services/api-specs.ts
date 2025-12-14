@@ -8,13 +8,27 @@ import { join, dirname, basename } from 'path';
 import { fileURLToPath } from 'url';
 import type { ApiSpec, OpenAPISpec, SearchResult, SchemaDefinition } from '../types.js';
 
-// Get the project root (parent of mcp-server)
+// Get the package root directory
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const PROJECT_ROOT = join(__dirname, '..', '..', '..');
+
+// When installed via npm, specs are in dist/docs/specifications/api/ relative to package root
+// When running in development, specs are in parent project's docs/specifications/api/
+const PACKAGE_ROOT = join(__dirname, '..', '..'); // mcp-server/
+const BUNDLED_SPECS = join(PACKAGE_ROOT, 'dist', 'docs', 'specifications', 'api');
+const PROJECT_ROOT = join(PACKAGE_ROOT, '..'); // terraform-provider-f5xc/
+const PROJECT_SPECS = join(PROJECT_ROOT, 'docs', 'specifications', 'api');
+
+// Use bundled specs if available (npm install), otherwise fall back to project specs (development)
+function getApiSpecsPath(): string {
+  if (existsSync(BUNDLED_SPECS)) {
+    return BUNDLED_SPECS;
+  }
+  return PROJECT_SPECS;
+}
 
 // API specifications path
-const API_SPECS_PATH = join(PROJECT_ROOT, 'docs', 'specifications', 'api');
+const API_SPECS_PATH = getApiSpecsPath();
 
 // Cache for loaded specifications
 const specsCache = new Map<string, ApiSpec>();

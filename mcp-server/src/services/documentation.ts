@@ -8,18 +8,37 @@ import { join, dirname, basename, extname } from 'path';
 import { fileURLToPath } from 'url';
 import type { ResourceDoc, SearchResult } from '../types.js';
 
-// Get the project root (parent of mcp-server)
+// Get the package root directory
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const PROJECT_ROOT = join(__dirname, '..', '..', '..');
 
-// Documentation paths relative to project root
-const DOCS_PATHS = {
-  resources: join(PROJECT_ROOT, 'docs', 'resources'),
-  dataSources: join(PROJECT_ROOT, 'docs', 'data-sources'),
-  functions: join(PROJECT_ROOT, 'docs', 'functions'),
-  guides: join(PROJECT_ROOT, 'docs', 'guides'),
-};
+// When installed via npm, docs are in dist/docs/ relative to package root
+// When running in development, docs are in parent project's docs/
+const PACKAGE_ROOT = join(__dirname, '..', '..'); // mcp-server/
+const BUNDLED_DOCS = join(PACKAGE_ROOT, 'dist', 'docs');
+const PROJECT_ROOT = join(PACKAGE_ROOT, '..'); // terraform-provider-f5xc/
+const PROJECT_DOCS = join(PROJECT_ROOT, 'docs');
+
+// Use bundled docs if available (npm install), otherwise fall back to project docs (development)
+function getDocsRoot(): string {
+  if (existsSync(BUNDLED_DOCS)) {
+    return BUNDLED_DOCS;
+  }
+  return PROJECT_DOCS;
+}
+
+// Documentation paths relative to docs root
+function getDocsPaths() {
+  const docsRoot = getDocsRoot();
+  return {
+    resources: join(docsRoot, 'resources'),
+    dataSources: join(docsRoot, 'data-sources'),
+    functions: join(docsRoot, 'functions'),
+    guides: join(docsRoot, 'guides'),
+  };
+}
+
+const DOCS_PATHS = getDocsPaths();
 
 // Cache for loaded documentation
 const docsCache = new Map<string, ResourceDoc>();

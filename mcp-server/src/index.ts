@@ -7,8 +7,12 @@
  * - F5 Distributed Cloud OpenAPI specifications (270+ specs)
  * - Search and query capabilities for both documentation and API specs
  *
- * Version is synced with the Terraform provider release version.
+ * Version Synchronization:
+ * The npm package version is automatically synced with GitHub releases via CI/CD.
+ * Both the Terraform provider and MCP server always share the same version number.
+ *
  * @see https://github.com/robinmordasiewicz/terraform-provider-f5xc
+ * @see https://www.npmjs.com/package/@robinmordasiewicz/f5xc-terraform-mcp
  */
 
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';

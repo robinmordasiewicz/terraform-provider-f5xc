@@ -56,6 +56,89 @@ Or if running from source:
 }
 ```
 
+### Claude Code (CLI)
+
+Install the MCP server with a single command:
+
+```bash
+claude mcp add f5xc-terraform -- npx -y @robinmordasiewicz/f5xc-terraform-mcp
+```
+
+**Scope Options:**
+
+- `--scope local` (default): Available only in the current directory
+- `--scope project`: Shared with anyone who clones the repository (saved in `.mcp.json`)
+- `--scope user`: Available in all your Claude Code sessions
+
+Examples with different scopes:
+
+```bash
+# User-wide installation (recommended for personal use)
+claude mcp add --scope user f5xc-terraform -- npx -y @robinmordasiewicz/f5xc-terraform-mcp
+
+# Project-specific installation (for team collaboration)
+claude mcp add --scope project f5xc-terraform -- npx -y @robinmordasiewicz/f5xc-terraform-mcp
+```
+
+**Verify Installation:**
+
+```bash
+claude mcp list
+```
+
+You should see `f5xc-terraform` listed with a `✓ Connected` status.
+
+**Remove Server:**
+
+```bash
+claude mcp remove f5xc-terraform
+```
+
+### Visual Studio Code (with GitHub Copilot)
+
+VS Code 1.99+ supports MCP servers through GitHub Copilot. Configure by creating a `.vscode/mcp.json` file in your workspace:
+
+```json
+{
+  "servers": {
+    "f5xc-terraform": {
+      "command": "npx",
+      "args": ["-y", "@robinmordasiewicz/f5xc-terraform-mcp"]
+    }
+  }
+}
+```
+
+**Alternative: Command Palette**
+
+1. Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`)
+2. Run `MCP: Add Server`
+3. Select `npm package`
+4. Enter: `@robinmordasiewicz/f5xc-terraform-mcp`
+
+**Alternative: Command Line**
+
+```bash
+code --add-mcp "{\"name\":\"f5xc-terraform\",\"command\":\"npx\",\"args\":[\"-y\",\"@robinmordasiewicz/f5xc-terraform-mcp\"]}"
+```
+
+**Global Configuration (User Settings)**
+
+To make the MCP server available across all workspaces, add to your VS Code user settings (`settings.json`):
+
+```json
+{
+  "mcp": {
+    "servers": {
+      "f5xc-terraform": {
+        "command": "npx",
+        "args": ["-y", "@robinmordasiewicz/f5xc-terraform-mcp"]
+      }
+    }
+  }
+}
+```
+
 ## Available Tools
 
 ### Documentation Tools

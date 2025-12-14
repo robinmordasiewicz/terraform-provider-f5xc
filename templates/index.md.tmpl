@@ -168,6 +168,51 @@ Add the following to your Claude Desktop configuration file:
 }
 ```
 
+### Quick Setup for Claude Code (CLI)
+
+Install the MCP server with a single command:
+
+```bash
+claude mcp add f5xc-terraform -- npx -y @robinmordasiewicz/f5xc-terraform-mcp
+```
+
+**Scope Options:**
+
+* `--scope local` (default) - Available only in the current directory
+* `--scope user` - Available in all your Claude Code sessions
+* `--scope project` - Shared with anyone who clones the repository (saved in `.mcp.json`)
+
+Example with user scope (recommended for personal use):
+
+```bash
+claude mcp add --scope user f5xc-terraform -- npx -y @robinmordasiewicz/f5xc-terraform-mcp
+```
+
+**Verify Installation:**
+
+```bash
+claude mcp list
+```
+
+You should see `f5xc-terraform` listed with a `✓ Connected` status.
+
+### Quick Setup for Visual Studio Code
+
+VS Code 1.99+ supports MCP servers through GitHub Copilot. Create a `.vscode/mcp.json` file in your workspace:
+
+```json
+{
+  "servers": {
+    "f5xc-terraform": {
+      "command": "npx",
+      "args": ["-y", "@robinmordasiewicz/f5xc-terraform-mcp"]
+    }
+  }
+}
+```
+
+Or use the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`) and run `MCP: Add Server`, then select `npm package` and enter `@robinmordasiewicz/f5xc-terraform-mcp`.
+
 For complete MCP server documentation including all available tools and advanced configuration options, see the [NPM package page](https://www.npmjs.com/package/@robinmordasiewicz/f5xc-terraform-mcp).
 
 ## Resources and Data Sources

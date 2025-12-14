@@ -30,3 +30,16 @@ func normalizeAPIURL(url string) (string, bool) {
 
 	return url, url != original
 }
+
+// filterSystemLabels removes F5 XC system-managed labels (ves.io/*) from the label map.
+// These labels are injected by the platform and should not be managed by Terraform.
+// nolint:unused // Used by generated resource/data source Read methods
+func filterSystemLabels(labels map[string]string) map[string]string {
+	filtered := make(map[string]string)
+	for k, v := range labels {
+		if !strings.HasPrefix(k, "ves.io/") {
+			filtered[k] = v
+		}
+	}
+	return filtered
+}
